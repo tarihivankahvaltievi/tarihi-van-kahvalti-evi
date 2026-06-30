@@ -1187,12 +1187,15 @@ h2 span {
 .red-reviews {
   position: relative;
   overflow: hidden;
-  border-radius: 28px;
+  border-radius: 18px;
   background:
-    linear-gradient(rgba(154, 28, 31, 0.95), rgba(154, 28, 31, 0.95)),
+    radial-gradient(circle at 18% 12%, rgba(237, 200, 117, 0.2), transparent 28%),
+    linear-gradient(135deg, rgba(110, 20, 22, 0.98), rgba(154, 28, 31, 0.94) 48%, rgba(92, 22, 17, 0.98)),
     url("/images/breakfast-spread.jpg") center/cover;
   color: var(--white);
-  box-shadow: var(--shadow-red);
+  box-shadow:
+    0 34px 90px rgba(73, 24, 18, 0.28),
+    inset 0 1px 0 rgba(255, 238, 207, 0.22);
 }
 
 .red-story {
@@ -1209,87 +1212,152 @@ h2 span {
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
-    linear-gradient(180deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
-  background-size: 72px 72px;
+    linear-gradient(90deg, rgba(255, 246, 224, 0.06) 1px, transparent 1px),
+    linear-gradient(180deg, rgba(255, 246, 224, 0.035) 1px, transparent 1px),
+    radial-gradient(ellipse at 74% 84%, rgba(38, 11, 8, 0.42), transparent 42%);
+  background-size: 76px 76px, 76px 76px, auto;
   content: "";
-  opacity: 0.4;
+  opacity: 0.72;
 }
 
 .red-story {
-  min-height: 680px;
-  padding: 4rem 5.5vw 16rem;
+  min-height: 640px;
+  padding: clamp(2.2rem, 5vw, 4.8rem) 5.5vw clamp(14rem, 23vw, 18rem);
 }
 
 .story-content {
   position: relative;
   z-index: 2;
   display: grid;
-  gap: 2rem;
+  gap: clamp(1.4rem, 4vw, 4rem);
+}
+
+.story-intro {
+  display: grid;
+  max-width: 46rem;
+  align-content: start;
 }
 
 .light-pill {
-  border-color: rgba(255, 255, 255, 0.2);
-  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 232, 190, 0.22);
+  background: rgba(255, 247, 232, 0.1);
   color: var(--white);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.14);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
 }
 
 .red-story h2,
 .red-reviews h2 {
-  max-width: 12em;
-  margin: 1.5rem 0 1rem;
+  max-width: 10.8em;
+  margin: 1.2rem 0 0.9rem;
   color: var(--white);
-  font-size: clamp(2.2rem, 7vw, 3.8rem);
-  line-height: 1.15;
+  font-size: clamp(2rem, 5.8vw, 4.45rem);
+  line-height: 0.98;
+  letter-spacing: 0;
+  text-wrap: balance;
 }
 
 .story-content p,
 .red-reviews p {
-  color: rgba(255, 255, 255, 0.88);
+  max-width: 39rem;
+  color: rgba(255, 247, 232, 0.84);
+  text-wrap: pretty;
 }
 
 .story-text {
   display: grid;
-  gap: 1.2rem;
+  align-content: center;
+  gap: 1.35rem;
+  border-left: 1px solid rgba(255, 232, 190, 0.22);
+  padding-left: clamp(1.15rem, 2.6vw, 2rem);
+}
+
+.story-rituals {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.52rem;
+}
+
+.story-rituals span {
+  display: inline-flex;
+  min-height: 2.1rem;
+  align-items: center;
+  border: 1px solid rgba(255, 232, 190, 0.2);
+  border-radius: 999px;
+  background: rgba(255, 248, 236, 0.095);
+  color: rgba(255, 248, 236, 0.9);
+  padding: 0 0.8rem;
+  font-size: 0.78rem;
+  font-weight: 720;
+  letter-spacing: 0.01em;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
 }
 
 .story-stats {
   position: relative;
   z-index: 2;
   display: flex;
-  justify-content: space-around;
-  gap: 1.5rem;
-  margin-top: 3rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.15);
-  padding-top: 2rem;
+  width: fit-content;
+  max-width: 100%;
+  gap: 0.7rem;
+  margin-top: clamp(2rem, 5vw, 3.4rem);
+  border: 1px solid rgba(255, 232, 190, 0.18);
+  border-radius: 14px;
+  background: rgba(64, 16, 14, 0.28);
+  padding: 0.7rem;
+  backdrop-filter: blur(16px) saturate(128%);
+  -webkit-backdrop-filter: blur(16px) saturate(128%);
+}
+
+.story-stats div {
+  min-width: clamp(8.8rem, 19vw, 12rem);
+  border-radius: 10px;
+  background: rgba(255, 248, 236, 0.08);
+  padding: 1rem 1.05rem 0.95rem;
 }
 
 .story-stats strong {
   display: block;
   font-family: var(--font-serif), Georgia, serif;
-  font-size: clamp(2.4rem, 8vw, 4.2rem);
+  font-size: clamp(2.15rem, 5vw, 3.65rem);
   color: var(--gold);
   line-height: 1;
 }
 
 .story-stats span {
-  color: rgba(255, 255, 255, 0.8);
-  font-size: 0.88rem;
-  font-weight: 500;
+  display: block;
+  margin-top: 0.28rem;
+  color: rgba(255, 248, 236, 0.78);
+  font-size: 0.8rem;
+  font-weight: 650;
 }
 
 .story-plate {
   position: absolute;
-  right: 50%;
-  bottom: -2.5rem;
-  width: min(760px, 104vw);
-  height: min(380px, 52vw);
+  right: clamp(1.1rem, 7vw, 6.5rem);
+  bottom: -3.8rem;
+  width: min(700px, 66vw);
+  height: clamp(210px, 28vw, 355px);
   overflow: hidden;
-  border: 12px solid var(--white);
-  border-radius: 999px;
-  background: var(--white);
-  box-shadow: 0 30px 70px rgba(60, 5, 5, 0.25);
-  transform: translateX(50%);
+  border: 10px solid rgba(255, 248, 236, 0.92);
+  border-radius: 16px;
+  background: #fff8ec;
+  box-shadow:
+    0 30px 70px rgba(44, 8, 7, 0.32),
+    0 1px 0 rgba(255, 255, 255, 0.8) inset;
+  transform: rotate(-2.2deg);
+}
+
+.story-plate::after {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, rgba(34, 12, 10, 0.02), rgba(34, 12, 10, 0.14)),
+    linear-gradient(115deg, rgba(255, 255, 255, 0.18), transparent 36%, transparent 72%, rgba(255, 255, 255, 0.1));
+  content: "";
+  pointer-events: none;
 }
 
 /* Menu Section */
@@ -11755,6 +11823,115 @@ h2 span {
   .hero-parallax-card {
     width: min(45vw, 176px);
     aspect-ratio: 1.15 / 1;
+  }
+}
+
+@media (max-width: 760px) {
+  .story-band {
+    --story-transition-overlap: 52px;
+    padding: calc(1.35rem + var(--story-transition-overlap)) 0 1.3rem;
+    background-size:
+      auto,
+      360px 180px;
+  }
+
+  .red-story {
+    margin-inline: 0.92rem;
+    min-height: 0;
+    padding: 2rem 1.25rem 14.5rem;
+    border-radius: 14px;
+  }
+
+  .story-content {
+    gap: 1.35rem;
+  }
+
+  .story-intro {
+    max-width: none;
+  }
+
+  .red-story h2 {
+    max-width: 9.8em;
+    margin: 1rem 0 0.78rem;
+    font-size: clamp(2.05rem, 10.8vw, 3.1rem);
+    line-height: 0.98;
+  }
+
+  .story-content p {
+    max-width: 24rem;
+    font-size: 0.92rem;
+    line-height: 1.55;
+  }
+
+  .story-text {
+    border-left: 0;
+    border-top: 1px solid rgba(255, 232, 190, 0.18);
+    padding: 1.15rem 0 0;
+  }
+
+  .story-rituals {
+    gap: 0.42rem;
+  }
+
+  .story-rituals span {
+    min-height: 1.94rem;
+    padding-inline: 0.66rem;
+    font-size: 0.72rem;
+  }
+
+  .story-stats {
+    display: grid;
+    width: 100%;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.5rem;
+    margin-top: 1.45rem;
+    padding: 0.5rem;
+  }
+
+  .story-stats div {
+    min-width: 0;
+    padding: 0.86rem 0.76rem 0.82rem;
+  }
+
+  .story-stats strong {
+    font-size: clamp(2rem, 10vw, 2.8rem);
+  }
+
+  .story-stats span {
+    font-size: 0.72rem;
+  }
+
+  .story-plate {
+    right: 1rem;
+    bottom: -2.5rem;
+    left: 1rem;
+    width: auto;
+    height: 205px;
+    border-width: 7px;
+    border-radius: 12px;
+    transform: rotate(-1.3deg);
+  }
+}
+
+@media (min-width: 761px) and (max-width: 1039px) {
+  .red-story {
+    padding-bottom: 15.5rem;
+  }
+
+  .story-content {
+    grid-template-columns: 1fr;
+  }
+
+  .story-text {
+    max-width: 42rem;
+    border-left: 0;
+    border-top: 1px solid rgba(255, 232, 190, 0.18);
+    padding: 1.4rem 0 0;
+  }
+
+  .story-plate {
+    right: 5vw;
+    width: min(620px, 78vw);
   }
 }
 
