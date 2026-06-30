@@ -147,7 +147,7 @@ export function VanHeroParallax() {
     spring,
   );
   const galleryY = useSpring(
-    useTransform(scrollYProgress, [0, 0.36, 1], [24, -18, -72]),
+    useTransform(scrollYProgress, [0, 0.36, 1], [110, 82, 56]),
     spring,
   );
   const galleryOpacity = useSpring(
@@ -155,7 +155,7 @@ export function VanHeroParallax() {
     spring,
   );
   const floatingFoodY = useSpring(
-    useTransform(scrollYProgress, [0, 1], [0, -58]),
+    useTransform(scrollYProgress, [0, 1], [0, -28]),
     spring,
   );
 

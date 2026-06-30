@@ -11333,7 +11333,7 @@ h2 span {
 
 .hero-parallax-gallery {
   position: absolute;
-  top: 16%;
+  top: 24%;
   right: auto;
   left: -18vw;
   z-index: 3;
@@ -11345,7 +11345,7 @@ h2 span {
 
 .hero-parallax-food-stage {
   position: absolute;
-  top: 11%;
+  top: 16%;
   right: clamp(1rem, 8vw, 8rem);
   z-index: 7;
   width: min(46vw, 600px);
@@ -11371,43 +11371,50 @@ h2 span {
 
 .hero-parallax-food-stage .hero-float-pan {
   top: 36%;
-  left: 24%;
-  width: clamp(190px, 22vw, 330px);
+  left: 25%;
+  z-index: 9;
+  width: clamp(185px, 21vw, 315px);
 }
 
 .hero-parallax-food-stage .hero-float-tea {
   top: 2%;
-  right: 18%;
+  right: 22%;
+  z-index: 10;
   width: clamp(82px, 9vw, 132px);
 }
 
 .hero-parallax-food-stage .hero-float-simit {
-  right: -1%;
-  bottom: 13%;
-  width: clamp(150px, 17vw, 252px);
+  right: 4%;
+  bottom: 12%;
+  z-index: 8;
+  width: clamp(145px, 16vw, 236px);
 }
 
 .hero-parallax-food-stage .hero-float-omelette {
-  left: 0;
-  bottom: 7%;
-  width: clamp(170px, 20vw, 292px);
+  left: 4%;
+  bottom: 8%;
+  z-index: 7;
+  width: clamp(160px, 18vw, 270px);
 }
 
 .hero-parallax-food-stage .hero-float-jam {
-  left: 10%;
-  top: 35%;
-  width: clamp(100px, 11vw, 166px);
+  left: 9%;
+  top: 31%;
+  z-index: 6;
+  width: clamp(92px, 10vw, 150px);
 }
 
 .hero-parallax-food-stage .hero-float-tomato {
-  top: 24%;
-  right: 2%;
+  top: 25%;
+  right: 9%;
+  z-index: 11;
   width: clamp(52px, 6vw, 88px);
 }
 
 .hero-parallax-food-stage .hero-float-mint {
-  left: 42%;
-  top: 8%;
+  left: 39%;
+  top: 9%;
+  z-index: 11;
   width: clamp(48px, 5.5vw, 78px);
 }
 
@@ -11460,13 +11467,13 @@ h2 span {
   }
 
   .hero-parallax-gallery {
-    top: 20%;
+    top: 28%;
     right: auto;
     left: -42vw;
   }
 
   .hero-parallax-food-stage {
-    top: 18%;
+    top: 19%;
     right: 8%;
     width: min(82vw, 640px);
     height: min(62vw, 500px);
@@ -11496,14 +11503,14 @@ h2 span {
   }
 
   .hero-parallax-gallery {
-    top: 12%;
+    top: 25%;
     right: auto;
     left: -84vw;
     gap: 0.68rem;
   }
 
   .hero-parallax-food-stage {
-    top: 15%;
+    top: 19%;
     right: auto;
     left: 50%;
     width: calc(100vw - 24px);
@@ -11514,43 +11521,43 @@ h2 span {
   }
 
   .hero-parallax-food-stage .hero-float-pan {
-    top: 26%;
-    left: 18%;
-    width: min(54vw, 216px);
+    top: 27%;
+    left: 22%;
+    width: min(50vw, 202px);
   }
 
   .hero-parallax-food-stage .hero-float-tea {
-    top: 1%;
-    right: 18%;
-    width: min(21vw, 86px);
+    top: 3%;
+    right: 24%;
+    width: min(20vw, 82px);
   }
 
   .hero-parallax-food-stage .hero-float-simit {
-    right: 7%;
-    bottom: 12%;
-    width: min(36vw, 142px);
+    right: 8%;
+    bottom: 10%;
+    width: min(34vw, 136px);
   }
 
   .hero-parallax-food-stage .hero-float-omelette {
-    left: 6%;
-    bottom: 9%;
-    width: min(40vw, 158px);
+    left: 7%;
+    bottom: 8%;
+    width: min(37vw, 148px);
   }
 
   .hero-parallax-food-stage .hero-float-jam {
-    left: 7%;
-    top: 39%;
-    width: min(26vw, 104px);
+    left: 9%;
+    top: 34%;
+    width: min(23vw, 92px);
   }
 
   .hero-parallax-food-stage .hero-float-tomato {
-    top: 20%;
-    right: 1%;
-    width: min(14vw, 56px);
+    top: 23%;
+    right: 11%;
+    width: min(13vw, 52px);
   }
 
   .hero-parallax-food-stage .hero-float-mint {
-    left: 43%;
+    left: 35%;
     top: 8%;
     width: min(11vw, 46px);
   }
@@ -11577,14 +11584,14 @@ h2 span {
   }
 
   .hero-parallax-gallery {
-    top: 11%;
+    top: 25%;
     right: auto;
-    left: -92vw;
+    left: -90vw;
     gap: 0.58rem;
   }
 
   .hero-parallax-food-stage {
-    top: 15%;
+    top: 20%;
     width: calc(100vw - 18px);
     height: 340px;
     min-height: 340px;
@@ -11598,27 +11605,27 @@ h2 span {
   }
 
   .hero-parallax-food-stage .hero-float-pan {
-    top: 23%;
-    left: 17%;
-    width: min(57vw, 204px);
+    top: 25%;
+    left: 21%;
+    width: min(51vw, 190px);
   }
 
   .hero-parallax-food-stage .hero-float-tea {
-    top: 0;
-    right: 14%;
-    width: min(23vw, 78px);
+    top: 2%;
+    right: 23%;
+    width: min(20vw, 74px);
   }
 
   .hero-parallax-food-stage .hero-float-simit {
-    right: 6%;
+    right: 8%;
     bottom: 8%;
-    width: min(36vw, 132px);
+    width: min(33vw, 124px);
   }
 
   .hero-parallax-food-stage .hero-float-omelette {
-    left: 7%;
+    left: 8%;
     bottom: 7%;
-    width: min(40vw, 148px);
+    width: min(36vw, 136px);
   }
 
   .hero-parallax-row {
