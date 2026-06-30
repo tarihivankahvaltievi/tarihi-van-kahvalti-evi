@@ -11580,11 +11580,11 @@ h2 span {
   }
 
   .hero-parallax-copy {
-    top: 8.72rem;
-    left: 1.32rem;
+    top: 8.66rem;
+    left: 1.42rem;
     right: auto;
-    width: min(48vw, 18rem);
-    max-width: 18rem;
+    width: min(44vw, 17rem);
+    max-width: 17rem;
     gap: 0.36rem;
   }
 
@@ -11614,56 +11614,56 @@ h2 span {
   }
 
   .hero-parallax-food-stage {
-    top: 28.8%;
-    right: 0.24rem;
+    top: 18.2%;
+    right: 0.2rem;
     left: auto;
-    width: min(54vw, 236px);
-    max-width: 236px;
-    height: 392px;
-    min-height: 392px;
+    width: min(60vw, 270px);
+    max-width: 270px;
+    height: 470px;
+    min-height: 470px;
     margin-left: 0;
   }
 
   .hero-parallax-food-stage .hero-float-pan {
-    top: 29%;
-    left: 0%;
-    width: min(42vw, 160px);
+    top: 45%;
+    left: 7%;
+    width: min(43vw, 166px);
   }
 
   .hero-parallax-food-stage .hero-float-tea {
-    top: 4%;
-    right: 13%;
+    top: 29%;
+    right: 14%;
     width: min(18vw, 72px);
   }
 
   .hero-parallax-food-stage .hero-float-simit {
-    right: 8%;
-    bottom: 7%;
-    width: min(32vw, 124px);
+    right: 4%;
+    bottom: 11%;
+    width: min(32vw, 126px);
   }
 
   .hero-parallax-food-stage .hero-float-omelette {
-    left: -42vw;
-    bottom: -1%;
-    width: min(39vw, 150px);
+    left: -45%;
+    bottom: 4%;
+    width: min(38vw, 148px);
   }
 
   .hero-parallax-food-stage .hero-float-jam {
-    left: -34vw;
-    top: 52%;
-    width: min(22vw, 84px);
+    left: -29%;
+    top: 57%;
+    width: min(21vw, 82px);
   }
 
   .hero-parallax-food-stage .hero-float-tomato {
-    top: 33%;
-    right: 1%;
+    top: 49%;
+    right: 0%;
     width: min(13vw, 50px);
   }
 
   .hero-parallax-food-stage .hero-float-mint {
-    left: -30vw;
-    top: 23%;
-    width: min(9.5vw, 40px);
+    left: 30%;
+    top: 35%;
+    width: min(9.5vw, 38px);
   }
 
   .hero-parallax-row {
@@ -11688,11 +11688,11 @@ h2 span {
   }
 
   .hero-parallax-copy {
-    top: 8rem;
-    left: 0.92rem;
+    top: 7.94rem;
+    left: 1rem;
     right: auto;
-    width: min(49vw, 17rem);
-    max-width: 17rem;
+    width: min(44vw, 16rem);
+    max-width: 16rem;
   }
 
   .hero-parallax-copy h1 {
@@ -11712,12 +11712,12 @@ h2 span {
   }
 
   .hero-parallax-food-stage {
-    top: 28.5%;
-    right: 0.15rem;
+    top: 17.8%;
+    right: 0.08rem;
     left: auto;
-    width: min(54vw, 220px);
-    height: 362px;
-    min-height: 362px;
+    width: min(60vw, 244px);
+    height: 430px;
+    min-height: 430px;
     margin-left: 0;
   }
 
@@ -11728,26 +11728,26 @@ h2 span {
   }
 
   .hero-parallax-food-stage .hero-float-pan {
-    top: 29%;
-    left: 0%;
-    width: min(41vw, 148px);
+    top: 45%;
+    left: 7%;
+    width: min(42vw, 154px);
   }
 
   .hero-parallax-food-stage .hero-float-tea {
-    top: 4%;
-    right: 13%;
+    top: 29%;
+    right: 14%;
     width: min(17.5vw, 64px);
   }
 
   .hero-parallax-food-stage .hero-float-simit {
-    right: 8%;
-    bottom: 7%;
-    width: min(31vw, 112px);
+    right: 4%;
+    bottom: 11%;
+    width: min(31vw, 114px);
   }
 
   .hero-parallax-food-stage .hero-float-omelette {
-    left: -41vw;
-    bottom: -1%;
+    left: -45%;
+    bottom: 4%;
     width: min(37vw, 136px);
   }
 
