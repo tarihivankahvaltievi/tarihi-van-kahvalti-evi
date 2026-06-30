@@ -286,26 +286,26 @@ export default function ClientPage() {
           <section id="story" className="red-story" data-reveal>
             <OrganicLeaf className="leaf-story-1" />
             <div className="story-content">
-              <div className="story-intro">
+              <div>
                 <div className="light-pill">Hakkımızda</div>
-                <h2>Eski Beyoğlu ritmiyle kurulan Van sofrası.</h2>
+                <h2>Eski usul hazırlanır, sofrada uzun uzun yaşanır.</h2>
                 <p>
-                  Zambak Sokak&apos;taki tarihi Rum binasında, 1978&apos;den beri
-                  aile emeğini Van kahvaltısının cömertliğiyle aynı masada
+                  Tarihi Rum binasının sakin dokusunda, 1978’den beri gelen aile
+                  emeğini Van kahvaltısının cömertliğiyle aynı sofrada
                   buluşturuyoruz.
                 </p>
               </div>
               <div className="story-text">
                 <p>
-                  Bizim için kahvaltı hızlıca geçilen bir öğün değil; çayın
-                  yenilendiği, sahanların sıcak kaldığı, sohbetin sofraya
-                  yayıldığı sakin bir sabah ritüeli.
+                  Burada kahvaltı aceleye gelmez. Bakır sahanlar masaya tek tek
+                  yerleşir, çay tazelenir, sohbet kendine yer açar; eski binanın
+                  ruhu her tabakta usulca hissedilir.
                 </p>
-                <div className="story-rituals" aria-label="Tarihi Van Kahvaltıcısı değerleri">
-                  <span>Bakır sahanlar</span>
-                  <span>Otlu peynir</span>
-                  <span>Sınırsız demli çay</span>
-                </div>
+                <p>
+                  Üçüncü kuşak aile işletmesi olarak mirasımızı koruyor; Van’ın
+                  bereketli sofrasını Beyoğlu’nun kalbinde özenli, samimi ve
+                  hatırlanacak bir kahvaltıya dönüştürüyoruz.
+                </p>
               </div>
             </div>
             <div className="story-stats" data-reveal>
