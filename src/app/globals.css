@@ -11565,8 +11565,8 @@ h2 span {
 
 @media (max-width: 680px) {
   .hero.hero-parallax-dining {
-    height: 190svh;
-    min-height: 1260px;
+    height: 150svh;
+    min-height: 1040px;
   }
 
   .hero.hero-parallax-dining::before {
@@ -11679,8 +11679,8 @@ h2 span {
 
 @media (max-width: 420px) {
   .hero.hero-parallax-dining {
-    height: 188svh;
-    min-height: 1180px;
+    height: 136svh;
+    min-height: 980px;
   }
 
   .hero-parallax-sticky {
