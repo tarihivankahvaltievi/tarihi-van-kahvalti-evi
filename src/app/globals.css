@@ -11580,11 +11580,11 @@ h2 span {
   }
 
   .hero-parallax-copy {
-    top: 8.86rem;
-    left: 1.25rem;
-    right: 1.25rem;
-    width: auto;
-    max-width: 19rem;
+    top: 8.72rem;
+    left: 1.32rem;
+    right: auto;
+    width: min(48vw, 18rem);
+    max-width: 18rem;
     gap: 0.36rem;
   }
 
@@ -11595,14 +11595,14 @@ h2 span {
   }
 
   .hero-parallax-copy h1 {
-    max-width: 7.8em;
-    font-size: clamp(2.05rem, 9.8vw, 3rem);
+    max-width: 6.7em;
+    font-size: clamp(1.9rem, 8.8vw, 2.78rem);
     line-height: 0.96;
   }
 
   .hero-parallax-copy p {
-    max-width: 17rem;
-    font-size: 0.82rem;
+    max-width: 14.8rem;
+    font-size: 0.78rem;
     line-height: 1.42;
   }
 
@@ -11614,55 +11614,55 @@ h2 span {
   }
 
   .hero-parallax-food-stage {
-    top: 35.2%;
-    right: auto;
-    left: 50%;
-    width: calc(100vw - 20px);
-    max-width: 410px;
-    height: 292px;
-    min-height: 292px;
-    margin-left: max(-205px, calc((20px - 100vw) / 2));
+    top: 28.8%;
+    right: 0.24rem;
+    left: auto;
+    width: min(54vw, 236px);
+    max-width: 236px;
+    height: 392px;
+    min-height: 392px;
+    margin-left: 0;
   }
 
   .hero-parallax-food-stage .hero-float-pan {
-    top: 18%;
-    left: 30%;
-    width: min(43vw, 170px);
+    top: 29%;
+    left: 0%;
+    width: min(42vw, 160px);
   }
 
   .hero-parallax-food-stage .hero-float-tea {
-    top: 1%;
-    right: 14%;
-    width: min(18vw, 74px);
+    top: 4%;
+    right: 13%;
+    width: min(18vw, 72px);
   }
 
   .hero-parallax-food-stage .hero-float-simit {
-    right: 4%;
+    right: 8%;
     bottom: 7%;
-    width: min(33vw, 130px);
+    width: min(32vw, 124px);
   }
 
   .hero-parallax-food-stage .hero-float-omelette {
-    left: 4%;
-    bottom: 6%;
-    width: min(37vw, 144px);
+    left: -42vw;
+    bottom: -1%;
+    width: min(39vw, 150px);
   }
 
   .hero-parallax-food-stage .hero-float-jam {
-    left: 8%;
-    top: 27%;
-    width: min(21vw, 84px);
+    left: -34vw;
+    top: 52%;
+    width: min(22vw, 84px);
   }
 
   .hero-parallax-food-stage .hero-float-tomato {
-    top: 27%;
-    right: 7%;
-    width: min(12.5vw, 50px);
+    top: 33%;
+    right: 1%;
+    width: min(13vw, 50px);
   }
 
   .hero-parallax-food-stage .hero-float-mint {
-    left: 31%;
-    top: 5%;
+    left: -30vw;
+    top: 23%;
     width: min(9.5vw, 40px);
   }
 
@@ -11688,19 +11688,20 @@ h2 span {
   }
 
   .hero-parallax-copy {
-    top: 8.14rem;
-    left: 1rem;
-    right: 1rem;
-    max-width: 18rem;
+    top: 8rem;
+    left: 0.92rem;
+    right: auto;
+    width: min(49vw, 17rem);
+    max-width: 17rem;
   }
 
   .hero-parallax-copy h1 {
-    font-size: clamp(1.92rem, 9.4vw, 2.74rem);
+    font-size: clamp(1.72rem, 8.2vw, 2.42rem);
   }
 
   .hero-parallax-copy p {
-    max-width: 16.2rem;
-    font-size: 0.8rem;
+    max-width: 13.2rem;
+    font-size: 0.74rem;
   }
 
   .hero-parallax-gallery {
@@ -11711,11 +11712,13 @@ h2 span {
   }
 
   .hero-parallax-food-stage {
-    top: 35.4%;
-    width: calc(100vw - 18px);
-    height: 270px;
-    min-height: 270px;
-    margin-left: calc((18px - 100vw) / 2);
+    top: 28.5%;
+    right: 0.15rem;
+    left: auto;
+    width: min(54vw, 220px);
+    height: 362px;
+    min-height: 362px;
+    margin-left: 0;
   }
 
   .hero-parallax-food-stage .hero-float-tomato,
@@ -11725,27 +11728,27 @@ h2 span {
   }
 
   .hero-parallax-food-stage .hero-float-pan {
-    top: 18%;
-    left: 30%;
-    width: min(42vw, 158px);
+    top: 29%;
+    left: 0%;
+    width: min(41vw, 148px);
   }
 
   .hero-parallax-food-stage .hero-float-tea {
-    top: 1%;
-    right: 14%;
-    width: min(17.5vw, 66px);
+    top: 4%;
+    right: 13%;
+    width: min(17.5vw, 64px);
   }
 
   .hero-parallax-food-stage .hero-float-simit {
-    right: 4%;
+    right: 8%;
     bottom: 7%;
-    width: min(32vw, 118px);
+    width: min(31vw, 112px);
   }
 
   .hero-parallax-food-stage .hero-float-omelette {
-    left: 4%;
-    bottom: 6%;
-    width: min(35vw, 130px);
+    left: -41vw;
+    bottom: -1%;
+    width: min(37vw, 136px);
   }
 
   .hero-parallax-row {
