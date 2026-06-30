@@ -177,11 +177,11 @@ export function VanHeroParallax() {
           animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
           transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
         >
-          <span>Beyoğlu&apos;nda Van kahvaltısı</span>
-          <h1>Sofra hazır, çay demli.</h1>
+          <span>Zambak Sokak · Beyoğlu</span>
+          <h1>Çay taze, sofra sıcak.</h1>
           <p>
-            Otlu peynir, murtuğa, kavut ve bakır sahanlar; Zambak Sokak&apos;ta
-            kahvaltı aceleye gelmez.
+            Otlu peynir, kavut, murtuğa ve bakır sahanlar. Van kahvaltısı
+            burada aceleye gelmez.
           </p>
         </motion.div>
 
