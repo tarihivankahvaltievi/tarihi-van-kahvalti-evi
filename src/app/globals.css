@@ -10670,3 +10670,631 @@ h2 span {
     border-radius: 42px;
   }
 }
+
+/* Floating breakfast hero */
+.hero.hero-floating-food {
+  display: grid;
+  grid-template-columns: minmax(0, 0.86fr) minmax(420px, 1.14fr);
+  align-items: center;
+  gap: clamp(1.5rem, 4.8vw, 5rem);
+  min-height: 100svh;
+  padding: clamp(7.4rem, 9vw, 9.4rem) clamp(1.1rem, 5.2vw, 5.6rem) clamp(3rem, 5.4vw, 5.8rem);
+  background: linear-gradient(180deg, #fffdfa 0%, #ffffff 44%, #fbf7ef 100%);
+  color: var(--ink);
+}
+
+.hero.hero-floating-food::before {
+  inset: 0;
+  background:
+    linear-gradient(90deg, rgba(143, 23, 26, 0.045) 1px, transparent 1px),
+    linear-gradient(180deg, rgba(197, 162, 90, 0.052) 1px, transparent 1px);
+  background-size: 118px 118px;
+  mask-image: linear-gradient(180deg, transparent 0%, #000 18%, #000 84%, transparent 100%);
+  opacity: 0.42;
+}
+
+.hero.hero-floating-food::after {
+  right: clamp(1.1rem, 5.2vw, 5.6rem);
+  bottom: clamp(1.7rem, 3.4vw, 3rem);
+  left: clamp(1.1rem, 5.2vw, 5.6rem);
+  background: linear-gradient(90deg, rgba(143, 23, 26, 0), rgba(143, 23, 26, 0.18), rgba(197, 162, 90, 0.28), rgba(143, 23, 26, 0));
+}
+
+.hero-floating-food .hero-left {
+  align-self: center;
+  gap: clamp(1rem, 2vw, 1.45rem);
+  max-width: 660px;
+}
+
+.hero-floating-food .hero-kicker {
+  color: rgba(42, 42, 45, 0.74);
+  text-shadow: none;
+}
+
+.hero-floating-food .hero-kicker span {
+  border-color: rgba(143, 23, 26, 0.1);
+  background: rgba(255, 255, 255, 0.78);
+  box-shadow: 0 10px 28px rgba(80, 51, 31, 0.06);
+  backdrop-filter: blur(18px) saturate(130%);
+  -webkit-backdrop-filter: blur(18px) saturate(130%);
+}
+
+.hero-floating-food h1 {
+  max-width: 8.6em;
+  color: #231f1f;
+  font-size: clamp(3.18rem, 6.55vw, 6.7rem);
+  line-height: 0.9;
+  text-shadow: none;
+}
+
+.hero-floating-food h1 span {
+  color: var(--red);
+}
+
+.hero-floating-food .hero-bottom p {
+  max-width: 35rem;
+  color: rgba(42, 42, 45, 0.68);
+  text-shadow: none;
+}
+
+.hero-floating-food .red-cta {
+  background: linear-gradient(180deg, #ba252a, #7f1216);
+  color: #fff;
+}
+
+.hero-floating-food .ghost-cta {
+  border-color: rgba(143, 23, 26, 0.12);
+  background: rgba(255, 255, 255, 0.84);
+  color: var(--ink);
+  box-shadow: 0 16px 38px rgba(43, 27, 20, 0.08);
+}
+
+.hero-floating-food .ghost-cta:hover {
+  border-color: rgba(143, 23, 26, 0.28);
+  background: #fff6f0;
+  color: var(--red);
+}
+
+.hero-floating-food .hero-proof span {
+  border-color: rgba(143, 23, 26, 0.1);
+  background: rgba(255, 255, 255, 0.78);
+  color: rgba(42, 42, 45, 0.62);
+  box-shadow: 0 14px 34px rgba(52, 34, 24, 0.055);
+}
+
+.hero-floating-food .hero-proof strong {
+  color: #262223;
+}
+
+.hero-swirl {
+  position: absolute;
+  z-index: 1;
+  border: 1.5px solid rgba(197, 162, 90, 0.18);
+  border-color: rgba(197, 162, 90, 0.18) transparent transparent rgba(143, 23, 26, 0.12);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.hero-swirl-one {
+  width: min(58vw, 700px);
+  height: min(58vw, 700px);
+  top: 8%;
+  right: -12%;
+  transform: rotate(-18deg);
+  animation: hero-swirl-drift 18s var(--ease-soft) infinite alternate;
+}
+
+.hero-swirl-two {
+  width: min(44vw, 520px);
+  height: min(44vw, 520px);
+  right: 23%;
+  bottom: 4%;
+  border-color: transparent rgba(76, 118, 65, 0.13) rgba(197, 162, 90, 0.18) transparent;
+  transform: rotate(16deg);
+  animation: hero-swirl-drift 22s var(--ease-soft) infinite alternate-reverse;
+}
+
+.hero-floating-plate {
+  position: absolute;
+  right: clamp(0.4rem, 8vw, 7rem);
+  bottom: clamp(1.8rem, 5vw, 4.4rem);
+  z-index: 1;
+  width: min(48vw, 620px);
+  height: min(16vw, 180px);
+  border-radius: 50%;
+  background: radial-gradient(ellipse at center, rgba(101, 70, 38, 0.12), rgba(101, 70, 38, 0.055) 42%, transparent 68%);
+  filter: blur(4px);
+  pointer-events: none;
+}
+
+.hero-food-stage {
+  position: relative;
+  inset: auto;
+  display: block;
+  min-height: clamp(500px, 48vw, 650px);
+  align-self: center;
+  transform-style: preserve-3d;
+  perspective: 1300px;
+}
+
+.hero-float-item {
+  position: absolute;
+  z-index: 4;
+  display: block;
+  filter: drop-shadow(0 28px 30px rgba(72, 44, 24, 0.16));
+  opacity: 0;
+  transform-origin: 50% 58%;
+  animation:
+    hero-food-enter 900ms var(--ease-out) var(--float-delay) forwards,
+    hero-food-float 9.5s var(--ease-soft) calc(var(--float-delay) + 900ms) infinite;
+}
+
+.hero-float-item img {
+  object-fit: contain;
+  transform: translateZ(0);
+}
+
+.hero-float-pan {
+  top: 25%;
+  left: 21%;
+  width: clamp(230px, 31vw, 445px);
+  aspect-ratio: 1086 / 825;
+  z-index: 7;
+  rotate: -8deg;
+  --float-x: 12px;
+  --float-y: -18px;
+  --float-x-end: -9px;
+  --float-y-end: 11px;
+  animation-duration: 900ms, 10.2s;
+}
+
+.hero-float-tea {
+  top: 1%;
+  right: 16%;
+  width: clamp(96px, 12vw, 162px);
+  aspect-ratio: 891 / 1033;
+  z-index: 8;
+  rotate: 8deg;
+  --float-x: -7px;
+  --float-y: -16px;
+  --float-x-end: 9px;
+  --float-y-end: 8px;
+  animation-duration: 900ms, 8.8s;
+}
+
+.hero-float-simit {
+  right: 0;
+  bottom: 6%;
+  width: clamp(190px, 24vw, 340px);
+  aspect-ratio: 1130 / 914;
+  z-index: 6;
+  rotate: 7deg;
+  --float-x: -12px;
+  --float-y: -13px;
+  --float-x-end: 8px;
+  --float-y-end: 10px;
+  animation-duration: 900ms, 11s;
+}
+
+.hero-float-omelette {
+  left: 0;
+  bottom: 1%;
+  width: clamp(210px, 27vw, 390px);
+  aspect-ratio: 1228 / 777;
+  z-index: 5;
+  rotate: -10deg;
+  --float-x: 10px;
+  --float-y: -10px;
+  --float-x-end: -12px;
+  --float-y-end: 8px;
+  animation-duration: 900ms, 11.8s;
+}
+
+.hero-float-cheese {
+  top: 8%;
+  left: 3%;
+  width: clamp(150px, 18vw, 240px);
+  aspect-ratio: 980 / 856;
+  z-index: 4;
+  rotate: -12deg;
+  --float-x: 8px;
+  --float-y: -12px;
+  --float-x-end: -6px;
+  --float-y-end: 9px;
+  animation-duration: 900ms, 9.6s;
+}
+
+.hero-float-jam {
+  right: 14%;
+  top: 36%;
+  width: clamp(145px, 17vw, 235px);
+  aspect-ratio: 1141 / 863;
+  z-index: 5;
+  rotate: 9deg;
+  --float-x: -8px;
+  --float-y: -10px;
+  --float-x-end: 9px;
+  --float-y-end: 7px;
+  animation-duration: 900ms, 10.8s;
+}
+
+.hero-float-tomato {
+  top: 19%;
+  right: 2%;
+  width: clamp(72px, 9vw, 124px);
+  aspect-ratio: 887 / 723;
+  z-index: 9;
+  rotate: 18deg;
+  --float-x: -7px;
+  --float-y: -9px;
+  --float-x-end: 6px;
+  --float-y-end: 7px;
+  animation-duration: 900ms, 8.6s;
+}
+
+.hero-float-mint {
+  left: 35%;
+  top: 6%;
+  width: clamp(58px, 7.5vw, 102px);
+  aspect-ratio: 741 / 542;
+  z-index: 9;
+  rotate: -20deg;
+  --float-x: 6px;
+  --float-y: -11px;
+  --float-x-end: -7px;
+  --float-y-end: 7px;
+  animation-duration: 900ms, 8.2s;
+}
+
+.hero-float-badge {
+  position: absolute;
+  z-index: 12;
+  display: inline-flex;
+  min-height: 42px;
+  align-items: center;
+  gap: 0.48rem;
+  border: 1px solid rgba(143, 23, 26, 0.1);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.78);
+  color: rgba(42, 42, 45, 0.72);
+  padding: 0 0.92rem;
+  font-size: 0.78rem;
+  font-weight: 780;
+  box-shadow: 0 16px 34px rgba(52, 34, 24, 0.08);
+  backdrop-filter: blur(18px) saturate(130%);
+  -webkit-backdrop-filter: blur(18px) saturate(130%);
+  animation: hero-badge-float 7s var(--ease-soft) infinite;
+}
+
+.hero-float-badge svg {
+  color: var(--red);
+}
+
+.hero-badge-hours {
+  top: 17%;
+  left: 30%;
+}
+
+.hero-badge-place {
+  right: 5%;
+  bottom: 33%;
+  animation-delay: -2.6s;
+}
+
+@keyframes hero-food-enter {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 34px, -60px) scale(0.9);
+    filter: blur(8px) drop-shadow(0 18px 22px rgba(72, 44, 24, 0.08));
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+    filter: blur(0) drop-shadow(0 28px 30px rgba(72, 44, 24, 0.16));
+  }
+}
+
+@keyframes hero-food-float {
+  0%,
+  100% {
+    translate: 0 0;
+  }
+  35% {
+    translate: var(--float-x, 10px) var(--float-y, -15px);
+  }
+  68% {
+    translate: var(--float-x-end, -8px) var(--float-y-end, 9px);
+  }
+}
+
+@keyframes hero-badge-float {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(0, -9px, 0);
+  }
+}
+
+@keyframes hero-swirl-drift {
+  from {
+    translate: 0 0;
+    opacity: 0.68;
+  }
+  to {
+    translate: -18px 22px;
+    opacity: 0.34;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-float-item,
+  .hero-float-badge,
+  .hero-swirl {
+    animation: none;
+    opacity: 1;
+  }
+}
+
+@media (max-width: 980px) {
+  .hero.hero-floating-food {
+    grid-template-columns: 1fr;
+    gap: clamp(1.2rem, 4vw, 2.2rem);
+    min-height: 100svh;
+    padding: 7.1rem clamp(1rem, 4.5vw, 2rem) 2.7rem;
+  }
+
+  .hero-floating-food .hero-left {
+    max-width: 760px;
+    text-align: center;
+    justify-items: center;
+  }
+
+  .hero-floating-food h1 {
+    max-width: 9em;
+    font-size: clamp(3rem, 12vw, 5.5rem);
+  }
+
+  .hero-floating-food .hero-bottom {
+    justify-items: center;
+  }
+
+  .hero-floating-food .hero-bottom p {
+    max-width: 38rem;
+  }
+
+  .hero-food-stage {
+    position: relative;
+    inset: auto;
+    z-index: 5;
+    display: block;
+    width: min(100%, 720px);
+    min-height: clamp(430px, 76vw, 590px);
+    margin-inline: auto;
+  }
+
+  .hero-floating-plate {
+    right: 8%;
+    bottom: 1.2rem;
+    width: 82vw;
+    height: 22vw;
+  }
+}
+
+@media (max-width: 680px) {
+  .hero.hero-floating-food .hero-food-stage {
+    position: relative !important;
+    inset: auto !important;
+    z-index: 5;
+    display: block;
+  }
+
+  .hero.hero-floating-food {
+    min-height: 100svh;
+    padding-top: 6.8rem;
+    padding-bottom: 2rem;
+  }
+
+  .hero-floating-food .hero-kicker {
+    justify-content: center;
+    gap: 0.32rem;
+    font-size: 0.6rem;
+  }
+
+  .hero-floating-food .hero-kicker span {
+    min-height: 26px;
+    padding-inline: 0.56rem;
+  }
+
+  .hero-floating-food h1 {
+    max-width: 7.6em;
+    font-size: clamp(2.62rem, 14vw, 4.2rem);
+    line-height: 0.94;
+  }
+
+  .hero-floating-food .hero-actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    width: min(100%, 350px);
+    gap: 0.56rem;
+  }
+
+  .hero-floating-food .hero-actions .red-cta,
+  .hero-floating-food .hero-actions .ghost-cta {
+    min-height: 48px;
+    padding-inline: 0.8rem;
+    font-size: 0.82rem;
+  }
+
+  .hero-floating-food .hero-proof {
+    width: min(100%, 360px);
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.38rem;
+  }
+
+  .hero-floating-food .hero-proof span {
+    min-height: 64px;
+    padding: 0.54rem 0.42rem;
+    font-size: 0.66rem;
+  }
+
+  .hero-floating-food .hero-proof strong {
+    font-size: 1rem;
+  }
+
+  .hero-food-stage {
+    position: relative;
+    inset: auto;
+    min-height: clamp(420px, 94vw, 500px);
+    transform: none;
+  }
+
+  .hero-float-pan {
+    top: 22%;
+    left: 18%;
+    width: min(58vw, 250px);
+  }
+
+  .hero-float-tea {
+    top: 3%;
+    right: 18%;
+    width: min(22vw, 98px);
+  }
+
+  .hero-float-simit {
+    right: 2%;
+    bottom: 8%;
+    width: min(40vw, 170px);
+  }
+
+  .hero-float-omelette {
+    left: -2%;
+    bottom: 8%;
+    width: min(42vw, 188px);
+  }
+
+  .hero-float-cheese {
+    top: 8%;
+    left: 2%;
+    width: min(29vw, 126px);
+  }
+
+  .hero-float-jam {
+    right: 4%;
+    top: 42%;
+    width: min(28vw, 118px);
+  }
+
+  .hero-float-tomato {
+    top: 20%;
+    right: 0;
+    width: min(16vw, 68px);
+  }
+
+  .hero-float-mint {
+    left: 43%;
+    top: 8%;
+    width: min(13vw, 54px);
+  }
+
+  .hero-badge-hours {
+    display: none;
+  }
+
+  .hero-badge-place {
+    right: 50%;
+    bottom: 0;
+    transform: translateX(50%);
+    white-space: nowrap;
+  }
+
+  .hero-swirl-one {
+    width: 118vw;
+    height: 118vw;
+    right: -48%;
+    top: 37%;
+  }
+
+  .hero-swirl-two {
+    display: none;
+  }
+}
+
+@media (max-width: 420px) {
+  .hero.hero-floating-food .hero-food-stage {
+    position: relative !important;
+    inset: auto !important;
+    width: min(100%, 360px);
+  }
+
+  .hero.hero-floating-food {
+    height: auto;
+    min-height: 100svh;
+    overflow: hidden;
+    padding-top: 6.65rem;
+    padding-bottom: 1.15rem;
+  }
+
+  .hero-floating-food .hero-bottom p {
+    display: none;
+  }
+
+  .hero-food-stage {
+    min-height: 315px;
+  }
+
+  .hero-floating-food .hero-actions {
+    width: min(100%, 350px) !important;
+    justify-self: center;
+  }
+
+  .hero-floating-food .hero-actions {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-floating-food .hero-actions .red-cta,
+  .hero-floating-food .hero-actions .ghost-cta {
+    width: 100%;
+  }
+
+  .hero-floating-food .hero-proof {
+    display: none;
+  }
+
+  .hero-float-tomato,
+  .hero-float-mint,
+  .hero-float-jam {
+    display: none;
+  }
+
+  .hero-float-pan {
+    top: 19%;
+    left: 15%;
+    width: min(64vw, 230px);
+  }
+
+  .hero-float-tea {
+    top: 2%;
+    right: 13%;
+    width: min(24vw, 90px);
+  }
+
+  .hero-float-cheese {
+    top: 8%;
+    left: 0;
+    width: min(31vw, 116px);
+  }
+
+  .hero-float-simit {
+    right: 0;
+    bottom: 6%;
+    width: min(43vw, 160px);
+  }
+
+  .hero-float-omelette {
+    left: -2%;
+    bottom: 7%;
+    width: min(48vw, 176px);
+  }
+}

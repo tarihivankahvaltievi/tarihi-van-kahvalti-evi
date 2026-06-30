@@ -16,7 +16,6 @@ import { GalleryLightbox } from "./components/gallery-lightbox";
 import { BookingModal } from "./components/booking-modal";
 import { MenuDetailModal } from "./components/menu-detail-modal";
 import { ReviewCarousel } from "./components/review-carousel";
-import { HeroAtmosphere } from "./components/hero-atmosphere";
 import { AnimatedFooter } from "./components/animated-footer";
 
 const mapsUrl =
@@ -110,6 +109,49 @@ const gallery: [string, string][] = [
   ["/images/terrace-tea.jpg", "Teras keyfi ve çay servisi"],
   ["/images/coffee-moment.jpg", "Kafka Cafe kahve molası"],
   ["/images/street-table.jpg", "Beyoğlu sokaklarında kahvaltı masası"],
+];
+
+const heroFloatItems = [
+  {
+    src: "/images/hero-float/sucuk-egg-pan.png",
+    alt: "Bakır sahanda sucuklu yumurta",
+    className: "hero-float-item hero-float-pan",
+  },
+  {
+    src: "/images/hero-float/tea-glass.png",
+    alt: "İnce belli çay",
+    className: "hero-float-item hero-float-tea",
+  },
+  {
+    src: "/images/hero-float/simit-board.png",
+    alt: "Ahşap tabakta sıcak simit",
+    className: "hero-float-item hero-float-simit",
+  },
+  {
+    src: "/images/hero-float/omelette-plate.png",
+    alt: "Kahvaltı tabağı",
+    className: "hero-float-item hero-float-omelette",
+  },
+  {
+    src: "/images/hero-float/cheese-plate.png",
+    alt: "Otlu peynir",
+    className: "hero-float-item hero-float-cheese",
+  },
+  {
+    src: "/images/hero-float/tahin-bowl.png",
+    alt: "Tahin ve pekmez kasesi",
+    className: "hero-float-item hero-float-jam",
+  },
+  {
+    src: "/images/hero-float/tomato-slice.png",
+    alt: "Taze domates dilimi",
+    className: "hero-float-item hero-float-tomato",
+  },
+  {
+    src: "/images/hero-float/mint-leaf.png",
+    alt: "Taze nane yaprağı",
+    className: "hero-float-item hero-float-mint",
+  },
 ];
 
 const OrganicLeaf = ({ className }: { className: string }) => (
@@ -280,7 +322,11 @@ export default function ClientPage() {
           </button>
         </header>
 
-        <section id="top" className="hero">
+        <section id="top" className="hero hero-floating-food" aria-label="Tarihi Van Kahvaltıcısı ana alanı">
+          <div className="hero-swirl hero-swirl-one" aria-hidden="true" />
+          <div className="hero-swirl hero-swirl-two" aria-hidden="true" />
+          <div className="hero-floating-plate" aria-hidden="true" />
+
           <div className="hero-left" data-reveal>
             <div className="hero-kicker">
               <span>Beyoğlu</span>
@@ -289,7 +335,7 @@ export default function ClientPage() {
             </div>
 
             <h1>
-              Van kahvaltısı, <span>tarihle</span> aynı sofrada.
+              Van kahvaltısı <span>havada</span>, lezzet masada.
             </h1>
 
             <div className="hero-bottom">
@@ -297,18 +343,19 @@ export default function ClientPage() {
                 <a className="red-cta" href="#menu">
                   Menüyü İncele <ArrowRight size={16} />
                 </a>
-                <button 
-                  type="button" 
-                  className="ghost-cta" 
+                <button
+                  type="button"
+                  className="ghost-cta"
                   onClick={() => handleOpenBooking()}
                 >
                   Masa Ayırt <ArrowRight size={15} />
                 </button>
               </div>
-              
+
               <p>
-                Otlu peynir, bal-kaymak, sıcak çay ve bakır sahanlar.
-                Beyoğlu’nun kalbinde sakin, köklü bir Van sofrası.
+                Bakır sahanda sucuklu yumurta, ince belli çay, otlu peynir ve
+                sıcak simit. Beyoğlu’nda köklü, cömert ve özenli bir Van
+                sofrası.
               </p>
             </div>
 
@@ -328,28 +375,30 @@ export default function ClientPage() {
             </div>
           </div>
 
-          <div className="hero-visual" aria-label="Konsept Görseli" data-reveal>
-            <div className="rating-card">
-              <span className="rating-mark">4.9</span>
-              <div>
-                <strong>Misafir deneyimi</strong>
-                <small>Van sofrası, Beyoğlu ritmi</small>
+          <div className="hero-visual hero-food-stage" aria-label="Uçuşan kahvaltı lezzetleri" data-reveal>
+            {heroFloatItems.map((item, index) => (
+              <div
+                className={item.className}
+                key={item.src}
+                style={{ "--float-delay": `${index * 140}ms` } as React.CSSProperties}
+              >
+                <Image
+                  src={item.src}
+                  alt={item.alt}
+                  fill
+                  sizes="(max-width: 760px) 52vw, (max-width: 1100px) 32vw, 420px"
+                  priority={index < 5}
+                />
               </div>
+            ))}
+
+            <div className="hero-float-badge hero-badge-hours">
+              <Clock3 size={16} />
+              <span>Her gün 08.00-18.00</span>
             </div>
-            <div className="food-cutout large">
-              <Image
-                src="/images/hero-table.jpg"
-                alt="Konsept görseli"
-                fill
-                sizes="(max-width: 900px) 92vw, 46vw"
-                priority
-                className="hero-main-image"
-              />
-              <HeroAtmosphere />
-            </div>
-            <div className="hero-image-caption">
-              <span>Van serpme kahvaltısı</span>
-              <span>Bakır sahanlar</span>
+            <div className="hero-float-badge hero-badge-place">
+              <MapPin size={16} />
+              <span>Beyoğlu, Zambak Sk.</span>
             </div>
           </div>
         </section>
