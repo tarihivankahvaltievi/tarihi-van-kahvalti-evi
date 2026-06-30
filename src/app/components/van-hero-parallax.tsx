@@ -172,6 +172,20 @@ export function VanHeroParallax() {
     >
       <div className="hero-parallax-sticky">
         <motion.div
+          className="hero-parallax-copy"
+          initial={{ opacity: 0, y: 18, filter: "blur(10px)" }}
+          animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+          transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
+        >
+          <span>Beyoğlu&apos;nda Van kahvaltısı</span>
+          <h1>Sofra hazır, çay demli.</h1>
+          <p>
+            Otlu peynir, murtuğa, kavut ve bakır sahanlar; Zambak Sokak&apos;ta
+            kahvaltı aceleye gelmez.
+          </p>
+        </motion.div>
+
+        <motion.div
           className="hero-parallax-gallery"
           style={{
             rotateX,
