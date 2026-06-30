@@ -11286,3 +11286,595 @@ h2 span {
     width: min(49vw, 174px);
   }
 }
+
+/* 21st / Aceternity-inspired dining parallax hero */
+.hero.hero-parallax-dining {
+  display: block;
+  height: 168svh;
+  min-height: 1080px;
+  overflow: clip;
+  padding: 0;
+  background:
+    linear-gradient(180deg, #fffdfa 0%, #fff9ef 46%, #f7efe3 100%),
+    linear-gradient(90deg, rgba(143, 23, 26, 0.05) 1px, transparent 1px),
+    linear-gradient(180deg, rgba(197, 162, 90, 0.055) 1px, transparent 1px);
+  background-size: auto, 118px 118px, 118px 118px;
+  color: var(--ink);
+  perspective: 1200px;
+  transform-style: preserve-3d;
+}
+
+.hero.hero-parallax-dining::before {
+  inset: 0;
+  z-index: 1;
+  background:
+    linear-gradient(90deg, rgba(255, 253, 247, 0.94) 0%, rgba(255, 253, 247, 0.78) 30%, rgba(255, 253, 247, 0.2) 62%, rgba(143, 23, 26, 0.08) 100%),
+    linear-gradient(180deg, rgba(255, 253, 247, 0.24), rgba(255, 253, 247, 0) 34%, rgba(255, 253, 247, 0.94) 100%);
+  opacity: 1;
+}
+
+.hero.hero-parallax-dining::after {
+  right: clamp(1rem, 5vw, 5.5rem);
+  bottom: clamp(1.4rem, 4vw, 3.4rem);
+  left: clamp(1rem, 5vw, 5.5rem);
+  z-index: 5;
+  background: linear-gradient(90deg, rgba(143, 23, 26, 0), rgba(143, 23, 26, 0.18), rgba(197, 162, 90, 0.34), rgba(143, 23, 26, 0));
+}
+
+.hero-parallax-sticky {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  height: 100svh;
+  min-height: 720px;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.hero-parallax-copy {
+  position: relative;
+  z-index: 8;
+  display: grid;
+  max-width: min(680px, calc(100% - clamp(2rem, 10vw, 11rem)));
+  min-height: 100svh;
+  align-content: center;
+  gap: clamp(1rem, 2vw, 1.45rem);
+  padding: clamp(7.2rem, 10vw, 9.5rem) clamp(1.15rem, 5.2vw, 5.7rem) clamp(3rem, 5vw, 4.8rem);
+}
+
+.hero-parallax-copy .hero-kicker {
+  color: rgba(42, 42, 45, 0.74);
+  text-shadow: none;
+}
+
+.hero-parallax-copy .hero-kicker span {
+  border-color: rgba(143, 23, 26, 0.1);
+  background: rgba(255, 255, 255, 0.78);
+  box-shadow: 0 10px 28px rgba(80, 51, 31, 0.06);
+  backdrop-filter: blur(18px) saturate(130%);
+  -webkit-backdrop-filter: blur(18px) saturate(130%);
+}
+
+.hero-parallax-copy h1 {
+  max-width: 8.2em;
+  color: #231f1f;
+  font-size: clamp(3.1rem, 6.6vw, 6.8rem);
+  line-height: 0.9;
+  text-shadow: none;
+}
+
+.hero-parallax-copy h1 span {
+  color: var(--red);
+}
+
+.hero-parallax-copy .hero-bottom p {
+  max-width: 34rem;
+  color: rgba(42, 42, 45, 0.69);
+  text-shadow: none;
+}
+
+.hero-parallax-copy .red-cta {
+  background: linear-gradient(180deg, #ba252a, #7f1216);
+  color: #fff;
+}
+
+.hero-parallax-copy .ghost-cta {
+  border-color: rgba(143, 23, 26, 0.14);
+  background: rgba(255, 255, 255, 0.84);
+  color: var(--ink);
+  box-shadow: 0 16px 38px rgba(43, 27, 20, 0.08);
+}
+
+.hero-parallax-copy .ghost-cta:hover {
+  border-color: rgba(143, 23, 26, 0.28);
+  background: #fff6f0;
+  color: var(--red);
+}
+
+.hero-parallax-copy .hero-proof span {
+  border-color: rgba(143, 23, 26, 0.1);
+  background: rgba(255, 255, 255, 0.78);
+  color: rgba(42, 42, 45, 0.62);
+  box-shadow: 0 14px 34px rgba(52, 34, 24, 0.055);
+}
+
+.hero-parallax-copy .hero-proof strong {
+  color: #262223;
+}
+
+.hero-parallax-gallery {
+  position: absolute;
+  top: 31%;
+  right: -58vw;
+  left: 68vw;
+  z-index: 3;
+  display: grid;
+  gap: clamp(1rem, 2.1vw, 1.7rem);
+  transform-origin: 50% 10%;
+  will-change: transform, opacity;
+}
+
+.hero-parallax-food-stage {
+  position: absolute;
+  top: 17%;
+  right: clamp(0.5rem, 5vw, 4.2rem);
+  z-index: 7;
+  width: min(48vw, 620px);
+  height: min(54vw, 650px);
+  min-height: 470px;
+  pointer-events: none;
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+.hero-parallax-food-stage::before {
+  position: absolute;
+  right: 4%;
+  bottom: 2%;
+  z-index: 0;
+  width: 76%;
+  height: 28%;
+  border-radius: 50%;
+  background: radial-gradient(ellipse at center, rgba(101, 70, 38, 0.13), rgba(101, 70, 38, 0.055) 46%, transparent 70%);
+  filter: blur(5px);
+  content: "";
+}
+
+.hero-parallax-food-stage .hero-float-pan {
+  top: 36%;
+  left: 24%;
+  width: clamp(190px, 22vw, 330px);
+}
+
+.hero-parallax-food-stage .hero-float-tea {
+  top: 2%;
+  right: 18%;
+  width: clamp(82px, 9vw, 132px);
+}
+
+.hero-parallax-food-stage .hero-float-simit {
+  right: -1%;
+  bottom: 13%;
+  width: clamp(150px, 17vw, 252px);
+}
+
+.hero-parallax-food-stage .hero-float-omelette {
+  left: 0;
+  bottom: 7%;
+  width: clamp(170px, 20vw, 292px);
+}
+
+.hero-parallax-food-stage .hero-float-jam {
+  left: 10%;
+  top: 35%;
+  width: clamp(100px, 11vw, 166px);
+}
+
+.hero-parallax-food-stage .hero-float-tomato {
+  top: 24%;
+  right: 2%;
+  width: clamp(52px, 6vw, 88px);
+}
+
+.hero-parallax-food-stage .hero-float-mint {
+  left: 42%;
+  top: 8%;
+  width: clamp(48px, 5.5vw, 78px);
+}
+
+.hero-parallax-row {
+  display: flex;
+  gap: clamp(1rem, 2vw, 1.55rem);
+  width: max-content;
+  will-change: transform;
+}
+
+.hero-parallax-row.is-reverse {
+  flex-direction: row-reverse;
+}
+
+.hero-parallax-card {
+  position: relative;
+  width: clamp(18rem, 27vw, 30rem);
+  aspect-ratio: 1.2 / 1;
+  flex: 0 0 auto;
+  overflow: hidden;
+  border: 1px solid rgba(255, 246, 232, 0.76);
+  border-radius: 8px;
+  background: #201714;
+  box-shadow:
+    0 28px 70px rgba(42, 27, 18, 0.18),
+    0 8px 18px rgba(42, 27, 18, 0.1);
+  will-change: transform;
+}
+
+.hero-parallax-card img {
+  object-fit: cover;
+  filter: saturate(1.06) contrast(1.03) brightness(0.9);
+  transform: scale(1.02);
+}
+
+.hero-parallax-card::after {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, rgba(18, 12, 10, 0.02) 34%, rgba(18, 12, 10, 0.72) 100%),
+    linear-gradient(115deg, rgba(255, 255, 255, 0.14), transparent 24%, transparent 76%, rgba(255, 255, 255, 0.08));
+  content: "";
+  pointer-events: none;
+}
+
+.hero-parallax-card figcaption {
+  position: absolute;
+  right: 0.95rem;
+  bottom: 0.88rem;
+  left: 0.95rem;
+  z-index: 2;
+  display: grid;
+  gap: 0.28rem;
+  color: #fff8ec;
+  text-shadow: 0 8px 18px rgba(0, 0, 0, 0.36);
+}
+
+.hero-parallax-card figcaption span {
+  color: #edc875;
+  font-size: 0.62rem;
+  font-weight: 850;
+  letter-spacing: 0.09em;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.hero-parallax-card figcaption strong {
+  max-width: 17rem;
+  font-size: clamp(0.92rem, 1vw, 1.06rem);
+  font-weight: 760;
+  line-height: 1.12;
+}
+
+.hero-parallax-badge {
+  position: absolute;
+  z-index: 9;
+  display: inline-flex;
+  min-height: 42px;
+  align-items: center;
+  gap: 0.48rem;
+  border: 1px solid rgba(143, 23, 26, 0.1);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.8);
+  color: rgba(42, 42, 45, 0.72);
+  padding: 0 0.92rem;
+  font-size: 0.78rem;
+  font-weight: 780;
+  box-shadow: 0 16px 34px rgba(52, 34, 24, 0.08);
+  backdrop-filter: blur(18px) saturate(130%);
+  -webkit-backdrop-filter: blur(18px) saturate(130%);
+}
+
+.hero-parallax-badge svg {
+  color: var(--red);
+}
+
+.hero-parallax-badge-hours {
+  right: clamp(1.2rem, 6vw, 7rem);
+  top: clamp(7.5rem, 12vw, 9.5rem);
+}
+
+.hero-parallax-badge-place {
+  right: clamp(1.2rem, 5.2vw, 5.8rem);
+  bottom: clamp(2.35rem, 5vw, 4.4rem);
+}
+
+@media (max-width: 1080px) {
+  .hero.hero-parallax-dining {
+    height: 160svh;
+    min-height: 1000px;
+  }
+
+  .hero-parallax-copy {
+    max-width: min(620px, calc(100% - 2rem));
+  }
+
+  .hero-parallax-gallery {
+    top: 45%;
+    right: -38vw;
+    left: 4vw;
+  }
+
+  .hero-parallax-food-stage {
+    top: 46%;
+    right: 6%;
+    width: min(82vw, 640px);
+    height: min(62vw, 500px);
+    min-height: 410px;
+  }
+
+  .hero-parallax-card {
+    width: clamp(16rem, 40vw, 26rem);
+  }
+
+  .hero-parallax-badge-hours {
+    display: none;
+  }
+}
+
+@media (max-width: 680px) {
+  .hero.hero-parallax-dining {
+    height: 134svh;
+    min-height: 880px;
+  }
+
+  .hero.hero-parallax-dining::before {
+    background:
+      linear-gradient(180deg, rgba(255, 253, 247, 0.96) 0%, rgba(255, 253, 247, 0.92) 38%, rgba(255, 253, 247, 0.16) 62%, rgba(255, 253, 247, 0.96) 100%),
+      linear-gradient(90deg, rgba(143, 23, 26, 0.06), transparent 72%);
+  }
+
+  .hero-parallax-sticky {
+    min-height: 680px;
+  }
+
+  .hero-parallax-copy {
+    min-height: auto;
+    max-width: none;
+    justify-items: center;
+    align-content: start;
+    gap: 0.9rem;
+    padding: 6.95rem 1rem 0;
+    text-align: center;
+  }
+
+  .hero-parallax-copy .hero-kicker {
+    justify-content: center;
+    gap: 0.32rem;
+    font-size: 0.6rem;
+  }
+
+  .hero-parallax-copy .hero-kicker span {
+    min-height: 26px;
+    padding-inline: 0.56rem;
+  }
+
+  .hero-parallax-copy h1 {
+    max-width: 7.3em;
+    font-size: clamp(2.62rem, 13.6vw, 4.35rem);
+    line-height: 0.94;
+  }
+
+  .hero-parallax-copy .hero-bottom {
+    justify-items: center;
+  }
+
+  .hero-parallax-copy .hero-bottom p {
+    max-width: 22rem;
+    font-size: 0.94rem;
+    line-height: 1.48;
+  }
+
+  .hero-parallax-copy .hero-actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    width: min(100%, 350px);
+    gap: 0.56rem;
+  }
+
+  .hero-parallax-copy .hero-actions .red-cta,
+  .hero-parallax-copy .hero-actions .ghost-cta {
+    min-height: 48px;
+    padding-inline: 0.8rem;
+    font-size: 0.82rem;
+  }
+
+  .hero-parallax-copy .hero-proof {
+    width: min(100%, 360px);
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.38rem;
+  }
+
+  .hero-parallax-copy .hero-proof span {
+    min-height: 62px;
+    padding: 0.52rem 0.4rem;
+    font-size: 0.64rem;
+  }
+
+  .hero-parallax-copy .hero-proof strong {
+    font-size: 0.98rem;
+  }
+
+  .hero-parallax-gallery {
+    top: 57%;
+    right: -96vw;
+    left: -32vw;
+    gap: 0.78rem;
+  }
+
+  .hero-parallax-food-stage {
+    top: 54%;
+    right: 50%;
+    width: min(100%, 390px);
+    height: 360px;
+    min-height: 360px;
+    transform: translateX(50%);
+  }
+
+  .hero-parallax-food-stage .hero-float-pan {
+    top: 25%;
+    left: 18%;
+    width: min(56vw, 222px);
+  }
+
+  .hero-parallax-food-stage .hero-float-tea {
+    top: 1%;
+    right: 18%;
+    width: min(21vw, 86px);
+  }
+
+  .hero-parallax-food-stage .hero-float-simit {
+    right: 2%;
+    bottom: 8%;
+    width: min(38vw, 150px);
+  }
+
+  .hero-parallax-food-stage .hero-float-omelette {
+    left: 1%;
+    bottom: 8%;
+    width: min(42vw, 166px);
+  }
+
+  .hero-parallax-food-stage .hero-float-jam {
+    left: 7%;
+    top: 39%;
+    width: min(26vw, 104px);
+  }
+
+  .hero-parallax-food-stage .hero-float-tomato {
+    top: 20%;
+    right: 1%;
+    width: min(14vw, 56px);
+  }
+
+  .hero-parallax-food-stage .hero-float-mint {
+    left: 43%;
+    top: 8%;
+    width: min(11vw, 46px);
+  }
+
+  .hero-parallax-row {
+    gap: 0.78rem;
+  }
+
+  .hero-parallax-card {
+    width: min(66vw, 260px);
+    aspect-ratio: 1.04 / 1;
+  }
+
+  .hero-parallax-card figcaption {
+    right: 0.72rem;
+    bottom: 0.66rem;
+    left: 0.72rem;
+  }
+
+  .hero-parallax-card figcaption strong {
+    font-size: 0.82rem;
+  }
+
+  .hero-parallax-card figcaption span {
+    font-size: 0.56rem;
+  }
+
+  .hero-parallax-badge-place {
+    display: none !important;
+  }
+}
+
+@media (max-width: 420px) {
+  .hero.hero-parallax-dining {
+    height: 122svh;
+    min-height: 760px;
+  }
+
+  .hero-parallax-sticky {
+    min-height: 610px;
+  }
+
+  .hero-parallax-copy {
+    padding-top: 6.65rem;
+  }
+
+  .hero-parallax-copy .hero-bottom p,
+  .hero-parallax-copy .hero-proof {
+    display: none;
+  }
+
+  .hero-parallax-copy .hero-actions {
+    grid-template-columns: 1fr;
+    width: min(100%, 350px);
+  }
+
+  .hero-parallax-copy .hero-actions .red-cta,
+  .hero-parallax-copy .hero-actions .ghost-cta {
+    width: 100%;
+  }
+
+  .hero-parallax-gallery {
+    top: 55%;
+    right: -126vw;
+    left: -48vw;
+    gap: 0.6rem;
+  }
+
+  .hero-parallax-food-stage {
+    top: 56%;
+    width: min(100%, 350px);
+    height: 310px;
+    min-height: 310px;
+  }
+
+  .hero-parallax-food-stage .hero-float-tomato,
+  .hero-parallax-food-stage .hero-float-mint,
+  .hero-parallax-food-stage .hero-float-jam {
+    display: block;
+  }
+
+  .hero-parallax-food-stage .hero-float-pan {
+    top: 21%;
+    left: 16%;
+    width: min(62vw, 210px);
+  }
+
+  .hero-parallax-food-stage .hero-float-tea {
+    top: 0;
+    right: 14%;
+    width: min(23vw, 78px);
+  }
+
+  .hero-parallax-food-stage .hero-float-simit {
+    right: 1%;
+    bottom: 5%;
+    width: min(41vw, 142px);
+  }
+
+  .hero-parallax-food-stage .hero-float-omelette {
+    left: 0;
+    bottom: 7%;
+    width: min(47vw, 160px);
+  }
+
+  .hero-parallax-row {
+    gap: 0.6rem;
+  }
+
+  .hero-parallax-card {
+    width: min(68vw, 224px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-parallax-gallery,
+  .hero-parallax-food-stage,
+  .hero-parallax-row,
+  .hero-parallax-card,
+  .hero-parallax-copy {
+    transform: none !important;
+  }
+}

@@ -17,6 +17,7 @@ import { BookingModal } from "./components/booking-modal";
 import { MenuDetailModal } from "./components/menu-detail-modal";
 import { ReviewCarousel } from "./components/review-carousel";
 import { AnimatedFooter } from "./components/animated-footer";
+import { VanHeroParallax } from "./components/van-hero-parallax";
 
 const mapsUrl =
   "https://www.google.com/maps/search/?api=1&query=Tarihi%20Van%20Kahvalt%C4%B1%20Evi%20Zambak%20Sk.%20No%3A8%20Beyo%C4%9Flu";
@@ -109,44 +110,6 @@ const gallery: [string, string][] = [
   ["/images/terrace-tea.jpg", "Teras keyfi ve çay servisi"],
   ["/images/coffee-moment.jpg", "Kafka Cafe kahve molası"],
   ["/images/street-table.jpg", "Beyoğlu sokaklarında kahvaltı masası"],
-];
-
-const heroFloatItems = [
-  {
-    src: "/images/hero-float/sucuk-egg-pan.png",
-    alt: "Bakır sahanda sucuklu yumurta",
-    className: "hero-float-item hero-float-pan",
-  },
-  {
-    src: "/images/hero-float/tea-glass.png",
-    alt: "İnce belli çay",
-    className: "hero-float-item hero-float-tea",
-  },
-  {
-    src: "/images/hero-float/simit-board.png",
-    alt: "Ahşap tabakta sıcak simit",
-    className: "hero-float-item hero-float-simit",
-  },
-  {
-    src: "/images/hero-float/omelette-plate.png",
-    alt: "Kahvaltı tabağı",
-    className: "hero-float-item hero-float-omelette",
-  },
-  {
-    src: "/images/hero-float/tahin-bowl.png",
-    alt: "Tahin ve pekmez kasesi",
-    className: "hero-float-item hero-float-jam",
-  },
-  {
-    src: "/images/hero-float/tomato-slice.png",
-    alt: "Taze domates dilimi",
-    className: "hero-float-item hero-float-tomato",
-  },
-  {
-    src: "/images/hero-float/mint-leaf.png",
-    alt: "Taze nane yaprağı",
-    className: "hero-float-item hero-float-mint",
-  },
 ];
 
 const OrganicLeaf = ({ className }: { className: string }) => (
@@ -317,86 +280,7 @@ export default function ClientPage() {
           </button>
         </header>
 
-        <section id="top" className="hero hero-floating-food" aria-label="Tarihi Van Kahvaltıcısı ana alanı">
-          <div className="hero-swirl hero-swirl-one" aria-hidden="true" />
-          <div className="hero-swirl hero-swirl-two" aria-hidden="true" />
-          <div className="hero-floating-plate" aria-hidden="true" />
-
-          <div className="hero-left" data-reveal>
-            <div className="hero-kicker">
-              <span>Beyoğlu</span>
-              <span>Tarihi Rum binasında</span>
-              <span>08.00-18.00</span>
-            </div>
-
-            <h1>
-              Van kahvaltısı <span>havada</span>, lezzet masada.
-            </h1>
-
-            <div className="hero-bottom">
-              <div className="hero-actions">
-                <a className="red-cta" href="#menu">
-                  Menüyü İncele <ArrowRight size={16} />
-                </a>
-                <button
-                  type="button"
-                  className="ghost-cta"
-                  onClick={() => handleOpenBooking()}
-                >
-                  Masa Ayırt <ArrowRight size={15} />
-                </button>
-              </div>
-
-              <p>
-                Bakır sahanda sucuklu yumurta, ince belli çay, otlu peynir ve
-                sıcak simit. Beyoğlu’nda köklü, cömert ve özenli bir Van
-                sofrası.
-              </p>
-            </div>
-
-            <div className="hero-proof" aria-label="Mekan özellikleri">
-              <span>
-                <strong>1978</strong>
-                Aile geleneği
-              </span>
-              <span>
-                <strong>2. derece</strong>
-                Tarihi yapı
-              </span>
-              <span>
-                <strong>Sınırsız</strong>
-                Demli çay
-              </span>
-            </div>
-          </div>
-
-          <div className="hero-visual hero-food-stage" aria-label="Uçuşan kahvaltı lezzetleri" data-reveal>
-            {heroFloatItems.map((item, index) => (
-              <div
-                className={item.className}
-                key={item.src}
-                style={{ "--float-delay": `${index * 140}ms` } as React.CSSProperties}
-              >
-                <Image
-                  src={item.src}
-                  alt={item.alt}
-                  fill
-                  sizes="(max-width: 760px) 52vw, (max-width: 1100px) 32vw, 420px"
-                  priority={index < 5}
-                />
-              </div>
-            ))}
-
-            <div className="hero-float-badge hero-badge-hours">
-              <Clock3 size={16} />
-              <span>Her gün 08.00-18.00</span>
-            </div>
-            <div className="hero-float-badge hero-badge-place">
-              <MapPin size={16} />
-              <span>Beyoğlu, Zambak Sk.</span>
-            </div>
-          </div>
-        </section>
+        <VanHeroParallax onOpenBooking={() => handleOpenBooking()} />
 
         <div className="story-band">
           <section id="story" className="red-story" data-reveal>
