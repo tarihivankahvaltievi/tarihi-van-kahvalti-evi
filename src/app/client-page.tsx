@@ -133,11 +133,6 @@ const heroFloatItems = [
     className: "hero-float-item hero-float-omelette",
   },
   {
-    src: "/images/hero-float/cheese-plate.png",
-    alt: "Otlu peynir",
-    className: "hero-float-item hero-float-cheese",
-  },
-  {
     src: "/images/hero-float/tahin-bowl.png",
     alt: "Tahin ve pekmez kasesi",
     className: "hero-float-item hero-float-jam",

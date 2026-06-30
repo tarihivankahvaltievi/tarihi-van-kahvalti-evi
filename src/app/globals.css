@@ -10837,8 +10837,8 @@ h2 span {
 .hero-float-pan {
   top: 25%;
   left: 21%;
-  width: clamp(230px, 31vw, 445px);
-  aspect-ratio: 1086 / 825;
+  width: clamp(230px, 30vw, 420px);
+  aspect-ratio: 435 / 317;
   z-index: 7;
   rotate: -8deg;
   --float-x: 12px;
@@ -10852,7 +10852,7 @@ h2 span {
   top: 1%;
   right: 16%;
   width: clamp(96px, 12vw, 162px);
-  aspect-ratio: 891 / 1033;
+  aspect-ratio: 371 / 401;
   z-index: 8;
   rotate: 8deg;
   --float-x: -7px;
@@ -10863,10 +10863,10 @@ h2 span {
 }
 
 .hero-float-simit {
-  right: 0;
-  bottom: 6%;
-  width: clamp(190px, 24vw, 340px);
-  aspect-ratio: 1130 / 914;
+  right: 1%;
+  bottom: 7%;
+  width: clamp(180px, 22vw, 310px);
+  aspect-ratio: 453 / 362;
   z-index: 6;
   rotate: 7deg;
   --float-x: -12px;
@@ -10878,9 +10878,9 @@ h2 span {
 
 .hero-float-omelette {
   left: 0;
-  bottom: 1%;
-  width: clamp(210px, 27vw, 390px);
-  aspect-ratio: 1228 / 777;
+  bottom: 4%;
+  width: clamp(210px, 26vw, 370px);
+  aspect-ratio: 500 / 312;
   z-index: 5;
   rotate: -10deg;
   --float-x: 10px;
@@ -10905,12 +10905,12 @@ h2 span {
 }
 
 .hero-float-jam {
-  right: 14%;
-  top: 36%;
-  width: clamp(145px, 17vw, 235px);
-  aspect-ratio: 1141 / 863;
+  left: 9%;
+  top: 29%;
+  width: clamp(120px, 15vw, 205px);
+  aspect-ratio: 457 / 346;
   z-index: 5;
-  rotate: 9deg;
+  rotate: -9deg;
   --float-x: -8px;
   --float-y: -10px;
   --float-x-end: 9px;
@@ -10919,10 +10919,10 @@ h2 span {
 }
 
 .hero-float-tomato {
-  top: 19%;
-  right: 2%;
-  width: clamp(72px, 9vw, 124px);
-  aspect-ratio: 887 / 723;
+  top: 20%;
+  right: 1%;
+  width: clamp(66px, 8vw, 108px);
+  aspect-ratio: 355 / 285;
   z-index: 9;
   rotate: 18deg;
   --float-x: -7px;
@@ -10936,7 +10936,7 @@ h2 span {
   left: 35%;
   top: 6%;
   width: clamp(58px, 7.5vw, 102px);
-  aspect-ratio: 741 / 542;
+  aspect-ratio: 299 / 216;
   z-index: 9;
   rotate: -20deg;
   --float-x: 6px;
@@ -11151,9 +11151,9 @@ h2 span {
   }
 
   .hero-float-pan {
-    top: 22%;
-    left: 18%;
-    width: min(58vw, 250px);
+    top: 24%;
+    left: 17%;
+    width: min(58vw, 248px);
   }
 
   .hero-float-tea {
@@ -11165,37 +11165,31 @@ h2 span {
   .hero-float-simit {
     right: 2%;
     bottom: 8%;
-    width: min(40vw, 170px);
+    width: min(39vw, 166px);
   }
 
   .hero-float-omelette {
     left: -2%;
     bottom: 8%;
-    width: min(42vw, 188px);
-  }
-
-  .hero-float-cheese {
-    top: 8%;
-    left: 2%;
-    width: min(29vw, 126px);
+    width: min(43vw, 184px);
   }
 
   .hero-float-jam {
-    right: 4%;
-    top: 42%;
-    width: min(28vw, 118px);
+    left: 6%;
+    top: 39%;
+    width: min(28vw, 112px);
   }
 
   .hero-float-tomato {
     top: 20%;
     right: 0;
-    width: min(16vw, 68px);
+    width: min(15vw, 64px);
   }
 
   .hero-float-mint {
     left: 43%;
     top: 8%;
-    width: min(13vw, 54px);
+    width: min(12vw, 50px);
   }
 
   .hero-badge-hours {
@@ -11271,30 +11265,24 @@ h2 span {
   .hero-float-pan {
     top: 19%;
     left: 15%;
-    width: min(64vw, 230px);
+    width: min(64vw, 226px);
   }
 
   .hero-float-tea {
     top: 2%;
     right: 13%;
-    width: min(24vw, 90px);
-  }
-
-  .hero-float-cheese {
-    top: 8%;
-    left: 0;
-    width: min(31vw, 116px);
+    width: min(24vw, 88px);
   }
 
   .hero-float-simit {
     right: 0;
     bottom: 6%;
-    width: min(43vw, 160px);
+    width: min(42vw, 156px);
   }
 
   .hero-float-omelette {
     left: -2%;
     bottom: 7%;
-    width: min(48vw, 176px);
+    width: min(49vw, 174px);
   }
 }
