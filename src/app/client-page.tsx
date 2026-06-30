@@ -280,7 +280,7 @@ export default function ClientPage() {
           </button>
         </header>
 
-        <VanHeroParallax onOpenBooking={() => handleOpenBooking()} />
+        <VanHeroParallax />
 
         <div className="story-band">
           <section id="story" className="red-story" data-reveal>

@@ -8,12 +8,9 @@ import {
   useSpring,
   useTransform,
 } from "framer-motion";
-import { ArrowRight, Clock3, MapPin } from "lucide-react";
 import { type CSSProperties, useRef } from "react";
 
 type HeroImage = {
-  title: string;
-  eyebrow: string;
   thumbnail: string;
   position?: string;
 };
@@ -26,92 +23,62 @@ type FloatingFood = {
 
 const heroImages: HeroImage[] = [
   {
-    title: "Bakır sahanda sıcak servis",
-    eyebrow: "Sıcaklar",
     thumbnail: "/images/hero-parallax/sucuk-egg-action.jpg",
     position: "50% 45%",
   },
   {
-    title: "Balkonda Van sofrası",
-    eyebrow: "Beyoğlu",
     thumbnail: "/images/hero-parallax/balcony-full.jpg",
     position: "50% 42%",
   },
   {
-    title: "Otlu peynir ve Van balı",
-    eyebrow: "Serpme",
     thumbnail: "/images/hero-parallax/spread-close.jpg",
     position: "48% 44%",
   },
   {
-    title: "Pişi, reçel ve sahanda yumurta",
-    eyebrow: "Geleneksel",
     thumbnail: "/images/hero-parallax/table-pisi.jpg",
     position: "50% 46%",
   },
   {
-    title: "Tarihi binada kahve molası",
-    eyebrow: "Mekan",
     thumbnail: "/images/hero-parallax/historic-corner.jpg",
     position: "50% 38%",
   },
   {
-    title: "Kalabalık sofralar",
-    eyebrow: "Paylaşım",
     thumbnail: "/images/hero-parallax/overhead-feast.jpg",
     position: "50% 50%",
   },
   {
-    title: "Sınırsız demli çay",
-    eyebrow: "Çay",
     thumbnail: "/images/hero-parallax/tea-tray.jpg",
     position: "50% 48%",
   },
   {
-    title: "Kavut ve sıcak tabaklar",
-    eyebrow: "Van Lezzeti",
     thumbnail: "/images/hero-parallax/kavurma-pan.jpg",
     position: "50% 42%",
   },
   {
-    title: "Teras masası",
-    eyebrow: "Açık Hava",
     thumbnail: "/images/hero-parallax/terrace-table.jpg",
     position: "50% 42%",
   },
   {
-    title: "Klasik kahvaltı düzeni",
-    eyebrow: "İmza",
     thumbnail: "/images/hero-parallax/overhead-classic.jpg",
     position: "50% 50%",
   },
   {
-    title: "Simit ve çay",
-    eyebrow: "Sabah",
     thumbnail: "/images/hero-parallax/simit-table.jpg",
     position: "50% 44%",
   },
   {
-    title: "Masa başında servis",
-    eyebrow: "Özen",
     thumbnail: "/images/hero-parallax/hands-breakfast.jpg",
     position: "50% 45%",
   },
   {
-    title: "Balkon tabağı",
-    eyebrow: "Manzara",
     thumbnail: "/images/hero-parallax/terrace-plate.jpg",
     position: "50% 44%",
   },
   {
-    title: "Tarihi iç mekan",
-    eyebrow: "Rum Binası",
     thumbnail: "/images/hero-parallax/indoor-table.jpg",
     position: "50% 42%",
   },
   {
-    title: "İnce belli bardaklar",
-    eyebrow: "Ritüel",
     thumbnail: "/images/hero-parallax/tea-service.jpg",
     position: "50% 46%",
   },
@@ -155,11 +122,7 @@ const floatingFoods: FloatingFood[] = [
   },
 ];
 
-type VanHeroParallaxProps = {
-  onOpenBooking: () => void;
-};
-
-export function VanHeroParallax({ onOpenBooking }: VanHeroParallaxProps) {
+export function VanHeroParallax() {
   const ref = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -184,23 +147,15 @@ export function VanHeroParallax({ onOpenBooking }: VanHeroParallaxProps) {
     spring,
   );
   const galleryY = useSpring(
-    useTransform(scrollYProgress, [0, 0.36, 1], [86, 10, -16]),
+    useTransform(scrollYProgress, [0, 0.36, 1], [24, -18, -72]),
     spring,
   );
   const galleryOpacity = useSpring(
-    useTransform(scrollYProgress, [0, 0.18, 0.9, 1], [0.58, 1, 1, 0.55]),
-    spring,
-  );
-  const copyY = useSpring(
-    useTransform(scrollYProgress, [0, 0.72], [0, -40]),
-    spring,
-  );
-  const copyOpacity = useSpring(
-    useTransform(scrollYProgress, [0, 0.68, 0.92], [1, 1, 0]),
+    useTransform(scrollYProgress, [0, 0.18, 0.9, 1], [0.72, 1, 1, 0.68]),
     spring,
   );
   const floatingFoodY = useSpring(
-    useTransform(scrollYProgress, [0, 1], [0, -34]),
+    useTransform(scrollYProgress, [0, 1], [0, -58]),
     spring,
   );
 
@@ -216,54 +171,6 @@ export function VanHeroParallax({ onOpenBooking }: VanHeroParallaxProps) {
       aria-label="Tarihi Van Kahvaltıcısı ana alanı"
     >
       <div className="hero-parallax-sticky">
-        <motion.div
-          className="hero-parallax-copy"
-          style={{ y: copyY, opacity: copyOpacity }}
-          data-reveal
-        >
-          <div className="hero-kicker">
-            <span>Beyoğlu</span>
-            <span>Rum binasında</span>
-            <span>08.00-18.00</span>
-          </div>
-
-          <h1>
-            Van kahvaltısı <span>sofraya</span> dönüşür.
-          </h1>
-
-          <div className="hero-bottom">
-            <div className="hero-actions">
-              <a className="red-cta" href="#menu">
-                Menüyü İncele <ArrowRight size={16} />
-              </a>
-              <button type="button" className="ghost-cta" onClick={onOpenBooking}>
-                Masa Ayırt <ArrowRight size={15} />
-              </button>
-            </div>
-
-            <p>
-              Otlu peynir, hakiki Van balı, sıcak pişi, bakır sahanlar ve
-              sınırsız demli çay. Beyoğlu&apos;nun tarihi dokusunda cömert bir sabah
-              ritüeli.
-            </p>
-          </div>
-
-          <div className="hero-proof" aria-label="Mekan özellikleri">
-            <span>
-              <strong>1978</strong>
-              Aile geleneği
-            </span>
-            <span>
-              <strong>2. derece</strong>
-              Tarihi yapı
-            </span>
-            <span>
-              <strong>Sınırsız</strong>
-              Demli çay
-            </span>
-          </div>
-        </motion.div>
-
         <motion.div
           className="hero-parallax-gallery"
           style={{
@@ -300,15 +207,6 @@ export function VanHeroParallax({ onOpenBooking }: VanHeroParallaxProps) {
             </div>
           ))}
         </motion.div>
-
-        <div className="hero-parallax-badge hero-parallax-badge-hours">
-          <Clock3 size={16} />
-          <span>Her gün 08.00-18.00</span>
-        </div>
-        <div className="hero-parallax-badge hero-parallax-badge-place">
-          <MapPin size={16} />
-          <span>Zambak Sk. No:8, Beyoğlu</span>
-        </div>
       </div>
     </section>
   );
@@ -341,10 +239,6 @@ function HeroImageRow({
             priority={index < 2}
             style={{ objectPosition: image.position ?? "center" }}
           />
-          <figcaption>
-            <span>{image.eyebrow}</span>
-            <strong>{image.title}</strong>
-          </figcaption>
         </motion.figure>
       ))}
     </div>
