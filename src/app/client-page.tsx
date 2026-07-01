@@ -200,31 +200,23 @@ export default function ClientPage() {
         <VanHeroParallax />
 
         <div className="story-band">
-          <section id="story" className="red-story" data-reveal ref={storyRef}>
-            <motion.div
-              className="story-depth story-depth-bricks"
-              style={{ y: storyBrickY }}
-              aria-hidden="true"
-            />
-            <motion.div
-              className="story-depth story-depth-glow"
-              style={{ y: storyGlowY }}
-              aria-hidden="true"
-            />
-            <div className="story-scroll-rail" aria-hidden="true">
-              <motion.span style={{ scaleY: storyScroll }} />
-            </div>
+          <section id="story" className="heritage-story" ref={storyRef}>
             <OrganicLeaf className="leaf-story-1" />
-            <div className="story-content">
-              <div className="story-copy">
-                <div className="light-pill story-pill">Hakkımızda</div>
-                <h2>Eski usul hazırlanır, sofrada uzun uzun yaşanır.</h2>
-                <p>
+            
+            <div className="story-grid">
+              {/* Left Column: Editorial Copy */}
+              <div className="story-copy-panel" data-reveal>
+                <div className="story-badge">Hakkımızda</div>
+                <h2 className="story-heading">
+                  Eski usul hazırlanır,<br />sofrada uzun uzun yaşanır.
+                </h2>
+                <div className="story-divider" />
+                <p className="story-lead">
                   Tarihi Rum binasının sakin dokusunda, 1978’den beri gelen aile
                   emeğini Van kahvaltısının cömertliğiyle aynı sofrada
                   buluşturuyoruz.
                 </p>
-                <div className="story-text">
+                <div className="story-paragraphs">
                   <p>
                     Burada kahvaltı aceleye gelmez. Bakır sahanlar masaya tek tek
                     yerleşir, çay tazelenir, sohbet kendine yer açar; eski binanın
@@ -236,52 +228,72 @@ export default function ClientPage() {
                     hatırlanacak bir kahvaltıya dönüştürüyoruz.
                   </p>
                 </div>
+
+                <div className="story-stats-grid">
+                  <div className="stat-card">
+                    <span className="stat-num">1978</span>
+                    <span className="stat-label">Aile Yolculuğu</span>
+                  </div>
+                  <div className="stat-card">
+                    <span className="stat-num">2.</span>
+                    <span className="stat-label">Derece Tarihi Eser</span>
+                  </div>
+                </div>
               </div>
-              <div className="story-archive" data-reveal>
-                <motion.div className="story-arch" style={{ y: storyImageY }}>
+
+              {/* Right Column: Visual Collage & Timeline */}
+              <div className="story-visual-panel" data-reveal>
+                {/* Main Image (Arched Window shape) */}
+                <motion.div 
+                  className="visual-frame main-frame"
+                  style={{ y: storyImageY }}
+                >
                   <Image
                     src="/images/interior-chair.jpg"
                     alt="Tarihi Rum binasının taş ve ahşap iç mekan dokusu"
                     fill
                     sizes="(max-width: 900px) 88vw, 420px"
+                    className="visual-img"
                     loading="lazy"
                   />
+                  <div className="frame-overlay" />
                 </motion.div>
-                <div className="story-memory-list" aria-label="Tarihi Van Kahvaltıcısı kısa hikaye">
-                  <div>
-                    <span>1978</span>
-                    <p>Aile emeğiyle başlayan sofra kültürü.</p>
+
+                {/* Secondary Offset Image (Scroll Parallax) */}
+                <motion.div 
+                  className="visual-frame secondary-frame" 
+                  style={{ y: storyPlateY }}
+                >
+                  <Image
+                    src="/images/breakfast-spread.jpg"
+                    alt="Geniş serpme Van kahvaltısı"
+                    fill
+                    sizes="(max-width: 900px) 92vw, 760px"
+                    className="visual-img"
+                    loading="lazy"
+                  />
+                  <div className="frame-overlay" />
+                </motion.div>
+
+                {/* Floating Timeline Memory Card */}
+                <div className="story-timeline-card">
+                  <div className="timeline-item">
+                    <span className="timeline-year">1978</span>
+                    <p className="timeline-desc">Aile emeğiyle başlayan sofra kültürü.</p>
                   </div>
-                  <div>
-                    <span>Taş doku</span>
-                    <p>Rum binasının sakin, yaşanmış atmosferi.</p>
+                  <div className="timeline-item-divider" />
+                  <div className="timeline-item">
+                    <span className="timeline-year">Taş doku</span>
+                    <p className="timeline-desc">Rum binasının sakin, yaşanmış atmosferi.</p>
                   </div>
-                  <div>
-                    <span>Bugün</span>
-                    <p>Beyoğlu’nda uzun sohbetli Van kahvaltısı.</p>
+                  <div className="timeline-item-divider" />
+                  <div className="timeline-item">
+                    <span className="timeline-year">Bugün</span>
+                    <p className="timeline-desc">Beyoğlu’nda uzun sohbetli Van kahvaltısı.</p>
                   </div>
                 </div>
               </div>
             </div>
-            <div className="story-stats" data-reveal>
-              <div>
-                <strong>1978</strong>
-                <span>Aile yolculuğu</span>
-              </div>
-              <div>
-                <strong>2.</strong>
-                <span>Derece tarihi eser</span>
-              </div>
-            </div>
-            <motion.div className="story-plate" data-reveal style={{ y: storyPlateY }}>
-              <Image
-                src="/images/breakfast-spread.jpg"
-                alt="Geniş Van kahvaltısı"
-                fill
-                sizes="(max-width: 900px) 92vw, 760px"
-                loading="lazy"
-              />
-            </motion.div>
           </section>
         </div>
 
