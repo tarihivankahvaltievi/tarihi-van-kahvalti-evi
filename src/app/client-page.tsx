@@ -6,16 +6,13 @@ import {
   ArrowRight,
   Calendar,
   Camera,
-  Clock3,
   MapPin,
   MessageCircle,
 } from "lucide-react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { UiMotion } from "./ui-motion";
-import { InteractiveMenu } from "./components/interactive-menu";
 import { GalleryLightbox } from "./components/gallery-lightbox";
 import { BookingModal } from "./components/booking-modal";
-import { MenuDetailModal } from "./components/menu-detail-modal";
 import { ReviewCarousel } from "./components/review-carousel";
 import { AnimatedFooter } from "./components/animated-footer";
 import { VanHeroParallax } from "./components/van-hero-parallax";
@@ -24,81 +21,6 @@ const mapsUrl =
   "https://www.google.com/maps/search/?api=1&query=Tarihi%20Van%20Kahvalt%C4%B1%20Evi%20Zambak%20Sk.%20No%3A8%20Beyo%C4%9Flu";
 const whatsappUrl =
   "https://wa.me/905415252868?text=Merhaba%2C%20Tarihi%20Van%20Kahvalt%C4%B1%20Evi%20i%C3%A7in%20rezervasyon%20bilgisi%20almak%20istiyorum.";
-
-const menuItems = [
-  {
-    title: "Serpme Van Kahvaltısı",
-    tag: "İmza",
-    category: "Serpme",
-    image: "/images/breakfast-spread.jpg",
-    desc: "Yöresel otlu peynir, hakiki Van balı, taze kaymak, kete, kavut, murtuğa, zeytin çeşitleri, domates-salatalık, pişi ve sınırsız çay.",
-    detail: "En az 2 kişilik",
-    price: "₺550",
-  },
-  {
-    title: "Sahanda Sucuklu Yumurta",
-    tag: "Sıcak",
-    category: "Sıcaklar",
-    image: "/images/sucuk-egg.jpg",
-    desc: "Yerli kasap sucukları ve çiftlik yumurtası ile bakır sahanda tereyağlı sıcak servis.",
-    detail: "Sıcak Servis",
-    price: "₺280",
-  },
-  {
-    title: "Murtuğa (Van Spesiyali)",
-    tag: "Van",
-    category: "Van Lezzetleri",
-    image: "/images/kete-detail.jpg",
-    desc: "Un ve tereyağının sahanda özenle kavrulup organik yumurtayla buluştuğu yöresel sıcak lezzet.",
-    detail: "Yöresel Sıcak",
-    price: "₺210",
-  },
-  {
-    title: "Kavut (Kavrulmuş Buğday)",
-    tag: "Van",
-    category: "Van Lezzetleri",
-    image: "/images/hands-table.jpg",
-    desc: "Kavrulmuş buğday ununun tereyağı ve cevizle kavrulup bal eşliğinde sunulan tarihi Van tarifi.",
-    detail: "Geleneksel Tat",
-    price: "₺190",
-  },
-  {
-    title: "Sahanda Tereyağlı Menemen",
-    tag: "Sıcak",
-    category: "Sıcaklar",
-    image: "/images/balcony-breakfast.jpg",
-    desc: "Taze tarla domatesi, tatlı biber ve erimiş kaşar peyniri veya sade köy yumurtası eşliğinde.",
-    detail: "Sıcak Servis",
-    price: "₺220",
-  },
-  {
-    title: "Kete & Sıcak Pişi Tabağı",
-    tag: "Sıcak",
-    category: "Sıcaklar",
-    image: "/images/kete-detail.jpg",
-    desc: "Eski usul Van ketesi ve taze kızarmış sıcak pişiler, yanında süzme peynir ve domatesle.",
-    detail: "Paylaşmalık",
-    price: "₺240",
-  },
-  {
-    title: "Kafka Cafe Kahveleri",
-    tag: "Cafe",
-    category: "Kahve",
-    image: "/images/coffee-moment.jpg",
-    desc: "Espresso, Americano, Latte ve Flat White gibi taze çekilmiş nitelikli kahve çeşitleri.",
-    detail: "Gün boyu",
-    price: "₺90",
-  },
-  {
-    title: "Geleneksel Türk Kahvesi",
-    tag: "Cafe",
-    category: "Kahve",
-    image: "/images/terrace-tea.jpg",
-    desc: "Közde ağır ağır pişmiş, çikolatalı lokum ve su eşliğinde sunulan geleneksel kahve keyfi.",
-    detail: "Gün boyu",
-    price: "₺80",
-  }
-];
 
 const gallery: [string, string][] = [
   ["/images/balcony-breakfast.jpg", "Balkonda kahvaltı keyfi"],
@@ -138,7 +60,6 @@ const OrganicLeaf = ({ className }: { className: string }) => (
 
 export default function ClientPage() {
   const [isBookingOpen, setIsBookingOpen] = useState(false);
-  const [selectedMenuItem, setSelectedMenuItem] = useState<typeof menuItems[0] | null>(null);
   const storyRef = useRef<HTMLElement | null>(null);
   const { scrollYProgress: storyScroll } = useScroll({
     target: storyRef,
@@ -215,13 +136,6 @@ export default function ClientPage() {
     return () => clearInterval(interval);
   }, []);
 
-  const handleSelectItem = (itemTitle: string) => {
-    const item = menuItems.find((i) => i.title === itemTitle);
-    if (item) {
-      setSelectedMenuItem(item);
-    }
-  };
-
   const handleOpenBooking = (itemTitle?: string, category?: string) => {
     setPreselectedItem(itemTitle || "");
     setPreselectedType(category || "Kahvaltı");
@@ -275,7 +189,6 @@ export default function ClientPage() {
           
           <nav className="nav-links" aria-label="Ana menü" onMouseLeave={handleMouseLeave}>
             <span className="nav-hover-pill" style={hoverStyle} />
-            <a href="#menu" onMouseEnter={handleMouseEnter}>Menü</a>
             <a href="#story" onMouseEnter={handleMouseEnter}>Hikaye</a>
             <a href="#gallery" onMouseEnter={handleMouseEnter}>Galeri</a>
             <a href="#contact" onMouseEnter={handleMouseEnter}>Konum</a>
@@ -378,24 +291,6 @@ export default function ClientPage() {
           </section>
         </div>
 
-        <section id="menu" className="menu-section">
-          <OrganicLeaf className="leaf-menu-1" />
-          <div className="center-heading" data-reveal>
-            <div className="pill">
-              <Clock3 size={14} /> Menü kitabı
-            </div>
-            <h2>
-              Kahvaltı <span>menüsü</span>
-            </h2>
-            <p>
-              Van sofrasının imza lezzetleri, sıcak tabakları ve kahveleri
-              masaya gelen geleneksel sunum düzeninde.
-            </p>
-          </div>
-
-          <InteractiveMenu items={menuItems} onSelectItem={handleSelectItem} />
-        </section>
-
         <section className="red-reviews" data-reveal>
           <h2>Misafirlerimizin söylediği şey basit: masa uzasın.</h2>
           <ReviewCarousel />
@@ -444,11 +339,6 @@ export default function ClientPage() {
         preselectedItem={preselectedItem}
       />
 
-      <MenuDetailModal
-        item={selectedMenuItem}
-        onClose={() => setSelectedMenuItem(null)}
-        onSelectForBooking={(title) => handleOpenBooking(title)}
-      />
     </>
   );
 }
