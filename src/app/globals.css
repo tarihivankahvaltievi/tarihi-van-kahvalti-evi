@@ -11904,8 +11904,8 @@ h2 span {
 
 @media (max-width: 680px) {
   .hero.hero-parallax-dining {
-    height: 148svh;
-    min-height: 1060px;
+    height: 158svh;
+    min-height: 1100px;
   }
 
   .hero.hero-parallax-dining::before {
@@ -11915,7 +11915,7 @@ h2 span {
   }
 
   .hero-parallax-sticky {
-    min-height: 860px;
+    min-height: 960px;
   }
 
   .hero-parallax-copy {
@@ -11947,94 +11947,94 @@ h2 span {
   }
 
   .hero-parallax-gallery {
-    top: 64%;
+    top: 68%;
     right: auto;
-    left: -74vw;
+    left: -76vw;
     gap: 0.54rem;
   }
 
   .hero-parallax-food-stage {
-    top: 21.4rem;
-    right: auto;
-    left: clamp(0.8rem, 4vw, 1.35rem);
-    width: min(88vw, 355px);
-    max-width: 355px;
-    height: 245px;
-    min-height: 245px;
+    top: 10.6rem;
+    right: 0.25rem;
+    left: 0.55rem;
+    width: auto;
+    max-width: none;
+    height: 575px;
+    min-height: 575px;
     margin-left: 0;
   }
 
   .hero-parallax-food-stage .hero-float-pan {
-    top: 18%;
+    top: 48%;
     left: 44%;
-    width: min(31vw, 122px);
+    width: min(38vw, 150px);
   }
 
   .hero-parallax-food-stage .hero-float-tea {
-    top: 3%;
-    right: 5%;
-    width: min(15vw, 58px);
+    top: 26%;
+    right: 12%;
+    width: min(17vw, 66px);
   }
 
   .hero-parallax-food-stage .hero-float-simit {
-    right: 7%;
-    bottom: 0;
-    width: min(23vw, 90px);
+    right: 9%;
+    bottom: 5%;
+    width: min(28vw, 110px);
   }
 
   .hero-parallax-food-stage .hero-float-omelette {
-    left: 18%;
-    bottom: 12%;
-    width: min(27vw, 106px);
+    left: 8%;
+    bottom: 13%;
+    width: min(34vw, 134px);
   }
 
   .hero-parallax-food-stage .hero-float-jam {
-    left: 3%;
-    top: 42%;
-    width: min(15vw, 58px);
+    left: 4%;
+    top: 57%;
+    width: min(18vw, 70px);
   }
 
   .hero-parallax-food-stage .hero-float-tomato {
-    top: 26%;
-    right: 0;
-    width: min(10vw, 39px);
+    top: 46%;
+    right: 4%;
+    width: min(13vw, 50px);
   }
 
   .hero-parallax-food-stage .hero-float-mint {
-    left: 58%;
-    top: 4%;
-    width: min(8vw, 31px);
+    left: 56%;
+    top: 28%;
+    width: min(10vw, 39px);
   }
 
   .hero-parallax-food-stage .hero-float-cheese-platter {
-    top: 0;
-    left: 14%;
-    width: min(29vw, 114px);
+    top: 30%;
+    left: 22%;
+    width: min(36vw, 142px);
   }
 
   .hero-parallax-food-stage .hero-float-greens-platter {
-    right: 0;
-    bottom: 25%;
-    width: min(22vw, 86px);
+    right: 5%;
+    bottom: 22%;
+    width: min(26vw, 102px);
   }
 
   .hero-parallax-food-stage .hero-float-black-olives {
-    top: 34%;
-    right: 18%;
-    width: min(14.6vw, 57px);
+    top: 57%;
+    right: 21%;
+    width: min(16vw, 62px);
   }
 
   .hero-parallax-food-stage .hero-float-cherry-jam {
-    top: 17%;
+    top: 41%;
     left: 0;
     right: auto;
-    width: min(14vw, 54px);
+    width: min(16vw, 62px);
   }
 
   .hero-parallax-food-stage .hero-float-apricot-jam {
-    top: -2%;
+    top: 27%;
     left: 70%;
-    width: min(14vw, 54px);
+    width: min(16vw, 62px);
   }
 
   .hero-parallax-row {
@@ -12042,7 +12042,7 @@ h2 span {
   }
 
   .hero-parallax-card {
-    width: min(46vw, 188px);
+    width: min(44vw, 180px);
     aspect-ratio: 1.16 / 1;
   }
 
@@ -12050,12 +12050,12 @@ h2 span {
 
 @media (max-width: 420px) {
   .hero.hero-parallax-dining {
-    height: 142svh;
-    min-height: 1000px;
+    height: 154svh;
+    min-height: 1040px;
   }
 
   .hero-parallax-sticky {
-    min-height: 820px;
+    min-height: 920px;
   }
 
   .hero-parallax-copy {
@@ -12080,19 +12080,19 @@ h2 span {
   }
 
   .hero-parallax-gallery {
-    top: 65%;
+    top: 67%;
     right: auto;
-    left: -76vw;
+    left: -78vw;
     gap: 0.5rem;
   }
 
   .hero-parallax-food-stage {
-    top: 20.6rem;
-    right: auto;
-    left: 0.85rem;
-    width: min(90vw, 335px);
-    height: 232px;
-    min-height: 232px;
+    top: 10.2rem;
+    right: 0.2rem;
+    left: 0.45rem;
+    width: auto;
+    height: 540px;
+    min-height: 540px;
     margin-left: 0;
   }
 
@@ -12103,58 +12103,58 @@ h2 span {
   }
 
   .hero-parallax-food-stage .hero-float-pan {
-    top: 18%;
+    top: 48%;
     left: 44%;
-    width: min(30vw, 112px);
+    width: min(36vw, 134px);
   }
 
   .hero-parallax-food-stage .hero-float-tea {
-    top: 3%;
-    right: 5%;
-    width: min(14vw, 52px);
+    top: 26%;
+    right: 12%;
+    width: min(16vw, 60px);
   }
 
   .hero-parallax-food-stage .hero-float-simit {
-    right: 7%;
-    bottom: 0;
-    width: min(22vw, 82px);
+    right: 9%;
+    bottom: 5%;
+    width: min(27vw, 100px);
   }
 
   .hero-parallax-food-stage .hero-float-omelette {
-    left: 18%;
-    bottom: 12%;
-    width: min(26vw, 98px);
+    left: 8%;
+    bottom: 13%;
+    width: min(33vw, 122px);
   }
 
   .hero-parallax-food-stage .hero-float-cheese-platter {
-    top: 0;
-    left: 14%;
-    width: min(28vw, 104px);
+    top: 30%;
+    left: 22%;
+    width: min(35vw, 130px);
   }
 
   .hero-parallax-food-stage .hero-float-greens-platter {
-    right: 0;
-    bottom: 25%;
-    width: min(21vw, 78px);
+    right: 5%;
+    bottom: 22%;
+    width: min(25vw, 94px);
   }
 
   .hero-parallax-food-stage .hero-float-black-olives {
-    top: 34%;
-    right: 18%;
-    width: min(14vw, 52px);
+    top: 57%;
+    right: 21%;
+    width: min(15vw, 56px);
   }
 
   .hero-parallax-food-stage .hero-float-cherry-jam {
-    top: 17%;
+    top: 41%;
     left: 0;
     right: auto;
-    width: min(13.5vw, 50px);
+    width: min(15vw, 56px);
   }
 
   .hero-parallax-food-stage .hero-float-apricot-jam {
-    top: -2%;
+    top: 27%;
     left: 70%;
-    width: min(13.8vw, 51px);
+    width: min(15vw, 56px);
   }
 
   .hero-parallax-row {
@@ -12162,14 +12162,14 @@ h2 span {
   }
 
   .hero-parallax-card {
-    width: min(45vw, 176px);
+    width: min(43vw, 168px);
     aspect-ratio: 1.15 / 1;
   }
 }
 
 @media (max-width: 680px) {
   .story-band {
-    --story-transition-overlap: 86px;
+    --story-transition-overlap: 34px;
   }
 
   .leaf-story-1 {
@@ -12179,7 +12179,7 @@ h2 span {
 
 @media (max-width: 420px) {
   .story-band {
-    --story-transition-overlap: 78px;
+    --story-transition-overlap: 28px;
   }
 }
 
