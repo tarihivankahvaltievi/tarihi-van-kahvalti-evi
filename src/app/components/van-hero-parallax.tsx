@@ -8,7 +8,7 @@ import {
   useSpring,
   useTransform,
 } from "framer-motion";
-import { type CSSProperties, useRef } from "react";
+import { type CSSProperties, useEffect, useRef, useState } from "react";
 
 type HeroImage = {
   thumbnail: string;
@@ -148,6 +148,14 @@ const floatingFoods: FloatingFood[] = [
 ];
 
 export function VanHeroParallax() {
+  const [isMobile, setIsMobile] = useState(false);
+  useEffect(() => {
+    setIsMobile(window.innerWidth < 680);
+    const handleResize = () => setIsMobile(window.innerWidth < 680);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   const ref = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -172,7 +180,11 @@ export function VanHeroParallax() {
     spring,
   );
   const galleryY = useSpring(
-    useTransform(scrollYProgress, [0, 0.36, 1], [110, 82, 56]),
+    useTransform(
+      scrollYProgress,
+      [0, 0.36, 1],
+      isMobile ? [120, -40, -220] : [110, 82, 56]
+    ),
     spring,
   );
   const galleryOpacity = useSpring(
@@ -227,7 +239,9 @@ export function VanHeroParallax() {
         >
           <HeroImageRow images={firstRow} translate={translateX} reverse />
           <HeroImageRow images={secondRow} translate={translateXReverse} />
-          <HeroImageRow images={thirdRow} translate={translateX} reverse />
+          {!isMobile && (
+            <HeroImageRow images={thirdRow} translate={translateX} reverse />
+          )}
         </motion.div>
 
         <motion.div
