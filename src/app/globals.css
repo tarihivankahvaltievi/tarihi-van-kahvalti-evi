@@ -11657,6 +11657,19 @@ h2 span {
   pointer-events: none;
 }
 
+.hero-copy-ambient-glow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 160%;
+  height: 160%;
+  background: radial-gradient(circle, rgba(185, 139, 67, 0.12) 0%, rgba(54, 88, 61, 0.05) 50%, transparent 100%);
+  filter: blur(50px);
+  pointer-events: none;
+  z-index: -1;
+}
+
 .hero-parallax-copy::after {
   width: min(10.5rem, 52%);
   height: 1px;
@@ -11690,7 +11703,7 @@ h2 span {
   font-family: var(--font-serif), Georgia, serif;
   font-size: clamp(2.25rem, 3.65vw, 4.25rem);
   font-weight: 800;
-  letter-spacing: 0;
+  letter-spacing: -0.01em;
   line-height: 0.94;
   text-wrap: balance;
   text-shadow: 0 14px 34px rgba(71, 45, 28, 0.08);

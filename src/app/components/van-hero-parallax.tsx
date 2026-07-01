@@ -7,6 +7,7 @@ import {
   useScroll,
   useSpring,
   useTransform,
+  useMotionValue,
 } from "framer-motion";
 import { type CSSProperties, useEffect, useRef, useState } from "react";
 
@@ -156,13 +157,25 @@ export function VanHeroParallax() {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+
   const ref = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["start start", "end start"],
   });
 
-  const spring = { stiffness: 160, damping: 32, mass: 0.7 };
+  const spring = { stiffness: 90, damping: 26, mass: 1 };
+  
+  // Smooth mouse values
+  const smoothMouseX = useSpring(mouseX, { stiffness: 60, damping: 20 });
+  const smoothMouseY = useSpring(mouseY, { stiffness: 60, damping: 20 });
+
+  // Map mouse positions to 3D rotation angles for premium desktop interactivity
+  const rotateXMouse = useTransform(smoothMouseY, [-0.5, 0.5], [8, -8]);
+  const rotateYMouse = useTransform(smoothMouseX, [-0.5, 0.5], [-8, 8]);
+
   const translateX = useSpring(
     useTransform(scrollYProgress, [0, 1], [-110, 190]),
     spring,
@@ -226,12 +239,30 @@ export function VanHeroParallax() {
   const secondRow = heroImages.slice(5, 10);
   const thirdRow = heroImages.slice(10, 15);
 
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (isMobile) return;
+    const rect = e.currentTarget.getBoundingClientRect();
+    const width = rect.width;
+    const height = rect.height;
+    const x = (e.clientX - rect.left) / width - 0.5; // [-0.5, 0.5]
+    const y = (e.clientY - rect.top) / height - 0.5; // [-0.5, 0.5]
+    mouseX.set(x);
+    mouseY.set(y);
+  };
+
+  const handleMouseLeave = () => {
+    mouseX.set(0);
+    mouseY.set(0);
+  };
+
   return (
     <section
       id="top"
       ref={ref}
       className="hero hero-parallax-dining"
       aria-label="Tarihi Van Kahvaltıcısı ana alanı"
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
     >
       <div className="hero-parallax-sticky">
         <motion.div
@@ -240,6 +271,7 @@ export function VanHeroParallax() {
           animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
         >
+          <div className="hero-copy-ambient-glow" aria-hidden="true" />
           <motion.div
             style={{
               y: copyY,
@@ -284,6 +316,9 @@ export function VanHeroParallax() {
             y: floatingFoodY,
             scale: foodScale,
             opacity: foodOpacity,
+            rotateX: rotateXMouse,
+            rotateY: rotateYMouse,
+            transformStyle: "preserve-3d",
           }}
           aria-label="Uçan kahvaltı lezzetleri"
         >
