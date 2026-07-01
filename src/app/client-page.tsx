@@ -75,8 +75,8 @@ export default function ClientPage() {
 
   const [isOpenNow, setIsOpenNow] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const [mobileBarQuiet, setMobileBarQuiet] = useState(false);
-  const scrollQuietTimer = useRef<number | null>(null);
+  const [mobileBarHidden, setMobileBarHidden] = useState(false);
+  const lastScrollY = useRef(0);
   const [hoverStyle, setHoverStyle] = useState<React.CSSProperties>({
     opacity: 0,
     left: 0,
@@ -84,32 +84,26 @@ export default function ClientPage() {
   });
 
   useEffect(() => {
-    const settleMobileBar = () => {
-      setMobileBarQuiet(true);
-      if (scrollQuietTimer.current) {
-        window.clearTimeout(scrollQuietTimer.current);
-      }
-      scrollQuietTimer.current = window.setTimeout(() => {
-        setMobileBarQuiet(false);
-      }, 520);
-    };
-
     const handleScroll = () => {
-      setScrolled(window.scrollY > 40);
-      settleMobileBar();
+      const currentScrollY = Math.max(window.scrollY, 0);
+      const delta = currentScrollY - lastScrollY.current;
+
+      setScrolled(currentScrollY > 40);
+
+      if (currentScrollY < 56) {
+        setMobileBarHidden(false);
+      } else if (Math.abs(delta) > 6) {
+        setMobileBarHidden(delta > 0);
+      }
+
+      lastScrollY.current = currentScrollY;
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true });
-    window.addEventListener("wheel", settleMobileBar, { passive: true });
-    window.addEventListener("touchmove", settleMobileBar, { passive: true });
+    lastScrollY.current = Math.max(window.scrollY, 0);
     handleScroll();
     return () => {
       window.removeEventListener("scroll", handleScroll);
-      window.removeEventListener("wheel", settleMobileBar);
-      window.removeEventListener("touchmove", settleMobileBar);
-      if (scrollQuietTimer.current) {
-        window.clearTimeout(scrollQuietTimer.current);
-      }
     };
   }, []);
 
@@ -316,7 +310,7 @@ export default function ClientPage() {
         <AnimatedFooter onOpenBooking={() => handleOpenBooking()} />
       </main>
 
-      <div className={`mobile-bar ${mobileBarQuiet ? "scrolling" : ""}`}>
+      <div className={`mobile-bar ${mobileBarHidden ? "is-hidden" : ""}`}>
         <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" aria-label="WhatsApp üzerinden mesaj gönderin">
           <MessageCircle size={20} />
           <span>WhatsApp</span>

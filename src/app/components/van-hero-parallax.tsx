@@ -106,6 +106,31 @@ const floatingFoods: FloatingFood[] = [
     className: "hero-float-item hero-float-omelette",
   },
   {
+    src: "/images/hero-float/cheese-platter.png",
+    alt: "Van peynir tabağı",
+    className: "hero-float-item hero-float-cheese-platter",
+  },
+  {
+    src: "/images/hero-float/greens-platter.png",
+    alt: "Taze yeşillik tabağı",
+    className: "hero-float-item hero-float-greens-platter",
+  },
+  {
+    src: "/images/hero-float/black-olive-bowl.png",
+    alt: "Siyah zeytin kasesi",
+    className: "hero-float-item hero-float-black-olives",
+  },
+  {
+    src: "/images/hero-float/cherry-jam-bowl.png",
+    alt: "Vişne reçeli kasesi",
+    className: "hero-float-item hero-float-cherry-jam",
+  },
+  {
+    src: "/images/hero-float/apricot-jam-bowl.png",
+    alt: "Kayısı reçeli kasesi",
+    className: "hero-float-item hero-float-apricot-jam",
+  },
+  {
     src: "/images/hero-float/tahin-bowl.png",
     alt: "Tahin ve pekmez kasesi",
     className: "hero-float-item hero-float-jam",
@@ -173,11 +198,17 @@ export function VanHeroParallax() {
       <div className="hero-parallax-sticky">
         <motion.div
           className="hero-parallax-copy"
-          initial={{ opacity: 0, y: 18, filter: "blur(10px)" }}
+          initial={false}
           animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-          transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
+          transition={{ duration: 0.36, ease: [0.16, 1, 0.3, 1] }}
         >
-          <h1>Çay taze, sofra sıcak.</h1>
+          <h1>
+            Çay&nbsp;taze,
+            <br />
+            sofra
+            <br />
+            sıcak.
+          </h1>
           <p>
             Otlu peynir, kavut, murtuğa ve bakır sahanlar. Van kahvaltısı
             burada aceleye gelmez.
