@@ -11947,7 +11947,7 @@ h2 span {
   }
 
   .hero-parallax-gallery {
-    top: 44%;
+    top: 56%;
     right: auto;
     left: -80vw;
     gap: 0.54rem;
@@ -11959,82 +11959,95 @@ h2 span {
     left: 0.55rem;
     width: auto;
     max-width: none;
-    height: 475px;
-    min-height: 475px;
+    height: 380px;
+    min-height: 380px;
     margin-left: 0;
   }
 
-  .hero-parallax-food-stage .hero-float-pan {
-    top: 52%;
-    left: 38%;
-    width: min(36vw, 142px);
-  }
-
+  /* ── L-shape RIGHT ARM: natural stagger along the right side of the text ── */
   .hero-parallax-food-stage .hero-float-tea {
-    top: 12%;
-    right: 6%;
-    width: min(17vw, 66px);
-  }
-
-  .hero-parallax-food-stage .hero-float-simit {
-    top: 80%;
-    right: 10%;
-    width: min(26vw, 102px);
-  }
-
-  .hero-parallax-food-stage .hero-float-omelette {
-    top: 75%;
-    left: 4%;
-    width: min(32vw, 126px);
-  }
-
-  .hero-parallax-food-stage .hero-float-jam {
-    top: 86%;
-    left: 24%;
-    width: min(18vw, 70px);
-  }
-
-  .hero-parallax-food-stage .hero-float-tomato {
-    top: 42%;
-    right: 4%;
-    width: min(13vw, 50px);
-  }
-
-  .hero-parallax-food-stage .hero-float-mint {
-    top: 28%;
-    left: 56%;
-    width: min(10vw, 39px);
-  }
-
-  .hero-parallax-food-stage .hero-float-cheese-platter {
-    top: 64%;
-    left: 16%;
-    width: min(34vw, 134px);
-  }
-
-  .hero-parallax-food-stage .hero-float-greens-platter {
-    top: 68%;
-    right: 4%;
-    width: min(24vw, 94px);
-  }
-
-  .hero-parallax-food-stage .hero-float-black-olives {
-    top: 58%;
-    right: 26%;
-    width: min(16vw, 62px);
-  }
-
-  .hero-parallax-food-stage .hero-float-cherry-jam {
-    top: 60%;
-    left: 2%;
-    right: auto;
+    top: 0%;
+    right: 5%;
+    left: auto;
     width: min(16vw, 62px);
   }
 
   .hero-parallax-food-stage .hero-float-apricot-jam {
-    top: 24%;
-    left: 74%;
-    width: min(16vw, 62px);
+    top: 8%;
+    left: 50%;
+    right: auto;
+    width: min(14vw, 56px);
+  }
+
+  .hero-parallax-food-stage .hero-float-cheese-platter {
+    top: 17%;
+    right: 0%;
+    left: auto;
+    width: min(26vw, 104px);
+  }
+
+  .hero-parallax-food-stage .hero-float-black-olives {
+    top: 28%;
+    right: 30%;
+    left: auto;
+    width: min(14vw, 56px);
+  }
+
+  .hero-parallax-food-stage .hero-float-mint {
+    top: 36%;
+    left: 44%;
+    right: auto;
+    width: min(9vw, 36px);
+  }
+
+  .hero-parallax-food-stage .hero-float-cherry-jam {
+    top: 42%;
+    right: 12%;
+    left: auto;
+    width: min(14vw, 56px);
+  }
+
+  .hero-parallax-food-stage .hero-float-tomato {
+    top: 52%;
+    right: 4%;
+    left: auto;
+    width: min(12vw, 46px);
+  }
+
+  /* ── L-shape BOTTOM ARM: spread across the bottom with breathing room ── */
+  .hero-parallax-food-stage .hero-float-omelette {
+    top: 66%;
+    left: 0%;
+    right: auto;
+    width: min(28vw, 110px);
+  }
+
+  .hero-parallax-food-stage .hero-float-jam {
+    top: 62%;
+    left: 24%;
+    right: auto;
+    width: min(14vw, 56px);
+  }
+
+  .hero-parallax-food-stage .hero-float-pan {
+    top: 58%;
+    left: 36%;
+    right: auto;
+    width: min(28vw, 112px);
+  }
+
+  .hero-parallax-food-stage .hero-float-greens-platter {
+    top: 64%;
+    right: 0%;
+    left: auto;
+    width: min(20vw, 80px);
+  }
+
+  .hero-parallax-food-stage .hero-float-simit {
+    top: 76%;
+    right: 20%;
+    left: auto;
+    width: min(22vw, 86px);
   }
 
   .hero-parallax-row {
@@ -12080,7 +12093,7 @@ h2 span {
   }
 
   .hero-parallax-gallery {
-    top: 44%;
+    top: 56%;
     right: auto;
     left: -82vw;
     gap: 0.5rem;
@@ -12091,8 +12104,8 @@ h2 span {
     right: 0.2rem;
     left: 0.45rem;
     width: auto;
-    height: 450px;
-    min-height: 450px;
+    height: 350px;
+    min-height: 350px;
     margin-left: 0;
   }
 
@@ -12102,59 +12115,90 @@ h2 span {
     display: block;
   }
 
-  .hero-parallax-food-stage .hero-float-pan {
-    top: 52%;
-    left: 38%;
-    width: min(34vw, 126px);
-  }
-
+  /* ── L-shape RIGHT ARM ── */
   .hero-parallax-food-stage .hero-float-tea {
-    top: 12%;
-    right: 6%;
-    width: min(16vw, 60px);
-  }
-
-  .hero-parallax-food-stage .hero-float-simit {
-    top: 80%;
-    right: 10%;
-    width: min(25vw, 94px);
-  }
-
-  .hero-parallax-food-stage .hero-float-omelette {
-    top: 75%;
-    left: 4%;
-    width: min(31vw, 116px);
-  }
-
-  .hero-parallax-food-stage .hero-float-cheese-platter {
-    top: 64%;
-    left: 16%;
-    width: min(33vw, 122px);
-  }
-
-  .hero-parallax-food-stage .hero-float-greens-platter {
-    top: 68%;
-    right: 4%;
-    width: min(23vw, 86px);
-  }
-
-  .hero-parallax-food-stage .hero-float-black-olives {
-    top: 58%;
-    right: 26%;
-    width: min(15vw, 56px);
-  }
-
-  .hero-parallax-food-stage .hero-float-cherry-jam {
-    top: 60%;
-    left: 2%;
-    right: auto;
-    width: min(15vw, 56px);
+    top: 0%;
+    right: 5%;
+    left: auto;
+    width: min(15vw, 58px);
   }
 
   .hero-parallax-food-stage .hero-float-apricot-jam {
-    top: 24%;
-    left: 74%;
-    width: min(15vw, 56px);
+    top: 8%;
+    left: 50%;
+    right: auto;
+    width: min(13vw, 52px);
+  }
+
+  .hero-parallax-food-stage .hero-float-cheese-platter {
+    top: 17%;
+    right: 0%;
+    left: auto;
+    width: min(26vw, 98px);
+  }
+
+  .hero-parallax-food-stage .hero-float-black-olives {
+    top: 28%;
+    right: 30%;
+    left: auto;
+    width: min(13vw, 52px);
+  }
+
+  .hero-parallax-food-stage .hero-float-mint {
+    top: 36%;
+    left: 44%;
+    right: auto;
+    width: min(8vw, 32px);
+  }
+
+  .hero-parallax-food-stage .hero-float-tomato {
+    top: 42%;
+    right: 4%;
+    left: auto;
+    width: min(11vw, 42px);
+  }
+
+  .hero-parallax-food-stage .hero-float-cherry-jam {
+    top: 50%;
+    right: 22%;
+    left: auto;
+    width: min(13vw, 52px);
+  }
+
+  /* ── L-shape BOTTOM ARM ── */
+  .hero-parallax-food-stage .hero-float-omelette {
+    top: 66%;
+    left: 0%;
+    right: auto;
+    width: min(27vw, 102px);
+  }
+
+  .hero-parallax-food-stage .hero-float-jam {
+    top: 62%;
+    left: 24%;
+    right: auto;
+    width: min(13vw, 52px);
+  }
+
+  .hero-parallax-food-stage .hero-float-pan {
+    top: 58%;
+    left: 36%;
+    right: auto;
+    width: min(28vw, 106px);
+  }
+
+  .hero-parallax-food-stage .hero-float-greens-platter {
+    top: 64%;
+    right: 0%;
+    left: auto;
+    width: min(19vw, 74px);
+  }
+
+  .hero-parallax-food-stage .hero-float-simit {
+    top: 76%;
+    right: 20%;
+    left: auto;
+    width: min(21vw, 80px);
   }
 
   .hero-parallax-row {
