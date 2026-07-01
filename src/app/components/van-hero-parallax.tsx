@@ -192,7 +192,15 @@ export function VanHeroParallax() {
     spring,
   );
   const floatingFoodY = useSpring(
-    useTransform(scrollYProgress, [0, 1], [0, -28]),
+    useTransform(scrollYProgress, [0, 1], [0, -42]),
+    spring,
+  );
+  const foodScale = useSpring(
+    useTransform(scrollYProgress, [0, 0.45, 0.75], [1, 1.14, 1.32]),
+    spring,
+  );
+  const foodOpacity = useSpring(
+    useTransform(scrollYProgress, [0, 0.35, 0.65], [1, 0.9, 0]),
     spring,
   );
 
@@ -246,7 +254,11 @@ export function VanHeroParallax() {
 
         <motion.div
           className="hero-parallax-food-stage"
-          style={{ y: floatingFoodY }}
+          style={{
+            y: floatingFoodY,
+            scale: foodScale,
+            opacity: foodOpacity,
+          }}
           aria-label="Uçan kahvaltı lezzetleri"
         >
           {floatingFoods.map((item, index) => (
