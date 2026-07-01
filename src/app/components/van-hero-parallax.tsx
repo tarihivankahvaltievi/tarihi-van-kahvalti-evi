@@ -204,6 +204,24 @@ export function VanHeroParallax() {
     spring,
   );
 
+  // Copy parallax Y offset on scroll
+  const copyY = useSpring(
+    useTransform(scrollYProgress, [0, 0.6], [0, isMobile ? -80 : -140]),
+    spring,
+  );
+
+  // Copy opacity fade on scroll
+  const copyOpacity = useSpring(
+    useTransform(scrollYProgress, [0, 0.35, 0.55], [1, 0.8, 0]),
+    spring,
+  );
+
+  // Copy blur effect on scroll
+  const copyBlurPx = useSpring(
+    useTransform(scrollYProgress, [0, 0.5], [0, 6]),
+    spring,
+  );
+
   const firstRow = heroImages.slice(0, 5);
   const secondRow = heroImages.slice(5, 10);
   const thirdRow = heroImages.slice(10, 15);
@@ -218,21 +236,29 @@ export function VanHeroParallax() {
       <div className="hero-parallax-sticky">
         <motion.div
           className="hero-parallax-copy"
-          initial={false}
+          initial={{ opacity: 0, y: 24, filter: "blur(8px)" }}
           animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-          transition={{ duration: 0.36, ease: [0.16, 1, 0.3, 1] }}
+          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
         >
-          <h1>
-            Çay&nbsp;taze,
-            <br />
-            sofra
-            <br />
-            sıcak.
-          </h1>
-          <p>
-            Otlu peynir, kavut, murtuğa ve bakır sahanlar. Van kahvaltısı
-            burada aceleye gelmez.
-          </p>
+          <motion.div
+            style={{
+              y: copyY,
+              opacity: copyOpacity,
+              filter: useTransform(copyBlurPx, (v) => `blur(${v}px)`),
+            }}
+          >
+            <h1>
+              Çay&nbsp;taze,
+              <br />
+              sofra
+              <br />
+              sıcak.
+            </h1>
+            <p>
+              Otlu peynir, kavut, murtuğa ve bakır sahanlar. Van kahvaltısı
+              burada aceleye gelmez.
+            </p>
+          </motion.div>
         </motion.div>
 
         <motion.div
