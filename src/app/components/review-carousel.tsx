@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
-import { PenTool, Quote, Star, X } from "lucide-react";
+import { ChevronLeft, ChevronRight, PenTool, Star, X } from "lucide-react";
 
 interface Review {
   id: number;
@@ -19,7 +19,7 @@ const initialReviews: Review[] = [
     id: 1,
     name: "Murat Y.",
     rating: 5,
-    comment: "Taksim’in ortasında sakin bir Van sofrası. Tarihi atmosfer, sıcak servis ve gerçekten zengin bir serpme kahvaltı deneyimi.",
+    comment: "Taksim’in ortasında sakin bir Van sofrası. Tarihi atmosfer ve sıcak servis.",
     source: "Google Deneyimi",
     image: "/images/tea-service.jpg",
   },
@@ -27,7 +27,7 @@ const initialReviews: Review[] = [
     id: 2,
     name: "Ebru A.",
     rating: 5,
-    comment: "Kahvaltıdan sonra kahve için kalkmak istemiyorsun. Kafka Cafe alanı, kahvaltı sonrası sohbet ve çalışma molası için aynı hikayenin ikinci bölümü gibi.",
+    comment: "Kahvaltıdan sonra kalkmak istemiyorsun; Kafka Cafe sohbetin ikinci bölümü gibi.",
     source: "Google Deneyimi",
     thumbs: ["/images/coffee-moment.jpg", "/images/interior-chair.jpg", "/images/historic-mirror.jpg"],
   },
@@ -35,20 +35,23 @@ const initialReviews: Review[] = [
     id: 3,
     name: "Alessandro M.",
     rating: 5,
-    comment: "The most authentic Turkish breakfast in Istanbul! The historic Greek building has an amazing soul. Sınırsız çay service was incredible.",
+    comment: "Authentic Turkish breakfast in Istanbul. Historic building, endless tea, warm service.",
     source: "TripAdvisor",
+    image: "/images/breakfast-spread.jpg",
   },
   {
     id: 4,
     name: "Canan D.",
     rating: 5,
-    comment: "Van kahvaltısının buradaki sunumu tam anlamıyla sanat. Murtuğa ve kavut sıcak sıcak bakır sahanda geliyor, peynirlerin kokusu harika. Mutlaka gelin.",
+    comment: "Murtuğa, kavut ve peynirler sıcak bakır sahanlarda geliyor. Sunum çok özenli.",
     source: "Google Deneyimi",
+    image: "/images/sucuk-egg.jpg",
   }
 ];
 
 export function ReviewCarousel() {
   const [reviews, setReviews] = useState<Review[]>(initialReviews);
+  const [cardSize, setCardSize] = useState(365);
   const [isWriteOpen, setIsWriteOpen] = useState(false);
   const writeDialogRef = useRef<HTMLDialogElement>(null);
   
@@ -58,6 +61,45 @@ export function ReviewCarousel() {
   const [hoverRating, setHoverRating] = useState<number | null>(null);
   const [newComment, setNewComment] = useState("");
   const [toastMessage, setToastMessage] = useState<string | null>(null);
+
+  useEffect(() => {
+    const updateSize = () => {
+      const width = window.innerWidth;
+      if (width < 390) {
+        setCardSize(276);
+      } else if (width < 640) {
+        setCardSize(306);
+      } else {
+        setCardSize(365);
+      }
+    };
+
+    updateSize();
+    window.addEventListener("resize", updateSize);
+    return () => window.removeEventListener("resize", updateSize);
+  }, []);
+
+  const handleMove = (steps: number) => {
+    setReviews((currentReviews) => {
+      const nextReviews = [...currentReviews];
+
+      if (steps > 0) {
+        for (let i = steps; i > 0; i -= 1) {
+          const item = nextReviews.shift();
+          if (!item) return currentReviews;
+          nextReviews.push(item);
+        }
+      } else {
+        for (let i = steps; i < 0; i += 1) {
+          const item = nextReviews.pop();
+          if (!item) return currentReviews;
+          nextReviews.unshift(item);
+        }
+      }
+
+      return nextReviews;
+    });
+  };
 
   // Sync state with native dialog
   useEffect(() => {
@@ -127,7 +169,7 @@ export function ReviewCarousel() {
       source: "Müşteri Yorumu",
     };
 
-    setReviews([newReview, ...reviews]);
+    setReviews((currentReviews) => [newReview, ...currentReviews]);
     setIsWriteOpen(false);
     
     // Clear inputs
@@ -142,56 +184,73 @@ export function ReviewCarousel() {
 
   return (
     <>
-      <div className="testimonials-stagger" data-reveal>
-        <div className="testimonial-copy">
-          <span>Misafir Notları</span>
-          <p>
-            Kısa cümleler, gerçek masalar, uzun kalan çay kokusu. Yorumlar
-            gösterişli bir vitrin değil; sofradan kalkarken söylenenler.
-          </p>
-        </div>
+      <div className="stagger-testimonials" data-reveal>
+        <div
+          className="stagger-testimonials-stage"
+          aria-label="Misafir yorumları"
+          style={{ "--card-size": `${cardSize}px` } as React.CSSProperties}
+        >
+          {reviews.map((rev, index) => {
+            const centerIndex = Math.floor(reviews.length / 2);
+            const position = index - centerIndex;
+            const isCenter = position === 0;
+            const previewImage = rev.image || rev.thumbs?.[0] || "/images/brand-icon.svg";
 
-        <div className="testimonial-stagger-grid" aria-label="Misafir yorumları">
-          {reviews.map((rev, idx) => (
-            <article
-              key={rev.id}
-              className={`testimonial-card testimonial-card-${idx + 1}`}
-              style={{ "--stagger-index": idx } as React.CSSProperties}
-            >
-              <div className="testimonial-card-top">
-                <span className="testimonial-quote-mark" aria-hidden="true">
-                  <Quote size={16} />
-                </span>
-                <div className="testimonial-rating" aria-label={`${rev.rating} yıldız`}>
+            return (
+              <article
+                key={`${rev.id}-${index}`}
+                className={`stagger-testimonial-card ${isCenter ? "is-center" : ""}`}
+                style={
+                  {
+                    "--position": position,
+                    "--abs-position": Math.abs(position),
+                    "--direction": position > 0 ? 1 : -1,
+                    "--tilt": position % 2 ? 2.5 : -2.5,
+                    zIndex: isCenter ? 10 : Math.max(1, 8 - Math.abs(position)),
+                  } as React.CSSProperties
+                }
+                onClick={() => handleMove(position)}
+                aria-current={isCenter ? "true" : undefined}
+              >
+                <span className="stagger-card-corner" aria-hidden="true" />
+                <div className="stagger-card-image">
+                  <Image
+                    src={previewImage}
+                    alt={rev.name}
+                    fill
+                    sizes="64px"
+                    loading="lazy"
+                  />
+                </div>
+                <div className="stagger-card-stars" aria-label={`${rev.rating} yıldız`}>
                   {Array.from({ length: rev.rating }).map((_, i) => (
-                    <Star key={i} size={14} fill="currentColor" />
+                    <Star key={i} size={15} fill="currentColor" />
                   ))}
                 </div>
-              </div>
+                <p className="stagger-card-quote">“{rev.comment}”</p>
+                <p className="stagger-card-author">
+                  - {rev.name}, {rev.source}
+                </p>
+              </article>
+            );
+          })}
 
-              <p>“{rev.comment}”</p>
-
-              <div className="testimonial-author">
-                <strong>{rev.name}</strong>
-                <span>{rev.source}</span>
-              </div>
-
-              {(rev.image || rev.thumbs) && (
-                <div className="testimonial-media">
-                  {rev.image && (
-                    <div className="testimonial-thumb">
-                      <Image src={rev.image} alt={rev.name} fill sizes="84px" loading="lazy" />
-                    </div>
-                  )}
-                  {rev.thumbs?.slice(0, 3).map((thumb, index) => (
-                    <div className="testimonial-thumb" key={thumb}>
-                      <Image src={thumb} alt={`Mekan detayı ${index + 1}`} fill sizes="84px" loading="lazy" />
-                    </div>
-                  ))}
-                </div>
-              )}
-            </article>
-          ))}
+          <div className="stagger-testimonial-controls" aria-label="Yorum kontrolü">
+            <button
+              type="button"
+              onClick={() => handleMove(-1)}
+              aria-label="Önceki yorum"
+            >
+              <ChevronLeft size={28} />
+            </button>
+            <button
+              type="button"
+              onClick={() => handleMove(1)}
+              aria-label="Sonraki yorum"
+            >
+              <ChevronRight size={28} />
+            </button>
+          </div>
         </div>
 
         <button 
