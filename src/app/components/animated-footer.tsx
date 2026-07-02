@@ -111,6 +111,216 @@ const createStoneVein = (block: WallBlock, index: number) => {
   return `M ${startX.toFixed(1)} ${startY.toFixed(1)} c ${wobble(index, 1.29, 7)} ${wobble(index, 2.29, 5)} ${(length * 0.55).toFixed(1)} ${wobble(index, 3.29, 8)} ${length.toFixed(1)} ${wobble(index, 4.29, 5)}`;
 };
 
+function IstiklalWebglAtmosphere() {
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+
+    const gl = canvas.getContext("webgl", {
+      alpha: true,
+      antialias: false,
+      depth: false,
+      powerPreference: "low-power",
+      premultipliedAlpha: true,
+    });
+    if (!gl) {
+      canvas.classList.add("is-webgl-unavailable");
+      return;
+    }
+
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const vertexSource = `
+      attribute vec2 a_position;
+      varying vec2 v_uv;
+
+      void main() {
+        v_uv = a_position * 0.5 + 0.5;
+        gl_Position = vec4(a_position, 0.0, 1.0);
+      }
+    `;
+    const fragmentSource = `
+      precision mediump float;
+
+      uniform vec2 u_resolution;
+      uniform float u_time;
+      uniform float u_reduceMotion;
+      varying vec2 v_uv;
+
+      float hash(vec2 p) {
+        p = fract(p * vec2(123.34, 456.21));
+        p += dot(p, p + 45.32);
+        return fract(p.x * p.y);
+      }
+
+      float softCircle(vec2 uv, vec2 center, float radius, float blur) {
+        float distanceToCenter = length((uv - center) * vec2(u_resolution.x / u_resolution.y, 1.0));
+        return 1.0 - smoothstep(radius, radius + blur, distanceToCenter);
+      }
+
+      void main() {
+        vec2 uv = v_uv;
+        float t = u_time * (1.0 - u_reduceMotion);
+
+        float sky = smoothstep(1.0, 0.16, uv.y);
+        float horizon = exp(-pow((uv.y - 0.50) * 7.8, 2.0));
+        float street = smoothstep(0.68, 1.0, uv.y);
+        float vignette = smoothstep(0.9, 0.18, length((uv - vec2(0.5, 0.52)) * vec2(1.12, 0.92)));
+
+        vec3 cream = vec3(1.0, 0.955, 0.835);
+        vec3 gold = vec3(0.86, 0.62, 0.28);
+        vec3 green = vec3(0.18, 0.34, 0.22);
+        vec3 ink = vec3(0.13, 0.19, 0.22);
+
+        vec3 color = cream * (0.07 * sky) + gold * (0.13 * horizon) + green * (0.035 * street);
+
+        float railLine = exp(-pow((uv.y - 0.84) * 95.0, 2.0));
+        float railPulse = 0.55 + 0.45 * sin(t * 1.35 + uv.x * 11.0);
+        color += vec3(1.0, 0.76, 0.36) * railLine * (0.12 + 0.08 * railPulse);
+
+        float tramX = fract(t * 0.045 - 0.14);
+        float headlight = softCircle(uv, vec2(tramX, 0.74), 0.030, 0.070);
+        float headlightBeam = smoothstep(0.0, 0.55, uv.x - tramX) * smoothstep(0.90, 0.72, uv.y);
+        headlightBeam *= exp(-pow((uv.y - 0.73) * 6.0, 2.0)) * smoothstep(0.62, 0.0, uv.x - tramX);
+        color += vec3(1.0, 0.80, 0.36) * (headlight * 0.18 + headlightBeam * 0.12);
+
+        float lampLeft = softCircle(uv, vec2(0.250, 0.50), 0.035, 0.085);
+        float lampRight = softCircle(uv, vec2(0.625, 0.48), 0.035, 0.085);
+        float lampBreath = 0.72 + 0.28 * sin(t * 1.1);
+        color += vec3(1.0, 0.78, 0.38) * (lampLeft + lampRight) * 0.105 * lampBreath;
+
+        float towerAura = softCircle(uv, vec2(0.508, 0.42), 0.22, 0.32);
+        color += vec3(0.93, 0.76, 0.48) * towerAura * 0.055;
+
+        float dust = 0.0;
+        for (int i = 0; i < 18; i++) {
+          float fi = float(i);
+          vec2 seed = vec2(fi * 7.17, fi * 3.31);
+          vec2 p = vec2(hash(seed), 0.18 + hash(seed + 11.0) * 0.67);
+          p.x = fract(p.x + t * (0.006 + hash(seed + 4.0) * 0.012));
+          float radius = 0.0025 + hash(seed + 8.0) * 0.004;
+          dust += softCircle(uv, p, radius, radius * 3.8) * (0.25 + hash(seed + 2.0) * 0.55);
+        }
+        color += vec3(1.0, 0.84, 0.52) * dust * 0.075;
+
+        float scan = sin((uv.x + uv.y) * 52.0 + t * 0.8) * 0.5 + 0.5;
+        color += ink * scan * street * 0.010;
+
+        float alpha = clamp((sky * 0.10 + horizon * 0.18 + street * 0.12 + headlight * 0.18 + dust * 0.11) * vignette, 0.0, 0.38);
+        gl_FragColor = vec4(color, alpha);
+      }
+    `;
+
+    const createShader = (type: number, source: string) => {
+      const shader = gl.createShader(type);
+      if (!shader) return null;
+      gl.shaderSource(shader, source);
+      gl.compileShader(shader);
+      if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
+        gl.deleteShader(shader);
+        return null;
+      }
+      return shader;
+    };
+
+    const vertexShader = createShader(gl.VERTEX_SHADER, vertexSource);
+    const fragmentShader = createShader(gl.FRAGMENT_SHADER, fragmentSource);
+    if (!vertexShader || !fragmentShader) return;
+
+    const program = gl.createProgram();
+    if (!program) return;
+    gl.attachShader(program, vertexShader);
+    gl.attachShader(program, fragmentShader);
+    gl.linkProgram(program);
+    if (!gl.getProgramParameter(program, gl.LINK_STATUS)) return;
+
+    const positionBuffer = gl.createBuffer();
+    const positionLocation = gl.getAttribLocation(program, "a_position");
+    const resolutionLocation = gl.getUniformLocation(program, "u_resolution");
+    const timeLocation = gl.getUniformLocation(program, "u_time");
+    const reduceMotionLocation = gl.getUniformLocation(program, "u_reduceMotion");
+
+    gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
+    gl.bufferData(
+      gl.ARRAY_BUFFER,
+      new Float32Array([-1, -1, 1, -1, -1, 1, -1, 1, 1, -1, 1, 1]),
+      gl.STATIC_DRAW,
+    );
+
+    let animationFrame = 0;
+    let start = performance.now();
+
+    const resize = () => {
+      const rect = canvas.getBoundingClientRect();
+      const dpr = Math.min(window.devicePixelRatio || 1, 1.75);
+      const width = Math.max(1, Math.round(rect.width * dpr));
+      const height = Math.max(1, Math.round(rect.height * dpr));
+      if (canvas.width !== width || canvas.height !== height) {
+        canvas.width = width;
+        canvas.height = height;
+      }
+      gl.viewport(0, 0, width, height);
+    };
+
+    const render = (now: number) => {
+      resize();
+      gl.clearColor(0, 0, 0, 0);
+      gl.clear(gl.COLOR_BUFFER_BIT);
+      gl.useProgram(program);
+      gl.enableVertexAttribArray(positionLocation);
+      gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
+      gl.vertexAttribPointer(positionLocation, 2, gl.FLOAT, false, 0, 0);
+      gl.uniform2f(resolutionLocation, canvas.width, canvas.height);
+      gl.uniform1f(timeLocation, (now - start) / 1000);
+      gl.uniform1f(reduceMotionLocation, reduceMotion.matches ? 1 : 0);
+      gl.drawArrays(gl.TRIANGLES, 0, 6);
+      canvas.dataset.webglActive = "true";
+      canvas.dataset.webglFrame = Math.round(now).toString();
+
+      if (!reduceMotion.matches) {
+        animationFrame = window.requestAnimationFrame(render);
+      }
+    };
+
+    const handleMotionPreferenceChange = () => {
+      window.cancelAnimationFrame(animationFrame);
+      start = performance.now();
+      animationFrame = window.requestAnimationFrame(render);
+    };
+
+    reduceMotion.addEventListener("change", handleMotionPreferenceChange);
+    animationFrame = window.requestAnimationFrame(render);
+
+    return () => {
+      window.cancelAnimationFrame(animationFrame);
+      reduceMotion.removeEventListener("change", handleMotionPreferenceChange);
+      gl.deleteBuffer(positionBuffer);
+      gl.deleteProgram(program);
+      gl.deleteShader(vertexShader);
+      gl.deleteShader(fragmentShader);
+    };
+  }, []);
+
+  return (
+    <canvas
+      ref={canvasRef}
+      className="footer-istiklal-webgl"
+      aria-hidden="true"
+      style={{
+        position: "absolute",
+        inset: 0,
+        zIndex: 1,
+        width: "100%",
+        height: "100%",
+        mixBlendMode: "multiply",
+        opacity: 0.82,
+        pointerEvents: "none",
+      }}
+    />
+  );
+}
+
 export function AnimatedFooter({ onOpenBooking }: { onOpenBooking: () => void }) {
   const footerRef = useRef<HTMLElement>(null);
   const [dingCount, setDingCount] = useState(0);
@@ -175,6 +385,7 @@ export function AnimatedFooter({ onOpenBooking }: { onOpenBooking: () => void })
       
       {/* ─── Premium Live Beyoğlu Illustration ─── */}
       <div className="footer-skyline-wrapper" aria-hidden="true">
+        <IstiklalWebglAtmosphere />
         <svg viewBox="0 0 1200 240" preserveAspectRatio="xMidYMax meet" className="footer-skyline-svg" xmlns="http://www.w3.org/2000/svg">
           <defs>
             <linearGradient id="sky-building-fill" x1="0" y1="0" x2="0" y2="1">

@@ -8,6 +8,7 @@ import {
   useSpring,
   useTransform,
   useMotionValue,
+  useReducedMotion,
 } from "framer-motion";
 import { type CSSProperties, useRef, useSyncExternalStore } from "react";
 
@@ -148,6 +149,24 @@ const floatingFoods: FloatingFood[] = [
   },
 ];
 
+const mobileFloatingFoodClassNames = new Set([
+  "hero-float-item hero-float-pan",
+  "hero-float-item hero-float-tea",
+  "hero-float-item hero-float-simit",
+  "hero-float-item hero-float-omelette",
+  "hero-float-item hero-float-cheese-platter",
+  "hero-float-item hero-float-greens-platter",
+  "hero-float-item hero-float-black-olives",
+  "hero-float-item hero-float-apricot-jam",
+  "hero-float-item hero-float-tomato",
+]);
+
+const eagerFloatingFoodClassNames = new Set([
+  "hero-float-item hero-float-pan",
+  "hero-float-item hero-float-tea",
+  "hero-float-item hero-float-cheese-platter",
+]);
+
 const subscribeToMobileViewport = (callback: () => void) => {
   const mediaQuery = window.matchMedia("(max-width: 679px)");
   mediaQuery.addEventListener("change", callback);
@@ -163,6 +182,7 @@ export function VanHeroParallax() {
     getMobileViewportSnapshot,
     () => false,
   );
+  const prefersReducedMotion = useReducedMotion();
 
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
@@ -173,37 +193,42 @@ export function VanHeroParallax() {
     offset: ["start start", "end start"],
   });
 
-  const spring = { stiffness: 90, damping: 26, mass: 1 };
+  const spring = isMobile
+    ? { stiffness: 74, damping: 31, mass: 1.05 }
+    : { stiffness: 88, damping: 29, mass: 1 };
+  const visibleFloatingFoods = isMobile
+    ? floatingFoods.filter((item) => mobileFloatingFoodClassNames.has(item.className))
+    : floatingFoods;
   
   // Smooth mouse values
-  const smoothMouseX = useSpring(mouseX, { stiffness: 60, damping: 20 });
-  const smoothMouseY = useSpring(mouseY, { stiffness: 60, damping: 20 });
+  const smoothMouseX = useSpring(mouseX, { stiffness: 48, damping: 24 });
+  const smoothMouseY = useSpring(mouseY, { stiffness: 48, damping: 24 });
 
   // Map mouse positions to 3D rotation angles for premium desktop interactivity
-  const rotateXMouse = useTransform(smoothMouseY, [-0.5, 0.5], [8, -8]);
-  const rotateYMouse = useTransform(smoothMouseX, [-0.5, 0.5], [-8, 8]);
+  const rotateXMouse = useTransform(smoothMouseY, [-0.5, 0.5], [4.8, -4.8]);
+  const rotateYMouse = useTransform(smoothMouseX, [-0.5, 0.5], [-5.2, 5.2]);
 
   const translateX = useSpring(
-    useTransform(scrollYProgress, [0, 1], [-110, 190]),
+    useTransform(scrollYProgress, [0, 1], isMobile ? [-46, 82] : [-96, 164]),
     spring,
   );
   const translateXReverse = useSpring(
-    useTransform(scrollYProgress, [0, 1], [120, -220]),
+    useTransform(scrollYProgress, [0, 1], isMobile ? [58, -92] : [108, -188]),
     spring,
   );
   const rotateX = useSpring(
-    useTransform(scrollYProgress, [0, 0.22], [12, 0]),
+    useTransform(scrollYProgress, [0, 0.24], isMobile ? [3.2, 0] : [6, 0]),
     spring,
   );
   const rotateZ = useSpring(
-    useTransform(scrollYProgress, [0, 0.22], [-7, 0]),
+    useTransform(scrollYProgress, [0, 0.24], isMobile ? [-1.8, 0] : [-3.2, 0]),
     spring,
   );
   const galleryY = useSpring(
     useTransform(
       scrollYProgress,
       [0, 0.36, 1],
-      isMobile ? [120, -40, -220] : [110, 82, 56]
+      isMobile ? [82, 12, -118] : [104, 78, 58]
     ),
     spring,
   );
@@ -212,11 +237,15 @@ export function VanHeroParallax() {
     spring,
   );
   const floatingFoodY = useSpring(
-    useTransform(scrollYProgress, [0, 1], [0, -42]),
+    useTransform(scrollYProgress, [0, 1], [0, isMobile ? -24 : -36]),
     spring,
   );
   const foodScale = useSpring(
-    useTransform(scrollYProgress, [0, 0.45, 0.75], [1, 1.14, 1.32]),
+    useTransform(
+      scrollYProgress,
+      [0, 0.45, 0.75],
+      isMobile ? [1, 1.04, 1.1] : [1, 1.08, 1.18],
+    ),
     spring,
   );
   const foodOpacity = useSpring(
@@ -226,7 +255,7 @@ export function VanHeroParallax() {
 
   // Copy parallax Y offset on scroll
   const copyY = useSpring(
-    useTransform(scrollYProgress, [0, 0.6], [0, isMobile ? -80 : -140]),
+    useTransform(scrollYProgress, [0, 0.6], [0, isMobile ? -54 : -112]),
     spring,
   );
 
@@ -238,9 +267,10 @@ export function VanHeroParallax() {
 
   // Copy blur effect on scroll
   const copyBlurPx = useSpring(
-    useTransform(scrollYProgress, [0, 0.5], [0, 6]),
+    useTransform(scrollYProgress, [0, 0.5], [0, prefersReducedMotion ? 0 : 3.5]),
     spring,
   );
+  const copyFilter = useTransform(copyBlurPx, (v) => `blur(${v}px)`);
 
   const firstRow = heroImages.slice(0, 5);
   const secondRow = heroImages.slice(5, 10);
@@ -274,16 +304,13 @@ export function VanHeroParallax() {
       <div className="hero-parallax-sticky">
         <motion.div
           className="hero-parallax-copy"
-          initial={{ opacity: 0, y: 24, filter: "blur(8px)" }}
-          animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
         >
           <div className="hero-copy-ambient-glow" aria-hidden="true" />
           <motion.div
             style={{
               y: copyY,
               opacity: copyOpacity,
-              filter: useTransform(copyBlurPx, (v) => `blur(${v}px)`),
+              filter: copyFilter,
             }}
           >
             <h1>
@@ -310,10 +337,10 @@ export function VanHeroParallax() {
           }}
           aria-hidden="true"
         >
-          <HeroImageRow images={firstRow} translate={translateX} reverse />
-          <HeroImageRow images={secondRow} translate={translateXReverse} />
+          <HeroImageRow images={firstRow} translate={translateX} reverse enableHover={!isMobile} />
+          <HeroImageRow images={secondRow} translate={translateXReverse} enableHover={!isMobile} />
           {!isMobile && (
-            <HeroImageRow images={thirdRow} translate={translateX} reverse />
+            <HeroImageRow images={thirdRow} translate={translateX} reverse enableHover />
           )}
         </motion.div>
 
@@ -329,21 +356,26 @@ export function VanHeroParallax() {
           }}
           aria-label="Uçan kahvaltı lezzetleri"
         >
-          {floatingFoods.map((item, index) => (
-            <div
-              className={item.className}
-              key={item.src}
-              style={{ "--float-delay": `${index * 140}ms` } as CSSProperties}
-            >
-              <Image
-                src={item.src}
-                alt={item.alt}
-                fill
-                sizes="(max-width: 680px) 52vw, (max-width: 1080px) 34vw, 360px"
-                priority={index < 4}
-              />
-            </div>
-          ))}
+          {visibleFloatingFoods.map((item, index) => {
+            const isEager = eagerFloatingFoodClassNames.has(item.className);
+
+            return (
+              <div
+                className={item.className}
+                key={item.src}
+                style={{ "--float-delay": `${index * (isMobile ? 70 : 110)}ms` } as CSSProperties}
+              >
+                <Image
+                  src={item.src}
+                  alt={item.alt}
+                  fill
+                  sizes="(max-width: 680px) 52vw, (max-width: 1080px) 34vw, 360px"
+                  priority={isEager}
+                  loading={isEager ? "eager" : "lazy"}
+                />
+              </div>
+            );
+          })}
         </motion.div>
       </div>
     </section>
@@ -354,10 +386,12 @@ function HeroImageRow({
   images,
   translate,
   reverse = false,
+  enableHover = true,
 }: {
   images: HeroImage[];
   translate: MotionValue<number>;
   reverse?: boolean;
+  enableHover?: boolean;
 }) {
   return (
     <div className={`hero-parallax-row ${reverse ? "is-reverse" : ""}`}>
@@ -366,7 +400,7 @@ function HeroImageRow({
           className="hero-parallax-card"
           style={{ x: translate }}
           key={image.thumbnail}
-          whileHover={{ y: -12, scale: 1.015 }}
+          whileHover={enableHover ? { y: -8, scale: 1.01 } : undefined}
           transition={{ duration: 0.28, ease: "easeOut" }}
         >
           <Image
@@ -374,7 +408,8 @@ function HeroImageRow({
             alt=""
             fill
             sizes="(max-width: 680px) 64vw, (max-width: 1080px) 42vw, 30rem"
-            priority={index < 2}
+            priority={index < 3}
+            loading={index < 3 ? "eager" : "lazy"}
             style={{ objectPosition: image.position ?? "center" }}
           />
         </motion.figure>
