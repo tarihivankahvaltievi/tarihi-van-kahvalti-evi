@@ -159,6 +159,7 @@ const mobileFloatingFoodClassNames = new Set([
 
 const eagerFloatingFoodClassNames = new Set([
   "hero-float-item hero-float-tea",
+  "hero-float-item hero-float-cheese-platter",
 ]);
 
 const subscribeToMobileViewport = (callback: () => void) => {
