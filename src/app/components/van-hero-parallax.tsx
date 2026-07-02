@@ -9,7 +9,7 @@ import {
   useTransform,
   useMotionValue,
 } from "framer-motion";
-import { type CSSProperties, useEffect, useRef, useState } from "react";
+import { type CSSProperties, useRef, useSyncExternalStore } from "react";
 
 type HeroImage = {
   thumbnail: string;
@@ -148,14 +148,21 @@ const floatingFoods: FloatingFood[] = [
   },
 ];
 
+const subscribeToMobileViewport = (callback: () => void) => {
+  const mediaQuery = window.matchMedia("(max-width: 679px)");
+  mediaQuery.addEventListener("change", callback);
+  return () => mediaQuery.removeEventListener("change", callback);
+};
+
+const getMobileViewportSnapshot = () =>
+  window.matchMedia("(max-width: 679px)").matches;
+
 export function VanHeroParallax() {
-  const [isMobile, setIsMobile] = useState(false);
-  useEffect(() => {
-    setIsMobile(window.innerWidth < 680);
-    const handleResize = () => setIsMobile(window.innerWidth < 680);
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
+  const isMobile = useSyncExternalStore(
+    subscribeToMobileViewport,
+    getMobileViewportSnapshot,
+    () => false,
+  );
 
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);

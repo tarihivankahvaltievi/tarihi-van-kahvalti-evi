@@ -12555,3 +12555,613 @@ h2 span,
     max-width: 16rem !important;
   }
 }
+
+/* Premium review + contact polish pass */
+.red-reviews {
+  isolation: isolate;
+  margin: clamp(1.25rem, 3vw, 2.4rem) clamp(0.9rem, 3vw, 3rem) 0;
+  padding: clamp(3.4rem, 7vw, 6.4rem) clamp(1rem, 4.5vw, 4.8rem) clamp(3.2rem, 6.2vw, 5.4rem);
+  border: 1px solid rgba(255, 247, 224, 0.22);
+  border-radius: clamp(24px, 4vw, 40px);
+  background:
+    linear-gradient(180deg, rgba(18, 42, 27, 0.74), rgba(23, 58, 36, 0.88)),
+    radial-gradient(ellipse at 50% 16%, rgba(255, 248, 225, 0.16), transparent 34%),
+    url("/images/breakfast-spread.jpg") center/cover;
+  box-shadow:
+    0 30px 90px rgba(29, 48, 34, 0.22),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2),
+    inset 0 -18px 46px rgba(8, 25, 16, 0.22);
+}
+
+.red-reviews::before {
+  z-index: 0;
+  background:
+    linear-gradient(90deg, rgba(255, 255, 255, 0.075) 1px, transparent 1px),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.055) 1px, transparent 1px);
+  background-size: clamp(62px, 10vw, 128px) clamp(62px, 10vw, 128px);
+  opacity: 0.34;
+}
+
+.red-reviews::after {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  content: "";
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse at 50% 30%, rgba(255, 255, 255, 0.16), transparent 36%),
+    linear-gradient(180deg, rgba(7, 22, 14, 0) 0%, rgba(7, 22, 14, 0.24) 100%),
+    radial-gradient(ellipse at center, transparent 42%, rgba(4, 18, 11, 0.42));
+}
+
+.red-reviews h2 {
+  z-index: 2;
+  max-width: 11.8em;
+  margin: 0 auto;
+  color: #fffaf0;
+  font-size: clamp(2.35rem, 6.2vw, 5.8rem);
+  font-weight: 850;
+  line-height: 0.98;
+  letter-spacing: 0;
+  text-shadow: 0 18px 50px rgba(0, 0, 0, 0.22);
+}
+
+.red-reviews h2::before {
+  display: block;
+  width: fit-content;
+  margin: 0 auto clamp(0.8rem, 2vw, 1.1rem);
+  border: 1px solid rgba(255, 250, 240, 0.24);
+  border-radius: 999px;
+  background: rgba(255, 250, 240, 0.1);
+  color: rgba(255, 250, 240, 0.78);
+  padding: 0.42rem 0.76rem;
+  font-family: var(--font-sans);
+  font-size: clamp(0.62rem, 1.1vw, 0.78rem);
+  font-weight: 850;
+  letter-spacing: 0.12em;
+  line-height: 1;
+  text-transform: uppercase;
+  text-shadow: none;
+  content: "Misafir Notları";
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.carousel-container {
+  z-index: 2;
+  max-width: min(760px, 100%);
+  margin-top: clamp(2rem, 4vw, 3.2rem);
+}
+
+.carousel-track {
+  min-height: clamp(320px, 34vw, 430px);
+  overflow: visible;
+  border: 1px solid rgba(117, 92, 54, 0.13);
+  border-radius: clamp(22px, 3vw, 36px);
+  background:
+    radial-gradient(ellipse at 50% 0%, rgba(255, 255, 255, 0.9), transparent 42%),
+    linear-gradient(180deg, #fffaf0, #f5eddf);
+  box-shadow:
+    0 24px 70px rgba(6, 24, 13, 0.24),
+    0 3px 0 rgba(255, 255, 255, 0.36) inset,
+    inset 0 -1px 0 rgba(95, 65, 32, 0.08);
+}
+
+.carousel-track::before,
+.carousel-track::after {
+  position: absolute;
+  content: "";
+  pointer-events: none;
+}
+
+.carousel-track::before {
+  inset: -11px;
+  z-index: -1;
+  border: 1px solid rgba(255, 250, 240, 0.22);
+  border-radius: inherit;
+  background: rgba(255, 250, 240, 0.08);
+  filter: blur(0.2px);
+}
+
+.carousel-track::after {
+  right: 12%;
+  bottom: -24px;
+  left: 12%;
+  z-index: -2;
+  height: 40px;
+  border-radius: 50%;
+  background: radial-gradient(ellipse at center, rgba(5, 18, 10, 0.28), transparent 70%);
+  filter: blur(10px);
+}
+
+.carousel-slide {
+  padding: clamp(2.1rem, 5vw, 3.4rem) clamp(1.25rem, 5vw, 4.2rem);
+}
+
+.carousel-slide.active {
+  animation: review-slide-lift 720ms var(--ease-out) both;
+}
+
+.slide-content {
+  gap: clamp(0.9rem, 2.2vw, 1.35rem);
+}
+
+.slide-rating {
+  gap: 0.12rem;
+  color: var(--gold);
+  filter: drop-shadow(0 6px 10px rgba(185, 139, 67, 0.16));
+}
+
+.red-reviews .slide-comment {
+  max-width: 31rem;
+  color: rgba(33, 51, 68, 0.86);
+  font-family: var(--font-serif), Georgia, serif;
+  font-size: clamp(1.22rem, 2.35vw, 1.82rem);
+  font-weight: 650;
+  line-height: 1.52;
+  text-wrap: pretty;
+}
+
+.slide-author {
+  margin-top: 0.1rem;
+}
+
+.slide-author strong {
+  color: var(--ink);
+  font-size: clamp(1.18rem, 2vw, 1.45rem);
+}
+
+.slide-author span {
+  color: rgba(33, 51, 68, 0.62);
+  font-size: 0.82rem;
+  letter-spacing: 0.02em;
+}
+
+.slide-media {
+  border: 1px solid rgba(255, 250, 240, 0.8);
+}
+
+.carousel-nav-btn {
+  background:
+    linear-gradient(180deg, rgba(255, 250, 240, 0.96), rgba(242, 230, 207, 0.92));
+  border-color: rgba(185, 139, 67, 0.22);
+  color: var(--red);
+  box-shadow:
+    0 14px 30px rgba(10, 30, 18, 0.16),
+    inset 0 1px 0 rgba(255, 255, 255, 0.72);
+}
+
+.indicator-dot {
+  width: 9px;
+  height: 9px;
+  background: rgba(255, 250, 240, 0.42);
+  box-shadow: inset 0 0 0 1px rgba(255, 250, 240, 0.2);
+}
+
+.indicator-dot.active {
+  width: 34px;
+  background: #fffaf0;
+  transform: none;
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.12);
+}
+
+.write-review-trigger-btn {
+  min-height: 54px;
+  margin-top: clamp(1.7rem, 4vw, 2.4rem);
+  border-color: rgba(255, 250, 240, 0.24);
+  background:
+    linear-gradient(180deg, rgba(255, 250, 240, 0.18), rgba(255, 250, 240, 0.08));
+  color: #fffaf0;
+  padding: 0 1.7rem;
+  font-size: clamp(0.9rem, 1.8vw, 1rem);
+  letter-spacing: 0.01em;
+  backdrop-filter: blur(18px) saturate(120%);
+  -webkit-backdrop-filter: blur(18px) saturate(120%);
+  box-shadow:
+    0 18px 42px rgba(4, 18, 10, 0.18),
+    inset 0 1px 0 rgba(255, 255, 255, 0.18);
+}
+
+.write-review-trigger-btn:hover {
+  background: #fffaf0;
+  color: var(--red) !important;
+}
+
+@keyframes review-slide-lift {
+  from {
+    opacity: 0;
+    transform: translate3d(18px, 10px, 0) scale(0.985);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+}
+
+.footer-reimagined {
+  background:
+    radial-gradient(ellipse at 50% 0%, rgba(255, 255, 255, 0.86), transparent 34%),
+    radial-gradient(ellipse at 16% 58%, rgba(185, 139, 67, 0.18), transparent 32%),
+    linear-gradient(180deg, #fffdf8 0%, #f7eddc 46%, #ead7b8 100%);
+}
+
+.footer-reimagined::after {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  content: "";
+  pointer-events: none;
+  background:
+    linear-gradient(90deg, rgba(54, 88, 61, 0.025) 1px, transparent 1px),
+    linear-gradient(180deg, rgba(185, 139, 67, 0.035) 1px, transparent 1px);
+  background-size: 96px 96px;
+  opacity: 0.55;
+}
+
+.footer-skyline-wrapper {
+  z-index: 2;
+  height: clamp(170px, 19vw, 250px);
+  margin-top: 0;
+  border-bottom-color: rgba(33, 51, 68, 0.62);
+  background:
+    linear-gradient(180deg, rgba(255, 253, 248, 0.88), rgba(246, 237, 220, 0.58)),
+    radial-gradient(ellipse at 50% 40%, rgba(255, 248, 222, 0.76), transparent 38%);
+}
+
+.footer-content {
+  z-index: 3;
+  max-width: 1180px;
+  padding-top: clamp(2.4rem, 5vw, 4.2rem);
+}
+
+.footer-grid {
+  position: relative;
+  grid-template-columns: 0.8fr 1.15fr 0.95fr;
+  gap: clamp(1.2rem, 3vw, 2rem);
+  border: 1px solid rgba(185, 139, 67, 0.16);
+  border-radius: clamp(20px, 2.8vw, 30px);
+  background:
+    radial-gradient(ellipse at 18% 0%, rgba(255, 255, 255, 0.7), transparent 34%),
+    linear-gradient(180deg, rgba(255, 250, 240, 0.84), rgba(246, 237, 220, 0.72));
+  padding: clamp(1.25rem, 3vw, 2rem);
+  box-shadow:
+    0 24px 72px rgba(54, 45, 34, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.72);
+  backdrop-filter: blur(14px) saturate(112%);
+  -webkit-backdrop-filter: blur(14px) saturate(112%);
+}
+
+.footer-grid::before {
+  position: absolute;
+  inset: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.46);
+  border-radius: calc(clamp(20px, 2.8vw, 30px) - 7px);
+  content: "";
+  pointer-events: none;
+}
+
+.footer-col {
+  position: relative;
+  z-index: 1;
+}
+
+.footer-col-title {
+  color: rgba(128, 98, 51, 0.92);
+}
+
+.footer-links a {
+  min-height: 38px;
+  border-radius: 999px;
+  color: rgba(33, 51, 68, 0.86);
+  font-weight: 680;
+}
+
+.footer-links a svg {
+  color: var(--gold);
+  filter: drop-shadow(0 6px 10px rgba(185, 139, 67, 0.14));
+}
+
+.info-badge,
+.info-hours {
+  border: 1px solid rgba(185, 139, 67, 0.22);
+  border-radius: 18px;
+  background: rgba(255, 250, 240, 0.68);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.62);
+}
+
+.info-hours {
+  padding: 1rem 1.25rem;
+}
+
+.hours-value {
+  font-size: clamp(1.45rem, 3vw, 2rem);
+  letter-spacing: 0.02em;
+}
+
+@media (max-width: 768px) {
+  .red-reviews {
+    margin-inline: clamp(0.75rem, 4vw, 1.4rem);
+    padding: 3.15rem clamp(0.8rem, 4vw, 1.2rem) 3.5rem;
+    border-radius: 28px;
+  }
+
+  .red-reviews h2 {
+    max-width: 7.6em;
+    font-size: clamp(2.18rem, 9.9vw, 2.86rem);
+    line-height: 1;
+  }
+
+  .carousel-container {
+    margin-top: 2.1rem;
+  }
+
+  .carousel-track {
+    min-height: 352px;
+    border-radius: 22px;
+  }
+
+  .carousel-slide {
+    padding: 2rem 1.25rem;
+  }
+
+  .red-reviews .slide-comment {
+    max-width: 17.6rem;
+    font-size: clamp(1.04rem, 5.25vw, 1.34rem);
+    line-height: 1.5;
+  }
+
+  .footer-skyline-wrapper {
+    height: 42vw;
+    min-height: 172px;
+    max-height: 206px;
+  }
+
+  .footer-content {
+    padding: 1.05rem 4.4vw calc(7.6rem + env(safe-area-inset-bottom));
+  }
+
+  .footer-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    border-radius: 24px;
+    padding: 1rem;
+  }
+
+  .footer-col:nth-child(2) {
+    grid-column: auto;
+    grid-row: auto;
+  }
+
+  .footer-col:nth-child(2) .footer-links {
+    gap: 0.68rem;
+  }
+
+  .footer-links a {
+    min-height: 44px;
+    padding: 0.38rem 0.12rem;
+    font-size: 1rem;
+  }
+
+  .footer-col-info {
+    grid-column: auto;
+    grid-row: auto;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.7rem;
+  }
+
+  .info-badge {
+    width: 100%;
+    padding: 0.86rem 0.95rem;
+  }
+
+  .info-hours {
+    align-items: flex-end;
+    min-height: 72px;
+    padding: 0.86rem 0.95rem;
+  }
+
+  .hours-value {
+    font-size: clamp(1.2rem, 7vw, 1.62rem);
+  }
+}
+
+@media (max-width: 420px) {
+  .red-reviews .slide-comment {
+    max-width: 16.2rem;
+    font-size: 1.02rem;
+  }
+
+  .carousel-track {
+    min-height: 340px;
+  }
+
+  .footer-col-info {
+    grid-template-columns: 1fr;
+  }
+
+  .info-hours {
+    align-items: flex-start;
+    text-align: left;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .carousel-slide.active,
+  .tram-group,
+  .tram-chassis,
+  .tram-wheel,
+  .cloud-fast,
+  .cloud-slow,
+  .seagull-1,
+  .seagull-2 {
+    animation: none !important;
+  }
+}
+
+/* Refined vector Istiklal street scene */
+.footer-skyline-wrapper {
+  background:
+    radial-gradient(ellipse at 50% 42%, rgba(255, 250, 226, 0.9), transparent 34%),
+    linear-gradient(180deg, rgba(255, 253, 248, 0.96), rgba(246, 237, 220, 0.62)),
+    repeating-linear-gradient(90deg, rgba(54, 88, 61, 0.028) 0 1px, transparent 1px 112px);
+}
+
+.footer-skyline-svg {
+  overflow: visible;
+}
+
+.street-sun-glow {
+  animation: street-glow-breathe 7s var(--ease-soft) infinite alternate;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+.distant-window-lights rect,
+.window-light,
+.tram-window {
+  animation: istiklal-window-glow 5.8s ease-in-out infinite;
+}
+
+.distant-window-lights rect:nth-child(2n),
+.building:nth-child(2) .window-light {
+  animation-delay: -2.2s;
+}
+
+.shop-awning,
+.roof-garden,
+.tram-stop,
+.street-lamp-left,
+.street-lamp-right {
+  vector-effect: non-scaling-stroke;
+}
+
+.istiklal-paving {
+  opacity: 0.86;
+  filter:
+    drop-shadow(0 -1px 0 rgba(255, 255, 255, 0.38))
+    drop-shadow(0 8px 8px rgba(60, 42, 26, 0.12));
+}
+
+.street-figures {
+  opacity: 0.72;
+  filter: drop-shadow(0 3px 2px rgba(40, 28, 18, 0.18));
+}
+
+.walker {
+  transform-box: fill-box;
+  transform-origin: center bottom;
+  animation: walker-drift 8s ease-in-out infinite;
+}
+
+.walker-two {
+  animation-duration: 10s;
+  animation-delay: -4s;
+}
+
+.street-planter {
+  filter: drop-shadow(0 3px 2px rgba(40, 28, 18, 0.16));
+}
+
+.overhead-wire {
+  opacity: 0.82;
+  filter: drop-shadow(0 1px 0 rgba(255, 255, 255, 0.24));
+}
+
+.premium-tower {
+  transform-box: fill-box;
+  transform-origin: center bottom;
+  animation: tower-presence 9s var(--ease-soft) infinite alternate;
+}
+
+.refined-tram-stop {
+  transform-box: fill-box;
+  transform-origin: center bottom;
+  animation: sign-soft-pop 4.8s ease-in-out infinite;
+}
+
+.tram-rails {
+  filter:
+    drop-shadow(0 -1px 0 rgba(255, 255, 255, 0.42))
+    drop-shadow(0 2px 2px rgba(35, 29, 24, 0.16));
+}
+
+.tram-group {
+  animation-duration: 21s;
+}
+
+.tram-chassis {
+  animation-duration: 0.58s;
+}
+
+@keyframes street-glow-breathe {
+  from {
+    opacity: 0.54;
+    transform: scale(0.98);
+  }
+  to {
+    opacity: 0.88;
+    transform: scale(1.04);
+  }
+}
+
+@keyframes istiklal-window-glow {
+  0%, 100% {
+    opacity: 0.88;
+    filter: drop-shadow(0 0 0 rgba(246, 215, 135, 0));
+  }
+  48% {
+    opacity: 1;
+    filter: drop-shadow(0 0 5px rgba(246, 215, 135, 0.52));
+  }
+}
+
+@keyframes walker-drift {
+  0%, 100% {
+    transform: translate3d(-2px, 0, 0);
+    opacity: 0.62;
+  }
+  50% {
+    transform: translate3d(8px, -1px, 0);
+    opacity: 0.82;
+  }
+}
+
+@keyframes tower-presence {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-1.4px);
+  }
+}
+
+@keyframes sign-soft-pop {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-1px);
+  }
+}
+
+@media (max-width: 768px) {
+  .street-figures {
+    opacity: 0.54;
+  }
+
+  .footer-skyline-svg {
+    transform: translateX(-12vw) scale(1.03);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .street-sun-glow,
+  .distant-window-lights rect,
+  .walker,
+  .premium-tower,
+  .refined-tram-stop,
+  .window-light,
+  .tram-window {
+    animation: none !important;
+  }
+}

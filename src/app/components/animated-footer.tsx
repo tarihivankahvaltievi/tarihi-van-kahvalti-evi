@@ -114,7 +114,6 @@ const createStoneVein = (block: WallBlock, index: number) => {
 export function AnimatedFooter({ onOpenBooking }: { onOpenBooking: () => void }) {
   const footerRef = useRef<HTMLElement>(null);
   const [dingCount, setDingCount] = useState(0);
-  const [activeWindow, setActiveWindow] = useState<string | null>(null);
 
   const handleTramClick = () => {
     setDingCount((prev) => prev + 1);
@@ -222,7 +221,30 @@ export function AnimatedFooter({ onOpenBooking }: { onOpenBooking: () => void })
             <pattern id="stone-pattern" width="20" height="10" patternUnits="userSpaceOnUse" patternTransform="scale(0.8)">
               <path d="M0,5 H20 M10,0 V5 M0,5 V10" stroke="#8d7d67" strokeWidth="0.5" fill="none" opacity="0.3" />
             </pattern>
+            <linearGradient id="istiklal-sky-wash" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stopColor="#fffdf7" stopOpacity="0.96" />
+              <stop offset="0.55" stopColor="#f7ecdc" stopOpacity="0.58" />
+              <stop offset="1" stopColor="#dbc8a9" stopOpacity="0.34" />
+            </linearGradient>
+            <linearGradient id="street-paving" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stopColor="#efe5d5" />
+              <stop offset="0.54" stopColor="#d5c4ab" />
+              <stop offset="1" stopColor="#a99678" />
+            </linearGradient>
+            <linearGradient id="warm-window" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stopColor="#fff7d4" />
+              <stop offset="0.52" stopColor="#f6d787" />
+              <stop offset="1" stopColor="#d5a54f" />
+            </linearGradient>
+            <radialGradient id="street-glow" cx="50%" cy="48%" r="62%">
+              <stop offset="0" stopColor="#fff4c9" stopOpacity="0.38" />
+              <stop offset="0.5" stopColor="#d6b36e" stopOpacity="0.12" />
+              <stop offset="1" stopColor="#d6b36e" stopOpacity="0" />
+            </radialGradient>
           </defs>
+
+          <rect width="1200" height="240" fill="url(#istiklal-sky-wash)" />
+          <ellipse className="street-sun-glow" cx="610" cy="118" rx="260" ry="92" fill="url(#street-glow)" />
 
           {/* Subtle sky clouds */}
           <g className="clouds" fill="none" stroke="var(--gold-soft, rgba(197, 162, 90, 0.25))" strokeWidth="1.2">
@@ -245,6 +267,15 @@ export function AnimatedFooter({ onOpenBooking }: { onOpenBooking: () => void })
               <path d="M432 220 L432 182 L470 182 L470 170 L520 170 L520 220 Z" />
               <path d="M700 220 L700 174 L750 174 L750 184 L792 184 L792 220 Z" />
               <path d="M806 220 L806 188 L844 188 L844 176 L888 176 L888 220 Z" />
+            </g>
+
+            <g className="distant-window-lights" fill="url(#warm-window)" opacity="0.5">
+              <rect x="372" y="193" width="10" height="6" rx="1.5" />
+              <rect x="398" y="186" width="8" height="6" rx="1.5" />
+              <rect x="466" y="188" width="10" height="6" rx="1.5" />
+              <rect x="720" y="186" width="9" height="6" rx="1.5" />
+              <rect x="838" y="196" width="8" height="6" rx="1.5" />
+              <rect x="868" y="190" width="10" height="6" rx="1.5" />
             </g>
 
             {/* REALISTIC GALATA TOWER */}
@@ -451,6 +482,11 @@ export function AnimatedFooter({ onOpenBooking }: { onOpenBooking: () => void })
                 <rect x="193" y="82" width="24" height="4" />
               </g>
 
+              <g className="shop-awning" stroke="none">
+                <path d="M126 178 H234 L226 191 H134 Z" fill="#d7b58b" />
+                <path d="M134 178 H151 L145 191 H128 Z M169 178 H186 L180 191 H163 Z M204 178 H221 L215 191 H198 Z" fill="#b94b3f" opacity="0.72" />
+              </g>
+
               {/* Large Arched Windows Row 2 */}
               <path d="M 140 145 A 10 10 0 0 1 160 145 V 175 H 140 Z" className="window-light" fill="#fffdf6" />
               <path d="M 195 145 A 10 10 0 0 1 215 145 V 175 H 195 Z" className="window-light" fill="#fffdf6" />
@@ -515,6 +551,12 @@ export function AnimatedFooter({ onOpenBooking }: { onOpenBooking: () => void })
               <path d="M 880 155 L 930 155 L 930 160 L 880 160 Z" fill="#d0bea6" stroke="none" />
               <g stroke="#2a2a2d" strokeWidth="1" fill="none">
                 <path d="M 880 145 H 930 M 880 155 V 145 M 890 155 V 145 M 900 155 V 145 M 910 155 V 145 M 920 155 V 145 M 930 155 V 145" />
+              </g>
+
+              <g className="roof-garden" stroke="none">
+                <rect x="824" y="42" width="132" height="5" rx="2" fill="#9aa77b" opacity="0.7" />
+                <circle cx="848" cy="39" r="5" fill="#758b63" />
+                <circle cx="930" cy="38" r="4.5" fill="#758b63" />
               </g>
             </g>
           </g>
@@ -598,6 +640,31 @@ export function AnimatedFooter({ onOpenBooking }: { onOpenBooking: () => void })
               <rect x="412" y="133" width="36" height="13" rx="2.5" fill="#c1272d" stroke="none" />
               <text x="430" y="143" fontSize="8" fontWeight="900" textAnchor="middle" stroke="none" fill="var(--white, #ffffff)" fontFamily="var(--font-sans)" letterSpacing="0.08em">BARAN</text>
               <path d="M416 150 H444" stroke="#cdbf9d" strokeWidth="1.5" opacity="0.8" />
+            </g>
+
+            {/* Istiklal paving and street life layer */}
+            <g className="istiklal-paving" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M0 214 H1200 V240 H0 Z" fill="url(#street-paving)" stroke="none" />
+              <path d="M0 215 H1200" stroke="#fff7e2" strokeWidth="2" opacity="0.54" />
+              <path d="M0 231 C150 224 260 236 390 229 S640 224 780 230 S1040 236 1200 227" stroke="#7d705d" strokeWidth="1" opacity="0.2" fill="none" />
+              <path d="M25 224H70M112 228H165M208 224H252M306 229H352M410 225H462M518 229H566M622 224H675M730 228H782M842 224H886M948 229H1002M1062 225H1110M1148 229H1194" stroke="#fff9ea" strokeWidth="1.2" opacity="0.38" />
+            </g>
+
+            <g className="street-figures" fill="#2b2a27" stroke="none">
+              <g className="walker walker-one">
+                <circle cx="344" cy="198" r="4" />
+                <path d="M342 202 L340 216 H348 L346 202 Z" />
+                <path d="M341 210 L332 219 M346 210 L355 219" stroke="#2b2a27" strokeWidth="2" strokeLinecap="round" />
+              </g>
+              <g className="walker walker-two" opacity="0.74">
+                <circle cx="932" cy="199" r="3.5" />
+                <path d="M930 203 L928 216 H936 L934 203 Z" />
+                <path d="M929 211 L921 219 M934 211 L942 219" stroke="#2b2a27" strokeWidth="1.8" strokeLinecap="round" />
+              </g>
+              <g className="street-planter">
+                <rect x="1016" y="207" width="38" height="12" rx="4" fill="#8a6b48" />
+                <path d="M1022 207 C1026 198 1032 200 1035 207 C1038 197 1046 198 1049 207" fill="#5f7d57" />
+              </g>
             </g>
 
             {/* Tram Rail Tracks */}
@@ -699,7 +766,12 @@ export function AnimatedFooter({ onOpenBooking }: { onOpenBooking: () => void })
             </g>
 
             {/* Overhead Electrical Cable Wire */}
-            <line x1="0" y1="135" x2="1200" y2="135" stroke="#3a3c3e" strokeWidth="1.0" opacity="0.25" />
+            <g className="overhead-wire">
+              <line x1="0" y1="135" x2="1200" y2="135" stroke="#3a3c3e" strokeWidth="1.0" opacity="0.25" />
+              <path d="M300 135 C350 129 392 129 430 135 M730 135 C780 128 830 128 884 135" fill="none" stroke="#3a3c3e" strokeWidth="0.9" opacity="0.18" />
+              <circle cx="430" cy="135" r="2" fill="#9b7a36" opacity="0.65" stroke="none" />
+              <circle cx="884" cy="135" r="2" fill="#9b7a36" opacity="0.65" stroke="none" />
+            </g>
           </g>
         </svg>
       </div>
