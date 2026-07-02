@@ -228,6 +228,11 @@ export default function ClientPage() {
           </div>
 
           <div id="site-menu" className="nav-menu-panel" aria-hidden={!menuOpen}>
+            <div className="nav-menu-ambient" aria-hidden="true">
+              <span />
+              <span />
+              <span />
+            </div>
             <div className="nav-menu-meta" style={{ "--item-index": 0 } as React.CSSProperties}>
               <span className={`nav-menu-status ${isOpenNow ? "open" : "closed"}`}>
                 <span />
@@ -239,21 +244,25 @@ export default function ClientPage() {
               </span>
             </div>
             <a href="#top" style={{ "--item-index": 1 } as React.CSSProperties} onClick={() => setMenuOpen(false)}>
+              <span className="nav-menu-index">01</span>
               <Home size={18} />
-              Ana sayfa
+              <span className="nav-menu-link-text">Ana sayfa</span>
               <ChevronRight size={17} />
             </a>
             <a href="#story" style={{ "--item-index": 2 } as React.CSSProperties} onClick={() => setMenuOpen(false)}>
-              Hikaye
+              <span className="nav-menu-index">02</span>
+              <span className="nav-menu-link-text">Hikaye</span>
               <ChevronRight size={17} />
             </a>
             <a href="#gallery" style={{ "--item-index": 3 } as React.CSSProperties} onClick={() => setMenuOpen(false)}>
-              Galeri
+              <span className="nav-menu-index">03</span>
+              <span className="nav-menu-link-text">Galeri</span>
               <ChevronRight size={17} />
             </a>
             <a href="#contact" style={{ "--item-index": 4 } as React.CSSProperties} onClick={() => setMenuOpen(false)}>
+              <span className="nav-menu-index">04</span>
               <MapPin size={18} />
-              Konum
+              <span className="nav-menu-link-text">Konum</span>
               <ChevronRight size={17} />
             </a>
             <a
@@ -263,10 +272,17 @@ export default function ClientPage() {
               rel="noopener noreferrer"
               onClick={() => setMenuOpen(false)}
             >
+              <span className="nav-menu-index">05</span>
               <MessageCircle size={18} />
-              WhatsApp
+              <span className="nav-menu-link-text">WhatsApp</span>
               <ChevronRight size={17} />
             </a>
+            <div className="nav-menu-signature" aria-hidden="true" style={{ "--item-index": 6 } as React.CSSProperties}>
+              <span>
+                Tarihi<em>Van</em>
+              </span>
+              <small>Kahvaltıcısı</small>
+            </div>
           </div>
         </header>
 
