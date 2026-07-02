@@ -13351,3 +13351,252 @@ h2 span,
     opacity: 1;
   }
 }
+
+/* Premium liquid navigation refresh */
+.nav {
+  min-height: 74px !important;
+  padding: 0 clamp(0.68rem, 1.4vw, 1rem) !important;
+  border-radius: 18px !important;
+  border-color: rgba(255, 255, 255, 0.62) !important;
+  background:
+    linear-gradient(135deg, rgba(255, 255, 252, 0.84), rgba(244, 232, 205, 0.7) 52%, rgba(255, 248, 235, 0.76)),
+    radial-gradient(circle at 12% 0%, rgba(255, 255, 255, 0.88), transparent 38%) !important;
+  backdrop-filter: blur(28px) saturate(160%) !important;
+  -webkit-backdrop-filter: blur(28px) saturate(160%) !important;
+  box-shadow:
+    0 24px 70px rgba(35, 25, 17, 0.16),
+    0 1px 0 rgba(255, 255, 255, 0.72) inset,
+    0 -1px 0 rgba(89, 66, 38, 0.08) inset !important;
+}
+
+.nav::before {
+  position: absolute;
+  inset: 1px;
+  z-index: -1;
+  border-radius: 17px;
+  background:
+    linear-gradient(115deg, rgba(255, 255, 255, 0.5), transparent 38%),
+    linear-gradient(285deg, rgba(54, 88, 61, 0.08), transparent 42%);
+  content: "";
+  pointer-events: none;
+}
+
+.nav.scrolled {
+  min-height: 64px !important;
+  border-radius: 16px !important;
+  background:
+    linear-gradient(135deg, rgba(255, 255, 252, 0.91), rgba(245, 234, 210, 0.82)),
+    radial-gradient(circle at 8% 0%, rgba(255, 255, 255, 0.86), transparent 34%) !important;
+  box-shadow:
+    0 18px 48px rgba(35, 25, 17, 0.13),
+    0 1px 0 rgba(255, 255, 255, 0.78) inset,
+    0 -1px 0 rgba(89, 66, 38, 0.08) inset !important;
+}
+
+.nav .order-button {
+  display: none !important;
+}
+
+.nav-actions {
+  position: relative;
+  z-index: 64;
+  display: flex;
+  align-items: center;
+  gap: 0.46rem;
+  flex: 0 0 auto;
+}
+
+.nav-location {
+  display: none;
+  min-height: 42px;
+  border-radius: 12px;
+  border: 1px solid rgba(54, 88, 61, 0.12);
+  background: rgba(255, 255, 255, 0.36);
+  color: rgba(42, 42, 45, 0.76);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.52);
+}
+
+.nav-location:hover {
+  border-color: rgba(54, 88, 61, 0.24);
+  background: rgba(255, 255, 255, 0.56);
+  color: #2b5638;
+}
+
+.nav-menu-button {
+  position: relative;
+  display: inline-grid;
+  width: 46px;
+  height: 46px;
+  place-items: center;
+  border: 1px solid rgba(54, 88, 61, 0.16);
+  border-radius: 14px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.62), rgba(255, 247, 231, 0.34)),
+    rgba(255, 255, 255, 0.26);
+  color: #263c2e;
+  box-shadow:
+    0 12px 26px rgba(48, 35, 24, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.72);
+  transition:
+    transform 180ms var(--ease-out),
+    border-color 220ms var(--ease-soft),
+    background 220ms var(--ease-soft),
+    color 220ms var(--ease-soft),
+    box-shadow 220ms var(--ease-soft);
+}
+
+.nav-menu-button:hover,
+.nav.menu-open .nav-menu-button {
+  border-color: rgba(54, 88, 61, 0.28);
+  background:
+    linear-gradient(180deg, rgba(70, 104, 73, 0.96), rgba(36, 63, 43, 0.96));
+  color: var(--white);
+  box-shadow:
+    0 16px 30px rgba(36, 63, 43, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.18);
+}
+
+.nav-menu-button:active {
+  transform: scale(0.96);
+}
+
+.nav-menu-icon {
+  display: grid;
+  place-items: center;
+}
+
+.nav-menu-panel {
+  position: absolute;
+  top: calc(100% + 0.62rem);
+  right: 0;
+  z-index: 60;
+  width: min(340px, calc(100vw - 1.5rem));
+  padding: 0.55rem;
+  border: 1px solid rgba(255, 255, 255, 0.66);
+  border-radius: 18px;
+  background:
+    linear-gradient(150deg, rgba(255, 255, 252, 0.94), rgba(244, 232, 205, 0.86)),
+    radial-gradient(circle at 12% 0%, rgba(255, 255, 255, 0.82), transparent 42%);
+  backdrop-filter: blur(30px) saturate(160%);
+  -webkit-backdrop-filter: blur(30px) saturate(160%);
+  box-shadow:
+    0 26px 70px rgba(35, 25, 17, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.82);
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(-8px) scale(0.98);
+  transform-origin: top right;
+  transition:
+    opacity 210ms var(--ease-soft),
+    transform 260ms var(--ease-soft);
+}
+
+.nav.menu-open .nav-menu-panel {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0) scale(1);
+}
+
+.nav-menu-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-bottom: 0.32rem;
+  padding: 0.32rem 0.42rem 0.52rem;
+  border-bottom: 1px solid rgba(101, 75, 45, 0.1);
+  color: rgba(42, 42, 45, 0.62);
+  font-size: 0.72rem;
+  font-weight: 760;
+}
+
+.nav-menu-status,
+.nav-menu-hours {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.36rem;
+  white-space: nowrap;
+}
+
+.nav-menu-status span {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+  box-shadow: 0 0 0 4px color-mix(in srgb, currentColor 14%, transparent);
+}
+
+.nav-menu-status.open {
+  color: #315d39;
+}
+
+.nav-menu-status.closed {
+  color: var(--red);
+}
+
+.nav-menu-panel a {
+  display: flex;
+  align-items: center;
+  gap: 0.56rem;
+  min-height: 48px;
+  padding: 0 0.72rem;
+  border-radius: 12px;
+  color: rgba(42, 42, 45, 0.82);
+  font-size: 0.95rem;
+  font-weight: 720;
+  transition:
+    background 180ms var(--ease-soft),
+    color 180ms var(--ease-soft),
+    transform 180ms var(--ease-out);
+}
+
+.nav-menu-panel a svg:last-child {
+  margin-left: auto;
+  flex: 0 0 auto;
+  color: rgba(42, 42, 45, 0.38);
+}
+
+.nav-menu-panel a:hover {
+  background: rgba(54, 88, 61, 0.09);
+  color: #243f2b;
+  transform: translateX(2px);
+}
+
+@media (min-width: 860px) {
+  .nav-location {
+    display: inline-flex;
+  }
+}
+
+@media (max-width: 739px) {
+  .nav {
+    width: min(100% - 1rem, 720px) !important;
+    min-height: 66px !important;
+    border-radius: 16px !important;
+  }
+
+  .brand-logo-mark {
+    width: 48px;
+    height: 48px;
+    border-radius: 14px;
+  }
+
+  .nav-menu-button {
+    width: 42px;
+    height: 42px;
+    border-radius: 13px;
+  }
+
+  .nav-menu-panel {
+    right: -0.1rem;
+    width: min(328px, calc(100vw - 1rem));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nav-menu-panel,
+  .nav-menu-button,
+  .nav-menu-panel a {
+    transition: none;
+  }
+}

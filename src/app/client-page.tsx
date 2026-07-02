@@ -3,11 +3,15 @@
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import {
-  ArrowRight,
   Calendar,
   Camera,
+  ChevronRight,
+  Clock,
+  Home,
   MapPin,
+  Menu,
   MessageCircle,
+  X,
 } from "lucide-react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { UiMotion } from "./ui-motion";
@@ -75,6 +79,7 @@ export default function ClientPage() {
 
   const [isOpenNow, setIsOpenNow] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
   const [mobileBarHidden, setMobileBarHidden] = useState(false);
   const lastScrollY = useRef(0);
   const [hoverStyle, setHoverStyle] = useState<React.CSSProperties>({
@@ -130,6 +135,21 @@ export default function ClientPage() {
     return () => clearInterval(interval);
   }, []);
 
+  useEffect(() => {
+    if (!menuOpen) {
+      return;
+    }
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setMenuOpen(false);
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [menuOpen]);
+
   const handleOpenBooking = (itemTitle?: string, category?: string) => {
     setPreselectedItem(itemTitle || "");
     setPreselectedType(category || "Kahvaltı");
@@ -156,8 +176,8 @@ export default function ClientPage() {
     <>
       <UiMotion />
 
-      <main className="site-shell theme-breakfast">
-        <header className={`nav ${scrolled ? "scrolled" : ""}`}>
+      <main id="top" className="site-shell theme-breakfast">
+        <header className={`nav ${scrolled ? "scrolled" : ""} ${menuOpen ? "menu-open" : ""}`}>
           <div className="logo-wrap">
             <div className="logo-emblem brand-logo-mark" aria-hidden="true">
               <Image
@@ -188,13 +208,60 @@ export default function ClientPage() {
             <a href="#contact" onMouseEnter={handleMouseEnter}>Konum</a>
           </nav>
 
-          <button 
-            type="button" 
-            className="order-button" 
-            onClick={() => handleOpenBooking()}
-          >
-            <span className="nav-button-label">Rezervasyon</span> <ArrowRight size={16} />
-          </button>
+          <div className="nav-actions">
+            <a className="nav-location" href={mapsUrl} target="_blank" rel="noopener noreferrer">
+              <MapPin size={16} />
+              <span>Beyoğlu</span>
+            </a>
+            <button
+              type="button"
+              className="nav-menu-button"
+              aria-label={menuOpen ? "Menüyü kapat" : "Menüyü aç"}
+              aria-expanded={menuOpen}
+              aria-controls="site-menu"
+              onClick={() => setMenuOpen((open) => !open)}
+            >
+              <span className="nav-menu-icon" aria-hidden="true">
+                {menuOpen ? <X size={20} /> : <Menu size={20} />}
+              </span>
+            </button>
+          </div>
+
+          <div id="site-menu" className="nav-menu-panel" aria-hidden={!menuOpen}>
+            <div className="nav-menu-meta">
+              <span className={`nav-menu-status ${isOpenNow ? "open" : "closed"}`}>
+                <span />
+                {isOpenNow ? "Bugün açık" : "Şu an kapalı"}
+              </span>
+              <span className="nav-menu-hours">
+                <Clock size={14} />
+                08:00 - 18:00
+              </span>
+            </div>
+            <a href="#top" onClick={() => setMenuOpen(false)}>
+              <Home size={18} />
+              Ana sayfa
+              <ChevronRight size={17} />
+            </a>
+            <a href="#story" onClick={() => setMenuOpen(false)}>
+              Hikaye
+              <ChevronRight size={17} />
+            </a>
+            <a href="#gallery" onClick={() => setMenuOpen(false)}>
+              Galeri
+              <ChevronRight size={17} />
+            </a>
+            <a href="#contact" onClick={() => setMenuOpen(false)}>
+              <MapPin size={18} />
+              Konum
+              <ChevronRight size={17} />
+            </a>
+            <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" onClick={() => setMenuOpen(false)}>
+              <MessageCircle size={18} />
+              WhatsApp
+              <ChevronRight size={17} />
+            </a>
+          </div>
         </header>
 
         <VanHeroParallax />
