@@ -9,9 +9,7 @@ import {
   Clock,
   Home,
   MapPin,
-  Menu,
   MessageCircle,
-  X,
 } from "lucide-react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { UiMotion } from "./ui-motion";
@@ -221,14 +219,16 @@ export default function ClientPage() {
               aria-controls="site-menu"
               onClick={() => setMenuOpen((open) => !open)}
             >
-              <span className="nav-menu-icon" aria-hidden="true">
-                {menuOpen ? <X size={20} /> : <Menu size={20} />}
+              <span className="nav-menu-glyph" aria-hidden="true">
+                <span />
+                <span />
+                <span />
               </span>
             </button>
           </div>
 
           <div id="site-menu" className="nav-menu-panel" aria-hidden={!menuOpen}>
-            <div className="nav-menu-meta">
+            <div className="nav-menu-meta" style={{ "--item-index": 0 } as React.CSSProperties}>
               <span className={`nav-menu-status ${isOpenNow ? "open" : "closed"}`}>
                 <span />
                 {isOpenNow ? "Bugün açık" : "Şu an kapalı"}
@@ -238,25 +238,31 @@ export default function ClientPage() {
                 08:00 - 18:00
               </span>
             </div>
-            <a href="#top" onClick={() => setMenuOpen(false)}>
+            <a href="#top" style={{ "--item-index": 1 } as React.CSSProperties} onClick={() => setMenuOpen(false)}>
               <Home size={18} />
               Ana sayfa
               <ChevronRight size={17} />
             </a>
-            <a href="#story" onClick={() => setMenuOpen(false)}>
+            <a href="#story" style={{ "--item-index": 2 } as React.CSSProperties} onClick={() => setMenuOpen(false)}>
               Hikaye
               <ChevronRight size={17} />
             </a>
-            <a href="#gallery" onClick={() => setMenuOpen(false)}>
+            <a href="#gallery" style={{ "--item-index": 3 } as React.CSSProperties} onClick={() => setMenuOpen(false)}>
               Galeri
               <ChevronRight size={17} />
             </a>
-            <a href="#contact" onClick={() => setMenuOpen(false)}>
+            <a href="#contact" style={{ "--item-index": 4 } as React.CSSProperties} onClick={() => setMenuOpen(false)}>
               <MapPin size={18} />
               Konum
               <ChevronRight size={17} />
             </a>
-            <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" onClick={() => setMenuOpen(false)}>
+            <a
+              href={whatsappUrl}
+              style={{ "--item-index": 5 } as React.CSSProperties}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => setMenuOpen(false)}
+            >
               <MessageCircle size={18} />
               WhatsApp
               <ChevronRight size={17} />
