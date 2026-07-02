@@ -15478,3 +15478,80 @@ h2 span,
     transition-duration: 1ms !important;
   }
 }
+
+/* Mobile performance pass */
+.nav-menu-panel {
+  background:
+    linear-gradient(180deg, rgba(21, 54, 35, 0.98), rgba(9, 31, 19, 0.995)) !important;
+}
+
+.nav.menu-open .nav-menu-panel {
+  background:
+    linear-gradient(180deg, rgba(21, 54, 35, 0.98), rgba(9, 31, 19, 0.995)),
+    url("/images/balcony-breakfast.jpg") center 58% / cover !important;
+}
+
+.red-story,
+.red-reviews,
+.gallery-section,
+.footer-reimagined {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 900px;
+}
+
+@media (max-width: 680px) {
+  .nav {
+    backdrop-filter: blur(12px) saturate(120%) !important;
+    -webkit-backdrop-filter: blur(12px) saturate(120%) !important;
+  }
+
+  .nav-menu-ambient span,
+  .hero-parallax-food-stage .hero-float-item,
+  .street-sun-glow,
+  .clouds,
+  .seagulls,
+  .window-light,
+  .tram-window,
+  .nav-status-dot,
+  .nav-menu-status span {
+    animation-duration: 20s !important;
+    animation-iteration-count: 1 !important;
+  }
+
+  .hero-parallax-gallery,
+  .hero-parallax-row,
+  .hero-parallax-card,
+  .hero-parallax-food-stage {
+    will-change: auto !important;
+  }
+
+  .hero-parallax-card,
+  .stagger-testimonial-card,
+  .nav-menu-panel a {
+    box-shadow: 0 10px 22px rgba(20, 18, 14, 0.12) !important;
+  }
+
+  .hero-parallax-food-stage .hero-float-item {
+    filter: drop-shadow(0 8px 12px rgba(72, 44, 24, 0.12)) !important;
+  }
+
+  .hero-parallax-food-stage .hero-float-item::after,
+  .hero-parallax-food-stage::before,
+  .hero-copy-ambient-glow {
+    display: none !important;
+  }
+
+  .footer-skyline-wrapper,
+  .footer-drawn-wall {
+    opacity: 0.74;
+  }
+}
+
+@media (max-width: 420px) {
+  .red-story,
+  .red-reviews,
+  .gallery-section,
+  .footer-reimagined {
+    contain-intrinsic-size: auto 760px;
+  }
+}

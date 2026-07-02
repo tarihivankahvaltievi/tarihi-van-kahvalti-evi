@@ -4,6 +4,8 @@ import { useEffect } from "react";
 
 export function UiMotion() {
   useEffect(() => {
+    let observeFrame = 0;
+
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -17,13 +19,25 @@ export function UiMotion() {
     );
 
     const observeItems = () => {
+      if (observeFrame) {
+        return;
+      }
+
+      observeFrame = window.requestAnimationFrame(() => {
+        observeFrame = 0;
+        const items = document.querySelectorAll("[data-reveal]:not(.is-visible)");
+        items.forEach((item) => observer.observe(item));
+      });
+    };
+
+    const observeInitialItems = () => {
       const items = document.querySelectorAll("[data-reveal]:not(.is-visible)");
       items.forEach((item) => observer.observe(item));
     };
 
-    observeItems();
+    observeInitialItems();
 
-    // Watch for DOM changes to observe newly rendered items (like filtered menu cards)
+    // Watch for newly rendered reveal items without rescanning on every tiny DOM mutation.
     const mutationObserver = new MutationObserver(() => {
       observeItems();
     });
@@ -34,6 +48,9 @@ export function UiMotion() {
     });
 
     return () => {
+      if (observeFrame) {
+        window.cancelAnimationFrame(observeFrame);
+      }
       observer.disconnect();
       mutationObserver.disconnect();
     };

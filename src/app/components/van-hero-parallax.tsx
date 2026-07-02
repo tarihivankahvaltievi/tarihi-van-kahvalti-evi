@@ -154,17 +154,11 @@ const mobileFloatingFoodClassNames = new Set([
   "hero-float-item hero-float-tea",
   "hero-float-item hero-float-simit",
   "hero-float-item hero-float-omelette",
-  "hero-float-item hero-float-cheese-platter",
-  "hero-float-item hero-float-greens-platter",
-  "hero-float-item hero-float-black-olives",
-  "hero-float-item hero-float-apricot-jam",
   "hero-float-item hero-float-tomato",
 ]);
 
 const eagerFloatingFoodClassNames = new Set([
-  "hero-float-item hero-float-pan",
   "hero-float-item hero-float-tea",
-  "hero-float-item hero-float-cheese-platter",
 ]);
 
 const subscribeToMobileViewport = (callback: () => void) => {
@@ -337,10 +331,21 @@ export function VanHeroParallax() {
           }}
           aria-hidden="true"
         >
-          <HeroImageRow images={firstRow} translate={translateX} reverse enableHover={!isMobile} />
-          <HeroImageRow images={secondRow} translate={translateXReverse} enableHover={!isMobile} />
+          <HeroImageRow
+            images={firstRow}
+            translate={translateX}
+            reverse
+            enableHover={!isMobile}
+            priorityCount={isMobile ? 1 : 2}
+          />
+          <HeroImageRow
+            images={secondRow}
+            translate={translateXReverse}
+            enableHover={!isMobile}
+            priorityCount={0}
+          />
           {!isMobile && (
-            <HeroImageRow images={thirdRow} translate={translateX} reverse enableHover />
+            <HeroImageRow images={thirdRow} translate={translateX} reverse enableHover priorityCount={0} />
           )}
         </motion.div>
 
@@ -369,7 +374,7 @@ export function VanHeroParallax() {
                   src={item.src}
                   alt={item.alt}
                   fill
-                  sizes="(max-width: 680px) 52vw, (max-width: 1080px) 34vw, 360px"
+                  sizes="(max-width: 680px) 28vw, (max-width: 1080px) 34vw, 360px"
                   priority={isEager}
                   loading={isEager ? "eager" : "lazy"}
                 />
@@ -387,11 +392,13 @@ function HeroImageRow({
   translate,
   reverse = false,
   enableHover = true,
+  priorityCount = 0,
 }: {
   images: HeroImage[];
   translate: MotionValue<number>;
   reverse?: boolean;
   enableHover?: boolean;
+  priorityCount?: number;
 }) {
   return (
     <div className={`hero-parallax-row ${reverse ? "is-reverse" : ""}`}>
@@ -407,9 +414,9 @@ function HeroImageRow({
             src={image.thumbnail}
             alt=""
             fill
-            sizes="(max-width: 680px) 64vw, (max-width: 1080px) 42vw, 30rem"
-            priority={index < 3}
-            loading={index < 3 ? "eager" : "lazy"}
+            sizes="(max-width: 680px) 40vw, (max-width: 1080px) 42vw, 30rem"
+            priority={index < priorityCount}
+            loading={index < priorityCount ? "eager" : "lazy"}
             style={{ objectPosition: image.position ?? "center" }}
           />
         </motion.figure>

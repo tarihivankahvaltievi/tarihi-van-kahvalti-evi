@@ -1097,7 +1097,7 @@ export function AnimatedFooter({ onOpenBooking }: { onOpenBooking: () => void })
         <div className="footer-top-section">
           <div className="footer-brand-lockup">
             <a className="footer-brand-logo" href="#top" aria-label="Başa Dön">
-              <Image src="/images/brand-icon.svg" alt="Tarihi Van Kahvaltıcısı" width={76} height={95} priority />
+              <Image src="/images/brand-icon-small.png" alt="Tarihi Van Kahvaltıcısı" width={76} height={95} loading="lazy" />
             </a>
             <h2 className="footer-manifesto">
               Van kahvaltısı, <br />

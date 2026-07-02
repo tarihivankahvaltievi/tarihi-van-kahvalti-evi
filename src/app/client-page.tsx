@@ -179,7 +179,7 @@ export default function ClientPage() {
           <div className="logo-wrap">
             <div className="logo-emblem brand-logo-mark" aria-hidden="true">
               <Image
-                src="/images/brand-icon.svg"
+                src="/images/brand-icon-small.png"
                 alt=""
                 width={54}
                 height={68}

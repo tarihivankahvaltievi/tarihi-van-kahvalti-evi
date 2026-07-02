@@ -199,7 +199,7 @@ export function ReviewCarousel() {
             const centerIndex = Math.floor(reviews.length / 2);
             const position = index - centerIndex;
             const isCenter = position === 0;
-            const previewImage = rev.image || rev.thumbs?.[0] || "/images/brand-icon.svg";
+            const previewImage = rev.image || rev.thumbs?.[0] || "/images/brand-icon-small.png";
 
             return (
               <article
