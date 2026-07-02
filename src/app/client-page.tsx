@@ -233,6 +233,12 @@ export default function ClientPage() {
               <span />
               <span />
             </div>
+            <div className="nav-menu-art" aria-hidden="true">
+              <span className="nav-menu-art-mark">Van</span>
+              <span className="nav-menu-art-line" />
+              <span className="nav-menu-art-steam" />
+              <span className="nav-menu-art-steam" />
+            </div>
             <div className="nav-menu-meta" style={{ "--item-index": 0 } as React.CSSProperties}>
               <span className={`nav-menu-status ${isOpenNow ? "open" : "closed"}`}>
                 <span />
