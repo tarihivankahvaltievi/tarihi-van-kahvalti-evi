@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
-import { ChevronLeft, ChevronRight, PenTool, Star, X } from "lucide-react";
+import { PenTool, Quote, Star, X } from "lucide-react";
 
 interface Review {
   id: number;
@@ -59,6 +59,13 @@ export function ReviewCarousel() {
   const [hoverRating, setHoverRating] = useState<number | null>(null);
   const [newComment, setNewComment] = useState("");
   const [toastMessage, setToastMessage] = useState<string | null>(null);
+
+  const getRelativeIndex = (idx: number) => {
+    const forward = (idx - activeIndex + reviews.length) % reviews.length;
+    if (forward === 0) return 0;
+    if (forward <= Math.floor(reviews.length / 2)) return forward;
+    return forward - reviews.length;
+  };
 
   // Auto-play interval
   useEffect(() => {
@@ -125,14 +132,6 @@ export function ReviewCarousel() {
     };
   }, []);
 
-  const handlePrev = () => {
-    setActiveIndex((prev) => (prev - 1 + reviews.length) % reviews.length);
-  };
-
-  const handleNext = () => {
-    setActiveIndex((prev) => (prev + 1) % reviews.length);
-  };
-
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!newName.trim() || !newComment.trim()) return;
@@ -162,23 +161,33 @@ export function ReviewCarousel() {
   return (
     <>
       <div className="carousel-container" data-reveal>
-        <button 
-          type="button" 
-          className="carousel-nav-btn prev" 
-          onClick={handlePrev}
-          aria-label="Önceki yorum"
-        >
-          <ChevronLeft size={24} />
-        </button>
+        <div className="carousel-track" aria-label="Misafir yorumları">
+          {reviews.map((rev, idx) => {
+            const relativeIndex = getRelativeIndex(idx);
+            const visible = Math.abs(relativeIndex) <= 2;
 
-        <div className="carousel-track">
-          {reviews.map((rev, idx) => (
+            return (
             <article 
               key={rev.id} 
-              className={`carousel-slide ${idx === activeIndex ? "active" : ""}`}
-              aria-hidden={idx !== activeIndex}
+              className={`carousel-slide ${idx === activeIndex ? "active" : ""} ${visible ? "is-visible" : ""}`}
+              data-offset={relativeIndex}
+              aria-hidden={!visible}
+              role="button"
+              tabIndex={visible ? 0 : -1}
+              aria-label={`${rev.name} yorumunu göster`}
+              onClick={() => setActiveIndex(idx)}
+              onKeyDown={(event) => {
+                if (event.key === "Enter" || event.key === " ") {
+                  event.preventDefault();
+                  setActiveIndex(idx);
+                }
+              }}
+              style={{ "--stagger-index": Math.abs(relativeIndex) } as React.CSSProperties}
             >
               <div className="slide-content">
+                <span className="slide-quote-mark" aria-hidden="true">
+                  <Quote size={18} />
+                </span>
                 <div className="slide-rating">
                   {Array.from({ length: rev.rating }).map((_, i) => (
                     <Star key={i} size={16} fill="var(--gold)" color="var(--gold)" />
@@ -212,17 +221,9 @@ export function ReviewCarousel() {
                 )}
               </div>
             </article>
-          ))}
+            );
+          })}
         </div>
-
-        <button 
-          type="button" 
-          className="carousel-nav-btn next" 
-          onClick={handleNext}
-          aria-label="Sonraki yorum"
-        >
-          <ChevronRight size={24} />
-        </button>
 
         <div className="carousel-indicators">
           {reviews.map((_, idx) => (
