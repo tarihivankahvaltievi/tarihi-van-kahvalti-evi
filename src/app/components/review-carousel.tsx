@@ -52,6 +52,7 @@ const initialReviews: Review[] = [
 export function ReviewCarousel() {
   const [reviews, setReviews] = useState<Review[]>(initialReviews);
   const [cardSize, setCardSize] = useState(365);
+  const [moveCount, setMoveCount] = useState(0);
   const [isWriteOpen, setIsWriteOpen] = useState(false);
   const writeDialogRef = useRef<HTMLDialogElement>(null);
   
@@ -80,6 +81,8 @@ export function ReviewCarousel() {
   }, []);
 
   const handleMove = (steps: number) => {
+    if (steps === 0) return;
+
     setReviews((currentReviews) => {
       const nextReviews = [...currentReviews];
 
@@ -99,6 +102,7 @@ export function ReviewCarousel() {
 
       return nextReviews;
     });
+    setMoveCount((count) => count + 1);
   };
 
   // Sync state with native dialog
@@ -188,6 +192,7 @@ export function ReviewCarousel() {
         <div
           className="stagger-testimonials-stage"
           aria-label="Misafir yorumları"
+          data-move-count={moveCount}
           style={{ "--card-size": `${cardSize}px` } as React.CSSProperties}
         >
           {reviews.map((rev, index) => {
@@ -198,8 +203,9 @@ export function ReviewCarousel() {
 
             return (
               <article
-                key={`${rev.id}-${index}`}
+                key={rev.id}
                 className={`stagger-testimonial-card ${isCenter ? "is-center" : ""}`}
+                data-review-id={rev.id}
                 style={
                   {
                     "--position": position,
