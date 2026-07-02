@@ -49,7 +49,6 @@ const initialReviews: Review[] = [
 
 export function ReviewCarousel() {
   const [reviews, setReviews] = useState<Review[]>(initialReviews);
-  const [activeIndex, setActiveIndex] = useState(0);
   const [isWriteOpen, setIsWriteOpen] = useState(false);
   const writeDialogRef = useRef<HTMLDialogElement>(null);
   
@@ -59,22 +58,6 @@ export function ReviewCarousel() {
   const [hoverRating, setHoverRating] = useState<number | null>(null);
   const [newComment, setNewComment] = useState("");
   const [toastMessage, setToastMessage] = useState<string | null>(null);
-
-  const getRelativeIndex = (idx: number) => {
-    const forward = (idx - activeIndex + reviews.length) % reviews.length;
-    if (forward === 0) return 0;
-    if (forward <= Math.floor(reviews.length / 2)) return forward;
-    return forward - reviews.length;
-  };
-
-  // Auto-play interval
-  useEffect(() => {
-    if (isWriteOpen) return;
-    const interval = setInterval(() => {
-      setActiveIndex((prev) => (prev + 1) % reviews.length);
-    }, 6000);
-    return () => clearInterval(interval);
-  }, [reviews.length, isWriteOpen]);
 
   // Sync state with native dialog
   useEffect(() => {
@@ -145,7 +128,6 @@ export function ReviewCarousel() {
     };
 
     setReviews([newReview, ...reviews]);
-    setActiveIndex(0);
     setIsWriteOpen(false);
     
     // Clear inputs
@@ -160,80 +142,55 @@ export function ReviewCarousel() {
 
   return (
     <>
-      <div className="carousel-container" data-reveal>
-        <div className="carousel-track" aria-label="Misafir yorumları">
-          {reviews.map((rev, idx) => {
-            const relativeIndex = getRelativeIndex(idx);
-            const visible = Math.abs(relativeIndex) <= 2;
-
-            return (
-            <article 
-              key={rev.id} 
-              className={`carousel-slide ${idx === activeIndex ? "active" : ""} ${visible ? "is-visible" : ""}`}
-              data-offset={relativeIndex}
-              aria-hidden={!visible}
-              role="button"
-              tabIndex={visible ? 0 : -1}
-              aria-label={`${rev.name} yorumunu göster`}
-              onClick={() => setActiveIndex(idx)}
-              onKeyDown={(event) => {
-                if (event.key === "Enter" || event.key === " ") {
-                  event.preventDefault();
-                  setActiveIndex(idx);
-                }
-              }}
-              style={{ "--stagger-index": Math.abs(relativeIndex) } as React.CSSProperties}
-            >
-              <div className="slide-content">
-                <span className="slide-quote-mark" aria-hidden="true">
-                  <Quote size={18} />
-                </span>
-                <div className="slide-rating">
-                  {Array.from({ length: rev.rating }).map((_, i) => (
-                    <Star key={i} size={16} fill="var(--gold)" color="var(--gold)" />
-                  ))}
-                  {Array.from({ length: 5 - rev.rating }).map((_, i) => (
-                    <Star key={i} size={16} color="var(--line)" />
-                  ))}
-                </div>
-                
-                <p className="slide-comment">“{rev.comment}”</p>
-                
-                <div className="slide-author">
-                  <strong>{rev.name}</strong>
-                  <span>{rev.source}</span>
-                </div>
-
-                {rev.image && (
-                  <div className="slide-media single">
-                    <Image src={rev.image} alt={rev.name} fill sizes="100px" loading="lazy" />
-                  </div>
-                )}
-
-                {rev.thumbs && (
-                  <div className="slide-media thumbs">
-                    {rev.thumbs.map((t, index) => (
-                      <div className="thumb-item" key={index}>
-                        <Image src={t} alt="Mekan" fill sizes="60px" loading="lazy" />
-                      </div>
-                    ))}
-                  </div>
-                )}
-              </div>
-            </article>
-            );
-          })}
+      <div className="testimonials-stagger" data-reveal>
+        <div className="testimonial-copy">
+          <span>Misafir Notları</span>
+          <p>
+            Kısa cümleler, gerçek masalar, uzun kalan çay kokusu. Yorumlar
+            gösterişli bir vitrin değil; sofradan kalkarken söylenenler.
+          </p>
         </div>
 
-        <div className="carousel-indicators">
-          {reviews.map((_, idx) => (
-            <button
-              key={idx}
-              type="button"
-              className={`indicator-dot ${idx === activeIndex ? "active" : ""}`}
-              onClick={() => setActiveIndex(idx)}
-              aria-label={`${idx + 1}. yoruma git`}
-            />
+        <div className="testimonial-stagger-grid" aria-label="Misafir yorumları">
+          {reviews.map((rev, idx) => (
+            <article
+              key={rev.id}
+              className={`testimonial-card testimonial-card-${idx + 1}`}
+              style={{ "--stagger-index": idx } as React.CSSProperties}
+            >
+              <div className="testimonial-card-top">
+                <span className="testimonial-quote-mark" aria-hidden="true">
+                  <Quote size={16} />
+                </span>
+                <div className="testimonial-rating" aria-label={`${rev.rating} yıldız`}>
+                  {Array.from({ length: rev.rating }).map((_, i) => (
+                    <Star key={i} size={14} fill="currentColor" />
+                  ))}
+                </div>
+              </div>
+
+              <p>“{rev.comment}”</p>
+
+              <div className="testimonial-author">
+                <strong>{rev.name}</strong>
+                <span>{rev.source}</span>
+              </div>
+
+              {(rev.image || rev.thumbs) && (
+                <div className="testimonial-media">
+                  {rev.image && (
+                    <div className="testimonial-thumb">
+                      <Image src={rev.image} alt={rev.name} fill sizes="84px" loading="lazy" />
+                    </div>
+                  )}
+                  {rev.thumbs?.slice(0, 3).map((thumb, index) => (
+                    <div className="testimonial-thumb" key={thumb}>
+                      <Image src={thumb} alt={`Mekan detayı ${index + 1}`} fill sizes="84px" loading="lazy" />
+                    </div>
+                  ))}
+                </div>
+              )}
+            </article>
           ))}
         </div>
 
