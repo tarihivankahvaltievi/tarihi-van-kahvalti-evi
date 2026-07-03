@@ -12,11 +12,13 @@ import {
   MessageCircle,
 } from "lucide-react";
 import { UiMotion } from "./ui-motion";
-import { GalleryLightbox } from "./components/gallery-lightbox";
-import { BookingModal } from "./components/booking-modal";
-import { ReviewCarousel } from "./components/review-carousel";
-import { AnimatedFooter } from "./components/animated-footer";
+import dynamic from "next/dynamic";
 import { VanHeroParallax } from "./components/van-hero-parallax";
+
+const BookingModal = dynamic(() => import("./components/booking-modal").then(mod => mod.BookingModal), { ssr: false });
+const GalleryLightbox = dynamic(() => import("./components/gallery-lightbox").then(mod => mod.GalleryLightbox), { ssr: false });
+const ReviewCarousel = dynamic(() => import("./components/review-carousel").then(mod => mod.ReviewCarousel), { ssr: true });
+const AnimatedFooter = dynamic(() => import("./components/animated-footer").then(mod => mod.AnimatedFooter), { ssr: false });
 
 const mapsUrl =
   "https://www.google.com/maps/search/?api=1&query=Tarihi%20Van%20Kahvalt%C4%B1%20Evi%20Zambak%20Sk.%20No%3A8%20Beyo%C4%9Flu";
@@ -146,11 +148,12 @@ export default function ClientPage() {
             <div className="logo-emblem brand-logo-mark" aria-hidden="true">
               <Image
                 src="/images/brand-icon-small.png"
-                alt=""
+                alt="Tarihi Van Kahvaltı Evi"
                 width={54}
                 height={68}
                 className="brand-logo-image"
                 priority
+                fetchPriority="high"
               />
             </div>
             <a className="logo" href="#top" aria-label="Tarihi Van Kahvaltıcısı">
@@ -268,7 +271,7 @@ export default function ClientPage() {
         <VanHeroParallax />
 
         <div className="story-band">
-          <section id="story" className="red-story" data-reveal>
+          <article id="story" className="red-story" data-reveal>
             <div className="story-content">
               <div className="story-copy">
                 <div className="light-pill story-pill">Hakkımızda</div>
@@ -292,7 +295,7 @@ export default function ClientPage() {
                 </div>
               </div>
               <div className="story-archive" data-reveal>
-                <div className="story-arch">
+                <figure className="story-arch" style={{ margin: 0 }}>
                   <Image
                     src="/images/interior-chair.jpg"
                     alt="Tarihi Rum binasının taş ve ahşap iç mekan dokusu"
@@ -300,7 +303,8 @@ export default function ClientPage() {
                     sizes="(max-width: 900px) 88vw, 420px"
                     loading="lazy"
                   />
-                </div>
+                  <figcaption className="sr-only">Tarihi Rum binasının taş ve ahşap iç mekan dokusu</figcaption>
+                </figure>
                 <div className="story-memory-list" aria-label="Tarihi Van Kahvaltıcısı kısa hikaye">
                   <div>
                     <span>1978</span>
@@ -327,7 +331,7 @@ export default function ClientPage() {
                 <span>Derece tarihi eser</span>
               </div>
             </div>
-            <div className="story-plate" data-reveal>
+            <figure className="story-plate" data-reveal style={{ margin: 0 }}>
               <Image
                 src="/images/breakfast-spread.jpg"
                 alt="Geniş Van kahvaltısı"
@@ -335,8 +339,9 @@ export default function ClientPage() {
                 sizes="(max-width: 900px) 92vw, 760px"
                 loading="lazy"
               />
-            </div>
-          </section>
+              <figcaption className="sr-only">Geniş Van kahvaltısı sunumu</figcaption>
+            </figure>
+          </article>
         </div>
 
         <section className="red-reviews" data-reveal>

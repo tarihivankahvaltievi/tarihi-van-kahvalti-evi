@@ -319,11 +319,14 @@ export function VanHeroParallax() {
             }}
           >
             <h1>
-              Çay&nbsp;taze,
-              <br />
-              sofra
-              <br />
-              sıcak.
+              <span className="sr-only">Tarihi Van Kahvaltı Evi — Taksim Beyoğlu Serpme Van Kahvaltısı</span>
+              <span aria-hidden="true">
+                Çay&nbsp;taze,
+                <br />
+                sofra
+                <br />
+                sıcak.
+              </span>
             </h1>
             <p>
               Otlu peynir, kavut, murtuğa ve bakır sahanlar. Van kahvaltısı
@@ -387,7 +390,7 @@ export function VanHeroParallax() {
                   fill
                   sizes="(max-width: 680px) 30vw, (max-width: 1080px) 26vw, 320px"
                   preload={shouldPreload}
-                  loading="eager"
+                  loading={shouldPreload ? "eager" : "lazy"}
                   fetchPriority={shouldPreload ? "high" : "auto"}
                   quality={82}
                 />

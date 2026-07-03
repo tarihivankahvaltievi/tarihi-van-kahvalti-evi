@@ -1,0 +1,49 @@
+# Tarihi Van Kahvaltı Evi — robots.txt
+# https://tarihivankahvaltievi.com
+
+# ─── Büyük Arama Motorları ───
+User-agent: Googlebot
+Allow: /
+Disallow: /_next/static/
+Disallow: /api/
+
+User-agent: Bingbot
+Allow: /
+Disallow: /_next/static/
+Disallow: /api/
+
+User-agent: Yandex
+Allow: /
+Disallow: /_next/static/
+Disallow: /api/
+
+# ─── AI Arama Botları (GEO — Generative Engine Optimization) ───
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Anthropic-ai
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Bytespider
+Allow: /
+
+# ─── Diğer Tüm Botlar ───
+User-agent: *
+Allow: /
+Disallow: /_next/static/
+Disallow: /api/
+
+# Sitemap
+Sitemap: https://tarihivankahvaltievi.com/sitemap.xml

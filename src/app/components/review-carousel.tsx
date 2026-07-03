@@ -218,25 +218,29 @@ export function ReviewCarousel() {
                 onClick={() => handleMove(position)}
                 aria-current={isCenter ? "true" : undefined}
               >
-                <span className="stagger-card-corner" aria-hidden="true" />
-                <div className="stagger-card-image">
-                  <Image
-                    src={previewImage}
-                    alt={rev.name}
-                    fill
-                    sizes="64px"
-                    loading="lazy"
-                  />
-                </div>
-                <div className="stagger-card-stars" aria-label={`${rev.rating} yıldız`}>
-                  {Array.from({ length: rev.rating }).map((_, i) => (
-                    <Star key={i} size={15} fill="currentColor" />
-                  ))}
-                </div>
-                <p className="stagger-card-quote">“{rev.comment}”</p>
-                <p className="stagger-card-author">
-                  - {rev.name}, {rev.source}
-                </p>
+                <figure style={{ margin: 0, height: "100%", display: "flex", flexDirection: "column" }}>
+                  <span className="stagger-card-corner" aria-hidden="true" />
+                  <div className="stagger-card-image">
+                    <Image
+                      src={previewImage}
+                      alt={rev.name}
+                      fill
+                      sizes="64px"
+                      loading="lazy"
+                    />
+                  </div>
+                  <div className="stagger-card-stars" aria-label={`${rev.rating} yıldız`}>
+                    {Array.from({ length: rev.rating }).map((_, i) => (
+                      <Star key={i} size={15} fill="currentColor" />
+                    ))}
+                  </div>
+                  <blockquote className="stagger-card-quote" style={{ margin: 0, flexGrow: 1 }}>
+                    <p>“{rev.comment}”</p>
+                  </blockquote>
+                  <figcaption className="stagger-card-author">
+                    - {rev.name}, <cite>{rev.source}</cite>
+                  </figcaption>
+                </figure>
               </article>
             );
           })}

@@ -17722,3 +17722,11 @@ h2 span,
     opacity: 1 !important;
   }
 }
+
+/* Performance Optimization - CSS Containment */
+.red-reviews,
+.gallery-section,
+.footer-content {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 600px;
+}

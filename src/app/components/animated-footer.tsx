@@ -1149,6 +1149,9 @@ export function AnimatedFooter({ onOpenBooking }: { onOpenBooking: () => void })
                 </a>
               </li>
             </ul>
+            <address className="footer-address-semantic" style={{ fontStyle: "normal", display: "contents" }}>
+              <span className="sr-only">Zambak Sokak No:8, 34421 Beyoğlu, İstanbul, Türkiye</span>
+            </address>
           </div>
 
           <div className="footer-col footer-col-info">
@@ -1174,8 +1177,8 @@ export function AnimatedFooter({ onOpenBooking }: { onOpenBooking: () => void })
             © 2026 Tarihi Van Kahvaltısı. Tüm hakları saklıdır.
           </div>
           <div className="footer-legal-links">
-            <a href="#">Gizlilik Politikası</a>
-            <a href="#">Çerez Politikası</a>
+            <span aria-hidden="true">Gizlilik Politikası</span>
+            <span aria-hidden="true">Çerez Politikası</span>
           </div>
         </div>
       </div>
