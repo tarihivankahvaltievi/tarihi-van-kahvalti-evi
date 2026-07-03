@@ -17208,6 +17208,132 @@ h2 span,
   }
 }
 
+/* Mobile proportion correction: premium without oversized type or heavy empty space. */
+@media (max-width: 680px) {
+  .nav-menu-panel {
+    top: 78px !important;
+    left: 0.72rem !important;
+    right: 0.72rem !important;
+    min-height: auto !important;
+    max-height: calc(100dvh - 168px) !important;
+    gap: 0.5rem !important;
+    padding: 0.74rem !important;
+    border-radius: 22px !important;
+  }
+
+  .nav.scrolled .nav-menu-panel {
+    top: 68px !important;
+  }
+
+  .nav-menu-panel a {
+    min-height: 68px !important;
+    grid-template-columns: 2.38rem 1.58rem minmax(0, 1fr) 1rem !important;
+    gap: 0.48rem !important;
+    padding: 0.48rem 0.56rem !important;
+    border-radius: 16px !important;
+  }
+
+  .nav-menu-index {
+    width: 2.28rem !important;
+    height: 2.28rem !important;
+    font-size: 0.66rem !important;
+    box-shadow:
+      0 10px 22px rgba(0, 0, 0, 0.16),
+      inset 0 0 0 1px rgba(255, 249, 233, 0.06) !important;
+  }
+
+  .nav-menu-panel a svg:not(:last-child) {
+    width: 1.28rem !important;
+    height: 1.28rem !important;
+    filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.18)) !important;
+  }
+
+  .nav-menu-panel a svg:last-child {
+    width: 1.05rem !important;
+    height: 1.05rem !important;
+  }
+
+  .nav-menu-copy {
+    gap: 0.16rem !important;
+  }
+
+  .nav-menu-link-text {
+    font-size: clamp(1.42rem, 7vw, 1.95rem) !important;
+    font-weight: 920 !important;
+    line-height: 0.98 !important;
+    text-shadow: 0 14px 30px rgba(0, 0, 0, 0.2) !important;
+  }
+
+  .nav-menu-link-meta {
+    font-size: 0.54rem !important;
+    letter-spacing: 0.1em !important;
+  }
+
+  .nav-menu-signature {
+    display: grid !important;
+    justify-content: start !important;
+    gap: 0.18rem !important;
+    margin-top: 0.28rem !important;
+    padding: 0.58rem 0.18rem 0 !important;
+  }
+
+  .nav .nav-menu-panel .nav-menu-signature > span {
+    font-size: clamp(1.72rem, 9.2vw, 2.45rem) !important;
+    line-height: 0.9 !important;
+  }
+
+  .nav .nav-menu-panel .nav-menu-signature > small {
+    width: auto !important;
+    font-size: 0.54rem !important;
+    letter-spacing: 0.14em !important;
+  }
+
+  .nav-menu-art-mark {
+    right: -0.32em !important;
+    top: 5.2rem !important;
+    color: rgba(239, 207, 132, 0.045) !important;
+    font-size: clamp(7rem, 45vw, 10.5rem) !important;
+  }
+
+  .nav-menu-ambient span:nth-child(1) {
+    width: 18rem !important;
+    height: 18rem !important;
+    right: -6.5rem !important;
+    top: -4rem !important;
+  }
+
+  .nav-menu-ambient span:nth-child(2) {
+    width: 16rem !important;
+    height: 16rem !important;
+    left: -6rem !important;
+    bottom: -6.5rem !important;
+  }
+
+  .nav-menu-art-line {
+    bottom: 4.25rem !important;
+  }
+}
+
+@media (max-width: 390px) {
+  .nav-menu-panel {
+    left: 0.55rem !important;
+    right: 0.55rem !important;
+    padding: 0.66rem !important;
+    max-height: calc(100dvh - 162px) !important;
+  }
+
+  .nav-menu-panel a {
+    min-height: 64px !important;
+    grid-template-columns: 2.22rem 1.42rem minmax(0, 1fr) 0.9rem !important;
+    gap: 0.4rem !important;
+    padding: 0.44rem 0.5rem !important;
+  }
+
+  .nav-menu-link-text {
+    font-size: clamp(1.34rem, 6.7vw, 1.76rem) !important;
+  }
+}
+
 /* Final hero polish: lighter assets, faster first paint, stronger gallery depth. */
 .hero.hero-parallax-dining {
   height: 190svh !important;
