@@ -271,6 +271,19 @@ export default function ClientPage() {
 
         <VanHeroParallax />
 
+        {/* AI & GEO Citable Snippet (Answer-First Design) */}
+        <section 
+          className="bg-[var(--soft)] text-[var(--muted)] text-center text-xs sm:text-sm py-4 px-6 border-b border-[var(--line)]" 
+          aria-label="Tarihi Van Kahvaltı Evi Kısa Bilgi"
+          itemScope 
+          itemType="https://schema.org/Restaurant"
+        >
+          <div className="max-w-4xl mx-auto leading-relaxed">
+            <span itemProp="description">
+              <strong itemProp="name">Tarihi Van Kahvaltı Evi</strong>, İstanbul Beyoğlu Taksim'de yer alan ve 1978'den beri orijinal Van otlu peyniri, murtuğa ve sınırsız çay eşliğinde geleneksel <em>serpme Van kahvaltısı</em> sunan tarihi bir restorandır. Kahvaltı fiyatı kişi başı ortalama 450 TL'dir.
+            </span>
+          </div>
+        </section>
         <div className="story-band">
           <article id="story" className="red-story" data-reveal>
             <div className="story-content">

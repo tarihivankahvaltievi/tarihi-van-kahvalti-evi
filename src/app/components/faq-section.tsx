@@ -39,7 +39,13 @@ export function FaqSection() {
   };
 
   return (
-    <section className="py-24 px-6 md:px-12 bg-[var(--soft)]" id="faq" aria-labelledby="faq-heading">
+    <section 
+      className="py-24 px-6 md:px-12 bg-[var(--soft)]" 
+      id="faq" 
+      aria-labelledby="faq-heading"
+      itemScope 
+      itemType="https://schema.org/FAQPage"
+    >
       <div className="max-w-3xl mx-auto" data-reveal>
         <h2 id="faq-heading" className="text-3xl md:text-5xl text-[var(--ink)] font-serif mb-4 text-center">
           Sıkça Sorulan Sorular
@@ -55,6 +61,9 @@ export function FaqSection() {
               <div 
                 key={index} 
                 className={`border rounded-2xl overflow-hidden transition-colors duration-300 ${openIndex === index ? "bg-white border-[var(--red)] shadow-sm" : "bg-white border-[var(--line)] hover:border-[var(--gold)]"}`}
+                itemProp="mainEntity"
+                itemScope
+                itemType="https://schema.org/Question"
               >
                 <button
                   type="button"
@@ -63,7 +72,10 @@ export function FaqSection() {
                   aria-expanded={openIndex === index}
                   aria-controls={answerId}
                 >
-                  <span className={`font-medium pr-4 ${openIndex === index ? "text-[var(--red-dark)]" : "text-[var(--ink)]"}`}>
+                  <span 
+                    className={`font-medium pr-4 ${openIndex === index ? "text-[var(--red-dark)]" : "text-[var(--ink)]"}`}
+                    itemProp="name"
+                  >
                     {faq.question}
                   </span>
                   <ChevronDown 
@@ -81,8 +93,14 @@ export function FaqSection() {
                       transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
                       role="region"
                       aria-labelledby={`faq-heading-${index}`}
+                      itemProp="acceptedAnswer"
+                      itemScope
+                      itemType="https://schema.org/Answer"
                     >
-                      <div className="px-6 pb-6 text-[var(--muted)] leading-relaxed">
+                      <div 
+                        className="px-6 pb-6 text-[var(--muted)] leading-relaxed"
+                        itemProp="text"
+                      >
                         {faq.answer}
                       </div>
                     </motion.div>
