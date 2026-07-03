@@ -31,6 +31,7 @@ export function BookingModal({
   const [guests, setGuests] = useState(2);
   const [type, setType] = useState(() => preselectedType === "Kahve" ? "Kafka Cafe" : "Kahvaltı");
   const [note, setNote] = useState(() => preselectedItem ? `Seçilen Lezzet: ${preselectedItem}` : "");
+  const [honeypot, setHoneypot] = useState("");
 
   // Set default date to today or tomorrow
   useEffect(() => {
@@ -101,6 +102,13 @@ export function BookingModal({
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
+    // Spam bot check
+    if (honeypot) {
+      console.warn("Spam detected!");
+      onClose();
+      return;
+    }
+
     // Format date beautifully (e.g. 27.06.2026)
     const formattedDate = date ? date.split("-").reverse().join(".") : "";
     
@@ -138,6 +146,32 @@ Rezervasyonumu onaylayabilir misiniz? Şimdiden teşekkürler.`;
       </div>
 
       <form onSubmit={handleSubmit} className="booking-form">
+        {/* Honeypot field (hidden from real users) */}
+        <div 
+          aria-hidden="true" 
+          style={{ 
+            position: "absolute", 
+            width: "1px", 
+            height: "1px", 
+            padding: 0, 
+            margin: "-1px", 
+            overflow: "hidden", 
+            clip: "rect(0, 0, 0, 0)", 
+            border: 0 
+          }}
+        >
+          <label htmlFor="website_hp">Lütfen bu alanı doldurmayın</label>
+          <input
+            id="website_hp"
+            type="text"
+            name="website_hp"
+            value={honeypot}
+            onChange={(e) => setHoneypot(e.target.value)}
+            tabIndex={-1}
+            autoComplete="off"
+          />
+        </div>
+
         <div className="form-group">
           <label>Rezervasyon Tipi</label>
           <div className="type-toggle-grid">

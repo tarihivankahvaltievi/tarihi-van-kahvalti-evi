@@ -58,7 +58,7 @@ const nextConfig: NextConfig = {
           },
           {
             key: "Content-Security-Policy",
-            value: "upgrade-insecure-requests; frame-ancestors 'self';",
+            value: "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://*.google.com https://*.gstatic.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https://*.google.com https://*.gstatic.com https://*.googleapis.com; connect-src 'self' https://*.google.com https://*.googleapis.com; frame-src 'self' https://*.google.com; upgrade-insecure-requests; frame-ancestors 'self';",
           },
         ],
       },
