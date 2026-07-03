@@ -21,7 +21,6 @@ const BookingModal = dynamic(() => import("./components/booking-modal").then(mod
 const GalleryLightbox = dynamic(() => import("./components/gallery-lightbox").then(mod => mod.GalleryLightbox), { ssr: false });
 const ReviewCarousel = dynamic(() => import("./components/review-carousel").then(mod => mod.ReviewCarousel), { ssr: true });
 const FaqSection = dynamic(() => import("./components/faq-section").then(mod => mod.FaqSection), { ssr: true });
-const LocationSection = dynamic(() => import("./components/location-section").then(mod => mod.LocationSection), { ssr: true });
 const AnimatedFooter = dynamic(() => import("./components/animated-footer").then(mod => mod.AnimatedFooter), { ssr: false });
 
 const gallery: [string, string][] = [
@@ -404,8 +403,6 @@ export default function ClientPage() {
           
           <GalleryLightbox gallery={gallery} />
         </section>
-
-        <LocationSection />
 
         <FaqSection />
 
