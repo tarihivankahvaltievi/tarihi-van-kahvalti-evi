@@ -11,7 +11,6 @@ import {
   MapPin,
   MessageCircle,
 } from "lucide-react";
-import { motion, useScroll, useTransform } from "framer-motion";
 import { UiMotion } from "./ui-motion";
 import { GalleryLightbox } from "./components/gallery-lightbox";
 import { BookingModal } from "./components/booking-modal";
@@ -37,41 +36,8 @@ const gallery: [string, string][] = [
   ["/images/street-table.jpg", "Beyoğlu sokaklarında kahvaltı masası"],
 ];
 
-const OrganicLeaf = ({ className }: { className: string }) => (
-  <div className={`organic-leaf-wrapper ${className}`}>
-    <svg className="organic-leaf-svg" viewBox="0 0 120 80" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M10 60C35 40 85 45 110 20C90 40 45 40 10 60Z" fill="url(#leaf-grad-1)"/>
-      <path d="M10 60C45 35 75 10 110 20C80 25 50 45 10 60Z" fill="url(#leaf-grad-2)"/>
-      <path d="M10 60C30 55 60 52 110 20" stroke="rgba(255,255,255,0.4)" strokeWidth="1.5" strokeLinecap="round"/>
-      <path d="M35 48C45 44 55 43 65 40" stroke="rgba(255,255,255,0.22)" strokeWidth="1"/>
-      <path d="M55 42C62 38 70 37 78 33" stroke="rgba(255,255,255,0.22)" strokeWidth="1"/>
-      <path d="M75 35C82 30 90 28 98 23" stroke="rgba(255,255,255,0.22)" strokeWidth="1"/>
-      <defs>
-        <linearGradient id="leaf-grad-1" x1="10" y1="60" x2="110" y2="20" gradientUnits="userSpaceOnUse">
-          <stop stopColor="#689643" />
-          <stop offset="1" stopColor="#8cb761" />
-        </linearGradient>
-        <linearGradient id="leaf-grad-2" x1="10" y1="60" x2="110" y2="20" gradientUnits="userSpaceOnUse">
-          <stop stopColor="#4b6e2f" stopOpacity="0.85"/>
-          <stop offset="1" stopColor="#7ba757" stopOpacity="0.85"/>
-        </linearGradient>
-      </defs>
-    </svg>
-  </div>
-);
-
 export default function ClientPage() {
   const [isBookingOpen, setIsBookingOpen] = useState(false);
-  const storyRef = useRef<HTMLElement | null>(null);
-  const { scrollYProgress: storyScroll } = useScroll({
-    target: storyRef,
-    offset: ["start end", "end start"],
-  });
-  const storyBrickY = useTransform(storyScroll, [0, 1], ["-42px", "42px"]);
-  const storyGlowY = useTransform(storyScroll, [0, 1], ["54px", "-48px"]);
-  const storyImageY = useTransform(storyScroll, [0, 1], ["30px", "-30px"]);
-  const storyPlateY = useTransform(storyScroll, [0, 1], ["24px", "-34px"]);
-  
   const [preselectedItem, setPreselectedItem] = useState("");
   const [preselectedType, setPreselectedType] = useState("");
 
@@ -315,21 +281,7 @@ export default function ClientPage() {
         <VanHeroParallax />
 
         <div className="story-band">
-          <section id="story" className="red-story" data-reveal ref={storyRef}>
-            <motion.div
-              className="story-depth story-depth-bricks"
-              style={{ y: storyBrickY }}
-              aria-hidden="true"
-            />
-            <motion.div
-              className="story-depth story-depth-glow"
-              style={{ y: storyGlowY }}
-              aria-hidden="true"
-            />
-            <div className="story-scroll-rail" aria-hidden="true">
-              <motion.span style={{ scaleY: storyScroll }} />
-            </div>
-            <OrganicLeaf className="leaf-story-1" />
+          <section id="story" className="red-story" data-reveal>
             <div className="story-content">
               <div className="story-copy">
                 <div className="light-pill story-pill">Hakkımızda</div>
@@ -353,7 +305,7 @@ export default function ClientPage() {
                 </div>
               </div>
               <div className="story-archive" data-reveal>
-                <motion.div className="story-arch" style={{ y: storyImageY }}>
+                <div className="story-arch">
                   <Image
                     src="/images/interior-chair.jpg"
                     alt="Tarihi Rum binasının taş ve ahşap iç mekan dokusu"
@@ -361,7 +313,7 @@ export default function ClientPage() {
                     sizes="(max-width: 900px) 88vw, 420px"
                     loading="lazy"
                   />
-                </motion.div>
+                </div>
                 <div className="story-memory-list" aria-label="Tarihi Van Kahvaltıcısı kısa hikaye">
                   <div>
                     <span>1978</span>
@@ -388,7 +340,7 @@ export default function ClientPage() {
                 <span>Derece tarihi eser</span>
               </div>
             </div>
-            <motion.div className="story-plate" data-reveal style={{ y: storyPlateY }}>
+            <div className="story-plate" data-reveal>
               <Image
                 src="/images/breakfast-spread.jpg"
                 alt="Geniş Van kahvaltısı"
@@ -396,7 +348,7 @@ export default function ClientPage() {
                 sizes="(max-width: 900px) 92vw, 760px"
                 loading="lazy"
               />
-            </motion.div>
+            </div>
           </section>
         </div>
 
