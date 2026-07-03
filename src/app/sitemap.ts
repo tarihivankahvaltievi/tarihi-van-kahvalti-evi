@@ -7,6 +7,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: new Date(),
       changeFrequency: "daily",
       priority: 1,
+      images: [
+        "https://tarihivankahvaltievi.com/images/hero-table.jpg",
+        "https://tarihivankahvaltievi.com/images/breakfast-spread.jpg",
+        "https://tarihivankahvaltievi.com/images/balcony-breakfast.jpg",
+      ],
     },
     {
       url: "https://tarihivankahvaltievi.com/#menu",

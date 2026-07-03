@@ -8,6 +8,8 @@
 - **Çalışma Saatleri:** Haftanın 7 günü, 08:00 - 18:00
 - **E-posta:** info@tarihivankahvaltievi.com
 - **Web:** https://tarihivankahvaltievi.com
+- **Koordinatlar (Coordinates):** 41.0366, 28.9792
+- **Google Haritalar (Google Maps):** https://www.google.com/maps/search/?api=1&query=Tarihi%20Van%20Kahvalt%C4%B1%20Evi%20Zambak%20Sk.%20No%3A8%20Beyo%C4%9Flu
 
 ## Hizmetler ve Atmosfer
 - Tarihi 2. derece tescilli Rum binasında, balkonlu ve teraslı mimari.

@@ -12,11 +12,11 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://tarihivankahvaltievi.com"),
   title: {
     default:
-      "Tarihi Van Kahvaltı Evi | Taksim Beyoğlu – Serpme Van Kahvaltısı & Kafka Cafe",
+      "Tarihi Van Kahvaltı Evi | Taksim Beyoğlu – Serpme Van Kahvaltısı & Traditional Turkish Breakfast",
     template: "%s | Tarihi Van Kahvaltı Evi",
   },
   description:
-    "Beyoğlu Taksim'deki tarihi Rum binasında 1978'den beri süregelen geleneksel serpme Van kahvaltısı, otlu peynir, murtuğa, kavut ve Kafka Cafe kahve deneyimi. Zambak Sk. No:8 Beyoğlu, İstanbul.",
+    "Beyoğlu Taksim'deki tarihi Rum binasında 1978'den beri geleneksel serpme Van kahvaltısı & Kafka Cafe. Traditional Turkish breakfast in Taksim, Istanbul. Zambak Sk. No:8 Beyoğlu.",
   keywords: [
     "Van kahvaltısı",
     "Tarihi Van Kahvaltı Evi",
@@ -92,6 +92,22 @@ export const metadata: Metadata = {
     ],
   },
   category: "restaurant",
+  other: {
+    "geo.region": "TR-34",
+    "geo.placename": "Beyoğlu, İstanbul",
+    "geo.position": "41.0366;28.9792",
+    ICBM: "41.0366, 28.9792",
+    "place:location:latitude": "41.0366",
+    "place:location:longitude": "28.9792",
+    "business:contact_data:street_address": "Zambak Sk. No:8",
+    "business:contact_data:locality": "Beyoğlu",
+    "business:contact_data:region": "İstanbul",
+    "business:contact_data:postal_code": "34421",
+    "business:contact_data:country_name": "Türkiye",
+    "business:contact_data:phone_number": "+90 541 525 2868",
+    "business:contact_data:email": "info@tarihivankahvaltievi.com",
+    "business:contact_data:website": "https://tarihivankahvaltievi.com",
+  },
 };
 
 import { WebVitals } from "./components/web-vitals";

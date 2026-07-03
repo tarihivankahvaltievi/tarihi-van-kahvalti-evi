@@ -381,7 +381,7 @@ export function AnimatedFooter({ onOpenBooking }: { onOpenBooking: () => void })
   }, []);
 
   return (
-    <footer id="contact" ref={footerRef} className="footer-reimagined">
+    <footer id="footer" ref={footerRef} className="footer-reimagined">
       
       {/* ─── Premium Live Beyoğlu Illustration ─── */}
       <div className="footer-skyline-wrapper" aria-hidden="true">

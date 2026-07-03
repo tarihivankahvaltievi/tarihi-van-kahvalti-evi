@@ -389,8 +389,7 @@ export function VanHeroParallax() {
                   alt={item.alt}
                   fill
                   sizes="(max-width: 680px) 30vw, (max-width: 1080px) 26vw, 320px"
-                  preload={shouldPreload}
-                  loading={shouldPreload ? "eager" : "lazy"}
+                  priority={shouldPreload}
                   fetchPriority={shouldPreload ? "high" : "auto"}
                   quality={82}
                 />
@@ -434,8 +433,7 @@ function HeroImageRow({
               alt=""
               fill
               sizes="(max-width: 680px) 38vw, (max-width: 1080px) 40vw, 32rem"
-              preload={shouldPreload}
-              loading={shouldPreload ? "eager" : "lazy"}
+              priority={shouldPreload}
               fetchPriority={shouldPreload ? "high" : "low"}
               quality={74}
               style={{ objectPosition: image.position ?? "center" }}
