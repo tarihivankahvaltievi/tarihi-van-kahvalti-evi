@@ -76,6 +76,21 @@ export const metadata: Metadata = {
       "1978'den beri tarihi Rum binasında Van kahvaltısı. Otlu peynir, murtuğa, kavut ve sınırsız çay.",
     images: ["/images/hero-table.jpg"],
   },
+  icons: {
+    icon: [
+      { url: "/favicon.ico" },
+      { url: "/images/brand-icon-small.png", type: "image/png" },
+    ],
+    apple: [
+      { url: "/images/brand-icon-small.png" },
+    ],
+    other: [
+      {
+        rel: "apple-touch-icon-precomposed",
+        url: "/images/brand-icon-small.png",
+      },
+    ],
+  },
   category: "restaurant",
 };
 
