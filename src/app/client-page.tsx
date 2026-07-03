@@ -6,7 +6,7 @@ import {
   Calendar,
   Camera,
   ChevronRight,
-  Clock,
+  BookOpen,
   Home,
   MapPin,
   MessageCircle,
@@ -205,16 +205,6 @@ export default function ClientPage() {
               <span className="nav-menu-art-steam" />
               <span className="nav-menu-art-steam" />
             </div>
-            <div className="nav-menu-meta" style={{ "--item-index": 0 } as React.CSSProperties}>
-              <span className={`nav-menu-status ${isOpenNow ? "open" : "closed"}`}>
-                <span />
-                {isOpenNow ? "Bugün açık" : "Şu an kapalı"}
-              </span>
-              <span className="nav-menu-hours">
-                <Clock size={14} />
-                08:00 - 18:00
-              </span>
-            </div>
             <a href="#top" style={{ "--item-index": 1 } as React.CSSProperties} onClick={() => setMenuOpen(false)}>
               <span className="nav-menu-index">01</span>
               <Home size={18} />
@@ -222,25 +212,24 @@ export default function ClientPage() {
                 <span className="nav-menu-link-text">Ana sayfa</span>
                 <span className="nav-menu-link-meta">Sıcak sofra açılışı</span>
               </span>
-              <span className="nav-menu-thumb" aria-hidden="true" />
               <ChevronRight size={17} />
             </a>
             <a href="#story" style={{ "--item-index": 2 } as React.CSSProperties} onClick={() => setMenuOpen(false)}>
               <span className="nav-menu-index">02</span>
+              <BookOpen size={18} />
               <span className="nav-menu-copy">
                 <span className="nav-menu-link-text">Hikaye</span>
                 <span className="nav-menu-link-meta">Tarihi Rum binası</span>
               </span>
-              <span className="nav-menu-thumb" aria-hidden="true" />
               <ChevronRight size={17} />
             </a>
             <a href="#gallery" style={{ "--item-index": 3 } as React.CSSProperties} onClick={() => setMenuOpen(false)}>
               <span className="nav-menu-index">03</span>
+              <Camera size={18} />
               <span className="nav-menu-copy">
                 <span className="nav-menu-link-text">Galeri</span>
                 <span className="nav-menu-link-meta">Bakır, çay, masa</span>
               </span>
-              <span className="nav-menu-thumb" aria-hidden="true" />
               <ChevronRight size={17} />
             </a>
             <a href="#contact" style={{ "--item-index": 4 } as React.CSSProperties} onClick={() => setMenuOpen(false)}>
@@ -250,7 +239,6 @@ export default function ClientPage() {
                 <span className="nav-menu-link-text">Konum</span>
                 <span className="nav-menu-link-meta">Beyoğlu rotası</span>
               </span>
-              <span className="nav-menu-thumb" aria-hidden="true" />
               <ChevronRight size={17} />
             </a>
             <a
@@ -266,7 +254,6 @@ export default function ClientPage() {
                 <span className="nav-menu-link-text">WhatsApp</span>
                 <span className="nav-menu-link-meta">Hızlı iletişim</span>
               </span>
-              <span className="nav-menu-thumb" aria-hidden="true" />
               <ChevronRight size={17} />
             </a>
             <div className="nav-menu-signature" aria-hidden="true" style={{ "--item-index": 6 } as React.CSSProperties}>
