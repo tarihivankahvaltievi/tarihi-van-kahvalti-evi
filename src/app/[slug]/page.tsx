@@ -7,14 +7,18 @@ import {
   buildBreadcrumbJsonLd,
   buildFaqJsonLd,
   buildMenuJsonLd,
+  buildRestaurantJsonLd,
+  buildWebsiteJsonLd,
   createPageMetadata,
-  displayPhone,
+  dateModified,
   getSeoPage,
   jsonLd,
   mapsUrl,
+  pageOgImagePath,
   seoPages,
   siteName,
   siteUrl,
+  telUrl,
   whatsappUrl,
 } from "../seo";
 
@@ -46,9 +50,10 @@ export default async function SeoPage({ params }: PageProps) {
   }
 
   const pageUrl = absoluteUrl(page.slug);
-  const jsonLdGraph: unknown[] = [
+  const graph: unknown[] = [
+    buildWebsiteJsonLd(false),
+    buildRestaurantJsonLd(false),
     {
-      "@context": "https://schema.org",
       "@type": "WebPage",
       "@id": `${pageUrl}#webpage`,
       url: pageUrl,
@@ -56,37 +61,50 @@ export default async function SeoPage({ params }: PageProps) {
       headline: page.h1,
       description: page.description,
       inLanguage: "tr-TR",
+      dateModified,
       isPartOf: {
-        "@type": "WebSite",
         "@id": `${siteUrl}/#website`,
-        name: siteName,
-        url: siteUrl,
       },
       about: {
         "@id": `${siteUrl}/#restaurant`,
       },
-      primaryImageOfPage: absoluteUrl(page.image),
+      mainEntity: slug === "menu" ? { "@id": `${siteUrl}/menu#menu` } : { "@id": `${siteUrl}/#restaurant` },
+      primaryImageOfPage: {
+        "@type": "ImageObject",
+        url: absoluteUrl(page.image),
+        caption: page.imageAlt,
+      },
+      image: {
+        "@type": "ImageObject",
+        url: absoluteUrl(pageOgImagePath(page.slug)),
+        width: 1200,
+        height: 630,
+        caption: page.imageAlt,
+      },
+      breadcrumb: { "@id": `${pageUrl}#breadcrumb` },
     },
     buildBreadcrumbJsonLd([
       { name: "Ana Sayfa", url: siteUrl },
       { name: page.h1, url: pageUrl },
-    ]),
-    buildFaqJsonLd(page.questions),
+    ], pageUrl, false),
+    buildFaqJsonLd(page.questions, pageUrl, false),
   ];
 
   if (slug === "menu") {
-    jsonLdGraph.push({ "@context": "https://schema.org", ...buildMenuJsonLd() });
+    graph.push(buildMenuJsonLd());
   }
+
+  const pageJsonLd = {
+    "@context": "https://schema.org",
+    "@graph": graph,
+  };
 
   return (
     <main className="seo-page theme-breakfast">
-      {jsonLdGraph.map((data, index) => (
-        <script
-          key={index}
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: jsonLd(data) }}
-        />
-      ))}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: jsonLd(pageJsonLd) }}
+      />
 
       <nav className="seo-topbar" aria-label="Sayfa navigasyonu">
         <Link href="/" className="seo-brand">
@@ -114,7 +132,7 @@ export default async function SeoPage({ params }: PageProps) {
             <a href={mapsUrl} target="_blank" rel="noopener noreferrer">
               Yol tarifi
             </a>
-            <a href={`tel:${displayPhone.replace(/\s/g, "")}`}>Ara</a>
+            <a href={telUrl}>Ara</a>
           </div>
         </div>
         <figure className="seo-hero-media">

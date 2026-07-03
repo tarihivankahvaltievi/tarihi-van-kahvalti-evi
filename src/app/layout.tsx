@@ -27,7 +27,7 @@ export const metadata: Metadata = {
     template: `%s | ${siteName}`,
   },
   description:
-    "Beyoğlu Taksim'deki tarihi Rum binasında 1978'den beri geleneksel serpme Van kahvaltısı, otlu peynir, murtuğa, kavut, sınırsız çay ve Kafka Cafe. Zambak Sk. No:8 Beyoğlu.",
+    "Beyoğlu Taksim'deki tarihi Rum binasında 1978'den beri geleneksel serpme Van kahvaltısı, otlu peynir, murtuğa, kavut, sınırsız çay ve Kafka Cafe. Zambak Sk. No:8, Şehit Muhtar, Beyoğlu 34435.",
   keywords,
   authors: [{ name: siteName, url: siteUrl }],
   creator: siteName,
@@ -54,13 +54,8 @@ export const metadata: Metadata = {
     canonical: siteUrl,
     languages: {
       "tr-TR": siteUrl,
+      tr: siteUrl,
       "x-default": siteUrl,
-    },
-    types: {
-      "text/plain": [
-        { url: "/llms.txt", title: "LLMS summary" },
-        { url: "/llms-full.txt", title: "LLMS full entity facts" },
-      ],
     },
   },
   openGraph: {
@@ -134,9 +129,6 @@ export default function RootLayout({
         <link rel="dns-prefetch" href="https://www.google.com" />
         <link rel="dns-prefetch" href="https://wa.me" />
         <link rel="dns-prefetch" href="https://maps.googleapis.com" />
-        <link rel="preconnect" href="https://www.google.com" crossOrigin="anonymous" />
-        <link rel="preconnect" href="https://wa.me" crossOrigin="anonymous" />
-        <link rel="author" href="/llms.txt" />
       </head>
       <body className="min-h-full flex flex-col">
         <WebVitals />

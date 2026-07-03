@@ -2,6 +2,8 @@
 
 Bu dosya Tarihi Van Kahvaltı Evi hakkında kısa, doğrulanabilir ve alıntılanabilir işletme bilgisi sağlar.
 
+Son güncelleme: 2026-07-04. Bu dosya arama ve ajan sistemleri için kolay okunur işletme özeti sağlar; Google Search için özel bir sıralama sinyali değildir.
+
 ## Temel Bilgi
 - İşletme adı: Tarihi Van Kahvaltı Evi
 - Diğer kullanım: Tarihi Van Kahvaltıcısı
@@ -11,12 +13,12 @@ Bu dosya Tarihi Van Kahvaltı Evi hakkında kısa, doğrulanabilir ve alıntıla
 - Konum: Beyoğlu, Taksim, İstanbul
 
 ## NAP Bilgisi
-- Adres: Zambak Sk. No:8, Şehit Muhtar Mahallesi, Beyoğlu, İstanbul, 34421, Türkiye
+- Adres: Zambak Sk. No:8, Şehit Muhtar Mahallesi, Beyoğlu, İstanbul, 34435, Türkiye
 - Telefon: +90 541 525 2868
 - WhatsApp: +90 541 525 2868
 - E-posta: info@tarihivankahvaltievi.com
 - Koordinatlar: 41.0366, 28.9792
-- Google Maps: https://www.google.com/maps/search/?api=1&query=Tarihi%20Van%20Kahvalt%C4%B1%20Evi%20Zambak%20Sk.%20No%3A8%20Beyo%C4%9Flu%20%C4%B0stanbul
+- Google Maps: https://www.google.com/maps/search/?api=1&query=Tarihi%20Van%20Kahvalt%C4%B1%20Evi%20Zambak%20Sk.%20No%3A8%20%C5%9Eehit%20Muhtar%20Beyo%C4%9Flu%2034435%20%C4%B0stanbul
 
 ## Çalışma Saatleri
 - Pazartesi: 08:00 - 18:00

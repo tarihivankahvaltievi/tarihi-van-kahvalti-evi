@@ -5,10 +5,14 @@ export const siteName = "Tarihi Van Kahvaltı Evi";
 export const alternateName = "Tarihi Van Kahvaltıcısı";
 export const displayPhone = "+90 541 525 2868";
 export const phoneE164 = "+905415252868";
+export const telUrl = `tel:${phoneE164}`;
 export const email = "info@tarihivankahvaltievi.com";
 export const foundingDate = "1978";
+export const dateModified = "2026-07-04";
+export const dateModifiedIso = "2026-07-04T00:00:00+03:00";
 export const defaultImage = "/images/hero-table.jpg";
-export const defaultOgImage = `${siteUrl}${defaultImage}`;
+export const defaultOgImagePath = "/images/og/home.jpg";
+export const defaultOgImage = `${siteUrl}${defaultOgImagePath}`;
 
 export const address = {
   streetAddress: "Zambak Sk. No:8",
@@ -16,10 +20,13 @@ export const address = {
   locality: "Beyoğlu",
   district: "Taksim",
   region: "İstanbul",
-  postalCode: "34421",
+  postalCode: "34435",
   country: "TR",
   countryName: "Türkiye",
 };
+
+export const displayAddress = `${address.streetAddress}, ${address.neighborhood}, ${address.locality}, ${address.region} ${address.postalCode}`;
+export const fullAddress = `${displayAddress}, ${address.countryName}`;
 
 export const coordinates = {
   latitude: 41.0366,
@@ -34,7 +41,7 @@ export const openingHours = {
 };
 
 export const mapsUrl =
-  "https://www.google.com/maps/search/?api=1&query=Tarihi%20Van%20Kahvalt%C4%B1%20Evi%20Zambak%20Sk.%20No%3A8%20Beyo%C4%9Flu%20%C4%B0stanbul";
+  "https://www.google.com/maps/search/?api=1&query=Tarihi%20Van%20Kahvalt%C4%B1%20Evi%20Zambak%20Sk.%20No%3A8%20%C5%9Eehit%20Muhtar%20Beyo%C4%9Flu%2034435%20%C4%B0stanbul";
 export const whatsappUrl =
   "https://wa.me/905415252868?text=Merhaba%2C%20Tarihi%20Van%20Kahvalt%C4%B1%20Evi%20i%C3%A7in%20rezervasyon%20bilgisi%20almak%20istiyorum.";
 
@@ -53,10 +60,14 @@ export const keywords = [
   "Beyoğlu kahvaltı",
   "Taksim kahvaltı",
   "İstanbul kahvaltı",
+  "İstanbul Van kahvaltısı",
   "serpme kahvaltı",
+  "Beyoğlu serpme kahvaltı",
+  "Taksim serpme kahvaltı",
   "Van kahvaltı Beyoğlu",
   "Van kahvaltı Taksim",
   "Zambak Sokak kahvaltı",
+  "Şehit Muhtar kahvaltı",
   "otlu peynir",
   "murtuğa",
   "kavut",
@@ -127,7 +138,7 @@ export const faqItems = [
   {
     question: "Tarihi Van Kahvaltı Evi nerede?",
     answer:
-      "Tarihi Van Kahvaltı Evi, Zambak Sk. No:8, Şehit Muhtar Mahallesi, Beyoğlu, İstanbul adresindedir; Taksim Meydanı ve İstiklal Caddesi'ne yürüme mesafesindedir.",
+      `Tarihi Van Kahvaltı Evi, ${displayAddress} adresindedir; Taksim Meydanı ve İstiklal Caddesi'ne yürüme mesafesindedir.`,
   },
   {
     question: "Çalışma saatleri nedir?",
@@ -142,6 +153,21 @@ export const faqItems = [
     question: "Serpme Van kahvaltısı fiyatı ne kadar?",
     answer:
       "Geleneksel Van kahvaltısı kişi başı yaklaşık 450 TL'dir ve en az iki kişilik servis edilir. Güncel fiyatlar için işletmeyle iletişime geçmeniz önerilir.",
+  },
+  {
+    question: "Taksim metrodan nasıl gidilir?",
+    answer:
+      "M2 Taksim durağından Sıraselviler yönüne çıkıp Zambak Sokak'a yürüyerek kısa sürede ulaşabilirsiniz. İlk kez gelecek misafirler Google Haritalar bağlantısından rota alabilir.",
+  },
+  {
+    question: "Serpme Van kahvaltısı en az kaç kişilik servis edilir?",
+    answer:
+      "Serpme Van kahvaltısı en az iki kişilik servis edilir. Kalabalık masa ve hafta sonu ziyaretleri için önceden telefon veya WhatsApp üzerinden bilgi almak önerilir.",
+  },
+  {
+    question: "Aile ve kalabalık gruplar için uygun mu?",
+    answer:
+      "Tarihi Van Kahvaltı Evi aile kahvaltıları, arkadaş buluşmaları ve uzun sohbetli grup sofraları için uygundur. Kalabalık gruplarda masa uygunluğunu önceden teyit etmek iyi olur.",
   },
   {
     question: "Kafka Cafe nedir?",
@@ -188,13 +214,13 @@ export const seoPages: SeoPage[] = [
       title: section.name,
       body: `${section.description} ${section.items.map((item) => item.name).join(", ")} seçenekleriyle tamamlanır.`,
     })),
-    questions: [faqItems[0], faqItems[4], faqItems[5]],
+    questions: [faqItems[0], faqItems[4], faqItems[8]],
   },
   {
     slug: "iletisim",
     title: "İletişim ve Yol Tarifi | Zambak Sokak Beyoğlu",
     description:
-      "Tarihi Van Kahvaltı Evi iletişim, telefon, WhatsApp, adres ve yol tarifi bilgileri. Zambak Sk. No:8, Şehit Muhtar Mahallesi, Beyoğlu, İstanbul.",
+      "Tarihi Van Kahvaltı Evi iletişim, telefon, WhatsApp, adres ve yol tarifi bilgileri. Zambak Sk. No:8, Şehit Muhtar Mahallesi, Beyoğlu, İstanbul 34435.",
     h1: "İletişim ve yol tarifi",
     eyebrow: "Konum",
     image: "/images/street-table.jpg",
@@ -223,7 +249,7 @@ export const seoPages: SeoPage[] = [
         body: "Hafta sonu ve kalabalık saatler için önceden telefon ya da WhatsApp üzerinden bilgi almak önerilir.",
       },
     ],
-    questions: [faqItems[1], faqItems[2], faqItems[3]],
+    questions: [faqItems[1], faqItems[2], faqItems[3], faqItems[5]],
   },
   {
     slug: "sss",
@@ -240,7 +266,7 @@ export const seoPages: SeoPage[] = [
     ],
     highlights: [
       "İşletme her gün 08:00 - 18:00 arasında açıktır.",
-      "Adres Zambak Sk. No:8, Şehit Muhtar Mahallesi, Beyoğlu, İstanbul'dur.",
+      `Adres ${displayAddress} olarak geçer.`,
       "Rezervasyon için telefon ve WhatsApp kullanılabilir.",
       "Van kahvaltısında otlu peynir, murtuğa, kavut, kete ve sınırsız çay öne çıkar.",
     ],
@@ -280,7 +306,7 @@ export const seoPages: SeoPage[] = [
         body: "Kalabalık arkadaş kahvaltıları, aile buluşmaları ve İstanbul'da yöresel kahvaltı arayan ziyaretçiler için uygundur.",
       },
     ],
-    questions: [faqItems[0], faqItems[4], faqItems[3]],
+    questions: [faqItems[0], faqItems[6], faqItems[4]],
   },
   {
     slug: "beyoglu-kahvalti",
@@ -288,7 +314,7 @@ export const seoPages: SeoPage[] = [
     description:
       "Beyoğlu'nda kahvaltı arayanlar için Zambak Sokak'ta, Taksim'e yakın tarihi Rum binasında serpme Van kahvaltısı ve Kafka Cafe deneyimi.",
     h1: "Beyoğlu'nda kahvaltı: Van sofrası",
-    eyebrow: "Local SEO",
+    eyebrow: "Beyoğlu",
     image: "/images/balcony-breakfast.jpg",
     imageAlt: "Beyoğlu'nda balkonda kahvaltı sofrası",
     intro: [
@@ -311,13 +337,13 @@ export const seoPages: SeoPage[] = [
         body: "Taksim Meydanı, İstiklal Caddesi, Sıraselviler ve Cihangir çevresinden yürüyerek ulaşım mümkündür.",
       },
     ],
-    questions: [faqItems[1], faqItems[2], faqItems[0]],
+    questions: [faqItems[1], faqItems[2], faqItems[0], faqItems[7]],
   },
   {
     slug: "taksim-kahvalti",
     title: "Taksim Kahvaltı | Zambak Sokak'ta Serpme Van Kahvaltısı",
     description:
-      "Taksim kahvaltı önerisi: Zambak Sokak No:8'de, Taksim metroya yakın geleneksel serpme Van kahvaltısı, sınırsız çay ve sıcak servis.",
+      "Taksim kahvaltı önerisi: Zambak Sokak No:8'de, Taksim metroya yakın geleneksel serpme Van kahvaltısı, sınırsız çay, sıcak servis ve yol tarifi.",
     h1: "Taksim'de serpme Van kahvaltısı",
     eyebrow: "Yakın çevre",
     image: "/images/terrace-tea.jpg",
@@ -342,7 +368,7 @@ export const seoPages: SeoPage[] = [
         body: "İstiklal Caddesi, Cihangir ve Beyoğlu kültür rotaları kahvaltı sonrası yürüyüş için yakındır.",
       },
     ],
-    questions: [faqItems[1], faqItems[3], faqItems[4]],
+    questions: [faqItems[1], faqItems[5], faqItems[3], faqItems[4]],
   },
   {
     slug: "serpme-van-kahvaltisi",
@@ -373,7 +399,7 @@ export const seoPages: SeoPage[] = [
         body: "Serpme servis en az iki kişilik olduğu için aile, arkadaş grubu ve uzun sohbetli kahvaltılar için uygundur.",
       },
     ],
-    questions: [faqItems[0], faqItems[4], faqItems[2]],
+    questions: [faqItems[0], faqItems[6], faqItems[4], faqItems[2]],
   },
   {
     slug: "kahvalti-fiyatlari",
@@ -435,7 +461,7 @@ export const seoPages: SeoPage[] = [
         body: "Kafka Cafe, Zambak Sk. No:8 adresindeki Tarihi Van Kahvaltı Evi içinde yer alır.",
       },
     ],
-    questions: [faqItems[5], faqItems[1], faqItems[2]],
+    questions: [faqItems[8], faqItems[1], faqItems[2]],
   },
 ];
 
@@ -459,9 +485,13 @@ export function jsonLd(data: unknown) {
   return JSON.stringify(data).replace(/</g, "\\u003c");
 }
 
+export function pageOgImagePath(slug: string) {
+  return `/images/og/${slug}.jpg`;
+}
+
 export function createPageMetadata(page: SeoPage): Metadata {
   const url = absoluteUrl(page.slug);
-  const image = absoluteUrl(page.image);
+  const image = absoluteUrl(pageOgImagePath(page.slug));
 
   return {
     title: page.title,
@@ -471,6 +501,7 @@ export function createPageMetadata(page: SeoPage): Metadata {
       canonical: url,
       languages: {
         "tr-TR": url,
+        tr: url,
         "x-default": url,
       },
     },
@@ -488,13 +519,25 @@ export function createPageMetadata(page: SeoPage): Metadata {
         },
       ],
       locale: "tr_TR",
-      type: "article",
+      type: "website",
     },
     twitter: {
       card: "summary_large_image",
       title: page.title,
       description: page.description,
       images: [image],
+    },
+    other: {
+      "geo.region": "TR-34",
+      "geo.placename": "Beyoğlu, İstanbul",
+      "geo.position": `${coordinates.latitude};${coordinates.longitude}`,
+      ICBM: `${coordinates.latitude}, ${coordinates.longitude}`,
+      "business:contact_data:street_address": address.streetAddress,
+      "business:contact_data:locality": address.locality,
+      "business:contact_data:region": address.region,
+      "business:contact_data:postal_code": address.postalCode,
+      "business:contact_data:country_name": address.countryName,
+      "business:contact_data:phone_number": displayPhone,
     },
   };
 }
@@ -506,6 +549,8 @@ export function buildMenuJsonLd() {
     name: `${siteName} Menüsü`,
     url: `${siteUrl}/menu`,
     description: "Serpme Van kahvaltısı, sıcaklar ve Kafka Cafe kahveleri.",
+    inLanguage: "tr-TR",
+    provider: { "@id": `${siteUrl}/#restaurant` },
     hasMenuSection: menuSections.map((section) => ({
       "@type": "MenuSection",
       name: section.name,
@@ -520,6 +565,12 @@ export function buildMenuJsonLd() {
               price: item.price,
               priceCurrency: item.priceCurrency,
               availability: "https://schema.org/InStock",
+              url: `${siteUrl}/menu`,
+              seller: { "@id": `${siteUrl}/#restaurant` },
+              eligibleRegion: {
+                "@type": "Country",
+                name: "Türkiye",
+              },
             }
           : undefined,
       })),
@@ -527,9 +578,49 @@ export function buildMenuJsonLd() {
   };
 }
 
-export function buildRestaurantJsonLd() {
-  return {
-    "@context": "https://schema.org",
+export function buildWebsiteJsonLd(withContext = true) {
+  const data = {
+    "@type": "WebSite",
+    "@id": `${siteUrl}/#website`,
+    name: siteName,
+    alternateName,
+    url: siteUrl,
+    inLanguage: "tr-TR",
+    publisher: { "@id": `${siteUrl}/#restaurant` },
+  };
+
+  return withContext ? { "@context": "https://schema.org", ...data } : data;
+}
+
+export function buildHomeWebPageJsonLd(withContext = true) {
+  const data = {
+    "@type": "WebPage",
+    "@id": `${siteUrl}/#webpage`,
+    url: siteUrl,
+    name: "Tarihi Van Kahvaltı Evi | Taksim Beyoğlu Serpme Van Kahvaltısı",
+    headline: "Tarihi Van Kahvaltı Evi",
+    description:
+      "Beyoğlu Taksim'de 1978'den beri geleneksel serpme Van kahvaltısı, otlu peynir, murtuğa, kavut, sınırsız çay ve Kafka Cafe deneyimi.",
+    inLanguage: "tr-TR",
+    dateModified,
+    isPartOf: { "@id": `${siteUrl}/#website` },
+    about: { "@id": `${siteUrl}/#restaurant` },
+    mainEntity: { "@id": `${siteUrl}/#restaurant` },
+    primaryImageOfPage: {
+      "@type": "ImageObject",
+      url: defaultOgImage,
+      width: 1200,
+      height: 630,
+      caption: `${siteName} serpme Van kahvaltısı`,
+    },
+    significantLink: seoPages.map((page) => absoluteUrl(page.slug)),
+  };
+
+  return withContext ? { "@context": "https://schema.org", ...data } : data;
+}
+
+export function buildRestaurantJsonLd(withContext = true) {
+  const data = {
     "@type": ["Restaurant", "LocalBusiness"],
     "@id": `${siteUrl}/#restaurant`,
     name: siteName,
@@ -546,17 +637,18 @@ export function buildRestaurantJsonLd() {
       "Beyoğlu Taksim'deki tarihi Rum binasında 1978'den beri geleneksel serpme Van kahvaltısı, otlu peynir, murtuğa, kavut, sınırsız çay ve Kafka Cafe kahve deneyimi sunan restoran.",
     slogan: "Van kahvaltısı, tarihle aynı sofrada.",
     foundingDate,
-    telephone: displayPhone,
+    telephone: phoneE164,
     email,
     priceRange: "₺₺",
     currenciesAccepted: "TRY",
     paymentAccepted: "Nakit, Kredi Kartı, Banka Kartı",
     acceptsReservations: true,
     servesCuisine: cuisine,
+    keywords: keywords.join(", "),
     address: {
       "@type": "PostalAddress",
       streetAddress: address.streetAddress,
-      addressLocality: `${address.district}, ${address.locality}`,
+      addressLocality: address.locality,
       addressRegion: address.region,
       postalCode: address.postalCode,
       addressCountry: address.country,
@@ -567,6 +659,7 @@ export function buildRestaurantJsonLd() {
       longitude: coordinates.longitude,
     },
     hasMap: mapsUrl,
+    mainEntityOfPage: { "@id": `${siteUrl}/#webpage` },
     openingHours: "Mo-Su 08:00-18:00",
     openingHoursSpecification: [
       {
@@ -580,6 +673,27 @@ export function buildRestaurantJsonLd() {
       { "@type": "City", name: "İstanbul" },
       { "@type": "AdministrativeArea", name: "Beyoğlu" },
       { "@type": "Place", name: "Taksim" },
+    ],
+    containedInPlace: {
+      "@type": "Place",
+      name: "Şehit Muhtar Mahallesi, Taksim",
+    },
+    contactPoint: [
+      {
+        "@type": "ContactPoint",
+        telephone: phoneE164,
+        contactType: "reservations",
+        availableLanguage: ["tr", "en"],
+        areaServed: "TR",
+      },
+    ],
+    knowsAbout: [
+      "Van kahvaltısı",
+      "Serpme kahvaltı",
+      "Van otlu peyniri",
+      "Murtuğa",
+      "Kavut",
+      "Türk kahvesi",
     ],
     amenityFeature: [
       { "@type": "LocationFeatureSpecification", name: "Tarihi bina", value: true },
@@ -597,7 +711,7 @@ export function buildRestaurantJsonLd() {
       address: {
         "@type": "PostalAddress",
         streetAddress: address.streetAddress,
-        addressLocality: `${address.district}, ${address.locality}`,
+        addressLocality: address.locality,
         addressRegion: address.region,
         postalCode: address.postalCode,
         addressCountry: address.country,
@@ -611,18 +725,21 @@ export function buildRestaurantJsonLd() {
       },
       {
         "@type": "CommunicateAction",
-        target: `tel:${phoneE164}`,
+        target: telUrl,
         name: "Telefonla ara",
       },
     ],
     sameAs: ["https://www.instagram.com/tarihivankahvaltievi/", mapsUrl],
   };
+
+  return withContext ? { "@context": "https://schema.org", ...data } : data;
 }
 
-export function buildFaqJsonLd(items = faqItems) {
-  return {
-    "@context": "https://schema.org",
+export function buildFaqJsonLd(items = faqItems, pageUrl = siteUrl, withContext = true) {
+  const data = {
     "@type": "FAQPage",
+    "@id": `${pageUrl}#faq`,
+    inLanguage: "tr-TR",
     mainEntity: items.map((item) => ({
       "@type": "Question",
       name: item.question,
@@ -632,12 +749,18 @@ export function buildFaqJsonLd(items = faqItems) {
       },
     })),
   };
+
+  return withContext ? { "@context": "https://schema.org", ...data } : data;
 }
 
-export function buildBreadcrumbJsonLd(items: { name: string; url: string }[]) {
-  return {
-    "@context": "https://schema.org",
+export function buildBreadcrumbJsonLd(
+  items: { name: string; url: string }[],
+  pageUrl = items.length ? items[items.length - 1].url : siteUrl,
+  withContext = true,
+) {
+  const data = {
     "@type": "BreadcrumbList",
+    "@id": `${pageUrl}#breadcrumb`,
     itemListElement: items.map((item, index) => ({
       "@type": "ListItem",
       position: index + 1,
@@ -645,4 +768,6 @@ export function buildBreadcrumbJsonLd(items: { name: string; url: string }[]) {
       item: item.url,
     })),
   };
+
+  return withContext ? { "@context": "https://schema.org", ...data } : data;
 }

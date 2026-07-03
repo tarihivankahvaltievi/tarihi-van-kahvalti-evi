@@ -2,34 +2,33 @@ import ClientPage from "./client-page";
 import {
   buildBreadcrumbJsonLd,
   buildFaqJsonLd,
+  buildHomeWebPageJsonLd,
   buildMenuJsonLd,
   buildRestaurantJsonLd,
+  buildWebsiteJsonLd,
+  faqItems,
   jsonLd,
   siteUrl,
 } from "./seo";
 
 export default function Home() {
+  const homeJsonLd = {
+    "@context": "https://schema.org",
+    "@graph": [
+      buildWebsiteJsonLd(false),
+      buildRestaurantJsonLd(false),
+      buildHomeWebPageJsonLd(false),
+      buildMenuJsonLd(),
+      buildFaqJsonLd(faqItems, siteUrl, false),
+      buildBreadcrumbJsonLd([{ name: "Ana Sayfa", url: siteUrl }], siteUrl, false),
+    ],
+  };
+
   return (
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: jsonLd(buildRestaurantJsonLd()) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: jsonLd({ "@context": "https://schema.org", ...buildMenuJsonLd() }),
-        }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: jsonLd(buildFaqJsonLd()) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: jsonLd(buildBreadcrumbJsonLd([{ name: "Ana Sayfa", url: siteUrl }])),
-        }}
+        dangerouslySetInnerHTML={{ __html: jsonLd(homeJsonLd) }}
       />
       <ClientPage />
     </>

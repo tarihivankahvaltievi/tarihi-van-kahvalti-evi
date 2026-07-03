@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { Calendar, Clock, MessageCircle, Users, X } from "lucide-react";
+import { phoneE164 } from "../seo";
 
 interface BookingModalProps {
   isOpen: boolean;
@@ -122,7 +123,7 @@ export function BookingModal({
 
 Rezervasyonumu onaylayabilir misiniz? Şimdiden teşekkürler.`;
 
-    const whatsappUrl = `https://wa.me/905415252868?text=${encodeURIComponent(message)}`;
+    const whatsappUrl = `https://wa.me/${phoneE164.replace("+", "")}?text=${encodeURIComponent(message)}`;
     window.open(whatsappUrl, "_blank");
     onClose();
   };

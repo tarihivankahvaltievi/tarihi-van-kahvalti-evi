@@ -4,11 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, MapPin, MessageCircle, Phone, Clock } from "lucide-react";
-
-const phone = "+905415252868";
-const displayPhone = "+90 541 525 2868";
-const mapsUrl = "https://www.google.com/maps/search/?api=1&query=Tarihi%20Van%20Kahvalt%C4%B1%20Evi%20Zambak%20Sk.%20No%3A8%20Beyo%C4%9Flu";
-const whatsappUrl = "https://wa.me/905415252868?text=Merhaba%2C%20Tarihi%20Van%20Kahvalt%C4%B1%20Evi%20i%C3%A7in%20rezervasyon%20bilgisi%20almak%20istiyorum.";
+import { address, displayAddress, displayPhone, mapsUrl, openingHours, telUrl, whatsappUrl } from "../seo";
 
 const wallBlocks = [
   { x: -8, y: 2, w: 82, h: 28, tone: "stone" },
@@ -1133,7 +1129,7 @@ export function AnimatedFooter({ onOpenBooking }: { onOpenBooking: () => void })
             <h4 className="footer-col-title">Bize Ulaşın</h4>
             <ul className="footer-links">
               <li>
-                <a href={`tel:${phone}`}>
+                <a href={telUrl}>
                   <Phone size={16} /> 
                   <span className="link-text">{displayPhone}</span>
                 </a>
@@ -1147,12 +1143,12 @@ export function AnimatedFooter({ onOpenBooking }: { onOpenBooking: () => void })
               <li>
                 <a href={mapsUrl} target="_blank" rel="noopener noreferrer">
                   <MapPin size={16} /> 
-                  <span className="link-text">Zambak Sk. No:8 Beyoğlu</span>
+                  <span className="link-text">{address.streetAddress} {address.locality}</span>
                 </a>
               </li>
             </ul>
             <address className="footer-address-semantic" style={{ fontStyle: "normal", display: "contents" }}>
-              <span className="sr-only">Zambak Sokak No:8, 34421 Beyoğlu, İstanbul, Türkiye</span>
+              <span className="sr-only">{displayAddress}, {address.countryName}</span>
             </address>
           </div>
 
@@ -1168,7 +1164,7 @@ export function AnimatedFooter({ onOpenBooking }: { onOpenBooking: () => void })
                 <Clock size={12} style={{ display: "inline-block", marginRight: "4px", verticalAlign: "middle" }} />
                 Her Gün Açığız
               </span>
-              <span className="hours-value">08:00 - 18:00</span>
+              <span className="hours-value">{openingHours.opens} - {openingHours.closes}</span>
             </div>
           </div>
         </div>

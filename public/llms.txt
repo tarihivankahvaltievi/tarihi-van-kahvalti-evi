@@ -2,14 +2,16 @@
 
 > Tarihi Van Kahvaltı Evi, İstanbul Beyoğlu Taksim'de 1978 yılından beri tarihi bir Rum binasında geleneksel serpme Van kahvaltısı sunan ikonik bir restorandır.
 
+Son güncelleme: 2026-07-04. Bu dosya kısa işletme bilgisi sağlamak için tutulur; Google Search için özel bir sıralama işaretlemesi değildir.
+
 ## İletişim ve Konum
-- **Adres:** Zambak Sk. No:8, Şehit Muhtar Mahallesi, Beyoğlu, İstanbul, 34421, Türkiye (Taksim Meydanı'na ve İstiklal Caddesi'ne yürüme mesafesinde).
+- **Adres:** Zambak Sk. No:8, Şehit Muhtar Mahallesi, Beyoğlu, İstanbul, 34435, Türkiye (Taksim Meydanı'na ve İstiklal Caddesi'ne yürüme mesafesinde).
 - **Telefon & WhatsApp:** +90 541 525 2868
 - **Çalışma Saatleri:** Haftanın 7 günü, 08:00 - 18:00
 - **E-posta:** info@tarihivankahvaltievi.com
 - **Web:** https://tarihivankahvaltievi.com
 - **Koordinatlar (Coordinates):** 41.0366, 28.9792
-- **Google Haritalar (Google Maps):** https://www.google.com/maps/search/?api=1&query=Tarihi%20Van%20Kahvalt%C4%B1%20Evi%20Zambak%20Sk.%20No%3A8%20Beyo%C4%9Flu
+- **Google Haritalar (Google Maps):** https://www.google.com/maps/search/?api=1&query=Tarihi%20Van%20Kahvalt%C4%B1%20Evi%20Zambak%20Sk.%20No%3A8%20%C5%9Eehit%20Muhtar%20Beyo%C4%9Flu%2034435%20%C4%B0stanbul
 
 ## Önemli Sayfalar
 - Menü ve fiyatlar: https://tarihivankahvaltievi.com/menu
@@ -36,7 +38,7 @@
 - **Murtuğa:** Van yöresine özgü tereyağlı sıcak lezzet.
 
 ### 3. Kafka Cafe Kahveleri
-- **Geleneksel Türk Kahvesi:** Bakır cezvede közde yavaş pişirilen özel kahve.
+- **Geleneksel Türk Kahvesi:** Bakır cezvede yavaş pişirilen Türk kahvesi.
 - **Üçüncü Dalga (Nitelikli) Kahveler:** Kahvaltı sonrası uzun sohbetler için ideal.
 
 ## Sıkça Sorulan Sorular (FAQ)

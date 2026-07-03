@@ -15,7 +15,7 @@ import {
 import { UiMotion } from "./ui-motion";
 import dynamic from "next/dynamic";
 import { VanHeroParallax } from "./components/van-hero-parallax";
-import { mapsUrl, whatsappUrl } from "./seo";
+import { displayAddress, mapsUrl, whatsappUrl } from "./seo";
 
 const BookingModal = dynamic(() => import("./components/booking-modal").then(mod => mod.BookingModal), { ssr: false });
 const GalleryLightbox = dynamic(() => import("./components/gallery-lightbox").then(mod => mod.GalleryLightbox), { ssr: false });
@@ -288,18 +288,16 @@ export default function ClientPage() {
 
         <VanHeroParallax />
 
-        {/* AI & GEO Citable Snippet (Answer-First Design) */}
+        {/* Kısa işletme bilgisi */}
         <section 
           className="bg-[var(--soft)] text-[var(--muted)] text-center text-xs sm:text-sm py-4 px-6 border-b border-[var(--line)]" 
           aria-label="Tarihi Van Kahvaltı Evi Kısa Bilgi"
-          itemScope 
-          itemType="https://schema.org/Restaurant"
         >
           <div className="max-w-4xl mx-auto leading-relaxed">
-            <span itemProp="description">
-              <strong itemProp="name">Tarihi Van Kahvaltı Evi</strong>, İstanbul Beyoğlu Taksim&apos;de Zambak Sk. No:8 adresinde yer alan ve 1978&apos;den beri Van otlu peyniri, murtuğa, kavut ve sınırsız çay eşliğinde geleneksel <em>serpme Van kahvaltısı</em> sunan tarihi bir restorandır. Kahvaltı fiyatı kişi başı yaklaşık 450 TL&apos;dir.
+            <span>
+              <strong>Tarihi Van Kahvaltı Evi</strong>, İstanbul Beyoğlu Taksim&apos;de {displayAddress} adresinde yer alan ve 1978&apos;den beri Van otlu peyniri, murtuğa, kavut ve sınırsız çay eşliğinde geleneksel <em>serpme Van kahvaltısı</em> sunan tarihi bir restorandır. Kahvaltı fiyatı kişi başı yaklaşık 450 TL&apos;dir.
             </span>
-            <nav className="seo-inline-links" aria-label="SEO hızlı bağlantılar">
+            <nav className="seo-inline-links" aria-label="Hızlı bağlantılar">
               <Link href="/menu">Menü ve fiyatlar</Link>
               <Link href="/van-kahvaltisi">Van kahvaltısı nedir?</Link>
               <Link href="/beyoglu-kahvalti">Beyoğlu kahvaltı</Link>

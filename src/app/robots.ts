@@ -20,7 +20,7 @@ export default function robots(): MetadataRoute.Robots {
           "Bytespider",
         ],
         allow: ["/", "/llms.txt", "/llms-full.txt"],
-        disallow: ["/api/"],
+        disallow: ["/api/", "/_next/server/"],
       },
     ],
     sitemap: `${siteUrl}/sitemap.xml`,
