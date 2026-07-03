@@ -154,7 +154,14 @@ const mobileFloatingFoodClassNames = new Set([
   "hero-float-item hero-float-tea",
   "hero-float-item hero-float-simit",
   "hero-float-item hero-float-omelette",
+  "hero-float-item hero-float-cheese-platter",
+  "hero-float-item hero-float-greens-platter",
+  "hero-float-item hero-float-black-olives",
+  "hero-float-item hero-float-cherry-jam",
+  "hero-float-item hero-float-apricot-jam",
+  "hero-float-item hero-float-jam",
   "hero-float-item hero-float-tomato",
+  "hero-float-item hero-float-mint",
 ]);
 
 const eagerFloatingFoodClassNames = new Set([
