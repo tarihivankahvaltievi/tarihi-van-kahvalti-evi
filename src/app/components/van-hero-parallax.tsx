@@ -25,125 +25,125 @@ type FloatingFood = {
 
 const heroImages: HeroImage[] = [
   {
-    thumbnail: "/images/hero-parallax/sucuk-egg-action.jpg",
+    thumbnail: "/images/hero-parallax/sucuk-egg-action.webp",
     position: "50% 45%",
   },
   {
-    thumbnail: "/images/hero-parallax/balcony-full.jpg",
+    thumbnail: "/images/hero-parallax/balcony-full.webp",
     position: "50% 42%",
   },
   {
-    thumbnail: "/images/hero-parallax/spread-close.jpg",
+    thumbnail: "/images/hero-parallax/spread-close.webp",
     position: "48% 44%",
   },
   {
-    thumbnail: "/images/hero-parallax/table-pisi.jpg",
+    thumbnail: "/images/hero-parallax/table-pisi.webp",
     position: "50% 46%",
   },
   {
-    thumbnail: "/images/hero-parallax/historic-corner.jpg",
+    thumbnail: "/images/hero-parallax/historic-corner.webp",
     position: "50% 38%",
   },
   {
-    thumbnail: "/images/hero-parallax/overhead-feast.jpg",
+    thumbnail: "/images/hero-parallax/overhead-feast.webp",
     position: "50% 50%",
   },
   {
-    thumbnail: "/images/hero-parallax/tea-tray.jpg",
+    thumbnail: "/images/hero-parallax/tea-tray.webp",
     position: "50% 48%",
   },
   {
-    thumbnail: "/images/hero-parallax/kavurma-pan.jpg",
+    thumbnail: "/images/hero-parallax/kavurma-pan.webp",
     position: "50% 42%",
   },
   {
-    thumbnail: "/images/hero-parallax/terrace-table.jpg",
+    thumbnail: "/images/hero-parallax/terrace-table.webp",
     position: "50% 42%",
   },
   {
-    thumbnail: "/images/hero-parallax/overhead-classic.jpg",
+    thumbnail: "/images/hero-parallax/overhead-classic.webp",
     position: "50% 50%",
   },
   {
-    thumbnail: "/images/hero-parallax/simit-table.jpg",
+    thumbnail: "/images/hero-parallax/simit-table.webp",
     position: "50% 44%",
   },
   {
-    thumbnail: "/images/hero-parallax/hands-breakfast.jpg",
+    thumbnail: "/images/hero-parallax/hands-breakfast.webp",
     position: "50% 45%",
   },
   {
-    thumbnail: "/images/hero-parallax/terrace-plate.jpg",
+    thumbnail: "/images/hero-parallax/terrace-plate.webp",
     position: "50% 44%",
   },
   {
-    thumbnail: "/images/hero-parallax/indoor-table.jpg",
+    thumbnail: "/images/hero-parallax/indoor-table.webp",
     position: "50% 42%",
   },
   {
-    thumbnail: "/images/hero-parallax/tea-service.jpg",
+    thumbnail: "/images/hero-parallax/tea-service.webp",
     position: "50% 46%",
   },
 ];
 
 const floatingFoods: FloatingFood[] = [
   {
-    src: "/images/hero-float/sucuk-egg-pan.png",
+    src: "/images/hero-float/sucuk-egg-pan.webp",
     alt: "Bakır sahanda sucuklu yumurta",
     className: "hero-float-item hero-float-pan",
   },
   {
-    src: "/images/hero-float/tea-glass.png",
+    src: "/images/hero-float/tea-glass.webp",
     alt: "İnce belli çay",
     className: "hero-float-item hero-float-tea",
   },
   {
-    src: "/images/hero-float/simit-board.png",
+    src: "/images/hero-float/simit-board.webp",
     alt: "Ahşap tabakta sıcak simit",
     className: "hero-float-item hero-float-simit",
   },
   {
-    src: "/images/hero-float/omelette-plate.png",
+    src: "/images/hero-float/omelette-plate.webp",
     alt: "Kahvaltı tabağı",
     className: "hero-float-item hero-float-omelette",
   },
   {
-    src: "/images/hero-float/cheese-platter.png",
+    src: "/images/hero-float/cheese-platter.webp",
     alt: "Van peynir tabağı",
     className: "hero-float-item hero-float-cheese-platter",
   },
   {
-    src: "/images/hero-float/greens-platter.png",
+    src: "/images/hero-float/greens-platter.webp",
     alt: "Taze yeşillik tabağı",
     className: "hero-float-item hero-float-greens-platter",
   },
   {
-    src: "/images/hero-float/black-olive-bowl.png",
+    src: "/images/hero-float/black-olive-bowl.webp",
     alt: "Siyah zeytin kasesi",
     className: "hero-float-item hero-float-black-olives",
   },
   {
-    src: "/images/hero-float/cherry-jam-bowl.png",
+    src: "/images/hero-float/cherry-jam-bowl.webp",
     alt: "Vişne reçeli kasesi",
     className: "hero-float-item hero-float-cherry-jam",
   },
   {
-    src: "/images/hero-float/apricot-jam-bowl.png",
+    src: "/images/hero-float/apricot-jam-bowl.webp",
     alt: "Kayısı reçeli kasesi",
     className: "hero-float-item hero-float-apricot-jam",
   },
   {
-    src: "/images/hero-float/tahin-bowl.png",
+    src: "/images/hero-float/tahin-bowl.webp",
     alt: "Tahin ve pekmez kasesi",
     className: "hero-float-item hero-float-jam",
   },
   {
-    src: "/images/hero-float/tomato-slice.png",
+    src: "/images/hero-float/tomato-slice.webp",
     alt: "Taze domates dilimi",
     className: "hero-float-item hero-float-tomato",
   },
   {
-    src: "/images/hero-float/mint-leaf.png",
+    src: "/images/hero-float/mint-leaf.webp",
     alt: "Taze nane yaprağı",
     className: "hero-float-item hero-float-mint",
   },
@@ -165,8 +165,11 @@ const mobileFloatingFoodClassNames = new Set([
 ]);
 
 const eagerFloatingFoodClassNames = new Set([
+  "hero-float-item hero-float-pan",
   "hero-float-item hero-float-tea",
   "hero-float-item hero-float-cheese-platter",
+  "hero-float-item hero-float-apricot-jam",
+  "hero-float-item hero-float-black-olives",
 ]);
 
 const subscribeToMobileViewport = (callback: () => void) => {
@@ -196,8 +199,8 @@ export function VanHeroParallax() {
   });
 
   const spring = isMobile
-    ? { stiffness: 74, damping: 31, mass: 1.05 }
-    : { stiffness: 88, damping: 29, mass: 1 };
+    ? { stiffness: 92, damping: 30, mass: 1 }
+    : { stiffness: 112, damping: 27, mass: 0.95 };
   const visibleFloatingFoods = isMobile
     ? floatingFoods.filter((item) => mobileFloatingFoodClassNames.has(item.className))
     : floatingFoods;
@@ -207,35 +210,35 @@ export function VanHeroParallax() {
   const smoothMouseY = useSpring(mouseY, { stiffness: 48, damping: 24 });
 
   // Map mouse positions to 3D rotation angles for premium desktop interactivity
-  const rotateXMouse = useTransform(smoothMouseY, [-0.5, 0.5], [4.8, -4.8]);
-  const rotateYMouse = useTransform(smoothMouseX, [-0.5, 0.5], [-5.2, 5.2]);
+  const rotateXMouse = useTransform(smoothMouseY, [-0.5, 0.5], [6.6, -6.6]);
+  const rotateYMouse = useTransform(smoothMouseX, [-0.5, 0.5], [-7.2, 7.2]);
 
   const translateX = useSpring(
-    useTransform(scrollYProgress, [0, 1], isMobile ? [-46, 82] : [-96, 164]),
+    useTransform(scrollYProgress, [0, 1], isMobile ? [-58, 102] : [-132, 224]),
     spring,
   );
   const translateXReverse = useSpring(
-    useTransform(scrollYProgress, [0, 1], isMobile ? [58, -92] : [108, -188]),
+    useTransform(scrollYProgress, [0, 1], isMobile ? [72, -118] : [154, -246]),
     spring,
   );
   const rotateX = useSpring(
-    useTransform(scrollYProgress, [0, 0.24], isMobile ? [3.2, 0] : [6, 0]),
+    useTransform(scrollYProgress, [0, 0.26], isMobile ? [7, -0.8] : [14, -2.2]),
     spring,
   );
   const rotateZ = useSpring(
-    useTransform(scrollYProgress, [0, 0.24], isMobile ? [-1.8, 0] : [-3.2, 0]),
+    useTransform(scrollYProgress, [0, 0.26], isMobile ? [-3.2, 0.55] : [-7.2, 1.35]),
     spring,
   );
   const galleryY = useSpring(
     useTransform(
       scrollYProgress,
       [0, 0.36, 1],
-      isMobile ? [82, 12, -118] : [104, 78, 58]
+      isMobile ? [44, -18, -112] : [116, 72, 30]
     ),
     spring,
   );
   const galleryOpacity = useSpring(
-    useTransform(scrollYProgress, [0, 0.18, 0.9, 1], [0.72, 1, 1, 0.68]),
+    useTransform(scrollYProgress, [0, 0.16, 0.9, 1], [0.84, 1, 1, 0.72]),
     spring,
   );
   const floatingFoodY = useSpring(
@@ -344,16 +347,16 @@ export function VanHeroParallax() {
             translate={translateX}
             reverse
             enableHover={!isMobile}
-            priorityCount={isMobile ? 1 : 2}
+            preloadCount={isMobile ? 2 : 3}
           />
           <HeroImageRow
             images={secondRow}
             translate={translateXReverse}
             enableHover={!isMobile}
-            priorityCount={0}
+            preloadCount={isMobile ? 1 : 0}
           />
           {!isMobile && (
-            <HeroImageRow images={thirdRow} translate={translateX} reverse enableHover priorityCount={0} />
+            <HeroImageRow images={thirdRow} translate={translateX} reverse enableHover preloadCount={0} />
           )}
         </motion.div>
 
@@ -370,21 +373,23 @@ export function VanHeroParallax() {
           aria-label="Uçan kahvaltı lezzetleri"
         >
           {visibleFloatingFoods.map((item, index) => {
-            const isEager = eagerFloatingFoodClassNames.has(item.className);
+            const shouldPreload = eagerFloatingFoodClassNames.has(item.className);
 
             return (
               <div
                 className={item.className}
                 key={item.src}
-                style={{ "--float-delay": `${index * (isMobile ? 70 : 110)}ms` } as CSSProperties}
+                style={{ "--float-delay": `${Math.min(index, 6) * (isMobile ? 24 : 36)}ms` } as CSSProperties}
               >
                 <Image
                   src={item.src}
                   alt={item.alt}
                   fill
-                  sizes="(max-width: 680px) 28vw, (max-width: 1080px) 34vw, 360px"
-                  priority={isEager}
-                  loading={isEager ? "eager" : "lazy"}
+                  sizes="(max-width: 680px) 30vw, (max-width: 1080px) 26vw, 320px"
+                  preload={shouldPreload}
+                  loading="eager"
+                  fetchPriority={shouldPreload ? "high" : "auto"}
+                  quality={82}
                 />
               </div>
             );
@@ -400,35 +405,41 @@ function HeroImageRow({
   translate,
   reverse = false,
   enableHover = true,
-  priorityCount = 0,
+  preloadCount = 0,
 }: {
   images: HeroImage[];
   translate: MotionValue<number>;
   reverse?: boolean;
   enableHover?: boolean;
-  priorityCount?: number;
+  preloadCount?: number;
 }) {
   return (
     <div className={`hero-parallax-row ${reverse ? "is-reverse" : ""}`}>
-      {images.map((image, index) => (
-        <motion.figure
-          className="hero-parallax-card"
-          style={{ x: translate }}
-          key={image.thumbnail}
-          whileHover={enableHover ? { y: -8, scale: 1.01 } : undefined}
-          transition={{ duration: 0.28, ease: "easeOut" }}
-        >
-          <Image
-            src={image.thumbnail}
-            alt=""
-            fill
-            sizes="(max-width: 680px) 40vw, (max-width: 1080px) 42vw, 30rem"
-            priority={index < priorityCount}
-            loading={index < priorityCount ? "eager" : "lazy"}
-            style={{ objectPosition: image.position ?? "center" }}
-          />
-        </motion.figure>
-      ))}
+      {images.map((image, index) => {
+        const shouldPreload = index < preloadCount;
+
+        return (
+          <motion.figure
+            className="hero-parallax-card"
+            style={{ x: translate }}
+            key={image.thumbnail}
+            whileHover={enableHover ? { y: -10, scale: 1.018, rotateZ: reverse ? -0.4 : 0.4 } : undefined}
+            transition={{ duration: 0.34, ease: [0.16, 1, 0.3, 1] }}
+          >
+            <Image
+              src={image.thumbnail}
+              alt=""
+              fill
+              sizes="(max-width: 680px) 38vw, (max-width: 1080px) 40vw, 32rem"
+              preload={shouldPreload}
+              loading={shouldPreload ? "eager" : "lazy"}
+              fetchPriority={shouldPreload ? "high" : "low"}
+              quality={74}
+              style={{ objectPosition: image.position ?? "center" }}
+            />
+          </motion.figure>
+        );
+      })}
     </div>
   );
 }

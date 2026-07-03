@@ -16210,3 +16210,392 @@ h2 span,
     transition-duration: 1ms !important;
   }
 }
+
+/* Final hero polish: lighter assets, faster first paint, stronger gallery depth. */
+.hero.hero-parallax-dining {
+  height: 190svh !important;
+  min-height: 1200px !important;
+  background:
+    linear-gradient(180deg, rgba(255, 251, 239, 0.96) 0%, rgba(247, 235, 207, 0.94) 34%, rgba(232, 209, 169, 0.96) 100%),
+    linear-gradient(115deg, rgba(54, 88, 61, 0.1), transparent 38%, rgba(185, 139, 67, 0.16));
+  perspective: 1800px !important;
+  transform-style: preserve-3d;
+}
+
+.hero.hero-parallax-dining::before {
+  background:
+    linear-gradient(180deg, rgba(255, 252, 243, 0.88) 0%, rgba(255, 252, 243, 0.28) 18%, rgba(255, 252, 243, 0.02) 52%, rgba(237, 222, 193, 0.86) 100%),
+    linear-gradient(90deg, rgba(54, 88, 61, 0.1) 0%, transparent 27%, transparent 76%, rgba(143, 23, 26, 0.07) 100%),
+    repeating-linear-gradient(90deg, rgba(79, 57, 35, 0.025) 0 1px, transparent 1px 84px);
+}
+
+.hero-parallax-sticky {
+  min-height: 720px !important;
+}
+
+.hero-parallax-copy {
+  top: clamp(7.95rem, 13.2svh, 10.25rem) !important;
+  width: min(26rem, 35vw) !important;
+  text-shadow: 0 16px 38px rgba(92, 60, 31, 0.08);
+}
+
+.hero-parallax-copy h1 {
+  letter-spacing: 0 !important;
+  line-height: 0.91 !important;
+}
+
+.hero-parallax-copy p {
+  color: rgba(47, 42, 38, 0.76) !important;
+}
+
+.hero-copy-ambient-glow {
+  background:
+    linear-gradient(115deg, rgba(185, 139, 67, 0.14), rgba(54, 88, 61, 0.07) 48%, transparent 80%) !important;
+  filter: blur(22px) !important;
+}
+
+.hero-parallax-gallery {
+  top: 37% !important;
+  left: -17vw !important;
+  gap: clamp(1.05rem, 2vw, 1.62rem) !important;
+  filter: drop-shadow(0 30px 42px rgba(57, 39, 22, 0.16));
+  transform-origin: 54% 9% !important;
+}
+
+.hero-parallax-row {
+  gap: clamp(1.05rem, 2vw, 1.62rem) !important;
+  transform-style: preserve-3d;
+}
+
+.hero-parallax-card {
+  border-radius: 13px !important;
+  border-color: rgba(255, 250, 239, 0.7) !important;
+  background: #241a14 !important;
+  box-shadow:
+    0 1px 1px rgba(255, 255, 255, 0.34) inset,
+    0 12px 24px rgba(42, 27, 18, 0.1),
+    0 34px 78px rgba(42, 27, 18, 0.18) !important;
+  transform-style: preserve-3d;
+  transition: box-shadow 320ms var(--ease-out), filter 320ms var(--ease-out) !important;
+}
+
+.hero-parallax-card:nth-child(odd) {
+  rotate: -0.65deg;
+}
+
+.hero-parallax-card:nth-child(even) {
+  rotate: 0.75deg;
+}
+
+.hero-parallax-card img {
+  filter: saturate(1.08) contrast(1.05) brightness(0.94) !important;
+  transform: scale(1.018) translateZ(0) !important;
+  transition: none !important;
+}
+
+.hero-parallax-card::after {
+  background:
+    linear-gradient(180deg, rgba(18, 12, 10, 0.01), rgba(18, 12, 10, 0.15)),
+    linear-gradient(112deg, rgba(255, 255, 255, 0.22), transparent 22%, transparent 74%, rgba(255, 255, 255, 0.12)) !important;
+}
+
+.hero-parallax-food-stage {
+  top: 19.6% !important;
+  right: clamp(1rem, 7vw, 7.5rem) !important;
+  width: min(45vw, 590px) !important;
+  height: min(51vw, 600px) !important;
+  min-height: 430px !important;
+  contain: layout style;
+}
+
+.hero-parallax-food-stage::before {
+  filter: blur(4px) !important;
+  opacity: 0.82;
+}
+
+.hero-parallax-food-stage .hero-float-item {
+  opacity: 1;
+  transition: none !important;
+  will-change: transform, opacity;
+  animation:
+    hero-food-snap-in 340ms cubic-bezier(0.16, 1, 0.3, 1) var(--float-delay) both,
+    hero-food-drift-refined var(--float-dur, 13.5s) cubic-bezier(0.45, 0, 0.22, 1) calc(var(--float-delay) + 340ms) infinite !important;
+}
+
+.hero-parallax-food-stage .hero-float-item img {
+  object-fit: contain;
+  transition: none !important;
+}
+
+.hero-parallax-food-stage .hero-float-pan {
+  --float-dur: 13.6s;
+}
+
+.hero-parallax-food-stage .hero-float-tea {
+  --float-dur: 11.8s;
+}
+
+.hero-parallax-food-stage .hero-float-simit {
+  --float-dur: 14.2s;
+}
+
+.hero-parallax-food-stage .hero-float-omelette {
+  --float-dur: 14.8s;
+}
+
+.hero-parallax-food-stage .hero-float-cheese-platter {
+  --float-dur: 12.9s;
+}
+
+.hero-parallax-food-stage .hero-float-greens-platter {
+  --float-dur: 15.2s;
+}
+
+.hero-parallax-food-stage .hero-float-black-olives,
+.hero-parallax-food-stage .hero-float-cherry-jam,
+.hero-parallax-food-stage .hero-float-apricot-jam,
+.hero-parallax-food-stage .hero-float-jam {
+  --float-dur: 12.4s;
+}
+
+@keyframes hero-food-snap-in {
+  from {
+    opacity: 0.001;
+    transform: translate3d(0, 10px, 0) scale(0.975) rotate(-0.35deg);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1) rotate(0deg);
+  }
+}
+
+@keyframes hero-food-drift-refined {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) rotate(0deg);
+  }
+  30% {
+    transform: translate3d(calc(var(--float-x, 10px) * 0.42), calc(var(--float-y, -15px) * 0.48), 0) rotate(0.22deg);
+  }
+  62% {
+    transform: translate3d(calc(var(--float-x-end, -8px) * 0.34), calc(var(--float-y, -15px) * 0.28), 0) rotate(-0.18deg);
+  }
+  84% {
+    transform: translate3d(calc(var(--float-x-end, -8px) * 0.52), calc(var(--float-y-end, 9px) * 0.46), 0) rotate(0.14deg);
+  }
+}
+
+@media (max-width: 1080px) {
+  .hero.hero-parallax-dining {
+    height: 178svh !important;
+    min-height: 1120px !important;
+  }
+
+  .hero-parallax-gallery {
+    top: 41% !important;
+    left: -35vw !important;
+  }
+
+  .hero-parallax-food-stage {
+    top: 22% !important;
+    right: 5% !important;
+    width: min(80vw, 620px) !important;
+    height: min(60vw, 480px) !important;
+    min-height: 390px !important;
+  }
+}
+
+@media (max-width: 680px) {
+  .hero.hero-parallax-dining {
+    height: 140svh !important;
+    min-height: 940px !important;
+  }
+
+  .hero-parallax-sticky {
+    min-height: 800px !important;
+  }
+
+  .hero-parallax-copy {
+    top: 7.55rem !important;
+    left: clamp(1rem, 5.4vw, 1.45rem) !important;
+    width: min(64vw, 18.25rem) !important;
+    max-width: 18.25rem !important;
+  }
+
+  .hero-parallax-copy h1 {
+    max-width: 6.75em !important;
+    font-size: clamp(2.42rem, 10.5vw, 3.12rem) !important;
+    line-height: 0.9 !important;
+  }
+
+  .hero-parallax-copy p {
+    max-width: min(15.75rem, 63vw) !important;
+    font-size: clamp(0.84rem, 3.55vw, 0.98rem) !important;
+    line-height: 1.34 !important;
+  }
+
+  .hero-parallax-food-stage {
+    top: 9.1rem !important;
+    right: 0.2rem !important;
+    left: 0.38rem !important;
+    width: auto !important;
+    height: 318px !important;
+    min-height: 318px !important;
+  }
+
+  .hero-parallax-food-stage .hero-float-item {
+    filter:
+      drop-shadow(0 4px 8px rgba(72, 44, 24, 0.08))
+      drop-shadow(0 12px 16px rgba(72, 44, 24, 0.1)) !important;
+    animation:
+      hero-food-snap-in 280ms cubic-bezier(0.16, 1, 0.3, 1) var(--float-delay) both,
+      hero-food-drift-refined var(--float-dur, 14.5s) cubic-bezier(0.45, 0, 0.22, 1) calc(var(--float-delay) + 280ms) infinite !important;
+  }
+
+  .hero-parallax-food-stage .hero-float-tea {
+    top: 0 !important;
+    right: 3% !important;
+    width: min(15vw, 58px) !important;
+  }
+
+  .hero-parallax-food-stage .hero-float-apricot-jam {
+    top: 7% !important;
+    left: 49% !important;
+    width: min(13vw, 50px) !important;
+  }
+
+  .hero-parallax-food-stage .hero-float-cheese-platter {
+    top: 16% !important;
+    right: 0 !important;
+    width: min(24vw, 96px) !important;
+  }
+
+  .hero-parallax-food-stage .hero-float-black-olives {
+    top: 27% !important;
+    right: 30% !important;
+    width: min(13vw, 52px) !important;
+  }
+
+  .hero-parallax-food-stage .hero-float-mint {
+    top: 35% !important;
+    left: 54% !important;
+    width: min(8vw, 32px) !important;
+  }
+
+  .hero-parallax-food-stage .hero-float-tomato {
+    top: 43% !important;
+    right: 4% !important;
+    width: min(10vw, 40px) !important;
+  }
+
+  .hero-parallax-food-stage .hero-float-cherry-jam {
+    top: 49% !important;
+    right: 22% !important;
+    width: min(12.5vw, 50px) !important;
+  }
+
+  .hero-parallax-food-stage .hero-float-omelette {
+    top: 64% !important;
+    left: 0 !important;
+    width: min(27vw, 102px) !important;
+  }
+
+  .hero-parallax-food-stage .hero-float-jam {
+    top: 61% !important;
+    left: 24% !important;
+    width: min(12.5vw, 50px) !important;
+  }
+
+  .hero-parallax-food-stage .hero-float-pan {
+    top: 57% !important;
+    left: 36% !important;
+    width: min(27vw, 106px) !important;
+  }
+
+  .hero-parallax-food-stage .hero-float-greens-platter {
+    top: 63% !important;
+    right: 0 !important;
+    width: min(18vw, 72px) !important;
+  }
+
+  .hero-parallax-food-stage .hero-float-simit {
+    top: 75% !important;
+    right: 19% !important;
+    width: min(20vw, 78px) !important;
+  }
+
+  .hero-parallax-gallery {
+    top: 46% !important;
+    left: -58vw !important;
+    gap: 0.46rem !important;
+    filter: drop-shadow(0 18px 24px rgba(57, 39, 22, 0.14));
+  }
+
+  .hero-parallax-row {
+    gap: 0.46rem !important;
+  }
+
+  .hero-parallax-card {
+    width: min(36vw, 144px) !important;
+    border-radius: 9px !important;
+    box-shadow:
+      0 1px 1px rgba(255, 255, 255, 0.26) inset,
+      0 9px 20px rgba(42, 27, 18, 0.14) !important;
+  }
+}
+
+@media (max-width: 420px) {
+  .hero.hero-parallax-dining {
+    height: 136svh !important;
+    min-height: 900px !important;
+  }
+
+  .hero-parallax-sticky {
+    min-height: 780px !important;
+  }
+
+  .hero-parallax-copy {
+    top: 7.28rem !important;
+    width: min(65vw, 17.4rem) !important;
+  }
+
+  .hero-parallax-copy h1 {
+    font-size: clamp(2.2rem, 10.2vw, 2.72rem) !important;
+  }
+
+  .hero-parallax-copy p {
+    max-width: min(14.5rem, 63vw) !important;
+    font-size: clamp(0.8rem, 3.5vw, 0.92rem) !important;
+  }
+
+  .hero-parallax-food-stage {
+    top: 8.8rem !important;
+    height: 300px !important;
+    min-height: 300px !important;
+  }
+
+  .hero-parallax-gallery {
+    top: 45.4% !important;
+    left: -55vw !important;
+  }
+
+  .hero-parallax-card {
+    width: min(34vw, 132px) !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-parallax-gallery,
+  .hero-parallax-row,
+  .hero-parallax-card,
+  .hero-parallax-food-stage,
+  .hero-parallax-food-stage .hero-float-item {
+    animation: none !important;
+    transform: none !important;
+    rotate: 0deg !important;
+  }
+
+  .hero-parallax-food-stage .hero-float-item {
+    opacity: 1 !important;
+  }
+}
