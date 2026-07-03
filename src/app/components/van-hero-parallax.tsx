@@ -353,7 +353,7 @@ export function VanHeroParallax() {
             images={secondRow}
             translate={translateXReverse}
             enableHover={!isMobile}
-            preloadCount={isMobile ? 1 : 0}
+            preloadCount={isMobile ? 1 : 2}
           />
           {!isMobile && (
             <HeroImageRow images={thirdRow} translate={translateX} reverse enableHover preloadCount={0} />

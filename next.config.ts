@@ -5,6 +5,7 @@ const nextConfig: NextConfig = {
   cacheComponents: true,
   images: {
     formats: ["image/avif", "image/webp"],
+    qualities: [74, 75, 82],
     minimumCacheTTL: 60 * 60 * 24 * 30,
   },
   async headers() {
