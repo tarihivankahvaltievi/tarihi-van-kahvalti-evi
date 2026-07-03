@@ -47,3 +47,6 @@ Disallow: /api/
 
 # Sitemap
 Sitemap: https://tarihivankahvaltievi.com/sitemap.xml
+
+# AI Knowledge Base (llms.txt)
+Allow: /llms.txt
