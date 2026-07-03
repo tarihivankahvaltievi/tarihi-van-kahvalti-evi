@@ -10,6 +10,9 @@ const nextConfig: NextConfig = {
     qualities: [74, 75, 82],
     minimumCacheTTL: 60 * 60 * 24 * 30,
   },
+  experimental: {
+    optimizePackageImports: ["lucide-react"],
+  },
   async headers() {
     return [
       {

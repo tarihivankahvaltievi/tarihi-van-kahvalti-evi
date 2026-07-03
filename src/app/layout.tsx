@@ -94,6 +94,8 @@ export const metadata: Metadata = {
   category: "restaurant",
 };
 
+import { WebVitals } from "./components/web-vitals";
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -109,7 +111,10 @@ export default function RootLayout({
         <link rel="preconnect" href="https://www.google.com" crossOrigin="anonymous" />
         <link rel="preconnect" href="https://wa.me" crossOrigin="anonymous" />
       </head>
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="min-h-full flex flex-col">
+        <WebVitals />
+        {children}
+      </body>
     </html>
   );
 }
