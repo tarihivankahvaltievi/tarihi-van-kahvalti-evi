@@ -3,33 +3,7 @@
 import { useState } from "react";
 import { ChevronDown } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
-
-const faqs = [
-  {
-    question: "Van kahvaltısı nedir ve neler içerir?",
-    answer: "Van kahvaltısı, Türkiye'nin Van ilinin geleneksel serpme kahvaltısıdır. Otlu peynir, murtuğa (un, tereyağı ve yumurta karışımı), kavut (kavrulmuş un tatlısı), cacık, kete, süzme bal, kaymak, sahanda sucuklu yumurta ve sınırsız çay içerir. Tarihi Van Kahvaltı Evi'nde bu sofra bakır sahanlarda, en az iki kişilik servis edilir.",
-  },
-  {
-    question: "Tarihi Van Kahvaltı Evi çalışma saatleri nedir?",
-    answer: "Tarihi Van Kahvaltı Evi her gün 08:00 - 18:00 saatleri arasında hizmet vermektedir. Haftanın 7 günü açıktır.",
-  },
-  {
-    question: "Fiyatlar ne kadar?",
-    answer: "Geleneksel Van Kahvaltısı kişi başı yaklaşık 450 TL'dir (en az 2 kişilik). Sahanda sucuklu yumurta 180 TL'dir. Serpme kahvaltı yanında sınırsız çay ücretsizdir. Kafka Cafe'de Türk kahvesi ve nitelikli kahve seçenekleri de mevcuttur.",
-  },
-  {
-    question: "Rezervasyon nasıl yapılır?",
-    answer: "Rezervasyon için +90 541 525 2868 numaralı telefonu arayabilir veya WhatsApp üzerinden mesaj gönderebilirsiniz. Web sitemizden de online rezervasyon formu doldurabilirsiniz.",
-  },
-  {
-    question: "Tarihi Van Kahvaltı Evi nerede, nasıl gidilir?",
-    answer: "Zambak Sk. No:8, Beyoğlu, İstanbul adresinde, Taksim Meydanı'na yürüme mesafesindedir. Tarihi 2. derece tescilli Rum binasında yer almaktadır. Taksim metrosu ve nostaljik tramvaydan kolayca ulaşılabilir.",
-  },
-  {
-    question: "Kafka Cafe nedir?",
-    answer: "Kafka Cafe, Tarihi Van Kahvaltı Evi bünyesindeki kahve köşesidir. Bakır cezvede közde pişen geleneksel Türk kahvesi ve nitelikli üçüncü dalga kahve seçenekleri sunulmaktadır. Kahvaltı sonrası sohbeti uzatmak isteyenler için ideal bir mekandır.",
-  },
-];
+import { faqItems } from "../seo";
 
 export function FaqSection() {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
@@ -55,7 +29,7 @@ export function FaqSection() {
         </p>
 
         <div className="space-y-4">
-          {faqs.map((faq, index) => {
+          {faqItems.map((faq, index) => {
             const answerId = `faq-answer-${index}`;
             return (
               <div 

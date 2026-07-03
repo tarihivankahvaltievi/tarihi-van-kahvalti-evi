@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { ArrowRight, MapPin, MessageCircle, Phone, Clock } from "lucide-react";
 
 const phone = "+905415252868";
@@ -1121,9 +1122,10 @@ export function AnimatedFooter({ onOpenBooking }: { onOpenBooking: () => void })
           <div className="footer-col">
             <h4 className="footer-col-title">Keşfet</h4>
             <ul className="footer-links">
-              <li><a href="#menu">Zengin Menü</a></li>
-              <li><a href="#story">Aile Hikayemiz</a></li>
-              <li><a href="#gallery">Mekan & Atmosfer</a></li>
+              <li><Link href="/menu">Zengin Menü</Link></li>
+              <li><Link href="/van-kahvaltisi">Van Kahvaltısı</Link></li>
+              <li><Link href="/beyoglu-kahvalti">Beyoğlu Kahvaltı</Link></li>
+              <li><Link href="/sss">Sıkça Sorulan Sorular</Link></li>
             </ul>
           </div>
           

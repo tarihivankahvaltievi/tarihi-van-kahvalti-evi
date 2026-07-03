@@ -1,29 +1,43 @@
 import type { MetadataRoute } from "next";
+import { absoluteUrl, seoPages, siteUrl } from "./seo";
+
+const lastModified = new Date("2026-07-04T00:00:00+03:00");
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  return [
+  const staticRoutes: MetadataRoute.Sitemap = [
     {
-      url: "https://tarihivankahvaltievi.com",
-      lastModified: new Date(),
-      changeFrequency: "daily",
+      url: siteUrl,
+      lastModified,
+      changeFrequency: "weekly",
       priority: 1,
       images: [
-        "https://tarihivankahvaltievi.com/images/hero-table.jpg",
-        "https://tarihivankahvaltievi.com/images/breakfast-spread.jpg",
-        "https://tarihivankahvaltievi.com/images/balcony-breakfast.jpg",
+        absoluteUrl("/images/hero-table.jpg"),
+        absoluteUrl("/images/breakfast-spread.jpg"),
+        absoluteUrl("/images/balcony-breakfast.jpg"),
       ],
     },
     {
-      url: "https://tarihivankahvaltievi.com/#menu",
-      lastModified: new Date(),
-      changeFrequency: "weekly",
-      priority: 0.9,
+      url: absoluteUrl("/llms.txt"),
+      lastModified,
+      changeFrequency: "monthly",
+      priority: 0.4,
     },
     {
-      url: "https://tarihivankahvaltievi.com/#faq",
-      lastModified: new Date(),
+      url: absoluteUrl("/llms-full.txt"),
+      lastModified,
       changeFrequency: "monthly",
-      priority: 0.8,
-    }
+      priority: 0.4,
+    },
   ];
+
+  const seoRoutes: MetadataRoute.Sitemap = seoPages.map((page) => ({
+    url: absoluteUrl(page.slug),
+    lastModified,
+    changeFrequency:
+      page.slug === "menu" || page.slug === "kahvalti-fiyatlari" ? "weekly" : "monthly",
+    priority: page.slug === "menu" || page.slug === "iletisim" ? 0.9 : 0.75,
+    images: [absoluteUrl(page.image)],
+  }));
+
+  return [...staticRoutes, ...seoRoutes];
 }

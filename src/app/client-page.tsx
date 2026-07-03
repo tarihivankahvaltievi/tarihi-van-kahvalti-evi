@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import {
   Calendar,
   Camera,
@@ -14,6 +15,7 @@ import {
 import { UiMotion } from "./ui-motion";
 import dynamic from "next/dynamic";
 import { VanHeroParallax } from "./components/van-hero-parallax";
+import { mapsUrl, whatsappUrl } from "./seo";
 
 const BookingModal = dynamic(() => import("./components/booking-modal").then(mod => mod.BookingModal), { ssr: false });
 const GalleryLightbox = dynamic(() => import("./components/gallery-lightbox").then(mod => mod.GalleryLightbox), { ssr: false });
@@ -21,11 +23,6 @@ const ReviewCarousel = dynamic(() => import("./components/review-carousel").then
 const FaqSection = dynamic(() => import("./components/faq-section").then(mod => mod.FaqSection), { ssr: true });
 const LocationSection = dynamic(() => import("./components/location-section").then(mod => mod.LocationSection), { ssr: true });
 const AnimatedFooter = dynamic(() => import("./components/animated-footer").then(mod => mod.AnimatedFooter), { ssr: false });
-
-const mapsUrl =
-  "https://www.google.com/maps/search/?api=1&query=Tarihi%20Van%20Kahvalt%C4%B1%20Evi%20Zambak%20Sk.%20No%3A8%20Beyo%C4%9Flu";
-const whatsappUrl =
-  "https://wa.me/905415252868?text=Merhaba%2C%20Tarihi%20Van%20Kahvalt%C4%B1%20Evi%20i%C3%A7in%20rezervasyon%20bilgisi%20almak%20istiyorum.";
 
 const gallery: [string, string][] = [
   ["/images/balcony-breakfast.jpg", "Balkonda kahvaltı keyfi"],
@@ -173,8 +170,10 @@ export default function ClientPage() {
           <nav className="nav-links" aria-label="Ana menü" onMouseLeave={handleMouseLeave}>
             <span className="nav-hover-pill" style={hoverStyle} />
             <a href="#story" onMouseEnter={handleMouseEnter}>Hikaye</a>
+            <Link href="/menu" onMouseEnter={handleMouseEnter}>Menü</Link>
             <a href="#gallery" onMouseEnter={handleMouseEnter}>Galeri</a>
-            <a href="#contact" onMouseEnter={handleMouseEnter}>Konum</a>
+            <Link href="/iletisim" onMouseEnter={handleMouseEnter}>Konum</Link>
+            <Link href="/sss" onMouseEnter={handleMouseEnter}>SSS</Link>
           </nav>
 
           <div className="nav-actions">
@@ -228,8 +227,17 @@ export default function ClientPage() {
               </span>
               <ChevronRight size={17} />
             </a>
-            <a href="#gallery" style={{ "--item-index": 3 } as React.CSSProperties} onClick={() => setMenuOpen(false)}>
+            <Link href="/menu" style={{ "--item-index": 3 } as React.CSSProperties} onClick={() => setMenuOpen(false)}>
               <span className="nav-menu-index">03</span>
+              <BookOpen size={18} />
+              <span className="nav-menu-copy">
+                <span className="nav-menu-link-text">Menü</span>
+                <span className="nav-menu-link-meta">Fiyatlar ve içerik</span>
+              </span>
+              <ChevronRight size={17} />
+            </Link>
+            <a href="#gallery" style={{ "--item-index": 4 } as React.CSSProperties} onClick={() => setMenuOpen(false)}>
+              <span className="nav-menu-index">04</span>
               <Camera size={18} />
               <span className="nav-menu-copy">
                 <span className="nav-menu-link-text">Galeri</span>
@@ -237,23 +245,32 @@ export default function ClientPage() {
               </span>
               <ChevronRight size={17} />
             </a>
-            <a href="#contact" style={{ "--item-index": 4 } as React.CSSProperties} onClick={() => setMenuOpen(false)}>
-              <span className="nav-menu-index">04</span>
+            <Link href="/iletisim" style={{ "--item-index": 5 } as React.CSSProperties} onClick={() => setMenuOpen(false)}>
+              <span className="nav-menu-index">05</span>
               <MapPin size={18} />
               <span className="nav-menu-copy">
                 <span className="nav-menu-link-text">Konum</span>
                 <span className="nav-menu-link-meta">Beyoğlu rotası</span>
               </span>
               <ChevronRight size={17} />
-            </a>
+            </Link>
+            <Link href="/van-kahvaltisi" style={{ "--item-index": 6 } as React.CSSProperties} onClick={() => setMenuOpen(false)}>
+              <span className="nav-menu-index">06</span>
+              <BookOpen size={18} />
+              <span className="nav-menu-copy">
+                <span className="nav-menu-link-text">Van kahvaltısı</span>
+                <span className="nav-menu-link-meta">Rehber ve içerik</span>
+              </span>
+              <ChevronRight size={17} />
+            </Link>
             <a
               href={whatsappUrl}
-              style={{ "--item-index": 5 } as React.CSSProperties}
+              style={{ "--item-index": 7 } as React.CSSProperties}
               target="_blank"
               rel="noopener noreferrer"
               onClick={() => setMenuOpen(false)}
             >
-              <span className="nav-menu-index">05</span>
+              <span className="nav-menu-index">07</span>
               <MessageCircle size={18} />
               <span className="nav-menu-copy">
                 <span className="nav-menu-link-text">WhatsApp</span>
@@ -261,7 +278,7 @@ export default function ClientPage() {
               </span>
               <ChevronRight size={17} />
             </a>
-            <div className="nav-menu-signature" aria-hidden="true" style={{ "--item-index": 6 } as React.CSSProperties}>
+            <div className="nav-menu-signature" aria-hidden="true" style={{ "--item-index": 8 } as React.CSSProperties}>
               <span>
                 Tarihi<em>Van</em>
               </span>
@@ -281,8 +298,15 @@ export default function ClientPage() {
         >
           <div className="max-w-4xl mx-auto leading-relaxed">
             <span itemProp="description">
-              <strong itemProp="name">Tarihi Van Kahvaltı Evi</strong>, İstanbul Beyoğlu Taksim'de yer alan ve 1978'den beri orijinal Van otlu peyniri, murtuğa ve sınırsız çay eşliğinde geleneksel <em>serpme Van kahvaltısı</em> sunan tarihi bir restorandır. Kahvaltı fiyatı kişi başı ortalama 450 TL'dir.
+              <strong itemProp="name">Tarihi Van Kahvaltı Evi</strong>, İstanbul Beyoğlu Taksim&apos;de Zambak Sk. No:8 adresinde yer alan ve 1978&apos;den beri Van otlu peyniri, murtuğa, kavut ve sınırsız çay eşliğinde geleneksel <em>serpme Van kahvaltısı</em> sunan tarihi bir restorandır. Kahvaltı fiyatı kişi başı yaklaşık 450 TL&apos;dir.
             </span>
+            <nav className="seo-inline-links" aria-label="SEO hızlı bağlantılar">
+              <Link href="/menu">Menü ve fiyatlar</Link>
+              <Link href="/van-kahvaltisi">Van kahvaltısı nedir?</Link>
+              <Link href="/beyoglu-kahvalti">Beyoğlu kahvaltı</Link>
+              <Link href="/taksim-kahvalti">Taksim kahvaltı</Link>
+              <Link href="/kafka-cafe">Kafka Cafe</Link>
+            </nav>
           </div>
         </section>
         <div className="story-band">

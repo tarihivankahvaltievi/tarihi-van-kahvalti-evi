@@ -1,5 +1,15 @@
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
+import {
+  address,
+  coordinates,
+  defaultOgImage,
+  displayPhone,
+  email,
+  keywords,
+  siteName,
+  siteUrl,
+} from "./seo";
 
 export const viewport: Viewport = {
   width: "device-width",
@@ -9,32 +19,26 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://tarihivankahvaltievi.com"),
+  metadataBase: new URL(siteUrl),
+  applicationName: siteName,
   title: {
     default:
-      "Tarihi Van Kahvaltı Evi | Taksim Beyoğlu – Serpme Van Kahvaltısı & Traditional Turkish Breakfast",
-    template: "%s | Tarihi Van Kahvaltı Evi",
+      "Tarihi Van Kahvaltı Evi | Taksim Beyoğlu Serpme Van Kahvaltısı",
+    template: `%s | ${siteName}`,
   },
   description:
-    "Beyoğlu Taksim'deki tarihi Rum binasında 1978'den beri geleneksel serpme Van kahvaltısı & Kafka Cafe. Traditional Turkish breakfast in Taksim, Istanbul. Zambak Sk. No:8 Beyoğlu.",
-  keywords: [
-    "Van kahvaltısı",
-    "Tarihi Van Kahvaltı Evi",
-    "Beyoğlu kahvaltı",
-    "Taksim kahvaltı",
-    "İstanbul kahvaltı",
-    "serpme kahvaltı",
-    "Van kahvaltı Beyoğlu",
-    "Kafka Cafe",
-    "otlu peynir",
-    "murtuğa",
-    "kavut",
-    "tarihi Rum binası kahvaltı",
-    "Zambak Sokak Beyoğlu",
-    "geleneksel Türk kahvaltısı",
-    "Turkish breakfast Istanbul",
-    "Van breakfast Taksim",
-  ],
+    "Beyoğlu Taksim'deki tarihi Rum binasında 1978'den beri geleneksel serpme Van kahvaltısı, otlu peynir, murtuğa, kavut, sınırsız çay ve Kafka Cafe. Zambak Sk. No:8 Beyoğlu.",
+  keywords,
+  authors: [{ name: siteName, url: siteUrl }],
+  creator: siteName,
+  publisher: siteName,
+  category: "restaurant",
+  referrer: "strict-origin-when-cross-origin",
+  formatDetection: {
+    telephone: true,
+    address: true,
+    email: true,
+  },
   robots: {
     index: true,
     follow: true,
@@ -47,20 +51,27 @@ export const metadata: Metadata = {
     },
   },
   alternates: {
-    canonical: "https://tarihivankahvaltievi.com",
+    canonical: siteUrl,
     languages: {
-      "tr-TR": "https://tarihivankahvaltievi.com",
+      "tr-TR": siteUrl,
+      "x-default": siteUrl,
+    },
+    types: {
+      "text/plain": [
+        { url: "/llms.txt", title: "LLMS summary" },
+        { url: "/llms-full.txt", title: "LLMS full entity facts" },
+      ],
     },
   },
   openGraph: {
     title: "Tarihi Van Kahvaltı Evi | Beyoğlu Taksim",
     description:
-      "1978'den beri tarihi Rum binasında geleneksel Van kahvaltısı ve Kafka Cafe kahve deneyimi. Beyoğlu'nun kalbinde serpme kahvaltı, otlu peynir, murtuğa ve kavut.",
-    url: "https://tarihivankahvaltievi.com",
-    siteName: "Tarihi Van Kahvaltı Evi",
+      "1978'den beri tarihi Rum binasında geleneksel Van kahvaltısı, otlu peynir, murtuğa, kavut, sınırsız çay ve Kafka Cafe.",
+    url: siteUrl,
+    siteName,
     images: [
       {
-        url: "/images/hero-table.jpg",
+        url: defaultOgImage,
         width: 1200,
         height: 630,
         alt: "Tarihi Van Kahvaltı Evi — Beyoğlu'nda geleneksel serpme Van kahvaltısı sofrası",
@@ -74,7 +85,7 @@ export const metadata: Metadata = {
     title: "Tarihi Van Kahvaltı Evi | Beyoğlu Taksim",
     description:
       "1978'den beri tarihi Rum binasında Van kahvaltısı. Otlu peynir, murtuğa, kavut ve sınırsız çay.",
-    images: ["/images/hero-table.jpg"],
+    images: [defaultOgImage],
   },
   icons: {
     icon: [
@@ -91,22 +102,22 @@ export const metadata: Metadata = {
       },
     ],
   },
-  category: "restaurant",
   other: {
     "geo.region": "TR-34",
     "geo.placename": "Beyoğlu, İstanbul",
-    "geo.position": "41.0366;28.9792",
-    ICBM: "41.0366, 28.9792",
-    "place:location:latitude": "41.0366",
-    "place:location:longitude": "28.9792",
-    "business:contact_data:street_address": "Zambak Sk. No:8",
-    "business:contact_data:locality": "Beyoğlu",
-    "business:contact_data:region": "İstanbul",
-    "business:contact_data:postal_code": "34421",
-    "business:contact_data:country_name": "Türkiye",
-    "business:contact_data:phone_number": "+90 541 525 2868",
-    "business:contact_data:email": "info@tarihivankahvaltievi.com",
-    "business:contact_data:website": "https://tarihivankahvaltievi.com",
+    "geo.position": `${coordinates.latitude};${coordinates.longitude}`,
+    ICBM: `${coordinates.latitude}, ${coordinates.longitude}`,
+    "place:location:latitude": String(coordinates.latitude),
+    "place:location:longitude": String(coordinates.longitude),
+    "business:contact_data:street_address": address.streetAddress,
+    "business:contact_data:locality": address.locality,
+    "business:contact_data:region": address.region,
+    "business:contact_data:postal_code": address.postalCode,
+    "business:contact_data:country_name": address.countryName,
+    "business:contact_data:phone_number": displayPhone,
+    "business:contact_data:email": email,
+    "business:contact_data:website": siteUrl,
+    "og:phone_number": displayPhone,
   },
 };
 
@@ -120,12 +131,12 @@ export default function RootLayout({
   return (
     <html lang="tr" className="h-full antialiased">
       <head>
-        {/* DNS Prefetch & Preconnect — mobilde bağlantı gecikmesini ~100-300ms azaltır */}
         <link rel="dns-prefetch" href="https://www.google.com" />
         <link rel="dns-prefetch" href="https://wa.me" />
         <link rel="dns-prefetch" href="https://maps.googleapis.com" />
         <link rel="preconnect" href="https://www.google.com" crossOrigin="anonymous" />
         <link rel="preconnect" href="https://wa.me" crossOrigin="anonymous" />
+        <link rel="author" href="/llms.txt" />
       </head>
       <body className="min-h-full flex flex-col">
         <WebVitals />

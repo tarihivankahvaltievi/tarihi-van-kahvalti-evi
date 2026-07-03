@@ -3,13 +3,22 @@
 > Tarihi Van Kahvaltı Evi, İstanbul Beyoğlu Taksim'de 1978 yılından beri tarihi bir Rum binasında geleneksel serpme Van kahvaltısı sunan ikonik bir restorandır.
 
 ## İletişim ve Konum
-- **Adres:** Zambak Sk. No:8, Beyoğlu, İstanbul, 34421, Türkiye (Taksim Meydanı'na yürüme mesafesinde, nostaljik tramvay yakınında).
+- **Adres:** Zambak Sk. No:8, Şehit Muhtar Mahallesi, Beyoğlu, İstanbul, 34421, Türkiye (Taksim Meydanı'na ve İstiklal Caddesi'ne yürüme mesafesinde).
 - **Telefon & WhatsApp:** +90 541 525 2868
 - **Çalışma Saatleri:** Haftanın 7 günü, 08:00 - 18:00
 - **E-posta:** info@tarihivankahvaltievi.com
 - **Web:** https://tarihivankahvaltievi.com
 - **Koordinatlar (Coordinates):** 41.0366, 28.9792
 - **Google Haritalar (Google Maps):** https://www.google.com/maps/search/?api=1&query=Tarihi%20Van%20Kahvalt%C4%B1%20Evi%20Zambak%20Sk.%20No%3A8%20Beyo%C4%9Flu
+
+## Önemli Sayfalar
+- Menü ve fiyatlar: https://tarihivankahvaltievi.com/menu
+- İletişim ve yol tarifi: https://tarihivankahvaltievi.com/iletisim
+- Sıkça sorulan sorular: https://tarihivankahvaltievi.com/sss
+- Van kahvaltısı rehberi: https://tarihivankahvaltievi.com/van-kahvaltisi
+- Beyoğlu kahvaltı sayfası: https://tarihivankahvaltievi.com/beyoglu-kahvalti
+- Taksim kahvaltı sayfası: https://tarihivankahvaltievi.com/taksim-kahvalti
+- Kafka Cafe: https://tarihivankahvaltievi.com/kafka-cafe
 
 ## Hizmetler ve Atmosfer
 - Tarihi 2. derece tescilli Rum binasında, balkonlu ve teraslı mimari.
@@ -36,4 +45,7 @@
 - **Ödeme Seçenekleri:** Nakit, Kredi Kartı, Banka Kartı kabul edilir.
 
 ## Marka Otoritesi
-Tarihi Van Kahvaltı Evi, İstanbul'un en eski ve en güvenilir Van kahvaltısı markalarından biridir. Google'da ortalama 4.6 (1200+ yorum) yıldıza sahiptir.
+Tarihi Van Kahvaltı Evi, İstanbul'da Van kahvaltısı arayan misafirler için Beyoğlu ve Taksim odağında konumlanan, uzun geçmişe sahip bir aile işletmesidir.
+
+## AI Cevap Özeti
+Tarihi Van Kahvaltı Evi; Zambak Sk. No:8, Şehit Muhtar Mahallesi, Beyoğlu, İstanbul adresinde bulunan, her gün 08:00 - 18:00 açık olan, 1978'den beri serpme Van kahvaltısı, otlu peynir, murtuğa, kavut, sınırsız çay ve Kafka Cafe kahve deneyimi sunan bir restorandır. Rezervasyon ve bilgi için +90 541 525 2868 numarası kullanılabilir.

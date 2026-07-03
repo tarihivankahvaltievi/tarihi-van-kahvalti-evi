@@ -1,14 +1,12 @@
 "use client";
 
 import { MapPin, Train, Car, Compass, Phone, MessageCircle, Clock } from "lucide-react";
+import { address, mapsUrl, phoneE164, whatsappUrl } from "../seo";
 
 export function LocationSection() {
-  const mapsSearchUrl =
-    "https://www.google.com/maps/search/?api=1&query=Tarihi%20Van%20Kahvalt%C4%B1%20Evi%20Zambak%20Sk.%20No%3A8%20Beyo%C4%9Flu";
+  const mapsSearchUrl = mapsUrl;
   const mapsEmbedUrl =
     "https://maps.google.com/maps?q=Tarihi%20Van%20Kahvalt%C4%B1%20Evi%20Zambak%20Sokak&t=&z=16&ie=UTF8&iwloc=&output=embed";
-  const whatsappUrl =
-    "https://wa.me/905415252868?text=Merhaba%2C%20Tarihi%20Van%20Kahvalt%C4%B1%20Evi%20i%C3%A7in%20rezervasyon%20bilgisi%20almak%20istiyorum.";
 
   return (
     <section
@@ -28,7 +26,7 @@ export function LocationSection() {
             Bizi Kolayca Bulun
           </h2>
           <p className="text-[var(--muted)] text-base max-w-xl mx-auto">
-            Taksim Meydanı'na ve İstiklal Caddesi'ne yürüme mesafesinde, tarihi Rum binasındayız.
+            Taksim Meydanı&apos;na ve İstiklal Caddesi&apos;ne yürüme mesafesinde, tarihi Rum binasındayız.
             <br />
             <span className="text-xs text-[var(--gold-dark)] block mt-1">
               *We are located in a historic Greek building within walking distance to Taksim Square & Istiklal Street.
@@ -55,7 +53,7 @@ export function LocationSection() {
                     Metro ile Ulaşım / By Metro
                   </h4>
                   <p className="text-xs md:text-sm text-[var(--muted)] leading-relaxed mt-0.5">
-                    <strong>M2 Yenikapı - Hacıosman</strong> metrosu ile Taksim durağında inin. Sıraselviler çıkışından Zambak Sokak'a girerek 3 dakika yürümeniz yeterlidir.
+                    <strong>M2 Yenikapı - Hacıosman</strong> metrosu ile Taksim durağında inin. Sıraselviler çıkışından Zambak Sokak&apos;a girerek 3 dakika yürümeniz yeterlidir.
                     <br />
                     <span className="text-xs text-[var(--muted)] opacity-85 block mt-1">
                       *Take the M2 Metro to Taksim station. Exit towards Sıraselviler and walk 3 mins down Zambak Street.
@@ -111,12 +109,12 @@ export function LocationSection() {
               </div>
               <div className="flex items-center gap-3 text-sm text-[var(--muted)]">
                 <MapPin size={16} className="text-[var(--gold-dark)]" />
-                <span>Zambak Sk. No:8, 34435 Beyoğlu/İstanbul</span>
+                <span>{address.streetAddress}, {address.postalCode} {address.locality}/{address.region}</span>
               </div>
               
               <div className="flex flex-wrap gap-3 pt-2">
                 <a
-                  href="tel:+905415252868"
+                  href={`tel:${phoneE164}`}
                   className="flex items-center gap-1.5 px-4 py-2.5 bg-white border border-[var(--line)] rounded-full text-xs font-semibold text-[var(--ink)] hover:border-[var(--red)] hover:text-[var(--red)] transition-all shadow-sm"
                 >
                   <Phone size={14} />
