@@ -111,7 +111,7 @@ export function LocationSection() {
               </div>
               <div className="flex items-center gap-3 text-sm text-[var(--muted)]">
                 <MapPin size={16} className="text-[var(--gold-dark)]" />
-                <span>Zambak Sk. No:8, 34421 Beyoğlu/İstanbul</span>
+                <span>Zambak Sk. No:8, 34435 Beyoğlu/İstanbul</span>
               </div>
               
               <div className="flex flex-wrap gap-3 pt-2">
@@ -139,6 +139,15 @@ export function LocationSection() {
                 >
                   <MapPin size={14} />
                   <span>Yol Tarifi / Directions</span>
+                </a>
+                <a
+                  href={mapsSearchUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-1.5 px-4 py-2.5 bg-white border border-[#4285F4] text-[#4285F4] rounded-full text-xs font-semibold hover:bg-[#4285F4] hover:text-white transition-all shadow-sm"
+                >
+                  <Compass size={14} />
+                  <span>Değerlendirin / Review us</span>
                 </a>
               </div>
             </div>

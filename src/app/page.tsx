@@ -20,6 +20,7 @@ const jsonLd = {
     "Van kahvaltısı",
     "Serpme kahvaltı",
     "Turkish breakfast",
+    "Kurdish cuisine",
     "Geleneksel Türk kahvaltısı",
     "Coffee",
   ],
@@ -28,9 +29,9 @@ const jsonLd = {
   address: {
     "@type": "PostalAddress",
     streetAddress: "Zambak Sk. No:8",
-    addressLocality: "Beyoğlu",
+    addressLocality: "Taksim, Beyoğlu",
     addressRegion: "İstanbul",
-    postalCode: "34421",
+    postalCode: "34435",
     addressCountry: "TR",
   },
   geo: {
@@ -55,7 +56,7 @@ const jsonLd = {
       closes: "18:00",
     },
   ],
-  priceRange: "$$",
+  priceRange: "₺₺",
   currenciesAccepted: "TRY",
   paymentAccepted: "Nakit, Kredi Kartı, Banka Kartı",
   acceptsReservations: true,
