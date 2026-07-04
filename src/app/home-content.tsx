@@ -1,11 +1,11 @@
 import Image from "next/image";
 import Link from "next/link";
 import { ChevronRight } from "lucide-react";
+import { AnimatedFooter } from "./components/animated-footer";
 import { BookingOpenButton } from "./components/booking-open-button";
 import { FaqSection } from "./components/faq-section";
 import { GalleryLightbox } from "./components/gallery-lightbox";
 import { ReviewCarousel } from "./components/review-carousel";
-import { SiteFooter } from "./components/site-footer";
 import { VanHeroParallax } from "./components/van-hero-parallax";
 import { displayAddress, internationalTouristFacts, localSeoFacts } from "./seo";
 
@@ -192,7 +192,7 @@ export function HomeContent() {
         </section>
       </div>
 
-      <SiteFooter />
+      <AnimatedFooter />
     </>
   );
 }

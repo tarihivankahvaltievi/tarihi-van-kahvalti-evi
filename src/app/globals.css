@@ -491,11 +491,11 @@ body .mobile-bar button:hover {
     linear-gradient(90deg, rgba(255, 255, 255, 0.42), rgba(129, 37, 35, 0.06));
   backdrop-filter: blur(24px) saturate(136%);
   -webkit-backdrop-filter: blur(24px) saturate(136%);
-  box-shadow: 
+  box-shadow:
     0 18px 56px rgba(31, 20, 17, 0.16),
     inset 0 1px 0 rgba(255, 255, 255, 0.72),
     inset 0 -1px 0 rgba(101, 57, 34, 0.08);
-  transition: 
+  transition:
     top 450ms cubic-bezier(0.25, 1, 0.5, 1),
     min-height 450ms cubic-bezier(0.25, 1, 0.5, 1),
     padding 450ms cubic-bezier(0.25, 1, 0.5, 1),
@@ -515,7 +515,7 @@ body .mobile-bar button:hover {
     linear-gradient(135deg, rgba(255, 252, 246, 0.93), rgba(241, 230, 207, 0.86)),
     linear-gradient(90deg, rgba(255, 255, 255, 0.52), rgba(129, 37, 35, 0.055));
   border-color: rgba(255, 247, 232, 0.72);
-  box-shadow: 
+  box-shadow:
     0 14px 40px rgba(31, 20, 17, 0.13),
     inset 0 1px 0 rgba(255, 255, 255, 0.78),
     inset 0 -1px 0 rgba(101, 57, 34, 0.08);
@@ -701,7 +701,7 @@ body .mobile-bar button:hover {
   border: 1px solid rgba(143, 23, 26, 0.08);
   z-index: 0;
   pointer-events: none;
-  transition: 
+  transition:
     left 300ms cubic-bezier(0.25, 1, 0.5, 1),
     width 300ms cubic-bezier(0.25, 1, 0.5, 1),
     opacity 220ms ease;
@@ -2378,7 +2378,7 @@ h2 span {
   font-weight: 700;
   letter-spacing: 0.04em;
   text-transform: uppercase;
-  box-shadow: 
+  box-shadow:
     0 8px 20px rgba(80, 52, 29, 0.05),
     inset 0 1px 0 #ffffff;
   transition: all 220ms var(--ease-soft);
@@ -3026,7 +3026,7 @@ h2 span {
     margin-top: 1.2rem;
     padding: 0 0.2rem;
   }
-  
+
   .menu-book-controls button {
     min-height: 36px;
     padding: 0 0.85rem;
@@ -4195,7 +4195,7 @@ h2 span {
     transform: none !important;
     transition: none;
   }
-  
+
   .mid-layer {
     animation: parallax-mid linear both;
     animation-timeline: --footer-timeline;
@@ -4203,7 +4203,7 @@ h2 span {
     transform: none !important;
     transition: none;
   }
-  
+
   .fore-layer {
     animation: parallax-fore linear both;
     animation-timeline: --footer-timeline;
@@ -4211,7 +4211,7 @@ h2 span {
     transform: none !important;
     transition: none;
   }
-  
+
 }
 
 @keyframes parallax-bg {
@@ -4667,7 +4667,7 @@ h2 span {
   .footer-skyline-wrapper .facade-detail {
     opacity: 0.22;
   }
-  
+
   .footer-content {
     padding: 1.15rem 5vw calc(7.2rem + env(safe-area-inset-bottom));
   }
@@ -4679,7 +4679,7 @@ h2 span {
   .footer-brand-lockup {
     max-width: none;
   }
-  
+
   .footer-brand-logo {
     width: 48px;
     height: 48px;
@@ -4688,11 +4688,11 @@ h2 span {
     margin-bottom: 0;
     box-shadow: 0 8px 20px rgba(143, 23, 26, 0.08);
   }
-  
+
   .footer-manifesto {
     display: none;
   }
-  
+
   .footer-brand-desc {
     display: none;
   }
@@ -4704,7 +4704,7 @@ h2 span {
   .footer-divider {
     display: none;
   }
-  
+
   .footer-grid {
     grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
     gap: 1.05rem 1rem;
@@ -4791,7 +4791,7 @@ h2 span {
   .hours-value {
     font-size: 1.08rem;
   }
-  
+
   .footer-bottom {
     display: none;
   }
@@ -4839,7 +4839,7 @@ h2 span {
   background:
     linear-gradient(135deg, rgba(255, 252, 246, 0.9), rgba(235, 224, 207, 0.74)),
     radial-gradient(circle at 50% 0%, rgba(255, 255, 255, 0.86), transparent 54%);
-  box-shadow: 
+  box-shadow:
     0 24px 58px rgba(24, 16, 14, 0.18),
     0 8px 18px rgba(111, 16, 19, 0.08),
     inset 0 1px 0 rgba(255, 255, 255, 0.86),
@@ -5422,11 +5422,11 @@ h2 span {
   .mobile-bar {
     display: none;
   }
-  
+
   .lightbox-content {
     padding: 3rem;
   }
-  
+
   .lightbox-nav.prev {
     left: 3rem;
   }
@@ -5447,7 +5447,7 @@ h2 span {
   .red-reviews {
     margin-inline: 3vw;
   }
-  
+
   .menu-list {
     grid-template-columns: 1fr 1fr;
     gap: 2rem;
@@ -7398,7 +7398,7 @@ h2 span {
   opacity: 0;
   transform: translateX(30px);
   pointer-events: none;
-  transition: 
+  transition:
     opacity 500ms var(--ease-soft),
     transform 500ms var(--ease-out);
   display: flex;
@@ -18014,7 +18014,7 @@ h2 span,
 
 .local-answer-grid {
   display: grid;
-  grid-template-columns: repeat(5, minmax(0, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
   gap: 12px;
 }
 
@@ -18144,33 +18144,6 @@ h2 span,
   color: var(--red-dark);
   font-weight: 800;
   text-decoration: none;
-}
-
-.site-footer-lite {
-  position: relative;
-  border-top: 1px solid var(--line);
-}
-
-.site-footer-lite .footer-content {
-  padding-top: clamp(2rem, 5vw, 4rem);
-}
-
-.site-footer-lite .footer-brand-logo img {
-  object-fit: contain;
-}
-
-.site-footer-lite .footer-links a {
-  min-width: 0;
-}
-
-.site-footer-lite .footer-links .link-text {
-  overflow-wrap: anywhere;
-}
-
-.site-footer-lite .hours-label {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.35rem;
 }
 
 @media (max-width: 980px) {

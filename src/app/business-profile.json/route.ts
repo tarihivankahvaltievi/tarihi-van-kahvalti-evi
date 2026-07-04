@@ -17,6 +17,7 @@ import {
   email,
   foundingDate,
   fullAddress,
+  geoServiceArea,
   geoSearchIntents,
   homeLanguageAlternates,
   internationalTouristFacts,
@@ -25,6 +26,7 @@ import {
   localSeoFacts,
   mapsUrl,
   menuSections,
+  nearbyPlaceProfiles,
   nearbyLandmarks,
   openingHours,
   phoneE164,
@@ -34,6 +36,7 @@ import {
   siteUrl,
   supportedLanguages,
   transitAccess,
+  walkingRouteProfiles,
   whatsappUrl,
 } from "../seo";
 
@@ -88,10 +91,13 @@ export function GET() {
       },
       menu: menuSections,
       locationContext: {
+        geoServiceArea,
         localAreas,
         localAreaProfiles,
+        nearbyPlaceProfiles,
         nearbyLandmarks,
         transitAccess,
+        walkingRouteProfiles,
         geoSearchIntents,
       },
       localSeoFacts,

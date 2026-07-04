@@ -133,6 +133,81 @@ export const localAreaProfiles = [
   },
 ];
 
+export const geoServiceArea = {
+  radiusMeters: 2500,
+  primaryPlace: "Beyoğlu Taksim",
+  description:
+    "Taksim Meydanı, İstiklal Caddesi, Sıraselviler, Cihangir, Galata ve Karaköy hattında yürüyüş rotalarına yakın kahvaltı noktası.",
+};
+
+export const walkingRouteProfiles = [
+  {
+    from: "M2 Taksim Metro",
+    to: siteName,
+    distanceMeters: 450,
+    duration: "PT6M",
+    description: "Taksim metrodan Sıraselviler yönüne çıkıp Zambak Sokak'a kısa yürüyüş.",
+    url: "/kahvalti-yol-tarifi",
+  },
+  {
+    from: "İstiklal Caddesi",
+    to: siteName,
+    distanceMeters: 350,
+    duration: "PT5M",
+    description: "İstiklal Caddesi ve Sıraselviler hattından Zambak Sokak No:8'e yürüyüş.",
+    url: "/istiklal-caddesi-kahvalti",
+  },
+  {
+    from: "Cihangir",
+    to: siteName,
+    distanceMeters: 900,
+    duration: "PT12M",
+    description: "Cihangir ve Sıraselviler çevresinden Taksim'e yakın Van kahvaltısı rotası.",
+    url: "/cihangir-kahvalti",
+  },
+  {
+    from: "Galata",
+    to: siteName,
+    distanceMeters: 1900,
+    duration: "PT25M",
+    description: "Galata ve Karaköy gezisi öncesi veya sonrası Beyoğlu'nda kahvaltı başlangıcı.",
+    url: "/galata-kahvalti",
+  },
+];
+
+export const nearbyPlaceProfiles = [
+  {
+    name: "Taksim Meydanı",
+    type: "LandmarksOrHistoricalBuildings",
+    distanceMeters: 450,
+    url: "/taksim-kahvalti",
+  },
+  {
+    name: "İstiklal Caddesi",
+    type: "LandmarksOrHistoricalBuildings",
+    distanceMeters: 350,
+    url: "/istiklal-caddesi-kahvalti",
+  },
+  {
+    name: "Sıraselviler Caddesi",
+    type: "StreetAddress",
+    distanceMeters: 250,
+    url: "/siraselviler-kahvalti",
+  },
+  {
+    name: "Cihangir",
+    type: "Neighborhood",
+    distanceMeters: 900,
+    url: "/cihangir-kahvalti",
+  },
+  {
+    name: "Galata Kulesi",
+    type: "TouristAttraction",
+    distanceMeters: 1900,
+    url: "/galata-kahvalti",
+  },
+];
+
 export const openingHours = {
   opens: "08:00",
   closes: "18:00",
@@ -172,6 +247,12 @@ export const localSeoFacts = [
     value: "M2 Taksim metrodan Sıraselviler yönüne çıkıp Zambak Sokak'a kısa yürüyüşle ulaşılır.",
     href: "/kahvalti-yol-tarifi",
     intent: "Taksim metro kahvaltı yol tarifi, İstiklal Caddesi'ne yakın kahvaltı",
+  },
+  {
+    label: "Yakın çevre",
+    value: `${geoServiceArea.primaryPlace} çevresinde ${geoServiceArea.radiusMeters} metre yarıçapta yürüyüş rotalarına uygun konumdadır.`,
+    href: "/taksim-kahvalti",
+    intent: "yakınımdaki kahvaltı, Taksim çevresi Van kahvaltısı",
   },
   {
     label: "Kahve",
@@ -1905,7 +1986,7 @@ export function buildGeoCoverageJsonLd(withContext = true) {
             latitude: coordinates.latitude,
             longitude: coordinates.longitude,
           },
-          geoRadius: "2500",
+          geoRadius: String(geoServiceArea.radiusMeters),
         },
       },
       ...localAreaProfiles.map((area) => ({
@@ -1914,19 +1995,56 @@ export function buildGeoCoverageJsonLd(withContext = true) {
         additionalType: `https://schema.org/${area.type}`,
         description: area.relation,
       })),
-    ],
-    itemListElement: localAreaProfiles.map((area, index) => ({
-      "@type": "ListItem",
-      position: index + 1,
-      name: area.name,
-      description: area.relation,
-      item: {
+      ...nearbyPlaceProfiles.map((place) => ({
         "@type": "Place",
+        name: place.name,
+        additionalType: `https://schema.org/${place.type}`,
+        url: absoluteUrl(place.url),
+        distance: {
+          "@type": "Distance",
+          name: `${place.distanceMeters} m`,
+        },
+      })),
+    ],
+    itemListElement: [
+      ...localAreaProfiles.map((area, index) => ({
+        "@type": "ListItem",
+        position: index + 1,
         name: area.name,
-        additionalType: `https://schema.org/${area.type}`,
-        description: area.searchIntent,
-      },
-    })),
+        description: area.relation,
+        item: {
+          "@type": "Place",
+          name: area.name,
+          additionalType: `https://schema.org/${area.type}`,
+          description: area.searchIntent,
+        },
+      })),
+      ...walkingRouteProfiles.map((route, index) => ({
+        "@type": "ListItem",
+        position: localAreaProfiles.length + index + 1,
+        name: `${route.from} yürüyüş rotası`,
+        description: route.description,
+        item: {
+          "@type": "Trip",
+          name: `${route.from} - ${route.to}`,
+          url: absoluteUrl(route.url),
+          itinerary: [
+            {
+              "@type": "Place",
+              name: route.from,
+            },
+            {
+              "@id": `${siteUrl}/#restaurant`,
+            },
+          ],
+          distance: {
+            "@type": "Distance",
+            name: `${route.distanceMeters} m`,
+          },
+          duration: route.duration,
+        },
+      })),
+    ],
   };
 
   return withContext ? { "@context": "https://schema.org", ...data } : data;
@@ -2056,7 +2174,7 @@ export function buildRestaurantJsonLd(withContext = true) {
         latitude: coordinates.latitude,
         longitude: coordinates.longitude,
       },
-      geoRadius: "2500",
+      geoRadius: String(geoServiceArea.radiusMeters),
     },
     containedInPlace: {
       "@type": "Place",
@@ -2122,6 +2240,16 @@ export function buildRestaurantJsonLd(withContext = true) {
         additionalType: `https://schema.org/${area.type}`,
         description: area.relation,
       })),
+      ...nearbyPlaceProfiles.map((place) => ({
+        "@type": "Place",
+        name: place.name,
+        additionalType: `https://schema.org/${place.type}`,
+        url: absoluteUrl(place.url),
+        distance: {
+          "@type": "Distance",
+          name: `${place.distanceMeters} m`,
+        },
+      })),
     ],
     additionalProperty: [
       {
@@ -2143,6 +2271,16 @@ export function buildRestaurantJsonLd(withContext = true) {
         "@type": "PropertyValue",
         name: "Öne çıkan yerel lezzetler",
         value: "Van otlu peyniri, murtuğa, kavut, kete, sınırsız çay",
+      },
+      {
+        "@type": "PropertyValue",
+        name: "Geo servis alanı",
+        value: `${geoServiceArea.primaryPlace} çevresinde ${geoServiceArea.radiusMeters} metre yürünebilir yerel kapsam`,
+      },
+      {
+        "@type": "PropertyValue",
+        name: "Yakın yürüyüş rotaları",
+        value: walkingRouteProfiles.map((route) => `${route.from}: ${route.duration}`).join(", "),
       },
     ],
     amenityFeature: [
