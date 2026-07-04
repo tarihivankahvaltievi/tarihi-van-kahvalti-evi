@@ -7,6 +7,7 @@ import {
   displayPhone,
   email,
   keywords,
+  sameAsUrls,
   siteName,
   siteUrl,
 } from "./seo";
@@ -132,6 +133,7 @@ export default function RootLayout({
         <link rel="alternate" type="text/plain" href="/llms.txt" title="AI kısa işletme özeti" />
         <link rel="alternate" type="text/plain" href="/llms-full.txt" title="AI detaylı işletme özeti" />
         <link rel="alternate" type="application/json" href="/business-profile.json" title="Makine okunur işletme profili" />
+        <link rel="me" href={sameAsUrls[0]} />
       </head>
       <body className="min-h-full flex flex-col">
         <WebVitals />

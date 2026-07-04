@@ -3,6 +3,7 @@ import { siteUrl } from "./seo";
 
 const aiDiscoveryBots = [
   "OAI-SearchBot",
+  "ChatGPT-User",
   "GPTBot",
   "Google-Extended",
   "PerplexityBot",
@@ -15,9 +16,13 @@ const aiDiscoveryBots = [
   "Meta-ExternalAgent",
   "Meta-ExternalFetcher",
   "CCBot",
+  "YouBot",
+  "cohere-ai",
 ];
 
 export default function robots(): MetadataRoute.Robots {
+  const siteHost = new URL(siteUrl).host;
+
   return {
     rules: [
       {
@@ -32,6 +37,6 @@ export default function robots(): MetadataRoute.Robots {
       },
     ],
     sitemap: `${siteUrl}/sitemap.xml`,
-    host: siteUrl,
+    host: siteHost,
   };
 }

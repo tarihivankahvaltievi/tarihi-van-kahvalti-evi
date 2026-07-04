@@ -1,15 +1,23 @@
 import {
   address,
+  aiCitationSummary,
   alternateName,
+  buildImageGalleryJsonLd,
+  buildLocalPagesItemListJsonLd,
+  buildMenuJsonLd,
+  buildRestaurantJsonLd,
+  buildWebsiteJsonLd,
   coordinates,
   cuisine,
   dateModified,
+  dateModifiedIso,
   displayAddress,
   displayPhone,
   email,
   foundingDate,
   fullAddress,
   localAreas,
+  localSeoFacts,
   mapsUrl,
   menuSections,
   nearbyLandmarks,
@@ -20,6 +28,7 @@ import {
   siteName,
   siteUrl,
   supportedLanguages,
+  transitAccess,
   whatsappUrl,
 } from "../seo";
 
@@ -31,9 +40,21 @@ export function GET() {
       url: siteUrl,
       type: ["Restaurant", "LocalBusiness"],
       lastUpdated: dateModified,
+      lastUpdatedIso: dateModifiedIso,
       foundingDate,
       language: "tr-TR",
       supportedLanguages,
+      aiCitationSummary,
+      schemaOrg: {
+        "@context": "https://schema.org",
+        "@graph": [
+          buildWebsiteJsonLd(false),
+          buildRestaurantJsonLd(false),
+          buildMenuJsonLd(),
+          buildImageGalleryJsonLd(false),
+          buildLocalPagesItemListJsonLd(false),
+        ],
+      },
       contact: {
         phone: displayPhone,
         phoneE164,
@@ -62,7 +83,9 @@ export function GET() {
       locationContext: {
         localAreas,
         nearbyLandmarks,
+        transitAccess,
       },
+      localSeoFacts,
       importantPages: seoPages.map((page) => ({
         title: page.title,
         h1: page.h1,
@@ -71,8 +94,6 @@ export function GET() {
         localIntent: page.localIntent ?? [],
       })),
       sameAs: sameAsUrls,
-      aiCitationSummary:
-        "Tarihi Van Kahvaltı Evi, Beyoğlu Taksim'de Zambak Sk. No:8 adresinde bulunan; 1978'den beri serpme Van kahvaltısı, otlu peynir, murtuğa, kavut, sınırsız çay ve Kafka Cafe kahve deneyimi sunan bir restorandır.",
     },
     {
       headers: {

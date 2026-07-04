@@ -15,7 +15,7 @@ import {
 import { UiMotion } from "./ui-motion";
 import dynamic from "next/dynamic";
 import { VanHeroParallax } from "./components/van-hero-parallax";
-import { displayAddress, mapsUrl, whatsappUrl } from "./seo";
+import { displayAddress, localSeoFacts, mapsUrl, whatsappUrl } from "./seo";
 
 const BookingModal = dynamic(() => import("./components/booking-modal").then(mod => mod.BookingModal), { ssr: false });
 const GalleryLightbox = dynamic(() => import("./components/gallery-lightbox").then(mod => mod.GalleryLightbox), { ssr: false });
@@ -305,12 +305,33 @@ export default function ClientPage() {
               <Link href="/istanbul-van-kahvaltisi">İstanbul Van kahvaltısı</Link>
               <Link href="/serpme-kahvalti-beyoglu">Serpme kahvaltı</Link>
               <Link href="/istiklal-caddesi-kahvalti">İstiklal kahvaltı</Link>
+              <Link href="/zambak-sokak-kahvalti">Zambak Sokak</Link>
+              <Link href="/siraselviler-kahvalti">Sıraselviler</Link>
+              <Link href="/turkish-breakfast-istanbul">Turkish breakfast</Link>
               <Link href="/kahvalti-rezervasyon">Rezervasyon</Link>
               <Link href="/kafka-cafe">Kafka Cafe</Link>
             </nav>
           </div>
         </section>
         <div className="story-band">
+          <section className="local-answer-panel" aria-labelledby="local-answer-heading" data-reveal>
+            <div className="local-answer-head">
+              <span className="light-pill">Yerel bilgi</span>
+              <h2 id="local-answer-heading">Beyoğlu Taksim Van kahvaltısı için hızlı bilgiler</h2>
+            </div>
+            <div className="local-answer-grid">
+              {localSeoFacts.map((fact) => (
+                <article key={fact.label} className="local-answer-card">
+                  <h3>{fact.label}</h3>
+                  <p>{fact.value}</p>
+                  <Link href={fact.href} aria-label={`${fact.label} hakkında detay`}>
+                    Detay <ChevronRight size={16} />
+                  </Link>
+                </article>
+              ))}
+            </div>
+          </section>
+
           <article id="story" className="red-story" data-reveal>
             <div className="story-content">
               <div className="story-copy">

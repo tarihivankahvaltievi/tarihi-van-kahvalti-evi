@@ -28,5 +28,28 @@ export default function manifest(): MetadataRoute.Manifest {
     ],
     categories: ["food", "restaurant", "travel"],
     lang: "tr-TR",
+    shortcuts: [
+      {
+        name: "Menü ve Fiyatlar",
+        short_name: "Menü",
+        description: "Serpme Van kahvaltısı, sıcaklar ve Kafka Cafe menüsü.",
+        url: "/menu",
+        icons: [{ src: "/images/brand-icon-small.png", sizes: "512x512", type: "image/png" }],
+      },
+      {
+        name: "Yol Tarifi",
+        short_name: "Konum",
+        description: "Zambak Sokak Beyoğlu adresi ve Taksim metrodan yol tarifi.",
+        url: "/kahvalti-yol-tarifi",
+        icons: [{ src: "/images/brand-icon-small.png", sizes: "512x512", type: "image/png" }],
+      },
+      {
+        name: "Rezervasyon",
+        short_name: "Rezervasyon",
+        description: "Telefon ve WhatsApp ile kahvaltı rezervasyon bilgisi.",
+        url: "/kahvalti-rezervasyon",
+        icons: [{ src: "/images/brand-icon-small.png", sizes: "512x512", type: "image/png" }],
+      },
+    ],
   };
 }

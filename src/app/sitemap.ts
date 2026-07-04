@@ -10,6 +10,20 @@ import {
 
 const lastModified = new Date(dateModifiedIso);
 
+function languageAlternates(url: string) {
+  return {
+    languages: {
+      "tr-TR": url,
+      tr: url,
+      "x-default": url,
+    },
+  };
+}
+
+function uniqueImages(images: string[]) {
+  return [...new Set(images)];
+}
+
 export default function sitemap(): MetadataRoute.Sitemap {
   const staticRoutes: MetadataRoute.Sitemap = [
     {
@@ -17,12 +31,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified,
       changeFrequency: "weekly",
       priority: 1,
-      images: [
+      alternates: languageAlternates(siteUrl),
+      images: uniqueImages([
         absoluteUrl(defaultOgImagePath),
         absoluteUrl("/images/hero-table.jpg"),
         absoluteUrl("/images/breakfast-spread.jpg"),
         absoluteUrl("/images/balcony-breakfast.jpg"),
-      ],
+      ]),
     },
   ];
 
@@ -32,7 +47,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     changeFrequency:
       page.slug === "menu" || page.slug === "kahvalti-fiyatlari" ? "weekly" : "monthly",
     priority: page.slug === "menu" || page.slug === "iletisim" ? 0.9 : 0.75,
-    images: [absoluteUrl(pageOgImagePath(page.slug)), absoluteUrl(page.image)],
+    alternates: languageAlternates(absoluteUrl(page.slug)),
+    images: uniqueImages([absoluteUrl(pageOgImagePath(page.slug)), absoluteUrl(page.image)]),
   }));
 
   return [...staticRoutes, ...seoRoutes];

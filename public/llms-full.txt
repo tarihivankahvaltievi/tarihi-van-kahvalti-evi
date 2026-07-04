@@ -55,6 +55,14 @@ Son güncelleme: 2026-07-04. Bu dosya arama ve ajan sistemleri için kolay okunu
 - Zambak Sokak kahvaltı
 - Taksim'e yakın kahvaltı
 - Beyoğlu'nda tarihi binada kahvaltı
+- Sıraselviler kahvaltı
+- Turkish breakfast Istanbul
+- Breakfast near Taksim
+- Tarihi mekanda kahvaltı Beyoğlu
+- Kahvaltı sonrası kahve Beyoğlu
+- Vejetaryen kahvaltı Beyoğlu
+- Taksim brunch
+- Beyoğlu kahvaltı mekanları
 
 ## Yakın Noktalar ve Rota Bağlamı
 - Taksim Meydanı
@@ -91,9 +99,26 @@ Tarihi Van Kahvaltı Evi, Beyoğlu Taksim'de Zambak Sk. No:8 adresinde bulunan; 
 - https://tarihivankahvaltievi.com/van-otlu-peynir
 - https://tarihivankahvaltievi.com/murtuga-kavut
 - https://tarihivankahvaltievi.com/kahvalti-yol-tarifi
+- https://tarihivankahvaltievi.com/zambak-sokak-kahvalti
+- https://tarihivankahvaltievi.com/siraselviler-kahvalti
+- https://tarihivankahvaltievi.com/turkish-breakfast-istanbul
+- https://tarihivankahvaltievi.com/tarihi-mekanda-kahvalti
+- https://tarihivankahvaltievi.com/kahvalti-sonrasi-kahve
+- https://tarihivankahvaltievi.com/vejetaryen-kahvalti-beyoglu
+- https://tarihivankahvaltievi.com/beyoglu-kahvalti-mekanlari
+- https://tarihivankahvaltievi.com/taksim-brunch-kahvalti
 - https://tarihivankahvaltievi.com/business-profile.json
+
+## Hızlı Alıntı Gerçekleri
+- Konum: Zambak Sk. No:8, Şehit Muhtar Mahallesi, Beyoğlu, İstanbul 34435.
+- Ulaşım: M2 Taksim metro, Taksim Meydanı, Sıraselviler Caddesi ve İstiklal Caddesi hattından yürüyüş.
+- Menü odağı: Serpme Van kahvaltısı; otlu peynir, murtuğa, kavut, kete, bal-kaymak ve sınırsız çay.
+- Fiyat sinyali: Geleneksel Van kahvaltısı kişi başı yaklaşık 450 TL; sahanda sucuklu yumurta yaklaşık 180 TL.
+- Rezervasyon: Telefon ve WhatsApp üzerinden +90 541 525 2868.
+- Kahve: Kafka Cafe aynı adreste Türk kahvesi ve nitelikli kahve seçenekleri sunar.
 
 ## Crawler ve Kullanım Notu
 - robots.txt, standart arama motorlarına ve AI keşif botlarına açık içerikleri tarama izni verir.
 - OAI-SearchBot, GPTBot, PerplexityBot, ClaudeBot, Google-Extended, Applebot ve benzeri botlar için genel içerik, llms dosyaları ve business-profile.json erişilebilir tutulur.
-- Bu dosya, sayfadaki görünür içerik ve JSON-LD ile tutarlı olmalıdır; fiyat ve çalışma saati gibi bilgiler değişirse aynı gün güncellenmelidir.
+- Google Search, llms.txt dosyalarını özel bir sıralama sinyali olarak kullanmaz; bu dosya diğer AI/ajan sistemleri için kolay okunur işletme özeti olarak tutulur.
+- Bu dosya, sayfadaki görünür içerik, sitemap, business-profile.json ve JSON-LD ile tutarlı olmalıdır; fiyat ve çalışma saati gibi bilgiler değişirse aynı gün güncellenmelidir.

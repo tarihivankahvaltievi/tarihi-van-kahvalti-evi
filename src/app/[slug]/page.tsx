@@ -6,6 +6,7 @@ import {
   absoluteUrl,
   buildArticleJsonLd,
   buildBreadcrumbJsonLd,
+  buildDirectionsHowToJsonLd,
   buildFaqJsonLd,
   buildMenuJsonLd,
   buildRestaurantJsonLd,
@@ -98,6 +99,10 @@ export default async function SeoPage({ params }: PageProps) {
 
   if (slug === "menu") {
     graph.push(buildMenuJsonLd());
+  }
+
+  if (slug === "kahvalti-yol-tarifi") {
+    graph.push(buildDirectionsHowToJsonLd(false));
   }
 
   if (page.article) {
@@ -200,6 +205,10 @@ export default async function SeoPage({ params }: PageProps) {
         <Link href="/taksim-kahvalti">Taksim kahvaltı</Link>
         <Link href="/kahvalti-fiyatlari">Kahvaltı fiyatları</Link>
         <Link href="/kafka-cafe">Kafka Cafe</Link>
+        <Link href="/zambak-sokak-kahvalti">Zambak Sokak</Link>
+        <Link href="/siraselviler-kahvalti">Sıraselviler</Link>
+        <Link href="/turkish-breakfast-istanbul">Turkish breakfast</Link>
+        <Link href="/tarihi-mekanda-kahvalti">Tarihi mekan</Link>
       </section>
     </main>
   );
