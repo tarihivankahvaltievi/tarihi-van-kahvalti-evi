@@ -18323,3 +18323,9 @@ h2 span,
     width: min(16vw, 60px) !important;
   }
 }
+
+.story-band {
+  background:
+    linear-gradient(180deg, rgba(255, 251, 239, 0.96), rgba(247, 235, 207, 0.94)) !important;
+  box-shadow: none !important;
+}
