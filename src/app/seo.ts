@@ -18,7 +18,14 @@ export const sameAsUrls = [
   "https://www.instagram.com/tarihivankahvaltievi/",
 ];
 
-export const supportedLanguages = ["tr", "en"];
+export const supportedLanguages = ["tr", "en", "ru", "ar"];
+
+export const supportedLanguageNames = [
+  "Türkçe",
+  "English",
+  "Русский",
+  "العربية",
+];
 
 export const address = {
   streetAddress: "Zambak Sk. No:8",
@@ -115,6 +122,33 @@ export const localSeoFacts = [
   },
 ];
 
+export const internationalTouristFacts = [
+  {
+    language: "English",
+    title: "Turkish breakfast near Taksim",
+    value:
+      "Van-style Turkish breakfast in Beyoğlu, a short walk from Taksim Square, Istiklal Avenue and Siraselviler.",
+    href: "/turkish-breakfast-istanbul",
+    intent: "Turkish breakfast Istanbul, breakfast near Taksim, Van breakfast Istanbul",
+  },
+  {
+    language: "Русский",
+    title: "Завтрак рядом с Таксим",
+    value:
+      "Турецкий завтрак в стиле Ван в Бейоглу: сыр с травами, муртуга, кавут, чай и удобный маршрут от площади Таксим.",
+    href: "/zavtrak-taksim-stambul",
+    intent: "завтрак Таксим, турецкий завтрак Стамбул, завтрак рядом с Таксим",
+  },
+  {
+    language: "العربية",
+    title: "فطور تركي قرب تقسيم",
+    value:
+      "فطور فان التركي في بيوغلو قرب ميدان تقسيم وشارع الاستقلال، مع شاي وخيارات تقليدية وموقع سهل للسياح.",
+    href: "/arabic-breakfast-taksim",
+    intent: "فطور تركي اسطنبول, فطور قرب تقسيم, فطور فان",
+  },
+];
+
 export const cuisine = [
   "Van kahvaltısı",
   "Serpme kahvaltı",
@@ -146,6 +180,14 @@ export const keywords = [
   "Van breakfast Taksim",
   "Turkish breakfast Istanbul",
   "breakfast near Taksim",
+  "breakfast near Taksim Square",
+  "Istanbul breakfast for tourists",
+  "завтрак Таксим",
+  "турецкий завтрак Стамбул",
+  "завтрак рядом с Таксим",
+  "ванский завтрак Стамбул",
+  "فطور تركي اسطنبول",
+  "فطور قرب تقسيم",
   "Beyoğlu kahvaltı mekanları",
   "Sıraselviler kahvaltı",
   "tarihi mekanda kahvaltı",
@@ -263,6 +305,8 @@ export type SeoPage = {
   image: string;
   ogImage?: string;
   imageAlt: string;
+  language?: string;
+  locale?: string;
   schemaType?: "WebPage" | "AboutPage" | "ContactPage" | "CollectionPage";
   article?: boolean;
   keywords?: string[];
@@ -1080,9 +1124,18 @@ export const seoPages: SeoPage[] = [
     image: "/images/hero-table.jpg",
     ogImage: "/images/og/van-kahvaltisi.jpg",
     imageAlt: "Traditional Turkish Van breakfast table in Istanbul Beyoğlu",
+    language: "en",
+    locale: "en_US",
     schemaType: "AboutPage",
     article: true,
-    keywords: ["Turkish breakfast Istanbul", "Van breakfast Istanbul", "breakfast near Taksim"],
+    keywords: [
+      "Turkish breakfast Istanbul",
+      "Van breakfast Istanbul",
+      "breakfast near Taksim",
+      "breakfast near Taksim Square",
+      "Istanbul breakfast for tourists",
+      "traditional Turkish breakfast Beyoglu",
+    ],
     localIntent: ["traditional Turkish breakfast near Taksim", "Van breakfast in Istanbul"],
     nearbyLandmarks: ["Taksim Square", "Istiklal Avenue", "Cihangir"],
     intro: [
@@ -1109,7 +1162,169 @@ export const seoPages: SeoPage[] = [
         body: "Menus, current prices and table availability can change during busy periods, so checking by phone or WhatsApp before visiting is practical.",
       },
     ],
-    questions: [faqItems[0], faqItems[1], faqItems[2], faqItems[3]],
+    questions: [
+      {
+        question: "Where is Tarihi Van Kahvaltı Evi located?",
+        answer:
+          `Tarihi Van Kahvaltı Evi is at ${displayAddress}, close to Taksim Square, Istiklal Avenue and Siraselviler in Beyoğlu, Istanbul.`,
+      },
+      {
+        question: "What is served in the Van breakfast spread?",
+        answer:
+          "The table focuses on Van-style breakfast with herbed cheese, murtuğa, kavut, kete, honey and clotted cream, hot plates and freshly brewed tea.",
+      },
+      {
+        question: "Is it suitable for tourists staying around Taksim?",
+        answer:
+          "Yes. The restaurant is in central Beyoğlu and works well for visitors before walking to Istiklal Avenue, Cihangir, Galata or other Istanbul routes.",
+      },
+      {
+        question: "How can visitors ask about reservation or availability?",
+        answer:
+          `Visitors can call or send a WhatsApp message to ${displayPhone} for current table availability, opening hours and group information.`,
+      },
+    ],
+  },
+  {
+    slug: "zavtrak-taksim-stambul",
+    title: "Завтрак в Таксиме Стамбул | Турецкий завтрак Ван",
+    description:
+      "Традиционный турецкий завтрак в Стамбуле рядом с Таксим: завтрак Ван с сыром с травами, муртуга, кавут, чаем и Kafka Cafe в Бейоглу.",
+    h1: "Турецкий завтрак рядом с Таксим",
+    eyebrow: "Для туристов",
+    image: "/images/hero-table.jpg",
+    ogImage: "/images/og/taksim-kahvalti.jpg",
+    imageAlt: "Традиционный турецкий завтрак Ван в Бейоглу Стамбул",
+    language: "ru",
+    locale: "ru_RU",
+    schemaType: "AboutPage",
+    article: true,
+    keywords: [
+      "завтрак Таксим",
+      "турецкий завтрак Стамбул",
+      "завтрак рядом с Таксим",
+      "ванский завтрак Стамбул",
+      "завтрак Бейоглу",
+      "Taksim breakfast Russian tourists",
+    ],
+    localIntent: ["завтрак рядом с площадью Таксим", "турецкий завтрак для туристов в Стамбуле"],
+    nearbyLandmarks: ["Площадь Таксим", "Улица Истикляль", "Сирасельвилер", "Джихангир"],
+    intro: [
+      "Туристам, которые ищут завтрак в Таксиме, обычно важны понятный адрес, близость к метро и традиционная турецкая еда без сложного маршрута.",
+      "Tarihi Van Kahvaltı Evi находится в Бейоглу, недалеко от площади Таксим, и подает завтрак в стиле Ван: сыр с травами, муртуга, кавут, кете и свежий чай.",
+    ],
+    highlights: [
+      `Адрес: ${displayAddress}, рядом с площадью Таксим и улицей Истикляль.`,
+      "Открыто каждый день с 08:00 до 18:00.",
+      "Завтрак Ван подается как общий стол минимум для двух гостей.",
+      `Для информации о месте и бронировании можно написать в WhatsApp или позвонить: ${displayPhone}.`,
+    ],
+    sections: [
+      {
+        title: "Почему удобно для туристов",
+        body: "Ресторан расположен в центральном районе Бейоглу: после завтрака удобно идти на улицу Истикляль, в Джихангир или продолжить прогулку к Галате.",
+      },
+      {
+        title: "Что попробовать",
+        body: "Главные вкусы стола Ван: сыр с травами, горячая муртуга, кавут, кете, мед со сливками и свежезаваренный чай.",
+      },
+      {
+        title: "Оптимально для Яндекса и русскоязычных запросов",
+        body: "Эта страница использует русские заголовки, описание, FAQ и hreflang-разметку, чтобы поисковые системы корректно понимали ее язык и туристический контекст Таксима.",
+      },
+    ],
+    questions: [
+      {
+        question: "Где находится Tarihi Van Kahvaltı Evi?",
+        answer:
+          `Ресторан находится по адресу ${displayAddress}. От площади Таксим, улицы Истикляль и Сирасельвилер можно дойти пешком.`,
+      },
+      {
+        question: "Что входит в турецкий завтрак Ван?",
+        answer:
+          "В основе стола сыр с травами, муртуга, кавут, кете, мед со сливками, горячие блюда и свежий чай.",
+      },
+      {
+        question: "Подходит ли место для русских туристов в районе Таксим?",
+        answer:
+          "Да. Локация центральная, адрес понятный для навигации, а страница подготовлена на русском языке для запросов вроде завтрак Таксим и турецкий завтрак Стамбул.",
+      },
+      {
+        question: "Как уточнить наличие мест?",
+        answer:
+          `Лучше заранее позвонить или написать в WhatsApp по номеру ${displayPhone}, особенно в выходные и для групп.`,
+      },
+    ],
+  },
+  {
+    slug: "arabic-breakfast-taksim",
+    title: "فطور تركي في تقسيم إسطنبول | فطور فان في بيوغلو",
+    description:
+      "فطور تركي تقليدي قرب تقسيم في إسطنبول: فطور فان مع جبن بالأعشاب، شاي، أطباق ساخنة، وموقع قريب من شارع الاستقلال.",
+    h1: "فطور تركي قرب تقسيم في إسطنبول",
+    eyebrow: "للزوار",
+    image: "/images/breakfast-spread.jpg",
+    ogImage: "/images/og/van-kahvaltisi.jpg",
+    imageAlt: "مائدة فطور فان التركي في بيوغلو إسطنبول",
+    language: "ar",
+    locale: "ar_AR",
+    schemaType: "AboutPage",
+    article: true,
+    keywords: [
+      "فطور تركي اسطنبول",
+      "فطور قرب تقسيم",
+      "فطور فان",
+      "فطور في بيوغلو",
+      "مطعم فطور تركي تقسيم",
+    ],
+    localIntent: ["فطور تركي قرب ميدان تقسيم", "فطور للسياح في اسطنبول"],
+    nearbyLandmarks: ["ميدان تقسيم", "شارع الاستقلال", "سيراسيلفيلر", "جيهانغير"],
+    intro: [
+      "للزوار الذين يبحثون عن فطور تركي في إسطنبول، الموقع الواضح والقرب من تقسيم وشارع الاستقلال يساعدان في التخطيط لليوم.",
+      "يقدم Tarihi Van Kahvaltı Evi فطور فان التركي في بيوغلو مع جبن بالأعشاب، أطباق ساخنة، كيتا، عسل وقشطة، وشاي طازج.",
+    ],
+    highlights: [
+      `العنوان: ${displayAddress}، قريب من ميدان تقسيم وشارع الاستقلال.`,
+      "ساعات العمل يوميا من 08:00 إلى 18:00.",
+      "فطور فان يقدم كمائدة مشاركة ومناسب لشخصين أو أكثر.",
+      `للاستفسار عن الحجز أو التوفر يمكن الاتصال أو إرسال واتساب: ${displayPhone}.`,
+    ],
+    sections: [
+      {
+        title: "مناسب للسياح في تقسيم",
+        body: "المطعم في بيوغلو، ويمكن الوصول إليه بسهولة من تقسيم وسيراسيلفيلر قبل جولة شارع الاستقلال أو جيهانغير.",
+      },
+      {
+        title: "ماذا يوجد على المائدة؟",
+        body: "تضم مائدة فان جبنا بالأعشاب، أطباقا ساخنة، كيتا، عسل وقشطة، وشايا تركيا طازجا.",
+      },
+      {
+        title: "معلومات سريعة قبل الزيارة",
+        body: "في عطلة نهاية الأسبوع أو مع المجموعات، من الأفضل التأكد عبر الهاتف أو واتساب من توفر الطاولات والأسعار الحالية.",
+      },
+    ],
+    questions: [
+      {
+        question: "أين يقع Tarihi Van Kahvaltı Evi؟",
+        answer:
+          `يقع المطعم في ${displayAddress}، على مسافة قريبة من ميدان تقسيم وشارع الاستقلال في بيوغلو.`,
+      },
+      {
+        question: "هل الفطور مناسب للسياح حول تقسيم؟",
+        answer:
+          "نعم، الموقع مركزي وقريب من مسارات المشي في بيوغلو، لذلك يناسب الزوار قبل جولة إسطنبول.",
+      },
+      {
+        question: "ما أبرز أطباق فطور فان؟",
+        answer:
+          "تشمل المائدة جبنا بالأعشاب، أطباقا ساخنة، كيتا، عسل وقشطة، وشايا طازجا.",
+      },
+      {
+        question: "كيف يمكن الاستفسار عن الحجز؟",
+        answer:
+          `يمكن الاتصال أو إرسال رسالة واتساب إلى ${displayPhone} لمعرفة التوفر الحالي.`,
+      },
+    ],
   },
   {
     slug: "tarihi-mekanda-kahvalti",
@@ -1311,6 +1526,41 @@ export function absoluteUrl(path = "") {
   return `${siteUrl}${path.startsWith("/") ? path : `/${path}`}`;
 }
 
+export const homeLanguageAlternates = {
+  "tr-TR": siteUrl,
+  tr: siteUrl,
+  en: absoluteUrl("turkish-breakfast-istanbul"),
+  ru: absoluteUrl("zavtrak-taksim-stambul"),
+  ar: absoluteUrl("arabic-breakfast-taksim"),
+  "x-default": siteUrl,
+};
+
+export const internationalSeoSlugs = new Set([
+  "turkish-breakfast-istanbul",
+  "zavtrak-taksim-stambul",
+  "arabic-breakfast-taksim",
+]);
+
+export function getPageLanguage(page?: SeoPage) {
+  return page?.language ?? "tr-TR";
+}
+
+export function getPageLocale(page?: SeoPage) {
+  return page?.locale ?? "tr_TR";
+}
+
+export function getPageLanguageAlternates(page?: SeoPage, url = siteUrl) {
+  if (page && internationalSeoSlugs.has(page.slug)) {
+    return homeLanguageAlternates;
+  }
+
+  return {
+    "tr-TR": url,
+    tr: url,
+    "x-default": url,
+  };
+}
+
 export function getSeoPage(slug: string) {
   return seoPages.find((page) => page.slug === slug);
 }
@@ -1346,6 +1596,7 @@ export function createPageMetadata(page: SeoPage): Metadata {
   const url = absoluteUrl(page.slug);
   const image = absoluteUrl(pageOgImagePath(page.slug));
   const pageKeywords = [...new Set([...(page.keywords ?? []), ...keywords])];
+  const pageLanguage = getPageLanguage(page);
 
   return {
     title: page.title,
@@ -1357,11 +1608,7 @@ export function createPageMetadata(page: SeoPage): Metadata {
     category: "restaurant",
     alternates: {
       canonical: url,
-      languages: {
-        "tr-TR": url,
-        tr: url,
-        "x-default": url,
-      },
+      languages: getPageLanguageAlternates(page, url),
     },
     openGraph: {
       title: page.title,
@@ -1376,7 +1623,7 @@ export function createPageMetadata(page: SeoPage): Metadata {
           alt: page.imageAlt,
         },
       ],
-      locale: "tr_TR",
+      locale: getPageLocale(page),
       type: "website",
     },
     twitter: {
@@ -1409,6 +1656,7 @@ export function createPageMetadata(page: SeoPage): Metadata {
       "restaurant:contact_info:region": address.region,
       "restaurant:contact_info:postal_code": address.postalCode,
       "restaurant:contact_info:country_name": address.countryName,
+      "content-language": pageLanguage,
       ...(page.article
         ? {
             "article:published_time": dateModifiedIso,
@@ -1463,7 +1711,7 @@ export function buildWebsiteJsonLd(withContext = true) {
     name: siteName,
     alternateName,
     url: siteUrl,
-    inLanguage: "tr-TR",
+    inLanguage: supportedLanguages,
     dateModified: dateModifiedIso,
     publisher: { "@id": `${siteUrl}/#restaurant` },
     about: { "@id": `${siteUrl}/#restaurant` },
@@ -1479,7 +1727,7 @@ export function buildWebsiteJsonLd(withContext = true) {
       url: absoluteUrl(page.slug),
       name: page.title,
       description: page.description,
-      inLanguage: "tr-TR",
+      inLanguage: getPageLanguage(page),
     })),
     sameAs: sameAsUrls,
   };
@@ -1568,6 +1816,7 @@ export function buildLocalPagesItemListJsonLd(withContext = true) {
         name: page.title,
         description: page.description,
         url: absoluteUrl(page.slug),
+        inLanguage: getPageLanguage(page),
       },
     })),
   };
@@ -1734,6 +1983,13 @@ export function buildRestaurantJsonLd(withContext = true) {
       "Sıraselviler kahvaltı",
       "Zambak Sokak kahvaltı",
       "Turkish breakfast Istanbul",
+      "Breakfast near Taksim",
+      "Istanbul breakfast for tourists",
+      "завтрак Таксим",
+      "турецкий завтрак Стамбул",
+      "завтрак рядом с Таксим",
+      "فطور تركي اسطنبول",
+      "فطور قرب تقسيم",
     ],
     additionalProperty: [
       {
@@ -1755,6 +2011,16 @@ export function buildRestaurantJsonLd(withContext = true) {
         "@type": "PropertyValue",
         name: "Öne çıkan yerel lezzetler",
         value: "Van otlu peyniri, murtuğa, kavut, kete, sınırsız çay",
+      },
+      {
+        "@type": "PropertyValue",
+        name: "Turist ve yabancı dil sayfaları",
+        value: "English, Russian and Arabic visitor pages are available with reciprocal hreflang links.",
+      },
+      {
+        "@type": "PropertyValue",
+        name: "Yandex uyumlu yerelleştirme",
+        value: "Русская страница использует видимый русский текст, canonical URL and head hreflang markup.",
       },
     ],
     amenityFeature: [
@@ -1894,7 +2160,7 @@ export function buildArticleJsonLd(page: SeoPage, pageUrl = absoluteUrl(page.slu
     name: page.title,
     description: page.description,
     image: absoluteUrl(page.image),
-    inLanguage: "tr-TR",
+    inLanguage: getPageLanguage(page),
     datePublished: dateModified,
     dateModified: dateModifiedIso,
     isAccessibleForFree: true,
@@ -1929,7 +2195,7 @@ export function buildFaqJsonLd(items = faqItems, pageUrl = siteUrl, withContext 
   const data = {
     "@type": "FAQPage",
     "@id": `${pageUrl}#faq`,
-    inLanguage: "tr-TR",
+    inLanguage: getPageLanguage(seoPages.find((page) => absoluteUrl(page.slug) === pageUrl)),
     mainEntity: items.map((item) => ({
       "@type": "Question",
       name: item.question,

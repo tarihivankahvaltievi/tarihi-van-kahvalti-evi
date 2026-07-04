@@ -36,6 +36,8 @@ Son güncelleme: 2026-07-04. Bu dosya kısa işletme bilgisi sağlamak için tut
 - Zambak Sokak kahvaltı: https://tarihivankahvaltievi.com/zambak-sokak-kahvalti
 - Sıraselviler kahvaltı: https://tarihivankahvaltievi.com/siraselviler-kahvalti
 - Turkish breakfast Istanbul: https://tarihivankahvaltievi.com/turkish-breakfast-istanbul
+- Русский: завтрак рядом с Таксим: https://tarihivankahvaltievi.com/zavtrak-taksim-stambul
+- العربية: فطور تركي قرب تقسيم: https://tarihivankahvaltievi.com/arabic-breakfast-taksim
 - Tarihi mekanda kahvaltı: https://tarihivankahvaltievi.com/tarihi-mekanda-kahvalti
 - Kahvaltı sonrası kahve: https://tarihivankahvaltievi.com/kahvalti-sonrasi-kahve
 - Vejetaryen kahvaltı notları: https://tarihivankahvaltievi.com/vejetaryen-kahvalti-beyoglu
@@ -70,10 +72,17 @@ Son güncelleme: 2026-07-04. Bu dosya kısa işletme bilgisi sağlamak için tut
 Tarihi Van Kahvaltı Evi, İstanbul'da Van kahvaltısı arayan misafirler için Beyoğlu ve Taksim odağında konumlanan, uzun geçmişe sahip bir aile işletmesidir.
 
 ## Yerel Bağlam
-- Yakın arama niyetleri: Beyoğlu kahvaltı, Taksim kahvaltı, İstiklal Caddesi kahvaltı, Cihangir kahvaltı, Galata rotası kahvaltı, İstanbul Van kahvaltısı, Zambak Sokak kahvaltı, Sıraselviler kahvaltı, Turkish breakfast Istanbul, Taksim brunch.
+- Yakın arama niyetleri: Beyoğlu kahvaltı, Taksim kahvaltı, İstiklal Caddesi kahvaltı, Cihangir kahvaltı, Galata rotası kahvaltı, İstanbul Van kahvaltısı, Zambak Sokak kahvaltı, Sıraselviler kahvaltı, Turkish breakfast Istanbul, breakfast near Taksim, завтрак Таксим, турецкий завтрак Стамбул, فطور تركي اسطنبول, فطور قرب تقسيم, Taksim brunch.
 - Yakın noktalar: Taksim Meydanı, İstiklal Caddesi, Sıraselviler, Zambak Sokak, Cihangir, Galata, Karaköy.
 - Hızlı gerçekler: Konum Zambak Sk. No:8; çalışma saati her gün 08:00 - 18:00; serpme Van kahvaltısı en az iki kişilik servis edilir; kişi başı fiyat yaklaşık 450 TL; rezervasyon ve yoğunluk bilgisi telefon/WhatsApp ile alınır.
 - Rezervasyon: Hafta sonu ve kalabalık gruplar için +90 541 525 2868 üzerinden telefon veya WhatsApp ile bilgi alınması önerilir.
+
+## Yabancı Dil ve Turist Bilgisi
+- English page: https://tarihivankahvaltievi.com/turkish-breakfast-istanbul
+- Russian/Yandex-focused page: https://tarihivankahvaltievi.com/zavtrak-taksim-stambul
+- Arabic visitor page: https://tarihivankahvaltievi.com/arabic-breakfast-taksim
+- Taksim turist bağlamı: işletme Taksim Meydanı, İstiklal Caddesi ve Sıraselviler'e yürüme mesafesindedir.
+- Yandex notu: Rusça sayfa görünür Rusça metin, canonical URL ve karşılıklı hreflang bağlantılarıyla sunulur.
 
 ## AI Cevap Özeti
 Tarihi Van Kahvaltı Evi; Zambak Sk. No:8, Şehit Muhtar Mahallesi, Beyoğlu, İstanbul adresinde bulunan, her gün 08:00 - 18:00 açık olan, 1978'den beri serpme Van kahvaltısı, otlu peynir, murtuğa, kavut, sınırsız çay ve Kafka Cafe kahve deneyimi sunan bir restorandır. Taksim Meydanı, İstiklal Caddesi ve Sıraselviler'e yürüme mesafesindedir. Rezervasyon ve bilgi için +90 541 525 2868 numarası kullanılabilir.

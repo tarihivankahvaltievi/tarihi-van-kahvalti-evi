@@ -3,6 +3,8 @@ import {
   absoluteUrl,
   dateModifiedIso,
   defaultOgImagePath,
+  getPageLanguageAlternates,
+  homeLanguageAlternates,
   pageOgImagePath,
   seoPages,
   siteUrl,
@@ -10,13 +12,9 @@ import {
 
 const lastModified = new Date(dateModifiedIso);
 
-function languageAlternates(url: string) {
+function languageAlternates(url: string, page?: (typeof seoPages)[number]) {
   return {
-    languages: {
-      "tr-TR": url,
-      tr: url,
-      "x-default": url,
-    },
+    languages: page ? getPageLanguageAlternates(page, url) : homeLanguageAlternates,
   };
 }
 
@@ -47,7 +45,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     changeFrequency:
       page.slug === "menu" || page.slug === "kahvalti-fiyatlari" ? "weekly" : "monthly",
     priority: page.slug === "menu" || page.slug === "iletisim" ? 0.9 : 0.75,
-    alternates: languageAlternates(absoluteUrl(page.slug)),
+    alternates: languageAlternates(absoluteUrl(page.slug), page),
     images: uniqueImages([absoluteUrl(pageOgImagePath(page.slug)), absoluteUrl(page.image)]),
   }));
 

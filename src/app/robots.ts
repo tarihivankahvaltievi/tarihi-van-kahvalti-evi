@@ -20,6 +20,14 @@ const aiDiscoveryBots = [
   "cohere-ai",
 ];
 
+const yandexBots = [
+  "Yandex",
+  "YandexBot",
+  "YandexImages",
+  "YandexMobileBot",
+  "YandexAccessibilityBot",
+];
+
 export default function robots(): MetadataRoute.Robots {
   const siteHost = new URL(siteUrl).host;
 
@@ -28,6 +36,11 @@ export default function robots(): MetadataRoute.Robots {
       {
         userAgent: "*",
         allow: "/",
+        disallow: ["/api/", "/_next/server/"],
+      },
+      {
+        userAgent: yandexBots,
+        allow: ["/", "/sitemap.xml", "/business-profile.json", "/zavtrak-taksim-stambul"],
         disallow: ["/api/", "/_next/server/"],
       },
       {

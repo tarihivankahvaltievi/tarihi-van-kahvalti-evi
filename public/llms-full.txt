@@ -58,6 +58,14 @@ Son güncelleme: 2026-07-04. Bu dosya arama ve ajan sistemleri için kolay okunu
 - Sıraselviler kahvaltı
 - Turkish breakfast Istanbul
 - Breakfast near Taksim
+- Breakfast near Taksim Square
+- Istanbul breakfast for tourists
+- завтрак Таксим
+- турецкий завтрак Стамбул
+- завтрак рядом с Таксим
+- ванский завтрак Стамбул
+- فطور تركي اسطنبول
+- فطور قرب تقسيم
 - Tarihi mekanda kahvaltı Beyoğlu
 - Kahvaltı sonrası kahve Beyoğlu
 - Vejetaryen kahvaltı Beyoğlu
@@ -102,6 +110,8 @@ Tarihi Van Kahvaltı Evi, Beyoğlu Taksim'de Zambak Sk. No:8 adresinde bulunan; 
 - https://tarihivankahvaltievi.com/zambak-sokak-kahvalti
 - https://tarihivankahvaltievi.com/siraselviler-kahvalti
 - https://tarihivankahvaltievi.com/turkish-breakfast-istanbul
+- https://tarihivankahvaltievi.com/zavtrak-taksim-stambul
+- https://tarihivankahvaltievi.com/arabic-breakfast-taksim
 - https://tarihivankahvaltievi.com/tarihi-mekanda-kahvalti
 - https://tarihivankahvaltievi.com/kahvalti-sonrasi-kahve
 - https://tarihivankahvaltievi.com/vejetaryen-kahvalti-beyoglu
@@ -116,6 +126,16 @@ Tarihi Van Kahvaltı Evi, Beyoğlu Taksim'de Zambak Sk. No:8 adresinde bulunan; 
 - Fiyat sinyali: Geleneksel Van kahvaltısı kişi başı yaklaşık 450 TL; sahanda sucuklu yumurta yaklaşık 180 TL.
 - Rezervasyon: Telefon ve WhatsApp üzerinden +90 541 525 2868.
 - Kahve: Kafka Cafe aynı adreste Türk kahvesi ve nitelikli kahve seçenekleri sunar.
+
+## Uluslararası Turist ve Dil Sinyalleri
+- English tourist page: https://tarihivankahvaltievi.com/turkish-breakfast-istanbul
+- Russian tourist/Yandex page: https://tarihivankahvaltievi.com/zavtrak-taksim-stambul
+- Arabic tourist page: https://tarihivankahvaltievi.com/arabic-breakfast-taksim
+- Supported language signals: Turkish, English, Russian, Arabic.
+- Russian search intents: завтрак Таксим, турецкий завтрак Стамбул, завтрак рядом с Таксим, ванский завтрак Стамбул.
+- Arabic search intents: فطور تركي اسطنبول, فطور قرب تقسيم, فطور فان.
+- Hreflang policy: International tourist pages use reciprocal hreflang links in the page head for tr, en, ru, ar and x-default. This is important for both Google international targeting and Yandex localized page detection.
+- Browser note: Safari and Chrome receive responsive viewport, theme color, apple web app metadata, manifest, touch icon, server-rendered text and structured data.
 
 ## Crawler ve Kullanım Notu
 - robots.txt, standart arama motorlarına ve AI keşif botlarına açık içerikleri tarama izni verir.

@@ -16,6 +16,8 @@ import {
   email,
   foundingDate,
   fullAddress,
+  homeLanguageAlternates,
+  internationalTouristFacts,
   localAreas,
   localSeoFacts,
   mapsUrl,
@@ -44,6 +46,7 @@ export function GET() {
       foundingDate,
       language: "tr-TR",
       supportedLanguages,
+      supportedLanguagePages: homeLanguageAlternates,
       aiCitationSummary,
       schemaOrg: {
         "@context": "https://schema.org",
@@ -86,11 +89,25 @@ export function GET() {
         transitAccess,
       },
       localSeoFacts,
+      internationalTouristFacts,
+      yandexOptimization: {
+        russianTouristPage: `${siteUrl}/zavtrak-taksim-stambul`,
+        hreflangInHead: true,
+        canonicalUrls: true,
+        serverRenderedHtml: true,
+        note:
+          "Russian tourist content is available as crawlable HTML with reciprocal hreflang links in the page head; no Yandex verification token is published because a real token is required.",
+      },
+      browserOptimization: {
+        safari: ["appleWebApp metadata", "apple touch icon", "responsive viewport"],
+        chrome: ["manifest", "theme color", "server-rendered content", "structured data"],
+      },
       importantPages: seoPages.map((page) => ({
         title: page.title,
         h1: page.h1,
         url: `${siteUrl}/${page.slug}`,
         description: page.description,
+        language: page.language ?? "tr-TR",
         localIntent: page.localIntent ?? [],
       })),
       sameAs: sameAsUrls,

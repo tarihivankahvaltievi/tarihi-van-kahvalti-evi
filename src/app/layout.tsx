@@ -6,6 +6,7 @@ import {
   defaultOgImage,
   displayPhone,
   email,
+  homeLanguageAlternates,
   keywords,
   sameAsUrls,
   siteName,
@@ -53,11 +54,7 @@ export const metadata: Metadata = {
   },
   alternates: {
     canonical: siteUrl,
-    languages: {
-      "tr-TR": siteUrl,
-      tr: siteUrl,
-      "x-default": siteUrl,
-    },
+    languages: homeLanguageAlternates,
   },
   openGraph: {
     title: "Tarihi Van Kahvaltı Evi | Beyoğlu Taksim",
@@ -99,6 +96,7 @@ export const metadata: Metadata = {
     ],
   },
   other: {
+    "content-language": "tr, en, ru, ar",
     "geo.region": "TR-34",
     "geo.placename": "Beyoğlu, İstanbul",
     "geo.position": `${coordinates.latitude};${coordinates.longitude}`,
@@ -114,6 +112,11 @@ export const metadata: Metadata = {
     "business:contact_data:email": email,
     "business:contact_data:website": siteUrl,
     "og:phone_number": displayPhone,
+  },
+  appleWebApp: {
+    capable: true,
+    title: siteName,
+    statusBarStyle: "default",
   },
 };
 
