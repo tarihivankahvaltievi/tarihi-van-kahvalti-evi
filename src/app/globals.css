@@ -17815,12 +17815,12 @@ h2 span,
 
 @media (max-width: 680px) {
   .hero.hero-parallax-dining {
-    height: 140svh !important;
-    min-height: 940px !important;
+    height: 116svh !important;
+    min-height: 760px !important;
   }
 
   .hero-parallax-sticky {
-    min-height: 800px !important;
+    min-height: 700px !important;
   }
 
   .hero-parallax-copy {
@@ -17954,12 +17954,12 @@ h2 span,
 
 @media (max-width: 420px) {
   .hero.hero-parallax-dining {
-    height: 136svh !important;
-    min-height: 900px !important;
+    height: 112svh !important;
+    min-height: 730px !important;
   }
 
   .hero-parallax-sticky {
-    min-height: 780px !important;
+    min-height: 680px !important;
   }
 
   .hero-parallax-copy {
@@ -18331,6 +18331,14 @@ h2 span,
   box-shadow: none !important;
   -webkit-mask-image: none !important;
   mask-image: none !important;
+}
+
+@media (max-width: 680px) {
+  .story-band {
+    --story-transition-overlap: 36px;
+    margin-top: -36px;
+    padding-top: clamp(3rem, 10vw, 4.25rem);
+  }
 }
 
 .story-band::before,
