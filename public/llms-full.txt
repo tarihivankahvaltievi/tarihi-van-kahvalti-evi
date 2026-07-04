@@ -2,7 +2,7 @@
 
 Bu dosya Tarihi Van Kahvaltı Evi hakkında kısa, doğrulanabilir ve alıntılanabilir işletme bilgisi sağlar.
 
-Son güncelleme: 2026-07-04. Bu dosya arama ve ajan sistemleri için kolay okunur işletme özeti sağlar; Google Search için özel bir sıralama sinyali değildir.
+Son güncelleme: 2026-07-04. Bu dosya arama ve ajan sistemleri için kolay okunur işletme özeti sağlar; Google Search için özel bir sıralama sinyali değildir. Yapılandırılmış JSON profil: https://tarihivankahvaltievi.com/business-profile.json
 
 ## Temel Bilgi
 - İşletme adı: Tarihi Van Kahvaltı Evi
@@ -41,9 +41,29 @@ Son güncelleme: 2026-07-04. Bu dosya arama ve ajan sistemleri için kolay okunu
 - Taksim kahvaltı
 - İstanbul Van kahvaltısı
 - Serpme Van kahvaltısı
+- Beyoğlu serpme kahvaltı
+- İstiklal Caddesi kahvaltı
+- Cihangir kahvaltı
+- Galata rotası öncesi kahvaltı
+- Aile kahvaltısı Beyoğlu
+- Grup kahvaltısı Taksim
+- Hafta sonu kahvaltı Beyoğlu
+- Kahvaltı rezervasyon Beyoğlu
+- Taksim metrodan kahvaltı yol tarifi
+- Van otlu peyniri
+- Murtuğa ve kavut
 - Zambak Sokak kahvaltı
 - Taksim'e yakın kahvaltı
 - Beyoğlu'nda tarihi binada kahvaltı
+
+## Yakın Noktalar ve Rota Bağlamı
+- Taksim Meydanı
+- İstiklal Caddesi
+- Sıraselviler Caddesi
+- Cihangir
+- Galata Kulesi
+- Karaköy
+- Şehit Muhtar Mahallesi
 
 ## Önerilen Alıntı
 Tarihi Van Kahvaltı Evi, Beyoğlu Taksim'de Zambak Sk. No:8 adresinde bulunan; 1978'den beri serpme Van kahvaltısı, otlu peynir, murtuğa, kavut, sınırsız çay ve Kafka Cafe kahve deneyimi sunan bir restorandır.
@@ -59,3 +79,21 @@ Tarihi Van Kahvaltı Evi, Beyoğlu Taksim'de Zambak Sk. No:8 adresinde bulunan; 
 - https://tarihivankahvaltievi.com/serpme-van-kahvaltisi
 - https://tarihivankahvaltievi.com/kahvalti-fiyatlari
 - https://tarihivankahvaltievi.com/kafka-cafe
+- https://tarihivankahvaltievi.com/istanbul-van-kahvaltisi
+- https://tarihivankahvaltievi.com/serpme-kahvalti-beyoglu
+- https://tarihivankahvaltievi.com/istiklal-caddesi-kahvalti
+- https://tarihivankahvaltievi.com/cihangir-kahvalti
+- https://tarihivankahvaltievi.com/galata-kahvalti
+- https://tarihivankahvaltievi.com/aile-kahvaltisi-beyoglu
+- https://tarihivankahvaltievi.com/grup-kahvaltisi
+- https://tarihivankahvaltievi.com/hafta-sonu-kahvalti
+- https://tarihivankahvaltievi.com/kahvalti-rezervasyon
+- https://tarihivankahvaltievi.com/van-otlu-peynir
+- https://tarihivankahvaltievi.com/murtuga-kavut
+- https://tarihivankahvaltievi.com/kahvalti-yol-tarifi
+- https://tarihivankahvaltievi.com/business-profile.json
+
+## Crawler ve Kullanım Notu
+- robots.txt, standart arama motorlarına ve AI keşif botlarına açık içerikleri tarama izni verir.
+- OAI-SearchBot, GPTBot, PerplexityBot, ClaudeBot, Google-Extended, Applebot ve benzeri botlar için genel içerik, llms dosyaları ve business-profile.json erişilebilir tutulur.
+- Bu dosya, sayfadaki görünür içerik ve JSON-LD ile tutarlı olmalıdır; fiyat ve çalışma saati gibi bilgiler değişirse aynı gün güncellenmelidir.

@@ -1121,6 +1121,10 @@ export function AnimatedFooter({ onOpenBooking }: { onOpenBooking: () => void })
               <li><Link href="/menu">Zengin Menü</Link></li>
               <li><Link href="/van-kahvaltisi">Van Kahvaltısı</Link></li>
               <li><Link href="/beyoglu-kahvalti">Beyoğlu Kahvaltı</Link></li>
+              <li><Link href="/istanbul-van-kahvaltisi">İstanbul Van Kahvaltısı</Link></li>
+              <li><Link href="/serpme-kahvalti-beyoglu">Serpme Kahvaltı</Link></li>
+              <li><Link href="/istiklal-caddesi-kahvalti">İstiklal Kahvaltı</Link></li>
+              <li><Link href="/kahvalti-rezervasyon">Rezervasyon</Link></li>
               <li><Link href="/sss">Sıkça Sorulan Sorular</Link></li>
             </ul>
           </div>

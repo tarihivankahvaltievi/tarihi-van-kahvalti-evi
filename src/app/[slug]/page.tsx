@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import {
   absoluteUrl,
+  buildArticleJsonLd,
   buildBreadcrumbJsonLd,
   buildFaqJsonLd,
   buildMenuJsonLd,
@@ -54,7 +55,7 @@ export default async function SeoPage({ params }: PageProps) {
     buildWebsiteJsonLd(false),
     buildRestaurantJsonLd(false),
     {
-      "@type": "WebPage",
+      "@type": page.schemaType ?? "WebPage",
       "@id": `${pageUrl}#webpage`,
       url: pageUrl,
       name: page.title,
@@ -68,7 +69,12 @@ export default async function SeoPage({ params }: PageProps) {
       about: {
         "@id": `${siteUrl}/#restaurant`,
       },
-      mainEntity: slug === "menu" ? { "@id": `${siteUrl}/menu#menu` } : { "@id": `${siteUrl}/#restaurant` },
+      mainEntity:
+        slug === "menu"
+          ? { "@id": `${siteUrl}/menu#menu` }
+          : slug === "sss"
+            ? { "@id": `${pageUrl}#faq` }
+            : { "@id": `${siteUrl}/#restaurant` },
       primaryImageOfPage: {
         "@type": "ImageObject",
         url: absoluteUrl(page.image),
@@ -92,6 +98,10 @@ export default async function SeoPage({ params }: PageProps) {
 
   if (slug === "menu") {
     graph.push(buildMenuJsonLd());
+  }
+
+  if (page.article) {
+    graph.push(buildArticleJsonLd(page, pageUrl, false));
   }
 
   const pageJsonLd = {
@@ -153,6 +163,16 @@ export default async function SeoPage({ params }: PageProps) {
             <li key={highlight}>{highlight}</li>
           ))}
         </ul>
+        {(page.localIntent?.length || page.nearbyLandmarks?.length) ? (
+          <div className="seo-context-strip" aria-label="Yerel arama bağlamı">
+            {page.localIntent?.map((intent) => (
+              <span key={intent}>{intent}</span>
+            ))}
+            {page.nearbyLandmarks?.map((landmark) => (
+              <span key={landmark}>{landmark}</span>
+            ))}
+          </div>
+        ) : null}
       </section>
 
       <section className="seo-content-grid" aria-label={`${page.h1} detayları`}>

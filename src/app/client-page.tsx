@@ -302,6 +302,10 @@ export default function ClientPage() {
               <Link href="/van-kahvaltisi">Van kahvaltısı nedir?</Link>
               <Link href="/beyoglu-kahvalti">Beyoğlu kahvaltı</Link>
               <Link href="/taksim-kahvalti">Taksim kahvaltı</Link>
+              <Link href="/istanbul-van-kahvaltisi">İstanbul Van kahvaltısı</Link>
+              <Link href="/serpme-kahvalti-beyoglu">Serpme kahvaltı</Link>
+              <Link href="/istiklal-caddesi-kahvalti">İstiklal kahvaltı</Link>
+              <Link href="/kahvalti-rezervasyon">Rezervasyon</Link>
               <Link href="/kafka-cafe">Kafka Cafe</Link>
             </nav>
           </div>

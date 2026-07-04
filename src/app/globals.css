@@ -355,6 +355,24 @@ body .mobile-bar button:hover {
   line-height: 1.55;
 }
 
+.seo-context-strip {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.seo-context-strip span {
+  max-width: 100%;
+  border: 1px solid color-mix(in srgb, var(--red-dark), var(--line) 55%);
+  border-radius: 999px;
+  padding: 0.42rem 0.7rem;
+  background: color-mix(in srgb, var(--red-dark), transparent 94%);
+  color: var(--red-dark);
+  font-size: 0.78rem;
+  line-height: 1.25;
+}
+
 .seo-content-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));

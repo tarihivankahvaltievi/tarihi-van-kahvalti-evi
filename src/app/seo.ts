@@ -9,10 +9,16 @@ export const telUrl = `tel:${phoneE164}`;
 export const email = "info@tarihivankahvaltievi.com";
 export const foundingDate = "1978";
 export const dateModified = "2026-07-04";
-export const dateModifiedIso = "2026-07-04T00:00:00+03:00";
+export const dateModifiedIso = "2026-07-04T12:00:00+03:00";
 export const defaultImage = "/images/hero-table.jpg";
 export const defaultOgImagePath = "/images/og/home.jpg";
 export const defaultOgImage = `${siteUrl}${defaultOgImagePath}`;
+
+export const sameAsUrls = [
+  "https://www.instagram.com/tarihivankahvaltievi/",
+];
+
+export const supportedLanguages = ["tr", "en"];
 
 export const address = {
   streetAddress: "Zambak Sk. No:8",
@@ -32,6 +38,27 @@ export const coordinates = {
   latitude: 41.0366,
   longitude: 28.9792,
 };
+
+export const localAreas = [
+  "Beyoğlu",
+  "Taksim",
+  "Şehit Muhtar Mahallesi",
+  "İstiklal Caddesi",
+  "Sıraselviler",
+  "Cihangir",
+  "Galata",
+  "Karaköy",
+  "İstanbul",
+];
+
+export const nearbyLandmarks = [
+  "Taksim Meydanı",
+  "İstiklal Caddesi",
+  "Sıraselviler Caddesi",
+  "Cihangir",
+  "Galata Kulesi",
+  "Karaköy",
+];
 
 export const openingHours = {
   opens: "08:00",
@@ -183,7 +210,13 @@ export type SeoPage = {
   h1: string;
   eyebrow: string;
   image: string;
+  ogImage?: string;
   imageAlt: string;
+  schemaType?: "WebPage" | "AboutPage" | "ContactPage" | "CollectionPage";
+  article?: boolean;
+  keywords?: string[];
+  localIntent?: string[];
+  nearbyLandmarks?: string[];
   intro: string[];
   highlights: string[];
   sections: { title: string; body: string }[];
@@ -463,6 +496,457 @@ export const seoPages: SeoPage[] = [
     ],
     questions: [faqItems[8], faqItems[1], faqItems[2]],
   },
+  {
+    slug: "istanbul-van-kahvaltisi",
+    title: "İstanbul Van Kahvaltısı | Beyoğlu Taksim'de Yöresel Sofra",
+    description:
+      "İstanbul'da Van kahvaltısı arayanlar için Beyoğlu Taksim'de otlu peynir, murtuğa, kavut, kete, bal-kaymak ve sınırsız çayla geleneksel sofra.",
+    h1: "İstanbul'da Van kahvaltısı",
+    eyebrow: "İstanbul",
+    image: "/images/hero-table.jpg",
+    ogImage: "/images/og/van-kahvaltisi.jpg",
+    imageAlt: "İstanbul Beyoğlu'nda kurulan geleneksel Van kahvaltısı sofrası",
+    schemaType: "CollectionPage",
+    article: true,
+    keywords: ["İstanbul Van kahvaltısı", "İstanbul yöresel kahvaltı", "İstanbul serpme Van kahvaltısı"],
+    localIntent: ["İstanbul'da Van kahvaltısı nerede yenir?", "Taksim'e yakın yöresel kahvaltı"],
+    nearbyLandmarks: ["Taksim Meydanı", "İstiklal Caddesi", "Cihangir"],
+    intro: [
+      "İstanbul'da Van kahvaltısı arayan misafirler için en önemli konu, yöresel lezzetleri merkezi ve ulaşılabilir bir adreste bulabilmektir.",
+      "Tarihi Van Kahvaltı Evi, Beyoğlu Taksim hattında otlu peynir, murtuğa, kavut, kete ve sınırsız çayla geleneksel Van sofrası kurar.",
+    ],
+    highlights: [
+      "Adres Beyoğlu Taksim'de Zambak Sk. No:8 olarak geçer.",
+      "Her gün 08:00 - 18:00 arasında Van kahvaltısı servis edilir.",
+      "Serpme kahvaltı en az iki kişilik servis edilir.",
+      "Taksim metro, İstiklal Caddesi ve Cihangir çevresinden yürüyerek ulaşılabilir.",
+    ],
+    sections: [
+      {
+        title: "Merkezi konum avantajı",
+        body: "İstanbul'da kahvaltı planlayan misafirler için Taksim, metro ve yürüyüş rotaları sayesinde kolay buluşma noktasıdır.",
+      },
+      {
+        title: "Yöresel ürün odağı",
+        body: "Sofrada Van otlu peyniri, murtuğa, kavut, kete, süzme bal, kaymak ve demli çay gibi Van kahvaltısı lezzetleri öne çıkar.",
+      },
+      {
+        title: "Kimler tercih eder?",
+        body: "Şehri gezen ziyaretçiler, aileler, arkadaş grupları ve İstanbul'da yöresel kahvaltı deneyimi arayanlar için uygundur.",
+      },
+    ],
+    questions: [faqItems[0], faqItems[1], faqItems[2], faqItems[4]],
+  },
+  {
+    slug: "serpme-kahvalti-beyoglu",
+    title: "Serpme Kahvaltı Beyoğlu | Van Sofrası ve Sınırsız Çay",
+    description:
+      "Beyoğlu'nda serpme kahvaltı: Taksim'e yakın Zambak Sokak'ta Van otlu peyniri, murtuğa, kavut, sıcaklar ve sınırsız çay.",
+    h1: "Beyoğlu'nda serpme kahvaltı",
+    eyebrow: "Serpme kahvaltı",
+    image: "/images/hands-table.jpg",
+    ogImage: "/images/og/serpme-van-kahvaltisi.jpg",
+    imageAlt: "Beyoğlu'nda paylaşılan serpme Van kahvaltısı",
+    schemaType: "CollectionPage",
+    keywords: ["serpme kahvaltı Beyoğlu", "Beyoğlu serpme kahvaltı", "Taksim serpme kahvaltı"],
+    localIntent: ["Beyoğlu'nda serpme kahvaltı", "Taksim'e yakın serpme kahvaltı"],
+    nearbyLandmarks: ["Taksim Meydanı", "İstiklal Caddesi", "Sıraselviler Caddesi"],
+    intro: [
+      "Beyoğlu'nda serpme kahvaltı arayanlar genellikle merkezi konum, net fiyat bilgisi ve doyurucu bir sofra ister.",
+      "Tarihi Van Kahvaltı Evi'nde serpme servis Van kahvaltısı karakterini taşır; sıcaklar bakır sahanlarda, çay ise taze demlenmiş olarak gelir.",
+    ],
+    highlights: [
+      "Serpme Van kahvaltısı en az iki kişilik servis edilir.",
+      "Kişi başı fiyat yaklaşık 450 TL'dir; güncel bilgi için işletmeyle iletişim önerilir.",
+      "Sınırsız çay serpme kahvaltıya dahildir.",
+      "Beyoğlu, Taksim ve İstiklal Caddesi rotalarına yakındır.",
+    ],
+    sections: [
+      {
+        title: "Sofrada neler var?",
+        body: "Otlu peynir, murtuğa, kavut, cacık, kete, süzme bal, kaymak ve sıcak yumurta seçenekleri sofrayı tamamlar.",
+      },
+      {
+        title: "Paylaşım için uygun servis",
+        body: "Serpme servis, iki kişi ve üzeri kahvaltı planlarında tabakların paylaşılmasını ve uzun sohbeti kolaylaştırır.",
+      },
+      {
+        title: "Beyoğlu rotasına uyum",
+        body: "Kahvaltıdan sonra İstiklal Caddesi, Cihangir veya Galata yönünde yürüyüşle gün planı sürdürülebilir.",
+      },
+    ],
+    questions: [faqItems[6], faqItems[4], faqItems[0], faqItems[2]],
+  },
+  {
+    slug: "istiklal-caddesi-kahvalti",
+    title: "İstiklal Caddesi Kahvaltı | Zambak Sokak'ta Van Kahvaltısı",
+    description:
+      "İstiklal Caddesi'ne yakın kahvaltı için Zambak Sokak No:8'de geleneksel serpme Van kahvaltısı, sınırsız çay ve Kafka Cafe.",
+    h1: "İstiklal Caddesi'ne yakın kahvaltı",
+    eyebrow: "İstiklal",
+    image: "/images/street-table.jpg",
+    ogImage: "/images/og/beyoglu-kahvalti.jpg",
+    imageAlt: "İstiklal Caddesi'ne yakın Beyoğlu kahvaltı masası",
+    schemaType: "CollectionPage",
+    keywords: ["İstiklal Caddesi kahvaltı", "İstiklal'e yakın kahvaltı", "Zambak Sokak kahvaltı"],
+    localIntent: ["İstiklal Caddesi yakınında kahvaltı", "Beyoğlu yürüyüş rotası kahvaltı"],
+    nearbyLandmarks: ["İstiklal Caddesi", "Taksim Meydanı", "Sıraselviler Caddesi"],
+    intro: [
+      "İstiklal Caddesi çevresinde kahvaltı arayan misafirler için kısa yürüyüş mesafesi ve açık adres bilgisi belirleyicidir.",
+      "Tarihi Van Kahvaltı Evi, İstiklal ve Taksim rotalarına yakın Zambak Sokak'ta Van kahvaltısı sunar.",
+    ],
+    highlights: [
+      "Zambak Sokak No:8 adresindedir.",
+      "İstiklal Caddesi ve Taksim Meydanı'ndan yürüyerek ulaşılabilir.",
+      "Her gün 08:00 - 18:00 saatleri arasında açıktır.",
+      "Kahvaltı sonrası Kafka Cafe'de kahve molası verilebilir.",
+    ],
+    sections: [
+      {
+        title: "Yürüyerek ulaşım",
+        body: "İstiklal Caddesi'nden Sıraselviler yönüne geçerek Zambak Sokak'a kısa sürede varabilirsiniz.",
+      },
+      {
+        title: "Turistik güne uygun",
+        body: "Beyoğlu gezisi, müze veya Galata rotası öncesinde uzun kahvaltı için merkezi bir başlangıç noktasıdır.",
+      },
+    ],
+    questions: [faqItems[1], faqItems[5], faqItems[2], faqItems[3]],
+  },
+  {
+    slug: "cihangir-kahvalti",
+    title: "Cihangir Kahvaltı | Taksim'e Yakın Serpme Van Kahvaltısı",
+    description:
+      "Cihangir'e yakın kahvaltı arayanlar için Beyoğlu Zambak Sokak'ta serpme Van kahvaltısı, otlu peynir, murtuğa, kavut ve sınırsız çay.",
+    h1: "Cihangir'e yakın kahvaltı",
+    eyebrow: "Cihangir",
+    image: "/images/terrace-tea.jpg",
+    ogImage: "/images/og/taksim-kahvalti.jpg",
+    imageAlt: "Cihangir'e yakın terasta kahvaltı ve çay servisi",
+    schemaType: "CollectionPage",
+    keywords: ["Cihangir kahvaltı", "Cihangir'e yakın kahvaltı", "Cihangir Van kahvaltısı"],
+    localIntent: ["Cihangir çevresinde kahvaltı", "Cihangir'den yürünebilir Van kahvaltısı"],
+    nearbyLandmarks: ["Cihangir", "Sıraselviler Caddesi", "Taksim Meydanı"],
+    intro: [
+      "Cihangir çevresinde kahvaltı planlayanlar için Taksim'e yakın bir Van sofrası, buluşma ve yürüyüş planlarını kolaylaştırır.",
+      "Tarihi Van Kahvaltı Evi, Cihangir ve Sıraselviler hattından yürüyerek ulaşılabilen Zambak Sokak konumundadır.",
+    ],
+    highlights: [
+      "Cihangir ve Sıraselviler çevresine yakındır.",
+      "Serpme Van kahvaltısında yöresel sıcaklar ve sınırsız çay bulunur.",
+      "Kalabalık saatlerde rezervasyon bilgisi almak önerilir.",
+      "Kahvaltı sonrası Beyoğlu ve Cihangir yürüyüşü yapılabilir.",
+    ],
+    sections: [
+      {
+        title: "Cihangir'den rota",
+        body: "Cihangir'den Sıraselviler yönüne yürüyerek Taksim çevresindeki Zambak Sokak'a ulaşabilirsiniz.",
+      },
+      {
+        title: "Sakin kapanış",
+        body: "Uzun kahvaltıdan sonra aynı mekandaki Kafka Cafe, Türk kahvesi ve nitelikli kahve seçenekleriyle deneyimi tamamlar.",
+      },
+    ],
+    questions: [faqItems[1], faqItems[2], faqItems[3], faqItems[8]],
+  },
+  {
+    slug: "galata-kahvalti",
+    title: "Galata Kahvaltı Rotası | Beyoğlu'nda Van Kahvaltısı",
+    description:
+      "Galata ve Karaköy rotası öncesi Beyoğlu'nda Van kahvaltısı: Zambak Sokak'ta serpme kahvaltı, sınırsız çay ve tarihi bina atmosferi.",
+    h1: "Galata rotası öncesi kahvaltı",
+    eyebrow: "Galata",
+    image: "/images/balcony-breakfast.jpg",
+    ogImage: "/images/og/beyoglu-kahvalti.jpg",
+    imageAlt: "Galata rotasına yakın Beyoğlu balkon kahvaltısı",
+    schemaType: "CollectionPage",
+    keywords: ["Galata kahvaltı", "Galata'ya yakın kahvaltı", "Karaköy Galata kahvaltı rotası"],
+    localIntent: ["Galata turu öncesi kahvaltı", "Beyoğlu Galata hattında kahvaltı"],
+    nearbyLandmarks: ["Galata Kulesi", "Karaköy", "İstiklal Caddesi"],
+    intro: [
+      "Galata ve Karaköy rotası yapacak ziyaretçiler için Beyoğlu'nda merkezi bir kahvaltı başlangıcı pratik olabilir.",
+      "Tarihi Van Kahvaltı Evi, Taksim ve İstiklal hattındaki konumuyla Galata yönüne geçmeden önce doyurucu bir Van kahvaltısı sunar.",
+    ],
+    highlights: [
+      "Beyoğlu gezi rotalarıyla kolay birleşir.",
+      "Tarihi bina atmosferi ve balkon/teras deneyimi öne çıkar.",
+      "Van kahvaltısı en az iki kişilik serpme servis edilir.",
+      "Yol tarifi için Google Haritalar bağlantısı kullanılabilir.",
+    ],
+    sections: [
+      {
+        title: "Rota planı",
+        body: "Kahvaltıdan sonra İstiklal Caddesi üzerinden Galata yönüne yürüyüş yapılabilir veya Taksim bağlantıları kullanılabilir.",
+      },
+      {
+        title: "Fotoğraf ve deneyim",
+        body: "Tarihi Rum binasının taş dokusu, balkon ve kahvaltı sofrası şehir gezisine yerel bir başlangıç hissi katar.",
+      },
+    ],
+    questions: [faqItems[1], faqItems[5], faqItems[0], faqItems[2]],
+  },
+  {
+    slug: "aile-kahvaltisi-beyoglu",
+    title: "Aile Kahvaltısı Beyoğlu | Tarihi Binada Van Sofrası",
+    description:
+      "Beyoğlu'nda aile kahvaltısı için Taksim'e yakın tarihi binada serpme Van kahvaltısı, yöresel lezzetler, sınırsız çay ve rezervasyon bilgisi.",
+    h1: "Beyoğlu'nda aile kahvaltısı",
+    eyebrow: "Aile",
+    image: "/images/breakfast-spread.jpg",
+    ogImage: "/images/og/home.jpg",
+    imageAlt: "Aile ve arkadaşlarla paylaşılan zengin Van kahvaltısı",
+    schemaType: "CollectionPage",
+    keywords: ["aile kahvaltısı Beyoğlu", "aile kahvaltısı Taksim", "çocuklu aile kahvaltısı Beyoğlu"],
+    localIntent: ["Beyoğlu aile kahvaltısı", "Taksim'de ailece kahvaltı"],
+    nearbyLandmarks: ["Taksim Meydanı", "İstiklal Caddesi", "Cihangir"],
+    intro: [
+      "Aile kahvaltısı planında masa uygunluğu, ulaşım kolaylığı ve paylaşılabilir menü özellikle önemlidir.",
+      "Tarihi Van Kahvaltı Evi'nin serpme Van kahvaltısı, ailece uzun oturulabilecek sıcak ve doyurucu bir sofra sunar.",
+    ],
+    highlights: [
+      "Serpme kahvaltı aile sofraları için paylaşılabilir yapıdadır.",
+      "Hafta sonu ve kalabalık saatler için önceden bilgi almak önerilir.",
+      "Taksim'e yakın konum aile bireylerinin buluşmasını kolaylaştırır.",
+      "Çay servisi serpme kahvaltıya dahildir.",
+    ],
+    sections: [
+      {
+        title: "Aileler için neden uygun?",
+        body: "Küçük tabaklarla kurulan serpme servis, farklı damak zevklerine aynı sofrada seçenek sunar.",
+      },
+      {
+        title: "Rezervasyon önerisi",
+        body: "Hafta sonu sabah ve öğlen saatleri yoğun olabildiği için telefon veya WhatsApp üzerinden masa uygunluğunu teyit etmek iyi olur.",
+      },
+    ],
+    questions: [faqItems[7], faqItems[3], faqItems[6], faqItems[2]],
+  },
+  {
+    slug: "grup-kahvaltisi",
+    title: "Grup Kahvaltısı | Taksim Beyoğlu Serpme Van Kahvaltısı",
+    description:
+      "Arkadaş grubu ve kalabalık kahvaltılar için Taksim Beyoğlu'nda serpme Van kahvaltısı, rezervasyon, yol tarifi ve güncel fiyat bilgisi.",
+    h1: "Grup kahvaltısı ve kalabalık sofralar",
+    eyebrow: "Grup",
+    image: "/images/breakfast-spread.jpg",
+    ogImage: "/images/og/menu.jpg",
+    imageAlt: "Kalabalık grup için serpme Van kahvaltısı masası",
+    schemaType: "CollectionPage",
+    keywords: ["grup kahvaltısı Beyoğlu", "kalabalık kahvaltı Taksim", "arkadaş grubu kahvaltı"],
+    localIntent: ["Beyoğlu grup kahvaltısı", "Taksim kalabalık kahvaltı rezervasyon"],
+    nearbyLandmarks: ["Taksim Meydanı", "İstiklal Caddesi", "Sıraselviler Caddesi"],
+    intro: [
+      "Kalabalık kahvaltı planlarında masa düzeni, kişi sayısı ve ulaşım bilgisi önceden netleştiğinde deneyim daha rahat ilerler.",
+      "Tarihi Van Kahvaltı Evi, arkadaş buluşmaları ve grup kahvaltıları için Taksim'e yakın serpme Van kahvaltısı sunar.",
+    ],
+    highlights: [
+      "Grup ziyaretlerinde önceden aramak veya WhatsApp yazmak önerilir.",
+      "Serpme kahvaltı kişi başı yaklaşık 450 TL'dir.",
+      "Konum Taksim ve İstiklal çevresinden buluşmayı kolaylaştırır.",
+      "Menüde sıcaklar ve Kafka Cafe kahveleri de bulunur.",
+    ],
+    sections: [
+      {
+        title: "Grup planı nasıl yapılır?",
+        body: "Kişi sayısı, tercih edilen saat ve varsa özel notlar WhatsApp üzerinden iletilerek masa uygunluğu sorulabilir.",
+      },
+      {
+        title: "Paylaşılabilir menü",
+        body: "Serpme Van kahvaltısı çoklu tabak yapısı sayesinde kalabalık masalarda ortak paylaşım için uygundur.",
+      },
+    ],
+    questions: [faqItems[7], faqItems[3], faqItems[4], faqItems[6]],
+  },
+  {
+    slug: "hafta-sonu-kahvalti",
+    title: "Hafta Sonu Kahvaltı | Beyoğlu Taksim Van Kahvaltısı",
+    description:
+      "Hafta sonu Beyoğlu Taksim'de kahvaltı planı için çalışma saatleri, rezervasyon, serpme Van kahvaltısı fiyatı ve yol tarifi bilgileri.",
+    h1: "Hafta sonu Beyoğlu kahvaltısı",
+    eyebrow: "Hafta sonu",
+    image: "/images/tea-service.jpg",
+    ogImage: "/images/og/taksim-kahvalti.jpg",
+    imageAlt: "Hafta sonu kahvaltısı için taze çay servisi",
+    schemaType: "CollectionPage",
+    keywords: ["hafta sonu kahvaltı Beyoğlu", "hafta sonu kahvaltı Taksim", "pazar kahvaltısı Beyoğlu"],
+    localIntent: ["Beyoğlu hafta sonu kahvaltı", "Taksim pazar kahvaltısı"],
+    nearbyLandmarks: ["Taksim Meydanı", "İstiklal Caddesi", "Cihangir"],
+    intro: [
+      "Hafta sonu kahvaltısında yoğunluk, açık saat ve rezervasyon bilgisi arama yapan misafirler için kritik bilgidir.",
+      "Tarihi Van Kahvaltı Evi her gün 08:00 - 18:00 arasında açıktır; hafta sonu için önceden iletişim kurmak iyi olur.",
+    ],
+    highlights: [
+      "Cumartesi ve pazar 08:00 - 18:00 saatleri arasında açıktır.",
+      "Yoğun saatlerde rezervasyon veya masa uygunluğu için WhatsApp önerilir.",
+      "Serpme Van kahvaltısı en az iki kişilik servis edilir.",
+      "Kahvaltıdan sonra Beyoğlu yürüyüş rotaları yakındır.",
+    ],
+    sections: [
+      {
+        title: "Ne zaman gitmeli?",
+        body: "Hafta sonu yoğunluğu değişebileceği için gitmeden önce telefon veya WhatsApp üzerinden güncel durum sorulabilir.",
+      },
+      {
+        title: "Gün planı",
+        body: "Kahvaltı sonrası İstiklal Caddesi, Cihangir veya Galata yönünde yürüyüşle gün devam ettirilebilir.",
+      },
+    ],
+    questions: [faqItems[2], faqItems[3], faqItems[4], faqItems[5]],
+  },
+  {
+    slug: "kahvalti-rezervasyon",
+    title: "Kahvaltı Rezervasyon | Telefon ve WhatsApp ile Bilgi Al",
+    description:
+      "Tarihi Van Kahvaltı Evi kahvaltı rezervasyon bilgisi: telefon, WhatsApp, açık saatler, grup kahvaltısı, hafta sonu yoğunluğu ve yol tarifi.",
+    h1: "Kahvaltı rezervasyon bilgisi",
+    eyebrow: "Rezervasyon",
+    image: "/images/interior-chair.jpg",
+    ogImage: "/images/og/iletisim.jpg",
+    imageAlt: "Tarihi binada kahvaltı rezervasyonu için iç mekan",
+    schemaType: "ContactPage",
+    keywords: ["kahvaltı rezervasyon Beyoğlu", "Taksim kahvaltı rezervasyon", "Van kahvaltısı rezervasyon"],
+    localIntent: ["Beyoğlu kahvaltı rezervasyonu", "WhatsApp ile kahvaltı rezervasyon"],
+    nearbyLandmarks: ["Taksim Meydanı", "İstiklal Caddesi", "Sıraselviler Caddesi"],
+    intro: [
+      "Rezervasyon aramalarında misafirlerin hızlıca telefon, WhatsApp, saat ve adres bilgisine ulaşması gerekir.",
+      "Tarihi Van Kahvaltı Evi için güncel masa uygunluğu ve grup bilgisi +90 541 525 2868 numarasından alınabilir.",
+    ],
+    highlights: [
+      `Telefon ve WhatsApp: ${displayPhone}`,
+      `Çalışma saatleri: ${openingHours.short}`,
+      `Adres: ${displayAddress}`,
+      "Hafta sonu ve kalabalık gruplar için önceden iletişim önerilir.",
+    ],
+    sections: [
+      {
+        title: "WhatsApp ile bilgi",
+        body: "Kişi sayısı, tarih ve saat bilgisi paylaşarak masa uygunluğunu hızlıca sorabilirsiniz.",
+      },
+      {
+        title: "Telefonla ulaşım",
+        body: "Güncel yoğunluk, fiyat ve yol tarifi için doğrudan işletme telefonu kullanılabilir.",
+      },
+      {
+        title: "Grup notu",
+        body: "Kalabalık gruplarda oturma düzeninin rahat hazırlanabilmesi için kişi sayısını önceden bildirmek faydalıdır.",
+      },
+    ],
+    questions: [faqItems[3], faqItems[7], faqItems[2], faqItems[4]],
+  },
+  {
+    slug: "van-otlu-peynir",
+    title: "Van Otlu Peyniri | Van Kahvaltısının İmza Lezzeti",
+    description:
+      "Van otlu peyniri nedir, Van kahvaltısında nasıl yer alır? Beyoğlu Taksim'de serpme Van kahvaltısının yöresel peynir odağı.",
+    h1: "Van otlu peyniri",
+    eyebrow: "Yöresel lezzet",
+    image: "/images/kete-detail.jpg",
+    ogImage: "/images/og/van-kahvaltisi.jpg",
+    imageAlt: "Van kahvaltısında yöresel peynir ve kete detayı",
+    schemaType: "AboutPage",
+    article: true,
+    keywords: ["Van otlu peyniri", "otlu peynir kahvaltı", "Van kahvaltısı otlu peynir"],
+    localIntent: ["Van otlu peyniri nerede yenir?", "Beyoğlu'nda otlu peynirli Van kahvaltısı"],
+    nearbyLandmarks: ["Taksim Meydanı", "İstiklal Caddesi"],
+    intro: [
+      "Van otlu peyniri, Van kahvaltısını sıradan serpme kahvaltıdan ayıran en bilinen yöresel lezzetlerden biridir.",
+      "Tarihi Van Kahvaltı Evi'nde otlu peynir, murtuğa, kavut, kete ve çayla birlikte sofranın merkezindeki tatlardan biri olarak sunulur.",
+    ],
+    highlights: [
+      "Otlu peynir Van kahvaltısının imza ürünlerindendir.",
+      "Serpme Van kahvaltısı içinde diğer yöresel lezzetlerle birlikte gelir.",
+      "Kete, bal-kaymak ve sıcaklarla dengeli bir sofra oluşturur.",
+      "Beyoğlu Taksim'de merkezi konumda deneyimlenebilir.",
+    ],
+    sections: [
+      {
+        title: "Sofradaki rolü",
+        body: "Otlu peynir, kahvaltıya yöresel karakter ve belirgin aroma katar; sıcak murtuğa ve tatlı kavutla dengelenir.",
+      },
+      {
+        title: "Nasıl eşleşir?",
+        body: "Kete, bal-kaymak, cacık ve demli çay ile birlikte servis edildiğinde Van kahvaltısının ana dengesi ortaya çıkar.",
+      },
+    ],
+    questions: [faqItems[0], faqItems[6], faqItems[4]],
+  },
+  {
+    slug: "murtuga-kavut",
+    title: "Murtuğa ve Kavut | Van Kahvaltısı Yöresel Sıcakları",
+    description:
+      "Murtuğa ve kavut nedir? Van kahvaltısında tereyağlı sıcak murtuğa, kavrulmuş un geleneği ve Beyoğlu'nda yöresel kahvaltı deneyimi.",
+    h1: "Murtuğa ve kavut nedir?",
+    eyebrow: "Van sıcakları",
+    image: "/images/sucuk-egg.jpg",
+    ogImage: "/images/og/serpme-van-kahvaltisi.jpg",
+    imageAlt: "Bakır sahanda servis edilen Van kahvaltısı sıcakları",
+    schemaType: "AboutPage",
+    article: true,
+    keywords: ["murtuğa", "kavut", "Van kahvaltısı murtuğa kavut"],
+    localIntent: ["murtuğa nerede yenir?", "kavutlu Van kahvaltısı Beyoğlu"],
+    nearbyLandmarks: ["Taksim Meydanı", "İstiklal Caddesi"],
+    intro: [
+      "Murtuğa ve kavut, Van kahvaltısının sıcak ve yöresel karakterini taşıyan iki önemli lezzettir.",
+      "Beyoğlu'ndaki Tarihi Van Kahvaltı Evi'nde bu lezzetler serpme Van kahvaltısı deneyiminin ayırt edici parçaları arasında anlatılır.",
+    ],
+    highlights: [
+      "Murtuğa un, tereyağı ve yumurta ile hazırlanan sıcak bir Van lezzetidir.",
+      "Kavut kavrulmuş un geleneğinden gelen doyurucu bir kahvaltı tamamlayıcısıdır.",
+      "İkisi de otlu peynir ve demli çayla birlikte Van sofrasını güçlendirir.",
+      "Güncel servis ve fiyat bilgisi için işletmeyle iletişim kurulabilir.",
+    ],
+    sections: [
+      {
+        title: "Murtuğa",
+        body: "Murtuğa, sıcak servis edilen ve kahvaltıya doyuruculuk katan geleneksel bir Van lezzetidir.",
+      },
+      {
+        title: "Kavut",
+        body: "Kavut, kavrulmuş un karakteriyle sofraya tatlı ve yöresel bir denge ekler.",
+      },
+      {
+        title: "Neden birlikte anılır?",
+        body: "Van kahvaltısında otlu peynir kadar sıcak lezzetler de kimlik oluşturur; murtuğa ve kavut bu yüzden sıkça birlikte aranır.",
+      },
+    ],
+    questions: [faqItems[0], faqItems[4], faqItems[2]],
+  },
+  {
+    slug: "kahvalti-yol-tarifi",
+    title: "Kahvaltı Yol Tarifi | Taksim Metrodan Zambak Sokak'a",
+    description:
+      "Taksim metrodan Tarihi Van Kahvaltı Evi'ne yol tarifi: Zambak Sk. No:8, Şehit Muhtar Mahallesi, Beyoğlu adresine yürüyüş rotası.",
+    h1: "Taksim metrodan kahvaltıya yol tarifi",
+    eyebrow: "Yol tarifi",
+    image: "/images/street-table.jpg",
+    ogImage: "/images/og/iletisim.jpg",
+    imageAlt: "Zambak Sokak Beyoğlu kahvaltı adresi",
+    schemaType: "ContactPage",
+    keywords: ["Taksim metro kahvaltı yol tarifi", "Zambak Sokak yol tarifi", "Tarihi Van Kahvaltı Evi adres"],
+    localIntent: ["Taksim metrodan kahvaltı adresi", "Zambak Sokak nasıl gidilir"],
+    nearbyLandmarks: ["Taksim Meydanı", "Sıraselviler Caddesi", "İstiklal Caddesi"],
+    intro: [
+      "Yol tarifi aramalarında açık adres, yakın durak ve harita bağlantısı en hızlı karar verdiren bilgilerdir.",
+      "Tarihi Van Kahvaltı Evi, Taksim metro ve İstiklal Caddesi çevresinden yürüyerek ulaşılabilecek Zambak Sokak No:8 adresindedir.",
+    ],
+    highlights: [
+      `Açık adres: ${displayAddress}`,
+      "M2 Taksim metro durağına yürüme mesafesindedir.",
+      "Google Haritalar bağlantısından rota alınabilir.",
+      `Telefon: ${displayPhone}`,
+    ],
+    sections: [
+      {
+        title: "Taksim metrodan yürüyüş",
+        body: "Taksim durağından Sıraselviler yönüne çıkıp Zambak Sokak'a ilerleyerek restorana ulaşabilirsiniz.",
+      },
+      {
+        title: "İlk kez gelenler için",
+        body: "Beyoğlu sokakları yoğun olabildiği için harita bağlantısını açıp adresi Zambak Sk. No:8 olarak kontrol etmek pratik olur.",
+      },
+    ],
+    questions: [faqItems[5], faqItems[1], faqItems[2], faqItems[3]],
+  },
 ];
 
 export function absoluteUrl(path = "") {
@@ -486,17 +970,22 @@ export function jsonLd(data: unknown) {
 }
 
 export function pageOgImagePath(slug: string) {
-  return `/images/og/${slug}.jpg`;
+  return getSeoPage(slug)?.ogImage ?? `/images/og/${slug}.jpg`;
 }
 
 export function createPageMetadata(page: SeoPage): Metadata {
   const url = absoluteUrl(page.slug);
   const image = absoluteUrl(pageOgImagePath(page.slug));
+  const pageKeywords = [...new Set([...(page.keywords ?? []), ...keywords])];
 
   return {
     title: page.title,
     description: page.description,
-    keywords,
+    keywords: pageKeywords,
+    authors: [{ name: siteName, url: siteUrl }],
+    creator: siteName,
+    publisher: siteName,
+    category: "restaurant",
     alternates: {
       canonical: url,
       languages: {
@@ -538,6 +1027,11 @@ export function createPageMetadata(page: SeoPage): Metadata {
       "business:contact_data:postal_code": address.postalCode,
       "business:contact_data:country_name": address.countryName,
       "business:contact_data:phone_number": displayPhone,
+      "business:contact_data:email": email,
+      "business:contact_data:website": siteUrl,
+      "place:location:latitude": String(coordinates.latitude),
+      "place:location:longitude": String(coordinates.longitude),
+      "article:modified_time": dateModifiedIso,
     },
   };
 }
@@ -587,6 +1081,15 @@ export function buildWebsiteJsonLd(withContext = true) {
     url: siteUrl,
     inLanguage: "tr-TR",
     publisher: { "@id": `${siteUrl}/#restaurant` },
+    about: { "@id": `${siteUrl}/#restaurant` },
+    hasPart: seoPages.map((page) => ({
+      "@type": page.schemaType ?? "WebPage",
+      "@id": `${absoluteUrl(page.slug)}#webpage`,
+      url: absoluteUrl(page.slug),
+      name: page.title,
+      description: page.description,
+      inLanguage: "tr-TR",
+    })),
   };
 
   return withContext ? { "@context": "https://schema.org", ...data } : data;
@@ -620,6 +1123,11 @@ export function buildHomeWebPageJsonLd(withContext = true) {
 }
 
 export function buildRestaurantJsonLd(withContext = true) {
+  const areaServed = localAreas.map((area) => ({
+    "@type": area === "İstanbul" ? "City" : "Place",
+    name: area,
+  }));
+
   const data = {
     "@type": ["Restaurant", "LocalBusiness"],
     "@id": `${siteUrl}/#restaurant`,
@@ -644,20 +1152,39 @@ export function buildRestaurantJsonLd(withContext = true) {
     paymentAccepted: "Nakit, Kredi Kartı, Banka Kartı",
     acceptsReservations: true,
     servesCuisine: cuisine,
+    knowsLanguage: supportedLanguages,
     keywords: keywords.join(", "),
     address: {
       "@type": "PostalAddress",
-      streetAddress: address.streetAddress,
+      streetAddress: `${address.streetAddress}, ${address.neighborhood}`,
       addressLocality: address.locality,
       addressRegion: address.region,
       postalCode: address.postalCode,
       addressCountry: address.country,
+    },
+    location: {
+      "@type": "Place",
+      name: "Zambak Sokak, Şehit Muhtar Mahallesi",
+      address: {
+        "@type": "PostalAddress",
+        streetAddress: address.streetAddress,
+        addressLocality: address.locality,
+        addressRegion: address.region,
+        postalCode: address.postalCode,
+        addressCountry: address.country,
+      },
+      geo: {
+        "@type": "GeoCoordinates",
+        latitude: coordinates.latitude,
+        longitude: coordinates.longitude,
+      },
     },
     geo: {
       "@type": "GeoCoordinates",
       latitude: coordinates.latitude,
       longitude: coordinates.longitude,
     },
+    map: mapsUrl,
     hasMap: mapsUrl,
     mainEntityOfPage: { "@id": `${siteUrl}/#webpage` },
     openingHours: "Mo-Su 08:00-18:00",
@@ -669,45 +1196,10 @@ export function buildRestaurantJsonLd(withContext = true) {
         closes: openingHours.closes,
       },
     ],
-    areaServed: [
-      { "@type": "City", name: "İstanbul" },
-      { "@type": "AdministrativeArea", name: "Beyoğlu" },
-      { "@type": "Place", name: "Taksim" },
-    ],
+    areaServed,
     containedInPlace: {
       "@type": "Place",
       name: "Şehit Muhtar Mahallesi, Taksim",
-    },
-    contactPoint: [
-      {
-        "@type": "ContactPoint",
-        telephone: phoneE164,
-        contactType: "reservations",
-        availableLanguage: ["tr", "en"],
-        areaServed: "TR",
-      },
-    ],
-    knowsAbout: [
-      "Van kahvaltısı",
-      "Serpme kahvaltı",
-      "Van otlu peyniri",
-      "Murtuğa",
-      "Kavut",
-      "Türk kahvesi",
-    ],
-    amenityFeature: [
-      { "@type": "LocationFeatureSpecification", name: "Tarihi bina", value: true },
-      { "@type": "LocationFeatureSpecification", name: "Balkon", value: true },
-      { "@type": "LocationFeatureSpecification", name: "Teras", value: true },
-      { "@type": "LocationFeatureSpecification", name: "Sınırsız çay", value: true },
-      { "@type": "LocationFeatureSpecification", name: "Kafka Cafe", value: true },
-    ],
-    hasMenu: { "@id": `${siteUrl}/menu#menu` },
-    department: {
-      "@type": "CafeOrCoffeeShop",
-      "@id": `${siteUrl}/kafka-cafe#cafe`,
-      name: "Kafka Cafe",
-      servesCuisine: ["Türk kahvesi", "Nitelikli kahve", "Coffee"],
       address: {
         "@type": "PostalAddress",
         streetAddress: address.streetAddress,
@@ -717,10 +1209,107 @@ export function buildRestaurantJsonLd(withContext = true) {
         addressCountry: address.country,
       },
     },
+    contactPoint: [
+      {
+        "@type": "ContactPoint",
+        telephone: phoneE164,
+        contactType: "reservations",
+        availableLanguage: supportedLanguages,
+        areaServed: "TR",
+      },
+      {
+        "@type": "ContactPoint",
+        telephone: phoneE164,
+        contactType: "customer service",
+        availableLanguage: supportedLanguages,
+        areaServed: "TR",
+      },
+    ],
+    knowsAbout: [
+      "Van kahvaltısı",
+      "Serpme kahvaltı",
+      "Van otlu peyniri",
+      "Murtuğa",
+      "Kavut",
+      "Kete",
+      "Türk kahvesi",
+      "Beyoğlu kahvaltı",
+      "Taksim kahvaltı",
+    ],
+    amenityFeature: [
+      { "@type": "LocationFeatureSpecification", name: "Tarihi bina", value: true },
+      { "@type": "LocationFeatureSpecification", name: "Balkon", value: true },
+      { "@type": "LocationFeatureSpecification", name: "Teras", value: true },
+      { "@type": "LocationFeatureSpecification", name: "Sınırsız çay", value: true },
+      { "@type": "LocationFeatureSpecification", name: "Kafka Cafe", value: true },
+      { "@type": "LocationFeatureSpecification", name: "WhatsApp ile bilgi", value: true },
+    ],
+    menu: `${siteUrl}/menu`,
+    hasMenu: { "@id": `${siteUrl}/menu#menu` },
+    makesOffer: menuSections.flatMap((section) =>
+      section.items
+        .filter((item) => item.price)
+        .map((item) => ({
+          "@type": "Offer",
+          name: item.name,
+          description: item.description,
+          price: item.price,
+          priceCurrency: item.priceCurrency,
+          availability: "https://schema.org/InStock",
+          url: `${siteUrl}/menu`,
+          seller: { "@id": `${siteUrl}/#restaurant` },
+          itemOffered: {
+            "@type": "Service",
+            name: item.name,
+            serviceType: section.name,
+            areaServed,
+          },
+        })),
+    ),
+    department: {
+      "@type": "CafeOrCoffeeShop",
+      "@id": `${siteUrl}/kafka-cafe#cafe`,
+      name: "Kafka Cafe",
+      url: `${siteUrl}/kafka-cafe`,
+      telephone: phoneE164,
+      image: `${siteUrl}/images/coffee-moment.jpg`,
+      priceRange: "₺₺",
+      servesCuisine: ["Türk kahvesi", "Nitelikli kahve", "Coffee"],
+      openingHours: "Mo-Su 08:00-18:00",
+      openingHoursSpecification: [
+        {
+          "@type": "OpeningHoursSpecification",
+          dayOfWeek: openingHours.days,
+          opens: openingHours.opens,
+          closes: openingHours.closes,
+        },
+      ],
+      address: {
+        "@type": "PostalAddress",
+        streetAddress: address.streetAddress,
+        addressLocality: address.locality,
+        addressRegion: address.region,
+        postalCode: address.postalCode,
+        addressCountry: address.country,
+      },
+      geo: {
+        "@type": "GeoCoordinates",
+        latitude: coordinates.latitude,
+        longitude: coordinates.longitude,
+      },
+      parentOrganization: { "@id": `${siteUrl}/#restaurant` },
+    },
     potentialAction: [
       {
         "@type": "ReserveAction",
-        target: whatsappUrl,
+        target: {
+          "@type": "EntryPoint",
+          urlTemplate: whatsappUrl,
+          actionPlatform: [
+            "https://schema.org/DesktopWebPlatform",
+            "https://schema.org/MobileWebPlatform",
+          ],
+        },
         name: "WhatsApp ile rezervasyon bilgisi al",
       },
       {
@@ -729,7 +1318,48 @@ export function buildRestaurantJsonLd(withContext = true) {
         name: "Telefonla ara",
       },
     ],
-    sameAs: ["https://www.instagram.com/tarihivankahvaltievi/", mapsUrl],
+    sameAs: sameAsUrls,
+    subjectOf: [
+      { "@id": `${siteUrl}/llms.txt` },
+      { "@id": `${siteUrl}/llms-full.txt` },
+      { "@id": `${siteUrl}/business-profile.json` },
+    ],
+  };
+
+  return withContext ? { "@context": "https://schema.org", ...data } : data;
+}
+
+export function buildArticleJsonLd(page: SeoPage, pageUrl = absoluteUrl(page.slug), withContext = true) {
+  const data = {
+    "@type": "Article",
+    "@id": `${pageUrl}#article`,
+    headline: page.h1,
+    name: page.title,
+    description: page.description,
+    image: absoluteUrl(page.image),
+    inLanguage: "tr-TR",
+    dateModified,
+    author: { "@id": `${siteUrl}/#restaurant` },
+    publisher: { "@id": `${siteUrl}/#restaurant` },
+    mainEntityOfPage: { "@id": `${pageUrl}#webpage` },
+    articleSection: page.eyebrow,
+    about: [
+      { "@id": `${siteUrl}/#restaurant` },
+      ...(page.localIntent ?? []).map((intent) => ({
+        "@type": "Thing",
+        name: intent,
+      })),
+    ],
+    mentions: [
+      ...nearbyLandmarks.map((landmark) => ({
+        "@type": "Place",
+        name: landmark,
+      })),
+      ...page.highlights.map((highlight) => ({
+        "@type": "Thing",
+        name: highlight,
+      })),
+    ],
   };
 
   return withContext ? { "@context": "https://schema.org", ...data } : data;

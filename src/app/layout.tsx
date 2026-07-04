@@ -129,6 +129,9 @@ export default function RootLayout({
         <link rel="dns-prefetch" href="https://www.google.com" />
         <link rel="dns-prefetch" href="https://wa.me" />
         <link rel="dns-prefetch" href="https://maps.googleapis.com" />
+        <link rel="alternate" type="text/plain" href="/llms.txt" title="AI kısa işletme özeti" />
+        <link rel="alternate" type="text/plain" href="/llms-full.txt" title="AI detaylı işletme özeti" />
+        <link rel="alternate" type="application/json" href="/business-profile.json" title="Makine okunur işletme profili" />
       </head>
       <body className="min-h-full flex flex-col">
         <WebVitals />
