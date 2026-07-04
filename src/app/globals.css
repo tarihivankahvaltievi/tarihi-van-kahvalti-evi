@@ -17644,6 +17644,12 @@ h2 span,
 .hero-parallax-copy h1 {
   letter-spacing: 0 !important;
   line-height: 0.91 !important;
+  color: #171412 !important;
+  text-shadow: none !important;
+}
+
+.hero-parallax-copy h1 span {
+  color: #171412 !important;
 }
 
 .hero-parallax-copy p {

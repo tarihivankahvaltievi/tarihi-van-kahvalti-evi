@@ -242,19 +242,31 @@ export function VanHeroParallax() {
     spring,
   );
   const floatingFoodY = useSpring(
-    useTransform(scrollYProgress, [0, 1], [0, isMobile ? -24 : -36]),
+    useTransform(
+      scrollYProgress,
+      [0, 0.28, 0.55, 0.82],
+      isMobile ? [0, 180, 285, 340] : [0, 80, 132, 158],
+    ),
     spring,
   );
   const foodScale = useSpring(
     useTransform(
       scrollYProgress,
-      [0, 0.45, 0.75],
-      isMobile ? [1, 1.04, 1.1] : [1, 1.08, 1.18],
+      [0, 0.28, 0.55, 0.82],
+      isMobile ? [1, 1.24, 1.38, 1.46] : [1, 1.16, 1.28, 1.34],
+    ),
+    spring,
+  );
+  const foodRotateX = useSpring(
+    useTransform(
+      scrollYProgress,
+      [0, 0.28, 0.55, 0.82],
+      isMobile ? [0, -3.8, -7.2, -8.4] : [0, -2.8, -5.2, -6.2],
     ),
     spring,
   );
   const foodOpacity = useSpring(
-    useTransform(scrollYProgress, [0, 0.35, 0.65], [1, 0.9, 0]),
+    useTransform(scrollYProgress, [0, 0.55, 0.82, 0.94], [1, 1, 0.76, 0]),
     spring,
   );
 
@@ -369,7 +381,7 @@ export function VanHeroParallax() {
             y: floatingFoodY,
             scale: foodScale,
             opacity: foodOpacity,
-            rotateX: rotateXMouse,
+            rotateX: isMobile ? foodRotateX : rotateXMouse,
             rotateY: rotateYMouse,
             transformStyle: "preserve-3d",
           }}
