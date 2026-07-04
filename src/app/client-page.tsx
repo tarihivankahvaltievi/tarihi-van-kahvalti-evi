@@ -288,33 +288,6 @@ export default function ClientPage() {
 
         <VanHeroParallax />
 
-        {/* Kısa işletme bilgisi */}
-        <section 
-          className="bg-[var(--soft)] text-[var(--muted)] text-center text-xs sm:text-sm py-4 px-6 border-b border-[var(--line)]" 
-          aria-label="Tarihi Van Kahvaltı Evi Kısa Bilgi"
-        >
-          <div className="max-w-4xl mx-auto leading-relaxed">
-            <span>
-              <strong>Tarihi Van Kahvaltı Evi</strong>, İstanbul Beyoğlu Taksim&apos;de {displayAddress} adresinde yer alan ve 1978&apos;den beri Van otlu peyniri, murtuğa, kavut ve sınırsız çay eşliğinde geleneksel <em>serpme Van kahvaltısı</em> sunan tarihi bir restorandır. Kahvaltı fiyatı kişi başı yaklaşık 450 TL&apos;dir.
-            </span>
-            <nav className="seo-inline-links" aria-label="Hızlı bağlantılar">
-              <Link href="/menu">Menü ve fiyatlar</Link>
-              <Link href="/van-kahvaltisi">Van kahvaltısı nedir?</Link>
-              <Link href="/beyoglu-kahvalti">Beyoğlu kahvaltı</Link>
-              <Link href="/taksim-kahvalti">Taksim kahvaltı</Link>
-              <Link href="/istanbul-van-kahvaltisi">İstanbul Van kahvaltısı</Link>
-              <Link href="/serpme-kahvalti-beyoglu">Serpme kahvaltı</Link>
-              <Link href="/istiklal-caddesi-kahvalti">İstiklal kahvaltı</Link>
-              <Link href="/zambak-sokak-kahvalti">Zambak Sokak</Link>
-              <Link href="/siraselviler-kahvalti">Sıraselviler</Link>
-              <Link href="/turkish-breakfast-istanbul">Turkish breakfast</Link>
-              <Link href="/zavtrak-taksim-stambul">Русский</Link>
-              <Link href="/arabic-breakfast-taksim">العربية</Link>
-              <Link href="/kahvalti-rezervasyon">Rezervasyon</Link>
-              <Link href="/kafka-cafe">Kafka Cafe</Link>
-            </nav>
-          </div>
-        </section>
         <div className="story-band">
           <article id="story" className="red-story" data-reveal>
             <div className="story-content">
@@ -414,6 +387,34 @@ export default function ClientPage() {
         <FaqSection />
 
         <div className="bottom-info-band">
+          {/* Kısa işletme bilgisi */}
+          <section
+            className="bg-[var(--soft)] text-[var(--muted)] text-center text-xs sm:text-sm py-4 px-6 border-b border-[var(--line)]"
+            aria-label="Tarihi Van Kahvaltı Evi Kısa Bilgi"
+          >
+            <div className="max-w-4xl mx-auto leading-relaxed">
+              <span>
+                <strong>Tarihi Van Kahvaltı Evi</strong>, İstanbul Beyoğlu Taksim&apos;de {displayAddress} adresinde yer alan ve 1978&apos;den beri Van otlu peyniri, murtuğa, kavut ve sınırsız çay eşliğinde geleneksel <em>serpme Van kahvaltısı</em> sunan tarihi bir restorandır. Kahvaltı fiyatı kişi başı yaklaşık 450 TL&apos;dir.
+              </span>
+              <nav className="seo-inline-links" aria-label="Hızlı bağlantılar">
+                <Link href="/menu">Menü ve fiyatlar</Link>
+                <Link href="/van-kahvaltisi">Van kahvaltısı nedir?</Link>
+                <Link href="/beyoglu-kahvalti">Beyoğlu kahvaltı</Link>
+                <Link href="/taksim-kahvalti">Taksim kahvaltı</Link>
+                <Link href="/istanbul-van-kahvaltisi">İstanbul Van kahvaltısı</Link>
+                <Link href="/serpme-kahvalti-beyoglu">Serpme kahvaltı</Link>
+                <Link href="/istiklal-caddesi-kahvalti">İstiklal kahvaltı</Link>
+                <Link href="/zambak-sokak-kahvalti">Zambak Sokak</Link>
+                <Link href="/siraselviler-kahvalti">Sıraselviler</Link>
+                <Link href="/turkish-breakfast-istanbul">Turkish breakfast</Link>
+                <Link href="/zavtrak-taksim-stambul">Русский</Link>
+                <Link href="/arabic-breakfast-taksim">العربية</Link>
+                <Link href="/kahvalti-rezervasyon">Rezervasyon</Link>
+                <Link href="/kafka-cafe">Kafka Cafe</Link>
+              </nav>
+            </div>
+          </section>
+
           <section className="local-answer-panel" aria-labelledby="local-answer-heading" data-reveal>
             <div className="local-answer-head">
               <span className="light-pill">Yerel bilgi</span>
