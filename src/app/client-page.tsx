@@ -316,47 +316,6 @@ export default function ClientPage() {
           </div>
         </section>
         <div className="story-band">
-          <section className="local-answer-panel" aria-labelledby="local-answer-heading" data-reveal>
-            <div className="local-answer-head">
-              <span className="light-pill">Yerel bilgi</span>
-              <h2 id="local-answer-heading">Beyoğlu Taksim Van kahvaltısı için hızlı bilgiler</h2>
-            </div>
-            <div className="local-answer-grid">
-              {localSeoFacts.map((fact) => (
-                <article key={fact.label} className="local-answer-card">
-                  <h3>{fact.label}</h3>
-                  <p>{fact.value}</p>
-                  <Link href={fact.href} aria-label={`${fact.label} hakkında detay`}>
-                    Detay <ChevronRight size={16} />
-                  </Link>
-                </article>
-              ))}
-            </div>
-          </section>
-
-          <section className="tourist-language-panel" aria-labelledby="tourist-language-heading" data-reveal>
-            <div className="tourist-language-head">
-              <span className="light-pill">Tourist search</span>
-              <h2 id="tourist-language-heading">Taksim çevresindeki turistler için kahvaltı bilgisi</h2>
-              <p>
-                Yabancı ziyaretçiler için İngilizce, Rusça ve Arapça sayfalar; Taksim, Istiklal ve Beyoğlu aramalarına uygun açık adres, saat, menü ve rezervasyon bilgisi içerir.
-              </p>
-            </div>
-            <div className="tourist-language-grid">
-              {internationalTouristFacts.map((fact) => (
-                <article key={fact.language} className="tourist-language-card">
-                  <span>{fact.language}</span>
-                  <h3>{fact.title}</h3>
-                  <p>{fact.value}</p>
-                  <small>{fact.intent}</small>
-                  <Link href={fact.href} aria-label={`${fact.title} sayfasına git`}>
-                    Aç <ChevronRight size={16} />
-                  </Link>
-                </article>
-              ))}
-            </div>
-          </section>
-
           <article id="story" className="red-story" data-reveal>
             <div className="story-content">
               <div className="story-copy">
@@ -453,6 +412,49 @@ export default function ClientPage() {
         </section>
 
         <FaqSection />
+
+        <div className="bottom-info-band">
+          <section className="local-answer-panel" aria-labelledby="local-answer-heading" data-reveal>
+            <div className="local-answer-head">
+              <span className="light-pill">Yerel bilgi</span>
+              <h2 id="local-answer-heading">Beyoğlu Taksim Van kahvaltısı için hızlı bilgiler</h2>
+            </div>
+            <div className="local-answer-grid">
+              {localSeoFacts.map((fact) => (
+                <article key={fact.label} className="local-answer-card">
+                  <h3>{fact.label}</h3>
+                  <p>{fact.value}</p>
+                  <Link href={fact.href} aria-label={`${fact.label} hakkında detay`}>
+                    Detay <ChevronRight size={16} />
+                  </Link>
+                </article>
+              ))}
+            </div>
+          </section>
+
+          <section className="tourist-language-panel" aria-labelledby="tourist-language-heading" data-reveal>
+            <div className="tourist-language-head">
+              <span className="light-pill">Tourist search</span>
+              <h2 id="tourist-language-heading">Taksim çevresindeki turistler için kahvaltı bilgisi</h2>
+              <p>
+                Yabancı ziyaretçiler için İngilizce, Rusça ve Arapça sayfalar; Taksim, Istiklal ve Beyoğlu aramalarına uygun açık adres, saat, menü ve rezervasyon bilgisi içerir.
+              </p>
+            </div>
+            <div className="tourist-language-grid">
+              {internationalTouristFacts.map((fact) => (
+                <article key={fact.language} className="tourist-language-card">
+                  <span>{fact.language}</span>
+                  <h3>{fact.title}</h3>
+                  <p>{fact.value}</p>
+                  <small>{fact.intent}</small>
+                  <Link href={fact.href} aria-label={`${fact.title} sayfasına git`}>
+                    Aç <ChevronRight size={16} />
+                  </Link>
+                </article>
+              ))}
+            </div>
+          </section>
+        </div>
 
         <AnimatedFooter onOpenBooking={() => handleOpenBooking()} />
       </main>
