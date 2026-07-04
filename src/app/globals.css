@@ -18210,13 +18210,13 @@ h2 span,
 /* Mobile hero and chrome tightening: slimmer bars, fuller upper-right hero balance. */
 @media (max-width: 680px) {
   .nav {
-    min-height: 64px !important;
+    min-height: 61px !important;
     padding-inline: 0.8rem !important;
     gap: 0.6rem !important;
   }
 
   .nav.scrolled {
-    min-height: 58px !important;
+    min-height: 55px !important;
   }
 
   .logo-wrap {
@@ -18245,21 +18245,21 @@ h2 span,
   }
 
   .nav-menu-button {
-    width: 46px !important;
-    height: 46px !important;
-    border-radius: 12px !important;
+    width: 44px !important;
+    height: 44px !important;
+    border-radius: 11px !important;
   }
 
   .nav-menu-glyph {
-    transform: scale(0.96);
+    transform: scale(0.91);
   }
 
   .nav-menu-panel {
-    top: 64px !important;
+    top: 61px !important;
   }
 
   .nav.scrolled .nav-menu-panel {
-    top: 58px !important;
+    top: 55px !important;
   }
 
   .hero-parallax-food-stage .hero-float-simit {
