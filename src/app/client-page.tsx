@@ -4,6 +4,13 @@ import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import {
+  motion,
+  useReducedMotion,
+  useScroll,
+  useSpring,
+  useTransform,
+} from "framer-motion";
+import {
   Calendar,
   Camera,
   ChevronRight,
@@ -36,6 +43,18 @@ const gallery: [string, string][] = [
   ["/images/street-table.jpg", "Beyoğlu sokaklarında kahvaltı masası"],
 ];
 
+const aboutSignals = [
+  ["1978", "Aile emeği"],
+  ["Rum binası", "Tarihi doku"],
+  ["Van sofrası", "Cömert servis"],
+];
+
+const aboutOrbitImages = [
+  ["/images/tea-service.jpg", "Taze demlenmiş çay servisi"],
+  ["/images/interior-chair.jpg", "Tarihi iç mekan dokusu"],
+  ["/images/kete-detail.jpg", "Kete ve Van kahvaltısı detayı"],
+];
+
 export default function ClientPage() {
   const [isBookingOpen, setIsBookingOpen] = useState(false);
   const [preselectedItem, setPreselectedItem] = useState("");
@@ -46,6 +65,40 @@ export default function ClientPage() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [mobileBarHidden, setMobileBarHidden] = useState(false);
   const lastScrollY = useRef(0);
+  const aboutRef = useRef<HTMLElement>(null);
+  const prefersReducedMotion = useReducedMotion();
+  const reduceMotion = Boolean(prefersReducedMotion);
+  const { scrollYProgress: aboutScrollProgress } = useScroll({
+    target: aboutRef,
+    offset: ["start end", "end start"],
+  });
+  const aboutSpring = { stiffness: 92, damping: 30, mass: 1 };
+  const aboutBackdropY = useSpring(
+    useTransform(aboutScrollProgress, [0, 1], reduceMotion ? [0, 0] : [-18, 24]),
+    aboutSpring,
+  );
+  const aboutPlateY = useSpring(
+    useTransform(aboutScrollProgress, [0, 1], reduceMotion ? [0, 0] : [24, -32]),
+    aboutSpring,
+  );
+  const aboutSteamY = useSpring(
+    useTransform(aboutScrollProgress, [0, 1], reduceMotion ? [0, 0] : [36, -52]),
+    aboutSpring,
+  );
+  const aboutPlateRotate = useSpring(
+    useTransform(aboutScrollProgress, [0, 1], reduceMotion ? [0, 0] : [-2.5, 2.5]),
+    aboutSpring,
+  );
+  const aboutRailScale = useSpring(
+    useTransform(aboutScrollProgress, [0.15, 0.75], [0.12, 1]),
+    aboutSpring,
+  );
+  const aboutItemInitial = { opacity: 0, y: reduceMotion ? 0 : 22 };
+  const aboutItemInView = { opacity: 1, y: 0 };
+  const aboutItemTransition = {
+    duration: reduceMotion ? 0.01 : 0.72,
+    ease: [0.16, 1, 0.3, 1] as [number, number, number, number],
+  };
   const [hoverStyle, setHoverStyle] = useState<React.CSSProperties>({
     opacity: 0,
     left: 0,
@@ -288,78 +341,145 @@ export default function ClientPage() {
 
         <VanHeroParallax />
 
-        <div className="story-band">
-          <article id="story" className="red-story" data-reveal>
-            <div className="story-content">
-              <div className="story-copy">
-                <div className="light-pill story-pill">Hakkımızda</div>
-                <h2>Eski usul hazırlanır, sofrada uzun uzun yaşanır.</h2>
-                <p>
-                  Tarihi Rum binasının sakin dokusunda, 1978’den beri gelen aile
-                  emeğini Van kahvaltısının cömertliğiyle aynı sofrada
-                  buluşturuyoruz.
-                </p>
-                <div className="story-text">
-                  <p>
-                    Burada kahvaltı aceleye gelmez. Bakır sahanlar masaya tek tek
-                    yerleşir, çay tazelenir, sohbet kendine yer açar; eski binanın
-                    ruhu her tabakta usulca hissedilir.
-                  </p>
-                  <p>
-                    Üçüncü kuşak aile işletmesi olarak mirasımızı koruyor; Van’ın
-                    bereketli sofrasını Beyoğlu’nun kalbinde özenli, samimi ve
-                    hatırlanacak bir kahvaltıya dönüştürüyoruz.
-                  </p>
-                </div>
-              </div>
-              <div className="story-archive" data-reveal>
-                <figure className="story-arch" style={{ margin: 0 }}>
+        <div className="about-band">
+          <motion.article
+            id="story"
+            ref={aboutRef}
+            className="about-scene"
+            aria-labelledby="about-title"
+            initial={{ opacity: 0, y: reduceMotion ? 0 : 28 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.26 }}
+            transition={aboutItemTransition}
+          >
+            <motion.div className="about-depth" style={{ y: aboutBackdropY }} aria-hidden="true">
+              <span className="about-depth-grid" />
+              <span className="about-depth-light" />
+              <span className="about-depth-ring about-depth-ring-one" />
+              <span className="about-depth-ring about-depth-ring-two" />
+            </motion.div>
+            <div className="about-motes" aria-hidden="true">
+              {Array.from({ length: 14 }).map((_, index) => (
+                <span key={index} style={{ "--mote-index": index } as React.CSSProperties} />
+              ))}
+            </div>
+
+            <motion.div className="about-rail" style={{ scaleY: aboutRailScale }} aria-hidden="true" />
+
+            <div className="about-layout">
+              <motion.div className="about-copy">
+                <motion.div
+                  className="about-kicker"
+                  initial={aboutItemInitial}
+                  whileInView={aboutItemInView}
+                  viewport={{ once: true, amount: 0.45 }}
+                  transition={{ ...aboutItemTransition, delay: 0.04 }}
+                >
+                  <span>Hakkımızda</span>
+                  <span>1978&apos;den beri</span>
+                </motion.div>
+                <motion.h2
+                  id="about-title"
+                  initial={aboutItemInitial}
+                  whileInView={aboutItemInView}
+                  viewport={{ once: true, amount: 0.45 }}
+                  transition={{ ...aboutItemTransition, delay: 0.1 }}
+                >
+                  Van sabahını Beyoğlu&apos;nda yaşayan bir sofraya çeviriyoruz.
+                </motion.h2>
+                <motion.p
+                  initial={aboutItemInitial}
+                  whileInView={aboutItemInView}
+                  viewport={{ once: true, amount: 0.45 }}
+                  transition={{ ...aboutItemTransition, delay: 0.16 }}
+                >
+                  Tarihi Rum binasının taş dokusunda; otlu peynir, murtuğa, kavut
+                  ve sınırsız çayı aile işletmesi sıcaklığıyla masaya taşıyoruz.
+                </motion.p>
+                <motion.div
+                  className="about-signal-row"
+                  aria-label="Tarihi Van Kahvaltıcısı öne çıkanları"
+                  initial={aboutItemInitial}
+                  whileInView={aboutItemInView}
+                  viewport={{ once: true, amount: 0.45 }}
+                  transition={{ ...aboutItemTransition, delay: 0.22 }}
+                >
+                  {aboutSignals.map(([value, label], index) => (
+                    <span
+                      key={value}
+                      className="about-signal"
+                      style={{ "--signal-index": index } as React.CSSProperties}
+                    >
+                      <strong>{value}</strong>
+                      <small>{label}</small>
+                    </span>
+                  ))}
+                </motion.div>
+              </motion.div>
+
+              <motion.div
+                className="about-tableau"
+                style={{ y: aboutPlateY, rotate: aboutPlateRotate }}
+                initial={{ opacity: 0, scale: reduceMotion ? 1 : 0.94 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true, amount: 0.35 }}
+                transition={{ ...aboutItemTransition, delay: 0.12 }}
+                aria-label="Van kahvaltısı sofrası"
+              >
+                <span className="about-table-shadow" aria-hidden="true" />
+                <motion.div className="about-steam" style={{ y: aboutSteamY }} aria-hidden="true">
+                  <span />
+                  <span />
+                  <span />
+                  <span />
+                </motion.div>
+                <figure className="about-main-plate" style={{ margin: 0 }}>
                   <Image
-                    src="/images/interior-chair.jpg"
-                    alt="Tarihi Rum binasının taş ve ahşap iç mekan dokusu"
+                    src="/images/breakfast-spread.jpg"
+                    alt="Tarihi Van Kahvaltıcısı geniş Van kahvaltısı sofrası"
                     fill
-                    sizes="(max-width: 900px) 88vw, 420px"
+                    sizes="(max-width: 820px) 54vw, 540px"
                     loading="lazy"
                   />
-                  <figcaption className="sr-only">Tarihi Rum binasının taş ve ahşap iç mekan dokusu</figcaption>
+                  <figcaption className="sr-only">Geniş Van kahvaltısı sunumu</figcaption>
                 </figure>
-                <div className="story-memory-list" aria-label="Tarihi Van Kahvaltıcısı kısa hikaye">
-                  <div>
-                    <span>1978</span>
-                    <p>Aile emeğiyle başlayan sofra kültürü.</p>
-                  </div>
-                  <div>
-                    <span>Taş doku</span>
-                    <p>Rum binasının sakin, yaşanmış atmosferi.</p>
-                  </div>
-                  <div>
-                    <span>Bugün</span>
-                    <p>Beyoğlu’nda uzun sohbetli Van kahvaltısı.</p>
-                  </div>
-                </div>
-              </div>
+                <span className="about-copper-ring" aria-hidden="true" />
+                {aboutOrbitImages.map(([src, alt], index) => (
+                  <figure
+                    key={src}
+                    className={`about-orbit-card about-orbit-card-${index + 1}`}
+                    style={{ "--orbit-index": index } as React.CSSProperties}
+                  >
+                    <Image
+                      src={src}
+                      alt={alt}
+                      fill
+                      sizes="(max-width: 820px) 96px, 150px"
+                      loading="lazy"
+                    />
+                  </figure>
+                ))}
+              </motion.div>
             </div>
-            <div className="story-stats" data-reveal>
-              <div>
-                <strong>1978</strong>
-                <span>Aile yolculuğu</span>
+
+            <motion.div
+              className="about-bottom"
+              initial={aboutItemInitial}
+              whileInView={aboutItemInView}
+              viewport={{ once: true, amount: 0.45 }}
+              transition={{ ...aboutItemTransition, delay: 0.3 }}
+            >
+              <div className="about-memory">
+                <span>Bugün</span>
+                <p>Beyoğlu&apos;nda uzun sohbetli, bol tabaklı, sıcak çaylı Van kahvaltısı.</p>
               </div>
-              <div>
-                <strong>2.</strong>
-                <span>Derece tarihi eser</span>
-              </div>
-            </div>
-            <figure className="story-plate" data-reveal style={{ margin: 0 }}>
-              <Image
-                src="/images/breakfast-spread.jpg"
-                alt="Geniş Van kahvaltısı"
-                fill
-                sizes="(max-width: 900px) 92vw, 760px"
-                loading="lazy"
-              />
-              <figcaption className="sr-only">Geniş Van kahvaltısı sunumu</figcaption>
-            </figure>
-          </article>
+              <a className="about-cta" href={whatsappUrl} target="_blank" rel="noopener noreferrer">
+                <Calendar size={17} />
+                <span>Sofraya geç</span>
+                <ChevronRight size={16} />
+              </a>
+            </motion.div>
+          </motion.article>
         </div>
 
         <section className="red-reviews" data-reveal>
