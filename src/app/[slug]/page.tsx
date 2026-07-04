@@ -8,6 +8,7 @@ import {
   buildBreadcrumbJsonLd,
   buildDirectionsHowToJsonLd,
   buildFaqJsonLd,
+  buildGeoCoverageJsonLd,
   buildMenuJsonLd,
   buildRestaurantJsonLd,
   buildWebsiteJsonLd,
@@ -133,9 +134,21 @@ export default async function SeoPage({ params }: PageProps) {
       isPartOf: {
         "@id": `${siteUrl}/#website`,
       },
-      about: {
-        "@id": `${siteUrl}/#restaurant`,
-      },
+      about: [
+        { "@id": `${siteUrl}/#restaurant` },
+        { "@id": `${siteUrl}/#geo-search-coverage` },
+      ],
+      spatialCoverage: { "@id": `${siteUrl}/#geo-search-coverage` },
+      mentions: [
+        ...(page.nearbyLandmarks ?? []).map((landmark) => ({
+          "@type": "Place",
+          name: landmark,
+        })),
+        ...(page.localIntent ?? []).map((intent) => ({
+          "@type": "Thing",
+          name: intent,
+        })),
+      ],
       mainEntity:
         slug === "menu"
           ? { "@id": `${siteUrl}/menu#menu` }
@@ -160,6 +173,7 @@ export default async function SeoPage({ params }: PageProps) {
       { name: labels.home, url: siteUrl },
       { name: page.h1, url: pageUrl },
     ], pageUrl, false),
+    buildGeoCoverageJsonLd(false),
     buildFaqJsonLd(page.questions, pageUrl, false),
   ];
 

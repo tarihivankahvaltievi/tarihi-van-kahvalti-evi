@@ -73,6 +73,8 @@ Tarihi Van Kahvaltı Evi, İstanbul'da Van kahvaltısı arayan misafirler için 
 
 ## Yerel Bağlam
 - Yakın arama niyetleri: Beyoğlu kahvaltı, Taksim kahvaltı, İstiklal Caddesi kahvaltı, Cihangir kahvaltı, Galata rotası kahvaltı, İstanbul Van kahvaltısı, Zambak Sokak kahvaltı, Sıraselviler kahvaltı, Turkish breakfast Istanbul, breakfast near Taksim, завтрак Таксим, турецкий завтрак Стамбул, فطور تركي اسطنبول, فطور قرب تقسيم, Taksim brunch.
+- Geo arama niyetleri: yakınımdaki Van kahvaltısı, Taksim'e yakın kahvaltı, Taksim metroya yakın kahvaltı, İstiklal Caddesi yakınında kahvaltı, breakfast near me Taksim, Turkish breakfast near Taksim Square, завтрак рядом со мной Таксим, فطور قريب من تقسيم.
+- Yerel kapsam: Beyoğlu, Taksim, Şehit Muhtar Mahallesi, Zambak Sokak, İstiklal Caddesi, Sıraselviler, Cihangir, Galata ve Karaköy çevresindeki kahvaltı aramaları için konum sinyali verilir.
 - Yakın noktalar: Taksim Meydanı, İstiklal Caddesi, Sıraselviler, Zambak Sokak, Cihangir, Galata, Karaköy.
 - Hızlı gerçekler: Konum Zambak Sk. No:8; çalışma saati her gün 08:00 - 18:00; serpme Van kahvaltısı en az iki kişilik servis edilir; kişi başı fiyat yaklaşık 450 TL; rezervasyon ve yoğunluk bilgisi telefon/WhatsApp ile alınır.
 - Rezervasyon: Hafta sonu ve kalabalık gruplar için +90 541 525 2868 üzerinden telefon veya WhatsApp ile bilgi alınması önerilir.

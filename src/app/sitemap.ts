@@ -37,6 +37,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
         absoluteUrl("/images/balcony-breakfast.jpg"),
       ]),
     },
+    {
+      url: absoluteUrl("/business-profile.json"),
+      lastModified,
+      changeFrequency: "weekly",
+      priority: 0.5,
+    },
   ];
 
   const seoRoutes: MetadataRoute.Sitemap = seoPages.map((page) => ({

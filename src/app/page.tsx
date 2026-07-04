@@ -2,6 +2,7 @@ import ClientPage from "./client-page";
 import {
   buildBreadcrumbJsonLd,
   buildFaqJsonLd,
+  buildGeoCoverageJsonLd,
   buildHomeWebPageJsonLd,
   buildImageGalleryJsonLd,
   buildLocalPagesItemListJsonLd,
@@ -23,6 +24,7 @@ export default function Home() {
       buildMenuJsonLd(),
       buildImageGalleryJsonLd(false),
       buildLocalPagesItemListJsonLd(false),
+      buildGeoCoverageJsonLd(false),
       buildFaqJsonLd(faqItems, siteUrl, false),
       buildBreadcrumbJsonLd([{ name: "Ana Sayfa", url: siteUrl }], siteUrl, false),
     ],

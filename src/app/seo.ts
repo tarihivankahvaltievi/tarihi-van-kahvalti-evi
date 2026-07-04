@@ -50,6 +50,7 @@ export const localAreas = [
   "Beyoğlu",
   "Taksim",
   "Şehit Muhtar Mahallesi",
+  "Zambak Sokak",
   "İstiklal Caddesi",
   "Sıraselviler",
   "Cihangir",
@@ -61,6 +62,7 @@ export const localAreas = [
 export const nearbyLandmarks = [
   "Taksim Meydanı",
   "İstiklal Caddesi",
+  "Zambak Sokak",
   "Sıraselviler Caddesi",
   "Cihangir",
   "Galata Kulesi",
@@ -72,6 +74,63 @@ export const transitAccess = [
   "Taksim Meydanı yürüyüş rotası",
   "Sıraselviler Caddesi",
   "İstiklal Caddesi",
+];
+
+export const geoSearchIntents = [
+  "yakınımdaki Van kahvaltısı",
+  "Taksim'e yakın kahvaltı",
+  "Beyoğlu'nda kahvaltı nerede yapılır",
+  "İstiklal Caddesi yakınında kahvaltı",
+  "Sıraselviler kahvaltı",
+  "Zambak Sokak kahvaltı",
+  "Taksim metroya yakın kahvaltı",
+  "Beyoğlu tarihi binada kahvaltı",
+  "breakfast near me Taksim",
+  "Turkish breakfast near Taksim Square",
+  "Van breakfast near Istiklal Avenue",
+  "завтрак рядом со мной Таксим",
+  "турецкий завтрак рядом с Истикляль",
+  "فطور قريب من تقسيم",
+  "فطور تركي قريب من شارع الاستقلال",
+];
+
+export const localAreaProfiles = [
+  {
+    name: "Taksim",
+    type: "Neighborhood",
+    relation: "Taksim Meydanı ve M2 Taksim metrodan yürüyerek ulaşılabilen kahvaltı noktası.",
+    searchIntent: "Taksim kahvaltı, breakfast near Taksim Square",
+  },
+  {
+    name: "Beyoğlu",
+    type: "AdministrativeArea",
+    relation: "Beyoğlu'nda tarihi Rum binasında Van kahvaltısı ve Kafka Cafe deneyimi.",
+    searchIntent: "Beyoğlu kahvaltı, Beyoğlu serpme kahvaltı",
+  },
+  {
+    name: "Şehit Muhtar Mahallesi",
+    type: "Neighborhood",
+    relation: "Açık adresin bulunduğu mahalle; Zambak Sk. No:8.",
+    searchIntent: "Şehit Muhtar kahvaltı, Zambak Sokak kahvaltı",
+  },
+  {
+    name: "İstiklal Caddesi",
+    type: "LandmarksOrHistoricalBuildings",
+    relation: "İstiklal Caddesi ve Sıraselviler hattından kısa yürüyüşle ulaşılır.",
+    searchIntent: "İstiklal Caddesi kahvaltı, İstiklal'e yakın kahvaltı",
+  },
+  {
+    name: "Cihangir",
+    type: "Neighborhood",
+    relation: "Cihangir ve Sıraselviler çevresinden yürüyerek gelen misafirler için yakın rota.",
+    searchIntent: "Cihangir kahvaltı, Cihangir'e yakın Van kahvaltısı",
+  },
+  {
+    name: "Galata",
+    type: "TouristAttraction",
+    relation: "Galata ve Karaköy rotası öncesi Beyoğlu'nda kahvaltı başlangıcı.",
+    searchIntent: "Galata kahvaltı rotası, Galata öncesi kahvaltı",
+  },
 ];
 
 export const openingHours = {
@@ -1634,9 +1693,13 @@ export function createPageMetadata(page: SeoPage): Metadata {
     },
     other: {
       "geo.region": "TR-34",
+      "geo.country": address.country,
       "geo.placename": "Beyoğlu, İstanbul",
       "geo.position": `${coordinates.latitude};${coordinates.longitude}`,
       ICBM: `${coordinates.latitude}, ${coordinates.longitude}`,
+      "placename": "Taksim, Beyoğlu, İstanbul",
+      "coverage": localAreas.join(", "),
+      "target": geoSearchIntents.join(", "),
       "business:contact_data:street_address": address.streetAddress,
       "business:contact_data:locality": address.locality,
       "business:contact_data:region": address.region,
@@ -1750,8 +1813,12 @@ export function buildHomeWebPageJsonLd(withContext = true) {
     isAccessibleForFree: true,
     keywords: keywords.join(", "),
     isPartOf: { "@id": `${siteUrl}/#website` },
-    about: { "@id": `${siteUrl}/#restaurant` },
+    about: [
+      { "@id": `${siteUrl}/#restaurant` },
+      { "@id": `${siteUrl}/#geo-search-coverage` },
+    ],
     mainEntity: { "@id": `${siteUrl}/#restaurant` },
+    spatialCoverage: { "@id": `${siteUrl}/#geo-search-coverage` },
     primaryImageOfPage: {
       "@type": "ImageObject",
       url: defaultOgImage,
@@ -1819,6 +1886,54 @@ export function buildLocalPagesItemListJsonLd(withContext = true) {
         inLanguage: getPageLanguage(page),
       },
     })),
+  };
+
+  return withContext ? { "@context": "https://schema.org", ...data } : data;
+}
+
+export function buildGeoCoverageJsonLd(withContext = true) {
+  const data = {
+    "@type": "ItemList",
+    "@id": `${siteUrl}/#geo-search-coverage`,
+    name: "Tarihi Van Kahvaltı Evi geo arama kapsamı",
+    description:
+      "Beyoğlu Taksim çevresinde Van kahvaltısı, serpme kahvaltı, yol tarifi ve turist kahvaltısı aramaları için yerel kapsam.",
+    inLanguage: ["tr-TR", "en", "ru", "ar"],
+    about: { "@id": `${siteUrl}/#restaurant` },
+    spatialCoverage: [
+      {
+        "@type": "Place",
+        name: "Beyoğlu, İstanbul",
+        geo: {
+          "@type": "GeoCircle",
+          geoMidpoint: {
+            "@type": "GeoCoordinates",
+            latitude: coordinates.latitude,
+            longitude: coordinates.longitude,
+          },
+          geoRadius: "2500",
+        },
+      },
+      ...localAreaProfiles.map((area) => ({
+        "@type": "Place",
+        name: area.name,
+        additionalType: `https://schema.org/${area.type}`,
+        description: area.relation,
+      })),
+    ],
+    itemListElement: localAreaProfiles.map((area, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      name: area.name,
+      description: area.relation,
+      item: {
+        "@type": "Place",
+        name: area.name,
+        additionalType: `https://schema.org/${area.type}`,
+        description: area.searchIntent,
+      },
+    })),
+    keywords: geoSearchIntents.join(", "),
   };
 
   return withContext ? { "@context": "https://schema.org", ...data } : data;
@@ -1893,7 +2008,7 @@ export function buildRestaurantJsonLd(withContext = true) {
     acceptsReservations: true,
     servesCuisine: cuisine,
     knowsLanguage: supportedLanguages,
-    keywords: keywords.join(", "),
+    keywords: [...new Set([...keywords, ...geoSearchIntents])].join(", "),
     brand: {
       "@type": "Brand",
       name: siteName,
@@ -1942,6 +2057,15 @@ export function buildRestaurantJsonLd(withContext = true) {
       },
     ],
     areaServed,
+    serviceArea: {
+      "@type": "GeoCircle",
+      geoMidpoint: {
+        "@type": "GeoCoordinates",
+        latitude: coordinates.latitude,
+        longitude: coordinates.longitude,
+      },
+      geoRadius: "2500",
+    },
     containedInPlace: {
       "@type": "Place",
       name: "Şehit Muhtar Mahallesi, Taksim",
@@ -1990,6 +2114,24 @@ export function buildRestaurantJsonLd(withContext = true) {
       "завтрак рядом с Таксим",
       "فطور تركي اسطنبول",
       "فطور قرب تقسيم",
+      ...geoSearchIntents,
+    ],
+    spatialCoverage: [
+      {
+        "@type": "Place",
+        name: "Beyoğlu, İstanbul",
+        geo: {
+          "@type": "GeoCoordinates",
+          latitude: coordinates.latitude,
+          longitude: coordinates.longitude,
+        },
+      },
+      ...localAreaProfiles.map((area) => ({
+        "@type": "Place",
+        name: area.name,
+        additionalType: `https://schema.org/${area.type}`,
+        description: area.relation,
+      })),
     ],
     additionalProperty: [
       {
@@ -2021,6 +2163,11 @@ export function buildRestaurantJsonLd(withContext = true) {
         "@type": "PropertyValue",
         name: "Yandex uyumlu yerelleştirme",
         value: "Русская страница использует видимый русский текст, canonical URL and head hreflang markup.",
+      },
+      {
+        "@type": "PropertyValue",
+        name: "Geo arama kapsamı",
+        value: geoSearchIntents.join(", "),
       },
     ],
     amenityFeature: [

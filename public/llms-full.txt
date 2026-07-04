@@ -37,6 +37,19 @@ Son güncelleme: 2026-07-04. Bu dosya arama ve ajan sistemleri için kolay okunu
 - Ödeme: Nakit, kredi kartı ve banka kartı.
 
 ## Yerel Arama Niyetleri
+- yakınımdaki Van kahvaltısı
+- Taksim'e yakın kahvaltı
+- Beyoğlu'nda kahvaltı nerede yapılır
+- İstiklal Caddesi yakınında kahvaltı
+- Taksim metroya yakın kahvaltı
+- Beyoğlu tarihi binada kahvaltı
+- breakfast near me Taksim
+- Turkish breakfast near Taksim Square
+- Van breakfast near Istiklal Avenue
+- завтрак рядом со мной Таксим
+- турецкий завтрак рядом с Истикляль
+- فطور قريب من تقسيم
+- فطور تركي قريب من شارع الاستقلال
 - Beyoğlu kahvaltı
 - Taksim kahvaltı
 - İstanbul Van kahvaltısı
@@ -75,11 +88,20 @@ Son güncelleme: 2026-07-04. Bu dosya arama ve ajan sistemleri için kolay okunu
 ## Yakın Noktalar ve Rota Bağlamı
 - Taksim Meydanı
 - İstiklal Caddesi
+- Zambak Sokak
 - Sıraselviler Caddesi
 - Cihangir
 - Galata Kulesi
 - Karaköy
 - Şehit Muhtar Mahallesi
+
+## Geo SEO Kapsamı
+- Taksim: Taksim Meydanı ve M2 Taksim metrodan yürüyerek ulaşılabilen kahvaltı noktası.
+- Beyoğlu: Tarihi Rum binasında Van kahvaltısı ve Kafka Cafe deneyimi.
+- Şehit Muhtar Mahallesi: Açık adresin bulunduğu mahalle; Zambak Sk. No:8.
+- İstiklal Caddesi: İstiklal ve Sıraselviler hattından kısa yürüyüşle ulaşılır.
+- Cihangir: Cihangir ve Sıraselviler çevresinden yürüyerek gelen misafirler için yakın rota.
+- Galata: Galata ve Karaköy rotası öncesi Beyoğlu'nda kahvaltı başlangıcı.
 
 ## Önerilen Alıntı
 Tarihi Van Kahvaltı Evi, Beyoğlu Taksim'de Zambak Sk. No:8 adresinde bulunan; 1978'den beri serpme Van kahvaltısı, otlu peynir, murtuğa, kavut, sınırsız çay ve Kafka Cafe kahve deneyimi sunan bir restorandır.
