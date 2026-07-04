@@ -18327,5 +18327,15 @@ h2 span,
 .story-band {
   background:
     linear-gradient(180deg, rgba(255, 251, 239, 0.96), rgba(247, 235, 207, 0.94)) !important;
+  background-color: #f7ebcf !important;
   box-shadow: none !important;
+  -webkit-mask-image: none !important;
+  mask-image: none !important;
+}
+
+.story-band::before,
+.story-band::after {
+  display: none !important;
+  background: none !important;
+  opacity: 0 !important;
 }
