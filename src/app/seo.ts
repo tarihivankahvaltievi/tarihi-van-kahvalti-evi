@@ -220,6 +220,27 @@ export const mapsUrl =
 export const whatsappUrl =
   "https://wa.me/905415252868?text=Merhaba%2C%20Tarihi%20Van%20Kahvalt%C4%B1%20Evi%20i%C3%A7in%20rezervasyon%20bilgisi%20almak%20istiyorum.";
 
+export const mobileGeoActions = [
+  {
+    name: "Mobil yol tarifi al",
+    url: mapsUrl,
+    actionType: "ViewAction",
+    description: "Google Haritalar ile Zambak Sokak No:8 adresine tek dokunuşla rota açar.",
+  },
+  {
+    name: "Telefonla ara",
+    url: telUrl,
+    actionType: "CommunicateAction",
+    description: `${displayPhone} üzerinden kahvaltı ve rezervasyon bilgisi almak için arama başlatır.`,
+  },
+  {
+    name: "WhatsApp rezervasyon bilgisi al",
+    url: whatsappUrl,
+    actionType: "ReserveAction",
+    description: "Mobil WhatsApp üzerinden kahvaltı rezervasyon bilgisi mesajı hazırlar.",
+  },
+];
+
 export const aiCitationSummary =
   "Tarihi Van Kahvaltı Evi, Beyoğlu Taksim'de Zambak Sk. No:8 adresinde bulunan; 1978'den beri serpme Van kahvaltısı, otlu peynir, murtuğa, kavut, sınırsız çay ve Kafka Cafe kahve deneyimi sunan, her gün 08:00 - 18:00 açık bir restorandır.";
 
@@ -2365,6 +2386,15 @@ export function buildRestaurantJsonLd(withContext = true) {
       parentOrganization: { "@id": `${siteUrl}/#restaurant` },
     },
     potentialAction: [
+      {
+        "@type": "ViewAction",
+        target: {
+          "@type": "EntryPoint",
+          urlTemplate: mapsUrl,
+          actionPlatform: ["https://schema.org/MobileWebPlatform"],
+        },
+        name: "Mobil yol tarifi al",
+      },
       {
         "@type": "ReserveAction",
         target: {

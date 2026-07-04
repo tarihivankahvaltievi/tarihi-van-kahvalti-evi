@@ -13499,7 +13499,7 @@ h2 span,
 
 @media (max-width: 768px) {
   .footer-istiklal-webgl {
-    opacity: 0.58;
+    display: none;
   }
 
   .street-figures {

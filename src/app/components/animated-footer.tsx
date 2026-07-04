@@ -115,6 +115,14 @@ function IstiklalWebglAtmosphere() {
     const canvas = canvasRef.current;
     if (!canvas) return;
 
+    const mobileViewport = window.matchMedia("(max-width: 768px)");
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+    if (mobileViewport.matches) {
+      canvas.dataset.webglSkipped = "mobile";
+      return;
+    }
+
     const gl = canvas.getContext("webgl", {
       alpha: true,
       antialias: false,
@@ -127,7 +135,6 @@ function IstiklalWebglAtmosphere() {
       return;
     }
 
-    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
     const vertexSource = `
       attribute vec2 a_position;
       varying vec2 v_uv;
