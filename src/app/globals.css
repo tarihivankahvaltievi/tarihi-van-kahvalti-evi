@@ -17815,12 +17815,12 @@ h2 span,
 
 @media (max-width: 680px) {
   .hero.hero-parallax-dining {
-    height: 116svh !important;
-    min-height: 760px !important;
+    height: 110svh !important;
+    min-height: 720px !important;
   }
 
   .hero-parallax-sticky {
-    min-height: 700px !important;
+    min-height: 660px !important;
   }
 
   .hero-parallax-copy {
@@ -17954,12 +17954,12 @@ h2 span,
 
 @media (max-width: 420px) {
   .hero.hero-parallax-dining {
-    height: 112svh !important;
-    min-height: 730px !important;
+    height: 106svh !important;
+    min-height: 700px !important;
   }
 
   .hero-parallax-sticky {
-    min-height: 680px !important;
+    min-height: 640px !important;
   }
 
   .hero-parallax-copy {
@@ -18335,9 +18335,9 @@ h2 span,
 
 @media (max-width: 680px) {
   .story-band {
-    --story-transition-overlap: 36px;
-    margin-top: -36px;
-    padding-top: clamp(3rem, 10vw, 4.25rem);
+    --story-transition-overlap: 44px;
+    margin-top: -44px;
+    padding-top: clamp(2.7rem, 9vw, 3.8rem);
   }
 }
 
