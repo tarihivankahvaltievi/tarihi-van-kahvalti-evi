@@ -17837,7 +17837,7 @@ h2 span,
   }
 
   .hero-parallax-food-stage {
-    top: 9.1rem !important;
+    top: 10.25rem !important;
     right: 0.2rem !important;
     left: 0.38rem !important;
     width: auto !important;
@@ -17927,7 +17927,7 @@ h2 span,
   }
 
   .hero-parallax-gallery {
-    top: 46% !important;
+    top: 48.6% !important;
     left: -58vw !important;
     gap: 0.46rem !important;
     filter: drop-shadow(0 18px 24px rgba(57, 39, 22, 0.14));
@@ -17971,13 +17971,13 @@ h2 span,
   }
 
   .hero-parallax-food-stage {
-    top: 8.8rem !important;
+    top: 9.85rem !important;
     height: 300px !important;
     min-height: 300px !important;
   }
 
   .hero-parallax-gallery {
-    top: 45.4% !important;
+    top: 48% !important;
     left: -55vw !important;
   }
 

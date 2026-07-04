@@ -233,7 +233,7 @@ export function VanHeroParallax() {
     useTransform(
       scrollYProgress,
       [0, 0.36, 1],
-      isMobile ? [44, -18, -112] : [116, 72, 30]
+      isMobile ? [58, -4, -98] : [116, 72, 30]
     ),
     spring,
   );
