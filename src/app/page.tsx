@@ -1,4 +1,5 @@
 import ClientPage from "./client-page";
+import { HomeContent } from "./home-content";
 import {
   buildBreadcrumbJsonLd,
   buildFaqJsonLd,
@@ -36,7 +37,9 @@ export default function Home() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: jsonLd(homeJsonLd) }}
       />
-      <ClientPage />
+      <ClientPage>
+        <HomeContent />
+      </ClientPage>
     </>
   );
 }

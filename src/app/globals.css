@@ -1206,17 +1206,6 @@ h2 span {
   transform: scale(1.035);
 }
 
-.hero-atmosphere-canvas {
-  position: absolute;
-  inset: 0;
-  z-index: 3;
-  width: 100%;
-  height: 100%;
-  mix-blend-mode: screen;
-  opacity: 0.42;
-  pointer-events: none;
-}
-
 .hero-visual:hover .food-cutout.large {
   box-shadow: 0 46px 96px rgba(0, 0, 0, 0.34);
   transform: translateY(-5px) rotate(-0.7deg);
@@ -5271,11 +5260,6 @@ h2 span {
 
   .hero-visual {
     display: none;
-  }
-
-  .hero-atmosphere-canvas {
-    z-index: 3;
-    opacity: 0.5;
   }
 
   .rating-card,
@@ -10101,7 +10085,6 @@ h2 span {
   display: none;
 }
 
-.hero-atmosphere-canvas,
 .hero-motion-line,
 .hero-grain,
 .hero-stage {
@@ -10798,18 +10781,6 @@ h2 span {
   transform: none;
 }
 
-.hero-atmosphere-canvas {
-  position: absolute;
-  inset: 0;
-  z-index: 2;
-  display: block;
-  width: 100%;
-  height: 100%;
-  opacity: 0.56;
-  mix-blend-mode: screen;
-  pointer-events: none;
-}
-
 .rating-card {
   position: absolute;
   top: 2.2rem;
@@ -11092,12 +11063,6 @@ h2 span {
     object-position: 56% 43%;
     filter: saturate(1.02) contrast(1.01) brightness(0.96);
     transform: scale(1.01);
-  }
-
-  .hero-atmosphere-canvas {
-    z-index: 3;
-    display: block;
-    opacity: 0.62;
   }
 
   .rating-card {
@@ -18179,6 +18144,33 @@ h2 span,
   color: var(--red-dark);
   font-weight: 800;
   text-decoration: none;
+}
+
+.site-footer-lite {
+  position: relative;
+  border-top: 1px solid var(--line);
+}
+
+.site-footer-lite .footer-content {
+  padding-top: clamp(2rem, 5vw, 4rem);
+}
+
+.site-footer-lite .footer-brand-logo img {
+  object-fit: contain;
+}
+
+.site-footer-lite .footer-links a {
+  min-width: 0;
+}
+
+.site-footer-lite .footer-links .link-text {
+  overflow-wrap: anywhere;
+}
+
+.site-footer-lite .hours-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
 }
 
 @media (max-width: 980px) {

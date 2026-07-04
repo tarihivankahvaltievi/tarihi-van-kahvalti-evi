@@ -8,8 +8,8 @@ export const phoneE164 = "+905415252868";
 export const telUrl = `tel:${phoneE164}`;
 export const email = "info@tarihivankahvaltievi.com";
 export const foundingDate = "1978";
-export const dateModified = "2026-07-04";
-export const dateModifiedIso = "2026-07-04T12:00:00+03:00";
+export const dateModified = "2026-07-05";
+export const dateModifiedIso = "2026-07-05T12:00:00+03:00";
 export const defaultImage = "/images/hero-table.jpg";
 export const defaultOgImagePath = "/images/og/home.jpg";
 export const defaultOgImage = `${siteUrl}${defaultOgImagePath}`;
@@ -1654,13 +1654,11 @@ export function pageOgImagePath(slug: string) {
 export function createPageMetadata(page: SeoPage): Metadata {
   const url = absoluteUrl(page.slug);
   const image = absoluteUrl(pageOgImagePath(page.slug));
-  const pageKeywords = [...new Set([...(page.keywords ?? []), ...keywords])];
   const pageLanguage = getPageLanguage(page);
 
   return {
     title: page.title,
     description: page.description,
-    keywords: pageKeywords,
     authors: [{ name: siteName, url: siteUrl }],
     creator: siteName,
     publisher: siteName,
@@ -1698,8 +1696,6 @@ export function createPageMetadata(page: SeoPage): Metadata {
       "geo.position": `${coordinates.latitude};${coordinates.longitude}`,
       ICBM: `${coordinates.latitude}, ${coordinates.longitude}`,
       "placename": "Taksim, Beyoğlu, İstanbul",
-      "coverage": localAreas.join(", "),
-      "target": geoSearchIntents.join(", "),
       "business:contact_data:street_address": address.streetAddress,
       "business:contact_data:locality": address.locality,
       "business:contact_data:region": address.region,
@@ -1778,7 +1774,6 @@ export function buildWebsiteJsonLd(withContext = true) {
     dateModified: dateModifiedIso,
     publisher: { "@id": `${siteUrl}/#restaurant` },
     about: { "@id": `${siteUrl}/#restaurant` },
-    keywords: keywords.join(", "),
     audience: {
       "@type": "Audience",
       audienceType:
@@ -1811,7 +1806,6 @@ export function buildHomeWebPageJsonLd(withContext = true) {
     dateModified: dateModifiedIso,
     datePublished: dateModified,
     isAccessibleForFree: true,
-    keywords: keywords.join(", "),
     isPartOf: { "@id": `${siteUrl}/#website` },
     about: [
       { "@id": `${siteUrl}/#restaurant` },
@@ -1933,7 +1927,6 @@ export function buildGeoCoverageJsonLd(withContext = true) {
         description: area.searchIntent,
       },
     })),
-    keywords: geoSearchIntents.join(", "),
   };
 
   return withContext ? { "@context": "https://schema.org", ...data } : data;
@@ -2008,7 +2001,6 @@ export function buildRestaurantJsonLd(withContext = true) {
     acceptsReservations: true,
     servesCuisine: cuisine,
     knowsLanguage: supportedLanguages,
-    keywords: [...new Set([...keywords, ...geoSearchIntents])].join(", "),
     brand: {
       "@type": "Brand",
       name: siteName,
@@ -2111,10 +2103,8 @@ export function buildRestaurantJsonLd(withContext = true) {
       "Istanbul breakfast for tourists",
       "завтрак Таксим",
       "турецкий завтрак Стамбул",
-      "завтрак рядом с Таксим",
       "فطور تركي اسطنبول",
       "فطور قرب تقسيم",
-      ...geoSearchIntents,
     ],
     spatialCoverage: [
       {
@@ -2153,21 +2143,6 @@ export function buildRestaurantJsonLd(withContext = true) {
         "@type": "PropertyValue",
         name: "Öne çıkan yerel lezzetler",
         value: "Van otlu peyniri, murtuğa, kavut, kete, sınırsız çay",
-      },
-      {
-        "@type": "PropertyValue",
-        name: "Turist ve yabancı dil sayfaları",
-        value: "English, Russian and Arabic visitor pages are available with reciprocal hreflang links.",
-      },
-      {
-        "@type": "PropertyValue",
-        name: "Yandex uyumlu yerelleştirme",
-        value: "Русская страница использует видимый русский текст, canonical URL and head hreflang markup.",
-      },
-      {
-        "@type": "PropertyValue",
-        name: "Geo arama kapsamı",
-        value: geoSearchIntents.join(", "),
       },
     ],
     amenityFeature: [

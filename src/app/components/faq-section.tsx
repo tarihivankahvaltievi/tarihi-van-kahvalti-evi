@@ -1,17 +1,6 @@
-"use client";
-
-import { useState } from "react";
-import { ChevronDown } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
 import { faqItems } from "../seo";
 
 export function FaqSection() {
-  const [openIndex, setOpenIndex] = useState<number | null>(null);
-
-  const toggleOpen = (index: number) => {
-    setOpenIndex(openIndex === index ? null : index);
-  };
-
   return (
     <section 
       className="py-24 px-6 md:px-12 bg-[var(--soft)]" 
@@ -30,48 +19,26 @@ export function FaqSection() {
           {faqItems.map((faq, index) => {
             const answerId = `faq-answer-${index}`;
             return (
-              <div
+              <details
                 key={index}
-                className={`border rounded-2xl overflow-hidden transition-colors duration-300 ${openIndex === index ? "bg-white border-[var(--red)] shadow-sm" : "bg-white border-[var(--line)] hover:border-[var(--gold)]"}`}
+                className="border rounded-lg overflow-hidden bg-white border-[var(--line)] hover:border-[var(--gold)]"
               >
-                <button
+                <summary
                   id={`faq-question-${index}`}
-                  type="button"
-                  className="w-full text-left px-6 py-5 flex justify-between items-center focus:outline-none focus:ring-2 focus:ring-[var(--red)] focus:ring-inset"
-                  onClick={() => toggleOpen(index)}
-                  aria-expanded={openIndex === index}
+                  className="w-full text-left px-6 py-5 cursor-pointer font-medium text-[var(--ink)] focus:outline-none focus:ring-2 focus:ring-[var(--red)] focus:ring-inset"
                   aria-controls={answerId}
                 >
-                  <span
-                    className={`font-medium pr-4 ${openIndex === index ? "text-[var(--red-dark)]" : "text-[var(--ink)]"}`}
-                  >
-                    {faq.question}
-                  </span>
-                  <ChevronDown 
-                    className={`w-5 h-5 text-[var(--muted)] transition-transform duration-300 flex-shrink-0 ${openIndex === index ? "rotate-180 text-[var(--red)]" : ""}`} 
-                  />
-                </button>
-
-                <AnimatePresence>
-                  {openIndex === index && (
-                    <motion.div
-                      id={answerId}
-                      initial={{ height: 0, opacity: 0 }}
-                      animate={{ height: "auto", opacity: 1 }}
-                      exit={{ height: 0, opacity: 0 }}
-                      transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-                      role="region"
-                      aria-labelledby={`faq-question-${index}`}
-                    >
-                      <div
-                        className="px-6 pb-6 text-[var(--muted)] leading-relaxed"
-                      >
-                        {faq.answer}
-                      </div>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </div>
+                  {faq.question}
+                </summary>
+                <div
+                  id={answerId}
+                  className="px-6 pb-6 text-[var(--muted)] leading-relaxed"
+                  role="region"
+                  aria-labelledby={`faq-question-${index}`}
+                >
+                  {faq.answer}
+                </div>
+              </details>
             );
           })}
         </div>
