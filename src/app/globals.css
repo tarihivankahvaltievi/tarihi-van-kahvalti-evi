@@ -5,7 +5,7 @@
   --ease-soft: cubic-bezier(0.25, 1, 0.5, 1);
   --font-geist-sans: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   --font-geist-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
-  --font-playfair: Georgia, "Times New Roman", serif;
+  --font-playfair: var(--font-playfair-gf), Georgia, "Times New Roman", serif;
   --red: #8f171a;
   --red-dark: #6f1013;
   --red-light: #fef8f8;
@@ -12764,110 +12764,7 @@ h2 span,
   color: var(--red);
 }
 
-.hero.hero-parallax-dining {
-  background:
-    linear-gradient(180deg, #f6eed8 0%, #f2e6ce 32%, #efe0c4 64%, #ead6b5 100%);
-  color: var(--ink);
-}
-
-.hero.hero-parallax-dining::before {
-  background:
-    linear-gradient(180deg, rgba(255, 250, 240, 0.76) 0%, rgba(255, 250, 240, 0.16) 22%, rgba(255, 250, 240, 0) 58%, rgba(239, 227, 208, 0.84) 100%),
-    radial-gradient(ellipse at 50% 0%, rgba(255, 250, 240, 0.84), transparent 34%);
-}
-
-.hero.hero-parallax-dining::after,
-.hero-parallax-copy::after {
-  background: linear-gradient(90deg, rgba(54, 88, 61, 0), rgba(54, 88, 61, 0.38), rgba(185, 139, 67, 0.34), rgba(54, 88, 61, 0));
-}
-
-.hero-parallax-copy > span {
-  border-color: rgba(54, 88, 61, 0.14);
-  background: rgba(255, 250, 240, 0.7);
-  color: rgba(33, 51, 68, 0.72);
-}
-
-.story-band {
-  --story-transition-overlap: 0px;
-  margin-top: -1px;
-  padding: clamp(2.8rem, 6vw, 5.5rem) 0 clamp(2.6rem, 5vw, 4.8rem);
-  background:
-    linear-gradient(180deg, rgba(239, 227, 208, 0.12), rgba(239, 227, 208, 0.72) 48%, rgba(239, 227, 208, 0.18)),
-    linear-gradient(135deg, #d9c8aa 0%, #c8b494 42%, #e7d9bf 100%);
-  -webkit-mask-image: none;
-  mask-image: none;
-  box-shadow:
-    inset 0 22px 38px rgba(91, 69, 42, 0.13),
-    inset 0 -20px 42px rgba(255, 250, 240, 0.28);
-}
-
-.red-story {
-  min-height: auto;
-  margin: 0 clamp(1rem, 3vw, 3.2rem);
-  padding: clamp(2rem, 4.8vw, 4.7rem);
-  background:
-    linear-gradient(115deg, rgba(23, 48, 33, 0.95), rgba(47, 77, 53, 0.9) 44%, rgba(28, 44, 55, 0.94)),
-    url("/images/historic-mirror.jpg") center/cover;
-  border: 1px solid rgba(255, 239, 207, 0.2);
-  border-radius: clamp(22px, 3vw, 34px);
-  box-shadow:
-    0 28px 70px rgba(31, 56, 39, 0.22),
-    inset 0 1px 0 rgba(255, 239, 207, 0.22),
-    inset 0 -18px 42px rgba(15, 34, 24, 0.2);
-}
-
-.red-reviews {
-  background:
-    linear-gradient(115deg, rgba(31, 56, 39, 0.93), rgba(54, 88, 61, 0.88)),
-    url("/images/breakfast-spread.jpg") center/cover;
-}
-
-.red-story::after {
-  background:
-    radial-gradient(ellipse at 78% 18%, rgba(237, 199, 130, 0.2), transparent 30%),
-    linear-gradient(115deg, rgba(255, 255, 255, 0.075), transparent 26%, transparent 72%, rgba(17, 35, 24, 0.22)),
-    radial-gradient(ellipse at center, transparent 48%, rgba(15, 34, 24, 0.24));
-}
-
-.story-content {
-  grid-template-columns: minmax(0, 1.04fr) minmax(300px, 0.86fr);
-  gap: clamp(2rem, 4vw, 4rem);
-}
-
-.story-copy {
-  max-width: 660px;
-}
-
-.story-pill {
-  border-color: rgba(255, 239, 207, 0.26);
-  background: rgba(255, 250, 240, 0.11);
-  backdrop-filter: none;
-  -webkit-backdrop-filter: none;
-}
-
-.red-story h2 {
-  max-width: 11.4em;
-  margin: clamp(1.1rem, 2vw, 1.6rem) 0 1rem;
-  font-size: clamp(2.35rem, 5.8vw, 5.15rem);
-  line-height: 0.98;
-  letter-spacing: 0;
-  text-wrap: balance;
-}
-
-.story-copy > p {
-  max-width: 40rem;
-  color: rgba(255, 250, 240, 0.9);
-  font-size: clamp(1.03rem, 1.35vw, 1.24rem);
-  line-height: 1.72;
-}
-
-.story-text {
-  position: relative;
-  max-width: 42rem;
-  margin-top: clamp(1.5rem, 3vw, 2.3rem);
-  padding-left: clamp(1rem, 2vw, 1.55rem);
-  border-left: 2px solid rgba(185, 139, 67, 0.72);
-}
+/* [CONSOLIDATED] Hero parallax dining, story-band, red-story overrides moved to final block below (~line 18500+) */
 
 .story-text::before {
   position: absolute;
@@ -17756,400 +17653,7 @@ h2 span,
   }
 }
 
-/* Final hero polish: lighter assets, faster first paint, stronger gallery depth. */
-.hero.hero-parallax-dining {
-  height: 190svh !important;
-  min-height: 1200px !important;
-  background:
-    linear-gradient(180deg, rgba(255, 251, 239, 0.96) 0%, rgba(247, 235, 207, 0.94) 34%, rgba(232, 209, 169, 0.96) 100%),
-    linear-gradient(115deg, rgba(54, 88, 61, 0.1), transparent 38%, rgba(185, 139, 67, 0.16));
-  perspective: 1800px !important;
-  transform-style: preserve-3d;
-}
-
-.hero.hero-parallax-dining::before {
-  background:
-    linear-gradient(180deg, rgba(255, 252, 243, 0.88) 0%, rgba(255, 252, 243, 0.28) 18%, rgba(255, 252, 243, 0.02) 52%, rgba(237, 222, 193, 0.86) 100%),
-    linear-gradient(90deg, rgba(54, 88, 61, 0.1) 0%, transparent 27%, transparent 76%, rgba(143, 23, 26, 0.07) 100%),
-    repeating-linear-gradient(90deg, rgba(79, 57, 35, 0.025) 0 1px, transparent 1px 84px);
-}
-
-.hero-parallax-sticky {
-  min-height: 720px !important;
-}
-
-.hero-parallax-copy {
-  top: clamp(7.95rem, 13.2svh, 10.25rem) !important;
-  width: min(26rem, 35vw) !important;
-  text-shadow: 0 16px 38px rgba(92, 60, 31, 0.08);
-}
-
-.hero-parallax-copy h1 {
-  letter-spacing: 0 !important;
-  line-height: 0.91 !important;
-  color: #171412 !important;
-  text-shadow: none !important;
-}
-
-.hero-parallax-copy h1 span {
-  color: #171412 !important;
-}
-
-.hero-parallax-copy p {
-  color: rgba(47, 42, 38, 0.76) !important;
-}
-
-.hero-copy-ambient-glow {
-  background:
-    linear-gradient(115deg, rgba(185, 139, 67, 0.14), rgba(54, 88, 61, 0.07) 48%, transparent 80%) !important;
-  filter: blur(22px) !important;
-}
-
-.hero-parallax-gallery {
-  top: 37% !important;
-  left: -17vw !important;
-  gap: clamp(1.05rem, 2vw, 1.62rem) !important;
-  filter: drop-shadow(0 30px 42px rgba(57, 39, 22, 0.16));
-  transform-origin: 54% 9% !important;
-}
-
-.hero-parallax-row {
-  gap: clamp(1.05rem, 2vw, 1.62rem) !important;
-  transform-style: preserve-3d;
-}
-
-.hero-parallax-card {
-  border-radius: 13px !important;
-  border-color: rgba(255, 250, 239, 0.7) !important;
-  background: #241a14 !important;
-  box-shadow:
-    0 1px 1px rgba(255, 255, 255, 0.34) inset,
-    0 12px 24px rgba(42, 27, 18, 0.1),
-    0 34px 78px rgba(42, 27, 18, 0.18) !important;
-  transform-style: preserve-3d;
-  transition: box-shadow 320ms var(--ease-out), filter 320ms var(--ease-out) !important;
-}
-
-.hero-parallax-card:nth-child(odd) {
-  rotate: -0.65deg;
-}
-
-.hero-parallax-card:nth-child(even) {
-  rotate: 0.75deg;
-}
-
-.hero-parallax-card img {
-  filter: saturate(1.08) contrast(1.05) brightness(0.94) !important;
-  transform: scale(1.018) translateZ(0) !important;
-  transition: none !important;
-}
-
-.hero-parallax-card::after {
-  background:
-    linear-gradient(180deg, rgba(18, 12, 10, 0.01), rgba(18, 12, 10, 0.15)),
-    linear-gradient(112deg, rgba(255, 255, 255, 0.22), transparent 22%, transparent 74%, rgba(255, 255, 255, 0.12)) !important;
-}
-
-.hero-parallax-food-stage {
-  top: 19.6% !important;
-  right: clamp(1rem, 7vw, 7.5rem) !important;
-  width: min(45vw, 590px) !important;
-  height: min(51vw, 600px) !important;
-  min-height: 430px !important;
-  contain: layout style;
-}
-
-.hero-parallax-food-stage::before {
-  filter: blur(4px) !important;
-  opacity: 0.82;
-}
-
-.hero-parallax-food-stage .hero-float-item {
-  opacity: 1;
-  transition: none !important;
-  will-change: transform, opacity;
-  animation:
-    hero-food-snap-in 340ms cubic-bezier(0.16, 1, 0.3, 1) var(--float-delay) both,
-    hero-food-drift-refined var(--float-dur, 13.5s) cubic-bezier(0.45, 0, 0.22, 1) calc(var(--float-delay) + 340ms) infinite !important;
-}
-
-.hero-parallax-food-stage .hero-float-item img {
-  object-fit: contain;
-  transition: none !important;
-}
-
-.hero-parallax-food-stage .hero-float-pan {
-  --float-dur: 13.6s;
-}
-
-.hero-parallax-food-stage .hero-float-tea {
-  --float-dur: 11.8s;
-}
-
-.hero-parallax-food-stage .hero-float-simit {
-  --float-dur: 14.2s;
-}
-
-.hero-parallax-food-stage .hero-float-omelette {
-  --float-dur: 14.8s;
-}
-
-.hero-parallax-food-stage .hero-float-cheese-platter {
-  --float-dur: 12.9s;
-}
-
-.hero-parallax-food-stage .hero-float-greens-platter {
-  --float-dur: 15.2s;
-}
-
-.hero-parallax-food-stage .hero-float-black-olives,
-.hero-parallax-food-stage .hero-float-cherry-jam,
-.hero-parallax-food-stage .hero-float-apricot-jam,
-.hero-parallax-food-stage .hero-float-jam {
-  --float-dur: 12.4s;
-}
-
-@keyframes hero-food-snap-in {
-  from {
-    opacity: 0.001;
-    transform: translate3d(0, 10px, 0) scale(0.975) rotate(-0.35deg);
-  }
-  to {
-    opacity: 1;
-    transform: translate3d(0, 0, 0) scale(1) rotate(0deg);
-  }
-}
-
-@keyframes hero-food-drift-refined {
-  0%,
-  100% {
-    transform: translate3d(0, 0, 0) rotate(0deg);
-  }
-  30% {
-    transform: translate3d(calc(var(--float-x, 10px) * 0.42), calc(var(--float-y, -15px) * 0.48), 0) rotate(0.22deg);
-  }
-  62% {
-    transform: translate3d(calc(var(--float-x-end, -8px) * 0.34), calc(var(--float-y, -15px) * 0.28), 0) rotate(-0.18deg);
-  }
-  84% {
-    transform: translate3d(calc(var(--float-x-end, -8px) * 0.52), calc(var(--float-y-end, 9px) * 0.46), 0) rotate(0.14deg);
-  }
-}
-
-@media (max-width: 1080px) {
-  .hero.hero-parallax-dining {
-    height: 178svh !important;
-    min-height: 1120px !important;
-  }
-
-  .hero-parallax-gallery {
-    top: 41% !important;
-    left: -35vw !important;
-  }
-
-  .hero-parallax-food-stage {
-    top: 22% !important;
-    right: 5% !important;
-    width: min(80vw, 620px) !important;
-    height: min(60vw, 480px) !important;
-    min-height: 390px !important;
-  }
-}
-
-@media (max-width: 680px) {
-  .hero.hero-parallax-dining {
-    height: 110svh !important;
-    min-height: 720px !important;
-  }
-
-  .hero-parallax-sticky {
-    min-height: 660px !important;
-  }
-
-  .hero-parallax-copy {
-    top: 7.55rem !important;
-    left: clamp(1rem, 5.4vw, 1.45rem) !important;
-    width: min(64vw, 18.25rem) !important;
-    max-width: 18.25rem !important;
-  }
-
-  .hero-parallax-copy h1 {
-    max-width: 6.75em !important;
-    font-size: clamp(2.42rem, 10.5vw, 3.12rem) !important;
-    line-height: 0.9 !important;
-  }
-
-  .hero-parallax-copy p {
-    max-width: min(15.75rem, 63vw) !important;
-    font-size: clamp(0.84rem, 3.55vw, 0.98rem) !important;
-    line-height: 1.34 !important;
-  }
-
-  .hero-parallax-food-stage {
-    top: 10.25rem !important;
-    right: 0.2rem !important;
-    left: 0.38rem !important;
-    width: auto !important;
-    height: 318px !important;
-    min-height: 318px !important;
-  }
-
-  .hero-parallax-food-stage .hero-float-item {
-    filter:
-      drop-shadow(0 4px 8px rgba(72, 44, 24, 0.08))
-      drop-shadow(0 12px 16px rgba(72, 44, 24, 0.1)) !important;
-    animation:
-      hero-food-snap-in 280ms cubic-bezier(0.16, 1, 0.3, 1) var(--float-delay) both,
-      hero-food-drift-refined var(--float-dur, 14.5s) cubic-bezier(0.45, 0, 0.22, 1) calc(var(--float-delay) + 280ms) infinite !important;
-  }
-
-  .hero-parallax-food-stage .hero-float-tea {
-    top: 0 !important;
-    right: 3% !important;
-    width: min(15vw, 58px) !important;
-  }
-
-  .hero-parallax-food-stage .hero-float-apricot-jam {
-    top: 7% !important;
-    left: 49% !important;
-    width: min(13vw, 50px) !important;
-  }
-
-  .hero-parallax-food-stage .hero-float-cheese-platter {
-    top: 16% !important;
-    right: 0 !important;
-    width: min(24vw, 96px) !important;
-  }
-
-  .hero-parallax-food-stage .hero-float-black-olives {
-    top: 27% !important;
-    right: 30% !important;
-    width: min(13vw, 52px) !important;
-  }
-
-  .hero-parallax-food-stage .hero-float-mint {
-    top: 35% !important;
-    left: 54% !important;
-    width: min(8vw, 32px) !important;
-  }
-
-  .hero-parallax-food-stage .hero-float-tomato {
-    top: 43% !important;
-    right: 4% !important;
-    width: min(10vw, 40px) !important;
-  }
-
-  .hero-parallax-food-stage .hero-float-cherry-jam {
-    top: 49% !important;
-    right: 22% !important;
-    width: min(12.5vw, 50px) !important;
-  }
-
-  .hero-parallax-food-stage .hero-float-omelette {
-    top: 64% !important;
-    left: 0 !important;
-    width: min(27vw, 102px) !important;
-  }
-
-  .hero-parallax-food-stage .hero-float-jam {
-    top: 61% !important;
-    left: 24% !important;
-    width: min(12.5vw, 50px) !important;
-  }
-
-  .hero-parallax-food-stage .hero-float-pan {
-    top: 57% !important;
-    left: 36% !important;
-    width: min(27vw, 106px) !important;
-  }
-
-  .hero-parallax-food-stage .hero-float-greens-platter {
-    top: 63% !important;
-    right: 0 !important;
-    width: min(18vw, 72px) !important;
-  }
-
-  .hero-parallax-food-stage .hero-float-simit {
-    top: 75% !important;
-    right: 19% !important;
-    width: min(20vw, 78px) !important;
-  }
-
-  .hero-parallax-gallery {
-    top: 48.6% !important;
-    left: -58vw !important;
-    gap: 0.46rem !important;
-    filter: drop-shadow(0 18px 24px rgba(57, 39, 22, 0.14));
-  }
-
-  .hero-parallax-row {
-    gap: 0.46rem !important;
-  }
-
-  .hero-parallax-card {
-    width: min(36vw, 144px) !important;
-    border-radius: 9px !important;
-    box-shadow:
-      0 1px 1px rgba(255, 255, 255, 0.26) inset,
-      0 9px 20px rgba(42, 27, 18, 0.14) !important;
-  }
-}
-
-@media (max-width: 420px) {
-  .hero.hero-parallax-dining {
-    height: 106svh !important;
-    min-height: 700px !important;
-  }
-
-  .hero-parallax-sticky {
-    min-height: 640px !important;
-  }
-
-  .hero-parallax-copy {
-    top: 7.28rem !important;
-    width: min(65vw, 17.4rem) !important;
-  }
-
-  .hero-parallax-copy h1 {
-    font-size: clamp(2.2rem, 10.2vw, 2.72rem) !important;
-  }
-
-  .hero-parallax-copy p {
-    max-width: min(14.5rem, 63vw) !important;
-    font-size: clamp(0.8rem, 3.5vw, 0.92rem) !important;
-  }
-
-  .hero-parallax-food-stage {
-    top: 9.85rem !important;
-    height: 300px !important;
-    min-height: 300px !important;
-  }
-
-  .hero-parallax-gallery {
-    top: 48% !important;
-    left: -55vw !important;
-  }
-
-  .hero-parallax-card {
-    width: min(34vw, 132px) !important;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .hero-parallax-gallery,
-  .hero-parallax-row,
-  .hero-parallax-card,
-  .hero-parallax-food-stage,
-  .hero-parallax-food-stage .hero-float-item {
-    animation: none !important;
-    transform: none !important;
-    rotate: 0deg !important;
-  }
-
-  .hero-parallax-food-stage .hero-float-item {
-    opacity: 1 !important;
-  }
-}
+/* [CONSOLIDATED] "Final hero polish" overrides, keyframes (hero-food-snap-in, hero-food-drift-refined), and responsive MQs moved to final block below (~line 18100+) */
 
 /* Performance Optimization - CSS Containment */
 .red-reviews,
@@ -18588,24 +18092,62 @@ h2 span,
   opacity: 0 !important;
 }
 
-/* Cohesion pass: hero and story should feel like the same room, not two pasted comps. */
+/* ═══════════════════════════════════════════════════════════════════════════
+   UNIFIED HERO → STORY DESIGN SYSTEM
+   One voice, one palette, one rhythm. Every section belongs to the same room.
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* ── Shared Design Tokens ── */
+.hero.hero-parallax-dining,
+.story-band,
+.red-story {
+  --surface-warm:   #fffaf0;
+  --surface-mid:    #f7ebcf;
+  --surface-deep:   #ead6b5;
+  --forest:         rgba(29, 57, 39, 0.97);
+  --forest-mid:     rgba(53, 84, 58, 0.91);
+  --forest-light:   rgba(35, 58, 48, 0.95);
+  --cream:          rgba(255, 250, 240, 1);
+  --cream-88:       rgba(255, 250, 240, 0.88);
+  --cream-80:       rgba(255, 250, 240, 0.80);
+  --cream-18:       rgba(255, 239, 207, 0.18);
+  --cream-28:       rgba(255, 239, 207, 0.28);
+  --ink-warm:       #211d1b;
+  --ink-warm-72:    rgba(47, 42, 38, 0.72);
+  --shadow-forest:  rgba(31, 56, 39, 0.18);
+  --shadow-earth:   rgba(42, 27, 18, 0.13);
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-card: clamp(14px, 2.2vw, 22px);
+}
+
+/* ── Hero Background ── */
 .hero.hero-parallax-dining {
   background:
-    linear-gradient(180deg, #fffaf0 0%, #f7ebcf 48%, #ead6b5 100%) !important;
+    linear-gradient(180deg,
+      var(--surface-warm) 0%,
+      var(--surface-mid)  48%,
+      var(--surface-deep) 100%) !important;
 }
 
 .hero.hero-parallax-dining::before {
   background:
-    linear-gradient(180deg, rgba(255, 253, 247, 0.9) 0%, rgba(255, 253, 247, 0.18) 28%, rgba(255, 253, 247, 0) 62%, rgba(234, 214, 181, 0.86) 100%),
+    linear-gradient(180deg,
+      rgba(255, 253, 247, 0.9)  0%,
+      rgba(255, 253, 247, 0.18) 28%,
+      rgba(255, 253, 247, 0)    62%,
+      rgba(234, 214, 181, 0.86) 100%),
     radial-gradient(ellipse at 74% 24%, rgba(54, 88, 61, 0.08), transparent 36%),
-    radial-gradient(ellipse at 18% 12%, rgba(185, 139, 67, 0.12), transparent 34%) !important;
+    radial-gradient(ellipse at 18% 12%, rgba(185, 139, 67, 0.10), transparent 34%) !important;
 }
 
+/* ── Shared Typography ── */
 .hero-parallax-copy h1,
 .red-story h2 {
   font-family: var(--font-playfair), Georgia, serif;
   font-weight: 900;
-  letter-spacing: 0 !important;
+  letter-spacing: -0.005em !important;
+  -webkit-font-smoothing: antialiased;
 }
 
 .hero-parallax-copy p,
@@ -18613,42 +18155,67 @@ h2 span,
 .story-text p,
 .story-memory-list p,
 .story-stats span {
+  font-family: var(--font-geist-sans), system-ui, sans-serif;
   text-wrap: pretty;
+  -webkit-font-smoothing: antialiased;
 }
 
+/* ── Hero Copy ── */
+.hero-parallax-copy h1 {
+  color: var(--ink-warm) !important;
+  text-shadow: 0 8px 28px rgba(71, 45, 28, 0.06) !important;
+}
+
+.hero-parallax-copy p {
+  color: var(--ink-warm-72) !important;
+  font-weight: 480 !important;
+}
+
+/* ── Hero Gallery Cards ── */
 .hero-parallax-card {
-  border-radius: 10px !important;
-  border-color: rgba(255, 250, 240, 0.82) !important;
+  border-radius: var(--radius-md) !important;
+  border-color: rgba(255, 250, 240, 0.72) !important;
   box-shadow:
-    0 1px 0 rgba(255, 255, 255, 0.34) inset,
-    0 14px 30px rgba(42, 27, 18, 0.13) !important;
+    0 1px 0 rgba(255, 255, 255, 0.28) inset,
+    0 14px 30px var(--shadow-earth) !important;
+  transition: box-shadow 0.4s var(--ease-soft), transform 0.4s var(--ease-soft) !important;
 }
 
+/* ── Hero Food Stage ── */
 .hero-parallax-food-stage::before {
   inset: 38% 9% 9% 7% !important;
   border-radius: 999px !important;
   background:
-    radial-gradient(ellipse at center, rgba(111, 72, 34, 0.18), rgba(111, 72, 34, 0.06) 44%, transparent 72%) !important;
-  opacity: 0.72 !important;
+    radial-gradient(ellipse at center,
+      rgba(111, 72, 34, 0.16),
+      rgba(111, 72, 34, 0.05) 44%,
+      transparent 72%) !important;
+  opacity: 0.68 !important;
   filter: blur(14px) !important;
 }
 
+/* ── Story Band: seamless continuation of hero palette ── */
 .story-band {
   position: relative;
   margin-top: -1px !important;
   padding: clamp(2rem, 5vw, 4.2rem) 0 clamp(2.7rem, 5vw, 4.8rem) !important;
   background:
-    linear-gradient(180deg, #ead6b5 0%, #f7ebcf 13%, #fffaf0 28%, #f7ebcf 100%) !important;
-  background-color: #f7ebcf !important;
+    linear-gradient(180deg,
+      var(--surface-deep) 0%,
+      var(--surface-mid)  13%,
+      var(--surface-warm) 28%,
+      var(--surface-mid)  100%) !important;
+  background-color: var(--surface-mid) !important;
 }
 
+/* Top shadow: subtle depth where hero ends */
 .story-band::before {
   display: block !important;
   inset: 0 0 auto !important;
   height: clamp(4.6rem, 13vw, 8rem);
   background:
-    linear-gradient(180deg, rgba(117, 83, 42, 0.18), rgba(117, 83, 42, 0)),
-    radial-gradient(ellipse at 50% 0%, rgba(255, 250, 240, 0.68), transparent 62%) !important;
+    linear-gradient(180deg, rgba(117, 83, 42, 0.14), rgba(117, 83, 42, 0)),
+    radial-gradient(ellipse at 50% 0%, rgba(255, 250, 240, 0.58), transparent 62%) !important;
   opacity: 1 !important;
 }
 
@@ -18657,61 +18224,70 @@ h2 span,
   transform: none !important;
 }
 
+/* ── Red-Story Card (the main "Hakkımızda" container) ── */
 .red-story {
   margin-inline: clamp(1rem, 4vw, 4.5rem) !important;
   padding: clamp(2.15rem, 5vw, 4.85rem) clamp(1.25rem, 5vw, 5.3rem) clamp(2.25rem, 6vw, 5.5rem) !important;
-  border: 1px solid rgba(255, 239, 207, 0.28) !important;
-  border-radius: clamp(14px, 2.2vw, 24px) !important;
+  border: 1px solid var(--cream-28) !important;
+  border-radius: var(--radius-card) !important;
   background:
-    linear-gradient(118deg, rgba(27, 54, 37, 0.96), rgba(53, 84, 58, 0.91) 48%, rgba(35, 58, 48, 0.95)),
+    linear-gradient(118deg, var(--forest), var(--forest-mid) 48%, var(--forest-light)),
     url("/images/historic-mirror.jpg") center/cover !important;
   box-shadow:
-    0 18px 42px rgba(31, 56, 39, 0.18),
-    inset 0 1px 0 rgba(255, 239, 207, 0.28) !important;
+    0 18px 42px var(--shadow-forest),
+    inset 0 1px 0 var(--cream-28) !important;
 }
 
+/* Grid pattern - subtle, refined */
 .red-story::before {
   background:
-    linear-gradient(90deg, rgba(255, 250, 240, 0.045) 1px, transparent 1px),
-    linear-gradient(180deg, rgba(255, 250, 240, 0.035) 1px, transparent 1px) !important;
+    linear-gradient(90deg, rgba(255, 250, 240, 0.04) 1px, transparent 1px),
+    linear-gradient(180deg, rgba(255, 250, 240, 0.03) 1px, transparent 1px) !important;
   background-size: 128px 128px !important;
-  opacity: 0.22 !important;
+  opacity: 0.18 !important;
 }
 
+/* Light effect - warm glow from top-right */
 .red-story::after {
   background:
-    radial-gradient(ellipse at 77% 17%, rgba(237, 199, 130, 0.2), transparent 32%),
-    linear-gradient(118deg, rgba(255, 250, 240, 0.06), transparent 31%, transparent 74%, rgba(17, 35, 24, 0.22)),
-    linear-gradient(180deg, transparent 0%, rgba(15, 34, 24, 0.22) 100%) !important;
+    radial-gradient(ellipse at 77% 17%, rgba(237, 199, 130, 0.18), transparent 32%),
+    linear-gradient(118deg, rgba(255, 250, 240, 0.05), transparent 31%, transparent 74%, rgba(17, 35, 24, 0.2)),
+    linear-gradient(180deg, transparent 0%, rgba(15, 34, 24, 0.18) 100%) !important;
 }
 
+/* ── Story inner components ── */
 .story-pill {
-  border-color: rgba(255, 239, 207, 0.34) !important;
-  background: rgba(255, 250, 240, 0.1) !important;
+  border-color: rgba(255, 239, 207, 0.3) !important;
+  background: rgba(255, 250, 240, 0.09) !important;
   box-shadow: none !important;
+  font-family: var(--font-geist-sans), system-ui, sans-serif !important;
+  letter-spacing: 0.04em !important;
+  text-transform: uppercase !important;
+  font-weight: 700 !important;
 }
 
 .red-story h2 {
   max-width: 10.5em !important;
   margin: clamp(0.95rem, 2vw, 1.4rem) 0 clamp(0.9rem, 2vw, 1.25rem) !important;
-  color: #fffaf0 !important;
+  color: var(--cream) !important;
   font-size: clamp(2.2rem, 5vw, 4.75rem) !important;
-  line-height: 1.02 !important;
+  line-height: 1.04 !important;
 }
 
 .story-copy > p {
   max-width: 38rem !important;
-  color: rgba(255, 250, 240, 0.88) !important;
-  line-height: 1.68 !important;
+  color: var(--cream-88) !important;
+  font-size: clamp(1rem, 1.5vw, 1.18rem) !important;
+  line-height: 1.72 !important;
 }
 
 .story-text {
   max-width: 39rem !important;
   margin-top: clamp(1.3rem, 2.6vw, 2.1rem) !important;
   padding: clamp(1rem, 2vw, 1.35rem) clamp(1rem, 2vw, 1.45rem) !important;
-  border: 1px solid rgba(255, 239, 207, 0.14) !important;
-  border-radius: 12px !important;
-  background: rgba(16, 35, 24, 0.18) !important;
+  border: 1px solid rgba(255, 239, 207, 0.12) !important;
+  border-radius: var(--radius-sm) !important;
+  background: rgba(16, 35, 24, 0.16) !important;
 }
 
 .story-text::before {
@@ -18719,128 +18295,64 @@ h2 span,
 }
 
 .story-text p {
-  color: rgba(255, 250, 240, 0.8) !important;
-  line-height: 1.7 !important;
+  color: var(--cream-80) !important;
+  font-size: clamp(0.95rem, 1.3vw, 1.1rem) !important;
+  line-height: 1.72 !important;
 }
 
 .story-arch {
-  border-radius: 999px 999px 18px 18px !important;
+  border-radius: 999px 999px var(--radius-md) var(--radius-md) !important;
   box-shadow:
-    0 16px 36px rgba(20, 42, 29, 0.22),
-    inset 0 0 0 8px rgba(255, 250, 240, 0.08) !important;
+    0 16px 36px rgba(20, 42, 29, 0.2),
+    inset 0 0 0 6px rgba(255, 250, 240, 0.06) !important;
 }
 
 .story-memory-list div,
 .story-stats div {
-  border-color: rgba(255, 239, 207, 0.16) !important;
-  border-radius: 10px !important;
-  background: rgba(20, 42, 29, 0.22) !important;
+  border-color: var(--cream-18) !important;
+  border-radius: var(--radius-sm) !important;
+  background: rgba(20, 42, 29, 0.2) !important;
   box-shadow: none !important;
 }
 
+.story-memory-list span {
+  font-family: var(--font-playfair), Georgia, serif !important;
+}
+
+.story-stats strong {
+  font-family: var(--font-playfair), Georgia, serif !important;
+}
+
 .story-plate {
-  border-width: 7px !important;
-  border-radius: 14px !important;
-  box-shadow: 0 16px 36px rgba(31, 56, 39, 0.18) !important;
+  border-width: 6px !important;
+  border-color: rgba(255, 250, 240, 0.9) !important;
+  border-radius: var(--radius-md) !important;
+  box-shadow: 0 16px 36px var(--shadow-forest) !important;
 }
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   MOBILE — Single cascade, one breakpoint at a time
+   ═══════════════════════════════════════════════════════════════════════════ */
 
 @media (max-width: 680px) {
-  .hero.hero-parallax-dining {
-    height: 108svh !important;
-    min-height: 820px !important;
-  }
-
-  .hero-parallax-sticky {
-    min-height: 720px !important;
-  }
-
-  .hero-parallax-copy {
-    top: 7.35rem !important;
-  }
-
-  .hero-parallax-copy h1 {
-    font-size: clamp(2.28rem, 10.1vw, 2.86rem) !important;
-    line-height: 0.92 !important;
-  }
-
-  .hero-parallax-copy p {
-    color: rgba(47, 42, 38, 0.72) !important;
-    line-height: 1.38 !important;
-  }
-
-  .hero-parallax-gallery {
-    top: 50.2% !important;
-  }
-
-  .story-band {
-    margin-top: -70px !important;
-    padding-top: 1.35rem !important;
-  }
-
-  .red-story {
-    margin-inline: 0.92rem !important;
-    padding: 1.72rem 1.5rem 1.9rem !important;
-    border-radius: 18px !important;
-  }
-
-  .story-pill {
-    padding: 0.58rem 0.95rem !important;
-    font-size: 0.78rem !important;
-  }
-
-  .red-story h2 {
-    max-width: 8.65em !important;
-    font-size: clamp(2.24rem, 10.2vw, 3.35rem) !important;
-    line-height: 1.01 !important;
-  }
-
-  .story-copy > p,
-  .story-text p {
-    font-size: clamp(0.98rem, 4.2vw, 1.08rem) !important;
-    line-height: 1.62 !important;
-  }
-
-  .story-text {
-    margin-top: 1.1rem !important;
-    gap: 0.85rem !important;
-  }
-
-  .story-archive {
-    gap: 0.8rem !important;
-  }
-}
-
-@media (max-width: 420px) {
-  .hero.hero-parallax-dining {
-    min-height: 800px !important;
-  }
-
-  .hero-parallax-sticky {
-    min-height: 705px !important;
-  }
-
-  .story-band {
-    margin-top: -82px !important;
-  }
-
-  .red-story h2 {
-    font-size: clamp(2.08rem, 9.8vw, 2.9rem) !important;
-  }
-}
-
-/* Senior mobile composition pass: less spectacle, tighter rhythm, one restaurant voice. */
-@media (max-width: 680px) {
+  /* ── Hero ── */
   .hero.hero-parallax-dining {
     height: 100svh !important;
     min-height: 760px !important;
     background:
-      linear-gradient(180deg, #fffaf0 0%, #fbf3df 38%, #ead7b8 100%) !important;
+      linear-gradient(180deg,
+        var(--surface-warm) 0%,
+        #fbf3df              38%,
+        var(--surface-deep)  100%) !important;
   }
 
   .hero.hero-parallax-dining::before {
     background:
-      linear-gradient(180deg, rgba(255, 253, 247, 0.86) 0%, rgba(255, 253, 247, 0.12) 34%, rgba(237, 219, 184, 0.72) 100%),
-      radial-gradient(ellipse at 76% 22%, rgba(54, 88, 61, 0.07), transparent 34%) !important;
+      linear-gradient(180deg,
+        rgba(255, 253, 247, 0.86) 0%,
+        rgba(255, 253, 247, 0.12) 34%,
+        rgba(237, 219, 184, 0.72) 100%),
+      radial-gradient(ellipse at 76% 22%, rgba(54, 88, 61, 0.06), transparent 34%) !important;
   }
 
   .hero-parallax-sticky {
@@ -18859,8 +18371,8 @@ h2 span,
 
   .hero-parallax-copy p {
     max-width: min(15rem, 62vw) !important;
-    font-size: clamp(0.82rem, 3.45vw, 0.93rem) !important;
-    line-height: 1.36 !important;
+    font-size: clamp(0.84rem, 3.5vw, 0.94rem) !important;
+    line-height: 1.42 !important;
   }
 
   .hero-parallax-food-stage {
@@ -18896,62 +18408,67 @@ h2 span,
 
   .hero-parallax-card {
     width: min(35vw, 136px) !important;
-    border-radius: 8px !important;
+    border-radius: var(--radius-sm) !important;
     box-shadow:
-      0 1px 0 rgba(255, 255, 255, 0.24) inset,
-      0 8px 18px rgba(42, 27, 18, 0.11) !important;
+      0 1px 0 rgba(255, 255, 255, 0.2) inset,
+      0 8px 18px rgba(42, 27, 18, 0.1) !important;
   }
 
+  /* ── Story (seamless transition from hero) ── */
   .story-band {
     margin-top: -56px !important;
     padding: 0.85rem 0 3.4rem !important;
     background:
-      linear-gradient(180deg, #ead7b8 0%, #fbf3df 9%, #fffaf0 24%, #f7ebcf 100%) !important;
+      linear-gradient(180deg,
+        var(--surface-deep) 0%,
+        #fbf3df              9%,
+        var(--surface-warm)  24%,
+        var(--surface-mid)   100%) !important;
   }
 
   .red-story {
     margin-inline: 1rem !important;
     padding: 1.55rem 1.28rem 1.45rem !important;
-    border-radius: 14px !important;
+    border-radius: var(--radius-md) !important;
     background:
-      linear-gradient(126deg, rgba(29, 57, 39, 0.97), rgba(55, 83, 58, 0.91) 54%, rgba(32, 54, 45, 0.96)),
+      linear-gradient(126deg, var(--forest), var(--forest-mid) 54%, rgba(32, 54, 45, 0.96)),
       url("/images/historic-mirror.jpg") center/cover !important;
     box-shadow:
-      0 10px 24px rgba(31, 56, 39, 0.16),
-      inset 0 1px 0 rgba(255, 239, 207, 0.22) !important;
+      0 10px 24px var(--shadow-forest),
+      inset 0 1px 0 rgba(255, 239, 207, 0.18) !important;
   }
 
   .story-pill {
     padding: 0.42rem 0.78rem !important;
     border-radius: 999px !important;
-    font-size: 0.74rem !important;
+    font-size: 0.72rem !important;
   }
 
   .red-story h2 {
     max-width: 9.2em !important;
     margin: 0.8rem 0 0.82rem !important;
     font-size: clamp(1.92rem, 8.8vw, 2.54rem) !important;
-    line-height: 1.05 !important;
+    line-height: 1.06 !important;
   }
 
   .story-copy > p {
     max-width: 28rem !important;
     font-size: clamp(0.96rem, 4vw, 1.04rem) !important;
-    line-height: 1.58 !important;
+    line-height: 1.62 !important;
   }
 
   .story-text {
     margin-top: 1rem !important;
     padding: 0.98rem 0 0 !important;
     border: 0 !important;
-    border-top: 1px solid rgba(255, 239, 207, 0.18) !important;
+    border-top: 1px solid rgba(255, 239, 207, 0.15) !important;
     border-radius: 0 !important;
     background: transparent !important;
   }
 
   .story-text p {
     font-size: clamp(0.94rem, 3.8vw, 1rem) !important;
-    line-height: 1.6 !important;
+    line-height: 1.64 !important;
   }
 
   .story-archive {
@@ -18960,8 +18477,8 @@ h2 span,
 
   .story-arch {
     aspect-ratio: 1.45 !important;
-    border-radius: 10px !important;
-    box-shadow: 0 10px 24px rgba(20, 42, 29, 0.18) !important;
+    border-radius: var(--radius-sm) !important;
+    box-shadow: 0 10px 24px rgba(20, 42, 29, 0.16) !important;
   }
 
   .story-memory-list {
@@ -18970,15 +18487,15 @@ h2 span,
 
   .story-memory-list div,
   .story-stats div {
-    border-radius: 8px !important;
-    background: rgba(20, 42, 29, 0.18) !important;
+    border-radius: var(--radius-sm) !important;
+    background: rgba(20, 42, 29, 0.16) !important;
   }
 
   .story-plate {
     height: clamp(132px, 37vw, 180px) !important;
     margin-top: 0.95rem !important;
     border-width: 5px !important;
-    border-radius: 10px !important;
+    border-radius: var(--radius-sm) !important;
   }
 }
 
