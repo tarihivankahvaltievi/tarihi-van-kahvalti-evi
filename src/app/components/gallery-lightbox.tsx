@@ -1,7 +1,8 @@
 "use client";
 
-import { useCallback, useEffect, useRef, useState } from "react";
+import { type CSSProperties, useCallback, useEffect, useRef, useState } from "react";
 import Image from "next/image";
+import { motion, useReducedMotion } from "framer-motion";
 import { ChevronLeft, ChevronRight, X } from "lucide-react";
 
 interface GalleryLightboxProps {
@@ -11,6 +12,9 @@ interface GalleryLightboxProps {
 export function GalleryLightbox({ gallery }: GalleryLightboxProps) {
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
   const dialogRef = useRef<HTMLDialogElement>(null);
+  const prefersReducedMotion = useReducedMotion();
+  const firstRow = gallery.filter((_, index) => index % 2 === 0);
+  const secondRow = gallery.filter((_, index) => index % 2 === 1);
 
   const openLightbox = (index: number) => {
     setActiveIndex(index);
@@ -106,35 +110,21 @@ export function GalleryLightbox({ gallery }: GalleryLightboxProps) {
 
   return (
     <>
-      <div className="mosaic">
-        {gallery.map(([src, alt], index) => (
-          <div
-            className="mosaic-item"
-            key={src + index}
-            data-reveal
-            onClick={() => openLightbox(index)}
-            role="button"
-            tabIndex={0}
-            aria-label={`${alt} görselini büyüt`}
-            onKeyDown={(e) => {
-              if (e.key === "Enter" || e.key === " ") {
-                e.preventDefault();
-                openLightbox(index);
-              }
-            }}
-          >
-            <Image
-              src={src}
-              alt={alt}
-              fill
-              sizes="(max-width: 760px) 45vw, 180px"
-              loading="lazy"
-            />
-            <div className="mosaic-overlay">
-              <span>Görüntüle</span>
-            </div>
-          </div>
-        ))}
+      <div className="mosaic gallery-marquee" data-reveal aria-label="Mekan fotoğrafları">
+        <GalleryMarqueeRow
+          items={firstRow}
+          gallery={gallery}
+          openLightbox={openLightbox}
+          reverse={false}
+          paused={Boolean(prefersReducedMotion)}
+        />
+        <GalleryMarqueeRow
+          items={secondRow}
+          gallery={gallery}
+          openLightbox={openLightbox}
+          reverse
+          paused={Boolean(prefersReducedMotion)}
+        />
       </div>
 
       <dialog
@@ -192,5 +182,60 @@ export function GalleryLightbox({ gallery }: GalleryLightboxProps) {
         )}
       </dialog>
     </>
+  );
+}
+
+function GalleryMarqueeRow({
+  items,
+  gallery,
+  openLightbox,
+  reverse = false,
+  paused = false,
+}: {
+  items: [string, string][];
+  gallery: [string, string][];
+  openLightbox: (index: number) => void;
+  reverse?: boolean;
+  paused?: boolean;
+}) {
+  const marqueeItems = [...items, ...items];
+  const duration = reverse ? 44 : 52;
+
+  return (
+    <div className="gallery-marquee-row">
+      <motion.div
+        className="gallery-marquee-track"
+        animate={paused ? undefined : { x: reverse ? ["-50%", "0%"] : ["0%", "-50%"] }}
+        transition={paused ? undefined : { duration, ease: "linear", repeat: Infinity }}
+      >
+        {marqueeItems.map(([src, alt], index) => {
+          const galleryIndex = gallery.findIndex(([gallerySrc]) => gallerySrc === src);
+          const resolvedIndex = galleryIndex >= 0 ? galleryIndex : index % gallery.length;
+
+          return (
+            <button
+              type="button"
+              className="mosaic-item gallery-marquee-card"
+              key={`${src}-${index}-${reverse ? "reverse" : "forward"}`}
+              onClick={() => openLightbox(resolvedIndex)}
+              onPointerDown={() => openLightbox(resolvedIndex)}
+              aria-label={`${alt} görselini büyüt`}
+              style={{ "--marquee-tilt": `${index % 2 === 0 ? -1.4 : 1.8}deg` } as CSSProperties}
+            >
+              <Image
+                src={src}
+                alt={alt}
+                fill
+                sizes="(max-width: 760px) 58vw, (max-width: 1100px) 34vw, 360px"
+                loading="lazy"
+              />
+              <span className="mosaic-overlay">
+                <span>Görüntüle</span>
+              </span>
+            </button>
+          );
+        })}
+      </motion.div>
+    </div>
   );
 }
