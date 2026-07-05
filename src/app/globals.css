@@ -18161,9 +18161,15 @@ h2 span,
 }
 
 /* ── Hero Copy ── */
-.hero-parallax-copy h1 {
+.hero-parallax-copy h1,
+.hero-parallax-copy h1 span {
   color: var(--ink-warm) !important;
+  background: transparent !important;
   text-shadow: 0 8px 28px rgba(71, 45, 28, 0.06) !important;
+}
+
+.hero-parallax-copy::after {
+  background: linear-gradient(90deg, rgba(35, 58, 48, 0.4), transparent) !important;
 }
 
 .hero-parallax-copy p {
@@ -18376,7 +18382,7 @@ h2 span,
   }
 
   .hero-parallax-food-stage {
-    top: 9.4rem !important;
+    top: 17.5rem !important;
     height: 282px !important;
     min-height: 282px !important;
     opacity: 0.96 !important;
