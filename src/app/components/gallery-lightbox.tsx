@@ -9,12 +9,56 @@ interface GalleryLightboxProps {
   gallery: [string, string][];
 }
 
+type GalleryRow = {
+  items: [string, string][];
+  duration: number;
+  offset: string;
+  reverse: boolean;
+  density: "featured" | "tall" | "compact";
+};
+
 export function GalleryLightbox({ gallery }: GalleryLightboxProps) {
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
   const dialogRef = useRef<HTMLDialogElement>(null);
   const prefersReducedMotion = useReducedMotion();
-  const firstRow = gallery.filter((_, index) => index % 2 === 0);
-  const secondRow = gallery.filter((_, index) => index % 2 === 1);
+  const getImage = (src: string) => gallery.find(([gallerySrc]) => gallerySrc === src);
+  const compactImages = [
+    "/images/tea-service.jpg",
+    "/images/historic-mirror.jpg",
+    "/images/coffee-moment.jpg",
+    "/images/interior-chair.jpg",
+    "/images/sucuk-egg.jpg",
+  ].map(getImage).filter((item): item is [string, string] => Boolean(item));
+  const tableImages = [
+    "/images/breakfast-spread.jpg",
+    "/images/terrace-tea.jpg",
+    "/images/hands-table.jpg",
+    "/images/balcony-breakfast.jpg",
+    "/images/street-table.jpg",
+  ].map(getImage).filter((item): item is [string, string] => Boolean(item));
+  const galleryRows: GalleryRow[] = [
+    {
+      items: compactImages.length ? compactImages : gallery.slice(0, 5),
+      duration: 52,
+      offset: "0vw",
+      reverse: false,
+      density: "featured",
+    },
+    {
+      items: tableImages.length ? tableImages : [...gallery.slice(5), ...gallery.slice(0, 2)],
+      duration: 60,
+      offset: "-11vw",
+      reverse: true,
+      density: "tall",
+    },
+    {
+      items: gallery.filter((_, index) => index % 3 !== 1),
+      duration: 68,
+      offset: "-5vw",
+      reverse: false,
+      density: "compact",
+    },
+  ];
 
   const openLightbox = (index: number) => {
     setActiveIndex(index);
@@ -110,21 +154,24 @@ export function GalleryLightbox({ gallery }: GalleryLightboxProps) {
 
   return (
     <>
-      <div className="mosaic gallery-marquee" data-reveal aria-label="Mekan fotoğrafları">
-        <GalleryMarqueeRow
-          items={firstRow}
-          gallery={gallery}
-          openLightbox={openLightbox}
-          reverse={false}
-          paused={Boolean(prefersReducedMotion)}
-        />
-        <GalleryMarqueeRow
-          items={secondRow}
-          gallery={gallery}
-          openLightbox={openLightbox}
-          reverse
-          paused={Boolean(prefersReducedMotion)}
-        />
+      <div className="gallery-hero-shell" data-reveal>
+        <span className="gallery-ambient gallery-ambient-one" aria-hidden="true" />
+        <span className="gallery-ambient gallery-ambient-two" aria-hidden="true" />
+        <div className="mosaic gallery-marquee" aria-label="Mekan fotoğrafları">
+          {galleryRows.map((row) => (
+            <GalleryMarqueeRow
+              key={`${row.density}-${row.offset}`}
+              items={row.items}
+              gallery={gallery}
+              openLightbox={openLightbox}
+              reverse={row.reverse}
+              paused={Boolean(prefersReducedMotion)}
+              duration={row.duration}
+              offset={row.offset}
+              density={row.density}
+            />
+          ))}
+        </div>
       </div>
 
       <dialog
@@ -191,18 +238,26 @@ function GalleryMarqueeRow({
   openLightbox,
   reverse = false,
   paused = false,
+  duration,
+  offset,
+  density,
 }: {
   items: [string, string][];
   gallery: [string, string][];
   openLightbox: (index: number) => void;
   reverse?: boolean;
   paused?: boolean;
+  duration: number;
+  offset: string;
+  density: "featured" | "tall" | "compact";
 }) {
   const marqueeItems = [...items, ...items];
-  const duration = reverse ? 44 : 52;
 
   return (
-    <div className="gallery-marquee-row">
+    <div
+      className={`gallery-marquee-row gallery-marquee-row-${density}`}
+      style={{ "--marquee-offset": offset } as CSSProperties}
+    >
       <motion.div
         className="gallery-marquee-track"
         animate={paused ? undefined : { x: reverse ? ["-50%", "0%"] : ["0%", "-50%"] }}
@@ -218,9 +273,11 @@ function GalleryMarqueeRow({
               className="mosaic-item gallery-marquee-card"
               key={`${src}-${index}-${reverse ? "reverse" : "forward"}`}
               onClick={() => openLightbox(resolvedIndex)}
-              onPointerDown={() => openLightbox(resolvedIndex)}
               aria-label={`${alt} görselini büyüt`}
-              style={{ "--marquee-tilt": `${index % 2 === 0 ? -1.4 : 1.8}deg` } as CSSProperties}
+              style={{
+                "--marquee-tilt": `${index % 2 === 0 ? -1.2 : 1.45}deg`,
+                "--card-lift": `${index % 3 === 0 ? "-10px" : index % 3 === 1 ? "8px" : "0px"}`,
+              } as CSSProperties}
             >
               <Image
                 src={src}
