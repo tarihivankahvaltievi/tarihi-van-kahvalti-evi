@@ -149,15 +149,6 @@ const floatingFoods: FloatingFood[] = [
   },
 ];
 
-const mobileFloatingFoodClassNames = new Set([
-  "hero-float-item hero-float-pan",
-  "hero-float-item hero-float-tea",
-  "hero-float-item hero-float-simit",
-  "hero-float-item hero-float-cheese-platter",
-  "hero-float-item hero-float-apricot-jam",
-  "hero-float-item hero-float-mint",
-]);
-
 const eagerFloatingFoodClassNames = new Set([
   "hero-float-item hero-float-pan",
   "hero-float-item hero-float-tea",
@@ -195,9 +186,6 @@ export function VanHeroParallax() {
   const spring = isMobile
     ? { stiffness: 92, damping: 30, mass: 1 }
     : { stiffness: 112, damping: 27, mass: 0.95 };
-  const visibleFloatingFoods = isMobile
-    ? floatingFoods.filter((item) => mobileFloatingFoodClassNames.has(item.className))
-    : floatingFoods;
   
   // Smooth mouse values
   const smoothMouseX = useSpring(mouseX, { stiffness: 48, damping: 24 });
@@ -381,7 +369,7 @@ export function VanHeroParallax() {
           }}
           aria-label="Uçan kahvaltı lezzetleri"
         >
-          {visibleFloatingFoods.map((item, index) => {
+          {floatingFoods.map((item, index) => {
             const shouldPreload = eagerFloatingFoodClassNames.has(item.className);
 
             return (
