@@ -18312,3 +18312,243 @@ h2 span,
   background: none !important;
   opacity: 0 !important;
 }
+
+/* Cohesion pass: hero and story should feel like the same room, not two pasted comps. */
+.hero.hero-parallax-dining {
+  background:
+    linear-gradient(180deg, #fffaf0 0%, #f7ebcf 48%, #ead6b5 100%) !important;
+}
+
+.hero.hero-parallax-dining::before {
+  background:
+    linear-gradient(180deg, rgba(255, 253, 247, 0.9) 0%, rgba(255, 253, 247, 0.18) 28%, rgba(255, 253, 247, 0) 62%, rgba(234, 214, 181, 0.86) 100%),
+    radial-gradient(ellipse at 74% 24%, rgba(54, 88, 61, 0.08), transparent 36%),
+    radial-gradient(ellipse at 18% 12%, rgba(185, 139, 67, 0.12), transparent 34%) !important;
+}
+
+.hero-parallax-copy h1,
+.red-story h2 {
+  font-family: var(--font-playfair), Georgia, serif;
+  font-weight: 900;
+  letter-spacing: 0 !important;
+}
+
+.hero-parallax-copy p,
+.story-copy > p,
+.story-text p,
+.story-memory-list p,
+.story-stats span {
+  text-wrap: pretty;
+}
+
+.hero-parallax-card {
+  border-radius: 10px !important;
+  border-color: rgba(255, 250, 240, 0.82) !important;
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.34) inset,
+    0 14px 30px rgba(42, 27, 18, 0.13) !important;
+}
+
+.hero-parallax-food-stage::before {
+  inset: 38% 9% 9% 7% !important;
+  border-radius: 999px !important;
+  background:
+    radial-gradient(ellipse at center, rgba(111, 72, 34, 0.18), rgba(111, 72, 34, 0.06) 44%, transparent 72%) !important;
+  opacity: 0.72 !important;
+  filter: blur(14px) !important;
+}
+
+.story-band {
+  position: relative;
+  margin-top: -1px !important;
+  padding: clamp(2rem, 5vw, 4.2rem) 0 clamp(2.7rem, 5vw, 4.8rem) !important;
+  background:
+    linear-gradient(180deg, #ead6b5 0%, #f7ebcf 13%, #fffaf0 28%, #f7ebcf 100%) !important;
+  background-color: #f7ebcf !important;
+}
+
+.story-band::before {
+  display: block !important;
+  inset: 0 0 auto !important;
+  height: clamp(4.6rem, 13vw, 8rem);
+  background:
+    linear-gradient(180deg, rgba(117, 83, 42, 0.18), rgba(117, 83, 42, 0)),
+    radial-gradient(ellipse at 50% 0%, rgba(255, 250, 240, 0.68), transparent 62%) !important;
+  opacity: 1 !important;
+}
+
+.story-band [data-reveal] {
+  opacity: 1 !important;
+  transform: none !important;
+}
+
+.red-story {
+  margin-inline: clamp(1rem, 4vw, 4.5rem) !important;
+  padding: clamp(2.15rem, 5vw, 4.85rem) clamp(1.25rem, 5vw, 5.3rem) clamp(2.25rem, 6vw, 5.5rem) !important;
+  border: 1px solid rgba(255, 239, 207, 0.28) !important;
+  border-radius: clamp(14px, 2.2vw, 24px) !important;
+  background:
+    linear-gradient(118deg, rgba(27, 54, 37, 0.96), rgba(53, 84, 58, 0.91) 48%, rgba(35, 58, 48, 0.95)),
+    url("/images/historic-mirror.jpg") center/cover !important;
+  box-shadow:
+    0 18px 42px rgba(31, 56, 39, 0.18),
+    inset 0 1px 0 rgba(255, 239, 207, 0.28) !important;
+}
+
+.red-story::before {
+  background:
+    linear-gradient(90deg, rgba(255, 250, 240, 0.045) 1px, transparent 1px),
+    linear-gradient(180deg, rgba(255, 250, 240, 0.035) 1px, transparent 1px) !important;
+  background-size: 128px 128px !important;
+  opacity: 0.22 !important;
+}
+
+.red-story::after {
+  background:
+    radial-gradient(ellipse at 77% 17%, rgba(237, 199, 130, 0.2), transparent 32%),
+    linear-gradient(118deg, rgba(255, 250, 240, 0.06), transparent 31%, transparent 74%, rgba(17, 35, 24, 0.22)),
+    linear-gradient(180deg, transparent 0%, rgba(15, 34, 24, 0.22) 100%) !important;
+}
+
+.story-pill {
+  border-color: rgba(255, 239, 207, 0.34) !important;
+  background: rgba(255, 250, 240, 0.1) !important;
+  box-shadow: none !important;
+}
+
+.red-story h2 {
+  max-width: 10.5em !important;
+  margin: clamp(0.95rem, 2vw, 1.4rem) 0 clamp(0.9rem, 2vw, 1.25rem) !important;
+  color: #fffaf0 !important;
+  font-size: clamp(2.2rem, 5vw, 4.75rem) !important;
+  line-height: 1.02 !important;
+}
+
+.story-copy > p {
+  max-width: 38rem !important;
+  color: rgba(255, 250, 240, 0.88) !important;
+  line-height: 1.68 !important;
+}
+
+.story-text {
+  max-width: 39rem !important;
+  margin-top: clamp(1.3rem, 2.6vw, 2.1rem) !important;
+  padding: clamp(1rem, 2vw, 1.35rem) clamp(1rem, 2vw, 1.45rem) !important;
+  border: 1px solid rgba(255, 239, 207, 0.14) !important;
+  border-radius: 12px !important;
+  background: rgba(16, 35, 24, 0.18) !important;
+}
+
+.story-text::before {
+  display: none !important;
+}
+
+.story-text p {
+  color: rgba(255, 250, 240, 0.8) !important;
+  line-height: 1.7 !important;
+}
+
+.story-arch {
+  border-radius: 999px 999px 18px 18px !important;
+  box-shadow:
+    0 16px 36px rgba(20, 42, 29, 0.22),
+    inset 0 0 0 8px rgba(255, 250, 240, 0.08) !important;
+}
+
+.story-memory-list div,
+.story-stats div {
+  border-color: rgba(255, 239, 207, 0.16) !important;
+  border-radius: 10px !important;
+  background: rgba(20, 42, 29, 0.22) !important;
+  box-shadow: none !important;
+}
+
+.story-plate {
+  border-width: 7px !important;
+  border-radius: 14px !important;
+  box-shadow: 0 16px 36px rgba(31, 56, 39, 0.18) !important;
+}
+
+@media (max-width: 680px) {
+  .hero.hero-parallax-dining {
+    height: 108svh !important;
+    min-height: 820px !important;
+  }
+
+  .hero-parallax-sticky {
+    min-height: 720px !important;
+  }
+
+  .hero-parallax-copy {
+    top: 7.35rem !important;
+  }
+
+  .hero-parallax-copy h1 {
+    font-size: clamp(2.28rem, 10.1vw, 2.86rem) !important;
+    line-height: 0.92 !important;
+  }
+
+  .hero-parallax-copy p {
+    color: rgba(47, 42, 38, 0.72) !important;
+    line-height: 1.38 !important;
+  }
+
+  .hero-parallax-gallery {
+    top: 50.2% !important;
+  }
+
+  .story-band {
+    margin-top: -70px !important;
+    padding-top: 1.35rem !important;
+  }
+
+  .red-story {
+    margin-inline: 0.92rem !important;
+    padding: 1.72rem 1.5rem 1.9rem !important;
+    border-radius: 18px !important;
+  }
+
+  .story-pill {
+    padding: 0.58rem 0.95rem !important;
+    font-size: 0.78rem !important;
+  }
+
+  .red-story h2 {
+    max-width: 8.65em !important;
+    font-size: clamp(2.24rem, 10.2vw, 3.35rem) !important;
+    line-height: 1.01 !important;
+  }
+
+  .story-copy > p,
+  .story-text p {
+    font-size: clamp(0.98rem, 4.2vw, 1.08rem) !important;
+    line-height: 1.62 !important;
+  }
+
+  .story-text {
+    margin-top: 1.1rem !important;
+    gap: 0.85rem !important;
+  }
+
+  .story-archive {
+    gap: 0.8rem !important;
+  }
+}
+
+@media (max-width: 420px) {
+  .hero.hero-parallax-dining {
+    min-height: 800px !important;
+  }
+
+  .hero-parallax-sticky {
+    min-height: 705px !important;
+  }
+
+  .story-band {
+    margin-top: -82px !important;
+  }
+
+  .red-story h2 {
+    font-size: clamp(2.08rem, 9.8vw, 2.9rem) !important;
+  }
+}
