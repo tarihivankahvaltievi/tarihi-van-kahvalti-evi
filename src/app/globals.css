@@ -18552,3 +18552,185 @@ h2 span,
     font-size: clamp(2.08rem, 9.8vw, 2.9rem) !important;
   }
 }
+
+/* Senior mobile composition pass: less spectacle, tighter rhythm, one restaurant voice. */
+@media (max-width: 680px) {
+  .hero.hero-parallax-dining {
+    height: 100svh !important;
+    min-height: 760px !important;
+    background:
+      linear-gradient(180deg, #fffaf0 0%, #fbf3df 38%, #ead7b8 100%) !important;
+  }
+
+  .hero.hero-parallax-dining::before {
+    background:
+      linear-gradient(180deg, rgba(255, 253, 247, 0.86) 0%, rgba(255, 253, 247, 0.12) 34%, rgba(237, 219, 184, 0.72) 100%),
+      radial-gradient(ellipse at 76% 22%, rgba(54, 88, 61, 0.07), transparent 34%) !important;
+  }
+
+  .hero-parallax-sticky {
+    min-height: 675px !important;
+  }
+
+  .hero-parallax-copy {
+    top: 7.05rem !important;
+    width: min(61vw, 17rem) !important;
+  }
+
+  .hero-parallax-copy h1 {
+    font-size: clamp(2.08rem, 9.4vw, 2.62rem) !important;
+    line-height: 0.94 !important;
+  }
+
+  .hero-parallax-copy p {
+    max-width: min(15rem, 62vw) !important;
+    font-size: clamp(0.82rem, 3.45vw, 0.93rem) !important;
+    line-height: 1.36 !important;
+  }
+
+  .hero-parallax-food-stage {
+    top: 9.4rem !important;
+    height: 282px !important;
+    min-height: 282px !important;
+    opacity: 0.96 !important;
+  }
+
+  .hero-parallax-food-stage .hero-float-pan {
+    top: 55% !important;
+    left: 34% !important;
+  }
+
+  .hero-parallax-food-stage .hero-float-omelette {
+    top: 61% !important;
+  }
+
+  .hero-parallax-food-stage .hero-float-simit {
+    top: 71% !important;
+    right: 20% !important;
+  }
+
+  .hero-parallax-gallery {
+    top: 45.8% !important;
+    left: -61vw !important;
+    gap: 0.4rem !important;
+  }
+
+  .hero-parallax-row {
+    gap: 0.4rem !important;
+  }
+
+  .hero-parallax-card {
+    width: min(35vw, 136px) !important;
+    border-radius: 8px !important;
+    box-shadow:
+      0 1px 0 rgba(255, 255, 255, 0.24) inset,
+      0 8px 18px rgba(42, 27, 18, 0.11) !important;
+  }
+
+  .story-band {
+    margin-top: -56px !important;
+    padding: 0.85rem 0 3.4rem !important;
+    background:
+      linear-gradient(180deg, #ead7b8 0%, #fbf3df 9%, #fffaf0 24%, #f7ebcf 100%) !important;
+  }
+
+  .red-story {
+    margin-inline: 1rem !important;
+    padding: 1.55rem 1.28rem 1.45rem !important;
+    border-radius: 14px !important;
+    background:
+      linear-gradient(126deg, rgba(29, 57, 39, 0.97), rgba(55, 83, 58, 0.91) 54%, rgba(32, 54, 45, 0.96)),
+      url("/images/historic-mirror.jpg") center/cover !important;
+    box-shadow:
+      0 10px 24px rgba(31, 56, 39, 0.16),
+      inset 0 1px 0 rgba(255, 239, 207, 0.22) !important;
+  }
+
+  .story-pill {
+    padding: 0.42rem 0.78rem !important;
+    border-radius: 999px !important;
+    font-size: 0.74rem !important;
+  }
+
+  .red-story h2 {
+    max-width: 9.2em !important;
+    margin: 0.8rem 0 0.82rem !important;
+    font-size: clamp(1.92rem, 8.8vw, 2.54rem) !important;
+    line-height: 1.05 !important;
+  }
+
+  .story-copy > p {
+    max-width: 28rem !important;
+    font-size: clamp(0.96rem, 4vw, 1.04rem) !important;
+    line-height: 1.58 !important;
+  }
+
+  .story-text {
+    margin-top: 1rem !important;
+    padding: 0.98rem 0 0 !important;
+    border: 0 !important;
+    border-top: 1px solid rgba(255, 239, 207, 0.18) !important;
+    border-radius: 0 !important;
+    background: transparent !important;
+  }
+
+  .story-text p {
+    font-size: clamp(0.94rem, 3.8vw, 1rem) !important;
+    line-height: 1.6 !important;
+  }
+
+  .story-archive {
+    margin-top: 1.1rem !important;
+  }
+
+  .story-arch {
+    aspect-ratio: 1.45 !important;
+    border-radius: 10px !important;
+    box-shadow: 0 10px 24px rgba(20, 42, 29, 0.18) !important;
+  }
+
+  .story-memory-list {
+    gap: 0.48rem !important;
+  }
+
+  .story-memory-list div,
+  .story-stats div {
+    border-radius: 8px !important;
+    background: rgba(20, 42, 29, 0.18) !important;
+  }
+
+  .story-plate {
+    height: clamp(132px, 37vw, 180px) !important;
+    margin-top: 0.95rem !important;
+    border-width: 5px !important;
+    border-radius: 10px !important;
+  }
+}
+
+@media (max-width: 420px) {
+  .hero.hero-parallax-dining {
+    min-height: 740px !important;
+  }
+
+  .hero-parallax-sticky {
+    min-height: 650px !important;
+  }
+
+  .hero-parallax-food-stage {
+    top: 9.18rem !important;
+    height: 268px !important;
+    min-height: 268px !important;
+  }
+
+  .hero-parallax-gallery {
+    top: 45.3% !important;
+  }
+
+  .story-band {
+    margin-top: -48px !important;
+  }
+
+  .red-story h2 {
+    font-size: clamp(1.82rem, 8.7vw, 2.42rem) !important;
+  }
+}
