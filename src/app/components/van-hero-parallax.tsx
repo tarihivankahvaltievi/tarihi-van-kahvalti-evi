@@ -1,7 +1,6 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
 import {
   motion,
   MotionValue,
@@ -12,8 +11,6 @@ import {
   useReducedMotion,
 } from "framer-motion";
 import { type CSSProperties, useRef, useSyncExternalStore } from "react";
-import { BookingOpenButton } from "./booking-open-button";
-import { BookOpen, Star, Building2, Sun } from "lucide-react";
 
 type HeroImage = {
   thumbnail: string;
@@ -295,164 +292,107 @@ export function VanHeroParallax() {
   };
 
   return (
-    <>
-      {/* Desktop Hero Section */}
-      <section
-        id="top"
-        ref={ref}
-        className="hero hero-parallax-dining desktop-only-hero"
-        aria-label="Tarihi Van Kahvaltıcısı ana alanı"
-        onMouseMove={handleMouseMove}
-        onMouseLeave={handleMouseLeave}
-      >
-        <div className="hero-parallax-sticky">
+    <section
+      id="top"
+      ref={ref}
+      className="hero hero-parallax-dining"
+      aria-label="Tarihi Van Kahvaltıcısı ana alanı"
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+    >
+      <div className="hero-parallax-sticky">
+        <motion.div
+          className="hero-parallax-copy"
+        >
+          <div className="hero-copy-ambient-glow" aria-hidden="true" />
           <motion.div
-            className="hero-parallax-copy"
-          >
-            <div className="hero-copy-ambient-glow" aria-hidden="true" />
-            <motion.div
-              style={{
-                y: copyY,
-                opacity: copyOpacity,
-                filter: copyFilter,
-              }}
-            >
-              <h1>
-                <span className="sr-only">Tarihi Van Kahvaltı Evi — Taksim Beyoğlu Serpme Van Kahvaltısı</span>
-                <span aria-hidden="true">
-                  Çay&nbsp;taze,
-                  <br />
-                  sofra
-                  <br />
-                  sıcak.
-                </span>
-              </h1>
-              <p>
-                Otlu peynir, kavut, murtuğa ve bakır sahanlar. Van kahvaltısı
-                burada aceleye gelmez.
-              </p>
-            </motion.div>
-          </motion.div>
-
-          <motion.div
-            className="hero-parallax-gallery"
             style={{
-              rotateX,
-              rotateZ,
-              y: galleryY,
-              opacity: galleryOpacity,
+              y: copyY,
+              opacity: copyOpacity,
+              filter: copyFilter,
             }}
-            aria-hidden="true"
           >
-            <HeroImageRow
-              images={firstRow}
-              translate={translateX}
-              reverse
-              enableHover={!isMobile}
-              preloadCount={isMobile ? 2 : 3}
-            />
-            <HeroImageRow
-              images={secondRow}
-              translate={translateXReverse}
-              enableHover={!isMobile}
-              preloadCount={isMobile ? 1 : 2}
-            />
-            {!isMobile && (
-              <HeroImageRow images={thirdRow} translate={translateX} reverse enableHover preloadCount={0} />
-            )}
+            <h1>
+              <span className="sr-only">Tarihi Van Kahvaltı Evi — Taksim Beyoğlu Serpme Van Kahvaltısı</span>
+              <span aria-hidden="true">
+                Çay&nbsp;taze,
+                <br />
+                sofra
+                <br />
+                sıcak.
+              </span>
+            </h1>
+            <p>
+              Otlu peynir, kavut, murtuğa ve bakır sahanlar. Van kahvaltısı
+              burada aceleye gelmez.
+            </p>
           </motion.div>
+        </motion.div>
 
-          <motion.div
-            className="hero-parallax-food-stage"
-            style={{
-              y: floatingFoodY,
-              scale: foodScale,
-              opacity: foodOpacity,
-              rotateX: isMobile ? foodRotateX : rotateXMouse,
-              rotateY: rotateYMouse,
-              transformStyle: "preserve-3d",
-            }}
-            aria-label="Uçan kahvaltı lezzetleri"
-          >
-            {floatingFoods.map((item, index) => {
-              const shouldPreload = eagerFloatingFoodClassNames.has(item.className);
+        <motion.div
+          className="hero-parallax-gallery"
+          style={{
+            rotateX,
+            rotateZ,
+            y: galleryY,
+            opacity: galleryOpacity,
+          }}
+          aria-hidden="true"
+        >
+          <HeroImageRow
+            images={firstRow}
+            translate={translateX}
+            reverse
+            enableHover={!isMobile}
+            preloadCount={isMobile ? 2 : 3}
+          />
+          <HeroImageRow
+            images={secondRow}
+            translate={translateXReverse}
+            enableHover={!isMobile}
+            preloadCount={isMobile ? 1 : 2}
+          />
+          {!isMobile && (
+            <HeroImageRow images={thirdRow} translate={translateX} reverse enableHover preloadCount={0} />
+          )}
+        </motion.div>
 
-              return (
-                <div
-                  className={item.className}
-                  key={item.src}
-                  style={{ "--float-delay": `${Math.min(index, 6) * (isMobile ? 24 : 36)}ms` } as CSSProperties}
-                >
-                  <Image
-                    src={item.src}
-                    alt={item.alt}
-                    fill
-                    sizes="(max-width: 680px) 30vw, (max-width: 1080px) 26vw, 320px"
-                    priority={shouldPreload}
-                    fetchPriority={shouldPreload ? "high" : "auto"}
-                    quality={82}
-                  />
-                </div>
-              );
-            })}
-          </motion.div>
-        </div>
-      </section>
+        <motion.div
+          className="hero-parallax-food-stage"
+          style={{
+            y: floatingFoodY,
+            scale: foodScale,
+            opacity: foodOpacity,
+            rotateX: isMobile ? foodRotateX : rotateXMouse,
+            rotateY: rotateYMouse,
+            transformStyle: "preserve-3d",
+          }}
+          aria-label="Uçan kahvaltı lezzetleri"
+        >
+          {floatingFoods.map((item, index) => {
+            const shouldPreload = eagerFloatingFoodClassNames.has(item.className);
 
-      {/* Mobile Hero Section (Custom designed matching mockup) */}
-      <section
-        className="hero hero-mobile-window-view mobile-only-hero"
-        aria-label="Tarihi Van Kahvaltı Evi ana alanı"
-      >
-        <div className="hero-mobile-content">
-          <div className="hero-mobile-separator">
-            <span className="separator-line"></span>
-            <span className="separator-ornament">
-              <svg width="24" height="12" viewBox="0 0 24 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M12 0L15 4L24 6L15 8L12 12L9 8L0 6L9 4L12 0Z" fill="#B59A72" />
-              </svg>
-            </span>
-            <span className="separator-line"></span>
-          </div>
-
-          <h1 className="hero-mobile-title">
-            <span className="sr-only">Tarihi Van Kahvaltı Evi — Taksim Beyoğlu Serpme Van Kahvaltısı</span>
-            Van kahvaltısı,<br />
-            tarihle aynı<br />
-            sofrada.
-          </h1>
-
-          <p className="hero-mobile-desc">
-            1978’den beri süregelen aile yolculuğumuz; tarihi Rum binasının atmosferi, bakır sahanlarda sunulan Van lezzetleri ve eksilmeyen demli çay aynı masada buluşuyor.
-          </p>
-
-          <div className="hero-mobile-actions">
-            <BookingOpenButton className="hero-btn-primary" icon="calendar">
-              Rezervasyon Yap
-            </BookingOpenButton>
-            <Link href="/menu" className="hero-btn-secondary">
-              <BookOpen size={17} />
-              <span>Menüyü İncele</span>
-            </Link>
-          </div>
-
-          <div className="hero-mobile-badges">
-            <div className="hero-badge">
-              <Star size={14} className="badge-icon" />
-              <span>1978&apos;den beri</span>
-            </div>
-            <div className="hero-badge">
-              <Building2 size={14} className="badge-icon" />
-              <span>Tarihi Rum Binası</span>
-            </div>
-            <div className="hero-badge">
-              <Sun size={14} className="badge-icon" />
-              <span>Serpme Van Kahvaltısı</span>
-            </div>
-          </div>
-        </div>
-      </section>
-    </>
+            return (
+              <div
+                className={item.className}
+                key={item.src}
+                style={{ "--float-delay": `${Math.min(index, 6) * (isMobile ? 24 : 36)}ms` } as CSSProperties}
+              >
+                <Image
+                  src={item.src}
+                  alt={item.alt}
+                  fill
+                  sizes="(max-width: 680px) 30vw, (max-width: 1080px) 26vw, 320px"
+                  priority={shouldPreload}
+                  fetchPriority={shouldPreload ? "high" : "auto"}
+                  quality={82}
+                />
+              </div>
+            );
+          })}
+        </motion.div>
+      </div>
+    </section>
   );
 }
 
