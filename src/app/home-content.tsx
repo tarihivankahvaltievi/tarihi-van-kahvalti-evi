@@ -38,7 +38,7 @@ export function HomeContent() {
           <div className="about-sofra-visual" data-reveal>
             <figure className="about-sofra-table" style={{ margin: 0 }}>
               <Image
-                src="/images/hero-parallax/indoor-table.webp"
+                src="/images/hero-parallax/overhead-feast.webp"
                 alt="Tarihi Van Kahvaltı Evi kahvaltı sofrası"
                 fill
                 sizes="(max-width: 900px) 92vw, 560px"
