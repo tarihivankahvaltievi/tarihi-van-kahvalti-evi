@@ -20785,3 +20785,304 @@ h2 span,
     font-size: clamp(1.58rem, 6.8vw, 1.96rem);
   }
 }
+
+/* ── Mobile Hero & Navbar Redesign (Mockup Matching) ── */
+.desktop-only-hero {
+  display: block;
+}
+.mobile-only-hero {
+  display: none;
+}
+
+@media (max-width: 680px) {
+  /* Toggles */
+  .desktop-only-hero {
+    display: none !important;
+  }
+  .mobile-only-hero {
+    display: flex !important;
+  }
+
+  /* Flat full-width navbar on mobile */
+  .nav {
+    top: 0 !important;
+    left: 0 !important;
+    transform: none !important;
+    width: 100% !important;
+    min-height: 72px !important;
+    border-radius: 0 !important;
+    border: none !important;
+    border-bottom: 1px solid rgba(181, 154, 114, 0.28) !important;
+    background: #fffaf0 !important; /* solid cream background matching page surface */
+    box-shadow: none !important;
+    padding-inline: 1.2rem !important;
+    align-items: center !important;
+  }
+
+  .nav.scrolled {
+    top: 0 !important;
+    min-height: 64px !important;
+  }
+
+  .logo-wrap {
+    gap: 0.68rem !important;
+  }
+
+  .brand-logo-mark,
+  .logo-emblem {
+    width: 44px !important;
+    height: 56px !important;
+    border-radius: 0 !important;
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+  }
+
+  .brand-logo-image {
+    transform: none !important;
+    object-fit: contain !important;
+    width: 100% !important;
+    height: 100% !important;
+  }
+
+  .logo {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    font-size: 1.24rem !important;
+    line-height: 1.05 !important;
+    color: #1d3927 !important; /* forest color */
+    font-family: var(--font-playfair), Georgia, serif !important;
+    text-decoration: none !important;
+  }
+
+  .logo-word {
+    font-weight: 800 !important;
+    color: #1d3927 !important;
+  }
+
+  .logo-word em {
+    font-style: italic !important;
+    font-weight: 800 !important;
+    margin-left: 0.2rem !important;
+    color: #1d3927 !important;
+  }
+
+  .logo-subtitle {
+    font-family: var(--font-geist-sans), system-ui, sans-serif !important;
+    font-size: 0.44rem !important;
+    font-weight: 700 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.16em !important;
+    margin-top: 0.05rem !important;
+    color: #1d3927 !important;
+    opacity: 0.9 !important;
+  }
+
+  /* Hamburger Menu Button */
+  .nav-menu-button {
+    width: 44px !important;
+    height: 44px !important;
+    border-radius: 10px !important;
+    background: #1D3927 !important; /* forest green background */
+    border: none !important;
+    box-shadow: 0 4px 10px rgba(29, 57, 39, 0.15) !important;
+  }
+
+  .nav-menu-button::before,
+  .nav-menu-button::after {
+    display: none !important; /* remove the extra designer line/layer circles */
+  }
+
+  .nav-menu-glyph span {
+    background-color: #ffffff !important; /* white lines */
+  }
+
+  .nav-location {
+    display: none !important; /* hide location button in navbar to match mockup */
+  }
+
+  .nav-status-pill {
+    display: none !important; /* hide status pill in navbar to match mockup */
+  }
+
+  /* Drawer panel alignment */
+  .nav-menu-panel {
+    top: 72px !important;
+    border-radius: 0 0 24px 24px !important;
+    border: 1px solid rgba(181, 154, 114, 0.2) !important;
+    border-top: none !important;
+    box-shadow: 0 24px 48px rgba(31, 20, 17, 0.18) !important;
+  }
+
+  .nav.scrolled .nav-menu-panel {
+    top: 64px !important;
+  }
+
+  /* ── Mobile Hero Section ── */
+  .hero.hero-mobile-window-view {
+    position: relative !important;
+    min-height: 100vh !important;
+    min-height: 100dvh !important;
+    width: 100% !important;
+    padding-top: 86px !important; /* navbar height + breathing room */
+    padding-inline: 1.25rem !important;
+    box-sizing: border-box !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: flex-start !important;
+    background-image: url('/images/hero-mobile-bg.jpg') !important;
+    background-position: center bottom !important;
+    background-size: cover !important;
+    background-repeat: no-repeat !important;
+    background-color: #fffaf0 !important;
+  }
+
+  /* Overlay gradient to fade out the top-left background details under text if needed */
+  .hero.hero-mobile-window-view::before {
+    content: "" !important;
+    position: absolute !important;
+    inset: 0 !important;
+    z-index: 1 !important;
+    background: linear-gradient(180deg, 
+      rgba(255, 250, 240, 0.82) 0%, 
+      rgba(255, 250, 240, 0.62) 35%, 
+      rgba(255, 250, 240, 0) 65%) !important;
+    pointer-events: none !important;
+  }
+
+  .hero-mobile-content {
+    position: relative !important;
+    z-index: 2 !important; /* raise above the overlay gradient */
+    display: flex !important;
+    flex-direction: column !important;
+    width: 100% !important;
+    max-width: 480px !important;
+    margin-inline: auto !important;
+  }
+
+  /* Custom Leaf / Diamond Separator */
+  .hero-mobile-separator {
+    display: flex !important;
+    align-items: center !important;
+    gap: 12px !important;
+    width: 100% !important;
+    margin-top: 0.2rem !important;
+    margin-bottom: 0.8rem !important;
+  }
+
+  .hero-mobile-separator .separator-line {
+    flex-grow: 1 !important;
+    height: 1px !important;
+    background-color: #b59a72 !important;
+    opacity: 0.38 !important;
+  }
+
+  .hero-mobile-separator .separator-ornament {
+    display: flex !important;
+    align-items: center !important;
+    color: #b59a72 !important;
+  }
+
+  /* Title: "Van kahvaltısı, tarihle aynı sofrada" */
+  .hero-mobile-title {
+    font-family: var(--font-playfair), Georgia, serif !important;
+    font-size: clamp(2.05rem, 8.4vw, 2.5rem) !important;
+    font-weight: 800 !important;
+    line-height: 1.14 !important;
+    letter-spacing: -0.015em !important;
+    color: #1d3927 !important; /* elegant forest green color matching brand */
+    margin-bottom: 0.95rem !important;
+    text-align: left !important;
+  }
+
+  /* Description paragraph */
+  .hero-mobile-desc {
+    font-family: var(--font-geist-sans), system-ui, sans-serif !important;
+    font-size: clamp(0.85rem, 3.4vw, 0.94rem) !important;
+    line-height: 1.48 !important;
+    font-weight: 480 !important;
+    color: rgba(33, 29, 27, 0.82) !important;
+    margin-bottom: 1.5rem !important;
+    text-align: left !important;
+  }
+
+  /* Actions Container */
+  .hero-mobile-actions {
+    display: flex !important;
+    gap: 12px !important;
+    width: 100% !important;
+    margin-bottom: 1.6rem !important;
+  }
+
+  .hero-mobile-actions .hero-btn-primary,
+  .hero-mobile-actions .hero-btn-secondary {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 8px !important;
+    flex: 1 !important;
+    height: 48px !important;
+    border-radius: 12px !important;
+    font-family: var(--font-geist-sans), system-ui, sans-serif !important;
+    font-weight: 600 !important;
+    font-size: 0.88rem !important;
+    text-decoration: none !important;
+    transition: transform 0.2s ease, box-shadow 0.2s ease !important;
+    cursor: pointer !important;
+  }
+
+  .hero-mobile-actions .hero-btn-primary {
+    background-color: #1d3927 !important; /* solid forest green */
+    color: #ffffff !important;
+    border: none !important;
+    box-shadow: 0 4px 14px rgba(29, 57, 39, 0.28) !important;
+  }
+
+  .hero-mobile-actions .hero-btn-primary:active {
+    transform: scale(0.97) !important;
+    box-shadow: 0 2px 6px rgba(29, 57, 39, 0.2) !important;
+  }
+
+  .hero-mobile-actions .hero-btn-secondary {
+    background-color: rgba(255, 255, 255, 0.45) !important;
+    backdrop-filter: blur(4px) !important;
+    -webkit-backdrop-filter: blur(4px) !important;
+    border: 1px solid #b59a72 !important;
+    color: #1d3927 !important;
+  }
+
+  .hero-mobile-actions .hero-btn-secondary:active {
+    transform: scale(0.97) !important;
+    background-color: rgba(255, 255, 255, 0.6) !important;
+  }
+
+  /* Badges list */
+  .hero-mobile-badges {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 8px !important;
+    width: 100% !important;
+    margin-bottom: 2rem !important;
+  }
+
+  .hero-badge {
+    display: flex !important;
+    align-items: center !important;
+    gap: 6px !important;
+    background-color: rgba(255, 250, 240, 0.5) !important;
+    backdrop-filter: blur(4px) !important;
+    -webkit-backdrop-filter: blur(4px) !important;
+    border: 1px solid rgba(181, 154, 114, 0.38) !important;
+    padding: 6px 10px !important;
+    border-radius: 10px !important; /* rectangular pill shape matching mockup */
+    font-family: var(--font-geist-sans), system-ui, sans-serif !important;
+    font-size: 0.74rem !important;
+    font-weight: 550 !important;
+    color: #1d3927 !important;
+  }
+
+  .hero-badge .badge-icon {
+    color: #b59a72 !important;
+  }
+}
