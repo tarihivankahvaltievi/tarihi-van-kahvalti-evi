@@ -28,80 +28,68 @@ export function HomeContent() {
       <VanHeroParallax />
 
       <div className="story-band">
-        <article id="story" className="about-studio" data-reveal>
-          <div className="about-runner" aria-hidden="true">
-            <span>1978 / Tarihi Rum binası / Van kahvaltısı / Beyoğlu /</span>
-            <span>1978 / Tarihi Rum binası / Van kahvaltısı / Beyoğlu /</span>
+        <article id="story" className="about-sofra" data-reveal>
+          <div className="about-sofra-steam" aria-hidden="true">
+            <span />
+            <span />
+            <span />
           </div>
 
-          <div className="about-studio-grid">
-            <div className="about-label" data-reveal>
-              <span>Hakkımızda</span>
+          <div className="about-sofra-visual" data-reveal>
+            <figure className="about-sofra-table" style={{ margin: 0 }}>
+              <Image
+                src="/images/hero-parallax/indoor-table.webp"
+                alt="Tarihi Van Kahvaltı Evi kahvaltı sofrası"
+                fill
+                sizes="(max-width: 900px) 92vw, 560px"
+                loading="lazy"
+              />
+            </figure>
+            <figure className="about-sofra-room" style={{ margin: 0 }}>
+              <Image
+                src="/images/interior-chair.jpg"
+                alt="Tarihi Van Kahvaltı Evi iç mekan dokusu"
+                fill
+                sizes="(max-width: 900px) 34vw, 220px"
+                loading="lazy"
+              />
+            </figure>
+            <div className="about-sofra-mark" aria-hidden="true">
+              <strong>1978</strong>
+              <span>Beyoğlu&apos;nda aile sofrası</span>
             </div>
+          </div>
 
-            <header className="about-headline" data-reveal>
-              <p>Bir aile yolculuğu</p>
-              <h2>Eski binanın sessizliği, Van sofrasının bereketi.</h2>
-            </header>
+          <div className="about-sofra-copy">
+            <div className="about-sofra-kicker" data-reveal>Hakkımızda</div>
+            <h2 data-reveal>Van&apos;dan gelen sofra, Beyoğlu&apos;nda ağır ağır kurulur.</h2>
+            <p className="about-sofra-lead" data-reveal>
+              Tarihi Van Kahvaltı Evi, Taksim&apos;in kalabalığı içinde Van kahvaltısının
+              bereketini, tarihi Rum binasının sakin dokusuyla aynı masaya getirir.
+            </p>
 
-            <div className="about-photo-strip" data-reveal aria-label="Tarihi Van Kahvaltı Evi atmosferi">
-              <figure style={{ margin: 0 }}>
-                <Image
-                  src="/images/historic-mirror.jpg"
-                  alt="Tarihi Rum binasının iç mekan detayı"
-                  fill
-                  sizes="(max-width: 900px) 46vw, 360px"
-                  loading="lazy"
-                />
-              </figure>
-              <figure style={{ margin: 0 }}>
-                <Image
-                  src="/images/interior-chair.jpg"
-                  alt="Tarihi Van Kahvaltı Evi nostaljik iç mekan"
-                  fill
-                  sizes="(max-width: 900px) 46vw, 360px"
-                  loading="lazy"
-                />
-              </figure>
-              <figure style={{ margin: 0 }}>
-                <Image
-                  src="/images/breakfast-spread.jpg"
-                  alt="Geleneksel Van kahvaltısı sofrası"
-                  fill
-                  sizes="(max-width: 900px) 46vw, 360px"
-                  loading="lazy"
-                />
-              </figure>
-            </div>
-
-            <div className="about-story" aria-label="Tarihi Van Kahvaltı Evi hikayesi">
+            <div className="about-sofra-story" aria-label="Tarihi Van Kahvaltı Evi hikayesi">
               <p data-reveal>
-                Tarihi Van Kahvaltı Evi, Taksim&apos;in hızlı akışının içinde geleneksel
-                Van kahvaltısını tarihi bir Rum binasının sakin atmosferiyle buluşturan
-                bir aile mekanıdır.
+                <strong>Tarihi bina</strong>
+                18. yüzyılın sonlarında inşa edilen yapının ahşap, taş ve motifli
+                atmosferi kahvaltının temposunu yavaşlatır.
               </p>
               <p data-reveal>
-                18. yüzyılın sonlarında inşa edilen yapı; motifleri, ahşap dokusu ve
-                yaşanmışlığıyla Beyoğlu&apos;nun hafızasını taşır. Biz bu hafızayı
-                gösterişli cümlelerle değil, iyi hazırlanmış bir sofrayla yaşatıyoruz.
+                <strong>Aile emeği</strong>
+                1978&apos;den beri süren yolculuk bugün üçüncü kuşakta aynı özenle devam
+                eder; her servis aceleye değil sohbete yer açar.
               </p>
               <p data-reveal>
-                1978&apos;den bu yana süren aile yolculuğumuz bugün üçüncü kuşakta devam
-                ediyor. Otlu peynir, bal kaymak, Van ketesi, sıcak sahanlar ve taze
-                demlenen çay masaya tek tek gelir; kahvaltı aceleye değil sohbete
-                yer açar.
-              </p>
-              <p data-reveal>
-                Günün devamında Kafka Cafe&apos;nin kahveleri, tarihi binanın loş ve sakin
-                dokusuyla birleşir. Burası Taksim&apos;in ortasında kısa bir mola değil,
-                akılda kalan bir mekan duygusu bırakmak için var.
+                <strong>Van sofrası</strong>
+                Otlu peynir, bal kaymak, Van ketesi, sıcak sahanlar ve taze çay masaya
+                tek tek gelir; mekanın ruhu sofranın içinde hissedilir.
               </p>
             </div>
 
-            <div className="about-facts" data-reveal aria-label="Tarihi Van Kahvaltı Evi kısa bilgiler">
-              <span>1978&apos;den beri</span>
+            <div className="about-sofra-facts" data-reveal aria-label="Tarihi Van Kahvaltı Evi kısa bilgiler">
               <span>2. derece tarihi eser</span>
-              <span>Üçüncü kuşak aile işletmesi</span>
+              <span>Üçüncü kuşak</span>
+              <span>Kafka Cafe ile gün boyu</span>
             </div>
           </div>
         </article>
