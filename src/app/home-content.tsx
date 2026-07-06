@@ -29,74 +29,94 @@ export function HomeContent() {
 
       <div className="story-band">
         <article id="story" className="red-story" data-reveal>
+          <div className="story-ambient" aria-hidden="true">
+            <span />
+            <span />
+            <span />
+          </div>
           <div className="story-content">
             <div className="story-copy">
               <div className="light-pill story-pill">Hakkımızda</div>
-              <h2>Eski usul hazırlanır, sofrada uzun uzun yaşanır.</h2>
+              <h2>Van sofrası, Beyoğlu&apos;nun taş hafızasında.</h2>
               <p>
-                Tarihi Rum binasının sakin dokusunda, 1978&apos;den beri gelen aile emeğini Van
-                kahvaltısının cömertliğiyle aynı sofrada buluşturuyoruz.
+                Tarihi Van Kahvaltı Evi, Taksim&apos;in hareketli şehir hayatının içinde
+                geleneksel Van kahvaltısını, tarihi bir Rum binasının dingin atmosferiyle
+                buluşturan özel bir aile mekanıdır.
               </p>
-              <div className="story-text">
-                <p>
-                  Burada kahvaltı aceleye gelmez. Bakır sahanlar masaya tek tek yerleşir,
-                  çay tazelenir, sohbet kendine yer açar; eski binanın ruhu her tabakta
-                  usulca hissedilir.
-                </p>
-                <p>
-                  Üçüncü kuşak aile işletmesi olarak mirasımızı koruyor; Van&apos;ın bereketli
-                  sofrasını Beyoğlu&apos;nun kalbinde özenli, samimi ve hatırlanacak bir
-                  kahvaltıya dönüştürüyoruz.
-                </p>
+              <div className="story-text" aria-label="Tarihi Van Kahvaltı Evi hikayesi">
+                <article data-reveal>
+                  <span>Mekan</span>
+                  <p>
+                    18. yüzyılın sonlarında bir Rum ailesi tarafından inşa edilen yapı,
+                    özgün motifleri, ahşap dokusu ve zamanla güzelleşen sessizliğiyle
+                    bugün hala Beyoğlu&apos;nun en karakterli duraklarından biri.
+                  </p>
+                </article>
+                <article data-reveal>
+                  <span>Miras</span>
+                  <p>
+                    1978&apos;den bu yana süren aile yolculuğumuz, üçüncü kuşakta aynı özenle
+                    devam ediyor. Bu 2. derece tarihi eser içinde her servis, geçmişten
+                    gelen emeği yaşatma niyetiyle hazırlanıyor.
+                  </p>
+                </article>
+                <article data-reveal>
+                  <span>Sofra</span>
+                  <p>
+                    Otlu peynir, bal kaymak, geleneksel Van ketesi, sıcak sahanlar ve
+                    taze demlenen çay; masaya yalnızca lezzet değil, uzun sohbetlerin
+                    ritmini de getiriyor.
+                  </p>
+                </article>
+                <article data-reveal>
+                  <span>Bugün</span>
+                  <p>
+                    Kahvaltıdan sonra özel kahveler ve sakin buluşmalarla devam eden
+                    atmosferimiz, Taksim&apos;in ortasında şehrin temposundan kısa ama
+                    hatırlanan bir kaçış sunuyor.
+                  </p>
+                </article>
               </div>
             </div>
             <div className="story-archive" data-reveal>
-              <figure className="story-arch" style={{ margin: 0 }}>
-                <Image
-                  src="/images/interior-chair.jpg"
-                  alt="Tarihi Rum binasının taş ve ahşap iç mekan dokusu"
-                  fill
-                  sizes="(max-width: 900px) 88vw, 420px"
-                  loading="lazy"
-                />
-                <figcaption className="sr-only">Tarihi Rum binasının taş ve ahşap iç mekan dokusu</figcaption>
-              </figure>
+              <div className="story-image-duo">
+                <figure className="story-arch story-arch-room" style={{ margin: 0 }}>
+                  <Image
+                    src="/images/interior-chair.jpg"
+                    alt="Tarihi Rum binasının taş ve ahşap iç mekan dokusu"
+                    fill
+                    sizes="(max-width: 900px) 48vw, 360px"
+                    loading="lazy"
+                  />
+                  <figcaption className="sr-only">Tarihi Rum binasının taş ve ahşap iç mekan dokusu</figcaption>
+                </figure>
+                <figure className="story-arch story-arch-table" style={{ margin: 0 }}>
+                  <Image
+                    src="/images/breakfast-spread.jpg"
+                    alt="Geleneksel Van kahvaltısı sofrası"
+                    fill
+                    sizes="(max-width: 900px) 42vw, 300px"
+                    loading="lazy"
+                  />
+                  <figcaption className="sr-only">Geleneksel Van kahvaltısı sunumu</figcaption>
+                </figure>
+              </div>
               <div className="story-memory-list" aria-label="Tarihi Van Kahvaltıcısı kısa hikaye">
                 <div>
                   <span>1978</span>
-                  <p>Aile emeğiyle başlayan sofra kültürü.</p>
+                  <p>Aile emeğiyle başlayan yolculuk.</p>
                 </div>
                 <div>
-                  <span>Taş doku</span>
-                  <p>Rum binasının sakin, yaşanmış atmosferi.</p>
+                  <span>2. derece</span>
+                  <p>Tarihi eser niteliğinde yaşanmış mekan.</p>
                 </div>
                 <div>
-                  <span>Bugün</span>
-                  <p>Beyoğlu&apos;nda uzun sohbetli Van kahvaltısı.</p>
+                  <span>Van</span>
+                  <p>Yöresel lezzetleri cömertçe paylaşan sofra.</p>
                 </div>
               </div>
             </div>
           </div>
-          <div className="story-stats" data-reveal>
-            <div>
-              <strong>1978</strong>
-              <span>Aile yolculuğu</span>
-            </div>
-            <div>
-              <strong>2.</strong>
-              <span>Derece tarihi eser</span>
-            </div>
-          </div>
-          <figure className="story-plate" data-reveal style={{ margin: 0 }}>
-            <Image
-              src="/images/breakfast-spread.jpg"
-              alt="Geniş Van kahvaltısı"
-              fill
-              sizes="(max-width: 900px) 92vw, 760px"
-              loading="lazy"
-            />
-            <figcaption className="sr-only">Geniş Van kahvaltısı sunumu</figcaption>
-          </figure>
         </article>
       </div>
 
