@@ -28,17 +28,17 @@ export function HomeContent() {
       <VanHeroParallax />
 
       <div className="story-band">
+        <div className="about-sofra-blobs" aria-hidden="true">
+          <span className="blob blob-1" />
+          <span className="blob blob-2" />
+          <span className="blob blob-3" />
+        </div>
+
         <article id="story" className="about-sofra" data-reveal>
           <div className="about-sofra-steam" aria-hidden="true">
             <span />
             <span />
             <span />
-          </div>
-
-          <div className="about-sofra-blobs" aria-hidden="true">
-            <span className="blob blob-1" />
-            <span className="blob blob-2" />
-            <span className="blob blob-3" />
           </div>
 
           <div className="about-sofra-visual" data-reveal>

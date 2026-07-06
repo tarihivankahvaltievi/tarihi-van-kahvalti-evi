@@ -20453,21 +20453,31 @@ h2 span,
 
 /* ── About Section editorial finish: seamless, calmer, less boxed-in ── */
 .story-band {
-  padding-top: clamp(0.4rem, 2vw, 2.2rem) !important;
+  position: relative;
+  isolation: isolate;
+  margin-top: -1px !important;
+  padding: clamp(2rem, 5vw, 4.5rem) 0 clamp(3rem, 6vw, 6rem) !important;
   background:
     radial-gradient(ellipse at 50% 0%, rgba(255, 250, 240, 0.5), transparent 44%),
     linear-gradient(180deg, #ead6b5 0%, #f4e8d0 24%, #efe3d0 100%) !important;
+  overflow: hidden;
 }
 
 .about-sofra {
-  width: min(1180px, calc(100% - clamp(0.9rem, 4.5vw, 4.5rem)));
+  position: relative;
+  z-index: 1;
+  width: min(1180px, calc(100% - clamp(1.2rem, 5vw, 5rem)));
   grid-template-columns: minmax(330px, 0.86fr) minmax(0, 1fr);
-  gap: clamp(1.2rem, 4vw, 4.4rem);
-  padding: clamp(0.7rem, 2vw, 1.3rem) clamp(0.7rem, 2vw, 1.4rem);
-  border: 0;
-  border-radius: 0;
-  background: transparent;
-  box-shadow: none;
+  gap: clamp(1.5rem, 4vw, 4.4rem);
+  padding: clamp(1.5rem, 3.5vw, 4.2rem) clamp(1.5rem, 3.5vw, 3.8rem);
+  border: 1px solid rgba(255, 255, 255, 0.55);
+  border-radius: clamp(20px, 2.5vw, 32px);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.35) 0%, rgba(255, 255, 255, 0.12) 100%);
+  backdrop-filter: blur(28px) saturate(160%);
+  -webkit-backdrop-filter: blur(28px) saturate(160%);
+  box-shadow:
+    0 32px 64px rgba(54, 45, 34, 0.13),
+    inset 0 1px 1px rgba(255, 255, 255, 0.75);
 }
 
 .about-sofra::before {
@@ -20490,36 +20500,36 @@ h2 span,
 
 .about-sofra-blobs .blob {
   position: absolute;
-  mix-blend-mode: multiply;
-  filter: blur(45px);
-  opacity: 0.38;
+  mix-blend-mode: normal;
+  filter: blur(55px);
+  opacity: 0.65;
   pointer-events: none;
 }
 
 .about-sofra-blobs .blob-1 {
-  top: 8%;
-  right: 6%;
-  width: clamp(150px, 22vw, 290px);
-  height: clamp(150px, 22vw, 290px);
-  background: radial-gradient(circle, rgba(185, 139, 67, 0.42) 0%, transparent 75%);
+  top: 15%;
+  right: 5%;
+  width: clamp(250px, 35vw, 480px);
+  height: clamp(250px, 35vw, 480px);
+  background: radial-gradient(circle, rgba(224, 153, 36, 0.45) 0%, transparent 70%);
   animation: morphBlob 18s infinite ease-in-out alternate;
 }
 
 .about-sofra-blobs .blob-2 {
-  bottom: 12%;
-  left: 28%;
-  width: clamp(170px, 26vw, 350px);
-  height: clamp(170px, 26vw, 350px);
-  background: radial-gradient(circle, rgba(54, 88, 61, 0.32) 0%, transparent 75%);
+  bottom: 10%;
+  left: 20%;
+  width: clamp(280px, 40vw, 550px);
+  height: clamp(280px, 40vw, 550px);
+  background: radial-gradient(circle, rgba(46, 125, 50, 0.35) 0%, transparent 70%);
   animation: morphBlob2 22s infinite ease-in-out alternate-reverse;
 }
 
 .about-sofra-blobs .blob-3 {
-  top: 42%;
-  left: 8%;
-  width: clamp(130px, 16vw, 210px);
-  height: clamp(130px, 16vw, 210px);
-  background: radial-gradient(circle, rgba(234, 214, 181, 0.55) 0%, transparent 70%);
+  top: 40%;
+  left: 45%;
+  width: clamp(200px, 25vw, 360px);
+  height: clamp(200px, 25vw, 360px);
+  background: radial-gradient(circle, rgba(255, 235, 180, 0.65) 0%, transparent 70%);
   animation: morphBlob 14s infinite ease-in-out alternate-reverse;
 }
 
@@ -20591,8 +20601,8 @@ h2 span,
 .about-sofra-copy {
   align-self: center;
   max-width: 43rem;
-  border-left: 1px solid rgba(54, 88, 61, 0.16);
-  padding-left: clamp(1.1rem, 2.2vw, 1.8rem);
+  border-left: 0;
+  padding-left: 0;
 }
 
 .about-sofra-kicker {
@@ -20642,8 +20652,16 @@ h2 span,
   .about-sofra {
     grid-template-columns: minmax(0, 1fr);
     width: calc(100% - 1.25rem);
-    gap: 1.2rem;
-    padding: 0;
+    gap: 1.5rem;
+    padding: clamp(1.2rem, 4vw, 2rem);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    border-radius: 24px;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.35) 0%, rgba(255, 255, 255, 0.12) 100%);
+    backdrop-filter: blur(25px) saturate(160%);
+    -webkit-backdrop-filter: blur(25px) saturate(160%);
+    box-shadow:
+      0 26px 54px rgba(54, 45, 34, 0.12),
+      inset 0 1px 1px rgba(255, 255, 255, 0.75);
   }
 
   .about-sofra::before {
@@ -20680,16 +20698,13 @@ h2 span,
   .about-sofra-copy {
     max-width: none;
     border-left: 0;
-    border-radius: 20px;
-    padding: clamp(1.4rem, 5vw, 2.2rem) clamp(1.1rem, 4vw, 1.6rem);
-    background: rgba(255, 250, 240, 0.45);
-    backdrop-filter: blur(20px) saturate(160%);
-    -webkit-backdrop-filter: blur(20px) saturate(160%);
-    border: 1px solid rgba(255, 255, 255, 0.6);
-    box-shadow:
-      inset 0 1px 1px rgba(255, 255, 255, 0.85),
-      inset 0 -1px 1px rgba(185, 139, 67, 0.12),
-      0 20px 48px rgba(54, 45, 34, 0.09);
+    border-radius: 0;
+    padding: 0;
+    background: transparent;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    border: 0;
+    box-shadow: none;
   }
 
   .about-sofra-kicker {
@@ -20756,7 +20771,7 @@ h2 span,
   }
 
   .about-sofra-copy {
-    padding: 1.4rem 1.1rem;
+    padding: 0;
   }
 
   .about-sofra h2 {
