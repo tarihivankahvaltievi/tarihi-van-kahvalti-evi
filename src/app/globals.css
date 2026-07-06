@@ -20549,6 +20549,192 @@ h2 span,
   }
 }
 
+/* Authored variant: less boxed, more like a house signature */
+.about-sofra.about-sofra-authored {
+  width: min(1188px, calc(100% - clamp(1rem, 5vw, 5.4rem)));
+  grid-template-columns: minmax(350px, 0.93fr) minmax(0, 1fr);
+  gap: clamp(1.1rem, 3.6vw, 3.9rem);
+  padding: clamp(0.62rem, 1.3vw, 0.95rem);
+  border: 1px solid rgba(255, 255, 255, 0.62);
+  border-radius: 14px;
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.46), rgba(255, 248, 234, 0.18)),
+    rgba(255, 249, 236, 0.54);
+  backdrop-filter: blur(26px) saturate(132%);
+  -webkit-backdrop-filter: blur(26px) saturate(132%);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.82),
+    inset 0 -1px 0 rgba(37, 65, 47, 0.1);
+}
+
+.about-sofra.about-sofra-authored::before {
+  background:
+    linear-gradient(118deg, rgba(255, 255, 255, 0.46), transparent 34%),
+    linear-gradient(90deg, transparent 0 36%, rgba(37, 65, 47, 0.08) 36% 36.1%, transparent 36.1%),
+    radial-gradient(ellipse at 16% 84%, rgba(156, 119, 49, 0.17), transparent 42%);
+  mask-image: none;
+  opacity: 1;
+}
+
+.about-sofra.about-sofra-authored .about-sofra-visual {
+  height: clamp(420px, 42vw, 590px);
+  min-height: clamp(420px, 42vw, 590px);
+}
+
+.about-sofra.about-sofra-authored .about-sofra-table {
+  inset: 0 2% 0 0;
+  border: 0;
+  border-radius: 12px;
+  clip-path: polygon(0 0, 94% 0, 100% 7%, 100% 100%, 6% 100%, 0 93%);
+  box-shadow: none;
+}
+
+.about-sofra.about-sofra-authored .about-sofra-room {
+  right: -0.15rem;
+  bottom: 8%;
+  width: min(31%, 178px);
+  border: 0;
+  border-radius: 10px;
+  box-shadow: none;
+}
+
+.about-sofra.about-sofra-authored .about-sofra-table img,
+.about-sofra.about-sofra-authored .about-sofra-room img {
+  filter: saturate(1.04) contrast(1.05) brightness(0.98);
+}
+
+.about-sofra.about-sofra-authored .about-sofra-copy {
+  max-width: 43rem;
+  border: 0;
+  border-radius: 0;
+  padding: clamp(1.1rem, 2.4vw, 2rem) clamp(0.4rem, 1vw, 0.8rem);
+  background: transparent;
+  box-shadow: none;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+
+.about-sofra.about-sofra-authored .about-sofra-kicker {
+  color: rgba(34, 62, 44, 0.66);
+  font-size: clamp(0.68rem, 0.78vw, 0.74rem);
+}
+
+.about-sofra.about-sofra-authored h2 {
+  max-width: 8.55em;
+  font-size: clamp(2.55rem, 5vw, 5.05rem);
+  line-height: 0.94;
+}
+
+.about-sofra.about-sofra-authored .about-sofra-lead {
+  max-width: 35.5rem;
+  font-size: clamp(1.02rem, 1.2vw, 1.16rem);
+  line-height: 1.56;
+}
+
+.about-sofra.about-sofra-authored .about-sofra-ritual {
+  position: relative;
+  max-width: 34rem;
+  margin: clamp(0.85rem, 1.7vw, 1.15rem) 0 0;
+  padding-left: clamp(1rem, 1.6vw, 1.25rem);
+  color: rgba(34, 62, 44, 0.72);
+  font-family: var(--font-playfair), Georgia, serif;
+  font-size: clamp(1.06rem, 1.35vw, 1.28rem);
+  font-weight: 700;
+  line-height: 1.32;
+  text-wrap: pretty;
+}
+
+.about-sofra.about-sofra-authored .about-sofra-ritual::before {
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 2px;
+  border-radius: 999px;
+  background: linear-gradient(180deg, rgba(143, 108, 42, 0.16), rgba(143, 108, 42, 0.72), rgba(143, 108, 42, 0.16));
+  content: "";
+}
+
+.about-sofra.about-sofra-authored .about-sofra-story {
+  grid-template-columns: minmax(0, 1fr) !important;
+  gap: 0;
+  margin-top: clamp(1.25rem, 2.5vw, 1.8rem);
+  border-block: 1px solid rgba(34, 62, 44, 0.14);
+}
+
+.about-sofra.about-sofra-authored .about-sofra-story article {
+  display: grid;
+  grid-template-columns: minmax(7.2rem, 0.28fr) minmax(9rem, 0.24fr) minmax(0, 1fr);
+  gap: clamp(0.75rem, 1.8vw, 1.35rem);
+  align-items: baseline;
+  border: 0 !important;
+  border-radius: 0 !important;
+  padding: clamp(0.82rem, 1.55vw, 1.08rem) 0;
+  background: transparent !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+.about-sofra.about-sofra-authored .about-sofra-story article + article {
+  border-top: 1px solid rgba(34, 62, 44, 0.1) !important;
+}
+
+.about-sofra.about-sofra-authored .about-sofra-story article span {
+  margin: 0;
+  color: rgba(143, 108, 42, 0.82);
+  font-size: clamp(0.68rem, 0.86vw, 0.76rem);
+  letter-spacing: 0.04em;
+}
+
+.about-sofra.about-sofra-authored .about-sofra-story article strong {
+  font-size: clamp(1.08rem, 1.42vw, 1.32rem);
+}
+
+.about-sofra.about-sofra-authored .about-sofra-story article p {
+  margin: 0;
+  color: rgba(27, 43, 32, 0.7);
+  font-size: clamp(0.88rem, 1vw, 0.98rem);
+  line-height: 1.5;
+}
+
+@media (max-width: 900px) {
+  .about-sofra.about-sofra-authored {
+    width: calc(100% - 0.86rem);
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0.7rem;
+    padding: 0.44rem;
+  }
+
+  .about-sofra.about-sofra-authored .about-sofra-visual {
+    height: clamp(214px, 57vw, 328px);
+    min-height: clamp(214px, 57vw, 328px);
+  }
+
+  .about-sofra.about-sofra-authored .about-sofra-copy {
+    border-radius: 13px;
+    padding: clamp(1rem, 4vw, 1.3rem);
+    background:
+      linear-gradient(180deg, rgba(255, 252, 244, 0.74), rgba(255, 248, 234, 0.44));
+    backdrop-filter: blur(16px) saturate(112%);
+    -webkit-backdrop-filter: blur(16px) saturate(112%);
+  }
+
+  .about-sofra.about-sofra-authored h2 {
+    max-width: 9.3em;
+    font-size: clamp(1.9rem, 8.4vw, 2.78rem);
+    line-height: 0.98;
+  }
+
+  .about-sofra.about-sofra-authored .about-sofra-story article {
+    grid-template-columns: minmax(4.9rem, 0.3fr) minmax(0, 1fr);
+    gap: 0.16rem 0.68rem;
+    padding: 0.72rem 0;
+  }
+
+  .about-sofra.about-sofra-authored .about-sofra-story article span {
+    grid-row: span 2;
+  }
+}
+
 /* ── About Section editorial finish: seamless, calmer, less boxed-in ── */
 .story-band {
   padding-top: clamp(0.4rem, 2vw, 2.2rem) !important;
@@ -20739,5 +20925,419 @@ h2 span,
 
   .about-sofra h2 {
     font-size: clamp(1.42rem, 6.4vw, 1.82rem);
+  }
+}
+
+/* ── About Section: liquid glass restaurant finish ── */
+.story-band {
+  padding: clamp(1.25rem, 4vw, 4rem) 0 clamp(3rem, 8vw, 7rem) !important;
+  background:
+    linear-gradient(180deg, rgba(232, 206, 164, 0.98) 0%, rgba(245, 233, 211, 0.94) 34%, rgba(238, 226, 207, 1) 100%) !important;
+}
+
+.about-sofra-blobs {
+  display: none;
+}
+
+.about-sofra {
+  --about-glass: rgba(255, 250, 238, 0.66);
+  --about-glass-strong: rgba(255, 252, 244, 0.84);
+  --about-green: #213f2d;
+  --about-green-soft: #3d6648;
+  --about-ink: #1b2b20;
+  --about-body: rgba(27, 43, 32, 0.78);
+  --about-gold: #9a7a3a;
+  width: min(1168px, calc(100% - clamp(1rem, 5vw, 5.5rem)));
+  grid-template-columns: minmax(340px, 0.9fr) minmax(0, 1fr);
+  gap: clamp(1.25rem, 4vw, 4.25rem);
+  align-items: stretch;
+  padding: clamp(0.8rem, 1.8vw, 1.15rem);
+  border: 1px solid rgba(255, 255, 255, 0.52);
+  border-radius: 18px;
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.42), rgba(255, 250, 238, 0.18)),
+    var(--about-glass);
+  backdrop-filter: blur(26px) saturate(132%);
+  -webkit-backdrop-filter: blur(26px) saturate(132%);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.78),
+    inset 0 -1px 0 rgba(61, 102, 72, 0.08);
+}
+
+.about-sofra::before {
+  background:
+    linear-gradient(120deg, rgba(255, 255, 255, 0.44), transparent 36%),
+    radial-gradient(ellipse at 78% 18%, rgba(61, 102, 72, 0.12), transparent 42%),
+    radial-gradient(ellipse at 12% 86%, rgba(154, 122, 58, 0.16), transparent 48%);
+  mask-image: none;
+  opacity: 1;
+}
+
+.about-sofra-steam {
+  mix-blend-mode: soft-light;
+}
+
+.about-sofra-visual {
+  min-height: clamp(380px, 38vw, 548px);
+  border-radius: 14px;
+}
+
+.about-sofra-table,
+.about-sofra-room {
+  border: 0;
+  background: #213f2d;
+  box-shadow: none;
+}
+
+.about-sofra-table {
+  inset: 0 5% 0 0;
+  border-radius: 16px;
+  transform: rotate(-0.45deg);
+}
+
+.about-sofra-room {
+  right: 0;
+  bottom: 7.5%;
+  width: min(33%, 190px);
+  border-radius: 14px;
+  transform: rotate(1.3deg);
+}
+
+.about-sofra-table::before,
+.about-sofra-room::before {
+  position: absolute;
+  inset: 6px;
+  z-index: 2;
+  border: 1px solid rgba(255, 252, 244, 0.68);
+  border-radius: inherit;
+  content: "";
+  pointer-events: none;
+}
+
+.about-sofra-table::after,
+.about-sofra-room::after {
+  background:
+    linear-gradient(180deg, rgba(33, 63, 45, 0), rgba(33, 63, 45, 0.18)),
+    linear-gradient(118deg, rgba(255, 252, 244, 0.22), transparent 44%);
+}
+
+.about-sofra-mark {
+  left: clamp(0.8rem, 1.8vw, 1.25rem);
+  bottom: clamp(0.8rem, 2.2vw, 1.45rem);
+  max-width: 12.2rem;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 12px;
+  padding: clamp(0.62rem, 1.4vw, 0.86rem) clamp(0.68rem, 1.5vw, 0.95rem);
+  background:
+    linear-gradient(135deg, rgba(24, 48, 33, 0.92), rgba(61, 102, 72, 0.78));
+  backdrop-filter: blur(18px) saturate(132%);
+  -webkit-backdrop-filter: blur(18px) saturate(132%);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.16);
+}
+
+.about-sofra-mark strong {
+  font-size: clamp(1.7rem, 3.7vw, 3.15rem);
+  letter-spacing: 0;
+}
+
+.about-sofra-mark span {
+  color: rgba(255, 252, 244, 0.9);
+  font-size: clamp(0.68rem, 1vw, 0.82rem);
+}
+
+.about-sofra-copy {
+  align-self: center;
+  max-width: 42.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.44);
+  border-radius: 16px;
+  padding: clamp(1.15rem, 2.8vw, 2.3rem);
+  background:
+    linear-gradient(180deg, var(--about-glass-strong), rgba(255, 250, 238, 0.52));
+  backdrop-filter: blur(18px) saturate(118%);
+  -webkit-backdrop-filter: blur(18px) saturate(118%);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.72),
+    inset 0 -1px 0 rgba(33, 63, 45, 0.06);
+}
+
+.about-sofra-kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  border: 0;
+  padding: 0;
+  background: transparent;
+  color: rgba(33, 63, 45, 0.74);
+  font-size: clamp(0.7rem, 0.9vw, 0.78rem);
+  letter-spacing: 0.08em;
+}
+
+.about-sofra-kicker::before {
+  width: 2rem;
+  height: 1px;
+  background: rgba(154, 122, 58, 0.62);
+  content: "";
+}
+
+.about-sofra h2 {
+  max-width: 9.1em;
+  margin: clamp(0.52rem, 1.4vw, 0.9rem) 0 clamp(0.72rem, 1.8vw, 1.05rem);
+  color: var(--about-green);
+  font-size: clamp(2.35rem, 4.7vw, 4.7rem);
+  line-height: 0.98;
+  letter-spacing: 0 !important;
+}
+
+.about-sofra-lead {
+  max-width: 38rem;
+  color: var(--about-body);
+  font-size: clamp(1rem, 1.18vw, 1.12rem);
+  line-height: 1.58;
+}
+
+.about-sofra-story {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(0.62rem, 1.3vw, 0.95rem);
+  margin-top: clamp(1.15rem, 2.3vw, 1.65rem);
+}
+
+.about-sofra-story article {
+  min-width: 0;
+  border: 1px solid rgba(33, 63, 45, 0.1);
+  border-radius: 12px;
+  padding: clamp(0.78rem, 1.4vw, 1rem);
+  color: var(--about-body);
+  background: rgba(255, 255, 255, 0.28);
+  backdrop-filter: blur(12px) saturate(112%);
+  -webkit-backdrop-filter: blur(12px) saturate(112%);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.54);
+}
+
+.about-sofra-story article span {
+  display: block;
+  margin-bottom: 0.45rem;
+  color: var(--about-gold);
+  font-size: clamp(0.64rem, 0.82vw, 0.72rem);
+  font-weight: 850;
+  letter-spacing: 0.02em;
+}
+
+.about-sofra-story article strong {
+  display: block;
+  color: var(--about-green);
+  font-family: var(--font-playfair), Georgia, serif;
+  font-size: clamp(1.08rem, 1.36vw, 1.28rem);
+  line-height: 1.02;
+}
+
+.about-sofra-story article p {
+  display: block !important;
+  grid-template-columns: none !important;
+  margin: 0.38rem 0 0;
+  border: 0 !important;
+  border-radius: 0 !important;
+  padding: 0 !important;
+  color: rgba(27, 43, 32, 0.72);
+  background: transparent !important;
+  box-shadow: none !important;
+  font-size: clamp(0.86rem, 0.96vw, 0.94rem);
+  line-height: 1.48;
+  text-wrap: pretty;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+.about-sofra-facts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  margin-top: clamp(1rem, 2vw, 1.35rem);
+  border-top: 1px solid rgba(33, 63, 45, 0.12);
+  padding-top: 0.82rem;
+}
+
+.about-sofra-facts span {
+  border: 1px solid rgba(33, 63, 45, 0.12);
+  border-radius: 999px;
+  padding: 0.42rem 0.62rem;
+  color: var(--about-green);
+  background: rgba(255, 252, 244, 0.44);
+  font-size: clamp(0.68rem, 0.84vw, 0.78rem);
+  font-weight: 850;
+  line-height: 1;
+}
+
+.about-sofra-facts span:first-child,
+.about-sofra-facts span:last-child {
+  padding-left: 0.62rem;
+  border-right: 1px solid rgba(33, 63, 45, 0.12);
+}
+
+.about-sofra-story article[data-reveal]:nth-child(1) {
+  transition-delay: 130ms;
+}
+
+.about-sofra-story article[data-reveal]:nth-child(2) {
+  transition-delay: 180ms;
+}
+
+.about-sofra-story article[data-reveal]:nth-child(3),
+.about-sofra-facts[data-reveal] {
+  transition-delay: 230ms;
+}
+
+@media (max-width: 900px) {
+  .story-band {
+    padding-top: 1rem !important;
+  }
+
+  .about-sofra {
+    width: calc(100% - 1rem);
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0.75rem;
+    padding: 0.5rem;
+    border-radius: 17px;
+  }
+
+  .about-sofra-visual {
+    min-height: clamp(210px, 55vw, 330px);
+  }
+
+  .about-sofra-table {
+    inset: 0 12% 0 0;
+    border-radius: 14px;
+  }
+
+  .about-sofra-room {
+    right: 0.22rem;
+    bottom: 8%;
+    width: min(31%, 132px);
+    border-radius: 12px;
+  }
+
+  .about-sofra-table::before,
+  .about-sofra-room::before {
+    inset: 4px;
+  }
+
+  .about-sofra-mark {
+    left: 0.58rem;
+    bottom: 0.58rem;
+    max-width: 9.4rem;
+    padding: 0.52rem 0.62rem;
+  }
+
+  .about-sofra-mark strong {
+    font-size: clamp(1.36rem, 6.8vw, 2rem);
+  }
+
+  .about-sofra-mark span {
+    font-size: clamp(0.62rem, 2.6vw, 0.74rem);
+  }
+
+  .about-sofra-copy {
+    max-width: none;
+    border-radius: 15px;
+    padding: clamp(1rem, 4.2vw, 1.35rem);
+  }
+
+  .about-sofra-kicker {
+    font-size: 0.66rem;
+  }
+
+  .about-sofra h2 {
+    max-width: 9.4em;
+    font-size: clamp(1.92rem, 8.6vw, 2.85rem);
+    line-height: 1;
+  }
+
+  .about-sofra-lead {
+    font-size: clamp(0.92rem, 3.75vw, 1.02rem);
+    line-height: 1.48;
+  }
+
+  .about-sofra-story {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0.55rem;
+    margin-top: 0.88rem;
+  }
+
+  .about-sofra-story article {
+    display: grid;
+    grid-template-columns: minmax(5.4rem, 0.32fr) minmax(0, 1fr);
+    column-gap: 0.72rem;
+    align-items: start;
+    padding: 0.78rem;
+  }
+
+  .about-sofra-story article span {
+    grid-row: span 2;
+    margin: 0;
+    font-size: clamp(0.64rem, 2.7vw, 0.72rem);
+  }
+
+  .about-sofra-story article strong {
+    font-size: clamp(1rem, 4vw, 1.14rem);
+  }
+
+  .about-sofra-story article p {
+    margin-top: 0.22rem;
+    font-size: clamp(0.78rem, 3.16vw, 0.88rem);
+    line-height: 1.38;
+  }
+
+  .about-sofra-facts {
+    gap: 0.35rem;
+    padding-top: 0.68rem;
+  }
+
+  .about-sofra-facts span {
+    padding: 0.36rem 0.5rem;
+    font-size: clamp(0.64rem, 2.65vw, 0.74rem);
+  }
+}
+
+@media (max-width: 430px) {
+  .about-sofra {
+    width: calc(100% - 0.72rem);
+    padding: 0.42rem;
+  }
+
+  .about-sofra-visual {
+    min-height: clamp(190px, 58vw, 248px);
+  }
+
+  .about-sofra-table {
+    right: 9%;
+  }
+
+  .about-sofra-room {
+    width: min(32%, 108px);
+  }
+
+  .about-sofra-copy {
+    padding: 0.92rem 0.78rem;
+  }
+
+  .about-sofra h2 {
+    font-size: clamp(1.72rem, 8.1vw, 2.2rem);
+  }
+
+  .about-sofra-story article {
+    grid-template-columns: minmax(4.7rem, 0.32fr) minmax(0, 1fr);
+    column-gap: 0.58rem;
+    padding: 0.68rem;
+  }
+
+  .about-sofra-facts span {
+    flex: 1 1 auto;
+    text-align: center;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .about-sofra-story article {
+    transition-delay: 0ms !important;
   }
 }

@@ -22,6 +22,24 @@ const gallery: [string, string][] = [
   ["/images/street-table.jpg", "Beyoğlu sokaklarında kahvaltı masası"],
 ];
 
+const aboutStory = [
+  {
+    title: "Tarihi bina",
+    text: "18. yüzyılın sonlarından kalan Rum yapısının ahşap, taş ve motifli dokusu kahvaltının temposunu sakinleştirir.",
+    note: "Zambak Sokak",
+  },
+  {
+    title: "Aile emeği",
+    text: "1978'den beri süren yolculuk bugün üçüncü kuşakta aynı özenle devam eder; her servis aceleye değil sohbete yer açar.",
+    note: "Üçüncü kuşak",
+  },
+  {
+    title: "Van sofrası",
+    text: "Otlu peynir, bal kaymak, Van ketesi, sıcak sahanlar ve taze çay masaya tek tek gelir; mekanın ruhu sofranın içinde hissedilir.",
+    note: "Serpme kahvaltı",
+  },
+];
+
 export function HomeContent() {
   return (
     <>
@@ -34,7 +52,7 @@ export function HomeContent() {
           <span className="blob blob-3" />
         </div>
 
-        <article id="story" className="about-sofra" data-reveal>
+        <article id="story" className="about-sofra about-sofra-authored" data-reveal>
           <div className="about-sofra-steam" aria-hidden="true">
             <span />
             <span />
@@ -73,23 +91,19 @@ export function HomeContent() {
               Tarihi Van Kahvaltı Evi, Taksim&apos;in kalabalığı içinde Van kahvaltısının
               bereketini, tarihi Rum binasının sakin dokusuyla aynı masaya getirir.
             </p>
+            <p className="about-sofra-ritual" data-reveal>
+              Sofra aceleye değil; çayın buharına, eski binanın sesine ve masada
+              uzayan muhabbete kurulur.
+            </p>
 
             <div className="about-sofra-story" aria-label="Tarihi Van Kahvaltı Evi hikayesi">
-              <p data-reveal>
-                <strong>Tarihi bina</strong>
-                18. yüzyılın sonlarında inşa edilen yapının ahşap, taş ve motifli
-                atmosferi kahvaltının temposunu yavaşlatır.
-              </p>
-              <p data-reveal>
-                <strong>Aile emeği</strong>
-                1978&apos;den beri süren yolculuk bugün üçüncü kuşakta aynı özenle devam
-                eder; her servis aceleye değil sohbete yer açar.
-              </p>
-              <p data-reveal>
-                <strong>Van sofrası</strong>
-                Otlu peynir, bal kaymak, Van ketesi, sıcak sahanlar ve taze çay masaya
-                tek tek gelir; mekanın ruhu sofranın içinde hissedilir.
-              </p>
+              {aboutStory.map((item) => (
+                <article key={item.title} data-reveal>
+                  <span>{item.note}</span>
+                  <strong>{item.title}</strong>
+                  <p>{item.text}</p>
+                </article>
+              ))}
             </div>
 
             <div className="about-sofra-facts" data-reveal aria-label="Tarihi Van Kahvaltı Evi kısa bilgiler">
