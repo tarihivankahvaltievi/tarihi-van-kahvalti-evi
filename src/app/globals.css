@@ -19715,42 +19715,115 @@ h2 span,
   }
 }
 
-/* ── About Section: warm table continuation, rebuilt to match the hero ── */
+/* ── About Section: Premium Liquid Glassmorphism Redesign ── */
 .story-band {
+  position: relative;
   margin-top: -1px !important;
-  padding: clamp(1.1rem, 3.2vw, 3.8rem) 0 clamp(2.4rem, 5vw, 5rem) !important;
-  background:
-    linear-gradient(180deg, #ead6b5 0%, #f8efd9 16%, #efe3d0 100%) !important;
+  padding: clamp(2.4rem, 6vw, 6.2rem) 0 clamp(3.2rem, 8vw, 8.4rem) !important;
+  background: linear-gradient(180deg, #ead6b5 0%, #f8efd9 22%, #efe3d0 100%) !important;
+  overflow: hidden;
+  z-index: 1;
 }
 
+/* Floating Morphing Liquid Blobs behind the Glass Card */
+.about-sofra-blobs {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.about-sofra-blobs .blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.85;
+}
+
+.about-sofra-blobs .blob-1 {
+  top: -12%;
+  left: 10%;
+  width: clamp(280px, 35vw, 480px);
+  height: clamp(280px, 35vw, 480px);
+  background: radial-gradient(circle, rgba(234, 214, 181, 0.85) 0%, rgba(234, 214, 181, 0) 70%);
+  animation: float-blob-1 22s infinite alternate ease-in-out;
+}
+
+.about-sofra-blobs .blob-2 {
+  bottom: -8%;
+  right: 15%;
+  width: clamp(320px, 42vw, 580px);
+  height: clamp(320px, 42vw, 580px);
+  background: radial-gradient(circle, rgba(29, 57, 39, 0.28) 0%, rgba(29, 57, 39, 0) 70%);
+  animation: float-blob-2 26s infinite alternate ease-in-out;
+}
+
+.about-sofra-blobs .blob-3 {
+  top: 35%;
+  left: 45%;
+  width: clamp(220px, 28vw, 380px);
+  height: clamp(220px, 28vw, 380px);
+  background: radial-gradient(circle, rgba(181, 154, 114, 0.58) 0%, rgba(181, 154, 114, 0) 70%);
+  animation: float-blob-3 18s infinite alternate ease-in-out;
+}
+
+@keyframes float-blob-1 {
+  0% { transform: translate3d(0, 0, 0) scale(1) rotate(0deg); }
+  50% { transform: translate3d(40px, 60px, 0) scale(1.15) rotate(180deg); }
+  100% { transform: translate3d(-30px, -30px, 0) scale(0.9) rotate(360deg); }
+}
+
+@keyframes float-blob-2 {
+  0% { transform: translate3d(0, 0, 0) scale(1) rotate(0deg); }
+  50% { transform: translate3d(-50px, -40px, 0) scale(0.85) rotate(-180deg); }
+  100% { transform: translate3d(30px, 40px, 0) scale(1.1) rotate(-360deg); }
+}
+
+@keyframes float-blob-3 {
+  0% { transform: translate3d(0, 0, 0) scale(1); }
+  50% { transform: translate3d(60px, -30px, 0) scale(1.28); }
+  100% { transform: translate3d(-40px, 50px, 0) scale(0.92); }
+}
+
+/* Frosted Glassmorphism Panel */
 .about-sofra {
   --about-cream: #fffaf0;
   --about-cream-soft: rgba(255, 250, 240, 0.82);
-  --about-green: #243f2b;
-  --about-green-mid: #36583d;
-  --about-ink: #1f2d25;
-  --about-muted: rgba(31, 45, 37, 0.68);
-  --about-line: rgba(54, 88, 61, 0.18);
+  --about-green: #1d3927;
+  --about-green-mid: #2b4f37;
+  --about-ink: #111e15;
+  --about-muted: rgba(17, 30, 21, 0.72);
+  --about-line: rgba(29, 57, 39, 0.12);
   position: relative;
   isolation: isolate;
   display: grid;
   grid-template-columns: minmax(320px, 0.92fr) minmax(0, 1fr);
-  gap: clamp(1rem, 3vw, 3.4rem);
+  gap: clamp(1.2rem, 3.5vw, 4rem);
   align-items: center;
   width: min(1180px, calc(100% - clamp(1.1rem, 5vw, 5.6rem)));
   margin-inline: auto;
-  padding: clamp(1rem, 3.3vw, 3.4rem);
+  padding: clamp(1.5rem, 3.6vw, 3.8rem);
   overflow: hidden;
-  border: 1px solid rgba(185, 139, 67, 0.18);
-  border-radius: clamp(16px, 2vw, 24px);
+  border: 1px solid rgba(255, 255, 255, 0.5) !important;
+  border-radius: clamp(20px, 2.5vw, 32px);
   color: var(--about-ink);
-  background:
-    radial-gradient(ellipse at 16% 0%, rgba(255, 250, 240, 0.94), transparent 42%),
-    radial-gradient(ellipse at 96% 16%, rgba(54, 88, 61, 0.16), transparent 38%),
-    linear-gradient(135deg, rgba(255, 250, 240, 0.98), rgba(242, 229, 204, 0.92));
+  background: rgba(255, 250, 240, 0.58) !important;
+  backdrop-filter: blur(28px) saturate(125%) !important;
+  -webkit-backdrop-filter: blur(28px) saturate(125%) !important;
   box-shadow:
-    0 24px 54px rgba(54, 45, 34, 0.12),
-    inset 0 1px 0 rgba(255, 255, 255, 0.72);
+    0 28px 64px -16px rgba(54, 45, 34, 0.12),
+    inset 0 1px 1px rgba(255, 255, 255, 0.8),
+    0 4px 12px rgba(29, 57, 39, 0.02) !important;
+  transition: border-color 0.4s ease, box-shadow 0.4s ease, transform 0.4s ease;
+}
+
+.about-sofra:hover {
+  border-color: rgba(255, 255, 255, 0.72) !important;
+  box-shadow:
+    0 36px 82px -16px rgba(54, 45, 34, 0.18),
+    inset 0 1px 2px rgba(255, 255, 255, 0.95),
+    0 4px 16px rgba(29, 57, 39, 0.04) !important;
 }
 
 .about-sofra::before,
@@ -19764,20 +19837,20 @@ h2 span,
 .about-sofra::before {
   inset: 0;
   background:
-    linear-gradient(90deg, rgba(54, 88, 61, 0.055) 1px, transparent 1px),
-    linear-gradient(180deg, rgba(54, 88, 61, 0.04) 1px, transparent 1px);
-  background-size: 118px 118px;
-  mask-image: linear-gradient(90deg, transparent 0%, #000 18%, #000 100%);
+    linear-gradient(90deg, rgba(29, 57, 39, 0.04) 1px, transparent 1px),
+    linear-gradient(180deg, rgba(29, 57, 39, 0.03) 1px, transparent 1px);
+  background-size: 98px 98px;
+  mask-image: linear-gradient(90deg, transparent 0%, #000 15%, #000 100%);
 }
 
 .about-sofra::after {
-  right: -9%;
-  bottom: -18%;
-  width: 42%;
+  right: -8%;
+  bottom: -15%;
+  width: 40%;
   aspect-ratio: 1;
   border-radius: 999px;
-  background: radial-gradient(circle, rgba(54, 88, 61, 0.18), transparent 70%);
-  filter: blur(18px);
+  background: radial-gradient(circle, rgba(29, 57, 39, 0.14), transparent 70%);
+  filter: blur(24px);
   animation: aboutSofraGlow 6.5s var(--ease-soft) infinite alternate;
 }
 
@@ -19795,7 +19868,7 @@ h2 span,
   width: 1px;
   height: clamp(5rem, 10vw, 8rem);
   border-radius: 999px;
-  background: linear-gradient(180deg, transparent, rgba(54, 88, 61, 0.22), transparent);
+  background: linear-gradient(180deg, transparent, rgba(29, 57, 39, 0.22), transparent);
   opacity: 0;
   animation: aboutSofraSteam 8s var(--ease-soft) infinite;
 }
@@ -19835,7 +19908,7 @@ h2 span,
 
 .about-sofra-table {
   inset: 4% 8% 5% 0;
-  border: 8px solid rgba(255, 250, 240, 0.92);
+  border: 8px solid rgba(255, 250, 240, 0.95);
   border-radius: 26px;
   transform: rotate(-1.4deg);
   animation: aboutSofraPlate 7s var(--ease-soft) infinite alternate;
@@ -19846,7 +19919,7 @@ h2 span,
   bottom: 2%;
   width: min(42%, 220px);
   aspect-ratio: 0.82;
-  border: 6px solid rgba(255, 250, 240, 0.95);
+  border: 6px solid rgba(255, 250, 240, 0.98);
   border-radius: 999px 999px 16px 16px;
   transform: rotate(4deg);
   animation: aboutSofraRoom 6s var(--ease-soft) infinite alternate;
@@ -19858,8 +19931,8 @@ h2 span,
   inset: 0;
   content: "";
   background:
-    linear-gradient(180deg, rgba(24, 63, 43, 0), rgba(24, 63, 43, 0.18)),
-    linear-gradient(115deg, rgba(255, 250, 240, 0.14), transparent 46%);
+    linear-gradient(180deg, rgba(24, 63, 43, 0), rgba(24, 63, 43, 0.14)),
+    linear-gradient(115deg, rgba(255, 250, 240, 0.12), transparent 46%);
   pointer-events: none;
 }
 
@@ -19883,14 +19956,14 @@ h2 span,
   display: grid;
   gap: 0.12rem;
   max-width: 12rem;
-  border: 1px solid rgba(255, 250, 240, 0.34);
+  border: 1px solid rgba(255, 255, 255, 0.25);
   border-radius: 14px;
   padding: 0.72rem 0.84rem;
   color: var(--about-cream);
-  background: rgba(36, 63, 43, 0.82);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  box-shadow: 0 14px 34px rgba(36, 63, 43, 0.22);
+  background: rgba(29, 57, 39, 0.76);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 12px 28px rgba(29, 57, 39, 0.22);
 }
 
 .about-sofra-mark strong {
@@ -19900,7 +19973,7 @@ h2 span,
 }
 
 .about-sofra-mark span {
-  color: rgba(255, 250, 240, 0.82);
+  color: rgba(255, 250, 240, 0.85);
   font-size: 0.78rem;
   font-weight: 700;
   line-height: 1.18;
@@ -19908,16 +19981,18 @@ h2 span,
 
 .about-sofra-kicker {
   width: fit-content;
-  border: 1px solid rgba(54, 88, 61, 0.22);
+  border: 1px solid rgba(29, 57, 39, 0.16);
   border-radius: 999px;
   padding: 0.5rem 0.86rem;
   color: var(--about-green);
-  background: rgba(255, 250, 240, 0.62);
+  background: rgba(255, 250, 240, 0.68);
   font-size: 0.74rem;
   font-weight: 900;
   letter-spacing: 0.08em;
   line-height: 1;
   text-transform: uppercase;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
 }
 
 .about-sofra h2 {
@@ -19942,30 +20017,42 @@ h2 span,
   text-wrap: pretty;
 }
 
+/* Rebuilt nested cards as distinct glass panels */
 .about-sofra-story {
   display: grid;
-  gap: 0;
-  margin-top: clamp(1rem, 2.2vw, 1.6rem);
-  border-top: 1px solid var(--about-line);
-  border-bottom: 1px solid var(--about-line);
+  gap: clamp(0.6rem, 1.5vw, 1rem);
+  margin-top: clamp(1.2rem, 2.4vw, 1.8rem);
+  border-top: none;
+  border-bottom: none;
 }
 
 .about-sofra-story p {
   display: grid;
-  grid-template-columns: minmax(7.2rem, 0.28fr) minmax(0, 1fr);
+  grid-template-columns: minmax(7.2rem, 0.24fr) minmax(0, 1fr);
   gap: clamp(0.75rem, 1.6vw, 1.25rem);
-  align-items: baseline;
+  align-items: center;
   margin: 0;
-  padding: clamp(0.66rem, 1.2vw, 0.88rem) 0;
-  border-bottom: 1px solid rgba(54, 88, 61, 0.12);
+  padding: 1.1rem 1.4rem !important;
+  border: 1px solid rgba(29, 57, 39, 0.06) !important;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.35) !important;
+  backdrop-filter: blur(6px) !important;
+  -webkit-backdrop-filter: blur(6px) !important;
   color: var(--about-muted);
   font-size: clamp(0.88rem, 1.02vw, 0.98rem);
   font-weight: 500;
-  line-height: 1.48;
+  line-height: 1.5;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1) !important;
+  box-shadow: 0 4px 12px rgba(29, 57, 39, 0.01) !important;
 }
 
-.about-sofra-story p:last-child {
-  border-bottom: 0;
+.about-sofra-story p:hover {
+  background: rgba(255, 255, 255, 0.68) !important;
+  border-color: rgba(29, 57, 39, 0.16) !important;
+  transform: translateY(-2px);
+  box-shadow: 
+    0 12px 24px rgba(29, 57, 39, 0.04), 
+    inset 0 1px 1px rgba(255, 255, 255, 0.8) !important;
 }
 
 .about-sofra-story strong {
@@ -19983,7 +20070,7 @@ h2 span,
 }
 
 .about-sofra-facts span {
-  border: 1px solid rgba(54, 88, 61, 0.16);
+  border: 1px solid rgba(29, 57, 39, 0.12);
   border-radius: 999px;
   padding: 0.45rem 0.68rem;
   color: var(--about-green);
@@ -19991,6 +20078,14 @@ h2 span,
   font-size: clamp(0.74rem, 0.9vw, 0.84rem);
   font-weight: 800;
   line-height: 1;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  transition: background 0.3s ease, border-color 0.3s ease;
+}
+
+.about-sofra-facts span:hover {
+  background: rgba(255, 250, 240, 0.82);
+  border-color: rgba(29, 57, 39, 0.24);
 }
 
 .about-sofra [data-reveal] {
@@ -20136,9 +20231,10 @@ h2 span,
   .about-sofra-story p {
     grid-template-columns: minmax(4.9rem, 0.28fr) minmax(0, 1fr);
     gap: 0.62rem;
-    padding: 0.48rem 0;
+    padding: 0.8rem 1rem !important;
     font-size: clamp(0.76rem, 3.1vw, 0.86rem);
-    line-height: 1.32;
+    line-height: 1.38;
+    border-radius: 12px;
   }
 
   .about-sofra-story strong {
@@ -20178,8 +20274,10 @@ h2 span,
   .about-sofra-story p {
     grid-template-columns: minmax(4.3rem, 0.26fr) minmax(0, 1fr);
     gap: 0.5rem;
+    padding: 0.6rem 0.8rem !important;
     font-size: clamp(0.7rem, 2.85vw, 0.79rem);
     line-height: 1.25;
+    border-radius: 10px;
   }
 
   .about-sofra-story strong {
