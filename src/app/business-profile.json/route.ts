@@ -20,7 +20,6 @@ import {
   geoServiceArea,
   geoSearchIntents,
   homeLanguageAlternates,
-  internationalTouristFacts,
   localAreas,
   localAreaProfiles,
   localSeoFacts,
@@ -103,15 +102,6 @@ export function GET() {
         mobileGeoActions,
       },
       localSeoFacts,
-      internationalTouristFacts,
-      yandexOptimization: {
-        russianTouristPage: `${siteUrl}/zavtrak-taksim-stambul`,
-        hreflangInHead: true,
-        canonicalUrls: true,
-        serverRenderedHtml: true,
-        note:
-          "Russian tourist content is available as crawlable HTML with reciprocal hreflang links in the page head; no Yandex verification token is published because a real token is required.",
-      },
       browserOptimization: {
         safari: ["appleWebApp metadata", "apple touch icon", "responsive viewport"],
         chrome: ["manifest", "theme color", "server-rendered content", "structured data"],

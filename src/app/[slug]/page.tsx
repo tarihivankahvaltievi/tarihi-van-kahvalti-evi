@@ -287,9 +287,6 @@ export default async function SeoPage({ params }: PageProps) {
         <Link href="/kafka-cafe">Kafka Cafe</Link>
         <Link href="/zambak-sokak-kahvalti">Zambak Sokak</Link>
         <Link href="/siraselviler-kahvalti">Sıraselviler</Link>
-        <Link href="/turkish-breakfast-istanbul">Turkish breakfast</Link>
-        <Link href="/zavtrak-taksim-stambul">Завтрак Таксим</Link>
-        <Link href="/arabic-breakfast-taksim">فطور تقسيم</Link>
         <Link href="/tarihi-mekanda-kahvalti">Tarihi mekan</Link>
       </section>
     </main>

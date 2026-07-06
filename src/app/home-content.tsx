@@ -7,7 +7,7 @@ import { FaqSection } from "./components/faq-section";
 import { GalleryLightbox } from "./components/gallery-lightbox";
 import { ReviewCarousel } from "./components/review-carousel";
 import { VanHeroParallax } from "./components/van-hero-parallax";
-import { displayAddress, internationalTouristFacts, localSeoFacts } from "./seo";
+import { displayAddress, localSeoFacts } from "./seo";
 
 const gallery: [string, string][] = [
   ["/images/balcony-breakfast.jpg", "Balkonda kahvaltı keyfi"],
@@ -140,9 +140,6 @@ export function HomeContent() {
               <Link href="/istiklal-caddesi-kahvalti">İstiklal kahvaltı</Link>
               <Link href="/zambak-sokak-kahvalti">Zambak Sokak</Link>
               <Link href="/siraselviler-kahvalti">Sıraselviler</Link>
-              <Link href="/turkish-breakfast-istanbul">Turkish breakfast</Link>
-              <Link href="/zavtrak-taksim-stambul">Русский</Link>
-              <Link href="/arabic-breakfast-taksim">العربية</Link>
               <Link href="/kahvalti-rezervasyon">Rezervasyon</Link>
               <Link href="/kafka-cafe">Kafka Cafe</Link>
             </nav>
@@ -167,30 +164,7 @@ export function HomeContent() {
           </div>
         </section>
 
-        <section className="tourist-language-panel" aria-labelledby="tourist-language-heading" data-reveal>
-          <div className="tourist-language-head">
-            <span className="light-pill">Tourist search</span>
-            <h2 id="tourist-language-heading">Taksim çevresindeki turistler için kahvaltı bilgisi</h2>
-            <p>
-              Yabancı ziyaretçiler için İngilizce, Rusça ve Arapça sayfalar; Taksim,
-              Istiklal ve Beyoğlu aramalarına uygun açık adres, saat, menü ve rezervasyon
-              bilgisi içerir.
-            </p>
-          </div>
-          <div className="tourist-language-grid">
-            {internationalTouristFacts.map((fact) => (
-              <article key={fact.language} className="tourist-language-card">
-                <span>{fact.language}</span>
-                <h3>{fact.title}</h3>
-                <p>{fact.value}</p>
-                <small>{fact.intent}</small>
-                <Link href={fact.href} aria-label={`${fact.title} sayfasına git`}>
-                  Aç <ChevronRight size={16} />
-                </Link>
-              </article>
-            ))}
-          </div>
-        </section>
+
       </div>
 
       <AnimatedFooter />

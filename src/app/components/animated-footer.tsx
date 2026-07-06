@@ -1144,7 +1144,6 @@ export function AnimatedFooter() {
               <li><Link href="/zambak-sokak-kahvalti">Zambak Sokak</Link></li>
               <li><Link href="/siraselviler-kahvalti">Sıraselviler</Link></li>
               <li><Link href="/tarihi-mekanda-kahvalti">Tarihi Mekan</Link></li>
-              <li><Link href="/turkish-breakfast-istanbul">Turkish Breakfast</Link></li>
               <li><Link href="/kahvalti-rezervasyon">Rezervasyon</Link></li>
               <li><Link href="/sss">Sıkça Sorulan Sorular</Link></li>
             </ul>

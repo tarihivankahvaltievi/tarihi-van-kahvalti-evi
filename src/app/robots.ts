@@ -40,7 +40,7 @@ export default function robots(): MetadataRoute.Robots {
       },
       {
         userAgent: yandexBots,
-        allow: ["/", "/sitemap.xml", "/business-profile.json", "/zavtrak-taksim-stambul"],
+        allow: ["/", "/sitemap.xml", "/business-profile.json"],
         disallow: ["/api/", "/_next/server/"],
       },
       {
