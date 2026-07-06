@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { ChevronRight } from "lucide-react";
 import { AnimatedFooter } from "./components/animated-footer";
@@ -7,7 +8,6 @@ import { GalleryLightbox } from "./components/gallery-lightbox";
 import { ReviewCarousel } from "./components/review-carousel";
 import { VanHeroParallax } from "./components/van-hero-parallax";
 import { displayAddress, internationalTouristFacts, localSeoFacts } from "./seo";
-import { AboutSection } from "./components/about-section";
 
 const gallery: [string, string][] = [
   ["/images/balcony-breakfast.jpg", "Balkonda kahvaltı keyfi"],
@@ -27,7 +27,78 @@ export function HomeContent() {
     <>
       <VanHeroParallax />
 
-      <AboutSection />
+      <div className="story-band">
+        <article id="story" className="red-story" data-reveal>
+          <div className="story-content">
+            <div className="story-copy">
+              <div className="light-pill story-pill">Hakkımızda</div>
+              <h2>Eski usul hazırlanır, sofrada uzun uzun yaşanır.</h2>
+              <p>
+                Tarihi Rum binasının sakin dokusunda, 1978&apos;den beri gelen aile emeğini Van
+                kahvaltısının cömertliğiyle aynı sofrada buluşturuyoruz.
+              </p>
+              <div className="story-text">
+                <p>
+                  Burada kahvaltı aceleye gelmez. Bakır sahanlar masaya tek tek yerleşir,
+                  çay tazelenir, sohbet kendine yer açar; eski binanın ruhu her tabakta
+                  usulca hissedilir.
+                </p>
+                <p>
+                  Üçüncü kuşak aile işletmesi olarak mirasımızı koruyor; Van&apos;ın bereketli
+                  sofrasını Beyoğlu&apos;nun kalbinde özenli, samimi ve hatırlanacak bir
+                  kahvaltıya dönüştürüyoruz.
+                </p>
+              </div>
+            </div>
+            <div className="story-archive" data-reveal>
+              <figure className="story-arch" style={{ margin: 0 }}>
+                <Image
+                  src="/images/interior-chair.jpg"
+                  alt="Tarihi Rum binasının taş ve ahşap iç mekan dokusu"
+                  fill
+                  sizes="(max-width: 900px) 88vw, 420px"
+                  loading="lazy"
+                />
+                <figcaption className="sr-only">Tarihi Rum binasının taş ve ahşap iç mekan dokusu</figcaption>
+              </figure>
+              <div className="story-memory-list" aria-label="Tarihi Van Kahvaltıcısı kısa hikaye">
+                <div>
+                  <span>1978</span>
+                  <p>Aile emeğiyle başlayan sofra kültürü.</p>
+                </div>
+                <div>
+                  <span>Taş doku</span>
+                  <p>Rum binasının sakin, yaşanmış atmosferi.</p>
+                </div>
+                <div>
+                  <span>Bugün</span>
+                  <p>Beyoğlu&apos;nda uzun sohbetli Van kahvaltısı.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="story-stats" data-reveal>
+            <div>
+              <strong>1978</strong>
+              <span>Aile yolculuğu</span>
+            </div>
+            <div>
+              <strong>2.</strong>
+              <span>Derece tarihi eser</span>
+            </div>
+          </div>
+          <figure className="story-plate" data-reveal style={{ margin: 0 }}>
+            <Image
+              src="/images/breakfast-spread.jpg"
+              alt="Geniş Van kahvaltısı"
+              fill
+              sizes="(max-width: 900px) 92vw, 760px"
+              loading="lazy"
+            />
+            <figcaption className="sr-only">Geniş Van kahvaltısı sunumu</figcaption>
+          </figure>
+        </article>
+      </div>
 
       <section className="red-reviews" data-reveal>
         <h2>Misafirlerimizin söylediği şey basit: masa uzasın.</h2>
