@@ -21436,3 +21436,128 @@ body,
     transition-delay: 0ms !important;
   }
 }
+
+/* Review carousel motion repair: stable cards, no remount pop */
+.stagger-testimonials-stage {
+  --stack-gap: calc(var(--card-size) / 1.43);
+  perspective: 1200px !important;
+  perspective-origin: 50% 44% !important;
+}
+
+.stagger-testimonial-card {
+  transform-style: preserve-3d !important;
+  transform-origin: 50% 54% !important;
+  backface-visibility: hidden !important;
+  animation: none !important;
+  filter: saturate(calc(1 - (var(--abs-position) * 0.045))) brightness(calc(1 - (var(--abs-position) * 0.025))) !important;
+  opacity: max(0.2, calc(1 - (var(--abs-position) * 0.16))) !important;
+  transform:
+    translate(-50%, -50%)
+    translateX(calc(var(--stack-gap) * var(--position)))
+    translateY(calc((var(--abs-position) * 13px) + (var(--direction) * 7px)))
+    rotateZ(calc(var(--tilt) * 1deg))
+    rotateY(calc(var(--position) * -7deg))
+    scale(calc(1 - (var(--abs-position) * 0.04))) !important;
+  transition:
+    transform 680ms cubic-bezier(0.19, 1, 0.22, 1),
+    opacity 520ms ease,
+    filter 520ms ease,
+    background-color 260ms ease,
+    color 260ms ease,
+    border-color 260ms ease,
+    box-shadow 680ms cubic-bezier(0.19, 1, 0.22, 1) !important;
+}
+
+.stagger-testimonials-stage[data-is-moving="true"] .stagger-testimonial-card {
+  pointer-events: none !important;
+}
+
+.stagger-testimonial-card.is-center {
+  animation: none !important;
+  filter: none !important;
+  opacity: 1 !important;
+  transform:
+    translate(-50%, -50%)
+    translateY(-72px)
+    rotateZ(0deg)
+    rotateY(0deg)
+    scale(1) !important;
+}
+
+.stagger-testimonial-card:not(.is-center) {
+  box-shadow:
+    0 16px 42px rgba(64, 48, 28, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.7) !important;
+}
+
+.stagger-testimonial-card[style*="--abs-position: 4"] {
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
+.stagger-testimonials-stage[data-motion-direction="1"][data-is-moving="true"] .stagger-testimonial-card.is-center {
+  box-shadow:
+    10px 10px 0 rgba(197, 162, 90, 0.48),
+    0 36px 80px rgba(31, 56, 40, 0.27) !important;
+}
+
+.stagger-testimonials-stage[data-motion-direction="-1"][data-is-moving="true"] .stagger-testimonial-card.is-center {
+  box-shadow:
+    8px 10px 0 rgba(197, 162, 90, 0.48),
+    0 34px 76px rgba(31, 56, 40, 0.26) !important;
+}
+
+@media (max-width: 768px) {
+  .stagger-testimonials-stage {
+    --stack-gap: calc(var(--card-size) / 1.52);
+    perspective: 980px !important;
+  }
+
+  .stagger-testimonial-card {
+    filter: saturate(calc(1 - (var(--abs-position) * 0.035))) brightness(calc(1 - (var(--abs-position) * 0.018))) !important;
+    opacity: max(0.22, calc(1 - (var(--abs-position) * 0.18))) !important;
+    transform:
+      translate(-50%, -50%)
+      translateX(calc(var(--stack-gap) * var(--position)))
+      translateY(calc((var(--abs-position) * 9px) + (var(--direction) * 5px)))
+      rotateZ(calc(var(--tilt) * 1deg))
+      rotateY(calc(var(--position) * -5deg))
+      scale(calc(1 - (var(--abs-position) * 0.035))) !important;
+    transition:
+      transform 640ms cubic-bezier(0.19, 1, 0.22, 1),
+      opacity 500ms ease,
+      filter 500ms ease,
+      background-color 240ms ease,
+      color 240ms ease,
+      border-color 240ms ease,
+      box-shadow 640ms cubic-bezier(0.19, 1, 0.22, 1) !important;
+  }
+
+  .stagger-testimonial-card.is-center {
+    opacity: 1 !important;
+    transform:
+      translate(-50%, -50%)
+      translateY(-78px)
+      rotateZ(0deg)
+      rotateY(0deg)
+      scale(1) !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .stagger-testimonial-card {
+    transform:
+      translate(-50%, -50%)
+      translateX(calc(var(--stack-gap) * var(--position)))
+      translateY(calc((var(--abs-position) * 10px) + (var(--direction) * 5px)))
+      rotateZ(calc(var(--tilt) * 1deg))
+      scale(calc(1 - (var(--abs-position) * 0.035))) !important;
+  }
+
+  .stagger-testimonial-card.is-center {
+    transform:
+      translate(-50%, -50%)
+      translateY(-72px)
+      scale(1) !important;
+  }
+}

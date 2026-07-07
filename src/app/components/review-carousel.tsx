@@ -81,10 +81,29 @@ const initialReviews: Review[] = [
   }
 ];
 
+const MOVE_DURATION_MS = 680;
+
+const getCardPosition = (index: number, activeIndex: number, total: number) => {
+  const half = Math.floor(total / 2);
+  let position = (index - activeIndex + total) % total;
+
+  if (position > half) {
+    position -= total;
+  }
+
+  if (total % 2 === 0 && position === half) {
+    return -half;
+  }
+
+  return position;
+};
+
 export function ReviewCarousel() {
   const [reviews, setReviews] = useState<Review[]>(initialReviews);
   const [cardSize, setCardSize] = useState(365);
-  const [moveCount, setMoveCount] = useState(0);
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [moveDirection, setMoveDirection] = useState(1);
+  const [isMoving, setIsMoving] = useState(false);
   const [isWriteOpen, setIsWriteOpen] = useState(false);
   const writeDialogRef = useRef<HTMLDialogElement>(null);
   
@@ -96,6 +115,8 @@ export function ReviewCarousel() {
   const [toastMessage, setToastMessage] = useState<string | null>(null);
   const dragStartX = useRef<number | null>(null);
   const dragSuppressClick = useRef(false);
+  const movingRef = useRef(false);
+  const moveTimerRef = useRef<number | null>(null);
 
   useEffect(() => {
     const updateSize = () => {
@@ -114,29 +135,30 @@ export function ReviewCarousel() {
     return () => window.removeEventListener("resize", updateSize);
   }, []);
 
-  const handleMove = (steps: number) => {
-    if (steps === 0) return;
-
-    setReviews((currentReviews) => {
-      const nextReviews = [...currentReviews];
-
-      if (steps > 0) {
-        for (let i = steps; i > 0; i -= 1) {
-          const item = nextReviews.shift();
-          if (!item) return currentReviews;
-          nextReviews.push(item);
-        }
-      } else {
-        for (let i = steps; i < 0; i += 1) {
-          const item = nextReviews.pop();
-          if (!item) return currentReviews;
-          nextReviews.unshift(item);
-        }
+  useEffect(() => {
+    return () => {
+      if (moveTimerRef.current) {
+        window.clearTimeout(moveTimerRef.current);
       }
+    };
+  }, []);
 
-      return nextReviews;
-    });
-    setMoveCount((count) => count + 1);
+  const handleMove = (steps: number) => {
+    if (steps === 0 || movingRef.current || reviews.length < 2) return;
+
+    setMoveDirection(steps > 0 ? 1 : -1);
+    movingRef.current = true;
+    setIsMoving(true);
+    setActiveIndex((currentIndex) => (currentIndex + steps + reviews.length) % reviews.length);
+
+    if (moveTimerRef.current) {
+      window.clearTimeout(moveTimerRef.current);
+    }
+
+    moveTimerRef.current = window.setTimeout(() => {
+      movingRef.current = false;
+      setIsMoving(false);
+    }, MOVE_DURATION_MS);
   };
 
   const handleDragEnd = (clientX: number) => {
@@ -222,6 +244,7 @@ export function ReviewCarousel() {
     };
 
     setReviews((currentReviews) => [newReview, ...currentReviews]);
+    setActiveIndex(0);
     setIsWriteOpen(false);
     
     // Clear inputs
@@ -240,7 +263,8 @@ export function ReviewCarousel() {
         <div
           className="stagger-testimonials-stage"
           aria-label="Misafir yorumları"
-          data-move-count={moveCount}
+          data-motion-direction={moveDirection}
+          data-is-moving={isMoving ? "true" : "false"}
           style={{ "--card-size": `${cardSize}px` } as React.CSSProperties}
           onPointerDown={(event) => {
             dragStartX.current = event.clientX;
@@ -251,8 +275,7 @@ export function ReviewCarousel() {
           }}
         >
           {reviews.map((rev, index) => {
-            const centerIndex = Math.floor(reviews.length / 2);
-            const position = index - centerIndex;
+            const position = getCardPosition(index, activeIndex, reviews.length);
             const isCenter = position === 0;
             const previewImage = rev.image || rev.thumbs?.[0] || "/images/brand-icon-small.png";
 
@@ -267,7 +290,7 @@ export function ReviewCarousel() {
                     "--abs-position": Math.abs(position),
                     "--direction": position > 0 ? 1 : -1,
                     "--tilt": position % 2 ? 2.5 : -2.5,
-                    zIndex: isCenter ? 10 : Math.max(1, 8 - Math.abs(position)),
+                    zIndex: isCenter ? 30 : Math.max(1, 18 - Math.abs(position)),
                   } as React.CSSProperties
                 }
                 onClick={() => {
