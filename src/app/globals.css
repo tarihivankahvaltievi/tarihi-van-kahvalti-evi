@@ -19715,177 +19715,57 @@ h2 span,
   }
 }
 
-/* ── About Section: Premium Liquid Glassmorphism Redesign ── */
+/* About Section: Van table editorial */
 .story-band {
   position: relative;
   margin-top: -1px !important;
-  padding: clamp(2.4rem, 6vw, 6.2rem) 0 clamp(3.2rem, 8vw, 8.4rem) !important;
-  background: linear-gradient(180deg, #ead6b5 0%, #f8efd9 22%, #efe3d0 100%) !important;
+  padding: clamp(1.4rem, 4vw, 4.6rem) 0 clamp(3.4rem, 8vw, 7rem) !important;
   overflow: hidden;
+  background:
+    radial-gradient(ellipse at 16% 8%, rgba(255, 252, 242, 0.62), transparent 34%),
+    radial-gradient(ellipse at 88% 26%, rgba(88, 117, 77, 0.16), transparent 36%),
+    linear-gradient(180deg, #ead6b5 0%, #f5ead7 32%, #eee1ca 100%) !important;
   z-index: 1;
 }
 
-/* Floating Morphing Liquid Blobs behind the Glass Card */
-.about-sofra-blobs {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  z-index: 0;
-  overflow: hidden;
-}
-
-.about-sofra-blobs .blob {
-  position: absolute;
-  border-radius: 50%;
-  filter: blur(80px);
-  opacity: 0.85;
-}
-
-.about-sofra-blobs .blob-1 {
-  top: -12%;
-  left: 10%;
-  width: clamp(280px, 35vw, 480px);
-  height: clamp(280px, 35vw, 480px);
-  background: radial-gradient(circle, rgba(234, 214, 181, 0.85) 0%, rgba(234, 214, 181, 0) 70%);
-  animation: float-blob-1 22s infinite alternate ease-in-out;
-}
-
-.about-sofra-blobs .blob-2 {
-  bottom: -8%;
-  right: 15%;
-  width: clamp(320px, 42vw, 580px);
-  height: clamp(320px, 42vw, 580px);
-  background: radial-gradient(circle, rgba(29, 57, 39, 0.28) 0%, rgba(29, 57, 39, 0) 70%);
-  animation: float-blob-2 26s infinite alternate ease-in-out;
-}
-
-.about-sofra-blobs .blob-3 {
-  top: 35%;
-  left: 45%;
-  width: clamp(220px, 28vw, 380px);
-  height: clamp(220px, 28vw, 380px);
-  background: radial-gradient(circle, rgba(181, 154, 114, 0.58) 0%, rgba(181, 154, 114, 0) 70%);
-  animation: float-blob-3 18s infinite alternate ease-in-out;
-}
-
-@keyframes float-blob-1 {
-  0% { transform: translate3d(0, 0, 0) scale(1) rotate(0deg); }
-  50% { transform: translate3d(40px, 60px, 0) scale(1.15) rotate(180deg); }
-  100% { transform: translate3d(-30px, -30px, 0) scale(0.9) rotate(360deg); }
-}
-
-@keyframes float-blob-2 {
-  0% { transform: translate3d(0, 0, 0) scale(1) rotate(0deg); }
-  50% { transform: translate3d(-50px, -40px, 0) scale(0.85) rotate(-180deg); }
-  100% { transform: translate3d(30px, 40px, 0) scale(1.1) rotate(-360deg); }
-}
-
-@keyframes float-blob-3 {
-  0% { transform: translate3d(0, 0, 0) scale(1); }
-  50% { transform: translate3d(60px, -30px, 0) scale(1.28); }
-  100% { transform: translate3d(-40px, 50px, 0) scale(0.92); }
-}
-
-/* Frosted Glassmorphism Panel */
 .about-sofra {
-  --about-cream: #fffaf0;
-  --about-cream-soft: rgba(255, 250, 240, 0.82);
-  --about-green: #1d3927;
-  --about-green-mid: #2b4f37;
-  --about-ink: #111e15;
-  --about-muted: rgba(17, 30, 21, 0.72);
-  --about-line: rgba(29, 57, 39, 0.12);
+  --about-green: #203f2c;
+  --about-green-soft: #3e6547;
+  --about-ink: #17251b;
+  --about-body: rgba(23, 37, 27, 0.76);
+  --about-gold: #9a7438;
+  --about-paper: #fff9ea;
+  --about-line: rgba(32, 63, 44, 0.14);
   position: relative;
   isolation: isolate;
   display: grid;
-  grid-template-columns: minmax(320px, 0.92fr) minmax(0, 1fr);
-  gap: clamp(1.2rem, 3.5vw, 4rem);
+  grid-template-columns: minmax(340px, 0.92fr) minmax(0, 1fr);
+  gap: clamp(1.4rem, 4vw, 4.6rem);
   align-items: center;
-  width: min(1180px, calc(100% - clamp(1.1rem, 5vw, 5.6rem)));
+  width: min(1160px, calc(100% - clamp(1rem, 5vw, 5.4rem)));
   margin-inline: auto;
-  padding: clamp(1.5rem, 3.6vw, 3.8rem);
+  padding: clamp(0.78rem, 1.5vw, 1.05rem);
   overflow: hidden;
-  border: 1px solid rgba(255, 255, 255, 0.5) !important;
-  border-radius: clamp(20px, 2.5vw, 32px);
   color: var(--about-ink);
-  background: rgba(255, 250, 240, 0.58) !important;
-  backdrop-filter: blur(28px) saturate(125%) !important;
-  -webkit-backdrop-filter: blur(28px) saturate(125%) !important;
+  border: 1px solid rgba(255, 255, 255, 0.62);
+  border-radius: 18px;
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.5), rgba(255, 249, 235, 0.22)),
+    rgba(255, 247, 231, 0.7);
   box-shadow:
-    0 28px 64px -16px rgba(54, 45, 34, 0.12),
-    inset 0 1px 1px rgba(255, 255, 255, 0.8),
-    0 4px 12px rgba(29, 57, 39, 0.02) !important;
-  transition: border-color 0.4s ease, box-shadow 0.4s ease, transform 0.4s ease;
-}
-
-.about-sofra:hover {
-  border-color: rgba(255, 255, 255, 0.72) !important;
-  box-shadow:
-    0 36px 82px -16px rgba(54, 45, 34, 0.18),
-    inset 0 1px 2px rgba(255, 255, 255, 0.95),
-    0 4px 16px rgba(29, 57, 39, 0.04) !important;
-}
-
-.about-sofra::before,
-.about-sofra::after {
-  position: absolute;
-  z-index: -1;
-  content: "";
-  pointer-events: none;
+    0 22px 56px rgba(63, 47, 27, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.82);
 }
 
 .about-sofra::before {
-  inset: 0;
-  background:
-    linear-gradient(90deg, rgba(29, 57, 39, 0.04) 1px, transparent 1px),
-    linear-gradient(180deg, rgba(29, 57, 39, 0.03) 1px, transparent 1px);
-  background-size: 98px 98px;
-  mask-image: linear-gradient(90deg, transparent 0%, #000 15%, #000 100%);
-}
-
-.about-sofra::after {
-  right: -8%;
-  bottom: -15%;
-  width: 40%;
-  aspect-ratio: 1;
-  border-radius: 999px;
-  background: radial-gradient(circle, rgba(29, 57, 39, 0.14), transparent 70%);
-  filter: blur(24px);
-  animation: aboutSofraGlow 6.5s var(--ease-soft) infinite alternate;
-}
-
-.about-sofra-steam {
   position: absolute;
   inset: 0;
-  z-index: 0;
+  z-index: -1;
+  content: "";
   pointer-events: none;
-  overflow: hidden;
-}
-
-.about-sofra-steam span {
-  position: absolute;
-  bottom: 10%;
-  width: 1px;
-  height: clamp(5rem, 10vw, 8rem);
-  border-radius: 999px;
-  background: linear-gradient(180deg, transparent, rgba(29, 57, 39, 0.22), transparent);
-  opacity: 0;
-  animation: aboutSofraSteam 8s var(--ease-soft) infinite;
-}
-
-.about-sofra-steam span:nth-child(1) {
-  left: 18%;
-}
-
-.about-sofra-steam span:nth-child(2) {
-  left: 28%;
-  animation-delay: 1.5s;
-  animation-duration: 9.2s;
-}
-
-.about-sofra-steam span:nth-child(3) {
-  right: 18%;
-  animation-delay: 2.8s;
+  background:
+    linear-gradient(118deg, rgba(255, 255, 255, 0.42), transparent 34%),
+    radial-gradient(ellipse at 12% 86%, rgba(154, 116, 56, 0.16), transparent 42%);
 }
 
 .about-sofra-visual,
@@ -19895,7 +19775,8 @@ h2 span,
 }
 
 .about-sofra-visual {
-  min-height: clamp(340px, 38vw, 540px);
+  min-height: clamp(470px, 42vw, 620px);
+  border-radius: 14px;
 }
 
 .about-sofra-table,
@@ -19903,26 +19784,22 @@ h2 span,
   position: absolute;
   overflow: hidden;
   background: var(--about-green);
-  box-shadow: 0 18px 42px rgba(54, 45, 34, 0.18);
 }
 
 .about-sofra-table {
-  inset: 4% 8% 5% 0;
-  border: 8px solid rgba(255, 250, 240, 0.95);
-  border-radius: 26px;
-  transform: rotate(-1.4deg);
-  animation: aboutSofraPlate 7s var(--ease-soft) infinite alternate;
+  inset: 0 4% 0 0;
+  border-radius: 16px;
+  clip-path: polygon(0 0, 94% 0, 100% 7%, 100% 100%, 6% 100%, 0 93%);
 }
 
 .about-sofra-room {
   right: 0;
-  bottom: 2%;
-  width: min(42%, 220px);
+  bottom: 7%;
+  width: min(31%, 178px);
   aspect-ratio: 0.82;
-  border: 6px solid rgba(255, 250, 240, 0.98);
-  border-radius: 999px 999px 16px 16px;
-  transform: rotate(4deg);
-  animation: aboutSofraRoom 6s var(--ease-soft) infinite alternate;
+  border: 5px solid rgba(255, 249, 235, 0.82);
+  border-radius: 12px;
+  box-shadow: 0 18px 36px rgba(45, 35, 22, 0.18);
 }
 
 .about-sofra-table::after,
@@ -19930,1311 +19807,241 @@ h2 span,
   position: absolute;
   inset: 0;
   content: "";
-  background:
-    linear-gradient(180deg, rgba(24, 63, 43, 0), rgba(24, 63, 43, 0.14)),
-    linear-gradient(115deg, rgba(255, 250, 240, 0.12), transparent 46%);
   pointer-events: none;
+  background:
+    linear-gradient(180deg, rgba(32, 63, 44, 0), rgba(32, 63, 44, 0.18)),
+    linear-gradient(118deg, rgba(255, 249, 235, 0.18), transparent 44%);
 }
 
 .about-sofra-table img,
 .about-sofra-room img {
-  filter: saturate(1.02) contrast(1.04);
-  transform: scale(1.035);
-  transition: transform 850ms var(--ease-soft), filter 850ms var(--ease-soft);
+  filter: saturate(1.03) contrast(1.04) brightness(0.99);
+  transform: scale(1.02);
+  transition: transform 700ms var(--ease-soft), filter 700ms var(--ease-soft);
 }
 
-.about-sofra:hover .about-sofra-table img,
-.about-sofra:hover .about-sofra-room img {
-  filter: saturate(1.1) contrast(1.06);
-  transform: scale(1.075);
+@media (hover: hover) and (pointer: fine) {
+  .about-sofra:hover .about-sofra-table img,
+  .about-sofra:hover .about-sofra-room img {
+    filter: saturate(1.08) contrast(1.06) brightness(1);
+    transform: scale(1.055);
+  }
 }
 
 .about-sofra-mark {
   position: absolute;
-  left: clamp(0.75rem, 2vw, 1.25rem);
-  bottom: clamp(1rem, 3vw, 2rem);
+  left: clamp(0.82rem, 1.7vw, 1.2rem);
+  bottom: clamp(0.82rem, 2vw, 1.35rem);
   display: grid;
-  gap: 0.12rem;
+  gap: 0.08rem;
   max-width: 12rem;
-  border: 1px solid rgba(255, 255, 255, 0.25);
-  border-radius: 14px;
-  padding: 0.72rem 0.84rem;
-  color: var(--about-cream);
-  background: rgba(29, 57, 39, 0.76);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  box-shadow: 0 12px 28px rgba(29, 57, 39, 0.22);
+  padding: clamp(0.62rem, 1.3vw, 0.82rem) clamp(0.72rem, 1.4vw, 0.95rem);
+  color: var(--about-paper);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 12px;
+  background: linear-gradient(135deg, rgba(24, 48, 33, 0.94), rgba(62, 101, 71, 0.82));
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.18);
 }
 
 .about-sofra-mark strong {
   font-family: var(--font-playfair), Georgia, serif;
-  font-size: clamp(1.65rem, 3.6vw, 3rem);
+  font-size: clamp(1.75rem, 3.6vw, 3rem);
   line-height: 0.92;
 }
 
 .about-sofra-mark span {
-  color: rgba(255, 250, 240, 0.85);
-  font-size: 0.78rem;
-  font-weight: 700;
+  color: rgba(255, 249, 235, 0.9);
+  font-size: clamp(0.66rem, 0.95vw, 0.8rem);
+  font-weight: 800;
   line-height: 1.18;
 }
 
-.about-sofra-kicker {
-  width: fit-content;
-  border: 1px solid rgba(29, 57, 39, 0.16);
-  border-radius: 999px;
-  padding: 0.5rem 0.86rem;
-  color: var(--about-green);
-  background: rgba(255, 250, 240, 0.68);
-  font-size: 0.74rem;
-  font-weight: 900;
-  letter-spacing: 0.08em;
-  line-height: 1;
-  text-transform: uppercase;
-  backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(4px);
-}
-
-.about-sofra h2 {
-  max-width: 9.8em;
-  margin: clamp(0.72rem, 1.8vw, 1.2rem) 0 clamp(0.72rem, 1.6vw, 1.05rem);
-  color: var(--about-green);
-  font-family: var(--font-playfair), Georgia, serif;
-  font-size: clamp(2.25rem, 5.4vw, 5.25rem);
-  font-weight: 900;
-  letter-spacing: 0 !important;
-  line-height: 0.95;
-  text-wrap: balance;
-}
-
-.about-sofra-lead {
-  max-width: 39rem;
-  margin: 0;
-  color: var(--about-ink);
-  font-size: clamp(1rem, 1.35vw, 1.22rem);
-  font-weight: 600;
-  line-height: 1.58;
-  text-wrap: pretty;
-}
-
-/* Rebuilt nested cards as distinct glass panels */
-.about-sofra-story {
-  display: grid;
-  gap: clamp(0.6rem, 1.5vw, 1rem);
-  margin-top: clamp(1.2rem, 2.4vw, 1.8rem);
-  border-top: none;
-  border-bottom: none;
-}
-
-.about-sofra-story p {
-  display: grid;
-  grid-template-columns: minmax(7.2rem, 0.24fr) minmax(0, 1fr);
-  gap: clamp(0.75rem, 1.6vw, 1.25rem);
-  align-items: center;
-  margin: 0;
-  padding: 1.1rem 1.4rem !important;
-  border: 1px solid rgba(29, 57, 39, 0.06) !important;
-  border-radius: 16px;
-  background: rgba(255, 255, 255, 0.35) !important;
-  backdrop-filter: blur(6px) !important;
-  -webkit-backdrop-filter: blur(6px) !important;
-  color: var(--about-muted);
-  font-size: clamp(0.88rem, 1.02vw, 0.98rem);
-  font-weight: 500;
-  line-height: 1.5;
-  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1) !important;
-  box-shadow: 0 4px 12px rgba(29, 57, 39, 0.01) !important;
-}
-
-.about-sofra-story p:hover {
-  background: rgba(255, 255, 255, 0.68) !important;
-  border-color: rgba(29, 57, 39, 0.16) !important;
-  transform: translateY(-2px);
-  box-shadow: 
-    0 12px 24px rgba(29, 57, 39, 0.04), 
-    inset 0 1px 1px rgba(255, 255, 255, 0.8) !important;
-}
-
-.about-sofra-story strong {
-  color: var(--about-green);
-  font-family: var(--font-playfair), Georgia, serif;
-  font-size: clamp(1.02rem, 1.45vw, 1.3rem);
-  line-height: 1;
-}
-
-.about-sofra-facts {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-  margin-top: clamp(0.85rem, 1.7vw, 1.2rem);
-}
-
-.about-sofra-facts span {
-  border: 1px solid rgba(29, 57, 39, 0.12);
-  border-radius: 999px;
-  padding: 0.45rem 0.68rem;
-  color: var(--about-green);
-  background: rgba(255, 250, 240, 0.58);
-  font-size: clamp(0.74rem, 0.9vw, 0.84rem);
-  font-weight: 800;
-  line-height: 1;
-  backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(4px);
-  transition: background 0.3s ease, border-color 0.3s ease;
-}
-
-.about-sofra-facts span:hover {
-  background: rgba(255, 250, 240, 0.82);
-  border-color: rgba(29, 57, 39, 0.24);
-}
-
-.about-sofra [data-reveal] {
-  transform: translate3d(0, 16px, 0);
-  transition:
-    opacity 760ms cubic-bezier(0.2, 0, 0, 1),
-    transform 760ms cubic-bezier(0.2, 0, 0, 1);
-}
-
-.about-sofra [data-reveal].is-visible {
-  transform: translate3d(0, 0, 0);
-}
-
-.about-sofra h2[data-reveal] {
-  transition-delay: 70ms;
-}
-
-.about-sofra-lead[data-reveal],
-.about-sofra-story p[data-reveal]:first-child {
-  transition-delay: 120ms;
-}
-
-.about-sofra-story p[data-reveal]:nth-child(2) {
-  transition-delay: 170ms;
-}
-
-.about-sofra-story p[data-reveal]:nth-child(3),
-.about-sofra-facts[data-reveal] {
-  transition-delay: 220ms;
-}
-
-@keyframes aboutSofraGlow {
-  from {
-    opacity: 0.58;
-    transform: scale(0.96);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1.04);
-  }
-}
-
-@keyframes aboutSofraSteam {
-  0% {
-    opacity: 0;
-    transform: translate3d(0, 42%, 0) scaleY(0.6);
-  }
-  28% {
-    opacity: 0.7;
-  }
-  100% {
-    opacity: 0;
-    transform: translate3d(16px, -38%, 0) scaleY(1.08);
-  }
-}
-
-@keyframes aboutSofraPlate {
-  from {
-    transform: translate3d(0, 0, 0) rotate(-1.4deg);
-  }
-  to {
-    transform: translate3d(0, -9px, 0) rotate(0.6deg);
-  }
-}
-
-@keyframes aboutSofraRoom {
-  from {
-    transform: translate3d(0, 0, 0) rotate(4deg);
-  }
-  to {
-    transform: translate3d(-8px, -7px, 0) rotate(1deg);
-  }
-}
-
-@media (max-width: 900px) {
-  .story-band {
-    padding-top: 0.85rem !important;
-  }
-
-  .about-sofra {
-    grid-template-columns: minmax(0, 1fr);
-    gap: 0.9rem;
-    width: calc(100% - 1rem);
-    padding: 0.85rem;
-    border-radius: 18px;
-  }
-
-  .about-sofra-visual {
-    min-height: clamp(150px, 40vw, 210px);
-  }
-
-  .about-sofra-table {
-    inset: 0 18% 0 0;
-    border-width: 5px;
-    border-radius: 16px;
-  }
-
-  .about-sofra-room {
-    right: 0;
-    bottom: 6%;
-    width: min(31%, 132px);
-    border-width: 4px;
-    border-radius: 999px 999px 10px 10px;
-  }
-
-  .about-sofra-mark {
-    left: 0.62rem;
-    bottom: 0.62rem;
-    max-width: 8.8rem;
-    border-radius: 11px;
-    padding: 0.5rem 0.6rem;
-  }
-
-  .about-sofra-mark strong {
-    font-size: clamp(1.32rem, 6vw, 1.8rem);
-  }
-
-  .about-sofra-mark span {
-    font-size: 0.66rem;
-  }
-
-  .about-sofra-kicker {
-    padding: 0.42rem 0.68rem;
-    font-size: 0.66rem;
-  }
-
-  .about-sofra h2 {
-    max-width: 10em;
-    margin: 0.62rem 0 0.56rem;
-    font-size: clamp(1.88rem, 8vw, 2.56rem);
-    line-height: 0.98;
-  }
-
-  .about-sofra-lead {
-    font-size: clamp(0.88rem, 3.5vw, 0.98rem);
-    line-height: 1.42;
-  }
-
-  .about-sofra-story {
-    margin-top: 0.72rem;
-  }
-
-  .about-sofra-story p {
-    grid-template-columns: minmax(4.9rem, 0.28fr) minmax(0, 1fr);
-    gap: 0.62rem;
-    padding: 0.8rem 1rem !important;
-    font-size: clamp(0.76rem, 3.1vw, 0.86rem);
-    line-height: 1.38;
-    border-radius: 12px;
-  }
-
-  .about-sofra-story strong {
-    font-size: clamp(0.9rem, 3.8vw, 1.06rem);
-  }
-
-  .about-sofra-facts {
-    gap: 0.38rem;
-    margin-top: 0.64rem;
-  }
-
-  .about-sofra-facts span {
-    padding: 0.36rem 0.5rem;
-    font-size: clamp(0.66rem, 2.8vw, 0.76rem);
-  }
-}
-
-@media (max-width: 430px) {
-  .about-sofra {
-    width: calc(100% - 0.72rem);
-    padding: 0.72rem;
-  }
-
-  .about-sofra-visual {
-    min-height: clamp(132px, 35vw, 168px);
-  }
-
-  .about-sofra h2 {
-    font-size: clamp(1.62rem, 7.25vw, 2rem);
-  }
-
-  .about-sofra-lead {
-    font-size: clamp(0.8rem, 3.18vw, 0.88rem);
-    line-height: 1.34;
-  }
-
-  .about-sofra-story p {
-    grid-template-columns: minmax(4.3rem, 0.26fr) minmax(0, 1fr);
-    gap: 0.5rem;
-    padding: 0.6rem 0.8rem !important;
-    font-size: clamp(0.7rem, 2.85vw, 0.79rem);
-    line-height: 1.25;
-    border-radius: 10px;
-  }
-
-  .about-sofra-story strong {
-    font-size: clamp(0.82rem, 3.4vw, 0.96rem);
-  }
-
-  .about-sofra-facts span {
-    font-size: clamp(0.62rem, 2.65vw, 0.7rem);
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .about-sofra::after,
-  .about-sofra-steam span,
-  .about-sofra-table,
-  .about-sofra-room {
-    animation: none !important;
-  }
-
-  .about-sofra:hover .about-sofra-table img,
-  .about-sofra:hover .about-sofra-room img,
-  .about-sofra-table img,
-  .about-sofra-room img {
-    transform: scale(1.035) !important;
-  }
-}
-
-/* ── About Section final polish: less template, more restaurant craft ── */
-.story-band {
-  padding-top: clamp(0.8rem, 2.8vw, 3rem) !important;
-  background:
-    linear-gradient(180deg, #ead6b5 0%, #f6eddc 22%, #efe3d0 100%) !important;
-}
-
-.about-sofra {
-  width: min(1160px, calc(100% - clamp(1rem, 5vw, 5rem)));
-  border-color: rgba(91, 72, 42, 0.12);
-  border-radius: clamp(14px, 1.6vw, 18px);
-  background:
-    radial-gradient(ellipse at 12% 0%, rgba(255, 255, 255, 0.78), transparent 36%),
-    radial-gradient(ellipse at 90% 20%, rgba(54, 88, 61, 0.1), transparent 38%),
-    linear-gradient(135deg, rgba(255, 250, 240, 0.98), rgba(244, 234, 216, 0.95));
-  box-shadow:
-    0 18px 42px rgba(54, 45, 34, 0.1),
-    inset 0 1px 0 rgba(255, 255, 255, 0.76);
-}
-
-.about-sofra::before {
-  background:
-    linear-gradient(90deg, rgba(54, 88, 61, 0.022) 1px, transparent 1px),
-    linear-gradient(180deg, rgba(54, 88, 61, 0.018) 1px, transparent 1px);
-  background-size: 148px 148px;
-  mask-image: linear-gradient(90deg, transparent 0%, #000 34%, #000 100%);
-}
-
-.about-sofra::after {
-  opacity: 0.72;
-}
-
-.about-sofra-visual {
-  min-height: clamp(330px, 34vw, 500px);
-}
-
-.about-sofra-table {
-  inset: 2% 6% 4% 0;
-  border-width: 7px;
-  border-color: rgba(255, 250, 240, 0.88);
-  border-radius: 18px;
-  transform: rotate(-0.6deg);
-  box-shadow:
-    0 22px 48px rgba(53, 41, 26, 0.16),
-    0 0 0 1px rgba(54, 88, 61, 0.1);
-}
-
-.about-sofra-room {
-  right: 1.5%;
-  bottom: 7%;
-  width: min(34%, 184px);
-  border-width: 5px;
-  border-color: rgba(255, 250, 240, 0.95);
-  border-radius: 16px;
-  transform: rotate(2deg);
-  box-shadow:
-    0 18px 40px rgba(53, 41, 26, 0.18),
-    0 0 0 1px rgba(54, 88, 61, 0.08);
-}
-
-.about-sofra-mark {
-  left: clamp(0.72rem, 1.8vw, 1.15rem);
-  bottom: clamp(0.86rem, 2.4vw, 1.55rem);
-  border: 1px solid rgba(255, 250, 240, 0.22);
-  border-radius: 10px;
-  background: rgba(36, 63, 43, 0.9);
-  box-shadow: 0 12px 28px rgba(36, 63, 43, 0.2);
-}
-
-.about-sofra-kicker {
-  border-radius: 10px;
-  border-color: rgba(54, 88, 61, 0.18);
-  background: rgba(255, 250, 240, 0.72);
-  letter-spacing: 0.1em;
-}
-
-.about-sofra h2 {
-  max-width: 9.4em;
-  font-size: clamp(2.18rem, 4.8vw, 4.72rem);
-  line-height: 0.98;
-}
-
-.about-sofra-lead {
-  max-width: 37rem;
-  color: rgba(31, 45, 37, 0.9);
-  font-size: clamp(0.98rem, 1.2vw, 1.12rem);
-  line-height: 1.52;
-}
-
-.about-sofra-story {
-  gap: clamp(0.56rem, 1vw, 0.78rem);
-  border: 0;
-}
-
-.about-sofra-story p {
-  display: block;
-  border: 0;
-  border-left: 2px solid rgba(54, 88, 61, 0.18);
-  padding: 0 0 0 clamp(0.75rem, 1.2vw, 1rem);
-  color: rgba(31, 45, 37, 0.66);
-  font-size: clamp(0.86rem, 0.98vw, 0.95rem);
-  line-height: 1.5;
-}
-
-.about-sofra-story strong {
-  display: block;
-  margin-bottom: 0.18rem;
-  font-size: clamp(1rem, 1.22vw, 1.14rem);
-}
-
-.about-sofra-facts {
-  gap: 0;
-  border-top: 1px solid rgba(54, 88, 61, 0.14);
-  padding-top: 0.72rem;
-}
-
-.about-sofra-facts span {
-  border: 0;
-  border-right: 1px solid rgba(54, 88, 61, 0.14);
-  border-radius: 0;
-  padding: 0.12rem 0.72rem;
-  background: transparent;
-}
-
-.about-sofra-facts span:first-child {
-  padding-left: 0;
-}
-
-.about-sofra-facts span:last-child {
-  border-right: 0;
-}
-
-@keyframes aboutSofraPlate {
-  from {
-    transform: translate3d(0, 0, 0) rotate(-0.6deg);
-  }
-  to {
-    transform: translate3d(0, -7px, 0) rotate(0.35deg);
-  }
-}
-
-@keyframes aboutSofraRoom {
-  from {
-    transform: translate3d(0, 0, 0) rotate(2deg);
-  }
-  to {
-    transform: translate3d(-7px, -6px, 0) rotate(0.4deg);
-  }
-}
-
-@media (max-width: 900px) {
-  .about-sofra {
-    width: calc(100% - 1rem);
-    padding: 0.72rem 0.72rem 0.82rem;
-    border-radius: 16px;
-  }
-
-  .about-sofra::before {
-    background-size: 118px 118px;
-  }
-
-  .about-sofra-visual {
-    min-height: clamp(128px, 34vw, 174px);
-  }
-
-  .about-sofra-table {
-    inset: 0 20% 0 0;
-    border-width: 4px;
-    border-radius: 12px;
-  }
-
-  .about-sofra-room {
-    bottom: 8%;
-    width: min(30%, 118px);
-    border-width: 4px;
-    border-radius: 12px;
-  }
-
-  .about-sofra-mark {
-    max-width: 8rem;
-    border-radius: 9px;
-    padding: 0.44rem 0.56rem;
-  }
-
-  .about-sofra-mark strong {
-    font-size: clamp(1.14rem, 5.2vw, 1.55rem);
-  }
-
-  .about-sofra-mark span {
-    font-size: 0.61rem;
-  }
-
-  .about-sofra h2 {
-    max-width: 9.2em;
-    font-size: clamp(1.56rem, 6.75vw, 2.05rem);
-    line-height: 1;
-  }
-
-  .about-sofra-lead {
-    font-size: clamp(0.78rem, 3.02vw, 0.86rem);
-    line-height: 1.34;
-  }
-
-  .about-sofra-story {
-    gap: 0.42rem;
-    margin-top: 0.62rem;
-  }
-
-  .about-sofra-story p {
-    padding-left: 0.56rem;
-    font-size: clamp(0.72rem, 2.82vw, 0.8rem);
-    line-height: 1.3;
-  }
-
-  .about-sofra-story strong {
-    margin-bottom: 0.1rem;
-    font-size: clamp(0.82rem, 3.2vw, 0.92rem);
-  }
-
-  .about-sofra-facts {
-    padding-top: 0.52rem;
-  }
-
-  .about-sofra-facts span {
-    padding: 0.08rem 0.5rem;
-    font-size: clamp(0.58rem, 2.35vw, 0.66rem);
-  }
-}
-
-@media (max-width: 430px) {
-  .about-sofra {
-    width: calc(100% - 0.7rem);
-    padding: 0.62rem;
-  }
-
-  .about-sofra-visual {
-    min-height: clamp(118px, 31vw, 148px);
-  }
-
-  .about-sofra h2 {
-    font-size: clamp(1.45rem, 6.55vw, 1.82rem);
-  }
-}
-
-/* Authored variant: less boxed, more like a house signature */
-.about-sofra.about-sofra-authored {
-  width: min(1188px, calc(100% - clamp(1rem, 5vw, 5.4rem)));
-  grid-template-columns: minmax(350px, 0.93fr) minmax(0, 1fr);
-  gap: clamp(1.1rem, 3.6vw, 3.9rem);
-  padding: clamp(0.62rem, 1.3vw, 0.95rem);
-  border: 1px solid rgba(255, 255, 255, 0.62);
-  border-radius: 14px;
-  background:
-    linear-gradient(135deg, rgba(255, 255, 255, 0.46), rgba(255, 248, 234, 0.18)),
-    rgba(255, 249, 236, 0.54);
-  backdrop-filter: blur(26px) saturate(132%);
-  -webkit-backdrop-filter: blur(26px) saturate(132%);
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.82),
-    inset 0 -1px 0 rgba(37, 65, 47, 0.1);
-}
-
-.about-sofra.about-sofra-authored::before {
-  background:
-    linear-gradient(118deg, rgba(255, 255, 255, 0.46), transparent 34%),
-    linear-gradient(90deg, transparent 0 36%, rgba(37, 65, 47, 0.08) 36% 36.1%, transparent 36.1%),
-    radial-gradient(ellipse at 16% 84%, rgba(156, 119, 49, 0.17), transparent 42%);
-  mask-image: none;
-  opacity: 1;
-}
-
-.about-sofra.about-sofra-authored .about-sofra-visual {
-  height: clamp(420px, 42vw, 590px);
-  min-height: clamp(420px, 42vw, 590px);
-}
-
-.about-sofra.about-sofra-authored .about-sofra-table {
-  inset: 0 2% 0 0;
-  border: 0;
-  border-radius: 12px;
-  clip-path: polygon(0 0, 94% 0, 100% 7%, 100% 100%, 6% 100%, 0 93%);
-  box-shadow: none;
-}
-
-.about-sofra.about-sofra-authored .about-sofra-room {
-  right: -0.15rem;
-  bottom: 8%;
-  width: min(31%, 178px);
-  border: 0;
-  border-radius: 10px;
-  box-shadow: none;
-}
-
-.about-sofra.about-sofra-authored .about-sofra-table img,
-.about-sofra.about-sofra-authored .about-sofra-room img {
-  filter: saturate(1.04) contrast(1.05) brightness(0.98);
-}
-
-.about-sofra.about-sofra-authored .about-sofra-copy {
-  max-width: 43rem;
-  border: 0;
-  border-radius: 0;
-  padding: clamp(1.1rem, 2.4vw, 2rem) clamp(0.4rem, 1vw, 0.8rem);
-  background: transparent;
-  box-shadow: none;
-  backdrop-filter: none;
-  -webkit-backdrop-filter: none;
-}
-
-.about-sofra.about-sofra-authored .about-sofra-kicker {
-  color: rgba(34, 62, 44, 0.66);
-  font-size: clamp(0.68rem, 0.78vw, 0.74rem);
-}
-
-.about-sofra.about-sofra-authored h2 {
-  max-width: 8.55em;
-  font-size: clamp(2.55rem, 5vw, 5.05rem);
-  line-height: 0.94;
-}
-
-.about-sofra.about-sofra-authored .about-sofra-lead {
-  max-width: 35.5rem;
-  font-size: clamp(1.02rem, 1.2vw, 1.16rem);
-  line-height: 1.56;
-}
-
-.about-sofra.about-sofra-authored .about-sofra-ritual {
-  position: relative;
-  max-width: 34rem;
-  margin: clamp(0.85rem, 1.7vw, 1.15rem) 0 0;
-  padding-left: clamp(1rem, 1.6vw, 1.25rem);
-  color: rgba(34, 62, 44, 0.72);
-  font-family: var(--font-playfair), Georgia, serif;
-  font-size: clamp(1.06rem, 1.35vw, 1.28rem);
-  font-weight: 700;
-  line-height: 1.32;
-  text-wrap: pretty;
-}
-
-.about-sofra.about-sofra-authored .about-sofra-ritual::before {
-  position: absolute;
-  inset: 0 auto 0 0;
-  width: 2px;
-  border-radius: 999px;
-  background: linear-gradient(180deg, rgba(143, 108, 42, 0.16), rgba(143, 108, 42, 0.72), rgba(143, 108, 42, 0.16));
-  content: "";
-}
-
-.about-sofra.about-sofra-authored .about-sofra-story {
-  grid-template-columns: minmax(0, 1fr) !important;
-  gap: 0;
-  margin-top: clamp(1.25rem, 2.5vw, 1.8rem);
-  border-block: 1px solid rgba(34, 62, 44, 0.14);
-}
-
-.about-sofra.about-sofra-authored .about-sofra-story article {
-  display: grid;
-  grid-template-columns: minmax(7.2rem, 0.28fr) minmax(9rem, 0.24fr) minmax(0, 1fr);
-  gap: clamp(0.75rem, 1.8vw, 1.35rem);
-  align-items: baseline;
-  border: 0 !important;
-  border-radius: 0 !important;
-  padding: clamp(0.82rem, 1.55vw, 1.08rem) 0;
-  background: transparent !important;
-  box-shadow: none !important;
-  backdrop-filter: none !important;
-  -webkit-backdrop-filter: none !important;
-}
-
-.about-sofra.about-sofra-authored .about-sofra-story article + article {
-  border-top: 1px solid rgba(34, 62, 44, 0.1) !important;
-}
-
-.about-sofra.about-sofra-authored .about-sofra-story article span {
-  margin: 0;
-  color: rgba(143, 108, 42, 0.82);
-  font-size: clamp(0.68rem, 0.86vw, 0.76rem);
-  letter-spacing: 0.04em;
-}
-
-.about-sofra.about-sofra-authored .about-sofra-story article strong {
-  font-size: clamp(1.08rem, 1.42vw, 1.32rem);
-}
-
-.about-sofra.about-sofra-authored .about-sofra-story article p {
-  margin: 0;
-  color: rgba(27, 43, 32, 0.7);
-  font-size: clamp(0.88rem, 1vw, 0.98rem);
-  line-height: 1.5;
-}
-
-@media (max-width: 900px) {
-  .about-sofra.about-sofra-authored {
-    width: calc(100% - 0.86rem);
-    grid-template-columns: minmax(0, 1fr);
-    gap: 0.7rem;
-    padding: 0.44rem;
-  }
-
-  .about-sofra.about-sofra-authored .about-sofra-visual {
-    height: clamp(214px, 57vw, 328px);
-    min-height: clamp(214px, 57vw, 328px);
-  }
-
-  .about-sofra.about-sofra-authored .about-sofra-copy {
-    border-radius: 13px;
-    padding: clamp(1rem, 4vw, 1.3rem);
-    background:
-      linear-gradient(180deg, rgba(255, 252, 244, 0.74), rgba(255, 248, 234, 0.44));
-    backdrop-filter: blur(16px) saturate(112%);
-    -webkit-backdrop-filter: blur(16px) saturate(112%);
-  }
-
-  .about-sofra.about-sofra-authored h2 {
-    max-width: 9.3em;
-    font-size: clamp(1.9rem, 8.4vw, 2.78rem);
-    line-height: 0.98;
-  }
-
-  .about-sofra.about-sofra-authored .about-sofra-story article {
-    grid-template-columns: minmax(4.9rem, 0.3fr) minmax(0, 1fr);
-    gap: 0.16rem 0.68rem;
-    padding: 0.72rem 0;
-  }
-
-  .about-sofra.about-sofra-authored .about-sofra-story article span {
-    grid-row: span 2;
-  }
-}
-
-/* ── About Section editorial finish: seamless, calmer, less boxed-in ── */
-.story-band {
-  padding-top: clamp(0.4rem, 2vw, 2.2rem) !important;
-  background:
-    radial-gradient(ellipse at 50% 0%, rgba(255, 250, 240, 0.5), transparent 44%),
-    linear-gradient(180deg, #ead6b5 0%, #f4e8d0 24%, #efe3d0 100%) !important;
-}
-
-.about-sofra {
-  width: min(1180px, calc(100% - clamp(0.9rem, 4.5vw, 4.5rem)));
-  grid-template-columns: minmax(330px, 0.86fr) minmax(0, 1fr);
-  gap: clamp(1.2rem, 4vw, 4.4rem);
-  padding: clamp(0.7rem, 2vw, 1.3rem) clamp(0.7rem, 2vw, 1.4rem);
-  border: 0;
-  border-radius: 0;
-  background: transparent;
-  box-shadow: none;
-}
-
-.about-sofra::before {
-  opacity: 0.24;
-  mask-image: linear-gradient(90deg, transparent 0%, #000 46%, transparent 100%);
-}
-
-.about-sofra::after {
-  display: none;
-}
-
-.about-sofra-visual {
-  min-height: clamp(360px, 37vw, 540px);
-}
-
-.about-sofra-table {
-  inset: 0 3% 0 0;
-  border-width: 8px;
-  border-radius: 22px;
-  box-shadow:
-    0 26px 58px rgba(55, 42, 24, 0.18),
-    0 0 0 1px rgba(255, 250, 240, 0.54);
-}
-
-.about-sofra-room {
-  right: 0;
-  bottom: 8%;
-  width: min(31%, 176px);
-  border-radius: 14px;
-  box-shadow:
-    0 18px 38px rgba(55, 42, 24, 0.2),
-    0 0 0 1px rgba(255, 250, 240, 0.58);
-}
-
-.about-sofra-mark {
-  left: clamp(0.9rem, 2vw, 1.35rem);
-  bottom: clamp(1rem, 2.5vw, 1.7rem);
-  border-radius: 12px;
-  background:
-    linear-gradient(135deg, rgba(36, 63, 43, 0.95), rgba(54, 88, 61, 0.88));
-}
-
 .about-sofra-copy {
   align-self: center;
-  max-width: 43rem;
-  border-left: 1px solid rgba(54, 88, 61, 0.16);
-  padding-left: clamp(1.1rem, 2.2vw, 1.8rem);
-}
-
-.about-sofra-kicker {
-  border: 0;
-  padding: 0;
-  background: transparent;
-  color: rgba(36, 63, 43, 0.72);
-}
-
-.about-sofra h2 {
-  max-width: 8.8em;
-  margin-top: 0.55rem;
-  font-size: clamp(2.25rem, 4.65vw, 4.55rem);
-  line-height: 0.97;
-}
-
-.about-sofra-lead {
-  max-width: 34rem;
-  color: rgba(31, 45, 37, 0.88);
-  font-size: clamp(0.98rem, 1.14vw, 1.08rem);
-}
-
-.about-sofra-story {
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: clamp(0.8rem, 1.5vw, 1.15rem);
-  margin-top: clamp(1rem, 2vw, 1.35rem);
-}
-
-.about-sofra-story p {
-  border-left: 0;
-  border-top: 1px solid rgba(54, 88, 61, 0.16);
-  padding: 0.62rem 0 0;
-}
-
-.about-sofra-facts {
-  border-top-color: rgba(54, 88, 61, 0.12);
-}
-
-@media (max-width: 900px) {
-  .about-sofra {
-    grid-template-columns: minmax(0, 1fr);
-    width: calc(100% - 0.95rem);
-    gap: 0.65rem;
-    padding: 0;
-  }
-
-  .about-sofra::before {
-    opacity: 0.18;
-  }
-
-  .about-sofra-visual {
-    min-height: clamp(158px, 41vw, 214px);
-  }
-
-  .about-sofra-table {
-    inset: 0 17% 0 0;
-    border-width: 5px;
-    border-radius: 16px;
-  }
-
-  .about-sofra-room {
-    right: 0.2rem;
-    bottom: 7%;
-    width: min(30%, 126px);
-    border-radius: 12px;
-  }
-
-  .about-sofra-mark {
-    left: 0.62rem;
-    bottom: 0.62rem;
-  }
-
-  .about-sofra-copy {
-    max-width: none;
-    border-left: 0;
-    border-radius: 15px;
-    padding: 0.86rem 0.78rem 0.72rem;
-    background:
-      linear-gradient(180deg, rgba(255, 250, 240, 0.62), rgba(255, 250, 240, 0.28));
-    box-shadow:
-      inset 0 1px 0 rgba(255, 255, 255, 0.52),
-      0 14px 34px rgba(54, 45, 34, 0.06);
-  }
-
-  .about-sofra-kicker {
-    font-size: 0.62rem;
-  }
-
-  .about-sofra h2 {
-    max-width: 8.7em;
-    margin-top: 0.48rem;
-    font-size: clamp(1.58rem, 6.9vw, 2.08rem);
-  }
-
-  .about-sofra-lead {
-    font-size: clamp(0.8rem, 3.1vw, 0.88rem);
-  }
-
-  .about-sofra-story {
-    grid-template-columns: minmax(0, 1fr);
-    gap: 0.42rem;
-    margin-top: 0.62rem;
-  }
-
-  .about-sofra-story p {
-    border-top: 0;
-    border-left: 2px solid rgba(54, 88, 61, 0.16);
-    padding: 0 0 0 0.58rem;
-  }
-}
-
-@media (max-width: 430px) {
-  .about-sofra {
-    width: calc(100% - 0.7rem);
-  }
-
-  .about-sofra-visual {
-    min-height: clamp(144px, 38vw, 178px);
-  }
-
-  .about-sofra-copy {
-    padding: 0.78rem 0.68rem 0.66rem;
-  }
-
-  .about-sofra h2 {
-    font-size: clamp(1.42rem, 6.4vw, 1.82rem);
-  }
-}
-
-/* ── About Section: liquid glass restaurant finish ── */
-.story-band {
-  padding: clamp(1.25rem, 4vw, 4rem) 0 clamp(3rem, 8vw, 7rem) !important;
-  background:
-    linear-gradient(180deg, rgba(232, 206, 164, 0.98) 0%, rgba(245, 233, 211, 0.94) 34%, rgba(238, 226, 207, 1) 100%) !important;
-}
-
-.about-sofra-blobs {
-  display: none;
-}
-
-.about-sofra {
-  --about-glass: rgba(255, 250, 238, 0.66);
-  --about-glass-strong: rgba(255, 252, 244, 0.84);
-  --about-green: #213f2d;
-  --about-green-soft: #3d6648;
-  --about-ink: #1b2b20;
-  --about-body: rgba(27, 43, 32, 0.78);
-  --about-gold: #9a7a3a;
-  width: min(1168px, calc(100% - clamp(1rem, 5vw, 5.5rem)));
-  grid-template-columns: minmax(340px, 0.9fr) minmax(0, 1fr);
-  gap: clamp(1.25rem, 4vw, 4.25rem);
-  align-items: stretch;
-  padding: clamp(0.8rem, 1.8vw, 1.15rem);
-  border: 1px solid rgba(255, 255, 255, 0.52);
-  border-radius: 18px;
-  background:
-    linear-gradient(135deg, rgba(255, 255, 255, 0.42), rgba(255, 250, 238, 0.18)),
-    var(--about-glass);
-  backdrop-filter: blur(26px) saturate(132%);
-  -webkit-backdrop-filter: blur(26px) saturate(132%);
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.78),
-    inset 0 -1px 0 rgba(61, 102, 72, 0.08);
-}
-
-.about-sofra::before {
-  background:
-    linear-gradient(120deg, rgba(255, 255, 255, 0.44), transparent 36%),
-    radial-gradient(ellipse at 78% 18%, rgba(61, 102, 72, 0.12), transparent 42%),
-    radial-gradient(ellipse at 12% 86%, rgba(154, 122, 58, 0.16), transparent 48%);
-  mask-image: none;
-  opacity: 1;
-}
-
-.about-sofra-steam {
-  mix-blend-mode: soft-light;
-}
-
-.about-sofra-visual {
-  height: 100%;
-  min-height: clamp(620px, 68vw, 864px);
-  border-radius: 14px;
-}
-
-.about-sofra-table,
-.about-sofra-room {
-  border: 0;
-  background: #213f2d;
-  box-shadow: none;
-}
-
-.about-sofra-table {
-  inset: 0 5% 0 0;
-  border-radius: 16px;
-  transform: rotate(-0.45deg);
-}
-
-.about-sofra-room {
-  right: 0;
-  bottom: 7.5%;
-  width: min(33%, 190px);
-  border-radius: 14px;
-  transform: rotate(1.3deg);
-}
-
-.about-sofra-table::before,
-.about-sofra-room::before {
-  position: absolute;
-  inset: 6px;
-  z-index: 2;
-  border: 1px solid rgba(255, 252, 244, 0.68);
-  border-radius: inherit;
-  content: "";
-  pointer-events: none;
-}
-
-.about-sofra-table::after,
-.about-sofra-room::after {
-  background:
-    linear-gradient(180deg, rgba(33, 63, 45, 0), rgba(33, 63, 45, 0.18)),
-    linear-gradient(118deg, rgba(255, 252, 244, 0.22), transparent 44%);
-}
-
-.about-sofra-mark {
-  left: clamp(0.8rem, 1.8vw, 1.25rem);
-  bottom: clamp(0.8rem, 2.2vw, 1.45rem);
-  max-width: 12.2rem;
-  border: 1px solid rgba(255, 255, 255, 0.18);
-  border-radius: 12px;
-  padding: clamp(0.62rem, 1.4vw, 0.86rem) clamp(0.68rem, 1.5vw, 0.95rem);
-  background:
-    linear-gradient(135deg, rgba(24, 48, 33, 0.92), rgba(61, 102, 72, 0.78));
-  backdrop-filter: blur(18px) saturate(132%);
-  -webkit-backdrop-filter: blur(18px) saturate(132%);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.16);
-}
-
-.about-sofra-mark strong {
-  font-size: clamp(1.7rem, 3.7vw, 3.15rem);
-  letter-spacing: 0;
-}
-
-.about-sofra-mark span {
-  color: rgba(255, 252, 244, 0.9);
-  font-size: clamp(0.68rem, 1vw, 0.82rem);
-}
-
-.about-sofra-copy {
-  align-self: center;
-  max-width: 42.5rem;
-  border: 1px solid rgba(255, 255, 255, 0.44);
-  border-radius: 16px;
-  padding: clamp(1.15rem, 2.8vw, 2.3rem);
-  background:
-    linear-gradient(180deg, var(--about-glass-strong), rgba(255, 250, 238, 0.52));
-  backdrop-filter: blur(18px) saturate(118%);
-  -webkit-backdrop-filter: blur(18px) saturate(118%);
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.72),
-    inset 0 -1px 0 rgba(33, 63, 45, 0.06);
+  max-width: 42rem;
+  padding: clamp(1.1rem, 2.6vw, 2rem) clamp(0.2rem, 0.8vw, 0.7rem);
 }
 
 .about-sofra-kicker {
   display: inline-flex;
   align-items: center;
-  gap: 0.5rem;
-  border: 0;
-  padding: 0;
-  background: transparent;
-  color: rgba(33, 63, 45, 0.74);
-  font-size: clamp(0.7rem, 0.9vw, 0.78rem);
+  gap: 0.55rem;
+  color: rgba(32, 63, 44, 0.7);
+  font-size: clamp(0.68rem, 0.9vw, 0.78rem);
+  font-weight: 900;
   letter-spacing: 0.08em;
+  line-height: 1;
+  text-transform: uppercase;
 }
 
 .about-sofra-kicker::before {
-  width: 2rem;
+  width: 2.2rem;
   height: 1px;
-  background: rgba(154, 122, 58, 0.62);
+  background: rgba(154, 116, 56, 0.64);
   content: "";
 }
 
 .about-sofra h2 {
-  max-width: 9.1em;
-  margin: clamp(0.52rem, 1.4vw, 0.9rem) 0 clamp(0.72rem, 1.8vw, 1.05rem);
+  max-width: 8.8em;
+  margin: clamp(0.55rem, 1.3vw, 0.9rem) 0 clamp(0.72rem, 1.8vw, 1.05rem);
   color: var(--about-green);
-  font-size: clamp(2.35rem, 4.7vw, 4.7rem);
-  line-height: 0.98;
+  font-family: var(--font-playfair), Georgia, serif;
+  font-size: clamp(2.45rem, 4.7vw, 4.75rem);
+  font-weight: 900;
   letter-spacing: 0 !important;
+  line-height: 0.97;
+  text-wrap: balance;
 }
 
 .about-sofra-lead {
-  max-width: 38rem;
-  color: var(--about-body);
+  max-width: 37rem;
+  margin: 0;
+  color: rgba(23, 37, 27, 0.82);
   font-size: clamp(1rem, 1.18vw, 1.12rem);
-  line-height: 1.58;
+  font-weight: 650;
+  line-height: 1.56;
+  text-wrap: pretty;
+}
+
+.about-sofra-ritual {
+  position: relative;
+  max-width: 35rem;
+  margin: clamp(0.9rem, 1.7vw, 1.18rem) 0 0;
+  padding-left: clamp(1rem, 1.6vw, 1.25rem);
+  color: rgba(32, 63, 44, 0.72);
+  font-family: var(--font-playfair), Georgia, serif;
+  font-size: clamp(1.05rem, 1.34vw, 1.28rem);
+  font-weight: 760;
+  line-height: 1.34;
+  text-wrap: pretty;
+}
+
+.about-sofra-ritual::before {
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 2px;
+  border-radius: 999px;
+  background: linear-gradient(180deg, rgba(154, 116, 56, 0.14), rgba(154, 116, 56, 0.72), rgba(154, 116, 56, 0.14));
+  content: "";
 }
 
 .about-sofra-story {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: clamp(0.62rem, 1.3vw, 0.95rem);
-  margin-top: clamp(1.15rem, 2.3vw, 1.65rem);
+  gap: 0;
+  margin-top: clamp(1.25rem, 2.4vw, 1.75rem);
+  border-block: 1px solid var(--about-line);
 }
 
 .about-sofra-story article {
-  min-width: 0;
-  border: 1px solid rgba(33, 63, 45, 0.1);
-  border-radius: 12px;
-  padding: clamp(0.78rem, 1.4vw, 1rem);
+  display: grid;
+  grid-template-columns: minmax(7rem, 0.28fr) minmax(8.6rem, 0.24fr) minmax(0, 1fr);
+  gap: clamp(0.75rem, 1.8vw, 1.35rem);
+  align-items: baseline;
+  padding: clamp(0.85rem, 1.55vw, 1.08rem) 0;
   color: var(--about-body);
-  background: rgba(255, 255, 255, 0.28);
-  backdrop-filter: blur(12px) saturate(112%);
-  -webkit-backdrop-filter: blur(12px) saturate(112%);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.54);
+}
+
+.about-sofra-story article + article {
+  border-top: 1px solid rgba(32, 63, 44, 0.1);
 }
 
 .about-sofra-story article span {
-  display: block;
-  margin-bottom: 0.45rem;
   color: var(--about-gold);
-  font-size: clamp(0.64rem, 0.82vw, 0.72rem);
-  font-weight: 850;
-  letter-spacing: 0.02em;
+  font-size: clamp(0.68rem, 0.86vw, 0.76rem);
+  font-weight: 900;
+  letter-spacing: 0.03em;
+  line-height: 1.15;
 }
 
 .about-sofra-story article strong {
-  display: block;
   color: var(--about-green);
   font-family: var(--font-playfair), Georgia, serif;
-  font-size: clamp(1.08rem, 1.36vw, 1.28rem);
-  line-height: 1.02;
+  font-size: clamp(1.08rem, 1.42vw, 1.32rem);
+  line-height: 1.04;
 }
 
 .about-sofra-story article p {
-  display: block !important;
-  grid-template-columns: none !important;
-  margin: 0.38rem 0 0;
-  border: 0 !important;
-  border-radius: 0 !important;
-  padding: 0 !important;
-  color: rgba(27, 43, 32, 0.72);
-  background: transparent !important;
-  box-shadow: none !important;
-  font-size: clamp(0.86rem, 0.96vw, 0.94rem);
-  line-height: 1.48;
+  margin: 0;
+  color: rgba(23, 37, 27, 0.7);
+  font-size: clamp(0.88rem, 1vw, 0.98rem);
+  line-height: 1.5;
   text-wrap: pretty;
-  backdrop-filter: none !important;
-  -webkit-backdrop-filter: none !important;
 }
 
 .about-sofra-facts {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.45rem;
-  margin-top: clamp(1rem, 2vw, 1.35rem);
-  border-top: 1px solid rgba(33, 63, 45, 0.12);
-  padding-top: 0.82rem;
+  gap: 0.55rem;
+  margin-top: clamp(1rem, 2vw, 1.3rem);
 }
 
 .about-sofra-facts span {
-  border: 1px solid rgba(33, 63, 45, 0.12);
+  min-height: 2rem;
+  border: 1px solid rgba(32, 63, 44, 0.14);
   border-radius: 999px;
-  padding: 0.42rem 0.62rem;
+  padding: 0.46rem 0.78rem;
   color: var(--about-green);
-  background: rgba(255, 252, 244, 0.44);
-  font-size: clamp(0.68rem, 0.84vw, 0.78rem);
+  background: rgba(255, 249, 235, 0.46);
+  font-size: clamp(0.72rem, 0.9vw, 0.82rem);
   font-weight: 850;
   line-height: 1;
 }
 
-.about-sofra-facts span:first-child,
-.about-sofra-facts span:last-child {
-  padding-left: 0.62rem;
-  border-right: 1px solid rgba(33, 63, 45, 0.12);
-}
-
 .about-sofra-story article[data-reveal]:nth-child(1) {
-  transition-delay: 130ms;
+  transition-delay: 90ms;
 }
 
 .about-sofra-story article[data-reveal]:nth-child(2) {
-  transition-delay: 180ms;
+  transition-delay: 140ms;
 }
 
 .about-sofra-story article[data-reveal]:nth-child(3),
 .about-sofra-facts[data-reveal] {
-  transition-delay: 230ms;
+  transition-delay: 190ms;
 }
 
 @media (max-width: 900px) {
   .story-band {
-    padding: 0.65rem 0 calc(4.8rem + env(safe-area-inset-bottom)) !important;
+    padding: 0.78rem 0 calc(4.8rem + env(safe-area-inset-bottom)) !important;
   }
 
   .about-sofra {
-    width: min(calc(100% - 0.82rem), 430px);
+    width: min(calc(100% - 0.9rem), 430px);
     grid-template-columns: minmax(0, 1fr);
-    gap: 0.58rem;
+    gap: 0.72rem;
     padding: 0.42rem;
-    border-color: rgba(255, 255, 255, 0.6);
     border-radius: 18px;
     box-shadow:
-      0 18px 42px rgba(86, 65, 38, 0.1),
-      inset 0 1px 0 rgba(255, 255, 255, 0.74);
+      0 16px 38px rgba(75, 56, 32, 0.1),
+      inset 0 1px 0 rgba(255, 255, 255, 0.78);
   }
 
   .about-sofra-visual {
-    min-height: clamp(196px, 51vw, 280px);
+    min-height: clamp(214px, 57vw, 292px);
   }
 
   .about-sofra-table {
-    inset: 0 10% 0 0;
+    inset: 0 9% 0 0;
     border-radius: 14px;
   }
 
   .about-sofra-room {
-    right: 0.18rem;
+    right: 0.2rem;
     bottom: 9%;
-    width: min(29%, 118px);
+    width: min(30%, 116px);
+    border-width: 4px;
     border-radius: 12px;
   }
 
-  .about-sofra-table::before,
-  .about-sofra-room::before {
-    inset: 4px;
-  }
-
   .about-sofra-mark {
-    left: 0.56rem;
-    bottom: 0.56rem;
-    max-width: 8.5rem;
+    left: 0.58rem;
+    bottom: 0.58rem;
+    max-width: 8.8rem;
     padding: 0.46rem 0.58rem;
   }
 
   .about-sofra-mark strong {
-    font-size: clamp(1.26rem, 6.2vw, 1.82rem);
+    font-size: clamp(1.32rem, 6.1vw, 1.82rem);
   }
 
   .about-sofra-mark span {
@@ -21244,14 +20051,14 @@ h2 span,
   .about-sofra-copy {
     max-width: none;
     border-radius: 15px;
-    padding: clamp(0.9rem, 3.7vw, 1.18rem);
-    background:
-      linear-gradient(180deg, rgba(255, 252, 244, 0.84), rgba(255, 250, 238, 0.42));
+    padding: clamp(0.98rem, 4vw, 1.28rem) clamp(0.82rem, 3.4vw, 1.05rem) clamp(0.86rem, 3.3vw, 1.1rem);
+    background: linear-gradient(180deg, rgba(255, 252, 244, 0.86), rgba(255, 249, 235, 0.48));
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.58);
   }
 
   .about-sofra-kicker {
     gap: 0.44rem;
-    font-size: 0.62rem;
+    font-size: 0.66rem;
   }
 
   .about-sofra-kicker::before {
@@ -21259,102 +20066,82 @@ h2 span,
   }
 
   .about-sofra h2 {
-    max-width: 8.8em;
-    margin: 0.44rem 0 0.55rem;
-    font-size: clamp(1.72rem, 7.8vw, 2.42rem);
-    line-height: 0.98;
+    max-width: 100%;
+    margin: 0.48rem 0 0.58rem;
+    font-size: clamp(1.76rem, 7.55vw, 2.34rem);
+    line-height: 1;
   }
 
   .about-sofra-lead {
     max-width: 29rem;
-    font-size: clamp(0.86rem, 3.45vw, 0.96rem);
-    line-height: 1.42;
+    font-size: clamp(0.9rem, 3.55vw, 1rem);
+    line-height: 1.44;
   }
 
   .about-sofra-ritual {
-    margin-top: 0.68rem !important;
-    padding-left: 0.72rem !important;
-    font-size: clamp(0.98rem, 4vw, 1.14rem) !important;
-    line-height: 1.28 !important;
+    margin-top: 0.72rem;
+    padding-left: 0.78rem;
+    font-size: clamp(1rem, 4.05vw, 1.16rem);
+    line-height: 1.3;
   }
 
   .about-sofra-story {
-    grid-template-columns: minmax(0, 1fr);
-    gap: 0.42rem;
-    margin-top: 0.72rem;
+    margin-top: 0.92rem;
   }
 
   .about-sofra-story article {
-    display: grid;
-    grid-template-columns: minmax(4.45rem, 0.28fr) minmax(0, 1fr);
-    column-gap: 0.62rem;
-    align-items: start;
-    border-color: rgba(33, 63, 45, 0.09);
-    border-radius: 10px;
-    padding: 0.58rem 0.62rem;
-    background: rgba(255, 252, 244, 0.34);
+    grid-template-columns: minmax(4.65rem, 0.28fr) minmax(0, 1fr);
+    gap: 0.16rem 0.68rem;
+    padding: 0.78rem 0;
   }
 
   .about-sofra-story article span {
     grid-row: span 2;
-    margin: 0;
-    color: rgba(154, 122, 58, 0.88);
-    font-size: clamp(0.58rem, 2.35vw, 0.66rem);
-    line-height: 1.22;
+    font-size: clamp(0.6rem, 2.45vw, 0.68rem);
   }
 
   .about-sofra-story article strong {
-    font-size: clamp(0.96rem, 3.65vw, 1.08rem);
+    font-size: clamp(1rem, 3.8vw, 1.12rem);
   }
 
   .about-sofra-story article p {
-    margin-top: 0.16rem;
-    font-size: clamp(0.75rem, 3vw, 0.84rem);
-    line-height: 1.34;
+    font-size: clamp(0.78rem, 3.08vw, 0.86rem);
+    line-height: 1.36;
   }
 
   .about-sofra-facts {
-    gap: 0.32rem;
-    margin-top: 0.72rem;
-    padding-top: 0.58rem;
+    gap: 0.36rem;
+    margin-top: 0.8rem;
   }
 
   .about-sofra-facts span {
-    padding: 0.34rem 0.5rem;
-    font-size: clamp(0.61rem, 2.45vw, 0.7rem);
+    min-height: 1.76rem;
+    padding: 0.38rem 0.56rem;
+    font-size: clamp(0.64rem, 2.55vw, 0.72rem);
   }
 }
 
 @media (max-width: 430px) {
   .about-sofra {
-    width: min(calc(100% - 0.6rem), 430px);
+    width: min(calc(100% - 0.64rem), 430px);
     padding: 0.38rem;
   }
 
   .about-sofra-visual {
-    min-height: clamp(186px, 54vw, 226px);
-  }
-
-  .about-sofra-table {
-    right: 8%;
-  }
-
-  .about-sofra-room {
-    width: min(30%, 104px);
+    min-height: clamp(194px, 55vw, 232px);
   }
 
   .about-sofra-copy {
-    padding: 0.82rem 0.68rem;
+    padding: 0.9rem 0.76rem 0.92rem;
   }
 
   .about-sofra h2 {
-    font-size: clamp(1.6rem, 7.45vw, 2.02rem);
+    font-size: clamp(1.64rem, 7.2vw, 2rem);
   }
 
   .about-sofra-story article {
-    grid-template-columns: minmax(4.05rem, 0.28fr) minmax(0, 1fr);
-    column-gap: 0.5rem;
-    padding: 0.54rem 0.56rem;
+    grid-template-columns: minmax(4.15rem, 0.28fr) minmax(0, 1fr);
+    column-gap: 0.54rem;
   }
 
   .about-sofra-facts span {
@@ -21364,26 +20151,12 @@ h2 span,
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .about-sofra-story article {
+  .about-sofra-table img,
+  .about-sofra-room img,
+  .about-sofra-story article,
+  .about-sofra-facts {
     transition-delay: 0ms !important;
-  }
-}
-
-.about-sofra.about-sofra-authored .about-sofra-visual {
-  height: 100%;
-  min-height: clamp(620px, 68vw, 864px);
-}
-
-@media (max-width: 900px) {
-  .about-sofra.about-sofra-authored .about-sofra-visual {
-    height: auto;
-    min-height: clamp(196px, 51vw, 280px);
-  }
-}
-
-@media (max-width: 430px) {
-  .about-sofra.about-sofra-authored .about-sofra-visual {
-    min-height: clamp(186px, 54vw, 226px);
+    transition-duration: 0ms !important;
   }
 }
 
