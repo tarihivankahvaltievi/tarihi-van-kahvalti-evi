@@ -20720,6 +20720,431 @@ body,
   background: rgba(255, 249, 237, 0.72) !important;
 }
 
+/* 21st.dev-inspired review stack, final pass */
+.red-reviews {
+  position: relative !important;
+  isolation: isolate !important;
+  margin: clamp(1rem, 2.5vw, 2rem) clamp(0.75rem, 2.4vw, 2rem) 0 !important;
+  padding: clamp(3rem, 6vw, 5.5rem) 0 clamp(3rem, 6vw, 5rem) !important;
+  overflow: hidden !important;
+  border: 1px solid rgba(36, 63, 43, 0.14) !important;
+  border-radius: clamp(18px, 2.4vw, 30px) !important;
+  background:
+    radial-gradient(ellipse at 50% 8%, rgba(255, 255, 255, 0.68), transparent 44%),
+    linear-gradient(180deg, rgba(255, 249, 237, 0.96), rgba(248, 239, 224, 0.92)) !important;
+  box-shadow:
+    0 26px 76px rgba(64, 48, 28, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.76) !important;
+}
+
+.red-reviews::before,
+.red-reviews::after {
+  display: none !important;
+}
+
+.red-reviews h2 {
+  max-width: min(790px, calc(100% - 2rem)) !important;
+  margin-inline: auto !important;
+  color: var(--heritage-ink) !important;
+  font-family: var(--font-playfair), Georgia, serif !important;
+  font-size: clamp(2.45rem, 5.8vw, 5.25rem) !important;
+  font-weight: 900 !important;
+  line-height: 0.96 !important;
+  letter-spacing: 0 !important;
+  text-align: center !important;
+  text-wrap: balance;
+}
+
+.red-reviews h2::before {
+  display: table !important;
+  margin: 0 auto clamp(1.15rem, 2vw, 1.45rem) !important;
+  border: 1px solid rgba(36, 63, 43, 0.2) !important;
+  background: rgba(255, 252, 244, 0.86) !important;
+  color: rgba(42, 42, 45, 0.62) !important;
+  box-shadow:
+    0 10px 28px rgba(64, 48, 28, 0.07),
+    inset 0 1px 0 rgba(255, 255, 255, 0.74) !important;
+}
+
+.stagger-testimonials {
+  position: relative !important;
+  z-index: 2 !important;
+  width: 100% !important;
+  margin-top: clamp(1.9rem, 4vw, 3.25rem) !important;
+}
+
+.stagger-testimonials-stage {
+  --stack-gap: calc(var(--card-size) / 1.47);
+  position: relative !important;
+  width: 100% !important;
+  height: clamp(590px, 57vw, 660px) !important;
+  overflow: hidden !important;
+  touch-action: pan-y !important;
+  user-select: none !important;
+  background:
+    linear-gradient(92deg, transparent 0 13.8%, rgba(36, 63, 43, 0.12) 13.9% 14.15%, transparent 14.25%),
+    linear-gradient(183deg, transparent 0 17.7%, rgba(154, 116, 56, 0.12) 17.8% 18.05%, transparent 18.15%),
+    radial-gradient(ellipse at 50% 34%, rgba(255, 249, 237, 0.76), transparent 36%),
+    linear-gradient(180deg, rgba(255, 249, 237, 0.78), rgba(248, 239, 224, 0.66)),
+    url("/images/breakfast-spread.jpg") center/cover !important;
+}
+
+.stagger-testimonials-stage::before {
+  position: absolute !important;
+  inset: 0 !important;
+  z-index: 0 !important;
+  display: block !important;
+  content: "" !important;
+  pointer-events: none !important;
+  background:
+    linear-gradient(90deg, rgba(248, 239, 224, 0.76), transparent 18%, transparent 82%, rgba(248, 239, 224, 0.76)),
+    linear-gradient(180deg, rgba(255, 249, 237, 0.74), rgba(255, 249, 237, 0.52)),
+    radial-gradient(ellipse at center, transparent 43%, rgba(36, 63, 43, 0.15)) !important;
+}
+
+.stagger-testimonial-card {
+  position: absolute !important;
+  left: 50% !important;
+  top: 50% !important;
+  z-index: calc(10 - var(--abs-position)) !important;
+  display: block !important;
+  width: var(--card-size) !important;
+  height: var(--card-size) !important;
+  padding: clamp(1.18rem, 2vw, 1.75rem) !important;
+  overflow: hidden !important;
+  border: 2px solid rgba(101, 75, 45, 0.2) !important;
+  border-radius: 0 !important;
+  background:
+    linear-gradient(180deg, rgba(255, 252, 244, 0.98), rgba(251, 243, 229, 0.96)) !important;
+  color: #24211f !important;
+  clip-path: polygon(50px 0%, calc(100% - 50px) 0%, 100% 50px, 100% 100%, calc(100% - 50px) 100%, 50px 100%, 0 100%, 0 0) !important;
+  opacity: max(0.18, calc(1 - (var(--abs-position) * 0.18))) !important;
+  transform:
+    translate(-50%, -50%)
+    translateX(calc(var(--stack-gap) * var(--position)))
+    translateY(calc((var(--abs-position) * 12px) + (var(--direction) * 8px)))
+    rotate(calc(var(--tilt) * 1deg))
+    scale(calc(1 - (var(--abs-position) * 0.035))) !important;
+  box-shadow:
+    0 22px 54px rgba(64, 48, 28, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.75) !important;
+  will-change: transform, opacity !important;
+  transition:
+    transform 640ms cubic-bezier(0.16, 1, 0.3, 1),
+    opacity 420ms ease,
+    background-color 260ms ease,
+    color 260ms ease,
+    border-color 260ms ease,
+    box-shadow 640ms cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+.stagger-testimonial-card:hover,
+.stagger-testimonial-card:focus-visible {
+  border-color: rgba(36, 63, 43, 0.48) !important;
+}
+
+.stagger-testimonial-card:focus-visible {
+  outline: 3px solid rgba(197, 162, 90, 0.72) !important;
+  outline-offset: 4px !important;
+}
+
+.stagger-testimonial-card.is-center {
+  z-index: 20 !important;
+  border-color: var(--heritage-forest) !important;
+  background: linear-gradient(180deg, #31543c, var(--heritage-forest)) !important;
+  color: var(--heritage-paper-light) !important;
+  opacity: 1 !important;
+  transform:
+    translate(-50%, -50%)
+    translateY(-72px)
+    rotate(0deg)
+    scale(1) !important;
+  box-shadow:
+    9px 9px 0 rgba(197, 162, 90, 0.5),
+    0 32px 74px rgba(31, 56, 40, 0.25) !important;
+  animation: stagger-center-pop 640ms cubic-bezier(0.16, 1, 0.3, 1) both !important;
+}
+
+.stagger-card-corner {
+  position: absolute !important;
+  right: -2px !important;
+  top: 48px !important;
+  width: 70.71px !important;
+  height: 2px !important;
+  transform: rotate(45deg) !important;
+  transform-origin: top right !important;
+  background: currentColor !important;
+  opacity: 0.22 !important;
+}
+
+.stagger-card-image {
+  position: relative !important;
+  width: 58px !important;
+  height: 66px !important;
+  margin-bottom: clamp(1.05rem, 2vw, 1.45rem) !important;
+  overflow: hidden !important;
+  border: 1px solid rgba(255, 249, 237, 0.72) !important;
+  background: rgba(255, 249, 237, 0.92) !important;
+  box-shadow: 4px 4px 0 rgba(197, 162, 90, 0.26) !important;
+}
+
+.stagger-testimonial-card.is-center .stagger-card-image {
+  box-shadow: 4px 4px 0 rgba(16, 33, 22, 0.58) !important;
+}
+
+.stagger-card-stars {
+  position: absolute !important;
+  right: clamp(1.18rem, 2vw, 1.75rem) !important;
+  top: clamp(1.18rem, 2vw, 1.75rem) !important;
+  display: flex !important;
+  gap: 0.08rem !important;
+  color: #d2a44d !important;
+}
+
+.stagger-card-quote {
+  max-width: 12.8em !important;
+  max-height: 7.3em !important;
+  overflow: hidden !important;
+  color: currentColor !important;
+  font-family: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif !important;
+  font-size: clamp(1.12rem, 1.8vw, 1.48rem) !important;
+  font-weight: 820 !important;
+  line-height: 1.36 !important;
+  letter-spacing: 0 !important;
+}
+
+.stagger-card-quote p {
+  margin: 0 !important;
+}
+
+.stagger-testimonial-card:not(.is-center) .stagger-card-quote {
+  font-size: clamp(1.16rem, 2vw, 1.62rem) !important;
+  line-height: 1.28 !important;
+}
+
+.stagger-card-author {
+  position: absolute !important;
+  right: clamp(1.18rem, 2vw, 1.75rem) !important;
+  bottom: clamp(1.18rem, 2vw, 1.75rem) !important;
+  left: clamp(1.18rem, 2vw, 1.75rem) !important;
+  color: currentColor !important;
+  font-size: clamp(0.8rem, 1.24vw, 1rem) !important;
+  font-style: italic !important;
+  font-weight: 720 !important;
+  line-height: 1.35 !important;
+  opacity: 0.72 !important;
+}
+
+.stagger-testimonial-controls {
+  position: absolute !important;
+  bottom: 28px !important;
+  left: 50% !important;
+  z-index: 40 !important;
+  display: flex !important;
+  gap: 0.9rem !important;
+  transform: translateX(-50%) !important;
+}
+
+.stagger-testimonial-controls button,
+.stagger-testimonials > .write-review-trigger-btn {
+  border: 2px solid rgba(36, 63, 43, 0.16) !important;
+  border-radius: 0 !important;
+  background: rgba(255, 252, 244, 0.9) !important;
+  color: var(--heritage-forest) !important;
+  box-shadow:
+    0 14px 30px rgba(64, 48, 28, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.78) !important;
+  transition:
+    transform 180ms var(--ease-out),
+    background-color 180ms ease,
+    color 180ms ease,
+    border-color 180ms ease,
+    box-shadow 180ms ease !important;
+}
+
+.stagger-testimonial-controls button {
+  display: grid !important;
+  width: 64px !important;
+  height: 64px !important;
+  place-items: center !important;
+}
+
+.stagger-testimonial-controls button:hover,
+.stagger-testimonial-controls button:focus-visible,
+.stagger-testimonials > .write-review-trigger-btn:hover,
+.stagger-testimonials > .write-review-trigger-btn:focus-visible {
+  border-color: var(--heritage-forest) !important;
+  background: var(--heritage-forest) !important;
+  color: var(--heritage-paper-light) !important;
+  transform: translateY(-2px) !important;
+  box-shadow:
+    0 18px 36px rgba(36, 63, 43, 0.18),
+    inset 0 1px 0 rgba(255, 255, 255, 0.16) !important;
+}
+
+.stagger-testimonials > .write-review-trigger-btn {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: fit-content !important;
+  min-height: 58px !important;
+  margin: clamp(1.35rem, 2.8vw, 2rem) auto 0 !important;
+  padding: 0 2.15rem !important;
+  font-weight: 850 !important;
+}
+
+@keyframes stagger-center-pop {
+  from {
+    opacity: 0.82;
+    transform:
+      translate(-50%, -50%)
+      translateY(-42px)
+      rotate(-1.4deg)
+      scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform:
+      translate(-50%, -50%)
+      translateY(-72px)
+      rotate(0deg)
+      scale(1);
+  }
+}
+
+@media (max-width: 768px) {
+  .red-reviews {
+    margin-inline: 0.5rem !important;
+    padding: 2.8rem 0 calc(3rem + env(safe-area-inset-bottom)) !important;
+    border-radius: 18px !important;
+  }
+
+  .red-reviews h2 {
+    max-width: min(23rem, calc(100% - 1.35rem)) !important;
+    font-size: clamp(2.25rem, 10.3vw, 3.55rem) !important;
+  }
+
+  .stagger-testimonials {
+    margin-top: 1.45rem !important;
+  }
+
+  .stagger-testimonials-stage {
+    --stack-gap: calc(var(--card-size) / 1.58);
+    height: clamp(555px, 137vw, 610px) !important;
+  }
+
+  .stagger-testimonial-card {
+    padding: 1.05rem !important;
+    clip-path: polygon(36px 0%, calc(100% - 36px) 0%, 100% 36px, 100% 100%, 0 100%, 0 0) !important;
+    transform:
+      translate(-50%, -50%)
+      translateX(calc(var(--stack-gap) * var(--position)))
+      translateY(calc((var(--abs-position) * 9px) + (var(--direction) * 5px)))
+      rotate(calc(var(--tilt) * 1deg))
+      scale(calc(1 - (var(--abs-position) * 0.032))) !important;
+  }
+
+  .stagger-testimonial-card.is-center {
+    transform:
+      translate(-50%, -50%)
+      translateY(-78px)
+      rotate(0deg)
+      scale(1) !important;
+    box-shadow:
+      7px 7px 0 rgba(197, 162, 90, 0.5),
+      0 26px 58px rgba(31, 56, 40, 0.24) !important;
+  }
+
+  .stagger-card-corner {
+    top: 34px !important;
+    width: 50.91px !important;
+  }
+
+  .stagger-card-image {
+    width: 48px !important;
+    height: 56px !important;
+    margin-bottom: 1rem !important;
+  }
+
+  .stagger-card-stars {
+    right: 1.05rem !important;
+    top: 1.05rem !important;
+  }
+
+  .stagger-card-stars svg {
+    width: 13px !important;
+    height: 13px !important;
+  }
+
+  .stagger-card-quote,
+  .stagger-testimonial-card:not(.is-center) .stagger-card-quote {
+    max-width: 12em !important;
+    font-size: clamp(1rem, 5vw, 1.28rem) !important;
+    line-height: 1.36 !important;
+  }
+
+  .stagger-card-author {
+    right: 1.05rem !important;
+    bottom: 1.05rem !important;
+    left: 1.05rem !important;
+    font-size: 0.76rem !important;
+  }
+
+  .stagger-testimonial-controls {
+    bottom: 24px !important;
+    gap: 0.78rem !important;
+  }
+
+  .stagger-testimonial-controls button {
+    width: 58px !important;
+    height: 58px !important;
+  }
+
+  .stagger-testimonials > .write-review-trigger-btn {
+    width: calc(100% - 2rem) !important;
+    max-width: 306px !important;
+    min-height: 54px !important;
+  }
+
+  @keyframes stagger-center-pop {
+    from {
+      opacity: 0.82;
+      transform:
+        translate(-50%, -50%)
+        translateY(-52px)
+        rotate(-1.2deg)
+        scale(0.96);
+    }
+    to {
+      opacity: 1;
+      transform:
+        translate(-50%, -50%)
+        translateY(-78px)
+        rotate(0deg)
+        scale(1);
+    }
+  }
+}
+
+@media (max-width: 390px) {
+  .stagger-testimonials-stage {
+    height: 545px !important;
+  }
+
+  .stagger-testimonial-card {
+    padding: 0.95rem !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .stagger-testimonial-card,
+  .stagger-testimonial-controls button,
+  .stagger-testimonials > .write-review-trigger-btn {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
 @media (max-width: 900px) {
   .about-sofra-copy {
     background:

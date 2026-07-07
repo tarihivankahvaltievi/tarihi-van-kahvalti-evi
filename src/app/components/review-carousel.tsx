@@ -46,6 +46,38 @@ const initialReviews: Review[] = [
     comment: "Murtuğa, kavut ve peynirler sıcak bakır sahanlarda geliyor. Sunum çok özenli.",
     source: "Google Deneyimi",
     image: "/images/sucuk-egg.jpg",
+  },
+  {
+    id: 5,
+    name: "Selin K.",
+    rating: 5,
+    comment: "Çay hiç bitmiyor, masa da sohbet de uzuyor. Beyoğlu'nda böyle sakin bir köşe bulmak güzel.",
+    source: "Google Deneyimi",
+    image: "/images/terrace-tea.jpg",
+  },
+  {
+    id: 6,
+    name: "James R.",
+    rating: 5,
+    comment: "A generous breakfast table with character. The old building makes the whole morning feel special.",
+    source: "TripAdvisor",
+    image: "/images/hands-table.jpg",
+  },
+  {
+    id: 7,
+    name: "Zeynep Ö.",
+    rating: 5,
+    comment: "Otlu peynir, bal kaymak ve sıcak sahanlar çok dengeliydi. Servis hızlı ama telaşsız.",
+    source: "Google Deneyimi",
+    image: "/images/kete-detail.jpg",
+  },
+  {
+    id: 8,
+    name: "Marco L.",
+    rating: 5,
+    comment: "We came for breakfast and stayed for coffee. Warm people, beautiful room, memorable food.",
+    source: "TripAdvisor",
+    image: "/images/coffee-moment.jpg",
   }
 ];
 
@@ -62,6 +94,8 @@ export function ReviewCarousel() {
   const [hoverRating, setHoverRating] = useState<number | null>(null);
   const [newComment, setNewComment] = useState("");
   const [toastMessage, setToastMessage] = useState<string | null>(null);
+  const dragStartX = useRef<number | null>(null);
+  const dragSuppressClick = useRef(false);
 
   useEffect(() => {
     const updateSize = () => {
@@ -103,6 +137,20 @@ export function ReviewCarousel() {
       return nextReviews;
     });
     setMoveCount((count) => count + 1);
+  };
+
+  const handleDragEnd = (clientX: number) => {
+    if (dragStartX.current === null) return;
+
+    const deltaX = clientX - dragStartX.current;
+    dragStartX.current = null;
+
+    if (Math.abs(deltaX) < 42) return;
+    dragSuppressClick.current = true;
+    handleMove(deltaX > 0 ? -1 : 1);
+    window.setTimeout(() => {
+      dragSuppressClick.current = false;
+    }, 0);
   };
 
   // Sync state with native dialog
@@ -194,6 +242,13 @@ export function ReviewCarousel() {
           aria-label="Misafir yorumları"
           data-move-count={moveCount}
           style={{ "--card-size": `${cardSize}px` } as React.CSSProperties}
+          onPointerDown={(event) => {
+            dragStartX.current = event.clientX;
+          }}
+          onPointerUp={(event) => handleDragEnd(event.clientX)}
+          onPointerCancel={() => {
+            dragStartX.current = null;
+          }}
         >
           {reviews.map((rev, index) => {
             const centerIndex = Math.floor(reviews.length / 2);
@@ -215,7 +270,17 @@ export function ReviewCarousel() {
                     zIndex: isCenter ? 10 : Math.max(1, 8 - Math.abs(position)),
                   } as React.CSSProperties
                 }
-                onClick={() => handleMove(position)}
+                onClick={() => {
+                  if (dragSuppressClick.current) return;
+                  handleMove(position);
+                }}
+                tabIndex={0}
+                onKeyDown={(event) => {
+                  if (event.key === "Enter" || event.key === " ") {
+                    event.preventDefault();
+                    handleMove(position);
+                  }
+                }}
                 aria-current={isCenter ? "true" : undefined}
               >
                 <figure style={{ margin: 0, height: "100%", display: "flex", flexDirection: "column" }}>
