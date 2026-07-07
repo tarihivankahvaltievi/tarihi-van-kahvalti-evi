@@ -13661,8 +13661,8 @@ h2 span,
 
 @keyframes hero-food-enter-fast {
   from {
-    opacity: 0.001;
-    transform: translate3d(0, 16px, 0) scale(0.96) rotate(-0.8deg);
+    opacity: 0.78;
+    transform: translate3d(0, 8px, 0) scale(0.985) rotate(-0.35deg);
   }
   to {
     opacity: 1;
@@ -13676,10 +13676,10 @@ h2 span,
     transform: translate3d(0, 0, 0) rotate(0deg);
   }
   38% {
-    transform: translate3d(calc(var(--float-x, 10px) * 0.55), calc(var(--float-y, -15px) * 0.55), 0) rotate(0.36deg);
+    transform: translate3d(calc(var(--float-x, 10px) * 0.32), calc(var(--float-y, -15px) * 0.32), 0) rotate(0.22deg);
   }
   72% {
-    transform: translate3d(calc(var(--float-x-end, -8px) * 0.42), calc(var(--float-y-end, 9px) * 0.42), 0) rotate(-0.28deg);
+    transform: translate3d(calc(var(--float-x-end, -8px) * 0.26), calc(var(--float-y-end, 9px) * 0.26), 0) rotate(-0.18deg);
   }
 }
 
@@ -21411,155 +21411,192 @@ h2 span,
   }
 
   .hero.hero-parallax-dining {
-    height: clamp(805px, 216vw, 960px) !important;
-    min-height: clamp(805px, 216vw, 960px) !important;
-    max-height: 960px !important;
+    height: clamp(835px, 224vw, 990px) !important;
+    min-height: clamp(835px, 224vw, 990px) !important;
+    max-height: 990px !important;
     padding: 0 !important;
+    background:
+      radial-gradient(ellipse at 76% 29%, rgba(50, 84, 58, 0.075), transparent 34%),
+      radial-gradient(ellipse at 52% 54%, rgba(181, 128, 56, 0.13), transparent 35%),
+      linear-gradient(180deg, #fffaf0 0%, #fbf4e5 44%, #ead6b5 100%) !important;
   }
 
   .hero-parallax-sticky {
-    height: clamp(805px, 216vw, 960px) !important;
-    min-height: clamp(805px, 216vw, 960px) !important;
-    max-height: 960px !important;
+    height: clamp(835px, 224vw, 990px) !important;
+    min-height: clamp(835px, 224vw, 990px) !important;
+    max-height: 990px !important;
+  }
+
+  .hero-top-curtain {
+    position: absolute;
+    inset: 0 0 auto;
+    z-index: 12;
+    height: calc(5.2rem + env(safe-area-inset-top, 0px));
+    background:
+      linear-gradient(180deg, rgba(255, 250, 240, 0.98) 0%, rgba(255, 250, 240, 0.88) 52%, rgba(255, 250, 240, 0) 100%);
+    pointer-events: none;
   }
 
   .hero-parallax-copy {
-    top: 7.9rem !important;
+    top: 7.72rem !important;
     left: max(1rem, calc((100vw - 430px) / 2 + 1rem)) !important;
-    width: min(17.4rem, calc(100vw - 2rem)) !important;
-    max-width: 17.4rem !important;
+    width: min(16.8rem, calc(100vw - 2rem)) !important;
+    max-width: 16.8rem !important;
     gap: 0.38rem !important;
   }
 
   .hero-parallax-copy h1 {
-    max-width: 7.1em !important;
-    font-size: 2.9rem !important;
-    line-height: 0.9 !important;
+    max-width: 6.8em !important;
+    font-size: clamp(2.72rem, 11.2vw, 2.84rem) !important;
+    line-height: 0.91 !important;
     letter-spacing: 0 !important;
+    text-shadow: 0 10px 28px rgba(67, 43, 27, 0.075) !important;
   }
 
   .hero-parallax-copy p {
-    max-width: 14.25rem !important;
-    font-size: 0.98rem !important;
-    line-height: 1.38 !important;
+    max-width: 13.75rem !important;
+    color: rgba(47, 42, 38, 0.76) !important;
+    font-size: clamp(0.91rem, 3.85vw, 0.95rem) !important;
+    line-height: 1.42 !important;
   }
 
   .hero-parallax-copy::after {
-    width: 8.8rem !important;
+    width: 7.65rem !important;
     margin-top: 0.34rem !important;
+    opacity: 0.72 !important;
   }
 
   .hero-parallax-food-stage {
-    top: 10.45rem !important;
+    top: 11.75rem !important;
     right: max(0.25rem, calc((100vw - 430px) / 2 + 0.25rem)) !important;
     left: max(0.65rem, calc((100vw - 430px) / 2 + 0.65rem)) !important;
     width: auto !important;
-    height: clamp(344px, 89vw, 386px) !important;
-    min-height: clamp(344px, 89vw, 386px) !important;
-    max-height: 386px !important;
+    height: clamp(338px, 87vw, 376px) !important;
+    min-height: clamp(338px, 87vw, 376px) !important;
+    max-height: 376px !important;
     margin: 0 !important;
-    transform-origin: 54% 42% !important;
+    transform-origin: 54% 48% !important;
+  }
+
+  .hero-parallax-food-stage .hero-float-item {
+    filter:
+      drop-shadow(0 5px 8px rgba(72, 44, 24, 0.08))
+      drop-shadow(0 16px 22px rgba(72, 44, 24, 0.11)) !important;
+    animation:
+      hero-food-enter-fast 420ms cubic-bezier(0.16, 1, 0.3, 1) var(--float-delay) both,
+      hero-food-float-premium var(--float-dur, 18s) var(--ease-soft) calc(var(--float-delay) + 420ms) 1 !important;
+    animation-delay: var(--float-delay), calc(var(--float-delay) + 420ms) !important;
+    animation-duration: 420ms, var(--float-dur, 18s) !important;
+    animation-fill-mode: both, none !important;
+    animation-iteration-count: 1, 1 !important;
   }
 
   .hero-parallax-food-stage .hero-float-tea {
-    top: 0% !important;
-    right: 5% !important;
+    top: 1% !important;
+    right: 4% !important;
     left: auto !important;
-    width: clamp(54px, 14.6vw, 64px) !important;
+    width: clamp(52px, 14vw, 62px) !important;
   }
 
   .hero-parallax-food-stage .hero-float-apricot-jam {
-    top: 8% !important;
-    left: 49% !important;
+    top: 9% !important;
+    left: 50% !important;
     right: auto !important;
-    width: clamp(48px, 12.8vw, 56px) !important;
+    width: clamp(46px, 12.2vw, 54px) !important;
   }
 
   .hero-parallax-food-stage .hero-float-cheese-platter {
-    top: 17% !important;
+    top: 21% !important;
     right: 0% !important;
     left: auto !important;
-    width: clamp(94px, 24.8vw, 108px) !important;
+    width: clamp(88px, 23.5vw, 102px) !important;
   }
 
   .hero-parallax-food-stage .hero-float-black-olives {
-    top: 30% !important;
-    right: 22% !important;
+    top: 37% !important;
+    right: 23% !important;
     left: auto !important;
-    width: clamp(48px, 12.9vw, 56px) !important;
+    width: clamp(46px, 12.4vw, 54px) !important;
   }
 
   .hero-parallax-food-stage .hero-float-mint {
-    top: 42% !important;
-    left: 52% !important;
+    top: 46% !important;
+    left: 51% !important;
     right: auto !important;
-    width: clamp(31px, 8.2vw, 36px) !important;
+    width: clamp(30px, 7.8vw, 35px) !important;
   }
 
   .hero-parallax-food-stage .hero-float-cherry-jam {
-    top: 48% !important;
+    top: 54% !important;
     right: 12% !important;
     left: auto !important;
-    width: clamp(48px, 12.9vw, 56px) !important;
+    width: clamp(46px, 12.4vw, 54px) !important;
   }
 
   .hero-parallax-food-stage .hero-float-tomato {
-    top: 53% !important;
+    top: 58% !important;
     right: 4% !important;
     left: auto !important;
-    width: clamp(40px, 10.5vw, 46px) !important;
+    width: clamp(38px, 10vw, 44px) !important;
   }
 
   .hero-parallax-food-stage .hero-float-omelette {
-    top: 66% !important;
+    top: 70% !important;
     left: 0% !important;
     right: auto !important;
-    width: clamp(100px, 26.5vw, 114px) !important;
+    width: clamp(96px, 25.5vw, 110px) !important;
   }
 
   .hero-parallax-food-stage .hero-float-jam {
-    top: 62% !important;
+    top: 66% !important;
     left: 24% !important;
     right: auto !important;
-    width: clamp(48px, 12.9vw, 56px) !important;
+    width: clamp(45px, 12.2vw, 53px) !important;
   }
 
   .hero-parallax-food-stage .hero-float-pan {
-    top: 58% !important;
+    top: 61% !important;
     left: 36% !important;
     right: auto !important;
-    width: clamp(104px, 27.4vw, 116px) !important;
+    width: clamp(100px, 26.6vw, 114px) !important;
   }
 
   .hero-parallax-food-stage .hero-float-greens-platter {
-    top: 65% !important;
+    top: 70% !important;
     right: 0% !important;
     left: auto !important;
-    width: clamp(74px, 19vw, 82px) !important;
+    width: clamp(70px, 18.4vw, 80px) !important;
   }
 
   .hero-parallax-food-stage .hero-float-simit {
-    top: 76% !important;
+    top: 80% !important;
     right: 20% !important;
     left: auto !important;
-    width: clamp(80px, 20.4vw, 88px) !important;
+    width: clamp(76px, 19.8vw, 86px) !important;
   }
 
   .hero-parallax-gallery {
-    top: 50.6% !important;
+    top: 53.6% !important;
     right: auto !important;
-    left: calc(50% - min(100vw, 430px) * 1.1) !important;
-    gap: 0.54rem !important;
+    left: calc(50% - min(100vw, 430px) * 1.08) !important;
+    gap: 0.58rem !important;
+    opacity: 0.9 !important;
   }
 
   .hero-parallax-row {
-    gap: 0.54rem !important;
+    gap: 0.58rem !important;
   }
 
   .hero-parallax-card {
-    width: clamp(150px, 39vw, 172px) !important;
+    width: clamp(146px, 38vw, 168px) !important;
     aspect-ratio: 1.16 / 1 !important;
-    border-radius: 8px !important;
+    border-color: rgba(255, 250, 240, 0.78) !important;
+    border-radius: 9px !important;
+  }
+
+  .hero-parallax-card img {
+    filter: saturate(1.03) contrast(1.02) brightness(0.94) !important;
+    transform: scale(1.01) !important;
   }
 
   .mobile-bar {
@@ -21601,20 +21638,24 @@ h2 span,
   }
 
   .hero-parallax-copy {
-    top: 7.65rem !important;
+    top: 7.48rem !important;
   }
 
   .hero-parallax-copy h1 {
-    font-size: 2.68rem !important;
+    font-size: 2.6rem !important;
   }
 
   .hero-parallax-copy p {
-    max-width: 14.2rem !important;
-    font-size: 0.9rem !important;
+    max-width: 13.6rem !important;
+    font-size: 0.88rem !important;
+  }
+
+  .hero-parallax-food-stage {
+    top: 11.45rem !important;
   }
 
   .hero-parallax-gallery {
-    top: 51.4% !important;
+    top: 54.1% !important;
   }
 
   .mobile-bar a,

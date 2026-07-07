@@ -194,40 +194,61 @@ export function VanHeroParallax() {
   // Map mouse positions to 3D rotation angles for premium desktop interactivity
   const rotateXMouse = useTransform(smoothMouseY, [-0.5, 0.5], [6.6, -6.6]);
   const rotateYMouse = useTransform(smoothMouseX, [-0.5, 0.5], [-7.2, 7.2]);
+  const still = prefersReducedMotion;
 
   const translateX = useSpring(
-    useTransform(scrollYProgress, [0, 1], isMobile ? [-58, 102] : [-132, 224]),
+    useTransform(
+      scrollYProgress,
+      [0, 1],
+      still ? [0, 0] : isMobile ? [-58, 102] : [-132, 224],
+    ),
     spring,
   );
   const translateXReverse = useSpring(
-    useTransform(scrollYProgress, [0, 1], isMobile ? [72, -118] : [154, -246]),
+    useTransform(
+      scrollYProgress,
+      [0, 1],
+      still ? [0, 0] : isMobile ? [72, -118] : [154, -246],
+    ),
     spring,
   );
   const rotateX = useSpring(
-    useTransform(scrollYProgress, [0, 0.26], isMobile ? [7, -0.8] : [14, -2.2]),
+    useTransform(
+      scrollYProgress,
+      [0, 0.26],
+      still ? [0, 0] : isMobile ? [7, -0.8] : [14, -2.2],
+    ),
     spring,
   );
   const rotateZ = useSpring(
-    useTransform(scrollYProgress, [0, 0.26], isMobile ? [-3.2, 0.55] : [-7.2, 1.35]),
+    useTransform(
+      scrollYProgress,
+      [0, 0.26],
+      still ? [0, 0] : isMobile ? [-3.2, 0.55] : [-7.2, 1.35],
+    ),
     spring,
   );
   const galleryY = useSpring(
     useTransform(
       scrollYProgress,
       [0, 0.36, 1],
-      isMobile ? [58, -4, -98] : [116, 72, 30]
+      still ? [0, 0, 0] : isMobile ? [58, -4, -98] : [116, 72, 30],
     ),
     spring,
   );
   const galleryOpacity = useSpring(
-    useTransform(scrollYProgress, [0, 0.16, 0.9, 1], [0.84, 1, 1, 0.72]),
+    useTransform(
+      scrollYProgress,
+      [0, 0.16, 0.9, 1],
+      still ? [1, 1, 1, 1] : [0.84, 1, 1, 0.72],
+    ),
     spring,
   );
   const floatingFoodY = useSpring(
     useTransform(
       scrollYProgress,
       [0, 0.28, 0.55, 0.82],
-      isMobile ? [0, 180, 285, 340] : [0, 80, 132, 158],
+      still ? [0, 0, 0, 0] : isMobile ? [0, 180, 285, 340] : [0, 80, 132, 158],
     ),
     spring,
   );
@@ -235,7 +256,7 @@ export function VanHeroParallax() {
     useTransform(
       scrollYProgress,
       [0, 0.28, 0.55, 0.82],
-      isMobile ? [1, 1.24, 1.38, 1.46] : [1, 1.16, 1.28, 1.34],
+      still ? [1, 1, 1, 1] : isMobile ? [1, 1.24, 1.38, 1.46] : [1, 1.16, 1.28, 1.34],
     ),
     spring,
   );
@@ -243,30 +264,46 @@ export function VanHeroParallax() {
     useTransform(
       scrollYProgress,
       [0, 0.28, 0.55, 0.82],
-      isMobile ? [0, -3.8, -7.2, -8.4] : [0, -2.8, -5.2, -6.2],
+      still ? [0, 0, 0, 0] : isMobile ? [0, -3.8, -7.2, -8.4] : [0, -2.8, -5.2, -6.2],
     ),
     spring,
   );
   const foodOpacity = useSpring(
-    useTransform(scrollYProgress, [0, 0.55, 0.82, 0.94], [1, 1, 0.76, 0]),
+    useTransform(
+      scrollYProgress,
+      [0, 0.55, 0.82, 0.94],
+      still ? [1, 1, 1, 1] : [1, 1, 0.76, 0],
+    ),
     spring,
   );
 
   // Copy parallax Y offset on scroll
   const copyY = useSpring(
-    useTransform(scrollYProgress, [0, 0.6], [0, isMobile ? -54 : -112]),
+    useTransform(
+      scrollYProgress,
+      [0, isMobile ? 0.42 : 0.6],
+      still ? [0, 0] : [0, isMobile ? -74 : -112],
+    ),
     spring,
   );
 
   // Copy opacity fade on scroll
   const copyOpacity = useSpring(
-    useTransform(scrollYProgress, [0, 0.35, 0.55], [1, 0.8, 0]),
+    useTransform(
+      scrollYProgress,
+      isMobile ? [0, 0.22, 0.34] : [0, 0.35, 0.55],
+      [1, isMobile ? 0.35 : still ? 0.7 : 0.8, 0],
+    ),
     spring,
   );
 
   // Copy blur effect on scroll
   const copyBlurPx = useSpring(
-    useTransform(scrollYProgress, [0, 0.5], [0, prefersReducedMotion ? 0 : 3.5]),
+    useTransform(
+      scrollYProgress,
+      [0, isMobile ? 0.32 : 0.5],
+      [0, prefersReducedMotion ? 0 : 3.5],
+    ),
     spring,
   );
   const copyFilter = useTransform(copyBlurPx, (v) => `blur(${v}px)`);
@@ -301,6 +338,8 @@ export function VanHeroParallax() {
       onMouseLeave={handleMouseLeave}
     >
       <div className="hero-parallax-sticky">
+        <div className="hero-top-curtain" aria-hidden="true" />
+
         <motion.div
           className="hero-parallax-copy"
         >
