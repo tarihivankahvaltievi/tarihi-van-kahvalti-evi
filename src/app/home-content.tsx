@@ -25,17 +25,17 @@ const gallery: [string, string][] = [
 const aboutStory = [
   {
     title: "Tarihi bina",
-    text: "18. yüzyılın sonlarından kalan Rum yapısının ahşap, taş ve motifli dokusu kahvaltının temposunu sakinleştirir.",
+    text: "18. yüzyıl sonu Rum yapısının ahşap, taş ve motifleri kahvaltının temposunu sakinleştirir.",
     note: "Zambak Sokak",
   },
   {
     title: "Aile emeği",
-    text: "1978'den beri süren yolculuk bugün üçüncü kuşakta aynı özenle devam eder; her servis aceleye değil sohbete yer açar.",
+    text: "1978'den beri üçüncü kuşak aynı özenle servis eder; masa aceleye değil sohbete yer açar.",
     note: "Üçüncü kuşak",
   },
   {
     title: "Van sofrası",
-    text: "Otlu peynir, bal kaymak, Van ketesi, sıcak sahanlar ve taze çay masaya tek tek gelir; mekanın ruhu sofranın içinde hissedilir.",
+    text: "Otlu peynir, bal kaymak, Van ketesi, sıcak sahanlar ve taze çay masaya tek tek gelir.",
     note: "Serpme kahvaltı",
   },
 ];
@@ -88,12 +88,11 @@ export function HomeContent() {
             <div className="about-sofra-kicker" data-reveal>Hakkımızda</div>
             <h2 data-reveal>Van&apos;dan gelen sofra, Beyoğlu&apos;nda ağır ağır kurulur.</h2>
             <p className="about-sofra-lead" data-reveal>
-              Tarihi Van Kahvaltı Evi, Taksim&apos;in kalabalığı içinde Van kahvaltısının
-              bereketini, tarihi Rum binasının sakin dokusuyla aynı masaya getirir.
+              Tarihi Van Kahvaltı Evi, Taksim&apos;in kalabalığında Van sofrasını
+              tarihi Rum binasının sakin dokusuyla buluşturur.
             </p>
             <p className="about-sofra-ritual" data-reveal>
-              Sofra aceleye değil; çayın buharına, eski binanın sesine ve masada
-              uzayan muhabbete kurulur.
+              Sofra aceleye değil; çayın buharına ve masada uzayan muhabbete kurulur.
             </p>
 
             <div className="about-sofra-story" aria-label="Tarihi Van Kahvaltı Evi hikayesi">
