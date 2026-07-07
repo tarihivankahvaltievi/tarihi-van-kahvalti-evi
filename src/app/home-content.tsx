@@ -25,23 +25,18 @@ const gallery: [string, string][] = [
 const aboutStory = [
   {
     title: "Tarihi bina",
-    text: "18. yüzyıl sonu Rum yapısının ahşap, taş ve motifleri; Zambak Sokak'ın telaşını içeri girince yavaşlatır.",
+    text: "18. yüzyıl sonu Rum yapısının ahşap, taş ve motifleri kahvaltının temposunu sakinleştirir.",
     note: "Zambak Sokak",
   },
   {
     title: "Aile emeği",
-    text: "1978'den beri aynı aile sofrası korunur; üçüncü kuşak servis, misafiri müşteriden çok eve gelen biri gibi ağırlar.",
+    text: "1978'den beri üçüncü kuşak aynı özenle servis eder; masa aceleye değil sohbete yer açar.",
     note: "Üçüncü kuşak",
   },
   {
     title: "Van sofrası",
-    text: "Otlu peynir, bal kaymak, Van ketesi, kavut, murtuğa ve sıcak sahanlar masaya tek tek gelir; çay hep taze kalır.",
+    text: "Otlu peynir, bal kaymak, Van ketesi, sıcak sahanlar ve taze çay masaya tek tek gelir.",
     note: "Serpme kahvaltı",
-  },
-  {
-    title: "Gün boyu ruh",
-    text: "Kahvaltıdan sonra aynı tarihi dokuda Kafka Cafe'nin kahvesi, tatlısı ve sakin köşeleri güne eşlik eder.",
-    note: "Kafka Cafe",
   },
 ];
 
@@ -55,7 +50,7 @@ export function HomeContent() {
           <div className="about-sofra-visual" data-reveal>
             <figure className="about-sofra-table" style={{ margin: 0 }}>
               <Image
-                src="/images/breakfast-spread.jpg"
+                src="/images/hero-parallax/overhead-feast.webp"
                 alt="Tarihi Van Kahvaltı Evi kahvaltı sofrası"
                 fill
                 sizes="(max-width: 900px) 92vw, 560px"
@@ -81,13 +76,11 @@ export function HomeContent() {
             <div className="about-sofra-kicker" data-reveal>Hakkımızda</div>
             <h2 data-reveal>Van&apos;dan gelen sofra, Beyoğlu&apos;nda ağır ağır kurulur.</h2>
             <p className="about-sofra-lead" data-reveal>
-              Tarihi Van Kahvaltı Evi, Taksim&apos;in kalabalığından birkaç adım içeride,
-              Van&apos;ın doyurucu kahvaltı geleneğini 2. derece tarihi Rum binasının
-              taş, ahşap ve aile emeğiyle buluşturur.
+              Tarihi Van Kahvaltı Evi, Taksim&apos;in kalabalığında Van sofrasını
+              tarihi Rum binasının sakin dokusuyla buluşturur.
             </p>
             <p className="about-sofra-ritual" data-reveal>
-              Burada sofra aceleye değil; çayın buharına, taze çıkan sıcaklara ve
-              masada uzayan muhabbete kurulur.
+              Sofra aceleye değil; çayın buharına ve masada uzayan muhabbete kurulur.
             </p>
 
             <div className="about-sofra-story" aria-label="Tarihi Van Kahvaltı Evi hikayesi">

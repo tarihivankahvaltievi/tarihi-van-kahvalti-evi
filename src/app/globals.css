@@ -20565,139 +20565,44 @@ body,
 .about-sofra {
   --about-green: var(--heritage-forest);
   --about-green-soft: var(--heritage-forest-soft);
-  --about-ink: #101711;
-  --about-body: rgba(16, 23, 17, 0.78);
-  --about-gold: #b98a3d;
-  --about-paper: rgba(255, 249, 237, 0.88);
-  --about-line: rgba(16, 23, 17, 0.22);
-  border-color: rgba(10, 18, 12, 0.72) !important;
+  --about-ink: #17251b;
+  --about-body: rgba(23, 37, 27, 0.76);
+  --about-gold: var(--heritage-bronze);
+  --about-paper: var(--heritage-paper-light);
+  --about-line: var(--heritage-line);
+  border-color: rgba(255, 249, 237, 0.72) !important;
   background:
-    radial-gradient(ellipse at 16% 0%, rgba(255, 255, 255, 0.3), transparent 34%),
-    radial-gradient(ellipse at 92% 82%, rgba(185, 138, 61, 0.32), transparent 38%),
-    linear-gradient(135deg, rgba(11, 23, 15, 0.92), rgba(32, 63, 44, 0.78) 46%, rgba(10, 15, 12, 0.9)),
-    rgba(13, 22, 16, 0.86) !important;
-  backdrop-filter: blur(26px) saturate(1.28);
-  -webkit-backdrop-filter: blur(26px) saturate(1.28);
+    linear-gradient(135deg, rgba(255, 255, 255, 0.48), rgba(255, 249, 237, 0.3)),
+    rgba(255, 249, 237, 0.68) !important;
   box-shadow:
-    0 30px 78px rgba(18, 16, 12, 0.34),
-    0 10px 26px rgba(36, 63, 43, 0.18),
-    inset 0 1px 0 rgba(255, 255, 255, 0.34),
-    inset 0 -1px 0 rgba(0, 0, 0, 0.62) !important;
-  align-items: stretch;
+    0 22px 56px rgba(64, 48, 28, 0.11),
+    inset 0 1px 0 rgba(255, 255, 255, 0.82) !important;
 }
 
 .about-sofra::before {
   background:
-    linear-gradient(122deg, rgba(255, 255, 255, 0.34), rgba(255, 255, 255, 0.04) 32%, transparent 50%),
-    linear-gradient(304deg, transparent 0 62%, rgba(255, 255, 255, 0.16) 66%, transparent 78%),
-    radial-gradient(ellipse at 8% 84%, rgba(185, 138, 61, 0.22), transparent 42%) !important;
-}
-
-.about-sofra::after {
-  position: absolute;
-  inset: 0.52rem;
-  z-index: -1;
-  border: 1px solid rgba(255, 255, 255, 0.14);
-  border-radius: 14px;
-  content: "";
-  pointer-events: none;
-  box-shadow:
-    inset 0 0 0 1px rgba(0, 0, 0, 0.28),
-    inset 0 18px 40px rgba(255, 255, 255, 0.08);
+    linear-gradient(118deg, rgba(255, 255, 255, 0.38), transparent 34%),
+    radial-gradient(ellipse at 12% 86%, rgba(154, 116, 56, 0.13), transparent 42%) !important;
 }
 
 .about-sofra-room {
-  border-color: rgba(8, 14, 10, 0.78) !important;
-  box-shadow:
-    0 20px 44px rgba(0, 0, 0, 0.34),
-    0 0 0 1px rgba(255, 255, 255, 0.32),
-    inset 0 1px 0 rgba(255, 255, 255, 0.32) !important;
+  border-color: rgba(255, 249, 237, 0.86) !important;
 }
 
 .about-sofra-table::after,
 .about-sofra-room::after {
   background:
-    linear-gradient(180deg, rgba(4, 9, 6, 0), rgba(4, 9, 6, 0.2)),
-    linear-gradient(118deg, rgba(255, 255, 255, 0.24), transparent 44%) !important;
-}
-
-.about-sofra-table {
-  box-shadow:
-    0 18px 42px rgba(0, 0, 0, 0.26),
-    0 0 0 1px rgba(255, 255, 255, 0.24),
-    inset 0 0 0 1px rgba(8, 14, 10, 0.72) !important;
-  background:
-    linear-gradient(180deg, rgba(8, 14, 10, 0.06), rgba(8, 14, 10, 0.18)),
-    url("/images/breakfast-spread.jpg") center 52% / cover no-repeat,
-    var(--about-green) !important;
-}
-
-.about-sofra-visual {
-  height: 100%;
-}
-
-.about-sofra-table img {
-  opacity: 0.92;
-  object-position: center 52%;
-}
-
-.about-sofra-mark {
-  border-color: rgba(5, 10, 7, 0.72) !important;
-  background:
-    radial-gradient(ellipse at 12% 0%, rgba(255, 255, 255, 0.34), transparent 48%),
-    linear-gradient(135deg, rgba(8, 16, 11, 0.88), rgba(37, 68, 46, 0.74)) !important;
-  backdrop-filter: blur(18px) saturate(1.35);
-  -webkit-backdrop-filter: blur(18px) saturate(1.35);
-  box-shadow:
-    0 16px 34px rgba(0, 0, 0, 0.28),
-    inset 0 1px 0 rgba(255, 255, 255, 0.34),
-    inset 0 -1px 0 rgba(0, 0, 0, 0.46) !important;
-}
-
-.about-sofra-copy {
-  border: 1px solid rgba(255, 255, 255, 0.46);
-  border-radius: 16px;
-  background:
-    linear-gradient(145deg, rgba(255, 252, 244, 0.92), rgba(255, 249, 237, 0.7) 58%, rgba(232, 216, 188, 0.62)),
-    rgba(255, 249, 237, 0.78);
-  backdrop-filter: blur(24px) saturate(1.18);
-  -webkit-backdrop-filter: blur(24px) saturate(1.18);
-  box-shadow:
-    0 18px 42px rgba(0, 0, 0, 0.16),
-    inset 0 1px 0 rgba(255, 255, 255, 0.82),
-    inset 0 -1px 0 rgba(16, 23, 17, 0.12);
+    linear-gradient(180deg, rgba(36, 63, 43, 0), rgba(36, 63, 43, 0.17)),
+    linear-gradient(118deg, rgba(255, 249, 237, 0.18), transparent 44%) !important;
 }
 
 .about-sofra-kicker,
 .about-sofra-ritual {
-  color: rgba(26, 49, 34, 0.86) !important;
-}
-
-.about-sofra-story {
-  border-block-color: rgba(16, 23, 17, 0.2) !important;
-}
-
-.about-sofra-story article + article {
-  border-top-color: rgba(16, 23, 17, 0.16) !important;
-}
-
-.about-sofra-story article span {
-  color: #9a6722 !important;
-}
-
-.about-sofra-story article p {
-  color: rgba(16, 23, 17, 0.72) !important;
+  color: rgba(36, 63, 43, 0.72) !important;
 }
 
 .about-sofra-facts span {
-  border-color: rgba(12, 20, 14, 0.5) !important;
-  color: #102015 !important;
-  background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.74), rgba(230, 214, 188, 0.58)),
-    rgba(255, 249, 237, 0.68) !important;
-  box-shadow:
-    0 8px 18px rgba(0, 0, 0, 0.08),
-    inset 0 1px 0 rgba(255, 255, 255, 0.8);
+  background: rgba(255, 249, 237, 0.52) !important;
 }
 
 .red-reviews {
@@ -20777,17 +20682,9 @@ body,
 }
 
 @media (max-width: 900px) {
-  .about-sofra {
-    align-items: center;
-  }
-
-  .about-sofra-visual {
-    height: auto;
-  }
-
   .about-sofra-copy {
     background:
-      linear-gradient(180deg, rgba(255, 252, 244, 0.94), rgba(238, 224, 198, 0.72)) !important;
+      linear-gradient(180deg, rgba(255, 249, 237, 0.9), rgba(255, 249, 237, 0.52)) !important;
   }
 }
 
