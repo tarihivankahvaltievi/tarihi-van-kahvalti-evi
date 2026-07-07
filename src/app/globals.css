@@ -20021,34 +20021,6 @@ h2 span,
   text-wrap: pretty;
 }
 
-.about-sofra-facts {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.38rem 0.65rem;
-  margin-top: clamp(0.65rem, 1.4vw, 0.95rem);
-  padding-top: clamp(0.7rem, 1.4vw, 0.95rem);
-  border-top: 1px solid rgba(32, 63, 44, 0.1);
-}
-
-.about-sofra-facts span {
-  min-height: auto;
-  border: 0;
-  border-radius: 999px;
-  padding: 0;
-  color: var(--about-green);
-  background: transparent;
-  font-size: clamp(0.68rem, 0.86vw, 0.78rem);
-  font-weight: 850;
-  line-height: 1.25;
-}
-
-.about-sofra-facts span + span::before {
-  margin-right: 0.65rem;
-  color: currentColor;
-  opacity: 0.42;
-  content: "/";
-}
-
 .about-sofra-story article[data-reveal]:nth-child(1) {
   transition-delay: 90ms;
 }
@@ -20057,8 +20029,7 @@ h2 span,
   transition-delay: 140ms;
 }
 
-.about-sofra-story article[data-reveal]:nth-child(3),
-.about-sofra-facts[data-reveal] {
+.about-sofra-story article[data-reveal]:nth-child(3) {
   transition-delay: 190ms;
 }
 
@@ -20192,16 +20163,6 @@ h2 span,
     line-height: 1.36;
   }
 
-  .about-sofra-facts {
-    gap: 0.36rem;
-    margin-top: 0.8rem;
-  }
-
-  .about-sofra-facts span {
-    min-height: 1.76rem;
-    padding: 0.38rem 0.56rem;
-    font-size: clamp(0.64rem, 2.55vw, 0.72rem);
-  }
 }
 
 @media (max-width: 430px) {
@@ -20242,17 +20203,12 @@ h2 span,
     margin-top: 0;
   }
 
-  .about-sofra-facts span {
-    flex: 1 1 auto;
-    text-align: center;
-  }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .about-sofra-table img,
   .about-sofra-room img,
-  .about-sofra-story article,
-  .about-sofra-facts {
+  .about-sofra-story article {
     transition-delay: 0ms !important;
     transition-duration: 0ms !important;
   }
@@ -20688,10 +20644,6 @@ body,
   color: rgba(36, 63, 43, 0.72) !important;
 }
 
-.about-sofra-facts span {
-  background: rgba(255, 249, 237, 0.52) !important;
-}
-
 .red-reviews {
   border-color: rgba(101, 75, 45, 0.15) !important;
   background: var(--heritage-paper) !important;
@@ -20924,23 +20876,12 @@ body,
   opacity: 0.4;
 }
 
-.about-sofra-facts span {
-  color: rgba(255, 248, 234, 0.84);
-  background: transparent !important;
-  box-shadow: none;
-}
-
-.about-sofra-facts {
-  border-top-color: rgba(255, 248, 234, 0.16);
-}
-
 .story-band .about-sofra-kicker[data-reveal],
 .story-band .about-sofra h2[data-reveal],
 .story-band .about-sofra-lead[data-reveal],
 .story-band .about-sofra-ritual[data-reveal],
 .story-band .about-sofra-proof[data-reveal],
-.story-band .about-sofra-story article[data-reveal],
-.story-band .about-sofra-facts[data-reveal] {
+.story-band .about-sofra-story article[data-reveal] {
   transform: translateY(18px) !important;
   opacity: 0 !important;
   transition:
@@ -20953,8 +20894,7 @@ body,
 .story-band .about-sofra-lead[data-reveal].is-visible,
 .story-band .about-sofra-ritual[data-reveal].is-visible,
 .story-band .about-sofra-proof[data-reveal].is-visible,
-.story-band .about-sofra-story article[data-reveal].is-visible,
-.story-band .about-sofra-facts[data-reveal].is-visible {
+.story-band .about-sofra-story article[data-reveal].is-visible {
   transform: translateY(0) !important;
   opacity: 1 !important;
 }
@@ -21021,9 +20961,6 @@ body,
     grid-column: 2;
   }
 
-  .about-sofra-facts {
-    gap: 0.28rem 0.5rem;
-  }
 }
 
 @media (max-width: 430px) {
@@ -21067,8 +21004,7 @@ body,
   .story-band .about-sofra-lead[data-reveal],
   .story-band .about-sofra-ritual[data-reveal],
   .story-band .about-sofra-proof[data-reveal],
-  .story-band .about-sofra-story article[data-reveal],
-  .story-band .about-sofra-facts[data-reveal] {
+  .story-band .about-sofra-story article[data-reveal] {
     transform: none !important;
     opacity: 1 !important;
     transition-duration: 0ms !important;

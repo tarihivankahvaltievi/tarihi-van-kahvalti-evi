@@ -97,12 +97,6 @@ export function HomeContent() {
                 </article>
               ))}
             </div>
-
-            <div className="about-sofra-facts" data-reveal aria-label="Tarihi Van Kahvaltı Evi kısa bilgiler">
-              <span>2. derece tarihi eser</span>
-              <span>Zambak Sokak&apos;ta sakin sofra</span>
-              <span>Kafka Cafe ile gün boyu</span>
-            </div>
           </div>
         </article>
       </div>
