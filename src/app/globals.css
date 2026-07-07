@@ -11,13 +11,24 @@
   --red-light: #fef8f8;
   --gold: #c5a25a;
   --gold-dark: #8f7234;
-  --gold-light: #fbf8f0;
+  --gold-light: #fff7e8;
   --ink: #2a2a2d;
   --ink-soft: #3f3f44;
   --muted: #6b6b72;
-  --line: #eae8e1;
-  --soft: #fcfbf7;
+  --line: #e5d8bf;
+  --soft: #f8efe0;
   --white: #ffffff;
+  --heritage-paper: #f8efe0;
+  --heritage-paper-light: #fff9ed;
+  --heritage-paper-soft: #fbf3e5;
+  --heritage-paper-mid: #ebdcc3;
+  --heritage-paper-deep: #e1cdaa;
+  --heritage-ink: #211d1b;
+  --heritage-forest: #243f2b;
+  --heritage-forest-soft: #3e6547;
+  --heritage-bronze: #9a7438;
+  --heritage-line: rgba(36, 63, 43, 0.16);
+  --heritage-shadow: rgba(64, 48, 28, 0.12);
   --shadow-soft: 0 20px 50px rgba(42, 42, 45, 0.06);
   --shadow-red: 0 12px 32px rgba(154, 28, 31, 0.16);
   --shadow-gold: 0 12px 32px rgba(207, 168, 81, 0.12);
@@ -29,12 +40,12 @@
   --red-light: #fef8f8;
   --gold: #c5a25a;
   --gold-dark: #8f7234;
-  --gold-light: #fbf8f0;
+  --gold-light: var(--heritage-paper-light);
   --ink: #2a2a2d;
   --ink-soft: #3f3f44;
   --muted: #6b6b72;
-  --line: #eae8e1;
-  --soft: #fcfbf7;
+  --line: var(--heritage-paper-mid);
+  --soft: var(--heritage-paper);
   --white: #ffffff;
   --shadow-soft: 0 20px 50px rgba(42, 42, 45, 0.06);
   --shadow-red: 0 12px 32px rgba(154, 28, 31, 0.16);
@@ -20479,5 +20490,251 @@ h2 span,
   .mobile-bar a,
   .mobile-bar button {
     font-size: 0.62rem !important;
+  }
+}
+
+/* Heritage beige system: keep hero, story, reviews, and support panels in one warm paper family. */
+html,
+body,
+.site-shell {
+  background: var(--heritage-paper) !important;
+}
+
+.nav,
+.nav.scrolled,
+.mobile-bar {
+  border-color: rgba(229, 216, 191, 0.72) !important;
+  background:
+    linear-gradient(135deg, rgba(255, 249, 237, 0.94), rgba(248, 239, 224, 0.84)),
+    radial-gradient(ellipse at 52% 0%, rgba(255, 255, 255, 0.72), transparent 62%) !important;
+  box-shadow:
+    0 18px 46px rgba(64, 48, 28, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.78),
+    inset 0 -1px 0 rgba(36, 63, 43, 0.08) !important;
+}
+
+.hero.hero-parallax-dining {
+  background:
+    radial-gradient(ellipse at 76% 29%, rgba(62, 101, 71, 0.07), transparent 34%),
+    radial-gradient(ellipse at 52% 54%, rgba(154, 116, 56, 0.11), transparent 35%),
+    linear-gradient(
+      180deg,
+      var(--heritage-paper-light) 0%,
+      var(--heritage-paper-soft) 44%,
+      var(--heritage-paper-mid) 100%
+    ) !important;
+}
+
+.hero.hero-parallax-dining::before {
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255, 249, 237, 0.9) 0%,
+      rgba(255, 249, 237, 0.18) 28%,
+      rgba(255, 249, 237, 0) 62%,
+      rgba(235, 220, 195, 0.82) 100%
+    ),
+    radial-gradient(ellipse at 74% 24%, rgba(36, 63, 43, 0.08), transparent 36%),
+    radial-gradient(ellipse at 18% 12%, rgba(154, 116, 56, 0.1), transparent 34%) !important;
+}
+
+.hero-top-curtain {
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255, 249, 237, 0.98) 0%,
+      rgba(255, 249, 237, 0.86) 52%,
+      rgba(255, 249, 237, 0) 100%
+    ) !important;
+}
+
+.hero-parallax-copy h1,
+.hero-parallax-copy h1 span {
+  color: var(--heritage-ink) !important;
+}
+
+.hero-parallax-copy p {
+  color: rgba(33, 29, 27, 0.72) !important;
+}
+
+.hero-parallax-copy::after {
+  background: linear-gradient(90deg, rgba(36, 63, 43, 0.38), transparent) !important;
+}
+
+.hero-parallax-card {
+  border-color: rgba(255, 249, 237, 0.8) !important;
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.32) inset,
+    0 12px 26px rgba(64, 48, 28, 0.12) !important;
+}
+
+.story-band {
+  background:
+    radial-gradient(ellipse at 16% 8%, rgba(255, 249, 237, 0.54), transparent 34%),
+    radial-gradient(ellipse at 88% 26%, rgba(62, 101, 71, 0.12), transparent 36%),
+    linear-gradient(
+      180deg,
+      var(--heritage-paper-mid) 0%,
+      var(--heritage-paper) 30%,
+      var(--heritage-paper) 100%
+    ) !important;
+}
+
+.story-band::before {
+  background:
+    linear-gradient(180deg, rgba(117, 83, 42, 0.1), rgba(117, 83, 42, 0)),
+    radial-gradient(ellipse at 50% 0%, rgba(255, 249, 237, 0.5), transparent 62%) !important;
+}
+
+.about-sofra {
+  --about-green: var(--heritage-forest);
+  --about-green-soft: var(--heritage-forest-soft);
+  --about-ink: #17251b;
+  --about-body: rgba(23, 37, 27, 0.76);
+  --about-gold: var(--heritage-bronze);
+  --about-paper: var(--heritage-paper-light);
+  --about-line: var(--heritage-line);
+  border-color: rgba(255, 249, 237, 0.72) !important;
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.48), rgba(255, 249, 237, 0.3)),
+    rgba(255, 249, 237, 0.68) !important;
+  box-shadow:
+    0 22px 56px rgba(64, 48, 28, 0.11),
+    inset 0 1px 0 rgba(255, 255, 255, 0.82) !important;
+}
+
+.about-sofra::before {
+  background:
+    linear-gradient(118deg, rgba(255, 255, 255, 0.38), transparent 34%),
+    radial-gradient(ellipse at 12% 86%, rgba(154, 116, 56, 0.13), transparent 42%) !important;
+}
+
+.about-sofra-room {
+  border-color: rgba(255, 249, 237, 0.86) !important;
+}
+
+.about-sofra-table::after,
+.about-sofra-room::after {
+  background:
+    linear-gradient(180deg, rgba(36, 63, 43, 0), rgba(36, 63, 43, 0.17)),
+    linear-gradient(118deg, rgba(255, 249, 237, 0.18), transparent 44%) !important;
+}
+
+.about-sofra-kicker,
+.about-sofra-ritual {
+  color: rgba(36, 63, 43, 0.72) !important;
+}
+
+.about-sofra-facts span {
+  background: rgba(255, 249, 237, 0.52) !important;
+}
+
+.red-reviews {
+  border-color: rgba(101, 75, 45, 0.15) !important;
+  background:
+    linear-gradient(180deg, rgba(255, 249, 237, 0.92), rgba(248, 239, 224, 0.9)),
+    radial-gradient(ellipse at 50% 8%, rgba(255, 255, 255, 0.72), transparent 40%) !important;
+  box-shadow:
+    0 28px 80px rgba(64, 48, 28, 0.11),
+    inset 0 1px 0 rgba(255, 255, 255, 0.72) !important;
+}
+
+.red-reviews::before {
+  background:
+    linear-gradient(90deg, rgba(36, 63, 43, 0.045) 1px, transparent 1px),
+    linear-gradient(180deg, rgba(36, 63, 43, 0.03) 1px, transparent 1px) !important;
+  background-size: 82px 82px !important;
+  opacity: 0.36 !important;
+}
+
+.red-reviews h2 {
+  color: var(--heritage-ink) !important;
+}
+
+.red-reviews h2::before {
+  border-color: rgba(36, 63, 43, 0.16) !important;
+  background: rgba(255, 249, 237, 0.86) !important;
+}
+
+.stagger-testimonials-stage {
+  background:
+    linear-gradient(92deg, transparent 0 14%, rgba(36, 63, 43, 0.1) 14.08% 14.32%, transparent 14.4%),
+    linear-gradient(183deg, transparent 0 18%, rgba(154, 116, 56, 0.1) 18.08% 18.32%, transparent 18.4%),
+    radial-gradient(ellipse at 50% 34%, rgba(255, 249, 237, 0.72), transparent 36%),
+    linear-gradient(180deg, rgba(255, 249, 237, 0.86), rgba(248, 239, 224, 0.78)),
+    url("/images/breakfast-spread.jpg") center/cover !important;
+}
+
+.stagger-testimonials-stage::before {
+  background:
+    linear-gradient(180deg, rgba(255, 249, 237, 0.78), rgba(255, 249, 237, 0.56)),
+    radial-gradient(ellipse at center, transparent 42%, rgba(36, 63, 43, 0.12)) !important;
+}
+
+.stagger-testimonial-card {
+  border-color: rgba(101, 75, 45, 0.2) !important;
+  background:
+    linear-gradient(180deg, rgba(255, 249, 237, 0.98), rgba(251, 243, 229, 0.96)) !important;
+}
+
+.stagger-testimonial-card.is-center {
+  border-color: var(--heritage-forest) !important;
+  background: linear-gradient(180deg, #31543c, var(--heritage-forest)) !important;
+  color: var(--heritage-paper-light) !important;
+}
+
+.stagger-card-image,
+.stagger-testimonial-controls button,
+.stagger-testimonials > .write-review-trigger-btn {
+  background-color: rgba(255, 249, 237, 0.92) !important;
+}
+
+.gallery-section,
+.bottom-info-band {
+  background: var(--heritage-paper) !important;
+}
+
+.local-answer-panel {
+  border-color: var(--heritage-line) !important;
+  background:
+    linear-gradient(180deg, rgba(255, 249, 237, 0.96), rgba(251, 243, 229, 0.88)),
+    var(--heritage-paper) !important;
+  box-shadow: 0 18px 45px rgba(64, 48, 28, 0.08) !important;
+}
+
+.local-answer-card {
+  border-color: rgba(36, 63, 43, 0.12) !important;
+  background: rgba(255, 249, 237, 0.72) !important;
+}
+
+@media (max-width: 900px) {
+  .about-sofra-copy {
+    background:
+      linear-gradient(180deg, rgba(255, 249, 237, 0.9), rgba(255, 249, 237, 0.52)) !important;
+  }
+}
+
+@media (max-width: 680px) {
+  .hero.hero-parallax-dining {
+    background:
+      radial-gradient(ellipse at 76% 29%, rgba(62, 101, 71, 0.07), transparent 34%),
+      radial-gradient(ellipse at 52% 54%, rgba(154, 116, 56, 0.11), transparent 35%),
+      linear-gradient(
+        180deg,
+        var(--heritage-paper-light) 0%,
+        var(--heritage-paper-soft) 44%,
+        var(--heritage-paper-mid) 100%
+      ) !important;
+  }
+
+  .story-band {
+    background:
+      linear-gradient(
+        180deg,
+        var(--heritage-paper-mid) 0%,
+        var(--heritage-paper-soft) 13%,
+        var(--heritage-paper) 32%,
+        var(--heritage-paper) 100%
+      ) !important;
   }
 }
