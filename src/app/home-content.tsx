@@ -40,12 +40,6 @@ const aboutStory = [
   },
 ];
 
-const aboutHighlights = [
-  ["48 yıl", "Beyoğlu'nda aynı sabah ritmi"],
-  ["18. yy", "Rum yapısında ağır kahvaltı"],
-  ["Van", "Otlu peynir, kete, kavut ve murtuğa"],
-];
-
 export function HomeContent() {
   return (
     <>
@@ -90,12 +84,8 @@ export function HomeContent() {
             </p>
 
             <div className="about-sofra-proof" data-reveal aria-label="Tarihi Van Kahvaltı Evi öne çıkan bilgileri">
-              {aboutHighlights.map(([value, label]) => (
-                <span key={value}>
-                  <strong>{value}</strong>
-                  <small>{label}</small>
-                </span>
-              ))}
+              <strong>1978&apos;den beri</strong>
+              <span>Beyoğlu&apos;nda üçüncü kuşak aile emeği, tarihi Rum yapısı ve Van sofrası aynı masada buluşur.</span>
             </div>
 
             <div className="about-sofra-story" aria-label="Tarihi Van Kahvaltı Evi hikayesi">
@@ -110,9 +100,8 @@ export function HomeContent() {
 
             <div className="about-sofra-facts" data-reveal aria-label="Tarihi Van Kahvaltı Evi kısa bilgiler">
               <span>2. derece tarihi eser</span>
-              <span>Üçüncü kuşak</span>
-              <span>Kafka Cafe ile gün boyu</span>
               <span>Zambak Sokak&apos;ta sakin sofra</span>
+              <span>Kafka Cafe ile gün boyu</span>
             </div>
           </div>
         </article>

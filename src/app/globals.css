@@ -19937,98 +19937,116 @@ h2 span,
 }
 
 .about-sofra-proof {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 0.5rem;
-  margin-top: clamp(1rem, 2vw, 1.45rem);
-}
-
-.about-sofra-proof span {
-  display: grid;
-  align-content: start;
-  min-height: 5.25rem;
-  padding: clamp(0.72rem, 1.35vw, 0.9rem);
-  border: 1px solid rgba(32, 63, 44, 0.18);
-  border-radius: 10px;
-  background:
-    linear-gradient(180deg, rgba(255, 249, 235, 0.72), rgba(238, 225, 202, 0.42));
+  display: flex;
+  align-items: baseline;
+  gap: clamp(0.7rem, 1.4vw, 1rem);
+  margin-top: clamp(1.05rem, 2vw, 1.45rem);
+  padding: 0.78rem 0;
+  border-block: 1px solid rgba(32, 63, 44, 0.12);
 }
 
 .about-sofra-proof strong {
   color: var(--about-green);
   font-family: var(--font-playfair), Georgia, serif;
-  font-size: clamp(1.35rem, 2vw, 1.95rem);
+  font-size: clamp(1.28rem, 1.9vw, 1.86rem);
   line-height: 0.95;
+  white-space: nowrap;
 }
 
-.about-sofra-proof small {
-  margin-top: 0.36rem;
+.about-sofra-proof span {
   color: rgba(23, 37, 27, 0.68);
-  font-size: clamp(0.66rem, 0.8vw, 0.76rem);
+  font-size: clamp(0.78rem, 0.96vw, 0.94rem);
   font-weight: 800;
-  line-height: 1.22;
+  line-height: 1.42;
+  text-wrap: pretty;
 }
 
 .about-sofra-story {
+  position: relative;
   display: grid;
-  gap: 0;
-  margin-top: clamp(1.25rem, 2.4vw, 1.75rem);
-  border-block: 1px solid var(--about-line);
+  gap: clamp(0.2rem, 0.6vw, 0.45rem);
+  margin-top: clamp(1rem, 2vw, 1.45rem);
+  padding-top: clamp(0.25rem, 0.8vw, 0.55rem);
+  border-top: 1px solid var(--about-line);
 }
 
 .about-sofra-story article {
+  position: relative;
   display: grid;
-  grid-template-columns: minmax(7rem, 0.28fr) minmax(8.6rem, 0.24fr) minmax(0, 1fr);
-  gap: clamp(0.75rem, 1.8vw, 1.35rem);
-  align-items: baseline;
-  padding: clamp(0.85rem, 1.55vw, 1.08rem) 0;
+  grid-template-columns: minmax(6.6rem, 0.25fr) minmax(0, 1fr);
+  gap: clamp(0.7rem, 1.6vw, 1.2rem);
+  align-items: start;
+  padding: clamp(0.95rem, 1.6vw, 1.18rem) 0 clamp(0.95rem, 1.6vw, 1.18rem);
   color: var(--about-body);
 }
 
 .about-sofra-story article + article {
-  border-top: 1px solid rgba(32, 63, 44, 0.1);
+  border-top: 1px solid rgba(32, 63, 44, 0.09);
 }
 
 .about-sofra-story article span {
   color: var(--about-gold);
-  font-size: clamp(0.68rem, 0.86vw, 0.76rem);
+  font-size: clamp(0.68rem, 0.84vw, 0.76rem);
   font-weight: 900;
   letter-spacing: 0.03em;
   line-height: 1.15;
+  text-wrap: balance;
+}
+
+.about-sofra-story article span::before {
+  display: block;
+  width: 1.4rem;
+  height: 2px;
+  margin-bottom: 0.52rem;
+  border-radius: 999px;
+  background: currentColor;
+  opacity: 0.46;
+  content: "";
 }
 
 .about-sofra-story article strong {
   color: var(--about-green);
   font-family: var(--font-playfair), Georgia, serif;
-  font-size: clamp(1.08rem, 1.42vw, 1.32rem);
+  font-size: clamp(1.3rem, 1.78vw, 1.72rem);
   line-height: 1.04;
 }
 
 .about-sofra-story article p {
+  grid-column: 2;
   margin: 0;
+  margin-top: 0.24rem;
   color: rgba(23, 37, 27, 0.7);
-  font-size: clamp(0.88rem, 1vw, 0.98rem);
-  line-height: 1.5;
+  font-size: clamp(0.9rem, 1.04vw, 1rem);
+  line-height: 1.52;
   text-wrap: pretty;
 }
 
 .about-sofra-facts {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.55rem;
-  margin-top: clamp(1rem, 2vw, 1.3rem);
+  gap: 0.38rem 0.65rem;
+  margin-top: clamp(0.65rem, 1.4vw, 0.95rem);
+  padding-top: clamp(0.7rem, 1.4vw, 0.95rem);
+  border-top: 1px solid rgba(32, 63, 44, 0.1);
 }
 
 .about-sofra-facts span {
-  min-height: 2rem;
-  border: 1px solid rgba(32, 63, 44, 0.14);
+  min-height: auto;
+  border: 0;
   border-radius: 999px;
-  padding: 0.46rem 0.78rem;
+  padding: 0;
   color: var(--about-green);
-  background: rgba(255, 249, 235, 0.46);
-  font-size: clamp(0.72rem, 0.9vw, 0.82rem);
+  background: transparent;
+  font-size: clamp(0.68rem, 0.86vw, 0.78rem);
   font-weight: 850;
-  line-height: 1;
+  line-height: 1.25;
+}
+
+.about-sofra-facts span + span::before {
+  margin-right: 0.65rem;
+  color: currentColor;
+  opacity: 0.42;
+  content: "/";
 }
 
 .about-sofra-story article[data-reveal]:nth-child(1) {
@@ -20870,29 +20888,24 @@ body,
   background: linear-gradient(180deg, rgba(169, 138, 84, 0.08), rgba(169, 138, 84, 0.48), rgba(169, 138, 84, 0.1));
 }
 
-.about-sofra-proof span {
-  border-color: rgba(25, 32, 24, 0.48);
-  background:
-    linear-gradient(180deg, rgba(255, 248, 234, 0.17), rgba(255, 248, 234, 0.09));
-  box-shadow:
-    0 0 0 1px rgba(255, 248, 234, 0.08),
-    inset 0 1px 0 rgba(255, 248, 234, 0.14);
+.about-sofra-proof {
+  border-block-color: rgba(255, 248, 234, 0.28);
 }
 
 .about-sofra-proof strong {
   color: #f1d18a;
 }
 
-.about-sofra-proof small {
+.about-sofra-proof span {
   color: rgba(255, 248, 234, 0.76);
 }
 
 .about-sofra-story {
-  border-block-color: rgba(255, 248, 234, 0.2);
+  border-top-color: rgba(255, 248, 234, 0.24);
 }
 
 .about-sofra-story article + article {
-  border-top-color: rgba(255, 248, 234, 0.16);
+  border-top-color: rgba(255, 248, 234, 0.14);
 }
 
 .about-sofra-story article span {
@@ -20907,11 +20920,56 @@ body,
   color: rgba(255, 248, 234, 0.72);
 }
 
+.about-sofra-story article span::before {
+  opacity: 0.4;
+}
+
 .about-sofra-facts span {
-  border-color: rgba(25, 32, 24, 0.46);
-  color: #fff2d9;
-  background: rgba(255, 248, 234, 0.12) !important;
-  box-shadow: inset 0 1px 0 rgba(255, 248, 234, 0.12);
+  color: rgba(255, 248, 234, 0.84);
+  background: transparent !important;
+  box-shadow: none;
+}
+
+.about-sofra-facts {
+  border-top-color: rgba(255, 248, 234, 0.16);
+}
+
+.story-band .about-sofra-kicker[data-reveal],
+.story-band .about-sofra h2[data-reveal],
+.story-band .about-sofra-lead[data-reveal],
+.story-band .about-sofra-ritual[data-reveal],
+.story-band .about-sofra-proof[data-reveal],
+.story-band .about-sofra-story article[data-reveal],
+.story-band .about-sofra-facts[data-reveal] {
+  transform: translateY(18px) !important;
+  opacity: 0 !important;
+  transition:
+    opacity 720ms cubic-bezier(0.2, 0, 0, 1),
+    transform 720ms cubic-bezier(0.2, 0, 0, 1);
+}
+
+.story-band .about-sofra-kicker[data-reveal].is-visible,
+.story-band .about-sofra h2[data-reveal].is-visible,
+.story-band .about-sofra-lead[data-reveal].is-visible,
+.story-band .about-sofra-ritual[data-reveal].is-visible,
+.story-band .about-sofra-proof[data-reveal].is-visible,
+.story-band .about-sofra-story article[data-reveal].is-visible,
+.story-band .about-sofra-facts[data-reveal].is-visible {
+  transform: translateY(0) !important;
+  opacity: 1 !important;
+}
+
+.story-band .about-sofra h2[data-reveal] {
+  transition-duration: 880ms;
+}
+
+.story-band .about-sofra-lead[data-reveal] {
+  transition-delay: 80ms;
+}
+
+.story-band .about-sofra-ritual[data-reveal],
+.story-band .about-sofra-proof[data-reveal] {
+  transition-delay: 140ms;
 }
 
 @media (max-width: 900px) {
@@ -20940,6 +20998,32 @@ body,
   .about-sofra h2 {
     max-width: 11em;
   }
+
+  .about-sofra-proof {
+    align-items: flex-start;
+    gap: 0.54rem;
+  }
+
+  .about-sofra-proof span {
+    min-height: auto;
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
+  }
+
+  .about-sofra-story article {
+    grid-template-columns: minmax(4.6rem, 0.25fr) minmax(0, 1fr);
+  }
+
+  .about-sofra-story article p {
+    grid-column: 2;
+  }
+
+  .about-sofra-facts {
+    gap: 0.28rem 0.5rem;
+  }
 }
 
 @media (max-width: 430px) {
@@ -20953,5 +21037,41 @@ body,
 
   .about-sofra-copy {
     padding-bottom: 1rem;
+  }
+
+  .about-sofra-proof {
+    display: grid;
+    gap: 0.32rem;
+    padding: 0.68rem 0;
+  }
+
+  .about-sofra-proof strong {
+    white-space: normal;
+  }
+
+  .about-sofra-proof span {
+    display: block;
+    grid-template-columns: none;
+    column-gap: 0;
+  }
+
+  .about-sofra-story article {
+    grid-template-columns: minmax(4.25rem, 0.24fr) minmax(0, 1fr);
+    column-gap: 0.58rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .story-band .about-sofra-kicker[data-reveal],
+  .story-band .about-sofra h2[data-reveal],
+  .story-band .about-sofra-lead[data-reveal],
+  .story-band .about-sofra-ritual[data-reveal],
+  .story-band .about-sofra-proof[data-reveal],
+  .story-band .about-sofra-story article[data-reveal],
+  .story-band .about-sofra-facts[data-reveal] {
+    transform: none !important;
+    opacity: 1 !important;
+    transition-duration: 0ms !important;
+    transition-delay: 0ms !important;
   }
 }
