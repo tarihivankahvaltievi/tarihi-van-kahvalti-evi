@@ -20776,31 +20776,31 @@ body,
 }
 
 .about-sofra {
-  --about-green: #1d3324;
-  --about-green-soft: #31523a;
-  --about-ink: #f8efdf;
-  --about-body: rgba(248, 239, 223, 0.74);
-  --about-gold: #a98a54;
+  --about-green: #4f5f46;
+  --about-green-soft: #6f7c61;
+  --about-ink: #fff8ea;
+  --about-body: rgba(255, 248, 234, 0.8);
+  --about-gold: #9b7f4c;
   --about-paper: #fff7e6;
-  --about-line: rgba(248, 239, 223, 0.18);
+  --about-line: rgba(255, 248, 234, 0.24);
   gap: clamp(1.2rem, 3.4vw, 4rem);
   padding: clamp(0.62rem, 1.2vw, 0.86rem);
-  border: 1px solid rgba(19, 29, 22, 0.92) !important;
+  border: 1px solid rgba(30, 36, 28, 0.78) !important;
   border-radius: 16px;
   color: var(--about-ink);
   background:
-    radial-gradient(ellipse at 18% 12%, rgba(64, 83, 58, 0.34), transparent 34%),
-    linear-gradient(145deg, #223329 0%, #17241c 48%, #111811 100%) !important;
+    radial-gradient(ellipse at 18% 10%, rgba(255, 248, 234, 0.18), transparent 32%),
+    linear-gradient(145deg, #738064 0%, #596950 48%, #435640 100%) !important;
   box-shadow:
-    0 28px 70px rgba(26, 20, 13, 0.3),
-    0 0 0 1px rgba(0, 0, 0, 0.8),
-    inset 0 1px 0 rgba(255, 247, 230, 0.055) !important;
+    0 24px 58px rgba(76, 57, 31, 0.2),
+    0 0 0 1px rgba(255, 248, 234, 0.18),
+    inset 0 1px 0 rgba(255, 248, 234, 0.2) !important;
 }
 
 .about-sofra::before {
   background:
-    linear-gradient(90deg, rgba(0, 0, 0, 0.42), transparent 16%, transparent 84%, rgba(0, 0, 0, 0.34)),
-    radial-gradient(ellipse at 72% 10%, rgba(255, 247, 230, 0.055), transparent 32%) !important;
+    linear-gradient(90deg, rgba(0, 0, 0, 0.14), transparent 18%, transparent 84%, rgba(0, 0, 0, 0.12)),
+    radial-gradient(ellipse at 74% 8%, rgba(255, 248, 234, 0.16), transparent 32%) !important;
 }
 
 .about-sofra-visual {
@@ -20808,14 +20808,14 @@ body,
 }
 
 .about-sofra-table {
-  border: 2px solid rgba(5, 7, 6, 0.9);
+  border: 2px solid rgba(9, 13, 9, 0.84);
   box-shadow:
     0 18px 34px rgba(0, 0, 0, 0.34),
     0 0 0 1px rgba(255, 247, 230, 0.08);
 }
 
 .about-sofra-room {
-  border-color: #060806 !important;
+  border-color: #101510 !important;
   box-shadow:
     0 18px 36px rgba(0, 0, 0, 0.36),
     0 0 0 1px rgba(169, 138, 84, 0.38);
@@ -20830,21 +20830,26 @@ body,
 
 .about-sofra-mark {
   color: #fff7e6;
-  border-color: rgba(169, 138, 84, 0.34);
+  border-color: rgba(16, 21, 16, 0.42);
   background:
-    linear-gradient(135deg, rgba(15, 24, 18, 0.96), rgba(34, 57, 40, 0.9));
+    linear-gradient(135deg, rgba(31, 44, 32, 0.95), rgba(64, 85, 58, 0.9));
   box-shadow:
     0 14px 28px rgba(0, 0, 0, 0.28),
     inset 0 1px 0 rgba(255, 247, 230, 0.12);
 }
 
 .about-sofra-copy {
+  border: 1px solid rgba(255, 248, 234, 0.16);
+  border-radius: 15px;
   padding: clamp(1.15rem, 2.7vw, 2.15rem) clamp(0.5rem, 1vw, 0.95rem);
+  background:
+    linear-gradient(180deg, rgba(255, 248, 234, 0.13), rgba(255, 248, 234, 0.07));
+  box-shadow: inset 0 1px 0 rgba(255, 248, 234, 0.16);
 }
 
 .about-sofra-kicker,
 .about-sofra-ritual {
-  color: rgba(248, 239, 223, 0.76) !important;
+  color: rgba(255, 248, 234, 0.82) !important;
 }
 
 .about-sofra-kicker::before {
@@ -20853,12 +20858,12 @@ body,
 
 .about-sofra h2 {
   max-width: 9.6em;
-  color: #fff4df;
-  text-shadow: 0 2px 16px rgba(0, 0, 0, 0.16);
+  color: #fff7e8;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
 }
 
 .about-sofra-lead {
-  color: rgba(248, 239, 223, 0.88);
+  color: rgba(255, 248, 234, 0.9);
 }
 
 .about-sofra-ritual::before {
@@ -20866,32 +20871,32 @@ body,
 }
 
 .about-sofra-proof span {
-  border-color: rgba(0, 0, 0, 0.7);
+  border-color: rgba(25, 32, 24, 0.48);
   background:
-    linear-gradient(180deg, rgba(255, 247, 230, 0.085), rgba(255, 247, 230, 0.035));
+    linear-gradient(180deg, rgba(255, 248, 234, 0.17), rgba(255, 248, 234, 0.09));
   box-shadow:
-    0 0 0 1px rgba(255, 247, 230, 0.06),
-    inset 0 1px 0 rgba(255, 247, 230, 0.055);
+    0 0 0 1px rgba(255, 248, 234, 0.08),
+    inset 0 1px 0 rgba(255, 248, 234, 0.14);
 }
 
 .about-sofra-proof strong {
-  color: #e7c583;
+  color: #f1d18a;
 }
 
 .about-sofra-proof small {
-  color: rgba(248, 239, 223, 0.7);
+  color: rgba(255, 248, 234, 0.76);
 }
 
 .about-sofra-story {
-  border-block-color: rgba(169, 138, 84, 0.26);
+  border-block-color: rgba(255, 248, 234, 0.2);
 }
 
 .about-sofra-story article + article {
-  border-top-color: rgba(248, 239, 223, 0.14);
+  border-top-color: rgba(255, 248, 234, 0.16);
 }
 
 .about-sofra-story article span {
-  color: #c4a46b;
+  color: #e0c987;
 }
 
 .about-sofra-story article strong {
@@ -20899,14 +20904,14 @@ body,
 }
 
 .about-sofra-story article p {
-  color: rgba(248, 239, 223, 0.68);
+  color: rgba(255, 248, 234, 0.72);
 }
 
 .about-sofra-facts span {
-  border-color: rgba(0, 0, 0, 0.62);
+  border-color: rgba(25, 32, 24, 0.46);
   color: #fff2d9;
-  background: rgba(255, 247, 230, 0.08) !important;
-  box-shadow: inset 0 1px 0 rgba(255, 247, 230, 0.055);
+  background: rgba(255, 248, 234, 0.12) !important;
+  box-shadow: inset 0 1px 0 rgba(255, 248, 234, 0.12);
 }
 
 @media (max-width: 900px) {
@@ -20917,9 +20922,9 @@ body,
   .about-sofra {
     border-radius: 18px;
     box-shadow:
-      0 18px 44px rgba(26, 20, 13, 0.24),
-      0 0 0 1px rgba(0, 0, 0, 0.78),
-      inset 0 1px 0 rgba(255, 247, 230, 0.08) !important;
+      0 18px 42px rgba(76, 57, 31, 0.18),
+      0 0 0 1px rgba(30, 36, 28, 0.48),
+      inset 0 1px 0 rgba(255, 248, 234, 0.18) !important;
   }
 
   .about-sofra-visual {
@@ -20928,8 +20933,8 @@ body,
 
   .about-sofra-copy {
     background:
-      linear-gradient(180deg, rgba(255, 247, 230, 0.08), rgba(255, 247, 230, 0.035)) !important;
-    box-shadow: inset 0 1px 0 rgba(255, 247, 230, 0.06);
+      linear-gradient(180deg, rgba(255, 248, 234, 0.16), rgba(255, 248, 234, 0.08)) !important;
+    box-shadow: inset 0 1px 0 rgba(255, 248, 234, 0.16);
   }
 
   .about-sofra h2 {
