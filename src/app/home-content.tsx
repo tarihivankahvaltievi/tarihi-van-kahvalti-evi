@@ -25,19 +25,25 @@ const gallery: [string, string][] = [
 const aboutStory = [
   {
     title: "Tarihi bina",
-    text: "18. yüzyıl sonu Rum yapısının ahşap, taş ve motifleri kahvaltının temposunu sakinleştirir.",
+    text: "18. yüzyıl sonu Rum yapısının ahşap, taş ve motifleri kahvaltının temposunu yavaşlatır; sokaktan içeri girince masa şehrin gürültüsünden ayrılır.",
     note: "Zambak Sokak",
   },
   {
     title: "Aile emeği",
-    text: "1978'den beri üçüncü kuşak aynı özenle servis eder; masa aceleye değil sohbete yer açar.",
+    text: "1978'den beri üçüncü kuşak aynı özenle servis eder; reçel, peynir, sıcak sahan ve çay aynı sabırla masaya gelir.",
     note: "Üçüncü kuşak",
   },
   {
     title: "Van sofrası",
-    text: "Otlu peynir, bal kaymak, Van ketesi, sıcak sahanlar ve taze çay masaya tek tek gelir.",
+    text: "Otlu peynir, bal kaymak, Van ketesi, kavut, murtuğa, sıcak sahanlar ve taze çay sofrayı doyuran asıl karakterdir.",
     note: "Serpme kahvaltı",
   },
+];
+
+const aboutHighlights = [
+  ["48 yıl", "Beyoğlu'nda aynı sabah ritmi"],
+  ["18. yy", "Rum yapısında ağır kahvaltı"],
+  ["Van", "Otlu peynir, kete, kavut ve murtuğa"],
 ];
 
 export function HomeContent() {
@@ -83,6 +89,15 @@ export function HomeContent() {
               Sofra aceleye değil; çayın buharına ve masada uzayan muhabbete kurulur.
             </p>
 
+            <div className="about-sofra-proof" data-reveal aria-label="Tarihi Van Kahvaltı Evi öne çıkan bilgileri">
+              {aboutHighlights.map(([value, label]) => (
+                <span key={value}>
+                  <strong>{value}</strong>
+                  <small>{label}</small>
+                </span>
+              ))}
+            </div>
+
             <div className="about-sofra-story" aria-label="Tarihi Van Kahvaltı Evi hikayesi">
               {aboutStory.map((item) => (
                 <article key={item.title} data-reveal>
@@ -97,6 +112,7 @@ export function HomeContent() {
               <span>2. derece tarihi eser</span>
               <span>Üçüncü kuşak</span>
               <span>Kafka Cafe ile gün boyu</span>
+              <span>Zambak Sokak&apos;ta sakin sofra</span>
             </div>
           </div>
         </article>
