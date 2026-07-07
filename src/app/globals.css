@@ -20780,7 +20780,7 @@ body,
   --about-green-soft: #31523a;
   --about-ink: #f8efdf;
   --about-body: rgba(248, 239, 223, 0.74);
-  --about-gold: #d0a85f;
+  --about-gold: #a98a54;
   --about-paper: #fff7e6;
   --about-line: rgba(248, 239, 223, 0.18);
   gap: clamp(1.2rem, 3.4vw, 4rem);
@@ -20789,19 +20789,18 @@ body,
   border-radius: 16px;
   color: var(--about-ink);
   background:
-    linear-gradient(135deg, rgba(26, 43, 31, 0.98), rgba(17, 26, 20, 0.98)),
-    #152018 !important;
+    radial-gradient(ellipse at 18% 12%, rgba(64, 83, 58, 0.34), transparent 34%),
+    linear-gradient(145deg, #223329 0%, #17241c 48%, #111811 100%) !important;
   box-shadow:
-    0 28px 70px rgba(26, 20, 13, 0.28),
-    0 0 0 1px rgba(208, 168, 95, 0.24),
-    inset 0 1px 0 rgba(255, 247, 230, 0.08) !important;
+    0 28px 70px rgba(26, 20, 13, 0.3),
+    0 0 0 1px rgba(0, 0, 0, 0.8),
+    inset 0 1px 0 rgba(255, 247, 230, 0.055) !important;
 }
 
 .about-sofra::before {
   background:
-    linear-gradient(90deg, rgba(208, 168, 95, 0.14), transparent 18%, transparent 82%, rgba(208, 168, 95, 0.16)),
-    radial-gradient(ellipse at 72% 12%, rgba(255, 247, 230, 0.08), transparent 34%),
-    repeating-linear-gradient(90deg, rgba(255, 247, 230, 0.035) 0 1px, transparent 1px 9px) !important;
+    linear-gradient(90deg, rgba(0, 0, 0, 0.42), transparent 16%, transparent 84%, rgba(0, 0, 0, 0.34)),
+    radial-gradient(ellipse at 72% 10%, rgba(255, 247, 230, 0.055), transparent 32%) !important;
 }
 
 .about-sofra-visual {
@@ -20809,17 +20808,17 @@ body,
 }
 
 .about-sofra-table {
-  border: 1px solid rgba(6, 10, 8, 0.82);
+  border: 2px solid rgba(5, 7, 6, 0.9);
   box-shadow:
     0 18px 34px rgba(0, 0, 0, 0.34),
-    0 0 0 1px rgba(208, 168, 95, 0.22);
+    0 0 0 1px rgba(255, 247, 230, 0.08);
 }
 
 .about-sofra-room {
-  border-color: #151c16 !important;
+  border-color: #060806 !important;
   box-shadow:
     0 18px 36px rgba(0, 0, 0, 0.36),
-    0 0 0 2px rgba(208, 168, 95, 0.6);
+    0 0 0 1px rgba(169, 138, 84, 0.38);
 }
 
 .about-sofra-table::after,
@@ -20831,7 +20830,7 @@ body,
 
 .about-sofra-mark {
   color: #fff7e6;
-  border-color: rgba(208, 168, 95, 0.52);
+  border-color: rgba(169, 138, 84, 0.34);
   background:
     linear-gradient(135deg, rgba(15, 24, 18, 0.96), rgba(34, 57, 40, 0.9));
   box-shadow:
@@ -20849,7 +20848,7 @@ body,
 }
 
 .about-sofra-kicker::before {
-  background: rgba(208, 168, 95, 0.86);
+  background: rgba(169, 138, 84, 0.58);
 }
 
 .about-sofra h2 {
@@ -20863,18 +20862,20 @@ body,
 }
 
 .about-sofra-ritual::before {
-  background: linear-gradient(180deg, rgba(208, 168, 95, 0.1), rgba(208, 168, 95, 0.86), rgba(208, 168, 95, 0.12));
+  background: linear-gradient(180deg, rgba(169, 138, 84, 0.08), rgba(169, 138, 84, 0.48), rgba(169, 138, 84, 0.1));
 }
 
 .about-sofra-proof span {
-  border-color: rgba(208, 168, 95, 0.36);
+  border-color: rgba(0, 0, 0, 0.7);
   background:
-    linear-gradient(180deg, rgba(255, 247, 230, 0.1), rgba(255, 247, 230, 0.045));
-  box-shadow: inset 0 1px 0 rgba(255, 247, 230, 0.08);
+    linear-gradient(180deg, rgba(255, 247, 230, 0.085), rgba(255, 247, 230, 0.035));
+  box-shadow:
+    0 0 0 1px rgba(255, 247, 230, 0.06),
+    inset 0 1px 0 rgba(255, 247, 230, 0.055);
 }
 
 .about-sofra-proof strong {
-  color: #f4c978;
+  color: #e7c583;
 }
 
 .about-sofra-proof small {
@@ -20882,7 +20883,7 @@ body,
 }
 
 .about-sofra-story {
-  border-block-color: rgba(208, 168, 95, 0.34);
+  border-block-color: rgba(169, 138, 84, 0.26);
 }
 
 .about-sofra-story article + article {
@@ -20890,7 +20891,7 @@ body,
 }
 
 .about-sofra-story article span {
-  color: #d0a85f;
+  color: #c4a46b;
 }
 
 .about-sofra-story article strong {
@@ -20902,9 +20903,10 @@ body,
 }
 
 .about-sofra-facts span {
-  border-color: rgba(208, 168, 95, 0.42);
+  border-color: rgba(0, 0, 0, 0.62);
   color: #fff2d9;
   background: rgba(255, 247, 230, 0.08) !important;
+  box-shadow: inset 0 1px 0 rgba(255, 247, 230, 0.055);
 }
 
 @media (max-width: 900px) {
@@ -20916,7 +20918,7 @@ body,
     border-radius: 18px;
     box-shadow:
       0 18px 44px rgba(26, 20, 13, 0.24),
-      0 0 0 1px rgba(208, 168, 95, 0.22),
+      0 0 0 1px rgba(0, 0, 0, 0.78),
       inset 0 1px 0 rgba(255, 247, 230, 0.08) !important;
   }
 
