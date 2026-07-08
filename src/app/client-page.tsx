@@ -147,11 +147,11 @@ export default function ClientPage({ children }: { children: ReactNode }) {
                 fetchPriority="high"
               />
             </div>
-            <a className="logo" href="#top" aria-label="Tarihi Van Kahvaltıcısı">
+            <a className="logo" href="#top" aria-label="Tarihi Van Kahvaltı Evi">
               <span className="logo-word">
                 Tarihi<em>Van</em>
               </span>
-              <span className="logo-subtitle">Kahvaltıcısı</span>
+              <span className="logo-subtitle">Kahvaltı Evi</span>
             </a>
             <div className={`nav-status-pill ${isOpenNow ? "open" : "closed"}`}>
               <span className="nav-status-dot" />
