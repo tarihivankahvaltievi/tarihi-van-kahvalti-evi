@@ -22896,3 +22896,70 @@ body,
     animation: none !important;
   }
 }
+
+/* Hero copy final pass: cleaner Turkish headline rhythm on mobile. */
+.hero-parallax-copy h1,
+.hero-parallax-copy h1 span {
+  letter-spacing: -0.025em !important;
+  text-wrap: balance;
+}
+
+.hero-parallax-copy p {
+  text-wrap: pretty;
+}
+
+@media (max-width: 680px) {
+  .hero-parallax-copy {
+    top: 8.18rem !important;
+    width: min(18.9rem, calc(100vw - 2rem)) !important;
+    max-width: 18.9rem !important;
+  }
+
+  .hero-parallax-copy h1 {
+    max-width: 7.9em !important;
+    margin: 0 0 0.52rem !important;
+    color: #171411 !important;
+    font-size: clamp(3.08rem, 14.2vw, 3.92rem) !important;
+    font-weight: 900 !important;
+    letter-spacing: -0.045em !important;
+    line-height: 0.86 !important;
+    text-shadow:
+      1px 1px 0 rgba(255, 249, 237, 0.72),
+      0 16px 34px rgba(64, 48, 28, 0.12) !important;
+  }
+
+  .hero-parallax-copy p {
+    max-width: min(18rem, calc(100vw - 3rem)) !important;
+    color: rgba(33, 29, 27, 0.74) !important;
+    font-size: clamp(1.02rem, 4.25vw, 1.16rem) !important;
+    font-weight: 620 !important;
+    line-height: 1.38 !important;
+  }
+
+  .hero-parallax-copy::after {
+    width: 8.8rem !important;
+    margin-top: 0.72rem !important;
+    background:
+      linear-gradient(90deg, rgba(36, 63, 43, 0.36), rgba(224, 201, 135, 0.46), transparent) !important;
+  }
+
+  .hero-parallax-food-stage {
+    top: 12.25rem !important;
+  }
+}
+
+@media (max-width: 380px) {
+  .hero-parallax-copy {
+    top: 8rem !important;
+    width: min(17.4rem, calc(100vw - 2rem)) !important;
+  }
+
+  .hero-parallax-copy h1 {
+    font-size: clamp(2.82rem, 13.6vw, 3.36rem) !important;
+  }
+
+  .hero-parallax-copy p {
+    max-width: 16.6rem !important;
+    font-size: 0.98rem !important;
+  }
+}

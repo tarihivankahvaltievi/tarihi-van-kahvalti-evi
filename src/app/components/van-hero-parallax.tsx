@@ -354,11 +354,9 @@ export function VanHeroParallax() {
             <h1>
               <span className="sr-only">Tarihi Van Kahvaltı Evi — Taksim Beyoğlu Serpme Van Kahvaltısı</span>
               <span aria-hidden="true">
-                Çay&nbsp;taze,
+                Çay&nbsp;taze.
                 <br />
-                sofra
-                <br />
-                sıcak.
+                Sofra&nbsp;sıcak.
               </span>
             </h1>
             <p>
