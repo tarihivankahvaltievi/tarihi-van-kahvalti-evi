@@ -23091,3 +23091,58 @@ body,
     animation: none !important;
   }
 }
+
+/* Hero mobile containment: keep all copy inside the marked left rectangle. */
+@media (max-width: 680px) {
+  .hero-parallax-copy {
+    top: 8.05rem !important;
+    left: max(0.78rem, calc((100vw - 430px) / 2 + 0.78rem)) !important;
+    width: min(20.25rem, calc(100vw - 3.4rem)) !important;
+    max-width: min(20.25rem, calc(100vw - 3.4rem)) !important;
+  }
+
+  .hero-parallax-copy h1 {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin-bottom: 0.6rem !important;
+    font-size: clamp(2.38rem, 10.15vw, 2.94rem) !important;
+    letter-spacing: -0.018em !important;
+    line-height: 0.88 !important;
+  }
+
+  .hero-parallax-copy h1 span {
+    max-width: 100% !important;
+  }
+
+  .hero-parallax-copy p {
+    max-width: min(19rem, calc(100vw - 4.2rem)) !important;
+    font-size: clamp(0.9rem, 3.42vw, 0.98rem) !important;
+    line-height: 1.36 !important;
+  }
+
+  .hero-parallax-copy::after {
+    width: 7.2rem !important;
+    margin-top: 0.66rem !important;
+  }
+
+  .hero-parallax-food-stage {
+    top: 12.85rem !important;
+  }
+}
+
+@media (max-width: 380px) {
+  .hero-parallax-copy {
+    left: 0.72rem !important;
+    width: min(18.7rem, calc(100vw - 3rem)) !important;
+    max-width: min(18.7rem, calc(100vw - 3rem)) !important;
+  }
+
+  .hero-parallax-copy h1 {
+    font-size: clamp(2.16rem, 9.75vw, 2.48rem) !important;
+  }
+
+  .hero-parallax-copy p {
+    max-width: min(17.35rem, calc(100vw - 3.7rem)) !important;
+    font-size: 0.86rem !important;
+  }
+}

@@ -356,7 +356,9 @@ export function VanHeroParallax() {
               <span aria-hidden="true">
                 Tarihi <em>Van</em>
                 <br />
-                Kahvaltı&nbsp;Evi
+                Kahvaltı
+                <br />
+                Evi
               </span>
             </h1>
             <p>
