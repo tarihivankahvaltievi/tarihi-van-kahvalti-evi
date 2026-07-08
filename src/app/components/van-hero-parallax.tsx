@@ -354,16 +354,16 @@ export function VanHeroParallax() {
             <h1>
               <span className="sr-only">Tarihi Van Kahvaltı Evi — Taksim Beyoğlu Serpme Van Kahvaltısı</span>
               <span aria-hidden="true">
-                Tarihi <em>Van</em>
+                Çay&nbsp;taze,
                 <br />
-                Kahvaltı
+                sofra
                 <br />
-                Evi
+                sıcak.
               </span>
             </h1>
             <p>
-              Beyoğlu&apos;nda tarihi Rum binasında, otlu peynirden bakır
-              sahanlara uzanan geleneksel Van kahvaltısı.
+              Otlu peynir, kavut, murtuğa ve bakır sahanlar. Van kahvaltısı
+              burada aceleye gelmez.
             </p>
           </motion.div>
         </motion.div>
