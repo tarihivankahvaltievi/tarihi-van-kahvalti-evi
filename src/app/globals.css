@@ -21685,9 +21685,9 @@ body,
 }
 
 .stagger-testimonials-stage::before {
-  background:
-    linear-gradient(90deg, var(--review-paper), rgba(248, 239, 224, 0) 20%, rgba(248, 239, 224, 0) 80%, var(--review-paper)),
-    linear-gradient(180deg, rgba(248, 239, 224, 0.12), var(--review-paper) 100%) !important;
+  display: none !important;
+  background: none !important;
+  opacity: 0 !important;
 }
 
 .stagger-testimonial-card {
@@ -21714,7 +21714,11 @@ body,
 }
 
 .stagger-testimonial-card:not(.is-center) {
-  opacity: max(0.14, calc(1 - (var(--abs-position) * 0.34))) !important;
+  background:
+    linear-gradient(145deg, rgba(118, 132, 107, 0.96) 0%, rgba(89, 105, 80, 0.94) 48%, rgba(67, 86, 64, 0.96) 100%) !important;
+  color: #fff8ea !important;
+  opacity: max(0.2, calc(0.66 - (var(--abs-position) * 0.16))) !important;
+  filter: saturate(0.84) brightness(1.04) !important;
 }
 
 .stagger-card-corner {
@@ -21791,7 +21795,8 @@ body,
 
 @media (max-width: 768px) {
   .red-reviews {
-    padding: calc(4.7rem + env(safe-area-inset-top, 0px)) 0 2.25rem !important;
+    padding: calc(6rem + env(safe-area-inset-top, 0px)) 0 2.25rem !important;
+    scroll-margin-top: calc(5.4rem + env(safe-area-inset-top, 0px)) !important;
   }
 
   .red-reviews::after {
@@ -21813,7 +21818,7 @@ body,
   }
 
   .stagger-testimonials-stage {
-    --stack-gap: calc(var(--card-size) / 1.34) !important;
+    --stack-gap: calc(var(--card-size) / 1.18) !important;
     height: clamp(405px, 103vw, 455px) !important;
     background-size: auto, auto !important;
   }
@@ -21824,7 +21829,7 @@ body,
   }
 
   .stagger-testimonial-card:not(.is-center) {
-    opacity: 0.38 !important;
+    opacity: 0.56 !important;
   }
 
   .stagger-testimonial-card.is-center {
@@ -21898,5 +21903,29 @@ body,
 @media (max-width: 390px) {
   .stagger-testimonials-stage {
     height: 392px !important;
+  }
+}
+
+/* Review preview cards: side comments stay readable until promoted to center. */
+.red-reviews .stagger-testimonial-card:not(.is-center) {
+  background:
+    linear-gradient(145deg, rgba(118, 132, 107, 0.96) 0%, rgba(89, 105, 80, 0.94) 48%, rgba(67, 86, 64, 0.96) 100%) !important;
+  color: #fff8ea !important;
+  opacity: max(0.22, calc(0.68 - (var(--abs-position) * 0.14))) !important;
+  filter: saturate(0.86) brightness(1.05) !important;
+}
+
+.red-reviews .stagger-testimonial-card:not(.is-center) .stagger-card-quote,
+.red-reviews .stagger-testimonial-card:not(.is-center) .stagger-card-author {
+  color: #fff8ea !important;
+}
+
+.red-reviews .stagger-testimonials-stage::before {
+  display: none !important;
+}
+
+@media (max-width: 768px) {
+  .red-reviews .stagger-testimonial-card:not(.is-center) {
+    opacity: 0.6 !important;
   }
 }

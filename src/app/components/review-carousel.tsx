@@ -122,9 +122,9 @@ export function ReviewCarousel() {
     const updateSize = () => {
       const width = window.innerWidth;
       if (width < 390) {
-        setCardSize(252);
+        setCardSize(242);
       } else if (width < 640) {
-        setCardSize(282);
+        setCardSize(264);
       } else {
         setCardSize(350);
       }
