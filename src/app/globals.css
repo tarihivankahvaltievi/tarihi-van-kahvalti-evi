@@ -18396,7 +18396,6 @@ h2 span,
     top: 17.5rem !important;
     height: 282px !important;
     min-height: 282px !important;
-    opacity: 0.96 !important;
   }
 
   .hero-parallax-food-stage .hero-float-pan {
@@ -21559,5 +21558,64 @@ body,
       translate(-50%, -50%)
       translateY(-72px)
       scale(1) !important;
+  }
+}
+
+/* Mobile hero finish: soften floating-food exit and keep hero/about beige identical. */
+.hero.hero-parallax-dining,
+.story-band {
+  background: var(--heritage-paper) !important;
+  background-color: var(--heritage-paper) !important;
+}
+
+.hero-parallax-sticky::after {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 8;
+  height: clamp(7rem, 18vw, 11rem);
+  content: "";
+  background:
+    linear-gradient(
+      180deg,
+      rgba(248, 239, 224, 0) 0%,
+      rgba(248, 239, 224, 0.68) 58%,
+      var(--heritage-paper) 100%
+    );
+  pointer-events: none;
+}
+
+@media (max-width: 680px) {
+  .hero.hero-parallax-dining,
+  .story-band {
+    background: var(--heritage-paper) !important;
+    background-color: var(--heritage-paper) !important;
+  }
+
+  .hero.hero-parallax-dining::before {
+    background:
+      linear-gradient(
+        180deg,
+        rgba(248, 239, 224, 0.56) 0%,
+        rgba(248, 239, 224, 0.12) 44%,
+        var(--heritage-paper) 100%
+      ) !important;
+  }
+
+  .hero-parallax-food-stage {
+    will-change: transform, opacity !important;
+  }
+
+  .hero-parallax-sticky::after {
+    height: clamp(9rem, 29vw, 13rem);
+    background:
+      linear-gradient(
+        180deg,
+        rgba(248, 239, 224, 0) 0%,
+        rgba(248, 239, 224, 0.38) 34%,
+        rgba(248, 239, 224, 0.86) 72%,
+        var(--heritage-paper) 100%
+      );
   }
 }

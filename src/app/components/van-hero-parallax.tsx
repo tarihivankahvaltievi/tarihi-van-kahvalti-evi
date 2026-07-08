@@ -271,8 +271,8 @@ export function VanHeroParallax() {
   const foodOpacity = useSpring(
     useTransform(
       scrollYProgress,
-      [0, 0.55, 0.82, 0.94],
-      still ? [1, 1, 1, 1] : [1, 1, 0.76, 0],
+      isMobile ? [0, 0.36, 0.58, 0.76] : [0, 0.55, 0.82, 0.94],
+      still ? [1, 1, 1, 1] : isMobile ? [1, 0.98, 0.46, 0] : [1, 1, 0.76, 0],
     ),
     spring,
   );
