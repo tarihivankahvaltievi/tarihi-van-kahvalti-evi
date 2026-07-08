@@ -333,7 +333,7 @@ export function VanHeroParallax() {
       id="top"
       ref={ref}
       className="hero hero-parallax-dining"
-      aria-label="Tarihi Van Kahvaltıcısı ana alanı"
+      aria-label="Tarihi Van Kahvaltı Evi ana alanı"
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
     >
@@ -351,19 +351,17 @@ export function VanHeroParallax() {
               filter: copyFilter,
             }}
           >
-            <h1>
+            <div className="hero-parallax-kicker" aria-hidden="true">
+              Beyoğlu Taksim
+            </div>
+            <h1 className="hero-title-lockup">
               <span className="sr-only">Tarihi Van Kahvaltı Evi — Taksim Beyoğlu Serpme Van Kahvaltısı</span>
-              <span aria-hidden="true">
-                Çay&nbsp;taze,
-                <br />
-                sofra
-                <br />
-                sıcak.
-              </span>
+              <span className="hero-title-line hero-title-line-one" aria-hidden="true">Tarihi Van</span>
+              <span className="hero-title-line hero-title-line-two" aria-hidden="true">Kahvaltı Evi</span>
             </h1>
             <p>
-              Otlu peynir, kavut, murtuğa ve bakır sahanlar. Van kahvaltısı
-              burada aceleye gelmez.
+              1978&apos;den beri serpme Van kahvaltısı: otlu peynir, kavut,
+              murtuğa, sıcak bakır sahanlar ve sınırsız taze çay.
             </p>
           </motion.div>
         </motion.div>
