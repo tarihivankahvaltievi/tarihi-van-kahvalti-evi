@@ -103,7 +103,7 @@ export function HomeContent() {
       </div>
 
       <section className="red-reviews" data-reveal>
-        <h2>Misafirlerimizin söylediği şey basit: masa uzasın.</h2>
+        <h2>Misafirlerimizin yorumları</h2>
         <ReviewCarousel />
       </section>
 
