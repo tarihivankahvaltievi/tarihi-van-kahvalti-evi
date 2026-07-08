@@ -22897,10 +22897,10 @@ body,
   }
 }
 
-/* Hero copy final pass: cleaner Turkish headline rhythm on mobile. */
+/* Hero copy final pass: direct brand intro with calmer rhythm. */
 .hero-parallax-copy h1,
 .hero-parallax-copy h1 span {
-  letter-spacing: -0.025em !important;
+  letter-spacing: -0.018em !important;
   text-wrap: balance;
 }
 
@@ -22910,30 +22910,30 @@ body,
 
 @media (max-width: 680px) {
   .hero-parallax-copy {
-    top: 8.18rem !important;
-    width: min(18.9rem, calc(100vw - 2rem)) !important;
-    max-width: 18.9rem !important;
+    top: 8.3rem !important;
+    width: min(20.25rem, calc(100vw - 2rem)) !important;
+    max-width: 20.25rem !important;
   }
 
   .hero-parallax-copy h1 {
-    max-width: 7.9em !important;
-    margin: 0 0 0.52rem !important;
+    max-width: 8.8em !important;
+    margin: 0 0 0.64rem !important;
     color: #171411 !important;
-    font-size: clamp(3.08rem, 14.2vw, 3.92rem) !important;
+    font-size: clamp(2.86rem, 12.6vw, 3.54rem) !important;
     font-weight: 900 !important;
-    letter-spacing: -0.045em !important;
-    line-height: 0.86 !important;
+    letter-spacing: -0.04em !important;
+    line-height: 0.88 !important;
     text-shadow:
       1px 1px 0 rgba(255, 249, 237, 0.72),
       0 16px 34px rgba(64, 48, 28, 0.12) !important;
   }
 
   .hero-parallax-copy p {
-    max-width: min(18rem, calc(100vw - 3rem)) !important;
+    max-width: min(19.1rem, calc(100vw - 2.7rem)) !important;
     color: rgba(33, 29, 27, 0.74) !important;
-    font-size: clamp(1.02rem, 4.25vw, 1.16rem) !important;
-    font-weight: 620 !important;
-    line-height: 1.38 !important;
+    font-size: clamp(0.98rem, 3.95vw, 1.1rem) !important;
+    font-weight: 650 !important;
+    line-height: 1.42 !important;
   }
 
   .hero-parallax-copy::after {
@@ -22944,22 +22944,22 @@ body,
   }
 
   .hero-parallax-food-stage {
-    top: 12.25rem !important;
+    top: 12.4rem !important;
   }
 }
 
 @media (max-width: 380px) {
   .hero-parallax-copy {
-    top: 8rem !important;
-    width: min(17.4rem, calc(100vw - 2rem)) !important;
+    top: 8.08rem !important;
+    width: min(18.35rem, calc(100vw - 2rem)) !important;
   }
 
   .hero-parallax-copy h1 {
-    font-size: clamp(2.82rem, 13.6vw, 3.36rem) !important;
+    font-size: clamp(2.62rem, 12.4vw, 3.08rem) !important;
   }
 
   .hero-parallax-copy p {
-    max-width: 16.6rem !important;
-    font-size: 0.98rem !important;
+    max-width: 17.2rem !important;
+    font-size: 0.94rem !important;
   }
 }
