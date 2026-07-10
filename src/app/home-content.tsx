@@ -25,17 +25,17 @@ const gallery: [string, string][] = [
 const aboutStory = [
   {
     title: "Tarihi bina",
-    text: "18. yüzyıl sonu Rum yapısının ahşap, taş ve motifleri kahvaltının temposunu yavaşlatır; sokaktan içeri girince masa şehrin gürültüsünden ayrılır.",
+    text: "18. yüzyıl sonu Rum yapısının ahşabı, taşı ve motifleri; Zambak Sokak'tan içeri adım atınca şehrin temposunu geride bırakır.",
     note: "Zambak Sokak",
   },
   {
     title: "Aile emeği",
-    text: "1978'den beri üçüncü kuşak aynı özenle servis eder; reçel, peynir, sıcak sahan ve çay aynı sabırla masaya gelir.",
+    text: "1978'den beri aynı aile sofrası, bugün üçüncü kuşağın emeğiyle kuruluyor. Her tabak, evde misafir ağırlar gibi hazırlanıyor.",
     note: "Üçüncü kuşak",
   },
   {
     title: "Van sofrası",
-    text: "Otlu peynir, bal kaymak, Van ketesi, kavut, murtuğa, sıcak sahanlar ve taze çay sofrayı doyuran asıl karakterdir.",
+    text: "Otlu peynir, bal kaymak, Van ketesi, kavut, murtuğa ve sıcak sahanlar; taze çay eşliğinde uzun bir kahvaltıya dönüşüyor.",
     note: "Serpme kahvaltı",
   },
 ];
@@ -75,13 +75,13 @@ export function HomeContent() {
 
           <div className="about-sofra-copy">
             <div className="about-sofra-kicker" data-reveal>Hakkımızda</div>
-            <h2 data-reveal>Van&apos;dan gelen sofra, Beyoğlu&apos;nda ağır ağır kurulur.</h2>
+            <h2 data-reveal>Van&apos;dan Beyoğlu&apos;na uzanan bir aile sofrası.</h2>
             <p className="about-sofra-lead" data-reveal>
-              Tarihi Van Kahvaltı Evi, Taksim&apos;in kalabalığında Van sofrasını
-              tarihi Rum binasının sakin dokusuyla buluşturur.
+              Taksim&apos;in kalabalığından bir adım içeride, Van&apos;ın kahvaltı geleneğini
+              tarihi Rum binasının sakinliğiyle buluşturuyoruz.
             </p>
             <p className="about-sofra-ritual" data-reveal>
-              Sofra aceleye değil; çayın buharına ve masada uzayan muhabbete kurulur.
+              Burada kahvaltı aceleye gelmez; çay tazelenir, sohbet uzar, sofra paylaşılır.
             </p>
 
             <div className="about-sofra-proof" data-reveal aria-label="Tarihi Van Kahvaltı Evi öne çıkan bilgileri">

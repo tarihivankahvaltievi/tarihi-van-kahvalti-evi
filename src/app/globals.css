@@ -5678,6 +5678,204 @@ h2 span {
 	/* Reduced motion overrides cleaned */
 }
 
+/* About refinement: one continuous story, aligned with the hero's quiet heritage tone. */
+.about-sofra-copy {
+  overflow: visible !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+.about-sofra-copy::before,
+.about-sofra-copy::after {
+  display: none !important;
+}
+
+.about-sofra-kicker {
+  padding: 0 !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  color: rgba(255, 248, 234, 0.72) !important;
+}
+
+.about-sofra h2 {
+  max-width: 12ch !important;
+  font-family: var(--font-cormorant), Georgia, serif !important;
+  font-size: clamp(3.15rem, 6.4vw, 6.5rem) !important;
+  font-weight: 700 !important;
+  letter-spacing: -0.025em !important;
+  line-height: 0.91 !important;
+  text-wrap: balance;
+}
+
+.about-sofra-lead {
+  max-width: 39rem !important;
+  font-weight: 680 !important;
+  line-height: 1.5 !important;
+  text-wrap: pretty;
+}
+
+.about-sofra-ritual {
+  display: block !important;
+  max-width: 39rem !important;
+  padding: 0 0 0.1rem !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  color: #f1d18a !important;
+  box-shadow: none !important;
+  font-family: var(--font-cormorant), Georgia, serif !important;
+  font-size: clamp(1.45rem, 2.4vw, 2rem) !important;
+  font-weight: 700 !important;
+  line-height: 1.16 !important;
+  text-wrap: balance;
+}
+
+.about-sofra-proof {
+  grid-template-columns: minmax(9rem, 0.62fr) minmax(0, 1.38fr) !important;
+  max-width: 42rem;
+  border-color: rgba(255, 248, 234, 0.3) !important;
+}
+
+.about-sofra-proof strong {
+  font-family: var(--font-cormorant), Georgia, serif !important;
+  font-weight: 700 !important;
+  letter-spacing: -0.02em !important;
+}
+
+.about-sofra-story {
+  max-width: 44rem;
+  grid-template-columns: 1fr !important;
+  gap: 0 !important;
+  border-bottom: 1px solid rgba(255, 248, 234, 0.22);
+}
+
+.about-sofra-story article {
+  grid-template-columns: minmax(7.5rem, 0.38fr) minmax(0, 1fr) !important;
+  gap: 0.22rem 1.2rem !important;
+  min-height: 0 !important;
+  padding: 1.1rem 0 !important;
+  border: 0 !important;
+  border-top: 1px solid rgba(255, 248, 234, 0.22) !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  transform: none !important;
+}
+
+.about-sofra-story article + article {
+  border-top-color: rgba(255, 248, 234, 0.22) !important;
+}
+
+.about-sofra-story article span {
+  grid-row: span 2;
+  padding-top: 0.16rem;
+}
+
+.about-sofra-story article strong {
+  font-family: var(--font-cormorant), Georgia, serif !important;
+  font-size: clamp(1.35rem, 2vw, 1.65rem) !important;
+  font-weight: 700 !important;
+}
+
+.about-sofra-story article p {
+  display: block !important;
+  overflow: visible !important;
+  -webkit-line-clamp: unset !important;
+  font-size: clamp(0.9rem, 1.1vw, 1rem) !important;
+  line-height: 1.48 !important;
+  text-wrap: pretty;
+}
+
+@media (max-width: 900px) {
+  .about-sofra-copy {
+    padding: 1.35rem 0.15rem 1.1rem !important;
+  }
+
+  .about-sofra h2 {
+    max-width: 11ch !important;
+    margin-top: 0.8rem !important;
+    font-size: clamp(2.65rem, 12vw, 4.6rem) !important;
+    line-height: 0.94 !important;
+  }
+
+  .about-sofra-lead {
+    font-size: clamp(1rem, 4.2vw, 1.18rem) !important;
+    line-height: 1.48 !important;
+  }
+
+  .about-sofra-ritual {
+    margin-top: 1rem !important;
+    padding: 0 !important;
+    font-size: clamp(1.35rem, 5.8vw, 1.72rem) !important;
+    line-height: 1.18 !important;
+  }
+
+  .about-sofra-proof {
+    grid-template-columns: minmax(7.4rem, 0.7fr) minmax(0, 1.3fr) !important;
+    gap: 0.7rem !important;
+    margin-top: 1rem !important;
+    padding: 0.9rem 0 !important;
+  }
+
+  .about-sofra-proof strong {
+    font-size: clamp(1.65rem, 7.2vw, 2.15rem) !important;
+    line-height: 0.95 !important;
+  }
+
+  .about-sofra-proof span {
+    font-size: clamp(0.83rem, 3.35vw, 0.96rem) !important;
+    line-height: 1.38 !important;
+  }
+
+  .about-sofra-story {
+    margin-top: 0.1rem !important;
+  }
+
+  .about-sofra-story article {
+    grid-template-columns: minmax(6.2rem, 0.36fr) minmax(0, 1fr) !important;
+    gap: 0.18rem 0.85rem !important;
+    padding: 1rem 0 !important;
+  }
+
+  .about-sofra-story article span {
+    font-size: 0.68rem !important;
+    line-height: 1.18 !important;
+  }
+
+  .about-sofra-story article strong {
+    font-size: clamp(1.25rem, 5.2vw, 1.5rem) !important;
+  }
+
+  .about-sofra-story article p {
+    font-size: clamp(0.86rem, 3.45vw, 0.96rem) !important;
+    line-height: 1.43 !important;
+  }
+}
+
+@media (max-width: 390px) {
+  .about-sofra h2 {
+    font-size: clamp(2.45rem, 11.7vw, 3.15rem) !important;
+  }
+
+  .about-sofra-story article {
+    grid-template-columns: 1fr !important;
+    gap: 0.3rem !important;
+  }
+
+  .about-sofra-story article span {
+    grid-row: auto;
+  }
+
+  .about-sofra-story article span::before {
+    display: inline-block;
+    margin: 0 0.5rem 0.16rem 0 !important;
+  }
+}
+
 /* Final mobile pass: keep the 3D book, remove the cramped oversized layout. */
 @media (max-width: 767px) {
   .menu-section {
@@ -23191,5 +23389,154 @@ body,
   .hero-parallax-copy p,
   .hero-parallax-copy::after {
     animation: none !important;
+  }
+}
+
+/* About section — definitive cascade layer. */
+@layer about-refinement {
+  .about-sofra-copy {
+    overflow: visible !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    background: transparent !important;
+    box-shadow: none !important;
+  }
+
+  .about-sofra-copy::before,
+  .about-sofra-copy::after { display: none !important; }
+
+  .about-sofra-kicker {
+    padding: 0 !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    color: rgba(255, 248, 234, 0.72) !important;
+  }
+
+  .about-sofra h2 {
+    max-width: 12ch !important;
+    font-family: var(--font-cormorant), Georgia, serif !important;
+    font-size: clamp(3.15rem, 6.4vw, 6.5rem) !important;
+    font-weight: 700 !important;
+    letter-spacing: -0.025em !important;
+    line-height: 0.91 !important;
+    text-wrap: balance;
+  }
+
+  .about-sofra-lead {
+    max-width: 39rem !important;
+    font-weight: 680 !important;
+    line-height: 1.5 !important;
+    text-wrap: pretty;
+  }
+
+  .about-sofra-ritual {
+    display: block !important;
+    max-width: 39rem !important;
+    padding: 0 !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    color: #f1d18a !important;
+    font-family: var(--font-cormorant), Georgia, serif !important;
+    font-size: clamp(1.45rem, 2.4vw, 2rem) !important;
+    font-weight: 700 !important;
+    line-height: 1.16 !important;
+    text-wrap: balance;
+  }
+
+  .about-sofra-proof {
+    grid-template-columns: minmax(9rem, 0.62fr) minmax(0, 1.38fr) !important;
+    max-width: 42rem;
+    border-color: rgba(255, 248, 234, 0.3) !important;
+  }
+
+  .about-sofra-proof strong {
+    font-family: var(--font-cormorant), Georgia, serif !important;
+    font-weight: 700 !important;
+  }
+
+  .about-sofra-story {
+    grid-template-columns: 1fr !important;
+    gap: 0 !important;
+    max-width: 44rem;
+    border-bottom: 1px solid rgba(255, 248, 234, 0.22) !important;
+  }
+
+  .about-sofra-story article,
+  .about-sofra-story article + article {
+    grid-template-columns: minmax(7.5rem, 0.38fr) minmax(0, 1fr) !important;
+    gap: 0.22rem 1.2rem !important;
+    min-height: 0 !important;
+    padding: 1.1rem 0 !important;
+    border: 0 !important;
+    border-top: 1px solid rgba(255, 248, 234, 0.22) !important;
+    border-radius: 0 !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    transform: none !important;
+  }
+
+  .about-sofra-story article span { grid-row: span 2; }
+
+  .about-sofra-story article strong {
+    font-family: var(--font-cormorant), Georgia, serif !important;
+    font-size: clamp(1.35rem, 2vw, 1.65rem) !important;
+    font-weight: 700 !important;
+  }
+
+  .about-sofra-story article p {
+    display: block !important;
+    overflow: visible !important;
+    -webkit-line-clamp: unset !important;
+    font-size: clamp(0.9rem, 1.1vw, 1rem) !important;
+    line-height: 1.48 !important;
+    text-wrap: pretty;
+  }
+
+  @media (max-width: 900px) {
+    .about-sofra-copy { padding: 1.35rem 0.15rem 1.1rem !important; }
+
+    .about-sofra h2 {
+      max-width: 11ch !important;
+      font-size: clamp(2.65rem, 12vw, 4.6rem) !important;
+      line-height: 0.94 !important;
+    }
+
+    .about-sofra-ritual {
+      font-size: clamp(1.35rem, 5.8vw, 1.72rem) !important;
+      line-height: 1.18 !important;
+    }
+
+    .about-sofra-proof {
+      grid-template-columns: minmax(7.4rem, 0.7fr) minmax(0, 1.3fr) !important;
+      gap: 0.7rem !important;
+    }
+
+    .about-sofra-story article,
+    .about-sofra-story article + article {
+      grid-template-columns: minmax(6.2rem, 0.36fr) minmax(0, 1fr) !important;
+      gap: 0.18rem 0.85rem !important;
+      padding: 1rem 0 !important;
+    }
+
+    .about-sofra-story article p {
+      font-size: clamp(0.86rem, 3.45vw, 0.96rem) !important;
+      line-height: 1.43 !important;
+    }
+  }
+
+  @media (max-width: 390px) {
+    .about-sofra h2 { font-size: clamp(2.45rem, 11.7vw, 3.15rem) !important; }
+
+    .about-sofra-story article,
+    .about-sofra-story article + article {
+      grid-template-columns: 1fr !important;
+      gap: 0.3rem !important;
+    }
+
+    .about-sofra-story article span { grid-row: auto; }
   }
 }
