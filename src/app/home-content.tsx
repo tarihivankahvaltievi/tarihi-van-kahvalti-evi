@@ -74,27 +74,32 @@ export function HomeContent() {
           </div>
 
           <div className="about-sofra-copy">
-            <div className="about-sofra-kicker" data-reveal>Hakkımızda</div>
+            <div className="about-sofra-heading">
+              <div className="about-sofra-kicker" data-reveal>Hakkımızda</div>
+              <span className="about-sofra-year" aria-hidden="true">1978 — Beyoğlu</span>
+            </div>
             <h2 data-reveal>Van&apos;dan gelen sofra, Beyoğlu&apos;nda ağır ağır kurulur.</h2>
             <p className="about-sofra-lead" data-reveal>
               Tarihi Van Kahvaltı Evi, Taksim&apos;in kalabalığında Van sofrasını
               tarihi Rum binasının sakin dokusuyla buluşturur.
             </p>
-            <p className="about-sofra-ritual" data-reveal>
+            <blockquote className="about-sofra-ritual" data-reveal>
               Sofra aceleye değil; çayın buharına ve masada uzayan muhabbete kurulur.
-            </p>
+            </blockquote>
 
-            <div className="about-sofra-proof" data-reveal aria-label="Tarihi Van Kahvaltı Evi öne çıkan bilgileri">
+            <p className="about-sofra-proof" data-reveal>
               <strong>1978&apos;den beri</strong>
               <span>Beyoğlu&apos;nda üçüncü kuşak aile emeği, tarihi Rum yapısı ve Van sofrası aynı masada buluşur.</span>
-            </div>
+            </p>
 
             <div className="about-sofra-story" aria-label="Tarihi Van Kahvaltı Evi hikayesi">
               {aboutStory.map((item) => (
                 <article key={item.title} data-reveal>
                   <span>{item.note}</span>
-                  <strong>{item.title}</strong>
-                  <p>{item.text}</p>
+                  <div>
+                    <strong>{item.title}</strong>
+                    <p>{item.text}</p>
+                  </div>
                 </article>
               ))}
             </div>
