@@ -3,8 +3,9 @@
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, MapPin, MessageCircle, Phone, Clock } from "lucide-react";
+import { ArrowRight, Bell, CirclePause, CirclePlay, MapPin, MessageCircle, Phone, Clock } from "lucide-react";
 import { address, displayAddress, displayPhone, mapsUrl, openingHours, telUrl, whatsappUrl } from "../seo";
+import { IstiklalAtmosphere } from "./istiklal-atmosphere";
 
 const wallBlocks = [
   { x: -8, y: 2, w: 82, h: 28, tone: "stone" },
@@ -108,7 +109,7 @@ const createStoneVein = (block: WallBlock, index: number) => {
   return `M ${startX.toFixed(1)} ${startY.toFixed(1)} c ${wobble(index, 1.29, 7)} ${wobble(index, 2.29, 5)} ${(length * 0.55).toFixed(1)} ${wobble(index, 3.29, 8)} ${length.toFixed(1)} ${wobble(index, 4.29, 5)}`;
 };
 
-function IstiklalWebglAtmosphere() {
+function IstiklalWebglAtmosphere({ paused }: { paused: boolean }) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
@@ -306,31 +307,41 @@ function IstiklalWebglAtmosphere() {
     };
   }, []);
 
-  return (
-    <canvas
-      ref={canvasRef}
-      className="footer-istiklal-webgl"
-      aria-hidden="true"
-      style={{
-        position: "absolute",
-        inset: 0,
-        zIndex: 1,
-        width: "100%",
-        height: "100%",
-        mixBlendMode: "multiply",
-        opacity: 0.82,
-        pointerEvents: "none",
-      }}
-    />
-  );
+  return <IstiklalAtmosphere paused={paused} />;
 }
 
 export function AnimatedFooter() {
   const footerRef = useRef<HTMLElement>(null);
   const [dingCount, setDingCount] = useState(0);
+  const [scenePaused, setScenePaused] = useState(false);
 
   const handleTramClick = () => {
     setDingCount((prev) => prev + 1);
+
+    const AudioContextClass = window.AudioContext;
+    if (!AudioContextClass) return;
+    const context = new AudioContextClass();
+    const master = context.createGain();
+    master.gain.setValueAtTime(0.0001, context.currentTime);
+    master.gain.exponentialRampToValueAtTime(0.12, context.currentTime + 0.012);
+    master.gain.exponentialRampToValueAtTime(0.0001, context.currentTime + 0.82);
+    master.connect(context.destination);
+
+    [0, 0.16].forEach((delay, index) => {
+      const oscillator = context.createOscillator();
+      const gain = context.createGain();
+      oscillator.type = "sine";
+      oscillator.frequency.setValueAtTime(index === 0 ? 1240 : 980, context.currentTime + delay);
+      oscillator.frequency.exponentialRampToValueAtTime(index === 0 ? 940 : 760, context.currentTime + delay + 0.34);
+      gain.gain.setValueAtTime(0.0001, context.currentTime + delay);
+      gain.gain.exponentialRampToValueAtTime(0.7, context.currentTime + delay + 0.008);
+      gain.gain.exponentialRampToValueAtTime(0.0001, context.currentTime + delay + 0.48);
+      oscillator.connect(gain);
+      gain.connect(master);
+      oscillator.start(context.currentTime + delay);
+      oscillator.stop(context.currentTime + delay + 0.5);
+    });
+    window.setTimeout(() => void context.close(), 1100);
   };
 
   const handleOpenBooking = () => {
@@ -395,12 +406,12 @@ export function AnimatedFooter() {
   }, []);
 
   return (
-    <footer id="footer" ref={footerRef} className="footer-reimagined">
+    <footer id="footer" ref={footerRef} className={`footer-reimagined${scenePaused ? " is-scene-paused" : ""}`}>
 
       {/* ─── Premium Live Beyoğlu Illustration ─── */}
-      <div className="footer-skyline-wrapper" aria-hidden="true">
-        <IstiklalWebglAtmosphere />
-        <svg viewBox="0 0 1200 240" preserveAspectRatio="xMidYMax meet" className="footer-skyline-svg" xmlns="http://www.w3.org/2000/svg">
+      <div className="footer-skyline-wrapper">
+        <IstiklalWebglAtmosphere paused={scenePaused} />
+        <svg aria-hidden="true" focusable="false" viewBox="0 0 1200 240" preserveAspectRatio="xMidYMax meet" className="footer-skyline-svg" xmlns="http://www.w3.org/2000/svg">
           <defs>
             <linearGradient id="sky-building-fill" x1="0" y1="0" x2="0" y2="1">
               <stop offset="0" stopColor="#fffdf7" />
@@ -902,7 +913,7 @@ export function AnimatedFooter() {
             </g>
 
             {/* ─── Nostalgic Tram (Interaktif) ─── */}
-            <g className="tram-group" onClick={handleTramClick} style={{ cursor: "pointer" }}>
+            <g className="tram-group">
               <g className={`bell-bubble ${dingCount > 0 ? "show-ding" : ""}`} key={dingCount}>
                 <path d="M 30 118 L 45 118 L 50 128 L 55 118 L 85 118 A 8 8 0 0 0 93 110 L 93 90 A 8 8 0 0 0 85 82 L 30 82 A 8 8 0 0 0 22 90 L 22 110 A 8 8 0 0 0 30 118 Z" fill="var(--white, #ffffff)" stroke="#c1272d" strokeWidth="1.5" />
                 <text x="57" y="103" fontSize="10.5" fontWeight="900" textAnchor="middle" stroke="none" fill="#c1272d" fontFamily="var(--font-sans)">Dıng Dıng! 🔔</text>
@@ -910,19 +921,20 @@ export function AnimatedFooter() {
 
               {/* Tram Chassis Group (for vibration animation) */}
               <g className="tram-chassis">
-                {/* Nostalgic Istiklal tram body - more rounded and realistic */}
-                <path d="M2 172 C2 155 10 155 25 155 H115 C130 155 138 155 138 172 L145 190 C145 208 135 210 125 210 H15 C5 210 -2 208 2 172 Z" fill="url(#tram-body)" stroke="#2a2a2d" strokeWidth="1.8" />
+                {/* Restored car 223-inspired body: lacquered wood, cream roof and İstanbul red metalwork. */}
+                <ellipse className="tram-ground-shadow" cx="76" cy="218" rx="79" ry="7" fill="#34281f" opacity="0.2" />
+                <path d="M2 172 C2 155 10 155 25 155 H115 C130 155 138 157 138 172 L145 190 C145 208 135 210 125 210 H15 C5 210 -2 208 2 172 Z" fill="url(#tram-body)" stroke="#291a16" strokeWidth="1.8" />
 
                 {/* Darker lower section */}
                 <path d="M3 195 L143 195 L135 210 H10 Z" fill="#2d251c" stroke="none" />
 
                 {/* Roof details */}
-                <path d="M12 155 H128 L133 162 H7 Z" fill="#3a3c3e" stroke="#2a2a2d" strokeWidth="1" />
-                <rect x="35" y="152" width="70" height="4" rx="2" fill="#55585b" stroke="#2a2a2d" strokeWidth="1" />
+                <path d="M12 155 H128 L133 162 H7 Z" fill="#eee1c3" stroke="#38251c" strokeWidth="1" />
+                <rect x="35" y="152" width="70" height="4" rx="2" fill="#f8efd8" stroke="#3d2a21" strokeWidth="1" />
 
                 {/* Signage */}
-                <rect x="46" y="145" width="48" height="12" rx="2" fill="#e8d5a5" stroke="#2a2a2d" strokeWidth="1.5" />
-                <text x="70" y="154" fontSize="7" fontWeight="900" textAnchor="middle" stroke="none" fill="#6f1013" fontFamily="var(--font-sans)" letterSpacing="0.08em">TÜNEL</text>
+                <rect x="42" y="144" width="56" height="13" rx="1.5" fill="#f0e3c5" stroke="#5d151a" strokeWidth="1.5" />
+                <text x="70" y="153" fontSize="6.4" fontWeight="900" textAnchor="middle" stroke="none" fill="#77151a" fontFamily="var(--font-sans)" letterSpacing="0.045em">2 · TAKSİM — TÜNEL</text>
 
                 {/* Brass Trims */}
                 <path d="M6 182 H138" stroke="url(#brass-trim)" strokeWidth="2.5" />
@@ -936,6 +948,14 @@ export function AnimatedFooter() {
                   <rect x="84" y="167" width="18" height="26" rx="2" fill="url(#tram-glass)" className="tram-window" />
                   {/* Front curved window */}
                   <path d="M107 167 H125 C132 175 133 185 133 193 H107 Z" fill="url(#tram-glass)" className="tram-window" />
+                </g>
+
+                {/* Low-contrast passenger silhouettes behind the glass. */}
+                <g className="tram-passengers" fill="#4f382c" opacity="0.36">
+                  <circle cx="47" cy="176" r="3" />
+                  <path d="M43.5 181 Q47 177.5 50.5 181 V192 H43.5 Z" />
+                  <circle cx="89" cy="177" r="2.8" />
+                  <path d="M85.8 182 Q89 178.5 92.2 182 V192 H85.8 Z" />
                 </g>
 
                 {/* Wooden panels / dividers */}
@@ -964,18 +984,18 @@ export function AnimatedFooter() {
                   <path d="M98 205 C98 198 118 198 118 205" fill="#1a1c1e" />
 
                   {/* Wheels */}
-                  <circle cx="28" cy="213" r="6.5" fill="#55585b" className="tram-wheel" />
-                  <circle cx="108" cy="213" r="6.5" fill="#55585b" className="tram-wheel" />
+                  <g className="tram-wheel"><circle cx="28" cy="213" r="6.5" fill="#55585b" /><path d="M28 207V219M22 213H34M23.5 208.5L32.5 217.5M32.5 208.5L23.5 217.5" stroke="#b8a98d" strokeWidth="0.8" /></g>
+                  <g className="tram-wheel"><circle cx="108" cy="213" r="6.5" fill="#55585b" /><path d="M108 207V219M102 213H114M103.5 208.5L112.5 217.5M112.5 208.5L103.5 217.5" stroke="#b8a98d" strokeWidth="0.8" /></g>
                   <circle cx="28" cy="213" r="2" fill="#2a2a2d" />
                   <circle cx="108" cy="213" r="2" fill="#2a2a2d" />
 
                   {/* Mechanisms connecting wheels */}
-                  <path d="M28 213 H108" stroke="#3a3c3e" strokeWidth="2" />
+                  <path className="tram-connecting-rod" d="M28 213 H108" stroke="#3a3c3e" strokeWidth="2" />
                   <path d="M15 210 H120" stroke="#1a1c1e" strokeWidth="3" />
                 </g>
 
                 {/* Pantograph (Detailed) */}
-                <g stroke="#2a2a2d" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                <g className="tram-pantograph" stroke="#2a2a2d" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M25 152 H115" strokeWidth="2" />
                   {/* Lower arms */}
                   <line x1="75" y1="152" x2="60" y2="140" />
@@ -999,6 +1019,30 @@ export function AnimatedFooter() {
             </g>
           </g>
         </svg>
+        <div className="footer-scene-controls" aria-label="İstiklal tramvayı animasyon kontrolleri">
+          <button
+            type="button"
+            className="footer-scene-control footer-tram-bell"
+            onClick={handleTramClick}
+            aria-label="Tramvay zilini çal"
+          >
+            <Bell aria-hidden="true" />
+            <span>Zili çal</span>
+          </button>
+          <button
+            type="button"
+            className="footer-scene-control footer-motion-toggle"
+            onClick={() => setScenePaused((current) => !current)}
+            aria-pressed={scenePaused}
+            aria-label={scenePaused ? "İstiklal sahnesini oynat" : "İstiklal sahnesini duraklat"}
+          >
+            {scenePaused ? <CirclePlay aria-hidden="true" /> : <CirclePause aria-hidden="true" />}
+            <span>{scenePaused ? "Oynat" : "Duraklat"}</span>
+          </button>
+        </div>
+        <span className="sr-only" aria-live="polite">
+          {dingCount > 0 ? "Tramvay zili çaldı." : ""}
+        </span>
       </div>
       <div className="footer-drawn-wall" aria-hidden="true">
         <svg viewBox="0 0 1200 260" preserveAspectRatio="none" className="footer-wall-svg" xmlns="http://www.w3.org/2000/svg">

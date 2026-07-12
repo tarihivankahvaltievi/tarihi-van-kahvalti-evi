@@ -4507,7 +4507,7 @@ h2 span {
   pointer-events: none;
 }
 .bell-bubble.show-ding {
-  animation: bubble-pop 1.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+  animation: bubble-pop 1.4s cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }
 @keyframes bubble-pop {
   0% { opacity: 0; transform: scale(0.5) translateY(15px); }
@@ -27379,4 +27379,207 @@ body .mobile-bar a svg {
     transform: none !important;
     filter: none !important;
   }
+}
+
+/* ═══════════════════════════════════════════════════════════
+   LIVE İSTİKLAL — authoritative footer scene motion layer
+   ═══════════════════════════════════════════════════════════ */
+.footer-reimagined {
+  --tram-cycle: 24s;
+  --tram-ease: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.footer-reimagined .footer-skyline-wrapper {
+  isolation: isolate;
+  height: clamp(220px, 23vw, 292px);
+  background:
+    radial-gradient(ellipse at 51% 38%, rgba(255, 244, 203, 0.72), transparent 31%),
+    linear-gradient(180deg, #fffdf8 0%, #f7ead8 62%, #dec7a6 100%);
+  border-bottom: 1px solid rgba(45, 34, 26, 0.74);
+}
+
+.footer-istiklal-gpu {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  pointer-events: none;
+  mix-blend-mode: screen;
+  transition: opacity 700ms var(--tram-ease);
+}
+
+.footer-istiklal-gpu[data-ready="true"] { opacity: 0.76; }
+.footer-istiklal-gpu.is-gpu-unavailable { display: none; }
+
+.footer-reimagined .footer-skyline-svg {
+  z-index: 2;
+  filter: saturate(1.03) contrast(1.015);
+}
+
+.footer-reimagined .tram-group {
+  animation: istiklal-tram-story var(--tram-cycle) linear infinite both;
+  filter: drop-shadow(0 9px 6px rgba(42, 28, 20, 0.23)) drop-shadow(0 -1px 0 rgba(255, 245, 218, 0.36));
+  transform-box: fill-box;
+  transform-origin: center bottom;
+  will-change: transform, opacity;
+}
+
+.footer-reimagined .tram-chassis {
+  animation: istiklal-chassis-story var(--tram-cycle) linear infinite both;
+  transform-box: fill-box;
+  transform-origin: center bottom;
+  filter: none;
+}
+
+.footer-reimagined .tram-wheel {
+  animation: istiklal-wheel-story var(--tram-cycle) linear infinite both;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+.footer-reimagined .tram-connecting-rod {
+  animation: istiklal-rod-story var(--tram-cycle) linear infinite both;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+.footer-reimagined .tram-pantograph {
+  animation: istiklal-pantograph-story var(--tram-cycle) ease-in-out infinite both;
+  transform-box: fill-box;
+  transform-origin: center bottom;
+}
+
+.footer-reimagined .tram-ground-shadow {
+  animation: istiklal-shadow-story var(--tram-cycle) linear infinite both;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+.footer-reimagined .tram-passengers {
+  animation: istiklal-passenger-story var(--tram-cycle) ease-in-out infinite both;
+}
+
+.footer-reimagined .bell-bubble.show-ding {
+  animation: istiklal-bell-pop 900ms var(--tram-ease) both;
+}
+
+.footer-scene-controls {
+  position: absolute;
+  right: clamp(0.72rem, 2.4vw, 2rem);
+  bottom: clamp(0.72rem, 1.7vw, 1.2rem);
+  z-index: 6;
+  display: flex;
+  gap: 0.5rem;
+}
+
+.footer-scene-control {
+  display: inline-flex;
+  min-width: 48px;
+  min-height: 48px;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  padding: 0.68rem 0.85rem;
+  border: 1px solid rgba(66, 40, 29, 0.28);
+  border-radius: 999px;
+  background: rgba(255, 250, 238, 0.92);
+  color: #4e251e;
+  box-shadow: 0 4px 8px rgba(52, 35, 24, 0.13);
+  font: 750 0.75rem/1 var(--font-sans);
+  cursor: pointer;
+  backdrop-filter: blur(8px) saturate(112%);
+  -webkit-backdrop-filter: blur(8px) saturate(112%);
+  transition: transform 120ms ease-out, background-color 180ms ease-out, border-color 180ms ease-out;
+}
+
+.footer-scene-control svg { width: 18px; height: 18px; stroke-width: 1.8; }
+.footer-scene-control:hover { border-color: rgba(143, 23, 26, 0.56); background: #fffaf0; transform: translateY(-2px); }
+.footer-scene-control:active { transform: scale(0.97); }
+.footer-scene-control:focus-visible { outline: 3px solid #8f171a; outline-offset: 3px; }
+
+.footer-reimagined.is-scene-paused .footer-skyline-svg * { animation-play-state: paused !important; }
+
+@keyframes istiklal-tram-story {
+  0%, 12% { opacity: 1; transform: translate3d(420px, 0, 0); }
+  15% { opacity: 1; transform: translate3d(455px, 0, 0); animation-timing-function: cubic-bezier(0.36, 0, 0.72, 0.32); }
+  55% { opacity: 1; transform: translate3d(1260px, 0, 0); }
+  58% { opacity: 0; transform: translate3d(1320px, 0, 0); }
+  60% { opacity: 0; transform: translate3d(-205px, 0, 0); }
+  63% { opacity: 1; transform: translate3d(-160px, 0, 0); animation-timing-function: cubic-bezier(0.42, 0, 0.72, 0.38); }
+  89% { opacity: 1; transform: translate3d(410px, 0, 0); animation-timing-function: var(--tram-ease); }
+  92%, 100% { opacity: 1; transform: translate3d(420px, 0, 0); }
+}
+
+@keyframes istiklal-wheel-story {
+  0%, 12% { transform: rotate(0deg); }
+  55%, 60% { transform: rotate(2060deg); }
+  89%, 100% { transform: rotate(3520deg); }
+}
+
+@keyframes istiklal-chassis-story {
+  0%, 4%, 29%, 31%, 44%, 47%, 88%, 100% { transform: translateY(0) rotate(0deg) scaleX(1.26); }
+  8%, 18%, 54%, 68%, 80% { transform: translateY(-0.65px) rotate(-0.08deg) scaleX(1.26); }
+  13%, 23%, 61%, 74%, 85% { transform: translateY(0.45px) rotate(0.08deg) scaleX(1.26); }
+  27% { transform: translateY(0) rotate(0.24deg) scaleX(1.26); }
+  46% { transform: translateY(0) rotate(-0.2deg) scaleX(1.26); }
+}
+
+@keyframes istiklal-rod-story {
+  0% { transform: translateY(0); }
+  29%, 44% { transform: translateY(1.2px); }
+  88%, 100% { transform: translateY(0); }
+}
+
+@keyframes istiklal-pantograph-story {
+  0%, 29%, 44%, 88%, 100% { transform: skewX(0deg) translateY(0); }
+  14%, 62% { transform: skewX(0.8deg) translateY(-0.7px); }
+  22%, 78% { transform: skewX(-0.7deg) translateY(0.45px); }
+}
+
+@keyframes istiklal-shadow-story {
+  0%, 29%, 44%, 88%, 100% { opacity: 0.18; transform: scaleX(1); }
+  16%, 66% { opacity: 0.25; transform: scaleX(0.94); }
+}
+
+@keyframes istiklal-passenger-story {
+  0%, 12%, 92%, 100% { opacity: 0.5; transform: translateX(1px); }
+  15%, 55%, 63%, 89% { opacity: 0.3; transform: translateX(-1px); }
+}
+
+@keyframes istiklal-bell-pop {
+  0% { opacity: 0; transform: scale(0.84) translateY(8px); }
+  18% { opacity: 1; transform: scale(1) translateY(0); }
+  72% { opacity: 1; transform: scale(1) translateY(0); }
+  100% { opacity: 0; transform: scale(0.94) translateY(-10px); }
+}
+
+@media (max-width: 768px) {
+  .footer-reimagined .footer-skyline-wrapper { height: clamp(196px, 56vw, 238px); min-height: 196px; max-height: 238px; opacity: 1; }
+  .footer-reimagined .footer-skyline-svg { width: 160vw; max-width: none; transform: translateX(-30vw); }
+  .footer-istiklal-gpu[data-ready="true"] { opacity: 0.54; }
+  .footer-reimagined .tram-group,
+  .footer-reimagined .tram-chassis,
+  .footer-reimagined .tram-wheel,
+  .footer-reimagined .tram-connecting-rod,
+  .footer-reimagined .tram-pantograph,
+  .footer-reimagined .tram-ground-shadow,
+  .footer-reimagined .tram-passengers { animation-duration: var(--tram-cycle) !important; animation-iteration-count: infinite !important; }
+  .footer-scene-controls { right: 0.58rem; bottom: 0.58rem; }
+  .footer-scene-control { min-width: 48px; padding-inline: 0.72rem; background: rgba(255, 250, 238, 0.95); }
+  .footer-motion-toggle span { display: none; }
+}
+
+@media (max-width: 420px) {
+  .footer-reimagined .footer-skyline-svg { width: 176vw; transform: translateX(-37vw); }
+  .footer-tram-bell span { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .footer-reimagined .tram-group { opacity: 1 !important; transform: translate3d(420px, 0, 0) !important; }
+  .footer-reimagined .tram-chassis { transform: scaleX(1.26) !important; }
+  .footer-reimagined .footer-skyline-svg *,
+  .footer-reimagined .footer-istiklal-gpu { animation: none !important; transition-duration: 1ms !important; }
+  .footer-istiklal-gpu { display: none; }
 }
