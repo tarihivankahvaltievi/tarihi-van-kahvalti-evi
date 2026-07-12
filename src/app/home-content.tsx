@@ -83,17 +83,11 @@ export function HomeContent() {
               <span className="about-title-line about-title-line-accent">Beyoğlu&apos;nda ağır ağır kurulur.</span>
             </h2>
             <p className="about-sofra-lead" data-reveal>
-              Tarihi Van Kahvaltı Evi, Taksim&apos;in kalabalığında Van sofrasını
-              tarihi Rum binasının sakin dokusuyla buluşturur.
+              Van sofrasını, Beyoğlu&apos;nun tarihi Rum binasında 1978&apos;den beri ailece kuruyoruz.
             </p>
             <blockquote className="about-sofra-ritual" data-reveal>
               Sofra aceleye değil; çayın buharına ve masada uzayan muhabbete kurulur.
             </blockquote>
-
-            <p className="about-sofra-proof" data-reveal>
-              <strong>1978&apos;den beri</strong>
-              <span>Beyoğlu&apos;nda üçüncü kuşak aile emeği, tarihi Rum yapısı ve Van sofrası aynı masada buluşur.</span>
-            </p>
 
             <div className="about-sofra-story" aria-label="Tarihi Van Kahvaltı Evi hikayesi">
               {aboutStory.map((item, index) => (
