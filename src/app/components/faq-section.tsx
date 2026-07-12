@@ -2,37 +2,38 @@ import { faqItems } from "../seo";
 
 export function FaqSection() {
   return (
-    <section 
-      className="py-24 px-6 md:px-12 bg-[var(--soft)]" 
+    <section
+      className="faq-section"
       id="faq" 
       aria-labelledby="faq-heading"
     >
-      <div className="max-w-3xl mx-auto" data-reveal>
-        <h2 id="faq-heading" className="text-3xl md:text-5xl text-[var(--ink)] font-serif mb-4 text-center">
+      <div className="faq-inner" data-reveal>
+        <div className="faq-heading-wrap">
+          <span>Merak edilenler</span>
+          <h2 id="faq-heading">
           Sıkça Sorulan Sorular
-        </h2>
-        <p className="text-[var(--muted)] text-center mb-12 max-w-xl mx-auto">
-          Tarihi Van Kahvaltı Evi ve serpme kahvaltımız hakkında merak edilenler.
-        </p>
+          </h2>
+          <p>Tarihi Van Kahvaltı Evi ve serpme kahvaltımız hakkında kısa cevaplar.</p>
+        </div>
 
-        <div className="space-y-4">
+        <div className="faq-list">
           {faqItems.map((faq, index) => {
             const answerId = `faq-answer-${index}`;
             return (
               <details
                 key={index}
-                className="border rounded-lg overflow-hidden bg-white border-[var(--line)] hover:border-[var(--gold)]"
+                className="faq-item"
               >
                 <summary
                   id={`faq-question-${index}`}
-                  className="w-full text-left px-6 py-5 cursor-pointer font-medium text-[var(--ink)] focus:outline-none focus:ring-2 focus:ring-[var(--red)] focus:ring-inset"
+                  className="faq-question"
                   aria-controls={answerId}
                 >
                   {faq.question}
                 </summary>
                 <div
                   id={answerId}
-                  className="px-6 pb-6 text-[var(--muted)] leading-relaxed"
+                  className="faq-answer"
                   role="region"
                   aria-labelledby={`faq-question-${index}`}
                 >

@@ -13486,6 +13486,748 @@ h2 span,
   }
 }
 
+/* 2026-07 unified heritage system: burgundy, warm stone, restrained contour. */
+:root,
+.theme-breakfast {
+  --red: #70151c;
+  --red-dark: #4e0c12;
+  --red-light: #f2dfe0;
+  --soft: #f1ebe2;
+  --white: #fff9ee;
+  --ink: #241718;
+  --ink-soft: #3f2b2d;
+  --muted: #685a55;
+  --line: #d1c3b1;
+  --heritage-paper: #f1ebe2;
+  --heritage-paper-light: #fff9ee;
+  --heritage-paper-soft: #f7f0e6;
+  --heritage-paper-mid: #ded0be;
+  --heritage-paper-deep: #cbb99f;
+  --heritage-ink: #241718;
+  --heritage-forest: #70151c;
+  --heritage-forest-soft: #8d252c;
+  --heritage-line: rgba(28, 14, 15, 0.18);
+}
+
+html,
+body,
+.site-shell,
+.story-band,
+.gallery-section,
+.bottom-info-band,
+.footer-reimagined,
+.seo-page {
+  background: #f1ebe2 !important;
+  background-color: #f1ebe2 !important;
+}
+
+/* Navigation: one quiet bar and a flat burgundy menu sheet. */
+.theme-breakfast .nav,
+.theme-breakfast .nav.scrolled {
+  min-height: 70px !important;
+  padding: 0 clamp(0.9rem, 3vw, 2rem) !important;
+  border: 0 !important;
+  border-bottom: 1px solid rgba(20, 9, 10, 0.22) !important;
+  border-radius: 0 !important;
+  background: rgba(247, 240, 230, 0.96) !important;
+  box-shadow: 0 5px 8px rgba(42, 24, 20, 0.06) !important;
+  backdrop-filter: blur(14px) !important;
+  -webkit-backdrop-filter: blur(14px) !important;
+}
+
+.theme-breakfast .nav.scrolled {
+  min-height: 62px !important;
+}
+
+.theme-breakfast .logo em,
+.theme-breakfast .nav-links a:hover,
+.theme-breakfast .nav-location,
+.theme-breakfast .nav-location svg {
+  color: #70151c !important;
+}
+
+.theme-breakfast .nav-menu-button {
+  width: 46px !important;
+  height: 46px !important;
+  overflow: visible !important;
+  border: 1px solid #170b0c !important;
+  border-radius: 6px !important;
+  background: #70151c !important;
+  color: #fff6e5 !important;
+  box-shadow: 3px 3px 0 rgba(23, 11, 12, 0.2) !important;
+}
+
+.theme-breakfast .nav-menu-button::before,
+.theme-breakfast .nav-menu-button::after {
+  display: none !important;
+}
+
+.theme-breakfast .nav-menu-button:hover,
+.theme-breakfast .nav.menu-open .nav-menu-button {
+  background: #4e0c12 !important;
+  transform: translate(-1px, -1px) !important;
+  box-shadow: 4px 4px 0 rgba(23, 11, 12, 0.24) !important;
+}
+
+.theme-breakfast .nav-menu-panel {
+  position: fixed !important;
+  inset: 70px 0 auto !important;
+  z-index: 49 !important;
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: 0 !important;
+  width: 100% !important;
+  max-width: none !important;
+  min-height: 0 !important;
+  max-height: calc(100dvh - 70px) !important;
+  padding: clamp(1rem, 3vw, 2.2rem) clamp(1rem, 5vw, 4rem) !important;
+  overflow: auto !important;
+  border: 0 !important;
+  border-bottom: 1px solid #16090b !important;
+  border-radius: 0 !important;
+  background:
+    radial-gradient(circle at 92% 12%, rgba(239, 207, 145, 0.1), transparent 28%),
+    #70151c !important;
+  box-shadow: 0 8px 8px rgba(35, 7, 10, 0.12) !important;
+  opacity: 0 !important;
+  filter: none !important;
+  transform: translateY(-16px) !important;
+  transform-origin: top !important;
+  transition: opacity 220ms ease, transform 420ms cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+.theme-breakfast .nav.scrolled .nav-menu-panel {
+  inset: 62px 0 auto !important;
+  max-height: calc(100dvh - 62px) !important;
+}
+
+.theme-breakfast .nav.menu-open .nav-menu-panel {
+  background:
+    radial-gradient(circle at 92% 12%, rgba(239, 207, 145, 0.1), transparent 28%),
+    #70151c !important;
+  opacity: 1 !important;
+  transform: translateY(0) !important;
+}
+
+.theme-breakfast .nav-menu-panel::before,
+.theme-breakfast .nav-menu-panel::after,
+.theme-breakfast .nav-menu-ambient,
+.theme-breakfast .nav-menu-art {
+  display: none !important;
+}
+
+.theme-breakfast .nav-menu-panel a {
+  position: relative !important;
+  display: grid !important;
+  grid-template-columns: 2rem 1.5rem minmax(0, 1fr) 1.25rem !important;
+  align-items: center !important;
+  gap: 0.72rem !important;
+  min-height: 68px !important;
+  margin: 0 !important;
+  padding: 0.55rem 1rem !important;
+  overflow: hidden !important;
+  border: 0 !important;
+  border-bottom: 1px solid rgba(19, 7, 9, 0.5) !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  color: #fff4df !important;
+  box-shadow: none !important;
+  opacity: 1 !important;
+  filter: none !important;
+  transform: translateY(12px) !important;
+  transition: color 180ms ease, background-color 180ms ease, transform 420ms cubic-bezier(0.16, 1, 0.3, 1) !important;
+  transition-delay: 0ms !important;
+}
+
+.theme-breakfast .nav.menu-open .nav-menu-panel a {
+  transform: translateY(0) !important;
+  transition-delay: calc(40ms + (var(--item-index, 0) * 45ms)) !important;
+}
+
+.theme-breakfast .nav-menu-panel a::before,
+.theme-breakfast .nav-menu-panel a::after {
+  display: none !important;
+}
+
+.theme-breakfast .nav-menu-panel a:hover,
+.theme-breakfast .nav-menu-panel a:focus-visible {
+  background: #fff4df !important;
+  color: #4e0c12 !important;
+  transform: translateY(0) !important;
+  outline: none !important;
+}
+
+.theme-breakfast .nav-menu-index {
+  display: block !important;
+  width: auto !important;
+  height: auto !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  color: #efcf91 !important;
+  box-shadow: none !important;
+  font-size: 0.68rem !important;
+  font-weight: 850 !important;
+  letter-spacing: 0.08em !important;
+  opacity: 1 !important;
+  transform: none !important;
+}
+
+.theme-breakfast .nav-menu-panel a:hover .nav-menu-index,
+.theme-breakfast .nav-menu-panel a:focus-visible .nav-menu-index {
+  background: transparent !important;
+  color: #70151c !important;
+  transform: none !important;
+}
+
+.theme-breakfast .nav-menu-panel a svg {
+  width: 1.15rem !important;
+  height: 1.15rem !important;
+  color: currentColor !important;
+  filter: none !important;
+  opacity: 0.78 !important;
+  transform: none !important;
+}
+
+.theme-breakfast .nav-menu-copy {
+  display: grid !important;
+  grid-column: auto !important;
+  gap: 0.12rem !important;
+}
+
+.theme-breakfast .nav-menu-link-text {
+  color: currentColor !important;
+  font-family: var(--font-geist-sans), system-ui, sans-serif !important;
+  font-size: clamp(1rem, 2vw, 1.22rem) !important;
+  font-weight: 760 !important;
+  letter-spacing: -0.01em !important;
+  line-height: 1.05 !important;
+  text-shadow: none !important;
+  transform: none !important;
+}
+
+.theme-breakfast .nav-menu-link-meta {
+  color: currentColor !important;
+  font-size: 0.61rem !important;
+  font-weight: 650 !important;
+  letter-spacing: 0.09em !important;
+  opacity: 0.58 !important;
+}
+
+.theme-breakfast .nav-menu-signature {
+  grid-column: 1 / -1 !important;
+  display: flex !important;
+  align-items: baseline !important;
+  justify-content: space-between !important;
+  gap: 1rem !important;
+  margin: 1rem 0 0 !important;
+  padding: 0.9rem 1rem 0 !important;
+  border-top: 1px solid rgba(239, 207, 145, 0.5) !important;
+  opacity: 1 !important;
+  filter: none !important;
+  transform: none !important;
+}
+
+.theme-breakfast .nav .nav-menu-panel .nav-menu-signature > span {
+  color: #fff4df !important;
+  font-size: clamp(1.8rem, 5vw, 3rem) !important;
+  line-height: 0.9 !important;
+}
+
+.theme-breakfast .nav .nav-menu-panel .nav-menu-signature > span em {
+  color: #efcf91 !important;
+}
+
+.theme-breakfast .nav .nav-menu-panel .nav-menu-signature > small {
+  color: rgba(255, 244, 223, 0.64) !important;
+  font-size: 0.58rem !important;
+}
+
+/* About and reviews share one calm stone room and one burgundy focal color. */
+.theme-breakfast .story-band,
+.theme-breakfast .red-reviews {
+  border-color: rgba(23, 11, 12, 0.2) !important;
+  background: #f1ebe2 !important;
+  color: #241718 !important;
+}
+
+.theme-breakfast .red-reviews {
+  margin: 0 !important;
+  padding: clamp(3.4rem, 7vw, 5.5rem) 0 clamp(3rem, 6vw, 4.8rem) !important;
+  border-width: 1px 0 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+
+.theme-breakfast .red-reviews h2 {
+  color: #241718 !important;
+  text-shadow: none !important;
+  -webkit-text-fill-color: #241718 !important;
+}
+
+.theme-breakfast .red-reviews h2::before {
+  background: #70151c !important;
+}
+
+.theme-breakfast .red-reviews .stagger-testimonials-stage {
+  background: radial-gradient(ellipse at center, rgba(112, 21, 28, 0.08), transparent 58%) !important;
+}
+
+.theme-breakfast .red-reviews .stagger-testimonial-card.is-center {
+  border: 1px solid #16090b !important;
+  background: #70151c !important;
+  color: #fff4df !important;
+  box-shadow: 7px 7px 0 rgba(22, 9, 11, 0.86) !important;
+}
+
+.theme-breakfast .red-reviews .stagger-testimonial-card:not(.is-center) {
+  border: 1px solid rgba(22, 9, 11, 0.44) !important;
+  background: #e4d7cc !important;
+  color: #4d2025 !important;
+  box-shadow: 3px 3px 0 rgba(22, 9, 11, 0.16) !important;
+}
+
+.theme-breakfast .red-reviews .stagger-testimonials > .write-review-trigger-btn {
+  min-height: 48px !important;
+  border: 1px solid #16090b !important;
+  border-radius: 4px !important;
+  background: #70151c !important;
+  color: #fff4df !important;
+  box-shadow: 4px 4px 0 rgba(22, 9, 11, 0.24) !important;
+}
+
+/* Gallery: replace the old green accents with the About burgundy. */
+.theme-breakfast .gallery-section {
+  --gallery-green: #70151c;
+  --gallery-green-soft: #8d252c;
+  --gallery-gold: #efcf91;
+  border-top-color: rgba(23, 11, 12, 0.18) !important;
+  background: #f1ebe2 !important;
+}
+
+.theme-breakfast .gallery-section::before {
+  background: radial-gradient(ellipse at 88% 24%, rgba(112, 21, 28, 0.1), transparent 32%) !important;
+}
+
+.theme-breakfast .gallery-head h2 span {
+  color: #8d252c !important;
+}
+
+.theme-breakfast .gallery-head h2::after {
+  border-radius: 0 !important;
+  background: linear-gradient(90deg, #efcf91, #70151c, transparent) !important;
+}
+
+.theme-breakfast .gallery-head .order-button {
+  border: 1px solid #16090b !important;
+  border-radius: 6px !important;
+  background: #70151c !important;
+  box-shadow: 5px 5px 0 rgba(23, 11, 12, 0.18) !important;
+}
+
+/* FAQ: compact editorial accordion with a small draw-line motion. */
+.faq-section {
+  position: relative;
+  padding: clamp(3.5rem, 7vw, 6rem) clamp(1rem, 4vw, 3rem);
+  border-top: 1px solid rgba(23, 11, 12, 0.16);
+  background: #f1ebe2;
+  color: #241718;
+}
+
+.faq-inner {
+  display: grid;
+  grid-template-columns: minmax(15rem, 0.7fr) minmax(22rem, 1.3fr);
+  gap: clamp(2rem, 6vw, 6rem);
+  width: min(1120px, 100%);
+  margin-inline: auto;
+}
+
+.faq-heading-wrap {
+  align-self: start;
+  position: sticky;
+  top: 6rem;
+}
+
+.faq-heading-wrap > span,
+.local-answer-label {
+  display: block;
+  width: fit-content;
+  margin-bottom: 0.9rem;
+  padding-bottom: 0.35rem;
+  border-bottom: 1px solid #70151c;
+  color: #70151c;
+  font-size: 0.7rem;
+  font-weight: 850;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.faq-heading-wrap h2 {
+  margin: 0;
+  color: #241718;
+  font-family: var(--font-playfair), Georgia, serif;
+  font-size: clamp(2.5rem, 5vw, 4.7rem);
+  font-weight: 900;
+  line-height: 0.96;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+}
+
+.faq-heading-wrap p {
+  max-width: 32rem;
+  margin: 1rem 0 0;
+  color: #685a55;
+  line-height: 1.55;
+}
+
+.faq-list {
+  border-top: 1px solid rgba(23, 11, 12, 0.44);
+}
+
+.faq-item {
+  overflow: clip;
+  border: 0;
+  border-bottom: 1px solid rgba(23, 11, 12, 0.44);
+  border-radius: 0;
+  background: transparent;
+  transition: background-color 180ms ease;
+}
+
+.faq-item[open] {
+  background: rgba(255, 249, 238, 0.56);
+}
+
+.faq-question {
+  display: grid;
+  grid-template-columns: 1fr 1.25rem;
+  align-items: center;
+  gap: 1rem;
+  min-height: 62px;
+  padding: 1rem 0.35rem;
+  color: #241718;
+  cursor: pointer;
+  font-size: clamp(0.98rem, 1.4vw, 1.12rem);
+  font-weight: 720;
+  list-style: none;
+}
+
+.faq-question::-webkit-details-marker {
+  display: none;
+}
+
+.faq-question::after {
+  content: "+";
+  display: grid;
+  width: 1.25rem;
+  height: 1.25rem;
+  place-items: center;
+  border: 1px solid #70151c;
+  color: #70151c;
+  font-size: 1rem;
+  line-height: 1;
+  transition: transform 300ms cubic-bezier(0.16, 1, 0.3, 1), background-color 180ms ease, color 180ms ease;
+}
+
+.faq-item[open] .faq-question::after {
+  background: #70151c;
+  color: #fff4df;
+  transform: rotate(45deg);
+}
+
+.faq-question:focus-visible {
+  outline: 2px solid #70151c;
+  outline-offset: -2px;
+}
+
+.faq-answer {
+  max-width: 62ch;
+  padding: 0 2.6rem 1.15rem 0.35rem;
+  color: #685a55;
+  line-height: 1.55;
+  animation: faq-answer-in 340ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes faq-answer-in {
+  from { opacity: 0; transform: translateY(-6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Quick information: compact horizontal reading shelf on phones. */
+.bottom-info-band {
+  padding: clamp(1.5rem, 4vw, 3rem) 0 1rem !important;
+}
+
+.bottom-info-band > section:first-child {
+  border-color: rgba(23, 11, 12, 0.16) !important;
+  background: #ebe2d7 !important;
+}
+
+.bottom-info-band .seo-inline-links a {
+  border: 0 !important;
+  border-bottom: 1px solid rgba(112, 21, 28, 0.42) !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+}
+
+.local-answer-panel {
+  width: min(1120px, calc(100% - 2rem)) !important;
+  margin: 0 auto 1.5rem !important;
+  padding: clamp(1.5rem, 4vw, 2.7rem) !important;
+  border: 1px solid rgba(23, 11, 12, 0.28) !important;
+  border-radius: 6px !important;
+  background: #f7f0e6 !important;
+  box-shadow: none !important;
+}
+
+.local-answer-head h2 {
+  font-size: clamp(2rem, 4.2vw, 3.8rem) !important;
+  letter-spacing: -0.02em !important;
+}
+
+.local-answer-card {
+  min-height: 190px !important;
+  border: 1px solid rgba(23, 11, 12, 0.28) !important;
+  border-radius: 4px !important;
+  background: #fff9ee !important;
+  box-shadow: none !important;
+}
+
+.local-answer-card h3,
+.local-answer-card a {
+  color: #70151c !important;
+}
+
+.theme-breakfast .mobile-bar button,
+body .mobile-bar button {
+  background: #70151c !important;
+  box-shadow: 0 8px 16px rgba(78, 12, 18, 0.22) !important;
+}
+
+@media (max-width: 768px) {
+  .theme-breakfast .nav,
+  .theme-breakfast .nav.scrolled {
+    min-height: 62px !important;
+    padding-inline: 0.78rem !important;
+  }
+
+  .theme-breakfast .brand-logo-mark,
+  .theme-breakfast .logo-emblem {
+    width: 44px !important;
+    height: 44px !important;
+    border-radius: 6px !important;
+    box-shadow: none !important;
+  }
+
+  .theme-breakfast .nav-menu-button {
+    width: 42px !important;
+    height: 42px !important;
+  }
+
+  .theme-breakfast .nav-menu-panel,
+  .theme-breakfast .nav.scrolled .nav-menu-panel {
+    inset: 62px 0 auto !important;
+    grid-template-columns: 1fr !important;
+    max-height: calc(100dvh - 62px) !important;
+    padding: 0.6rem 0.85rem 0.8rem !important;
+  }
+
+  .theme-breakfast .nav-menu-panel a {
+    grid-template-columns: 1.55rem 1.25rem minmax(0, 1fr) 1rem !important;
+    gap: 0.55rem !important;
+    min-height: 52px !important;
+    padding: 0.4rem 0.25rem !important;
+  }
+
+  .theme-breakfast .nav-menu-link-text {
+    font-size: clamp(0.94rem, 4.2vw, 1.08rem) !important;
+  }
+
+  .theme-breakfast .nav-menu-link-meta {
+    font-size: 0.5rem !important;
+  }
+
+  .theme-breakfast .nav-menu-signature {
+    margin-top: 0.45rem !important;
+    padding: 0.6rem 0.25rem 0 !important;
+  }
+
+  .theme-breakfast .nav .nav-menu-panel .nav-menu-signature > span {
+    font-size: 1.55rem !important;
+  }
+
+  .theme-breakfast .nav .nav-menu-panel .nav-menu-signature > small {
+    font-size: 0.48rem !important;
+  }
+
+  .theme-breakfast .red-reviews {
+    padding: 3rem 0 calc(4.8rem + env(safe-area-inset-bottom)) !important;
+  }
+
+  .theme-breakfast .red-reviews h2 {
+    font-size: clamp(2.1rem, 9.8vw, 2.8rem) !important;
+  }
+
+  .theme-breakfast .red-reviews .stagger-testimonials-stage {
+    height: 390px !important;
+  }
+
+  .theme-breakfast .gallery-section {
+    padding: 3rem 0 calc(4.6rem + env(safe-area-inset-bottom)) !important;
+  }
+
+  .theme-breakfast .gallery-head .order-button {
+    min-height: 46px !important;
+    max-width: 40vw !important;
+    padding-inline: 0.85rem !important;
+  }
+
+  .faq-section {
+    padding: 3rem 0.85rem;
+  }
+
+  .faq-inner {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .faq-heading-wrap {
+    position: static;
+  }
+
+  .faq-heading-wrap > span {
+    margin-bottom: 0.65rem;
+    font-size: 0.62rem;
+  }
+
+  .faq-heading-wrap h2 {
+    max-width: 9em;
+    font-size: clamp(2.2rem, 10vw, 3rem);
+  }
+
+  .faq-heading-wrap p {
+    margin-top: 0.65rem;
+    font-size: 0.86rem;
+    line-height: 1.42;
+  }
+
+  .faq-question {
+    min-height: 48px;
+    padding: 0.7rem 0.2rem;
+    font-size: 0.9rem;
+    line-height: 1.25;
+  }
+
+  .faq-answer {
+    padding: 0 1.8rem 0.85rem 0.2rem;
+    font-size: 0.82rem;
+    line-height: 1.45;
+  }
+
+  .bottom-info-band {
+    padding-top: 0.8rem !important;
+  }
+
+  .bottom-info-band > section:first-child {
+    padding-block: 0.8rem !important;
+    font-size: 0.68rem !important;
+  }
+
+  .bottom-info-band .seo-inline-links {
+    gap: 0.3rem 0.65rem;
+    margin-top: 0.6rem;
+  }
+
+  .bottom-info-band .seo-inline-links a {
+    padding: 0.18rem 0 !important;
+    font-size: 0.66rem !important;
+  }
+
+  .bottom-info-band .seo-inline-links a:nth-child(n + 5) {
+    display: none;
+  }
+
+  .local-answer-panel {
+    width: calc(100% - 1.3rem) !important;
+    margin-bottom: 0.75rem !important;
+    padding: 1.15rem 0.9rem 1rem !important;
+  }
+
+  .local-answer-head {
+    gap: 0.5rem !important;
+    margin-bottom: 0.9rem !important;
+  }
+
+  .local-answer-label {
+    margin-bottom: 0;
+    font-size: 0.58rem;
+  }
+
+  .local-answer-head h2 {
+    max-width: 12em !important;
+    font-size: clamp(1.75rem, 8.2vw, 2.35rem) !important;
+    line-height: 0.98 !important;
+  }
+
+  .local-answer-grid {
+    display: flex !important;
+    gap: 0.7rem !important;
+    margin-inline: -0.9rem !important;
+    padding: 0 0.9rem 0.35rem !important;
+    overflow-x: auto !important;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+  }
+
+  .local-answer-grid::-webkit-scrollbar {
+    display: none;
+  }
+
+  .local-answer-card {
+    flex: 0 0 min(78vw, 278px) !important;
+    min-height: 156px !important;
+    padding: 0.9rem !important;
+    scroll-snap-align: start;
+  }
+
+  .local-answer-card p {
+    display: -webkit-box;
+    overflow: hidden;
+    font-size: 0.82rem !important;
+    line-height: 1.4 !important;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+  }
+
+  .local-answer-card a {
+    font-size: 0.78rem;
+  }
+}
+
+@media (max-width: 390px) {
+  .theme-breakfast .nav-menu-link-meta {
+    display: none !important;
+  }
+
+  .theme-breakfast .nav-menu-panel a {
+    min-height: 48px !important;
+  }
+
+  .theme-breakfast .nav .nav-menu-panel .nav-menu-signature > small {
+    display: none !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .theme-breakfast .nav-menu-panel,
+  .theme-breakfast .nav-menu-panel a,
+  .faq-question::after,
+  .faq-answer {
+    animation: none !important;
+    transition: none !important;
+    transform: none !important;
+  }
+}
+
 /* About mobile balance — stone narrative, burgundy coda, beige linework. */
 @media (max-width: 900px) {
   .story-band {
@@ -24624,5 +25366,355 @@ body,
 
   .red-reviews .stagger-testimonial-card:not(.is-center) {
     opacity: 0.38 !important;
+  }
+}
+
+/* Final authority layer — keep after all legacy experiments. */
+:root,
+.theme-breakfast {
+  --red: #70151c;
+  --red-dark: #4e0c12;
+  --soft: #f1ebe2;
+  --white: #fff9ee;
+  --ink: #241718;
+  --muted: #685a55;
+  --heritage-paper: #f1ebe2;
+  --heritage-paper-light: #fff9ee;
+  --heritage-forest: #70151c;
+  --heritage-forest-soft: #8d252c;
+}
+
+html,
+body,
+.site-shell,
+.story-band,
+.gallery-section,
+.bottom-info-band,
+.footer-reimagined,
+.seo-page {
+  background: #f1ebe2 !important;
+  background-color: #f1ebe2 !important;
+}
+
+.theme-breakfast .nav,
+.theme-breakfast .nav.scrolled {
+  min-height: 70px !important;
+  padding: 0 clamp(0.9rem, 3vw, 2rem) !important;
+  border: 0 !important;
+  border-bottom: 1px solid rgba(20, 9, 10, 0.22) !important;
+  border-radius: 0 !important;
+  background: rgba(247, 240, 230, 0.96) !important;
+  box-shadow: 0 5px 8px rgba(42, 24, 20, 0.06) !important;
+  backdrop-filter: blur(14px) !important;
+  -webkit-backdrop-filter: blur(14px) !important;
+}
+
+.theme-breakfast .nav.scrolled {
+  min-height: 62px !important;
+}
+
+.theme-breakfast .nav-menu-button,
+.theme-breakfast .nav.menu-open .nav-menu-button {
+  width: 46px !important;
+  height: 46px !important;
+  overflow: visible !important;
+  border: 1px solid #170b0c !important;
+  border-radius: 6px !important;
+  background: #70151c !important;
+  color: #fff6e5 !important;
+  box-shadow: 3px 3px 0 rgba(23, 11, 12, 0.2) !important;
+}
+
+.theme-breakfast .nav-menu-button::before,
+.theme-breakfast .nav-menu-button::after {
+  display: none !important;
+}
+
+.theme-breakfast .nav-menu-panel,
+.theme-breakfast .nav.menu-open .nav-menu-panel,
+.theme-breakfast .nav.scrolled .nav-menu-panel {
+  position: fixed !important;
+  inset: 70px 0 auto !important;
+  z-index: 49 !important;
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: 0 !important;
+  width: 100% !important;
+  max-width: none !important;
+  min-height: 0 !important;
+  max-height: calc(100dvh - 70px) !important;
+  padding: clamp(1rem, 3vw, 2.2rem) clamp(1rem, 5vw, 4rem) !important;
+  overflow: auto !important;
+  border: 0 !important;
+  border-bottom: 1px solid #16090b !important;
+  border-radius: 0 !important;
+  background: radial-gradient(circle at 92% 12%, rgba(239, 207, 145, 0.1), transparent 28%), #70151c !important;
+  box-shadow: 0 8px 8px rgba(35, 7, 10, 0.12) !important;
+  filter: none !important;
+  transform: translateY(-16px) !important;
+  transition: opacity 220ms ease, transform 420ms cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+.theme-breakfast .nav.scrolled .nav-menu-panel {
+  inset: 62px 0 auto !important;
+  max-height: calc(100dvh - 62px) !important;
+}
+
+.theme-breakfast .nav.menu-open .nav-menu-panel {
+  opacity: 1 !important;
+  transform: translateY(0) !important;
+}
+
+.theme-breakfast .nav-menu-panel::before,
+.theme-breakfast .nav-menu-panel::after,
+.theme-breakfast .nav-menu-ambient,
+.theme-breakfast .nav-menu-art {
+  display: none !important;
+}
+
+.theme-breakfast .nav-menu-panel a,
+.theme-breakfast .nav.menu-open .nav-menu-panel a {
+  display: grid !important;
+  grid-template-columns: 2rem 1.5rem minmax(0, 1fr) 1.25rem !important;
+  align-items: center !important;
+  gap: 0.72rem !important;
+  min-height: 68px !important;
+  margin: 0 !important;
+  padding: 0.55rem 1rem !important;
+  border: 0 !important;
+  border-bottom: 1px solid rgba(19, 7, 9, 0.5) !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  color: #fff4df !important;
+  box-shadow: none !important;
+  opacity: 1 !important;
+  filter: none !important;
+  transform: translateY(0) !important;
+}
+
+.theme-breakfast .nav-menu-panel a::before,
+.theme-breakfast .nav-menu-panel a::after {
+  display: none !important;
+}
+
+.theme-breakfast .nav-menu-panel a:hover,
+.theme-breakfast .nav-menu-panel a:focus-visible {
+  background: #fff4df !important;
+  color: #4e0c12 !important;
+  outline: none !important;
+}
+
+.theme-breakfast .nav-menu-index,
+.theme-breakfast .nav.menu-open .nav-menu-index {
+  display: block !important;
+  width: auto !important;
+  height: auto !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  color: #efcf91 !important;
+  box-shadow: none !important;
+  font-size: 0.68rem !important;
+  opacity: 1 !important;
+  transform: none !important;
+}
+
+.theme-breakfast .nav-menu-panel a svg,
+.theme-breakfast .nav.menu-open .nav-menu-panel a svg {
+  width: 1.15rem !important;
+  height: 1.15rem !important;
+  color: currentColor !important;
+  filter: none !important;
+  opacity: 0.78 !important;
+  transform: none !important;
+}
+
+.theme-breakfast .nav-menu-copy {
+  display: grid !important;
+  grid-column: auto !important;
+  gap: 0.12rem !important;
+}
+
+.theme-breakfast .nav-menu-link-text {
+  color: currentColor !important;
+  font-family: var(--font-geist-sans), system-ui, sans-serif !important;
+  font-size: clamp(1rem, 2vw, 1.22rem) !important;
+  font-weight: 760 !important;
+  line-height: 1.05 !important;
+  text-shadow: none !important;
+  transform: none !important;
+}
+
+.theme-breakfast .nav-menu-link-meta {
+  color: currentColor !important;
+  font-size: 0.61rem !important;
+  opacity: 0.58 !important;
+}
+
+.theme-breakfast .nav-menu-signature,
+.theme-breakfast .nav.menu-open .nav-menu-signature {
+  grid-column: 1 / -1 !important;
+  display: flex !important;
+  align-items: baseline !important;
+  justify-content: space-between !important;
+  gap: 1rem !important;
+  margin: 1rem 0 0 !important;
+  padding: 0.9rem 1rem 0 !important;
+  border-top: 1px solid rgba(239, 207, 145, 0.5) !important;
+  opacity: 1 !important;
+  filter: none !important;
+  transform: none !important;
+}
+
+.theme-breakfast .nav .nav-menu-panel .nav-menu-signature > span {
+  color: #fff4df !important;
+  font-size: clamp(1.8rem, 5vw, 3rem) !important;
+  line-height: 0.9 !important;
+}
+
+.theme-breakfast .nav .nav-menu-panel .nav-menu-signature > span em {
+  color: #efcf91 !important;
+}
+
+.theme-breakfast .red-reviews {
+  margin: 0 !important;
+  padding: clamp(3.4rem, 7vw, 5.5rem) 0 clamp(3rem, 6vw, 4.8rem) !important;
+  border: 0 !important;
+  border-top: 1px solid rgba(23, 11, 12, 0.2) !important;
+  border-radius: 0 !important;
+  background: #f1ebe2 !important;
+  box-shadow: none !important;
+  color: #241718 !important;
+}
+
+.theme-breakfast .red-reviews h2 {
+  color: #241718 !important;
+  text-shadow: none !important;
+  -webkit-text-fill-color: #241718 !important;
+}
+
+.theme-breakfast .red-reviews .stagger-testimonials-stage {
+  background: radial-gradient(ellipse at center, rgba(112, 21, 28, 0.08), transparent 58%) !important;
+}
+
+.theme-breakfast .red-reviews .stagger-testimonial-card.is-center {
+  border: 1px solid #16090b !important;
+  background: #70151c !important;
+  color: #fff4df !important;
+  box-shadow: 7px 7px 0 rgba(22, 9, 11, 0.86) !important;
+}
+
+.theme-breakfast .red-reviews .stagger-testimonial-card:not(.is-center) {
+  border: 1px solid rgba(22, 9, 11, 0.44) !important;
+  background: #e4d7cc !important;
+  color: #4d2025 !important;
+  box-shadow: 3px 3px 0 rgba(22, 9, 11, 0.16) !important;
+}
+
+.theme-breakfast .red-reviews .stagger-testimonials > .write-review-trigger-btn {
+  border: 1px solid #16090b !important;
+  border-radius: 4px !important;
+  background: #70151c !important;
+  color: #fff4df !important;
+  box-shadow: 4px 4px 0 rgba(22, 9, 11, 0.24) !important;
+}
+
+.theme-breakfast .gallery-section {
+  --gallery-green: #70151c;
+  --gallery-green-soft: #8d252c;
+  background: #f1ebe2 !important;
+}
+
+.theme-breakfast .gallery-section::before {
+  background: radial-gradient(ellipse at 88% 24%, rgba(112, 21, 28, 0.1), transparent 32%) !important;
+}
+
+.theme-breakfast .gallery-head h2 span {
+  color: #8d252c !important;
+}
+
+.theme-breakfast .gallery-head h2::after {
+  border-radius: 0 !important;
+  background: linear-gradient(90deg, #efcf91, #70151c, transparent) !important;
+}
+
+.theme-breakfast .gallery-head .order-button {
+  border: 1px solid #16090b !important;
+  border-radius: 6px !important;
+  background: #70151c !important;
+  box-shadow: 5px 5px 0 rgba(23, 11, 12, 0.18) !important;
+}
+
+.theme-breakfast .mobile-bar button,
+body .mobile-bar button {
+  background: #70151c !important;
+  box-shadow: 0 8px 16px rgba(78, 12, 18, 0.22) !important;
+}
+
+@media (max-width: 768px) {
+  .theme-breakfast .nav,
+  .theme-breakfast .nav.scrolled {
+    min-height: 62px !important;
+    padding-inline: 0.78rem !important;
+  }
+
+  .theme-breakfast .nav-menu-button,
+  .theme-breakfast .nav.menu-open .nav-menu-button {
+    width: 42px !important;
+    height: 42px !important;
+  }
+
+  .theme-breakfast .nav-menu-panel,
+  .theme-breakfast .nav.menu-open .nav-menu-panel,
+  .theme-breakfast .nav.scrolled .nav-menu-panel {
+    inset: 62px 0 auto !important;
+    grid-template-columns: 1fr !important;
+    max-height: calc(100dvh - 62px) !important;
+    padding: 0.6rem 0.85rem 0.8rem !important;
+  }
+
+  .theme-breakfast .nav-menu-panel a,
+  .theme-breakfast .nav.menu-open .nav-menu-panel a {
+    grid-template-columns: 1.55rem 1.25rem minmax(0, 1fr) 1rem !important;
+    gap: 0.55rem !important;
+    min-height: 52px !important;
+    padding: 0.4rem 0.25rem !important;
+  }
+
+  .theme-breakfast .nav-menu-link-text {
+    font-size: clamp(0.94rem, 4.2vw, 1.08rem) !important;
+  }
+
+  .theme-breakfast .nav-menu-link-meta {
+    font-size: 0.5rem !important;
+  }
+
+  .theme-breakfast .nav-menu-signature,
+  .theme-breakfast .nav.menu-open .nav-menu-signature {
+    margin-top: 0.45rem !important;
+    padding: 0.6rem 0.25rem 0 !important;
+  }
+
+  .theme-breakfast .nav .nav-menu-panel .nav-menu-signature > span {
+    font-size: 1.55rem !important;
+  }
+
+  .theme-breakfast .red-reviews {
+    padding: 3rem 0 calc(4.8rem + env(safe-area-inset-bottom)) !important;
+  }
+
+  .theme-breakfast .red-reviews .stagger-testimonials-stage {
+    height: 390px !important;
+  }
+}
+
+@media (max-width: 390px) {
+  .theme-breakfast .nav-menu-link-meta {
+    display: none !important;
+  }
+
+  .theme-breakfast .nav-menu-panel a,
+  .theme-breakfast .nav.menu-open .nav-menu-panel a {
+    min-height: 48px !important;
   }
 }

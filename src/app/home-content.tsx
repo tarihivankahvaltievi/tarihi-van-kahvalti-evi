@@ -151,7 +151,7 @@ export function HomeContent() {
 
         <section className="local-answer-panel" aria-labelledby="local-answer-heading" data-reveal>
           <div className="local-answer-head">
-            <span className="light-pill">Yerel bilgi</span>
+            <span className="local-answer-label">Yerel bilgi</span>
             <h2 id="local-answer-heading">Beyoğlu Taksim Van kahvaltısı için hızlı bilgiler</h2>
           </div>
           <div className="local-answer-grid">
