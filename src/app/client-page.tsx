@@ -202,6 +202,10 @@ export default function ClientPage({ children }: { children: ReactNode }) {
             aria-hidden={!menuOpen}
             aria-label="Site menüsü"
           >
+            <div className="nav-menu-intro" aria-hidden="true">
+              <span>Van&apos;dan Beyoğlu&apos;na</span>
+              <small>08.00 — 18.00</small>
+            </div>
             <div className="nav-menu-ambient" aria-hidden="true">
               <span />
               <span />
