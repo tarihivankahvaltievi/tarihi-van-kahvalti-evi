@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Bodoni_Moda, Cormorant_Garamond, Playfair_Display } from "next/font/google";
+import { Bodoni_Moda, Cormorant_Garamond, Noto_Serif_Display, Playfair_Display } from "next/font/google";
 import "./globals.css";
 
 const playfair = Playfair_Display({
@@ -20,6 +20,13 @@ const bodoni = Bodoni_Moda({
   style: ["normal", "italic"],
   display: "swap",
   variable: "--font-bodoni-gf",
+});
+const notoSerifDisplay = Noto_Serif_Display({
+  subsets: ["latin", "latin-ext"],
+  weight: "variable",
+  style: "normal",
+  display: "swap",
+  variable: "--font-noto-serif-display-gf",
 });
 import {
   address,
@@ -154,7 +161,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="tr" className={`h-full antialiased ${playfair.variable} ${cormorant.variable} ${bodoni.variable}`}>
+    <html lang="tr" className={`h-full antialiased ${playfair.variable} ${cormorant.variable} ${bodoni.variable} ${notoSerifDisplay.variable}`}>
       <head>
         <link rel="dns-prefetch" href="https://www.google.com" />
         <link rel="dns-prefetch" href="https://wa.me" />

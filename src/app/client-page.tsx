@@ -156,7 +156,7 @@ export default function ClientPage({ children }: { children: ReactNode }) {
             </div>
             <a className="logo" href="#top" aria-label="Tarihi Van Kahvaltı Evi">
               <span className="logo-word">
-                <span>Tarihi</span> <em>Van</em>
+                <span>Tarihi</span> <span className="logo-van">Van</span>
               </span>
               <span className="logo-subtitle">Kahvaltı Evi</span>
             </a>

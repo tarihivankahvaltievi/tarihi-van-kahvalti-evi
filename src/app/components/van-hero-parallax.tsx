@@ -354,9 +354,13 @@ export function VanHeroParallax() {
             <h1 className="hero-title-lockup">
               <span className="sr-only">Tarihi Van Kahvaltı Evi</span>
               <span className="hero-title-line hero-title-line-one" aria-hidden="true">
-                Tarihi <em>Van</em>
+                <span className="hero-title-word" style={{ "--word-index": 0 } as CSSProperties}>Tarihi</span>{" "}
+                <span className="hero-title-word" style={{ "--word-index": 1 } as CSSProperties}>Van</span>
               </span>
-              <span className="hero-title-line hero-title-line-two" aria-hidden="true">Kahvaltı Evi</span>
+              <span className="hero-title-line hero-title-line-two" aria-hidden="true">
+                <span className="hero-title-word" style={{ "--word-index": 2 } as CSSProperties}>Kahvaltı</span>{" "}
+                <span className="hero-title-word" style={{ "--word-index": 3 } as CSSProperties}>Evi</span>
+              </span>
             </h1>
             <p>
               1978&apos;den beri serpme Van kahvaltısı: otlu peynir, kavut,
