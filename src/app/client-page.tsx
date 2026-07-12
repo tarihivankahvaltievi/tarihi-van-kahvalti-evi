@@ -199,8 +199,6 @@ export default function ClientPage({ children }: { children: ReactNode }) {
           <div
             id="site-menu"
             className="nav-menu-panel"
-            role="dialog"
-            aria-modal="true"
             aria-hidden={!menuOpen}
             aria-label="Site menüsü"
           >
