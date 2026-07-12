@@ -79,17 +79,8 @@ export function HomeContent() {
               <span className="about-sofra-year" aria-hidden="true">1978 — Beyoğlu</span>
             </div>
             <h2 data-reveal aria-label="Van'dan gelen sofra, Beyoğlu'nda ağır ağır kurulur.">
-              <span className="about-title-line" aria-hidden="true">
-                <span className="about-title-word">Van&apos;dan</span>{" "}
-                <span className="about-title-word">gelen</span>{" "}
-                <span className="about-title-word">sofra,</span>
-              </span>
-              <span className="about-title-line about-title-line-accent" aria-hidden="true">
-                <span className="about-title-word">Beyoğlu&apos;nda</span>{" "}
-                <span className="about-title-word">ağır</span>{" "}
-                <span className="about-title-word">ağır</span>{" "}
-                <span className="about-title-word">kurulur.</span>
-              </span>
+              <span className="about-title-line">Van&apos;dan gelen sofra,</span>
+              <span className="about-title-line about-title-line-accent">Beyoğlu&apos;nda ağır ağır kurulur.</span>
             </h2>
             <p className="about-sofra-lead" data-reveal>
               Van sofrasını, Beyoğlu&apos;nun tarihi Rum binasında 1978&apos;den beri ailece kuruyoruz.
