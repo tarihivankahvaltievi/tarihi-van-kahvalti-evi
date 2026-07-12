@@ -158,13 +158,13 @@ const eagerFloatingFoodClassNames = new Set([
 ]);
 
 const subscribeToMobileViewport = (callback: () => void) => {
-  const mediaQuery = window.matchMedia("(max-width: 679px)");
+  const mediaQuery = window.matchMedia("(max-width: 680px)");
   mediaQuery.addEventListener("change", callback);
   return () => mediaQuery.removeEventListener("change", callback);
 };
 
 const getMobileViewportSnapshot = () =>
-  window.matchMedia("(max-width: 679px)").matches;
+  window.matchMedia("(max-width: 680px)").matches;
 
 export function VanHeroParallax() {
   const isMobile = useSyncExternalStore(
@@ -351,22 +351,17 @@ export function VanHeroParallax() {
               filter: copyFilter,
             }}
           >
-            <div className="hero-parallax-kicker" aria-hidden="true">
-              Beyoğlu Taksim
-            </div>
             <h1 className="hero-title-lockup">
-              <span className="sr-only">Tarihi Van Kahvaltı Evi — Taksim Beyoğlu Serpme Van Kahvaltısı</span>
-              <span className="hero-title-line hero-title-line-one" aria-hidden="true">Tarihi Van</span>
+              <span className="sr-only">Tarihi Van Kahvaltı Evi</span>
+              <span className="hero-title-line hero-title-line-one" aria-hidden="true">
+                Tarihi <em>Van</em>
+              </span>
               <span className="hero-title-line hero-title-line-two" aria-hidden="true">Kahvaltı Evi</span>
             </h1>
             <p>
               1978&apos;den beri serpme Van kahvaltısı: otlu peynir, kavut,
               murtuğa, sıcak bakır sahanlar ve sınırsız taze çay.
             </p>
-            <a className="hero-story-link" href="#story">
-              <span>Sofranın hikayesi</span>
-              <span aria-hidden="true">↘</span>
-            </a>
           </motion.div>
         </motion.div>
 

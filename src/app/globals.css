@@ -26984,3 +26984,237 @@ body .mobile-bar a svg {
 .theme-breakfast .nav-menu-link-text {
   text-align: left !important;
 }
+
+/* Hero + navbar identity, July 2026 — final authority. */
+.theme-breakfast .nav,
+.theme-breakfast .nav.scrolled {
+  top: 0 !important;
+  right: 0 !important;
+  left: 0 !important;
+  transform: none !important;
+  width: 100vw !important;
+  max-width: none !important;
+  min-height: 72px !important;
+  padding-left: max(clamp(0.82rem, 3.2vw, 2.75rem), env(safe-area-inset-left)) !important;
+  padding-right: max(clamp(0.82rem, 3.2vw, 2.75rem), env(safe-area-inset-right)) !important;
+  border: 0 !important;
+  border-bottom: 0.5px solid rgba(10, 8, 7, 0.88) !important;
+  border-radius: 0 !important;
+  background: rgba(248, 241, 230, 0.975) !important;
+  box-shadow: 0 5px 12px rgba(34, 24, 18, 0.055) !important;
+  backdrop-filter: blur(15px) saturate(112%) !important;
+  -webkit-backdrop-filter: blur(15px) saturate(112%) !important;
+}
+
+.theme-breakfast .logo-wrap {
+  gap: clamp(0.58rem, 1.2vw, 0.88rem) !important;
+}
+
+.theme-breakfast .logo {
+  display: grid !important;
+  gap: 0.11rem !important;
+  color: #1d1817 !important;
+  font-family: var(--font-bodoni-gf), "Bodoni Moda", Georgia, serif !important;
+  font-size: clamp(1.34rem, 2vw, 1.72rem) !important;
+  font-optical-sizing: auto;
+  font-weight: 650 !important;
+  letter-spacing: -0.024em !important;
+  line-height: 0.86 !important;
+  animation: nav-brand-arrive 720ms cubic-bezier(0.16, 1, 0.3, 1) 90ms both;
+}
+
+.theme-breakfast .logo-word {
+  display: block;
+  font-weight: 650 !important;
+  letter-spacing: -0.024em !important;
+  white-space: nowrap;
+}
+
+.theme-breakfast .logo-word > span,
+.theme-breakfast .logo-word > em {
+  display: inline-block;
+  transition: transform 480ms cubic-bezier(0.16, 1, 0.3, 1), color 320ms ease;
+}
+
+.theme-breakfast .logo-word > em {
+  color: var(--van-blue) !important;
+  font-style: italic;
+  font-weight: 650 !important;
+}
+
+.theme-breakfast .logo:hover .logo-word > span {
+  transform: translateX(-1px);
+}
+
+.theme-breakfast .logo:hover .logo-word > em {
+  color: var(--van-blue-dark) !important;
+  transform: translateX(2px);
+}
+
+.theme-breakfast .logo-subtitle {
+  color: rgba(29, 24, 23, 0.72) !important;
+  font-family: var(--font-geist-sans), system-ui, sans-serif !important;
+  font-size: 0.54rem !important;
+  font-weight: 820 !important;
+  letter-spacing: 0.19em !important;
+  line-height: 1 !important;
+  text-transform: uppercase;
+}
+
+.theme-breakfast .nav-menu-button,
+.theme-breakfast .nav.menu-open .nav-menu-button {
+  border: 0.75px solid #17120d !important;
+  border-radius: 7px !important;
+  background: #d2ae63 !important;
+  color: #17120d !important;
+  box-shadow: 3px 3px 0 rgba(23, 18, 13, 0.16) !important;
+}
+
+.theme-breakfast .nav-menu-glyph span {
+  background: #17120d !important;
+}
+
+.theme-breakfast .hero-title-lockup,
+.theme-breakfast .hero-parallax-copy h1 {
+  font-family: var(--font-bodoni-gf), "Bodoni Moda", Georgia, serif !important;
+  font-optical-sizing: auto;
+}
+
+.theme-breakfast .hero-title-line {
+  font-family: inherit !important;
+  font-weight: 650 !important;
+  letter-spacing: -0.035em !important;
+  line-height: 0.9 !important;
+  text-shadow: 0 1px 0 rgba(255, 249, 238, 0.72), 0 12px 28px rgba(59, 38, 29, 0.1) !important;
+}
+
+.theme-breakfast .hero-title-line-one {
+  color: #211817 !important;
+}
+
+.theme-breakfast .hero-title-line-one em {
+  color: #211817 !important;
+  font-style: italic;
+  font-weight: 620;
+}
+
+.theme-breakfast .hero-title-line-two {
+  color: var(--van-blue) !important;
+  font-style: italic;
+  font-weight: 650 !important;
+  text-shadow: 0 1px 0 rgba(255, 249, 238, 0.74), 0 12px 28px rgba(47, 86, 102, 0.13) !important;
+}
+
+.theme-breakfast .hero-parallax-copy p {
+  max-width: 34rem !important;
+  margin-top: clamp(0.9rem, 1.8vw, 1.2rem) !important;
+  color: rgba(36, 23, 24, 0.78) !important;
+  font-weight: 650 !important;
+}
+
+.theme-breakfast .hero-parallax-copy::after {
+  display: none !important;
+}
+
+@keyframes nav-brand-arrive {
+  from {
+    opacity: 0;
+    transform: translate3d(-9px, 5px, 0);
+    filter: blur(5px);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+    filter: blur(0);
+  }
+}
+
+@media (min-width: 681px) {
+  .theme-breakfast .hero-parallax-copy {
+    width: min(48vw, 43rem) !important;
+  }
+
+  .theme-breakfast .hero-parallax-copy h1 {
+    max-width: 9.4em !important;
+    font-size: clamp(4.2rem, 7.45vw, 7.9rem) !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .theme-breakfast .nav,
+  .theme-breakfast .nav.scrolled {
+    min-height: 66px !important;
+    padding-left: max(0.72rem, env(safe-area-inset-left)) !important;
+    padding-right: max(0.72rem, env(safe-area-inset-right)) !important;
+  }
+
+  .theme-breakfast .logo-emblem {
+    width: 48px !important;
+    height: 48px !important;
+  }
+
+  .theme-breakfast .logo {
+    font-size: clamp(1.18rem, 5.1vw, 1.48rem) !important;
+  }
+
+  .theme-breakfast .logo-subtitle {
+    font-size: clamp(0.43rem, 1.72vw, 0.52rem) !important;
+    letter-spacing: 0.16em !important;
+  }
+
+  .theme-breakfast .nav-menu-panel,
+  .theme-breakfast .nav.menu-open .nav-menu-panel,
+  .theme-breakfast .nav.scrolled .nav-menu-panel {
+    inset: 66px 0 auto !important;
+    max-height: calc(100dvh - 66px) !important;
+  }
+}
+
+@media (max-width: 680px) {
+  .theme-breakfast .hero-parallax-copy {
+    top: clamp(7.8rem, 20.4vw, 8.45rem) !important;
+    left: max(1rem, calc((100vw - 430px) / 2 + 1rem)) !important;
+    width: min(77vw, 20.6rem) !important;
+    max-width: calc(100vw - 1.8rem) !important;
+  }
+
+  .theme-breakfast .hero-parallax-copy h1 {
+    max-width: 7.25em !important;
+    font-size: clamp(2.68rem, 11.45vw, 3.42rem) !important;
+    line-height: 0.9 !important;
+  }
+
+  .theme-breakfast .hero-parallax-copy p {
+    max-width: min(17.7rem, 70vw) !important;
+    margin-top: 0.88rem !important;
+    font-size: clamp(0.82rem, 3.25vw, 0.94rem) !important;
+    line-height: 1.4 !important;
+  }
+}
+
+@media (max-width: 390px) {
+  .theme-breakfast .hero-parallax-copy {
+    top: 7.65rem !important;
+    width: min(79vw, 18.6rem) !important;
+  }
+
+  .theme-breakfast .hero-parallax-copy h1 {
+    font-size: clamp(2.42rem, 11.1vw, 2.82rem) !important;
+  }
+
+  .theme-breakfast .hero-parallax-copy p {
+    max-width: 16.2rem !important;
+    font-size: 0.78rem !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .theme-breakfast .logo,
+  .theme-breakfast .logo-word > span,
+  .theme-breakfast .logo-word > em {
+    animation: none !important;
+    transition: none !important;
+    transform: none !important;
+    filter: none !important;
+  }
+}
