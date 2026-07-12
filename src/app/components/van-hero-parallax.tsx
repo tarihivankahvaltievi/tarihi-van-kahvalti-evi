@@ -21,8 +21,6 @@ type FloatingFood = {
   src: string;
   alt: string;
   className: string;
-  depth: number;
-  tilt: string;
 };
 
 const heroImages: HeroImage[] = [
@@ -93,85 +91,61 @@ const floatingFoods: FloatingFood[] = [
     src: "/images/hero-float/sucuk-egg-pan.webp",
     alt: "Bakır sahanda sucuklu yumurta",
     className: "hero-float-item hero-float-pan",
-    depth: 58,
-    tilt: "-4deg",
   },
   {
     src: "/images/hero-float/tea-glass.webp",
     alt: "İnce belli çay",
     className: "hero-float-item hero-float-tea",
-    depth: 92,
-    tilt: "5deg",
   },
   {
     src: "/images/hero-float/simit-board.webp",
     alt: "Ahşap tabakta sıcak simit",
     className: "hero-float-item hero-float-simit",
-    depth: 34,
-    tilt: "7deg",
   },
   {
     src: "/images/hero-float/omelette-plate.webp",
     alt: "Kahvaltı tabağı",
     className: "hero-float-item hero-float-omelette",
-    depth: 22,
-    tilt: "-6deg",
   },
   {
     src: "/images/hero-float/cheese-platter.webp",
     alt: "Van peynir tabağı",
     className: "hero-float-item hero-float-cheese-platter",
-    depth: 18,
-    tilt: "3deg",
   },
   {
     src: "/images/hero-float/greens-platter.webp",
     alt: "Taze yeşillik tabağı",
     className: "hero-float-item hero-float-greens-platter",
-    depth: 26,
-    tilt: "6deg",
   },
   {
     src: "/images/hero-float/black-olive-bowl.webp",
     alt: "Siyah zeytin kasesi",
     className: "hero-float-item hero-float-black-olives",
-    depth: 68,
-    tilt: "-3deg",
   },
   {
     src: "/images/hero-float/cherry-jam-bowl.webp",
     alt: "Vişne reçeli kasesi",
     className: "hero-float-item hero-float-cherry-jam",
-    depth: 44,
-    tilt: "4deg",
   },
   {
     src: "/images/hero-float/apricot-jam-bowl.webp",
     alt: "Kayısı reçeli kasesi",
     className: "hero-float-item hero-float-apricot-jam",
-    depth: 76,
-    tilt: "-5deg",
   },
   {
     src: "/images/hero-float/tahin-bowl.webp",
     alt: "Tahin ve pekmez kasesi",
     className: "hero-float-item hero-float-jam",
-    depth: 38,
-    tilt: "5deg",
   },
   {
     src: "/images/hero-float/tomato-slice.webp",
     alt: "Taze domates dilimi",
     className: "hero-float-item hero-float-tomato",
-    depth: 104,
-    tilt: "9deg",
   },
   {
     src: "/images/hero-float/mint-leaf.webp",
     alt: "Taze nane yaprağı",
     className: "hero-float-item hero-float-mint",
-    depth: 116,
-    tilt: "-12deg",
   },
 ];
 
@@ -294,6 +268,15 @@ export function VanHeroParallax() {
     ),
     spring,
   );
+  const foodOpacity = useSpring(
+    useTransform(
+      scrollYProgress,
+      isMobile ? [0, 0.36, 0.58, 0.76] : [0, 0.55, 0.82, 0.94],
+      still ? [1, 1, 1, 1] : isMobile ? [1, 0.98, 0.46, 0] : [1, 1, 0.76, 0],
+    ),
+    spring,
+  );
+
   // Copy parallax Y offset on scroll
   const copyY = useSpring(
     useTransform(
@@ -416,22 +399,13 @@ export function VanHeroParallax() {
           style={{
             y: floatingFoodY,
             scale: foodScale,
+            opacity: foodOpacity,
             rotateX: isMobile ? foodRotateX : rotateXMouse,
             rotateY: rotateYMouse,
             transformStyle: "preserve-3d",
           }}
           aria-label="Uçan kahvaltı lezzetleri"
         >
-          <div className="hero-breakfast-table" aria-hidden="true">
-            <div className="hero-table-top">
-              <span className="hero-table-inlay" />
-              <span className="hero-table-highlight" />
-            </div>
-            <span className="hero-table-apron hero-table-apron-front" />
-            <span className="hero-table-apron hero-table-apron-side" />
-            <span className="hero-table-leg hero-table-leg-left" />
-            <span className="hero-table-leg hero-table-leg-right" />
-          </div>
           {floatingFoods.map((item, index) => {
             const shouldPreload = eagerFloatingFoodClassNames.has(item.className);
 
@@ -439,12 +413,7 @@ export function VanHeroParallax() {
               <div
                 className={item.className}
                 key={item.src}
-                style={{
-                  "--float-delay": `${Math.min(index, 6) * (isMobile ? 24 : 36)}ms`,
-                  "--food-depth": `${item.depth}px`,
-                  "--food-tilt": item.tilt,
-                  "--food-tilt-in": `${Number.parseFloat(item.tilt) * -1}deg`,
-                } as CSSProperties}
+                style={{ "--float-delay": `${Math.min(index, 6) * (isMobile ? 24 : 36)}ms` } as CSSProperties}
               >
                 <Image
                   src={item.src}
