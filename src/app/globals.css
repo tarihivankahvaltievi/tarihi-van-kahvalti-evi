@@ -24083,3 +24083,129 @@ body,
     transform: none !important;
   }
 }
+
+/* Guest reviews — one burgundy room with the About section. */
+.red-reviews {
+  --review-burgundy: #70151c;
+  --review-burgundy-light: #8d252c;
+  --review-burgundy-dark: #4e0c12;
+  --review-cream: #fff4df;
+  --review-gold: #efcf91;
+  position: relative;
+  border-top: 1px solid rgba(12, 7, 8, 0.72) !important;
+  background:
+    radial-gradient(ellipse at 50% 2%, rgba(245, 223, 178, 0.11), transparent 34%),
+    radial-gradient(ellipse at 10% 70%, rgba(43, 3, 8, 0.24), transparent 35%),
+    linear-gradient(180deg, #75171e 0%, var(--review-burgundy) 48%, #651219 100%) !important;
+  color: var(--review-cream) !important;
+}
+
+.red-reviews::before {
+  left: 50% !important;
+  width: min(74rem, calc(100% - 2rem)) !important;
+  background: linear-gradient(90deg, transparent, rgba(239, 207, 145, 0.42), transparent) !important;
+  transform: translateX(-50%);
+}
+
+.red-reviews h2 {
+  color: var(--review-cream) !important;
+  font-family: var(--font-bodoni-gf), "Bodoni Moda", Georgia, serif !important;
+  font-weight: 600 !important;
+  letter-spacing: -0.035em !important;
+  text-shadow: 2px 3px 0 rgba(16, 6, 7, 0.46) !important;
+  -webkit-text-fill-color: var(--review-cream) !important;
+}
+
+.red-reviews h2::before {
+  background: linear-gradient(90deg, transparent, rgba(239, 207, 145, 0.82), rgba(20, 10, 11, 0.62), transparent) !important;
+}
+
+.red-reviews h2::after {
+  background: rgba(10, 6, 7, 0.68) !important;
+}
+
+.red-reviews .stagger-testimonials-stage {
+  background:
+    radial-gradient(ellipse at 50% 46%, rgba(248, 218, 161, 0.1), transparent 34%),
+    linear-gradient(180deg, transparent, rgba(47, 3, 8, 0.14) 52%, transparent) !important;
+}
+
+.red-reviews .stagger-testimonial-card {
+  border-color: rgba(13, 7, 8, 0.82) !important;
+  color: var(--review-cream) !important;
+}
+
+.red-reviews .stagger-testimonial-card.is-center {
+  background:
+    linear-gradient(145deg, #982e35 0%, #791b23 46%, #570e15 100%) !important;
+  box-shadow:
+    7px 7px 0 rgba(14, 7, 8, 0.88),
+    0 26px 52px rgba(43, 3, 8, 0.32),
+    inset 0 1px 0 rgba(255, 244, 223, 0.16) !important;
+}
+
+.red-reviews .stagger-testimonial-card:not(.is-center) {
+  background:
+    linear-gradient(145deg, rgba(145, 45, 53, 0.78), rgba(111, 21, 28, 0.76) 52%, rgba(75, 10, 16, 0.8)) !important;
+  color: rgba(255, 244, 223, 0.92) !important;
+  filter: saturate(0.84) contrast(0.96) blur(0.12px) !important;
+  box-shadow:
+    3px 3px 0 rgba(13, 7, 8, 0.52),
+    0 18px 34px rgba(43, 3, 8, 0.16) !important;
+}
+
+.red-reviews .stagger-card-corner {
+  color: rgba(13, 7, 8, 0.76) !important;
+}
+
+.red-reviews .stagger-card-image,
+.red-reviews .stagger-testimonial-card.is-center .stagger-card-image {
+  border-color: rgba(13, 7, 8, 0.82) !important;
+  background: #f7ead3 !important;
+  box-shadow: 3px 3px 0 rgba(13, 7, 8, 0.72) !important;
+}
+
+.red-reviews .stagger-card-stars {
+  color: var(--review-gold) !important;
+  filter: drop-shadow(0 1px 0 rgba(13, 7, 8, 0.5));
+}
+
+.red-reviews .stagger-testimonial-controls button {
+  border-color: rgba(13, 7, 8, 0.76) !important;
+  background: #fff2dc !important;
+  color: var(--review-burgundy-dark) !important;
+  box-shadow: 4px 4px 0 rgba(13, 7, 8, 0.52) !important;
+}
+
+.red-reviews .stagger-testimonial-controls button:hover,
+.red-reviews .stagger-testimonial-controls button:focus-visible {
+  background: var(--review-gold) !important;
+  color: #2a090c !important;
+}
+
+.red-reviews .stagger-testimonials > .write-review-trigger-btn {
+  border-color: rgba(13, 7, 8, 0.82) !important;
+  background: #fff2dc !important;
+  color: var(--review-burgundy-dark) !important;
+  box-shadow:
+    5px 5px 0 rgba(13, 7, 8, 0.62),
+    0 14px 30px rgba(43, 3, 8, 0.2) !important;
+}
+
+.red-reviews .stagger-testimonials > .write-review-trigger-btn:hover,
+.red-reviews .stagger-testimonials > .write-review-trigger-btn:focus-visible {
+  background: var(--review-gold) !important;
+  color: #2a090c !important;
+}
+
+@media (max-width: 768px) {
+  .red-reviews {
+    padding-top: calc(4.25rem + env(safe-area-inset-top, 0px)) !important;
+  }
+
+  .red-reviews h2 {
+    font-size: clamp(2.18rem, 10.4vw, 2.9rem) !important;
+    line-height: 0.93 !important;
+    text-shadow: 1px 2px 0 rgba(16, 6, 7, 0.5) !important;
+  }
+}
