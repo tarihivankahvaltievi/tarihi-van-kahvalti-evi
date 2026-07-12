@@ -27380,3 +27380,215 @@ body .mobile-bar a svg {
     filter: none !important;
   }
 }
+
+/* 2026 UX audit — final interaction and responsive authority layer. */
+.hero-conversion-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.62rem;
+  margin-top: 1rem;
+}
+
+.hero-booking-button,
+.hero-menu-link {
+  display: inline-flex;
+  min-height: 44px;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  padding: 0 1rem;
+  border-radius: 6px;
+  font-size: 0.82rem;
+  font-weight: 780;
+}
+
+.hero-booking-button {
+  border: 1px solid #16090b;
+  background: #70151c;
+  color: #fff9ee;
+  box-shadow: 4px 4px 0 rgba(22, 9, 11, 0.2);
+}
+
+.hero-menu-link {
+  border: 1px solid rgba(36, 23, 24, 0.48);
+  background: rgba(255, 249, 238, 0.72);
+  color: #241718;
+}
+
+.hero-location-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.32rem;
+  min-height: 40px;
+  color: #594447;
+  font-size: 0.76rem;
+  font-weight: 720;
+}
+
+.hero-booking-button:hover,
+.hero-booking-button:focus-visible,
+.hero-menu-link:hover,
+.hero-menu-link:focus-visible {
+  transform: translateY(-2px);
+  outline: 2px solid #efcf91;
+  outline-offset: 3px;
+}
+
+.theme-breakfast .red-reviews h2 {
+  max-width: 12ch !important;
+  margin-inline: auto !important;
+  line-height: 0.98 !important;
+  text-wrap: balance;
+}
+
+.theme-breakfast .red-reviews h2::before,
+.theme-breakfast .red-reviews h2::after {
+  display: none !important;
+}
+
+.faq-heading-wrap p,
+.about-sofra-lead,
+.bottom-info-band {
+  color: #5d4b47 !important;
+}
+
+:where(a, button, summary, input, textarea):focus-visible {
+  outline: 3px solid #b88a3d;
+  outline-offset: 3px;
+}
+
+@media (max-width: 768px) {
+  .hero-conversion-actions {
+    width: min(18.8rem, 88vw);
+    gap: 0.48rem;
+    margin-top: 0.8rem;
+  }
+
+  .hero-booking-button,
+  .hero-menu-link {
+    min-height: 42px;
+    flex: 1 1 calc(50% - 0.25rem);
+    padding-inline: 0.62rem;
+    font-size: 0.74rem;
+  }
+
+  .hero-location-link {
+    flex-basis: 100%;
+    min-height: 30px;
+  }
+
+  .theme-breakfast .nav-menu-panel,
+  .theme-breakfast .nav.menu-open .nav-menu-panel,
+  .theme-breakfast .nav.scrolled .nav-menu-panel {
+    padding-bottom: calc(0.9rem + env(safe-area-inset-bottom)) !important;
+  }
+
+  .theme-breakfast .nav-menu-panel a,
+  .theme-breakfast .nav.menu-open .nav-menu-panel a {
+    grid-template-columns: 1.35rem minmax(0, 1fr) 1rem !important;
+    min-height: 50px !important;
+    padding-inline: 0.55rem !important;
+  }
+
+  .theme-breakfast .nav-menu-panel a > svg:first-child {
+    grid-column: 1;
+  }
+
+  .theme-breakfast .nav-menu-copy {
+    grid-column: 2 !important;
+  }
+
+  .theme-breakfast .nav-menu-panel a > svg:last-child {
+    grid-column: 3;
+  }
+
+  .theme-breakfast .nav-menu-link-meta {
+    display: none !important;
+  }
+
+  .theme-breakfast .red-reviews {
+    padding-top: 2.7rem !important;
+  }
+
+  .theme-breakfast .red-reviews h2 {
+    max-width: 9ch !important;
+    margin-bottom: 1.2rem !important;
+    font-size: clamp(2rem, 9vw, 2.65rem) !important;
+    line-height: 0.96 !important;
+  }
+
+  .theme-breakfast .red-reviews .stagger-testimonials-stage {
+    height: 350px !important;
+  }
+
+  .theme-breakfast .gallery-section {
+    padding: 3.25rem 1rem 3.5rem !important;
+  }
+
+  .theme-breakfast .gallery-head {
+    align-items: center;
+    margin-bottom: 1.2rem !important;
+  }
+
+  .theme-breakfast .gallery-head h2 {
+    font-size: clamp(2.45rem, 12vw, 3.35rem) !important;
+    line-height: 0.92 !important;
+  }
+
+  .theme-breakfast .gallery-head .order-button {
+    min-height: 42px;
+    padding-inline: 0.78rem;
+    font-size: 0.72rem;
+  }
+
+  .theme-breakfast .gallery-hero-shell {
+    padding-bottom: 0.5rem !important;
+  }
+
+  .theme-breakfast .gallery-marquee-card {
+    border-radius: 12px !important;
+  }
+
+  .faq-section {
+    padding-top: 3.5rem !important;
+    padding-bottom: 3.5rem !important;
+  }
+
+  .faq-heading-wrap h2 {
+    font-size: clamp(2.6rem, 12vw, 3.6rem) !important;
+    line-height: 0.94 !important;
+  }
+
+  .faq-question {
+    min-height: 70px !important;
+    padding: 1rem 3.25rem 1rem 0.2rem !important;
+    font-size: clamp(0.98rem, 4.4vw, 1.12rem) !important;
+    line-height: 1.28 !important;
+  }
+
+  .bottom-info-band .seo-inline-links {
+    display: none;
+  }
+}
+
+@media (max-width: 390px) {
+  .theme-breakfast .hero-parallax-copy {
+    width: min(82vw, 19rem) !important;
+  }
+
+  .theme-breakfast .hero-parallax-copy p {
+    max-width: 17rem !important;
+  }
+
+  .hero-location-link {
+    font-size: 0.7rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-booking-button,
+  .hero-menu-link {
+    transition: none !important;
+  }
+}

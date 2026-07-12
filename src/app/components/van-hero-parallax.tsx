@@ -11,6 +11,9 @@ import {
   useReducedMotion,
 } from "framer-motion";
 import { type CSSProperties, useRef, useSyncExternalStore } from "react";
+import Link from "next/link";
+import { MapPin } from "lucide-react";
+import { BookingOpenButton } from "./booking-open-button";
 
 type HeroImage = {
   thumbnail: string;
@@ -366,6 +369,18 @@ export function VanHeroParallax() {
               1978&apos;den beri serpme Van kahvaltısı: otlu peynir, kavut,
               murtuğa, sıcak bakır sahanlar ve sınırsız taze çay.
             </p>
+            <div className="hero-conversion-actions" aria-label="Hızlı işlemler">
+              <BookingOpenButton className="hero-booking-button">
+                Masa ayırt
+              </BookingOpenButton>
+              <Link className="hero-menu-link" href="/menu">
+                Menüyü incele
+              </Link>
+              <Link className="hero-location-link" href="/iletisim" aria-label="Konum ve yol tarifi">
+                <MapPin size={16} aria-hidden="true" />
+                Taksim · 4 dk
+              </Link>
+            </div>
           </motion.div>
         </motion.div>
 
