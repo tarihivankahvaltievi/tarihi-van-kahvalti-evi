@@ -27224,21 +27224,21 @@ body .mobile-bar a svg {
 .theme-breakfast .hero-title-lockup,
 .theme-breakfast .hero-parallax-copy h1,
 .theme-breakfast .hero-title-line {
-  font-family: var(--font-noto-serif-display-gf), "Noto Serif Display", Georgia, serif !important;
+  font-family: var(--font-literata-gf), "Literata", Georgia, serif !important;
   font-optical-sizing: auto;
   font-style: normal !important;
 }
 
 .theme-breakfast .logo {
-  font-weight: 720 !important;
-  letter-spacing: -0.035em !important;
+  font-weight: 740 !important;
+  letter-spacing: -0.025em !important;
 }
 
 .theme-breakfast .logo-word,
 .theme-breakfast .logo-word > span,
 .theme-breakfast .logo-word > .logo-van {
   font-style: normal !important;
-  font-weight: 720 !important;
+  font-weight: 740 !important;
 }
 
 .theme-breakfast .logo-word > .logo-van {
@@ -27267,9 +27267,9 @@ body .mobile-bar a svg {
 .theme-breakfast .hero-title-line {
   animation: none !important;
   font-style: normal !important;
-  font-weight: 730 !important;
-  letter-spacing: -0.04em !important;
-  line-height: 0.91 !important;
+  font-weight: 760 !important;
+  letter-spacing: -0.03em !important;
+  line-height: 0.94 !important;
   transform-style: preserve-3d;
 }
 
@@ -27286,7 +27286,7 @@ body .mobile-bar a svg {
 .theme-breakfast .hero-title-line-two {
   color: var(--van-blue) !important;
   font-style: normal !important;
-  font-weight: 730 !important;
+  font-weight: 760 !important;
 }
 
 .theme-breakfast .hero-title-line-two .hero-title-word {
@@ -27361,7 +27361,7 @@ body .mobile-bar a svg {
 
 @media (max-width: 680px) {
   .theme-breakfast .hero-title-line {
-    letter-spacing: -0.035em !important;
+    letter-spacing: -0.025em !important;
   }
 
   .theme-breakfast .hero-title-lockup::after {
