@@ -14217,6 +14217,209 @@ body .mobile-bar button {
   }
 }
 
+/* Hero revision — fewer objects, stronger burgundy identity, earlier gallery reveal. */
+.theme-breakfast .hero.hero-parallax-dining {
+  background:
+    radial-gradient(ellipse at 82% 24%, rgba(112, 21, 28, 0.075), transparent 30%),
+    radial-gradient(ellipse at 46% 58%, rgba(181, 128, 56, 0.1), transparent 34%),
+    #f1ebe2 !important;
+}
+
+.theme-breakfast .hero-parallax-kicker {
+  color: #70151c !important;
+}
+
+.theme-breakfast .hero-parallax-kicker::before {
+  background: linear-gradient(90deg, transparent, #70151c) !important;
+}
+
+.theme-breakfast .hero-title-line-one {
+  color: #241718 !important;
+}
+
+.theme-breakfast .hero-title-line-two {
+  color: #70151c !important;
+  text-shadow: 0 1px 0 rgba(255, 249, 238, 0.8), 0 12px 26px rgba(112, 21, 28, 0.12) !important;
+}
+
+.theme-breakfast .hero-parallax-copy p {
+  color: rgba(36, 23, 24, 0.76) !important;
+  font-weight: 610 !important;
+}
+
+.theme-breakfast .hero-parallax-copy::after {
+  background: linear-gradient(90deg, #70151c, rgba(112, 21, 28, 0.22) 52%, transparent) !important;
+}
+
+.hero-story-link {
+  position: relative;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  width: fit-content;
+  margin-top: 0.9rem;
+  padding: 0.3rem 0 0.42rem;
+  border-bottom: 1px solid rgba(112, 21, 28, 0.66);
+  color: #70151c;
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.025em;
+  transition: gap 240ms cubic-bezier(0.16, 1, 0.3, 1), color 180ms ease;
+}
+
+.hero-story-link:hover,
+.hero-story-link:focus-visible {
+  gap: 0.95rem;
+  color: #4e0c12;
+  outline: none;
+}
+
+.hero-story-link span:last-child {
+  font-size: 1rem;
+  line-height: 1;
+  transform: translateY(-1px);
+}
+
+.theme-breakfast .hero-parallax-card {
+  border: 1px solid rgba(22, 9, 11, 0.72) !important;
+  border-radius: 6px !important;
+  box-shadow: 4px 5px 0 rgba(22, 9, 11, 0.1), 0 14px 26px rgba(55, 35, 25, 0.1) !important;
+}
+
+@media (max-width: 680px) {
+  .theme-breakfast .hero.hero-parallax-dining,
+  .theme-breakfast .hero-parallax-sticky {
+    height: clamp(790px, 206vw, 870px) !important;
+    min-height: clamp(790px, 206vw, 870px) !important;
+    max-height: 870px !important;
+  }
+
+  .theme-breakfast .hero-parallax-copy {
+    top: clamp(8.15rem, 21vw, 8.8rem) !important;
+    width: min(68vw, 18rem) !important;
+  }
+
+  .theme-breakfast .hero-parallax-copy h1 {
+    max-width: 6.6em !important;
+    font-size: clamp(2.28rem, 9.7vw, 2.92rem) !important;
+    line-height: 0.88 !important;
+  }
+
+  .theme-breakfast .hero-parallax-copy p {
+    max-width: min(16rem, 64vw) !important;
+    margin-top: 0.68rem !important;
+    font-size: clamp(0.79rem, 3.05vw, 0.9rem) !important;
+    line-height: 1.36 !important;
+  }
+
+  .theme-breakfast .hero-parallax-copy::after {
+    display: none !important;
+  }
+
+  .hero-story-link {
+    margin-top: 0.58rem;
+    padding-bottom: 0.28rem;
+    font-size: 0.68rem;
+  }
+
+  .theme-breakfast .hero-parallax-food-stage {
+    top: 10.4rem !important;
+    height: clamp(322px, 82vw, 354px) !important;
+    min-height: clamp(322px, 82vw, 354px) !important;
+    max-height: 354px !important;
+  }
+
+  .theme-breakfast .hero-parallax-food-stage .hero-float-apricot-jam,
+  .theme-breakfast .hero-parallax-food-stage .hero-float-mint,
+  .theme-breakfast .hero-parallax-food-stage .hero-float-tomato,
+  .theme-breakfast .hero-parallax-food-stage .hero-float-jam {
+    display: none !important;
+  }
+
+  .theme-breakfast .hero-parallax-food-stage .hero-float-tea {
+    top: 3% !important;
+    right: 3% !important;
+    width: clamp(58px, 15vw, 66px) !important;
+  }
+
+  .theme-breakfast .hero-parallax-food-stage .hero-float-cheese-platter {
+    top: 24% !important;
+    right: -1% !important;
+    width: clamp(98px, 25vw, 112px) !important;
+  }
+
+  .theme-breakfast .hero-parallax-food-stage .hero-float-black-olives {
+    top: 43% !important;
+    right: 23% !important;
+  }
+
+  .theme-breakfast .hero-parallax-food-stage .hero-float-cherry-jam {
+    top: 57% !important;
+    right: 8% !important;
+  }
+
+  .theme-breakfast .hero-parallax-food-stage .hero-float-omelette {
+    top: 70% !important;
+    left: -2% !important;
+    width: clamp(104px, 27vw, 118px) !important;
+  }
+
+  .theme-breakfast .hero-parallax-food-stage .hero-float-pan {
+    top: 62% !important;
+    left: 35% !important;
+    width: clamp(108px, 28vw, 122px) !important;
+  }
+
+  .theme-breakfast .hero-parallax-food-stage .hero-float-greens-platter {
+    top: 72% !important;
+    right: -1% !important;
+    width: clamp(76px, 19.5vw, 86px) !important;
+  }
+
+  .theme-breakfast .hero-parallax-food-stage .hero-float-simit {
+    top: 83% !important;
+    right: 17% !important;
+    width: clamp(82px, 21vw, 92px) !important;
+  }
+
+  .theme-breakfast .hero-parallax-gallery {
+    top: 48.5% !important;
+    gap: 0.48rem !important;
+  }
+
+  .theme-breakfast .hero-parallax-row {
+    gap: 0.48rem !important;
+  }
+
+  .theme-breakfast .hero-parallax-card {
+    width: clamp(150px, 40vw, 174px) !important;
+    border-radius: 5px !important;
+  }
+}
+
+@media (max-width: 390px) {
+  .theme-breakfast .hero-parallax-copy {
+    top: 8rem !important;
+    width: 16.4rem !important;
+  }
+
+  .theme-breakfast .hero-parallax-copy h1 {
+    font-size: clamp(2.12rem, 9.25vw, 2.48rem) !important;
+  }
+
+  .theme-breakfast .hero-parallax-copy p {
+    max-width: 14.6rem !important;
+    font-size: 0.77rem !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-story-link {
+    transition: none !important;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .theme-breakfast .nav-menu-panel,
   .theme-breakfast .nav-menu-panel a,
@@ -25717,4 +25920,110 @@ body .mobile-bar button {
   .theme-breakfast .nav.menu-open .nav-menu-panel a {
     min-height: 48px !important;
   }
+}
+
+/* Hero final authority — must remain the last hero layer. */
+.theme-breakfast .hero.hero-parallax-dining {
+  background: radial-gradient(ellipse at 82% 24%, rgba(112, 21, 28, 0.075), transparent 30%), radial-gradient(ellipse at 46% 58%, rgba(181, 128, 56, 0.1), transparent 34%), #f1ebe2 !important;
+}
+
+.theme-breakfast .hero-parallax-kicker,
+.theme-breakfast .hero-title-line-two,
+.theme-breakfast .hero-story-link {
+  color: #70151c !important;
+}
+
+.theme-breakfast .hero-parallax-kicker::before {
+  background: linear-gradient(90deg, transparent, #70151c) !important;
+}
+
+.theme-breakfast .hero-title-line-one {
+  color: #241718 !important;
+}
+
+.theme-breakfast .hero-title-line-two {
+  text-shadow: 0 1px 0 rgba(255, 249, 238, 0.8), 0 12px 26px rgba(112, 21, 28, 0.12) !important;
+}
+
+.theme-breakfast .hero-parallax-copy p {
+  color: rgba(36, 23, 24, 0.76) !important;
+  font-weight: 610 !important;
+}
+
+.theme-breakfast .hero-parallax-card {
+  border: 1px solid rgba(22, 9, 11, 0.72) !important;
+  border-radius: 6px !important;
+  box-shadow: 4px 5px 0 rgba(22, 9, 11, 0.1), 0 14px 26px rgba(55, 35, 25, 0.1) !important;
+}
+
+@media (max-width: 680px) {
+  .theme-breakfast .hero.hero-parallax-dining,
+  .theme-breakfast .hero-parallax-sticky {
+    height: clamp(790px, 206vw, 870px) !important;
+    min-height: clamp(790px, 206vw, 870px) !important;
+    max-height: 870px !important;
+  }
+
+  .theme-breakfast .hero-parallax-copy {
+    top: clamp(8.15rem, 21vw, 8.8rem) !important;
+    width: min(68vw, 18rem) !important;
+  }
+
+  .theme-breakfast .hero-parallax-copy h1 {
+    max-width: 6.6em !important;
+    font-size: clamp(2.28rem, 9.7vw, 2.92rem) !important;
+    line-height: 0.88 !important;
+  }
+
+  .theme-breakfast .hero-parallax-copy p {
+    max-width: min(16rem, 64vw) !important;
+    margin-top: 0.68rem !important;
+    font-size: clamp(0.79rem, 3.05vw, 0.9rem) !important;
+  }
+
+  .theme-breakfast .hero-parallax-copy::after {
+    display: none !important;
+  }
+
+  .theme-breakfast .hero-story-link {
+    margin-top: 0.58rem !important;
+    font-size: 0.68rem !important;
+  }
+
+  .theme-breakfast .hero-parallax-food-stage {
+    top: 10.4rem !important;
+    height: clamp(322px, 82vw, 354px) !important;
+    min-height: clamp(322px, 82vw, 354px) !important;
+    max-height: 354px !important;
+  }
+
+  .theme-breakfast .hero-parallax-food-stage .hero-float-apricot-jam,
+  .theme-breakfast .hero-parallax-food-stage .hero-float-mint,
+  .theme-breakfast .hero-parallax-food-stage .hero-float-tomato,
+  .theme-breakfast .hero-parallax-food-stage .hero-float-jam {
+    display: none !important;
+  }
+
+  .theme-breakfast .hero-parallax-food-stage .hero-float-tea { top: 3% !important; right: 3% !important; width: clamp(58px, 15vw, 66px) !important; }
+  .theme-breakfast .hero-parallax-food-stage .hero-float-cheese-platter { top: 24% !important; right: -1% !important; width: clamp(98px, 25vw, 112px) !important; }
+  .theme-breakfast .hero-parallax-food-stage .hero-float-black-olives { top: 43% !important; right: 23% !important; }
+  .theme-breakfast .hero-parallax-food-stage .hero-float-cherry-jam { top: 57% !important; right: 8% !important; }
+  .theme-breakfast .hero-parallax-food-stage .hero-float-omelette { top: 70% !important; left: -2% !important; width: clamp(104px, 27vw, 118px) !important; }
+  .theme-breakfast .hero-parallax-food-stage .hero-float-pan { top: 62% !important; left: 35% !important; width: clamp(108px, 28vw, 122px) !important; }
+  .theme-breakfast .hero-parallax-food-stage .hero-float-greens-platter { top: 72% !important; right: -1% !important; width: clamp(76px, 19.5vw, 86px) !important; }
+  .theme-breakfast .hero-parallax-food-stage .hero-float-simit { top: 83% !important; right: 17% !important; width: clamp(82px, 21vw, 92px) !important; }
+
+  .theme-breakfast .hero-parallax-gallery {
+    top: 48.5% !important;
+    gap: 0.48rem !important;
+  }
+
+  .theme-breakfast .hero-parallax-row { gap: 0.48rem !important; }
+  .theme-breakfast .hero-parallax-card { width: clamp(150px, 40vw, 174px) !important; border-radius: 5px !important; }
+}
+
+@media (max-width: 390px) {
+  .theme-breakfast .hero-parallax-copy { top: 8rem !important; width: 16.4rem !important; }
+  .theme-breakfast .hero-parallax-copy h1 { font-size: clamp(2.12rem, 9.25vw, 2.48rem) !important; }
+  .theme-breakfast .hero-parallax-copy p { max-width: 14.6rem !important; font-size: 0.77rem !important; }
 }

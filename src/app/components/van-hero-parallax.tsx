@@ -363,6 +363,10 @@ export function VanHeroParallax() {
               1978&apos;den beri serpme Van kahvaltısı: otlu peynir, kavut,
               murtuğa, sıcak bakır sahanlar ve sınırsız taze çay.
             </p>
+            <a className="hero-story-link" href="#story">
+              <span>Sofranın hikayesi</span>
+              <span aria-hidden="true">↘</span>
+            </a>
           </motion.div>
         </motion.div>
 
