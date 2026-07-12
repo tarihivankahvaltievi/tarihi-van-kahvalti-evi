@@ -203,7 +203,7 @@ export default function ClientPage({ children }: { children: ReactNode }) {
             aria-label="Site menüsü"
           >
             <div className="nav-menu-intro" aria-hidden="true">
-              <span>Van&apos;dan Beyoğlu&apos;na</span>
+              <span>Sofra menüsü</span>
               <small>08.00 — 18.00</small>
             </div>
             <div className="nav-menu-ambient" aria-hidden="true">
@@ -217,7 +217,7 @@ export default function ClientPage({ children }: { children: ReactNode }) {
               <span className="nav-menu-art-steam" />
               <span className="nav-menu-art-steam" />
             </div>
-            <a href="#top" tabIndex={menuOpen ? 0 : -1} style={{ "--item-index": 1 } as CSSProperties} onClick={() => setMenuOpen(false)}>
+            <a className="nav-menu-primary" href="#top" tabIndex={menuOpen ? 0 : -1} style={{ "--item-index": 1 } as CSSProperties} onClick={() => setMenuOpen(false)}>
               <span className="nav-menu-index">01</span>
               <Home size={18} />
               <span className="nav-menu-copy">
@@ -226,7 +226,7 @@ export default function ClientPage({ children }: { children: ReactNode }) {
               </span>
               <ChevronRight size={17} />
             </a>
-            <a href="#story" tabIndex={menuOpen ? 0 : -1} style={{ "--item-index": 2 } as CSSProperties} onClick={() => setMenuOpen(false)}>
+            <a className="nav-menu-primary" href="#story" tabIndex={menuOpen ? 0 : -1} style={{ "--item-index": 2 } as CSSProperties} onClick={() => setMenuOpen(false)}>
               <span className="nav-menu-index">02</span>
               <BookOpen size={18} />
               <span className="nav-menu-copy">
@@ -235,7 +235,7 @@ export default function ClientPage({ children }: { children: ReactNode }) {
               </span>
               <ChevronRight size={17} />
             </a>
-            <Link href="/menu" tabIndex={menuOpen ? 0 : -1} style={{ "--item-index": 3 } as CSSProperties} onClick={() => setMenuOpen(false)}>
+            <Link className="nav-menu-primary" href="/menu" tabIndex={menuOpen ? 0 : -1} style={{ "--item-index": 3 } as CSSProperties} onClick={() => setMenuOpen(false)}>
               <span className="nav-menu-index">03</span>
               <BookOpen size={18} />
               <span className="nav-menu-copy">
@@ -244,7 +244,7 @@ export default function ClientPage({ children }: { children: ReactNode }) {
               </span>
               <ChevronRight size={17} />
             </Link>
-            <a href="#gallery" tabIndex={menuOpen ? 0 : -1} style={{ "--item-index": 4 } as CSSProperties} onClick={() => setMenuOpen(false)}>
+            <a className="nav-menu-primary" href="#gallery" tabIndex={menuOpen ? 0 : -1} style={{ "--item-index": 4 } as CSSProperties} onClick={() => setMenuOpen(false)}>
               <span className="nav-menu-index">04</span>
               <Camera size={18} />
               <span className="nav-menu-copy">
@@ -253,7 +253,7 @@ export default function ClientPage({ children }: { children: ReactNode }) {
               </span>
               <ChevronRight size={17} />
             </a>
-            <Link href="/iletisim" tabIndex={menuOpen ? 0 : -1} style={{ "--item-index": 5 } as CSSProperties} onClick={() => setMenuOpen(false)}>
+            <Link className="nav-menu-primary" href="/iletisim" tabIndex={menuOpen ? 0 : -1} style={{ "--item-index": 5 } as CSSProperties} onClick={() => setMenuOpen(false)}>
               <span className="nav-menu-index">05</span>
               <MapPin size={18} />
               <span className="nav-menu-copy">
@@ -262,7 +262,7 @@ export default function ClientPage({ children }: { children: ReactNode }) {
               </span>
               <ChevronRight size={17} />
             </Link>
-            <Link href="/van-kahvaltisi" tabIndex={menuOpen ? 0 : -1} style={{ "--item-index": 6 } as CSSProperties} onClick={() => setMenuOpen(false)}>
+            <Link className="nav-menu-utility" href="/van-kahvaltisi" tabIndex={menuOpen ? 0 : -1} style={{ "--item-index": 6 } as CSSProperties} onClick={() => setMenuOpen(false)}>
               <span className="nav-menu-index">06</span>
               <BookOpen size={18} />
               <span className="nav-menu-copy">
@@ -271,7 +271,7 @@ export default function ClientPage({ children }: { children: ReactNode }) {
               </span>
               <ChevronRight size={17} />
             </Link>
-            <Link href="/sss" tabIndex={menuOpen ? 0 : -1} style={{ "--item-index": 7 } as CSSProperties} onClick={() => setMenuOpen(false)}>
+            <Link className="nav-menu-utility" href="/sss" tabIndex={menuOpen ? 0 : -1} style={{ "--item-index": 7 } as CSSProperties} onClick={() => setMenuOpen(false)}>
               <span className="nav-menu-index">07</span>
               <CircleHelp size={18} />
               <span className="nav-menu-copy">
@@ -281,6 +281,7 @@ export default function ClientPage({ children }: { children: ReactNode }) {
               <ChevronRight size={17} />
             </Link>
             <a
+              className="nav-menu-utility"
               href={whatsappUrl}
               tabIndex={menuOpen ? 0 : -1}
               style={{ "--item-index": 8 } as CSSProperties}
