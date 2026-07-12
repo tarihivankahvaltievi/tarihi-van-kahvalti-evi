@@ -26027,3 +26027,152 @@ body .mobile-bar button {
   .theme-breakfast .hero-parallax-copy h1 { font-size: clamp(2.12rem, 9.25vw, 2.48rem) !important; }
   .theme-breakfast .hero-parallax-copy p { max-width: 14.6rem !important; font-size: 0.77rem !important; }
 }
+
+/* Van tile blue — the third brand color, used for information and wayfinding. */
+:root,
+.theme-breakfast {
+  --van-blue: #2f5666;
+  --van-blue-dark: #203e4a;
+  --van-blue-soft: #d8e5e7;
+  --van-blue-pale: #b9d2d9;
+}
+
+.theme-breakfast .nav-links a:hover,
+.theme-breakfast .nav-location,
+.theme-breakfast .nav-location svg,
+.theme-breakfast .hero-parallax-kicker,
+.theme-breakfast .hero-story-link {
+  color: var(--van-blue) !important;
+}
+
+.theme-breakfast .nav-hover-pill {
+  border-color: rgba(47, 86, 102, 0.22) !important;
+  background: rgba(47, 86, 102, 0.09) !important;
+}
+
+.theme-breakfast .nav-location {
+  border-color: rgba(47, 86, 102, 0.24) !important;
+}
+
+.theme-breakfast .nav-location:hover {
+  background: var(--van-blue-soft) !important;
+  color: var(--van-blue-dark) !important;
+}
+
+.theme-breakfast .hero-parallax-kicker::before {
+  background: linear-gradient(90deg, transparent, var(--van-blue)) !important;
+}
+
+.theme-breakfast .hero-story-link {
+  border-bottom-color: rgba(47, 86, 102, 0.58) !important;
+}
+
+.theme-breakfast .story-band .about-sofra-kicker,
+.theme-breakfast .story-band .about-sofra-year {
+  color: var(--van-blue) !important;
+}
+
+.theme-breakfast .story-band .about-sofra-heading {
+  border-color: rgba(47, 86, 102, 0.28) !important;
+}
+
+.theme-breakfast .red-reviews .stagger-testimonial-controls button {
+  border-color: var(--van-blue-dark) !important;
+  color: var(--van-blue-dark) !important;
+}
+
+.theme-breakfast .red-reviews .stagger-testimonial-controls button:hover,
+.theme-breakfast .red-reviews .stagger-testimonial-controls button:focus-visible {
+  background: var(--van-blue) !important;
+  color: #fff9ee !important;
+}
+
+.theme-breakfast .gallery-head h2 span {
+  color: var(--van-blue) !important;
+}
+
+.theme-breakfast .gallery-head h2::after {
+  background: linear-gradient(90deg, #efcf91, var(--van-blue), #70151c, transparent) !important;
+}
+
+.faq-heading-wrap > span,
+.local-answer-label,
+.local-answer-card h3,
+.local-answer-card a {
+  color: var(--van-blue) !important;
+}
+
+.faq-heading-wrap > span,
+.local-answer-label {
+  border-bottom-color: var(--van-blue) !important;
+}
+
+.faq-question::after {
+  border-color: var(--van-blue) !important;
+  color: var(--van-blue) !important;
+}
+
+.faq-item[open] .faq-question::after {
+  background: var(--van-blue) !important;
+  color: #fff9ee !important;
+}
+
+.faq-question:focus-visible {
+  outline-color: var(--van-blue) !important;
+}
+
+.bottom-info-band .seo-inline-links a {
+  border-bottom-color: rgba(47, 86, 102, 0.42) !important;
+  color: var(--van-blue-dark) !important;
+}
+
+.theme-breakfast .mobile-bar a,
+.theme-breakfast .mobile-bar a svg,
+body .mobile-bar a,
+body .mobile-bar a svg {
+  color: var(--van-blue-dark) !important;
+}
+
+.theme-breakfast .nav-menu-index,
+.theme-breakfast .nav.menu-open .nav-menu-index,
+.theme-breakfast .nav-menu-panel a > svg {
+  color: var(--van-blue-pale) !important;
+}
+
+.theme-breakfast .nav-menu-panel a:hover .nav-menu-index,
+.theme-breakfast .nav-menu-panel a:focus-visible .nav-menu-index,
+.theme-breakfast .nav-menu-panel a:hover > svg,
+.theme-breakfast .nav-menu-panel a:focus-visible > svg {
+  color: var(--van-blue-dark) !important;
+}
+
+.footer-reimagined .footer-col-title,
+.footer-reimagined .footer-links a svg,
+.footer-reimagined .footer-links a:hover {
+  color: var(--van-blue-dark) !important;
+}
+
+.seo-page .seo-eyebrow,
+.seo-page .seo-content-grid h2,
+.seo-page .seo-faq-list details[open] summary {
+  color: var(--van-blue-dark) !important;
+}
+
+.seo-page .seo-eyebrow {
+  border-color: rgba(47, 86, 102, 0.3) !important;
+  background: var(--van-blue-soft) !important;
+}
+
+.seo-page .seo-actions a:nth-child(2),
+.seo-page .seo-actions a:nth-child(3),
+.seo-page .seo-related a,
+.seo-page .seo-toplinks a {
+  border-color: rgba(47, 86, 102, 0.28) !important;
+  color: var(--van-blue-dark) !important;
+}
+
+.seo-page .seo-context-strip span {
+  border-color: rgba(47, 86, 102, 0.28) !important;
+  background: rgba(47, 86, 102, 0.07) !important;
+  color: var(--van-blue-dark) !important;
+}
