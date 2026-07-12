@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Cormorant_Garamond, Playfair_Display } from "next/font/google";
+import { Bodoni_Moda, Cormorant_Garamond, Playfair_Display } from "next/font/google";
 import "./globals.css";
 
 const playfair = Playfair_Display({
@@ -13,6 +13,13 @@ const cormorant = Cormorant_Garamond({
   weight: ["500", "600", "700"],
   display: "swap",
   variable: "--font-cormorant-gf",
+});
+const bodoni = Bodoni_Moda({
+  subsets: ["latin", "latin-ext"],
+  weight: ["400", "500", "600", "700"],
+  style: ["normal", "italic"],
+  display: "swap",
+  variable: "--font-bodoni-gf",
 });
 import {
   address,
@@ -147,7 +154,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="tr" className={`h-full antialiased ${playfair.variable} ${cormorant.variable}`}>
+    <html lang="tr" className={`h-full antialiased ${playfair.variable} ${cormorant.variable} ${bodoni.variable}`}>
       <head>
         <link rel="dns-prefetch" href="https://www.google.com" />
         <link rel="dns-prefetch" href="https://wa.me" />

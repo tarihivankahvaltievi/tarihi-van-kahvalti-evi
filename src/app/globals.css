@@ -23623,3 +23623,298 @@ body,
     animation: none !important;
   }
 }
+
+/* About refinement II — compact mobile pacing, ink contours and typographic choreography. */
+.about-sofra-table {
+  outline: 1px solid rgba(12, 8, 8, 0.9) !important;
+  outline-offset: -1px;
+}
+
+.about-sofra-room {
+  outline: 0.42rem solid #70151c !important;
+  box-shadow: 0 0 0 1px #130b0b !important;
+}
+
+.about-sofra-heading,
+.about-sofra-proof,
+.about-sofra-story article + article {
+  border-color: rgba(12, 8, 8, 0.5) !important;
+}
+
+.about-sofra-heading::after {
+  width: 2.5rem;
+  height: 1px;
+  margin-left: auto;
+  content: "";
+  background: #160c0d;
+  transform-origin: right;
+}
+
+.about-sofra-year {
+  margin-left: auto;
+}
+
+.about-sofra h2 {
+  font-family: var(--font-bodoni-gf), "Bodoni Moda", Georgia, serif !important;
+  font-optical-sizing: auto;
+}
+
+.about-title-line {
+  display: block;
+  color: #fff7e9 !important;
+  transform-origin: left center;
+}
+
+.about-title-line-accent {
+  color: #f5dfb2 !important;
+  font-style: italic;
+  font-weight: 500;
+}
+
+.about-sofra h2.is-visible .about-title-line:first-child {
+  animation: about-line-arrive 820ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.about-sofra h2.is-visible .about-title-line-accent {
+  animation: about-line-arrive 920ms cubic-bezier(0.16, 1, 0.3, 1) 110ms both;
+}
+
+.about-sofra-ritual,
+.about-sofra-proof strong,
+.about-sofra-story article strong {
+  font-family: var(--font-bodoni-gf), "Bodoni Moda", Georgia, serif !important;
+  font-optical-sizing: auto;
+}
+
+.about-sofra-story article {
+  position: relative;
+}
+
+.about-sofra-story article::after {
+  position: absolute;
+  right: 0;
+  bottom: -1px;
+  width: 0;
+  height: 1px;
+  content: "";
+  background: #160c0d;
+  transition: width 700ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.about-sofra-story article.is-visible::after {
+  width: 32%;
+}
+
+.about-sofra-story article span {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+}
+
+.about-sofra-story article span i {
+  color: rgba(12, 8, 8, 0.72);
+  font-family: var(--font-bodoni-gf), Georgia, serif;
+  font-size: 0.82rem;
+  font-style: italic;
+  font-weight: 600;
+  letter-spacing: 0;
+}
+
+@keyframes about-line-arrive {
+  0% {
+    opacity: 0.25;
+    transform: translate3d(0, 0.55em, 0) skewY(2deg);
+    filter: blur(7px);
+  }
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) skewY(0);
+    filter: blur(0);
+  }
+}
+
+@media (max-width: 680px) {
+  .about-sofra {
+    gap: 1.5rem !important;
+    padding: 2.1rem 1rem 2.35rem !important;
+  }
+
+  .about-sofra-visual {
+    min-height: clamp(15.5rem, 72vw, 19rem) !important;
+  }
+
+  .about-sofra-table {
+    inset: 0 8% 7% 0 !important;
+    box-shadow: 0.45rem 0.45rem 0 rgba(20, 7, 8, 0.42) !important;
+  }
+
+  .about-sofra-room {
+    width: 37% !important;
+    height: 40% !important;
+    outline-width: 0.24rem !important;
+  }
+
+  .about-sofra-copy::before {
+    display: none;
+  }
+
+  .about-sofra-heading {
+    padding-bottom: 0.55rem;
+  }
+
+  .about-sofra-heading::after {
+    display: none;
+  }
+
+  .about-sofra-kicker {
+    font-size: 0.64rem !important;
+    letter-spacing: 0.14em !important;
+  }
+
+  .about-sofra-year {
+    font-size: 0.61rem;
+  }
+
+  .about-sofra h2 {
+    margin: 1rem 0 0.75rem !important;
+    font-size: clamp(2.18rem, 9.8vw, 2.85rem) !important;
+    line-height: 0.94 !important;
+  }
+
+  .about-title-line-accent {
+    margin-top: 0.06em;
+  }
+
+  .about-sofra-lead {
+    font-size: clamp(0.84rem, 3.45vw, 0.96rem) !important;
+    line-height: 1.42 !important;
+  }
+
+  .about-sofra-ritual {
+    margin: 0.9rem 0 !important;
+    padding-left: 0.85rem !important;
+    font-size: clamp(1.04rem, 4.45vw, 1.25rem) !important;
+    line-height: 1.24 !important;
+  }
+
+  .about-sofra-proof {
+    display: flex !important;
+    align-items: center !important;
+    grid-template-columns: none !important;
+    gap: 0.75rem !important;
+    padding: 0.72rem 0 !important;
+  }
+
+  .about-sofra-proof strong {
+    font-size: clamp(1.18rem, 5vw, 1.42rem) !important;
+  }
+
+  .about-sofra-proof span {
+    font-size: clamp(0.68rem, 2.72vw, 0.77rem) !important;
+    line-height: 1.32 !important;
+  }
+
+  .about-sofra-story {
+    margin-top: 0.65rem !important;
+  }
+
+  .about-sofra-story article,
+  .about-sofra-story article:nth-child(n) {
+    grid-template-columns: minmax(6rem, 0.34fr) minmax(0, 1fr) !important;
+    gap: 0.7rem !important;
+    padding: 0.68rem 0 !important;
+  }
+
+  .about-sofra-story article span {
+    align-items: center;
+    align-self: start;
+    gap: 0.35rem;
+    padding-top: 0.1rem;
+    font-size: clamp(0.56rem, 2.25vw, 0.64rem) !important;
+    line-height: 1.18 !important;
+  }
+
+  .about-sofra-story article span::before {
+    display: none !important;
+  }
+
+  .about-sofra-story article span i {
+    font-size: 0.68rem;
+  }
+
+  .about-sofra-story article strong {
+    font-size: clamp(1rem, 4.2vw, 1.16rem) !important;
+  }
+
+  .about-sofra-story article p {
+    margin-top: 0.22rem !important;
+    font-size: clamp(0.7rem, 2.82vw, 0.79rem) !important;
+    line-height: 1.32 !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .about-title-line,
+  .about-sofra-story article::after {
+    animation: none !important;
+    transition: none !important;
+    transform: none !important;
+    filter: none !important;
+  }
+}
+
+@media (max-width: 680px) {
+  .story-band .about-sofra {
+    gap: 1.5rem !important;
+    padding: 2.1rem 1rem 2.35rem !important;
+  }
+
+  .story-band .about-sofra .about-sofra-visual {
+    min-height: clamp(15.5rem, 72vw, 19rem) !important;
+  }
+
+  .story-band .about-sofra h2 {
+    margin: 1rem 0 0.75rem !important;
+    font-size: clamp(2.18rem, 9.8vw, 2.85rem) !important;
+    line-height: 0.94 !important;
+  }
+
+  .story-band .about-sofra .about-sofra-lead {
+    font-size: clamp(0.84rem, 3.45vw, 0.96rem) !important;
+    line-height: 1.42 !important;
+  }
+
+  .story-band .about-sofra .about-sofra-ritual {
+    margin: 0.9rem 0 !important;
+    padding: 0 0 0 0.85rem !important;
+    font-size: clamp(1.04rem, 4.45vw, 1.25rem) !important;
+    line-height: 1.24 !important;
+  }
+
+  .story-band .about-sofra .about-sofra-proof {
+    display: flex !important;
+    grid-template-columns: none !important;
+    gap: 0.75rem !important;
+    margin: 0 !important;
+    padding: 0.72rem 0 !important;
+  }
+
+  .story-band .about-sofra .about-sofra-story {
+    margin-top: 0.65rem !important;
+  }
+
+  .story-band .about-sofra .about-sofra-story article {
+    grid-template-columns: minmax(6rem, 0.34fr) minmax(0, 1fr) !important;
+    gap: 0.7rem !important;
+    padding: 0.68rem 0 !important;
+  }
+
+  .story-band .about-sofra .about-sofra-story article p {
+    display: block !important;
+    margin-top: 0.22rem !important;
+    overflow: visible !important;
+    font-size: clamp(0.7rem, 2.82vw, 0.79rem) !important;
+    line-height: 1.32 !important;
+    -webkit-line-clamp: unset !important;
+  }
+}

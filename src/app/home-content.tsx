@@ -25,17 +25,17 @@ const gallery: [string, string][] = [
 const aboutStory = [
   {
     title: "Tarihi bina",
-    text: "18. yüzyıl sonu Rum yapısının ahşap, taş ve motifleri kahvaltının temposunu yavaşlatır; sokaktan içeri girince masa şehrin gürültüsünden ayrılır.",
+    text: "18. yüzyıl sonu Rum yapısının ahşap ve taş dokusunda, şehirden uzakta bir sofra.",
     note: "Zambak Sokak",
   },
   {
     title: "Aile emeği",
-    text: "1978'den beri üçüncü kuşak aynı özenle servis eder; reçel, peynir, sıcak sahan ve çay aynı sabırla masaya gelir.",
-    note: "Üçüncü kuşak",
+    text: "Üç kuşaktır reçelden sıcak sahana, her tabak aynı aile özeniyle hazırlanır.",
+    note: "Aile işletmesi",
   },
   {
     title: "Van sofrası",
-    text: "Otlu peynir, bal kaymak, Van ketesi, kavut, murtuğa, sıcak sahanlar ve taze çay sofrayı doyuran asıl karakterdir.",
+    text: "Otlu peynir, kete, kavut, murtuğa ve taze çay; Van'dan gelen asıl karakter.",
     note: "Serpme kahvaltı",
   },
 ];
@@ -78,7 +78,10 @@ export function HomeContent() {
               <div className="about-sofra-kicker" data-reveal>Hakkımızda</div>
               <span className="about-sofra-year" aria-hidden="true">1978 — Beyoğlu</span>
             </div>
-            <h2 data-reveal>Van&apos;dan gelen sofra, Beyoğlu&apos;nda ağır ağır kurulur.</h2>
+            <h2 data-reveal aria-label="Van'dan gelen sofra, Beyoğlu'nda ağır ağır kurulur.">
+              <span className="about-title-line">Van&apos;dan gelen sofra,</span>
+              <span className="about-title-line about-title-line-accent">Beyoğlu&apos;nda ağır ağır kurulur.</span>
+            </h2>
             <p className="about-sofra-lead" data-reveal>
               Tarihi Van Kahvaltı Evi, Taksim&apos;in kalabalığında Van sofrasını
               tarihi Rum binasının sakin dokusuyla buluşturur.
@@ -93,9 +96,9 @@ export function HomeContent() {
             </p>
 
             <div className="about-sofra-story" aria-label="Tarihi Van Kahvaltı Evi hikayesi">
-              {aboutStory.map((item) => (
+              {aboutStory.map((item, index) => (
                 <article key={item.title} data-reveal>
-                  <span>{item.note}</span>
+                  <span><i aria-hidden="true">0{index + 1}</i>{item.note}</span>
                   <div>
                     <strong>{item.title}</strong>
                     <p>{item.text}</p>
