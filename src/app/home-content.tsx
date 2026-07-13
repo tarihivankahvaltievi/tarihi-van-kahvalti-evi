@@ -104,8 +104,16 @@ export function HomeContent() {
         </article>
       </div>
 
-      <section className="red-reviews" data-reveal>
-        <h2>Misafirlerimizin yorumları</h2>
+      <section className="red-reviews">
+        <h2 className="reviews-heading" data-reveal aria-label="Misafirlerimizin yorumları">
+          <span className="reviews-heading-line reviews-heading-line-primary" aria-hidden="true">
+            Misafirlerimizin
+          </span>
+          <span className="reviews-heading-line reviews-heading-line-secondary" aria-hidden="true">
+            yorumları
+          </span>
+          <span className="reviews-heading-rule" aria-hidden="true" />
+        </h2>
         <ReviewCarousel />
       </section>
 
