@@ -38,6 +38,8 @@ export default function ClientPage({ children }: { children: ReactNode }) {
   const [menuOpen, setMenuOpen] = useState(false);
   const [mobileBarHidden, setMobileBarHidden] = useState(false);
   const lastScrollY = useRef(0);
+  const menuButtonRef = useRef<HTMLButtonElement>(null);
+  const menuPanelRef = useRef<HTMLDivElement>(null);
   const [hoverStyle, setHoverStyle] = useState<CSSProperties>({
     opacity: 0,
     left: 0,
@@ -89,16 +91,44 @@ export default function ClientPage({ children }: { children: ReactNode }) {
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
         setMenuOpen(false);
+        return;
+      }
+
+      if (event.key === "Tab") {
+        const focusable = Array.from(
+          menuPanelRef.current?.querySelectorAll<HTMLElement>("a[href], button:not([disabled])") ?? [],
+        );
+
+        if (focusable.length === 0) {
+          return;
+        }
+
+        const first = focusable[0];
+        const last = focusable[focusable.length - 1];
+
+        if (event.shiftKey && document.activeElement === first) {
+          event.preventDefault();
+          last.focus();
+        } else if (!event.shiftKey && document.activeElement === last) {
+          event.preventDefault();
+          first.focus();
+        }
       }
     };
 
     window.addEventListener("keydown", handleKeyDown);
+    const menuButton = menuButtonRef.current;
+    const focusFrame = window.requestAnimationFrame(() => {
+      menuPanelRef.current?.querySelector<HTMLElement>("a[href]")?.focus();
+    });
     const previousOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
 
     return () => {
       window.removeEventListener("keydown", handleKeyDown);
+      window.cancelAnimationFrame(focusFrame);
       document.body.style.overflow = previousOverflow;
+      menuButton?.focus();
     };
   }, [menuOpen]);
 
@@ -181,6 +211,7 @@ export default function ClientPage({ children }: { children: ReactNode }) {
               <span>Beyoğlu</span>
             </a>
             <button
+              ref={menuButtonRef}
               type="button"
               className="nav-menu-button"
               aria-label={menuOpen ? "Menüyü kapat" : "Menüyü aç"}
@@ -197,8 +228,11 @@ export default function ClientPage({ children }: { children: ReactNode }) {
           </div>
 
           <div
+            ref={menuPanelRef}
             id="site-menu"
             className="nav-menu-panel"
+            role="dialog"
+            aria-modal="true"
             aria-hidden={!menuOpen}
             aria-label="Site menüsü"
           >
@@ -212,6 +246,10 @@ export default function ClientPage({ children }: { children: ReactNode }) {
               <span className="nav-menu-art-line" />
               <span className="nav-menu-art-steam" />
               <span className="nav-menu-art-steam" />
+            </div>
+            <div className="nav-drawer-head" aria-hidden="true">
+              <span>Menü</span>
+              <small>1978 · Beyoğlu</small>
             </div>
             <a className="nav-menu-primary" href="#top" tabIndex={menuOpen ? 0 : -1} style={{ "--item-index": 1 } as CSSProperties} onClick={() => setMenuOpen(false)}>
               <Home size={18} />
@@ -288,10 +326,18 @@ export default function ClientPage({ children }: { children: ReactNode }) {
           </div>
         </header>
 
+        <button
+          type="button"
+          className={`nav-menu-backdrop ${menuOpen ? "is-visible" : ""}`}
+          aria-label="Menüyü kapat"
+          tabIndex={-1}
+          onClick={() => setMenuOpen(false)}
+        />
+
         {children}
       </main>
 
-      <div className={`mobile-bar ${mobileBarHidden ? "is-hidden" : ""}`}>
+      <div className={`mobile-bar ${mobileBarHidden || menuOpen ? "is-hidden" : ""}`}>
         <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" aria-label="WhatsApp üzerinden mesaj gönderin">
           <MessageCircle size={20} />
           <span>WhatsApp</span>

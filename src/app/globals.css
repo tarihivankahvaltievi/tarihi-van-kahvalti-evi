@@ -26122,7 +26122,9 @@ body .mobile-bar button {
   }
 
   .theme-breakfast .nav-menu-panel a,
-  .theme-breakfast .nav.menu-open .nav-menu-panel a {
+  .theme-breakfast .nav.menu-open .nav-menu-panel a,
+  .theme-breakfast .nav.menu-open .nav-menu-panel a.nav-menu-primary,
+  .theme-breakfast .nav.menu-open .nav-menu-panel a.nav-menu-utility {
     grid-template-columns: 1.55rem 1.25rem minmax(0, 1fr) 1rem !important;
     gap: 0.55rem !important;
     min-height: 52px !important;
@@ -27378,5 +27380,345 @@ body .mobile-bar a svg {
     opacity: 1 !important;
     transform: none !important;
     filter: none !important;
+  }
+}
+
+/* Mobile navigation drawer — right-to-left, July 2026. */
+.nav-menu-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 48;
+  display: block;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  border: 0;
+  background: rgba(18, 13, 9, 0.48);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 260ms ease;
+}
+
+.nav-menu-backdrop.is-visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.nav-drawer-head {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .theme-breakfast .nav-menu-panel,
+  .theme-breakfast .nav.scrolled .nav-menu-panel,
+  .theme-breakfast .nav.menu-open .nav-menu-panel {
+    position: absolute !important;
+    inset: 100% 0 auto auto !important;
+    z-index: 51 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 0 !important;
+    width: min(88vw, 360px) !important;
+    height: calc(100dvh - 66px) !important;
+    max-height: none !important;
+    padding: 0.9rem max(0.85rem, env(safe-area-inset-right)) calc(1rem + env(safe-area-inset-bottom)) 0.9rem !important;
+    overflow-x: hidden !important;
+    overflow-y: auto !important;
+    overscroll-behavior: contain;
+    border: 0 !important;
+    border-left: 1px solid rgba(28, 24, 18, 0.78) !important;
+    border-radius: 0 !important;
+    background: #c5a25a !important;
+    box-shadow: -12px 0 18px rgba(28, 24, 18, 0.16) !important;
+    clip-path: inset(0 0 0 100%) !important;
+    opacity: 1 !important;
+    pointer-events: none !important;
+    transform: translate3d(102%, 0, 0) !important;
+    transform-origin: right center;
+    visibility: hidden;
+    will-change: transform, clip-path;
+    transition:
+      transform 470ms cubic-bezier(0.16, 1, 0.3, 1),
+      clip-path 520ms cubic-bezier(0.16, 1, 0.3, 1),
+      visibility 0s linear 520ms !important;
+  }
+
+  .theme-breakfast .nav.scrolled .nav-menu-panel {
+    inset: 100% 0 auto auto !important;
+  }
+
+  .theme-breakfast .nav.menu-open .nav-menu-panel {
+    clip-path: inset(0) !important;
+    pointer-events: auto !important;
+    transform: translate3d(0, 0, 0) !important;
+    visibility: visible;
+    transition:
+      transform 470ms cubic-bezier(0.16, 1, 0.3, 1),
+      clip-path 520ms cubic-bezier(0.16, 1, 0.3, 1),
+      visibility 0s linear 0s !important;
+  }
+
+  .theme-breakfast .nav-menu-panel::before {
+    position: absolute !important;
+    top: 0 !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    z-index: 3 !important;
+    display: block !important;
+    width: 1px !important;
+    height: auto !important;
+    content: "" !important;
+    background: rgba(28, 24, 18, 0.88) !important;
+    opacity: 0.9 !important;
+    transform: scaleY(0) !important;
+    transform-origin: top center !important;
+    transition: transform 620ms cubic-bezier(0.16, 1, 0.3, 1) 90ms !important;
+  }
+
+  .theme-breakfast .nav.menu-open .nav-menu-panel::before {
+    transform: scaleY(1) !important;
+  }
+
+  .theme-breakfast .nav-menu-panel::after {
+    position: absolute !important;
+    top: -5.5rem !important;
+    right: -5rem !important;
+    z-index: 0 !important;
+    display: block !important;
+    width: 15rem !important;
+    height: 15rem !important;
+    border-radius: 50% !important;
+    content: "" !important;
+    background: rgba(255, 245, 219, 0.16) !important;
+    opacity: 0 !important;
+    transform: scale(0.68) !important;
+    transition: opacity 540ms ease 90ms, transform 720ms cubic-bezier(0.16, 1, 0.3, 1) 90ms !important;
+  }
+
+  .theme-breakfast .nav.menu-open .nav-menu-panel::after {
+    opacity: 1 !important;
+    transform: scale(1) !important;
+  }
+
+  .nav-drawer-head {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1rem;
+    min-height: 68px;
+    padding: 0.35rem 0.35rem 0.8rem;
+    border-bottom: 1px solid rgba(28, 24, 18, 0.72);
+    opacity: 0;
+    transform: translate3d(24px, 0, 0);
+    transition: opacity 260ms ease, transform 460ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .nav.menu-open .nav-drawer-head {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+    transition-delay: 110ms;
+  }
+
+  .nav-drawer-head span {
+    color: #1c1812;
+    font-family: var(--font-literata-gf), Georgia, serif;
+    font-size: clamp(1.85rem, 8vw, 2.4rem);
+    font-weight: 760;
+    letter-spacing: -0.03em;
+    line-height: 1;
+  }
+
+  .nav-drawer-head small {
+    color: rgba(28, 24, 18, 0.7);
+    font-size: 0.62rem;
+    font-weight: 820;
+    letter-spacing: 0.08em;
+    white-space: nowrap;
+  }
+
+  .theme-breakfast .nav-menu-panel a,
+  .theme-breakfast .nav.menu-open .nav-menu-panel a,
+  .theme-breakfast .nav-menu-panel a.nav-menu-primary,
+  .theme-breakfast .nav.menu-open .nav-menu-panel a.nav-menu-primary,
+  .theme-breakfast .nav-menu-panel a.nav-menu-utility,
+  .theme-breakfast .nav.menu-open .nav-menu-panel a.nav-menu-utility {
+    position: relative !important;
+    z-index: 2 !important;
+    display: grid !important;
+    flex: 0 0 auto !important;
+    grid-template-columns: 1.35rem minmax(0, 1fr) 1rem !important;
+    grid-column: auto !important;
+    align-items: center !important;
+    gap: 0.68rem !important;
+    min-height: 58px !important;
+    padding: 0.55rem 0.38rem !important;
+    border: 0 !important;
+    border-bottom: 1px solid rgba(28, 24, 18, 0.46) !important;
+    background: transparent !important;
+    color: #1c1812 !important;
+    opacity: 0 !important;
+    filter: blur(3px) !important;
+    visibility: hidden !important;
+    transform: translate3d(30px, 0, 0) !important;
+    transition:
+      opacity 260ms ease,
+      transform 480ms cubic-bezier(0.16, 1, 0.3, 1),
+      filter 360ms ease,
+      background-color 150ms ease !important;
+  }
+
+  .theme-breakfast .nav.menu-open .nav-menu-panel a,
+  .theme-breakfast .nav.menu-open .nav-menu-panel a.nav-menu-primary,
+  .theme-breakfast .nav.menu-open .nav-menu-panel a.nav-menu-utility {
+    opacity: 1 !important;
+    filter: blur(0) !important;
+    visibility: visible !important;
+    transform: translate3d(0, 0, 0) !important;
+    animation: nav-drawer-item-in 480ms cubic-bezier(0.16, 1, 0.3, 1) both !important;
+    animation-delay: calc(80ms + (var(--item-index, 0) * 38ms)) !important;
+  }
+
+  .theme-breakfast .nav-menu-panel a:first-of-type,
+  .theme-breakfast .nav-menu-panel a.nav-menu-primary:first-of-type {
+    border-top: 0 !important;
+  }
+
+  .theme-breakfast .nav-menu-panel a:hover,
+  .theme-breakfast .nav-menu-panel a:focus-visible,
+  .theme-breakfast .nav-menu-panel a:active {
+    background: rgba(255, 247, 226, 0.42) !important;
+    color: #1c1812 !important;
+    outline: none !important;
+  }
+
+  .theme-breakfast .nav-menu-panel a:focus-visible {
+    box-shadow: inset 0 0 0 2px #1c1812 !important;
+  }
+
+  .theme-breakfast .nav-menu-panel a > svg:first-child {
+    grid-column: 1 !important;
+    color: #1c1812 !important;
+    opacity: 0.72 !important;
+    transform: scale(0.72) rotate(-8deg) !important;
+    transition: transform 420ms cubic-bezier(0.16, 1, 0.3, 1) !important;
+  }
+
+  .theme-breakfast .nav.menu-open .nav-menu-panel a > svg:first-child {
+    transform: scale(1) rotate(0) !important;
+    transition-delay: calc(175ms + (var(--item-index, 0) * 38ms)) !important;
+  }
+
+  .theme-breakfast .nav-menu-panel a .nav-menu-copy,
+  .theme-breakfast .nav-menu-panel a.nav-menu-primary .nav-menu-copy,
+  .theme-breakfast .nav-menu-panel a.nav-menu-utility .nav-menu-copy {
+    grid-column: 2 !important;
+    gap: 0.1rem !important;
+  }
+
+  .theme-breakfast .nav-menu-panel a > svg:last-child,
+  .theme-breakfast .nav-menu-panel a.nav-menu-utility > svg:last-child {
+    display: block !important;
+    grid-column: 3 !important;
+    justify-self: end !important;
+    color: #1c1812 !important;
+    opacity: 0.56 !important;
+    transform: translateX(0) !important;
+    transition: transform 180ms ease, opacity 180ms ease !important;
+  }
+
+  .theme-breakfast .nav-menu-panel a:hover > svg:last-child,
+  .theme-breakfast .nav-menu-panel a:focus-visible > svg:last-child {
+    opacity: 1 !important;
+    transform: translateX(3px) !important;
+  }
+
+  .theme-breakfast .nav-menu-link-text,
+  .theme-breakfast .nav-menu-panel a.nav-menu-utility .nav-menu-link-text {
+    color: currentColor !important;
+    font-size: clamp(0.94rem, 4vw, 1.06rem) !important;
+    font-weight: 780 !important;
+    letter-spacing: -0.012em !important;
+    line-height: 1.08 !important;
+  }
+
+  .theme-breakfast .nav-menu-link-meta {
+    display: block !important;
+    color: rgba(28, 24, 18, 0.66) !important;
+    font-size: 0.59rem !important;
+    font-weight: 650 !important;
+    line-height: 1.2 !important;
+    opacity: 1 !important;
+  }
+
+  .theme-breakfast .nav-menu-button {
+    transition: transform 160ms ease, background-color 220ms ease, box-shadow 220ms ease !important;
+  }
+
+  .theme-breakfast .nav.menu-open .nav-menu-button {
+    background: #dbc080 !important;
+    box-shadow: 1px 1px 0 rgba(23, 18, 13, 0.2) !important;
+    transform: translate3d(-2px, 0, 0) !important;
+  }
+}
+
+@keyframes nav-drawer-item-in {
+  from {
+    opacity: 0;
+    filter: blur(3px);
+    transform: translate3d(30px, 0, 0);
+  }
+  to {
+    opacity: 1;
+    filter: blur(0);
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@media (max-width: 390px) {
+  .theme-breakfast .nav-menu-panel,
+  .theme-breakfast .nav.scrolled .nav-menu-panel,
+  .theme-breakfast .nav.menu-open .nav-menu-panel {
+    width: min(91vw, 344px) !important;
+  }
+
+  .nav-drawer-head {
+    min-height: 61px;
+  }
+
+  .theme-breakfast .nav-menu-panel a,
+  .theme-breakfast .nav.menu-open .nav-menu-panel a,
+  .theme-breakfast .nav-menu-panel a.nav-menu-primary,
+  .theme-breakfast .nav.menu-open .nav-menu-panel a.nav-menu-primary,
+  .theme-breakfast .nav-menu-panel a.nav-menu-utility,
+  .theme-breakfast .nav.menu-open .nav-menu-panel a.nav-menu-utility {
+    min-height: 55px !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nav-menu-backdrop,
+  .theme-breakfast .nav-menu-panel,
+  .theme-breakfast .nav-menu-panel::before,
+  .theme-breakfast .nav-menu-panel::after,
+  .nav-drawer-head,
+  .theme-breakfast .nav-menu-panel a,
+  .theme-breakfast .nav-menu-panel a > svg,
+  .theme-breakfast .nav-menu-glyph span {
+    animation: none !important;
+    filter: none !important;
+    transition-duration: 0.01ms !important;
+    transition-delay: 0ms !important;
+  }
+
+  .theme-breakfast .nav.menu-open .nav-menu-panel,
+  .theme-breakfast .nav.menu-open .nav-menu-panel a,
+  .theme-breakfast .nav.menu-open .nav-menu-panel a.nav-menu-primary,
+  .theme-breakfast .nav.menu-open .nav-menu-panel a.nav-menu-utility,
+  .theme-breakfast .nav.menu-open .nav-drawer-head {
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: none !important;
   }
 }
