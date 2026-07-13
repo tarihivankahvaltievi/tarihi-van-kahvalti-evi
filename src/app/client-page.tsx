@@ -323,6 +323,26 @@ export default function ClientPage({ children }: { children: ReactNode }) {
               </span>
               <ChevronRight size={17} />
             </a>
+            <div className="nav-drawer-footer">
+              <div className="nav-drawer-hours">
+                <span className="nav-drawer-live-dot" aria-hidden="true" />
+                <span>Her gün</span>
+                <strong>08:00 — 18:00</strong>
+              </div>
+              <button
+                type="button"
+                className="nav-drawer-book"
+                tabIndex={menuOpen ? 0 : -1}
+                onClick={() => {
+                  setMenuOpen(false);
+                  handleOpenBooking();
+                }}
+              >
+                <Calendar size={17} />
+                <span>Masada yerini ayırt</span>
+                <ChevronRight size={16} />
+              </button>
+            </div>
           </div>
         </header>
 
