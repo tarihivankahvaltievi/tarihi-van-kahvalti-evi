@@ -21,6 +21,7 @@ type FloatingFood = {
   src: string;
   alt: string;
   className: string;
+  entranceOrder: number;
 };
 
 const heroImages: HeroImage[] = [
@@ -91,61 +92,73 @@ const floatingFoods: FloatingFood[] = [
     src: "/images/hero-float/sucuk-egg-pan.webp",
     alt: "Bakır sahanda sucuklu yumurta",
     className: "hero-float-item hero-float-pan",
+    entranceOrder: 2,
   },
   {
     src: "/images/hero-float/tea-glass.webp",
     alt: "İnce belli çay",
     className: "hero-float-item hero-float-tea",
+    entranceOrder: 0,
   },
   {
     src: "/images/hero-float/simit-board.webp",
     alt: "Ahşap tabakta sıcak simit",
     className: "hero-float-item hero-float-simit",
+    entranceOrder: 4,
   },
   {
     src: "/images/hero-float/omelette-plate.webp",
     alt: "Kahvaltı tabağı",
     className: "hero-float-item hero-float-omelette",
+    entranceOrder: 3,
   },
   {
     src: "/images/hero-float/cheese-platter.webp",
     alt: "Van peynir tabağı",
     className: "hero-float-item hero-float-cheese-platter",
+    entranceOrder: 1,
   },
   {
     src: "/images/hero-float/greens-platter.webp",
     alt: "Taze yeşillik tabağı",
     className: "hero-float-item hero-float-greens-platter",
+    entranceOrder: 5,
   },
   {
     src: "/images/hero-float/black-olive-bowl.webp",
     alt: "Siyah zeytin kasesi",
     className: "hero-float-item hero-float-black-olives",
+    entranceOrder: 6,
   },
   {
     src: "/images/hero-float/cherry-jam-bowl.webp",
     alt: "Vişne reçeli kasesi",
     className: "hero-float-item hero-float-cherry-jam",
+    entranceOrder: 7,
   },
   {
     src: "/images/hero-float/apricot-jam-bowl.webp",
     alt: "Kayısı reçeli kasesi",
     className: "hero-float-item hero-float-apricot-jam",
+    entranceOrder: 8,
   },
   {
     src: "/images/hero-float/tahin-bowl.webp",
     alt: "Tahin ve pekmez kasesi",
     className: "hero-float-item hero-float-jam",
+    entranceOrder: 9,
   },
   {
     src: "/images/hero-float/tomato-slice.webp",
     alt: "Taze domates dilimi",
     className: "hero-float-item hero-float-tomato",
+    entranceOrder: 10,
   },
   {
     src: "/images/hero-float/mint-leaf.webp",
     alt: "Taze nane yaprağı",
     className: "hero-float-item hero-float-mint",
+    entranceOrder: 11,
   },
 ];
 
@@ -413,14 +426,17 @@ export function VanHeroParallax() {
           }}
           aria-label="Uçan kahvaltı lezzetleri"
         >
-          {floatingFoods.map((item, index) => {
+          {floatingFoods.map((item) => {
             const shouldPreload = eagerFloatingFoodClassNames.has(item.className);
 
             return (
               <div
                 className={item.className}
                 key={item.src}
-                style={{ "--float-delay": `${Math.min(index, 6) * (isMobile ? 24 : 36)}ms` } as CSSProperties}
+                style={{
+                  "--float-delay": `${(isMobile ? 120 : 90) + Math.min(item.entranceOrder, 6) * (isMobile ? 88 : 68)}ms`,
+                  "--float-index": item.entranceOrder,
+                } as CSSProperties}
               >
                 <Image
                   src={item.src}

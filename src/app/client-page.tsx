@@ -186,9 +186,12 @@ export default function ClientPage({ children }: { children: ReactNode }) {
             </div>
             <a className="logo" href="#top" aria-label="Tarihi Van Kahvaltı Evi">
               <span className="logo-word">
-                <span>Tarihi</span> <span className="logo-van">Van</span>
+                <span className="logo-tarihi">Tarihi</span><span className="logo-van">Van</span>
               </span>
-              <span className="logo-subtitle">Kahvaltı Evi</span>
+              <span className="logo-subtitle">
+                <span>Kahvaltı Evi</span>
+                <span className="logo-founded" aria-hidden="true">1978</span>
+              </span>
             </a>
             <div className={`nav-status-pill ${isOpenNow ? "open" : "closed"}`}>
               <span className="nav-status-dot" />
@@ -357,18 +360,18 @@ export default function ClientPage({ children }: { children: ReactNode }) {
         {children}
       </main>
 
-      <div className={`mobile-bar ${mobileBarHidden || menuOpen ? "is-hidden" : ""}`}>
+      <div className={`mobile-bar ${mobileBarHidden || menuOpen ? "is-hidden" : ""}`} role="navigation" aria-label="Hızlı işlemler">
         <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" aria-label="WhatsApp üzerinden mesaj gönderin">
           <MessageCircle size={20} />
-          <span>WhatsApp</span>
+          <span className="mobile-bar-label">WhatsApp</span>
         </a>
         <button type="button" onClick={() => handleOpenBooking()} aria-label="Rezervasyon yapın">
           <Calendar size={22} className="mobile-bar-highlight-icon" />
-          <span>Rezervasyon</span>
+          <span className="mobile-bar-label">Rezervasyon</span>
         </button>
         <a href={mapsUrl} target="_blank" rel="noopener noreferrer" aria-label="Haritada yol tarifi alın">
           <MapPin size={20} />
-          <span>Yol Tarifi</span>
+          <span className="mobile-bar-label">Yol Tarifi</span>
         </a>
       </div>
 
