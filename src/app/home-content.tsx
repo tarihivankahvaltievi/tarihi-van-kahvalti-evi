@@ -1,6 +1,6 @@
-import Image from "next/image";
 import Link from "next/link";
 import { ChevronRight } from "lucide-react";
+import { AboutStory } from "./components/about-story";
 import { AnimatedFooter } from "./components/animated-footer";
 import { BookingOpenButton } from "./components/booking-open-button";
 import { FaqSection } from "./components/faq-section";
@@ -22,87 +22,12 @@ const gallery: [string, string][] = [
   ["/images/street-table.jpg", "Beyoğlu sokaklarında kahvaltı masası"],
 ];
 
-const aboutStory = [
-  {
-    title: "Tarihi bina",
-    text: "18. yüzyıl sonu Rum yapısının ahşap ve taş dokusunda, şehirden uzakta bir sofra.",
-    note: "Zambak Sokak",
-  },
-  {
-    title: "Aile emeği",
-    text: "Üç kuşaktır reçelden sıcak sahana, her tabak aynı aile özeniyle hazırlanır.",
-    note: "Aile işletmesi",
-  },
-  {
-    title: "Van sofrası",
-    text: "Otlu peynir, kete, kavut, murtuğa ve taze çay; Van'dan gelen asıl karakter.",
-    note: "Serpme kahvaltı",
-  },
-];
-
 export function HomeContent() {
   return (
     <>
       <VanHeroParallax />
 
-      <div className="story-band">
-        <article id="story" className="about-sofra about-sofra-authored" data-reveal>
-          <div className="about-sofra-visual" data-reveal>
-            <figure className="about-sofra-table" style={{ margin: 0 }}>
-              <Image
-                src="/images/breakfast-spread.jpg"
-                alt="Tarihi Van Kahvaltı Evi kahvaltı sofrası"
-                fill
-                sizes="(max-width: 900px) 92vw, 560px"
-                loading="lazy"
-                unoptimized
-              />
-            </figure>
-            <figure className="about-sofra-room" style={{ margin: 0 }}>
-              <Image
-                src="/images/interior-chair.jpg"
-                alt="Tarihi Van Kahvaltı Evi iç mekan dokusu"
-                fill
-                sizes="(max-width: 900px) 34vw, 220px"
-                loading="lazy"
-              />
-            </figure>
-            <div className="about-sofra-mark" aria-hidden="true">
-              <strong>1978</strong>
-              <span>Beyoğlu&apos;nda aile sofrası</span>
-            </div>
-          </div>
-
-          <div className="about-sofra-copy">
-            <div className="about-sofra-heading">
-              <div className="about-sofra-kicker" data-reveal>Hakkımızda</div>
-              <span className="about-sofra-year" aria-hidden="true">1978 — Beyoğlu</span>
-            </div>
-            <h2 data-reveal aria-label="Van'dan gelen sofra, Beyoğlu'nda ağır ağır kurulur.">
-              <span className="about-title-line">Van&apos;dan gelen sofra,</span>
-              <span className="about-title-line about-title-line-accent">Beyoğlu&apos;nda ağır ağır kurulur.</span>
-            </h2>
-            <p className="about-sofra-lead" data-reveal>
-              Van sofrasını, Beyoğlu&apos;nun tarihi Rum binasında 1978&apos;den beri ailece kuruyoruz.
-            </p>
-            <blockquote className="about-sofra-ritual" data-reveal>
-              Sofra aceleye değil; çayın buharına ve masada uzayan muhabbete kurulur.
-            </blockquote>
-
-            <div className="about-sofra-story" aria-label="Tarihi Van Kahvaltı Evi hikayesi">
-              {aboutStory.map((item, index) => (
-                <article key={item.title} data-reveal>
-                  <span><i aria-hidden="true">0{index + 1}</i>{item.note}</span>
-                  <div>
-                    <strong>{item.title}</strong>
-                    <p>{item.text}</p>
-                  </div>
-                </article>
-              ))}
-            </div>
-          </div>
-        </article>
-      </div>
+      <AboutStory />
 
       <section className="red-reviews">
         <h2 className="reviews-heading" data-reveal aria-label="Misafirlerimizin yorumları">
