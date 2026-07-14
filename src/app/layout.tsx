@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Bodoni_Moda, Cormorant_Garamond, Libre_Caslon_Display, Literata, Playfair_Display } from "next/font/google";
+import { Bodoni_Moda, Bricolage_Grotesque, Cormorant_Garamond, Literata, Playfair_Display } from "next/font/google";
 import "./globals.css";
 
 const playfair = Playfair_Display({
@@ -29,11 +29,12 @@ const literata = Literata({
   display: "swap",
   variable: "--font-literata-gf",
 });
-const libreCaslonDisplay = Libre_Caslon_Display({
+const bricolageGrotesque = Bricolage_Grotesque({
   subsets: ["latin", "latin-ext"],
-  weight: "400",
+  weight: "variable",
+  axes: ["opsz", "wdth"],
   display: "swap",
-  variable: "--font-libre-caslon-display-gf",
+  variable: "--font-bricolage-grotesque-gf",
 });
 import {
   address,
@@ -168,7 +169,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="tr" className={`h-full antialiased ${playfair.variable} ${cormorant.variable} ${bodoni.variable} ${literata.variable} ${libreCaslonDisplay.variable}`}>
+    <html lang="tr" className={`h-full antialiased ${playfair.variable} ${cormorant.variable} ${bodoni.variable} ${literata.variable} ${bricolageGrotesque.variable}`}>
       <head>
         <link rel="dns-prefetch" href="https://www.google.com" />
         <link rel="dns-prefetch" href="https://wa.me" />
