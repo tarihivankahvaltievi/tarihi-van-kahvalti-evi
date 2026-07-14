@@ -5,7 +5,6 @@ import { AnimatedFooter } from "./components/animated-footer";
 import { BookingOpenButton } from "./components/booking-open-button";
 import { FaqSection } from "./components/faq-section";
 import { GalleryLightbox } from "./components/gallery-lightbox";
-import { ReviewCarousel } from "./components/review-carousel";
 import { VanHeroParallax } from "./components/van-hero-parallax";
 import { displayAddress, localSeoFacts } from "./seo";
 
@@ -25,25 +24,13 @@ const gallery: [string, string][] = [
 export function HomeContent() {
   return (
     <>
+      <main id="main-content">
       <VanHeroParallax />
 
       <AboutStory />
 
-      <section className="red-reviews">
-        <h2 className="reviews-heading" data-reveal aria-label="Misafirlerimizin yorumları">
-          <span className="reviews-heading-line reviews-heading-line-primary" aria-hidden="true">
-            Misafirlerimizin
-          </span>
-          <span className="reviews-heading-line reviews-heading-line-secondary" aria-hidden="true">
-            yorumları
-          </span>
-          <span className="reviews-heading-rule" aria-hidden="true" />
-        </h2>
-        <ReviewCarousel />
-      </section>
-
       <section id="gallery" className="gallery-section">
-        <div className="gallery-head" data-reveal>
+        <div className="gallery-head">
           <h2>
             Mekan <span>anları</span>
           </h2>
@@ -70,19 +57,13 @@ export function HomeContent() {
               <Link href="/menu">Menü ve fiyatlar</Link>
               <Link href="/van-kahvaltisi">Van kahvaltısı nedir?</Link>
               <Link href="/beyoglu-kahvalti">Beyoğlu kahvaltı</Link>
-              <Link href="/taksim-kahvalti">Taksim kahvaltı</Link>
-              <Link href="/istanbul-van-kahvaltisi">İstanbul Van kahvaltısı</Link>
-              <Link href="/serpme-kahvalti-beyoglu">Serpme kahvaltı</Link>
-              <Link href="/istiklal-caddesi-kahvalti">İstiklal kahvaltı</Link>
-              <Link href="/zambak-sokak-kahvalti">Zambak Sokak</Link>
-              <Link href="/siraselviler-kahvalti">Sıraselviler</Link>
-              <Link href="/kahvalti-rezervasyon">Rezervasyon</Link>
+              <Link href="/iletisim">Konum ve rezervasyon</Link>
               <Link href="/kafka-cafe">Kafka Cafe</Link>
             </nav>
           </div>
         </section>
 
-        <section className="local-answer-panel" aria-labelledby="local-answer-heading" data-reveal>
+        <section className="local-answer-panel" aria-labelledby="local-answer-heading">
           <div className="local-answer-head">
             <span className="local-answer-label">Yerel bilgi</span>
             <h2 id="local-answer-heading">Beyoğlu Taksim Van kahvaltısı için hızlı bilgiler</h2>
@@ -102,6 +83,8 @@ export function HomeContent() {
 
 
       </div>
+
+      </main>
 
       <AnimatedFooter />
     </>

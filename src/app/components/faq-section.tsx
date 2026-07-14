@@ -7,7 +7,7 @@ export function FaqSection() {
       id="faq" 
       aria-labelledby="faq-heading"
     >
-      <div className="faq-inner" data-reveal>
+      <div className="faq-inner">
         <div className="faq-heading-wrap">
           <span>Merak edilenler</span>
           <h2 id="faq-heading">

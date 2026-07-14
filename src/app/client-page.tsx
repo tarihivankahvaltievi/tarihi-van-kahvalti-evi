@@ -21,7 +21,6 @@ import {
   MapPin,
   MessageCircle,
 } from "lucide-react";
-import { UiMotion } from "./ui-motion";
 import { mapsUrl, whatsappUrl } from "./seo";
 
 const BookingModal = dynamic(
@@ -96,7 +95,9 @@ export default function ClientPage({ children }: { children: ReactNode }) {
 
       if (event.key === "Tab") {
         const focusable = Array.from(
-          menuPanelRef.current?.querySelectorAll<HTMLElement>("a[href], button:not([disabled])") ?? [],
+          menuPanelRef.current?.querySelectorAll<HTMLElement>(
+            "[data-menu-title], a[href], button:not([disabled])",
+          ) ?? [],
         );
 
         if (focusable.length === 0) {
@@ -168,9 +169,7 @@ export default function ClientPage({ children }: { children: ReactNode }) {
 
   return (
     <>
-      <UiMotion />
-
-      <main id="top" className="site-shell theme-breakfast">
+      <div id="top" className="site-shell theme-breakfast">
         <header className={`nav ${scrolled ? "scrolled" : ""} ${menuOpen ? "menu-open" : ""}`}>
           <div className="logo-wrap">
             <div className="logo-emblem brand-logo-mark" aria-hidden="true">
@@ -180,8 +179,6 @@ export default function ClientPage({ children }: { children: ReactNode }) {
                 width={54}
                 height={68}
                 className="brand-logo-image"
-                priority
-                fetchPriority="high"
               />
             </div>
             <a className="logo" href="#top" aria-label="Tarihi Van Kahvaltı Evi">
@@ -236,6 +233,7 @@ export default function ClientPage({ children }: { children: ReactNode }) {
             role="dialog"
             aria-modal="true"
             aria-hidden={!menuOpen}
+            inert={!menuOpen}
             aria-labelledby="site-menu-title"
           >
             <div className="nav-menu-ambient" aria-hidden="true">
@@ -357,7 +355,7 @@ export default function ClientPage({ children }: { children: ReactNode }) {
         />
 
         {children}
-      </main>
+      </div>
 
       <div className={`mobile-bar ${mobileBarHidden || menuOpen ? "is-hidden" : ""}`} role="navigation" aria-label="Hızlı işlemler">
         <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" aria-label="WhatsApp üzerinden mesaj gönderin">

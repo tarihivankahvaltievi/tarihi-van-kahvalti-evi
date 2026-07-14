@@ -174,11 +174,12 @@ Rezervasyonumu onaylayabilir misiniz? Şimdiden teşekkürler.`;
         </div>
 
         <div className="form-group">
-          <label>Rezervasyon Tipi</label>
-          <div className="type-toggle-grid">
+          <span id="booking-type-label" className="form-label">Rezervasyon Tipi</span>
+          <div className="type-toggle-grid" role="group" aria-labelledby="booking-type-label">
             <button
               type="button"
               className={type === "Kahvaltı" ? "active" : ""}
+              aria-pressed={type === "Kahvaltı"}
               onClick={() => setType("Kahvaltı")}
             >
               🍳 Van Kahvaltısı
@@ -186,6 +187,7 @@ Rezervasyonumu onaylayabilir misiniz? Şimdiden teşekkürler.`;
             <button
               type="button"
               className={type === "Kafka Cafe" ? "active" : ""}
+              aria-pressed={type === "Kafka Cafe"}
               onClick={() => setType("Kafka Cafe")}
             >
               ☕ Kafka Cafe
@@ -237,20 +239,22 @@ Rezervasyonumu onaylayabilir misiniz? Şimdiden teşekkürler.`;
         </div>
 
         <div className="form-group">
-          <label>
+          <span id="guest-count-label" className="form-label">
             <Users size={15} /> Kişi Sayısı
-          </label>
-          <div className="guests-counter">
+          </span>
+          <div className="guests-counter" role="group" aria-labelledby="guest-count-label">
             <button
               type="button"
+              aria-label="Kişi sayısını azalt"
               disabled={guests <= 1}
               onClick={() => setGuests(guests - 1)}
             >
               -
             </button>
-            <span className="guests-value">{guests} Kişi</span>
+            <span className="guests-value" role="status" aria-live="polite">{guests} Kişi</span>
             <button
               type="button"
+              aria-label="Kişi sayısını artır"
               disabled={guests >= 30}
               onClick={() => setGuests(guests + 1)}
             >

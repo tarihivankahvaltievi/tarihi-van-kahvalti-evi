@@ -14,7 +14,7 @@ type GalleryRow = {
   duration: number;
   offset: string;
   reverse: boolean;
-  density: "featured" | "tall" | "compact";
+  density: "featured" | "tall";
 };
 
 export function GalleryLightbox({ gallery }: GalleryLightboxProps) {
@@ -50,13 +50,6 @@ export function GalleryLightbox({ gallery }: GalleryLightboxProps) {
       offset: "-11vw",
       reverse: true,
       density: "tall",
-    },
-    {
-      items: gallery.filter((_, index) => index % 3 !== 1),
-      duration: 68,
-      offset: "-5vw",
-      reverse: false,
-      density: "compact",
     },
   ];
 
@@ -154,7 +147,7 @@ export function GalleryLightbox({ gallery }: GalleryLightboxProps) {
 
   return (
     <>
-      <div className="gallery-hero-shell" data-reveal>
+      <div className="gallery-hero-shell">
         <span className="gallery-ambient gallery-ambient-one" aria-hidden="true" />
         <span className="gallery-ambient gallery-ambient-two" aria-hidden="true" />
         <div className="mosaic gallery-marquee" aria-label="Mekan fotoğrafları">
@@ -206,7 +199,6 @@ export function GalleryLightbox({ gallery }: GalleryLightboxProps) {
                 fill
                 sizes="(max-width: 1200px) 90vw, 1000px"
                 className="lightbox-image"
-                priority
               />
             </div>
 
@@ -249,7 +241,7 @@ function GalleryMarqueeRow({
   paused?: boolean;
   duration: number;
   offset: string;
-  density: "featured" | "tall" | "compact";
+  density: "featured" | "tall";
 }) {
   const marqueeItems = [...items, ...items];
 
@@ -266,6 +258,7 @@ function GalleryMarqueeRow({
         {marqueeItems.map(([src, alt], index) => {
           const galleryIndex = gallery.findIndex(([gallerySrc]) => gallerySrc === src);
           const resolvedIndex = galleryIndex >= 0 ? galleryIndex : index % gallery.length;
+          const isDuplicate = index >= items.length;
 
           return (
             <button
@@ -273,7 +266,10 @@ function GalleryMarqueeRow({
               className="mosaic-item gallery-marquee-card"
               key={`${src}-${index}-${reverse ? "reverse" : "forward"}`}
               onClick={() => openLightbox(resolvedIndex)}
-              aria-label={`${alt} görselini büyüt`}
+              aria-label={isDuplicate ? undefined : `${alt} görselini büyüt`}
+              aria-hidden={isDuplicate}
+              inert={isDuplicate}
+              tabIndex={isDuplicate ? -1 : 0}
               style={{
                 "--marquee-tilt": `${index % 2 === 0 ? -1.2 : 1.45}deg`,
                 "--card-lift": `${index % 3 === 0 ? "-10px" : index % 3 === 1 ? "8px" : "0px"}`,
@@ -281,7 +277,7 @@ function GalleryMarqueeRow({
             >
               <Image
                 src={src}
-                alt={alt}
+                alt={isDuplicate ? "" : alt}
                 fill
                 sizes="(max-width: 760px) 58vw, (max-width: 1100px) 34vw, 360px"
                 loading="lazy"

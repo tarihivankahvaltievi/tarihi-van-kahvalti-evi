@@ -65,26 +65,6 @@ const heroImages: HeroImage[] = [
     thumbnail: "/images/hero-parallax/overhead-classic.webp",
     position: "50% 50%",
   },
-  {
-    thumbnail: "/images/hero-parallax/simit-table.webp",
-    position: "50% 44%",
-  },
-  {
-    thumbnail: "/images/hero-parallax/hands-breakfast.webp",
-    position: "50% 45%",
-  },
-  {
-    thumbnail: "/images/hero-parallax/terrace-plate.webp",
-    position: "50% 44%",
-  },
-  {
-    thumbnail: "/images/hero-parallax/indoor-table.webp",
-    position: "50% 42%",
-  },
-  {
-    thumbnail: "/images/hero-parallax/tea-service.webp",
-    position: "50% 46%",
-  },
 ];
 
 const floatingFoods: FloatingFood[] = [
@@ -131,44 +111,12 @@ const floatingFoods: FloatingFood[] = [
     entranceOrder: 6,
   },
   {
-    src: "/images/hero-float/cherry-jam-bowl.webp",
-    alt: "Vişne reçeli kasesi",
-    className: "hero-float-item hero-float-cherry-jam",
-    entranceOrder: 7,
-  },
-  {
     src: "/images/hero-float/apricot-jam-bowl.webp",
     alt: "Kayısı reçeli kasesi",
     className: "hero-float-item hero-float-apricot-jam",
     entranceOrder: 8,
   },
-  {
-    src: "/images/hero-float/tahin-bowl.webp",
-    alt: "Tahin ve pekmez kasesi",
-    className: "hero-float-item hero-float-jam",
-    entranceOrder: 9,
-  },
-  {
-    src: "/images/hero-float/tomato-slice.webp",
-    alt: "Taze domates dilimi",
-    className: "hero-float-item hero-float-tomato",
-    entranceOrder: 10,
-  },
-  {
-    src: "/images/hero-float/mint-leaf.webp",
-    alt: "Taze nane yaprağı",
-    className: "hero-float-item hero-float-mint",
-    entranceOrder: 11,
-  },
 ];
-
-const eagerFloatingFoodClassNames = new Set([
-  "hero-float-item hero-float-pan",
-  "hero-float-item hero-float-tea",
-  "hero-float-item hero-float-cheese-platter",
-  "hero-float-item hero-float-apricot-jam",
-  "hero-float-item hero-float-black-olives",
-]);
 
 const mobileFloatingFoodClassNames = new Set([
   "hero-float-item hero-float-pan",
@@ -333,7 +281,6 @@ export function VanHeroParallax() {
 
   const firstRow = heroImages.slice(0, 5);
   const secondRow = heroImages.slice(5, 10);
-  const thirdRow = heroImages.slice(10, 15);
   const visibleFloatingFoods = isMobile
     ? floatingFoods.filter((item) => mobileFloatingFoodClassNames.has(item.className))
     : floatingFoods;
@@ -356,7 +303,6 @@ export function VanHeroParallax() {
 
   return (
     <section
-      id="top"
       ref={ref}
       className="hero hero-parallax-dining"
       aria-label="Tarihi Van Kahvaltı Evi ana alanı"
@@ -419,17 +365,14 @@ export function VanHeroParallax() {
             translate={translateX}
             reverse
             enableHover={!isMobile}
-            preloadCount={isMobile ? 2 : 3}
+            preloadCount={1}
           />
           <HeroImageRow
             images={secondRow}
             translate={translateXReverse}
             enableHover={!isMobile}
-            preloadCount={isMobile ? 1 : 2}
+            preloadCount={0}
           />
-          {!isMobile && (
-            <HeroImageRow images={thirdRow} translate={translateX} reverse enableHover preloadCount={0} />
-          )}
         </motion.div>
 
         <motion.div
@@ -445,9 +388,6 @@ export function VanHeroParallax() {
           aria-hidden="true"
         >
           {visibleFloatingFoods.map((item) => {
-            const shouldPreload = eagerFloatingFoodClassNames.has(item.className)
-              && (!isMobile || mobileFloatingFoodClassNames.has(item.className));
-
             return (
               <div
                 className={item.className}
@@ -462,8 +402,6 @@ export function VanHeroParallax() {
                   alt={item.alt}
                   fill
                   sizes="(max-width: 680px) 30vw, (max-width: 1080px) 26vw, 320px"
-                  priority={shouldPreload}
-                  fetchPriority={shouldPreload ? "high" : "auto"}
                   quality={82}
                 />
               </div>
@@ -506,8 +444,7 @@ function HeroImageRow({
               alt=""
               fill
               sizes="(max-width: 680px) 38vw, (max-width: 1080px) 40vw, 32rem"
-              priority={shouldPreload}
-              fetchPriority={shouldPreload ? "high" : "low"}
+              preload={shouldPreload}
               quality={74}
               style={{ objectPosition: image.position ?? "center" }}
             />

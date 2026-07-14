@@ -1,4 +1,5 @@
 import type { NextConfig } from "next";
+import { legacyRedirects } from "./src/app/seo";
 
 const isDev = process.env.NODE_ENV !== "production";
 
@@ -29,8 +30,23 @@ const nextConfig: NextConfig = {
     qualities: [74, 75, 82],
     minimumCacheTTL: 60 * 60 * 24 * 30,
   },
-  experimental: {
-    optimizePackageImports: ["lucide-react"],
+  async redirects() {
+    const wordpressRedirects = [
+      { source: "/anasayfa", destination: "/" },
+      { source: "/tarihi-van-kahvaltisi-evi-menu", destination: "/menu" },
+      { source: "/van-kahvalti", destination: "/van-kahvaltisi" },
+      { source: "/gercek-van-kahvaltisinda-neler-olur", destination: "/van-kahvaltisi" },
+      { source: "/tarihi-van-kahvalti-evi-hikayemiz", destination: "/#story" },
+      { source: "/galeri-van-kahvalti-evi-taksim", destination: "/#gallery" },
+      { source: "/urun/van-serpme-kahvalti", destination: "/menu#serpme-kahvalti" },
+      { source: "/urun/cift-kisilik-serpme-kahvalti", destination: "/menu#serpme-kahvalti" },
+      { source: "/urun/turk-kahvesi", destination: "/kafka-cafe" },
+    ];
+
+    return [...legacyRedirects, ...wordpressRedirects].map((redirect) => ({
+      ...redirect,
+      permanent: true,
+    }));
   },
   async headers() {
     return [
@@ -39,24 +55,7 @@ const nextConfig: NextConfig = {
         headers: [
           {
             key: "Cache-Control",
-            value: "public, max-age=31536000, immutable",
-          },
-        ],
-      },
-      {
-        source: "/:file(llms|llms-full).txt",
-        headers: [
-          {
-            key: "Content-Type",
-            value: "text/plain; charset=utf-8",
-          },
-          {
-            key: "Cache-Control",
-            value: "public, max-age=3600, s-maxage=86400, stale-while-revalidate=604800",
-          },
-          {
-            key: "X-Robots-Tag",
-            value: "all",
+            value: "public, max-age=86400, stale-while-revalidate=604800",
           },
         ],
       },
@@ -96,24 +95,11 @@ const nextConfig: NextConfig = {
         ],
       },
       {
-        source: "/business-profile.json",
-        headers: [
-          {
-            key: "Cache-Control",
-            value: "public, max-age=3600, s-maxage=86400, stale-while-revalidate=604800",
-          },
-          {
-            key: "X-Robots-Tag",
-            value: "all",
-          },
-        ],
-      },
-      {
         source: "/:path*.(svg|ico|woff|woff2)",
         headers: [
           {
             key: "Cache-Control",
-            value: "public, max-age=31536000, immutable",
+            value: "public, max-age=86400, stale-while-revalidate=604800",
           },
         ],
       },

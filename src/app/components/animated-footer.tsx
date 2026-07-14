@@ -254,6 +254,8 @@ function IstiklalWebglAtmosphere() {
 
     let animationFrame = 0;
     let start = performance.now();
+    let isVisible = false;
+    let pageVisible = document.visibilityState === "visible";
 
     const resize = () => {
       const rect = canvas.getBoundingClientRect();
@@ -268,7 +270,6 @@ function IstiklalWebglAtmosphere() {
     };
 
     const render = (now: number) => {
-      resize();
       gl.clearColor(0, 0, 0, 0);
       gl.clear(gl.COLOR_BUFFER_BIT);
       gl.useProgram(program);
@@ -282,23 +283,55 @@ function IstiklalWebglAtmosphere() {
       canvas.dataset.webglActive = "true";
       canvas.dataset.webglFrame = Math.round(now).toString();
 
-      if (!reduceMotion.matches) {
+      if (!reduceMotion.matches && isVisible && pageVisible) {
+        animationFrame = window.requestAnimationFrame(render);
+      } else {
+        animationFrame = 0;
+      }
+    };
+
+    const requestRender = () => {
+      window.cancelAnimationFrame(animationFrame);
+      animationFrame = 0;
+      if (isVisible && pageVisible) {
         animationFrame = window.requestAnimationFrame(render);
       }
     };
 
     const handleMotionPreferenceChange = () => {
-      window.cancelAnimationFrame(animationFrame);
       start = performance.now();
-      animationFrame = window.requestAnimationFrame(render);
+      requestRender();
     };
 
+    const handleVisibilityChange = () => {
+      pageVisible = document.visibilityState === "visible";
+      requestRender();
+    };
+
+    const resizeObserver = new ResizeObserver(() => {
+      resize();
+      requestRender();
+    });
+    const visibilityObserver = new IntersectionObserver(
+      ([entry]) => {
+        isVisible = entry.isIntersecting;
+        if (isVisible) resize();
+        requestRender();
+      },
+      { rootMargin: "200px 0px", threshold: 0 },
+    );
+
     reduceMotion.addEventListener("change", handleMotionPreferenceChange);
-    animationFrame = window.requestAnimationFrame(render);
+    document.addEventListener("visibilitychange", handleVisibilityChange);
+    resizeObserver.observe(canvas);
+    visibilityObserver.observe(canvas);
 
     return () => {
       window.cancelAnimationFrame(animationFrame);
       reduceMotion.removeEventListener("change", handleMotionPreferenceChange);
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
+      resizeObserver.disconnect();
+      visibilityObserver.disconnect();
       gl.deleteBuffer(positionBuffer);
       gl.deleteProgram(program);
       gl.deleteShader(vertexShader);

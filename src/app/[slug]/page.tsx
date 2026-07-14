@@ -6,21 +6,15 @@ import {
   absoluteUrl,
   buildArticleJsonLd,
   buildBreadcrumbJsonLd,
-  buildDirectionsHowToJsonLd,
   buildFaqJsonLd,
-  buildGeoCoverageJsonLd,
   buildMenuJsonLd,
-  buildRestaurantJsonLd,
-  buildWebsiteJsonLd,
   createPageMetadata,
   dateModified,
-  getPageLanguage,
   getSeoPage,
   jsonLd,
   mapsUrl,
   pageOgImagePath,
   seoPages,
-  siteName,
   siteUrl,
   telUrl,
   whatsappUrl,
@@ -54,74 +48,21 @@ export default async function SeoPage({ params }: PageProps) {
   }
 
   const pageUrl = absoluteUrl(page.slug);
-  const pageLanguage = getPageLanguage(page);
-  const isArabic = pageLanguage.startsWith("ar");
-  const labels = pageLanguage.startsWith("ru")
-    ? {
-        nav: "Навигация",
-        menu: "Меню",
-        contact: "Контакты",
-        faq: "FAQ",
-        whatsapp: "WhatsApp",
-        directions: "Маршрут",
-        call: "Позвонить",
-        quick: "Кратко",
-        context: "Поисковый контекст",
-        details: "Подробности",
-        questions: "Вопросы",
-        related: "Полезные страницы",
-        home: "Главная",
-      }
-    : pageLanguage.startsWith("en")
-      ? {
-          nav: "Page navigation",
-          menu: "Menu",
-          contact: "Contact",
-          faq: "FAQ",
-          whatsapp: "WhatsApp",
-          directions: "Directions",
-          call: "Call",
-          quick: "Quick answer",
-          context: "Search context",
-          details: "Details",
-          questions: "Questions",
-          related: "Related pages",
-          home: "Home",
-        }
-      : isArabic
-        ? {
-            nav: "تنقل الصفحة",
-            menu: "القائمة",
-            contact: "التواصل",
-            faq: "أسئلة",
-            whatsapp: "واتساب",
-            directions: "الاتجاهات",
-            call: "اتصال",
-            quick: "إجابة سريعة",
-            context: "سياق البحث",
-            details: "التفاصيل",
-            questions: "أسئلة شائعة",
-            related: "صفحات مفيدة",
-            home: "الرئيسية",
-          }
-        : {
-            nav: "Sayfa navigasyonu",
-            menu: "Menü",
-            contact: "İletişim",
-            faq: "SSS",
-            whatsapp: "WhatsApp",
-            directions: "Yol tarifi",
-            call: "Ara",
-            quick: "Kısa cevap",
-            context: "Yerel arama bağlamı",
-            details: "Detaylar",
-            questions: "Merak edilenler",
-            related: "İlgili sayfalar",
-            home: "Ana Sayfa",
-          };
+  const labels = {
+    nav: "Sayfa navigasyonu",
+    menu: "Menü",
+    contact: "İletişim",
+    faq: "SSS",
+    whatsapp: "WhatsApp",
+    directions: "Yol tarifi",
+    call: "Ara",
+    quick: "Kısa cevap",
+    details: "Detaylar",
+    questions: "Merak edilenler",
+    related: "İlgili sayfalar",
+    home: "Ana Sayfa",
+  };
   const graph: unknown[] = [
-    buildWebsiteJsonLd(false),
-    buildRestaurantJsonLd(false),
     {
       "@type": page.schemaType ?? "WebPage",
       "@id": `${pageUrl}#webpage`,
@@ -129,26 +70,12 @@ export default async function SeoPage({ params }: PageProps) {
       name: page.title,
       headline: page.h1,
       description: page.description,
-      inLanguage: pageLanguage,
+      inLanguage: "tr-TR",
       dateModified,
       isPartOf: {
         "@id": `${siteUrl}/#website`,
       },
-      about: [
-        { "@id": `${siteUrl}/#restaurant` },
-        { "@id": `${siteUrl}/#geo-search-coverage` },
-      ],
-      spatialCoverage: { "@id": `${siteUrl}/#geo-search-coverage` },
-      mentions: [
-        ...(page.nearbyLandmarks ?? []).map((landmark) => ({
-          "@type": "Place",
-          name: landmark,
-        })),
-        ...(page.localIntent ?? []).map((intent) => ({
-          "@type": "Thing",
-          name: intent,
-        })),
-      ],
+      about: { "@id": `${siteUrl}/#restaurant` },
       mainEntity:
         slug === "menu"
           ? { "@id": `${siteUrl}/menu#menu` }
@@ -169,20 +96,22 @@ export default async function SeoPage({ params }: PageProps) {
       },
       breadcrumb: { "@id": `${pageUrl}#breadcrumb` },
     },
-    buildBreadcrumbJsonLd([
-      { name: labels.home, url: siteUrl },
-      { name: page.h1, url: pageUrl },
-    ], pageUrl, false),
-    buildGeoCoverageJsonLd(false),
-    buildFaqJsonLd(page.questions, pageUrl, false),
+    buildBreadcrumbJsonLd(
+      [
+        { name: labels.home, url: siteUrl },
+        { name: page.h1, url: pageUrl },
+      ],
+      pageUrl,
+      false,
+    ),
   ];
 
   if (slug === "menu") {
     graph.push(buildMenuJsonLd());
   }
 
-  if (slug === "kahvalti-yol-tarifi") {
-    graph.push(buildDirectionsHowToJsonLd(false));
+  if (slug === "sss") {
+    graph.push(buildFaqJsonLd(page.questions, pageUrl, false));
   }
 
   if (page.article) {
@@ -195,7 +124,7 @@ export default async function SeoPage({ params }: PageProps) {
   };
 
   return (
-    <main className="seo-page theme-breakfast" lang={pageLanguage} dir={isArabic ? "rtl" : undefined}>
+    <>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: jsonLd(pageJsonLd) }}
@@ -204,7 +133,7 @@ export default async function SeoPage({ params }: PageProps) {
       <nav className="seo-topbar" aria-label={labels.nav}>
         <Link href="/" className="seo-brand">
           <Image src="/images/brand-icon-small.png" alt="" width={38} height={48} />
-          <span>{siteName}</span>
+          <span>Tarihi Van Kahvaltı Evi</span>
         </Link>
         <div className="seo-toplinks">
           <Link href="/menu">{labels.menu}</Link>
@@ -212,6 +141,13 @@ export default async function SeoPage({ params }: PageProps) {
           <Link href="/sss">{labels.faq}</Link>
         </div>
       </nav>
+
+      <main id="main-content" className="seo-page theme-breakfast">
+        <nav className="seo-breadcrumb" aria-label="Sayfa yolu">
+          <Link href="/">Ana Sayfa</Link>
+          <span aria-hidden="true">/</span>
+          <span aria-current="page">{page.h1}</span>
+        </nav>
 
       <section className="seo-hero">
         <div className="seo-hero-copy">
@@ -235,7 +171,7 @@ export default async function SeoPage({ params }: PageProps) {
             src={page.image}
             alt={page.imageAlt}
             fill
-            priority
+            preload
             sizes="(max-width: 900px) 100vw, 44vw"
           />
         </figure>
@@ -248,21 +184,11 @@ export default async function SeoPage({ params }: PageProps) {
             <li key={highlight}>{highlight}</li>
           ))}
         </ul>
-        {(page.localIntent?.length || page.nearbyLandmarks?.length) ? (
-          <div className="seo-context-strip" aria-label={labels.context}>
-            {page.localIntent?.map((intent) => (
-              <span key={intent}>{intent}</span>
-            ))}
-            {page.nearbyLandmarks?.map((landmark) => (
-              <span key={landmark}>{landmark}</span>
-            ))}
-          </div>
-        ) : null}
       </section>
 
       <section className="seo-content-grid" aria-label={`${page.h1} ${labels.details}`}>
         {page.sections.map((section) => (
-          <article key={section.title}>
+          <article key={section.title} id={section.id}>
             <h2>{section.title}</h2>
             <p>{section.body}</p>
           </article>
@@ -279,16 +205,14 @@ export default async function SeoPage({ params }: PageProps) {
         ))}
       </section>
 
-      <section className="seo-related" aria-label={labels.related}>
-        <Link href="/van-kahvaltisi">Van kahvaltısı nedir?</Link>
-        <Link href="/beyoglu-kahvalti">Beyoğlu kahvaltı</Link>
-        <Link href="/taksim-kahvalti">Taksim kahvaltı</Link>
-        <Link href="/kahvalti-fiyatlari">Kahvaltı fiyatları</Link>
-        <Link href="/kafka-cafe">Kafka Cafe</Link>
-        <Link href="/zambak-sokak-kahvalti">Zambak Sokak</Link>
-        <Link href="/siraselviler-kahvalti">Sıraselviler</Link>
-        <Link href="/tarihi-mekanda-kahvalti">Tarihi mekan</Link>
-      </section>
-    </main>
+        <section className="seo-related" aria-label={labels.related}>
+          <Link href="/van-kahvaltisi">Van kahvaltısı nedir?</Link>
+          <Link href="/beyoglu-kahvalti">Beyoğlu kahvaltı</Link>
+          <Link href="/menu">Kahvaltı fiyatları</Link>
+          <Link href="/kafka-cafe">Kafka Cafe</Link>
+          <Link href="/iletisim">Zambak Sokak ve yol tarifi</Link>
+        </section>
+      </main>
+    </>
   );
 }

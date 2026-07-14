@@ -1,20 +1,8 @@
 import type { Metadata, Viewport } from "next";
-import { Bodoni_Moda, Bricolage_Grotesque, Cormorant_Garamond, Literata, Playfair_Display } from "next/font/google";
+import { Bodoni_Moda, Bricolage_Grotesque, Literata } from "next/font/google";
 import "./globals.css";
 import "./mobile-header-hero.css";
 
-const playfair = Playfair_Display({
-  subsets: ["latin", "latin-ext"],
-  weight: ["400", "500", "600", "700", "800", "900"],
-  display: "swap",
-  variable: "--font-playfair-gf",
-});
-const cormorant = Cormorant_Garamond({
-  subsets: ["latin", "latin-ext"],
-  weight: ["500", "600", "700"],
-  display: "swap",
-  variable: "--font-cormorant-gf",
-});
 const bodoni = Bodoni_Moda({
   subsets: ["latin", "latin-ext"],
   weight: ["400", "500", "600", "700"],
@@ -38,12 +26,7 @@ const bricolageGrotesque = Bricolage_Grotesque({
   variable: "--font-bricolage-grotesque-gf",
 });
 import {
-  address,
-  coordinates,
   defaultOgImage,
-  displayPhone,
-  email,
-  homeLanguageAlternates,
   sameAsUrls,
   siteName,
   siteUrl,
@@ -89,7 +72,6 @@ export const metadata: Metadata = {
   },
   alternates: {
     canonical: siteUrl,
-    languages: homeLanguageAlternates,
   },
   openGraph: {
     title: "Tarihi Van Kahvaltı Evi | Beyoğlu Taksim",
@@ -118,42 +100,18 @@ export const metadata: Metadata = {
   icons: {
     icon: [
       { url: "/favicon.ico" },
-      { url: "/images/brand-icon-small.png", type: "image/png" },
+      { url: "/icons/icon-192.png", type: "image/png", sizes: "192x192" },
+      { url: "/icons/icon-512.png", type: "image/png", sizes: "512x512" },
     ],
     apple: [
-      { url: "/images/brand-icon-small.png" },
+      { url: "/icons/apple-touch-icon.png", type: "image/png", sizes: "180x180" },
     ],
     other: [
       {
         rel: "apple-touch-icon-precomposed",
-        url: "/images/brand-icon-small.png",
+        url: "/icons/apple-touch-icon.png",
       },
     ],
-  },
-  other: {
-    "content-language": "tr, en, ru, ar",
-    "geo.country": address.country,
-    "geo.region": "TR-34",
-    "geo.placename": "Beyoğlu, İstanbul",
-    "geo.position": `${coordinates.latitude};${coordinates.longitude}`,
-    ICBM: `${coordinates.latitude}, ${coordinates.longitude}`,
-    placename: "Taksim, Beyoğlu, İstanbul",
-    "place:location:latitude": String(coordinates.latitude),
-    "place:location:longitude": String(coordinates.longitude),
-    "business:contact_data:street_address": address.streetAddress,
-    "business:contact_data:locality": address.locality,
-    "business:contact_data:region": address.region,
-    "business:contact_data:postal_code": address.postalCode,
-    "business:contact_data:country_name": address.countryName,
-    "business:contact_data:phone_number": displayPhone,
-    "business:contact_data:email": email,
-    "business:contact_data:website": siteUrl,
-    "og:phone_number": displayPhone,
-    "og:street-address": address.streetAddress,
-    "og:locality": address.locality,
-    "og:region": address.region,
-    "og:postal-code": address.postalCode,
-    "og:country-name": address.countryName,
   },
   appleWebApp: {
     capable: true,
@@ -170,18 +128,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="tr" className={`h-full antialiased ${playfair.variable} ${cormorant.variable} ${bodoni.variable} ${literata.variable} ${bricolageGrotesque.variable}`}>
+    <html lang="tr" className={`h-full antialiased ${bodoni.variable} ${literata.variable} ${bricolageGrotesque.variable}`}>
       <head>
         <link rel="dns-prefetch" href="https://www.google.com" />
         <link rel="dns-prefetch" href="https://wa.me" />
         <link rel="dns-prefetch" href="https://maps.googleapis.com" />
-        <link rel="alternate" type="text/plain" href="/llms.txt" title="AI kısa işletme özeti" />
-        <link rel="alternate" type="text/plain" href="/llms-full.txt" title="AI detaylı işletme özeti" />
-        <link rel="alternate" type="application/json" href="/business-profile.json" title="Makine okunur işletme profili" />
         <link rel="me" href={sameAsUrls[0]} />
       </head>
       <body className="min-h-full flex flex-col">
         <WebVitals />
+        <a className="skip-link" href="#main-content">Ana içeriğe geç</a>
         {children}
       </body>
     </html>
