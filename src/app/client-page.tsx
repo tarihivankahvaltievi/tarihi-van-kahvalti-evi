@@ -190,7 +190,6 @@ export default function ClientPage({ children }: { children: ReactNode }) {
               </span>
               <span className="logo-subtitle">
                 <span>Kahvaltı Evi</span>
-                <span className="logo-founded" aria-hidden="true">1978</span>
               </span>
             </a>
             <div className={`nav-status-pill ${isOpenNow ? "open" : "closed"}`}>
