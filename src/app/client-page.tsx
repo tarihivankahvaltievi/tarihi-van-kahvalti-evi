@@ -119,7 +119,7 @@ export default function ClientPage({ children }: { children: ReactNode }) {
     window.addEventListener("keydown", handleKeyDown);
     const menuButton = menuButtonRef.current;
     const focusFrame = window.requestAnimationFrame(() => {
-      menuPanelRef.current?.querySelector<HTMLElement>("a[href]")?.focus();
+      menuPanelRef.current?.querySelector<HTMLElement>("[data-menu-title]")?.focus();
     });
     const previousOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
@@ -236,7 +236,7 @@ export default function ClientPage({ children }: { children: ReactNode }) {
             role="dialog"
             aria-modal="true"
             aria-hidden={!menuOpen}
-            aria-label="Site menüsü"
+            aria-labelledby="site-menu-title"
           >
             <div className="nav-menu-ambient" aria-hidden="true">
               <span />
@@ -249,8 +249,8 @@ export default function ClientPage({ children }: { children: ReactNode }) {
               <span className="nav-menu-art-steam" />
               <span className="nav-menu-art-steam" />
             </div>
-            <div className="nav-drawer-head" aria-hidden="true">
-              <span>Menü</span>
+            <div className="nav-drawer-head">
+              <span id="site-menu-title" data-menu-title tabIndex={-1}>Menü</span>
               <small>1978 · Beyoğlu</small>
             </div>
             <a className="nav-menu-primary" href="#top" tabIndex={menuOpen ? 0 : -1} style={{ "--item-index": 1 } as CSSProperties} onClick={() => setMenuOpen(false)}>

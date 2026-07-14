@@ -1,0 +1,429 @@
+/*
+ * Mobile header + hero authority.
+ * Kept separate from the legacy global cascade so this surface has one readable
+ * source of truth while the rest of the site is gradually consolidated.
+ */
+
+.hero-intro-mobile {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .theme-breakfast .nav,
+  .theme-breakfast .nav.scrolled {
+    min-height: 72px !important;
+    padding: 0 14px !important;
+    background: rgba(241, 235, 226, 0.98) !important;
+  }
+
+  .theme-breakfast .nav::after {
+    height: 2px !important;
+    background: linear-gradient(90deg, #821b22 0 32%, #cda85f 32% 42%, rgba(36, 23, 24, 0.16) 42% 100%) !important;
+  }
+
+  .theme-breakfast .logo-wrap {
+    min-width: 0;
+    gap: 0.56rem !important;
+  }
+
+  .theme-breakfast .brand-logo-mark,
+  .theme-breakfast .logo-emblem {
+    width: 44px !important;
+    height: 48px !important;
+  }
+
+  .theme-breakfast .brand-logo-image {
+    transform: scale(1.58) !important;
+  }
+
+  .theme-breakfast .logo {
+    font-size: clamp(1.08rem, 4.9vw, 1.28rem) !important;
+  }
+
+  .theme-breakfast .nav-menu-button,
+  .theme-breakfast .nav.menu-open .nav-menu-button {
+    width: 46px !important;
+    height: 46px !important;
+    flex: 0 0 46px !important;
+    border-radius: 10px !important;
+  }
+
+  .theme-breakfast .nav-menu-button:focus-visible,
+  .theme-breakfast .nav-menu-panel a:focus-visible,
+  .theme-breakfast .nav-drawer-book:focus-visible {
+    outline: 2px solid #fff8eb !important;
+    outline-offset: -4px !important;
+  }
+
+  .theme-breakfast .nav-menu-panel,
+  .theme-breakfast .nav.scrolled .nav-menu-panel,
+  .theme-breakfast .nav.menu-open .nav-menu-panel {
+    top: 72px !important;
+    right: 0 !important;
+    left: 0 !important;
+    width: 100vw !important;
+    max-width: none !important;
+    height: calc(100dvh - 72px) !important;
+    max-height: none !important;
+    grid-template-columns: minmax(0, 1fr) !important;
+    grid-auto-rows: min-content !important;
+    align-content: start !important;
+    padding: 0 14px max(14px, env(safe-area-inset-bottom)) !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    background: #68161c !important;
+    box-shadow: none !important;
+    overflow-y: auto !important;
+    overscroll-behavior: contain;
+  }
+
+  .theme-breakfast .nav-menu-panel::before {
+    right: 14px !important;
+    left: 14px !important;
+    width: auto !important;
+    height: 1px !important;
+    background: rgba(224, 189, 112, 0.52) !important;
+  }
+
+  .theme-breakfast .nav-menu-panel::after,
+  .theme-breakfast .nav.menu-open .nav-menu-panel::after,
+  .theme-breakfast .nav-menu-art,
+  .theme-breakfast .nav-menu-ambient {
+    display: none !important;
+    content: none !important;
+  }
+
+  .theme-breakfast .nav-drawer-head {
+    display: flex !important;
+    min-height: 72px !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    padding: 0 4px !important;
+    border-bottom: 1px solid rgba(255, 248, 235, 0.24) !important;
+  }
+
+  .theme-breakfast .nav-drawer-head span {
+    color: #fff8eb !important;
+    font-size: clamp(1.7rem, 8vw, 2.15rem) !important;
+    letter-spacing: -0.035em !important;
+    outline: 0;
+  }
+
+  .theme-breakfast .nav-drawer-head small {
+    color: #e0bd70 !important;
+    font-size: 0.72rem !important;
+    font-weight: 760 !important;
+    letter-spacing: 0.08em !important;
+  }
+
+  .theme-breakfast .nav-menu-panel a,
+  .theme-breakfast .nav.menu-open .nav-menu-panel a,
+  .theme-breakfast .nav-menu-panel a.nav-menu-primary,
+  .theme-breakfast .nav.menu-open .nav-menu-panel a.nav-menu-primary,
+  .theme-breakfast .nav-menu-panel a.nav-menu-utility,
+  .theme-breakfast .nav.menu-open .nav-menu-panel a.nav-menu-utility {
+    min-height: 55px !important;
+    grid-template-columns: 22px minmax(0, 1fr) 18px !important;
+    gap: 0.72rem !important;
+    padding: 8px 4px !important;
+    border: 0 !important;
+    border-bottom: 1px solid rgba(255, 248, 235, 0.17) !important;
+    border-radius: 0 !important;
+    background: transparent !important;
+    box-shadow: none !important;
+  }
+
+  .theme-breakfast .nav-menu-panel a.nav-menu-utility {
+    min-height: 47px !important;
+  }
+
+  .theme-breakfast .nav-menu-panel a.nav-menu-primary + a.nav-menu-utility {
+    margin-top: 8px !important;
+    border-top: 1px solid rgba(224, 189, 112, 0.42) !important;
+  }
+
+  .theme-breakfast .nav-menu-panel a::before,
+  .theme-breakfast .nav-menu-panel a::after {
+    display: none !important;
+    content: none !important;
+  }
+
+  .theme-breakfast .nav-menu-panel a:hover,
+  .theme-breakfast .nav-menu-panel a:focus-visible,
+  .theme-breakfast .nav-menu-panel a:active {
+    background: rgba(255, 248, 235, 0.1) !important;
+    color: #fff8eb !important;
+  }
+
+  .theme-breakfast .nav-menu-link-text,
+  .theme-breakfast .nav-menu-panel a.nav-menu-utility .nav-menu-link-text {
+    font-size: 1rem !important;
+    line-height: 1.05 !important;
+  }
+
+  .theme-breakfast .nav-menu-link-meta {
+    color: rgba(255, 248, 235, 0.64) !important;
+    font-size: 0.59rem !important;
+    letter-spacing: 0.1em !important;
+  }
+
+  .theme-breakfast .nav-menu-panel a > svg:first-child,
+  .theme-breakfast .nav-menu-panel a > svg:last-child {
+    color: #e0bd70 !important;
+  }
+
+  .theme-breakfast .nav-drawer-footer {
+    display: flex !important;
+    min-height: 68px !important;
+    align-items: center !important;
+    gap: 0.8rem !important;
+    justify-content: space-between !important;
+    margin-top: 8px !important;
+    padding: 10px 4px 0 !important;
+    border-top: 1px solid rgba(255, 248, 235, 0.24) !important;
+  }
+
+  .theme-breakfast .nav-drawer-hours {
+    min-width: 0 !important;
+    display: grid !important;
+    grid-template-columns: auto 1fr !important;
+    column-gap: 0.38rem !important;
+    row-gap: 0.1rem !important;
+    align-items: center !important;
+  }
+
+  .theme-breakfast .nav-drawer-hours strong {
+    grid-column: 2 !important;
+    white-space: nowrap !important;
+    font-size: 0.76rem !important;
+  }
+
+  .theme-breakfast .nav-drawer-book {
+    min-width: 158px !important;
+    min-height: 44px !important;
+    border: 0 !important;
+    border-radius: 8px !important;
+    background: #e0bd70 !important;
+    color: #241718 !important;
+    box-shadow: none !important;
+  }
+}
+
+@media (max-width: 680px) {
+  .hero-intro-mobile {
+    display: inline;
+  }
+
+  .hero-intro-desktop {
+    display: none;
+  }
+
+  .theme-breakfast .hero.hero-parallax-dining {
+    height: 104svh !important;
+    min-height: 800px !important;
+    max-height: 920px !important;
+    background: #f1ebe2 !important;
+  }
+
+  .theme-breakfast .hero.hero-parallax-dining::before {
+    background:
+      linear-gradient(180deg, rgba(255, 253, 247, 0.64), rgba(241, 235, 226, 0) 40%),
+      radial-gradient(ellipse at 76% 26%, rgba(130, 27, 34, 0.07), transparent 35%),
+      linear-gradient(180deg, #f1ebe2 0%, #f1ebe2 58%, #e4d3b7 100%) !important;
+  }
+
+  .theme-breakfast .hero-parallax-sticky {
+    min-height: 800px !important;
+  }
+
+  .theme-breakfast .hero-parallax-copy {
+    top: 7.25rem !important;
+    left: 16px !important;
+    width: min(86vw, 21rem) !important;
+  }
+
+  .theme-breakfast .hero-provenance {
+    margin-bottom: 0.72rem !important;
+  }
+
+  .theme-breakfast .hero-parallax-copy h1 {
+    max-width: 8.2em !important;
+    font-size: clamp(2.34rem, 10.5vw, 2.85rem) !important;
+    line-height: 0.91 !important;
+    letter-spacing: -0.035em !important;
+    text-wrap: balance;
+  }
+
+  .theme-breakfast .hero-parallax-copy p {
+    max-width: 18.5rem !important;
+    margin-top: 0.86rem !important;
+    color: rgba(36, 23, 24, 0.78) !important;
+    font-size: clamp(0.9rem, 3.7vw, 1rem) !important;
+    font-weight: 560 !important;
+    line-height: 1.42 !important;
+    text-wrap: pretty;
+  }
+
+  .theme-breakfast .hero-copy-ambient-glow {
+    opacity: 0.42 !important;
+  }
+
+  .theme-breakfast .hero-parallax-food-stage {
+    top: 17.25rem !important;
+    right: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 310px !important;
+    min-height: 310px !important;
+  }
+
+  .theme-breakfast .hero-parallax-food-stage .hero-float-pan {
+    top: 38% !important;
+    left: 29% !important;
+    width: min(40vw, 154px) !important;
+  }
+
+  .theme-breakfast .hero-parallax-food-stage .hero-float-tea {
+    top: 0 !important;
+    right: 3% !important;
+    width: min(17vw, 66px) !important;
+  }
+
+  .theme-breakfast .hero-parallax-food-stage .hero-float-cheese-platter {
+    top: 16% !important;
+    left: -4% !important;
+    width: min(31vw, 120px) !important;
+  }
+
+  .theme-breakfast .hero-parallax-food-stage .hero-float-greens-platter {
+    top: 63% !important;
+    left: 1% !important;
+    display: block !important;
+    width: min(26vw, 100px) !important;
+  }
+
+  .theme-breakfast .hero-parallax-food-stage .hero-float-simit {
+    top: 62% !important;
+    right: 0 !important;
+    width: min(25vw, 96px) !important;
+  }
+
+  .theme-breakfast .hero-parallax-gallery {
+    top: 63% !important;
+    left: -55vw !important;
+    gap: 0.5rem !important;
+    padding-block: 2rem !important;
+    margin-block: -2rem !important;
+    -webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 14%, #000 96%, transparent 100%) !important;
+    mask-image: linear-gradient(to bottom, transparent 0%, #000 14%, #000 96%, transparent 100%) !important;
+  }
+
+  .theme-breakfast .hero-parallax-row {
+    gap: 0.5rem !important;
+  }
+
+  .theme-breakfast .hero-parallax-card {
+    width: min(34vw, 132px) !important;
+    border: 0 !important;
+    border-radius: 8px !important;
+    box-shadow: 0 6px 8px rgba(42, 27, 18, 0.14) !important;
+  }
+
+  body .mobile-bar {
+    bottom: calc(10px + env(safe-area-inset-bottom)) !important;
+    width: calc(100% - 20px) !important;
+    height: 58px !important;
+    padding: 5px !important;
+    border: 0 !important;
+    border-radius: 12px !important;
+    background: #241718 !important;
+    box-shadow: 0 6px 8px rgba(36, 23, 24, 0.18) !important;
+  }
+
+  body .mobile-bar::before,
+  body .mobile-bar::after {
+    display: none !important;
+    content: none !important;
+  }
+
+  body .mobile-bar a,
+  body .mobile-bar button {
+    min-height: 48px !important;
+    border-radius: 8px !important;
+    color: rgba(255, 248, 235, 0.86) !important;
+  }
+
+  body .mobile-bar button,
+  body .mobile-bar button:hover {
+    background: #e0bd70 !important;
+    color: #241718 !important;
+    box-shadow: none !important;
+  }
+
+  body .mobile-bar a svg,
+  body .mobile-bar a .mobile-bar-label {
+    color: rgba(255, 248, 235, 0.88) !important;
+  }
+
+  body .mobile-bar button svg,
+  body .mobile-bar button .mobile-bar-label {
+    color: #241718 !important;
+  }
+
+  body .mobile-bar a:focus-visible,
+  body .mobile-bar button:focus-visible {
+    outline: 2px solid #fff8eb !important;
+    outline-offset: -3px !important;
+  }
+}
+
+@media (max-width: 680px) and (max-height: 720px) {
+  .theme-breakfast .nav-drawer-head {
+    min-height: 64px !important;
+  }
+
+  .theme-breakfast .nav-menu-panel a,
+  .theme-breakfast .nav.menu-open .nav-menu-panel a,
+  .theme-breakfast .nav-menu-panel a.nav-menu-primary,
+  .theme-breakfast .nav.menu-open .nav-menu-panel a.nav-menu-primary {
+    min-height: 51px !important;
+  }
+
+  .theme-breakfast .nav-menu-panel a.nav-menu-utility,
+  .theme-breakfast .nav.menu-open .nav-menu-panel a.nav-menu-utility {
+    min-height: 44px !important;
+  }
+
+  .theme-breakfast .nav-drawer-footer {
+    min-height: 60px !important;
+    margin-top: 4px !important;
+    padding-top: 6px !important;
+  }
+
+  .theme-breakfast .hero.hero-parallax-dining,
+  .theme-breakfast .hero-parallax-sticky {
+    min-height: 740px !important;
+  }
+
+  .theme-breakfast .hero-parallax-copy {
+    top: 6.7rem !important;
+  }
+
+  .theme-breakfast .hero-parallax-food-stage {
+    top: 16.2rem !important;
+  }
+
+  .theme-breakfast .hero-parallax-gallery {
+    top: 61% !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .theme-breakfast .hero-parallax-food-stage .hero-float-item,
+  .theme-breakfast .hero-parallax-food-stage .hero-float-item::after,
+  .theme-breakfast .nav-menu-panel,
+  .theme-breakfast .nav-menu-panel a {
+    animation: none !important;
+    transition: none !important;
+  }
+}

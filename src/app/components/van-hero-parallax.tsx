@@ -170,6 +170,14 @@ const eagerFloatingFoodClassNames = new Set([
   "hero-float-item hero-float-black-olives",
 ]);
 
+const mobileFloatingFoodClassNames = new Set([
+  "hero-float-item hero-float-pan",
+  "hero-float-item hero-float-tea",
+  "hero-float-item hero-float-simit",
+  "hero-float-item hero-float-cheese-platter",
+  "hero-float-item hero-float-greens-platter",
+]);
+
 const subscribeToMobileViewport = (callback: () => void) => {
   const mediaQuery = window.matchMedia("(max-width: 680px)");
   mediaQuery.addEventListener("change", callback);
@@ -183,7 +191,9 @@ export function VanHeroParallax() {
   const isMobile = useSyncExternalStore(
     subscribeToMobileViewport,
     getMobileViewportSnapshot,
-    () => false,
+    // Ship the smaller five-item scene in the initial HTML. Desktop enhances
+    // after hydration; mobile avoids fetching decorative off-screen cutouts.
+    () => true,
   );
   const prefersReducedMotion = useReducedMotion();
 
@@ -324,6 +334,9 @@ export function VanHeroParallax() {
   const firstRow = heroImages.slice(0, 5);
   const secondRow = heroImages.slice(5, 10);
   const thirdRow = heroImages.slice(10, 15);
+  const visibleFloatingFoods = isMobile
+    ? floatingFoods.filter((item) => mobileFloatingFoodClassNames.has(item.className))
+    : floatingFoods;
 
   const handleMouseMove = (e: React.MouseEvent) => {
     if (isMobile) return;
@@ -379,9 +392,14 @@ export function VanHeroParallax() {
                 <span className="hero-title-word" style={{ "--word-index": 3 } as CSSProperties}>Evi</span>
               </span>
             </h1>
-            <p>
-              Van&apos;dan Beyoğlu&apos;na uzanan serpme kahvaltı: otlu peynir,
-              kavut, murtuğa, sıcak bakır sahanlar ve sınırsız taze çay.
+            <p className="hero-intro">
+              <span className="hero-intro-mobile">
+                1978&apos;den beri Beyoğlu&apos;nda kurulan gerçek Van sofrası.
+              </span>
+              <span className="hero-intro-desktop">
+                Van&apos;dan Beyoğlu&apos;na uzanan serpme kahvaltı: otlu peynir,
+                kavut, murtuğa, sıcak bakır sahanlar ve sınırsız taze çay.
+              </span>
             </p>
           </motion.div>
         </motion.div>
@@ -424,10 +442,11 @@ export function VanHeroParallax() {
             rotateY: rotateYMouse,
             transformStyle: "preserve-3d",
           }}
-          aria-label="Uçan kahvaltı lezzetleri"
+          aria-hidden="true"
         >
-          {floatingFoods.map((item) => {
-            const shouldPreload = eagerFloatingFoodClassNames.has(item.className);
+          {visibleFloatingFoods.map((item) => {
+            const shouldPreload = eagerFloatingFoodClassNames.has(item.className)
+              && (!isMobile || mobileFloatingFoodClassNames.has(item.className));
 
             return (
               <div
