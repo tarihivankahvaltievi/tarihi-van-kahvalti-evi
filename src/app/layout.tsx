@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Bodoni_Moda, Bricolage_Grotesque, Cormorant_Garamond, Literata, Playfair_Display } from "next/font/google";
 import "./globals.css";
 import "./mobile-header-hero.css";
+import "./review-experience.css";
 
 const playfair = Playfair_Display({
   subsets: ["latin", "latin-ext"],

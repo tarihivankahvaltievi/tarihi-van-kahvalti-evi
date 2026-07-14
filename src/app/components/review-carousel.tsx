@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { ChevronLeft, ChevronRight, PenTool, Star, X } from "lucide-react";
+import { useReducedMotion } from "framer-motion";
 
 interface Review {
   id: number;
@@ -81,7 +82,7 @@ const initialReviews: Review[] = [
   }
 ];
 
-const MOVE_DURATION_MS = 680;
+const MOVE_DURATION_MS = 480;
 
 const getCardPosition = (index: number, activeIndex: number, total: number) => {
   const half = Math.floor(total / 2);
@@ -100,7 +101,6 @@ const getCardPosition = (index: number, activeIndex: number, total: number) => {
 
 export function ReviewCarousel() {
   const [reviews, setReviews] = useState<Review[]>(initialReviews);
-  const [cardSize, setCardSize] = useState(365);
   const [activeIndex, setActiveIndex] = useState(0);
   const [moveDirection, setMoveDirection] = useState(1);
   const [isMoving, setIsMoving] = useState(false);
@@ -113,27 +113,11 @@ export function ReviewCarousel() {
   const [hoverRating, setHoverRating] = useState<number | null>(null);
   const [newComment, setNewComment] = useState("");
   const [toastMessage, setToastMessage] = useState<string | null>(null);
-  const dragStartX = useRef<number | null>(null);
+  const shouldReduceMotion = useReducedMotion();
+  const dragStart = useRef<{ x: number; y: number } | null>(null);
   const dragSuppressClick = useRef(false);
   const movingRef = useRef(false);
   const moveTimerRef = useRef<number | null>(null);
-
-  useEffect(() => {
-    const updateSize = () => {
-      const width = window.innerWidth;
-      if (width < 390) {
-        setCardSize(242);
-      } else if (width < 640) {
-        setCardSize(264);
-      } else {
-        setCardSize(350);
-      }
-    };
-
-    updateSize();
-    window.addEventListener("resize", updateSize);
-    return () => window.removeEventListener("resize", updateSize);
-  }, []);
 
   useEffect(() => {
     return () => {
@@ -155,19 +139,21 @@ export function ReviewCarousel() {
       window.clearTimeout(moveTimerRef.current);
     }
 
+    const moveDuration = shouldReduceMotion ? 0 : MOVE_DURATION_MS;
     moveTimerRef.current = window.setTimeout(() => {
       movingRef.current = false;
       setIsMoving(false);
-    }, MOVE_DURATION_MS);
+    }, moveDuration);
   };
 
-  const handleDragEnd = (clientX: number) => {
-    if (dragStartX.current === null) return;
+  const handleDragEnd = (clientX: number, clientY: number) => {
+    if (dragStart.current === null) return;
 
-    const deltaX = clientX - dragStartX.current;
-    dragStartX.current = null;
+    const deltaX = clientX - dragStart.current.x;
+    const deltaY = clientY - dragStart.current.y;
+    dragStart.current = null;
 
-    if (Math.abs(deltaX) < 42) return;
+    if (Math.abs(deltaX) < 42 || Math.abs(deltaX) <= Math.abs(deltaY) * 1.2) return;
     dragSuppressClick.current = true;
     handleMove(deltaX > 0 ? -1 : 1);
     window.setTimeout(() => {
@@ -253,7 +239,7 @@ export function ReviewCarousel() {
     setNewComment("");
 
     // Show toast success
-    setToastMessage("Yorumunuz başarıyla eklendi! Teşekkür ederiz.");
+    setToastMessage("Notunuz bu ziyaret için yorumlara eklendi. Teşekkür ederiz.");
     setTimeout(() => setToastMessage(null), 4000);
   };
 
@@ -262,16 +248,35 @@ export function ReviewCarousel() {
       <div className="stagger-testimonials" data-reveal>
         <div
           className="stagger-testimonials-stage"
-          aria-label="Misafir yorumları"
+          role="region"
+          aria-roledescription="carousel"
+          aria-labelledby="reviews-heading"
           data-motion-direction={moveDirection}
           data-is-moving={isMoving ? "true" : "false"}
-          style={{ "--card-size": `${cardSize}px` } as React.CSSProperties}
-          onPointerDown={(event) => {
-            dragStartX.current = event.clientX;
+          onKeyDown={(event) => {
+            if (event.key === "ArrowLeft") {
+              event.preventDefault();
+              handleMove(-1);
+            } else if (event.key === "ArrowRight") {
+              event.preventDefault();
+              handleMove(1);
+            }
           }}
-          onPointerUp={(event) => handleDragEnd(event.clientX)}
-          onPointerCancel={() => {
-            dragStartX.current = null;
+          onPointerDown={(event) => {
+            dragStart.current = { x: event.clientX, y: event.clientY };
+            event.currentTarget.setPointerCapture(event.pointerId);
+          }}
+          onPointerUp={(event) => {
+            if (event.currentTarget.hasPointerCapture(event.pointerId)) {
+              event.currentTarget.releasePointerCapture(event.pointerId);
+            }
+            handleDragEnd(event.clientX, event.clientY);
+          }}
+          onPointerCancel={(event) => {
+            if (event.currentTarget.hasPointerCapture(event.pointerId)) {
+              event.currentTarget.releasePointerCapture(event.pointerId);
+            }
+            dragStart.current = null;
           }}
         >
           {reviews.map((rev, index) => {
@@ -282,8 +287,10 @@ export function ReviewCarousel() {
             return (
               <article
                 key={rev.id}
-                className={`stagger-testimonial-card ${isCenter ? "is-center" : ""}`}
+                role="group"
+                className={`stagger-testimonial-card ${isCenter ? "is-center" : ""} ${Math.abs(position) === 1 ? "is-neighbor" : ""}`}
                 data-review-id={rev.id}
+                data-position={position}
                 style={
                   {
                     "--position": position,
@@ -295,23 +302,20 @@ export function ReviewCarousel() {
                 }
                 onClick={() => {
                   if (dragSuppressClick.current) return;
-                  handleMove(position);
-                }}
-                tabIndex={0}
-                onKeyDown={(event) => {
-                  if (event.key === "Enter" || event.key === " ") {
-                    event.preventDefault();
-                    handleMove(position);
+                  if (Math.abs(position) === 1) {
+                    handleMove(Math.sign(position));
                   }
                 }}
-                aria-current={isCenter ? "true" : undefined}
+                aria-roledescription="slide"
+                aria-label={`${index + 1} / ${reviews.length}: ${rev.name}`}
+                aria-hidden={isCenter ? undefined : true}
               >
                 <figure style={{ margin: 0, height: "100%", display: "flex", flexDirection: "column" }}>
                   <span className="stagger-card-corner" aria-hidden="true" />
                   <div className="stagger-card-image">
                     <Image
                       src={previewImage}
-                      alt={rev.name}
+                      alt=""
                       fill
                       sizes="64px"
                       loading="lazy"
@@ -341,6 +345,10 @@ export function ReviewCarousel() {
             >
               <ChevronLeft size={28} />
             </button>
+            <div className="stagger-testimonial-status" aria-live="polite" aria-atomic="true">
+              <strong>{activeIndex + 1} / {reviews.length}</strong>
+              <span>Kaydırın veya okları kullanın</span>
+            </div>
             <button
               type="button"
               onClick={() => handleMove(1)}
@@ -384,6 +392,9 @@ export function ReviewCarousel() {
         </div>
 
         <form onSubmit={handleSubmit} className="write-review-form">
+          <p className="write-review-note">
+            Notunuz bu sayfada yalnız bu ziyaret boyunca görünür.
+          </p>
           <div className="form-group">
             <label htmlFor="writer-name">Adınız Soyadınız</label>
             <input

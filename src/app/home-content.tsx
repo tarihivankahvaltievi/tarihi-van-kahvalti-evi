@@ -27,20 +27,30 @@ export function HomeContent() {
     <>
       <VanHeroParallax />
 
-      <AboutStory />
+      <div className="story-reviews-flow">
+        <AboutStory />
 
-      <section className="red-reviews">
-        <h2 className="reviews-heading" data-reveal aria-label="Misafirlerimizin yorumları">
-          <span className="reviews-heading-line reviews-heading-line-primary" aria-hidden="true">
-            Misafirlerimizin
-          </span>
-          <span className="reviews-heading-line reviews-heading-line-secondary" aria-hidden="true">
-            yorumları
-          </span>
-          <span className="reviews-heading-rule" aria-hidden="true" />
-        </h2>
-        <ReviewCarousel />
-      </section>
+        <section className="red-reviews" aria-labelledby="reviews-heading">
+          <p className="reviews-bridge">
+            Sofrayı biz kuruyoruz; hikâyeyi misafirlerimiz tamamlıyor.
+          </p>
+          <h2
+            id="reviews-heading"
+            className="reviews-heading"
+            data-reveal
+            aria-label="Misafirlerimizin yorumları"
+          >
+            <span className="reviews-heading-line reviews-heading-line-primary" aria-hidden="true">
+              Misafirlerimizin
+            </span>
+            <span className="reviews-heading-line reviews-heading-line-secondary" aria-hidden="true">
+              yorumları
+            </span>
+            <span className="reviews-heading-rule" aria-hidden="true" />
+          </h2>
+          <ReviewCarousel />
+        </section>
+      </div>
 
       <section id="gallery" className="gallery-section">
         <div className="gallery-head" data-reveal>

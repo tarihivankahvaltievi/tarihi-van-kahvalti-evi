@@ -1,0 +1,619 @@
+/*
+ * Hero → story → reviews continuity layer.
+ * Loaded after the legacy global stylesheet so this section has one clear
+ * typographic, responsive and reduced-motion authority.
+ */
+
+.story-reviews-flow {
+  --review-burgundy: #70151c;
+  --review-burgundy-dark: #4e0c12;
+  --review-cream: #fff7e9;
+  --review-stone: #f1ebe2;
+  --review-gold: #cda85f;
+  --review-ink: #241718;
+  background: var(--review-burgundy);
+}
+
+.theme-breakfast .red-reviews {
+  position: relative !important;
+  isolation: isolate;
+  margin: 0 !important;
+  padding: clamp(2rem, 4vw, 3rem) clamp(1rem, 4vw, 3rem)
+    clamp(4.5rem, 8vw, 7rem) !important;
+  overflow: hidden !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: var(--review-stone) !important;
+  color: var(--review-ink) !important;
+  box-shadow: none !important;
+}
+
+.theme-breakfast .red-reviews::before {
+  position: absolute !important;
+  inset: 0 0 auto !important;
+  z-index: -1 !important;
+  display: block !important;
+  height: clamp(8.5rem, 15vw, 11rem) !important;
+  border: 0 !important;
+  background: var(--review-burgundy) !important;
+  clip-path: polygon(0 0, 100% 0, 100% 54%, 68% 72%, 0 58%);
+  content: "" !important;
+  opacity: 1 !important;
+  pointer-events: none;
+}
+
+.theme-breakfast .red-reviews::after {
+  position: absolute !important;
+  top: clamp(5.4rem, 9.5vw, 7.1rem) !important;
+  right: 0 !important;
+  left: 0 !important;
+  z-index: -1 !important;
+  display: block !important;
+  width: 72% !important;
+  height: 2px !important;
+  margin: 0 !important;
+  border: 0 !important;
+  background: linear-gradient(90deg, var(--review-gold), rgba(205, 168, 95, 0)) !important;
+  content: "" !important;
+  opacity: 0.75 !important;
+  transform: rotate(1.4deg) !important;
+  transform-origin: left center !important;
+  pointer-events: none;
+}
+
+.reviews-bridge {
+  position: relative;
+  z-index: 1;
+  max-width: 40ch;
+  min-height: clamp(3.4rem, 6vw, 4.7rem);
+  margin: 0 auto;
+  color: rgba(255, 247, 233, 0.88);
+  font-family: var(--font-bricolage-grotesque-gf), "Bricolage Grotesque", Arial, sans-serif;
+  font-size: clamp(0.86rem, 1.25vw, 1.02rem);
+  font-weight: 620;
+  letter-spacing: -0.012em;
+  line-height: 1.42;
+  text-align: center;
+  text-wrap: balance;
+}
+
+.theme-breakfast .red-reviews .reviews-heading {
+  position: relative !important;
+  z-index: 1;
+  display: grid !important;
+  justify-items: center !important;
+  gap: 0 !important;
+  width: fit-content !important;
+  max-width: min(100%, 16em) !important;
+  margin: clamp(3.5rem, 8vw, 6rem) auto 0 !important;
+  padding: 0 !important;
+  color: var(--review-ink) !important;
+  font-family: var(--font-bricolage-grotesque-gf), "Bricolage Grotesque", Arial, sans-serif !important;
+  font-optical-sizing: auto;
+  font-size: clamp(2.75rem, 6.2vw, 5.6rem) !important;
+  font-style: normal !important;
+  font-weight: 790 !important;
+  letter-spacing: -0.038em !important;
+  line-height: 0.91 !important;
+  text-align: center !important;
+  text-shadow: none !important;
+  text-wrap: balance;
+  animation: none !important;
+  -webkit-text-fill-color: var(--review-ink) !important;
+}
+
+.theme-breakfast .red-reviews .reviews-heading[data-reveal],
+.theme-breakfast .red-reviews .stagger-testimonials[data-reveal] {
+  opacity: 1 !important;
+  transform: none !important;
+  transition: none !important;
+}
+
+.theme-breakfast .red-reviews .reviews-heading::before,
+.theme-breakfast .red-reviews .reviews-heading::after {
+  display: none !important;
+  content: none !important;
+}
+
+.theme-breakfast .red-reviews .reviews-heading-line {
+  display: block;
+  opacity: 1;
+  transform: none;
+  transform-origin: 50% 82%;
+  backface-visibility: hidden;
+}
+
+.theme-breakfast .red-reviews .reviews-heading.is-visible .reviews-heading-line-primary {
+  animation: review-title-arrive 560ms cubic-bezier(0.16, 1, 0.3, 1) 40ms both !important;
+}
+
+.theme-breakfast .red-reviews .reviews-heading.is-visible .reviews-heading-line-secondary {
+  color: var(--review-burgundy);
+  animation: review-title-arrive 600ms cubic-bezier(0.16, 1, 0.3, 1) 115ms both !important;
+}
+
+.theme-breakfast .red-reviews .reviews-heading-rule {
+  display: block !important;
+  width: clamp(4.5rem, 9vw, 7rem) !important;
+  height: 3px !important;
+  margin-top: clamp(0.8rem, 1.5vw, 1.1rem) !important;
+  background: linear-gradient(90deg, var(--review-burgundy) 0 70%, var(--review-gold) 70%) !important;
+  opacity: 1 !important;
+  transform: none !important;
+  transform-origin: left center;
+  animation: none !important;
+}
+
+.theme-breakfast .red-reviews .reviews-heading.is-visible .reviews-heading-rule {
+  animation: review-title-rule 440ms cubic-bezier(0.16, 1, 0.3, 1) 260ms both !important;
+}
+
+.theme-breakfast .red-reviews .stagger-testimonials {
+  position: relative !important;
+  z-index: 1 !important;
+  width: min(100%, 76rem) !important;
+  margin: clamp(1.7rem, 4vw, 3rem) auto 0 !important;
+}
+
+.theme-breakfast .red-reviews .stagger-testimonials-stage {
+  --card-size: clamp(18rem, 29vw, 22rem);
+  --stack-gap: calc(var(--card-size) * 0.74);
+  position: relative !important;
+  width: 100% !important;
+  height: clamp(31rem, 52vw, 36rem) !important;
+  overflow: hidden !important;
+  border: 0 !important;
+  background: radial-gradient(ellipse at 50% 43%, rgba(112, 21, 28, 0.09), transparent 54%) !important;
+  perspective: 1100px !important;
+  perspective-origin: 50% 42% !important;
+  touch-action: pan-y pinch-zoom !important;
+  user-select: none !important;
+  -webkit-user-select: none;
+}
+
+.theme-breakfast .red-reviews .stagger-testimonials-stage::before {
+  position: absolute !important;
+  inset: auto 8% 5.1rem !important;
+  z-index: 0 !important;
+  display: block !important;
+  height: 1px !important;
+  background: linear-gradient(90deg, transparent, rgba(36, 23, 24, 0.2), transparent) !important;
+  content: "" !important;
+  pointer-events: none;
+}
+
+.theme-breakfast .red-reviews .stagger-testimonial-card {
+  position: absolute !important;
+  top: 43% !important;
+  left: 50% !important;
+  display: block !important;
+  width: var(--card-size) !important;
+  height: clamp(21rem, calc(var(--card-size) * 1.16), 24rem) !important;
+  padding: clamp(1.2rem, 2.3vw, 1.7rem) !important;
+  overflow: hidden !important;
+  border: 1px solid rgba(22, 9, 11, 0.44) !important;
+  border-radius: 0 !important;
+  background: #dfd1c5 !important;
+  color: var(--review-ink) !important;
+  clip-path: polygon(0 0, calc(100% - 3rem) 0, 100% 3rem, 100% 100%, 0 100%) !important;
+  opacity: 0 !important;
+  filter: none !important;
+  transform:
+    translate(-50%, -50%)
+    translateX(calc(var(--stack-gap) * var(--position)))
+    translateY(calc(var(--abs-position) * 0.6rem))
+    rotateZ(calc(var(--direction) * -3deg))
+    scale(0.86) !important;
+  transform-origin: 50% 56% !important;
+  backface-visibility: hidden !important;
+  box-shadow: 3px 4px 0 rgba(22, 9, 11, 0.14) !important;
+  pointer-events: none !important;
+  cursor: default;
+  animation: none !important;
+  transition:
+    transform 480ms cubic-bezier(0.16, 1, 0.3, 1),
+    opacity 300ms ease,
+    background-color 240ms ease,
+    color 240ms ease,
+    border-color 240ms ease,
+    box-shadow 300ms ease !important;
+}
+
+.theme-breakfast .red-reviews .stagger-testimonials-stage[data-is-moving="true"] .stagger-testimonial-card {
+  will-change: transform, opacity;
+}
+
+.theme-breakfast .red-reviews .stagger-testimonial-card.is-neighbor {
+  opacity: 0.4 !important;
+  pointer-events: auto !important;
+  cursor: pointer;
+}
+
+.theme-breakfast .red-reviews .stagger-testimonial-card:not(.is-center) figure {
+  opacity: 0 !important;
+}
+
+.theme-breakfast .red-reviews .stagger-testimonial-card:not(.is-center)::after {
+  position: absolute;
+  inset: 1.2rem;
+  display: grid;
+  border: 1px solid rgba(112, 21, 28, 0.2);
+  color: rgba(112, 21, 28, 0.5);
+  content: "✦";
+  font-family: Georgia, serif;
+  font-size: 1.5rem;
+  place-items: center;
+}
+
+.theme-breakfast .red-reviews .stagger-testimonial-card.is-center {
+  z-index: 30 !important;
+  border-color: #16090b !important;
+  background: var(--review-burgundy) !important;
+  color: var(--review-cream) !important;
+  opacity: 1 !important;
+  transform: translate(-50%, -50%) translateY(-1.2rem) rotateZ(0) scale(1) !important;
+  box-shadow: 7px 7px 0 rgba(22, 9, 11, 0.84) !important;
+  pointer-events: auto !important;
+  cursor: grab;
+}
+
+.theme-breakfast .red-reviews .stagger-testimonial-card.is-center:active {
+  cursor: grabbing;
+}
+
+.theme-breakfast .red-reviews .stagger-testimonial-card.is-center figure {
+  opacity: 1 !important;
+}
+
+.theme-breakfast .red-reviews .stagger-card-corner {
+  position: absolute !important;
+  top: 3rem !important;
+  right: -2px !important;
+  display: block !important;
+  width: 4.25rem !important;
+  height: 1px !important;
+  background: currentColor !important;
+  opacity: 0.18 !important;
+  transform: rotate(45deg) !important;
+  transform-origin: top right !important;
+}
+
+.theme-breakfast .red-reviews .stagger-card-image {
+  position: relative !important;
+  width: 3.75rem !important;
+  height: 4.25rem !important;
+  margin: 0 0 clamp(1rem, 2vw, 1.4rem) !important;
+  overflow: hidden !important;
+  border: 1px solid rgba(255, 247, 233, 0.72) !important;
+  background: var(--review-cream) !important;
+  box-shadow: 3px 3px 0 rgba(22, 9, 11, 0.48) !important;
+}
+
+.theme-breakfast .red-reviews .stagger-card-image img {
+  object-fit: cover;
+}
+
+.theme-breakfast .red-reviews .stagger-card-stars {
+  position: absolute !important;
+  top: clamp(1.2rem, 2.3vw, 1.7rem) !important;
+  right: clamp(1.2rem, 2.3vw, 1.7rem) !important;
+  display: flex !important;
+  gap: 0.08rem !important;
+  color: #efcf91 !important;
+}
+
+.theme-breakfast .red-reviews .stagger-card-quote,
+.theme-breakfast .red-reviews .stagger-testimonial-card:not(.is-center) .stagger-card-quote {
+  max-width: 14em !important;
+  max-height: none !important;
+  margin: 0 !important;
+  overflow: visible !important;
+  color: currentColor !important;
+  font-family: var(--font-bricolage-grotesque-gf), "Bricolage Grotesque", Arial, sans-serif !important;
+  font-size: clamp(1.08rem, 1.65vw, 1.32rem) !important;
+  font-weight: 700 !important;
+  letter-spacing: -0.018em !important;
+  line-height: 1.34 !important;
+  text-wrap: pretty;
+}
+
+.theme-breakfast .red-reviews .stagger-card-quote p {
+  margin: 0 !important;
+}
+
+.theme-breakfast .red-reviews .stagger-card-author {
+  position: static !important;
+  display: block !important;
+  margin-top: auto !important;
+  padding-top: 1rem !important;
+  color: rgba(255, 247, 233, 0.78) !important;
+  font-size: clamp(0.76rem, 1vw, 0.9rem) !important;
+  font-style: normal !important;
+  font-weight: 620 !important;
+  line-height: 1.35 !important;
+}
+
+.theme-breakfast .red-reviews .stagger-card-author cite {
+  font-style: normal;
+  opacity: 0.78;
+}
+
+.theme-breakfast .red-reviews .stagger-testimonial-controls {
+  position: absolute !important;
+  right: 0 !important;
+  bottom: 0.8rem !important;
+  left: 0 !important;
+  z-index: 40 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: clamp(0.7rem, 2vw, 1rem) !important;
+  transform: none !important;
+}
+
+.theme-breakfast .red-reviews .stagger-testimonial-controls button {
+  display: grid !important;
+  width: 3.25rem !important;
+  height: 3.25rem !important;
+  padding: 0 !important;
+  border: 1px solid rgba(36, 23, 24, 0.62) !important;
+  border-radius: 0 !important;
+  background: var(--review-stone) !important;
+  color: var(--review-ink) !important;
+  box-shadow: 3px 3px 0 rgba(36, 23, 24, 0.14) !important;
+  place-items: center !important;
+  transition: transform 160ms cubic-bezier(0.16, 1, 0.3, 1), background-color 160ms ease, color 160ms ease !important;
+}
+
+.theme-breakfast .red-reviews .stagger-testimonial-controls button:hover,
+.theme-breakfast .red-reviews .stagger-testimonial-controls button:focus-visible {
+  border-color: var(--review-burgundy) !important;
+  background: var(--review-burgundy) !important;
+  color: var(--review-cream) !important;
+  box-shadow: 3px 3px 0 rgba(36, 23, 24, 0.22) !important;
+  transform: translateY(-2px) !important;
+}
+
+.theme-breakfast .red-reviews .stagger-testimonial-controls button:active {
+  transform: translateY(1px) scale(0.97) !important;
+}
+
+.theme-breakfast .red-reviews .stagger-testimonial-controls button:focus-visible,
+.theme-breakfast .red-reviews .write-review-trigger-btn:focus-visible {
+  outline: 3px solid var(--review-gold) !important;
+  outline-offset: 3px !important;
+}
+
+.stagger-testimonial-status {
+  display: grid;
+  min-width: clamp(8.5rem, 17vw, 11rem);
+  gap: 0.15rem;
+  color: rgba(36, 23, 24, 0.68);
+  line-height: 1.2;
+  text-align: center;
+}
+
+.stagger-testimonial-status strong {
+  color: var(--review-burgundy);
+  font-family: var(--font-bricolage-grotesque-gf), "Bricolage Grotesque", Arial, sans-serif;
+  font-size: 0.9rem;
+  font-weight: 780;
+}
+
+.stagger-testimonial-status span {
+  font-size: 0.68rem;
+  font-weight: 620;
+}
+
+.theme-breakfast .red-reviews .stagger-testimonials > .write-review-trigger-btn {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 0.65rem !important;
+  width: fit-content !important;
+  min-height: 3.25rem !important;
+  margin: clamp(1.2rem, 2.5vw, 1.8rem) auto 0 !important;
+  padding: 0.75rem 1.5rem !important;
+  border: 1px solid #16090b !important;
+  border-radius: 3px !important;
+  background: var(--review-burgundy) !important;
+  color: var(--review-cream) !important;
+  box-shadow: 4px 4px 0 rgba(22, 9, 11, 0.2) !important;
+  font-family: var(--font-bricolage-grotesque-gf), "Bricolage Grotesque", Arial, sans-serif !important;
+  font-size: 0.98rem !important;
+  font-weight: 740 !important;
+  letter-spacing: -0.01em !important;
+  transition: transform 180ms cubic-bezier(0.16, 1, 0.3, 1), background-color 180ms ease !important;
+}
+
+.theme-breakfast .red-reviews .stagger-testimonials > .write-review-trigger-btn:hover,
+.theme-breakfast .red-reviews .stagger-testimonials > .write-review-trigger-btn:focus-visible {
+  background: var(--review-burgundy-dark) !important;
+  color: var(--review-cream) !important;
+  transform: translateY(-2px) !important;
+}
+
+.write-review-note {
+  margin: 0 0 0.4rem;
+  color: rgba(36, 23, 24, 0.72);
+  font-size: 0.78rem;
+  line-height: 1.45;
+  text-wrap: pretty;
+}
+
+@keyframes review-title-arrive {
+  from {
+    opacity: 0;
+    clip-path: inset(0 0 100% 0);
+    filter: blur(4px);
+    transform: translate3d(0, 0.28em, 0) rotateX(-8deg);
+  }
+  to {
+    opacity: 1;
+    clip-path: inset(0 0 0 0);
+    filter: blur(0);
+    transform: translate3d(0, 0, 0) rotateX(0);
+  }
+}
+
+@keyframes review-title-rule {
+  from {
+    opacity: 0;
+    transform: scaleX(0);
+  }
+  to {
+    opacity: 1;
+    transform: scaleX(1);
+  }
+}
+
+@media (max-width: 768px) {
+  .theme-breakfast .red-reviews {
+    padding: 1.4rem 0.75rem calc(4rem + env(safe-area-inset-bottom)) !important;
+  }
+
+  .theme-breakfast .red-reviews::before {
+    height: 7.5rem !important;
+    clip-path: polygon(0 0, 100% 0, 100% 58%, 68% 78%, 0 64%);
+  }
+
+  .theme-breakfast .red-reviews::after {
+    top: 5.25rem !important;
+    width: 84% !important;
+  }
+
+  .reviews-bridge {
+    max-width: 31ch;
+    min-height: 3.6rem;
+    font-size: 0.86rem;
+    line-height: 1.38;
+  }
+
+  .theme-breakfast .red-reviews .reviews-heading {
+    max-width: 100% !important;
+    margin-top: 3.5rem !important;
+    font-size: clamp(2.4rem, 10.9vw, 3.3rem) !important;
+    letter-spacing: -0.036em !important;
+    line-height: 0.92 !important;
+  }
+
+  .theme-breakfast .red-reviews .stagger-testimonials {
+    margin-top: 1.4rem !important;
+  }
+
+  .theme-breakfast .red-reviews .stagger-testimonials-stage {
+    --card-size: min(82vw, 20rem);
+    --stack-gap: calc(var(--card-size) * 0.77);
+    height: clamp(30rem, 126vw, 34rem) !important;
+    perspective: 900px !important;
+  }
+
+  .theme-breakfast .red-reviews .stagger-testimonial-card {
+    top: 44% !important;
+    height: clamp(21rem, calc(var(--card-size) * 1.16), 24rem) !important;
+    padding: 1.15rem !important;
+    clip-path: polygon(0 0, calc(100% - 2.4rem) 0, 100% 2.4rem, 100% 100%, 0 100%) !important;
+    transform:
+      translate(-50%, -50%)
+      translateX(calc(var(--stack-gap) * var(--position)))
+      translateY(calc(var(--abs-position) * 0.45rem))
+      rotateZ(calc(var(--direction) * -2.4deg))
+      scale(0.88) !important;
+  }
+
+  .theme-breakfast .red-reviews .stagger-testimonial-card.is-neighbor {
+    opacity: 0.34 !important;
+  }
+
+  .theme-breakfast .red-reviews .stagger-testimonial-card.is-center {
+    transform: translate(-50%, -50%) translateY(-1.45rem) rotateZ(0) scale(1) !important;
+    box-shadow: 6px 6px 0 rgba(22, 9, 11, 0.84) !important;
+  }
+
+  .theme-breakfast .red-reviews .stagger-card-corner {
+    top: 2.4rem !important;
+    width: 3.4rem !important;
+  }
+
+  .theme-breakfast .red-reviews .stagger-card-image {
+    width: 3.2rem !important;
+    height: 3.65rem !important;
+    margin-bottom: 1rem !important;
+  }
+
+  .theme-breakfast .red-reviews .stagger-card-stars {
+    top: 1.15rem !important;
+    right: 1.15rem !important;
+  }
+
+  .theme-breakfast .red-reviews .stagger-card-stars svg {
+    width: 0.82rem;
+    height: 0.82rem;
+  }
+
+  .theme-breakfast .red-reviews .stagger-card-quote,
+  .theme-breakfast .red-reviews .stagger-testimonial-card:not(.is-center) .stagger-card-quote {
+    font-size: clamp(1.02rem, 4.5vw, 1.18rem) !important;
+    line-height: 1.34 !important;
+  }
+
+  .theme-breakfast .red-reviews .stagger-card-author {
+    font-size: 0.76rem !important;
+  }
+
+  .theme-breakfast .red-reviews .stagger-testimonial-controls {
+    bottom: 0.55rem !important;
+  }
+
+  .theme-breakfast .red-reviews .stagger-testimonial-controls button {
+    width: 3.25rem !important;
+    height: 3.25rem !important;
+  }
+
+  .stagger-testimonial-status {
+    min-width: 7.8rem;
+  }
+
+  .stagger-testimonial-status span {
+    font-size: 0.62rem;
+  }
+
+  .theme-breakfast .red-reviews .stagger-testimonials > .write-review-trigger-btn {
+    width: min(100%, 19rem) !important;
+    min-height: 3.25rem !important;
+    margin-top: 1rem !important;
+  }
+}
+
+@media (max-width: 360px) {
+  .theme-breakfast .red-reviews .reviews-heading {
+    font-size: clamp(2.25rem, 10.4vw, 2.7rem) !important;
+  }
+
+  .theme-breakfast .red-reviews .stagger-testimonial-status span {
+    display: none;
+  }
+
+  .stagger-testimonial-status {
+    min-width: 4.8rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .theme-breakfast .red-reviews .reviews-heading,
+  .theme-breakfast .red-reviews .reviews-heading-line,
+  .theme-breakfast .red-reviews .reviews-heading-rule,
+  .theme-breakfast .red-reviews .stagger-testimonial-card,
+  .theme-breakfast .red-reviews .stagger-testimonial-controls button,
+  .theme-breakfast .red-reviews .write-review-trigger-btn {
+    animation: none !important;
+    filter: none !important;
+    transition: none !important;
+  }
+
+  .theme-breakfast .red-reviews .reviews-heading-line,
+  .theme-breakfast .red-reviews .reviews-heading-rule {
+    clip-path: none !important;
+    opacity: 1 !important;
+  }
+}
