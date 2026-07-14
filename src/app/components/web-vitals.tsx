@@ -2,14 +2,11 @@
 
 import { useReportWebVitals } from "next/web-vitals";
 
-export function WebVitals() {
+export function WebVitals({ endpoint }: { endpoint: string }) {
   useReportWebVitals((metric) => {
     if (process.env.NODE_ENV !== "production") {
       console.debug("[Web Vitals]", metric.name, Math.round(metric.value * 100) / 100, metric);
     }
-
-    const endpoint = process.env.NEXT_PUBLIC_WEB_VITALS_ENDPOINT;
-    if (!endpoint) return;
 
     const payload = JSON.stringify({
       id: metric.id,

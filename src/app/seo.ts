@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 
-export const siteUrl = "https://tarihivankahvaltievi.com";
+export const siteUrl = "https://www.tarihivankahvaltievi.com";
 export const siteName = "Tarihi Van Kahvaltı Evi";
 export const alternateName = "Tarihi Van Kahvaltıcısı";
 export const displayPhone = "+90 541 525 2868";
@@ -8,9 +8,6 @@ export const phoneE164 = "+905415252868";
 export const telUrl = `tel:${phoneE164}`;
 export const email = "info@tarihivankahvaltievi.com";
 export const foundingDate = "1978";
-export const dateModified = "2026-07-14";
-export const dateModifiedIso = "2026-07-14T12:00:00+03:00";
-export const defaultImage = "/images/hero-table.jpg";
 export const defaultOgImagePath = "/images/og/home.jpg";
 export const defaultOgImage = `${siteUrl}${defaultOgImagePath}`;
 
@@ -27,7 +24,6 @@ export const address = {
 };
 
 export const displayAddress = `${address.streetAddress}, ${address.neighborhood}, ${address.locality}, ${address.region} ${address.postalCode}`;
-export const fullAddress = `${displayAddress}, ${address.countryName}`;
 
 export const coordinates = {
   latitude: 41.0366,
@@ -189,11 +185,7 @@ export const seoPages: SeoPage[] = [
       "Serpme kahvaltı yanında sınırsız çay sunulur.",
       "Fiyatlar değişebileceği için ziyaret öncesi güncel bilgi alınması önerilir.",
     ],
-    sections: menuSections.map((section) => ({
-      title: section.name,
-      body: `${section.description} ${section.items.map((item) => item.name).join(", ")} seçenekleriyle tamamlanır.`,
-      id: section.name === "Serpme Van Kahvaltısı" ? "serpme-kahvalti" : undefined,
-    })),
+    sections: [],
     questions: [faqItems[0], faqItems[4], faqItems[6], faqItems[8]],
   },
   {
@@ -237,7 +229,7 @@ export const seoPages: SeoPage[] = [
   },
   {
     slug: "sss",
-    title: "Sıkça Sorulan Sorular | Tarihi Van Kahvaltı Evi",
+    title: "Sıkça Sorulan Sorular",
     description:
       "Van kahvaltısı içeriği, fiyatlar, çalışma saatleri, rezervasyon, konum ve Kafka Cafe hakkında kısa, güncel cevaplar.",
     h1: "Sıkça sorulan sorular",
@@ -268,7 +260,6 @@ export const seoPages: SeoPage[] = [
     image: "/images/kete-detail.jpg",
     ogImage: "/images/og/van-kahvaltisi.jpg",
     imageAlt: "Geleneksel Van kahvaltısında kete detayı",
-    schemaType: "AboutPage",
     article: true,
     intro: [
       "Van kahvaltısı, tek bir tabaktan çok birlikte paylaşılan zengin bir sofra kültürüdür.",
@@ -510,7 +501,6 @@ export function buildHomeWebPageJsonLd(withContext = true) {
     description:
       "Beyoğlu Taksim'de 1978'den beri geleneksel serpme Van kahvaltısı, otlu peynir, murtuğa, kavut, sınırsız çay ve Kafka Cafe deneyimi.",
     inLanguage: "tr-TR",
-    dateModified: dateModifiedIso,
     isPartOf: { "@id": `${siteUrl}/#website` },
     mainEntity: { "@id": `${siteUrl}/#restaurant` },
     primaryImageOfPage: {
@@ -582,9 +572,22 @@ export function buildArticleJsonLd(page: SeoPage, pageUrl = absoluteUrl(page.slu
     description: page.description,
     image: absoluteUrl(page.image),
     inLanguage: "tr-TR",
-    dateModified: dateModifiedIso,
-    author: { "@id": `${siteUrl}/#restaurant` },
-    publisher: { "@id": `${siteUrl}/#restaurant` },
+    author: {
+      "@type": "Organization",
+      "@id": `${siteUrl}/#restaurant`,
+      name: siteName,
+      url: siteUrl,
+    },
+    publisher: {
+      "@type": "Organization",
+      "@id": `${siteUrl}/#restaurant`,
+      name: siteName,
+      url: siteUrl,
+      logo: {
+        "@type": "ImageObject",
+        url: `${siteUrl}/images/brand-icon-small.png`,
+      },
+    },
     mainEntityOfPage: { "@id": `${pageUrl}#webpage` },
   };
   return withContext ? { "@context": "https://schema.org", ...data } : data;

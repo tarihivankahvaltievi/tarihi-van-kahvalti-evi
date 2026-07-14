@@ -9,10 +9,10 @@ import {
   buildFaqJsonLd,
   buildMenuJsonLd,
   createPageMetadata,
-  dateModified,
   getSeoPage,
   jsonLd,
   mapsUrl,
+  menuSections,
   pageOgImagePath,
   seoPages,
   siteUrl,
@@ -71,7 +71,6 @@ export default async function SeoPage({ params }: PageProps) {
       headline: page.h1,
       description: page.description,
       inLanguage: "tr-TR",
-      dateModified,
       isPartOf: {
         "@id": `${siteUrl}/#website`,
       },
@@ -177,7 +176,11 @@ export default async function SeoPage({ params }: PageProps) {
         </figure>
       </section>
 
-      <section className="seo-answer-box" aria-labelledby="quick-answer">
+      <section
+        className="seo-answer-box"
+        id={slug === "menu" ? "fiyatlar" : undefined}
+        aria-labelledby="quick-answer"
+      >
         <h2 id="quick-answer">{labels.quick}</h2>
         <ul>
           {page.highlights.map((highlight) => (
@@ -186,14 +189,44 @@ export default async function SeoPage({ params }: PageProps) {
         </ul>
       </section>
 
-      <section className="seo-content-grid" aria-label={`${page.h1} ${labels.details}`}>
-        {page.sections.map((section) => (
-          <article key={section.title} id={section.id}>
-            <h2>{section.title}</h2>
-            <p>{section.body}</p>
-          </article>
-        ))}
-      </section>
+      {slug === "menu" ? (
+        <section className="seo-content-grid" aria-label="Menü kalemleri ve fiyatları">
+          {menuSections.map((section, sectionIndex) => (
+            <article
+              key={section.name}
+              id={sectionIndex === 0 ? "serpme-kahvalti" : undefined}
+            >
+              <h2>{section.name}</h2>
+              <p>{section.description}</p>
+              <ul className="seo-menu-list">
+                {section.items.map((item) => (
+                  <li key={item.name}>
+                    <div>
+                      <h3>{item.name}</h3>
+                      <p>{item.description}</p>
+                    </div>
+                    {"price" in item && item.price ? (
+                      <p className="seo-menu-price">
+                        <strong>{item.price} {item.priceCurrency}</strong>
+                        {"unit" in item && item.unit ? <span>{item.unit}</span> : null}
+                      </p>
+                    ) : null}
+                  </li>
+                ))}
+              </ul>
+            </article>
+          ))}
+        </section>
+      ) : (
+        <section className="seo-content-grid" aria-label={`${page.h1} ${labels.details}`}>
+          {page.sections.map((section) => (
+            <article key={section.title} id={section.id}>
+              <h2>{section.title}</h2>
+              <p>{section.body}</p>
+            </article>
+          ))}
+        </section>
+      )}
 
       <section className="seo-faq-list" aria-labelledby="page-faq">
         <h2 id="page-faq">{labels.questions}</h2>

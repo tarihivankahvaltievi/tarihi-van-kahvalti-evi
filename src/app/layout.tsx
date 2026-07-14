@@ -5,9 +5,11 @@ import "./mobile-header-hero.css";
 
 const bodoni = Bodoni_Moda({
   subsets: ["latin", "latin-ext"],
-  weight: ["400", "500", "600", "700"],
+  weight: "variable",
   style: ["normal", "italic"],
+  axes: ["opsz"],
   display: "swap",
+  preload: false,
   variable: "--font-bodoni-gf",
 });
 const literata = Literata({
@@ -23,6 +25,7 @@ const bricolageGrotesque = Bricolage_Grotesque({
   weight: "variable",
   axes: ["opsz", "wdth"],
   display: "swap",
+  preload: false,
   variable: "--font-bricolage-grotesque-gf",
 });
 import {
@@ -69,9 +72,6 @@ export const metadata: Metadata = {
       "max-image-preview": "large",
       "max-snippet": -1,
     },
-  },
-  alternates: {
-    canonical: siteUrl,
   },
   openGraph: {
     title: "Tarihi Van Kahvaltı Evi | Beyoğlu Taksim",
@@ -127,16 +127,15 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const webVitalsEndpoint = process.env.NEXT_PUBLIC_WEB_VITALS_ENDPOINT;
+
   return (
     <html lang="tr" className={`h-full antialiased ${bodoni.variable} ${literata.variable} ${bricolageGrotesque.variable}`}>
       <head>
-        <link rel="dns-prefetch" href="https://www.google.com" />
-        <link rel="dns-prefetch" href="https://wa.me" />
-        <link rel="dns-prefetch" href="https://maps.googleapis.com" />
         <link rel="me" href={sameAsUrls[0]} />
       </head>
       <body className="min-h-full flex flex-col">
-        <WebVitals />
+        {webVitalsEndpoint?.startsWith("/") ? <WebVitals endpoint={webVitalsEndpoint} /> : null}
         <a className="skip-link" href="#main-content">Ana içeriğe geç</a>
         {children}
       </body>

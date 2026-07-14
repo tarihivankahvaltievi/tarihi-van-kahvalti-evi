@@ -1,14 +1,17 @@
+import type { Metadata } from "next";
 import ClientPage from "./client-page";
 import { HomeContent } from "./home-content";
 import {
-  buildBreadcrumbJsonLd,
   buildHomeWebPageJsonLd,
-  buildMenuJsonLd,
   buildRestaurantJsonLd,
   buildWebsiteJsonLd,
   jsonLd,
   siteUrl,
 } from "./seo";
+
+export const metadata: Metadata = {
+  alternates: { canonical: siteUrl },
+};
 
 export default function Home() {
   const homeJsonLd = {
@@ -17,8 +20,6 @@ export default function Home() {
       buildWebsiteJsonLd(false),
       buildRestaurantJsonLd(false),
       buildHomeWebPageJsonLd(false),
-      buildMenuJsonLd(),
-      buildBreadcrumbJsonLd([{ name: "Ana Sayfa", url: siteUrl }], siteUrl, false),
     ],
   };
 
