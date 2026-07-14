@@ -351,6 +351,10 @@ export function VanHeroParallax() {
               filter: copyFilter,
             }}
           >
+            <div className="hero-provenance">
+              <span className="hero-provenance-year">1978</span>
+              <span className="hero-provenance-place">Beyoğlu · Aile sofrası</span>
+            </div>
             <h1 className="hero-title-lockup">
               <span className="sr-only">Tarihi Van Kahvaltı Evi</span>
               <span className="hero-title-line hero-title-line-one" aria-hidden="true">
@@ -363,8 +367,8 @@ export function VanHeroParallax() {
               </span>
             </h1>
             <p>
-              1978&apos;den beri serpme Van kahvaltısı: otlu peynir, kavut,
-              murtuğa, sıcak bakır sahanlar ve sınırsız taze çay.
+              Van&apos;dan Beyoğlu&apos;na uzanan serpme kahvaltı: otlu peynir,
+              kavut, murtuğa, sıcak bakır sahanlar ve sınırsız taze çay.
             </p>
           </motion.div>
         </motion.div>
