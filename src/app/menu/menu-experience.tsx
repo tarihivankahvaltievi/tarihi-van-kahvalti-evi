@@ -309,7 +309,7 @@ export function MenuExperience() {
           {visibleItems.length ? (
             <AnimatePresence initial={false} mode="popLayout">
               {visibleGroups.map((group, groupIndex) => (
-                <motion.section key={group.id} className={styles.categorySection} layout={!reduceMotion} initial={reduceMotion ? false : { opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} transition={{ duration: reduceMotion ? 0 : 0.38, delay: groupIndex * 0.04 }} aria-labelledby={`category-${group.id}`}>
+                <motion.section key={group.id} data-category={group.id} className={styles.categorySection} layout={!reduceMotion} initial={reduceMotion ? false : { opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} transition={{ duration: reduceMotion ? 0 : 0.38, delay: groupIndex * 0.04 }} aria-labelledby={`category-${group.id}`}>
                   <header className={styles.categoryHeader}>
                     <div><h3 id={`category-${group.id}`}>{group.label}</h3><p>{group.description}</p></div>
                     <span>{group.items.length} çeşit</span>
