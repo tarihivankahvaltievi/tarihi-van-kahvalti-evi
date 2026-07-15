@@ -22,6 +22,7 @@
   font-family: var(--font-bricolage-grotesque-gf), system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
   position: relative;
+  scroll-behavior: smooth;
 }
 
 .page::after {
@@ -490,11 +491,11 @@
   padding: 0.35rem 0.65rem;
   background: var(--gold);
   color: var(--ink);
-  font-size: 0.65rem;
+  font-size: 0.62rem;
   font-weight: 800;
-  border: 1px solid rgba(32, 24, 25, 0.2);
+  border: 1px solid rgba(32, 24, 25, 0.15);
   border-radius: 6px;
-  box-shadow: 1px 1px 0 rgba(32, 24, 25, 0.1);
+  box-shadow: 1px 1px 0 rgba(32, 24, 25, 0.08);
   text-transform: uppercase;
   letter-spacing: 0.02em;
 }
@@ -1069,7 +1070,9 @@
   padding: 2rem;
   flex-direction: column;
   overflow-y: auto;
-  border-left: 1px dashed rgba(32, 24, 25, 0.18); /* Elegant scrapbook-style vertical divider */
+  border-left: 1px dashed rgba(32, 24, 25, 0.12);
+  scrollbar-width: thin;
+  scrollbar-color: rgba(32, 24, 25, 0.12) transparent;
 }
 
 .dialogTags {
@@ -1081,12 +1084,17 @@
 
 .dialogTags span {
   padding: 0.2rem 0.5rem;
-  border: 1px solid rgba(112, 21, 28, 0.3);
+  border: 1px solid rgba(112, 21, 28, 0.2);
   border-radius: 20px;
   color: var(--red);
   font-size: 0.62rem;
   font-weight: 800;
   background: var(--gold-light);
+  transition: background-color 0.15s ease;
+}
+
+.dialogTags span:hover {
+  background: rgba(223, 182, 94, 0.15);
 }
 
 .dialogContent h2 {
