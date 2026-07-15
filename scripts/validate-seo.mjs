@@ -7,6 +7,7 @@ const routes = [
   { path: "/sss", canonical: "https://www.tarihivankahvaltievi.com/sss", types: ["WebPage", "BreadcrumbList", "FAQPage"] },
   { path: "/van-kahvaltisi", canonical: "https://www.tarihivankahvaltievi.com/van-kahvaltisi", types: ["WebPage", "BreadcrumbList"] },
   { path: "/beyoglu-kahvalti", canonical: "https://www.tarihivankahvaltievi.com/beyoglu-kahvalti", types: ["WebPage", "BreadcrumbList"] },
+  { path: "/taksim-kahvalti", canonical: "https://www.tarihivankahvaltievi.com/taksim-kahvalti", types: ["WebPage", "BreadcrumbList"] },
   { path: "/kafka-cafe", canonical: "https://www.tarihivankahvaltievi.com/kafka-cafe", types: ["WebPage", "BreadcrumbList"] },
 ];
 

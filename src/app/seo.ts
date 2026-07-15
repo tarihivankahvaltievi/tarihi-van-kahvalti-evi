@@ -165,6 +165,7 @@ export type SeoPage = {
   highlights: string[];
   sections: { title: string; body: string; id?: string }[];
   questions: { question: string; answer: string }[];
+  resources?: { label: string; url: string; description: string }[];
 };
 
 export const seoPages: SeoPage[] = [
@@ -292,17 +293,17 @@ export const seoPages: SeoPage[] = [
   },
   {
     slug: "beyoglu-kahvalti",
-    title: "Beyoğlu'nda Van Kahvaltısı",
+    title: "Beyoğlu Van Kahvaltıcısı",
     description:
-      "Beyoğlu Zambak Sokak'ta, Taksim'e yakın tarihi Rum binasında serpme Van kahvaltısı, açık adres, saatler ve ulaşım bilgisi.",
-    h1: "Beyoğlu'nda serpme Van kahvaltısı",
+      "Beyoğlu Van kahvaltıcısı arayanlara Zambak Sokak'ta serpme Van kahvaltısı; güncel menü, açık adres, saatler, ulaşım ve rezervasyon.",
+    h1: "Beyoğlu'nda Van kahvaltıcısı ve serpme kahvaltı",
     eyebrow: "Beyoğlu",
     image: "/images/balcony-breakfast.jpg",
     ogImage: "/images/og/beyoglu-kahvalti.jpg",
     imageAlt: "Beyoğlu'nda balkonda kahvaltı sofrası",
     intro: [
-      "Tarihi Van Kahvaltı Evi, Zambak Sokak'taki tarihi binasında geleneksel Van kahvaltısını Beyoğlu'nun merkezinde sunar.",
-      "Bu sayfada konum, çalışma saati, ulaşım ve sofranın ayırt edici özelliklerini tek yerde bulabilirsiniz.",
+      "Beyoğlu kahvaltıcısı arayanlar için Tarihi Van Kahvaltı Evi, Zambak Sokak'taki tarihi binasında geleneksel Van sofrası kurar.",
+      "Van otlu peyniri, murtuğa, kavut, kete ve sınırsız çayla hazırlanan serpme kahvaltının menü, konum, saat ve rezervasyon bilgileri bu sayfadadır.",
     ],
     highlights: [
       "Taksim Meydanı'na ve M2 Taksim metroya yürüme mesafesindedir.",
@@ -325,6 +326,67 @@ export const seoPages: SeoPage[] = [
       },
     ],
     questions: [faqItems[0], faqItems[2], faqItems[3], faqItems[4], faqItems[8]],
+  },
+  {
+    slug: "taksim-kahvalti",
+    title: "Taksim Van Kahvaltıcısı",
+    description:
+      "Taksim kahvaltıcısı arayanlara M2 metro ve İstiklal Caddesi yakınında serpme Van kahvaltısı; menü, saatler, yol tarifi ve rezervasyon.",
+    h1: "Taksim'de Van kahvaltıcısı",
+    eyebrow: "Taksim kahvaltı rehberi",
+    image: "/images/street-table.jpg",
+    ogImage: "/images/og/beyoglu-kahvalti.jpg",
+    imageAlt: "Taksim Zambak Sokak yakınında serpme Van kahvaltısı",
+    intro: [
+      "Taksim kahvaltı seçenekleri arasında yöresel bir sofra arayanlar, Tarihi Van Kahvaltı Evi'nde Van otlu peyniri, murtuğa, kavut, kete ve sıcak bakır sahanları aynı masada bulur.",
+      `İşletme ${displayAddress} adresindedir; M2 Taksim istasyonu, Taksim Meydanı ve İstiklal Caddesi çevresinden yürüyerek ulaşılabilir.`,
+    ],
+    highlights: [
+      "Taksim Meydanı ve M2 Taksim istasyonu çevresinden yürüyerek ulaşılır.",
+      "Serpme Van kahvaltısı en az iki kişilik servis edilir.",
+      "Van otlu peyniri, murtuğa, kavut, kete, bal-kaymak ve sınırsız çay öne çıkar.",
+      `Çalışma saatleri ${openingHours.short}; hafta sonu için masa uygunluğu önceden sorulabilir.`,
+    ],
+    sections: [
+      {
+        title: "Taksim'de kahvaltı için Van sofrası",
+        body: "Tarihi Van Kahvaltı Evi, standart kahvaltı tabağı yerine küçük tabaklarla paylaşılan yöresel bir sofra sunar. Otlu peynir, murtuğa ve kavut; menüyü klasik kafe kahvaltısından ayırır.",
+      },
+      {
+        title: "Taksim Meydanı ve metrodan ulaşım",
+        id: "metrodan-ulasim",
+        body: "M2 Taksim istasyonundan Sıraselviler yönüne ilerleyip Zambak Sokak'a geçebilirsiniz. Güncel istasyon ve sefer durumunu Metro İstanbul üzerinden kontrol etmek, özel günlerde rota değişikliklerini görmeyi kolaylaştırır.",
+      },
+      {
+        title: "İstiklal Caddesi çevresinden",
+        body: "İstiklal Caddesi, Tarlabaşı ve Şehit Muhtar çevresinden gelenler için Zambak Sokak merkezi bir buluşma noktasıdır. İlk ziyarette Google Haritalar yol tarifi kullanılabilir.",
+      },
+      {
+        title: "Taksim kahvaltısı öncesi plan",
+        body: "Güncel fiyatları menü sayfasından inceleyebilir; hafta sonu veya kalabalık grup ziyaretlerinde telefon ya da WhatsApp üzerinden masa uygunluğunu sorabilirsiniz.",
+      },
+    ],
+    questions: [
+      {
+        question: "Taksim'de Van kahvaltısı nerede yenir?",
+        answer: `Tarihi Van Kahvaltı Evi, ${displayAddress} adresinde yöresel serpme Van kahvaltısı sunar; Taksim Meydanı ve M2 metro çevresinden yürüyerek ulaşılabilir.`,
+      },
+      {
+        question: "Taksim kahvaltıcısı seçerken nelere bakılır?",
+        answer: "Menü içeriği, fiyatın kişi başı mı masa başı mı olduğu, çalışma saati, metroya yakınlık ve rezervasyon bilgisi birlikte değerlendirilmelidir.",
+      },
+      faqItems[6],
+      faqItems[5],
+      faqItems[3],
+      faqItems[4],
+    ],
+    resources: [
+      {
+        label: "Metro İstanbul M2 hattı",
+        url: "https://www.metro.istanbul/Hatlarimiz/HatDetay?hat=M2",
+        description: "Taksim istasyonu, hat bilgisi ve güncel ulaşım ayrıntıları",
+      },
+    ],
   },
   {
     slug: "kafka-cafe",
@@ -361,7 +423,6 @@ export const seoPages: SeoPage[] = [
 ];
 
 export const legacyRedirects = [
-  { source: "/taksim-kahvalti", destination: "/beyoglu-kahvalti" },
   // Google'da görünen eski sonuç doğrudan ana sayfaya gitmeli; yönlendirme zinciri oluşturmayın.
   { source: "/istanbul-van-kahvaltisi", destination: "/" },
   { source: "/serpme-van-kahvaltisi", destination: "/van-kahvaltisi" },
@@ -383,7 +444,7 @@ export const legacyRedirects = [
   { source: "/kahvalti-sonrasi-kahve", destination: "/kafka-cafe" },
   { source: "/vejetaryen-kahvalti-beyoglu", destination: "/menu" },
   { source: "/beyoglu-kahvalti-mekanlari", destination: "/beyoglu-kahvalti" },
-  { source: "/taksim-brunch-kahvalti", destination: "/beyoglu-kahvalti" },
+  { source: "/taksim-brunch-kahvalti", destination: "/taksim-kahvalti" },
 ] as const;
 
 export const localSeoFacts = [
@@ -559,7 +620,9 @@ export function buildRestaurantJsonLd(withContext = true) {
       "Murtuğa",
       "Kavut",
       "Beyoğlu kahvaltı",
+      "Beyoğlu Van kahvaltısı",
       "Taksim kahvaltı",
+      "Taksim Van kahvaltısı",
     ],
     address: {
       "@type": "PostalAddress",

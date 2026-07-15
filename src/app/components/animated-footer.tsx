@@ -1171,6 +1171,7 @@ export function AnimatedFooter() {
               <li><Link href="/menu">Zengin Menü</Link></li>
               <li><Link href="/van-kahvaltisi">Van Kahvaltısı</Link></li>
               <li><Link href="/beyoglu-kahvalti">Beyoğlu Kahvaltı</Link></li>
+              <li><Link href="/taksim-kahvalti">Taksim Kahvaltı</Link></li>
               <li><Link href="/kafka-cafe">Kafka Cafe</Link></li>
               <li><Link href="/iletisim">Konum ve Rezervasyon</Link></li>
               <li><Link href="/sss">Sıkça Sorulan Sorular</Link></li>

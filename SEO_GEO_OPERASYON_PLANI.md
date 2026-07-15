@@ -6,7 +6,7 @@ Bu belge, `van kahvaltıcısı` ve ilgili yerel niyetli aramalarda görünürlü
 
 ## Canlı teknik durum
 
-- Sitemap yalnız 7 kanonik ve indekslenebilir URL içerir; eski/yönlendirilen URL'ler sitemap'e alınmaz.
+- Sitemap yalnız 8 kanonik ve indekslenebilir URL içerir; eski/yönlendirilen URL'ler sitemap'e alınmaz.
 - Her sitemap kaydında gerçek içerik revizyonunu gösteren `lastmod` ve sayfaya ait özgün görseller bulunur.
 - Kanonik sayfalardaki dahili bağlantılar yönlendirme zinciri oluşturmadan doğrudan `200` dönen hedeflere gider.
 - Ana sayfada `WebSite`, `WebPage` ve `Restaurant`; alt sayfalarda içerikle eşleşen sayfa, breadcrumb, menü veya SSS şemaları kullanılır.
@@ -20,6 +20,27 @@ Bu belge, `van kahvaltıcısı` ve ilgili yerel niyetli aramalarda görünürlü
 - Site adresi `Zambak Sk. No:8, Şehit Muhtar Mahallesi, Beyoğlu, İstanbul 34435`. Google Business Profile, Instagram ve önemli dizinlerde yazım sırası dahil aynı NAP (ad, adres, telefon) kullanılmalı.
 - Önceki şema koordinatları yalnız dört ondalık basamaklıydı ve üçüncü taraf harita verisiyle yaklaşık 250 metre ayrışıyordu; yanlış konum sinyali vermemek için kaldırıldı. İşletme sahibi Google Business Profile'daki kesin pini doğrulayıp en az beş ondalıklı koordinatı sağlamadan tahmini değer eklenmemeli.
 - Fiyatlar değişebileceğinden menü sayfasındaki `450 TL` ve `180 TL` değerleri düzenli doğrulanmalı.
+
+## Üçüncü taraf NAP ve kategori denetimi — 15 Temmuz 2026
+
+Hedef sorgular için Restoranim.net, Menü Burada, Gezip Geliyorum, Tripadvisor, Reddit, MekanRadar, RenkMobil, Yandex Maps ve Google Maps sonuçları tarandı. Kodla değiştirilemeyen aşağıdaki kayıtlar işletme hesabından düzeltilmelidir:
+
+1. Google Maps sonucunda işletmenin birincil kategorisi `Cafe` görünüyor. Gerçek ana faaliyet kahvaltıysa Google Business Profile'da mevcut en yakın `Kahvaltı restoranı / Breakfast restaurant` kategorisi birincil kategori olarak doğrulanmalı; `Cafe` yalnız gerçekten uygunsa ikincil kalmalı.
+2. Google Maps sonucu açılışı `06:30`, site ise `08:00` gösteriyor. Gerçek saat işletme sahibi tarafından doğrulanıp aynı gün site ve profil eşitlenmeli.
+3. RenkMobil kaydı işletmeyi yanlış biçimde `24 saat açık` ve `34421` posta koduyla gösteriyor. Kayıt sahiplenilip saat ve posta kodu düzeltilmeli veya kaynağa düzeltme bildirilmeli.
+4. Yandex Maps kaydı adresi `Zambak Sokak 10A` ve saatleri bilinmiyor olarak gösteriyor. İşletme kaydı sahiplenilip gerçek kapı numarası ve saat eklenmeli.
+5. MekanRadar kaydında telefon doğru, posta kodu `34421`. İşletme sahibi gerçek posta kodunu doğruladıktan sonra kayıt siteyle eşitlenmeli.
+6. Menü Burada'nın Taksim kahvaltıcı listesinde aynı sokaktaki başka işletmeler bulunurken Tarihi Van Kahvaltı Evi görünmüyor. Ücretsiz ve doğrulanmış işletme kaydı imkânı varsa gerçek NAP, resmi site ve menü URL'siyle eklenmeli; ücretli bağlantı paketi alınmamalı.
+7. Restoranim.net Beyoğlu kahvaltıcı listesinde işletme görünmüyor. Gerçek işletme sahipliği doğrulanabiliyorsa resmi ad, adres, telefon, çalışma saati ve siteyle başvuru yapılmalı.
+
+Kaynaklar:
+
+- https://www.google.com/maps/search/Breakfast%20at%20Van%20Kahvalti%20Evi%20Istanbul
+- https://renkmobil.com/kahvalti/istanbul/tarihi-van-kahvalti-evi-1978/
+- https://yandex.com/maps/org/tarihi_van_kahvalt_ve_arap_evi/237523878781/
+- https://mekanradar.com/mekan/istanbul/beyoglu/tarihi-van-kahvalti-evi-1978
+- https://menuburada.com/restoranlar/istanbul-taksim-kahvalti
+- https://restoranim.net/istanbul/beyoglu/kahvaltici
 
 ## Google Business Profile çalışma listesi
 

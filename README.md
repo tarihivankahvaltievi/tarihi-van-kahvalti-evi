@@ -21,7 +21,7 @@ npm start
 
 - İşletme bilgileri, sayfa içeriği, yapılandırılmış veri ve eski URL yönlendirmeleri: `src/app/seo.ts`
 - Site geneli metadata: `src/app/layout.tsx`
-- Canonical sayfalar: `/`, `/menu`, `/iletisim`, `/sss`, `/van-kahvaltisi`, `/beyoglu-kahvalti`, `/kafka-cafe`
+- Canonical sayfalar: `/`, `/menu`, `/iletisim`, `/sss`, `/van-kahvaltisi`, `/beyoglu-kahvalti`, `/taksim-kahvalti`, `/kafka-cafe`
 - Sitemap ve tarayıcı kuralları: `src/app/sitemap.ts`, `src/app/robots.ts`
 
 Adres, telefon, çalışma saatleri veya fiyatlar değiştiğinde önce `seo.ts` güncellenmeli; görünür içerik ile JSON-LD aynı kaynaktan beslenmelidir.

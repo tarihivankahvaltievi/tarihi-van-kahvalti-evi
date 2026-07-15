@@ -57,6 +57,7 @@ export function HomeContent() {
               <Link href="/menu">Menü ve fiyatlar</Link>
               <Link href="/van-kahvaltisi">Van kahvaltısı nedir?</Link>
               <Link href="/beyoglu-kahvalti">Beyoğlu kahvaltı</Link>
+              <Link href="/taksim-kahvalti">Taksim kahvaltı</Link>
               <Link href="/iletisim">Konum ve rezervasyon</Link>
               <Link href="/kafka-cafe">Kafka Cafe</Link>
             </nav>

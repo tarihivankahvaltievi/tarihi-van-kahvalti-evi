@@ -233,9 +233,24 @@ export default async function SeoPage({ params }: PageProps) {
         ))}
       </section>
 
+        {page.resources?.length ? (
+          <section className="seo-resources" aria-labelledby="trusted-resources">
+            <h2 id="trusted-resources">Resmî ulaşım kaynağı</h2>
+            <div>
+              {page.resources.map((resource) => (
+                <a key={resource.url} href={resource.url} target="_blank" rel="noopener noreferrer">
+                  <strong>{resource.label}</strong>
+                  <span>{resource.description}</span>
+                </a>
+              ))}
+            </div>
+          </section>
+        ) : null}
+
         <section className="seo-related" aria-label={labels.related}>
           <Link href="/van-kahvaltisi">Van kahvaltısı nedir?</Link>
           <Link href="/beyoglu-kahvalti">Beyoğlu kahvaltı</Link>
+          <Link href="/taksim-kahvalti">Taksim kahvaltı</Link>
           <Link href="/menu">Kahvaltı fiyatları</Link>
           <Link href="/kafka-cafe">Kafka Cafe</Link>
           <Link href="/iletisim">Zambak Sokak ve yol tarifi</Link>
