@@ -10,6 +10,9 @@ const routes = [
   { path: "/kafka-cafe", canonical: "https://www.tarihivankahvaltievi.com/kafka-cafe", types: ["WebPage", "BreadcrumbList"] },
 ];
 
+const canonicalUrls = new Set(routes.map((route) => route.canonical));
+const internalPaths = new Set();
+
 const fail = (message) => {
   throw new Error(message);
 };
@@ -69,6 +72,12 @@ for (const route of routes) {
   assert(description.length >= 80 && description.length <= 160, `${routeLabel}: description uzunluğu ${description.length}`);
   assert((visibleHtml(html).match(/<h1\b/gi) ?? []).length === 1, `${routeLabel}: tam bir H1 bulunmalı`);
 
+  for (const match of html.matchAll(/<a\b[^>]*\bhref="([^"]+)"/gi)) {
+    const href = decodeHtml(match[1]);
+    if (!href.startsWith("/")) continue;
+    internalPaths.add(new URL(href, baseUrl).pathname);
+  }
+
   const jsonScripts = [...html.matchAll(/<script\s+type="application\/ld\+json">([\s\S]*?)<\/script>/gi)];
   assert(jsonScripts.length === 1, `${routeLabel}: tek JSON-LD script bulunmalı`);
   const graphDocument = JSON.parse(jsonScripts[0][1]);
@@ -104,6 +113,21 @@ for (const route of routes) {
 
 const sitemap = await (await fetchWithRetry("/sitemap.xml")).text();
 assert(routes.every((route) => sitemap.includes(`<loc>${route.canonical}</loc>`)), "Sitemap: kanonik rota eksik");
+const sitemapUrls = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map((match) => match[1]);
+const sitemapLastModified = [...sitemap.matchAll(/<lastmod>([^<]+)<\/lastmod>/g)].map((match) => match[1]);
+const sitemapImages = [...sitemap.matchAll(/<image:loc>([^<]+)<\/image:loc>/g)].map((match) => match[1]);
+assert(sitemapUrls.length === routes.length, "Sitemap: yalnız kanonik sayfalar bulunmalı");
+assert(sitemapUrls.every((url) => canonicalUrls.has(url)), "Sitemap: kanonik olmayan URL var");
+assert(sitemapLastModified.length === routes.length, "Sitemap: her sayfada lastmod bulunmalı");
+assert(
+  sitemapLastModified.every((value) => Number.isFinite(Date.parse(value)) && Date.parse(value) <= Date.now()),
+  "Sitemap: lastmod geçerli ve gelecekte olmayan bir tarih olmalı",
+);
+assert(sitemapImages.length >= routes.length * 2, "Sitemap: önemli sayfa görselleri eksik");
+assert(
+  sitemapImages.every((url) => url.startsWith("https://www.tarihivankahvaltievi.com/images/")),
+  "Sitemap: görsel URL'si kanonik alan adında olmalı",
+);
 
 const robots = await (await fetchWithRetry("/robots.txt")).text();
 assert(robots.includes("User-Agent: *"), "robots.txt: genel bot kuralı eksik");
@@ -113,9 +137,16 @@ const googleResultRedirect = await fetchWithRetry("/istanbul-van-kahvaltisi", 30
 assert(googleResultRedirect.status === 308, "Google sonuç URL'si kalıcı 308 dönmeli");
 assert(googleResultRedirect.headers.get("location") === "/", "Google sonuç URL'si ana sayfaya gitmeli");
 
+for (const path of internalPaths) {
+  const response = await fetchWithRetry(path, 30, "manual");
+  assert(response.status === 200, `Dahili bağlantı doğrudan 200 dönmeli: ${path} (HTTP ${response.status})`);
+}
+
 const missing = await fetchWithRetry("/seo-contract-missing-page");
 const missingHtml = await missing.text();
 assert(missing.status === 404, "Bilinmeyen rota gerçek 404 dönmeli");
 assert(/<meta\s+name="robots"\s+content="noindex"/i.test(missingHtml), "404 sayfası noindex olmalı");
 
-console.log(`SEO sözleşmesi geçti: ${routes.length} kanonik rota, sitemap, robots ve 404.`);
+console.log(
+  `SEO sözleşmesi geçti: ${routes.length} kanonik rota; lastmod ve görsel sitemap; doğrudan dahili bağlantılar; robots ve 404.`,
+);

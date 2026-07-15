@@ -535,6 +535,12 @@ export function buildRestaurantJsonLd(withContext = true) {
     foundingDate,
     telephone: phoneE164,
     email,
+    contactPoint: {
+      "@type": "ContactPoint",
+      telephone: phoneE164,
+      contactType: "reservations",
+      availableLanguage: "tr",
+    },
     priceRange: "₺₺",
     acceptsReservations: true,
     servesCuisine: cuisine,

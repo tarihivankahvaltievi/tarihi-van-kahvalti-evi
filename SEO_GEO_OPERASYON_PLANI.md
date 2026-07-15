@@ -4,6 +4,15 @@ Son teknik revizyon: 15 Temmuz 2026
 
 Bu belge, `van kahvaltıcısı` ve ilgili yerel niyetli aramalarda görünürlüğü artırmak için kod dışındaki çalışmayı tarif eder. Google'da birinci sıra garanti edilemez; yerel sonuçlar alaka düzeyi, arayan kişinin mesafesi ve işletmenin bilinirliğine göre değişir.
 
+## Canlı teknik durum
+
+- Sitemap yalnız 7 kanonik ve indekslenebilir URL içerir; eski/yönlendirilen URL'ler sitemap'e alınmaz.
+- Her sitemap kaydında gerçek içerik revizyonunu gösteren `lastmod` ve sayfaya ait özgün görseller bulunur.
+- Kanonik sayfalardaki dahili bağlantılar yönlendirme zinciri oluşturmadan doğrudan `200` dönen hedeflere gider.
+- Ana sayfada `WebSite`, `WebPage` ve `Restaurant`; alt sayfalarda içerikle eşleşen sayfa, breadcrumb, menü veya SSS şemaları kullanılır.
+- `robots.txt`, Googlebot ve AI arama botlarının kanonik sayfalara erişmesine izin verir ve kanonik sitemap adresini bildirir.
+- Derleme sırasında canonical, title, description, H1, JSON-LD, sitemap, görsel sitemap, `lastmod`, robots, 404 ve dahili bağlantı sözleşmeleri otomatik test edilir.
+
 ## Önce doğrulanacak işletme gerçekleri
 
 - Google Haritalar sonucunda görünen ad `Tarihi Van Kahvaltı Evi 1978`; site şeması bu adla uyumlu hale getirildi. İşletme adına yeni anahtar kelime eklemeyin.

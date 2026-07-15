@@ -66,7 +66,7 @@ export function HomeContent() {
         <section className="local-answer-panel" aria-labelledby="local-answer-heading">
           <div className="local-answer-head">
             <span className="local-answer-label">Ziyaretinizi planlayın</span>
-            <h2 id="local-answer-heading">Menüden yol tarifine, ihtiyacınız olan bilgiler</h2>
+            <h2 id="local-answer-heading">İstanbul Beyoğlu&apos;nda Van kahvaltısı için hızlı bilgiler</h2>
           </div>
           <div className="local-answer-grid">
             {localSeoFacts.map((fact) => (
