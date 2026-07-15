@@ -15,55 +15,48 @@ function normalize(value: string) {
   return value.toLocaleLowerCase("tr-TR").normalize("NFD").replace(/[\u0300-\u036f]/g, "").trim();
 }
 
-function MenuCard({ item, index, onOpen }: { item: MenuItem; index: number; onOpen: () => void }) {
+function MenuRow({ item, index, onOpen }: { item: MenuItem; index: number; onOpen: () => void }) {
   const reduceMotion = useReducedMotion();
   const isIncluded = item.price.toLowerCase().includes("dahil") || item.price.toLowerCase().includes("sofraya");
 
   return (
     <motion.article
-      className={styles.productCard}
-      initial={reduceMotion ? false : { opacity: 0, y: 15 }}
+      className={styles.productRow}
+      initial={reduceMotion ? false : { opacity: 0, y: 10 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.1 }}
-      whileTap={reduceMotion ? undefined : { scale: 0.98 }}
+      whileTap={reduceMotion ? undefined : { scale: 0.99 }}
       transition={{ duration: reduceMotion ? 0 : 0.4, delay: Math.min(index * 0.04, 0.1), ease }}
     >
-      <button type="button" onClick={onOpen} aria-label={`${item.name} detayını aç`} className={styles.cardButton}>
-        <span className={styles.cardMedia}>
-          <span className={styles.cardImagePlane}>
-            <Image src={item.image} alt={item.imageAlt} fill sizes="(max-width: 700px) 160px, 240px" quality={82} />
-          </span>
+      <button type="button" onClick={onOpen} aria-label={`${item.name} detayını aç`} className={styles.rowButton}>
+        <div className={styles.rowThumbnail}>
+          <Image src={item.image} alt={item.imageAlt} fill sizes="72px" quality={82} />
           {item.tags.includes("Öne çıkan") && (
-            <span className={styles.cardBadgeHighlight}>
-              <Sparkles size={10} /> Popüler
+            <span className={styles.rowHighlightBadge}>
+              <Sparkles size={8} /> Popüler
             </span>
           )}
-        </span>
-        <span className={styles.cardBody}>
-          <span className={styles.cardTop}>
-            <span className={styles.cardName}>{item.name}</span>
-          </span>
+        </div>
+        <div className={styles.rowInfo}>
+          <div className={styles.rowHeader}>
+            <span className={styles.rowName}>{item.name}</span>
+            {isIncluded ? (
+              <span className={styles.rowIncludedBadge}>Sofraya Dahil</span>
+            ) : (
+              <span className={styles.rowPrice}>{item.price}</span>
+            )}
+          </div>
+          <p className={styles.rowDescription}>{item.description}</p>
           {item.tags.filter(t => t !== "Öne çıkan").length > 0 && (
-            <span className={styles.cardTagsInline}>
+            <div className={styles.rowBadges}>
               {item.tags.filter(t => t !== "Öne çıkan").map(tag => (
-                <span key={tag} className={`${styles.inlineTag} ${tag === "Vejetaryen" ? styles.tagVeggie : styles.tagRecommend}`}>
+                <span key={tag} className={`${styles.rowBadge} ${tag === "Vejetaryen" ? styles.badgeVeggie : styles.badgeRecommend}`}>
                   {tag}
                 </span>
               ))}
-            </span>
+            </div>
           )}
-          <span className={styles.cardDescription}>{item.description}</span>
-          <span className={styles.cardPriceRow}>
-            {isIncluded ? (
-              <span className={styles.includedBadge}>Sofraya Dahil</span>
-            ) : (
-              <span className={styles.cardPriceVal}>{item.price}</span>
-            )}
-            <span className={styles.cardDetailBtn}>
-              Detay <ChevronRight size={13} />
-            </span>
-          </span>
-        </span>
+        </div>
       </button>
     </motion.article>
   );
@@ -364,8 +357,8 @@ export function MenuExperience() {
                       </div>
                       <span>{group.items.length} lezzet</span>
                     </header>
-                    <div className={styles.productRail}>
-                      {group.items.map((item, index) => <MenuCard key={item.id} item={item} index={index} onOpen={() => setSelectedItem(item)} />)}
+                    <div className={styles.productList}>
+                      {group.items.map((item, index) => <MenuRow key={item.id} item={item} index={index} onOpen={() => setSelectedItem(item)} />)}
                     </div>
                   </motion.section>
                 ))}
