@@ -259,22 +259,12 @@ function GalleryMarqueeRow({
           const galleryIndex = gallery.findIndex(([gallerySrc]) => gallerySrc === src);
           const resolvedIndex = galleryIndex >= 0 ? galleryIndex : index % gallery.length;
           const isDuplicate = index >= items.length;
-
-          return (
-            <button
-              type="button"
-              className="mosaic-item gallery-marquee-card"
-              key={`${src}-${index}-${reverse ? "reverse" : "forward"}`}
-              onClick={() => openLightbox(resolvedIndex)}
-              aria-label={isDuplicate ? undefined : `${alt} görselini büyüt`}
-              aria-hidden={isDuplicate}
-              inert={isDuplicate}
-              tabIndex={isDuplicate ? -1 : 0}
-              style={{
-                "--marquee-tilt": `${index % 2 === 0 ? -1.2 : 1.45}deg`,
-                "--card-lift": `${index % 3 === 0 ? "-10px" : index % 3 === 1 ? "8px" : "0px"}`,
-              } as CSSProperties}
-            >
+          const cardStyle = {
+            "--marquee-tilt": `${index % 2 === 0 ? -1.2 : 1.45}deg`,
+            "--card-lift": `${index % 3 === 0 ? "-10px" : index % 3 === 1 ? "8px" : "0px"}`,
+          } as CSSProperties;
+          const cardImage = (
+            <>
               <Image
                 src={src}
                 alt={isDuplicate ? "" : alt}
@@ -285,6 +275,32 @@ function GalleryMarqueeRow({
               <span className="mosaic-overlay">
                 <span>Görüntüle</span>
               </span>
+            </>
+          );
+
+          if (isDuplicate) {
+            return (
+              <div
+                className="mosaic-item gallery-marquee-card"
+                key={`${src}-${index}-${reverse ? "reverse" : "forward"}`}
+                aria-hidden="true"
+                style={cardStyle}
+              >
+                {cardImage}
+              </div>
+            );
+          }
+
+          return (
+            <button
+              type="button"
+              className="mosaic-item gallery-marquee-card"
+              key={`${src}-${index}-${reverse ? "reverse" : "forward"}`}
+              onClick={() => openLightbox(resolvedIndex)}
+              aria-label={`${alt} görselini büyüt`}
+              style={cardStyle}
+            >
+              {cardImage}
             </button>
           );
         })}

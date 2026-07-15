@@ -2,11 +2,16 @@
   "name": "tarihi-van-site",
   "version": "0.1.0",
   "private": true,
+  "packageManager": "npm@11.16.0",
+  "engines": {
+    "node": ">=20.9.0 <25"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "test:seo": "node scripts/validate-seo.mjs"
   },
   "dependencies": {
     "framer-motion": "^12.42.2",

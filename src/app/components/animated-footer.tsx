@@ -1,10 +1,11 @@
 import Image from "next/image";
 import Link from "next/link";
-import { Clock, MapPin, MessageCircle, Phone } from "lucide-react";
+import { Clock, Mail, MapPin, MessageCircle, Phone } from "lucide-react";
 import {
   address,
   displayAddress,
   displayPhone,
+  email,
   mapsUrl,
   openingHours,
   telUrl,
@@ -105,6 +106,9 @@ export function AnimatedFooter() {
             <ul className="footer-links">
               <li>
                 <a href={telUrl}><Phone size={16} /> {displayPhone}</a>
+              </li>
+              <li>
+                <a href={`mailto:${email}`}><Mail size={16} /> {email}</a>
               </li>
               <li>
                 <a href={whatsappUrl} target="_blank" rel="noopener noreferrer">

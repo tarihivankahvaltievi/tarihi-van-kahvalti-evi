@@ -124,7 +124,7 @@ export function BookingModal({
 Rezervasyonumu onaylayabilir misiniz? Şimdiden teşekkürler.`;
 
     const whatsappUrl = `https://wa.me/${phoneE164.replace("+", "")}?text=${encodeURIComponent(message)}`;
-    window.open(whatsappUrl, "_blank");
+    window.open(whatsappUrl, "_blank", "noopener,noreferrer");
     onClose();
   };
 
@@ -270,8 +270,12 @@ Rezervasyonumu onaylayabilir misiniz? Şimdiden teşekkürler.`;
             rows={2}
             placeholder="Cam kenarı masa, çocuk arabası alanı, doğum günü kutlaması vb."
             value={note}
+            maxLength={240}
             onChange={(e) => setNote(e.target.value)}
           />
+          <p className="booking-privacy-note">
+            Bu not WhatsApp&apos;a aktarılır; özel veya hassas bilgi yazmayın.
+          </p>
         </div>
 
         <button type="submit" className="booking-submit-btn">

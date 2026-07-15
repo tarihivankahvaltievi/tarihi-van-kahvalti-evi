@@ -37,6 +37,9 @@ export default function ClientPage({ children }: { children: ReactNode }) {
   const [menuOpen, setMenuOpen] = useState(false);
   const [mobileBarHidden, setMobileBarHidden] = useState(false);
   const lastScrollY = useRef(0);
+  const scrollFrame = useRef<number | null>(null);
+  const scrolledRef = useRef(false);
+  const mobileBarHiddenRef = useRef(false);
   const menuButtonRef = useRef<HTMLButtonElement>(null);
   const menuPanelRef = useRef<HTMLDivElement>(null);
   const [hoverStyle, setHoverStyle] = useState<CSSProperties>({
@@ -46,25 +49,47 @@ export default function ClientPage({ children }: { children: ReactNode }) {
   });
 
   useEffect(() => {
-    const handleScroll = () => {
+    const updateScrollState = () => {
+      scrollFrame.current = null;
       const currentScrollY = Math.max(window.scrollY, 0);
       const delta = currentScrollY - lastScrollY.current;
+      const nextScrolled = currentScrollY > 40;
 
-      setScrolled(currentScrollY > 40);
+      if (nextScrolled !== scrolledRef.current) {
+        scrolledRef.current = nextScrolled;
+        setScrolled(nextScrolled);
+      }
 
+      let nextMobileBarHidden = mobileBarHiddenRef.current;
       if (currentScrollY < 56) {
-        setMobileBarHidden(false);
+        nextMobileBarHidden = false;
       } else if (Math.abs(delta) > 6) {
-        setMobileBarHidden(delta > 0);
+        nextMobileBarHidden = delta > 0;
+      }
+
+      if (nextMobileBarHidden !== mobileBarHiddenRef.current) {
+        mobileBarHiddenRef.current = nextMobileBarHidden;
+        setMobileBarHidden(nextMobileBarHidden);
       }
 
       lastScrollY.current = currentScrollY;
     };
 
+    const handleScroll = () => {
+      if (scrollFrame.current === null) {
+        scrollFrame.current = window.requestAnimationFrame(updateScrollState);
+      }
+    };
+
     window.addEventListener("scroll", handleScroll, { passive: true });
     lastScrollY.current = Math.max(window.scrollY, 0);
-    handleScroll();
-    return () => window.removeEventListener("scroll", handleScroll);
+    updateScrollState();
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      if (scrollFrame.current !== null) {
+        window.cancelAnimationFrame(scrollFrame.current);
+      }
+    };
   }, []);
 
   useEffect(() => {
@@ -181,7 +206,7 @@ export default function ClientPage({ children }: { children: ReactNode }) {
                 className="brand-logo-image"
               />
             </div>
-            <a className="logo" href="#top" aria-label="Tarihi Van Kahvaltı Evi">
+            <a className="logo" href="#top">
               <span className="logo-word">
                 <span className="logo-tarihi">Tarihi</span><span className="logo-van">Van</span>
               </span>

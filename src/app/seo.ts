@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 
 export const siteUrl = "https://www.tarihivankahvaltievi.com";
 export const siteName = "Tarihi Van Kahvaltı Evi";
-export const alternateName = "Tarihi Van Kahvaltıcısı";
+export const alternateName = "Tarihi Van Kahvaltı Evi 1978";
 export const displayPhone = "+90 541 525 2868";
 export const phoneE164 = "+905415252868";
 export const telUrl = `tel:${phoneE164}`;
@@ -24,11 +24,6 @@ export const address = {
 };
 
 export const displayAddress = `${address.streetAddress}, ${address.neighborhood}, ${address.locality}, ${address.region} ${address.postalCode}`;
-
-export const coordinates = {
-  latitude: 41.0366,
-  longitude: 28.9792,
-};
 
 export const openingHours = {
   opens: "08:00",
@@ -104,6 +99,10 @@ export const menuSections = [
 
 export const faqItems = [
   {
+    question: "Beyoğlu'nda Van kahvaltısı nerede yenir?",
+    answer: `${siteName}, ${displayAddress} adresinde hizmet veren köklü bir Van kahvaltıcısıdır. Taksim Meydanı ve İstiklal Caddesi'nden yürüyerek ulaşılabilir.`,
+  },
+  {
     question: "Van kahvaltısı nedir ve neler içerir?",
     answer:
       "Van kahvaltısı, otlu peynir, murtuğa, kavut, cacık, kete, süzme bal, kaymak, sahanda yumurta ve sınırsız çay gibi yöresel ürünlerle hazırlanan zengin bir serpme kahvaltıdır.",
@@ -157,7 +156,6 @@ export type SeoPage = {
   ogImage: string;
   imageAlt: string;
   schemaType?: "WebPage" | "AboutPage" | "ContactPage" | "CollectionPage";
-  article?: boolean;
   intro: string[];
   highlights: string[];
   sections: { title: string; body: string; id?: string }[];
@@ -167,7 +165,7 @@ export type SeoPage = {
 export const seoPages: SeoPage[] = [
   {
     slug: "menu",
-    title: "Menü ve Fiyatlar | Serpme Van Kahvaltısı",
+    title: "Van Kahvaltısı Menüsü ve Fiyatlar",
     description:
       "Tarihi Van Kahvaltı Evi menüsü: serpme Van kahvaltısı, otlu peynir, murtuğa, kavut, sahanda sucuklu yumurta, sınırsız çay ve Kafka Cafe kahveleri.",
     h1: "Tarihi Van Kahvaltı Evi menüsü",
@@ -186,11 +184,11 @@ export const seoPages: SeoPage[] = [
       "Fiyatlar değişebileceği için ziyaret öncesi güncel bilgi alınması önerilir.",
     ],
     sections: [],
-    questions: [faqItems[0], faqItems[4], faqItems[6], faqItems[8]],
+    questions: [faqItems[1], faqItems[5], faqItems[7], faqItems[9]],
   },
   {
     slug: "iletisim",
-    title: "İletişim, Adres ve Yol Tarifi | Zambak Sokak Beyoğlu",
+    title: "İletişim ve Yol Tarifi",
     description:
       "Tarihi Van Kahvaltı Evi telefon, WhatsApp, adres, çalışma saatleri ve yol tarifi. Zambak Sk. No:8, Şehit Muhtar, Beyoğlu, İstanbul 34435.",
     h1: "İletişim ve yol tarifi",
@@ -225,7 +223,7 @@ export const seoPages: SeoPage[] = [
         body: "Hafta sonu ve kalabalık saatler için önceden telefon ya da WhatsApp üzerinden bilgi almak önerilir.",
       },
     ],
-    questions: [faqItems[1], faqItems[2], faqItems[3], faqItems[5]],
+    questions: [faqItems[2], faqItems[3], faqItems[4], faqItems[6]],
   },
   {
     slug: "sss",
@@ -247,12 +245,12 @@ export const seoPages: SeoPage[] = [
       "Rezervasyon için telefon ve WhatsApp kullanılabilir.",
       "Van kahvaltısında otlu peynir, murtuğa, kavut, kete ve sınırsız çay öne çıkar.",
     ],
-    sections: faqItems.slice(0, 5).map((item) => ({ title: item.question, body: item.answer })),
+    sections: [],
     questions: [...faqItems],
   },
   {
     slug: "van-kahvaltisi",
-    title: "Van Kahvaltısı Nedir? | Geleneksel Sofra Rehberi",
+    title: "Van Kahvaltısı Nedir?",
     description:
       "Van kahvaltısının kültürü ve temel lezzetleri: otlu peynir, murtuğa, kavut, kete, bal-kaymak ve demli çay.",
     h1: "Van kahvaltısı nedir?",
@@ -260,7 +258,6 @@ export const seoPages: SeoPage[] = [
     image: "/images/kete-detail.jpg",
     ogImage: "/images/og/van-kahvaltisi.jpg",
     imageAlt: "Geleneksel Van kahvaltısında kete detayı",
-    article: true,
     intro: [
       "Van kahvaltısı, tek bir tabaktan çok birlikte paylaşılan zengin bir sofra kültürüdür.",
       "Otlu peynir, murtuğa, kavut, kete, bal-kaymak ve demli çay bu kültürün en tanınan parçalarıdır.",
@@ -286,11 +283,11 @@ export const seoPages: SeoPage[] = [
         body: "Serpme servis, masadaki farklı lezzetlerin birlikte tadılmasına ve çay eşliğinde sohbetin uzamasına dayanır.",
       },
     ],
-    questions: [faqItems[0], faqItems[6], faqItems[4]],
+    questions: [faqItems[1], faqItems[7], faqItems[5]],
   },
   {
     slug: "beyoglu-kahvalti",
-    title: "Beyoğlu Kahvaltı | Taksim'e Yakın Van Kahvaltısı",
+    title: "Beyoğlu'nda Van Kahvaltısı",
     description:
       "Beyoğlu Zambak Sokak'ta, Taksim'e yakın tarihi Rum binasında serpme Van kahvaltısı, açık adres, saatler ve ulaşım bilgisi.",
     h1: "Beyoğlu'nda serpme Van kahvaltısı",
@@ -322,11 +319,11 @@ export const seoPages: SeoPage[] = [
         body: "Hafta sonu veya kalabalık grupla gelecek misafirlerin masa ve güncel menü bilgisini telefonla teyit etmesi önerilir.",
       },
     ],
-    questions: [faqItems[1], faqItems[2], faqItems[3], faqItems[7]],
+    questions: [faqItems[0], faqItems[2], faqItems[3], faqItems[4], faqItems[8]],
   },
   {
     slug: "kafka-cafe",
-    title: "Kafka Cafe | Kahvaltı Sonrası Kahve",
+    title: "Kafka Cafe ve Kahve",
     description:
       "Tarihi Van Kahvaltı Evi içindeki Kafka Cafe: kahvaltı sonrası Türk kahvesi ve nitelikli kahve seçenekleri, adres ve çalışma saatleri.",
     h1: "Kafka Cafe",
@@ -354,7 +351,7 @@ export const seoPages: SeoPage[] = [
         body: `Kafka Cafe, ${displayAddress} adresindeki Tarihi Van Kahvaltı Evi içinde yer alır.`,
       },
     ],
-    questions: [faqItems[8], faqItems[1], faqItems[2]],
+    questions: [faqItems[9], faqItems[2], faqItems[3]],
   },
 ];
 
@@ -390,17 +387,17 @@ export const localSeoFacts = [
     href: "/iletisim",
   },
   {
-    label: "Menü odağı",
+    label: "Van kahvaltısı",
     value: "Serpme Van kahvaltısı; otlu peynir, murtuğa, kavut, kete, bal-kaymak ve sınırsız çay.",
     href: "/menu",
   },
   {
-    label: "Saatler",
+    label: "Ziyaret saatleri",
     value: `${openingHours.short}; hafta sonu ve kalabalık gruplar için önceden bilgi almak önerilir.`,
     href: "/iletisim",
   },
   {
-    label: "Kahve",
+    label: "Kahvaltı sonrası",
     value: "Kafka Cafe aynı mekânda Türk kahvesi ve nitelikli kahve seçenekleri sunar.",
     href: "/kafka-cafe",
   },
@@ -439,7 +436,7 @@ export function createPageMetadata(page: SeoPage): Metadata {
       siteName,
       images: [{ url: image, width: 1200, height: 630, alt: page.imageAlt }],
       locale: "tr_TR",
-      type: page.article ? "article" : "website",
+      type: "website",
     },
     twitter: {
       card: "summary_large_image",
@@ -450,8 +447,8 @@ export function createPageMetadata(page: SeoPage): Metadata {
   };
 }
 
-export function buildMenuJsonLd() {
-  return {
+export function buildMenuJsonLd(withContext = true) {
+  const data = {
     "@type": "Menu",
     "@id": `${siteUrl}/menu#menu`,
     name: `${siteName} Menüsü`,
@@ -477,6 +474,7 @@ export function buildMenuJsonLd() {
       })),
     })),
   };
+  return withContext ? { "@context": "https://schema.org", ...data } : data;
 }
 
 export function buildWebsiteJsonLd(withContext = true) {
@@ -497,9 +495,9 @@ export function buildHomeWebPageJsonLd(withContext = true) {
     "@type": "WebPage",
     "@id": `${siteUrl}/#webpage`,
     url: siteUrl,
-    name: "Tarihi Van Kahvaltı Evi | Taksim Beyoğlu Serpme Van Kahvaltısı",
+    name: "Van Kahvaltıcısı | Tarihi Van Kahvaltı Evi, Beyoğlu",
     description:
-      "Beyoğlu Taksim'de 1978'den beri geleneksel serpme Van kahvaltısı, otlu peynir, murtuğa, kavut, sınırsız çay ve Kafka Cafe deneyimi.",
+      "Beyoğlu Taksim'de geleneksel Van kahvaltısı; menü, adres, yol tarifi ve rezervasyon bilgileri.",
     inLanguage: "tr-TR",
     isPartOf: { "@id": `${siteUrl}/#website` },
     mainEntity: { "@id": `${siteUrl}/#restaurant` },
@@ -521,7 +519,7 @@ export function buildRestaurantJsonLd(withContext = true) {
     name: siteName,
     alternateName,
     url: siteUrl,
-    logo: `${siteUrl}/images/brand-icon-small.png`,
+    logo: `${siteUrl}/icons/icon-512.png`,
     image: [
       `${siteUrl}/images/hero-table.jpg`,
       `${siteUrl}/images/breakfast-spread.jpg`,
@@ -543,11 +541,6 @@ export function buildRestaurantJsonLd(withContext = true) {
       postalCode: address.postalCode,
       addressCountry: address.country,
     },
-    geo: {
-      "@type": "GeoCoordinates",
-      latitude: coordinates.latitude,
-      longitude: coordinates.longitude,
-    },
     hasMap: mapsUrl,
     openingHoursSpecification: [
       {
@@ -560,35 +553,6 @@ export function buildRestaurantJsonLd(withContext = true) {
     menu: `${siteUrl}/menu`,
     hasMenu: { "@id": `${siteUrl}/menu#menu` },
     sameAs: sameAsUrls,
-  };
-  return withContext ? { "@context": "https://schema.org", ...data } : data;
-}
-
-export function buildArticleJsonLd(page: SeoPage, pageUrl = absoluteUrl(page.slug), withContext = true) {
-  const data = {
-    "@type": "Article",
-    "@id": `${pageUrl}#article`,
-    headline: page.h1,
-    description: page.description,
-    image: absoluteUrl(page.image),
-    inLanguage: "tr-TR",
-    author: {
-      "@type": "Organization",
-      "@id": `${siteUrl}/#restaurant`,
-      name: siteName,
-      url: siteUrl,
-    },
-    publisher: {
-      "@type": "Organization",
-      "@id": `${siteUrl}/#restaurant`,
-      name: siteName,
-      url: siteUrl,
-      logo: {
-        "@type": "ImageObject",
-        url: `${siteUrl}/images/brand-icon-small.png`,
-      },
-    },
-    mainEntityOfPage: { "@id": `${pageUrl}#webpage` },
   };
   return withContext ? { "@context": "https://schema.org", ...data } : data;
 }

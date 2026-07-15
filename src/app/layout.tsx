@@ -1,29 +1,21 @@
 import type { Metadata, Viewport } from "next";
-import { Bodoni_Moda, Bricolage_Grotesque, Literata } from "next/font/google";
+import { Bodoni_Moda, Bricolage_Grotesque } from "next/font/google";
 import "./globals.css";
 import "./mobile-header-hero.css";
 
 const bodoni = Bodoni_Moda({
   subsets: ["latin", "latin-ext"],
   weight: "variable",
-  style: ["normal", "italic"],
+  style: "normal",
   axes: ["opsz"],
   display: "swap",
   preload: false,
   variable: "--font-bodoni-gf",
 });
-const literata = Literata({
-  subsets: ["latin", "latin-ext"],
-  weight: "variable",
-  style: "normal",
-  axes: ["opsz"],
-  display: "swap",
-  variable: "--font-literata-gf",
-});
 const bricolageGrotesque = Bricolage_Grotesque({
   subsets: ["latin", "latin-ext"],
   weight: "variable",
-  axes: ["opsz", "wdth"],
+  axes: ["opsz"],
   display: "swap",
   preload: false,
   variable: "--font-bricolage-grotesque-gf",
@@ -47,11 +39,11 @@ export const metadata: Metadata = {
   applicationName: siteName,
   title: {
     default:
-      "Tarihi Van Kahvaltı Evi | Taksim Beyoğlu Serpme Van Kahvaltısı",
+      "Van Kahvaltıcısı | Tarihi Van Kahvaltı Evi, Beyoğlu",
     template: `%s | ${siteName}`,
   },
   description:
-    "Beyoğlu Taksim'deki tarihi Rum binasında 1978'den beri geleneksel serpme Van kahvaltısı, otlu peynir, murtuğa, kavut, sınırsız çay ve Kafka Cafe. Zambak Sk. No:8, Şehit Muhtar, Beyoğlu 34435.",
+    "Beyoğlu Taksim'de Van kahvaltısı: otlu peynir, murtuğa, kavut, sıcak sahanlar ve sınırsız çay. Menü, adres, yol tarifi ve rezervasyon.",
   authors: [{ name: siteName, url: siteUrl }],
   creator: siteName,
   publisher: siteName,
@@ -74,9 +66,9 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: "Tarihi Van Kahvaltı Evi | Beyoğlu Taksim",
+    title: "Van Kahvaltıcısı | Tarihi Van Kahvaltı Evi, Beyoğlu",
     description:
-      "1978'den beri tarihi Rum binasında geleneksel Van kahvaltısı, otlu peynir, murtuğa, kavut, sınırsız çay ve Kafka Cafe.",
+      "Beyoğlu Taksim'de geleneksel Van kahvaltısı; menü, adres, yol tarifi ve rezervasyon bilgileri.",
     url: siteUrl,
     siteName,
     images: [
@@ -92,9 +84,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Tarihi Van Kahvaltı Evi | Beyoğlu Taksim",
+    title: "Van Kahvaltıcısı | Tarihi Van Kahvaltı Evi",
     description:
-      "1978'den beri tarihi Rum binasında Van kahvaltısı. Otlu peynir, murtuğa, kavut ve sınırsız çay.",
+      "Beyoğlu Taksim'de Van kahvaltısı; otlu peynir, murtuğa, kavut ve sınırsız çay.",
     images: [defaultOgImage],
   },
   icons: {
@@ -130,12 +122,14 @@ export default function RootLayout({
   const webVitalsEndpoint = process.env.NEXT_PUBLIC_WEB_VITALS_ENDPOINT;
 
   return (
-    <html lang="tr" className={`h-full antialiased ${bodoni.variable} ${literata.variable} ${bricolageGrotesque.variable}`}>
+    <html lang="tr" className={`h-full antialiased ${bodoni.variable} ${bricolageGrotesque.variable}`}>
       <head>
         <link rel="me" href={sameAsUrls[0]} />
       </head>
       <body className="min-h-full flex flex-col">
-        {webVitalsEndpoint?.startsWith("/") ? <WebVitals endpoint={webVitalsEndpoint} /> : null}
+        {webVitalsEndpoint?.startsWith("/") && !webVitalsEndpoint.startsWith("//") ? (
+          <WebVitals endpoint={webVitalsEndpoint} />
+        ) : null}
         <a className="skip-link" href="#main-content">Ana içeriğe geç</a>
         {children}
       </body>

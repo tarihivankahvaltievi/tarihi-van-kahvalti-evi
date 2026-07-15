@@ -4,17 +4,20 @@ import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import {
   absoluteUrl,
-  buildArticleJsonLd,
   buildBreadcrumbJsonLd,
   buildFaqJsonLd,
   buildMenuJsonLd,
   createPageMetadata,
+  displayAddress,
+  displayPhone,
+  email,
   getSeoPage,
   jsonLd,
   mapsUrl,
   menuSections,
   pageOgImagePath,
   seoPages,
+  siteName,
   siteUrl,
   telUrl,
   whatsappUrl,
@@ -106,15 +109,11 @@ export default async function SeoPage({ params }: PageProps) {
   ];
 
   if (slug === "menu") {
-    graph.push(buildMenuJsonLd());
+    graph.push(buildMenuJsonLd(false));
   }
 
   if (slug === "sss") {
     graph.push(buildFaqJsonLd(page.questions, pageUrl, false));
-  }
-
-  if (page.article) {
-    graph.push(buildArticleJsonLd(page, pageUrl, false));
   }
 
   const pageJsonLd = {
@@ -246,6 +245,20 @@ export default async function SeoPage({ params }: PageProps) {
           <Link href="/iletisim">Zambak Sokak ve yol tarifi</Link>
         </section>
       </main>
+
+      <footer className="seo-local-footer">
+        <div>
+          <strong>{siteName}</strong>
+          <address>{displayAddress}</address>
+        </div>
+        <div className="seo-local-footer-links">
+          <a href={telUrl}>{displayPhone}</a>
+          <a href={`mailto:${email}`}>{email}</a>
+          <a href={mapsUrl} target="_blank" rel="noopener noreferrer">
+            Google Haritalar&apos;da yol tarifi
+          </a>
+        </div>
+      </footer>
     </>
   );
 }
