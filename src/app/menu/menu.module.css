@@ -292,6 +292,11 @@
   transition: color 250ms ease, border-color 250ms ease;
 }
 
+.categoryNav button:not(.activeCategory):hover .navBtnText {
+  text-decoration: underline dashed var(--red);
+  text-underline-offset: 4px;
+}
+
 .navBtnText {
   position: relative;
   z-index: 1;
@@ -715,6 +720,20 @@
   overflow: hidden;
   background: #f0ede9;
   border-bottom: 1px solid rgba(32, 24, 25, 0.08);
+}
+
+.cardMedia::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle, transparent 55%, rgba(32, 24, 25, 0.12) 100%);
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  z-index: 1;
+}
+
+.productCard:hover .cardMedia::after {
+  opacity: 0.75;
 }
 
 .cardImagePlane {
@@ -1386,4 +1405,57 @@
 
 @media (prefers-reduced-motion: reduce) {
   .cardImagePlane img, .cardFoot svg { transition: none; }
+}
+
+/* --- Premium Intro Page Loader --- */
+.loaderContainer {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background-color: var(--surface);
+  /* Matching paper texture noise */
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.03'/%3E%3C/svg%3E");
+  display: grid;
+  place-content: center;
+  text-align: center;
+}
+
+.loaderContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.loaderLogo {
+  margin-bottom: 1.2rem;
+  filter: drop-shadow(4px 4px 0px var(--ink));
+}
+
+.loaderContent h2 {
+  font-family: var(--font-literata-gf), Georgia, serif;
+  font-weight: 500;
+  font-style: italic;
+  font-size: 1.6rem;
+  color: var(--red);
+  margin: 0;
+}
+
+.loaderLine {
+  height: 2px;
+  width: 60px;
+  background-color: var(--gold);
+  border-radius: 2px;
+  margin-top: 0.8rem;
+  border: 1px solid var(--ink);
+}
+
+/* --- Search Icon Focus Spring Support --- */
+.searchIconWrap {
+  display: grid;
+  place-items: center;
+  color: var(--body);
+}
+
+.searchBox:focus-within .searchIconWrap {
+  color: var(--red);
 }

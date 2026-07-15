@@ -181,8 +181,15 @@ export function MenuExperience() {
   const [activeCategory, setActiveCategory] = useState<MenuFilterId>("all");
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedItem, setSelectedItem] = useState<MenuItem | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [searchFocused, setSearchFocused] = useState(false);
   const deferredSearch = useDeferredValue(searchTerm);
   const contentRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const timer = setTimeout(() => setLoading(false), 1200);
+    return () => clearTimeout(timer);
+  }, []);
 
   const visibleItems = useMemo(() => {
     const query = normalize(deferredSearch);
@@ -206,7 +213,42 @@ export function MenuExperience() {
   };
 
   return (
-    <main id="main-content" className={styles.page}>
+    <>
+      <AnimatePresence>
+        {loading && (
+          <motion.div
+            className={styles.loaderContainer}
+            exit={{ opacity: 0, y: -40 }}
+            transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+          >
+            <div className={styles.loaderContent}>
+              <motion.div
+                className={styles.loaderLogo}
+                initial={{ scale: 0.9, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                transition={{ duration: 0.6, ease: "easeOut" }}
+              >
+                <Image src="/images/brand-icon-small.png" alt="Logo" width={80} height={100} priority />
+              </motion.div>
+              <motion.h2
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.3, duration: 0.5 }}
+              >
+                Tarihi Van Sofrası
+              </motion.h2>
+              <motion.div
+                className={styles.loaderLine}
+                initial={{ width: 0 }}
+                animate={{ width: 60 }}
+                transition={{ delay: 0.5, duration: 0.6, ease: "easeInOut" }}
+              />
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      <main id="main-content" className={styles.page}>
       <section className={styles.masthead} aria-labelledby="menu-title">
         <div className={styles.mastheadInner}>
           <motion.div 
@@ -268,9 +310,23 @@ export function MenuExperience() {
               ))}
             </nav>
             <div className={styles.searchBox}>
-              <Search size={16} />
+              <motion.div
+                animate={{ rotate: searchFocused ? 15 : 0, scale: searchFocused ? 1.15 : 1 }}
+                transition={{ type: "spring", stiffness: 300, damping: 15 }}
+                className={styles.searchIconWrap}
+              >
+                <Search size={16} />
+              </motion.div>
               <label htmlFor="menu-search" className={styles.srOnly}>Menüde ara</label>
-              <input id="menu-search" type="search" value={searchTerm} onChange={(event) => setSearchTerm(event.target.value)} placeholder="Menüde lezzet ara..." />
+              <input 
+                id="menu-search" 
+                type="search" 
+                value={searchTerm} 
+                onChange={(event) => setSearchTerm(event.target.value)} 
+                onFocus={() => setSearchFocused(true)}
+                onBlur={() => setSearchFocused(false)}
+                placeholder="Menüde lezzet ara..." 
+              />
               {searchTerm ? <button type="button" onClick={() => setSearchTerm("")} aria-label="Aramayı temizle"><X size={14} /></button> : null}
             </div>
           </div>
@@ -334,6 +390,7 @@ export function MenuExperience() {
       </section>
       <ProductDialog item={selectedItem} onClose={() => setSelectedItem(null)} />
     </main>
+    </>
   );
 }
 
