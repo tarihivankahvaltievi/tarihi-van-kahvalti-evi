@@ -2,9 +2,11 @@ import type { Metadata } from "next";
 import ClientPage from "./client-page";
 import { HomeContent } from "./home-content";
 import {
+  buildFaqJsonLd,
   buildHomeWebPageJsonLd,
   buildRestaurantJsonLd,
   buildWebsiteJsonLd,
+  faqItems,
   jsonLd,
   siteUrl,
 } from "./seo";
@@ -20,6 +22,7 @@ export default function Home() {
       buildWebsiteJsonLd(false),
       buildRestaurantJsonLd(false),
       buildHomeWebPageJsonLd(false),
+      buildFaqJsonLd(faqItems, siteUrl, false),
     ],
   };
 

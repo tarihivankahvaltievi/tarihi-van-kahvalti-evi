@@ -316,11 +316,11 @@ export default function ClientPage({ children }: { children: ReactNode }) {
               </span>
               <ChevronRight size={17} />
             </Link>
-            <Link className="nav-menu-utility" href="/van-kahvaltisi" tabIndex={menuOpen ? 0 : -1} style={{ "--item-index": 6 } as CSSProperties} onClick={() => setMenuOpen(false)}>
+            <Link className="nav-menu-utility" href="/#faq" tabIndex={menuOpen ? 0 : -1} style={{ "--item-index": 6 } as CSSProperties} onClick={() => setMenuOpen(false)}>
               <BookOpen size={18} />
               <span className="nav-menu-copy">
                 <span className="nav-menu-link-text">Van kahvaltısı</span>
-                <span className="nav-menu-link-meta">Rehber ve içerik</span>
+                <span className="nav-menu-link-meta">Ana sayfada kısa cevaplar</span>
               </span>
               <ChevronRight size={17} />
             </Link>

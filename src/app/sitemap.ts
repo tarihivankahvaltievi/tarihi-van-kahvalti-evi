@@ -2,8 +2,6 @@ import type { MetadataRoute } from "next";
 import {
   absoluteUrl,
   defaultOgImagePath,
-  pageOgImagePath,
-  seoPages,
   siteUrl,
 } from "./seo";
 
@@ -16,7 +14,7 @@ function uniqueImages(images: string[]) {
 }
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const staticRoutes: MetadataRoute.Sitemap = [
+  return [
     {
       url: siteUrl,
       lastModified: contentLastModified,
@@ -28,12 +26,4 @@ export default function sitemap(): MetadataRoute.Sitemap {
       ]),
     },
   ];
-
-  const seoRoutes: MetadataRoute.Sitemap = seoPages.map((page) => ({
-    url: absoluteUrl(page.slug),
-    lastModified: contentLastModified,
-    images: uniqueImages([absoluteUrl(pageOgImagePath(page.slug)), absoluteUrl(page.image)]),
-  }));
-
-  return [...staticRoutes, ...seoRoutes];
 }

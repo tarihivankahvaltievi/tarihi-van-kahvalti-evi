@@ -51,23 +51,25 @@ export function HomeContent() {
         >
           <div className="max-w-4xl mx-auto leading-relaxed">
             <span>
-              <strong>Tarihi Van Kahvaltı Evi</strong>, {displayAddress} adresinde hizmet veren köklü bir <em>Van kahvaltıcısıdır</em>. Otlu peynir, murtuğa, kavut, sıcak bakır sahanlar ve sınırsız çayla kurulan serpme sofranın güncel menü ve fiyat bilgilerini ziyaret öncesi inceleyebilirsiniz.
+              <strong>Tarihi Van Kahvaltı Evi</strong>, {displayAddress} adresinde hizmet veren köklü bir <em>Van kahvaltıcısıdır</em>. Beyoğlu kahvaltıcısı, Taksim kahvaltıcısı veya İstanbul&apos;da gerçek bir Van kahvaltısı arayan misafirler için otlu peynir, murtuğa, kavut, sıcak bakır sahanlar ve sınırsız çayla serpme sofra kurulur.
             </span>
             <nav className="seo-inline-links" aria-label="Hızlı bağlantılar">
               <Link href="/menu">Menü ve fiyatlar</Link>
-              <Link href="/van-kahvaltisi">Van kahvaltısı nedir?</Link>
-              <Link href="/beyoglu-kahvalti">Beyoğlu kahvaltı</Link>
-              <Link href="/taksim-kahvalti">Taksim kahvaltı</Link>
+              <Link href="/#faq">Van kahvaltısı nedir?</Link>
+              <Link href="/#beyoglu-taksim-kahvalti">Beyoğlu ve Taksim kahvaltı</Link>
               <Link href="/iletisim">Konum ve rezervasyon</Link>
               <Link href="/kafka-cafe">Kafka Cafe</Link>
             </nav>
           </div>
         </section>
 
-        <section className="local-answer-panel" aria-labelledby="local-answer-heading">
+        <section id="beyoglu-taksim-kahvalti" className="local-answer-panel" aria-labelledby="local-answer-heading">
           <div className="local-answer-head">
             <span className="local-answer-label">Ziyaretinizi planlayın</span>
-            <h2 id="local-answer-heading">İstanbul Beyoğlu&apos;nda Van kahvaltısı için hızlı bilgiler</h2>
+            <h2 id="local-answer-heading">Beyoğlu ve Taksim&apos;de Van kahvaltıcısı</h2>
+            <p>
+              Taksim kahvaltı ve Beyoğlu kahvaltı seçenekleri arasında yöresel bir sofra arayanlar için menü, açık adres, çalışma saatleri ve rezervasyon bilgileri ana sayfada tek yerde sunulur.
+            </p>
           </div>
           <div className="local-answer-grid">
             {localSeoFacts.map((fact) => (

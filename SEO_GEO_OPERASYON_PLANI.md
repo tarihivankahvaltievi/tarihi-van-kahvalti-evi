@@ -6,10 +6,12 @@ Bu belge, `van kahvaltıcısı` ve ilgili yerel niyetli aramalarda görünürlü
 
 ## Canlı teknik durum
 
-- Sitemap yalnız 8 kanonik ve indekslenebilir URL içerir; eski/yönlendirilen URL'ler sitemap'e alınmaz.
-- Her sitemap kaydında gerçek içerik revizyonunu gösteren `lastmod` ve sayfaya ait özgün görseller bulunur.
+- Sitemap yalnız indekslenebilir ana sayfayı içerir; eski/yönlendirilen URL'ler ve `noindex` araç sayfaları sitemap'e alınmaz.
+- Ana sayfa sitemap kaydında gerçek içerik revizyonunu gösteren `lastmod` ve özgün işletme görselleri bulunur.
 - Kanonik sayfalardaki dahili bağlantılar yönlendirme zinciri oluşturmadan doğrudan `200` dönen hedeflere gider.
-- Ana sayfada `WebSite`, `WebPage` ve `Restaurant`; alt sayfalarda içerikle eşleşen sayfa, breadcrumb, menü veya SSS şemaları kullanılır.
+- Taksim, Beyoğlu, İstanbul ve Van kahvaltısı odaklı eski/yeni bütün arama URL'leri tek adımda ana sayfaya kalıcı yönlenir.
+- Ana sayfada `WebSite`, `WebPage`, `Restaurant` ve görünür sorularla eşleşen `FAQPage` şeması bulunur.
+- Menü, iletişim, SSS ve Kafka Cafe sayfaları kullanıcılar için açık kalır; arama sonucunda ana sayfanın tercih edilmesi için `noindex, follow` kullanır.
 - `robots.txt`, Googlebot ve AI arama botlarının kanonik sayfalara erişmesine izin verir ve kanonik sitemap adresini bildirir.
 - Derleme sırasında canonical, title, description, H1, JSON-LD, sitemap, görsel sitemap, `lastmod`, robots, 404 ve dahili bağlantı sözleşmeleri otomatik test edilir.
 
@@ -64,7 +66,8 @@ Kaynaklar:
 ## Ölçüm ve Search Console rutini
 
 - Google Search Console'a `https://www.tarihivankahvaltievi.com/sitemap.xml` gönderin.
-- Ana sayfa, `/menu`, `/iletisim`, `/van-kahvaltisi` ve `/beyoglu-kahvalti` için URL Denetleme ile dizine eklenebilirliği kontrol edin; tekrar tekrar dizine ekleme isteği göndermeyin.
+- Yalnız ana sayfa için URL Denetleme ile dizine eklenebilirliği kontrol edin; tekrar tekrar dizine ekleme isteği göndermeyin.
+- `/taksim-brunch-kahvalti`, `/taksim-kahvalti`, `/beyoglu-kahvalti`, `/van-kahvaltisi` ve diğer eski arama URL'lerinin Google yeniden taradıktan sonra ana sayfada birleştiğini kontrol edin.
 - Haftalık sorgu görünümü: `van kahvaltıcısı`, `van kahvaltısı`, `beyoğlu kahvaltı`, `taksim kahvaltı`, marka sorguları. Tıklama, gösterim, CTR ve ortalama konumu sayfa bazında kaydedin.
 - Google Business Profile performansında yol tarifi, arama ve web sitesi tıklamalarını aylık karşılaştırın.
 - Core Web Vitals saha verisini 28 günlük dönemlerle izleyin. Tek bir laboratuvar testini sıralama sonucu gibi yorumlamayın.

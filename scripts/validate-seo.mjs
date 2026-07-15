@@ -1,18 +1,29 @@
 const baseUrl = process.env.SEO_TEST_BASE_URL ?? "http://127.0.0.1:3100";
 
 const routes = [
-  { path: "/", canonical: "https://www.tarihivankahvaltievi.com", types: ["WebSite", "Restaurant", "WebPage"] },
-  { path: "/menu", canonical: "https://www.tarihivankahvaltievi.com/menu", types: ["WebPage", "BreadcrumbList", "Menu"] },
-  { path: "/iletisim", canonical: "https://www.tarihivankahvaltievi.com/iletisim", types: ["ContactPage", "BreadcrumbList"] },
-  { path: "/sss", canonical: "https://www.tarihivankahvaltievi.com/sss", types: ["WebPage", "BreadcrumbList", "FAQPage"] },
-  { path: "/van-kahvaltisi", canonical: "https://www.tarihivankahvaltievi.com/van-kahvaltisi", types: ["WebPage", "BreadcrumbList"] },
-  { path: "/beyoglu-kahvalti", canonical: "https://www.tarihivankahvaltievi.com/beyoglu-kahvalti", types: ["WebPage", "BreadcrumbList"] },
-  { path: "/taksim-kahvalti", canonical: "https://www.tarihivankahvaltievi.com/taksim-kahvalti", types: ["WebPage", "BreadcrumbList"] },
-  { path: "/kafka-cafe", canonical: "https://www.tarihivankahvaltievi.com/kafka-cafe", types: ["WebPage", "BreadcrumbList"] },
+  { path: "/", canonical: "https://www.tarihivankahvaltievi.com", types: ["WebSite", "Restaurant", "WebPage", "FAQPage"], indexable: true },
+  { path: "/menu", canonical: "https://www.tarihivankahvaltievi.com/menu", types: ["WebPage", "BreadcrumbList", "Menu"], indexable: false },
+  { path: "/iletisim", canonical: "https://www.tarihivankahvaltievi.com/iletisim", types: ["ContactPage", "BreadcrumbList"], indexable: false },
+  { path: "/sss", canonical: "https://www.tarihivankahvaltievi.com/sss", types: ["WebPage", "BreadcrumbList", "FAQPage"], indexable: false },
+  { path: "/kafka-cafe", canonical: "https://www.tarihivankahvaltievi.com/kafka-cafe", types: ["WebPage", "BreadcrumbList"], indexable: false },
 ];
 
-const canonicalUrls = new Set(routes.map((route) => route.canonical));
+const canonicalUrls = new Set(routes.filter((route) => route.indexable).map((route) => route.canonical));
 const internalPaths = new Set();
+const redirectPaths = [
+  "/istanbul-van-kahvaltisi", "/van-kahvaltisi", "/beyoglu-kahvalti", "/taksim-kahvalti",
+  "/serpme-van-kahvaltisi", "/serpme-kahvalti-beyoglu", "/istiklal-caddesi-kahvalti",
+  "/cihangir-kahvalti", "/galata-kahvalti", "/aile-kahvaltisi-beyoglu", "/grup-kahvaltisi",
+  "/hafta-sonu-kahvalti", "/kahvalti-rezervasyon", "/kahvalti-yol-tarifi",
+  "/zambak-sokak-kahvalti", "/siraselviler-kahvalti", "/kahvalti-fiyatlari",
+  "/van-otlu-peynir", "/murtuga-kavut", "/tarihi-mekanda-kahvalti",
+  "/kahvalti-sonrasi-kahve", "/vejetaryen-kahvalti-beyoglu",
+  "/beyoglu-kahvalti-mekanlari", "/taksim-brunch-kahvalti",
+  "/anasayfa", "/tarihi-van-kahvaltisi-evi-menu", "/van-kahvalti",
+  "/gercek-van-kahvaltisinda-neler-olur", "/tarihi-van-kahvalti-evi-hikayemiz",
+  "/galeri-van-kahvalti-evi-taksim", "/urun/van-serpme-kahvalti",
+  "/urun/cift-kisilik-serpme-kahvalti", "/urun/turk-kahvesi",
+];
 
 const fail = (message) => {
   throw new Error(message);
@@ -72,6 +83,8 @@ for (const route of routes) {
   assert(title.length >= 20 && title.length <= 65, `${routeLabel}: title uzunluğu ${title.length}`);
   assert(description.length >= 80 && description.length <= 160, `${routeLabel}: description uzunluğu ${description.length}`);
   assert((visibleHtml(html).match(/<h1\b/gi) ?? []).length === 1, `${routeLabel}: tam bir H1 bulunmalı`);
+  const isNoindex = /<meta\s+name="robots"\s+content="[^"]*noindex/i.test(html);
+  assert(route.indexable ? !isNoindex : isNoindex, `${routeLabel}: indeksleme tercihi yanlış`);
 
   for (const match of html.matchAll(/<a\b[^>]*\bhref="([^"]+)"/gi)) {
     const href = decodeHtml(match[1]);
@@ -101,7 +114,7 @@ for (const route of routes) {
     assert(text.toLocaleLowerCase("tr-TR").includes("van kahvaltıcısı"), "Ana sayfa: hedef ifade görünür değil");
   }
 
-  if (route.path === "/sss") {
+  if (route.path === "/" || route.path === "/sss") {
     const faq = graphDocument["@graph"].find((node) => node["@type"] === "FAQPage");
     const questions = faq?.mainEntity?.map((item) => item.name) ?? [];
     const summaries = [...visibleHtml(html).matchAll(/<summary[^>]*>([\s\S]*?)<\/summary>/gi)]
@@ -113,18 +126,18 @@ for (const route of routes) {
 }
 
 const sitemap = await (await fetchWithRetry("/sitemap.xml")).text();
-assert(routes.every((route) => sitemap.includes(`<loc>${route.canonical}</loc>`)), "Sitemap: kanonik rota eksik");
+assert(sitemap.includes(`<loc>https://www.tarihivankahvaltievi.com</loc>`), "Sitemap: ana sayfa eksik");
 const sitemapUrls = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map((match) => match[1]);
 const sitemapLastModified = [...sitemap.matchAll(/<lastmod>([^<]+)<\/lastmod>/g)].map((match) => match[1]);
 const sitemapImages = [...sitemap.matchAll(/<image:loc>([^<]+)<\/image:loc>/g)].map((match) => match[1]);
-assert(sitemapUrls.length === routes.length, "Sitemap: yalnız kanonik sayfalar bulunmalı");
+assert(sitemapUrls.length === 1, "Sitemap: yalnız ana sayfa bulunmalı");
 assert(sitemapUrls.every((url) => canonicalUrls.has(url)), "Sitemap: kanonik olmayan URL var");
-assert(sitemapLastModified.length === routes.length, "Sitemap: her sayfada lastmod bulunmalı");
+assert(sitemapLastModified.length === 1, "Sitemap: ana sayfada lastmod bulunmalı");
 assert(
   sitemapLastModified.every((value) => Number.isFinite(Date.parse(value)) && Date.parse(value) <= Date.now()),
   "Sitemap: lastmod geçerli ve gelecekte olmayan bir tarih olmalı",
 );
-assert(sitemapImages.length >= routes.length * 2, "Sitemap: önemli sayfa görselleri eksik");
+assert(sitemapImages.length >= 4, "Sitemap: ana sayfa görselleri eksik");
 assert(
   sitemapImages.every((url) => url.startsWith("https://www.tarihivankahvaltievi.com/images/")),
   "Sitemap: görsel URL'si kanonik alan adında olmalı",
@@ -134,9 +147,11 @@ const robots = await (await fetchWithRetry("/robots.txt")).text();
 assert(robots.includes("User-Agent: *"), "robots.txt: genel bot kuralı eksik");
 assert(robots.includes("https://www.tarihivankahvaltievi.com/sitemap.xml"), "robots.txt: sitemap eksik");
 
-const googleResultRedirect = await fetchWithRetry("/istanbul-van-kahvaltisi", 30, "manual");
-assert(googleResultRedirect.status === 308, "Google sonuç URL'si kalıcı 308 dönmeli");
-assert(googleResultRedirect.headers.get("location") === "/", "Google sonuç URL'si ana sayfaya gitmeli");
+for (const path of redirectPaths) {
+  const response = await fetchWithRetry(path, 30, "manual");
+  assert(response.status === 308, `Arama URL'si kalıcı 308 dönmeli: ${path}`);
+  assert(response.headers.get("location") === "/", `Arama URL'si ana sayfaya gitmeli: ${path}`);
+}
 
 for (const path of internalPaths) {
   const response = await fetchWithRetry(path, 30, "manual");
@@ -149,5 +164,5 @@ assert(missing.status === 404, "Bilinmeyen rota gerçek 404 dönmeli");
 assert(/<meta\s+name="robots"\s+content="noindex"/i.test(missingHtml), "404 sayfası noindex olmalı");
 
 console.log(
-  `SEO sözleşmesi geçti: ${routes.length} kanonik rota; lastmod ve görsel sitemap; doğrudan dahili bağlantılar; robots ve 404.`,
+  `SEO sözleşmesi geçti: yalnız ana sayfa indekslenebilir; ${redirectPaths.length} arama URL'si doğrudan ana sayfaya gider; sitemap, dahili bağlantılar, robots ve 404 doğru.`,
 );

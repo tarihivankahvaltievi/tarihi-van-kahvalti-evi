@@ -34,14 +34,14 @@ const nextConfig: NextConfig = {
   async redirects() {
     const wordpressRedirects = [
       { source: "/anasayfa", destination: "/" },
-      { source: "/tarihi-van-kahvaltisi-evi-menu", destination: "/menu" },
-      { source: "/van-kahvalti", destination: "/van-kahvaltisi" },
-      { source: "/gercek-van-kahvaltisinda-neler-olur", destination: "/van-kahvaltisi" },
-      { source: "/tarihi-van-kahvalti-evi-hikayemiz", destination: "/#story" },
-      { source: "/galeri-van-kahvalti-evi-taksim", destination: "/#gallery" },
-      { source: "/urun/van-serpme-kahvalti", destination: "/menu#serpme-kahvalti" },
-      { source: "/urun/cift-kisilik-serpme-kahvalti", destination: "/menu#serpme-kahvalti" },
-      { source: "/urun/turk-kahvesi", destination: "/kafka-cafe" },
+      { source: "/tarihi-van-kahvaltisi-evi-menu", destination: "/" },
+      { source: "/van-kahvalti", destination: "/" },
+      { source: "/gercek-van-kahvaltisinda-neler-olur", destination: "/" },
+      { source: "/tarihi-van-kahvalti-evi-hikayemiz", destination: "/" },
+      { source: "/galeri-van-kahvalti-evi-taksim", destination: "/" },
+      { source: "/urun/van-serpme-kahvalti", destination: "/" },
+      { source: "/urun/cift-kisilik-serpme-kahvalti", destination: "/" },
+      { source: "/urun/turk-kahvesi", destination: "/" },
     ];
 
     return [...legacyRedirects, ...wordpressRedirects].map((redirect) => ({

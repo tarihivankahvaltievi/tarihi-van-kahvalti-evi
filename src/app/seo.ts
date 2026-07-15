@@ -165,7 +165,6 @@ export type SeoPage = {
   highlights: string[];
   sections: { title: string; body: string; id?: string }[];
   questions: { question: string; answer: string }[];
-  resources?: { label: string; url: string; description: string }[];
 };
 
 export const seoPages: SeoPage[] = [
@@ -255,140 +254,6 @@ export const seoPages: SeoPage[] = [
     questions: [...faqItems],
   },
   {
-    slug: "van-kahvaltisi",
-    title: "Van Kahvaltısı Nedir?",
-    description:
-      "Van kahvaltısının kültürü ve temel lezzetleri: otlu peynir, murtuğa, kavut, kete, bal-kaymak ve demli çay.",
-    h1: "Van kahvaltısı nedir?",
-    eyebrow: "Sofra rehberi",
-    image: "/images/kete-detail.jpg",
-    ogImage: "/images/og/van-kahvaltisi.jpg",
-    imageAlt: "Geleneksel Van kahvaltısında kete detayı",
-    intro: [
-      "Van kahvaltısı, tek bir tabaktan çok birlikte paylaşılan zengin bir sofra kültürüdür.",
-      "Otlu peynir, murtuğa, kavut, kete, bal-kaymak ve demli çay bu kültürün en tanınan parçalarıdır.",
-    ],
-    highlights: [
-      "Van otlu peyniri sofranın ayırt edici lezzetlerinden biridir.",
-      "Murtuğa un, tereyağı ve yumurta ile hazırlanır.",
-      "Kavut kavrulmuş un geleneğinden gelir.",
-      "Sofra acele servis mantığından çok paylaşım ve sohbet üzerine kurulur.",
-    ],
-    sections: [
-      {
-        title: "Beyoğlu'nda Van sofrası",
-        body: "Tarihi Van Kahvaltı Evi, Van kahvaltısı geleneğini Taksim'e yakın tarihi bir Rum binasında, bakır sahanlar ve sıcak servisle sunar.",
-      },
-      {
-        title: "Sofranın ana lezzetleri",
-        id: "lezzetler",
-        body: "Otlu peynir, murtuğa, kavut, kete, süzme bal, kaymak, cacık ve sınırsız çay Van kahvaltısının temel bileşenleridir.",
-      },
-      {
-        title: "Paylaşma kültürü",
-        body: "Serpme servis, masadaki farklı lezzetlerin birlikte tadılmasına ve çay eşliğinde sohbetin uzamasına dayanır.",
-      },
-    ],
-    questions: [faqItems[1], faqItems[7], faqItems[5]],
-  },
-  {
-    slug: "beyoglu-kahvalti",
-    title: "Beyoğlu Van Kahvaltıcısı",
-    description:
-      "Beyoğlu Van kahvaltıcısı arayanlara Zambak Sokak'ta serpme Van kahvaltısı; güncel menü, açık adres, saatler, ulaşım ve rezervasyon.",
-    h1: "Beyoğlu'nda Van kahvaltıcısı ve serpme kahvaltı",
-    eyebrow: "Beyoğlu",
-    image: "/images/balcony-breakfast.jpg",
-    ogImage: "/images/og/beyoglu-kahvalti.jpg",
-    imageAlt: "Beyoğlu'nda balkonda kahvaltı sofrası",
-    intro: [
-      "Beyoğlu kahvaltıcısı arayanlar için Tarihi Van Kahvaltı Evi, Zambak Sokak'taki tarihi binasında geleneksel Van sofrası kurar.",
-      "Van otlu peyniri, murtuğa, kavut, kete ve sınırsız çayla hazırlanan serpme kahvaltının menü, konum, saat ve rezervasyon bilgileri bu sayfadadır.",
-    ],
-    highlights: [
-      "Taksim Meydanı'na ve M2 Taksim metroya yürüme mesafesindedir.",
-      "İstiklal Caddesi ve Sıraselviler çevresinden kolay ulaşılır.",
-      "Her gün 08:00 - 18:00 arasında açıktır.",
-      "Kahvaltı sonrası aynı mekandaki Kafka Cafe'de kahve içilebilir.",
-    ],
-    sections: [
-      {
-        title: "Merkezi konum",
-        body: "Taksim Meydanı, İstiklal Caddesi, Sıraselviler ve Cihangir çevresinden yürüyerek ulaşım mümkündür.",
-      },
-      {
-        title: "Tarihi mekânda uzun kahvaltı",
-        body: "Tarihi binanın balkon, teras ve iç mekân dokusu; bakır sahanlarla kurulan Van sofrasına sakin bir ritim eşlik eder.",
-      },
-      {
-        title: "Ziyaret öncesi",
-        body: "Hafta sonu veya kalabalık grupla gelecek misafirlerin masa ve güncel menü bilgisini telefonla teyit etmesi önerilir.",
-      },
-    ],
-    questions: [faqItems[0], faqItems[2], faqItems[3], faqItems[4], faqItems[8]],
-  },
-  {
-    slug: "taksim-kahvalti",
-    title: "Taksim Van Kahvaltıcısı",
-    description:
-      "Taksim kahvaltıcısı arayanlara M2 metro ve İstiklal Caddesi yakınında serpme Van kahvaltısı; menü, saatler, yol tarifi ve rezervasyon.",
-    h1: "Taksim'de Van kahvaltıcısı",
-    eyebrow: "Taksim kahvaltı rehberi",
-    image: "/images/street-table.jpg",
-    ogImage: "/images/og/beyoglu-kahvalti.jpg",
-    imageAlt: "Taksim Zambak Sokak yakınında serpme Van kahvaltısı",
-    intro: [
-      "Taksim kahvaltı seçenekleri arasında yöresel bir sofra arayanlar, Tarihi Van Kahvaltı Evi'nde Van otlu peyniri, murtuğa, kavut, kete ve sıcak bakır sahanları aynı masada bulur.",
-      `İşletme ${displayAddress} adresindedir; M2 Taksim istasyonu, Taksim Meydanı ve İstiklal Caddesi çevresinden yürüyerek ulaşılabilir.`,
-    ],
-    highlights: [
-      "Taksim Meydanı ve M2 Taksim istasyonu çevresinden yürüyerek ulaşılır.",
-      "Serpme Van kahvaltısı en az iki kişilik servis edilir.",
-      "Van otlu peyniri, murtuğa, kavut, kete, bal-kaymak ve sınırsız çay öne çıkar.",
-      `Çalışma saatleri ${openingHours.short}; hafta sonu için masa uygunluğu önceden sorulabilir.`,
-    ],
-    sections: [
-      {
-        title: "Taksim'de kahvaltı için Van sofrası",
-        body: "Tarihi Van Kahvaltı Evi, standart kahvaltı tabağı yerine küçük tabaklarla paylaşılan yöresel bir sofra sunar. Otlu peynir, murtuğa ve kavut; menüyü klasik kafe kahvaltısından ayırır.",
-      },
-      {
-        title: "Taksim Meydanı ve metrodan ulaşım",
-        id: "metrodan-ulasim",
-        body: "M2 Taksim istasyonundan Sıraselviler yönüne ilerleyip Zambak Sokak'a geçebilirsiniz. Güncel istasyon ve sefer durumunu Metro İstanbul üzerinden kontrol etmek, özel günlerde rota değişikliklerini görmeyi kolaylaştırır.",
-      },
-      {
-        title: "İstiklal Caddesi çevresinden",
-        body: "İstiklal Caddesi, Tarlabaşı ve Şehit Muhtar çevresinden gelenler için Zambak Sokak merkezi bir buluşma noktasıdır. İlk ziyarette Google Haritalar yol tarifi kullanılabilir.",
-      },
-      {
-        title: "Taksim kahvaltısı öncesi plan",
-        body: "Güncel fiyatları menü sayfasından inceleyebilir; hafta sonu veya kalabalık grup ziyaretlerinde telefon ya da WhatsApp üzerinden masa uygunluğunu sorabilirsiniz.",
-      },
-    ],
-    questions: [
-      {
-        question: "Taksim'de Van kahvaltısı nerede yenir?",
-        answer: `Tarihi Van Kahvaltı Evi, ${displayAddress} adresinde yöresel serpme Van kahvaltısı sunar; Taksim Meydanı ve M2 metro çevresinden yürüyerek ulaşılabilir.`,
-      },
-      {
-        question: "Taksim kahvaltıcısı seçerken nelere bakılır?",
-        answer: "Menü içeriği, fiyatın kişi başı mı masa başı mı olduğu, çalışma saati, metroya yakınlık ve rezervasyon bilgisi birlikte değerlendirilmelidir.",
-      },
-      faqItems[6],
-      faqItems[5],
-      faqItems[3],
-      faqItems[4],
-    ],
-    resources: [
-      {
-        label: "Metro İstanbul M2 hattı",
-        url: "https://www.metro.istanbul/Hatlarimiz/HatDetay?hat=M2",
-        description: "Taksim istasyonu, hat bilgisi ve güncel ulaşım ayrıntıları",
-      },
-    ],
-  },
-  {
     slug: "kafka-cafe",
     title: "Kafka Cafe ve Kahve",
     description:
@@ -422,35 +287,43 @@ export const seoPages: SeoPage[] = [
   },
 ];
 
-export const legacyRedirects = [
-  // Google'da görünen eski sonuç doğrudan ana sayfaya gitmeli; yönlendirme zinciri oluşturmayın.
-  { source: "/istanbul-van-kahvaltisi", destination: "/" },
-  { source: "/serpme-van-kahvaltisi", destination: "/van-kahvaltisi" },
-  { source: "/serpme-kahvalti-beyoglu", destination: "/beyoglu-kahvalti" },
-  { source: "/istiklal-caddesi-kahvalti", destination: "/iletisim#ulasim" },
-  { source: "/cihangir-kahvalti", destination: "/iletisim#ulasim" },
-  { source: "/galata-kahvalti", destination: "/iletisim#ulasim" },
-  { source: "/aile-kahvaltisi-beyoglu", destination: "/beyoglu-kahvalti" },
-  { source: "/grup-kahvaltisi", destination: "/beyoglu-kahvalti" },
-  { source: "/hafta-sonu-kahvalti", destination: "/beyoglu-kahvalti" },
-  { source: "/kahvalti-rezervasyon", destination: "/iletisim#rezervasyon" },
-  { source: "/kahvalti-yol-tarifi", destination: "/iletisim#ulasim" },
-  { source: "/zambak-sokak-kahvalti", destination: "/iletisim#ulasim" },
-  { source: "/siraselviler-kahvalti", destination: "/iletisim#ulasim" },
-  { source: "/kahvalti-fiyatlari", destination: "/menu#fiyatlar" },
-  { source: "/van-otlu-peynir", destination: "/van-kahvaltisi#lezzetler" },
-  { source: "/murtuga-kavut", destination: "/van-kahvaltisi#lezzetler" },
-  { source: "/tarihi-mekanda-kahvalti", destination: "/#story" },
-  { source: "/kahvalti-sonrasi-kahve", destination: "/kafka-cafe" },
-  { source: "/vejetaryen-kahvalti-beyoglu", destination: "/menu" },
-  { source: "/beyoglu-kahvalti-mekanlari", destination: "/beyoglu-kahvalti" },
-  { source: "/taksim-brunch-kahvalti", destination: "/taksim-kahvalti" },
+export const searchLandingPaths = [
+  "/istanbul-van-kahvaltisi",
+  "/van-kahvaltisi",
+  "/beyoglu-kahvalti",
+  "/taksim-kahvalti",
+  "/serpme-van-kahvaltisi",
+  "/serpme-kahvalti-beyoglu",
+  "/istiklal-caddesi-kahvalti",
+  "/cihangir-kahvalti",
+  "/galata-kahvalti",
+  "/aile-kahvaltisi-beyoglu",
+  "/grup-kahvaltisi",
+  "/hafta-sonu-kahvalti",
+  "/kahvalti-rezervasyon",
+  "/kahvalti-yol-tarifi",
+  "/zambak-sokak-kahvalti",
+  "/siraselviler-kahvalti",
+  "/kahvalti-fiyatlari",
+  "/van-otlu-peynir",
+  "/murtuga-kavut",
+  "/tarihi-mekanda-kahvalti",
+  "/kahvalti-sonrasi-kahve",
+  "/vejetaryen-kahvalti-beyoglu",
+  "/beyoglu-kahvalti-mekanlari",
+  "/taksim-brunch-kahvalti",
 ] as const;
+
+// Arama sonuçlarında görünen bütün eski konu URL'leri tek adımda ana sayfaya gider.
+export const legacyRedirects = searchLandingPaths.map((source) => ({
+  source,
+  destination: "/",
+}));
 
 export const localSeoFacts = [
   {
-    label: "Konum",
-    value: `${displayAddress}; Taksim Meydanı, İstiklal Caddesi ve Sıraselviler hattına yürüme mesafesi.`,
+    label: "Beyoğlu ve Taksim",
+    value: `Beyoğlu kahvaltıcısı veya Taksim kahvaltıcısı arayanlar için adres: ${displayAddress}.`,
     href: "/iletisim",
   },
   {
@@ -496,6 +369,11 @@ export function createPageMetadata(page: SeoPage): Metadata {
     title: page.title,
     description: page.description,
     alternates: { canonical: url },
+    robots: {
+      index: false,
+      follow: true,
+      googleBot: { index: false, follow: true },
+    },
     openGraph: {
       title: page.title,
       description: page.description,
