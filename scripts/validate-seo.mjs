@@ -1,4 +1,5 @@
 import { request as httpRequest } from "node:http";
+import { request as httpsRequest } from "node:https";
 
 const baseUrl = process.env.SEO_TEST_BASE_URL ?? "http://127.0.0.1:3100";
 const canonicalSiteUrl = "https://www.tarihivankahvaltievi.com";
@@ -120,10 +121,11 @@ async function fetchWithRetry(path, attempts = 30, options = {}) {
 function requestWithHost(path, host) {
   const target = new URL(baseUrl);
   return new Promise((resolve, reject) => {
-    const request = httpRequest(
+    const requestMethod = target.protocol === "https:" ? httpsRequest : httpRequest;
+    const request = requestMethod(
       {
         hostname: target.hostname,
-        port: target.port,
+        port: target.port || undefined,
         path,
         method: "GET",
         headers: { host },
