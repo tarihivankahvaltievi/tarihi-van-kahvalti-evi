@@ -38,7 +38,6 @@
 
   .theme-breakfast .logo {
     font-size: clamp(1.08rem, 4.9vw, 1.28rem) !important;
-    min-height: 44px !important;
   }
 
   .theme-breakfast .nav-menu-button,
@@ -328,27 +327,6 @@
     border: 0 !important;
     border-radius: 8px !important;
     box-shadow: 0 6px 8px rgba(42, 27, 18, 0.14) !important;
-  }
-
-  .theme-breakfast .hero-parallax-gallery,
-  .theme-breakfast .hero-parallax-row,
-  .theme-breakfast .hero-parallax-card,
-  .theme-breakfast .hero-parallax-card img {
-    transition: none !important;
-  }
-
-  .theme-breakfast .hero-parallax-food-stage .hero-float-item,
-  .theme-breakfast .hero-parallax-food-stage .hero-float-item::after {
-    opacity: 1 !important;
-    animation: none !important;
-    transition: none !important;
-  }
-
-  .bottom-info-band .seo-inline-links a {
-    min-height: 44px;
-    display: inline-flex;
-    align-items: center;
-    padding: 0.35rem 0.2rem !important;
   }
 
 }

@@ -273,9 +273,6 @@ Rezervasyonumu onaylayabilir misiniz? Şimdiden teşekkürler.`;
             maxLength={240}
             onChange={(e) => setNote(e.target.value)}
           />
-          <p className="booking-privacy-note">
-            Bu not WhatsApp&apos;a aktarılır; özel veya hassas bilgi yazmayın.
-          </p>
         </div>
 
         <button type="submit" className="booking-submit-btn">

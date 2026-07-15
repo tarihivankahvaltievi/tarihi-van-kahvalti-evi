@@ -8,16 +8,12 @@ import {
   buildFaqJsonLd,
   buildMenuJsonLd,
   createPageMetadata,
-  displayAddress,
-  displayPhone,
-  email,
   getSeoPage,
   jsonLd,
   mapsUrl,
   menuSections,
   pageOgImagePath,
   seoPages,
-  siteName,
   siteUrl,
   telUrl,
   whatsappUrl,
@@ -245,20 +241,6 @@ export default async function SeoPage({ params }: PageProps) {
           <Link href="/iletisim">Zambak Sokak ve yol tarifi</Link>
         </section>
       </main>
-
-      <footer className="seo-local-footer">
-        <div>
-          <strong>{siteName}</strong>
-          <address>{displayAddress}</address>
-        </div>
-        <div className="seo-local-footer-links">
-          <a href={telUrl}>{displayPhone}</a>
-          <a href={`mailto:${email}`}>{email}</a>
-          <a href={mapsUrl} target="_blank" rel="noopener noreferrer">
-            Google Haritalar&apos;da yol tarifi
-          </a>
-        </div>
-      </footer>
     </>
   );
 }

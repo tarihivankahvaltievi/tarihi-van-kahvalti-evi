@@ -1,21 +1,29 @@
 import type { Metadata, Viewport } from "next";
-import { Bodoni_Moda, Bricolage_Grotesque } from "next/font/google";
+import { Bodoni_Moda, Bricolage_Grotesque, Literata } from "next/font/google";
 import "./globals.css";
 import "./mobile-header-hero.css";
 
 const bodoni = Bodoni_Moda({
   subsets: ["latin", "latin-ext"],
   weight: "variable",
-  style: "normal",
+  style: ["normal", "italic"],
   axes: ["opsz"],
   display: "swap",
   preload: false,
   variable: "--font-bodoni-gf",
 });
+const literata = Literata({
+  subsets: ["latin", "latin-ext"],
+  weight: "variable",
+  style: "normal",
+  axes: ["opsz"],
+  display: "swap",
+  variable: "--font-literata-gf",
+});
 const bricolageGrotesque = Bricolage_Grotesque({
   subsets: ["latin", "latin-ext"],
   weight: "variable",
-  axes: ["opsz"],
+  axes: ["opsz", "wdth"],
   display: "swap",
   preload: false,
   variable: "--font-bricolage-grotesque-gf",
@@ -122,7 +130,7 @@ export default function RootLayout({
   const webVitalsEndpoint = process.env.NEXT_PUBLIC_WEB_VITALS_ENDPOINT;
 
   return (
-    <html lang="tr" className={`h-full antialiased ${bodoni.variable} ${bricolageGrotesque.variable}`}>
+    <html lang="tr" className={`h-full antialiased ${bodoni.variable} ${literata.variable} ${bricolageGrotesque.variable}`}>
       <head>
         <link rel="me" href={sameAsUrls[0]} />
       </head>

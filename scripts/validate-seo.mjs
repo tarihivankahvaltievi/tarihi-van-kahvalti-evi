@@ -82,12 +82,11 @@ for (const route of routes) {
     `${routeLabel}: şema tipleri ${actualTypes.join(", ")}`,
   );
   assert(!actualTypes.includes("Article"), `${routeLabel}: doğrulanmamış Article şeması var`);
-  assert(text.includes("info@tarihivankahvaltievi.com"), `${routeLabel}: görünür e-posta eksik`);
-
   if (route.path === "/") {
     const restaurant = graphDocument["@graph"].find((node) => node["@type"] === "Restaurant");
     assert(restaurant?.alternateName === "Tarihi Van Kahvaltı Evi 1978", "Ana sayfa: işletme aliası yanlış");
     assert(restaurant?.logo === "https://www.tarihivankahvaltievi.com/icons/icon-512.png", "Ana sayfa: logo yanlış");
+    assert(restaurant?.email === "info@tarihivankahvaltievi.com", "Ana sayfa: işletme e-postası yanlış");
     assert(!("geo" in restaurant), "Ana sayfa: doğrulanmamış koordinat yayınlanmamalı");
     assert(text.toLocaleLowerCase("tr-TR").includes("van kahvaltıcısı"), "Ana sayfa: hedef ifade görünür değil");
   }

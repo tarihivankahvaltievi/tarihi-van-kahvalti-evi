@@ -121,7 +121,9 @@ const floatingFoods: FloatingFood[] = [
 const mobileFloatingFoodClassNames = new Set([
   "hero-float-item hero-float-pan",
   "hero-float-item hero-float-tea",
+  "hero-float-item hero-float-simit",
   "hero-float-item hero-float-cheese-platter",
+  "hero-float-item hero-float-greens-platter",
 ]);
 
 const subscribeToMobileViewport = (callback: () => void) => {
@@ -229,6 +231,14 @@ export function VanHeroParallax() {
     ),
     spring,
   );
+  const foodRotateX = useSpring(
+    useTransform(
+      scrollYProgress,
+      [0, 0.28, 0.55, 0.82],
+      still ? [0, 0, 0, 0] : isMobile ? [0, -3.8, -7.2, -8.4] : [0, -2.8, -5.2, -6.2],
+    ),
+    spring,
+  );
   const foodOpacity = useSpring(
     useTransform(
       scrollYProgress,
@@ -269,10 +279,8 @@ export function VanHeroParallax() {
   );
   const copyFilter = useTransform(copyBlurPx, (v) => `blur(${v}px)`);
 
-  const visibleHeroImages = isMobile ? heroImages.slice(0, 6) : heroImages;
-  const rowLength = isMobile ? 3 : 5;
-  const firstRow = visibleHeroImages.slice(0, rowLength);
-  const secondRow = visibleHeroImages.slice(rowLength, rowLength * 2);
+  const firstRow = heroImages.slice(0, 5);
+  const secondRow = heroImages.slice(5, 10);
   const visibleFloatingFoods = isMobile
     ? floatingFoods.filter((item) => mobileFloatingFoodClassNames.has(item.className))
     : floatingFoods;
@@ -309,7 +317,7 @@ export function VanHeroParallax() {
         >
           <div className="hero-copy-ambient-glow" aria-hidden="true" />
           <motion.div
-            style={isMobile ? undefined : {
+            style={{
               y: copyY,
               opacity: copyOpacity,
               filter: copyFilter,
@@ -344,7 +352,7 @@ export function VanHeroParallax() {
 
         <motion.div
           className="hero-parallax-gallery"
-          style={isMobile ? undefined : {
+          style={{
             rotateX,
             rotateZ,
             y: galleryY,
@@ -357,30 +365,29 @@ export function VanHeroParallax() {
             translate={translateX}
             reverse
             enableHover={!isMobile}
-            staticLayout={isMobile}
+            preloadCount={1}
           />
           <HeroImageRow
             images={secondRow}
             translate={translateXReverse}
             enableHover={!isMobile}
-            staticLayout={isMobile}
+            preloadCount={0}
           />
         </motion.div>
 
         <motion.div
           className="hero-parallax-food-stage"
-          style={isMobile ? undefined : {
+          style={{
             y: floatingFoodY,
             scale: foodScale,
             opacity: foodOpacity,
-            rotateX: rotateXMouse,
+            rotateX: isMobile ? foodRotateX : rotateXMouse,
             rotateY: rotateYMouse,
             transformStyle: "preserve-3d",
           }}
           aria-hidden="true"
         >
           {visibleFloatingFoods.map((item) => {
-            const isPrimaryImage = item.className.includes("hero-float-pan");
             return (
               <div
                 className={item.className}
@@ -395,9 +402,7 @@ export function VanHeroParallax() {
                   alt={item.alt}
                   fill
                   sizes="(max-width: 680px) 30vw, (max-width: 1080px) 26vw, 320px"
-                  quality={74}
-                  loading={isPrimaryImage ? "eager" : "lazy"}
-                  fetchPriority={isPrimaryImage ? "high" : undefined}
+                  quality={82}
                 />
               </div>
             );
@@ -413,21 +418,23 @@ function HeroImageRow({
   translate,
   reverse = false,
   enableHover = true,
-  staticLayout = false,
+  preloadCount = 0,
 }: {
   images: HeroImage[];
   translate: MotionValue<number>;
   reverse?: boolean;
   enableHover?: boolean;
-  staticLayout?: boolean;
+  preloadCount?: number;
 }) {
   return (
     <div className={`hero-parallax-row ${reverse ? "is-reverse" : ""}`}>
-      {images.map((image) => {
+      {images.map((image, index) => {
+        const shouldPreload = index < preloadCount;
+
         return (
           <motion.figure
             className="hero-parallax-card"
-            style={staticLayout ? undefined : { x: translate }}
+            style={{ x: translate }}
             key={image.thumbnail}
             whileHover={enableHover ? { y: -10, scale: 1.018, rotateZ: reverse ? -0.4 : 0.4 } : undefined}
             transition={{ duration: 0.34, ease: [0.16, 1, 0.3, 1] }}
@@ -436,9 +443,9 @@ function HeroImageRow({
               src={image.thumbnail}
               alt=""
               fill
-              sizes="(max-width: 680px) 34vw, (max-width: 1080px) 40vw, 32rem"
-              loading="lazy"
-              quality={staticLayout ? 60 : 74}
+              sizes="(max-width: 680px) 38vw, (max-width: 1080px) 40vw, 32rem"
+              preload={shouldPreload}
+              quality={74}
               style={{ objectPosition: image.position ?? "center" }}
             />
           </motion.figure>
