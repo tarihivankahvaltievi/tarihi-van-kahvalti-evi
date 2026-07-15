@@ -21,6 +21,23 @@
   color: var(--ink);
   font-family: var(--font-bricolage-grotesque-gf), system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
+  position: relative;
+}
+
+.page::after {
+  content: "";
+  position: fixed;
+  right: -80px;
+  bottom: 8%;
+  width: 480px;
+  height: 600px;
+  background-image: url("/images/brand-icon-small.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: bottom right;
+  opacity: 0.012; /* Faint, elegant brand background watermark */
+  pointer-events: none;
+  z-index: 0;
 }
 
 /* --- Masthead (Header) --- */
@@ -867,10 +884,20 @@
 }
 
 .emptyState h3 {
-  margin: 0 0 1rem;
+  margin: 0 0 0.5rem;
   font-family: var(--font-bricolage-grotesque-gf), system-ui, sans-serif;
   font-size: 1.25rem;
   font-weight: 800;
+}
+
+.emptyStateText {
+  color: var(--body);
+  font-family: var(--font-literata-gf), Georgia, serif;
+  font-size: 0.82rem;
+  font-style: italic;
+  line-height: 1.45;
+  max-width: 45ch;
+  margin: 0.2rem auto 1.4rem;
 }
 
 .emptyState button, .dialogDone {
@@ -1189,6 +1216,12 @@
 }
 
 @media (max-width: 680px) {
+  .page::after {
+    width: 260px;
+    height: 340px;
+    right: -40px;
+    bottom: 5%;
+  }
   .menuTools {
     top: 72px; /* Set precisely to header height */
   }

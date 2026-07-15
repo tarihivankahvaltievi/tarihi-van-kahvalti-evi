@@ -318,8 +318,11 @@ export function MenuExperience() {
           ) : (
             <div className={styles.emptyState}>
               <Search size={28} />
-              <h3>Aradığınız lezzeti bulamadık.</h3>
-              <button type="button" onClick={() => { setSearchTerm(""); setActiveCategory("all"); }}>Tüm menüyü göster</button>
+              <h3>Aradığınız lezzeti bulamadık</h3>
+              <p className={styles.emptyStateText}>
+                Yazım hatası yapmış olabilirsiniz veya aradığınız lezzet şu an menümüzde yer almıyor olabilir. Dilerseniz arama kutusunu temizleyerek tüm yöresel lezzetlerimize göz atabilirsiniz.
+              </p>
+              <button type="button" onClick={() => { setSearchTerm(""); setActiveCategory("all"); }}>Tüm Menüyü Göster</button>
             </div>
           )}
 
