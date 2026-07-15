@@ -33,7 +33,7 @@ import {
   homeDescription,
   homeOgDescription,
   homeTitle,
-  sameAsUrls,
+  instagramUrl,
   siteName,
   siteUrl,
 } from "./seo";
@@ -131,7 +131,7 @@ export default function RootLayout({
   return (
     <html lang="tr" className={`h-full antialiased ${bodoni.variable} ${literata.variable} ${bricolageGrotesque.variable}`}>
       <head>
-        <link rel="me" href={sameAsUrls[0]} />
+        <link rel="me" href={instagramUrl} />
       </head>
       <body className="min-h-full flex flex-col">
         {webVitalsEndpoint?.startsWith("/") && !webVitalsEndpoint.startsWith("//") ? (

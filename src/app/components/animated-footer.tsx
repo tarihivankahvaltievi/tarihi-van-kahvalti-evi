@@ -1144,7 +1144,7 @@ export function AnimatedFooter() {
         <div className="footer-top-section">
           <div className="footer-brand-lockup">
             <a className="footer-brand-logo" href="#top" aria-label="Başa Dön">
-              <Image src="/images/brand-icon-small.png" alt="Tarihi Van Kahvaltıcısı" width={76} height={95} loading="lazy" />
+              <Image src="/images/brand-icon-small.png" alt="Tarihi Van Kahvaltı Evi" width={76} height={95} loading="lazy" />
             </a>
             <h2 className="footer-manifesto">
               Van kahvaltısı, <br />
@@ -1168,12 +1168,13 @@ export function AnimatedFooter() {
           <div className="footer-col">
             <h4 className="footer-col-title">Keşfet</h4>
             <ul className="footer-links">
-              <li><Link href="/menu">Zengin Menü</Link></li>
+              <li><Link href="/#menu">Zengin Menü</Link></li>
               <li><Link href="/#faq">Van Kahvaltısı</Link></li>
-              <li><Link href="/#beyoglu-taksim-kahvalti">Beyoğlu ve Taksim Kahvaltı</Link></li>
-              <li><Link href="/kafka-cafe">Kafka Cafe</Link></li>
-              <li><Link href="/iletisim">Konum ve Rezervasyon</Link></li>
-              <li><Link href="/sss">Sıkça Sorulan Sorular</Link></li>
+              <li><Link href="/#contact">Beyoğlu ve Taksim Kahvaltı</Link></li>
+              <li><Link href="/#menu">Kafka Cafe</Link></li>
+              <li><Link href="/#contact">Konum ve Rezervasyon</Link></li>
+              <li><Link href="/#faq">Sıkça Sorulan Sorular</Link></li>
+              <li><Link href="/en" hrefLang="en">English Visitor Guide</Link></li>
             </ul>
           </div>
 
@@ -1224,7 +1225,7 @@ export function AnimatedFooter() {
         {/* Bottom Legal & Copyright Strip */}
         <div className="footer-bottom">
           <div className="footer-copyright">
-            © 2026 Tarihi Van Kahvaltısı. Tüm hakları saklıdır.
+            © 2026 Tarihi Van Kahvaltı Evi. Tüm hakları saklıdır.
           </div>
           <div className="footer-legal-links">
             <span aria-hidden="true">Gizlilik Politikası</span>

@@ -1,5 +1,5 @@
 import type { NextConfig } from "next";
-import { legacyRedirects } from "./src/app/seo";
+import { legacyRedirects, siteUrl } from "./src/app/seo";
 
 const isDev = process.env.NODE_ENV !== "production";
 
@@ -44,10 +44,18 @@ const nextConfig: NextConfig = {
       { source: "/urun/turk-kahvesi", destination: "/" },
     ];
 
-    return [...legacyRedirects, ...wordpressRedirects].map((redirect) => ({
-      ...redirect,
-      permanent: true,
-    }));
+    return [
+      {
+        source: "/:path*",
+        has: [{ type: "host" as const, value: "tarihivankahvaltievi.com" }],
+        destination: `${siteUrl}/:path*`,
+        permanent: true,
+      },
+      ...[...legacyRedirects, ...wordpressRedirects].map((redirect) => ({
+        ...redirect,
+        permanent: true,
+      })),
+    ];
   },
   async headers() {
     return [

@@ -1,12 +1,10 @@
-import Link from "next/link";
-import { ChevronRight } from "lucide-react";
 import { AboutStory } from "./components/about-story";
 import { AnimatedFooter } from "./components/animated-footer";
 import { BookingOpenButton } from "./components/booking-open-button";
 import { FaqSection } from "./components/faq-section";
 import { GalleryLightbox } from "./components/gallery-lightbox";
+import { LocalSeoSections } from "./components/local-seo-sections";
 import { VanHeroParallax } from "./components/van-hero-parallax";
-import { displayAddress, localSeoFacts } from "./seo";
 
 const gallery: [string, string][] = [
   ["/images/balcony-breakfast.jpg", "Balkonda kahvaltı keyfi"],
@@ -29,6 +27,8 @@ export function HomeContent() {
 
       <AboutStory />
 
+      <LocalSeoSections />
+
       <section id="gallery" className="gallery-section">
         <div className="gallery-head">
           <h2>
@@ -43,49 +43,6 @@ export function HomeContent() {
       </section>
 
       <FaqSection />
-
-      <div className="bottom-info-band">
-        <section
-          className="bg-[var(--soft)] text-[var(--muted)] text-center text-xs sm:text-sm py-4 px-6 border-b border-[var(--line)]"
-          aria-label="Tarihi Van Kahvaltı Evi Kısa Bilgi"
-        >
-          <div className="max-w-4xl mx-auto leading-relaxed">
-            <span>
-              <strong>Tarihi Van Kahvaltı Evi</strong>, {displayAddress} adresinde hizmet veren köklü bir <em>Van kahvaltıcısıdır</em>. Beyoğlu kahvaltıcısı, Taksim kahvaltıcısı veya İstanbul&apos;da gerçek bir Van kahvaltısı arayan misafirler için otlu peynir, murtuğa, kavut, sıcak bakır sahanlar ve sınırsız çayla serpme sofra kurulur.
-            </span>
-            <nav className="seo-inline-links" aria-label="Hızlı bağlantılar">
-              <Link href="/menu">Menü ve fiyatlar</Link>
-              <Link href="/#faq">Van kahvaltısı nedir?</Link>
-              <Link href="/#beyoglu-taksim-kahvalti">Beyoğlu ve Taksim kahvaltı</Link>
-              <Link href="/iletisim">Konum ve rezervasyon</Link>
-              <Link href="/kafka-cafe">Kafka Cafe</Link>
-            </nav>
-          </div>
-        </section>
-
-        <section id="beyoglu-taksim-kahvalti" className="local-answer-panel" aria-labelledby="local-answer-heading">
-          <div className="local-answer-head">
-            <span className="local-answer-label">Ziyaretinizi planlayın</span>
-            <h2 id="local-answer-heading">Beyoğlu ve Taksim&apos;de Van kahvaltıcısı</h2>
-            <p>
-              Taksim kahvaltı ve Beyoğlu kahvaltı seçenekleri arasında yöresel bir sofra arayanlar için menü, açık adres, çalışma saatleri ve rezervasyon bilgileri ana sayfada tek yerde sunulur.
-            </p>
-          </div>
-          <div className="local-answer-grid">
-            {localSeoFacts.map((fact) => (
-              <article key={fact.label} className="local-answer-card">
-                <h3>{fact.label}</h3>
-                <p>{fact.value}</p>
-                <Link href={fact.href} aria-label={`${fact.label} hakkında detay`}>
-                  Detay <ChevronRight size={16} />
-                </Link>
-              </article>
-            ))}
-          </div>
-        </section>
-
-
-      </div>
 
       </main>
 

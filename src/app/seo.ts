@@ -1,13 +1,19 @@
-import type { Metadata } from "next";
-
 export const siteUrl = "https://www.tarihivankahvaltievi.com";
+export const englishPageUrl = `${siteUrl}/en`;
 export const siteName = "Tarihi Van Kahvaltı Evi";
 export const alternateName = "Tarihi Van Kahvaltı Evi 1978";
-export const homeTitle = "İstanbul Van Kahvaltıcısı | Tarihi Van Kahvaltı Evi";
+
+export const homeTitle = "Van Kahvaltıcısı İstanbul | Tarihi Van Kahvaltı Evi";
 export const homeDescription =
-  "İstanbul Beyoğlu Taksim'de Van kahvaltısı: otlu peynir, murtuğa, kavut, sıcak sahanlar ve sınırsız çay. Menü, yol tarifi ve rezervasyon.";
+  "İstanbul Beyoğlu Taksim'de geleneksel Van kahvaltısı: otlu peynir, murtuğa, kavut, sıcak sahanlar ve sınırsız çay. Menü, konum ve rezervasyon.";
 export const homeOgDescription =
-  "İstanbul Beyoğlu Taksim'de geleneksel Van kahvaltısı; menü, adres, yol tarifi ve rezervasyon bilgileri.";
+  "Beyoğlu Taksim'de geleneksel Van kahvaltısı; güncel menü, açık adres, yol tarifi ve rezervasyon bilgileri.";
+
+export const englishTitle =
+  "Van Breakfast in Beyoğlu, Istanbul | Tarihi Van Kahvaltı Evi";
+export const englishDescription =
+  "Experience an authentic Van breakfast near Taksim Square in Beyoğlu, Istanbul: herb cheese, murtuğa, kavut, warm dishes and unlimited Turkish tea.";
+
 export const displayPhone = "+90 541 525 2868";
 export const phoneE164 = "+905415252868";
 export const telUrl = `tel:${phoneE164}`;
@@ -15,8 +21,6 @@ export const email = "info@tarihivankahvaltievi.com";
 export const foundingDate = "1978";
 export const defaultOgImagePath = "/images/og/home.jpg";
 export const defaultOgImage = `${siteUrl}${defaultOgImagePath}`;
-
-export const sameAsUrls = ["https://www.instagram.com/tarihivankahvaltievi/"];
 
 export const address = {
   streetAddress: "Zambak Sk. No:8",
@@ -29,24 +33,41 @@ export const address = {
 };
 
 export const displayAddress = `${address.streetAddress}, ${address.neighborhood}, ${address.locality}, ${address.region} ${address.postalCode}`;
+export const englishDisplayAddress = `Zambak St. No:8, Şehit Muhtar, Beyoğlu, Istanbul ${address.postalCode}, Türkiye`;
+
+export const coordinates = {
+  latitude: 41.0367655,
+  longitude: 28.9829478,
+};
 
 export const openingHours = {
   opens: "08:00",
   closes: "18:00",
   days: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
   short: "Her gün 08:00 - 18:00",
+  shortEnglish: "Open daily 08:00 - 18:00",
 };
 
+// Doğrudan doğrulanmış Google Maps işletme kaydı (CID), genel arama sonucu değil.
 export const mapsUrl =
-  "https://www.google.com/maps/search/?api=1&query=Tarihi%20Van%20Kahvalt%C4%B1%20Evi%20Zambak%20Sk.%20No%3A8%20%C5%9Eehit%20Muhtar%20Beyo%C4%9Flu%2034435%20%C4%B0stanbul";
+  "https://www.google.com/maps?cid=10380797280962926014";
 export const whatsappUrl =
   "https://wa.me/905415252868?text=Merhaba%2C%20Tarihi%20Van%20Kahvalt%C4%B1%20Evi%20i%C3%A7in%20rezervasyon%20bilgisi%20almak%20istiyorum.";
+export const whatsappEnglishUrl =
+  "https://wa.me/905415252868?text=Hello%2C%20I%20would%20like%20reservation%20information%20for%20Tarihi%20Van%20Kahvalt%C4%B1%20Evi.";
+export const instagramUrl = "https://www.instagram.com/tarihivankahvaltievi/";
+
+export const sameAsUrls = [
+  mapsUrl,
+  instagramUrl,
+];
 
 export const cuisine = [
   "Van kahvaltısı",
   "Serpme kahvaltı",
   "Geleneksel Türk kahvaltısı",
-  "Turkish breakfast",
+  "Van breakfast",
+  "Traditional Turkish breakfast",
 ];
 
 export const menuSections = [
@@ -102,15 +123,67 @@ export const menuSections = [
   },
 ] as const;
 
+export const englishMenuSections = [
+  {
+    name: "Traditional Van Breakfast Spread",
+    description:
+      "A shared Van-style breakfast served for at least two guests, with herb cheese, murtuğa, kavut, cacık, kete, honey, clotted cream and unlimited Turkish tea.",
+    items: [
+      {
+        name: "Traditional Van Breakfast",
+        description:
+          "A sharing breakfast completed with Van herb cheese, regional warm dishes and copper-pan service.",
+        price: "450",
+        priceCurrency: "TRY",
+        unit: "per person",
+      },
+    ],
+  },
+  {
+    name: "Warm Breakfast Dishes",
+    description: "Breakfast favourites served hot in copper pans.",
+    items: [
+      {
+        name: "Eggs with Sucuk",
+        description: "Eggs cooked with Turkish sucuk and served hot at the table.",
+        price: "180",
+        priceCurrency: "TRY",
+      },
+      {
+        name: "Murtuğa",
+        description: "A traditional Van dish prepared with flour, butter and eggs.",
+      },
+      {
+        name: "Kavut",
+        description: "A rich regional dish rooted in Van's roasted-flour tradition.",
+      },
+    ],
+  },
+  {
+    name: "Coffee and Tea",
+    description: "Turkish coffee, coffee options and freshly brewed tea after breakfast.",
+    items: [
+      {
+        name: "Traditional Turkish Coffee",
+        description: "Turkish coffee slowly brewed in a copper pot.",
+      },
+      {
+        name: "Unlimited Turkish Tea",
+        description: "Freshly brewed tea served with the Van breakfast spread.",
+      },
+    ],
+  },
+] as const;
+
 export const faqItems = [
   {
     question: "Beyoğlu'nda Van kahvaltısı nerede yenir?",
-    answer: `${siteName}, ${displayAddress} adresinde hizmet veren köklü bir Van kahvaltıcısıdır. Taksim Meydanı ve İstiklal Caddesi'nden yürüyerek ulaşılabilir.`,
+    answer: `${siteName}, ${displayAddress} adresinde hizmet veren bir Van kahvaltıcısıdır. Taksim Meydanı ve İstiklal Caddesi'nden yürüyerek ulaşılabilir.`,
   },
   {
     question: "Van kahvaltısı nedir ve neler içerir?",
     answer:
-      "Van kahvaltısı, otlu peynir, murtuğa, kavut, cacık, kete, süzme bal, kaymak, sahanda yumurta ve sınırsız çay gibi yöresel ürünlerle hazırlanan zengin bir serpme kahvaltıdır.",
+      "Van kahvaltısı, otlu peynir, murtuğa, kavut, cacık, kete, süzme bal, kaymak ve sınırsız çay gibi yöresel ürünlerle hazırlanan zengin bir serpme kahvaltıdır.",
   },
   {
     question: "Tarihi Van Kahvaltı Evi nerede?",
@@ -151,141 +224,35 @@ export const faqItems = [
   },
 ] as const;
 
-export type SeoPage = {
-  slug: string;
-  title: string;
-  description: string;
-  h1: string;
-  eyebrow: string;
-  image: string;
-  ogImage: string;
-  imageAlt: string;
-  schemaType?: "WebPage" | "AboutPage" | "ContactPage" | "CollectionPage";
-  intro: string[];
-  highlights: string[];
-  sections: { title: string; body: string; id?: string }[];
-  questions: { question: string; answer: string }[];
-};
-
-export const seoPages: SeoPage[] = [
+export const englishFaqItems = [
   {
-    slug: "menu",
-    title: "Van Kahvaltısı Menüsü ve Fiyatlar",
-    description:
-      "Tarihi Van Kahvaltı Evi menüsü: serpme Van kahvaltısı, otlu peynir, murtuğa, kavut, sahanda sucuklu yumurta, sınırsız çay ve Kafka Cafe kahveleri.",
-    h1: "Tarihi Van Kahvaltı Evi menüsü",
-    eyebrow: "Menü",
-    image: "/images/breakfast-spread.jpg",
-    ogImage: "/images/og/menu.jpg",
-    imageAlt: "Bakır sahanlarda geleneksel serpme Van kahvaltısı",
-    intro: [
-      "Menünün odağı, Beyoğlu'nda uzun uzun paylaşılan geleneksel serpme Van kahvaltısıdır.",
-      "Otlu peynir, murtuğa, kavut, bal-kaymak, kete ve sınırsız çay aynı sofrada servis edilir; sıcaklar bakır sahanlarla masaya gelir.",
-    ],
-    highlights: [
-      "Geleneksel Van kahvaltısı kişi başı yaklaşık 450 TL'dir ve en az iki kişilik servis edilir.",
-      "Sahanda sucuklu yumurta yaklaşık 180 TL'dir.",
-      "Serpme kahvaltı yanında sınırsız çay sunulur.",
-      "Fiyatlar değişebileceği için ziyaret öncesi güncel bilgi alınması önerilir.",
-    ],
-    sections: [],
-    questions: [faqItems[1], faqItems[5], faqItems[7], faqItems[9]],
+    question: "Where can I have an authentic Van breakfast near Taksim?",
+    answer: `${siteName} is at ${englishDisplayAddress}, within walking distance of Taksim Square and Istiklal Avenue.`,
   },
   {
-    slug: "iletisim",
-    title: "İletişim ve Yol Tarifi",
-    description:
-      "Tarihi Van Kahvaltı Evi telefon, WhatsApp, adres, çalışma saatleri ve yol tarifi. Zambak Sk. No:8, Şehit Muhtar, Beyoğlu, İstanbul 34435.",
-    h1: "İletişim ve yol tarifi",
-    eyebrow: "Konum",
-    image: "/images/street-table.jpg",
-    ogImage: "/images/og/iletisim.jpg",
-    imageAlt: "Beyoğlu Zambak Sokak'ta kahvaltı masası",
-    schemaType: "ContactPage",
-    intro: [
-      "Tarihi Van Kahvaltı Evi, Taksim Meydanı'na ve İstiklal Caddesi'ne yürüme mesafesindeki Zambak Sokak'tadır.",
-      "Rezervasyon, güncel yoğunluk ve yol tarifi için telefon veya WhatsApp üzerinden iletişime geçebilirsiniz.",
-    ],
-    highlights: [
-      `Adres: ${displayAddress}`,
-      `Telefon ve WhatsApp: ${displayPhone}`,
-      `Çalışma saatleri: ${openingHours.short}`,
-      "M2 Taksim metro durağından Sıraselviler yönüne kısa yürüyüşle ulaşılır.",
-    ],
-    sections: [
-      {
-        title: "Metro ile ulaşım",
-        id: "ulasim",
-        body: "M2 Yenikapı - Hacıosman hattında Taksim durağında inip Sıraselviler yönünden Zambak Sokak'a yürüyebilirsiniz.",
-      },
-      {
-        title: "Yaya rota",
-        body: "İstiklal Caddesi ve Taksim çevresinden gelen misafirler için işletme kısa bir yürüyüş mesafesindedir.",
-      },
-      {
-        title: "Rezervasyon",
-        id: "rezervasyon",
-        body: "Hafta sonu ve kalabalık saatler için önceden telefon ya da WhatsApp üzerinden bilgi almak önerilir.",
-      },
-    ],
-    questions: [faqItems[2], faqItems[3], faqItems[4], faqItems[6]],
+    question: "What is included in a traditional Van breakfast?",
+    answer:
+      "The shared table includes Van herb cheese, murtuğa, kavut, cacık, kete, honey, clotted cream, warm dishes and unlimited freshly brewed Turkish tea.",
   },
   {
-    slug: "sss",
-    title: "Sıkça Sorulan Sorular",
-    description:
-      "Van kahvaltısı içeriği, fiyatlar, çalışma saatleri, rezervasyon, konum ve Kafka Cafe hakkında kısa, güncel cevaplar.",
-    h1: "Sıkça sorulan sorular",
-    eyebrow: "SSS",
-    image: "/images/tea-service.jpg",
-    ogImage: "/images/og/sss.jpg",
-    imageAlt: "İnce belli bardakta taze demlenmiş çay servisi",
-    intro: [
-      "Van kahvaltısı, rezervasyon, ulaşım ve menü hakkında en sık gelen soruları kısa ve net şekilde yanıtladık.",
-      "Fiyat ve yoğunluk gibi değişebilen bilgiler için ziyaret öncesi işletmeyle iletişime geçebilirsiniz.",
-    ],
-    highlights: [
-      "İşletme her gün 08:00 - 18:00 arasında açıktır.",
-      `Adres ${displayAddress} olarak geçer.`,
-      "Rezervasyon için telefon ve WhatsApp kullanılabilir.",
-      "Van kahvaltısında otlu peynir, murtuğa, kavut, kete ve sınırsız çay öne çıkar.",
-    ],
-    sections: [],
-    questions: [...faqItems],
+    question: "What are the opening hours?",
+    answer: `${siteName} is open daily from 08:00 to 18:00.`,
   },
   {
-    slug: "kafka-cafe",
-    title: "Kafka Cafe ve Kahve",
-    description:
-      "Tarihi Van Kahvaltı Evi içindeki Kafka Cafe: kahvaltı sonrası Türk kahvesi ve nitelikli kahve seçenekleri, adres ve çalışma saatleri.",
-    h1: "Kafka Cafe",
-    eyebrow: "Kahve köşesi",
-    image: "/images/coffee-moment.jpg",
-    ogImage: "/images/og/kafka-cafe.jpg",
-    imageAlt: "Kafka Cafe'de kahvaltı sonrası kahve molası",
-    intro: [
-      "Kafka Cafe, Tarihi Van Kahvaltı Evi'nin içinde kahvaltı sonrası sohbeti uzatan kahve köşesidir.",
-      "Bakır cezvede Türk kahvesi ve nitelikli kahve seçenekleri, Van kahvaltısı deneyimini sakin bir kapanışa taşır.",
-    ],
-    highlights: [
-      "Kahvaltı sonrası Türk kahvesi servis edilir.",
-      "Nitelikli kahve seçenekleri bulunur.",
-      "Kafka Cafe, Tarihi Van Kahvaltı Evi ile aynı adrestedir.",
-      `Çalışma saatleri: ${openingHours.short}.`,
-    ],
-    sections: [
-      {
-        title: "Kahvaltıdan kahveye",
-        body: "Uzun kahvaltıdan sonra aynı mekânda kahve içmek, özellikle hafta sonu buluşmalarında deneyimi kesintisiz kılar.",
-      },
-      {
-        title: "Konum",
-        body: `Kafka Cafe, ${displayAddress} adresindeki Tarihi Van Kahvaltı Evi içinde yer alır.`,
-      },
-    ],
-    questions: [faqItems[9], faqItems[2], faqItems[3]],
+    question: "How much is the Van breakfast?",
+    answer:
+      "The traditional Van breakfast is approximately TRY 450 per person and is served for at least two guests. Contact the restaurant for current prices.",
   },
-];
+  {
+    question: "How do I get there from Taksim Metro?",
+    answer:
+      "Leave M2 Taksim station towards Sıraselviler and walk to Zambak Street. Use the direct Google Maps link for live walking directions.",
+  },
+  {
+    question: "How can I reserve a table?",
+    answer: `Call or send a WhatsApp message to ${displayPhone} for current availability and reservation information.`,
+  },
+] as const;
 
 export const searchLandingPaths = [
   "/istanbul-van-kahvaltisi",
@@ -314,32 +281,44 @@ export const searchLandingPaths = [
   "/taksim-brunch-kahvalti",
 ] as const;
 
-// Arama sonuçlarında görünen bütün eski konu URL'leri tek adımda ana sayfaya gider.
-export const legacyRedirects = searchLandingPaths.map((source) => ({
-  source,
-  destination: "/",
-}));
+// Yalnız bilinen eski URL'ler en yakın gerçek içeriğe tek adımda taşınır.
+// Bilinmeyen URL'ler gerçek 404 kalır; site geneli wildcard yönlendirme yapılmaz.
+export const legacyRedirects = [
+  ...searchLandingPaths.map((source) => ({ source, destination: "/" })),
+  { source: "/menu", destination: "/#menu" },
+  { source: "/iletisim", destination: "/#contact" },
+  { source: "/sss", destination: "/#faq" },
+  { source: "/kafka-cafe", destination: "/#menu" },
+  { source: "/turkish-breakfast-istanbul", destination: "/en" },
+  { source: "/breakfast-near-taksim", destination: "/en" },
+  { source: "/zavtrak-taksim-stambul", destination: "/" },
+  { source: "/arabic-breakfast-taksim", destination: "/" },
+];
 
 export const localSeoFacts = [
   {
-    label: "Beyoğlu ve Taksim",
-    value: `Beyoğlu kahvaltıcısı veya Taksim kahvaltıcısı arayanlar için adres: ${displayAddress}.`,
-    href: "/iletisim",
+    label: "Açık adres",
+    value: `${displayAddress}. Taksim Meydanı ve İstiklal Caddesi'nden yürüyerek ulaşılabilir.`,
+    href: mapsUrl,
+    linkLabel: "Google Haritalar'da aç",
   },
   {
     label: "Van kahvaltısı",
-    value: "Serpme Van kahvaltısı; otlu peynir, murtuğa, kavut, kete, bal-kaymak ve sınırsız çay.",
-    href: "/menu",
+    value: "Otlu peynir, murtuğa, kavut, kete, bal-kaymak, sıcak sahanlar ve sınırsız çayla serpme sofra.",
+    href: "#menu",
+    linkLabel: "Menüyü gör",
   },
   {
     label: "Ziyaret saatleri",
     value: `${openingHours.short}; hafta sonu ve kalabalık gruplar için önceden bilgi almak önerilir.`,
-    href: "/iletisim",
+    href: telUrl,
+    linkLabel: "İşletmeyi ara",
   },
   {
-    label: "Kahvaltı sonrası",
-    value: "Kafka Cafe aynı mekânda Türk kahvesi ve nitelikli kahve seçenekleri sunar.",
-    href: "/kafka-cafe",
+    label: "English visitor guide",
+    value: "English menu, prices, directions, opening hours and answers for visitors staying near Taksim.",
+    href: "/en",
+    linkLabel: "View in English",
   },
 ];
 
@@ -349,57 +328,26 @@ export function absoluteUrl(path = "") {
   return `${siteUrl}${path.startsWith("/") ? path : `/${path}`}`;
 }
 
-export function getSeoPage(slug: string) {
-  return seoPages.find((page) => page.slug === slug);
-}
-
 export function jsonLd(data: unknown) {
   return JSON.stringify(data).replace(/</g, "\\u003c");
 }
 
-export function pageOgImagePath(slug: string) {
-  return getSeoPage(slug)?.ogImage ?? defaultOgImagePath;
-}
+type ContentLanguage = "tr" | "en";
 
-export function createPageMetadata(page: SeoPage): Metadata {
-  const url = absoluteUrl(page.slug);
-  const image = absoluteUrl(page.ogImage);
-
-  return {
-    title: page.title,
-    description: page.description,
-    alternates: { canonical: url },
-    robots: {
-      index: false,
-      follow: true,
-      googleBot: { index: false, follow: true },
-    },
-    openGraph: {
-      title: page.title,
-      description: page.description,
-      url,
-      siteName,
-      images: [{ url: image, width: 1200, height: 630, alt: page.imageAlt }],
-      locale: "tr_TR",
-      type: "website",
-    },
-    twitter: {
-      card: "summary_large_image",
-      title: page.title,
-      description: page.description,
-      images: [image],
-    },
-  };
-}
-
-export function buildMenuJsonLd(withContext = true) {
+export function buildMenuJsonLd(
+  withContext = true,
+  language: ContentLanguage = "tr",
+) {
+  const isEnglish = language === "en";
+  const pageUrl = isEnglish ? englishPageUrl : siteUrl;
+  const sections = isEnglish ? englishMenuSections : menuSections;
   const data = {
     "@type": "Menu",
-    "@id": `${siteUrl}/menu#menu`,
-    name: `${siteName} Menüsü`,
-    url: `${siteUrl}/menu`,
-    inLanguage: "tr-TR",
-    hasMenuSection: menuSections.map((section) => ({
+    "@id": `${pageUrl}#menu`,
+    name: isEnglish ? `${siteName} English Menu` : `${siteName} Menüsü`,
+    url: `${pageUrl}#menu`,
+    inLanguage: isEnglish ? "en" : "tr-TR",
+    hasMenuSection: sections.map((section) => ({
       "@type": "MenuSection",
       name: section.name,
       description: section.description,
@@ -413,7 +361,7 @@ export function buildMenuJsonLd(withContext = true) {
                 "@type": "Offer",
                 price: item.price,
                 priceCurrency: item.priceCurrency,
-                url: `${siteUrl}/menu`,
+                url: `${pageUrl}#menu`,
               }
             : undefined,
       })),
@@ -429,7 +377,7 @@ export function buildWebsiteJsonLd(withContext = true) {
     name: siteName,
     alternateName,
     url: siteUrl,
-    inLanguage: "tr-TR",
+    inLanguage: ["tr-TR", "en"],
     publisher: { "@id": `${siteUrl}/#restaurant` },
   };
   return withContext ? { "@context": "https://schema.org", ...data } : data;
@@ -456,7 +404,33 @@ export function buildHomeWebPageJsonLd(withContext = true) {
   return withContext ? { "@context": "https://schema.org", ...data } : data;
 }
 
-export function buildRestaurantJsonLd(withContext = true) {
+export function buildEnglishWebPageJsonLd(withContext = true) {
+  const data = {
+    "@type": "WebPage",
+    "@id": `${englishPageUrl}#webpage`,
+    url: englishPageUrl,
+    name: englishTitle,
+    description: englishDescription,
+    inLanguage: "en",
+    isPartOf: { "@id": `${siteUrl}/#website` },
+    mainEntity: { "@id": `${siteUrl}/#restaurant` },
+    primaryImageOfPage: {
+      "@type": "ImageObject",
+      url: `${siteUrl}/images/og/van-kahvaltisi.jpg`,
+      width: 1200,
+      height: 630,
+      caption: `${siteName} traditional Van breakfast in Istanbul`,
+    },
+  };
+  return withContext ? { "@context": "https://schema.org", ...data } : data;
+}
+
+export function buildRestaurantJsonLd(
+  withContext = true,
+  language: ContentLanguage = "tr",
+) {
+  const isEnglish = language === "en";
+  const pageUrl = isEnglish ? englishPageUrl : siteUrl;
   const data = {
     "@type": "Restaurant",
     "@id": `${siteUrl}/#restaurant`,
@@ -469,8 +443,9 @@ export function buildRestaurantJsonLd(withContext = true) {
       `${siteUrl}/images/breakfast-spread.jpg`,
       `${siteUrl}/images/balcony-breakfast.jpg`,
     ],
-    description:
-      "Beyoğlu Taksim'deki tarihi Rum binasında 1978'den beri geleneksel serpme Van kahvaltısı sunan aile restoranı.",
+    description: isEnglish
+      ? "A Van breakfast restaurant in Beyoğlu, Istanbul, near Taksim Square and Istiklal Avenue, serving a traditional shared breakfast with regional dishes and Turkish tea."
+      : "Beyoğlu Taksim'de otlu peynir, murtuğa, kavut, sıcak sahanlar ve sınırsız çayla geleneksel serpme Van kahvaltısı sunan restoran.",
     foundingDate,
     telephone: phoneE164,
     email,
@@ -485,23 +460,12 @@ export function buildRestaurantJsonLd(withContext = true) {
     servesCuisine: cuisine,
     areaServed: {
       "@type": "City",
-      name: "İstanbul",
+      name: isEnglish ? "Istanbul" : "İstanbul",
       containedInPlace: {
         "@type": "Country",
         name: address.countryName,
       },
     },
-    knowsAbout: [
-      "Van kahvaltısı",
-      "Serpme kahvaltı",
-      "Van otlu peyniri",
-      "Murtuğa",
-      "Kavut",
-      "Beyoğlu kahvaltı",
-      "Beyoğlu Van kahvaltısı",
-      "Taksim kahvaltı",
-      "Taksim Van kahvaltısı",
-    ],
     address: {
       "@type": "PostalAddress",
       streetAddress: `${address.streetAddress}, ${address.neighborhood}`,
@@ -509,6 +473,11 @@ export function buildRestaurantJsonLd(withContext = true) {
       addressRegion: address.region,
       postalCode: address.postalCode,
       addressCountry: address.country,
+    },
+    geo: {
+      "@type": "GeoCoordinates",
+      latitude: coordinates.latitude,
+      longitude: coordinates.longitude,
     },
     hasMap: mapsUrl,
     openingHoursSpecification: [
@@ -519,8 +488,8 @@ export function buildRestaurantJsonLd(withContext = true) {
         closes: openingHours.closes,
       },
     ],
-    menu: `${siteUrl}/menu`,
-    hasMenu: { "@id": `${siteUrl}/menu#menu` },
+    menu: `${pageUrl}#menu`,
+    hasMenu: { "@id": `${pageUrl}#menu` },
     sameAs: sameAsUrls,
   };
   return withContext ? { "@context": "https://schema.org", ...data } : data;
@@ -530,33 +499,16 @@ export function buildFaqJsonLd(
   items: readonly { question: string; answer: string }[],
   pageUrl = siteUrl,
   withContext = true,
+  language: ContentLanguage = "tr",
 ) {
   const data = {
     "@type": "FAQPage",
     "@id": `${pageUrl}#faq`,
-    inLanguage: "tr-TR",
+    inLanguage: language === "en" ? "en" : "tr-TR",
     mainEntity: items.map((item) => ({
       "@type": "Question",
       name: item.question,
       acceptedAnswer: { "@type": "Answer", text: item.answer },
-    })),
-  };
-  return withContext ? { "@context": "https://schema.org", ...data } : data;
-}
-
-export function buildBreadcrumbJsonLd(
-  items: { name: string; url: string }[],
-  pageUrl = items.at(-1)?.url ?? siteUrl,
-  withContext = true,
-) {
-  const data = {
-    "@type": "BreadcrumbList",
-    "@id": `${pageUrl}#breadcrumb`,
-    itemListElement: items.map((item, index) => ({
-      "@type": "ListItem",
-      position: index + 1,
-      name: item.name,
-      item: item.url,
     })),
   };
   return withContext ? { "@context": "https://schema.org", ...data } : data;

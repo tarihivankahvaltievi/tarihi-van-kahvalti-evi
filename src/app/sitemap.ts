@@ -2,6 +2,7 @@ import type { MetadataRoute } from "next";
 import {
   absoluteUrl,
   defaultOgImagePath,
+  englishPageUrl,
   siteUrl,
 } from "./seo";
 
@@ -18,11 +19,33 @@ export default function sitemap(): MetadataRoute.Sitemap {
     {
       url: siteUrl,
       lastModified: contentLastModified,
+      alternates: {
+        languages: {
+          tr: siteUrl,
+          en: englishPageUrl,
+          "x-default": siteUrl,
+        },
+      },
       images: uniqueImages([
         absoluteUrl(defaultOgImagePath),
-        absoluteUrl("/images/hero-table.jpg"),
         absoluteUrl("/images/breakfast-spread.jpg"),
         absoluteUrl("/images/balcony-breakfast.jpg"),
+        absoluteUrl("/images/hands-table.jpg"),
+      ]),
+    },
+    {
+      url: englishPageUrl,
+      lastModified: contentLastModified,
+      alternates: {
+        languages: {
+          tr: siteUrl,
+          en: englishPageUrl,
+          "x-default": siteUrl,
+        },
+      },
+      images: uniqueImages([
+        absoluteUrl("/images/og/van-kahvaltisi.jpg"),
+        absoluteUrl("/images/hero-table.jpg"),
       ]),
     },
   ];

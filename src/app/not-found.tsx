@@ -3,7 +3,7 @@ import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "Sayfa Bulunamadı",
-  description: "Aradığınız sayfa bulunamadı. Menüye, iletişim bilgilerine veya ana sayfaya dönebilirsiniz.",
+  description: "Aradığınız sayfa bulunamadı. Ana sayfadaki menüye, iletişim bilgilerine veya sık sorulan sorulara dönebilirsiniz.",
   robots: {
     index: false,
     follow: true,
@@ -19,8 +19,8 @@ export default function NotFound() {
         <p>Bağlantı değişmiş veya sayfa kaldırılmış olabilir.</p>
         <div className="seo-related" aria-label="Devam bağlantıları">
           <Link href="/">Ana sayfaya dön</Link>
-          <Link href="/menu">Menüyü incele</Link>
-          <Link href="/iletisim">İletişim ve yol tarifi</Link>
+          <Link href="/#menu">Menüyü incele</Link>
+          <Link href="/#contact">İletişim ve yol tarifi</Link>
         </div>
       </section>
     </main>

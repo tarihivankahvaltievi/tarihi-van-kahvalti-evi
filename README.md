@@ -1,6 +1,6 @@
 # Tarihi Van Kahvaltı Evi
 
-Tarihi Van Kahvaltı Evi'nin Türkçe, mobil öncelikli Next.js web sitesi. Menü, iletişim, sık sorulan sorular ve yerel kahvaltı rehberleri tek bir doğrulanabilir işletme profili üzerinden üretilir.
+Tarihi Van Kahvaltı Evi'nin Türkçe ve İngilizce, mobil öncelikli Next.js web sitesi. Menü, iletişim, sık sorulan sorular ve yerel işletme şeması tek bir doğrulanabilir veri kaynağından üretilir.
 
 ## Yerel geliştirme
 
@@ -21,10 +21,13 @@ npm start
 
 - İşletme bilgileri, sayfa içeriği, yapılandırılmış veri ve eski URL yönlendirmeleri: `src/app/seo.ts`
 - Site geneli metadata: `src/app/layout.tsx`
-- İndekslenebilir kanonik sayfa: `/`
-- Kullanıcı araç sayfaları (`/menu`, `/iletisim`, `/sss`, `/kafka-cafe`) erişilebilir ancak `noindex, follow` kullanır.
-- Eski ve konu odaklı arama URL'lerinin tamamı kalıcı olarak doğrudan `/` adresine yönlenir.
+- İndekslenebilir kanonik sayfalar: Türkçe `/` ve İngilizce `/en`
+- İki dil arasında karşılıklı `hreflang` (`tr`, `en`, `x-default`) bulunur.
+- Menü, iletişim ve SSS Türkçe ana sayfada gerçek bölümler olarak yer alır.
+- Kaldırılan `/menu`, `/iletisim`, `/sss` ve `/kafka-cafe` URL'leri kalıcı olarak ana sayfadaki en yakın bölüme yönlenir.
+- Eski konu/WordPress URL'leri yalnız bilinen eşdeğer hedefe tek adım kalıcı yönlenir; bilinmeyen URL'ler gerçek `404` döner.
 - Sitemap ve tarayıcı kuralları: `src/app/sitemap.ts`, `src/app/robots.ts`
+- Otomatik SEO/HTTP sözleşmesi: `npm run test:seo`
 
 Adres, telefon, çalışma saatleri veya fiyatlar değiştiğinde önce `seo.ts` güncellenmeli; görünür içerik ile JSON-LD aynı kaynaktan beslenmelidir.
 

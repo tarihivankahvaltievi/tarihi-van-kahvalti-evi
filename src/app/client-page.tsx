@@ -18,6 +18,7 @@ import {
   ChevronRight,
   CircleHelp,
   Home,
+  Languages,
   MapPin,
   MessageCircle,
 } from "lucide-react";
@@ -223,10 +224,11 @@ export default function ClientPage({ children }: { children: ReactNode }) {
           <nav className="nav-links" aria-label="Ana menü" onMouseLeave={handleMouseLeave}>
             <span className="nav-hover-pill" style={hoverStyle} />
             <a href="#story" onMouseEnter={handleMouseEnter}>Hakkımızda</a>
-            <Link href="/menu" onMouseEnter={handleMouseEnter}>Menü</Link>
+            <a href="#menu" onMouseEnter={handleMouseEnter}>Menü</a>
             <a href="#gallery" onMouseEnter={handleMouseEnter}>Galeri</a>
-            <Link href="/iletisim" onMouseEnter={handleMouseEnter}>Konum</Link>
-            <Link href="/sss" onMouseEnter={handleMouseEnter}>SSS</Link>
+            <a href="#contact" onMouseEnter={handleMouseEnter}>Konum</a>
+            <a href="#faq" onMouseEnter={handleMouseEnter}>SSS</a>
+            <Link href="/en" hrefLang="en" onMouseEnter={handleMouseEnter}>English</Link>
           </nav>
 
           <div className="nav-actions">
@@ -292,14 +294,14 @@ export default function ClientPage({ children }: { children: ReactNode }) {
               </span>
               <ChevronRight size={17} />
             </a>
-            <Link className="nav-menu-primary" href="/menu" tabIndex={menuOpen ? 0 : -1} style={{ "--item-index": 3 } as CSSProperties} onClick={() => setMenuOpen(false)}>
+            <a className="nav-menu-primary" href="#menu" tabIndex={menuOpen ? 0 : -1} style={{ "--item-index": 3 } as CSSProperties} onClick={() => setMenuOpen(false)}>
               <BookOpen size={18} />
               <span className="nav-menu-copy">
                 <span className="nav-menu-link-text">Menü</span>
                 <span className="nav-menu-link-meta">Fiyatlar ve içerik</span>
               </span>
               <ChevronRight size={17} />
-            </Link>
+            </a>
             <a className="nav-menu-primary" href="#gallery" tabIndex={menuOpen ? 0 : -1} style={{ "--item-index": 4 } as CSSProperties} onClick={() => setMenuOpen(false)}>
               <Camera size={18} />
               <span className="nav-menu-copy">
@@ -308,27 +310,35 @@ export default function ClientPage({ children }: { children: ReactNode }) {
               </span>
               <ChevronRight size={17} />
             </a>
-            <Link className="nav-menu-primary" href="/iletisim" tabIndex={menuOpen ? 0 : -1} style={{ "--item-index": 5 } as CSSProperties} onClick={() => setMenuOpen(false)}>
+            <a className="nav-menu-primary" href="#contact" tabIndex={menuOpen ? 0 : -1} style={{ "--item-index": 5 } as CSSProperties} onClick={() => setMenuOpen(false)}>
               <MapPin size={18} />
               <span className="nav-menu-copy">
                 <span className="nav-menu-link-text">Konum</span>
                 <span className="nav-menu-link-meta">Beyoğlu rotası</span>
               </span>
               <ChevronRight size={17} />
-            </Link>
-            <Link className="nav-menu-utility" href="/#faq" tabIndex={menuOpen ? 0 : -1} style={{ "--item-index": 6 } as CSSProperties} onClick={() => setMenuOpen(false)}>
+            </a>
+            <a className="nav-menu-utility" href="#menu" tabIndex={menuOpen ? 0 : -1} style={{ "--item-index": 6 } as CSSProperties} onClick={() => setMenuOpen(false)}>
               <BookOpen size={18} />
               <span className="nav-menu-copy">
                 <span className="nav-menu-link-text">Van kahvaltısı</span>
                 <span className="nav-menu-link-meta">Ana sayfada kısa cevaplar</span>
               </span>
               <ChevronRight size={17} />
-            </Link>
-            <Link className="nav-menu-utility" href="/sss" tabIndex={menuOpen ? 0 : -1} style={{ "--item-index": 7 } as CSSProperties} onClick={() => setMenuOpen(false)}>
+            </a>
+            <a className="nav-menu-utility" href="#faq" tabIndex={menuOpen ? 0 : -1} style={{ "--item-index": 7 } as CSSProperties} onClick={() => setMenuOpen(false)}>
               <CircleHelp size={18} />
               <span className="nav-menu-copy">
                 <span className="nav-menu-link-text">Sıkça sorulanlar</span>
                 <span className="nav-menu-link-meta">Kısa ve net cevaplar</span>
+              </span>
+              <ChevronRight size={17} />
+            </a>
+            <Link className="nav-menu-utility" href="/en" hrefLang="en" tabIndex={menuOpen ? 0 : -1} style={{ "--item-index": 8 } as CSSProperties} onClick={() => setMenuOpen(false)}>
+              <Languages size={18} />
+              <span className="nav-menu-copy">
+                <span className="nav-menu-link-text">English</span>
+                <span className="nav-menu-link-meta">Visitor guide</span>
               </span>
               <ChevronRight size={17} />
             </Link>
@@ -336,7 +346,7 @@ export default function ClientPage({ children }: { children: ReactNode }) {
               className="nav-menu-utility"
               href={whatsappUrl}
               tabIndex={menuOpen ? 0 : -1}
-              style={{ "--item-index": 8 } as CSSProperties}
+              style={{ "--item-index": 9 } as CSSProperties}
               target="_blank"
               rel="noopener noreferrer"
               onClick={() => setMenuOpen(false)}

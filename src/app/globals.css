@@ -2310,6 +2310,185 @@ h2 span {
   }
 }
 
+/* SEO/GEO content: one useful Turkish homepage plus one complete English version. */
+.local-seo-stack {
+  padding: clamp(2rem, 6vw, 5rem) 0 clamp(1rem, 3vw, 2.5rem);
+  background: var(--heritage-paper, var(--soft));
+}
+
+.local-seo-stack .local-answer-panel {
+  margin-bottom: clamp(1rem, 3vw, 2rem) !important;
+}
+
+.menu-answer-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.85rem;
+}
+
+.menu-answer-card {
+  padding: clamp(1rem, 2vw, 1.35rem);
+  border: 1px solid var(--heritage-line, rgba(23, 11, 12, 0.2));
+  border-radius: 4px;
+  background: rgba(255, 249, 237, 0.78);
+}
+
+.menu-answer-card > h3 {
+  margin: 0 0 0.55rem;
+  color: var(--van-blue-dark, var(--red-dark));
+  font-family: var(--font-playfair), Georgia, serif;
+  font-size: clamp(1.25rem, 2vw, 1.65rem);
+}
+
+.menu-answer-card > p {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.55;
+}
+
+.menu-answer-list {
+  display: grid;
+  gap: 0.75rem;
+  margin: 1rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.menu-answer-list li {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.9rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--heritage-line, rgba(23, 11, 12, 0.16));
+}
+
+.menu-answer-list li > span:first-child {
+  display: grid;
+  gap: 0.2rem;
+}
+
+.menu-answer-list strong {
+  color: var(--ink);
+  font-size: 0.92rem;
+}
+
+.menu-answer-list small {
+  color: var(--muted);
+  font-size: 0.78rem;
+  line-height: 1.4;
+}
+
+.menu-answer-price {
+  display: grid;
+  flex: 0 0 auto;
+  gap: 0.1rem;
+  color: var(--van-blue-dark, var(--red-dark));
+  font-weight: 850;
+  text-align: right;
+  white-space: nowrap;
+}
+
+.menu-answer-price small {
+  font-weight: 600;
+}
+
+.local-contact-strip {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.65rem 1rem;
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--heritage-line, rgba(23, 11, 12, 0.2));
+  color: var(--muted);
+  font-size: 0.88rem;
+}
+
+.local-contact-strip address {
+  font-style: normal;
+}
+
+.local-contact-strip a {
+  color: var(--van-blue-dark, var(--red-dark));
+  font-weight: 800;
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+.seo-section {
+  scroll-margin-top: 2rem;
+  padding-top: clamp(1.5rem, 4vw, 3.5rem);
+}
+
+.seo-section-heading {
+  width: min(1120px, calc(100% - 2rem));
+  margin: 0 auto;
+}
+
+.seo-section-heading h2 {
+  max-width: 18ch;
+  margin: 0.75rem 0 0.65rem;
+  color: var(--ink);
+  font-family: var(--font-playfair), Georgia, serif;
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  line-height: 1;
+}
+
+.seo-section-heading p,
+.seo-section-copy,
+.seo-address {
+  max-width: 70ch;
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+.seo-section-copy {
+  margin: 0;
+}
+
+.seo-address {
+  margin-top: 0.75rem;
+  font-style: normal;
+  font-weight: 750;
+}
+
+#menu,
+#contact,
+#location,
+#faq-en {
+  scroll-margin-top: 6rem;
+}
+
+@media (max-width: 900px) {
+  .menu-answer-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .menu-answer-card {
+    padding: 1rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .local-seo-stack {
+    padding-top: 1.25rem;
+  }
+
+  .menu-answer-list li {
+    gap: 0.6rem;
+  }
+
+  .local-contact-strip {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .seo-section-heading {
+    width: min(100% - 1.2rem, 560px);
+  }
+}
+
 @keyframes nav-drawer-row-wash {
   0% { opacity: 0; transform: scaleX(0); }
   44% { opacity: 1; transform: scaleX(1); }

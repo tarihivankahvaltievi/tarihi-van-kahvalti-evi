@@ -4,15 +4,24 @@ import { HomeContent } from "./home-content";
 import {
   buildFaqJsonLd,
   buildHomeWebPageJsonLd,
+  buildMenuJsonLd,
   buildRestaurantJsonLd,
   buildWebsiteJsonLd,
+  englishPageUrl,
   faqItems,
   jsonLd,
   siteUrl,
 } from "./seo";
 
 export const metadata: Metadata = {
-  alternates: { canonical: siteUrl },
+  alternates: {
+    canonical: siteUrl,
+    languages: {
+      tr: siteUrl,
+      en: englishPageUrl,
+      "x-default": siteUrl,
+    },
+  },
 };
 
 export default function Home() {
@@ -22,6 +31,7 @@ export default function Home() {
       buildWebsiteJsonLd(false),
       buildRestaurantJsonLd(false),
       buildHomeWebPageJsonLd(false),
+      buildMenuJsonLd(false),
       buildFaqJsonLd(faqItems, siteUrl, false),
     ],
   };

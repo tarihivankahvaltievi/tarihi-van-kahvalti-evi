@@ -58,7 +58,7 @@ export function AboutStory() {
           </p>
 
           <nav className={styles.actions} aria-label="Hakkımızda bölümü sonraki adımlar">
-            <Link href="/menu" className={`${styles.action} ${styles.menuAction}`}>
+            <Link href="/#menu" className={`${styles.action} ${styles.menuAction}`}>
               <span>Sofrayı keşfet</span>
               <span className={styles.actionArrow} aria-hidden="true">↗</span>
             </Link>
