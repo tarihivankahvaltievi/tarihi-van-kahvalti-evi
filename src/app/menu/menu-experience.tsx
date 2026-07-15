@@ -1,7 +1,7 @@
 "use client";
 
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
-import { ArrowLeft, Check, ChevronRight, Clock3, Search, Sparkles, UtensilsCrossed, X } from "lucide-react";
+import { ArrowLeft, Check, ChevronRight, Clock3, Leaf, Search, Sparkles, UtensilsCrossed, X } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { createPortal } from "react-dom";
@@ -22,18 +22,17 @@ function MenuRow({ item, index, onOpen }: { item: MenuItem; index: number; onOpe
   return (
     <motion.article
       className={styles.productRow}
-      initial={reduceMotion ? false : { opacity: 0, y: 10 }}
+      initial={reduceMotion ? false : { opacity: 0, y: 8 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.1 }}
-      whileTap={reduceMotion ? undefined : { scale: 0.99 }}
-      transition={{ duration: reduceMotion ? 0 : 0.4, delay: Math.min(index * 0.04, 0.1), ease }}
+      viewport={{ once: true, amount: 0.15 }}
+      transition={{ duration: reduceMotion ? 0 : 0.35, delay: Math.min(index * 0.03, 0.12), ease }}
     >
       <button type="button" onClick={onOpen} aria-label={`${item.name} detayını aç`} className={styles.rowButton}>
         <div className={styles.rowThumbnail}>
           <Image src={item.image} alt={item.imageAlt} fill sizes="72px" quality={82} />
           {item.tags.includes("Öne çıkan") && (
             <span className={styles.rowHighlightBadge}>
-              <Sparkles size={8} /> Popüler
+              <Sparkles size={7} /> Popüler
             </span>
           )}
         </div>
@@ -51,12 +50,13 @@ function MenuRow({ item, index, onOpen }: { item: MenuItem; index: number; onOpe
             <div className={styles.rowBadges}>
               {item.tags.filter(t => t !== "Öne çıkan").map(tag => (
                 <span key={tag} className={`${styles.rowBadge} ${tag === "Vejetaryen" ? styles.badgeVeggie : styles.badgeRecommend}`}>
-                  {tag}
+                  {tag === "Vejetaryen" && <Leaf size={9} />} {tag}
                 </span>
               ))}
             </div>
           )}
         </div>
+        <ChevronRight size={16} className={styles.rowChevron} />
       </button>
     </motion.article>
   );
@@ -355,7 +355,7 @@ export function MenuExperience() {
                         <h3 id={`category-${group.id}`}>{group.label}</h3>
                         <p>{group.description}</p>
                       </div>
-                      <span>{group.items.length} lezzet</span>
+                      <span className={styles.categoryCount}>{group.items.length} lezzet</span>
                     </header>
                     <div className={styles.productList}>
                       {group.items.map((item, index) => <MenuRow key={item.id} item={item} index={index} onOpen={() => setSelectedItem(item)} />)}
