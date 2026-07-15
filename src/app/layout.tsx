@@ -30,6 +30,9 @@ const bricolageGrotesque = Bricolage_Grotesque({
 });
 import {
   defaultOgImage,
+  homeDescription,
+  homeOgDescription,
+  homeTitle,
   sameAsUrls,
   siteName,
   siteUrl,
@@ -46,12 +49,10 @@ export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   applicationName: siteName,
   title: {
-    default:
-      "Van Kahvaltıcısı | Tarihi Van Kahvaltı Evi, Beyoğlu",
+    default: homeTitle,
     template: `%s | ${siteName}`,
   },
-  description:
-    "Beyoğlu Taksim'de Van kahvaltısı: otlu peynir, murtuğa, kavut, sıcak sahanlar ve sınırsız çay. Menü, adres, yol tarifi ve rezervasyon.",
+  description: homeDescription,
   authors: [{ name: siteName, url: siteUrl }],
   creator: siteName,
   publisher: siteName,
@@ -74,9 +75,8 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: "Van Kahvaltıcısı | Tarihi Van Kahvaltı Evi, Beyoğlu",
-    description:
-      "Beyoğlu Taksim'de geleneksel Van kahvaltısı; menü, adres, yol tarifi ve rezervasyon bilgileri.",
+    title: homeTitle,
+    description: homeOgDescription,
     url: siteUrl,
     siteName,
     images: [
@@ -92,9 +92,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Van Kahvaltıcısı | Tarihi Van Kahvaltı Evi",
-    description:
-      "Beyoğlu Taksim'de Van kahvaltısı; otlu peynir, murtuğa, kavut ve sınırsız çay.",
+    title: homeTitle,
+    description: homeOgDescription,
     images: [defaultOgImage],
   },
   icons: {

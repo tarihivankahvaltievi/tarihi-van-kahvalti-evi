@@ -3,6 +3,11 @@ import type { Metadata } from "next";
 export const siteUrl = "https://www.tarihivankahvaltievi.com";
 export const siteName = "Tarihi Van Kahvaltı Evi";
 export const alternateName = "Tarihi Van Kahvaltı Evi 1978";
+export const homeTitle = "İstanbul Van Kahvaltıcısı | Tarihi Van Kahvaltı Evi";
+export const homeDescription =
+  "İstanbul Beyoğlu Taksim'de Van kahvaltısı: otlu peynir, murtuğa, kavut, sıcak sahanlar ve sınırsız çay. Menü, yol tarifi ve rezervasyon.";
+export const homeOgDescription =
+  "İstanbul Beyoğlu Taksim'de geleneksel Van kahvaltısı; menü, adres, yol tarifi ve rezervasyon bilgileri.";
 export const displayPhone = "+90 541 525 2868";
 export const phoneE164 = "+905415252868";
 export const telUrl = `tel:${phoneE164}`;
@@ -357,7 +362,8 @@ export const seoPages: SeoPage[] = [
 
 export const legacyRedirects = [
   { source: "/taksim-kahvalti", destination: "/beyoglu-kahvalti" },
-  { source: "/istanbul-van-kahvaltisi", destination: "/van-kahvaltisi" },
+  // Google'da görünen eski sonuç doğrudan ana sayfaya gitmeli; yönlendirme zinciri oluşturmayın.
+  { source: "/istanbul-van-kahvaltisi", destination: "/" },
   { source: "/serpme-van-kahvaltisi", destination: "/van-kahvaltisi" },
   { source: "/serpme-kahvalti-beyoglu", destination: "/beyoglu-kahvalti" },
   { source: "/istiklal-caddesi-kahvalti", destination: "/iletisim#ulasim" },
@@ -495,9 +501,8 @@ export function buildHomeWebPageJsonLd(withContext = true) {
     "@type": "WebPage",
     "@id": `${siteUrl}/#webpage`,
     url: siteUrl,
-    name: "Van Kahvaltıcısı | Tarihi Van Kahvaltı Evi, Beyoğlu",
-    description:
-      "Beyoğlu Taksim'de geleneksel Van kahvaltısı; menü, adres, yol tarifi ve rezervasyon bilgileri.",
+    name: homeTitle,
+    description: homeOgDescription,
     inLanguage: "tr-TR",
     isPartOf: { "@id": `${siteUrl}/#website` },
     mainEntity: { "@id": `${siteUrl}/#restaurant` },
@@ -533,6 +538,23 @@ export function buildRestaurantJsonLd(withContext = true) {
     priceRange: "₺₺",
     acceptsReservations: true,
     servesCuisine: cuisine,
+    areaServed: {
+      "@type": "City",
+      name: "İstanbul",
+      containedInPlace: {
+        "@type": "Country",
+        name: address.countryName,
+      },
+    },
+    knowsAbout: [
+      "Van kahvaltısı",
+      "Serpme kahvaltı",
+      "Van otlu peyniri",
+      "Murtuğa",
+      "Kavut",
+      "Beyoğlu kahvaltı",
+      "Taksim kahvaltı",
+    ],
     address: {
       "@type": "PostalAddress",
       streetAddress: `${address.streetAddress}, ${address.neighborhood}`,

@@ -37,11 +37,11 @@ const visibleHtml = (html) =>
 const visibleText = (html) =>
   decodeHtml(visibleHtml(html).replace(/<[^>]+>/g, " ")).replace(/\s+/g, " ").trim();
 
-async function fetchWithRetry(path, attempts = 30) {
+async function fetchWithRetry(path, attempts = 30, redirect = "follow") {
   let lastError;
   for (let attempt = 0; attempt < attempts; attempt += 1) {
     try {
-      const response = await fetch(`${baseUrl}${path}`);
+      const response = await fetch(`${baseUrl}${path}`, { redirect });
       return response;
     } catch (error) {
       lastError = error;
@@ -108,6 +108,10 @@ assert(routes.every((route) => sitemap.includes(`<loc>${route.canonical}</loc>`)
 const robots = await (await fetchWithRetry("/robots.txt")).text();
 assert(robots.includes("User-Agent: *"), "robots.txt: genel bot kuralı eksik");
 assert(robots.includes("https://www.tarihivankahvaltievi.com/sitemap.xml"), "robots.txt: sitemap eksik");
+
+const googleResultRedirect = await fetchWithRetry("/istanbul-van-kahvaltisi", 30, "manual");
+assert(googleResultRedirect.status === 308, "Google sonuç URL'si kalıcı 308 dönmeli");
+assert(googleResultRedirect.headers.get("location") === "/", "Google sonuç URL'si ana sayfaya gitmeli");
 
 const missing = await fetchWithRetry("/seo-contract-missing-page");
 const missingHtml = await missing.text();
