@@ -4,6 +4,7 @@ import { request as httpsRequest } from "node:https";
 const baseUrl = process.env.SEO_TEST_BASE_URL ?? "http://127.0.0.1:3100";
 const canonicalSiteUrl = "https://www.tarihivankahvaltievi.com";
 const englishPageUrl = `${canonicalSiteUrl}/en`;
+const menuPageUrl = `${canonicalSiteUrl}/menu`;
 
 const routes = [
   {
@@ -29,7 +30,7 @@ const routes = [
   },
 ];
 
-const canonicalUrls = new Set(routes.map((route) => route.canonical));
+const canonicalUrls = new Set([...routes.map((route) => route.canonical), menuPageUrl]);
 const internalPaths = new Set();
 const redirectRules = [
   ["/istanbul-van-kahvaltisi", "/"],
@@ -56,7 +57,6 @@ const redirectRules = [
   ["/vejetaryen-kahvalti-beyoglu", "/"],
   ["/beyoglu-kahvalti-mekanlari", "/"],
   ["/taksim-brunch-kahvalti", "/"],
-  ["/menu", "/#menu"],
   ["/iletisim", "/#contact"],
   ["/sss", "/#faq"],
   ["/kafka-cafe", "/#menu"],
@@ -117,6 +117,23 @@ async function fetchWithRetry(path, attempts = 30, options = {}) {
   }
   throw lastError;
 }
+
+const menuResponse = await fetchWithRetry("/menu");
+const menuHtml = await menuResponse.text();
+assert(menuResponse.status === 200, `/menu: HTTP ${menuResponse.status}`);
+assert(
+  menuHtml.includes(`<link rel="canonical" href="${menuPageUrl}"`),
+  "/menu: canonical yanlış",
+);
+assert((visibleHtml(menuHtml).match(/<h1\b/gi) ?? []).length === 1, "/menu: tam bir H1 bulunmalı");
+const menuJsonScripts = [
+  ...menuHtml.matchAll(/<script\s+type="application\/ld\+json">([\s\S]*?)<\/script>/gi),
+];
+assert(menuJsonScripts.length === 1, "/menu: tek JSON-LD script bulunmalı");
+const menuDocument = JSON.parse(menuJsonScripts[0][1]);
+assert(menuDocument["@type"] === "Menu", "/menu: Menu şeması eksik");
+assert(menuDocument.url === menuPageUrl, "/menu: şema URL'si yanlış");
+assert(menuDocument.hasMenuSection?.length === 4, "/menu: dört menü bölümü bulunmalı");
 
 function requestWithHost(path, host) {
   const target = new URL(baseUrl);
@@ -223,9 +240,9 @@ const sitemap = await (await fetchWithRetry("/sitemap.xml")).text();
 const sitemapUrls = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map((match) => match[1]);
 const sitemapLastModified = [...sitemap.matchAll(/<lastmod>([^<]+)<\/lastmod>/g)].map((match) => match[1]);
 const sitemapImages = [...sitemap.matchAll(/<image:loc>([^<]+)<\/image:loc>/g)].map((match) => match[1]);
-assert(sitemapUrls.length === 2, "Sitemap: iki kanonik dil URL'si bulunmalı");
+assert(sitemapUrls.length === 3, "Sitemap: üç kanonik URL bulunmalı");
 assert(sitemapUrls.every((url) => canonicalUrls.has(url)), "Sitemap: kanonik olmayan URL var");
-assert(sitemapLastModified.length === 2, "Sitemap: lastmod sayısı yanlış");
+assert(sitemapLastModified.length === 3, "Sitemap: lastmod sayısı yanlış");
 assert(
   sitemapLastModified.every((value) => Number.isFinite(Date.parse(value)) && Date.parse(value) <= Date.now()),
   "Sitemap: lastmod geçerli ve gelecekte olmayan bir tarih olmalı",

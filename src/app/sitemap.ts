@@ -34,6 +34,16 @@ export default function sitemap(): MetadataRoute.Sitemap {
       ]),
     },
     {
+      url: `${siteUrl}/menu`,
+      lastModified: contentLastModified,
+      images: uniqueImages([
+        absoluteUrl("/images/og/menu.jpg"),
+        absoluteUrl("/images/breakfast-spread.jpg"),
+        absoluteUrl("/images/sucuk-egg.jpg"),
+        absoluteUrl("/images/kete-detail.jpg"),
+      ]),
+    },
+    {
       url: englishPageUrl,
       lastModified: contentLastModified,
       alternates: {

@@ -285,7 +285,6 @@ export const searchLandingPaths = [
 // Bilinmeyen URL'ler gerçek 404 kalır; site geneli wildcard yönlendirme yapılmaz.
 export const legacyRedirects = [
   ...searchLandingPaths.map((source) => ({ source, destination: "/" })),
-  { source: "/menu", destination: "/#menu" },
   { source: "/iletisim", destination: "/#contact" },
   { source: "/sss", destination: "/#faq" },
   { source: "/kafka-cafe", destination: "/#menu" },
@@ -305,7 +304,7 @@ export const localSeoFacts = [
   {
     label: "Van kahvaltısı",
     value: "Otlu peynir, murtuğa, kavut, kete, bal-kaymak, sıcak sahanlar ve sınırsız çayla serpme sofra.",
-    href: "#menu",
+    href: "/menu",
     linkLabel: "Menüyü gör",
   },
   {

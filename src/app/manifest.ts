@@ -40,7 +40,7 @@ export default function manifest(): MetadataRoute.Manifest {
         name: "Menü ve Fiyatlar",
         short_name: "Menü",
         description: "Serpme Van kahvaltısı, sıcaklar ve Kafka Cafe menüsü.",
-        url: "/#menu",
+        url: "/menu",
         icons: [{ src: "/icons/icon-192.png", sizes: "192x192", type: "image/png" }],
       },
       {

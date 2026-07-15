@@ -3,6 +3,7 @@
 import dynamic from "next/dynamic";
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import {
   useEffect,
   useRef,
@@ -21,6 +22,7 @@ import {
   Languages,
   MapPin,
   MessageCircle,
+  UtensilsCrossed,
 } from "lucide-react";
 import { mapsUrl, whatsappUrl } from "./seo";
 
@@ -30,6 +32,8 @@ const BookingModal = dynamic(
 );
 
 export default function ClientPage({ children }: { children: ReactNode }) {
+  const pathname = usePathname();
+  const isMenuPage = pathname === "/menu";
   const [isBookingOpen, setIsBookingOpen] = useState(false);
   const [preselectedItem, setPreselectedItem] = useState("");
   const [preselectedType, setPreselectedType] = useState("");
@@ -207,14 +211,14 @@ export default function ClientPage({ children }: { children: ReactNode }) {
                 className="brand-logo-image"
               />
             </div>
-            <a className="logo" href="#top">
+            <Link className="logo" href="/#top" aria-label="Tarihi Van Kahvaltı Evi ana sayfası">
               <span className="logo-word">
                 <span className="logo-tarihi">Tarihi</span><span className="logo-van">Van</span>
               </span>
               <span className="logo-subtitle">
                 <span>Kahvaltı Evi</span>
               </span>
-            </a>
+            </Link>
             <div className={`nav-status-pill ${isOpenNow ? "open" : "closed"}`}>
               <span className="nav-status-dot" />
               <span>{isOpenNow ? "Açık" : "Kapalı"}</span>
@@ -223,11 +227,11 @@ export default function ClientPage({ children }: { children: ReactNode }) {
 
           <nav className="nav-links" aria-label="Ana menü" onMouseLeave={handleMouseLeave}>
             <span className="nav-hover-pill" style={hoverStyle} />
-            <a href="#story" onMouseEnter={handleMouseEnter}>Hakkımızda</a>
-            <a href="#menu" onMouseEnter={handleMouseEnter}>Menü</a>
-            <a href="#gallery" onMouseEnter={handleMouseEnter}>Galeri</a>
-            <a href="#contact" onMouseEnter={handleMouseEnter}>Konum</a>
-            <a href="#faq" onMouseEnter={handleMouseEnter}>SSS</a>
+            <Link href="/#story" onMouseEnter={handleMouseEnter}>Hakkımızda</Link>
+            <Link href="/menu" aria-current={isMenuPage ? "page" : undefined} onMouseEnter={handleMouseEnter}>Menü</Link>
+            <Link href="/#gallery" onMouseEnter={handleMouseEnter}>Galeri</Link>
+            <Link href="/#contact" onMouseEnter={handleMouseEnter}>Konum</Link>
+            <Link href="/#faq" onMouseEnter={handleMouseEnter}>SSS</Link>
             <Link href="/en" hrefLang="en" onMouseEnter={handleMouseEnter}>English</Link>
           </nav>
 
@@ -278,62 +282,62 @@ export default function ClientPage({ children }: { children: ReactNode }) {
               <span id="site-menu-title" data-menu-title tabIndex={-1}>Menü</span>
               <small>1978 · Beyoğlu</small>
             </div>
-            <a className="nav-menu-primary" href="#top" tabIndex={menuOpen ? 0 : -1} style={{ "--item-index": 1 } as CSSProperties} onClick={() => setMenuOpen(false)}>
+            <Link className="nav-menu-primary" href="/#top" tabIndex={menuOpen ? 0 : -1} style={{ "--item-index": 1 } as CSSProperties} onClick={() => setMenuOpen(false)}>
               <Home size={18} />
               <span className="nav-menu-copy">
                 <span className="nav-menu-link-text">Ana sayfa</span>
                 <span className="nav-menu-link-meta">Sıcak sofra açılışı</span>
               </span>
               <ChevronRight size={17} />
-            </a>
-            <a className="nav-menu-primary" href="#story" tabIndex={menuOpen ? 0 : -1} style={{ "--item-index": 2 } as CSSProperties} onClick={() => setMenuOpen(false)}>
+            </Link>
+            <Link className="nav-menu-primary" href="/#story" tabIndex={menuOpen ? 0 : -1} style={{ "--item-index": 2 } as CSSProperties} onClick={() => setMenuOpen(false)}>
               <BookOpen size={18} />
               <span className="nav-menu-copy">
                 <span className="nav-menu-link-text">Hakkımızda</span>
                 <span className="nav-menu-link-meta">Tarihi Rum binası</span>
               </span>
               <ChevronRight size={17} />
-            </a>
-            <a className="nav-menu-primary" href="#menu" tabIndex={menuOpen ? 0 : -1} style={{ "--item-index": 3 } as CSSProperties} onClick={() => setMenuOpen(false)}>
+            </Link>
+            <Link className="nav-menu-primary" href="/menu" aria-current={isMenuPage ? "page" : undefined} tabIndex={menuOpen ? 0 : -1} style={{ "--item-index": 3 } as CSSProperties} onClick={() => setMenuOpen(false)}>
               <BookOpen size={18} />
               <span className="nav-menu-copy">
                 <span className="nav-menu-link-text">Menü</span>
                 <span className="nav-menu-link-meta">Fiyatlar ve içerik</span>
               </span>
               <ChevronRight size={17} />
-            </a>
-            <a className="nav-menu-primary" href="#gallery" tabIndex={menuOpen ? 0 : -1} style={{ "--item-index": 4 } as CSSProperties} onClick={() => setMenuOpen(false)}>
+            </Link>
+            <Link className="nav-menu-primary" href="/#gallery" tabIndex={menuOpen ? 0 : -1} style={{ "--item-index": 4 } as CSSProperties} onClick={() => setMenuOpen(false)}>
               <Camera size={18} />
               <span className="nav-menu-copy">
                 <span className="nav-menu-link-text">Galeri</span>
                 <span className="nav-menu-link-meta">Bakır, çay, masa</span>
               </span>
               <ChevronRight size={17} />
-            </a>
-            <a className="nav-menu-primary" href="#contact" tabIndex={menuOpen ? 0 : -1} style={{ "--item-index": 5 } as CSSProperties} onClick={() => setMenuOpen(false)}>
+            </Link>
+            <Link className="nav-menu-primary" href="/#contact" tabIndex={menuOpen ? 0 : -1} style={{ "--item-index": 5 } as CSSProperties} onClick={() => setMenuOpen(false)}>
               <MapPin size={18} />
               <span className="nav-menu-copy">
                 <span className="nav-menu-link-text">Konum</span>
                 <span className="nav-menu-link-meta">Beyoğlu rotası</span>
               </span>
               <ChevronRight size={17} />
-            </a>
-            <a className="nav-menu-utility" href="#menu" tabIndex={menuOpen ? 0 : -1} style={{ "--item-index": 6 } as CSSProperties} onClick={() => setMenuOpen(false)}>
+            </Link>
+            <Link className="nav-menu-utility" href="/menu" tabIndex={menuOpen ? 0 : -1} style={{ "--item-index": 6 } as CSSProperties} onClick={() => setMenuOpen(false)}>
               <BookOpen size={18} />
               <span className="nav-menu-copy">
                 <span className="nav-menu-link-text">Van kahvaltısı</span>
                 <span className="nav-menu-link-meta">Ana sayfada kısa cevaplar</span>
               </span>
               <ChevronRight size={17} />
-            </a>
-            <a className="nav-menu-utility" href="#faq" tabIndex={menuOpen ? 0 : -1} style={{ "--item-index": 7 } as CSSProperties} onClick={() => setMenuOpen(false)}>
+            </Link>
+            <Link className="nav-menu-utility" href="/#faq" tabIndex={menuOpen ? 0 : -1} style={{ "--item-index": 7 } as CSSProperties} onClick={() => setMenuOpen(false)}>
               <CircleHelp size={18} />
               <span className="nav-menu-copy">
                 <span className="nav-menu-link-text">Sıkça sorulanlar</span>
                 <span className="nav-menu-link-meta">Kısa ve net cevaplar</span>
               </span>
               <ChevronRight size={17} />
-            </a>
+            </Link>
             <Link className="nav-menu-utility" href="/en" hrefLang="en" tabIndex={menuOpen ? 0 : -1} style={{ "--item-index": 8 } as CSSProperties} onClick={() => setMenuOpen(false)}>
               <Languages size={18} />
               <span className="nav-menu-copy">
@@ -392,15 +396,15 @@ export default function ClientPage({ children }: { children: ReactNode }) {
         {children}
       </div>
 
-      <div className={`mobile-bar ${mobileBarHidden || menuOpen ? "is-hidden" : ""}`} role="navigation" aria-label="Hızlı işlemler">
+      <div className={`mobile-bar ${mobileBarHidden || menuOpen ? "is-hidden" : ""} ${isMenuPage ? "menu-active" : ""}`} role="navigation" aria-label="Hızlı işlemler">
         <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" aria-label="WhatsApp üzerinden mesaj gönderin">
           <MessageCircle size={20} />
           <span className="mobile-bar-label">WhatsApp</span>
         </a>
-        <button type="button" onClick={() => handleOpenBooking()} aria-label="Rezervasyon yapın">
-          <Calendar size={22} className="mobile-bar-highlight-icon" />
-          <span className="mobile-bar-label">Rezervasyon</span>
-        </button>
+        <Link className="mobile-bar-primary" href="/menu" aria-label="QR menüyü açın" aria-current={isMenuPage ? "page" : undefined}>
+          <UtensilsCrossed size={22} className="mobile-bar-highlight-icon" />
+          <span className="mobile-bar-label">Menü</span>
+        </Link>
         <a href={mapsUrl} target="_blank" rel="noopener noreferrer" aria-label="Haritada yol tarifi alın">
           <MapPin size={20} />
           <span className="mobile-bar-label">Yol Tarifi</span>
