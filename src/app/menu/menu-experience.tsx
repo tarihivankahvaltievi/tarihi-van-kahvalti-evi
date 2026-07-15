@@ -1,6 +1,13 @@
 "use client";
 
-import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
+import {
+  AnimatePresence,
+  motion,
+  useReducedMotion,
+  useScroll,
+  useSpring,
+  useTransform,
+} from "framer-motion";
 import {
   ArrowLeft,
   ArrowUp,
@@ -144,9 +151,16 @@ function CopperLight() {
 }
 
 function MenuImage({ item, sizes, priority = false }: { item: MenuItem; sizes: string; priority?: boolean }) {
+  const frameRef = useRef<HTMLSpanElement>(null);
+  const reduceMotion = useReducedMotion();
+  const { scrollYProgress } = useScroll({ target: frameRef, offset: ["start end", "end start"] });
+  const imageY = useTransform(scrollYProgress, [0, 1], [-7, 7]);
+
   return (
-    <span className={styles.imageFrame}>
-      <Image src={item.image} alt={item.imageAlt} fill sizes={sizes} quality={82} priority={priority} />
+    <span ref={frameRef} className={styles.imageFrame}>
+      <motion.span className={styles.imagePlane} style={{ y: reduceMotion ? 0 : imageY }}>
+        <Image src={item.image} alt={item.imageAlt} fill sizes={sizes} quality={82} priority={priority} />
+      </motion.span>
       <span className={styles.imageWash} aria-hidden="true" />
     </span>
   );
@@ -198,7 +212,7 @@ function ProductDialog({ item, onClose }: { item: MenuItem | null; onClose: () =
             initial={reduceMotion ? false : { opacity: 0, y: 34, clipPath: "inset(7% 0 0 0 round 14px)" }}
             animate={{ opacity: 1, y: 0, clipPath: "inset(0% 0 0 0 round 14px)" }}
             exit={reduceMotion ? { opacity: 0 } : { opacity: 0, y: 18 }}
-            transition={{ duration: reduceMotion ? 0 : 0.5, ease: [0.16, 1, 0.3, 1] }}
+            transition={reduceMotion ? { duration: 0 } : { type: "spring", stiffness: 290, damping: 30, mass: 0.72 }}
           >
             <div className={styles.dialogMedia}>
               <Image src={item.image} alt={item.imageAlt} fill sizes="(max-width: 680px) 100vw, 520px" quality={82} />
@@ -228,6 +242,14 @@ export function MenuExperience() {
   const [showTop, setShowTop] = useState(false);
   const deferredSearch = useDeferredValue(searchTerm);
   const resultsRef = useRef<HTMLDivElement>(null);
+  const heroRef = useRef<HTMLElement>(null);
+  const { scrollYProgress: heroProgress } = useScroll({ target: heroRef, offset: ["start start", "end start"] });
+  const smoothHeroProgress = useSpring(heroProgress, { stiffness: 115, damping: 28, mass: 0.45 });
+  const heroImageY = useTransform(smoothHeroProgress, [0, 1], [0, 68]);
+  const heroImageScale = useTransform(smoothHeroProgress, [0, 1], [1.035, 1.12]);
+  const heroCopyY = useTransform(smoothHeroProgress, [0, 1], [0, 34]);
+  const heroCopyOpacity = useTransform(smoothHeroProgress, [0, 0.84], [1, 0.56]);
+  const heroSealRotate = useTransform(smoothHeroProgress, [0, 1], [-5, 9]);
 
   useEffect(() => {
     const onScroll = () => setShowTop(window.scrollY > 900);
@@ -261,23 +283,27 @@ export function MenuExperience() {
 
   return (
     <main id="main-content" className={styles.page}>
-      <section className={styles.hero} aria-labelledby="menu-title">
-        <Image className={styles.heroImage} src="/images/hero-parallax/overhead-feast.webp" alt="Van kahvaltısı sofrasına yukarıdan bakış" fill priority sizes="100vw" quality={82} />
+      <section ref={heroRef} className={styles.hero} aria-labelledby="menu-title">
+        <motion.div className={styles.heroImagePlane} style={{ y: reduceMotion ? 0 : heroImageY, scale: reduceMotion ? 1.035 : heroImageScale }}>
+          <Image className={styles.heroImage} src="/images/hero-parallax/overhead-feast.webp" alt="Van kahvaltısı sofrasına yukarıdan bakış" fill priority sizes="100vw" quality={82} />
+        </motion.div>
         <div className={styles.heroShade} aria-hidden="true" />
         <CopperLight />
-        <motion.div className={styles.heroCopy} initial={reduceMotion ? false : { opacity: 0, y: 22 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: reduceMotion ? 0 : 0.7, ease: [0.16, 1, 0.3, 1] }}>
-          <div className={styles.heroTopline}>
-            <Link href="/" className={styles.backLink}><ArrowLeft size={16} /> Ana sayfa</Link>
-            <span>1978’den beri · Beyoğlu</span>
-          </div>
-          <h1 id="menu-title">Sofraya<br /><em>buyurun.</em></h1>
-          <p>Van’dan gelen tatlar, bakır sahanlar ve demini hiç aceleye getirmeyen çay.</p>
-          <div className={styles.heroMeta}>
-            <span><Clock3 size={15} /> 08:00–18:00</span>
-            <span><UtensilsCrossed size={15} /> {menuItems.length} lezzet</span>
-          </div>
+        <motion.div className={styles.heroCopy} style={{ y: reduceMotion ? 0 : heroCopyY, opacity: reduceMotion ? 1 : heroCopyOpacity }}>
+          <motion.div initial={reduceMotion ? false : { y: 22, clipPath: "inset(0 0 18% 0)" }} animate={{ y: 0, clipPath: "inset(0 0 0% 0)" }} transition={{ duration: reduceMotion ? 0 : 0.78, ease: [0.16, 1, 0.3, 1] }}>
+            <div className={styles.heroTopline}>
+              <Link href="/" className={styles.backLink}><ArrowLeft size={16} /> Ana sayfa</Link>
+              <span>1978’den beri · Beyoğlu</span>
+            </div>
+            <h1 id="menu-title">Sofraya<br /><em>buyurun.</em></h1>
+            <p>Van’dan gelen tatlar, bakır sahanlar ve demini hiç aceleye getirmeyen çay.</p>
+            <div className={styles.heroMeta}>
+              <span><Clock3 size={15} /> 08:00–18:00</span>
+              <span><UtensilsCrossed size={15} /> {menuItems.length} lezzet</span>
+            </div>
+          </motion.div>
         </motion.div>
-        <motion.div className={styles.heroSeal} initial={reduceMotion ? false : { opacity: 0, rotate: -12, scale: 0.8 }} animate={{ opacity: 1, rotate: -5, scale: 1 }} transition={{ duration: reduceMotion ? 0 : 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }} aria-hidden="true"><span>Van</span><small>Kahvaltısı</small></motion.div>
+        <motion.div className={styles.heroSeal} style={{ rotate: reduceMotion ? -5 : heroSealRotate }} initial={reduceMotion ? false : { opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: reduceMotion ? 0 : 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }} aria-hidden="true"><span>Van</span><small>Kahvaltısı</small></motion.div>
         <div className={styles.scrollCue} aria-hidden="true"><span /> menüyü incele</div>
       </section>
 
@@ -291,10 +317,16 @@ export function MenuExperience() {
               {searchTerm ? <button type="button" onClick={() => setSearchTerm("")} aria-label="Aramayı temizle"><X size={16} /></button> : null}
             </div>
             <nav className={styles.categories} aria-label="Menü kategorileri">
-              <button type="button" className={activeCategory === "all" ? styles.categoryActive : ""} aria-pressed={activeCategory === "all"} onClick={() => selectCategory("all")}>Tümü <span>{menuItems.length}</span></button>
+              <motion.button type="button" className={activeCategory === "all" ? styles.categoryActive : ""} aria-pressed={activeCategory === "all"} onClick={() => selectCategory("all")} whileTap={reduceMotion ? undefined : { scale: 0.95 }}>
+                {activeCategory === "all" ? <motion.span layoutId="active-menu-category" className={styles.categoryPill} transition={{ type: "spring", stiffness: 420, damping: 34 }} /> : null}
+                <span className={styles.categoryLabel}>Tümü</span><span className={styles.categoryCount}>{menuItems.length}</span>
+              </motion.button>
               {menuCategories.map((category) => {
                 const count = menuItems.filter((item) => item.category === category.id).length;
-                return <button key={category.id} type="button" className={activeCategory === category.id ? styles.categoryActive : ""} aria-pressed={activeCategory === category.id} onClick={() => selectCategory(category.id)}><span className={styles.longCategory}>{category.label}</span><span className={styles.shortCategory}>{category.shortLabel}</span><span>{count}</span></button>;
+                return <motion.button key={category.id} type="button" className={activeCategory === category.id ? styles.categoryActive : ""} aria-pressed={activeCategory === category.id} onClick={() => selectCategory(category.id)} whileTap={reduceMotion ? undefined : { scale: 0.95 }}>
+                  {activeCategory === category.id ? <motion.span layoutId="active-menu-category" className={styles.categoryPill} transition={{ type: "spring", stiffness: 420, damping: 34 }} /> : null}
+                  <span className={`${styles.categoryLabel} ${styles.longCategory}`}>{category.label}</span><span className={`${styles.categoryLabel} ${styles.shortCategory}`}>{category.shortLabel}</span><span className={styles.categoryCount}>{count}</span>
+                </motion.button>;
               })}
             </nav>
           </div>
@@ -302,23 +334,26 @@ export function MenuExperience() {
 
         <div ref={resultsRef} className={styles.results}>
           <div className={styles.resultsIntro}>
-            <h2>{activeCategory === "all" ? "Bugünün sofrası" : menuCategories.find((category) => category.id === activeCategory)?.label}</h2>
+            <AnimatePresence mode="wait" initial={false}>
+              <motion.h2 key={activeCategory} initial={reduceMotion ? false : { y: 10, clipPath: "inset(0 0 60% 0)" }} animate={{ y: 0, clipPath: "inset(0 0 0% 0)" }} exit={reduceMotion ? { opacity: 0 } : { y: -8, clipPath: "inset(60% 0 0 0)" }} transition={{ duration: reduceMotion ? 0 : 0.32, ease: [0.16, 1, 0.3, 1] }}>{activeCategory === "all" ? "Bugünün sofrası" : menuCategories.find((category) => category.id === activeCategory)?.label}</motion.h2>
+            </AnimatePresence>
             <p role="status" aria-live="polite"><strong>{visibleItems.length}</strong> lezzet</p>
           </div>
 
           {visibleItems.length ? (
             <AnimatePresence initial={false} mode="popLayout">
               {visibleGroups.map((group, groupIndex) => (
-                <motion.section key={group.id} data-category={group.id} className={styles.categorySection} layout={!reduceMotion} initial={reduceMotion ? false : { opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} transition={{ duration: reduceMotion ? 0 : 0.38, delay: groupIndex * 0.04 }} aria-labelledby={`category-${group.id}`}>
-                  <header className={styles.categoryHeader}>
+                <motion.section key={group.id} data-category={group.id} className={styles.categorySection} layout={!reduceMotion} initial={reduceMotion ? false : { y: 24, clipPath: "inset(0 0 7% 0 round 10px)" }} whileInView={{ y: 0, clipPath: "inset(0 0 0% 0 round 10px)" }} exit={{ opacity: 0, y: -8 }} viewport={{ once: true, amount: 0.12 }} transition={{ duration: reduceMotion ? 0 : 0.62, delay: groupIndex * 0.025, ease: [0.16, 1, 0.3, 1] }} aria-labelledby={`category-${group.id}`}>
+                  <motion.span className={styles.sectionSweep} aria-hidden="true" initial={reduceMotion ? false : { x: "-120%" }} whileInView={{ x: "170%" }} viewport={{ once: true, amount: 0.4 }} transition={{ duration: reduceMotion ? 0 : 1.05, delay: 0.18, ease: [0.16, 1, 0.3, 1] }} />
+                  <motion.header className={styles.categoryHeader} initial={reduceMotion ? false : { x: -12 }} whileInView={{ x: 0 }} viewport={{ once: true, amount: 0.6 }} transition={{ duration: reduceMotion ? 0 : 0.52, ease: [0.16, 1, 0.3, 1] }}>
                     <div><h3 id={`category-${group.id}`}>{group.label}</h3><p>{group.description}</p></div>
                     <span>{group.items.length} çeşit</span>
-                  </header>
+                  </motion.header>
                   <div className={styles.itemGrid}>
                     {group.items.map((item, itemIndex) => {
                       const feature = itemIndex === 0;
                       return (
-                        <motion.article key={item.id} id={item.id} className={`${styles.menuItem} ${feature ? styles.featureItem : ""}`} layout={!reduceMotion} whileHover={reduceMotion ? undefined : { y: -3 }} whileTap={reduceMotion ? undefined : { scale: 0.992 }} transition={{ duration: 0.24 }}>
+                        <motion.article key={item.id} id={item.id} className={`${styles.menuItem} ${feature ? styles.featureItem : ""}`} layout={!reduceMotion} initial={reduceMotion ? false : { y: 14, clipPath: "inset(0 0 10% 0 round 7px)" }} whileInView={{ y: 0, clipPath: "inset(0 0 0% 0 round 7px)" }} viewport={{ once: true, amount: 0.22 }} whileHover={reduceMotion ? undefined : { y: -4 }} whileTap={reduceMotion ? undefined : { scale: 0.975 }} transition={{ duration: reduceMotion ? 0 : 0.48, delay: itemIndex * 0.06, ease: [0.16, 1, 0.3, 1] }}>
                           <button type="button" className={styles.itemButton} onClick={() => setSelectedItem(item)} aria-label={`${item.name} ayrıntılarını aç`}>
                             <MenuImage item={item} priority={groupIndex === 0 && itemIndex === 0} sizes={feature ? "(max-width: 640px) 100vw, 560px" : "(max-width: 640px) 45vw, 260px"} />
                             <span className={styles.itemContent}>
@@ -346,7 +381,7 @@ export function MenuExperience() {
         </div>
       </section>
 
-      <AnimatePresence>{showTop ? <motion.button className={styles.toTop} type="button" aria-label="Menünün başına dön" onClick={() => window.scrollTo({ top: 0, behavior: reduceMotion ? "auto" : "smooth" })} initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0 }}><ArrowUp size={18} /></motion.button> : null}</AnimatePresence>
+      <AnimatePresence>{showTop ? <motion.button className={styles.toTop} type="button" aria-label="Menünün başına dön" onClick={() => window.scrollTo({ top: 0, behavior: reduceMotion ? "auto" : "smooth" })} initial={{ opacity: 0, scale: 0.84, rotate: -12 }} animate={{ opacity: 1, scale: 1, rotate: 0 }} exit={{ opacity: 0, scale: 0.88 }} whileHover={reduceMotion ? undefined : { y: -3 }} whileTap={reduceMotion ? undefined : { scale: 0.9 }} transition={{ type: "spring", stiffness: 380, damping: 28 }}><ArrowUp size={18} /></motion.button> : null}</AnimatePresence>
       <ProductDialog item={selectedItem} onClose={() => setSelectedItem(null)} />
     </main>
   );
