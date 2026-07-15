@@ -166,11 +166,10 @@
   width: 100%;
   height: 220px;
   overflow: hidden;
-  border: 1px solid var(--ink);
-  border-radius: 12px;
-  box-shadow: 6px 6px 0 var(--ink);
+  border: 1px solid rgba(32, 24, 25, 0.08);
+  border-radius: 16px;
+  box-shadow: 0 12px 32px rgba(32, 24, 25, 0.05); /* Soft, elegant blurred shadow */
   background: #ded7d3;
-  transform: rotate(1.5deg);
   transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
@@ -181,8 +180,8 @@
 }
 
 .mastheadVisual:hover {
-  transform: rotate(-0.5deg) translate(-2px, -2px);
-  box-shadow: 8px 8px 0 var(--ink);
+  transform: translateY(-3px); /* Classic lift instead of rotation */
+  box-shadow: 0 16px 44px rgba(32, 24, 25, 0.08);
 }
 
 .mastheadVisual:hover img {
@@ -198,12 +197,12 @@
   width: 5.2rem;
   aspect-ratio: 1;
   place-content: center;
-  border: 1px solid var(--ink);
+  border: 1px solid rgba(32, 24, 25, 0.06);
   border-radius: 50%;
   background: var(--gold);
   color: var(--ink);
   text-align: center;
-  box-shadow: 3px 3px 0 var(--ink);
+  box-shadow: 0 4px 14px rgba(32, 24, 25, 0.06); /* Soft blurred stamp shadow */
   transform: rotate(-8deg);
   animation: floatStamp 6s ease-in-out infinite;
 }
@@ -241,9 +240,9 @@
   position: sticky;
   top: 72px; /* Header height */
   z-index: 20;
-  border-bottom: 4px double var(--ink); /* Classic traditional double line border */
+  border-bottom: 1px solid rgba(32, 24, 25, 0.08); /* Soft single dividing border */
   background: rgba(250, 246, 238, 0.94);
-  box-shadow: 0 4px 12px rgba(32, 24, 25, 0.04);
+  box-shadow: 0 4px 12px rgba(32, 24, 25, 0.03);
   backdrop-filter: blur(12px);
   transition: top 0.3s ease;
 }
@@ -334,8 +333,7 @@
   z-index: 0;
   border-radius: inherit;
   background: var(--red);
-  border: 1px solid var(--ink);
-  box-shadow: 2px 2px 0 var(--ink);
+  box-shadow: 0 3px 10px rgba(112, 21, 28, 0.2); /* Soft red glowing shadow */
 }
 
 .searchBox {
@@ -344,18 +342,18 @@
   min-height: 36px;
   align-items: center;
   padding: 0 0.75rem;
-  border: 1px solid var(--ink);
+  border: 1px solid rgba(32, 24, 25, 0.12); /* Soft neutral outline */
   border-radius: 20px;
   background: #ffffff;
   color: var(--red);
   gap: 0.5rem;
-  box-shadow: 2px 2px 0 var(--ink);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 2px 6px rgba(32, 24, 25, 0.02);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
 .searchBox:focus-within {
-  transform: translate(-1px, -1px);
-  box-shadow: 3px 3px 0 var(--ink);
+  border-color: var(--red);
+  box-shadow: 0 4px 12px rgba(112, 21, 28, 0.08); /* Soft red glow on focus */
 }
 
 .searchBox input {
@@ -439,21 +437,21 @@
   display: grid;
   width: 100%;
   padding: 0;
-  border: 1px solid var(--ink);
-  border-radius: 14px;
+  border: 1px solid rgba(32, 24, 25, 0.08);
+  border-radius: 16px;
   grid-template-columns: 1.1fr 0.9fr;
   background: #ffffff;
   color: var(--ink);
   text-align: left;
-  box-shadow: 6px 6px 0 var(--ink);
+  box-shadow: 0 10px 40px rgba(32, 24, 25, 0.03); /* Soft blurry shadow */
   overflow: hidden;
   cursor: pointer;
-  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .signatureButton:hover {
-  transform: translate(-2px, -2px);
-  box-shadow: 8px 8px 0 var(--ink);
+  transform: translateY(-4px); /* Clean lift instead of shift */
+  box-shadow: 0 15px 45px rgba(32, 24, 25, 0.06);
 }
 
 .signatureMedia {
@@ -604,10 +602,10 @@
   display: flex;
   flex-direction: column;
   background: #ffffff;
-  border: 1px solid var(--ink);
-  border-radius: 12px;
-  box-shadow: 4px 4px 0 var(--ink);
-  padding: 1.5rem;
+  border: 1px solid rgba(32, 24, 25, 0.06);
+  border-radius: 16px;
+  box-shadow: 0 10px 40px rgba(32, 24, 25, 0.03); /* Soft blurry shadow instead of neobrutalist block shadow */
+  padding: 1.8rem;
   overflow: hidden;
 }
 
@@ -617,7 +615,7 @@
   justify-content: space-between;
   margin-bottom: 1.2rem;
   padding-bottom: 0.8rem;
-  border-bottom: 1px solid rgba(32, 24, 25, 0.15);
+  border-bottom: 1px solid rgba(32, 24, 25, 0.08);
   gap: 1rem;
 }
 
@@ -642,16 +640,12 @@
 
 .categoryHeader > span {
   flex-shrink: 0;
-  background: var(--gold-light);
-  border: 1px solid var(--ink);
-  box-shadow: 2px 2px 0 var(--ink);
-  color: var(--ink);
-  font-size: 0.6rem;
-  font-weight: 800;
-  padding: 0.2rem 0.5rem;
-  border-radius: 6px;
-  text-transform: uppercase;
-  letter-spacing: 0.02em;
+  color: var(--body);
+  font-family: var(--font-literata-gf), Georgia, serif;
+  font-size: 0.72rem;
+  font-style: italic;
+  font-weight: 500;
+  padding: 0.1rem 0;
 }
 
 .productList {
@@ -694,39 +688,39 @@
   width: 68px;
   height: 68px;
   flex-shrink: 0;
-  border: 1.5px solid var(--ink);
+  border: 1px solid rgba(32, 24, 25, 0.08);
   border-radius: 6px;
-  box-shadow: 2px 2px 0 var(--ink);
+  box-shadow: 0 2px 8px rgba(32, 24, 25, 0.03);
   overflow: hidden;
   background: #f0ede9;
-  transition: transform 0.25s ease;
+  transition: transform 0.3s ease;
 }
 
 .rowThumbnail img {
   object-fit: cover;
+  transition: transform 0.4s ease;
 }
 
-.productRow:hover .rowThumbnail {
-  transform: rotate(-2deg) scale(1.03);
+.productRow:hover .rowThumbnail img {
+  transform: scale(1.06); /* Classic clean zoom transition on hover */
 }
 
 .rowHighlightBadge {
   position: absolute;
   top: 4px;
   left: 4px;
-  background: var(--gold);
-  border: 1px solid var(--ink);
-  color: var(--ink);
-  font-size: 0.5rem;
+  background: var(--red);
+  color: #ffffff;
+  font-size: 0.45rem;
   font-weight: 800;
-  padding: 0.05rem 0.25rem;
-  border-radius: 4px;
+  padding: 0.08rem 0.25rem;
+  border-radius: 3px;
   text-transform: uppercase;
   z-index: 2;
-  box-shadow: 1px 1px 0 var(--ink);
   display: inline-flex;
   align-items: center;
   gap: 1px;
+  letter-spacing: 0.02em;
 }
 
 .rowInfo {
@@ -1130,7 +1124,7 @@
   }
   .signatureButton {
     grid-template-columns: 1fr;
-    box-shadow: 4px 4px 0 var(--ink);
+    box-shadow: 0 8px 24px rgba(32, 24, 25, 0.03);
   }
   .signatureMedia {
     min-height: 200px;
