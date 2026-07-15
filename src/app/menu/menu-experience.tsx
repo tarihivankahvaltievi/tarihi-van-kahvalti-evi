@@ -43,6 +43,15 @@ function MenuCard({ item, index, onOpen }: { item: MenuItem; index: number; onOp
           <span className={styles.cardTop}>
             <span className={styles.cardName}>{item.name}</span>
           </span>
+          {item.tags.filter(t => t !== "Öne çıkan").length > 0 && (
+            <span className={styles.cardTagsInline}>
+              {item.tags.filter(t => t !== "Öne çıkan").map(tag => (
+                <span key={tag} className={`${styles.inlineTag} ${tag === "Vejetaryen" ? styles.tagVeggie : styles.tagRecommend}`}>
+                  {tag}
+                </span>
+              ))}
+            </span>
+          )}
           <span className={styles.cardDescription}>{item.description}</span>
           <span className={styles.cardPriceRow}>
             {isIncluded ? (

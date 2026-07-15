@@ -79,27 +79,37 @@
   flex-direction: column;
   margin: 0;
   color: var(--ink);
-  font-family: var(--font-bricolage-grotesque-gf), system-ui, sans-serif;
-  font-size: clamp(3.2rem, 5.5vw, 4.8rem);
-  font-weight: 850;
   letter-spacing: -0.04em;
   line-height: 0.85;
 }
 
 .titleLine {
-  color: var(--ink);
+  font-family: var(--font-literata-gf), Georgia, serif;
+  font-weight: 500;
+  font-style: italic;
+  font-size: clamp(2rem, 4.2vw, 3.4rem);
+  color: var(--red);
+  line-height: 1.1;
+  margin-bottom: 0.35rem;
+  letter-spacing: -0.01em;
 }
 
 .titleLineHighlight {
-  color: var(--red);
+  font-family: var(--font-bricolage-grotesque-gf), system-ui, sans-serif;
+  font-weight: 850;
+  font-size: clamp(2.8rem, 5.8vw, 4.6rem);
+  text-transform: uppercase;
+  color: var(--ink);
+  line-height: 0.85;
+  letter-spacing: -0.03em;
 }
 
 .subtitle {
   max-width: 32rem;
-  margin: 1rem 0 0;
+  margin: 0.85rem 0 0;
   color: var(--body);
   font-family: var(--font-literata-gf), Georgia, serif;
-  font-size: clamp(1rem, 1.3vw, 1.2rem);
+  font-size: clamp(0.95rem, 1.25vw, 1.15rem);
   font-style: italic;
   line-height: 1.45;
   text-wrap: pretty;
@@ -108,7 +118,7 @@
 .mastheadMeta {
   display: flex;
   align-items: center;
-  margin-top: 1.5rem;
+  margin-top: 1.35rem;
   padding: 0.6rem 0;
   border-top: 1px dashed rgba(32, 24, 25, 0.2);
   gap: 1.5rem;
@@ -139,8 +149,10 @@
   overflow: hidden;
   border: 1px solid var(--ink);
   border-radius: 12px;
-  box-shadow: 4px 4px 0 var(--ink);
+  box-shadow: 6px 6px 0 var(--ink);
   background: #ded7d3;
+  transform: rotate(1.5deg);
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .mastheadVisual img {
@@ -149,17 +161,22 @@
   transition: transform 1s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.masthead:hover .mastheadVisual img {
+.mastheadVisual:hover {
+  transform: rotate(-0.5deg) translate(-2px, -2px);
+  box-shadow: 8px 8px 0 var(--ink);
+}
+
+.mastheadVisual:hover img {
   transform: scale(1.03);
 }
 
 .mastheadStamp {
   position: absolute;
-  right: 1rem;
-  bottom: 1rem;
+  right: 1.5rem;
+  bottom: -0.5rem;
   z-index: 2;
   display: grid;
-  width: 5rem;
+  width: 5.2rem;
   aspect-ratio: 1;
   place-content: center;
   border: 1px solid var(--ink);
@@ -167,8 +184,18 @@
   background: var(--gold);
   color: var(--ink);
   text-align: center;
-  box-shadow: 2px 2px 0 var(--ink);
-  transform: rotate(-6deg);
+  box-shadow: 3px 3px 0 var(--ink);
+  transform: rotate(-8deg);
+  animation: floatStamp 6s ease-in-out infinite;
+}
+
+@keyframes floatStamp {
+  0%, 100% {
+    transform: rotate(-8deg) translateY(0);
+  }
+  50% {
+    transform: rotate(-11deg) translateY(-6px);
+  }
 }
 
 .mastheadStamp strong {
@@ -577,12 +604,15 @@
 .categoryHeader > span {
   flex-shrink: 0;
   background: var(--gold-light);
-  border: 1px solid var(--gold);
-  color: var(--red-dark);
-  font-size: 0.62rem;
+  border: 1px solid var(--ink);
+  box-shadow: 2px 2px 0 var(--ink);
+  color: var(--ink);
+  font-size: 0.6rem;
   font-weight: 800;
   padding: 0.2rem 0.5rem;
-  border-radius: 10px;
+  border-radius: 6px;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
 }
 
 .productRail {
@@ -727,13 +757,43 @@
 
 .includedBadge {
   background: var(--gold-light);
-  border: 1px solid var(--gold);
+  border: 1px dashed var(--gold);
   color: var(--red);
   font-size: 0.6rem;
   font-weight: 800;
   padding: 0.12rem 0.35rem;
   border-radius: 4px;
   text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+.cardTagsInline {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem;
+  margin-top: 0.2rem;
+  margin-bottom: 0.4rem;
+}
+
+.inlineTag {
+  font-size: 0.58rem;
+  font-weight: 800;
+  padding: 0.08rem 0.3rem;
+  border-radius: 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+.tagVeggie {
+  background: #eef7ee;
+  color: #2b5b2b;
+  border: 1px solid #cce5cc;
+}
+
+.tagRecommend {
+  background: #fff9eb;
+  color: #8b6b10;
+  border: 1px solid #ffd8a8;
 }
 
 .cardDetailBtn {
@@ -942,6 +1002,7 @@
   padding: 2rem;
   flex-direction: column;
   overflow-y: auto;
+  border-left: 1px dashed rgba(32, 24, 25, 0.18); /* Elegant scrapbook-style vertical divider */
 }
 
 .dialogTags {
