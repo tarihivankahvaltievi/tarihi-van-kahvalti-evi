@@ -318,7 +318,7 @@ export function MenuExperience() {
                     {group.items.map((item, itemIndex) => {
                       const feature = itemIndex === 0;
                       return (
-                        <motion.article key={item.id} id={item.id} className={`${styles.menuItem} ${feature ? styles.featureItem : ""}`} layout={!reduceMotion} whileHover={reduceMotion ? undefined : { y: -3 }} transition={{ duration: 0.24 }}>
+                        <motion.article key={item.id} id={item.id} className={`${styles.menuItem} ${feature ? styles.featureItem : ""}`} layout={!reduceMotion} whileHover={reduceMotion ? undefined : { y: -3 }} whileTap={reduceMotion ? undefined : { scale: 0.992 }} transition={{ duration: 0.24 }}>
                           <button type="button" className={styles.itemButton} onClick={() => setSelectedItem(item)} aria-label={`${item.name} ayrıntılarını aç`}>
                             <MenuImage item={item} priority={groupIndex === 0 && itemIndex === 0} sizes={feature ? "(max-width: 640px) 100vw, 560px" : "(max-width: 640px) 45vw, 260px"} />
                             <span className={styles.itemContent}>
