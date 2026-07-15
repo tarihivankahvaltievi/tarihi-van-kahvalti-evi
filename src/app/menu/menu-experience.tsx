@@ -17,24 +17,43 @@ function normalize(value: string) {
 
 function MenuCard({ item, index, onOpen }: { item: MenuItem; index: number; onOpen: () => void }) {
   const reduceMotion = useReducedMotion();
+  const isIncluded = item.price.toLowerCase().includes("dahil") || item.price.toLowerCase().includes("sofraya");
 
   return (
     <motion.article
       className={styles.productCard}
-      initial={reduceMotion ? false : { opacity: 0, x: -18 }}
-      whileInView={{ opacity: 1, x: 0 }}
-      viewport={{ once: true, amount: 0.18 }}
-      whileTap={reduceMotion ? undefined : { scale: 0.99 }}
-      transition={{ duration: reduceMotion ? 0 : 0.48, delay: Math.min(index * 0.05, 0.12), ease }}
+      initial={reduceMotion ? false : { opacity: 0, y: 15 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.1 }}
+      whileTap={reduceMotion ? undefined : { scale: 0.98 }}
+      transition={{ duration: reduceMotion ? 0 : 0.4, delay: Math.min(index * 0.04, 0.1), ease }}
     >
-      <button type="button" onClick={onOpen} aria-label={`${item.name} detayını aç`}>
+      <button type="button" onClick={onOpen} aria-label={`${item.name} detayını aç`} className={styles.cardButton}>
         <span className={styles.cardMedia}>
-          <span className={styles.cardImagePlane}><Image src={item.image} alt={item.imageAlt} fill sizes="(max-width: 700px) 104px, 150px" quality={82} /></span>
+          <span className={styles.cardImagePlane}>
+            <Image src={item.image} alt={item.imageAlt} fill sizes="(max-width: 700px) 160px, 240px" quality={82} />
+          </span>
+          {item.tags.includes("Öne çıkan") && (
+            <span className={styles.cardBadgeHighlight}>
+              <Sparkles size={10} /> Popüler
+            </span>
+          )}
         </span>
         <span className={styles.cardBody}>
-          <span className={styles.cardTop}><span className={styles.cardName}>{item.name}</span><span className={styles.cardPrice}>{item.price}</span></span>
+          <span className={styles.cardTop}>
+            <span className={styles.cardName}>{item.name}</span>
+          </span>
           <span className={styles.cardDescription}>{item.description}</span>
-          <span className={styles.cardFoot}><span>{item.tags[0] ?? "Detayı gör"}</span><ChevronRight size={17} /></span>
+          <span className={styles.cardPriceRow}>
+            {isIncluded ? (
+              <span className={styles.includedBadge}>Sofraya Dahil</span>
+            ) : (
+              <span className={styles.cardPriceVal}>{item.price}</span>
+            )}
+            <span className={styles.cardDetailBtn}>
+              Detay <ChevronRight size={13} />
+            </span>
+          </span>
         </span>
       </button>
     </motion.article>
@@ -44,18 +63,31 @@ function MenuCard({ item, index, onOpen }: { item: MenuItem; index: number; onOp
 function SignatureDish({ item, onOpen }: { item: MenuItem; onOpen: () => void }) {
   const reduceMotion = useReducedMotion();
   return (
-    <motion.article className={styles.signatureDish} initial={reduceMotion ? false : { opacity: 0, y: 28 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: .2 }} transition={{ duration: reduceMotion ? 0 : .68, ease }}>
-      <button type="button" onClick={onOpen} aria-label={`${item.name} detayını aç`}>
-        <motion.span className={styles.signatureMedia} whileHover={reduceMotion ? undefined : { scale: 1.015 }} transition={{ duration: .65, ease }}>
-          <Image src="/images/hero-table.jpg" alt="Masaya kurulmuş geleneksel Van kahvaltısı" fill sizes="(max-width: 700px) 46vw, 58vw" quality={88} />
-          <span className={styles.signatureNote}>İki kişiden itibaren</span>
-        </motion.span>
+    <motion.article 
+      className={styles.signatureDish} 
+      initial={reduceMotion ? false : { opacity: 0, y: 20 }} 
+      whileInView={{ opacity: 1, y: 0 }} 
+      viewport={{ once: true, amount: 0.15 }} 
+      transition={{ duration: reduceMotion ? 0 : 0.5, ease }}
+    >
+      <button type="button" onClick={onOpen} aria-label={`${item.name} detayını aç`} className={styles.signatureButton}>
+        <span className={styles.signatureMedia}>
+          <Image src="/images/hero-table.jpg" alt="Masaya kurulmuş geleneksel Van kahvaltısı" fill sizes="(max-width: 700px) 100vw, 600px" quality={88} />
+          <span className={styles.signatureNote}>En Az İki Kişilik</span>
+        </span>
         <span className={styles.signatureContent}>
-          <span className={styles.signatureLabel}><Sparkles size={14} /> Sofranın imzası</span>
-          <span className={styles.signatureTop}><span className={styles.signatureName}>{item.name}</span><span className={styles.signaturePrice}>{item.price}</span></span>
+          <span className={styles.signatureLabel}><Sparkles size={12} /> Sofranın İmza Lezzeti</span>
+          <span className={styles.signatureName}>{item.name}</span>
           <span className={styles.signatureDescription}>{item.description}</span>
-          <span className={styles.signatureIncludes}>{item.details.slice(0, 2).map((detail) => <span key={detail}><Check size={14} />{detail}</span>)}</span>
-          <span className={styles.signatureAction}>{item.priceNote}<ChevronRight size={19} /></span>
+          <div className={styles.signaturePriceRow}>
+            <div>
+              <span className={styles.signaturePriceVal}>{item.price}</span>
+              <span className={styles.signaturePriceNote}>{item.priceNote}</span>
+            </div>
+            <span className={styles.signatureDetailBtn}>
+              Detayları İncele <ChevronRight size={15} />
+            </span>
+          </div>
         </span>
       </button>
     </motion.article>
@@ -94,24 +126,42 @@ function ProductDialog({ item, onClose }: { item: MenuItem | null; onClose: () =
   return createPortal(
     <AnimatePresence>
       {item ? (
-        <motion.div className={styles.dialogLayer} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
+        <div className={styles.dialogLayer}>
           <button className={styles.dialogBackdrop} type="button" onClick={onClose} aria-label="Ürün detayını kapat" />
-          <motion.section ref={dialogRef} className={styles.dialog} role="dialog" aria-modal="true" aria-labelledby="product-title"
-            initial={reduceMotion ? false : { opacity: 0, y: 42, scale: 0.975 }} animate={{ opacity: 1, y: 0, scale: 1 }} exit={{ opacity: 0, y: 24 }} transition={{ duration: reduceMotion ? 0 : 0.5, ease }}>
+          <motion.section 
+            ref={dialogRef} 
+            className={styles.dialog} 
+            role="dialog" 
+            aria-modal="true" 
+            aria-labelledby="product-title"
+            initial={reduceMotion ? false : { opacity: 0, y: 30, scale: 0.98 }} 
+            animate={{ opacity: 1, y: 0, scale: 1 }} 
+            exit={{ opacity: 0, y: 15, scale: 0.99 }} 
+            transition={{ duration: reduceMotion ? 0 : 0.35, ease }}
+          >
             <div className={styles.dialogMedia}>
               <Image src={item.image} alt={item.imageAlt} fill sizes="(max-width: 700px) 100vw, 480px" quality={82} />
-              <button ref={closeRef} type="button" className={styles.dialogClose} onClick={onClose} aria-label="Kapat"><X /></button>
-              <div className={styles.dialogPrice}><strong>{item.price}</strong>{item.priceNote ? <span>{item.priceNote}</span> : null}</div>
+              <button ref={closeRef} type="button" className={styles.dialogClose} onClick={onClose} aria-label="Kapat"><X size={16} /></button>
+              <div className={styles.dialogPrice}>
+                <strong>{item.price}</strong>
+                {item.priceNote ? <span>{item.priceNote}</span> : null}
+              </div>
             </div>
             <div className={styles.dialogContent}>
-              <div className={styles.dialogTags}>{item.tags.map((tag) => <span key={tag}>{tag}</span>)}</div>
+              <div className={styles.dialogTags}>
+                {item.tags.map((tag) => <span key={tag}>{tag}</span>)}
+              </div>
               <h2 id="product-title">{item.name}</h2>
               <p>{item.story}</p>
-              <ul>{item.details.map((detail) => <li key={detail}><Check size={15} />{detail}</li>)}</ul>
-              <button type="button" className={styles.dialogDone} onClick={onClose}>Menüye dön <ChevronRight size={18} /></button>
+              <ul>
+                {item.details.map((detail) => <li key={detail}><Check size={14} />{detail}</li>)}
+              </ul>
+              <button type="button" className={styles.dialogDone} onClick={onClose}>
+                Menüye dön <ChevronRight size={15} />
+              </button>
             </div>
           </motion.section>
-        </motion.div>
+        </div>
       ) : null}
     </AnimatePresence>, document.body,
   );
@@ -134,58 +184,144 @@ export function MenuExperience() {
   }, [activeCategory, deferredSearch]);
 
   const signatureItem = visibleItems.find((item) => item.id === "geleneksel-van-kahvaltisi");
-  const groups = menuCategories.map((category) => ({ ...category, items: visibleItems.filter((item) => item.category === category.id && item.id !== signatureItem?.id) })).filter((group) => group.items.length);
+  const groups = menuCategories.map((category) => ({
+    ...category,
+    items: visibleItems.filter((item) => item.category === category.id && item.id !== signatureItem?.id)
+  })).filter((group) => group.items.length);
 
   const selectCategory = (category: MenuFilterId) => {
     setActiveCategory(category);
-    if (window.scrollY > 300) requestAnimationFrame(() => contentRef.current?.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "start" }));
+    if (window.scrollY > 200) {
+      requestAnimationFrame(() => contentRef.current?.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "start" }));
+    }
   };
 
   return (
     <main id="main-content" className={styles.page}>
       <section className={styles.masthead} aria-labelledby="menu-title">
         <div className={styles.mastheadInner}>
-        <motion.div className={styles.mastheadCopy} initial={reduceMotion ? false : { opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: reduceMotion ? 0 : 0.62, ease }}>
-          <div className={styles.breadcrumb}><Link href="/"><ArrowLeft size={16} /> Ana sayfa</Link><span>1978 · Beyoğlu</span></div>
-          <h1 id="menu-title"><motion.span initial={reduceMotion ? false : { y: "105%" }} animate={{ y: 0 }} transition={{ duration: reduceMotion ? 0 : 0.72, delay: .06, ease }}>Kahvaltı</motion.span><motion.span initial={reduceMotion ? false : { y: "105%" }} animate={{ y: 0 }} transition={{ duration: reduceMotion ? 0 : 0.72, delay: .13, ease }}>Menüsü</motion.span></h1>
-          <p>Her tabağı fotoğrafı ve güncel fiyatıyla görün.</p>
-          <motion.div className={styles.mastheadMeta} initial={reduceMotion ? false : { scaleX: 0 }} animate={{ scaleX: 1 }} transition={{ duration: reduceMotion ? 0 : 0.75, delay: .28, ease }}><span><Clock3 size={16} /> Her gün <strong>08:00–18:00</strong></span><span><UtensilsCrossed size={16} /><strong>{menuItems.length}</strong> lezzet</span></motion.div>
-        </motion.div>
-        <motion.figure className={styles.mastheadVisual} initial={reduceMotion ? false : { clipPath: "inset(0 100% 0 0)" }} animate={{ clipPath: "inset(0 0% 0 0)" }} transition={{ duration: reduceMotion ? 0 : 0.9, delay: .08, ease }}>
-          <Image src="/images/hands-table.jpg" alt="Van kahvaltısı tabaklarını masaya uzatan eller" fill priority sizes="(max-width: 700px) 44vw, 48vw" quality={86} />
-          <figcaption><span>Günlük sofra</span><strong>KDV dahil fiyatlar</strong></figcaption>
-        </motion.figure>
-        <motion.div className={styles.mastheadStamp} initial={reduceMotion ? false : { opacity: 0, scale: .8, rotate: -8 }} animate={{ opacity: 1, scale: 1, rotate: -3 }} transition={{ duration: reduceMotion ? 0 : .55, delay: .62, ease }} aria-hidden="true"><strong>Van</strong><span>sofrası · 1978</span></motion.div>
+          <motion.div 
+            className={styles.mastheadCopy} 
+            initial={reduceMotion ? false : { opacity: 0, y: 15 }} 
+            animate={{ opacity: 1, y: 0 }} 
+            transition={{ duration: reduceMotion ? 0 : 0.5, ease }}
+          >
+            <div className={styles.breadcrumb}>
+              <Link href="/"><ArrowLeft size={14} /> Ana sayfa</Link>
+              <span>1978 · Beyoğlu</span>
+            </div>
+            <h1 id="menu-title">
+              <span className={styles.titleLine}>Tarihi Van</span>
+              <span className={styles.titleLineHighlight}>Kahvaltı Menüsü</span>
+            </h1>
+            <p className={styles.subtitle}>Her tabağı fotoğrafı ve güncel fiyatıyla görün.</p>
+            <div className={styles.mastheadMeta}>
+              <span><Clock3 size={14} /> Her gün <strong>08:00–18:00</strong></span>
+              <span><UtensilsCrossed size={14} /> KDV dahil fiyatlar</span>
+            </div>
+          </motion.div>
+          <div className={styles.mastheadVisual}>
+            <Image src="/images/hands-table.jpg" alt="Van kahvaltısı tabaklarını masaya uzatan eller" fill priority sizes="(max-width: 700px) 100vw, 500px" quality={86} />
+            <div className={styles.mastheadStamp}>
+              <strong>Van</strong>
+              <span>sofrası · 1978</span>
+            </div>
+          </div>
         </div>
       </section>
 
       <section className={styles.menuSection} aria-label="Fotoğraflı kahvaltı menüsü">
-        <div className={styles.menuTools}><div className={styles.toolsInner}>
-          <nav className={styles.categoryNav} aria-label="Menü kategorileri">
-            <button type="button" className={activeCategory === "all" ? styles.activeCategory : ""} aria-pressed={activeCategory === "all"} onClick={() => selectCategory("all")}>
-              {activeCategory === "all" ? <motion.span layoutId="menu-active" className={styles.activePill} transition={{ duration: 0.38, ease }} /> : null}<b>Tümü</b><small>{menuItems.length}</small>
-            </button>
-            {menuCategories.map((category) => <button key={category.id} type="button" className={activeCategory === category.id ? styles.activeCategory : ""} aria-pressed={activeCategory === category.id} onClick={() => selectCategory(category.id)}>
-              {activeCategory === category.id ? <motion.span layoutId="menu-active" className={styles.activePill} transition={{ duration: 0.38, ease }} /> : null}<b>{category.shortLabel}</b><small>{menuItems.filter((item) => item.category === category.id).length}</small>
-            </button>)}
-          </nav>
-          <div className={styles.searchBox}><Search size={18} /><label htmlFor="menu-search" className={styles.srOnly}>Menüde ara</label><input id="menu-search" type="search" value={searchTerm} onChange={(event) => setSearchTerm(event.target.value)} placeholder="Menüde ara" />{searchTerm ? <button type="button" onClick={() => setSearchTerm("")} aria-label="Aramayı temizle"><X size={16} /></button> : null}</div>
-        </div></div>
+        <div className={styles.menuTools}>
+          <div className={styles.toolsInner}>
+            <nav className={styles.categoryNav} aria-label="Menü kategorileri">
+              <button 
+                type="button" 
+                className={activeCategory === "all" ? styles.activeCategory : ""} 
+                aria-pressed={activeCategory === "all"} 
+                onClick={() => selectCategory("all")}
+              >
+                {activeCategory === "all" ? <motion.span layoutId="menu-active" className={styles.activePill} transition={{ duration: 0.3, ease }} /> : null}
+                <span className={styles.navBtnText}>Tümü</span>
+                <span className={styles.navBtnCount}>{menuItems.length}</span>
+              </button>
+              {menuCategories.map((category) => (
+                <button 
+                  key={category.id} 
+                  type="button" 
+                  className={activeCategory === category.id ? styles.activeCategory : ""} 
+                  aria-pressed={activeCategory === category.id} 
+                  onClick={() => selectCategory(category.id)}
+                >
+                  {activeCategory === category.id ? <motion.span layoutId="menu-active" className={styles.activePill} transition={{ duration: 0.3, ease }} /> : null}
+                  <span className={styles.navBtnText}>{category.shortLabel}</span>
+                  <span className={styles.navBtnCount}>{menuItems.filter((item) => item.category === category.id).length}</span>
+                </button>
+              ))}
+            </nav>
+            <div className={styles.searchBox}>
+              <Search size={16} />
+              <label htmlFor="menu-search" className={styles.srOnly}>Menüde ara</label>
+              <input id="menu-search" type="search" value={searchTerm} onChange={(event) => setSearchTerm(event.target.value)} placeholder="Menüde lezzet ara..." />
+              {searchTerm ? <button type="button" onClick={() => setSearchTerm("")} aria-label="Aramayı temizle"><X size={14} /></button> : null}
+            </div>
+          </div>
+        </div>
 
         <div ref={contentRef} className={styles.menuContent}>
-          <header className={styles.menuIntro}><h2>{activeCategory === "all" ? "Bugün sofrada" : menuCategories.find((category) => category.id === activeCategory)?.label}</h2><p role="status" aria-live="polite"><strong>{visibleItems.length}</strong> lezzet</p></header>
+          <header className={styles.menuIntro}>
+            <h2>{activeCategory === "all" ? "Bugün Sofrada" : menuCategories.find((category) => category.id === activeCategory)?.label}</h2>
+            <p role="status" aria-live="polite">
+              <strong>{visibleItems.length}</strong> lezzet
+            </p>
+          </header>
 
-          {visibleItems.length ? <><AnimatePresence mode="popLayout">{signatureItem ? <SignatureDish key={signatureItem.id} item={signatureItem} onOpen={() => setSelectedItem(signatureItem)} /> : null}</AnimatePresence><motion.div className={`${styles.categoryGallery} ${activeCategory !== "all" ? styles.filteredGallery : ""}`} layout={!reduceMotion}>
-            {groups.map((group, groupIndex) => <motion.section key={group.id} className={styles.category} layout={!reduceMotion} aria-labelledby={`category-${group.id}`} initial={reduceMotion ? false : { opacity: 0, y: 25 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.08 }} transition={{ duration: reduceMotion ? 0 : 0.58, delay: groupIndex * 0.06, ease }}>
-              <header className={styles.categoryHeader}><div><h3 id={`category-${group.id}`}>{group.label}</h3><p>{group.description}</p></div><span>{group.items.length} ürün</span></header>
-              <div className={styles.productRail}>{group.items.map((item, index) => <MenuCard key={item.id} item={item} index={index} onOpen={() => setSelectedItem(item)} />)}</div>
-            </motion.section>)}
-          </motion.div></> : <div className={styles.emptyState}><Search size={24} /><h3>Aradığınız lezzeti bulamadık.</h3><button type="button" onClick={() => { setSearchTerm(""); setActiveCategory("all"); }}>Tüm menüyü göster</button></div>}
+          {visibleItems.length ? (
+            <>
+              <AnimatePresence mode="popLayout">
+                {signatureItem ? <SignatureDish key={signatureItem.id} item={signatureItem} onOpen={() => setSelectedItem(signatureItem)} /> : null}
+              </AnimatePresence>
+              <motion.div className={`${styles.categoryGallery} ${activeCategory !== "all" ? styles.filteredGallery : ""}`} layout={!reduceMotion}>
+                {groups.map((group, groupIndex) => (
+                  <motion.section 
+                    key={group.id} 
+                    className={styles.category} 
+                    layout={!reduceMotion} 
+                    aria-labelledby={`category-${group.id}`} 
+                    initial={reduceMotion ? false : { opacity: 0, y: 20 }} 
+                    whileInView={{ opacity: 1, y: 0 }} 
+                    viewport={{ once: true, amount: 0.05 }} 
+                    transition={{ duration: reduceMotion ? 0 : 0.5, delay: Math.min(groupIndex * 0.05, 0.15), ease }}
+                  >
+                    <header className={styles.categoryHeader}>
+                      <div>
+                        <h3 id={`category-${group.id}`}>{group.label}</h3>
+                        <p>{group.description}</p>
+                      </div>
+                      <span>{group.items.length} lezzet</span>
+                    </header>
+                    <div className={styles.productRail}>
+                      {group.items.map((item, index) => <MenuCard key={item.id} item={item} index={index} onOpen={() => setSelectedItem(item)} />)}
+                    </div>
+                  </motion.section>
+                ))}
+              </motion.div>
+            </>
+          ) : (
+            <div className={styles.emptyState}>
+              <Search size={28} />
+              <h3>Aradığınız lezzeti bulamadık.</h3>
+              <button type="button" onClick={() => { setSearchTerm(""); setActiveCategory("all"); }}>Tüm menüyü göster</button>
+            </div>
+          )}
 
-          <footer className={styles.menuFooter}><p><strong>Alerjen bilgisi:</strong> Özel beslenme ihtiyacınızı sipariş öncesinde ekibimize iletebilirsiniz.</p><span>Güncelleme · {menuLastUpdated}</span></footer>
+          <footer className={styles.menuFooter}>
+            <p><strong>Alerjen bilgisi:</strong> Özel beslenme ihtiyacınızı sipariş öncesinde ekibimize iletebilirsiniz.</p>
+            <span>Güncelleme · {menuLastUpdated}</span>
+          </footer>
         </div>
       </section>
       <ProductDialog item={selectedItem} onClose={() => setSelectedItem(null)} />
     </main>
   );
 }
+
