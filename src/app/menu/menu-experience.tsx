@@ -285,7 +285,7 @@ export function MenuExperience() {
     <main id="main-content" className={styles.page}>
       <section ref={heroRef} className={styles.hero} aria-labelledby="menu-title">
         <motion.div className={styles.heroImagePlane} style={{ y: reduceMotion ? 0 : heroImageY, scale: reduceMotion ? 1.035 : heroImageScale }}>
-          <Image className={styles.heroImage} src="/images/hero-parallax/overhead-feast.webp" alt="Van kahvaltısı sofrasına yukarıdan bakış" fill priority sizes="100vw" quality={82} />
+          <Image className={styles.heroImage} src="/images/hero-parallax/overhead-feast.webp" alt="Van kahvaltısı sofrasına yukarıdan bakış" fill priority loading="eager" sizes="100vw" quality={82} />
         </motion.div>
         <div className={styles.heroShade} aria-hidden="true" />
         <CopperLight />
