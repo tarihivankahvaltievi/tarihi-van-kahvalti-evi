@@ -9742,3 +9742,85 @@ body .mobile-bar a svg {
     transition: none !important;
   }
 }
+
+/* Pure white surface authority — requested July 2026. */
+:root,
+.theme-breakfast {
+  --soft: #ffffff;
+  --white: #ffffff;
+  --heritage-paper: #ffffff;
+  --heritage-paper-light: #ffffff;
+  --heritage-paper-soft: #ffffff;
+}
+
+html,
+body,
+.site-shell,
+.theme-breakfast .nav,
+.theme-breakfast .nav.scrolled,
+.theme-breakfast .hero.hero-parallax-dining,
+.theme-breakfast .hero-parallax-sticky,
+.theme-breakfast .gallery-section,
+.faq-section,
+.bottom-info-band,
+.footer-reimagined,
+.seo-page {
+  background: #ffffff !important;
+  background-color: #ffffff !important;
+}
+
+body .mobile-bar,
+body .theme-breakfast .gallery-section {
+  background: #ffffff !important;
+  background-color: #ffffff !important;
+}
+
+.theme-breakfast .gallery-section::before {
+  background: none !important;
+}
+
+.theme-breakfast .hero.hero-parallax-dining::before {
+  background: none !important;
+  opacity: 0 !important;
+}
+
+.theme-breakfast .hero-top-curtain {
+  background: linear-gradient(180deg, #ffffff 0%, rgba(255, 255, 255, 0.9) 52%, rgba(255, 255, 255, 0) 100%) !important;
+}
+
+.theme-breakfast .hero-parallax-sticky::after {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.7) 58%, #ffffff 100%) !important;
+}
+
+.local-answer-panel,
+.local-answer-card,
+.bottom-info-band > section:first-child,
+.footer-skyline-wrapper,
+.footer-grid,
+.info-badge,
+.info-hours {
+  background: #ffffff !important;
+  background-color: #ffffff !important;
+}
+
+.footer-reimagined::before,
+.footer-reimagined::after {
+  background: none !important;
+}
+
+@media (max-width: 900px) {
+  .theme-breakfast + main,
+  #story {
+    background-color: #ffffff;
+  }
+}
+
+@media (max-width: 680px) {
+  .theme-breakfast .hero.hero-parallax-dining::before {
+    background: none !important;
+  }
+
+  .theme-breakfast .hero-parallax-sticky::after {
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.42) 34%, rgba(255, 255, 255, 0.9) 72%, #ffffff 100%) !important;
+  }
+}
