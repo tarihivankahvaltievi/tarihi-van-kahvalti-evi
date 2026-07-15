@@ -52,7 +52,7 @@ function ProductDialog({ item, onClose }: { item: MenuItem | null; onClose: () =
           <motion.section ref={dialogRef} className={styles.dialog} role="dialog" aria-modal="true" aria-labelledby="menu-dialog-title"
             initial={reduceMotion ? false : { opacity: 0, y: 32, scale: .985 }} animate={{ opacity: 1, y: 0, scale: 1 }} exit={{ opacity: 0, y: 18 }} transition={{ duration: reduceMotion ? 0 : .46, ease }}>
             <div className={styles.dialogMedia}>
-              <Image src={item.image} alt={item.imageAlt} fill sizes="(max-width: 680px) 100vw, 460px" quality={86} />
+              <Image src={item.image} alt={item.imageAlt} fill sizes="(max-width: 680px) 100vw, 460px" quality={82} />
               <button ref={closeRef} className={styles.dialogClose} type="button" onClick={onClose} aria-label="Kapat"><X /></button>
               <div className={styles.dialogPrice}><strong>{item.price}</strong>{item.priceNote && <span>{item.priceNote}</span>}</div>
             </div>
@@ -77,7 +77,7 @@ function MenuRow({ item, onOpen, featured = false, priority = false }: { item: M
       initial={reduceMotion ? false : { opacity: .001, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: .25 }} transition={{ duration: reduceMotion ? 0 : .48, ease }}>
       <button type="button" onClick={onOpen} aria-label={`${item.name} ayrıntılarını aç`}>
         <span className={styles.rowImage}>
-          <Image src={item.image} alt={item.imageAlt} fill sizes={featured ? "(max-width: 700px) 42vw, 420px" : "96px"} quality={84} priority={priority} />
+          <Image src={item.image} alt={item.imageAlt} fill sizes={featured ? "(max-width: 700px) 42vw, 420px" : "96px"} quality={82} priority={priority} />
         </span>
         <span className={styles.rowCopy}>
           <span className={styles.rowTitleLine}>
@@ -133,7 +133,7 @@ export function MenuExperience() {
     <main id="main-content" className={styles.page}>
       <section ref={heroRef} className={styles.hero} aria-labelledby="menu-title">
         <motion.div className={styles.heroImagePlane} style={{ y: reduceMotion ? 0 : imageY, scale: reduceMotion ? 1.02 : imageScale }}>
-          <Image src="/images/hero-parallax/overhead-feast.webp" alt="Bakır sahanlarla kurulmuş Van kahvaltısı sofrası" fill priority sizes="100vw" quality={86} />
+          <Image src="/images/hero-parallax/overhead-feast.webp" alt="Bakır sahanlarla kurulmuş Van kahvaltısı sofrası" fill priority loading="eager" sizes="100vw" quality={82} />
         </motion.div>
         <div className={styles.heroShade} />
         <motion.div className={styles.heroCopy} initial={reduceMotion ? false : { opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: reduceMotion ? 0 : .72, ease }}>
