@@ -9906,6 +9906,11 @@ body .mobile-bar .mobile-bar-primary:focus-visible {
   background: none !important;
 }
 
+.theme-breakfast .gallery-marquee::after {
+  display: none !important;
+  content: none !important;
+}
+
 .theme-breakfast .gallery-ambient {
   display: none !important;
 }
