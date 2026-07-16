@@ -61,6 +61,11 @@
 }
 
 .kineticTitle {
+  --particle-accent: var(--menu-burgundy);
+  --particle-accent-margin: 0.14em;
+  --particle-accent-scale: 0.78em;
+  --particle-secondary-scale: 0.67em;
+  --particle-underline: var(--menu-brass);
   position: relative;
   z-index: 1;
   width: min(92vw, 980px);
@@ -74,88 +79,6 @@
   letter-spacing: -0.038em;
   line-height: 0.84;
   text-align: center;
-}
-
-.kineticTitle span {
-  color: inherit;
-  font-style: inherit;
-  font-weight: inherit;
-}
-
-.kineticLine {
-  display: flex;
-  align-items: baseline;
-  justify-content: center;
-  gap: 0.18em;
-}
-
-.kineticLineSecond {
-  margin-top: 0.12em;
-  font-size: 0.67em;
-  letter-spacing: -0.025em;
-}
-
-.wordMask {
-  display: inline-block;
-  overflow: hidden;
-  padding: 0.09em 0.015em 0.1em;
-  margin-block: -0.09em -0.1em;
-  vertical-align: bottom;
-}
-
-.wordMask > span {
-  display: inline-block;
-  color: inherit;
-  font-style: inherit;
-  font-weight: inherit;
-  transform-origin: left bottom;
-  will-change: transform, opacity;
-}
-
-.kineticTitle .menuWord {
-  position: relative;
-  width: fit-content;
-  margin: 0.14em auto 0;
-  overflow: hidden;
-  gap: 0.018em;
-  color: var(--menu-burgundy);
-  font-size: 0.78em;
-  letter-spacing: -0.025em;
-  line-height: 0.92;
-}
-
-.letterMask {
-  display: inline-block;
-  overflow: hidden;
-  padding: 0.08em 0.012em 0.12em;
-  margin-block: -0.08em -0.12em;
-}
-
-.letterMask > span {
-  display: inline-block;
-  transform-origin: center bottom;
-}
-
-.menuUnderline {
-  position: absolute;
-  right: 0;
-  bottom: 0.02em;
-  left: 0;
-  height: 0.055em;
-  background: var(--menu-brass);
-  transform-origin: left center;
-}
-
-.menuGlint {
-  position: absolute;
-  top: -20%;
-  bottom: -20%;
-  left: 0;
-  width: 24%;
-  background: linear-gradient(90deg, transparent, rgba(255, 244, 213, 0.62), transparent);
-  filter: blur(5px);
-  pointer-events: none;
-  transform: skewX(-18deg);
 }
 
 .categoryShowcase {
@@ -1048,20 +971,12 @@
   }
 
   .kineticTitle {
+    --particle-accent-margin: 0.2em;
+    --particle-accent-scale: 0.72em;
+    --particle-secondary-scale: 0.59em;
     width: 100%;
     font-size: clamp(3.2rem, 14.2vw, 4.35rem);
     letter-spacing: -0.035em;
-  }
-
-  .kineticLineSecond {
-    justify-content: center;
-    margin-top: 0.16em;
-    font-size: 0.59em;
-  }
-
-  .kineticTitle .menuWord {
-    margin: 0.2em auto 0;
-    font-size: 0.72em;
   }
 
   .categoryShowcase {

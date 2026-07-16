@@ -14,6 +14,7 @@ import {
 import Image from "next/image";
 import { createPortal } from "react-dom";
 import { useDeferredValue, useEffect, useMemo, useRef, useState } from "react";
+import { ParticleTextEffect } from "@/components/ui/particle-text-effect";
 import styles from "./menu.module.css";
 import {
   menuCategories,
@@ -370,66 +371,10 @@ export function MenuExperience() {
   return (
     <main id="main-content" className={styles.page}>
       <section ref={heroRef} className={styles.menuHero} aria-labelledby="menu-page-title">
-        <motion.h1
+        <ParticleTextEffect
           id="menu-page-title"
           className={styles.kineticTitle}
-          initial={reduceMotion ? false : { scale: 0.94 }}
-          animate={{ scale: 1 }}
-          transition={{ duration: reduceMotion ? 0 : 1.05, ease }}
-        >
-          <span className={styles.srOnly}>Tarihi Van Kahvaltı Evi Menü</span>
-          <span className={styles.kineticLine} aria-hidden="true">
-            {(["Tarihi", "Van"] as const).map((word, index) => (
-              <span className={styles.wordMask} key={word}>
-                <motion.span
-                  initial={reduceMotion ? false : { y: "125%", x: index ? 24 : -24, opacity: 0, rotate: index ? 4 : -4, filter: "blur(9px)" }}
-                  animate={{ y: "0%", x: 0, opacity: 1, rotate: 0, filter: "blur(0px)" }}
-                  transition={{ duration: reduceMotion ? 0 : 0.88, delay: reduceMotion ? 0 : index * 0.09, ease }}
-                >
-                  {word}
-                </motion.span>
-              </span>
-            ))}
-          </span>
-          <span className={`${styles.kineticLine} ${styles.kineticLineSecond}`} aria-hidden="true">
-            {(["Kahvaltı", "Evi"] as const).map((word, index) => (
-              <span className={styles.wordMask} key={word}>
-                <motion.span
-                  initial={reduceMotion ? false : { y: "125%", x: index ? 18 : -18, opacity: 0, rotate: index ? 3 : -3, filter: "blur(7px)" }}
-                  animate={{ y: "0%", x: 0, opacity: 1, rotate: 0, filter: "blur(0px)" }}
-                  transition={{ duration: reduceMotion ? 0 : 0.82, delay: reduceMotion ? 0 : 0.18 + index * 0.075, ease }}
-                >
-                  {word}
-                </motion.span>
-              </span>
-            ))}
-          </span>
-          <span className={`${styles.kineticLine} ${styles.menuWord}`} aria-hidden="true">
-            {Array.from("Menü").map((letter, index) => (
-              <span className={styles.letterMask} key={`${letter}-${index}`}>
-                <motion.span
-                  initial={reduceMotion ? false : { y: "135%", opacity: 0, rotate: index % 2 ? 8 : -8, scale: 0.72 }}
-                  animate={{ y: "0%", opacity: 1, rotate: 0, scale: 1 }}
-                  transition={{ duration: reduceMotion ? 0 : 0.76, delay: reduceMotion ? 0 : 0.36 + index * 0.055, ease }}
-                >
-                  {letter}
-                </motion.span>
-              </span>
-            ))}
-            <motion.span
-              className={styles.menuUnderline}
-              initial={reduceMotion ? false : { scaleX: 0, opacity: 0 }}
-              animate={{ scaleX: 1, opacity: 1 }}
-              transition={{ duration: reduceMotion ? 0 : 0.82, delay: reduceMotion ? 0 : 0.58, ease }}
-            />
-            <motion.span
-              className={styles.menuGlint}
-              initial={reduceMotion ? false : { x: "-130%", opacity: 0 }}
-              animate={reduceMotion ? { opacity: 0 } : { x: "150%", opacity: [0, 0.85, 0] }}
-              transition={{ duration: 0.95, delay: 0.88, ease }}
-            />
-          </span>
-        </motion.h1>
+        />
       </section>
 
       <section className={styles.categoryShowcase} aria-labelledby="category-showcase-title">

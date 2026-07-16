@@ -1,0 +1,76 @@
+.root {
+  position: relative;
+  display: block;
+  isolation: isolate;
+}
+
+.text {
+  position: relative;
+  z-index: 0;
+  display: block;
+  transition: opacity 180ms ease;
+}
+
+.line {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 0.18em;
+}
+
+.lineSecondary {
+  margin-top: 0.12em;
+  font-size: var(--particle-secondary-scale, 0.67em);
+  letter-spacing: -0.025em;
+}
+
+.lineAccent {
+  position: relative;
+  width: fit-content;
+  margin: var(--particle-accent-margin, 0.14em) auto 0;
+  padding-bottom: 0.08em;
+  color: var(--particle-accent, #70151c);
+  font-size: var(--particle-accent-scale, 0.78em);
+  letter-spacing: -0.025em;
+  line-height: 0.92;
+}
+
+.underline {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 0.055em;
+  background: var(--particle-underline, #a77b37);
+}
+
+.canvas {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  pointer-events: auto;
+  touch-action: pan-y;
+  transition: opacity 220ms ease;
+}
+
+.ready .text {
+  opacity: 0;
+}
+
+.ready .canvas {
+  opacity: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .text {
+    opacity: 1;
+    transition: none;
+  }
+
+  .canvas {
+    display: none;
+  }
+}
