@@ -9894,6 +9894,43 @@ body .mobile-bar .mobile-bar-primary:focus-visible {
   }
 }
 
+/* Gallery mobile alignment: keep the CTA clear of the title and make the
+   moving photo stage use the same white surface as the page. */
+.theme-breakfast .gallery-hero-shell,
+.theme-breakfast .gallery-marquee,
+.theme-breakfast .gallery-marquee-row {
+  background: var(--heritage-paper) !important;
+}
+
+.theme-breakfast .gallery-marquee::before {
+  background: none !important;
+}
+
+.theme-breakfast .gallery-ambient {
+  display: none !important;
+}
+
+@media (max-width: 520px) {
+  .theme-breakfast .gallery-head {
+    grid-template-columns: minmax(0, 1fr) !important;
+    gap: 0.85rem !important;
+  }
+
+  .theme-breakfast .gallery-head h2 {
+    max-width: 100% !important;
+  }
+
+  .theme-breakfast .gallery-head h2 span {
+    display: block;
+  }
+
+  .theme-breakfast .gallery-head .order-button {
+    width: fit-content !important;
+    max-width: none !important;
+    justify-self: end;
+  }
+}
+
 /* QR menu: keep the shared header compact so the menu, not the chrome, owns the viewport. */
 .menu-page-shell .nav,
 .menu-page-shell .nav.scrolled {
