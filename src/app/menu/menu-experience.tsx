@@ -25,6 +25,14 @@ import {
 
 const ease = [0.16, 1, 0.3, 1] as const;
 
+type QuickFilterId = "signature" | "new" | "vegetarian";
+
+const quickFilters: Array<{ id: QuickFilterId; label: string }> = [
+  { id: "signature", label: "İmzalar" },
+  { id: "new", label: "Yeni" },
+  { id: "vegetarian", label: "Vejetaryen" },
+];
+
 function normalize(value: string) {
   return value
     .toLocaleLowerCase("tr-TR")
@@ -217,6 +225,7 @@ export function MenuExperience() {
   const searchInputRef = useRef<HTMLInputElement>(null);
   const searchSessionRef = useRef(false);
   const [activeCategory, setActiveCategory] = useState<MenuFilterId>("all");
+  const [activeQuickFilter, setActiveQuickFilter] = useState<QuickFilterId | null>(null);
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedItem, setSelectedItem] = useState<MenuItem | null>(null);
   const [isCatalogPinned, setIsCatalogPinned] = useState(false);
@@ -249,10 +258,13 @@ export function MenuExperience() {
     const query = normalize(deferredSearch);
     return menuItems.filter((item) => {
       if (activeCategory !== "all" && item.category !== activeCategory) return false;
+      if (activeQuickFilter === "signature" && !item.tags.some((tag) => tag === "Öne çıkan" || tag === "Tavsiye")) return false;
+      if (activeQuickFilter === "new" && !item.tags.includes("Yeni")) return false;
+      if (activeQuickFilter === "vegetarian" && !item.tags.includes("Vejetaryen")) return false;
       if (!query) return true;
       return normalize([item.name, item.description, item.story, ...item.tags, ...item.details].join(" ")).includes(query);
     });
-  }, [activeCategory, deferredSearch]);
+  }, [activeCategory, activeQuickFilter, deferredSearch]);
 
   const groups = menuCategories
     .map((category) => ({
@@ -277,6 +289,7 @@ export function MenuExperience() {
     searchSessionRef.current = false;
     searchInputRef.current?.blur();
     setSearchTerm("");
+    setActiveQuickFilter(null);
     setActiveCategory(category);
     if (trigger) {
       const categoryRail = trigger.parentElement;
@@ -303,6 +316,32 @@ export function MenuExperience() {
     }
   };
 
+  const selectQuickFilter = (filter: QuickFilterId, trigger: HTMLButtonElement) => {
+    const catalog = document.getElementById("menu-catalog");
+    const shouldAlignResults =
+      isCatalogPinned || (catalog?.getBoundingClientRect().top ?? Number.POSITIVE_INFINITY) <= 73;
+
+    searchSessionRef.current = false;
+    searchInputRef.current?.blur();
+    setSearchTerm("");
+    setActiveCategory("all");
+    setActiveQuickFilter((current) => (current === filter ? null : filter));
+    trigger.parentElement?.scrollTo({
+      left: trigger.offsetLeft - (trigger.parentElement.clientWidth - trigger.offsetWidth) / 2,
+      behavior: reduceMotion ? "auto" : "smooth",
+    });
+
+    if (shouldAlignResults) {
+      window.requestAnimationFrame(() => {
+        const results = document.getElementById("menu-results");
+        const discovery = document.getElementById("menu-catalog");
+        if (!results || !discovery) return;
+        const targetTop = results.getBoundingClientRect().top + window.scrollY - 72 - discovery.getBoundingClientRect().height;
+        window.scrollTo({ top: Math.max(0, targetTop), behavior: reduceMotion ? "auto" : "smooth" });
+      });
+    }
+  };
+
   const handleSearchFocus = () => {
     searchSessionRef.current = true;
     if (!window.matchMedia("(max-width: 760px)").matches) return;
@@ -318,6 +357,7 @@ export function MenuExperience() {
   const exploreCategory = (category: MenuFilterId) => {
     searchSessionRef.current = false;
     setSearchTerm("");
+    setActiveQuickFilter(null);
     setActiveCategory(category);
     window.requestAnimationFrame(() => {
       document.getElementById("menu-catalog")?.scrollIntoView({
@@ -434,7 +474,10 @@ export function MenuExperience() {
               onChange={(event) => {
                 const nextSearch = event.target.value;
                 setSearchTerm(nextSearch);
-                if (nextSearch) setActiveCategory("all");
+                if (nextSearch) {
+                  setActiveCategory("all");
+                  setActiveQuickFilter(null);
+                }
               }}
               autoComplete="off"
               inputMode="search"
@@ -459,12 +502,12 @@ export function MenuExperience() {
           <nav className={styles.categoryNav} aria-label="Menü kategorileri">
             <button
               type="button"
-              className={activeCategory === "all" ? styles.activeCategory : ""}
-              aria-pressed={activeCategory === "all"}
+              className={activeCategory === "all" && !activeQuickFilter ? styles.activeCategory : ""}
+              aria-pressed={activeCategory === "all" && !activeQuickFilter}
               aria-controls="menu-results"
               onClick={(event) => selectCategory("all", event.currentTarget)}
             >
-              {activeCategory === "all" ? <motion.span layoutId="category-rail" className={styles.categoryRail} /> : null}
+              {activeCategory === "all" && !activeQuickFilter ? <motion.span layoutId="category-rail" className={styles.categoryRail} /> : null}
               <span>Tümü</span><small>{menuItems.length}</small>
             </button>
             {menuCategories.map((category) => (
@@ -480,13 +523,33 @@ export function MenuExperience() {
                 <span>{category.shortLabel}</span><small>{categoryCounts[category.id]}</small>
               </button>
             ))}
+            <span className={styles.categoryNavDivider} aria-hidden="true" />
+            {quickFilters.map((filter) => (
+              <button
+                key={filter.id}
+                type="button"
+                className={`${styles.quickFilterButton} ${activeQuickFilter === filter.id ? styles.activeCategory : ""}`}
+                aria-pressed={activeQuickFilter === filter.id}
+                aria-controls="menu-results"
+                onClick={(event) => selectQuickFilter(filter.id, event.currentTarget)}
+              >
+                {activeQuickFilter === filter.id ? <motion.span layoutId="category-rail" className={styles.categoryRail} /> : null}
+                <span>{filter.label}</span>
+              </button>
+            ))}
           </nav>
         </div>
       </section>
 
       <div id="menu-results" className={styles.menuContainer}>
-        <div className={`${styles.resultLine} ${searchTerm ? styles.searchResultLine : ""}`} aria-live="polite">
-          <span>{searchTerm ? `“${searchTerm}” için ${visibleItems.length} sonuç` : `${visibleItems.length} lezzet gösteriliyor`}</span>
+        <div className={`${styles.resultLine} ${searchTerm || activeQuickFilter ? styles.searchResultLine : ""}`} aria-live="polite">
+          <span>
+            {searchTerm
+              ? `“${searchTerm}” için ${visibleItems.length} sonuç`
+              : activeQuickFilter
+                ? `${quickFilters.find((filter) => filter.id === activeQuickFilter)?.label} seçkisinde ${visibleItems.length} lezzet`
+                : `${visibleItems.length} lezzet gösteriliyor`}
+          </span>
           <span>Tüm fiyatlar TRY</span>
         </div>
 
@@ -521,6 +584,7 @@ export function MenuExperience() {
               onClick={() => {
                 setSearchTerm("");
                 setActiveCategory("all");
+                setActiveQuickFilter(null);
               }}
             >
               Tüm menüyü göster

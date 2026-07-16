@@ -394,6 +394,19 @@
   background: rgba(36, 63, 43, 0.06);
 }
 
+.categoryNavDivider {
+  width: 1px;
+  height: 24px;
+  flex: 0 0 1px;
+  align-self: center;
+  margin-inline: 0.25rem;
+  background: rgba(36, 63, 43, 0.18);
+}
+
+.categoryNav .quickFilterButton {
+  color: var(--menu-burgundy-bright);
+}
+
 .categoryRail {
   position: absolute;
   right: 0.55rem;
@@ -1117,6 +1130,7 @@
 
   .discoveryInner {
     display: grid;
+    grid-template-columns: 1fr;
     gap: 0.3rem;
     width: 100%;
     min-height: 0;
@@ -1168,6 +1182,11 @@
     scroll-snap-stop: always;
   }
 
+  .categoryNavDivider {
+    height: 22px;
+    margin-inline: 0.15rem;
+  }
+
   .categoryNav button small {
     min-width: 1.35rem;
     height: 1.35rem;
@@ -1188,7 +1207,7 @@
     display: flex;
     min-height: 28px;
     margin: 0 0.5rem 1rem;
-    font-size: 0.68rem;
+    font-size: 0.8125rem;
   }
 
   .menuContent {
@@ -1196,7 +1215,7 @@
   }
 
   .sectionHeader {
-    align-items: center;
+    align-items: start;
     gap: 0.65rem;
     margin: 0 0.5rem 0.65rem;
     padding-bottom: 0.6rem;
@@ -1208,15 +1227,20 @@
   }
 
   .sectionHeader p {
-    display: none;
+    display: -webkit-box;
+    max-width: 31ch;
+    margin-top: 0.35rem;
+    overflow: hidden;
+    font-size: 0.875rem;
+    line-height: 1.42;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
   }
 
   .sectionHeader > span {
-    padding: 0.24rem 0.45rem;
-    border: 1px solid rgba(36, 63, 43, 0.22);
-    border-radius: 999px;
-    background: rgba(36, 63, 43, 0.05);
-    font-size: 0.62rem;
+    padding-top: 0.2rem;
+    color: var(--menu-muted);
+    font-size: 0.72rem;
   }
 
   .menuGrid {
@@ -1229,9 +1253,10 @@
     grid-template-columns: 112px minmax(0, 1fr);
     grid-column: auto;
     min-height: 116px;
-    border-radius: 10px;
-    background: var(--menu-surface);
-    box-shadow: var(--menu-shadow-rest);
+    border-color: rgba(36, 63, 43, 0.16);
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.74);
+    box-shadow: none;
   }
 
   .spotlightCard {
@@ -1301,13 +1326,13 @@
   .cardDescription,
   .spotlightCard .cardDescription {
     margin-top: 0.42rem;
-    font-size: 0.77rem;
-    line-height: 1.38;
+    font-size: 0.875rem;
+    line-height: 1.4;
   }
 
   .cardMeta {
     padding-top: 0.4rem;
-    font-size: 0.68rem;
+    font-size: 0.75rem;
   }
 
   .cardDetailCue {
