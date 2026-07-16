@@ -52,6 +52,10 @@ function MenuCard({
   const reduceMotion = useReducedMotion();
   const isSpotlight = item.id === "geleneksel-van-kahvaltisi";
   const visibleTag = item.tags.find((tag) => tag === "Öne çıkan" || tag === "Yeni");
+  const metaLabel =
+    item.priceNote ||
+    item.tags.find((tag) => tag !== visibleTag) ||
+    "Günlük hazırlanır";
 
   return (
     <motion.button
@@ -89,7 +93,7 @@ function MenuCard({
         </span>
         <span className={styles.cardDescription}>{item.description}</span>
         <span className={styles.cardMeta}>
-          <span>{item.priceNote || item.tags[0] || "Günlük hazırlanır"}</span>
+          <span>{metaLabel}</span>
           <span className={styles.cardDetailCue} aria-hidden="true">
             Ayrıntı <ChevronRight size={15} strokeWidth={1.8} />
           </span>
@@ -377,7 +381,7 @@ export function MenuExperience() {
               ref={searchInputRef}
               id="menu-search"
               type="search"
-              placeholder="Lezzet ara"
+              placeholder="Menüde lezzet ara…"
               value={searchTerm}
               onChange={(event) => {
                 const nextSearch = event.target.value;
