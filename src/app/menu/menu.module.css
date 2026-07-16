@@ -22,13 +22,14 @@
   padding-bottom: 4.5rem;
   position: relative;
   isolation: isolate;
-  background-color: #f4f0e9;
+  background-color: #f5f1eb;
   background-image:
-    linear-gradient(104deg, transparent 0 46%, rgba(69, 45, 38, 0.028) 47% 49%, transparent 50% 100%),
-    linear-gradient(76deg, transparent 0 48%, rgba(112, 21, 28, 0.018) 49% 50%, transparent 51% 100%),
-    linear-gradient(0deg, rgba(255, 255, 255, 0.22), rgba(228, 219, 207, 0.08));
-  background-position: 0 0, 3px 5px, 0 0;
-  background-size: 13px 17px, 19px 23px, 100% 100%;
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='180' viewBox='0 0 220 180'%3E%3Cg fill='none' stroke='%236f4b3f' stroke-opacity='.1' stroke-width='.55' stroke-linecap='round'%3E%3Cpath d='M17 28c8-2 15-1 23 0'/%3E%3Cpath d='M132 16c4 1 9 1 14-1'/%3E%3Cpath d='M78 91c7-1 13 0 21 2'/%3E%3Cpath d='M181 119c6 0 10-2 15-1'/%3E%3Cpath d='M28 153c8 1 13 0 18-2'/%3E%3Cpath d='M118 161c10-2 17-1 22 0'/%3E%3C/g%3E%3C/svg%3E"),
+    radial-gradient(ellipse at 12% 18%, rgba(112, 21, 28, 0.025), transparent 34%),
+    radial-gradient(ellipse at 84% 58%, rgba(167, 123, 55, 0.035), transparent 38%),
+    linear-gradient(0deg, rgba(255, 255, 255, 0.26), rgba(228, 219, 207, 0.06));
+  background-position: 0 0, 0 0, 0 0, 0 0;
+  background-size: 220px 180px, 100% 100%, 100% 100%, 100% 100%;
   color: var(--menu-ink);
   font-family: var(--font-geist-sans), system-ui, sans-serif;
 }
@@ -48,11 +49,11 @@
 .menuHero {
   position: relative;
   display: flex;
-  min-height: clamp(340px, 40vw, 520px);
-  align-items: flex-end;
+  min-height: clamp(310px, 34vw, 440px);
+  align-items: center;
   justify-content: center;
   margin-top: 72px;
-  padding: clamp(3rem, 6vw, 5.5rem) max(1.25rem, calc((100% - 1200px) / 2)) clamp(2.1rem, 4vw, 3.5rem);
+  padding: clamp(2.2rem, 4vw, 3.8rem) max(1.25rem, calc((100% - 1200px) / 2)) clamp(1.8rem, 3vw, 2.8rem);
   overflow: hidden;
   isolation: isolate;
   background: transparent;
@@ -116,7 +117,8 @@
   width: fit-content;
   margin: 0.14em auto 0;
   overflow: hidden;
-  color: #8f171a;
+  gap: 0.018em;
+  color: var(--menu-burgundy);
   font-size: 0.78em;
   letter-spacing: -0.025em;
   line-height: 0.92;
@@ -158,7 +160,7 @@
 
 .kineticRule {
   position: absolute;
-  bottom: clamp(0.85rem, 1.7vw, 1.5rem);
+  bottom: clamp(0.65rem, 1.2vw, 1.1rem);
   left: 50%;
   z-index: 1;
   width: min(28vw, 280px);
@@ -169,7 +171,7 @@
 }
 
 .categoryShowcase {
-  padding: clamp(1.2rem, 3vw, 2.6rem) max(1rem, calc((100% - 1200px) / 2)) clamp(2.1rem, 4.8vw, 4.4rem);
+  padding: clamp(0.8rem, 1.8vw, 1.6rem) max(1rem, calc((100% - 1200px) / 2)) clamp(2.1rem, 4.8vw, 4.4rem);
   background: transparent;
   color: var(--menu-ink);
 }
@@ -218,7 +220,7 @@
   padding: 1rem;
   overflow: hidden;
   border: 0;
-  border-radius: 12px;
+  border-radius: 10px;
   background: var(--menu-burgundy-dark);
   color: #fff9ee;
   box-shadow: 0 4px 8px rgba(75, 12, 18, 0.14);
@@ -1046,14 +1048,15 @@
 
 @media (max-width: 760px) {
   .page {
-    padding-bottom: calc(7.5rem + env(safe-area-inset-bottom));
+    padding-bottom: calc(2.5rem + env(safe-area-inset-bottom));
   }
 
   .menuHero {
     display: flex;
-    min-height: 330px;
+    min-height: 246px;
     margin-top: 72px;
-    padding: 2.5rem 0.75rem 2.2rem;
+    align-items: center;
+    padding: 1.2rem 1rem 1rem;
   }
 
   .kineticTitle {
@@ -1062,33 +1065,50 @@
     letter-spacing: -0.035em;
   }
 
+  .kineticLineFirst {
+    justify-content: flex-start;
+    padding-left: 0.05em;
+  }
+
   .kineticLineSecond {
+    justify-content: flex-end;
     margin-top: 0.16em;
+    padding-right: 0.22em;
     font-size: 0.59em;
   }
 
   .kineticTitle .menuWord {
-    margin-top: 0.18em;
-    font-size: 0.78em;
+    margin: 0.2em 0.14em 0 auto;
+    font-size: 0.72em;
   }
 
   .kineticRule {
-    bottom: 0.85rem;
-    width: min(42vw, 180px);
+    bottom: 0.42rem;
+    width: min(31vw, 124px);
   }
 
   .categoryShowcase {
-    padding: 0.8rem 0 2rem;
+    padding: 0.3rem 0 1.75rem;
   }
 
   .categoryShowcaseHead {
-    display: block;
-    margin: 0 1rem 0.95rem;
+    display: flex;
+    align-items: center;
+    gap: 0.9rem;
+    margin: 0 1rem 0.9rem;
+  }
+
+  .categoryShowcaseHead::after {
+    height: 1px;
+    flex: 1;
+    background: linear-gradient(90deg, rgba(112, 21, 28, 0.38), rgba(167, 123, 55, 0.06));
+    content: "";
   }
 
   .categoryShowcaseHead h2 {
     max-width: none;
-    font-size: 1.75rem;
+    flex: none;
+    font-size: 1.65rem;
   }
 
   .categoryShowcaseHead p {

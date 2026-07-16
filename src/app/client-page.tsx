@@ -397,20 +397,22 @@ export default function ClientPage({ children }: { children: ReactNode }) {
         {children}
       </div>
 
-      <div className={`mobile-bar ${mobileBarHidden || menuOpen ? "is-hidden" : ""} ${isMenuPage ? "menu-active" : ""}`} role="navigation" aria-label="Hızlı işlemler">
-        <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" aria-label="WhatsApp üzerinden mesaj gönderin">
-          <MessageCircle size={20} />
-          <span className="mobile-bar-label">WhatsApp</span>
-        </a>
-        <Link className="mobile-bar-primary" href="/menu" aria-label="QR menüyü açın" aria-current={isMenuPage ? "page" : undefined}>
-          <UtensilsCrossed size={22} className="mobile-bar-highlight-icon" />
-          <span className="mobile-bar-label">Menü</span>
-        </Link>
-        <a href={mapsUrl} target="_blank" rel="noopener noreferrer" aria-label="Haritada yol tarifi alın">
-          <MapPin size={20} />
-          <span className="mobile-bar-label">Yol Tarifi</span>
-        </a>
-      </div>
+      {!isMenuPage ? (
+        <div className={`mobile-bar ${mobileBarHidden || menuOpen ? "is-hidden" : ""}`} role="navigation" aria-label="Hızlı işlemler">
+          <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" aria-label="WhatsApp üzerinden mesaj gönderin">
+            <MessageCircle size={20} />
+            <span className="mobile-bar-label">WhatsApp</span>
+          </a>
+          <Link className="mobile-bar-primary" href="/menu" aria-label="QR menüyü açın">
+            <UtensilsCrossed size={22} className="mobile-bar-highlight-icon" />
+            <span className="mobile-bar-label">Menü</span>
+          </Link>
+          <a href={mapsUrl} target="_blank" rel="noopener noreferrer" aria-label="Haritada yol tarifi alın">
+            <MapPin size={20} />
+            <span className="mobile-bar-label">Yol Tarifi</span>
+          </a>
+        </div>
+      ) : null}
 
       <BookingModal
         key={`${isBookingOpen}-${preselectedType}-${preselectedItem}`}

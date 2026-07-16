@@ -378,7 +378,7 @@ export function MenuExperience() {
           transition={{ duration: reduceMotion ? 0 : 1.05, ease }}
         >
           <span className={styles.srOnly}>Tarihi Van Kahvaltı Evi Menü</span>
-          <span className={styles.kineticLine} aria-hidden="true">
+          <span className={`${styles.kineticLine} ${styles.kineticLineFirst}`} aria-hidden="true">
             {(["Tarihi", "Van"] as const).map((word, index) => (
               <span className={styles.wordMask} key={word}>
                 <motion.span
