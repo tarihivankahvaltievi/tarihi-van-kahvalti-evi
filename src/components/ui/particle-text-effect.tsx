@@ -36,13 +36,41 @@ const FRAME_MS = 1000 / 60;
 const clamp = (value: number, min = 0, max = 1) => Math.min(max, Math.max(min, value));
 const easeOutQuint = (value: number) => 1 - Math.pow(1 - clamp(value), 5);
 
-function randomEdgePosition(width: number, height: number, index: number, count: number): Vector2D {
-  const angle = (index / Math.max(1, count)) * Math.PI * 2 + (Math.random() - 0.5) * 0.7;
-  const radiusX = width * (0.56 + Math.random() * 0.25);
-  const radiusY = height * (0.72 + Math.random() * 0.38);
+function organicStartPosition(target: Vector2D, width: number, height: number) {
+  const isMobile = width < 520;
+  const maxDistance = isMobile ? Math.min(width * 0.34, 128) : Math.min(width * 0.3, 260);
+  const minDistance = isMobile ? 18 : 32;
+
+  for (let attempt = 0; attempt < 8; attempt++) {
+    const angle = Math.random() * Math.PI * 2;
+    const distance = minDistance + Math.pow(Math.random(), 0.72) * maxDistance;
+    const position = {
+      x: target.x + Math.cos(angle) * distance,
+      y: target.y + Math.sin(angle) * distance * (isMobile ? 0.46 : 0.56),
+    };
+
+    if (position.x > 5 && position.x < width - 5 && position.y > 4 && position.y < height - 4) {
+      return position;
+    }
+  }
+
+  const fallbackAngle = Math.random() * Math.PI * 2;
+  const fallbackRadius = Math.sqrt(Math.random());
   return {
-    x: width / 2 + Math.cos(angle) * radiusX,
-    y: height / 2 + Math.sin(angle) * radiusY,
+    x: width / 2 + Math.cos(fallbackAngle) * width * 0.43 * fallbackRadius,
+    y: height / 2 + Math.sin(fallbackAngle) * height * 0.4 * fallbackRadius,
+  };
+}
+
+function tangentialVelocity(position: Vector2D, target: Vector2D): Vector2D {
+  const dx = position.x - target.x;
+  const dy = position.y - target.y;
+  const magnitude = Math.max(1, Math.hypot(dx, dy));
+  const direction = target.y < position.y ? 1 : -1;
+  const strength = 0.35 + Math.random() * 0.6;
+  return {
+    x: (-dy / magnitude) * strength * direction + (Math.random() - 0.5) * 0.18,
+    y: (dx / magnitude) * strength * direction + (Math.random() - 0.5) * 0.18,
   };
 }
 
@@ -199,12 +227,12 @@ export function ParticleTextEffect({
       const tones: Tone[] = ["ink", "accent", "gold"];
       for (const tone of tones) {
         ctx.save();
-        ctx.globalAlpha = particleAlpha * 0.08;
+        ctx.globalAlpha = particleAlpha * 0.045;
         ctx.fillStyle = colors[tone];
         ctx.beginPath();
         for (const particle of particles) {
           if (particle.tone !== tone) continue;
-          const haloRadius = particle.radius * 2.35;
+          const haloRadius = particle.radius * 1.85;
           ctx.moveTo(particle.pos.x + haloRadius, particle.pos.y);
           ctx.arc(particle.pos.x, particle.pos.y, haloRadius, 0, Math.PI * 2);
         }
@@ -280,14 +308,14 @@ export function ParticleTextEffect({
         if (updateParticle(particle, elapsed, frameScale)) moving = true;
       }
 
-      const maskProgress = easeOutQuint((elapsed - 760) / 720);
-      const particleFade = 1 - easeOutQuint((elapsed - 980) / 680) * 0.86;
-      const particleEntrance = easeOutQuint(elapsed / 240);
+      const maskProgress = easeOutQuint((elapsed - 480) / 680);
+      const particleFade = 1 - easeOutQuint((elapsed - 720) / 620) * 0.9;
+      const particleEntrance = easeOutQuint(elapsed / 180);
       ctx.clearRect(0, 0, width, height);
       drawMask(maskProgress);
       drawParticles(particleFade * particleEntrance);
 
-      if ((moving && elapsed < 2600) || elapsed < 1750) {
+      if ((moving && elapsed < 2200) || elapsed < 1480) {
         animationFrame = window.requestAnimationFrame(animate);
       } else {
         isAnimating = false;
@@ -321,19 +349,19 @@ export function ParticleTextEffect({
       const result = createMaskAndTargets();
       if (!result) return;
       mask = result.nextMask;
-      particles = result.targets.map((target, index) => {
-        const start = randomEdgePosition(width, height, index, result.targets.length);
-        const maxSpeed = 4.8 + Math.random() * 4.2;
+      particles = result.targets.map((target) => {
+        const start = organicStartPosition(target, width, height);
+        const maxSpeed = 4.2 + Math.random() * 3.5;
         return {
           pos: start,
-          vel: { x: (Math.random() - 0.5) * 0.5, y: (Math.random() - 0.5) * 0.5 },
+          vel: tangentialVelocity(start, target),
           target: { x: target.x, y: target.y },
           tone: target.tone,
-          radius: width < 520 ? 0.7 + Math.random() * 0.42 : 0.8 + Math.random() * 0.5,
+          radius: width < 520 ? 0.43 + Math.random() * 0.28 : 0.56 + Math.random() * 0.38,
           maxSpeed,
-          maxForce: maxSpeed * (0.042 + Math.random() * 0.016),
-          slowRadius: 72 + Math.random() * 72,
-          delay: Math.random() * 260,
+          maxForce: maxSpeed * (0.046 + Math.random() * 0.016),
+          slowRadius: 54 + Math.random() * 62,
+          delay: Math.random() * 120,
         };
       });
 
