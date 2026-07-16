@@ -14,7 +14,6 @@ import {
 import Image from "next/image";
 import { createPortal } from "react-dom";
 import { useDeferredValue, useEffect, useMemo, useRef, useState } from "react";
-import { ParticleTextEffect } from "@/components/ui/particle-text-effect";
 import styles from "./menu.module.css";
 import {
   menuCategories,
@@ -26,11 +25,9 @@ import {
 
 const ease = [0.16, 1, 0.3, 1] as const;
 
-type QuickFilterId = "signature" | "new" | "vegetarian";
+type QuickFilterId = "vegetarian";
 
 const quickFilters: Array<{ id: QuickFilterId; label: string }> = [
-  { id: "signature", label: "İmzalar" },
-  { id: "new", label: "Yeni" },
   { id: "vegetarian", label: "Vejetaryen" },
 ];
 
@@ -92,12 +89,12 @@ function MenuCard({
           <span className={styles.cardPrice}>{item.price}</span>
         </span>
         <span className={styles.cardDescription}>{item.description}</span>
-        <span className={styles.cardMeta}>
-          <span>{metaLabel}</span>
-          <span className={styles.cardDetailCue} aria-hidden="true">
-            Ayrıntı <ChevronRight size={15} strokeWidth={1.8} />
+          <span className={styles.cardMeta}>
+            <span>{metaLabel}</span>
+            <span className={styles.cardDetailCue} aria-hidden="true">
+            <ChevronRight size={18} strokeWidth={2.1} />
+            </span>
           </span>
-        </span>
       </span>
     </motion.button>
   );
@@ -263,8 +260,6 @@ export function MenuExperience() {
     const query = normalize(deferredSearch);
     return menuItems.filter((item) => {
       if (activeCategory !== "all" && item.category !== activeCategory) return false;
-      if (activeQuickFilter === "signature" && !item.tags.some((tag) => tag === "Öne çıkan" || tag === "Tavsiye")) return false;
-      if (activeQuickFilter === "new" && !item.tags.includes("Yeni")) return false;
       if (activeQuickFilter === "vegetarian" && !item.tags.includes("Vejetaryen")) return false;
       if (!query) return true;
       return normalize([item.name, item.description, item.story, ...item.tags, ...item.details].join(" ")).includes(query);
@@ -277,14 +272,6 @@ export function MenuExperience() {
       items: visibleItems.filter((item) => item.category === category.id),
     }))
     .filter((group) => group.items.length > 0);
-
-  const categoryCounts = useMemo(
-    () =>
-      Object.fromEntries(
-        menuCategories.map((category) => [category.id, menuItems.filter((item) => item.category === category.id).length]),
-      ),
-    [],
-  );
 
   const selectCategory = (category: MenuFilterId, trigger?: HTMLButtonElement) => {
     const catalog = document.getElementById("menu-catalog");
@@ -362,15 +349,16 @@ export function MenuExperience() {
   return (
     <main id="main-content" className={styles.page}>
       <section ref={heroRef} className={styles.menuHero} aria-labelledby="menu-page-title">
-        <ParticleTextEffect
-          id="menu-page-title"
-          className={styles.kineticTitle}
-        />
+        <div className={styles.heroContent}>
+          <span className={styles.heroKicker}>Tarihi Van Kahvaltı Evi</span>
+          <h1 id="menu-page-title">QR Menü</h1>
+          <p>Günlük hazırlanan lezzetler ve güncel fiyatlar</p>
+        </div>
       </section>
 
       <section
         id="menu-catalog"
-        className={`${styles.discoveryBar} ${isCatalogPinned ? styles.discoveryPinned : ""}`}
+        className={`${styles.discoveryBar} ${isCatalogPinned ? styles.discoveryPinned : ""} ${searchTerm ? styles.discoveryWithSearch : ""}`}
         aria-label="Menüde gezinme"
       >
         <div className={styles.discoveryInner}>
@@ -420,7 +408,7 @@ export function MenuExperience() {
               onClick={(event) => selectCategory("all", event.currentTarget)}
             >
               {activeCategory === "all" && !activeQuickFilter ? <motion.span layoutId="category-rail" className={styles.categoryRail} /> : null}
-              <span>Tümü</span><small>{menuItems.length}</small>
+              <span>Tümü</span>
             </button>
             {menuCategories.map((category) => (
               <button
@@ -432,7 +420,7 @@ export function MenuExperience() {
                 onClick={(event) => selectCategory(category.id, event.currentTarget)}
               >
                 {activeCategory === category.id ? <motion.span layoutId="category-rail" className={styles.categoryRail} /> : null}
-                <span>{category.shortLabel}</span><small>{categoryCounts[category.id]}</small>
+                <span>{category.shortLabel}</span>
               </button>
             ))}
             <span className={styles.categoryNavDivider} aria-hidden="true" />
@@ -462,7 +450,7 @@ export function MenuExperience() {
                 ? `${quickFilters.find((filter) => filter.id === activeQuickFilter)?.label} seçkisinde ${visibleItems.length} lezzet`
                 : `${visibleItems.length} lezzet gösteriliyor`}
           </span>
-          <span>Tüm fiyatlar TRY</span>
+          <span>Fiyatlar ₺ olarak gösterilir</span>
         </div>
 
         {visibleItems.length > 0 ? (
