@@ -354,7 +354,7 @@ export function MenuExperience() {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: reduceMotion ? 0 : 0.58, ease }}
           >
-            <Image src="/images/hero-parallax/overhead-feast.webp" alt="" fill preload sizes="(max-width: 760px) 100vw, 500px" quality={82} />
+            <Image src="/images/hero-parallax/overhead-feast.webp" alt="" fill priority sizes="(max-width: 760px) 100vw, 500px" quality={82} />
           </motion.figure>
         </motion.div>
       </section>
