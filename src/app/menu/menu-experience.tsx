@@ -1,141 +1,185 @@
 "use client";
 
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
-import { ArrowLeft, Check, ChevronRight, Clock3, Search, UtensilsCrossed, X } from "lucide-react";
+import {
+  Check,
+  ChevronRight,
+  Clock3,
+  Search,
+  UtensilsCrossed,
+  X,
+} from "lucide-react";
 import Image from "next/image";
-import Link from "next/link";
 import { createPortal } from "react-dom";
 import { useDeferredValue, useEffect, useMemo, useRef, useState } from "react";
 import styles from "./menu.module.css";
-import { menuCategories, menuItems, type MenuFilterId, type MenuItem } from "./menu-data";
+import {
+  menuCategories,
+  menuItems,
+  menuLastUpdated,
+  type MenuFilterId,
+  type MenuItem,
+} from "./menu-data";
 
 const ease = [0.16, 1, 0.3, 1] as const;
 
 function normalize(value: string) {
-  return value.toLocaleLowerCase("tr-TR").normalize("NFD").replace(/[\u0300-\u036f]/g, "").trim();
+  return value
+    .toLocaleLowerCase("tr-TR")
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .trim();
 }
 
-/* --- Loader Component --- */
-function PageLoader({ visible }: { visible: boolean }) {
-  return (
-    <AnimatePresence>
-      {visible && (
-        <motion.div
-          className={styles.loaderContainer}
-          exit={{ opacity: 0, y: -20 }}
-          transition={{ duration: 0.4, ease }}
-        >
-          <div className={styles.loaderContent}>
-            <motion.div
-              className={styles.loaderSpinner}
-              animate={{ rotate: 360 }}
-              transition={{ repeat: Infinity, duration: 1, ease: "linear" }}
-            />
-            <motion.h2
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.1, duration: 0.4 }}
-            >
-              Yükleniyor...
-            </motion.h2>
-          </div>
-        </motion.div>
-      )}
-    </AnimatePresence>
-  );
-}
-
-/* --- Visual Grid Card Component --- */
-function MenuCard({ item, index, onOpen }: { item: MenuItem; index: number; onOpen: () => void }) {
+function MenuCard({
+  item,
+  index,
+  onOpen,
+}: {
+  item: MenuItem;
+  index: number;
+  onOpen: () => void;
+}) {
   const reduceMotion = useReducedMotion();
-  const isIncluded = item.price.toLowerCase().includes("dahil") || item.price.toLowerCase().includes("sofraya");
+  const isSpotlight = item.id === "geleneksel-van-kahvaltisi";
+  const visibleTag = item.tags.find((tag) => tag === "Öne çıkan" || tag === "Yeni");
 
   return (
     <motion.button
+      id={item.id}
       type="button"
-      className={styles.menuCard}
+      className={`${styles.menuCard} ${isSpotlight ? styles.spotlightCard : ""}`}
       onClick={onOpen}
-      initial={reduceMotion ? false : { opacity: 0, y: 16 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.1 }}
-      transition={{ duration: reduceMotion ? 0 : 0.4, delay: Math.min(index * 0.04, 0.2), ease }}
-      aria-label={`${item.name} detayını gör`}
+      layout="position"
+      initial={false}
+      whileHover={reduceMotion ? undefined : { y: -3 }}
+      whileTap={reduceMotion ? undefined : { scale: 0.99 }}
+      transition={{ duration: reduceMotion ? 0 : 0.28, delay: Math.min(index * 0.025, 0.14), ease }}
+      aria-label={`${item.name}: ${item.price}. Ayrıntıları gör`}
     >
-      <div className={styles.cardMedia}>
-        <Image src={item.image} alt={item.imageAlt} fill sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" quality={80} />
-        {item.tags.includes("Öne çıkan") && (
-          <span className={styles.tagBadge}>Popüler</span>
-        )}
-      </div>
-      <div className={styles.cardContent}>
-        <div className={styles.cardHeader}>
-          <h3 className={styles.cardTitle}>{item.name}</h3>
-          <span className={styles.cardPrice}>
-            {isIncluded ? "Dahil" : item.price}
+      <span className={styles.cardMedia}>
+        <Image
+          src={item.image}
+          alt={item.imageAlt}
+          fill
+          sizes={
+            isSpotlight
+              ? "(max-width: 680px) 36vw, (max-width: 1080px) 38vw, 480px"
+              : "(max-width: 680px) 30vw, (max-width: 1080px) 18vw, 180px"
+          }
+          quality={82}
+          priority={isSpotlight}
+        />
+        {visibleTag ? <span className={styles.tagBadge}>{visibleTag}</span> : null}
+      </span>
+
+      <span className={styles.cardBody}>
+        <span className={styles.cardHeading}>
+          <span className={styles.cardTitle}>{item.name}</span>
+          <span className={styles.cardPrice}>{item.price}</span>
+        </span>
+        <span className={styles.cardDescription}>{item.description}</span>
+        <span className={styles.cardMeta}>
+          <span>{item.priceNote || item.tags[0] || "Günlük hazırlanır"}</span>
+          <span className={styles.cardDetailCue} aria-hidden="true">
+            Ayrıntı <ChevronRight size={15} strokeWidth={1.8} />
           </span>
-        </div>
-        <p className={styles.cardDesc}>{item.description}</p>
-      </div>
+        </span>
+      </span>
     </motion.button>
   );
 }
 
-/* --- Native App Bottom Sheet / Modal --- */
 function ProductSheet({ item, onClose }: { item: MenuItem | null; onClose: () => void }) {
   const reduceMotion = useReducedMotion();
   const sheetRef = useRef<HTMLDivElement>(null);
+  const closeRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
     if (!item) return;
+
     const previousOverflow = document.body.style.overflow;
+    const previousActive = document.activeElement instanceof HTMLElement ? document.activeElement : null;
+    document.body.classList.add("menu-sheet-open");
     document.body.style.overflow = "hidden";
-    
+
+    const focusFrame = window.requestAnimationFrame(() => closeRef.current?.focus());
     const onKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "Escape") onClose();
+      if (event.key === "Escape") {
+        onClose();
+        return;
+      }
+
+      if (event.key !== "Tab") return;
+      const focusable = Array.from(
+        sheetRef.current?.querySelectorAll<HTMLElement>(
+          'button:not([disabled]), a[href], input:not([disabled]), [tabindex]:not([tabindex="-1"])',
+        ) ?? [],
+      );
+      if (focusable.length === 0) return;
+
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
+      }
     };
+
     document.addEventListener("keydown", onKeyDown);
-    
     return () => {
+      window.cancelAnimationFrame(focusFrame);
       document.removeEventListener("keydown", onKeyDown);
+      document.body.classList.remove("menu-sheet-open");
       document.body.style.overflow = previousOverflow;
+      previousActive?.focus();
     };
   }, [item, onClose]);
 
   if (typeof document === "undefined") return null;
-  
+
+  const category = item ? menuCategories.find((entry) => entry.id === item.category) : null;
+
   return createPortal(
     <AnimatePresence>
       {item ? (
-        <>
-          <motion.div 
+        <div className={styles.sheetLayer}>
+          <motion.button
+            type="button"
             className={styles.overlayBackdrop}
+            aria-label="Ürün ayrıntılarını kapat"
+            onClick={onClose}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            onClick={onClose}
+            transition={{ duration: reduceMotion ? 0 : 0.22 }}
           />
-          <motion.div 
+          <motion.div
             ref={sheetRef}
-            className={styles.bottomSheet} 
-            role="dialog" 
-            aria-modal="true" 
-            initial={reduceMotion ? false : { y: "100%", opacity: 0.5 }} 
-            animate={{ y: 0, opacity: 1 }} 
-            exit={{ y: "100%", opacity: 0 }} 
-            transition={{ type: "spring", damping: 25, stiffness: 200 }}
+            className={styles.productSheet}
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="product-sheet-title"
+            initial={reduceMotion ? false : { y: 34, opacity: 0, scale: 0.985 }}
+            animate={{ y: 0, opacity: 1, scale: 1 }}
+            exit={reduceMotion ? { opacity: 0 } : { y: 28, opacity: 0, scale: 0.99 }}
+            transition={{ duration: reduceMotion ? 0 : 0.38, ease }}
           >
-            <div className={styles.sheetHandle} />
-            <button type="button" className={styles.sheetCloseBtn} onClick={onClose} aria-label="Kapat">
-              <X size={20} />
-            </button>
-
             <div className={styles.sheetMedia}>
-              <Image src={item.image} alt={item.imageAlt} fill sizes="(max-width: 768px) 100vw, 500px" quality={85} priority />
+              <Image src={item.image} alt={item.imageAlt} fill sizes="(max-width: 680px) 100vw, 430px" quality={82} priority />
+              <span className={styles.sheetCategory}>{category?.label}</span>
             </div>
 
             <div className={styles.sheetContent}>
+              <button ref={closeRef} type="button" className={styles.sheetClose} onClick={onClose} aria-label="Kapat">
+                <X size={20} />
+              </button>
+
               <div className={styles.sheetTitleRow}>
-                <h2>{item.name}</h2>
+                <h2 id="product-sheet-title">{item.name}</h2>
                 <div className={styles.sheetPriceBlock}>
                   <strong>{item.price}</strong>
                   {item.priceNote ? <span>{item.priceNote}</span> : null}
@@ -143,148 +187,226 @@ function ProductSheet({ item, onClose }: { item: MenuItem | null; onClose: () =>
               </div>
 
               <p className={styles.sheetStory}>{item.story}</p>
-              
-              <h3 className={styles.sheetSectionTitle}>İçerik & Bilgiler</h3>
+
+              <div className={styles.sheetRule} />
+              <h3 className={styles.sheetSectionTitle}>Bu tabakta</h3>
               <ul className={styles.sheetDetailsList}>
                 {item.details.map((detail) => (
-                  <li key={detail}><Check size={16} /> {detail}</li>
+                  <li key={detail}>
+                    <Check size={15} strokeWidth={2.2} />
+                    <span>{detail}</span>
+                  </li>
                 ))}
               </ul>
 
               <button type="button" className={styles.sheetAction} onClick={onClose}>
-                Menüye Dön <ChevronRight size={18} />
+                Menüye dön <ChevronRight size={18} />
               </button>
             </div>
           </motion.div>
-        </>
+        </div>
       ) : null}
-    </AnimatePresence>, document.body,
+    </AnimatePresence>,
+    document.body,
   );
 }
 
-/* --- Main Application View --- */
 export function MenuExperience() {
   const reduceMotion = useReducedMotion();
   const [activeCategory, setActiveCategory] = useState<MenuFilterId>("all");
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedItem, setSelectedItem] = useState<MenuItem | null>(null);
-  const [loading, setLoading] = useState(true);
-  
   const deferredSearch = useDeferredValue(searchTerm);
 
   useEffect(() => {
-    const timer = setTimeout(() => setLoading(false), 800);
-    return () => clearTimeout(timer);
+    document.documentElement.classList.add("menu-scroll-root");
+    document.body.classList.add("menu-scroll-root");
+    return () => {
+      document.documentElement.classList.remove("menu-scroll-root");
+      document.body.classList.remove("menu-scroll-root");
+    };
   }, []);
 
   const visibleItems = useMemo(() => {
     const query = normalize(deferredSearch);
     return menuItems.filter((item) => {
       if (activeCategory !== "all" && item.category !== activeCategory) return false;
-      return !query || normalize([item.name, item.description, item.story, ...item.tags, ...item.details].join(" ")).includes(query);
+      if (!query) return true;
+      return normalize([item.name, item.description, item.story, ...item.tags, ...item.details].join(" ")).includes(query);
     });
   }, [activeCategory, deferredSearch]);
 
-  const groups = menuCategories.map((category) => ({
-    ...category,
-    items: visibleItems.filter((item) => item.category === category.id)
-  })).filter((group) => group.items.length);
+  const groups = menuCategories
+    .map((category) => ({
+      ...category,
+      items: visibleItems.filter((item) => item.category === category.id),
+    }))
+    .filter((group) => group.items.length > 0);
+
+  const categoryCounts = useMemo(
+    () =>
+      Object.fromEntries(
+        menuCategories.map((category) => [category.id, menuItems.filter((item) => item.category === category.id).length]),
+      ),
+    [],
+  );
 
   const selectCategory = (category: MenuFilterId) => {
     setActiveCategory(category);
-    window.scrollTo({ top: 0, behavior: reduceMotion ? "auto" : "smooth" });
+    if (window.scrollY > 430) {
+      document.getElementById("menu-results")?.scrollIntoView({
+        behavior: reduceMotion ? "auto" : "smooth",
+        block: "start",
+      });
+    }
   };
 
   return (
-    <>
-      <PageLoader visible={loading} />
-
-      <main className={styles.page}>
-        {/* Top App Header */}
-        <header className={styles.appHeader}>
-          <div className={styles.headerTitle}>
-            <Link href="/" className={styles.headerBack} aria-label="Geri Dön">
-              <ArrowLeft size={18} />
-            </Link>
-            Tarihi Van Sofrası
+    <main id="main-content" className={styles.page}>
+      <section className={styles.menuHero} aria-labelledby="menu-page-title">
+        <div className={styles.heroCopy}>
+          <p className={styles.heroProvenance}>
+            <span>1978</span>
+            <span>Beyoğlu · Van sofrası</span>
+          </p>
+          <h1 id="menu-page-title">
+            Van sofrası,
+            <strong>tek bakışta.</strong>
+          </h1>
+          <p className={styles.heroLead}>
+            Her lezzetin görseli, içeriği ve fiyatı aynı yerde. Seçin, yakından bakın, sofranızı kolayca kurun.
+          </p>
+          <div className={styles.heroFacts} aria-label="Menü özeti">
+            <span><UtensilsCrossed size={17} /> {menuItems.length} lezzet</span>
+            <span><Clock3 size={17} /> Her gün 08:00—18:00</span>
           </div>
-          <div className={styles.searchWrapper}>
-            <Search className={styles.searchIcon} size={18} />
-            <input 
-              type="search" 
-              className={styles.searchInput}
-              placeholder="Menüde ara..." 
+        </div>
+
+        <div className={styles.heroVisual} aria-hidden="true">
+          <motion.figure
+            className={styles.heroMainPhoto}
+            initial={reduceMotion ? false : { opacity: 0.82, x: 28, rotate: 1.5 }}
+            animate={{ opacity: 1, x: 0, rotate: -1.2 }}
+            transition={{ duration: reduceMotion ? 0 : 0.85, ease }}
+          >
+            <Image src="/images/hero-parallax/overhead-feast.webp" alt="" fill priority sizes="(max-width: 760px) 58vw, 500px" quality={82} />
+          </motion.figure>
+          <motion.figure
+            className={styles.heroSmallPhoto}
+            initial={reduceMotion ? false : { opacity: 0, y: 24, rotate: -3 }}
+            animate={{ opacity: 1, y: 0, rotate: 2.5 }}
+            transition={{ duration: reduceMotion ? 0 : 0.72, delay: reduceMotion ? 0 : 0.16, ease }}
+          >
+            <Image src="/images/sucuk-egg.jpg" alt="" fill priority sizes="(max-width: 760px) 31vw, 220px" quality={82} />
+          </motion.figure>
+          <motion.div
+            className={styles.heroTea}
+            animate={reduceMotion ? undefined : { y: [0, -7, 0], rotate: [-1, 1, -1] }}
+            transition={{ duration: 5.4, repeat: Infinity, ease: "easeInOut" }}
+          >
+            <Image src="/images/hero-float/tea-glass.webp" alt="" fill sizes="120px" quality={82} />
+          </motion.div>
+          <span className={styles.heroStamp}>Beyoğlu<br />sofrası</span>
+        </div>
+      </section>
+
+      <section id="menu-catalog" className={styles.discoveryBar} aria-label="Menüde gezinme">
+        <div className={styles.discoveryInner}>
+          <div className={styles.searchField}>
+            <Search size={18} aria-hidden="true" />
+            <label className={styles.srOnly} htmlFor="menu-search">Menüde ara</label>
+            <input
+              id="menu-search"
+              type="search"
+              placeholder="Lezzet ara"
               value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
+              onChange={(event) => setSearchTerm(event.target.value)}
+              autoComplete="off"
             />
-            {searchTerm && (
-              <button type="button" className={styles.clearSearch} onClick={() => setSearchTerm("")}>
-                <X size={16} />
+            {searchTerm ? (
+              <button type="button" onClick={() => setSearchTerm("")} aria-label="Aramayı temizle">
+                <X size={17} />
               </button>
-            )}
+            ) : null}
           </div>
-        </header>
 
-        {/* Sticky Horizontal Categories */}
-        <div className={styles.categoryNavWrapper}>
-          <nav className={styles.categoryNav} aria-label="Kategoriler">
-            <button 
-              type="button" 
-              className={`${styles.categoryBtn} ${activeCategory === "all" ? styles.activeCategory : ""}`}
+          <nav className={styles.categoryNav} aria-label="Menü kategorileri">
+            <button
+              type="button"
+              className={activeCategory === "all" ? styles.activeCategory : ""}
+              aria-pressed={activeCategory === "all"}
               onClick={() => selectCategory("all")}
             >
-              {activeCategory === "all" && <motion.span layoutId="activePill" className={styles.activePill} transition={{ duration: 0.3 }} />}
-              Tümü
+              {activeCategory === "all" ? <motion.span layoutId="category-rail" className={styles.categoryRail} /> : null}
+              <span>Tümü</span><small>{menuItems.length}</small>
             </button>
-            {menuCategories.map((cat) => (
-              <button 
-                key={cat.id}
-                type="button" 
-                className={`${styles.categoryBtn} ${activeCategory === cat.id ? styles.activeCategory : ""}`}
-                onClick={() => selectCategory(cat.id)}
+            {menuCategories.map((category) => (
+              <button
+                key={category.id}
+                type="button"
+                className={activeCategory === category.id ? styles.activeCategory : ""}
+                aria-pressed={activeCategory === category.id}
+                onClick={() => selectCategory(category.id)}
               >
-                {activeCategory === cat.id && <motion.span layoutId="activePill" className={styles.activePill} transition={{ duration: 0.3 }} />}
-                {cat.shortLabel}
+                {activeCategory === category.id ? <motion.span layoutId="category-rail" className={styles.categoryRail} /> : null}
+                <span>{category.shortLabel}</span><small>{categoryCounts[category.id]}</small>
               </button>
             ))}
           </nav>
         </div>
+      </section>
 
-        {/* Main Menu Content */}
-        <div className={styles.menuContainer}>
-          {visibleItems.length > 0 ? (
-            <div className={styles.menuContent}>
-              {groups.map((group) => (
-                <section key={group.id} aria-labelledby={`cat-${group.id}`}>
-                  {activeCategory === "all" && (
-                    <h2 id={`cat-${group.id}`} className={styles.sectionTitle}>{group.label}</h2>
-                  )}
-                  <div className={styles.menuGrid}>
-                    {group.items.map((item, index) => (
-                      <MenuCard 
-                        key={item.id} 
-                        item={item} 
-                        index={index} 
-                        onOpen={() => setSelectedItem(item)} 
-                      />
-                    ))}
-                  </div>
-                </section>
-              ))}
-            </div>
-          ) : (
-            <div className={styles.emptyState}>
-              <Search size={40} />
-              <h3>Sonuç bulunamadı</h3>
-              <p>"{searchTerm}" aramasıyla eşleşen bir lezzet bulamadık. Başka bir kelime deneyebilir veya menüye göz atabilirsiniz.</p>
-              <button type="button" onClick={() => { setSearchTerm(""); setActiveCategory("all"); }}>Tüm Menüyü Gör</button>
-            </div>
-          )}
+      <div id="menu-results" className={styles.menuContainer}>
+        <div className={`${styles.resultLine} ${searchTerm ? styles.searchResultLine : ""}`} aria-live="polite">
+          <span>{searchTerm ? `“${searchTerm}” için ${visibleItems.length} sonuç` : `${visibleItems.length} lezzet gösteriliyor`}</span>
+          <span>Tüm fiyatlar TRY</span>
         </div>
 
-        {/* Selected Product Bottom Sheet */}
-        <ProductSheet item={selectedItem} onClose={() => setSelectedItem(null)} />
-      </main>
-    </>
+        {visibleItems.length > 0 ? (
+          <div className={styles.menuContent}>
+            {groups.map((group) => (
+              <section key={group.id} className={styles.menuSection} aria-labelledby={`cat-${group.id}`}>
+                <header className={styles.sectionHeader}>
+                  <div>
+                    <h2 id={`cat-${group.id}`}>{group.label}</h2>
+                    <p>{group.description}</p>
+                  </div>
+                  <span>{group.items.length} seçenek</span>
+                </header>
+                <motion.div className={styles.menuGrid} layout>
+                  <AnimatePresence initial={false} mode="popLayout">
+                    {group.items.map((item, index) => (
+                      <MenuCard key={item.id} item={item} index={index} onOpen={() => setSelectedItem(item)} />
+                    ))}
+                  </AnimatePresence>
+                </motion.div>
+              </section>
+            ))}
+          </div>
+        ) : (
+          <div className={styles.emptyState}>
+            <Search size={30} />
+            <h2>Bu isimde bir lezzet bulamadık.</h2>
+            <p>Başka bir kelime deneyin veya tüm sofraya geri dönün.</p>
+            <button
+              type="button"
+              onClick={() => {
+                setSearchTerm("");
+                setActiveCategory("all");
+              }}
+            >
+              Tüm menüyü göster
+            </button>
+          </div>
+        )}
+
+        <footer className={styles.menuNote}>
+          <span>Menü güncelleme · {menuLastUpdated}</span>
+          <p>Ürün uygunluğu mevsime ve günlük hazırlığa göre değişebilir. Alerjen bilgisi için ekibimize danışabilirsiniz.</p>
+        </footer>
+      </div>
+
+      <ProductSheet item={selectedItem} onClose={() => setSelectedItem(null)} />
+    </main>
   );
 }

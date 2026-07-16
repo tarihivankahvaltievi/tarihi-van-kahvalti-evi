@@ -199,7 +199,7 @@ export default function ClientPage({ children }: { children: ReactNode }) {
 
   return (
     <>
-      <div id="top" className="site-shell theme-breakfast">
+      <div id="top" className={`site-shell theme-breakfast ${isMenuPage ? "menu-page-shell" : ""}`}>
         <header className={`nav ${scrolled ? "scrolled" : ""} ${menuOpen ? "menu-open" : ""}`}>
           <div className="logo-wrap">
             <div className="logo-emblem brand-logo-mark" aria-hidden="true">

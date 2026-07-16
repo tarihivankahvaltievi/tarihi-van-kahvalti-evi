@@ -2470,6 +2470,11 @@ h2 span {
   }
 }
 
+/* The menu owns a sticky discovery rail; keep its shell out of the scroll-container chain. */
+.site-shell.menu-page-shell {
+  overflow: visible;
+}
+
 @media (max-width: 640px) {
   .local-seo-stack {
     padding-top: 1.25rem;
@@ -3303,6 +3308,23 @@ h2 span {
     bottom: 8%;
     width: min(43vw, 184px);
   }
+}
+
+/* The menu discovery rail sticks to the viewport; avoid a nested body scroll container. */
+html.menu-scroll-root,
+html:has(.menu-page-shell) {
+  overflow-x: clip !important;
+  overflow-y: auto !important;
+}
+
+body.menu-scroll-root,
+body:has(.menu-page-shell) {
+  overflow-x: clip !important;
+  overflow-y: visible !important;
+}
+
+body.menu-sheet-open {
+  overflow: hidden !important;
 }
 
 @media (max-width: 420px) {
