@@ -12,20 +12,46 @@ type ParticleTextEffectProps = {
   accentLine?: string;
 };
 
+type Vector2D = { x: number; y: number };
+type Tone = "ink" | "accent" | "gold";
+
+type ParticleTarget = Vector2D & { tone: Tone };
+
 type Particle = {
-  x: number;
-  y: number;
-  vx: number;
-  vy: number;
-  tx: number;
-  ty: number;
-  color: string;
-  size: number;
+  pos: Vector2D;
+  vel: Vector2D;
+  target: Vector2D;
+  tone: Tone;
+  radius: number;
+  maxSpeed: number;
+  maxForce: number;
+  slowRadius: number;
+  delay: number;
 };
 
-type ParticleTarget = Pick<Particle, "x" | "y" | "color">;
+const MAX_MOBILE_PARTICLES = 5200;
+const MAX_DESKTOP_PARTICLES = 7600;
+const FRAME_MS = 1000 / 60;
 
-const MAX_PARTICLES = 5600;
+const clamp = (value: number, min = 0, max = 1) => Math.min(max, Math.max(min, value));
+const easeOutQuint = (value: number) => 1 - Math.pow(1 - clamp(value), 5);
+
+function randomEdgePosition(width: number, height: number, index: number, count: number): Vector2D {
+  const angle = (index / Math.max(1, count)) * Math.PI * 2 + (Math.random() - 0.5) * 0.7;
+  const radiusX = width * (0.56 + Math.random() * 0.25);
+  const radiusY = height * (0.72 + Math.random() * 0.38);
+  return {
+    x: width / 2 + Math.cos(angle) * radiusX,
+    y: height / 2 + Math.sin(angle) * radiusY,
+  };
+}
+
+function limitVector(vector: Vector2D, maximum: number) {
+  const magnitude = Math.hypot(vector.x, vector.y);
+  if (magnitude <= maximum || magnitude === 0) return vector;
+  const ratio = maximum / magnitude;
+  return { x: vector.x * ratio, y: vector.y * ratio };
+}
 
 export function ParticleTextEffect({
   id,
@@ -51,177 +77,330 @@ export function ParticleTextEffect({
     const underline = underlineRef.current;
     if (!root || !canvas || !primary || !secondary || !accent || !underline) return;
 
-    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
-    if (reduceMotion.matches) return;
+    const motionPreference = window.matchMedia("(prefers-reduced-motion: reduce)");
+    if (motionPreference.matches) return;
 
-    const ctx = canvas.getContext("2d");
+    const ctx = canvas.getContext("2d", { alpha: true });
     if (!ctx) return;
 
+    let mask: HTMLCanvasElement | null = null;
     let particles: Particle[] = [];
-    let animationFrame = 0;
-    let resizeFrame = 0;
-    let activeUntil = 0;
-    let pointer = { x: -1000, y: -1000, active: false };
+    let colors: Record<Tone, string> = { ink: "#211d1b", accent: "#70151c", gold: "#a77b37" };
+    let animationFrame: number | null = null;
+    let resizeFrame: number | null = null;
+    let startTime = 0;
+    let previousTime = 0;
+    let width = 0;
+    let height = 0;
+    let pixelRatio = 1;
+    let isVisible = true;
+    let isAnimating = false;
 
-    const drawTextMask = (maskCtx: CanvasRenderingContext2D, element: HTMLElement, text: string, color: string) => {
+    const setCanvasSize = (nextWidth: number, nextHeight: number) => {
+      pixelRatio = Math.min(window.devicePixelRatio || 1, 2);
+      canvas.width = Math.round(nextWidth * pixelRatio);
+      canvas.height = Math.round(nextHeight * pixelRatio);
+      canvas.style.width = `${nextWidth}px`;
+      canvas.style.height = `${nextHeight}px`;
+      ctx.setTransform(pixelRatio, 0, 0, pixelRatio, 0, 0);
+      ctx.imageSmoothingEnabled = true;
+      ctx.imageSmoothingQuality = "high";
+    };
+
+    const drawText = (maskCtx: CanvasRenderingContext2D, element: HTMLElement, text: string, color: string) => {
       const rootRect = root.getBoundingClientRect();
       const rect = element.getBoundingClientRect();
       const computed = window.getComputedStyle(element);
+      const scaledFontSize = Number.parseFloat(computed.fontSize) * pixelRatio;
       maskCtx.fillStyle = color;
-      maskCtx.font = `${computed.fontStyle} ${computed.fontWeight} ${computed.fontSize} ${computed.fontFamily}`;
+      maskCtx.font = `${computed.fontStyle} ${computed.fontWeight} ${scaledFontSize}px ${computed.fontFamily}`;
       maskCtx.textAlign = "center";
       maskCtx.textBaseline = "middle";
-      maskCtx.fillText(text, rect.left - rootRect.left + rect.width / 2, rect.top - rootRect.top + rect.height / 2);
-    };
-
-    const render = (time: number) => {
-      const width = canvas.clientWidth;
-      const height = canvas.clientHeight;
-      ctx.clearRect(0, 0, width, height);
-
-      let moving = false;
-      for (const particle of particles) {
-        const dx = particle.tx - particle.x;
-        const dy = particle.ty - particle.y;
-        particle.vx = (particle.vx + dx * 0.028) * 0.84;
-        particle.vy = (particle.vy + dy * 0.028) * 0.84;
-
-        if (pointer.active) {
-          const pointerDx = particle.x - pointer.x;
-          const pointerDy = particle.y - pointer.y;
-          const distanceSquared = pointerDx * pointerDx + pointerDy * pointerDy;
-          if (distanceSquared > 0 && distanceSquared < 6400) {
-            const force = (1 - Math.sqrt(distanceSquared) / 80) * 1.35;
-            particle.vx += (pointerDx / Math.sqrt(distanceSquared)) * force;
-            particle.vy += (pointerDy / Math.sqrt(distanceSquared)) * force;
-          }
-        }
-
-        particle.x += particle.vx;
-        particle.y += particle.vy;
-        if (Math.abs(dx) + Math.abs(dy) + Math.abs(particle.vx) + Math.abs(particle.vy) > 0.35) moving = true;
-
-        ctx.fillStyle = particle.color;
-        ctx.fillRect(particle.x, particle.y, particle.size, particle.size);
+      maskCtx.fontKerning = "normal";
+      if ("letterSpacing" in maskCtx) {
+        maskCtx.letterSpacing = `${Number.parseFloat(computed.letterSpacing || "0") * pixelRatio}px`;
       }
-
-      if (moving || pointer.active || time < activeUntil) {
-        animationFrame = window.requestAnimationFrame(render);
-      } else {
-        particles.forEach((particle) => {
-          particle.x = particle.tx;
-          particle.y = particle.ty;
-        });
-      }
+      maskCtx.fillText(
+        text,
+        (rect.left - rootRect.left + rect.width / 2) * pixelRatio,
+        (rect.top - rootRect.top + rect.height / 2) * pixelRatio,
+      );
     };
 
-    const startAnimation = (duration = 1200) => {
-      activeUntil = performance.now() + duration;
-      window.cancelAnimationFrame(animationFrame);
-      animationFrame = window.requestAnimationFrame(render);
-    };
-
-    const buildParticles = () => {
-      const width = Math.max(1, Math.round(root.clientWidth));
-      const height = Math.max(1, Math.round(root.clientHeight));
-      const dpr = Math.min(window.devicePixelRatio || 1, 2);
-      canvas.width = Math.round(width * dpr);
-      canvas.height = Math.round(height * dpr);
-      canvas.style.width = `${width}px`;
-      canvas.style.height = `${height}px`;
-      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-
-      const mask = document.createElement("canvas");
-      mask.width = width;
-      mask.height = height;
-      const maskCtx = mask.getContext("2d", { willReadFrequently: true });
-      if (!maskCtx) return;
+    const createMaskAndTargets = () => {
+      const nextMask = document.createElement("canvas");
+      nextMask.width = canvas.width;
+      nextMask.height = canvas.height;
+      const maskCtx = nextMask.getContext("2d", { alpha: true, willReadFrequently: true });
+      if (!maskCtx) return null;
 
       const rootStyle = window.getComputedStyle(root);
-      const ink = rootStyle.color;
-      const accentColor = rootStyle.getPropertyValue("--particle-accent").trim() || "#70151c";
-      const underlineColor = rootStyle.getPropertyValue("--particle-underline").trim() || "#a77b37";
-      drawTextMask(maskCtx, primary, primaryLine, ink);
-      drawTextMask(maskCtx, secondary, secondaryLine, ink);
-      drawTextMask(maskCtx, accent, accentLine, accentColor);
+      colors = {
+        ink: rootStyle.color || "#211d1b",
+        accent: rootStyle.getPropertyValue("--particle-accent").trim() || "#70151c",
+        gold: rootStyle.getPropertyValue("--particle-underline").trim() || "#a77b37",
+      };
+
+      drawText(maskCtx, primary, primaryLine, colors.ink);
+      drawText(maskCtx, secondary, secondaryLine, colors.ink);
+      drawText(maskCtx, accent, accentLine, colors.accent);
 
       const rootRect = root.getBoundingClientRect();
       const underlineRect = underline.getBoundingClientRect();
-      maskCtx.fillStyle = underlineColor;
+      maskCtx.fillStyle = colors.gold;
       maskCtx.fillRect(
-        underlineRect.left - rootRect.left,
-        underlineRect.top - rootRect.top,
-        underlineRect.width,
-        Math.max(2, underlineRect.height),
+        (underlineRect.left - rootRect.left) * pixelRatio,
+        (underlineRect.top - rootRect.top) * pixelRatio,
+        underlineRect.width * pixelRatio,
+        Math.max(2 * pixelRatio, underlineRect.height * pixelRatio),
       );
 
-      const image = maskCtx.getImageData(0, 0, width, height);
-      const stride = width < 520 ? 3 : 4;
-      const targets: ParticleTarget[] = [];
-      for (let y = 0; y < height; y += stride) {
-        for (let x = 0; x < width; x += stride) {
-          const index = (y * width + x) * 4;
-          if (image.data[index + 3] < 100) continue;
-          targets.push({
-            x,
-            y,
-            color: `rgb(${image.data[index]}, ${image.data[index + 1]}, ${image.data[index + 2]})`,
+      const image = maskCtx.getImageData(0, 0, nextMask.width, nextMask.height);
+      const accentRect = accent.getBoundingClientRect();
+      const accentTop = (accentRect.top - rootRect.top) * pixelRatio;
+      const underlineTop = (underlineRect.top - rootRect.top - 1) * pixelRatio;
+      const underlineBottom = (underlineRect.bottom - rootRect.top + 1) * pixelRatio;
+      const sampleStep = width < 520 ? 3 : 4;
+      const candidates: ParticleTarget[] = [];
+
+      for (let y = 0; y < nextMask.height; y += sampleStep) {
+        const offset = ((y / sampleStep) * 7) % sampleStep;
+        for (let x = offset; x < nextMask.width; x += sampleStep) {
+          const index = (Math.floor(y) * nextMask.width + Math.floor(x)) * 4;
+          if (image.data[index + 3] < 72) continue;
+          const jitter = sampleStep * 0.24;
+          const tone: Tone = y >= underlineTop && y <= underlineBottom ? "gold" : y >= accentTop ? "accent" : "ink";
+          candidates.push({
+            x: (x + (Math.random() - 0.5) * jitter) / pixelRatio,
+            y: (y + (Math.random() - 0.5) * jitter) / pixelRatio,
+            tone,
           });
         }
       }
 
-      let selectedTargets: ParticleTarget[];
-      if (targets.length > MAX_PARTICLES) {
-        const keepEvery = targets.length / MAX_PARTICLES;
-        selectedTargets = Array.from({ length: MAX_PARTICLES }, (_, index) => targets[Math.floor(index * keepEvery)]);
-      } else {
-        selectedTargets = targets;
+      for (let index = candidates.length - 1; index > 0; index--) {
+        const swapIndex = Math.floor(Math.random() * (index + 1));
+        [candidates[index], candidates[swapIndex]] = [candidates[swapIndex], candidates[index]];
       }
 
-      particles = selectedTargets.map((target, index) => {
-        const angle = (index / Math.max(1, selectedTargets.length)) * Math.PI * 2 + Math.random() * 0.45;
-        const radius = Math.max(width, height) * (0.54 + Math.random() * 0.34);
+      const maximum = width < 520 ? MAX_MOBILE_PARTICLES : MAX_DESKTOP_PARTICLES;
+      return { nextMask, targets: candidates.slice(0, maximum) };
+    };
+
+    const drawMask = (alpha: number) => {
+      if (!mask || alpha <= 0) return;
+      ctx.save();
+      ctx.globalAlpha = clamp(alpha);
+      ctx.drawImage(mask, 0, 0, mask.width, mask.height, 0, 0, width, height);
+      ctx.restore();
+    };
+
+    const drawParticles = (particleAlpha: number) => {
+      const tones: Tone[] = ["ink", "accent", "gold"];
+      for (const tone of tones) {
+        ctx.save();
+        ctx.globalAlpha = particleAlpha * 0.08;
+        ctx.fillStyle = colors[tone];
+        ctx.beginPath();
+        for (const particle of particles) {
+          if (particle.tone !== tone) continue;
+          const haloRadius = particle.radius * 2.35;
+          ctx.moveTo(particle.pos.x + haloRadius, particle.pos.y);
+          ctx.arc(particle.pos.x, particle.pos.y, haloRadius, 0, Math.PI * 2);
+        }
+        ctx.fill();
+        ctx.restore();
+
+        ctx.save();
+        ctx.globalAlpha = particleAlpha;
+        ctx.fillStyle = colors[tone];
+        ctx.beginPath();
+        for (const particle of particles) {
+          if (particle.tone !== tone) continue;
+          ctx.moveTo(particle.pos.x + particle.radius, particle.pos.y);
+          ctx.arc(particle.pos.x, particle.pos.y, particle.radius, 0, Math.PI * 2);
+        }
+        ctx.fill();
+        ctx.restore();
+      }
+    };
+
+    const drawFinalFrame = () => {
+      ctx.clearRect(0, 0, width, height);
+      drawMask(1);
+    };
+
+    const updateParticle = (particle: Particle, elapsed: number, frameScale: number) => {
+      if (elapsed < particle.delay) return false;
+
+      const toTarget = {
+        x: particle.target.x - particle.pos.x,
+        y: particle.target.y - particle.pos.y,
+      };
+      const distance = Math.hypot(toTarget.x, toTarget.y);
+      if (distance < 0.08 && Math.hypot(particle.vel.x, particle.vel.y) < 0.08) {
+        particle.pos.x = particle.target.x;
+        particle.pos.y = particle.target.y;
+        particle.vel.x = 0;
+        particle.vel.y = 0;
+        return false;
+      }
+
+      const arrival = distance < particle.slowRadius ? easeOutQuint(distance / particle.slowRadius) : 1;
+      const desiredMagnitude = particle.maxSpeed * arrival;
+      const desired = distance > 0
+        ? { x: (toTarget.x / distance) * desiredMagnitude, y: (toTarget.y / distance) * desiredMagnitude }
+        : { x: 0, y: 0 };
+      const steering = limitVector(
+        { x: desired.x - particle.vel.x, y: desired.y - particle.vel.y },
+        particle.maxForce * frameScale,
+      );
+
+      particle.vel.x += steering.x;
+      particle.vel.y += steering.y;
+      particle.pos.x += particle.vel.x * frameScale;
+      particle.pos.y += particle.vel.y * frameScale;
+      return true;
+    };
+
+    const animate = (time: number) => {
+      if (!isAnimating) return;
+      if (!isVisible) {
+        animationFrame = null;
+        return;
+      }
+
+      if (!startTime) startTime = time;
+      const elapsed = time - startTime;
+      const frameScale = clamp((time - (previousTime || time - FRAME_MS)) / FRAME_MS, 0.35, 1.8);
+      previousTime = time;
+      let moving = false;
+
+      for (const particle of particles) {
+        if (updateParticle(particle, elapsed, frameScale)) moving = true;
+      }
+
+      const maskProgress = easeOutQuint((elapsed - 760) / 720);
+      const particleFade = 1 - easeOutQuint((elapsed - 980) / 680) * 0.86;
+      const particleEntrance = easeOutQuint(elapsed / 240);
+      ctx.clearRect(0, 0, width, height);
+      drawMask(maskProgress);
+      drawParticles(particleFade * particleEntrance);
+
+      if ((moving && elapsed < 2600) || elapsed < 1750) {
+        animationFrame = window.requestAnimationFrame(animate);
+      } else {
+        isAnimating = false;
+        animationFrame = null;
+        particles.forEach((particle) => {
+          particle.pos.x = particle.target.x;
+          particle.pos.y = particle.target.y;
+          particle.vel.x = 0;
+          particle.vel.y = 0;
+        });
+        drawFinalFrame();
+      }
+    };
+
+    const startAnimation = () => {
+      if (animationFrame !== null) window.cancelAnimationFrame(animationFrame);
+      startTime = 0;
+      previousTime = 0;
+      isAnimating = true;
+      if (isVisible) animationFrame = window.requestAnimationFrame(animate);
+    };
+
+    const rebuild = () => {
+      const nextWidth = Math.max(1, Math.round(root.clientWidth));
+      const nextHeight = Math.max(1, Math.round(root.clientHeight));
+      if (nextWidth === width && nextHeight === height && mask) return;
+      width = nextWidth;
+      height = nextHeight;
+      setCanvasSize(width, height);
+
+      const result = createMaskAndTargets();
+      if (!result) return;
+      mask = result.nextMask;
+      particles = result.targets.map((target, index) => {
+        const start = randomEdgePosition(width, height, index, result.targets.length);
+        const maxSpeed = 4.8 + Math.random() * 4.2;
         return {
-          x: width / 2 + Math.cos(angle) * radius,
-          y: height / 2 + Math.sin(angle) * radius,
-          vx: 0,
-          vy: 0,
-          tx: target.x,
-          ty: target.y,
-          color: target.color,
-          size: width < 520 ? 1.55 : 1.8,
+          pos: start,
+          vel: { x: (Math.random() - 0.5) * 0.5, y: (Math.random() - 0.5) * 0.5 },
+          target: { x: target.x, y: target.y },
+          tone: target.tone,
+          radius: width < 520 ? 0.7 + Math.random() * 0.42 : 0.8 + Math.random() * 0.5,
+          maxSpeed,
+          maxForce: maxSpeed * (0.042 + Math.random() * 0.016),
+          slowRadius: 72 + Math.random() * 72,
+          delay: Math.random() * 260,
         };
       });
 
       root.classList.add(styles.ready);
-      startAnimation(1800);
+      startAnimation();
     };
 
-    const onPointerMove = (event: PointerEvent) => {
+    const scatter = (event: PointerEvent) => {
+      if (!mask || particles.length === 0) return;
+      if (event.pointerType === "mouse" && event.button !== 0 && event.button !== 2) return;
       const rect = canvas.getBoundingClientRect();
-      pointer = { x: event.clientX - rect.left, y: event.clientY - rect.top, active: true };
-      startAnimation(800);
-    };
-    const onPointerLeave = () => {
-      pointer.active = false;
-      startAnimation(1200);
+      const point = { x: event.clientX - rect.left, y: event.clientY - rect.top };
+
+      particles.forEach((particle) => {
+        const dx = particle.target.x - point.x;
+        const dy = particle.target.y - point.y;
+        const distance = Math.max(12, Math.hypot(dx, dy));
+        const localForce = clamp(1 - distance / Math.max(150, width * 0.28));
+        const angle = Math.atan2(dy, dx) + (Math.random() - 0.5) * 0.7;
+        const displacement = 18 + localForce * (58 + Math.random() * 54);
+        particle.pos.x = particle.target.x + Math.cos(angle) * displacement;
+        particle.pos.y = particle.target.y + Math.sin(angle) * displacement;
+        particle.vel.x = Math.cos(angle) * (1.4 + localForce * 3.2);
+        particle.vel.y = Math.sin(angle) * (1.4 + localForce * 3.2);
+        particle.delay = Math.random() * 90;
+      });
+      startAnimation();
     };
 
+    const preventContextMenu = (event: MouseEvent) => event.preventDefault();
     const resizeObserver = new ResizeObserver(() => {
-      window.cancelAnimationFrame(resizeFrame);
-      resizeFrame = window.requestAnimationFrame(buildParticles);
+      if (resizeFrame !== null) window.cancelAnimationFrame(resizeFrame);
+      resizeFrame = window.requestAnimationFrame(rebuild);
     });
+    const visibilityObserver = new IntersectionObserver(([entry]) => {
+      isVisible = entry.isIntersecting;
+      if (isVisible && isAnimating && animationFrame === null) {
+        previousTime = 0;
+        animationFrame = window.requestAnimationFrame(animate);
+      }
+    }, { threshold: 0.05 });
+    const onMotionPreferenceChange = () => {
+      if (!motionPreference.matches) return;
+      isAnimating = false;
+      if (animationFrame !== null) window.cancelAnimationFrame(animationFrame);
+      animationFrame = null;
+      root.classList.remove(styles.ready);
+    };
+
+    canvas.addEventListener("pointerdown", scatter);
+    canvas.addEventListener("contextmenu", preventContextMenu);
+    motionPreference.addEventListener("change", onMotionPreferenceChange);
     resizeObserver.observe(root);
-    canvas.addEventListener("pointermove", onPointerMove);
-    canvas.addEventListener("pointerleave", onPointerLeave);
-    void document.fonts.ready.then(buildParticles);
+    visibilityObserver.observe(root);
+    void document.fonts.ready.then(() => {
+      mask = null;
+      rebuild();
+    });
 
     return () => {
       resizeObserver.disconnect();
-      canvas.removeEventListener("pointermove", onPointerMove);
-      canvas.removeEventListener("pointerleave", onPointerLeave);
-      window.cancelAnimationFrame(animationFrame);
-      window.cancelAnimationFrame(resizeFrame);
+      visibilityObserver.disconnect();
+      canvas.removeEventListener("pointerdown", scatter);
+      canvas.removeEventListener("contextmenu", preventContextMenu);
+      motionPreference.removeEventListener("change", onMotionPreferenceChange);
+      if (animationFrame !== null) window.cancelAnimationFrame(animationFrame);
+      if (resizeFrame !== null) window.cancelAnimationFrame(resizeFrame);
     };
   }, [accentLine, primaryLine, secondaryLine]);
 
@@ -235,7 +414,7 @@ export function ParticleTextEffect({
           <span ref={underlineRef} className={styles.underline} />
         </span>
       </span>
-      <canvas ref={canvasRef} className={styles.canvas} aria-hidden="true" />
+      <canvas ref={canvasRef} className={styles.canvas} aria-hidden="true" title="Parçacık animasyonunu yeniden oynat" />
     </h1>
   );
 }
