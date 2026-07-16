@@ -3,24 +3,26 @@
   --menu-burgundy-dark: #4e0c12;
   --menu-burgundy-bright: #821b22;
   --menu-brass: #cda85f;
-  --menu-gold: #efcf91;
-  --menu-stone: #f1ebe2;
-  --menu-stone-deep: #ded0be;
+  --menu-gold: #d8b26e;
+  --menu-gold-soft: rgba(216, 178, 110, 0.12);
+  --menu-stone: #faf6f0;
+  --menu-stone-deep: #f2e7d5;
   --menu-ink: #241718;
   --menu-muted: #685a55;
   --menu-blue: #2f5666;
-  --menu-line: rgba(36, 23, 24, 0.2);
+  --menu-line: #ebdcc3;
   --menu-surface: #ffffff;
+  --menu-page-bg: #faf9f6;
   --menu-ease: cubic-bezier(0.16, 1, 0.3, 1);
   --menu-motion-quick: 120ms;
   --menu-motion-standard: 220ms;
-  --menu-shadow-rest: 0 1px 1px rgba(36, 23, 24, 0.045), 0 4px 8px rgba(36, 23, 24, 0.06);
-  --menu-shadow-lift: 0 2px 2px rgba(78, 12, 18, 0.07), 0 8px 8px rgba(78, 12, 18, 0.095);
-  --menu-shadow-press: 0 1px 2px rgba(36, 23, 24, 0.08);
-  --menu-shadow-sticky: 0 1px 0 rgba(36, 23, 24, 0.08), 0 6px 8px rgba(36, 23, 24, 0.075);
+  --menu-shadow-rest: 0 8px 24px rgba(78, 12, 18, 0.035), 0 2px 6px rgba(78, 12, 18, 0.015);
+  --menu-shadow-lift: 0 20px 48px rgba(78, 12, 18, 0.075), 0 6px 16px rgba(197, 162, 90, 0.03);
+  --menu-shadow-press: 0 2px 4px rgba(78, 12, 18, 0.04);
+  --menu-shadow-sticky: 0 4px 20px rgba(78, 12, 18, 0.05), 0 1px 0 rgba(78, 12, 18, 0.03);
   min-height: 100vh;
   padding-bottom: 4.5rem;
-  background: var(--menu-surface);
+  background: var(--menu-page-bg);
   color: var(--menu-ink);
   font-family: var(--font-geist-sans), system-ui, sans-serif;
 }
@@ -45,10 +47,10 @@
   align-items: center;
   min-height: 0;
   margin-top: 72px;
-  padding: clamp(1.5rem, 2.2vw, 2rem) clamp(1.5rem, 6vw, 5.5rem);
+  padding: clamp(1.5rem, 2.2vw, 2.5rem) clamp(1.5rem, 6vw, 5.5rem);
   overflow: hidden;
   isolation: isolate;
-  background: var(--menu-burgundy);
+  background: linear-gradient(135deg, var(--menu-burgundy-dark) 0%, var(--menu-burgundy) 100%);
   color: #fff9ee;
 }
 
@@ -57,8 +59,8 @@
   inset: 0;
   z-index: -2;
   background:
-    radial-gradient(circle at 8% 5%, rgba(239, 207, 145, 0.14), transparent 28%),
-    radial-gradient(circle at 92% 86%, rgba(45, 4, 9, 0.38), transparent 35%);
+    radial-gradient(circle at 8% 5%, rgba(216, 178, 110, 0.16), transparent 30%),
+    radial-gradient(circle at 92% 86%, rgba(36, 4, 8, 0.45), transparent 40%);
   content: "";
 }
 
@@ -69,7 +71,7 @@
   z-index: -1;
   width: min(48vw, 690px);
   aspect-ratio: 1;
-  border: 1px solid rgba(239, 207, 145, 0.13);
+  border: 1px solid rgba(216, 178, 110, 0.15);
   border-radius: 50%;
   content: "";
 }
@@ -83,12 +85,14 @@
 .heroProvenance {
   display: flex;
   align-items: center;
-  gap: 0.7rem;
+  gap: 0.75rem;
   width: fit-content;
-  margin: 0 0 1.1rem;
-  color: rgba(255, 249, 238, 0.82);
-  font-size: 0.76rem;
-  font-weight: 720;
+  margin: 0 0 1.25rem;
+  color: rgba(255, 249, 238, 0.85);
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
   line-height: 1;
 }
 
@@ -97,12 +101,13 @@
   min-height: 1.75rem;
   align-items: center;
   padding: 0.12rem 0.52rem 0;
-  border-radius: 2px;
+  border-radius: 4px;
   background: var(--menu-gold);
   color: var(--menu-burgundy-dark);
-  font-family: var(--font-bricolage-grotesque-gf), Arial, sans-serif;
-  font-weight: 790;
-  letter-spacing: 0.04em;
+  font-family: var(--font-literata-gf), Georgia, serif;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .heroProvenance span:last-child {
@@ -124,19 +129,22 @@
   max-width: 9.5em;
   margin: 0;
   color: #fff9ee;
-  font-family: var(--font-bricolage-grotesque-gf), Arial, sans-serif;
-  font-size: clamp(3.5rem, 6vw, 5.2rem);
+  font-family: var(--font-bodoni-gf), Georgia, serif;
+  font-size: clamp(3.2rem, 5.5vw, 4.6rem);
   font-optical-sizing: auto;
-  font-weight: 780;
-  letter-spacing: -0.04em;
-  line-height: 0.88;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  line-height: 1.02;
   text-wrap: balance;
 }
 
 .heroCopy h1 strong {
   display: block;
   color: var(--menu-gold);
-  font-weight: inherit;
+  font-family: var(--font-bodoni-gf), Georgia, serif;
+  font-style: italic;
+  font-weight: 400;
+  margin-top: 0.15rem;
 }
 
 .heroLead {
@@ -259,18 +267,22 @@
   scroll-margin-top: 72px;
   border-bottom: 1px solid var(--menu-line);
   isolation: isolate;
-  background: var(--menu-surface);
-  box-shadow: 0 1px 0 rgba(36, 23, 24, 0.035);
-  transition: box-shadow var(--menu-motion-standard) var(--menu-ease);
+  background: rgba(255, 255, 255, 0.82);
+  backdrop-filter: blur(20px) saturate(120%);
+  -webkit-backdrop-filter: blur(20px) saturate(120%);
+  box-shadow: 0 1px 0 rgba(112, 21, 28, 0.02);
+  transition: all var(--menu-motion-standard) var(--menu-ease);
 }
 
 .discoveryPinned {
+  background: rgba(255, 255, 255, 0.94);
   box-shadow: var(--menu-shadow-sticky);
+  border-bottom-color: rgba(197, 162, 90, 0.18);
 }
 
 .discoveryInner {
   display: flex;
-  gap: clamp(1rem, 2vw, 2rem);
+  gap: clamp(1rem, 2.5vw, 2.5rem);
   align-items: center;
   width: min(1200px, calc(100% - 2rem));
   min-height: 76px;
@@ -280,21 +292,26 @@
 .searchField {
   position: relative;
   display: flex;
-  flex: 0 0 230px;
-  min-height: 46px;
+  flex: 0 0 240px;
+  min-height: 44px;
   align-items: center;
-  gap: 0.55rem;
-  padding: 0 0.72rem;
-  border: 1px solid var(--menu-line);
-  border-radius: 8px;
+  gap: 0.6rem;
+  padding: 0 1rem;
+  border: 1px solid #ebdcc3;
+  border-radius: 999px;
   background: var(--menu-surface);
   color: var(--menu-muted);
-  transition: border-color var(--menu-motion-quick) ease, box-shadow var(--menu-motion-standard) var(--menu-ease);
+  box-shadow: inset 0 2px 4px rgba(78, 12, 18, 0.015);
+  transition: all var(--menu-motion-standard) var(--menu-ease);
 }
 
 .searchField:focus-within {
   border-color: var(--menu-burgundy);
-  box-shadow: 0 0 0 3px rgba(112, 21, 28, 0.12);
+  box-shadow: 0 0 0 3px rgba(112, 21, 28, 0.08), inset 0 2px 4px rgba(78, 12, 18, 0.015);
+}
+
+.searchField svg {
+  color: var(--menu-brass);
 }
 
 .searchField input {
@@ -305,25 +322,30 @@
   background: transparent;
   color: var(--menu-ink);
   font: inherit;
-  font-size: 0.92rem;
-  font-weight: 610;
+  font-size: 0.9rem;
+  font-weight: 550;
 }
 
 .searchField input::placeholder {
-  color: #776667;
+  color: #8c7b7c;
   opacity: 1;
 }
 
 .searchField button {
   display: inline-grid;
-  width: 32px;
-  height: 32px;
-  flex: 0 0 32px;
+  width: 28px;
+  height: 28px;
+  flex: 0 0 28px;
   place-items: center;
   border: 0;
   border-radius: 50%;
   background: var(--menu-stone);
   color: var(--menu-ink);
+  transition: all 180ms ease;
+}
+
+.searchField button:hover {
+  background: var(--menu-stone-deep);
 }
 
 .searchField button:focus-visible {
@@ -334,7 +356,7 @@
 .categoryNav {
   display: flex;
   flex: 1;
-  align-items: stretch;
+  align-items: center;
   justify-content: space-between;
   min-width: 0;
 }
@@ -342,16 +364,17 @@
 .categoryNav button {
   position: relative;
   display: inline-flex;
-  min-height: 54px;
+  min-height: 48px;
   align-items: center;
   justify-content: center;
-  gap: 0.48rem;
-  padding: 0.55rem clamp(0.6rem, 1.4vw, 1.15rem);
+  gap: 0.5rem;
+  padding: 0.55rem clamp(0.6rem, 1.4vw, 1.25rem);
   border: 0;
   background: transparent;
-  color: #746568;
-  font-size: 0.88rem;
-  font-weight: 690;
+  color: #685a55;
+  font-family: var(--font-literata-gf), Georgia, serif;
+  font-size: 0.92rem;
+  font-weight: 600;
   white-space: nowrap;
   transition: color var(--menu-motion-quick) ease;
 }
@@ -361,31 +384,35 @@
   min-width: 1.45rem;
   height: 1.45rem;
   place-items: center;
-  border: 1px solid rgba(36, 23, 24, 0.16);
+  border: 1px solid rgba(197, 162, 90, 0.28);
   border-radius: 50%;
   color: inherit;
-  font-size: 0.66rem;
-  font-weight: 760;
+  font-family: var(--font-geist-sans), system-ui, sans-serif;
+  font-size: 0.68rem;
+  font-weight: 700;
+  background: rgba(255, 255, 255, 0.5);
+  transition: all 220ms var(--menu-ease);
 }
 
 .categoryNav button.activeCategory {
   color: var(--menu-burgundy);
+  font-weight: 700;
 }
 
 .categoryNav button.activeCategory small {
-  border-color: rgba(112, 21, 28, 0.28);
-  background: rgba(112, 21, 28, 0.055);
+  border-color: var(--menu-burgundy);
+  background: var(--menu-burgundy);
+  color: #ffffff;
 }
 
 .categoryRail {
   position: absolute;
-  right: 0.55rem;
-  bottom: 0;
-  left: 0.55rem;
+  inset: 4px 2px;
   z-index: -1;
-  height: 3px;
-  border-radius: 3px 3px 0 0;
-  background: var(--menu-brass);
+  border-radius: 999px;
+  background: rgba(112, 21, 28, 0.055);
+  border: 1px solid rgba(112, 21, 28, 0.12);
+  box-shadow: 0 2px 8px rgba(112, 21, 28, 0.02);
 }
 
 .categoryNav button:focus-visible {
@@ -439,12 +466,12 @@
 .sectionHeader h2 {
   margin: 0;
   color: var(--menu-ink);
-  font-family: var(--font-bricolage-grotesque-gf), Arial, sans-serif;
+  font-family: var(--font-bodoni-gf), Georgia, serif;
   font-size: clamp(2rem, 3.4vw, 3rem);
   font-optical-sizing: auto;
-  font-weight: 760;
-  letter-spacing: -0.035em;
-  line-height: 0.96;
+  font-weight: 600;
+  letter-spacing: -0.025em;
+  line-height: 1.05;
   text-wrap: balance;
 }
 
@@ -468,7 +495,7 @@
 .menuGrid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 0.85rem;
+  gap: 1.1rem;
 }
 
 .menuCard {
@@ -479,8 +506,8 @@
   min-height: 148px;
   padding: 0;
   overflow: hidden;
-  border: 1px solid var(--menu-line);
-  border-radius: 12px;
+  border: 1px solid #efeae0;
+  border-radius: 16px;
   background: var(--menu-surface);
   color: var(--menu-ink);
   box-shadow: var(--menu-shadow-rest);
@@ -493,9 +520,22 @@
   grid-template-columns: minmax(270px, 0.82fr) minmax(0, 1.18fr);
   grid-column: 1 / -1;
   min-height: 262px;
-  border-color: rgba(112, 21, 28, 0.42);
-  background: linear-gradient(106deg, #ffffff 0 68%, #f7f1ec 100%);
-  box-shadow: 0 1px 1px rgba(78, 12, 18, 0.055), 0 6px 8px rgba(78, 12, 18, 0.09);
+  border-color: var(--menu-gold);
+  background: linear-gradient(106deg, #ffffff 0 68%, #faf6ee 100%);
+  box-shadow: 0 12px 32px rgba(112, 21, 28, 0.05), 0 4px 12px rgba(197, 162, 90, 0.03);
+}
+
+.spotlightCard::before {
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  right: 4px;
+  bottom: 4px;
+  border: 1px solid rgba(197, 162, 90, 0.22);
+  border-radius: 12px;
+  content: "";
+  pointer-events: none;
+  z-index: 10;
 }
 
 .menuCard:focus-visible {
@@ -514,9 +554,13 @@
 
 .cardMedia::after {
   position: absolute;
-  inset: 0;
-  background: linear-gradient(180deg, transparent 62%, rgba(36, 23, 24, 0.11));
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 1px;
+  background: rgba(197, 162, 90, 0.12);
   content: "";
+  z-index: 3;
   pointer-events: none;
 }
 
@@ -535,17 +579,20 @@
   left: 0.65rem;
   z-index: 2;
   display: inline-flex;
-  min-height: 1.6rem;
+  min-height: 1.5rem;
   align-items: center;
-  padding: 0.22rem 0.48rem;
-  border: 1px solid rgba(255, 249, 238, 0.46);
+  padding: 0.2rem 0.5rem;
+  border: 1px solid var(--menu-brass);
   border-radius: 4px;
   background: var(--menu-burgundy);
-  color: #fff9ee;
-  font-size: 0.65rem;
-  font-weight: 760;
+  color: var(--menu-gold);
+  font-family: var(--font-literata-gf), Georgia, serif;
+  font-size: 0.62rem;
+  font-weight: 700;
   line-height: 1;
-  box-shadow: 0 1px 3px rgba(47, 5, 10, 0.24);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  box-shadow: 0 2px 4px rgba(47, 5, 10, 0.16);
 }
 
 .cardBody {
@@ -553,11 +600,11 @@
   min-width: 0;
   flex-direction: column;
   justify-content: center;
-  padding: 1rem 1.05rem 0.85rem;
+  padding: 1.1rem 1.25rem 0.95rem;
 }
 
 .spotlightCard .cardBody {
-  padding: clamp(1.35rem, 3vw, 2.25rem);
+  padding: clamp(1.5rem, 3vw, 2.25rem);
 }
 
 .cardHeading {
@@ -570,35 +617,42 @@
 .cardTitle {
   display: block;
   color: var(--menu-ink);
-  font-family: var(--font-bricolage-grotesque-gf), Arial, sans-serif;
-  font-size: clamp(1rem, 1.45vw, 1.28rem);
+  font-family: var(--font-bodoni-gf), Georgia, serif;
+  font-size: clamp(1.05rem, 1.45vw, 1.35rem);
   font-optical-sizing: auto;
-  font-weight: 730;
-  letter-spacing: -0.025em;
-  line-height: 1.08;
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  line-height: 1.15;
   text-wrap: balance;
 }
 
 .spotlightCard .cardTitle {
   font-size: clamp(1.55rem, 3vw, 2.55rem);
-  letter-spacing: -0.035em;
+  letter-spacing: -0.025em;
   line-height: 0.98;
 }
 
 .cardPrice {
   display: block;
   color: var(--menu-burgundy);
-  font-family: var(--font-bricolage-grotesque-gf), Arial, sans-serif;
-  font-size: clamp(1.05rem, 1.5vw, 1.28rem);
+  font-family: var(--font-bodoni-gf), Georgia, serif;
+  font-size: clamp(1.1rem, 1.5vw, 1.35rem);
   font-variant-numeric: tabular-nums;
-  font-weight: 780;
-  letter-spacing: -0.02em;
+  font-weight: 700;
+  letter-spacing: -0.01em;
   line-height: 1;
   white-space: nowrap;
 }
 
 .spotlightCard .cardPrice {
   font-size: clamp(1.35rem, 2.4vw, 2rem);
+}
+
+.currencySymbol {
+  font-size: 0.85em;
+  margin-right: 1px;
+  font-weight: 500;
+  vertical-align: middle;
 }
 
 .cardDescription {
@@ -643,10 +697,13 @@
   display: inline-flex;
   flex: none;
   align-items: center;
-  gap: 0.18rem;
-  color: var(--menu-blue);
-  font-weight: 760;
-  transition: color var(--menu-motion-quick) ease, transform var(--menu-motion-standard) var(--menu-ease), background-color var(--menu-motion-quick) ease;
+  gap: 0.2rem;
+  color: var(--menu-burgundy);
+  font-weight: 700;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  transition: all var(--menu-motion-standard) var(--menu-ease);
 }
 
 .sheetLayer {
@@ -766,12 +823,12 @@
 .sheetTitleRow h2 {
   margin: 0;
   color: var(--menu-ink);
-  font-family: var(--font-bricolage-grotesque-gf), Arial, sans-serif;
+  font-family: var(--font-bodoni-gf), Georgia, serif;
   font-size: clamp(2rem, 4vw, 3.25rem);
   font-optical-sizing: auto;
-  font-weight: 760;
-  letter-spacing: -0.04em;
-  line-height: 0.94;
+  font-weight: 500;
+  letter-spacing: -0.03em;
+  line-height: 1;
   text-wrap: balance;
 }
 
@@ -784,11 +841,11 @@
 
 .sheetPriceBlock strong {
   color: var(--menu-burgundy);
-  font-family: var(--font-bricolage-grotesque-gf), Arial, sans-serif;
+  font-family: var(--font-bodoni-gf), Georgia, serif;
   font-size: clamp(1.45rem, 3vw, 2.15rem);
   font-variant-numeric: tabular-nums;
-  font-weight: 790;
-  letter-spacing: -0.03em;
+  font-weight: 700;
+  letter-spacing: -0.02em;
   line-height: 1;
 }
 
@@ -818,9 +875,11 @@
 .sheetSectionTitle {
   margin: 0 0 0.8rem;
   color: var(--menu-blue);
-  font-family: var(--font-bricolage-grotesque-gf), Arial, sans-serif;
-  font-size: 1rem;
-  font-weight: 740;
+  font-family: var(--font-literata-gf), Georgia, serif;
+  font-size: 0.92rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
 }
 
 .sheetDetailsList {
@@ -1230,13 +1289,15 @@
     grid-template-columns: 112px minmax(0, 1fr);
     grid-column: auto;
     min-height: 116px;
-    border-radius: 10px;
+    border-radius: 14px;
     background: var(--menu-surface);
     box-shadow: var(--menu-shadow-rest);
+    border-color: #efeae0;
   }
 
   .spotlightCard {
-    border-color: rgba(112, 21, 28, 0.42);
+    border-color: var(--menu-gold);
+    background: linear-gradient(135deg, #ffffff 0%, #faf6ee 100%);
   }
 
   .tagBadge {
@@ -1245,11 +1306,17 @@
     min-height: 1.45rem;
     padding: 0.16rem 0.36rem;
     font-size: 0.57rem;
+    font-family: var(--font-literata-gf), Georgia, serif;
+    font-weight: 700;
+    color: var(--menu-gold);
+    background: var(--menu-burgundy);
+    border-color: var(--menu-brass);
+    letter-spacing: 0.04em;
   }
 
   .cardBody,
   .spotlightCard .cardBody {
-    padding: 0.78rem 0.75rem 0.66rem;
+    padding: 0.85rem 0.85rem 0.75rem;
   }
 
   .cardHeading {
@@ -1258,14 +1325,17 @@
 
   .cardTitle,
   .spotlightCard .cardTitle {
-    font-size: clamp(0.97rem, 4.4vw, 1.12rem);
-    letter-spacing: -0.025em;
-    line-height: 1.05;
+    font-family: var(--font-bodoni-gf), Georgia, serif;
+    font-size: clamp(0.97rem, 4.4vw, 1.18rem);
+    letter-spacing: -0.015em;
+    line-height: 1.15;
   }
 
   .cardPrice,
   .spotlightCard .cardPrice {
-    font-size: clamp(1rem, 4.2vw, 1.13rem);
+    font-family: var(--font-bodoni-gf), Georgia, serif;
+    font-size: clamp(1.05rem, 4.2vw, 1.25rem);
+    font-weight: 700;
   }
 
   .cardDescription,
@@ -1282,14 +1352,16 @@
 
   .cardDetailCue {
     display: inline-grid;
-    width: 1.45rem;
-    height: 1.45rem;
+    width: 1.6rem;
+    height: 1.6rem;
     place-items: center;
     border-radius: 50%;
-    background: var(--menu-stone);
+    background: #faf7f2;
     color: var(--menu-burgundy);
     font-size: 0;
-    box-shadow: inset 0 0 0 1px rgba(112, 21, 28, 0.07);
+    border: 1px solid rgba(197, 162, 90, 0.28);
+    box-shadow: 0 2px 4px rgba(78, 12, 18, 0.03);
+    transition: all 200ms ease;
   }
 
   .menuCard {

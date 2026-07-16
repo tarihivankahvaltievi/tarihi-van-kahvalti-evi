@@ -31,6 +31,18 @@ function normalize(value: string) {
     .trim();
 }
 
+function formatPrice(price: string) {
+  if (price.startsWith("₺")) {
+    return (
+      <>
+        <span className={styles.currencySymbol}>₺</span>
+        {price.slice(1)}
+      </>
+    );
+  }
+  return price;
+}
+
 function MenuCard({
   item,
   onOpen,
@@ -74,7 +86,7 @@ function MenuCard({
       <span className={styles.cardBody}>
         <span className={styles.cardHeading}>
           <span className={styles.cardTitle}>{item.name}</span>
-          <span className={styles.cardPrice}>{item.price}</span>
+          <span className={styles.cardPrice}>{formatPrice(item.price)}</span>
         </span>
         <span className={styles.cardDescription}>{item.description}</span>
         <span className={styles.cardMeta}>
@@ -179,7 +191,7 @@ function ProductSheet({ item, onClose }: { item: MenuItem | null; onClose: () =>
               <div className={styles.sheetTitleRow}>
                 <h2 id="product-sheet-title">{item.name}</h2>
                 <div className={styles.sheetPriceBlock}>
-                  <strong>{item.price}</strong>
+                  <strong>{formatPrice(item.price)}</strong>
                   {item.priceNote ? <span>{item.priceNote}</span> : null}
                 </div>
               </div>
