@@ -45,10 +45,6 @@ export function AboutStory() {
               decoding="async"
             />
           </figure>
-          <p className={styles.visualCaption} aria-hidden="true">
-            <span>1978&apos;den beri</span>
-            <span>Zambak Sokak · Beyoğlu</span>
-          </p>
         </div>
 
         <div className={styles.copy}>
@@ -57,14 +53,9 @@ export function AboutStory() {
             Van sofrası,
             <em>Zambak Sokak&apos;ta ağır ağır kurulur.</em>
           </h2>
-          <div className={styles.storyText}>
-            <p className={styles.lead}>
-              Zambak Sokak&apos;ın kendine özgü dokusu içinde, Van kahvaltısının sevilen tatlarını aynı sofrada buluşturuyoruz.
-            </p>
-            <p className={styles.detail}>
-              Otlu peynirden murtuğaya, sıcak pişiden ev yapımı reçellere kadar her tabağı günlük, taze ve özenli hazırlıyoruz. Nostaljik ayrıntılarla çevrili mekânımızda kahvaltıyı hızlı bir öğün değil; çayın demlendiği, sohbetin uzadığı sakin bir buluşma olarak görüyoruz.
-            </p>
-          </div>
+          <p className={styles.lead}>
+            Zambak Sokak&apos;ın kendine özgü dokusu içinde, Van kahvaltısının sevilen tatlarını aynı sofrada buluşturuyoruz. Otlu peynirden murtuğaya, sıcak pişiden ev yapımı reçellere kadar her tabağı günlük, taze ve özenli hazırlıyoruz. Nostaljik ayrıntılarla çevrili mekânımızda kahvaltıyı hızlı bir öğün değil; çayın demlendiği, sohbetin uzadığı sakin bir buluşma olarak görüyoruz.
+          </p>
 
           <nav className={styles.actions} aria-label="Hakkımızda bölümü sonraki adımlar">
             <Link href="/#menu" className={`${styles.action} ${styles.menuAction}`}>
