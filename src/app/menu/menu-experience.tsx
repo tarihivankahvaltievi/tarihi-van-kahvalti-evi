@@ -330,33 +330,51 @@ export function MenuExperience() {
   return (
     <main id="main-content" className={styles.page}>
       <section ref={heroRef} className={styles.menuHero} aria-labelledby="menu-page-title">
-        <motion.div
-          className={styles.heroCopy}
-          initial={reduceMotion ? false : { opacity: 0.72 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: reduceMotion ? 0 : 0.62, ease }}
-        >
-          <p className={styles.heroProvenance}>1978’den beri · Beyoğlu</p>
-          <h1 id="menu-page-title">Sofraya buyurun.</h1>
-          <p className={styles.heroLead}>
-            Van’dan gelen kahvaltılıklar, bakır sahanda sıcaklar ve sofranız boyunca tazelenen çay.
-          </p>
-          <p className={styles.heroFacts}>{menuItems.length} lezzet · Her gün 08:00—18:00</p>
-        </motion.div>
-
-        <motion.div
-          className={styles.heroVisual}
+        <h1 id="menu-page-title" className={styles.kineticTitle}>
+          <span className={styles.srOnly}>Tarihi Van Kahvaltı Evi Menü</span>
+          <span className={styles.kineticLine} aria-hidden="true">
+            {(["Tarihi", "Van"] as const).map((word, index) => (
+              <span className={styles.wordMask} key={word}>
+                <motion.span
+                  initial={reduceMotion ? false : { y: "115%", opacity: 0, rotate: 2.2 }}
+                  animate={{ y: "0%", opacity: 1, rotate: 0 }}
+                  transition={{ duration: reduceMotion ? 0 : 0.72, delay: reduceMotion ? 0 : index * 0.075, ease }}
+                >
+                  {word}
+                </motion.span>
+              </span>
+            ))}
+          </span>
+          <span className={`${styles.kineticLine} ${styles.kineticLineSecond}`} aria-hidden="true">
+            {(["Kahvaltı", "Evi"] as const).map((word, index) => (
+              <span className={styles.wordMask} key={word}>
+                <motion.span
+                  initial={reduceMotion ? false : { y: "115%", opacity: 0, rotate: 2.2 }}
+                  animate={{ y: "0%", opacity: 1, rotate: 0 }}
+                  transition={{ duration: reduceMotion ? 0 : 0.72, delay: reduceMotion ? 0 : 0.16 + index * 0.075, ease }}
+                >
+                  {word}
+                </motion.span>
+              </span>
+            ))}
+            <span className={`${styles.wordMask} ${styles.menuWord}`}>
+              <motion.span
+                initial={reduceMotion ? false : { y: "115%", opacity: 0, rotate: 2.2 }}
+                animate={{ y: "0%", opacity: 1, rotate: 0 }}
+                transition={{ duration: reduceMotion ? 0 : 0.78, delay: reduceMotion ? 0 : 0.34, ease }}
+              >
+                Menü
+              </motion.span>
+            </span>
+          </span>
+        </h1>
+        <motion.span
+          className={styles.kineticRule}
           aria-hidden="true"
-        >
-          <motion.figure
-            className={styles.heroMainPhoto}
-            initial={reduceMotion ? false : { opacity: 0.84, x: 12 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: reduceMotion ? 0 : 0.58, ease }}
-          >
-            <Image src="/images/hero-parallax/overhead-feast.webp" alt="" fill priority sizes="(max-width: 760px) 100vw, 500px" quality={82} />
-          </motion.figure>
-        </motion.div>
+          initial={reduceMotion ? false : { scaleX: 0 }}
+          animate={{ scaleX: 1 }}
+          transition={{ duration: reduceMotion ? 0 : 0.9, delay: reduceMotion ? 0 : 0.42, ease }}
+        />
       </section>
 
       <section className={styles.categoryShowcase} aria-labelledby="category-showcase-title">
