@@ -12,6 +12,12 @@
   --menu-line: rgba(36, 23, 24, 0.2);
   --menu-surface: #ffffff;
   --menu-ease: cubic-bezier(0.16, 1, 0.3, 1);
+  --menu-motion-quick: 120ms;
+  --menu-motion-standard: 220ms;
+  --menu-shadow-rest: 0 1px 1px rgba(36, 23, 24, 0.045), 0 4px 8px rgba(36, 23, 24, 0.06);
+  --menu-shadow-lift: 0 2px 2px rgba(78, 12, 18, 0.07), 0 8px 8px rgba(78, 12, 18, 0.095);
+  --menu-shadow-press: 0 1px 2px rgba(36, 23, 24, 0.08);
+  --menu-shadow-sticky: 0 1px 0 rgba(36, 23, 24, 0.08), 0 6px 8px rgba(36, 23, 24, 0.075);
   min-height: 100vh;
   padding-bottom: 4.5rem;
   background: var(--menu-surface);
@@ -252,10 +258,14 @@
   z-index: 15;
   scroll-margin-top: 72px;
   border-bottom: 1px solid var(--menu-line);
-  background: rgba(255, 255, 255, 0.96);
-  box-shadow: 0 7px 8px rgba(36, 23, 24, 0.06);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  isolation: isolate;
+  background: var(--menu-surface);
+  box-shadow: 0 1px 0 rgba(36, 23, 24, 0.035);
+  transition: box-shadow var(--menu-motion-standard) var(--menu-ease);
+}
+
+.discoveryPinned {
+  box-shadow: var(--menu-shadow-sticky);
 }
 
 .discoveryInner {
@@ -279,7 +289,7 @@
   border-radius: 8px;
   background: var(--menu-surface);
   color: var(--menu-muted);
-  transition: border-color 180ms ease, box-shadow 180ms ease;
+  transition: border-color var(--menu-motion-quick) ease, box-shadow var(--menu-motion-standard) var(--menu-ease);
 }
 
 .searchField:focus-within {
@@ -343,7 +353,7 @@
   font-size: 0.88rem;
   font-weight: 690;
   white-space: nowrap;
-  transition: color 180ms ease;
+  transition: color var(--menu-motion-quick) ease;
 }
 
 .categoryNav button small {
@@ -360,6 +370,11 @@
 
 .categoryNav button.activeCategory {
   color: var(--menu-burgundy);
+}
+
+.categoryNav button.activeCategory small {
+  border-color: rgba(112, 21, 28, 0.28);
+  background: rgba(112, 21, 28, 0.055);
 }
 
 .categoryRail {
@@ -383,6 +398,7 @@
   margin-inline: auto;
   padding: 1.25rem 0 0;
   scroll-margin-top: 164px;
+  overflow-anchor: none;
 }
 
 .resultLine {
@@ -467,10 +483,10 @@
   border-radius: 12px;
   background: var(--menu-surface);
   color: var(--menu-ink);
-  box-shadow: 0 4px 8px rgba(36, 23, 24, 0.055);
+  box-shadow: var(--menu-shadow-rest);
   text-align: left;
   transform: translateZ(0);
-  transition: border-color 220ms ease, box-shadow 220ms ease;
+  transition: border-color var(--menu-motion-quick) ease, box-shadow var(--menu-motion-standard) var(--menu-ease), background-color var(--menu-motion-quick) ease;
 }
 
 .spotlightCard {
@@ -479,7 +495,7 @@
   min-height: 262px;
   border-color: rgba(112, 21, 28, 0.42);
   background: linear-gradient(106deg, #ffffff 0 68%, #f7f1ec 100%);
-  box-shadow: 0 6px 8px rgba(78, 12, 18, 0.09);
+  box-shadow: 0 1px 1px rgba(78, 12, 18, 0.055), 0 6px 8px rgba(78, 12, 18, 0.09);
 }
 
 .cardMedia {
@@ -501,7 +517,7 @@
 
 .cardMedia img {
   object-fit: cover;
-  transition: transform 700ms var(--menu-ease), filter 300ms ease;
+  transition: transform 520ms var(--menu-ease), filter var(--menu-motion-standard) ease;
 }
 
 .menuCard:not(.spotlightCard) .cardMedia img {
@@ -524,6 +540,7 @@
   font-size: 0.65rem;
   font-weight: 760;
   line-height: 1;
+  box-shadow: 0 1px 3px rgba(47, 5, 10, 0.24);
 }
 
 .cardBody {
@@ -624,6 +641,7 @@
   gap: 0.18rem;
   color: var(--menu-blue);
   font-weight: 760;
+  transition: color var(--menu-motion-quick) ease, transform var(--menu-motion-standard) var(--menu-ease), background-color var(--menu-motion-quick) ease;
 }
 
 .sheetLayer {
@@ -923,12 +941,17 @@
 
   .menuCard:hover {
     border-color: rgba(112, 21, 28, 0.44);
-    box-shadow: 0 7px 8px rgba(78, 12, 18, 0.1);
+    box-shadow: var(--menu-shadow-lift);
   }
 
   .menuCard:hover .cardMedia img {
     filter: saturate(1.04) contrast(1.04);
     transform: scale(1.045);
+  }
+
+  .menuCard:hover .cardDetailCue {
+    color: var(--menu-burgundy);
+    transform: translateX(2px);
   }
 
   .sheetClose:hover {
@@ -1098,7 +1121,7 @@
     min-height: 42px;
     flex: 0 0 132px;
     margin: 0;
-    transition: flex-basis 240ms var(--menu-ease), border-color 180ms ease, box-shadow 180ms ease;
+    transition: flex-basis 240ms var(--menu-ease), border-color var(--menu-motion-quick) ease, box-shadow var(--menu-motion-standard) var(--menu-ease);
   }
 
   .searchField:focus-within {
@@ -1121,6 +1144,7 @@
     scroll-padding-inline: 0.35rem;
     scrollbar-width: none;
     scroll-snap-type: inline proximity;
+    -webkit-overflow-scrolling: touch;
   }
 
   .categoryNav::-webkit-scrollbar {
@@ -1198,7 +1222,7 @@
     min-height: 116px;
     border-radius: 10px;
     background: var(--menu-surface);
-    box-shadow: 0 3px 7px rgba(36, 23, 24, 0.055);
+    box-shadow: var(--menu-shadow-rest);
   }
 
   .spotlightCard {
@@ -1255,6 +1279,7 @@
     background: var(--menu-stone);
     color: var(--menu-burgundy);
     font-size: 0;
+    box-shadow: inset 0 0 0 1px rgba(112, 21, 28, 0.07);
   }
 
   .menuCard {
@@ -1264,6 +1289,7 @@
 
   .menuCard:active {
     background: #fcf9f7;
+    box-shadow: var(--menu-shadow-press);
   }
 
   .sheetLayer {
@@ -1374,7 +1400,9 @@
   .sheetClose,
   .sheetAction,
   .categoryNav button,
-  .searchField {
+  .searchField,
+  .discoveryBar,
+  .cardDetailCue {
     scroll-behavior: auto !important;
     animation: none !important;
     transition-duration: 0.01ms !important;

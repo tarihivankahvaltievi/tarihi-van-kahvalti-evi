@@ -33,11 +33,9 @@ function normalize(value: string) {
 
 function MenuCard({
   item,
-  index,
   onOpen,
 }: {
   item: MenuItem;
-  index: number;
   onOpen: () => void;
 }) {
   const reduceMotion = useReducedMotion();
@@ -52,9 +50,9 @@ function MenuCard({
       onClick={onOpen}
       layout="position"
       initial={false}
-      whileHover={reduceMotion ? undefined : { y: -3 }}
-      whileTap={reduceMotion ? undefined : { scale: 0.99 }}
-      transition={{ duration: reduceMotion ? 0 : 0.28, delay: Math.min(index * 0.025, 0.14), ease }}
+      whileHover={reduceMotion ? undefined : { y: -2 }}
+      whileTap={reduceMotion ? undefined : { scale: 0.985 }}
+      transition={{ duration: reduceMotion ? 0 : 0.18, ease }}
       aria-label={`${item.name}: ${item.price}. Ayrıntıları gör`}
     >
       <span className={styles.cardMedia}>
@@ -213,9 +211,11 @@ function ProductSheet({ item, onClose }: { item: MenuItem | null; onClose: () =>
 
 export function MenuExperience() {
   const reduceMotion = useReducedMotion();
+  const heroRef = useRef<HTMLElement>(null);
   const [activeCategory, setActiveCategory] = useState<MenuFilterId>("all");
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedItem, setSelectedItem] = useState<MenuItem | null>(null);
+  const [isCatalogPinned, setIsCatalogPinned] = useState(false);
   const deferredSearch = useDeferredValue(searchTerm);
 
   useEffect(() => {
@@ -225,6 +225,20 @@ export function MenuExperience() {
       document.documentElement.classList.remove("menu-scroll-root");
       document.body.classList.remove("menu-scroll-root");
     };
+  }, []);
+
+  useEffect(() => {
+    const hero = heroRef.current;
+    if (!hero) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsCatalogPinned(!entry.isIntersecting && entry.boundingClientRect.bottom <= 73);
+      },
+      { rootMargin: "-73px 0px 0px", threshold: 0 },
+    );
+    observer.observe(hero);
+    return () => observer.disconnect();
   }, []);
 
   const visibleItems = useMemo(() => {
@@ -259,17 +273,27 @@ export function MenuExperience() {
       block: "nearest",
       inline: "center",
     });
-    if (window.scrollY > 430) {
-      document.getElementById("menu-results")?.scrollIntoView({
-        behavior: reduceMotion ? "auto" : "smooth",
-        block: "start",
+    if (isCatalogPinned) {
+      window.requestAnimationFrame(() => {
+        window.requestAnimationFrame(() => {
+          const results = document.getElementById("menu-results");
+          const discovery = document.getElementById("menu-catalog");
+          if (!results || !discovery) return;
+
+          const stickyOffset = 72 + discovery.getBoundingClientRect().height;
+          const targetTop = results.getBoundingClientRect().top + window.scrollY - stickyOffset;
+          window.scrollTo({
+            top: Math.max(0, targetTop),
+            behavior: reduceMotion ? "auto" : "smooth",
+          });
+        });
       });
     }
   };
 
   return (
     <main id="main-content" className={styles.page}>
-      <section className={styles.menuHero} aria-labelledby="menu-page-title">
+      <section ref={heroRef} className={styles.menuHero} aria-labelledby="menu-page-title">
         <div className={styles.heroCopy}>
           <p className={styles.heroProvenance}>
             <span>1978</span>
@@ -316,7 +340,11 @@ export function MenuExperience() {
         </div>
       </section>
 
-      <section id="menu-catalog" className={styles.discoveryBar} aria-label="Menüde gezinme">
+      <section
+        id="menu-catalog"
+        className={`${styles.discoveryBar} ${isCatalogPinned ? styles.discoveryPinned : ""}`}
+        aria-label="Menüde gezinme"
+      >
         <div className={styles.discoveryInner}>
           <div className={styles.searchField}>
             <Search size={18} aria-hidden="true" />
@@ -390,8 +418,8 @@ export function MenuExperience() {
                 </header>
                 <motion.div className={styles.menuGrid} layout>
                   <AnimatePresence initial={false} mode="popLayout">
-                    {group.items.map((item, index) => (
-                      <MenuCard key={item.id} item={item} index={index} onOpen={() => setSelectedItem(item)} />
+                    {group.items.map((item) => (
+                      <MenuCard key={item.id} item={item} onOpen={() => setSelectedItem(item)} />
                     ))}
                   </AnimatePresence>
                 </motion.div>
