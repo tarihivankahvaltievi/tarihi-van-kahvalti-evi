@@ -370,15 +370,21 @@ export function MenuExperience() {
   return (
     <main id="main-content" className={styles.page}>
       <section ref={heroRef} className={styles.menuHero} aria-labelledby="menu-page-title">
-        <h1 id="menu-page-title" className={styles.kineticTitle}>
+        <motion.h1
+          id="menu-page-title"
+          className={styles.kineticTitle}
+          initial={reduceMotion ? false : { scale: 0.94 }}
+          animate={{ scale: 1 }}
+          transition={{ duration: reduceMotion ? 0 : 1.05, ease }}
+        >
           <span className={styles.srOnly}>Tarihi Van Kahvaltı Evi Menü</span>
           <span className={styles.kineticLine} aria-hidden="true">
             {(["Tarihi", "Van"] as const).map((word, index) => (
               <span className={styles.wordMask} key={word}>
                 <motion.span
-                  initial={reduceMotion ? false : { y: "115%", opacity: 0, rotate: 2.2 }}
-                  animate={{ y: "0%", opacity: 1, rotate: 0 }}
-                  transition={{ duration: reduceMotion ? 0 : 0.72, delay: reduceMotion ? 0 : index * 0.075, ease }}
+                  initial={reduceMotion ? false : { y: "125%", x: index ? 24 : -24, opacity: 0, rotate: index ? 4 : -4, filter: "blur(9px)" }}
+                  animate={{ y: "0%", x: 0, opacity: 1, rotate: 0, filter: "blur(0px)" }}
+                  transition={{ duration: reduceMotion ? 0 : 0.88, delay: reduceMotion ? 0 : index * 0.09, ease }}
                 >
                   {word}
                 </motion.span>
@@ -389,31 +395,47 @@ export function MenuExperience() {
             {(["Kahvaltı", "Evi"] as const).map((word, index) => (
               <span className={styles.wordMask} key={word}>
                 <motion.span
-                  initial={reduceMotion ? false : { y: "115%", opacity: 0, rotate: 2.2 }}
-                  animate={{ y: "0%", opacity: 1, rotate: 0 }}
-                  transition={{ duration: reduceMotion ? 0 : 0.72, delay: reduceMotion ? 0 : 0.16 + index * 0.075, ease }}
+                  initial={reduceMotion ? false : { y: "125%", x: index ? 18 : -18, opacity: 0, rotate: index ? 3 : -3, filter: "blur(7px)" }}
+                  animate={{ y: "0%", x: 0, opacity: 1, rotate: 0, filter: "blur(0px)" }}
+                  transition={{ duration: reduceMotion ? 0 : 0.82, delay: reduceMotion ? 0 : 0.18 + index * 0.075, ease }}
                 >
                   {word}
                 </motion.span>
               </span>
             ))}
-            <span className={`${styles.wordMask} ${styles.menuWord}`}>
-              <motion.span
-                initial={reduceMotion ? false : { y: "115%", opacity: 0, rotate: 2.2 }}
-                animate={{ y: "0%", opacity: 1, rotate: 0 }}
-                transition={{ duration: reduceMotion ? 0 : 0.78, delay: reduceMotion ? 0 : 0.34, ease }}
-              >
-                Menü
-              </motion.span>
-            </span>
           </span>
-        </h1>
+          <span className={`${styles.kineticLine} ${styles.menuWord}`} aria-hidden="true">
+            {Array.from("Menü").map((letter, index) => (
+              <span className={styles.letterMask} key={`${letter}-${index}`}>
+                <motion.span
+                  initial={reduceMotion ? false : { y: "135%", opacity: 0, rotate: index % 2 ? 8 : -8, scale: 0.72 }}
+                  animate={{ y: "0%", opacity: 1, rotate: 0, scale: 1 }}
+                  transition={{ duration: reduceMotion ? 0 : 0.76, delay: reduceMotion ? 0 : 0.36 + index * 0.055, ease }}
+                >
+                  {letter}
+                </motion.span>
+              </span>
+            ))}
+            <motion.span
+              className={styles.menuUnderline}
+              initial={reduceMotion ? false : { scaleX: 0, opacity: 0 }}
+              animate={{ scaleX: 1, opacity: 1 }}
+              transition={{ duration: reduceMotion ? 0 : 0.82, delay: reduceMotion ? 0 : 0.58, ease }}
+            />
+            <motion.span
+              className={styles.menuGlint}
+              initial={reduceMotion ? false : { x: "-130%", opacity: 0 }}
+              animate={reduceMotion ? { opacity: 0 } : { x: "150%", opacity: [0, 0.85, 0] }}
+              transition={{ duration: 0.95, delay: 0.88, ease }}
+            />
+          </span>
+        </motion.h1>
         <motion.span
           className={styles.kineticRule}
           aria-hidden="true"
-          initial={reduceMotion ? false : { scaleX: 0 }}
-          animate={{ scaleX: 1 }}
-          transition={{ duration: reduceMotion ? 0 : 0.9, delay: reduceMotion ? 0 : 0.42, ease }}
+          initial={reduceMotion ? false : { scaleX: 0, opacity: 0 }}
+          animate={{ scaleX: 1, opacity: 1 }}
+          transition={{ duration: reduceMotion ? 0 : 1.05, delay: reduceMotion ? 0 : 0.68, ease }}
         />
       </section>
 
@@ -430,10 +452,10 @@ export function MenuExperience() {
               type="button"
               className={styles.categoryCard}
               onClick={() => exploreCategory(category.id)}
-              initial={reduceMotion ? false : { opacity: 0.88, y: 12 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              initial={reduceMotion ? false : { opacity: 0, y: 28, rotate: index % 2 ? 1.4 : -1.4, clipPath: "inset(18% 0 18% 0 round 12px)", filter: "blur(5px)" }}
+              whileInView={{ opacity: 1, y: 0, rotate: 0, clipPath: "inset(0% 0 0% 0 round 12px)", filter: "blur(0px)" }}
               viewport={{ once: true, amount: 0.3 }}
-              transition={{ duration: reduceMotion ? 0 : 0.42, delay: reduceMotion ? 0 : index * 0.055, ease }}
+              transition={{ duration: reduceMotion ? 0 : 0.62, delay: reduceMotion ? 0 : index * 0.065, ease }}
               whileTap={reduceMotion ? undefined : { scale: 0.985 }}
               aria-label={`${category.label} kategorisini aç, ${categoryCounts[category.id]} seçenek`}
             >

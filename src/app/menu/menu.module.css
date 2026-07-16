@@ -1,32 +1,34 @@
 .page {
-  --menu-burgundy: #243f2b;
-  --menu-burgundy-dark: #16281c;
-  --menu-burgundy-bright: #3e6547;
+  --menu-burgundy: #70151c;
+  --menu-burgundy-dark: #4b0c12;
+  --menu-burgundy-bright: #8d252c;
   --menu-brass: #a77b37;
   --menu-gold: #efd49b;
   --menu-stone: #f3eee6;
   --menu-stone-deep: #d9cdbd;
   --menu-ink: #211d1b;
   --menu-muted: #625a51;
-  --menu-blue: #315c3b;
-  --menu-line: rgba(36, 63, 43, 0.2);
+  --menu-blue: #762129;
+  --menu-line: rgba(112, 21, 28, 0.18);
   --menu-surface: #ffffff;
   --menu-ease: cubic-bezier(0.16, 1, 0.3, 1);
   --menu-motion-quick: 120ms;
   --menu-motion-standard: 220ms;
   --menu-shadow-rest: 0 1px 1px rgba(36, 23, 24, 0.045), 0 4px 8px rgba(36, 23, 24, 0.06);
-  --menu-shadow-lift: 0 2px 2px rgba(22, 40, 28, 0.07), 0 8px 8px rgba(22, 40, 28, 0.1);
+  --menu-shadow-lift: 0 2px 2px rgba(75, 12, 18, 0.07), 0 8px 8px rgba(75, 12, 18, 0.1);
   --menu-shadow-press: 0 1px 2px rgba(36, 23, 24, 0.08);
   --menu-shadow-sticky: 0 1px 0 rgba(36, 23, 24, 0.08), 0 6px 8px rgba(36, 23, 24, 0.075);
   min-height: 100vh;
   padding-bottom: 4.5rem;
-  background-color: #f2efe9;
+  position: relative;
+  isolation: isolate;
+  background-color: #f4f0e9;
   background-image:
-    radial-gradient(circle at 17% 28%, rgba(33, 29, 27, 0.14) 0 0.42px, transparent 0.58px),
-    radial-gradient(circle at 72% 63%, rgba(36, 63, 43, 0.1) 0 0.38px, transparent 0.56px),
-    radial-gradient(circle at 43% 81%, rgba(167, 123, 55, 0.1) 0 0.34px, transparent 0.52px);
-  background-position: 0 0, 1px 2px, 3px 1px;
-  background-size: 4px 4px, 5px 5px, 7px 7px;
+    linear-gradient(104deg, transparent 0 46%, rgba(69, 45, 38, 0.028) 47% 49%, transparent 50% 100%),
+    linear-gradient(76deg, transparent 0 48%, rgba(112, 21, 28, 0.018) 49% 50%, transparent 51% 100%),
+    linear-gradient(0deg, rgba(255, 255, 255, 0.22), rgba(228, 219, 207, 0.08));
+  background-position: 0 0, 3px 5px, 0 0;
+  background-size: 13px 17px, 19px 23px, 100% 100%;
   color: var(--menu-ink);
   font-family: var(--font-geist-sans), system-ui, sans-serif;
 }
@@ -46,53 +48,30 @@
 .menuHero {
   position: relative;
   display: flex;
-  min-height: clamp(220px, 27vw, 330px);
-  align-items: center;
+  min-height: clamp(340px, 40vw, 520px);
+  align-items: flex-end;
   justify-content: center;
   margin-top: 72px;
-  padding: clamp(2.6rem, 5vw, 4.6rem) max(1.25rem, calc((100% - 1200px) / 2));
+  padding: clamp(3rem, 6vw, 5.5rem) max(1.25rem, calc((100% - 1200px) / 2)) clamp(2.1rem, 4vw, 3.5rem);
   overflow: hidden;
   isolation: isolate;
   background: transparent;
   color: var(--menu-ink);
 }
 
-.menuHero::before {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 50%;
-  width: min(86vw, 880px);
-  border-right: 1px solid rgba(36, 63, 43, 0.12);
-  border-left: 1px solid rgba(36, 63, 43, 0.12);
-  content: "";
-  pointer-events: none;
-  transform: translateX(-50%);
-}
-
-.menuHero::after {
-  position: absolute;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  height: 1px;
-  background: rgba(36, 63, 43, 0.18);
-  content: "";
-}
-
 .kineticTitle {
   position: relative;
   z-index: 1;
-  width: min(78vw, 760px);
+  width: min(92vw, 980px);
   max-width: none;
   margin: 0;
   color: var(--menu-ink);
   font-family: var(--font-bricolage-grotesque-gf), Arial, sans-serif;
-  font-size: clamp(2.4rem, 5.4vw, 4.65rem);
+  font-size: clamp(3.6rem, 8vw, 6rem);
   font-optical-sizing: auto;
   font-weight: 760;
   letter-spacing: -0.038em;
-  line-height: 0.9;
+  line-height: 0.84;
   text-align: center;
 }
 
@@ -110,8 +89,8 @@
 }
 
 .kineticLineSecond {
-  margin-top: 0.08em;
-  font-size: 0.73em;
+  margin-top: 0.12em;
+  font-size: 0.67em;
   letter-spacing: -0.025em;
 }
 
@@ -134,37 +113,64 @@
 
 .kineticTitle .menuWord {
   position: relative;
-  margin-left: 0.17em;
+  width: fit-content;
+  margin: 0.14em auto 0;
+  overflow: hidden;
   color: #8f171a;
+  font-size: 0.78em;
+  letter-spacing: -0.025em;
+  line-height: 0.92;
 }
 
-.menuWord::before {
+.letterMask {
+  display: inline-block;
+  overflow: hidden;
+  padding: 0.08em 0.012em 0.12em;
+  margin-block: -0.08em -0.12em;
+}
+
+.letterMask > span {
+  display: inline-block;
+  transform-origin: center bottom;
+}
+
+.menuUnderline {
   position: absolute;
-  top: 52%;
-  left: -0.27em;
-  width: 0.12em;
-  height: 0.12em;
-  border-radius: 50%;
+  right: 0;
+  bottom: 0.02em;
+  left: 0;
+  height: 0.055em;
   background: var(--menu-brass);
-  content: "";
-  transform: translateY(-50%);
+  transform-origin: left center;
+}
+
+.menuGlint {
+  position: absolute;
+  top: -20%;
+  bottom: -20%;
+  left: 0;
+  width: 24%;
+  background: linear-gradient(90deg, transparent, rgba(255, 244, 213, 0.62), transparent);
+  filter: blur(5px);
+  pointer-events: none;
+  transform: skewX(-18deg);
 }
 
 .kineticRule {
   position: absolute;
-  bottom: clamp(1.7rem, 3vw, 2.5rem);
+  bottom: clamp(0.85rem, 1.7vw, 1.5rem);
   left: 50%;
   z-index: 1;
-  width: min(52vw, 420px);
-  height: 2px;
-  background: #8f171a;
+  width: min(28vw, 280px);
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(112, 21, 28, 0.62), transparent);
   transform-origin: center;
   translate: -50% 0;
 }
 
 .categoryShowcase {
-  padding: clamp(2.1rem, 4.8vw, 4.4rem) max(1rem, calc((100% - 1200px) / 2));
-  background: rgba(243, 238, 230, 0.48);
+  padding: clamp(1.2rem, 3vw, 2.6rem) max(1rem, calc((100% - 1200px) / 2)) clamp(2.1rem, 4.8vw, 4.4rem);
+  background: transparent;
   color: var(--menu-ink);
 }
 
@@ -215,7 +221,7 @@
   border-radius: 12px;
   background: var(--menu-burgundy-dark);
   color: #fff9ee;
-  box-shadow: 0 4px 8px rgba(22, 40, 28, 0.14);
+  box-shadow: 0 4px 8px rgba(75, 12, 18, 0.14);
   text-align: left;
   transform: translateZ(0);
   isolation: isolate;
@@ -232,7 +238,7 @@
   position: absolute;
   inset: 0;
   z-index: -1;
-  background: linear-gradient(180deg, rgba(9, 24, 14, 0.02) 28%, rgba(9, 24, 14, 0.86) 100%);
+  background: linear-gradient(180deg, rgba(30, 6, 9, 0.02) 28%, rgba(30, 6, 9, 0.86) 100%);
 }
 
 .categoryCardCopy {
@@ -311,7 +317,7 @@
 
 .searchField:focus-within {
   border-color: var(--menu-burgundy);
-  box-shadow: 0 0 0 3px rgba(36, 63, 43, 0.13);
+  box-shadow: 0 0 0 3px rgba(112, 21, 28, 0.13);
 }
 
 .searchField input {
@@ -390,8 +396,8 @@
 }
 
 .categoryNav button.activeCategory small {
-  border-color: rgba(36, 63, 43, 0.3);
-  background: rgba(36, 63, 43, 0.06);
+  border-color: rgba(112, 21, 28, 0.3);
+  background: rgba(112, 21, 28, 0.06);
 }
 
 .categoryNavDivider {
@@ -400,7 +406,7 @@
   flex: 0 0 1px;
   align-self: center;
   margin-inline: 0.25rem;
-  background: rgba(36, 63, 43, 0.18);
+  background: rgba(112, 21, 28, 0.18);
 }
 
 .categoryNav .quickFilterButton {
@@ -523,9 +529,9 @@
   grid-template-columns: minmax(270px, 0.82fr) minmax(0, 1.18fr);
   grid-column: 1 / -1;
   min-height: 262px;
-  border-color: rgba(36, 63, 43, 0.42);
+  border-color: rgba(112, 21, 28, 0.42);
   background: linear-gradient(106deg, #ffffff 0 68%, #f7f1ec 100%);
-  box-shadow: 0 1px 1px rgba(22, 40, 28, 0.055), 0 6px 8px rgba(22, 40, 28, 0.09);
+  box-shadow: 0 1px 1px rgba(75, 12, 18, 0.055), 0 6px 8px rgba(75, 12, 18, 0.09);
 }
 
 .menuCard:focus-visible {
@@ -575,7 +581,7 @@
   font-size: 0.65rem;
   font-weight: 760;
   line-height: 1;
-  box-shadow: 0 1px 3px rgba(8, 24, 14, 0.24);
+  box-shadow: 0 1px 3px rgba(48, 7, 12, 0.24);
 }
 
 .cardBody {
@@ -680,14 +686,14 @@
 }
 
 .sheetLayer {
-  --menu-burgundy: #243f2b;
-  --menu-burgundy-dark: #16281c;
+  --menu-burgundy: #70151c;
+  --menu-burgundy-dark: #4b0c12;
   --menu-brass: #a77b37;
   --menu-stone: #f3eee6;
   --menu-ink: #211d1b;
   --menu-muted: #625a51;
-  --menu-blue: #315c3b;
-  --menu-line: rgba(36, 63, 43, 0.2);
+  --menu-blue: #762129;
+  --menu-line: rgba(112, 21, 28, 0.18);
   --menu-surface: #ffffff;
   --menu-ease: cubic-bezier(0.16, 1, 0.3, 1);
   position: fixed;
@@ -704,7 +710,7 @@
   width: 100%;
   height: 100%;
   border: 0;
-  background: rgba(10, 25, 15, 0.74);
+  background: rgba(35, 5, 9, 0.74);
   cursor: default;
   backdrop-filter: blur(5px);
   -webkit-backdrop-filter: blur(5px);
@@ -732,7 +738,7 @@
 .sheetMedia::after {
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, transparent 66%, rgba(8, 24, 14, 0.3));
+  background: linear-gradient(180deg, transparent 66%, rgba(48, 7, 12, 0.3));
   content: "";
   pointer-events: none;
 }
@@ -975,7 +981,7 @@
   }
 
   .menuCard:hover {
-    border-color: rgba(36, 63, 43, 0.45);
+    border-color: rgba(112, 21, 28, 0.45);
     box-shadow: var(--menu-shadow-lift);
   }
 
@@ -1045,32 +1051,34 @@
 
   .menuHero {
     display: flex;
-    min-height: 184px;
+    min-height: 330px;
     margin-top: 72px;
-    padding: 2.25rem 1rem 2.65rem;
-  }
-
-  .menuHero::before {
-    width: calc(100% - 2rem);
+    padding: 2.5rem 0.75rem 2.2rem;
   }
 
   .kineticTitle {
     width: 100%;
-    font-size: clamp(2.05rem, 9vw, 2.72rem);
+    font-size: clamp(3.2rem, 14.2vw, 4.35rem);
     letter-spacing: -0.035em;
   }
 
   .kineticLineSecond {
-    font-size: 0.68em;
+    margin-top: 0.16em;
+    font-size: 0.59em;
+  }
+
+  .kineticTitle .menuWord {
+    margin-top: 0.18em;
+    font-size: 0.78em;
   }
 
   .kineticRule {
-    bottom: 1.45rem;
-    width: min(58vw, 250px);
+    bottom: 0.85rem;
+    width: min(42vw, 180px);
   }
 
   .categoryShowcase {
-    padding: 1.8rem 0 2rem;
+    padding: 0.8rem 0 2rem;
   }
 
   .categoryShowcaseHead {
@@ -1253,7 +1261,7 @@
     grid-template-columns: 112px minmax(0, 1fr);
     grid-column: auto;
     min-height: 116px;
-    border-color: rgba(36, 63, 43, 0.16);
+    border-color: rgba(112, 21, 28, 0.16);
     border-radius: 8px;
     background: rgba(255, 255, 255, 0.74);
     box-shadow: none;
@@ -1265,7 +1273,7 @@
     border: 0;
     background: var(--menu-burgundy-dark);
     color: #fff9ee;
-    box-shadow: 0 6px 8px rgba(22, 40, 28, 0.15);
+    box-shadow: 0 6px 8px rgba(75, 12, 18, 0.15);
   }
 
   .spotlightCard .cardMedia {
@@ -1344,12 +1352,12 @@
     background: var(--menu-stone);
     color: var(--menu-burgundy);
     font-size: 0;
-    box-shadow: inset 0 0 0 1px rgba(36, 63, 43, 0.08);
+    box-shadow: inset 0 0 0 1px rgba(112, 21, 28, 0.08);
   }
 
   .menuCard {
     touch-action: manipulation;
-    -webkit-tap-highlight-color: rgba(36, 63, 43, 0.08);
+    -webkit-tap-highlight-color: rgba(112, 21, 28, 0.08);
   }
 
   .menuCard:active {
@@ -1426,7 +1434,7 @@
 
 @media (max-width: 390px) {
   .kineticTitle {
-    font-size: clamp(1.95rem, 8.8vw, 2.18rem);
+    font-size: clamp(2.85rem, 13.6vw, 3.35rem);
   }
 
   .menuCard,
