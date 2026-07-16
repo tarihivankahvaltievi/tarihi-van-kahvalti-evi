@@ -82,11 +82,12 @@ const MenuCard = memo(function MenuCard({
           fill
           sizes={
             isSpotlight
-              ? "(max-width: 680px) 36vw, (max-width: 1080px) 38vw, 480px"
-              : "(max-width: 680px) 36vw, (max-width: 1080px) 18vw, 180px"
+              ? "(max-width: 680px) 32vw, (max-width: 1080px) 38vw, 480px"
+              : "(max-width: 680px) 32vw, (max-width: 1080px) 18vw, 180px"
           }
-          quality={80}
-          priority={isSpotlight}
+          quality={74}
+          loading={isSpotlight ? "eager" : "lazy"}
+          fetchPriority={isSpotlight ? "high" : "auto"}
         />
         {visibleTag ? <span className={styles.tagBadge}>{visibleTag}</span> : null}
       </span>

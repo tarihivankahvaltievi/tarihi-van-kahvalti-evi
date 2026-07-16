@@ -511,6 +511,8 @@
   cursor: default;
   backdrop-filter: blur(4px);
   -webkit-backdrop-filter: blur(4px);
+  animation: sheet-backdrop-in 200ms ease both;
+  transition: opacity 200ms ease;
 }
 
 .productSheet {
@@ -525,6 +527,29 @@
   border-radius: 12px;
   background: #ffffff;
   box-shadow: 7px 7px 0 rgba(29, 24, 24, 0.35);
+  animation: product-sheet-in 300ms var(--menu-ease) both;
+  transition: opacity 220ms ease, transform 300ms var(--menu-ease);
+}
+
+.sheetLayer[data-closing="true"] .overlayBackdrop {
+  animation: none;
+  opacity: 0;
+}
+
+.sheetLayer[data-closing="true"] .productSheet {
+  animation: none;
+  opacity: 0;
+  transform: translate3d(0, 22px, 0) scale(0.995);
+}
+
+@keyframes sheet-backdrop-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes product-sheet-in {
+  from { opacity: 0; transform: translate3d(0, 28px, 0) scale(0.99); }
+  to { opacity: 1; transform: translate3d(0, 0, 0) scale(1); }
 }
 
 .sheetMedia {

@@ -2,7 +2,6 @@
 
 import { type CSSProperties, useCallback, useEffect, useRef, useState } from "react";
 import Image from "next/image";
-import { motion, useReducedMotion } from "framer-motion";
 import { ChevronLeft, ChevronRight, X } from "lucide-react";
 
 interface GalleryLightboxProps {
@@ -20,7 +19,6 @@ type GalleryRow = {
 export function GalleryLightbox({ gallery }: GalleryLightboxProps) {
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
   const dialogRef = useRef<HTMLDialogElement>(null);
-  const prefersReducedMotion = useReducedMotion();
   const getImage = (src: string) => gallery.find(([gallerySrc]) => gallerySrc === src);
   const compactImages = [
     "/images/tea-service.webp",
@@ -158,7 +156,6 @@ export function GalleryLightbox({ gallery }: GalleryLightboxProps) {
               gallery={gallery}
               openLightbox={openLightbox}
               reverse={row.reverse}
-              paused={Boolean(prefersReducedMotion)}
               duration={row.duration}
               offset={row.offset}
               density={row.density}
@@ -229,7 +226,6 @@ function GalleryMarqueeRow({
   gallery,
   openLightbox,
   reverse = false,
-  paused = false,
   duration,
   offset,
   density,
@@ -238,7 +234,6 @@ function GalleryMarqueeRow({
   gallery: [string, string][];
   openLightbox: (index: number) => void;
   reverse?: boolean;
-  paused?: boolean;
   duration: number;
   offset: string;
   density: "featured" | "tall";
@@ -250,10 +245,9 @@ function GalleryMarqueeRow({
       className={`gallery-marquee-row gallery-marquee-row-${density}`}
       style={{ "--marquee-offset": offset } as CSSProperties}
     >
-      <motion.div
-        className="gallery-marquee-track"
-        animate={paused ? undefined : { x: reverse ? ["-50%", "0%"] : ["0%", "-50%"] }}
-        transition={paused ? undefined : { duration, ease: "linear", repeat: Infinity }}
+      <div
+        className={`gallery-marquee-track${reverse ? " is-reverse" : ""}`}
+        style={{ "--marquee-duration": `${duration}s` } as CSSProperties}
       >
         {marqueeItems.map(([src, alt], index) => {
           const galleryIndex = gallery.findIndex(([gallerySrc]) => gallerySrc === src);
@@ -304,7 +298,7 @@ function GalleryMarqueeRow({
             </button>
           );
         })}
-      </motion.div>
+      </div>
     </div>
   );
 }

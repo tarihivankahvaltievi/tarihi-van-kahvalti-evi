@@ -9,6 +9,8 @@
   --about-blue: #2f5666;
   position: relative;
   overflow: hidden;
+  content-visibility: auto;
+  contain-intrinsic-block-size: 850px;
   background: var(--about-burgundy);
   color: var(--about-cream);
 }
