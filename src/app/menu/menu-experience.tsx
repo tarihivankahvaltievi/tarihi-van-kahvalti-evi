@@ -251,8 +251,14 @@ export function MenuExperience() {
     [],
   );
 
-  const selectCategory = (category: MenuFilterId) => {
+  const selectCategory = (category: MenuFilterId, trigger?: HTMLButtonElement) => {
+    setSearchTerm("");
     setActiveCategory(category);
+    trigger?.scrollIntoView({
+      behavior: reduceMotion ? "auto" : "smooth",
+      block: "nearest",
+      inline: "center",
+    });
     if (window.scrollY > 430) {
       document.getElementById("menu-results")?.scrollIntoView({
         behavior: reduceMotion ? "auto" : "smooth",
@@ -289,7 +295,7 @@ export function MenuExperience() {
             animate={{ opacity: 1, x: 0, rotate: -1.2 }}
             transition={{ duration: reduceMotion ? 0 : 0.85, ease }}
           >
-            <Image src="/images/hero-parallax/overhead-feast.webp" alt="" fill priority sizes="(max-width: 760px) 58vw, 500px" quality={82} />
+            <Image src="/images/hero-parallax/overhead-feast.webp" alt="" fill loading="eager" sizes="(max-width: 760px) 58vw, 500px" quality={82} />
           </motion.figure>
           <motion.figure
             className={styles.heroSmallPhoto}
@@ -320,8 +326,15 @@ export function MenuExperience() {
               type="search"
               placeholder="Lezzet ara"
               value={searchTerm}
-              onChange={(event) => setSearchTerm(event.target.value)}
+              onChange={(event) => {
+                const nextSearch = event.target.value;
+                setSearchTerm(nextSearch);
+                if (nextSearch) setActiveCategory("all");
+              }}
               autoComplete="off"
+              inputMode="search"
+              enterKeyHint="search"
+              aria-controls="menu-results"
             />
             {searchTerm ? (
               <button type="button" onClick={() => setSearchTerm("")} aria-label="Aramayı temizle">
@@ -335,7 +348,8 @@ export function MenuExperience() {
               type="button"
               className={activeCategory === "all" ? styles.activeCategory : ""}
               aria-pressed={activeCategory === "all"}
-              onClick={() => selectCategory("all")}
+              aria-controls="menu-results"
+              onClick={(event) => selectCategory("all", event.currentTarget)}
             >
               {activeCategory === "all" ? <motion.span layoutId="category-rail" className={styles.categoryRail} /> : null}
               <span>Tümü</span><small>{menuItems.length}</small>
@@ -346,7 +360,8 @@ export function MenuExperience() {
                 type="button"
                 className={activeCategory === category.id ? styles.activeCategory : ""}
                 aria-pressed={activeCategory === category.id}
-                onClick={() => selectCategory(category.id)}
+                aria-controls="menu-results"
+                onClick={(event) => selectCategory(category.id, event.currentTarget)}
               >
                 {activeCategory === category.id ? <motion.span layoutId="category-rail" className={styles.categoryRail} /> : null}
                 <span>{category.shortLabel}</span><small>{categoryCounts[category.id]}</small>
