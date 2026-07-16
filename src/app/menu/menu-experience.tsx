@@ -378,7 +378,7 @@ export function MenuExperience() {
           transition={{ duration: reduceMotion ? 0 : 1.05, ease }}
         >
           <span className={styles.srOnly}>Tarihi Van Kahvaltı Evi Menü</span>
-          <span className={`${styles.kineticLine} ${styles.kineticLineFirst}`} aria-hidden="true">
+          <span className={styles.kineticLine} aria-hidden="true">
             {(["Tarihi", "Van"] as const).map((word, index) => (
               <span className={styles.wordMask} key={word}>
                 <motion.span
@@ -430,13 +430,6 @@ export function MenuExperience() {
             />
           </span>
         </motion.h1>
-        <motion.span
-          className={styles.kineticRule}
-          aria-hidden="true"
-          initial={reduceMotion ? false : { scaleX: 0, opacity: 0 }}
-          animate={{ scaleX: 1, opacity: 1 }}
-          transition={{ duration: reduceMotion ? 0 : 1.05, delay: reduceMotion ? 0 : 0.68, ease }}
-        />
       </section>
 
       <section className={styles.categoryShowcase} aria-labelledby="category-showcase-title">
