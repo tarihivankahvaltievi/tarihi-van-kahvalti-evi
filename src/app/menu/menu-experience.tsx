@@ -323,10 +323,10 @@ export function MenuExperience() {
           </p>
           <h1 id="menu-page-title">
             Van sofrası,
-            <strong>usulünce.</strong>
+            <strong>tek bakışta.</strong>
           </h1>
           <p className={styles.heroLead}>
-            Yöresinden gelen malzeme, aileden kalan tarifler ve her sabah yeniden kurulan bir sofra.
+            Her lezzetin görseli, içeriği ve fiyatı aynı yerde. Seçin, yakından bakın, sofranızı kolayca kurun.
           </p>
           <div className={styles.heroFacts} aria-label="Menü özeti">
             <span><UtensilsCrossed size={17} /> {menuItems.length} lezzet</span>
