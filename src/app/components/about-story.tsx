@@ -25,7 +25,7 @@ export function AboutStory() {
         <div className={styles.visual}>
           <figure className={styles.tablePhoto}>
             <Image
-              src="/images/hands-table.jpg"
+              src="/images/hands-table.webp"
               alt="Kahvaltı sofrasında peynir, reçel ve tahin tabaklarını uzatan eller"
               fill
               sizes="(max-width: 680px) 84vw, (min-width: 720px) and (max-width: 900px) 33vw, (max-width: 900px) 80vw, 520px"
@@ -36,7 +36,7 @@ export function AboutStory() {
           </figure>
           <figure className={styles.memoryPhoto}>
             <Image
-              src="/images/historic-mirror.jpg"
+              src="/images/historic-mirror.webp"
               alt="Mekândaki oymalı çerçeveli ayna ve aynaya yansıyan tuğla duvar"
               fill
               sizes="(max-width: 680px) 34vw, (min-width: 720px) and (max-width: 900px) 16vw, (max-width: 900px) 37vw, 220px"

@@ -439,8 +439,8 @@ export function buildRestaurantJsonLd(
     logo: `${siteUrl}/icons/icon-512.png`,
     image: [
       `${siteUrl}/images/hero-table.jpg`,
-      `${siteUrl}/images/breakfast-spread.jpg`,
-      `${siteUrl}/images/balcony-breakfast.jpg`,
+      `${siteUrl}/images/breakfast-spread.webp`,
+      `${siteUrl}/images/balcony-breakfast.webp`,
     ],
     description: isEnglish
       ? "A Van breakfast restaurant in Beyoğlu, Istanbul, near Taksim Square and Istiklal Avenue, serving a traditional shared breakfast with regional dishes and Turkish tea."

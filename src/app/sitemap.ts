@@ -28,9 +28,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
       },
       images: uniqueImages([
         absoluteUrl(defaultOgImagePath),
-        absoluteUrl("/images/breakfast-spread.jpg"),
-        absoluteUrl("/images/balcony-breakfast.jpg"),
-        absoluteUrl("/images/hands-table.jpg"),
+        absoluteUrl("/images/breakfast-spread.webp"),
+        absoluteUrl("/images/balcony-breakfast.webp"),
+        absoluteUrl("/images/hands-table.webp"),
       ]),
     },
     {
@@ -38,8 +38,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: contentLastModified,
       images: uniqueImages([
         absoluteUrl("/images/og/menu.jpg"),
-        absoluteUrl("/images/breakfast-spread.jpg"),
-        absoluteUrl("/images/sucuk-egg.jpg"),
+        absoluteUrl("/images/breakfast-spread.webp"),
+        absoluteUrl("/images/sucuk-egg.webp"),
         absoluteUrl("/images/kete-detail.jpg"),
       ]),
     },

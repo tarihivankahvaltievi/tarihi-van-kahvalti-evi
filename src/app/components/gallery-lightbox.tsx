@@ -23,18 +23,18 @@ export function GalleryLightbox({ gallery }: GalleryLightboxProps) {
   const prefersReducedMotion = useReducedMotion();
   const getImage = (src: string) => gallery.find(([gallerySrc]) => gallerySrc === src);
   const compactImages = [
-    "/images/tea-service.jpg",
-    "/images/historic-mirror.jpg",
-    "/images/coffee-moment.jpg",
-    "/images/interior-chair.jpg",
-    "/images/sucuk-egg.jpg",
+    "/images/tea-service.webp",
+    "/images/historic-mirror.webp",
+    "/images/coffee-moment.webp",
+    "/images/interior-chair.webp",
+    "/images/sucuk-egg.webp",
   ].map(getImage).filter((item): item is [string, string] => Boolean(item));
   const tableImages = [
-    "/images/breakfast-spread.jpg",
-    "/images/terrace-tea.jpg",
-    "/images/hands-table.jpg",
-    "/images/balcony-breakfast.jpg",
-    "/images/street-table.jpg",
+    "/images/breakfast-spread.webp",
+    "/images/terrace-tea.webp",
+    "/images/hands-table.webp",
+    "/images/balcony-breakfast.webp",
+    "/images/street-table.webp",
   ].map(getImage).filter((item): item is [string, string] => Boolean(item));
   const galleryRows: GalleryRow[] = [
     {

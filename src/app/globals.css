@@ -5604,7 +5604,7 @@ h2 span {
 .nav.menu-open .nav-menu-panel {
   background:
     linear-gradient(180deg, rgba(6, 30, 17, 0.92), rgba(3, 18, 10, 0.985)),
-    url("/images/interior-chair.jpg") center 42% / cover !important;
+    url("/images/interior-chair.webp") center 42% / cover !important;
 }
 
 .nav-menu-panel::after {
