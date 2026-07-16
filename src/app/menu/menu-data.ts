@@ -9,6 +9,8 @@ export type MenuCategory = {
   label: string;
   shortLabel: string;
   description: string;
+  image: string;
+  imageAlt: string;
 };
 
 export type MenuItem = {
@@ -31,24 +33,32 @@ export const menuCategories: MenuCategory[] = [
     label: "Van Sofraları",
     shortLabel: "Sofralar",
     description: "Paylaşmak için kurulan serpme sofralar ve kahvaltı tabakları.",
+    image: "/images/hero-parallax/overhead-classic.webp",
+    imageAlt: "Kuşbakışı kurulmuş geleneksel Van kahvaltısı sofrası",
   },
   {
     id: "sicaklar",
     label: "Bakır Sahanlar",
     shortLabel: "Sıcaklar",
     description: "Mutfaktan çıktığı anda, tereyağı hâlâ cızırdarken masaya gelenler.",
+    image: "/images/sucuk-egg.jpg",
+    imageAlt: "Bakır sahanda sıcak sucuklu yumurta",
   },
   {
     id: "vandan",
     label: "Van’dan Gelenler",
     shortLabel: "Van’dan",
     description: "Otlu peynirden keteye, yöre hafızasını taşıyan kahvaltılıklar.",
+    image: "/images/kete-detail.jpg",
+    imageAlt: "Kat kat dokulu geleneksel Van ketesi",
   },
   {
     id: "icecekler",
     label: "Çay & Kahve",
     shortLabel: "İçecekler",
     description: "Sofranın ritmini koruyan taze çaylar ve Kafka Cafe kahveleri.",
+    image: "/images/tea-service.jpg",
+    imageAlt: "İnce belli bardaklarda taze çay servisi",
   },
 ];
 

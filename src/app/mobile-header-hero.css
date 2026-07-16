@@ -9,6 +9,12 @@
 }
 
 @media (max-width: 768px) {
+  .theme-breakfast .nav-links,
+  .theme-breakfast .nav-status-pill,
+  .theme-breakfast .nav-location {
+    display: none !important;
+  }
+
   .theme-breakfast .nav,
   .theme-breakfast .nav.scrolled {
     min-height: 72px !important;

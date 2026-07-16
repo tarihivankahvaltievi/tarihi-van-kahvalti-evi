@@ -1,6 +1,12 @@
 "use client";
 
-import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
+import {
+  AnimatePresence,
+  motion,
+  useReducedMotion,
+  useScroll,
+  useTransform,
+} from "framer-motion";
 import {
   Check,
   ChevronRight,
@@ -219,6 +225,12 @@ export function MenuExperience() {
   const [selectedItem, setSelectedItem] = useState<MenuItem | null>(null);
   const [isCatalogPinned, setIsCatalogPinned] = useState(false);
   const deferredSearch = useDeferredValue(searchTerm);
+  const { scrollYProgress: heroScrollProgress } = useScroll({
+    target: heroRef,
+    offset: ["start start", "end start"],
+  });
+  const heroImageY = useTransform(heroScrollProgress, [0, 1], [0, 54]);
+  const heroCopyY = useTransform(heroScrollProgress, [0, 1], [0, -18]);
 
   useEffect(() => {
     document.documentElement.classList.add("menu-scroll-root");
@@ -313,10 +325,28 @@ export function MenuExperience() {
     });
   };
 
+  const exploreCategory = (category: MenuFilterId) => {
+    searchSessionRef.current = false;
+    setSearchTerm("");
+    setActiveCategory(category);
+    window.requestAnimationFrame(() => {
+      document.getElementById("menu-catalog")?.scrollIntoView({
+        behavior: reduceMotion ? "auto" : "smooth",
+        block: "start",
+      });
+    });
+  };
+
   return (
     <main id="main-content" className={styles.page}>
       <section ref={heroRef} className={styles.menuHero} aria-labelledby="menu-page-title">
-        <div className={styles.heroCopy}>
+        <motion.div
+          className={styles.heroCopy}
+          style={reduceMotion ? undefined : { y: heroCopyY }}
+          initial={reduceMotion ? false : { opacity: 0.72 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: reduceMotion ? 0 : 0.62, ease }}
+        >
           <p className={styles.heroProvenance}>
             <span>1978</span>
             <span>Beyoğlu · Van sofrası</span>
@@ -332,16 +362,20 @@ export function MenuExperience() {
             <span><UtensilsCrossed size={17} /> {menuItems.length} lezzet</span>
             <span><Clock3 size={17} /> Her gün 08:00—18:00</span>
           </div>
-        </div>
+        </motion.div>
 
-        <div className={styles.heroVisual} aria-hidden="true">
+        <motion.div
+          className={styles.heroVisual}
+          aria-hidden="true"
+          style={reduceMotion ? undefined : { y: heroImageY }}
+        >
           <motion.figure
             className={styles.heroMainPhoto}
             initial={reduceMotion ? false : { opacity: 0.82, x: 28, rotate: 1.5 }}
             animate={{ opacity: 1, x: 0, rotate: -1.2 }}
             transition={{ duration: reduceMotion ? 0 : 0.85, ease }}
           >
-            <Image src="/images/hero-parallax/overhead-feast.webp" alt="" fill loading="eager" sizes="(max-width: 760px) 58vw, 500px" quality={82} />
+            <Image src="/images/hero-parallax/overhead-feast.webp" alt="" fill preload sizes="(max-width: 760px) 100vw, 500px" quality={82} />
           </motion.figure>
           <motion.figure
             className={styles.heroSmallPhoto}
@@ -349,7 +383,7 @@ export function MenuExperience() {
             animate={{ opacity: 1, y: 0, rotate: 2.5 }}
             transition={{ duration: reduceMotion ? 0 : 0.72, delay: reduceMotion ? 0 : 0.16, ease }}
           >
-            <Image src="/images/sucuk-egg.jpg" alt="" fill priority sizes="(max-width: 760px) 31vw, 220px" quality={82} />
+            <Image src="/images/sucuk-egg.jpg" alt="" fill sizes="(max-width: 760px) 31vw, 220px" quality={82} />
           </motion.figure>
           <motion.div
             className={styles.heroTea}
@@ -359,6 +393,47 @@ export function MenuExperience() {
             <Image src="/images/hero-float/tea-glass.webp" alt="" fill sizes="120px" quality={82} />
           </motion.div>
           <span className={styles.heroStamp}>Beyoğlu<br />sofrası</span>
+        </motion.div>
+      </section>
+
+      <section className={styles.categoryShowcase} aria-labelledby="category-showcase-title">
+        <div className={styles.categoryShowcaseHead}>
+          <div>
+            <span>Sofrayı hislerinize göre kurun</span>
+            <h2 id="category-showcase-title">Bugün neye niyetiniz var?</h2>
+          </div>
+          <p>Bir kategori seçin; sizi doğrudan o lezzetlere götürelim.</p>
+        </div>
+
+        <div className={styles.categoryGallery}>
+          {menuCategories.map((category, index) => (
+            <motion.button
+              key={category.id}
+              type="button"
+              className={styles.categoryCard}
+              onClick={() => exploreCategory(category.id)}
+              initial={reduceMotion ? false : { opacity: 0.88, y: 12 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.3 }}
+              transition={{ duration: reduceMotion ? 0 : 0.42, delay: reduceMotion ? 0 : index * 0.055, ease }}
+              whileTap={reduceMotion ? undefined : { scale: 0.985 }}
+              aria-label={`${category.label} kategorisini aç, ${categoryCounts[category.id]} seçenek`}
+            >
+              <Image
+                src={category.image}
+                alt={category.imageAlt}
+                fill
+                sizes="(max-width: 760px) 44vw, 25vw"
+                quality={82}
+              />
+              <span className={styles.categoryCardShade} aria-hidden="true" />
+              <span className={styles.categoryCardCopy}>
+                <strong>{category.label}</strong>
+                <small>{categoryCounts[category.id]} seçenek</small>
+              </span>
+              <ChevronRight className={styles.categoryCardArrow} size={18} aria-hidden="true" />
+            </motion.button>
+          ))}
         </div>
       </section>
 
