@@ -14,8 +14,9 @@ type ParticleTextEffectProps = {
 
 type Vector2D = { x: number; y: number };
 type Tone = "ink" | "accent" | "gold";
+type LineBand = 0 | 1 | 2;
 
-type ParticleTarget = Vector2D & { tone: Tone };
+type ParticleTarget = Vector2D & { tone: Tone; band: LineBand };
 
 type Particle = {
   pos: Vector2D;
@@ -27,10 +28,12 @@ type Particle = {
   maxForce: number;
   slowRadius: number;
   delay: number;
+  band: LineBand;
+  spin: -1 | 1;
 };
 
-const MAX_MOBILE_PARTICLES = 5200;
-const MAX_DESKTOP_PARTICLES = 7600;
+const MAX_MOBILE_PARTICLES = 4700;
+const MAX_DESKTOP_PARTICLES = 6900;
 const FRAME_MS = 1000 / 60;
 
 const clamp = (value: number, min = 0, max = 1) => Math.min(max, Math.max(min, value));
@@ -184,7 +187,11 @@ export function ParticleTextEffect({
       );
 
       const image = maskCtx.getImageData(0, 0, nextMask.width, nextMask.height);
+      const primaryRect = primary.getBoundingClientRect();
+      const secondaryRect = secondary.getBoundingClientRect();
       const accentRect = accent.getBoundingClientRect();
+      const primaryBottom = (primaryRect.bottom - rootRect.top) * pixelRatio;
+      const secondaryBottom = (secondaryRect.bottom - rootRect.top) * pixelRatio;
       const accentTop = (accentRect.top - rootRect.top) * pixelRatio;
       const underlineTop = (underlineRect.top - rootRect.top - 1) * pixelRatio;
       const underlineBottom = (underlineRect.bottom - rootRect.top + 1) * pixelRatio;
@@ -198,10 +205,12 @@ export function ParticleTextEffect({
           if (image.data[index + 3] < 72) continue;
           const jitter = sampleStep * 0.24;
           const tone: Tone = y >= underlineTop && y <= underlineBottom ? "gold" : y >= accentTop ? "accent" : "ink";
+          const band: LineBand = y <= primaryBottom ? 0 : y <= secondaryBottom ? 1 : 2;
           candidates.push({
             x: (x + (Math.random() - 0.5) * jitter) / pixelRatio,
             y: (y + (Math.random() - 0.5) * jitter) / pixelRatio,
             tone,
+            band,
           });
         }
       }
@@ -223,7 +232,7 @@ export function ParticleTextEffect({
       ctx.restore();
     };
 
-    const drawParticles = (particleAlpha: number) => {
+    const drawParticles = (particleAlpha: number, elapsed: number) => {
       const tones: Tone[] = ["ink", "accent", "gold"];
       for (const tone of tones) {
         ctx.save();
@@ -232,7 +241,9 @@ export function ParticleTextEffect({
         ctx.beginPath();
         for (const particle of particles) {
           if (particle.tone !== tone) continue;
-          const haloRadius = particle.radius * 1.85;
+          const appearance = easeOutQuint((elapsed - particle.delay) / 150);
+          if (appearance <= 0) continue;
+          const haloRadius = particle.radius * appearance * 1.85;
           ctx.moveTo(particle.pos.x + haloRadius, particle.pos.y);
           ctx.arc(particle.pos.x, particle.pos.y, haloRadius, 0, Math.PI * 2);
         }
@@ -245,8 +256,11 @@ export function ParticleTextEffect({
         ctx.beginPath();
         for (const particle of particles) {
           if (particle.tone !== tone) continue;
-          ctx.moveTo(particle.pos.x + particle.radius, particle.pos.y);
-          ctx.arc(particle.pos.x, particle.pos.y, particle.radius, 0, Math.PI * 2);
+          const appearance = easeOutQuint((elapsed - particle.delay) / 150);
+          if (appearance <= 0) continue;
+          const radius = particle.radius * appearance;
+          ctx.moveTo(particle.pos.x + radius, particle.pos.y);
+          ctx.arc(particle.pos.x, particle.pos.y, radius, 0, Math.PI * 2);
         }
         ctx.fill();
         ctx.restore();
@@ -284,6 +298,13 @@ export function ParticleTextEffect({
         particle.maxForce * frameScale,
       );
 
+      const activeElapsed = elapsed - particle.delay;
+      const curl = (1 - clamp(activeElapsed / 680)) * particle.maxSpeed * 0.0065 * particle.spin * frameScale;
+      if (distance > 0) {
+        particle.vel.x += (-toTarget.y / distance) * curl;
+        particle.vel.y += (toTarget.x / distance) * curl;
+      }
+
       particle.vel.x += steering.x;
       particle.vel.y += steering.y;
       particle.pos.x += particle.vel.x * frameScale;
@@ -313,7 +334,7 @@ export function ParticleTextEffect({
       const particleEntrance = easeOutQuint(elapsed / 180);
       ctx.clearRect(0, 0, width, height);
       drawMask(maskProgress);
-      drawParticles(particleFade * particleEntrance);
+      drawParticles(particleFade * particleEntrance, elapsed);
 
       if ((moving && elapsed < 2200) || elapsed < 1480) {
         animationFrame = window.requestAnimationFrame(animate);
@@ -361,7 +382,9 @@ export function ParticleTextEffect({
           maxSpeed,
           maxForce: maxSpeed * (0.046 + Math.random() * 0.016),
           slowRadius: 54 + Math.random() * 62,
-          delay: Math.random() * 120,
+          delay: target.band * 55 + Math.random() * 72,
+          band: target.band,
+          spin: target.band === 1 ? -1 : 1,
         };
       });
 
@@ -386,7 +409,7 @@ export function ParticleTextEffect({
         particle.pos.y = particle.target.y + Math.sin(angle) * displacement;
         particle.vel.x = Math.cos(angle) * (1.4 + localForce * 3.2);
         particle.vel.y = Math.sin(angle) * (1.4 + localForce * 3.2);
-        particle.delay = Math.random() * 90;
+        particle.delay = particle.band * 24 + Math.random() * 48;
       });
       startAnimation();
     };
