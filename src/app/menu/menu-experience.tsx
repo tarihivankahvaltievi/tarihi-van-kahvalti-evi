@@ -1,19 +1,9 @@
 "use client";
 
-import {
-  AnimatePresence,
-  motion,
-  useReducedMotion,
-} from "framer-motion";
-import {
-  Check,
-  ChevronRight,
-  Search,
-  X,
-} from "lucide-react";
+import { ChevronRight, Search, X } from "lucide-react";
+import dynamic from "next/dynamic";
 import Image from "next/image";
-import { createPortal } from "react-dom";
-import { useDeferredValue, useEffect, useMemo, useRef, useState } from "react";
+import { memo, useCallback, useDeferredValue, useEffect, useMemo, useRef, useState } from "react";
 import styles from "./menu.module.css";
 import {
   menuCategories,
@@ -23,7 +13,10 @@ import {
   type MenuItem,
 } from "./menu-data";
 
-const ease = [0.16, 1, 0.3, 1] as const;
+const ProductSheet = dynamic(
+  () => import("./product-sheet").then((module) => module.ProductSheet),
+  { ssr: false },
+);
 
 type QuickFilterId = "vegetarian";
 
@@ -39,14 +32,34 @@ function normalize(value: string) {
     .trim();
 }
 
-function MenuCard({
+const normalizedMenuCopy = new Map(
+  menuItems.map((item) => [
+    item.id,
+    normalize([item.name, item.description, item.story, ...item.tags, ...item.details].join(" ")),
+  ]),
+);
+
+function usePrefersReducedMotion() {
+  const [reduceMotion, setReduceMotion] = useState(false);
+
+  useEffect(() => {
+    const media = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const update = () => setReduceMotion(media.matches);
+    update();
+    media.addEventListener("change", update);
+    return () => media.removeEventListener("change", update);
+  }, []);
+
+  return reduceMotion;
+}
+
+const MenuCard = memo(function MenuCard({
   item,
   onOpen,
 }: {
   item: MenuItem;
-  onOpen: () => void;
+  onOpen: (item: MenuItem) => void;
 }) {
-  const reduceMotion = useReducedMotion();
   const isSpotlight = item.id === "geleneksel-van-kahvaltisi";
   const visibleTag = item.tags.find((tag) => tag === "Öne çıkan" || tag === "Yeni");
   const metaLabel =
@@ -55,16 +68,11 @@ function MenuCard({
     "Günlük hazırlanır";
 
   return (
-    <motion.button
+    <button
       id={item.id}
       type="button"
       className={`${styles.menuCard} ${isSpotlight ? styles.spotlightCard : ""}`}
-      onClick={onOpen}
-      layout="position"
-      initial={false}
-      whileHover={reduceMotion ? undefined : { y: -2 }}
-      whileTap={reduceMotion ? undefined : { scale: 0.985 }}
-      transition={{ duration: reduceMotion ? 0 : 0.18, ease }}
+      onClick={() => onOpen(item)}
       aria-label={`${item.name}: ${item.price}. Ayrıntıları gör`}
     >
       <span className={styles.cardMedia}>
@@ -75,9 +83,9 @@ function MenuCard({
           sizes={
             isSpotlight
               ? "(max-width: 680px) 36vw, (max-width: 1080px) 38vw, 480px"
-              : "(max-width: 680px) 30vw, (max-width: 1080px) 18vw, 180px"
+              : "(max-width: 680px) 36vw, (max-width: 1080px) 18vw, 180px"
           }
-          quality={82}
+          quality={80}
           priority={isSpotlight}
         />
         {visibleTag ? <span className={styles.tagBadge}>{visibleTag}</span> : null}
@@ -89,140 +97,19 @@ function MenuCard({
           <span className={styles.cardPrice}>{item.price}</span>
         </span>
         <span className={styles.cardDescription}>{item.description}</span>
-          <span className={styles.cardMeta}>
-            <span>{metaLabel}</span>
-            <span className={styles.cardDetailCue} aria-hidden="true">
+        <span className={styles.cardMeta}>
+          <span>{metaLabel}</span>
+          <span className={styles.cardDetailCue} aria-hidden="true">
             <ChevronRight size={18} strokeWidth={2.1} />
-            </span>
           </span>
+        </span>
       </span>
-    </motion.button>
+    </button>
   );
-}
-
-function ProductSheet({ item, onClose }: { item: MenuItem | null; onClose: () => void }) {
-  const reduceMotion = useReducedMotion();
-  const sheetRef = useRef<HTMLDivElement>(null);
-  const closeRef = useRef<HTMLButtonElement>(null);
-
-  useEffect(() => {
-    if (!item) return;
-
-    const previousOverflow = document.body.style.overflow;
-    const previousActive = document.activeElement instanceof HTMLElement ? document.activeElement : null;
-    document.body.classList.add("menu-sheet-open");
-    document.body.style.overflow = "hidden";
-
-    const focusFrame = window.requestAnimationFrame(() => closeRef.current?.focus());
-    const onKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "Escape") {
-        onClose();
-        return;
-      }
-
-      if (event.key !== "Tab") return;
-      const focusable = Array.from(
-        sheetRef.current?.querySelectorAll<HTMLElement>(
-          'button:not([disabled]), a[href], input:not([disabled]), [tabindex]:not([tabindex="-1"])',
-        ) ?? [],
-      );
-      if (focusable.length === 0) return;
-
-      const first = focusable[0];
-      const last = focusable[focusable.length - 1];
-      if (event.shiftKey && document.activeElement === first) {
-        event.preventDefault();
-        last.focus();
-      } else if (!event.shiftKey && document.activeElement === last) {
-        event.preventDefault();
-        first.focus();
-      }
-    };
-
-    document.addEventListener("keydown", onKeyDown);
-    return () => {
-      window.cancelAnimationFrame(focusFrame);
-      document.removeEventListener("keydown", onKeyDown);
-      document.body.classList.remove("menu-sheet-open");
-      document.body.style.overflow = previousOverflow;
-      previousActive?.focus();
-    };
-  }, [item, onClose]);
-
-  if (typeof document === "undefined") return null;
-
-  const category = item ? menuCategories.find((entry) => entry.id === item.category) : null;
-
-  return createPortal(
-    <AnimatePresence>
-      {item ? (
-        <div className={styles.sheetLayer}>
-          <motion.button
-            type="button"
-            className={styles.overlayBackdrop}
-            aria-label="Ürün ayrıntılarını kapat"
-            onClick={onClose}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: reduceMotion ? 0 : 0.22 }}
-          />
-          <motion.div
-            ref={sheetRef}
-            className={styles.productSheet}
-            role="dialog"
-            aria-modal="true"
-            aria-labelledby="product-sheet-title"
-            initial={reduceMotion ? false : { y: 34, opacity: 0, scale: 0.985 }}
-            animate={{ y: 0, opacity: 1, scale: 1 }}
-            exit={reduceMotion ? { opacity: 0 } : { y: 28, opacity: 0, scale: 0.99 }}
-            transition={{ duration: reduceMotion ? 0 : 0.38, ease }}
-          >
-            <div className={styles.sheetMedia}>
-              <Image src={item.image} alt={item.imageAlt} fill sizes="(max-width: 680px) 100vw, 430px" quality={82} priority />
-              <span className={styles.sheetCategory}>{category?.label}</span>
-            </div>
-
-            <div className={styles.sheetContent}>
-              <button ref={closeRef} type="button" className={styles.sheetClose} onClick={onClose} aria-label="Kapat">
-                <X size={20} />
-              </button>
-
-              <div className={styles.sheetTitleRow}>
-                <h2 id="product-sheet-title">{item.name}</h2>
-                <div className={styles.sheetPriceBlock}>
-                  <strong>{item.price}</strong>
-                  {item.priceNote ? <span>{item.priceNote}</span> : null}
-                </div>
-              </div>
-
-              <p className={styles.sheetStory}>{item.story}</p>
-
-              <div className={styles.sheetRule} />
-              <h3 className={styles.sheetSectionTitle}>Bu tabakta</h3>
-              <ul className={styles.sheetDetailsList}>
-                {item.details.map((detail) => (
-                  <li key={detail}>
-                    <Check size={15} strokeWidth={2.2} />
-                    <span>{detail}</span>
-                  </li>
-                ))}
-              </ul>
-
-              <button type="button" className={styles.sheetAction} onClick={onClose}>
-                Menüye dön <ChevronRight size={18} />
-              </button>
-            </div>
-          </motion.div>
-        </div>
-      ) : null}
-    </AnimatePresence>,
-    document.body,
-  );
-}
+});
 
 export function MenuExperience() {
-  const reduceMotion = useReducedMotion();
+  const reduceMotion = usePrefersReducedMotion();
   const heroRef = useRef<HTMLElement>(null);
   const searchInputRef = useRef<HTMLInputElement>(null);
   const searchSessionRef = useRef(false);
@@ -262,16 +149,40 @@ export function MenuExperience() {
       if (activeCategory !== "all" && item.category !== activeCategory) return false;
       if (activeQuickFilter === "vegetarian" && !item.tags.includes("Vejetaryen")) return false;
       if (!query) return true;
-      return normalize([item.name, item.description, item.story, ...item.tags, ...item.details].join(" ")).includes(query);
+      return normalizedMenuCopy.get(item.id)?.includes(query) ?? false;
     });
   }, [activeCategory, activeQuickFilter, deferredSearch]);
 
-  const groups = menuCategories
-    .map((category) => ({
-      ...category,
-      items: visibleItems.filter((item) => item.category === category.id),
-    }))
-    .filter((group) => group.items.length > 0);
+  const groups = useMemo(
+    () =>
+      menuCategories
+        .map((category) => ({
+          ...category,
+          items: visibleItems.filter((item) => item.category === category.id),
+        }))
+        .filter((group) => group.items.length > 0),
+    [visibleItems],
+  );
+
+  const openItem = useCallback((item: MenuItem) => setSelectedItem(item), []);
+  const closeItem = useCallback(() => setSelectedItem(null), []);
+
+  const alignResults = () => {
+    window.requestAnimationFrame(() => {
+      window.requestAnimationFrame(() => {
+        const results = document.getElementById("menu-results");
+        const discovery = document.getElementById("menu-catalog");
+        if (!results || !discovery) return;
+
+        const stickyOffset = 72 + discovery.getBoundingClientRect().height;
+        const targetTop = results.getBoundingClientRect().top + window.scrollY - stickyOffset;
+        window.scrollTo({
+          top: Math.max(0, targetTop),
+          behavior: reduceMotion ? "auto" : "smooth",
+        });
+      });
+    });
+  };
 
   const selectCategory = (category: MenuFilterId, trigger?: HTMLButtonElement) => {
     const catalog = document.getElementById("menu-catalog");
@@ -291,20 +202,7 @@ export function MenuExperience() {
       });
     }
     if (shouldAlignResults) {
-      window.requestAnimationFrame(() => {
-        window.requestAnimationFrame(() => {
-          const results = document.getElementById("menu-results");
-          const discovery = document.getElementById("menu-catalog");
-          if (!results || !discovery) return;
-
-          const stickyOffset = 72 + discovery.getBoundingClientRect().height;
-          const targetTop = results.getBoundingClientRect().top + window.scrollY - stickyOffset;
-          window.scrollTo({
-            top: Math.max(0, targetTop),
-            behavior: reduceMotion ? "auto" : "smooth",
-          });
-        });
-      });
+      alignResults();
     }
   };
 
@@ -324,13 +222,7 @@ export function MenuExperience() {
     });
 
     if (shouldAlignResults) {
-      window.requestAnimationFrame(() => {
-        const results = document.getElementById("menu-results");
-        const discovery = document.getElementById("menu-catalog");
-        if (!results || !discovery) return;
-        const targetTop = results.getBoundingClientRect().top + window.scrollY - 72 - discovery.getBoundingClientRect().height;
-        window.scrollTo({ top: Math.max(0, targetTop), behavior: reduceMotion ? "auto" : "smooth" });
-      });
+      alignResults();
     }
   };
 
@@ -407,7 +299,6 @@ export function MenuExperience() {
               aria-controls="menu-results"
               onClick={(event) => selectCategory("all", event.currentTarget)}
             >
-              {activeCategory === "all" && !activeQuickFilter ? <motion.span layoutId="category-rail" className={styles.categoryRail} /> : null}
               <span>Tümü</span>
             </button>
             {menuCategories.map((category) => (
@@ -419,7 +310,6 @@ export function MenuExperience() {
                 aria-controls="menu-results"
                 onClick={(event) => selectCategory(category.id, event.currentTarget)}
               >
-                {activeCategory === category.id ? <motion.span layoutId="category-rail" className={styles.categoryRail} /> : null}
                 <span>{category.shortLabel}</span>
               </button>
             ))}
@@ -433,7 +323,6 @@ export function MenuExperience() {
                 aria-controls="menu-results"
                 onClick={(event) => selectQuickFilter(filter.id, event.currentTarget)}
               >
-                {activeQuickFilter === filter.id ? <motion.span layoutId="category-rail" className={styles.categoryRail} /> : null}
                 <span>{filter.label}</span>
               </button>
             ))}
@@ -464,13 +353,11 @@ export function MenuExperience() {
                   </div>
                   <span>{group.items.length} seçenek</span>
                 </header>
-                <motion.div className={styles.menuGrid} layout>
-                  <AnimatePresence initial={false} mode="popLayout">
-                    {group.items.map((item) => (
-                      <MenuCard key={item.id} item={item} onOpen={() => setSelectedItem(item)} />
-                    ))}
-                  </AnimatePresence>
-                </motion.div>
+                <div className={styles.menuGrid}>
+                  {group.items.map((item) => (
+                    <MenuCard key={item.id} item={item} onOpen={openItem} />
+                  ))}
+                </div>
               </section>
             ))}
           </div>
@@ -498,7 +385,7 @@ export function MenuExperience() {
         </footer>
       </div>
 
-      <ProductSheet item={selectedItem} onClose={() => setSelectedItem(null)} />
+      {selectedItem ? <ProductSheet key={selectedItem.id} item={selectedItem} onClose={closeItem} /> : null}
     </main>
   );
 }

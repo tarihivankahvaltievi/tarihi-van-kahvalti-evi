@@ -57,7 +57,6 @@ export default function ClientPage({ children }: { children: ReactNode }) {
     const updateScrollState = () => {
       scrollFrame.current = null;
       const currentScrollY = Math.max(window.scrollY, 0);
-      const delta = currentScrollY - lastScrollY.current;
       const nextScrolled = currentScrollY > 40;
 
       if (nextScrolled !== scrolledRef.current) {
@@ -65,16 +64,19 @@ export default function ClientPage({ children }: { children: ReactNode }) {
         setScrolled(nextScrolled);
       }
 
-      let nextMobileBarHidden = mobileBarHiddenRef.current;
-      if (currentScrollY < 56) {
-        nextMobileBarHidden = false;
-      } else if (Math.abs(delta) > 6) {
-        nextMobileBarHidden = delta > 0;
-      }
+      if (!isMenuPage) {
+        const delta = currentScrollY - lastScrollY.current;
+        let nextMobileBarHidden = mobileBarHiddenRef.current;
+        if (currentScrollY < 56) {
+          nextMobileBarHidden = false;
+        } else if (Math.abs(delta) > 6) {
+          nextMobileBarHidden = delta > 0;
+        }
 
-      if (nextMobileBarHidden !== mobileBarHiddenRef.current) {
-        mobileBarHiddenRef.current = nextMobileBarHidden;
-        setMobileBarHidden(nextMobileBarHidden);
+        if (nextMobileBarHidden !== mobileBarHiddenRef.current) {
+          mobileBarHiddenRef.current = nextMobileBarHidden;
+          setMobileBarHidden(nextMobileBarHidden);
+        }
       }
 
       lastScrollY.current = currentScrollY;
@@ -95,9 +97,11 @@ export default function ClientPage({ children }: { children: ReactNode }) {
         window.cancelAnimationFrame(scrollFrame.current);
       }
     };
-  }, []);
+  }, [isMenuPage]);
 
   useEffect(() => {
+    if (isMenuPage) return;
+
     const checkOpenStatus = () => {
       const now = new Date();
       const utc = now.getTime() + now.getTimezoneOffset() * 60000;
@@ -110,7 +114,7 @@ export default function ClientPage({ children }: { children: ReactNode }) {
     checkOpenStatus();
     const interval = setInterval(checkOpenStatus, 60000);
     return () => clearInterval(interval);
-  }, []);
+  }, [isMenuPage]);
 
   useEffect(() => {
     if (!menuOpen) {
@@ -220,10 +224,12 @@ export default function ClientPage({ children }: { children: ReactNode }) {
                 <span>Kahvaltı Evi</span>
               </span>
             </Link>
-            <div className={`nav-status-pill ${isOpenNow ? "open" : "closed"}`}>
-              <span className="nav-status-dot" />
-              <span>{isOpenNow ? "Açık" : "Kapalı"}</span>
-            </div>
+            {!isMenuPage ? (
+              <div className={`nav-status-pill ${isOpenNow ? "open" : "closed"}`}>
+                <span className="nav-status-dot" />
+                <span>{isOpenNow ? "Açık" : "Kapalı"}</span>
+              </div>
+            ) : null}
           </div>
 
           <nav className="nav-links" aria-label="Ana menü" onMouseLeave={handleMouseLeave}>
@@ -414,13 +420,15 @@ export default function ClientPage({ children }: { children: ReactNode }) {
         </div>
       ) : null}
 
-      <BookingModal
-        key={`${isBookingOpen}-${preselectedType}-${preselectedItem}`}
-        isOpen={isBookingOpen}
-        onClose={() => setIsBookingOpen(false)}
-        preselectedType={preselectedType}
-        preselectedItem={preselectedItem}
-      />
+      {isBookingOpen ? (
+        <BookingModal
+          key={`${isBookingOpen}-${preselectedType}-${preselectedItem}`}
+          isOpen={isBookingOpen}
+          onClose={() => setIsBookingOpen(false)}
+          preselectedType={preselectedType}
+          preselectedItem={preselectedItem}
+        />
+      ) : null}
     </>
   );
 }

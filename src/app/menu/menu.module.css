@@ -165,6 +165,7 @@
   align-items: center;
   gap: 0.42rem;
   overflow-x: auto;
+  overscroll-behavior-inline: contain;
   scrollbar-width: none;
   -webkit-overflow-scrolling: touch;
 }
@@ -196,16 +197,9 @@
 
 .categoryNav button.activeCategory {
   border-color: var(--menu-burgundy);
+  background: var(--menu-burgundy);
   color: var(--menu-on-burgundy);
   box-shadow: 2px 2px 0 var(--menu-line);
-}
-
-.categoryRail {
-  position: absolute;
-  inset: 0;
-  z-index: -1;
-  border-radius: 999px;
-  background: var(--menu-burgundy);
 }
 
 .categoryNavDivider {
@@ -265,6 +259,11 @@
 
 .menuSection {
   min-width: 0;
+}
+
+.menuSection + .menuSection {
+  content-visibility: auto;
+  contain-intrinsic-block-size: auto 900px;
 }
 
 .sectionHeader {
@@ -330,6 +329,7 @@
   background: #ffffff;
   color: var(--menu-ink);
   box-shadow: 2px 2px 0 rgba(29, 24, 24, 0.16);
+  contain: layout paint style;
   text-align: left;
   transition: border-color 160ms ease, box-shadow 160ms var(--menu-ease), transform 160ms var(--menu-ease);
 }
@@ -901,7 +901,7 @@
   }
 
   .categoryNav button {
-    min-height: 42px;
+    min-height: 44px;
     padding-inline: 0.68rem;
     font-size: 0.8rem;
     scroll-snap-align: start;
