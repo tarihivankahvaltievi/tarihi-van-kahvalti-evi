@@ -401,6 +401,7 @@ export function MenuExperience() {
                 src={category.image}
                 alt={category.imageAlt}
                 fill
+                priority
                 sizes="(max-width: 760px) 44vw, 25vw"
                 quality={82}
               />
