@@ -4,15 +4,11 @@ import {
   AnimatePresence,
   motion,
   useReducedMotion,
-  useScroll,
-  useTransform,
 } from "framer-motion";
 import {
   Check,
   ChevronRight,
-  Clock3,
   Search,
-  UtensilsCrossed,
   X,
 } from "lucide-react";
 import Image from "next/image";
@@ -225,12 +221,6 @@ export function MenuExperience() {
   const [selectedItem, setSelectedItem] = useState<MenuItem | null>(null);
   const [isCatalogPinned, setIsCatalogPinned] = useState(false);
   const deferredSearch = useDeferredValue(searchTerm);
-  const { scrollYProgress: heroScrollProgress } = useScroll({
-    target: heroRef,
-    offset: ["start start", "end start"],
-  });
-  const heroImageY = useTransform(heroScrollProgress, [0, 1], [0, 54]);
-  const heroCopyY = useTransform(heroScrollProgress, [0, 1], [0, -18]);
 
   useEffect(() => {
     document.documentElement.classList.add("menu-scroll-root");
@@ -342,67 +332,37 @@ export function MenuExperience() {
       <section ref={heroRef} className={styles.menuHero} aria-labelledby="menu-page-title">
         <motion.div
           className={styles.heroCopy}
-          style={reduceMotion ? undefined : { y: heroCopyY }}
           initial={reduceMotion ? false : { opacity: 0.72 }}
           animate={{ opacity: 1 }}
           transition={{ duration: reduceMotion ? 0 : 0.62, ease }}
         >
-          <p className={styles.heroProvenance}>
-            <span>1978</span>
-            <span>Beyoğlu · Van sofrası</span>
-          </p>
-          <h1 id="menu-page-title">
-            Van sofrası,
-            <strong>tek bakışta.</strong>
-          </h1>
+          <p className={styles.heroProvenance}>1978’den beri · Beyoğlu</p>
+          <h1 id="menu-page-title">Sofraya buyurun.</h1>
           <p className={styles.heroLead}>
-            Her lezzetin görseli, içeriği ve fiyatı aynı yerde. Seçin, yakından bakın, sofranızı kolayca kurun.
+            Van’dan gelen kahvaltılıklar, bakır sahanda sıcaklar ve sofranız boyunca tazelenen çay.
           </p>
-          <div className={styles.heroFacts} aria-label="Menü özeti">
-            <span><UtensilsCrossed size={17} /> {menuItems.length} lezzet</span>
-            <span><Clock3 size={17} /> Her gün 08:00—18:00</span>
-          </div>
+          <p className={styles.heroFacts}>{menuItems.length} lezzet · Her gün 08:00—18:00</p>
         </motion.div>
 
         <motion.div
           className={styles.heroVisual}
           aria-hidden="true"
-          style={reduceMotion ? undefined : { y: heroImageY }}
         >
           <motion.figure
             className={styles.heroMainPhoto}
-            initial={reduceMotion ? false : { opacity: 0.82, x: 28, rotate: 1.5 }}
-            animate={{ opacity: 1, x: 0, rotate: -1.2 }}
-            transition={{ duration: reduceMotion ? 0 : 0.85, ease }}
+            initial={reduceMotion ? false : { opacity: 0.84, x: 12 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: reduceMotion ? 0 : 0.58, ease }}
           >
             <Image src="/images/hero-parallax/overhead-feast.webp" alt="" fill preload sizes="(max-width: 760px) 100vw, 500px" quality={82} />
           </motion.figure>
-          <motion.figure
-            className={styles.heroSmallPhoto}
-            initial={reduceMotion ? false : { opacity: 0, y: 24, rotate: -3 }}
-            animate={{ opacity: 1, y: 0, rotate: 2.5 }}
-            transition={{ duration: reduceMotion ? 0 : 0.72, delay: reduceMotion ? 0 : 0.16, ease }}
-          >
-            <Image src="/images/sucuk-egg.jpg" alt="" fill sizes="(max-width: 760px) 31vw, 220px" quality={82} />
-          </motion.figure>
-          <motion.div
-            className={styles.heroTea}
-            animate={reduceMotion ? undefined : { y: [0, -7, 0], rotate: [-1, 1, -1] }}
-            transition={{ duration: 5.4, repeat: Infinity, ease: "easeInOut" }}
-          >
-            <Image src="/images/hero-float/tea-glass.webp" alt="" fill sizes="120px" quality={82} />
-          </motion.div>
-          <span className={styles.heroStamp}>Beyoğlu<br />sofrası</span>
         </motion.div>
       </section>
 
       <section className={styles.categoryShowcase} aria-labelledby="category-showcase-title">
         <div className={styles.categoryShowcaseHead}>
-          <div>
-            <span>Sofrayı hislerinize göre kurun</span>
-            <h2 id="category-showcase-title">Bugün neye niyetiniz var?</h2>
-          </div>
-          <p>Bir kategori seçin; sizi doğrudan o lezzetlere götürelim.</p>
+          <h2 id="category-showcase-title">Menü bölümleri</h2>
+          <p>Sofralar, sıcaklar, Van’dan gelenler ve içecekler.</p>
         </div>
 
         <div className={styles.categoryGallery}>
