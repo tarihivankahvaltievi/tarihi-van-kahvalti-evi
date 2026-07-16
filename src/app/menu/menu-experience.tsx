@@ -212,6 +212,8 @@ function ProductSheet({ item, onClose }: { item: MenuItem | null; onClose: () =>
 export function MenuExperience() {
   const reduceMotion = useReducedMotion();
   const heroRef = useRef<HTMLElement>(null);
+  const searchInputRef = useRef<HTMLInputElement>(null);
+  const searchSessionRef = useRef(false);
   const [activeCategory, setActiveCategory] = useState<MenuFilterId>("all");
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedItem, setSelectedItem] = useState<MenuItem | null>(null);
@@ -266,14 +268,22 @@ export function MenuExperience() {
   );
 
   const selectCategory = (category: MenuFilterId, trigger?: HTMLButtonElement) => {
+    const catalog = document.getElementById("menu-catalog");
+    const shouldAlignResults =
+      isCatalogPinned || searchSessionRef.current || (catalog?.getBoundingClientRect().top ?? Number.POSITIVE_INFINITY) <= 73;
+
+    searchSessionRef.current = false;
+    searchInputRef.current?.blur();
     setSearchTerm("");
     setActiveCategory(category);
-    trigger?.scrollIntoView({
-      behavior: reduceMotion ? "auto" : "smooth",
-      block: "nearest",
-      inline: "center",
-    });
-    if (isCatalogPinned) {
+    if (trigger) {
+      const categoryRail = trigger.parentElement;
+      categoryRail?.scrollTo({
+        left: trigger.offsetLeft - (categoryRail.clientWidth - trigger.offsetWidth) / 2,
+        behavior: reduceMotion ? "auto" : "smooth",
+      });
+    }
+    if (shouldAlignResults) {
       window.requestAnimationFrame(() => {
         window.requestAnimationFrame(() => {
           const results = document.getElementById("menu-results");
@@ -289,6 +299,18 @@ export function MenuExperience() {
         });
       });
     }
+  };
+
+  const handleSearchFocus = () => {
+    searchSessionRef.current = true;
+    if (!window.matchMedia("(max-width: 760px)").matches) return;
+    const catalog = document.getElementById("menu-catalog");
+    if (!catalog || catalog.getBoundingClientRect().top <= 72) return;
+
+    catalog.scrollIntoView({
+      behavior: reduceMotion ? "auto" : "smooth",
+      block: "start",
+    });
   };
 
   return (
@@ -350,6 +372,7 @@ export function MenuExperience() {
             <Search size={18} aria-hidden="true" />
             <label className={styles.srOnly} htmlFor="menu-search">Menüde ara</label>
             <input
+              ref={searchInputRef}
               id="menu-search"
               type="search"
               placeholder="Lezzet ara"
@@ -363,9 +386,17 @@ export function MenuExperience() {
               inputMode="search"
               enterKeyHint="search"
               aria-controls="menu-results"
+              onFocus={handleSearchFocus}
             />
             {searchTerm ? (
-              <button type="button" onClick={() => setSearchTerm("")} aria-label="Aramayı temizle">
+              <button
+                type="button"
+                onClick={() => {
+                  setSearchTerm("");
+                  window.requestAnimationFrame(() => searchInputRef.current?.focus());
+                }}
+                aria-label="Aramayı temizle"
+              >
                 <X size={17} />
               </button>
             ) : null}
