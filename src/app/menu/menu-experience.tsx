@@ -355,19 +355,6 @@ export function MenuExperience() {
     });
   };
 
-  const exploreCategory = (category: MenuFilterId) => {
-    searchSessionRef.current = false;
-    setSearchTerm("");
-    setActiveQuickFilter(null);
-    setActiveCategory(category);
-    window.requestAnimationFrame(() => {
-      document.getElementById("menu-catalog")?.scrollIntoView({
-        behavior: reduceMotion ? "auto" : "smooth",
-        block: "start",
-      });
-    });
-  };
-
   return (
     <main id="main-content" className={styles.page}>
       <section ref={heroRef} className={styles.menuHero} aria-labelledby="menu-page-title">
@@ -375,45 +362,6 @@ export function MenuExperience() {
           id="menu-page-title"
           className={styles.kineticTitle}
         />
-      </section>
-
-      <section className={styles.categoryShowcase} aria-labelledby="category-showcase-title">
-        <div className={styles.categoryShowcaseHead}>
-          <h2 id="category-showcase-title">Menü bölümleri</h2>
-          <p>Sofralar, sıcaklar, Van’dan gelenler ve içecekler.</p>
-        </div>
-
-        <div className={styles.categoryGallery}>
-          {menuCategories.map((category, index) => (
-            <motion.button
-              key={category.id}
-              type="button"
-              className={styles.categoryCard}
-              onClick={() => exploreCategory(category.id)}
-              initial={reduceMotion ? false : { opacity: 0, y: 28, rotate: index % 2 ? 1.4 : -1.4, clipPath: "inset(18% 0 18% 0 round 12px)", filter: "blur(5px)" }}
-              whileInView={{ opacity: 1, y: 0, rotate: 0, clipPath: "inset(0% 0 0% 0 round 12px)", filter: "blur(0px)" }}
-              viewport={{ once: true, amount: 0.3 }}
-              transition={{ duration: reduceMotion ? 0 : 0.62, delay: reduceMotion ? 0 : index * 0.065, ease }}
-              whileTap={reduceMotion ? undefined : { scale: 0.985 }}
-              aria-label={`${category.label} kategorisini aç, ${categoryCounts[category.id]} seçenek`}
-            >
-              <Image
-                src={category.image}
-                alt={category.imageAlt}
-                fill
-                priority
-                sizes="(max-width: 760px) 44vw, 25vw"
-                quality={82}
-              />
-              <span className={styles.categoryCardShade} aria-hidden="true" />
-              <span className={styles.categoryCardCopy}>
-                <strong>{category.label}</strong>
-                <small>{categoryCounts[category.id]} seçenek</small>
-              </span>
-              <ChevronRight className={styles.categoryCardArrow} size={18} aria-hidden="true" />
-            </motion.button>
-          ))}
-        </div>
       </section>
 
       <section
