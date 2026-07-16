@@ -3,7 +3,6 @@ import { AnimatedFooter } from "./components/animated-footer";
 import { BookingOpenButton } from "./components/booking-open-button";
 import { FaqSection } from "./components/faq-section";
 import { GalleryLightbox } from "./components/gallery-lightbox";
-import { LocalSeoSections } from "./components/local-seo-sections";
 import { VanHeroParallax } from "./components/van-hero-parallax";
 
 const gallery: [string, string][] = [
@@ -26,8 +25,6 @@ export function HomeContent() {
       <VanHeroParallax />
 
       <AboutStory />
-
-      <LocalSeoSections />
 
       <section id="gallery" className="gallery-section">
         <div className="gallery-head">
