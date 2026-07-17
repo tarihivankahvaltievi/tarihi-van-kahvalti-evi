@@ -159,6 +159,13 @@ export function AdminDashboard({ initialData }: AdminDashboardProps) {
   const [newDetailInput, setNewDetailInput] = useState("");
   const [newTagInput, setNewTagInput] = useState("");
 
+  const uniqueImages = Array.from(
+    new Set([
+      ...data.items.map((item) => item.image),
+      ...data.categories.map((cat) => cat.image)
+    ])
+  ).filter((img) => img && (img.startsWith("/") || img.startsWith("http")));
+
   const showMessage = (type: "success" | "error", text: string) => {
     setMessage({ type, text });
     setTimeout(() => setMessage(null), 4000);
@@ -496,15 +503,17 @@ export function AdminDashboard({ initialData }: AdminDashboardProps) {
     saveStateToBackend(updatedData, "Kategori sıralaması güncellendi");
   };
 
-  // Filtered menu items for display
-  const filteredItems = data.items.filter((item) => {
-    const matchesCategory = selectedCategoryFilter === "all" || item.category === selectedCategoryFilter;
-    const matchesSearch =
-      item.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      item.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      (item.story && item.story.toLowerCase().includes(searchTerm.toLowerCase()));
-    return matchesCategory && matchesSearch;
-  });
+  // Filtered menu items for display (retains original index for sorting operations)
+  const filteredWithIndex = data.items
+    .map((item, index) => ({ item, index }))
+    .filter(({ item }) => {
+      const matchesCategory = selectedCategoryFilter === "all" || item.category === selectedCategoryFilter;
+      const matchesSearch =
+        item.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        item.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        (item.story && item.story.toLowerCase().includes(searchTerm.toLowerCase()));
+      return matchesCategory && matchesSearch;
+    });
 
   return (
     <div
@@ -668,7 +677,7 @@ export function AdminDashboard({ initialData }: AdminDashboardProps) {
             </div>
 
             {/* Items Listing Table/Card List */}
-            {filteredItems.length > 0 ? (
+            {filteredWithIndex.length > 0 ? (
               <div className="bg-white border rounded-xl overflow-hidden shadow-sm" style={{ borderColor: "var(--line)" }}>
                 <div className="overflow-x-auto">
                   <table className="w-full text-left border-collapse">
@@ -683,17 +692,8 @@ export function AdminDashboard({ initialData }: AdminDashboardProps) {
                       </tr>
                     </thead>
                     <tbody className="divide-y text-sm" style={{ borderColor: "var(--line)" }}>
-                      {data.items
-                        .map((item, index) => ({ item, index }))
-                        .filter(({ item }) => {
-                          const matchesCategory = selectedCategoryFilter === "all" || item.category === selectedCategoryFilter;
-                          const matchesSearch =
-                            item.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                            item.description.toLowerCase().includes(searchTerm.toLowerCase());
-                          return matchesCategory && matchesSearch;
-                        })
-                        .map(({ item, index }) => {
-                          const categoryName = data.categories.find((c) => c.id === item.category)?.shortLabel || item.category;
+                      {filteredWithIndex.map(({ item, index }) => {
+                        const categoryName = data.categories.find((c) => c.id === item.category)?.shortLabel || item.category;
                           return (
                             <tr key={item.id} className="hover:bg-[#fffcf7] transition-all">
                               <td className="p-4">
@@ -1178,6 +1178,29 @@ export function AdminDashboard({ initialData }: AdminDashboardProps) {
                     placeholder="Görsel açıklama (Alt metin)"
                     className="w-full px-3 py-1.5 border rounded-lg text-xs bg-white focus:outline-none focus:border-red-800 mt-1"
                   />
+                  {uniqueImages.length > 0 && (
+                    <div className="mt-2">
+                      <span className="block text-[10px] font-semibold text-gray-500 mb-1">
+                        Sitedeki Mevcut Görseller (Seçmek için tıklayın):
+                      </span>
+                      <div className="flex gap-2 overflow-x-auto pb-1 max-w-full scrollbar-thin">
+                        {uniqueImages.map((imgUrl) => (
+                          <button
+                            key={imgUrl}
+                            type="button"
+                            onClick={() => setItemForm((prev) => ({
+                              ...prev,
+                              image: imgUrl,
+                              imageAlt: prev.imageAlt || `${prev.name || "Ürün"} görseli`
+                            }))}
+                            className={`relative h-10 w-10 border rounded overflow-hidden shrink-0 hover:border-red-800 transition-all ${itemForm.image === imgUrl ? "border-red-800 ring-2 ring-red-100" : "border-gray-200"}`}
+                          >
+                            <Image src={imgUrl} alt="Mevcut Görsel" fill className="object-cover" />
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+                  )}
                 </div>
 
                 {/* Tags Management */}
@@ -1386,6 +1409,29 @@ export function AdminDashboard({ initialData }: AdminDashboardProps) {
                   placeholder="Kategori görsel açıklaması (Alt)"
                   className="w-full px-3 py-1.5 border rounded-lg text-xs bg-white focus:outline-none focus:border-red-800 mt-1"
                 />
+                {uniqueImages.length > 0 && (
+                  <div className="mt-2">
+                    <span className="block text-[10px] font-semibold text-gray-500 mb-1">
+                      Sitedeki Mevcut Görseller (Seçmek için tıklayın):
+                    </span>
+                    <div className="flex gap-2 overflow-x-auto pb-1 max-w-full scrollbar-thin">
+                      {uniqueImages.map((imgUrl) => (
+                        <button
+                          key={imgUrl}
+                          type="button"
+                          onClick={() => setCategoryForm((prev) => ({
+                            ...prev,
+                            image: imgUrl,
+                            imageAlt: prev.imageAlt || `${prev.label || "Kategori"} görseli`
+                          }))}
+                          className={`relative h-10 w-10 border rounded overflow-hidden shrink-0 hover:border-red-800 transition-all ${categoryForm.image === imgUrl ? "border-red-800 ring-2 ring-red-100" : "border-gray-200"}`}
+                        >
+                          <Image src={imgUrl} alt="Mevcut Görsel" fill className="object-cover" />
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                )}
               </div>
             </div>
 
