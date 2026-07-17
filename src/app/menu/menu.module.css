@@ -89,7 +89,7 @@
   z-index: 15;
   border-bottom: 1px solid var(--menu-line);
   background: rgba(255, 255, 255, 0.98);
-  transition: box-shadow 180ms var(--menu-ease);
+  transition: box-shadow 220ms var(--menu-ease);
 }
 
 .discoveryPinned {
@@ -97,18 +97,45 @@
 }
 
 .discoveryInner {
+  display: grid;
+  gap: 0.6rem;
+  width: min(1160px, calc(100% - 2rem));
+  margin: 0 auto;
+  padding: 0.75rem 0 0.65rem;
+}
+
+.discoveryTop {
   display: flex;
   align-items: center;
-  gap: 0.8rem;
-  width: min(1160px, calc(100% - 2rem));
-  min-height: 70px;
-  margin: 0 auto;
-  padding: 0.65rem 0;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.discoveryTitle {
+  display: flex;
+  min-width: 0;
+  align-items: baseline;
+  gap: 0.65rem;
+}
+
+.discoveryTitle strong {
+  color: var(--menu-ink);
+  font-family: var(--font-bricolage-grotesque-gf), Arial, sans-serif;
+  font-size: 1.12rem;
+  font-weight: 760;
+  letter-spacing: -0.025em;
+}
+
+.discoveryTitle span {
+  color: var(--menu-muted);
+  font-size: 0.71rem;
+  font-weight: 650;
 }
 
 .searchField {
   display: flex;
-  flex: 0 0 248px;
+  width: min(340px, 42vw);
+  flex: 0 0 auto;
   min-height: 44px;
   align-items: center;
   gap: 0.56rem;
@@ -161,13 +188,17 @@
 .categoryNav {
   display: flex;
   min-width: 0;
-  flex: 1;
-  align-items: center;
-  gap: 0.42rem;
+  align-items: start;
+  gap: clamp(0.4rem, 1.35vw, 1.05rem);
   overflow-x: auto;
   overscroll-behavior-inline: contain;
+  padding: 0.08rem 0.2rem 0.28rem;
+  scroll-padding-inline: 0.2rem;
+  scroll-snap-type: inline proximity;
   scrollbar-width: none;
   -webkit-overflow-scrolling: touch;
+  -webkit-mask-image: linear-gradient(90deg, #000 0, #000 calc(100% - 1.8rem), transparent 100%);
+  mask-image: linear-gradient(90deg, #000 0, #000 calc(100% - 1.8rem), transparent 100%);
 }
 
 .categoryNav::-webkit-scrollbar {
@@ -176,57 +207,163 @@
 
 .categoryNav button {
   position: relative;
-  z-index: 0;
-  display: inline-flex;
-  min-height: 42px;
-  flex: 0 0 auto;
+  display: flex;
+  width: 84px;
+  min-height: 86px;
+  flex: 0 0 84px;
+  flex-direction: column;
   align-items: center;
-  justify-content: center;
-  padding: 0.42rem 0.74rem;
-  overflow: hidden;
-  border: 1px solid var(--menu-line);
-  border-radius: 999px;
-  background: #ffffff;
+  gap: 0.34rem;
+  padding: 0;
+  border: 0;
+  background: transparent;
   color: var(--menu-ink);
-  font-size: 0.83rem;
+  scroll-snap-align: start;
+  -webkit-tap-highlight-color: transparent;
+  animation: category-arrive 440ms var(--menu-ease) both;
+}
+
+.categoryIconWell {
+  position: relative;
+  display: grid;
+  width: 62px;
+  height: 62px;
+  flex: 0 0 62px;
+  place-items: center;
+  border: 1px solid var(--menu-line);
+  border-radius: 50%;
+  background: #ffffff;
+  box-shadow: 3px 3px 0 var(--menu-line-soft);
+  color: var(--menu-burgundy);
+  transition:
+    color 180ms ease,
+    background-color 220ms ease,
+    border-color 180ms ease,
+    box-shadow 220ms var(--menu-ease),
+    transform 220ms var(--menu-ease);
+}
+
+.categoryIconWell::after {
+  position: absolute;
+  inset: -5px;
+  border: 1px solid color-mix(in srgb, var(--menu-brass) 68%, transparent);
+  border-radius: 50%;
+  content: "";
+  opacity: 0;
+  transform: scale(0.84) rotate(-12deg);
+  transition: opacity 220ms ease, transform 420ms var(--menu-ease);
+}
+
+.categoryIconWell svg {
+  width: 37px;
+  height: 37px;
+  overflow: visible;
+}
+
+.categoryLabel {
+  display: block;
+  max-width: 84px;
+  color: inherit;
+  font-size: 0.7rem;
   font-weight: 720;
-  isolation: isolate;
-  white-space: nowrap;
-  transition: color 140ms ease, transform 140ms var(--menu-ease), box-shadow 140ms var(--menu-ease);
+  letter-spacing: -0.012em;
+  line-height: 1.05;
+  text-align: center;
+  text-wrap: balance;
+  transition: color 180ms ease, transform 220ms var(--menu-ease);
 }
 
 .categoryNav button.activeCategory {
-  border-color: var(--menu-burgundy);
-  background: var(--menu-burgundy);
-  color: var(--menu-on-burgundy);
-  box-shadow: 2px 2px 0 var(--menu-line);
-}
-
-.categoryNavDivider {
-  width: 1px;
-  height: 22px;
-  flex: 0 0 1px;
-  margin-inline: 0.1rem;
-  background: var(--menu-line-soft);
-}
-
-.categoryNav .quickFilterButton {
   color: var(--menu-burgundy);
 }
 
-.categoryNav .quickFilterButton.activeCategory {
-  color: #ffffff;
+.categoryNav button.activeCategory .categoryIconWell {
+  border-color: var(--menu-burgundy);
+  background: var(--menu-burgundy);
+  box-shadow: 3px 3px 0 var(--menu-line);
+  color: var(--menu-on-burgundy);
+  transform: translateY(-2px);
 }
 
-.categoryNav button:focus-visible,
+.categoryNav button.activeCategory .categoryIconWell::after {
+  opacity: 1;
+  transform: scale(1) rotate(0deg);
+}
+
+.categoryNav button.activeCategory .categoryLabel {
+  transform: translateY(-1px);
+}
+
+.categoryNav button:focus-visible {
+  outline: none;
+}
+
+.categoryNav button:focus-visible .categoryIconWell,
 .searchField button:focus-visible {
   outline: 3px solid var(--menu-brass);
   outline-offset: 3px;
 }
 
 .categoryNav button:active {
+  transform: scale(0.96);
+}
+
+.categoryNav button:active .categoryIconWell {
   box-shadow: none;
   transform: translate(2px, 2px);
+}
+
+.activeCategory [data-motion="steam"] {
+  animation: steam-breathe 1.8s ease-in-out infinite;
+}
+
+.activeCategory [data-motion="sizzle"],
+.activeCategory [data-motion="herb"],
+.activeCategory [data-motion="lift"] {
+  animation: icon-lift 1.9s ease-in-out infinite;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+.activeCategory [data-motion="ice"],
+.activeCategory [data-motion="seed"] {
+  animation: icon-shimmer 1.7s ease-in-out infinite;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+.activeCategory [data-motion="turn"] {
+  animation: icon-turn 3.2s ease-in-out infinite alternate;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+@keyframes category-arrive {
+  from {
+    transform: translateY(9px) scale(0.97);
+  }
+  to {
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes steam-breathe {
+  0%, 100% { opacity: 0.5; transform: translateY(1px); }
+  50% { opacity: 1; transform: translateY(-1.5px); }
+}
+
+@keyframes icon-lift {
+  0%, 100% { transform: translateY(0) rotate(0); }
+  50% { transform: translateY(-1.4px) rotate(1deg); }
+}
+
+@keyframes icon-shimmer {
+  0%, 100% { opacity: 0.58; transform: scale(0.94); }
+  50% { opacity: 1; transform: scale(1.08); }
+}
+
+@keyframes icon-turn {
+  to { transform: rotate(7deg); }
 }
 
 .menuContainer {
@@ -772,11 +909,16 @@
 @media (hover: hover) and (pointer: fine) {
   .categoryNav button:hover {
     color: var(--menu-burgundy);
-    transform: translateY(-1px);
   }
 
-  .categoryNav button.activeCategory:hover {
-    color: #ffffff;
+  .categoryNav button:hover .categoryIconWell {
+    border-color: var(--menu-burgundy);
+    box-shadow: 4px 4px 0 var(--menu-line-soft);
+    transform: translateY(-2px);
+  }
+
+  .categoryNav button.activeCategory:hover .categoryIconWell {
+    box-shadow: 4px 4px 0 var(--menu-line);
   }
 
   .menuCard:hover {
@@ -807,12 +949,8 @@
 }
 
 @media (max-width: 860px) {
-  .discoveryInner {
-    align-items: center;
-  }
-
   .searchField {
-    flex-basis: 220px;
+    width: min(310px, 48vw);
   }
 
   .menuGrid {
@@ -863,16 +1001,33 @@
   }
 
   .discoveryInner {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 0.45rem;
+    gap: 0.55rem;
     width: 100%;
     min-height: 0;
-    padding: 0.55rem 0.75rem;
+    padding: 0.6rem 0.75rem 0.52rem;
   }
 
-  .discoveryPinned:not(.discoveryWithSearch) .searchField {
+  .discoveryPinned:not(.discoveryWithSearch) .discoveryTop {
     display: none;
+  }
+
+  .discoveryTop {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.48rem;
+  }
+
+  .discoveryTitle {
+    justify-content: space-between;
+    padding-inline: 0.12rem;
+  }
+
+  .discoveryTitle strong {
+    font-size: 1rem;
+  }
+
+  .discoveryTitle span {
+    font-size: 0.68rem;
   }
 
   .searchField {
@@ -892,29 +1047,41 @@
   }
 
   .categoryNav {
-    gap: 0.38rem;
-    padding-right: 1.1rem;
+    gap: 0.4rem;
+    padding: 0.08rem 1.1rem 0.3rem 0.15rem;
     scroll-padding-inline: 0.2rem;
-    scroll-snap-type: inline proximity;
     -webkit-mask-image: linear-gradient(90deg, #000 0, #000 calc(100% - 1rem), transparent 100%);
     mask-image: linear-gradient(90deg, #000 0, #000 calc(100% - 1rem), transparent 100%);
   }
 
   .categoryNav button {
-    min-height: 44px;
-    padding-inline: 0.68rem;
-    font-size: 0.8rem;
-    scroll-snap-align: start;
+    width: 76px;
+    min-height: 80px;
+    flex-basis: 76px;
+    gap: 0.3rem;
   }
 
-  .categoryNavDivider {
-    height: 20px;
+  .categoryIconWell {
+    width: 56px;
+    height: 56px;
+    flex-basis: 56px;
+    box-shadow: 2px 2px 0 var(--menu-line-soft);
+  }
+
+  .categoryIconWell svg {
+    width: 34px;
+    height: 34px;
+  }
+
+  .categoryLabel {
+    max-width: 76px;
+    font-size: 0.66rem;
   }
 
   .menuContainer {
     width: min(100% - 1rem, 620px);
     padding-top: 1rem;
-    scroll-margin-top: 130px;
+    scroll-margin-top: 164px;
   }
 
   .resultLine {
@@ -1109,6 +1276,20 @@
 }
 
 @media (max-width: 360px) {
+  .discoveryInner {
+    padding-inline: 0.55rem;
+  }
+
+  .categoryNav button {
+    width: 71px;
+    flex-basis: 71px;
+  }
+
+  .categoryLabel {
+    max-width: 71px;
+    font-size: 0.63rem;
+  }
+
   .menuCard,
   .spotlightCard {
     grid-template-columns: 104px minmax(0, 1fr);
@@ -1132,5 +1313,9 @@
     transition-duration: 0.01ms !important;
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
+  }
+
+  .categoryNav button {
+    transform: none !important;
   }
 }

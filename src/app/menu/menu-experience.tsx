@@ -9,20 +9,73 @@ import {
   menuCategories,
   menuItems,
   menuLastUpdated,
-  type MenuFilterId,
   type MenuItem,
   type MenuCategory,
 } from "./menu-data";
+import { MenuCategoryIcon } from "./menu-category-icons";
 
 const ProductSheet = dynamic(
   () => import("./product-sheet").then((module) => module.ProductSheet),
   { ssr: false },
 );
 
-type QuickFilterId = "vegetarian";
+type MenuCollectionId =
+  | "all"
+  | "breakfast"
+  | "pans"
+  | "jams"
+  | "from-van"
+  | "hot-drinks"
+  | "cold-drinks";
 
-const quickFilters: Array<{ id: QuickFilterId; label: string }> = [
-  { id: "vegetarian", label: "Vejetaryen" },
+const menuCollections: Array<{
+  id: MenuCollectionId;
+  label: string;
+  description: string;
+  icon: "all" | "breakfast" | "pan" | "jam" | "van" | "hot-drink" | "cold-drink";
+}> = [
+  {
+    id: "all",
+    label: "Tüm sofra",
+    description: "Sofradaki bütün lezzetleri bir arada keşfedin.",
+    icon: "all",
+  },
+  {
+    id: "breakfast",
+    label: "Kahvaltılıklar",
+    description: "Paylaşımlık Van sofraları, peynirler ve kahvaltı tabakları.",
+    icon: "breakfast",
+  },
+  {
+    id: "pans",
+    label: "Sahanlar",
+    description: "Tereyağı hâlâ cızırdarken masaya gelen sıcak bakır sahanlar.",
+    icon: "pan",
+  },
+  {
+    id: "jams",
+    label: "Reçeller",
+    description: "Ev yapımı reçeller, bal ve kaymakla sofranın tatlı köşesi.",
+    icon: "jam",
+  },
+  {
+    id: "from-van",
+    label: "Van’dan",
+    description: "Otlu peynirden keteye, yöre hafızasını taşıyan lezzetler.",
+    icon: "van",
+  },
+  {
+    id: "hot-drinks",
+    label: "Sıcak içecekler",
+    description: "İnce belli bardakta taze çay ve ağır ağır pişen kahveler.",
+    icon: "hot-drink",
+  },
+  {
+    id: "cold-drinks",
+    label: "Soğuk içecekler",
+    description: "Kahvaltının sıcaklarına ferah ve ev yapımı eşlikçiler.",
+    icon: "cold-drink",
+  },
 ];
 
 function normalize(value: string) {
@@ -33,7 +86,22 @@ function normalize(value: string) {
     .trim();
 }
 
-// normalizedMenuCopy will be moved inside MenuExperience as a hook
+function isItemInCollection(item: MenuItem, collection: MenuCollectionId) {
+  if (collection === "all") return true;
+
+  const itemCopy = normalize([item.id, item.name, item.description, ...item.tags, ...item.details].join(" "));
+  const itemName = normalize([item.id, item.name].join(" "));
+  const isJam = itemName.includes("recel");
+  const isColdDrink = ["soguk", "limonata", "meyve suyu", "ayran", "soda", "serbet"]
+    .some((term) => itemCopy.includes(term));
+
+  if (collection === "breakfast") return item.category === "sofra" && !isJam;
+  if (collection === "pans") return item.category === "sicaklar";
+  if (collection === "jams") return isJam;
+  if (collection === "from-van") return item.category === "vandan";
+  if (collection === "hot-drinks") return item.category === "icecekler" && !isColdDrink;
+  return item.category === "icecekler" && isColdDrink;
+}
 
 function usePrefersReducedMotion() {
   const [reduceMotion, setReduceMotion] = useState(false);
@@ -117,8 +185,7 @@ export function MenuExperience({
   const heroRef = useRef<HTMLElement>(null);
   const searchInputRef = useRef<HTMLInputElement>(null);
   const searchSessionRef = useRef(false);
-  const [activeCategory, setActiveCategory] = useState<MenuFilterId>("all");
-  const [activeQuickFilter, setActiveQuickFilter] = useState<QuickFilterId | null>(null);
+  const [activeCollection, setActiveCollection] = useState<MenuCollectionId>("all");
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedItem, setSelectedItem] = useState<MenuItem | null>(null);
   const [isCatalogPinned, setIsCatalogPinned] = useState(false);
@@ -159,23 +226,30 @@ export function MenuExperience({
   const visibleItems = useMemo(() => {
     const query = normalize(deferredSearch);
     return initialItems.filter((item) => {
-      if (activeCategory !== "all" && item.category !== activeCategory) return false;
-      if (activeQuickFilter === "vegetarian" && !item.tags.includes("Vejetaryen")) return false;
+      if (!isItemInCollection(item, activeCollection)) return false;
       if (!query) return true;
       return normalizedMenuCopy.get(item.id)?.includes(query) ?? false;
     });
-  }, [initialItems, activeCategory, activeQuickFilter, deferredSearch, normalizedMenuCopy]);
+  }, [initialItems, activeCollection, deferredSearch, normalizedMenuCopy]);
 
-  const groups = useMemo(
-    () =>
-      initialCategories
+  const groups = useMemo(() => {
+    if (activeCollection !== "all" && !deferredSearch) {
+      const collection = menuCollections.find((entry) => entry.id === activeCollection)!;
+      return [{
+        id: `collection-${collection.id}`,
+        label: collection.label,
+        description: collection.description,
+        items: visibleItems,
+      }];
+    }
+
+    return initialCategories
         .map((category) => ({
           ...category,
           items: visibleItems.filter((item) => item.category === category.id),
         }))
-        .filter((group) => group.items.length > 0),
-    [initialCategories, visibleItems],
-  );
+        .filter((group) => group.items.length > 0);
+  }, [activeCollection, deferredSearch, initialCategories, visibleItems]);
 
   const openItem = useCallback((item: MenuItem) => setSelectedItem(item), []);
   const closeItem = useCallback(() => setSelectedItem(null), []);
@@ -197,7 +271,7 @@ export function MenuExperience({
     });
   };
 
-  const selectCategory = (category: MenuFilterId, trigger?: HTMLButtonElement) => {
+  const selectCollection = (collection: MenuCollectionId, trigger?: HTMLButtonElement) => {
     const catalog = document.getElementById("menu-catalog");
     const shouldAlignResults =
       isCatalogPinned || searchSessionRef.current || (catalog?.getBoundingClientRect().top ?? Number.POSITIVE_INFINITY) <= 73;
@@ -205,8 +279,7 @@ export function MenuExperience({
     searchSessionRef.current = false;
     searchInputRef.current?.blur();
     setSearchTerm("");
-    setActiveQuickFilter(null);
-    setActiveCategory(category);
+    setActiveCollection(collection);
     if (trigger) {
       const categoryRail = trigger.parentElement;
       categoryRail?.scrollTo({
@@ -214,26 +287,6 @@ export function MenuExperience({
         behavior: reduceMotion ? "auto" : "smooth",
       });
     }
-    if (shouldAlignResults) {
-      alignResults();
-    }
-  };
-
-  const selectQuickFilter = (filter: QuickFilterId, trigger: HTMLButtonElement) => {
-    const catalog = document.getElementById("menu-catalog");
-    const shouldAlignResults =
-      isCatalogPinned || (catalog?.getBoundingClientRect().top ?? Number.POSITIVE_INFINITY) <= 73;
-
-    searchSessionRef.current = false;
-    searchInputRef.current?.blur();
-    setSearchTerm("");
-    setActiveCategory("all");
-    setActiveQuickFilter((current) => (current === filter ? null : filter));
-    trigger.parentElement?.scrollTo({
-      left: trigger.offsetLeft - (trigger.parentElement.clientWidth - trigger.offsetWidth) / 2,
-      behavior: reduceMotion ? "auto" : "smooth",
-    });
-
     if (shouldAlignResults) {
       alignResults();
     }
@@ -267,76 +320,62 @@ export function MenuExperience({
         aria-label="Menüde gezinme"
       >
         <div className={styles.discoveryInner}>
-          <div className={styles.searchField}>
-            <Search size={18} aria-hidden="true" />
-            <label className={styles.srOnly} htmlFor="menu-search">Menüde ara</label>
-            <input
-              ref={searchInputRef}
-              id="menu-search"
-              type="search"
-              placeholder="Menüde lezzet ara…"
-              value={searchTerm}
-              onChange={(event) => {
-                const nextSearch = event.target.value;
-                setSearchTerm(nextSearch);
-                if (nextSearch) {
-                  setActiveCategory("all");
-                  setActiveQuickFilter(null);
-                }
-              }}
-              autoComplete="off"
-              inputMode="search"
-              enterKeyHint="search"
-              aria-controls="menu-results"
-              onFocus={handleSearchFocus}
-            />
-            {searchTerm ? (
-              <button
-                type="button"
-                onClick={() => {
-                  setSearchTerm("");
-                  window.requestAnimationFrame(() => searchInputRef.current?.focus());
+          <div className={styles.discoveryTop}>
+            <div className={styles.discoveryTitle} aria-hidden="true">
+              <strong>Sofranı seç</strong>
+              <span>Kaydır, dokun, keşfet</span>
+            </div>
+            <div className={styles.searchField}>
+              <Search size={18} aria-hidden="true" />
+              <label className={styles.srOnly} htmlFor="menu-search">Menüde ara</label>
+              <input
+                ref={searchInputRef}
+                id="menu-search"
+                type="search"
+                placeholder="Menüde lezzet ara…"
+                value={searchTerm}
+                onChange={(event) => {
+                  const nextSearch = event.target.value;
+                  setSearchTerm(nextSearch);
+                  if (nextSearch) setActiveCollection("all");
                 }}
-                aria-label="Aramayı temizle"
-              >
-                <X size={17} />
-              </button>
-            ) : null}
+                autoComplete="off"
+                inputMode="search"
+                enterKeyHint="search"
+                aria-controls="menu-results"
+                onFocus={handleSearchFocus}
+              />
+              {searchTerm ? (
+                <button
+                  type="button"
+                  onClick={() => {
+                    setSearchTerm("");
+                    window.requestAnimationFrame(() => searchInputRef.current?.focus());
+                  }}
+                  aria-label="Aramayı temizle"
+                >
+                  <X size={17} />
+                </button>
+              ) : null}
+            </div>
           </div>
 
           <nav className={styles.categoryNav} aria-label="Menü kategorileri">
-            <button
-              type="button"
-              className={activeCategory === "all" && !activeQuickFilter ? styles.activeCategory : ""}
-              aria-pressed={activeCategory === "all" && !activeQuickFilter}
-              aria-controls="menu-results"
-              onClick={(event) => selectCategory("all", event.currentTarget)}
-            >
-              <span>Tümü</span>
-            </button>
-            {initialCategories.map((category) => (
+            {menuCollections.map((collection, index) => (
               <button
-                key={category.id}
+                key={collection.id}
                 type="button"
-                className={activeCategory === category.id ? styles.activeCategory : ""}
-                aria-pressed={activeCategory === category.id}
+                className={activeCollection === collection.id ? styles.activeCategory : ""}
+                aria-pressed={activeCollection === collection.id}
                 aria-controls="menu-results"
-                onClick={(event) => selectCategory(category.id, event.currentTarget)}
+                aria-label={`${collection.label} kategorisini göster`}
+                style={{ animationDelay: `${index * 34}ms` }}
+                onClick={(event) => selectCollection(collection.id, event.currentTarget)}
               >
-                <span>{category.shortLabel}</span>
-              </button>
-            ))}
-            <span className={styles.categoryNavDivider} aria-hidden="true" />
-            {quickFilters.map((filter) => (
-              <button
-                key={filter.id}
-                type="button"
-                className={`${styles.quickFilterButton} ${activeQuickFilter === filter.id ? styles.activeCategory : ""}`}
-                aria-pressed={activeQuickFilter === filter.id}
-                aria-controls="menu-results"
-                onClick={(event) => selectQuickFilter(filter.id, event.currentTarget)}
-              >
-                <span>{filter.label}</span>
+                <span className={styles.categoryIconWell} aria-hidden="true">
+                  <MenuCategoryIcon name={collection.icon} />
+                </span>
+                <span className={styles.categoryLabel}>{collection.label}</span>
               </button>
             ))}
           </nav>
@@ -344,13 +383,11 @@ export function MenuExperience({
       </section>
 
       <div id="menu-results" className={styles.menuContainer}>
-        <div className={`${styles.resultLine} ${searchTerm || activeQuickFilter ? styles.searchResultLine : ""}`} aria-live="polite">
+        <div className={`${styles.resultLine} ${searchTerm ? styles.searchResultLine : ""}`} aria-live="polite">
           <span>
             {searchTerm
               ? `“${searchTerm}” için ${visibleItems.length} sonuç`
-              : activeQuickFilter
-                ? `${quickFilters.find((filter) => filter.id === activeQuickFilter)?.label} seçkisinde ${visibleItems.length} lezzet`
-                : `${visibleItems.length} lezzet gösteriliyor`}
+              : `${visibleItems.length} lezzet gösteriliyor`}
           </span>
           <span>Fiyatlar ₺ olarak gösterilir</span>
         </div>
@@ -383,8 +420,7 @@ export function MenuExperience({
               type="button"
               onClick={() => {
                 setSearchTerm("");
-                setActiveCategory("all");
-                setActiveQuickFilter(null);
+                setActiveCollection("all");
               }}
             >
               Tüm menüyü göster
