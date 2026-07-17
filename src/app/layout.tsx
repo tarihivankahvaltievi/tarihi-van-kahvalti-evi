@@ -98,7 +98,8 @@ export const metadata: Metadata = {
   },
   icons: {
     icon: [
-      { url: "/favicon.ico" },
+      { url: "/icons/favicon-brand.png", type: "image/png", sizes: "64x64" },
+      { url: "/favicon.ico", type: "image/x-icon" },
       { url: "/icons/icon-192.png", type: "image/png", sizes: "192x192" },
       { url: "/icons/icon-512.png", type: "image/png", sizes: "512x512" },
     ],
