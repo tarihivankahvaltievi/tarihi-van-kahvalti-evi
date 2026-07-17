@@ -360,12 +360,7 @@ function IstiklalWebglAtmosphere() {
 
 export function AnimatedFooter() {
   const footerRef = useRef<HTMLElement>(null);
-  const [dingCount, setDingCount] = useState(0);
   const [isFooterVisible, setIsFooterVisible] = useState(false);
-
-  const handleTramClick = () => {
-    setDingCount((prev) => prev + 1);
-  };
 
   const handleOpenBooking = () => {
     window.dispatchEvent(
@@ -490,9 +485,9 @@ export function AnimatedFooter() {
               <stop offset="1" stopColor="#601014" />
             </linearGradient>
             <linearGradient id="tram-glass" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0" stopColor="#ffe" />
-              <stop offset="0.5" stopColor="#dcb" />
-              <stop offset="1" stopColor="#9a9" />
+              <stop offset="0" stopColor="#f3f5ed" />
+              <stop offset="0.48" stopColor="#c7d0c5" />
+              <stop offset="1" stopColor="#78877e" />
             </linearGradient>
             <linearGradient id="brass-trim" x1="0" y1="0" x2="1" y2="0">
               <stop offset="0" stopColor="#ab8b4b" />
@@ -924,7 +919,7 @@ export function AnimatedFooter() {
               <line x1="430" y1="220" x2="430" y2="154" strokeWidth="2.5" />
               <rect x="407" y="128" width="46" height="28" rx="5" fill="var(--white, #ffffff)" />
               <rect x="412" y="133" width="36" height="13" rx="2.5" fill="#c1272d" stroke="none" />
-              <text x="430" y="143" fontSize="8" fontWeight="900" textAnchor="middle" stroke="none" fill="var(--white, #ffffff)" fontFamily="var(--font-sans)" letterSpacing="0.08em">BARAN</text>
+              <text x="430" y="143" fontSize="6.8" fontWeight="900" textAnchor="middle" stroke="none" fill="var(--white, #ffffff)" fontFamily="var(--font-sans)" letterSpacing="0.05em">İSTİKLAL</text>
               <path d="M416 150 H444" stroke="#cdbf9d" strokeWidth="1.5" opacity="0.8" />
             </g>
 
@@ -962,13 +957,8 @@ export function AnimatedFooter() {
               <path d="M10 219V225 M60 219V225 M110 219V225 M160 219V225 M210 219V225 M260 219V225 M310 219V225 M360 219V225 M410 219V225 M460 219V225 M510 219V225 M560 219V225 M610 219V225 M660 219V225 M710 219V225 M760 219V225 M810 219V225 M860 219V225 M910 219V225 M960 219V225 M1010 219V225 M1060 219V225 M1110 219V225 M1160 219V225" stroke="#3a3b3c" strokeWidth="1.5" />
             </g>
 
-            {/* ─── Nostalgic Tram (Interaktif) ─── */}
-            <g className="tram-group" onClick={handleTramClick} style={{ cursor: "pointer" }}>
-              <g className={`bell-bubble ${dingCount > 0 ? "show-ding" : ""}`} key={dingCount}>
-                <path d="M 30 118 L 45 118 L 50 128 L 55 118 L 85 118 A 8 8 0 0 0 93 110 L 93 90 A 8 8 0 0 0 85 82 L 30 82 A 8 8 0 0 0 22 90 L 22 110 A 8 8 0 0 0 30 118 Z" fill="var(--white, #ffffff)" stroke="#c1272d" strokeWidth="1.5" />
-                <text x="57" y="103" fontSize="10.5" fontWeight="900" textAnchor="middle" stroke="none" fill="#c1272d" fontFamily="var(--font-sans)">Dıng Dıng! 🔔</text>
-              </g>
-
+            {/* ─── Nostalgic İstiklal Tram ─── */}
+            <g className="tram-group">
               {/* Tram Chassis Group (for vibration animation) */}
               <g className="tram-chassis">
                 {/* Nostalgic Istiklal tram body - more rounded and realistic */}
@@ -997,6 +987,15 @@ export function AnimatedFooter() {
                   <rect x="84" y="167" width="18" height="26" rx="2" fill="url(#tram-glass)" className="tram-window" />
                   {/* Front curved window */}
                   <path d="M107 167 H125 C132 175 133 185 133 193 H107 Z" fill="url(#tram-glass)" className="tram-window" />
+                </g>
+
+                {/* Window reflections and driver silhouette keep the tram legible at mobile sizes. */}
+                <g fill="none" stroke="#ffffff" strokeWidth="1.15" strokeLinecap="round" opacity="0.56">
+                  <path d="M18 170 H28 M41 170 H51 M64 170 H74 M87 170 H97 M111 170 H124" />
+                </g>
+                <g fill="#28312d" opacity="0.72" stroke="none">
+                  <circle cx="119" cy="177" r="3.2" />
+                  <path d="M115 181 Q119 178 123 181 L124 191 H114 Z" />
                 </g>
 
                 {/* Wooden panels / dividers */}

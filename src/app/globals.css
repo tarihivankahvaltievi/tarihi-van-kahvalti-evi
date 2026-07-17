@@ -9613,3 +9613,142 @@ body .mobile-bar .mobile-bar-primary:focus-visible {
 .footer-reimagined:not(.footer-is-visible) .tram-group {
   animation-play-state: paused !important;
 }
+
+/* Footer sequence: information first; the İstiklal scene closes the page. */
+.footer-reimagined {
+  display: flex;
+  flex-direction: column;
+}
+
+.footer-content {
+  order: 1;
+}
+
+.footer-skyline-wrapper {
+  order: 2;
+  margin-top: 0;
+  border-top: 1px solid rgba(107, 81, 55, 0.22);
+}
+
+.footer-drawn-wall {
+  order: 3;
+  width: 100%;
+  height: min(30.333vw, 436.8px);
+  overflow: hidden;
+  line-height: 0;
+}
+
+.footer-wall-svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/* Sharper, calmer vector treatment for the street and tram. */
+.footer-skyline-svg {
+  filter: saturate(0.92) contrast(1.04);
+}
+
+.tram-group {
+  cursor: default;
+  filter:
+    drop-shadow(0 7px 4px rgba(42, 42, 45, 0.2))
+    drop-shadow(0 -1px 0 rgba(255, 242, 205, 0.34));
+}
+
+.tram-chassis {
+  filter: saturate(1.08) contrast(1.04);
+}
+
+.info-badge-wrapper {
+  width: 100%;
+}
+
+.info-badge {
+  display: flex;
+  align-items: baseline;
+  gap: 0.36rem;
+  padding: 0.72rem 0.9rem;
+  border-radius: 12px;
+}
+
+.info-badge-title {
+  color: var(--heritage-ink);
+  font-weight: 750;
+}
+
+.info-badge-subtitle {
+  color: var(--muted);
+  font-size: 0.82rem;
+  font-weight: 650;
+}
+
+@media (max-width: 768px) {
+  .footer-content {
+    padding: 1.05rem 4.4vw 1.5rem;
+  }
+
+  .footer-grid .footer-col:nth-child(2) {
+    display: none;
+  }
+
+  .footer-grid {
+    padding: 0.9rem;
+  }
+
+  .footer-col-info {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .info-badge-wrapper,
+  .info-badge {
+    width: 100%;
+    height: 100%;
+  }
+
+  .info-badge {
+    display: flex;
+    min-height: 96px;
+    flex-direction: column;
+    justify-content: center;
+    gap: 0.14rem;
+    padding: 0.86rem 0.95rem;
+    border-radius: 14px;
+  }
+
+  .info-badge-title {
+    color: var(--heritage-ink);
+    font-size: 1.05rem;
+    font-weight: 750;
+  }
+
+  .info-badge-subtitle {
+    color: var(--muted);
+    font-size: 0.72rem;
+    font-weight: 650;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  .footer-skyline-wrapper {
+    height: clamp(184px, 50vw, 214px);
+    min-height: 184px;
+    max-height: 214px;
+  }
+
+  .footer-skyline-svg {
+    width: 136vw;
+    transform: translateX(-18vw) scale(1.02);
+  }
+
+  .footer-skyline-wrapper,
+  .footer-drawn-wall {
+    opacity: 1;
+  }
+}
+
+@media (max-width: 420px) {
+  .footer-col-info {
+    grid-template-columns: 1fr 1fr;
+  }
+}
