@@ -255,8 +255,8 @@
 }
 
 .categoryIconWell svg {
-  width: 43px;
-  height: 43px;
+  width: 39px;
+  height: 39px;
   overflow: visible;
 }
 
@@ -313,31 +313,6 @@
   transform: translate(2px, 2px);
 }
 
-.activeCategory [data-motion="steam"] {
-  animation: steam-breathe 1.8s ease-in-out infinite;
-}
-
-.activeCategory [data-motion="sizzle"],
-.activeCategory [data-motion="herb"],
-.activeCategory [data-motion="lift"] {
-  animation: icon-lift 1.9s ease-in-out infinite;
-  transform-box: fill-box;
-  transform-origin: center;
-}
-
-.activeCategory [data-motion="ice"],
-.activeCategory [data-motion="seed"] {
-  animation: icon-shimmer 1.7s ease-in-out infinite;
-  transform-box: fill-box;
-  transform-origin: center;
-}
-
-.activeCategory [data-motion="turn"] {
-  animation: icon-turn 3.2s ease-in-out infinite alternate;
-  transform-box: fill-box;
-  transform-origin: center;
-}
-
 @keyframes category-arrive {
   from {
     transform: translateY(9px) scale(0.97);
@@ -345,25 +320,6 @@
   to {
     transform: translateY(0) scale(1);
   }
-}
-
-@keyframes steam-breathe {
-  0%, 100% { opacity: 0.5; transform: translateY(1px); }
-  50% { opacity: 1; transform: translateY(-1.5px); }
-}
-
-@keyframes icon-lift {
-  0%, 100% { transform: translateY(0) rotate(0); }
-  50% { transform: translateY(-1.4px) rotate(1deg); }
-}
-
-@keyframes icon-shimmer {
-  0%, 100% { opacity: 0.58; transform: scale(0.94); }
-  50% { opacity: 1; transform: scale(1.08); }
-}
-
-@keyframes icon-turn {
-  to { transform: rotate(7deg); }
 }
 
 .menuContainer {
@@ -1069,8 +1025,8 @@
   }
 
   .categoryIconWell svg {
-    width: 40px;
-    height: 40px;
+    width: 36px;
+    height: 36px;
   }
 
   .categoryLabel {
