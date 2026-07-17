@@ -325,7 +325,7 @@ export function MenuExperience({
           <div className={styles.discoveryTop}>
             <div className={styles.discoveryTitle} aria-hidden="true">
               <strong>Sofranı seç</strong>
-              <span>Kaydır, dokun, keşfet</span>
+              <span>{menuCollections.length} kategori</span>
             </div>
             <div className={styles.searchField}>
               <Search size={18} aria-hidden="true" />
