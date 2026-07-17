@@ -13,7 +13,7 @@ const routes = [
     language: "tr",
     types: ["WebSite", "Restaurant", "WebPage", "Menu", "FAQPage"],
     faqCount: 10,
-    visibleSignals: ["van kahvaltıcısı", "beyoğlu", "taksim", "van kahvaltısı menüsü"],
+    visibleSignals: ["van kahvaltıcısı", "beyoğlu", "taksim", "serpme kahvaltı"],
   },
   {
     path: "/en",

@@ -11,6 +11,7 @@ import {
   menuLastUpdated,
   type MenuFilterId,
   type MenuItem,
+  type MenuCategory,
 } from "./menu-data";
 
 const ProductSheet = dynamic(
@@ -32,12 +33,7 @@ function normalize(value: string) {
     .trim();
 }
 
-const normalizedMenuCopy = new Map(
-  menuItems.map((item) => [
-    item.id,
-    normalize([item.name, item.description, item.story, ...item.tags, ...item.details].join(" ")),
-  ]),
-);
+// normalizedMenuCopy will be moved inside MenuExperience as a hook
 
 function usePrefersReducedMotion() {
   const [reduceMotion, setReduceMotion] = useState(false);
@@ -108,7 +104,15 @@ const MenuCard = memo(function MenuCard({
   );
 });
 
-export function MenuExperience() {
+export function MenuExperience({
+  initialCategories = menuCategories,
+  initialItems = menuItems,
+  initialLastUpdated = menuLastUpdated,
+}: {
+  initialCategories?: MenuCategory[];
+  initialItems?: MenuItem[];
+  initialLastUpdated?: string;
+}) {
   const reduceMotion = usePrefersReducedMotion();
   const heroRef = useRef<HTMLElement>(null);
   const searchInputRef = useRef<HTMLInputElement>(null);
@@ -119,6 +123,15 @@ export function MenuExperience() {
   const [selectedItem, setSelectedItem] = useState<MenuItem | null>(null);
   const [isCatalogPinned, setIsCatalogPinned] = useState(false);
   const deferredSearch = useDeferredValue(searchTerm);
+
+  const normalizedMenuCopy = useMemo(() => {
+    return new Map(
+      initialItems.map((item) => [
+        item.id,
+        normalize([item.name, item.description, item.story, ...item.tags, ...item.details].join(" ")),
+      ]),
+    );
+  }, [initialItems]);
 
   useEffect(() => {
     document.documentElement.classList.add("menu-scroll-root");
@@ -145,23 +158,23 @@ export function MenuExperience() {
 
   const visibleItems = useMemo(() => {
     const query = normalize(deferredSearch);
-    return menuItems.filter((item) => {
+    return initialItems.filter((item) => {
       if (activeCategory !== "all" && item.category !== activeCategory) return false;
       if (activeQuickFilter === "vegetarian" && !item.tags.includes("Vejetaryen")) return false;
       if (!query) return true;
       return normalizedMenuCopy.get(item.id)?.includes(query) ?? false;
     });
-  }, [activeCategory, activeQuickFilter, deferredSearch]);
+  }, [initialItems, activeCategory, activeQuickFilter, deferredSearch, normalizedMenuCopy]);
 
   const groups = useMemo(
     () =>
-      menuCategories
+      initialCategories
         .map((category) => ({
           ...category,
           items: visibleItems.filter((item) => item.category === category.id),
         }))
         .filter((group) => group.items.length > 0),
-    [visibleItems],
+    [initialCategories, visibleItems],
   );
 
   const openItem = useCallback((item: MenuItem) => setSelectedItem(item), []);
@@ -301,7 +314,7 @@ export function MenuExperience() {
             >
               <span>Tümü</span>
             </button>
-            {menuCategories.map((category) => (
+            {initialCategories.map((category) => (
               <button
                 key={category.id}
                 type="button"
@@ -380,7 +393,7 @@ export function MenuExperience() {
         )}
 
         <footer className={styles.menuNote}>
-          <span>Menü güncelleme · {menuLastUpdated}</span>
+          <span>Menü güncelleme · {initialLastUpdated}</span>
           <p>Ürün uygunluğu mevsime ve günlük hazırlığa göre değişebilir. Alerjen bilgisi için ekibimize danışabilirsiniz.</p>
         </footer>
       </div>

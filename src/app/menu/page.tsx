@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
 import ClientPage from "../client-page";
 import { absoluteUrl, jsonLd, siteName, siteUrl } from "../seo";
 import { MenuExperience } from "./menu-experience";
-import { menuCategories, menuItems } from "./menu-data";
+import { getMenuData } from "./menu-storage";
 
 const menuUrl = `${siteUrl}/menu`;
 const menuDescription =
@@ -37,6 +38,22 @@ export const metadata: Metadata = {
 };
 
 export default function MenuPage() {
+  return (
+    <Suspense
+      fallback={
+        <div className="min-h-screen flex items-center justify-center bg-[#f8efe0]">
+          <div className="inline-block animate-spin rounded-full h-8 w-8 border-4 border-red-800 border-t-transparent" />
+        </div>
+      }
+    >
+      <MenuContainer />
+    </Suspense>
+  );
+}
+
+async function MenuContainer() {
+  const { categories, items, lastUpdated } = await getMenuData();
+
   const menuJsonLd = {
     "@context": "https://schema.org",
     "@type": "Menu",
@@ -45,14 +62,14 @@ export default function MenuPage() {
     description: menuDescription,
     url: menuUrl,
     inLanguage: "tr-TR",
-    hasMenuSection: menuCategories.map((category) => ({
+    hasMenuSection: categories.map((category) => ({
       "@type": "MenuSection",
       name: category.label,
       description: category.description,
-      hasMenuItem: menuItems
+      hasMenuItem: items
         .filter((item) => item.category === category.id)
         .map((item) => {
-          const numericPrice = item.price.match(/^₺(\d+)/)?.[1];
+          const numericPrice = item.price.match(/^₺?(\d+)/)?.[1];
           return {
             "@type": "MenuItem",
             name: item.name,
@@ -75,7 +92,11 @@ export default function MenuPage() {
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLd(menuJsonLd) }} />
       <ClientPage>
-        <MenuExperience />
+        <MenuExperience
+          initialCategories={categories}
+          initialItems={items}
+          initialLastUpdated={lastUpdated}
+        />
       </ClientPage>
     </>
   );
