@@ -1,0 +1,206 @@
+/*
+ * Desktop composition authority.
+ * Mobile and tablet keep their existing art direction; these rules only begin
+ * where the navigation and story naturally have room for a two-column layout.
+ */
+@media (min-width: 901px) {
+  .theme-breakfast .nav,
+  .theme-breakfast .nav.scrolled {
+    top: 0.9rem !important;
+    width: min(1240px, calc(100% - 2.5rem)) !important;
+    min-height: 72px !important;
+    padding-inline: 1rem !important;
+    border: 1px solid rgba(55, 38, 32, 0.14) !important;
+    border-radius: 14px !important;
+    background: rgba(246, 239, 228, 0.96) !important;
+    box-shadow: 0 7px 8px rgba(48, 31, 27, 0.06) !important;
+    backdrop-filter: blur(14px) saturate(112%) !important;
+    -webkit-backdrop-filter: blur(14px) saturate(112%) !important;
+  }
+
+  .theme-breakfast .nav::after {
+    display: none !important;
+  }
+
+  .theme-breakfast .nav-links {
+    display: flex !important;
+    border: 0 !important;
+    background: transparent !important;
+  }
+
+  .theme-breakfast .nav-links a {
+    padding-inline: 0.78rem !important;
+  }
+
+  .theme-breakfast .nav-location {
+    display: inline-flex !important;
+    min-height: 42px !important;
+    border-color: rgba(47, 86, 102, 0.24) !important;
+    background: rgba(255, 255, 255, 0.35) !important;
+    color: #2f5666 !important;
+  }
+
+  .theme-breakfast .nav-menu-button {
+    width: 44px !important;
+    height: 44px !important;
+  }
+
+  .theme-breakfast .hero.hero-parallax-dining {
+    height: clamp(720px, 90svh, 820px) !important;
+    min-height: 720px !important;
+    overflow: hidden !important;
+    perspective: none !important;
+  }
+
+  .theme-breakfast .hero-parallax-sticky {
+    position: relative !important;
+    top: auto !important;
+    height: 100% !important;
+    min-height: 0 !important;
+    overflow: hidden !important;
+  }
+
+  .theme-breakfast .hero-top-curtain {
+    height: 10rem !important;
+    background: linear-gradient(180deg, #f6efe4 0%, rgba(246, 239, 228, 0.88) 62%, rgba(246, 239, 228, 0) 100%) !important;
+  }
+
+  .theme-breakfast .hero-parallax-copy {
+    top: clamp(10.4rem, 22svh, 12.2rem) !important;
+    left: clamp(3.5rem, 6.5vw, 6.25rem) !important;
+    z-index: 8 !important;
+    width: min(39vw, 31rem) !important;
+    max-width: 31rem !important;
+    gap: 0.7rem !important;
+    transform: none !important;
+    opacity: 1 !important;
+    filter: none !important;
+  }
+
+  .theme-breakfast .hero-parallax-copy > div:last-child {
+    transform: none !important;
+    opacity: 1 !important;
+    filter: none !important;
+  }
+
+  .theme-breakfast .hero-parallax-copy h1 {
+    max-width: 8.2em !important;
+    font-size: clamp(4.25rem, 5.75vw, 5.5rem) !important;
+    letter-spacing: -0.035em !important;
+    line-height: 0.88 !important;
+  }
+
+  .theme-breakfast .hero-title-word,
+  .theme-breakfast .hero-parallax-copy p,
+  .theme-breakfast .hero-provenance {
+    animation: none !important;
+    clip-path: none !important;
+    filter: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  .theme-breakfast .hero-title-lockup::after {
+    display: none !important;
+  }
+
+  .theme-breakfast .hero-title-line {
+    gap: 0.16em !important;
+    letter-spacing: -0.035em !important;
+  }
+
+  .theme-breakfast .hero-parallax-copy p {
+    max-width: 29rem !important;
+    margin-top: 0.5rem !important;
+    color: rgba(36, 23, 24, 0.82) !important;
+    font-size: clamp(1rem, 1.25vw, 1.13rem) !important;
+    line-height: 1.55 !important;
+  }
+
+  .theme-breakfast .hero-copy-ambient-glow {
+    width: 130% !important;
+    height: 140% !important;
+    opacity: 0.58 !important;
+  }
+
+  .theme-breakfast .hero-parallax-gallery {
+    top: clamp(8.3rem, 16svh, 9.6rem) !important;
+    right: clamp(2.4rem, 4.7vw, 4.6rem) !important;
+    left: auto !important;
+    z-index: 4 !important;
+    display: grid !important;
+    width: min(51vw, 680px) !important;
+    gap: 0.8rem !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    transform: none !important;
+    opacity: 1 !important;
+    -webkit-mask-image: none !important;
+    mask-image: none !important;
+  }
+
+  .theme-breakfast .hero-parallax-row {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1.12fr) minmax(0, 0.88fr) !important;
+    gap: 0.8rem !important;
+    width: 100% !important;
+    transform: none !important;
+  }
+
+  .theme-breakfast .hero-parallax-row.is-reverse {
+    grid-template-columns: minmax(0, 0.82fr) minmax(0, 1.18fr) !important;
+  }
+
+  .theme-breakfast .hero-parallax-card {
+    width: 100% !important;
+    height: clamp(210px, 31svh, 290px) !important;
+    aspect-ratio: auto !important;
+    border: 0 !important;
+    border-radius: 8px !important;
+    box-shadow: 0 6px 8px rgba(45, 28, 20, 0.12) !important;
+    transform: none !important;
+  }
+
+  .theme-breakfast .hero-parallax-row.is-reverse .hero-parallax-card {
+    height: clamp(185px, 26svh, 238px) !important;
+  }
+
+  .theme-breakfast .hero-parallax-card:nth-child(n + 3) {
+    display: none !important;
+  }
+
+  .theme-breakfast .hero-parallax-card img {
+    filter: saturate(0.98) contrast(1.035) brightness(0.92) !important;
+    transform: scale(1.01) !important;
+  }
+
+  .theme-breakfast .hero-parallax-food-stage {
+    display: none !important;
+  }
+
+  .theme-breakfast .hero-parallax-sticky::after {
+    height: 24% !important;
+    background: linear-gradient(180deg, rgba(246, 239, 228, 0), #f6efe4 92%) !important;
+  }
+}
+
+@media (min-width: 901px) and (max-width: 1120px) {
+  .theme-breakfast .nav-links a {
+    padding-inline: 0.55rem !important;
+    font-size: 0.78rem !important;
+  }
+
+  .theme-breakfast .hero-parallax-copy {
+    left: 3rem !important;
+    width: 40vw !important;
+  }
+
+  .theme-breakfast .hero-parallax-copy h1 {
+    font-size: clamp(3.7rem, 6vw, 4.5rem) !important;
+  }
+
+  .theme-breakfast .hero-parallax-gallery {
+    right: 2.2rem !important;
+    width: 50vw !important;
+  }
+}

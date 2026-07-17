@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Bodoni_Moda, Bricolage_Grotesque, Literata } from "next/font/google";
 import "./globals.css";
 import "./mobile-header-hero.css";
+import "./desktop-refinement.css";
 
 const bodoni = Bodoni_Moda({
   subsets: ["latin", "latin-ext"],
