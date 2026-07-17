@@ -965,10 +965,6 @@
     padding: 0.58rem 0.75rem 0.46rem;
   }
 
-  .discoveryPinned:not(.discoveryWithSearch) .discoveryTop {
-    display: none;
-  }
-
   .discoveryTop {
     display: grid;
     grid-template-columns: 1fr;
@@ -1039,24 +1035,6 @@
     font-size: 0.66rem;
     line-height: 1.08;
     text-align: left;
-  }
-
-  .discoveryPinned:not(.discoveryWithSearch) .discoveryInner {
-    padding-block: 0.38rem;
-  }
-
-  .discoveryPinned:not(.discoveryWithSearch) .categoryNav button {
-    min-height: 46px;
-  }
-
-  .discoveryPinned:not(.discoveryWithSearch) .categoryIconWell {
-    width: 28px;
-    height: 28px;
-  }
-
-  .discoveryPinned:not(.discoveryWithSearch) .categoryIconWell img {
-    width: 26px;
-    height: 26px;
   }
 
   .menuContainer {

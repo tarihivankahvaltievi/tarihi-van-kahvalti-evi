@@ -318,7 +318,7 @@ export function MenuExperience({
 
       <section
         id="menu-catalog"
-        className={`${styles.discoveryBar} ${isCatalogPinned ? styles.discoveryPinned : ""} ${searchTerm ? styles.discoveryWithSearch : ""}`}
+        className={`${styles.discoveryBar} ${isCatalogPinned ? styles.discoveryPinned : ""}`}
         aria-label="Menüde gezinme"
       >
         <div className={styles.discoveryInner}>
