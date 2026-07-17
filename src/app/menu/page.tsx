@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Suspense } from "react";
+import { cookies } from "next/headers";
 import ClientPage from "../client-page";
 import { absoluteUrl, jsonLd, siteName, siteUrl } from "../seo";
 import { MenuExperience } from "./menu-experience";
@@ -52,6 +53,7 @@ export default function MenuPage() {
 }
 
 async function MenuContainer() {
+  await cookies(); // Force dynamic request-time execution in Next.js 16
   const { categories, items, lastUpdated } = await getMenuData();
 
   const menuJsonLd = {

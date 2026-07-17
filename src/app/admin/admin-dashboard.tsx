@@ -321,10 +321,31 @@ export function AdminDashboard({ initialData }: AdminDashboardProps) {
       return;
     }
 
+    // Format and sanitize price (e.g. "450" -> "₺450", "450 TL" -> "₺450")
+    let sanitizedPrice = itemForm.price?.trim() || "₺0";
+    if (/^\d+(\.\d+)?$/.test(sanitizedPrice)) {
+      sanitizedPrice = `₺${sanitizedPrice}`;
+    } else if (/^\d+(\.\d+)?\s*₺$/.test(sanitizedPrice) || /^\d+(\.\d+)?\s*tl$/i.test(sanitizedPrice)) {
+      const num = sanitizedPrice.match(/\d+(\.\d+)?/)?.[0] || "0";
+      sanitizedPrice = `₺${num}`;
+    }
+
+    const finalItemForm = {
+      ...itemForm,
+      price: sanitizedPrice,
+    };
+
     let updatedItems = [...data.items];
 
     if (isAddingItem) {
-      const slug = itemForm.name
+      const cleanName = itemForm.name
+        .replace(/Ğ/g, "g").replace(/ğ/g, "g")
+        .replace(/Ü/g, "u").replace(/ü/g, "u")
+        .replace(/Ş/g, "s").replace(/ş/g, "s")
+        .replace(/İ/g, "i").replace(/ı/g, "i")
+        .replace(/Ö/g, "o").replace(/ö/g, "o")
+        .replace(/Ç/g, "c").replace(/ç/g, "c");
+      const slug = cleanName
         .toLowerCase()
         .replace(/[^a-z0-9]+/g, "-")
         .replace(/(^-|-$)+/g, "");
@@ -332,22 +353,22 @@ export function AdminDashboard({ initialData }: AdminDashboardProps) {
 
       const newItem: MenuItem = {
         id: finalId,
-        category: itemForm.category!,
-        name: itemForm.name!,
-        description: itemForm.description || "",
-        story: itemForm.story || "",
-        price: itemForm.price || "₺0",
-        priceNote: itemForm.priceNote || undefined,
-        image: itemForm.image || "/images/breakfast-spread.webp",
-        imageAlt: itemForm.imageAlt || `${itemForm.name} görseli`,
-        tags: itemForm.tags || [],
-        details: itemForm.details || [],
+        category: finalItemForm.category!,
+        name: finalItemForm.name!,
+        description: finalItemForm.description || "",
+        story: finalItemForm.story || "",
+        price: finalItemForm.price,
+        priceNote: finalItemForm.priceNote || undefined,
+        image: finalItemForm.image || "/images/breakfast-spread.webp",
+        imageAlt: finalItemForm.imageAlt || `${finalItemForm.name} görseli`,
+        tags: finalItemForm.tags || [],
+        details: finalItemForm.details || [],
       };
 
       updatedItems.push(newItem);
     } else if (editingItem) {
       updatedItems = updatedItems.map((item) =>
-        item.id === editingItem.id ? (itemForm as MenuItem) : item
+        item.id === editingItem.id ? (finalItemForm as MenuItem) : item
       );
     }
 
@@ -420,7 +441,14 @@ export function AdminDashboard({ initialData }: AdminDashboardProps) {
     let updatedCategories = [...data.categories];
 
     if (isAddingCategory) {
-      const categoryId = categoryForm.label
+      const cleanLabel = categoryForm.label!
+        .replace(/Ğ/g, "g").replace(/ğ/g, "g")
+        .replace(/Ü/g, "u").replace(/ü/g, "u")
+        .replace(/Ş/g, "s").replace(/ş/g, "s")
+        .replace(/İ/g, "i").replace(/ı/g, "i")
+        .replace(/Ö/g, "o").replace(/ö/g, "o")
+        .replace(/Ç/g, "c").replace(/ç/g, "c");
+      const categoryId = cleanLabel
         .toLowerCase()
         .replace(/[^a-z0-9]+/g, "")
         .slice(0, 15);
