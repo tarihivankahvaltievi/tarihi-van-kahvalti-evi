@@ -2,7 +2,11 @@
 
 import { type CSSProperties, useCallback, useEffect, useRef, useState } from "react";
 import Image from "next/image";
-import { motion, useReducedMotion } from "framer-motion";
+import {
+  type AnimationPlaybackControls,
+  animateMini,
+  useReducedMotion,
+} from "framer-motion";
 import { ChevronLeft, ChevronRight, X } from "lucide-react";
 
 interface GalleryLightboxProps {
@@ -19,6 +23,8 @@ type GalleryRow = {
 
 export function GalleryLightbox({ gallery }: GalleryLightboxProps) {
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
+  const [isInViewport, setIsInViewport] = useState(false);
+  const galleryRef = useRef<HTMLDivElement>(null);
   const dialogRef = useRef<HTMLDialogElement>(null);
   const prefersReducedMotion = useReducedMotion();
   const getImage = (src: string) => gallery.find(([gallerySrc]) => gallerySrc === src);
@@ -52,6 +58,23 @@ export function GalleryLightbox({ gallery }: GalleryLightboxProps) {
       density: "tall",
     },
   ];
+
+  useEffect(() => {
+    const galleryElement = galleryRef.current;
+    if (!galleryElement) return;
+    if (typeof IntersectionObserver === "undefined") {
+      const visibilityTimer = window.setTimeout(() => setIsInViewport(true), 0);
+      return () => window.clearTimeout(visibilityTimer);
+    }
+
+    const observer = new IntersectionObserver(
+      ([entry]) => setIsInViewport(entry.isIntersecting),
+      { threshold: 0.01 },
+    );
+
+    observer.observe(galleryElement);
+    return () => observer.disconnect();
+  }, []);
 
   const openLightbox = (index: number) => {
     setActiveIndex(index);
@@ -147,7 +170,7 @@ export function GalleryLightbox({ gallery }: GalleryLightboxProps) {
 
   return (
     <>
-      <div className="gallery-hero-shell">
+      <div ref={galleryRef} className="gallery-hero-shell">
         <span className="gallery-ambient gallery-ambient-one" aria-hidden="true" />
         <span className="gallery-ambient gallery-ambient-two" aria-hidden="true" />
         <div className="mosaic gallery-marquee" aria-label="Mekan fotoğrafları">
@@ -158,7 +181,7 @@ export function GalleryLightbox({ gallery }: GalleryLightboxProps) {
               gallery={gallery}
               openLightbox={openLightbox}
               reverse={row.reverse}
-              paused={Boolean(prefersReducedMotion)}
+              paused={Boolean(prefersReducedMotion) || !isInViewport}
               duration={row.duration}
               offset={row.offset}
               density={row.density}
@@ -244,16 +267,51 @@ function GalleryMarqueeRow({
   density: "featured" | "tall";
 }) {
   const marqueeItems = [...items, ...items];
+  const trackRef = useRef<HTMLDivElement>(null);
+  const animationRef = useRef<AnimationPlaybackControls | null>(null);
+  const animationConfigRef = useRef<string | null>(null);
+
+  useEffect(() => {
+    const track = trackRef.current;
+    if (!track) return;
+
+    const animationConfig = `${reverse}:${duration}`;
+    if (animationConfigRef.current !== animationConfig) {
+      animationRef.current?.stop();
+      animationRef.current = animateMini(
+        track,
+        {
+          transform: reverse
+            ? ["translateX(-50%)", "translateX(0%)"]
+            : ["translateX(0%)", "translateX(-50%)"],
+        },
+        { autoplay: !paused, duration, ease: "linear", repeat: Infinity },
+      );
+      animationConfigRef.current = animationConfig;
+      return;
+    }
+
+    if (paused) {
+      animationRef.current?.pause();
+    } else {
+      animationRef.current?.play();
+    }
+  }, [duration, paused, reverse]);
+
+  useEffect(() => () => {
+    animationRef.current?.stop();
+    animationRef.current = null;
+  }, []);
 
   return (
     <div
       className={`gallery-marquee-row gallery-marquee-row-${density}`}
       style={{ "--marquee-offset": offset } as CSSProperties}
     >
-      <motion.div
+      <div
+        ref={trackRef}
         className="gallery-marquee-track"
-        animate={paused ? undefined : { x: reverse ? ["-50%", "0%"] : ["0%", "-50%"] }}
-        transition={paused ? undefined : { duration, ease: "linear", repeat: Infinity }}
+        style={{ transform: reverse ? "translateX(-50%)" : "translateX(0%)" }}
       >
         {marqueeItems.map(([src, alt], index) => {
           const galleryIndex = gallery.findIndex(([gallerySrc]) => gallerySrc === src);
@@ -304,7 +362,7 @@ function GalleryMarqueeRow({
             </button>
           );
         })}
-      </motion.div>
+      </div>
     </div>
   );
 }

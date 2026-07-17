@@ -361,6 +361,7 @@ function IstiklalWebglAtmosphere() {
 export function AnimatedFooter() {
   const footerRef = useRef<HTMLElement>(null);
   const [dingCount, setDingCount] = useState(0);
+  const [isFooterVisible, setIsFooterVisible] = useState(false);
 
   const handleTramClick = () => {
     setDingCount((prev) => prev + 1);
@@ -375,6 +376,23 @@ export function AnimatedFooter() {
       }),
     );
   };
+
+  useEffect(() => {
+    const footer = footerRef.current;
+    if (!footer) return;
+    if (typeof IntersectionObserver === "undefined") {
+      const visibilityTimer = window.setTimeout(() => setIsFooterVisible(true), 0);
+      return () => window.clearTimeout(visibilityTimer);
+    }
+
+    const observer = new IntersectionObserver(
+      ([entry]) => setIsFooterVisible(entry.isIntersecting),
+      { rootMargin: "180px 0px", threshold: 0 },
+    );
+
+    observer.observe(footer);
+    return () => observer.disconnect();
+  }, []);
 
   useEffect(() => {
     const footer = footerRef.current;
@@ -405,6 +423,12 @@ export function AnimatedFooter() {
       footer.style.setProperty("--scroll-ratio", ratio.toString());
     };
 
+    if (typeof IntersectionObserver === "undefined") {
+      window.addEventListener("scroll", handleScroll, { passive: true });
+      handleScroll();
+      return () => window.removeEventListener("scroll", handleScroll);
+    }
+
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -428,7 +452,11 @@ export function AnimatedFooter() {
   }, []);
 
   return (
-    <footer id="footer" ref={footerRef} className="footer-reimagined">
+    <footer
+      id="footer"
+      ref={footerRef}
+      className={`footer-reimagined${isFooterVisible ? " footer-is-visible" : ""}`}
+    >
 
       {/* ─── Premium Live Beyoğlu Illustration ─── */}
       <div className="footer-skyline-wrapper" aria-hidden="true">

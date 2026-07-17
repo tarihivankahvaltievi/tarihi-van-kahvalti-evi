@@ -10,7 +10,7 @@ import {
   useMotionValue,
   useReducedMotion,
 } from "framer-motion";
-import { type CSSProperties, useRef, useSyncExternalStore } from "react";
+import { type CSSProperties, useEffect, useRef, useState, useSyncExternalStore } from "react";
 
 type HeroImage = {
   thumbnail: string;
@@ -144,6 +144,7 @@ export function VanHeroParallax() {
     () => true,
   );
   const prefersReducedMotion = useReducedMotion();
+  const [isHeroVisible, setIsHeroVisible] = useState(true);
 
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
@@ -153,6 +154,22 @@ export function VanHeroParallax() {
     target: ref,
     offset: ["start start", "end start"],
   });
+
+  useEffect(() => {
+    const hero = ref.current;
+    if (!hero) return;
+    if (typeof IntersectionObserver === "undefined") return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsHeroVisible(entry.isIntersecting);
+      },
+      { threshold: 0 },
+    );
+
+    observer.observe(hero);
+    return () => observer.disconnect();
+  }, []);
 
   const spring = isMobile
     ? { stiffness: 92, damping: 30, mass: 1 }
@@ -304,7 +321,7 @@ export function VanHeroParallax() {
   return (
     <section
       ref={ref}
-      className="hero hero-parallax-dining"
+      className={`hero hero-parallax-dining${isHeroVisible ? " hero-is-visible" : ""}`}
       aria-label="Tarihi Van Kahvaltı Evi ana alanı"
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
