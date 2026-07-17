@@ -1399,7 +1399,7 @@ h2 span {
 /* Native Scroll Timeline Overrides */
 
 @keyframes tram-cruise {
-  from { transform: translateX(-190px); }
+  from { transform: translateX(180px); }
   to { transform: translateX(1265px); }
 }
 
@@ -4332,6 +4332,10 @@ h2 span {
 .seagull-1,
 .seagull-2 {
     animation: none !important;
+  }
+
+  .tram-group {
+    transform: translateX(180px) !important;
   }
 }
 
@@ -9570,6 +9574,33 @@ body .mobile-bar .mobile-bar-primary:focus-visible {
 
 .menu-page-shell .nav-menu-glyph span {
   box-shadow: none !important;
+}
+
+/* Keep the shared navigation trigger consistent with the white QR-menu header. */
+.theme-breakfast .nav-menu-button,
+.theme-breakfast .nav.scrolled .nav-menu-button {
+  border: 1px solid #1d1818 !important;
+  background: #ffffff !important;
+  color: #1d1818 !important;
+  box-shadow: 2px 2px 0 rgba(29, 24, 24, 0.22) !important;
+}
+
+.theme-breakfast .nav.menu-open .nav-menu-button {
+  background: #74151d !important;
+  color: #ffffff !important;
+  box-shadow: 2px 2px 0 #1d1818 !important;
+}
+
+.theme-breakfast .nav-menu-glyph span {
+  background: currentColor !important;
+  box-shadow: none !important;
+}
+
+/* The wordmark stays typographic; the former brass underline is intentionally removed. */
+.theme-breakfast .logo-van::after {
+  display: none !important;
+  content: none !important;
+  animation: none !important;
 }
 
 @media (max-width: 760px) {
