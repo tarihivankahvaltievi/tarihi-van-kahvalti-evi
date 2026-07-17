@@ -24,12 +24,23 @@ const iconProps = {
 function AllTableIcon() {
   return (
     <svg {...iconProps}>
-      <circle cx="24" cy="24" r="12.7" />
-      <circle cx="24" cy="24" r="8" opacity=".5" />
-      <path d="M9.2 9.2v9.4M6.8 9.2v6.2c0 2.2 1.1 3.2 2.4 3.2s2.4-1 2.4-3.2V9.2M9.2 18.6v20.2" />
-      <path d="M38.8 22.4v16.4M38.8 22.4c-2.3 0-4.1-2.4-4.1-6.2s1.8-7 4.1-7 4.1 3.2 4.1 7-1.8 6.2-4.1 6.2Z" />
-      <path data-motion="herb" d="M20.1 24.8c2-3 5.1-3.8 7.8-2.1-1.6 3.2-4.8 4.3-7.8 2.1Z" />
-      <path d="M23.3 22.7c-.1-1.4.4-2.6 1.5-3.6" opacity=".75" />
+      {/* Plate concentric circles */}
+      <circle cx="24" cy="24" r="14" />
+      <circle cx="24" cy="24" r="9" opacity="0.4" />
+      <circle cx="24" cy="24" r="5" opacity="0.2" />
+      
+      {/* Fork on the left */}
+      <path d="M7 10v5c0 2 1.3 3 3 3s3-1 3-3v-5" />
+      <path d="M10 10v8" />
+      <path d="M10 18v16" />
+      
+      {/* Spoon on the right */}
+      <path d="M35 15c0-3.5 2-5.5 5-5.5s5 2 5 5.5c0 4.5-2 7.5-5 7.5s-5-3-5-7.5Z" />
+      <path d="M40 22.5v11.5" />
+      
+      {/* Olive leaf in the center of the plate */}
+      <path data-motion="herb" d="M21 26c1.5-3.5 4.5-3.5 4.5 0s-3 3.5-4.5 0Z" />
+      <path d="M20 28c1-1 2.5-1.5 3.5-1.5" opacity="0.75" />
     </svg>
   );
 }
@@ -37,12 +48,22 @@ function AllTableIcon() {
 function BreakfastPlateIcon() {
   return (
     <svg {...iconProps}>
-      <circle cx="24" cy="24" r="15.2" />
-      <path d="M15.2 17.6c1.1-2.8 4.3-4.1 7-2.7 1.2.6 1.8 1.8 2 3.1.3 1.5 1.5 2.4 1.1 4.2-.5 2.5-3.2 4-6 3.2-3.3-.9-5.5-4.2-4.1-7.8Z" />
-      <circle cx="20.1" cy="20.2" r="2.3" fill="currentColor" stroke="none" />
-      <path d="m27.8 29.7 5.9-9.8 3.7 11.7-9.6-1.9Z" />
-      <circle cx="30.9" cy="27.3" r=".9" fill="currentColor" stroke="none" />
-      <path data-motion="lift" d="M13.5 31.9c3.9 2 7.8 2.2 11.9.7" />
+      {/* Plate */}
+      <circle cx="24" cy="24" r="16" />
+      <circle cx="24" cy="24" r="11" opacity="0.4" />
+      
+      {/* Fried Egg */}
+      <path d="M14 26c-1.5-2.5 0-5.5 2.5-6.5s5 0 6-2 3-1.5 4.5.5 1 4 0 5.5-2 3-4 3-4.5 1.5-6.5.5-1.5-1-2.5-1Z" />
+      <circle cx="20" cy="22" r="2.5" fill="currentColor" stroke="none" />
+      
+      {/* Cheese Wedge */}
+      <path d="M26 23l8-4v9l-8-5Z" />
+      <circle cx="29.5" cy="21.5" r="0.6" fill="currentColor" stroke="none" />
+      <circle cx="31.5" cy="23.5" r="0.6" fill="currentColor" stroke="none" />
+      
+      {/* Olives */}
+      <ellipse cx="20" cy="30" rx="1.2" ry="1.8" transform="rotate(30 20 30)" />
+      <ellipse cx="23.5" cy="31" rx="1.2" ry="1.8" transform="rotate(-30 23.5 31)" />
     </svg>
   );
 }
@@ -50,12 +71,30 @@ function BreakfastPlateIcon() {
 function CopperPanIcon() {
   return (
     <svg {...iconProps}>
-      <path d="m33.4 24.2 7.8-3.1c1.3-.5 2.8.1 3.3 1.4l.2.5c.5 1.3-.1 2.8-1.4 3.3l-8.2 3.2" />
-      <ellipse cx="22.1" cy="29" rx="13.7" ry="8.5" />
-      <path d="M9.2 30.6c1.8 5.2 7.5 8.2 13.8 7.6 5.4-.5 9.8-3.6 11.2-7.8" opacity=".5" />
-      <path d="M15.2 28.5c.5-3.2 3-5.2 5.8-4.6 1 .2 1.7 1 2.2 1.9.6 1.1 1.9 1.4 2.6 2.5 1.1 1.9-.4 4.5-3 4.9-3.6.5-8-1-7.6-4.7Z" />
-      <circle cx="20.8" cy="28.8" r="2.3" fill="currentColor" stroke="none" />
-      <path data-motion="sizzle" d="M16.7 13.7c1.4 1.4 1.4 2.9 0 4.3M24 10.4c1.5 1.6 1.5 3.2.1 4.8" />
+      {/* Sahan Outer Body */}
+      <circle cx="24" cy="25" r="13" />
+      {/* Sahan Inner Cooking Rim */}
+      <circle cx="24" cy="25" r="10.5" opacity="0.4" />
+      
+      {/* Left loop handle */}
+      <path d="M11 21.5c-3.5 0-6 2-6 4s2.5 4 6 4" />
+      <path d="M11 23v4" opacity="0.7" />
+      
+      {/* Right loop handle */}
+      <path d="M37 21.5c3.5 0 6 2 6 4s-2.5 4-6 4" />
+      <path d="M37 23v4" opacity="0.7" />
+      
+      {/* Two Eggs inside */}
+      {/* Egg 1 */}
+      <path d="M17.5 28.5c-1-1 0-2.5 1.2-3s2.2.2 2.5 1.2 0 1.8-1.2 2.2-1.5.6-2.5-.4Z" />
+      <circle cx="19.5" cy="27" r="1.5" fill="currentColor" stroke="none" />
+      
+      {/* Egg 2 */}
+      <path d="M24.5 23.5c-1-1 0-2.5 1.2-3s2.2.2 2.5 1.2 0 1.8-1.2 2.2-1.5.6-2.5-.4Z" />
+      <circle cx="26.5" cy="22" r="1.5" fill="currentColor" stroke="none" />
+      
+      {/* Steam lines */}
+      <path data-motion="sizzle" d="M21 9c-.5-1.5.5-3 0-4.5M27 9c.5-1.5-.5-3 0-4.5" />
     </svg>
   );
 }
@@ -63,14 +102,22 @@ function CopperPanIcon() {
 function JamBowlIcon() {
   return (
     <svg {...iconProps}>
-      <path d="m27.7 22.6 8.5-11.4c.9-1.2 2.6-1.4 3.8-.5l.4.3c1.2.9 1.4 2.6.5 3.8l-8.6 11.5" />
-      <ellipse cx="22.5" cy="25.1" rx="13.8" ry="4.7" />
-      <path d="M9.3 26.4c1.4 7.7 6.1 12.2 13.2 12.2s11.8-4.5 13.2-12.2" />
-      <path d="M13.1 24.4c5.8-2.1 12.7-2.1 18.5 0" opacity=".55" />
-      <circle cx="19.6" cy="25.1" r="2.1" fill="currentColor" stroke="none" />
-      <circle cx="24.2" cy="26" r="2.1" fill="currentColor" stroke="none" />
-      <path data-motion="herb" d="M21.7 22.4c.4-2.5 1.8-4.2 4.2-5.1" />
-      <path d="M14.2 38.8h16.6" />
+      {/* Jar lid */}
+      <rect x="17" y="11" width="14" height="4" rx="1" />
+      <path d="M19 15v2h10v-2" />
+      
+      {/* Jar Body */}
+      <path d="M19 17c-2.5 0-4 1.5-4 4v12c0 2.5 2 4.5 4.5 4.5h11c2.5 0 4.5-2 4.5-4.5V21c0-2.5-1.5-4-4-4H19Z" />
+      
+      {/* Jar Label */}
+      <rect x="19" y="22" width="10" height="7" rx="0.5" opacity="0.8" />
+      {/* Berry inside label */}
+      <circle cx="24" cy="25.5" r="1.2" fill="currentColor" stroke="none" />
+      <path d="M24 23.5v1" opacity="0.8" />
+      
+      {/* Spoon inside jar */}
+      <path d="M28 17l4.5-5.5" />
+      <path d="M27.5 19.5l-2.5 2.5" opacity="0.5" />
     </svg>
   );
 }
@@ -78,14 +125,25 @@ function JamBowlIcon() {
 function VanCheeseIcon() {
   return (
     <svg {...iconProps}>
-      <path d="m8.7 21.4 14.4-10 16.2 7.4-14.5 10-16.1-7.4Z" />
-      <path d="M8.7 21.4v10.8l16.1 7.4V28.8L8.7 21.4Z" />
-      <path d="m24.8 28.8 14.5-10v10.8l-14.5 10V28.8Z" />
-      <ellipse cx="23.6" cy="18.5" rx="2.3" ry="1.4" />
-      <ellipse cx="32.2" cy="21.5" rx="1.8" ry="1.1" />
-      <path data-motion="herb" d="M12.4 27.2c3.1-.2 5.1 1.1 6.1 3.8-3.1.4-5.2-.9-6.1-3.8Z" />
-      <path d="M18.2 30.8c1.5 1 2.5 2.4 3 4.1" opacity=".75" />
-      <circle cx="32.7" cy="31.8" r="1.2" fill="currentColor" stroke="none" />
+      {/* Van Ketesi (Round flatbread) */}
+      <circle cx="18" cy="28" r="9.5" />
+      {/* Decorative patterns on Kete */}
+      <path d="M12 28h12M18 22v12" strokeDasharray="1.5,2" opacity="0.8" />
+      <path d="M13.7 23.7l8.6 8.6M13.7 32.3l8.6-8.6" strokeDasharray="1.5,2" opacity="0.8" />
+      
+      {/* Herbed Cheese Block */}
+      {/* Top Face */}
+      <path d="M26 23l5-3.5 7.5 2.5-5 3.5-7.5-2.5Z" />
+      {/* Left Face */}
+      <path d="M26 23v9.5l7.5 2.5v-9.5Z" />
+      {/* Right Face */}
+      <path d="M33.5 25.5v9.5l5-3.5v-9.5Z" />
+      
+      {/* Herb flecks (sirmo herbs) in cheese */}
+      <path data-motion="herb" d="M28 28c.5-.5.5-1 0-1.5" opacity="0.8" />
+      <path d="M35 27c.4.4.4 1 0 1.4" opacity="0.8" />
+      <circle cx="30" cy="32" r="0.6" fill="currentColor" stroke="none" />
+      <circle cx="36" cy="29" r="0.6" fill="currentColor" stroke="none" />
     </svg>
   );
 }
@@ -93,12 +151,24 @@ function VanCheeseIcon() {
 function TurkishTeaIcon() {
   return (
     <svg {...iconProps}>
-      <path data-motion="steam" d="M19.4 11.7c-2-2.4 1.8-3.6.1-6M27.8 11.7c2-2.4-1.8-3.6-.1-6" />
-      <path d="M15.1 14.8h17.8" />
-      <path d="M17.2 14.8c.4 5 2.6 6.1 2.6 9.1 0 3.1-1.7 4.1-2 9.8-.1 2.2 1.6 4 3.8 4h4.8c2.2 0 3.9-1.8 3.8-4-.3-5.7-2-6.7-2-9.8 0-3 2.2-4.1 2.6-9.1" />
-      <path d="M19.4 25.5c2.9.9 6.3.9 9.2 0M16.3 38.6h15.4" />
-      <path d="M20 30.1h8" opacity=".55" />
-      <ellipse cx="24" cy="40.5" rx="11.4" ry="2.1" />
+      {/* Steam lines */}
+      <path data-motion="steam" d="M21 11c0-1.8-1-3 0-4.5s1-3 0-4.5M27 11c0-1.8 1-3 0-4.5s-1-3 0-4.5" />
+      
+      {/* Tea Glass upper rim */}
+      <ellipse cx="24" cy="13" rx="8" ry="1.8" />
+      
+      {/* Tea Glass body */}
+      <path d="M16 13c0 3 2.5 6.5 2.5 10s-2.5 7.5-3.5 10.5c0 2.5 2 4.5 4.5 4.5h9c2.5 0 4.5-2 4.5-4.5c-1-3-3.5-7-3.5-10.5s2.5-7 2.5-10" />
+      
+      {/* Saucer */}
+      <ellipse cx="24" cy="39" rx="14" ry="2.8" />
+      <path d="M10 39c0 1.5 6 3 14 3s14-1.5 14-3" />
+      
+      {/* Tea liquid lines */}
+      <ellipse cx="24" cy="23.5" rx="5.9" ry="1.2" opacity="0.6" />
+      <path d="M18.2 24.5c0 4.5-1.7 6.5-1.7 9 0 2 1.5 3.5 3 4" opacity="0.75" />
+      <path d="M29.8 24.5c0 4.5 1.7 6.5 1.7 9 0 2-1.5 3.5-3 4" opacity="0.75" />
+      <path d="M18.2 24.5h11.6" opacity="0.5" />
     </svg>
   );
 }
@@ -106,15 +176,27 @@ function TurkishTeaIcon() {
 function ColdDrinkIcon() {
   return (
     <svg {...iconProps}>
-      <path d="M14.7 14.2h18.1l-1.9 22.1c-.2 2-1.8 3.5-3.8 3.5h-6.7c-2 0-3.6-1.5-3.8-3.5l-1.9-22.1Z" />
-      <path d="M12.8 14.2h21.9M29.2 5.8l-4.6 15.1" />
-      <path d="M17 22.1c4.3-1.2 9-1.2 13.3 0" opacity=".55" />
-      <g data-motion="ice">
-        <path d="m19.3 25.2 4.1-1.3 1.3 4.1-4.1 1.3-1.3-4.1Z" />
-        <path d="m25.8 31.5 3.3-1 1 3.3-3.3 1-1-3.3Z" />
-      </g>
-      <circle cx="35" cy="19.8" r="5.2" />
-      <path d="m31.3 16.1 7.4 7.4M35 14.6v10.5" />
+      {/* Tall Tumbler Glass */}
+      <ellipse cx="24" cy="14" rx="10" ry="2" />
+      <path d="M14 14l3 23c.2 2 1.8 3.5 3.8 3.5h6.4c2 0 3.6-1.5 3.8-3.5l3-23" />
+      
+      {/* Liquid level */}
+      <ellipse cx="24" cy="19" rx="9.3" ry="1.8" opacity="0.5" />
+      
+      {/* Straw */}
+      {/* Inner part inside the glass */}
+      <path d="M22 20l-4 15" opacity="0.75" />
+      {/* Outer part rising above the rim */}
+      <path d="M22.5 18l3.5-12.5 4-2" />
+      
+      {/* Ice Cubes */}
+      <path d="M17 26l3.5-1.2 1.2 3.5-3.5 1.2Z" opacity="0.85" />
+      <path d="M22.5 31l3-1 1 3-3 1Z" opacity="0.85" />
+      
+      {/* Lemon Wheel on Rim */}
+      <circle cx="31.5" cy="15.5" r="4.5" />
+      <path d="M31.5 11v9M27 15.5h9" opacity="0.6" />
+      <path d="M28.3 12.3l6.4 6.4M28.3 18.7l6.4-6.4" opacity="0.6" />
     </svg>
   );
 }
