@@ -31,67 +31,180 @@
 
 .menuHero {
   display: grid;
-  min-height: 218px;
+  grid-template-columns: minmax(0, 1fr) minmax(420px, 1fr);
+  min-height: clamp(390px, 38vw, 510px);
   margin-top: 72px;
-  padding: clamp(2.25rem, 5vw, 4.3rem) max(1.25rem, calc((100% - 1160px) / 2));
-  place-items: center;
+  overflow: hidden;
   border-bottom: 1px solid var(--menu-line);
-  background: #ffffff;
-  text-align: center;
+  background: var(--menu-burgundy);
 }
 
 .heroContent {
   display: grid;
-  justify-items: center;
+  align-content: center;
+  justify-items: start;
+  padding: clamp(2.8rem, 5vw, 5.4rem) clamp(2rem, 5vw, 5rem) clamp(2.8rem, 5vw, 5.4rem) max(1.5rem, calc((100vw - 1160px) / 2));
+  color: var(--menu-on-burgundy);
+}
+
+.heroEdition {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  margin-bottom: clamp(1.1rem, 2vw, 1.65rem);
+  color: rgba(255, 255, 255, 0.78);
+  font-size: 0.74rem;
+  font-weight: 760;
+  letter-spacing: 0.06em;
+}
+
+.heroEdition span + span {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+}
+
+.heroEdition span + span::before {
+  width: 26px;
+  height: 1px;
+  background: currentColor;
+  content: "";
 }
 
 .heroContent h1 {
   display: grid;
+  gap: 0.7rem;
+  max-width: none;
   margin: 0;
-  justify-items: center;
-  color: var(--menu-ink);
+  color: var(--menu-on-burgundy);
   font-family: var(--font-bricolage-grotesque-gf), Arial, sans-serif;
   font-optical-sizing: auto;
   font-weight: 760;
-  letter-spacing: -0.035em;
-  line-height: 0.92;
   text-wrap: balance;
 }
 
 .heroBrand {
-  font-size: clamp(2.45rem, 5.8vw, 4.8rem);
+  max-width: 10ch;
+  color: var(--menu-on-burgundy);
+  font-size: clamp(3.15rem, 5.6vw, 5.7rem);
+  font-weight: 790;
+  letter-spacing: -0.04em;
+  line-height: 0.88;
 }
 
 .heroMenu {
-  position: relative;
-  display: grid;
-  grid-template-columns: 2.4rem auto 2.4rem;
-  align-items: center;
-  gap: 0.7rem;
-  margin-top: 0.65rem;
-  color: var(--menu-burgundy);
-  font-size: clamp(0.88rem, 1.5vw, 1.05rem);
-  font-weight: 780;
-  letter-spacing: 0.14em;
+  width: fit-content;
+  padding-bottom: 0.35rem;
+  border-bottom: 3px solid var(--menu-brass);
+  color: rgba(255, 255, 255, 0.78);
+  font-size: clamp(0.78rem, 1.1vw, 0.94rem);
+  font-weight: 800;
+  letter-spacing: 0.18em;
   line-height: 1;
   text-transform: uppercase;
 }
 
-.heroMenu::before,
-.heroMenu::after {
-  display: block;
-  width: 100%;
-  height: 2px;
-  background: var(--menu-brass);
+.heroContent p {
+  max-width: 48ch;
+  margin: clamp(1.3rem, 2.2vw, 1.9rem) 0 0;
+  color: rgba(255, 255, 255, 0.78);
+  font-size: clamp(0.9rem, 1.2vw, 1.05rem);
+  font-weight: 560;
+  line-height: 1.55;
+  text-wrap: pretty;
+}
+
+.heroActions {
+  display: flex;
+  align-items: center;
+  gap: clamp(1rem, 2vw, 1.5rem);
+  margin-top: clamp(1.35rem, 2.5vw, 2rem);
+}
+
+.heroActions a {
+  display: inline-flex;
+  min-height: 46px;
+  align-items: center;
+  justify-content: center;
+  gap: 0.65rem;
+  padding: 0.72rem 0.9rem;
+  border: 1px solid #ffffff;
+  border-radius: 7px;
+  background: #ffffff;
+  color: var(--menu-burgundy);
+  font-size: 0.8rem;
+  font-weight: 790;
+  text-decoration: none;
+  transition: background-color 160ms ease, color 160ms ease, transform 160ms var(--menu-ease);
+}
+
+.heroActions a:focus-visible {
+  outline: 3px solid var(--menu-brass);
+  outline-offset: 4px;
+}
+
+.heroActions > span {
+  color: rgba(255, 255, 255, 0.78);
+  font-size: 0.73rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.heroMedia {
+  position: relative;
+  min-width: 0;
+  min-height: 100%;
+  overflow: hidden;
+  background: var(--menu-line);
+}
+
+.heroMedia::after {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, rgba(84, 16, 24, 0.3), transparent 24%, transparent 62%, rgba(29, 24, 24, 0.18));
   content: "";
 }
 
-.heroContent p {
-  margin: 0.8rem 0 0;
-  color: var(--menu-muted);
-  font-size: 0.9rem;
-  font-weight: 560;
-  line-height: 1.4;
+.heroMedia img {
+  object-fit: cover;
+  object-position: 50% 48%;
+  transform: scale(1.015);
+  animation: hero-table-arrive 900ms var(--menu-ease) both;
+}
+
+.heroImageNote {
+  position: absolute;
+  right: clamp(1rem, 3vw, 2rem);
+  bottom: clamp(1rem, 3vw, 2rem);
+  z-index: 2;
+  display: grid;
+  max-width: 19rem;
+  gap: 0.2rem;
+  padding: 0.78rem 0.9rem;
+  border: 1px solid var(--menu-line);
+  border-radius: 8px;
+  background: #ffffff;
+  box-shadow: 3px 3px 0 var(--menu-line);
+  color: var(--menu-ink);
+}
+
+.heroImageNote span {
+  color: var(--menu-burgundy);
+  font-size: 0.64rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.heroImageNote strong {
+  font-family: var(--font-bricolage-grotesque-gf), Arial, sans-serif;
+  font-size: 1rem;
+  line-height: 1.05;
+}
+
+@keyframes hero-table-arrive {
+  from { opacity: 0.72; transform: scale(1.08); }
+  to { opacity: 1; transform: scale(1.015); }
 }
 
 .discoveryBar {
@@ -199,11 +312,11 @@
 .categoryNav {
   display: flex;
   min-width: 0;
-  align-items: start;
-  gap: clamp(0.4rem, 1.35vw, 1.05rem);
+  align-items: stretch;
+  gap: 0.45rem;
   overflow-x: auto;
   overscroll-behavior-inline: contain;
-  padding: 0.08rem 0.2rem 0.28rem;
+  padding: 0.08rem 0.2rem 0.2rem;
   scroll-padding-inline: 0.2rem;
   scroll-snap-type: inline proximity;
   scrollbar-width: none;
@@ -218,98 +331,73 @@
 
 .categoryNav button {
   position: relative;
-  display: flex;
-  width: 84px;
-  min-height: 86px;
-  flex: 0 0 84px;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: 38px minmax(0, 1fr);
+  width: 152px;
+  min-height: 58px;
+  flex: 1 0 138px;
   align-items: center;
-  gap: 0.34rem;
-  padding: 0;
-  border: 0;
-  background: transparent;
+  gap: 0.55rem;
+  padding: 0.5rem 0.62rem;
+  border: 1px solid var(--menu-line-soft);
+  border-radius: 8px;
+  background: #ffffff;
   color: var(--menu-ink);
   scroll-snap-align: start;
   -webkit-tap-highlight-color: transparent;
+  transition: background-color 180ms ease, border-color 180ms ease, color 180ms ease, box-shadow 220ms var(--menu-ease), transform 180ms var(--menu-ease);
   animation: category-arrive 440ms var(--menu-ease) both;
 }
 
 .categoryIconWell {
   position: relative;
   display: grid;
-  width: 62px;
-  height: 62px;
-  flex: 0 0 62px;
+  width: 38px;
+  height: 38px;
   place-items: center;
-  border: 1px solid color-mix(in srgb, var(--menu-burgundy) 42%, var(--menu-line-soft));
-  border-radius: 50%;
-  background: #ffffff;
-  box-shadow: 0 2px 0 color-mix(in srgb, var(--menu-line) 9%, transparent);
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
   color: var(--menu-burgundy);
-  transition:
-    color 180ms ease,
-    background-color 220ms ease,
-    border-color 180ms ease,
-    box-shadow 220ms var(--menu-ease),
-    transform 220ms var(--menu-ease);
-}
-
-.categoryIconWell::after {
-  position: absolute;
-  inset: -5px;
-  border: 1px solid color-mix(in srgb, var(--menu-brass) 68%, transparent);
-  border-radius: 50%;
-  content: "";
-  opacity: 0;
-  transform: scale(0.84) rotate(-12deg);
-  transition: opacity 220ms ease, transform 420ms var(--menu-ease);
+  transition: filter 180ms ease, transform 220ms var(--menu-ease);
 }
 
 .categoryIconWell img {
-  width: 39px;
-  height: 39px;
+  width: 34px;
+  height: 34px;
   object-fit: contain;
 }
 
 .categoryLabel {
   display: block;
-  max-width: 84px;
+  max-width: 10ch;
   color: inherit;
-  font-size: 0.7rem;
-  font-weight: 690;
+  font-size: 0.72rem;
+  font-weight: 730;
   letter-spacing: -0.012em;
-  line-height: 1.05;
-  text-align: center;
+  line-height: 1.08;
+  text-align: left;
   text-wrap: balance;
-  transition: color 180ms ease, transform 220ms var(--menu-ease);
+  transition: color 180ms ease;
 }
 
 .categoryNav button.activeCategory {
-  color: var(--menu-burgundy);
+  border-color: var(--menu-line);
+  background: var(--menu-burgundy);
+  box-shadow: 2px 2px 0 var(--menu-line);
+  color: #ffffff;
 }
 
 .categoryNav button.activeCategory .categoryIconWell {
-  border-color: var(--menu-burgundy);
-  background: var(--menu-surface-soft);
-  box-shadow: 3px 3px 0 var(--menu-line);
-  color: var(--menu-burgundy);
-  transform: translateY(-2px);
-}
-
-.categoryNav button.activeCategory .categoryIconWell::after {
-  opacity: 1;
-  transform: scale(1) rotate(0deg);
-}
-
-.categoryNav button.activeCategory .categoryLabel {
-  transform: translateY(-1px);
+  filter: brightness(0) invert(1);
 }
 
 .categoryNav button:focus-visible {
-  outline: none;
+  outline: 3px solid var(--menu-brass);
+  outline-offset: 3px;
 }
 
-.categoryNav button:focus-visible .categoryIconWell,
 .searchField button:focus-visible {
   outline: 3px solid var(--menu-brass);
   outline-offset: 3px;
@@ -320,8 +408,7 @@
 }
 
 .categoryNav button:active .categoryIconWell {
-  box-shadow: none;
-  transform: translate(2px, 2px);
+  transform: scale(0.94);
 }
 
 @keyframes category-arrive {
@@ -371,6 +458,7 @@
 }
 
 .sectionHeader {
+  position: relative;
   display: flex;
   align-items: end;
   justify-content: space-between;
@@ -378,6 +466,16 @@
   margin-bottom: 1rem;
   padding-bottom: 0.88rem;
   border-bottom: 1px solid var(--menu-line);
+}
+
+.sectionHeader::after {
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  width: clamp(3.8rem, 8vw, 6.5rem);
+  height: 4px;
+  background: var(--menu-burgundy);
+  content: "";
 }
 
 .sectionHeader h2 {
@@ -874,18 +972,27 @@
 }
 
 @media (hover: hover) and (pointer: fine) {
-  .categoryNav button:hover {
-    color: var(--menu-burgundy);
-  }
-
-  .categoryNav button:hover .categoryIconWell {
-    border-color: var(--menu-burgundy);
-    box-shadow: 4px 4px 0 var(--menu-line-soft);
+  .heroActions a:hover {
+    background: var(--menu-surface-soft);
+    color: var(--menu-burgundy-deep);
     transform: translateY(-2px);
   }
 
-  .categoryNav button.activeCategory:hover .categoryIconWell {
-    box-shadow: 4px 4px 0 var(--menu-line);
+  .categoryNav button:hover {
+    border-color: var(--menu-burgundy);
+    color: var(--menu-burgundy);
+    box-shadow: 2px 2px 0 var(--menu-line-soft);
+    transform: translateY(-2px);
+  }
+
+  .categoryNav button:hover .categoryIconWell {
+    transform: scale(1.06);
+  }
+
+  .categoryNav button.activeCategory:hover {
+    background: var(--menu-burgundy-deep);
+    color: #ffffff;
+    box-shadow: 3px 3px 0 var(--menu-line);
   }
 
   .menuCard:hover {
@@ -936,34 +1043,91 @@
   }
 
   .menuHero {
+    grid-template-columns: 1fr;
     min-height: 0;
     margin-top: 72px;
-    padding: 1.45rem 1rem 1.35rem;
+  }
+
+  .heroMedia {
+    order: -1;
+    min-height: 185px;
+  }
+
+  .heroMedia::after {
+    background: linear-gradient(180deg, transparent 46%, rgba(29, 24, 24, 0.28));
+  }
+
+  .heroMedia img {
+    object-position: 50% 44%;
+  }
+
+  .heroImageNote {
+    right: 0.75rem;
+    bottom: 0.75rem;
+    max-width: 12.5rem;
+    gap: 0.12rem;
+    padding: 0.55rem 0.65rem;
+    border-radius: 6px;
+    box-shadow: 2px 2px 0 var(--menu-line);
+  }
+
+  .heroImageNote span {
+    font-size: 0.55rem;
+  }
+
+  .heroImageNote strong {
+    font-size: 0.78rem;
+  }
+
+  .heroContent {
+    padding: 1.25rem 1rem 1.4rem;
+  }
+
+  .heroEdition {
+    margin-bottom: 0.75rem;
+    font-size: 0.63rem;
   }
 
   .heroContent h1 {
-    width: min(100%, 20.5rem);
-    letter-spacing: -0.03em;
-    line-height: 0.93;
+    width: min(100%, 22rem);
+    gap: 0.48rem;
   }
 
   .heroBrand {
-    max-width: 9.8em;
-    font-size: clamp(1.92rem, 8.8vw, 2.5rem);
+    max-width: 11ch;
+    font-size: clamp(2.25rem, 10.5vw, 3.05rem);
+    letter-spacing: -0.038em;
+    line-height: 0.9;
   }
 
   .heroMenu {
-    grid-template-columns: 1.8rem auto 1.8rem;
-    gap: 0.55rem;
-    margin-top: 0.7rem;
-    font-size: 0.76rem;
-    letter-spacing: 0.15em;
+    padding-bottom: 0.26rem;
+    border-bottom-width: 2px;
+    font-size: 0.68rem;
+    letter-spacing: 0.17em;
   }
 
   .heroContent p {
-    margin-top: 0.72rem;
-    font-size: 0.76rem;
-    font-weight: 600;
+    max-width: 42ch;
+    margin-top: 0.85rem;
+    font-size: 0.78rem;
+    font-weight: 570;
+    line-height: 1.45;
+  }
+
+  .heroActions {
+    gap: 0.85rem;
+    margin-top: 0.95rem;
+  }
+
+  .heroActions a {
+    min-height: 42px;
+    padding: 0.62rem 0.75rem;
+    font-size: 0.73rem;
+  }
+
+  .heroActions > span {
+    font-size: 0.64rem;
   }
 
   .discoveryBar {
@@ -1027,28 +1191,48 @@
   }
 
   .categoryNav button {
-    width: 70px;
-    min-height: 72px;
-    flex-basis: 70px;
-    gap: 0.28rem;
+    grid-template-columns: 32px minmax(0, 1fr);
+    width: 126px;
+    min-height: 52px;
+    flex: 0 0 126px;
+    gap: 0.38rem;
+    padding: 0.38rem 0.46rem;
+    border-radius: 7px;
   }
 
   .categoryIconWell {
-    width: 50px;
-    height: 50px;
-    flex-basis: 50px;
-    box-shadow: 2px 2px 0 color-mix(in srgb, var(--menu-line) 10%, transparent);
-  }
-
-  .categoryIconWell img {
     width: 32px;
     height: 32px;
   }
 
+  .categoryIconWell img {
+    width: 29px;
+    height: 29px;
+  }
+
   .categoryLabel {
-    max-width: 70px;
-    font-size: 0.68rem;
+    max-width: 9ch;
+    font-size: 0.66rem;
     line-height: 1.08;
+    text-align: left;
+  }
+
+  .discoveryPinned:not(.discoveryWithSearch) .discoveryInner {
+    padding-block: 0.38rem;
+  }
+
+  .discoveryPinned:not(.discoveryWithSearch) .categoryNav button {
+    min-height: 46px;
+  }
+
+  .discoveryPinned:not(.discoveryWithSearch) .categoryIconWell {
+    width: 28px;
+    height: 28px;
+  }
+
+  .discoveryPinned:not(.discoveryWithSearch) .categoryIconWell img {
+    width: 26px;
+    height: 26px;
   }
 
   .menuContainer {
@@ -1118,7 +1302,8 @@
   }
 
   .spotlightCard {
-    min-height: 158px;
+    grid-template-columns: minmax(132px, 40%) minmax(0, 1fr);
+    min-height: 172px;
     border-color: var(--menu-burgundy);
     box-shadow: 3px 3px 0 var(--menu-line);
   }
@@ -1260,18 +1445,21 @@
   }
 
   .categoryNav button {
-    width: 66px;
-    flex-basis: 66px;
+    width: 116px;
+    flex-basis: 116px;
   }
 
   .categoryLabel {
-    max-width: 66px;
-    font-size: 0.65rem;
+    max-width: 8ch;
+    font-size: 0.62rem;
   }
 
-  .menuCard,
-  .spotlightCard {
+  .menuCard {
     grid-template-columns: 108px minmax(0, 1fr);
+  }
+
+  .spotlightCard {
+    grid-template-columns: 122px minmax(0, 1fr);
   }
 
   .cardDescription,
