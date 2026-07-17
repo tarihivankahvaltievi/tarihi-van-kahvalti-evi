@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowDown, ChevronRight, Search, X } from "lucide-react";
+import { ChevronRight, Search, X } from "lucide-react";
 import dynamic from "next/dynamic";
 import Image from "next/image";
 import { memo, useCallback, useDeferredValue, useEffect, useMemo, useRef, useState } from "react";
@@ -308,37 +308,11 @@ export function MenuExperience({
     <main id="main-content" className={styles.page}>
       <section ref={heroRef} className={styles.menuHero} aria-labelledby="menu-page-title">
         <div className={styles.heroContent}>
-          <div className={styles.heroEdition} aria-label="1978'den beri Beyoğlu'nda">
-            <span>1978’den beri</span>
-            <span>Beyoğlu</span>
-          </div>
           <h1 id="menu-page-title">
+            <span className={styles.heroBrand}>Tarihi Van Kahvaltı Evi</span>
             <span className={styles.heroMenu}>Menü</span>
-            <span className={styles.heroBrand}>Van sofrası,<br />aceleye gelmez.</span>
           </h1>
-          <p>Günlük hazırlanan kahvaltılıklar, mutfaktan sıcak çıkan bakır sahanlar ve Van’dan gelen imza lezzetler.</p>
-          <div className={styles.heroActions}>
-            <a href="#menu-catalog">
-              Sofrayı keşfet
-              <ArrowDown size={18} aria-hidden="true" />
-            </a>
-            <span>Her gün 08.00—18.00</span>
-          </div>
-        </div>
-
-        <div className={styles.heroMedia} aria-hidden="true">
-          <Image
-            src="/images/breakfast-spread.webp"
-            alt=""
-            fill
-            sizes="(max-width: 760px) 100vw, 50vw"
-            quality={82}
-            priority
-          />
-          <div className={styles.heroImageNote}>
-            <span>İmza sofra</span>
-            <strong>Geleneksel Van Kahvaltısı</strong>
-          </div>
+          <p>Günlük hazırlanan lezzetler ve güncel fiyatlar</p>
         </div>
       </section>
 
