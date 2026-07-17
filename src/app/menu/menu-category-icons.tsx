@@ -1,4 +1,4 @@
-import { CookingPot, CupSoda, EggFried, MapPin, Utensils } from "lucide-react";
+import { Coffee, CupSoda, EggFried, MapPin, Soup, Utensils } from "lucide-react";
 
 type MenuCategoryIconName =
   | "all"
@@ -42,18 +42,6 @@ function JamJarIcon() {
   );
 }
 
-function TurkishTeaIcon() {
-  return (
-    <svg {...customIconProps}>
-      <path d="M12 3.8c-.75-.8-.75-1.6 0-2.4" />
-      <path d="M7.25 5.5h9.5" />
-      <path d="M7.7 5.5c.2 3.25 2.05 4.45 2.05 7.15 0 2.15-1.55 3.8-1.55 5.2 0 1.2.9 2.15 2.1 2.15h3.4c1.2 0 2.1-.95 2.1-2.15 0-1.4-1.55-3.05-1.55-5.2 0-2.7 1.85-3.9 2.05-7.15" />
-      <path d="M9.45 13.1c1.65.65 3.45.65 5.1 0" />
-      <path d="M5.2 20.35h13.6" />
-    </svg>
-  );
-}
-
 /**
  * Menu-category pictograms use one 24px outline system: a single subject,
  * consistent optical stroke weight, and no decorative texture at small sizes.
@@ -61,9 +49,9 @@ function TurkishTeaIcon() {
 export function MenuCategoryIcon({ name }: { name: MenuCategoryIconName }) {
   if (name === "all") return <Utensils {...libraryIconProps} />;
   if (name === "breakfast") return <EggFried {...libraryIconProps} />;
-  if (name === "pan") return <CookingPot {...libraryIconProps} />;
+  if (name === "pan") return <Soup {...libraryIconProps} />;
   if (name === "jam") return <JamJarIcon />;
   if (name === "van") return <MapPin {...libraryIconProps} />;
-  if (name === "hot-drink") return <TurkishTeaIcon />;
+  if (name === "hot-drink") return <Coffee {...libraryIconProps} />;
   return <CupSoda {...libraryIconProps} />;
 }
