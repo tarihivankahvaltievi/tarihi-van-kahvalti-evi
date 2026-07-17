@@ -107,18 +107,25 @@ export async function getMenuData(): Promise<MenuData> {
 }
 
 export async function saveMenuData(data: MenuData): Promise<boolean> {
-  let supabaseSuccess = true;
-
   if (isSupabaseConfigured()) {
-    supabaseSuccess = await saveToSupabase(data);
+    const supabaseSuccess = await saveToSupabase(data);
+    // Try to write locally as well for backup/dev, but ignore errors on read-only systems
+    try {
+      const filePath = getLocalFilePath();
+      const formattedJson = JSON.stringify(data, null, 2);
+      await fs.writeFile(filePath, formattedJson, "utf-8");
+    } catch (error) {
+      // Ignore read-only filesystem errors on Vercel/serverless
+    }
+    return supabaseSuccess;
   }
 
-  // Always write locally as well for backup/dev
+  // Local only flow
   try {
     const filePath = getLocalFilePath();
     const formattedJson = JSON.stringify(data, null, 2);
     await fs.writeFile(filePath, formattedJson, "utf-8");
-    return supabaseSuccess;
+    return true;
   } catch (error) {
     console.error("Error writing local menu-data.json:", error);
     return false;
