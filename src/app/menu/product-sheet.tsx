@@ -1,5 +1,6 @@
 "use client";
 
+import { motion, useReducedMotion } from "framer-motion";
 import { Check, ChevronRight, X } from "lucide-react";
 import Image from "next/image";
 import { createPortal } from "react-dom";
@@ -7,7 +8,10 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import styles from "./menu.module.css";
 import { menuCategories, type MenuItem } from "./menu-data";
 
+const ease = [0.16, 1, 0.3, 1] as const;
+
 export function ProductSheet({ item, onClose }: { item: MenuItem; onClose: () => void }) {
+  const reduceMotion = useReducedMotion();
   const sheetRef = useRef<HTMLDivElement>(null);
   const closeRef = useRef<HTMLButtonElement>(null);
   const [isClosing, setIsClosing] = useState(false);
@@ -55,32 +59,31 @@ export function ProductSheet({ item, onClose }: { item: MenuItem; onClose: () =>
     };
   }, [requestClose]);
 
-  useEffect(() => {
-    if (!isClosing) return;
-
-    // The timer is a safety net for browsers that suppress transitionend
-    // while an entrance animation is handing control back to the element.
-    const closeTimer = window.setTimeout(onClose, 320);
-    return () => window.clearTimeout(closeTimer);
-  }, [isClosing, onClose]);
-
   const category = menuCategories.find((entry) => entry.id === item.category);
+  const duration = reduceMotion ? 0 : 0.3;
+
   return createPortal(
-    <div className={styles.sheetLayer} data-closing={isClosing || undefined}>
-      <button
+    <div className={styles.sheetLayer}>
+      <motion.button
         type="button"
         className={styles.overlayBackdrop}
         aria-label="Ürün ayrıntılarını kapat"
         onClick={requestClose}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: isClosing ? 0 : 1 }}
+        transition={{ duration: reduceMotion ? 0 : 0.2 }}
       />
-      <div
+      <motion.div
         ref={sheetRef}
         className={styles.productSheet}
         role="dialog"
         aria-modal="true"
         aria-labelledby="product-sheet-title"
-        onTransitionEnd={(event) => {
-          if (isClosing && event.target === event.currentTarget && event.propertyName === "opacity") onClose();
+        initial={reduceMotion ? false : { y: 28, opacity: 0, scale: 0.99 }}
+        animate={isClosing ? { y: 22, opacity: 0, scale: 0.995 } : { y: 0, opacity: 1, scale: 1 }}
+        transition={{ duration, ease }}
+        onAnimationComplete={() => {
+          if (isClosing) onClose();
         }}
       >
         <div className={styles.sheetMedia}>
@@ -118,7 +121,7 @@ export function ProductSheet({ item, onClose }: { item: MenuItem; onClose: () =>
             Menüye dön <ChevronRight size={18} />
           </button>
         </div>
-      </div>
+      </motion.div>
     </div>,
     document.body,
   );
