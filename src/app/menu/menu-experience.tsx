@@ -86,7 +86,7 @@ const MenuCard = memo(function MenuCard({
               : "(max-width: 680px) 36vw, (max-width: 1080px) 18vw, 180px"
           }
           quality={80}
-          priority={isSpotlight}
+          loading="eager"
         />
         {visibleTag ? <span className={styles.tagBadge}>{visibleTag}</span> : null}
       </span>

@@ -1172,7 +1172,7 @@ export function AnimatedFooter() {
         <div className="footer-top-section">
           <div className="footer-brand-lockup">
             <a className="footer-brand-logo" href="#top" aria-label="Başa Dön">
-              <Image src="/images/brand-icon-small.png" alt="Tarihi Van Kahvaltı Evi" width={76} height={95} loading="lazy" />
+              <Image src="/images/brand-icon-small.png" alt="Tarihi Van Kahvaltı Evi" width={76} height={95} loading="eager" />
             </a>
             <h2 className="footer-manifesto">
               Van kahvaltısı, <br />

@@ -221,6 +221,7 @@ export function GalleryLightbox({ gallery }: GalleryLightboxProps) {
                 alt={gallery[activeIndex][1]}
                 fill
                 sizes="(max-width: 1200px) 90vw, 1000px"
+                loading="eager"
                 className="lightbox-image"
               />
             </div>
@@ -328,7 +329,7 @@ function GalleryMarqueeRow({
                 alt={isDuplicate ? "" : alt}
                 fill
                 sizes="(max-width: 760px) 58vw, (max-width: 1100px) 34vw, 360px"
-                loading="lazy"
+                loading="eager"
               />
               <span className="mosaic-overlay">
                 <span>Görüntüle</span>

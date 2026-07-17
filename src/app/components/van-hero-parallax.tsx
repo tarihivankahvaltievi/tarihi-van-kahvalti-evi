@@ -382,13 +382,11 @@ export function VanHeroParallax() {
             translate={translateX}
             reverse
             enableHover={!isMobile}
-            preloadCount={1}
           />
           <HeroImageRow
             images={secondRow}
             translate={translateXReverse}
             enableHover={!isMobile}
-            preloadCount={0}
           />
         </motion.div>
 
@@ -420,6 +418,7 @@ export function VanHeroParallax() {
                   fill
                   sizes="(max-width: 680px) 30vw, (max-width: 1080px) 26vw, 320px"
                   quality={82}
+                  loading="eager"
                 />
               </div>
             );
@@ -435,19 +434,15 @@ function HeroImageRow({
   translate,
   reverse = false,
   enableHover = true,
-  preloadCount = 0,
 }: {
   images: HeroImage[];
   translate: MotionValue<number>;
   reverse?: boolean;
   enableHover?: boolean;
-  preloadCount?: number;
 }) {
   return (
     <div className={`hero-parallax-row ${reverse ? "is-reverse" : ""}`}>
-      {images.map((image, index) => {
-        const shouldPreload = index < preloadCount;
-
+      {images.map((image) => {
         return (
           <motion.figure
             className="hero-parallax-card"
@@ -461,8 +456,8 @@ function HeroImageRow({
               alt=""
               fill
               sizes="(max-width: 680px) 38vw, (max-width: 1080px) 40vw, 32rem"
-              preload={shouldPreload}
               quality={74}
+              loading="eager"
               style={{ objectPosition: image.position ?? "center" }}
             />
           </motion.figure>

@@ -30,7 +30,7 @@ export function AboutStory() {
               fill
               sizes="(max-width: 680px) 84vw, (min-width: 720px) and (max-width: 900px) 33vw, (max-width: 900px) 80vw, 520px"
               quality={74}
-              loading="lazy"
+              loading="eager"
               decoding="async"
             />
           </figure>
@@ -41,7 +41,7 @@ export function AboutStory() {
               fill
               sizes="(max-width: 680px) 34vw, (min-width: 720px) and (max-width: 900px) 16vw, (max-width: 900px) 37vw, 220px"
               quality={74}
-              loading="lazy"
+              loading="eager"
               decoding="async"
             />
           </figure>

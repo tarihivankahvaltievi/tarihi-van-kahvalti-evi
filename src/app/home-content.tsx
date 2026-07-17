@@ -1,8 +1,8 @@
 import { AboutStory } from "./components/about-story";
 import { AnimatedFooter } from "./components/animated-footer";
 import { BookingOpenButton } from "./components/booking-open-button";
-import { DeferredGallery } from "./components/deferred-gallery";
 import { FaqSection } from "./components/faq-section";
+import { GalleryLightbox } from "./components/gallery-lightbox";
 import { VanHeroParallax } from "./components/van-hero-parallax";
 
 const gallery: [string, string][] = [
@@ -36,7 +36,7 @@ export function HomeContent() {
           </BookingOpenButton>
         </div>
 
-        <DeferredGallery gallery={gallery} />
+        <GalleryLightbox gallery={gallery} />
       </section>
 
       <FaqSection />

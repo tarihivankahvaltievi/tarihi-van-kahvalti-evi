@@ -87,7 +87,14 @@ export function ProductSheet({ item, onClose }: { item: MenuItem; onClose: () =>
         }}
       >
         <div className={styles.sheetMedia}>
-          <Image src={item.image} alt={item.imageAlt} fill sizes="(max-width: 680px) 100vw, 430px" quality={80} priority />
+          <Image
+            src={item.image}
+            alt={item.imageAlt}
+            fill
+            sizes="(max-width: 680px) 100vw, 430px"
+            quality={80}
+            loading="eager"
+          />
           <span className={styles.sheetCategory}>{category?.label}</span>
         </div>
 

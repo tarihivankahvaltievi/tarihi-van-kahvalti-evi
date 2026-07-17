@@ -212,7 +212,7 @@ export default function ClientPage({ children }: { children: ReactNode }) {
                 alt="Tarihi Van Kahvaltı Evi"
                 width={54}
                 height={68}
-                priority
+                loading="eager"
                 className="brand-logo-image"
               />
             </div>

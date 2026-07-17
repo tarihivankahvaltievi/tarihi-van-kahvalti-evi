@@ -9608,19 +9608,6 @@ body .mobile-bar .mobile-bar-primary:focus-visible {
   }
 }
 
-/* Preserve the existing visuals while preventing off-screen animation work. */
-.gallery-deferred:not([data-ready]),
-.gallery-deferred-placeholder {
-  min-height: clamp(32rem, 67vw, 60rem);
-}
-
-@media (min-width: 761px) {
-  .gallery-deferred:not([data-ready]),
-  .gallery-deferred-placeholder {
-    min-height: clamp(51.5rem, 83.8vw, 60rem);
-  }
-}
-
 .hero.hero-parallax-dining:not(.hero-is-visible) .hero-float-item,
 .hero.hero-parallax-dining:not(.hero-is-visible) .hero-float-item::after,
 .footer-reimagined:not(.footer-is-visible) .tram-group {
