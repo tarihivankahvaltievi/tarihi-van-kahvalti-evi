@@ -308,8 +308,10 @@ export function MenuExperience({
     <main id="main-content" className={styles.page}>
       <section ref={heroRef} className={styles.menuHero} aria-labelledby="menu-page-title">
         <div className={styles.heroContent}>
-          <span className={styles.heroKicker}>Tarihi Van Kahvaltı Evi</span>
-          <h1 id="menu-page-title">QR Menü</h1>
+          <h1 id="menu-page-title">
+            <span className={styles.heroBrand}>Tarihi Van Kahvaltı Evi</span>
+            <span className={styles.heroMenu}>Menü</span>
+          </h1>
           <p>Günlük hazırlanan lezzetler ve güncel fiyatlar</p>
         </div>
       </section>
