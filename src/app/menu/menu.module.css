@@ -6,8 +6,8 @@
   --menu-muted: #5d5554;
   --menu-line: #251d1d;
   --menu-line-soft: #e5dddd;
-  --menu-surface: #ffffff;
-  --menu-surface-soft: #fcf8f8;
+  --menu-surface: #f6efe4;
+  --menu-surface-soft: #f2e7d7;
   --menu-on-burgundy: #ffffff;
   --menu-ease: cubic-bezier(0.16, 1, 0.3, 1);
   min-height: 100vh;
@@ -36,7 +36,7 @@
   padding: clamp(2.25rem, 5vw, 4.3rem) max(1.25rem, calc((100% - 1160px) / 2));
   place-items: center;
   border-bottom: 1px solid var(--menu-line);
-  background: #ffffff;
+  background: var(--menu-surface);
   text-align: center;
 }
 
@@ -99,7 +99,7 @@
   top: 72px;
   z-index: 15;
   border-bottom: 1px solid var(--menu-line);
-  background: rgba(255, 255, 255, 0.98);
+  background: rgba(246, 239, 228, 0.98);
   transition: box-shadow 220ms var(--menu-ease);
 }
 
@@ -228,7 +228,7 @@
   padding: 0.5rem 0.62rem;
   border: 1px solid var(--menu-line-soft);
   border-radius: 8px;
-  background: #ffffff;
+  background: var(--menu-surface);
   color: var(--menu-ink);
   scroll-snap-align: start;
   -webkit-tap-highlight-color: transparent;
@@ -415,7 +415,7 @@
   overflow: hidden;
   border: 1px solid var(--menu-line);
   border-radius: 10px;
-  background: #ffffff;
+  background: var(--menu-surface);
   color: var(--menu-ink);
   box-shadow: 2px 2px 0 rgba(29, 24, 24, 0.16);
   contain: layout paint style;
@@ -577,7 +577,7 @@
   place-items: center;
   border: 1px solid var(--menu-line);
   border-radius: 50%;
-  background: #ffffff;
+  background: var(--menu-surface);
   color: var(--menu-burgundy);
 }
 
@@ -612,7 +612,7 @@
   overflow: hidden;
   border: 1px solid var(--menu-line);
   border-radius: 12px;
-  background: #ffffff;
+  background: var(--menu-surface);
   box-shadow: 7px 7px 0 rgba(29, 24, 24, 0.35);
 }
 
@@ -655,7 +655,7 @@
   position: relative;
   overflow-y: auto;
   padding: clamp(1.8rem, 4vw, 3.15rem);
-  background: #ffffff;
+  background: var(--menu-surface);
 }
 
 .sheetClose {
@@ -668,7 +668,7 @@
   place-items: center;
   border: 1px solid var(--menu-line);
   border-radius: 50%;
-  background: #ffffff;
+  background: var(--menu-surface);
   color: var(--menu-ink);
 }
 
@@ -1203,7 +1203,7 @@
     right: 0.75rem;
     width: 42px;
     height: 42px;
-    background: #ffffff;
+    background: var(--menu-surface);
   }
 
   .sheetTitleRow {

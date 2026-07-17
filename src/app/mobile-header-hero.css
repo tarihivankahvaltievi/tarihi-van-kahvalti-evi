@@ -19,7 +19,7 @@
   .theme-breakfast .nav.scrolled {
     min-height: 72px !important;
     padding: 0 14px !important;
-    background: #ffffff !important;
+    background: var(--site-beige) !important;
   }
 
   .theme-breakfast .nav::after {
@@ -228,11 +228,11 @@
     height: 104svh !important;
     min-height: 800px !important;
     max-height: 920px !important;
-    background: #ffffff !important;
+    background: var(--site-beige) !important;
   }
 
   .theme-breakfast .hero.hero-parallax-dining::before {
-    background: #ffffff !important;
+    background: var(--site-beige) !important;
   }
 
   .theme-breakfast .hero-parallax-sticky {

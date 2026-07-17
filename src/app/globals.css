@@ -9354,14 +9354,15 @@ body .mobile-bar a svg {
   }
 }
 
-/* Pure white surface authority — requested July 2026. */
+/* Shared warm-neutral surface authority. */
 :root,
 .theme-breakfast {
-  --soft: #ffffff;
-  --white: #ffffff;
-  --heritage-paper: #ffffff;
-  --heritage-paper-light: #ffffff;
-  --heritage-paper-soft: #ffffff;
+  --site-beige: #f6efe4;
+  --soft: var(--site-beige);
+  --white: var(--site-beige);
+  --heritage-paper: var(--site-beige);
+  --heritage-paper-light: var(--site-beige);
+  --heritage-paper-soft: var(--site-beige);
 }
 
 html,
@@ -9375,14 +9376,14 @@ body,
 .faq-section,
 .footer-reimagined,
 .seo-page {
-  background: #ffffff !important;
-  background-color: #ffffff !important;
+  background: var(--site-beige) !important;
+  background-color: var(--site-beige) !important;
 }
 
 body .mobile-bar,
 body .theme-breakfast .gallery-section {
-  background: #ffffff !important;
-  background-color: #ffffff !important;
+  background: var(--site-beige) !important;
+  background-color: var(--site-beige) !important;
 }
 
 /* Shared QR-menu destination in the mobile action bar. */
@@ -9442,19 +9443,19 @@ body .mobile-bar .mobile-bar-primary:focus-visible {
 }
 
 .theme-breakfast .hero-top-curtain {
-  background: linear-gradient(180deg, #ffffff 0%, rgba(255, 255, 255, 0.9) 52%, rgba(255, 255, 255, 0) 100%) !important;
+  background: linear-gradient(180deg, #f6efe4 0%, rgba(246, 239, 228, 0.9) 52%, rgba(246, 239, 228, 0) 100%) !important;
 }
 
 .theme-breakfast .hero-parallax-sticky::after {
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.7) 58%, #ffffff 100%) !important;
+  background: linear-gradient(180deg, rgba(246, 239, 228, 0) 0%, rgba(246, 239, 228, 0.7) 58%, #f6efe4 100%) !important;
 }
 
 .footer-skyline-wrapper,
 .footer-grid,
 .info-badge,
 .info-hours {
-  background: #ffffff !important;
-  background-color: #ffffff !important;
+  background: var(--site-beige) !important;
+  background-color: var(--site-beige) !important;
 }
 
 .footer-reimagined::before,
@@ -9465,7 +9466,7 @@ body .mobile-bar .mobile-bar-primary:focus-visible {
 @media (max-width: 900px) {
   .theme-breakfast + main,
   #story {
-    background-color: #ffffff;
+    background-color: var(--site-beige);
   }
 }
 
@@ -9475,12 +9476,12 @@ body .mobile-bar .mobile-bar-primary:focus-visible {
   }
 
   .theme-breakfast .hero-parallax-sticky::after {
-    background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.42) 34%, rgba(255, 255, 255, 0.9) 72%, #ffffff 100%) !important;
+    background: linear-gradient(180deg, rgba(246, 239, 228, 0) 0%, rgba(246, 239, 228, 0.42) 34%, rgba(246, 239, 228, 0.9) 72%, #f6efe4 100%) !important;
   }
 }
 
 /* Gallery mobile alignment: keep the CTA clear of the title and make the
-   moving photo stage use the same white surface as the page. */
+   moving photo stage use the same warm-neutral surface as the page. */
 .theme-breakfast .gallery-hero-shell,
 .theme-breakfast .gallery-marquee,
 .theme-breakfast .gallery-marquee-row {
@@ -9526,7 +9527,7 @@ body .mobile-bar .mobile-bar-primary:focus-visible {
 .menu-page-shell .nav.scrolled {
   min-height: 72px !important;
   border-bottom: 1px solid #1d1818 !important;
-  background: #ffffff !important;
+  background: var(--site-beige) !important;
   box-shadow: none !important;
 }
 
@@ -9556,7 +9557,7 @@ body .mobile-bar .mobile-bar-primary:focus-visible {
   height: 44px !important;
   border: 1px solid #1d1818 !important;
   border-radius: 8px !important;
-  background: #ffffff !important;
+  background: var(--site-beige) !important;
   color: #1d1818 !important;
   box-shadow: 2px 2px 0 rgba(29, 24, 24, 0.22) !important;
 }
@@ -9576,11 +9577,11 @@ body .mobile-bar .mobile-bar-primary:focus-visible {
   box-shadow: none !important;
 }
 
-/* Keep the shared navigation trigger consistent with the white QR-menu header. */
+/* Keep the shared navigation trigger consistent with the QR-menu header. */
 .theme-breakfast .nav-menu-button,
 .theme-breakfast .nav.scrolled .nav-menu-button {
   border: 1px solid #1d1818 !important;
-  background: #ffffff !important;
+  background: var(--site-beige) !important;
   color: #1d1818 !important;
   box-shadow: 2px 2px 0 rgba(29, 24, 24, 0.22) !important;
 }
