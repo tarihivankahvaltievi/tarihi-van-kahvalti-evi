@@ -254,10 +254,10 @@
   transition: opacity 220ms ease, transform 420ms var(--menu-ease);
 }
 
-.categoryIconWell svg {
+.categoryIconWell img {
   width: 39px;
   height: 39px;
-  overflow: visible;
+  object-fit: contain;
 }
 
 .categoryLabel {
@@ -279,9 +279,9 @@
 
 .categoryNav button.activeCategory .categoryIconWell {
   border-color: var(--menu-burgundy);
-  background: var(--menu-burgundy);
+  background: var(--menu-surface-soft);
   box-shadow: 3px 3px 0 var(--menu-line);
-  color: var(--menu-on-burgundy);
+  color: var(--menu-burgundy);
   transform: translateY(-2px);
 }
 
@@ -1024,7 +1024,7 @@
     box-shadow: 2px 2px 0 color-mix(in srgb, var(--menu-line) 10%, transparent);
   }
 
-  .categoryIconWell svg {
+  .categoryIconWell img {
     width: 36px;
     height: 36px;
   }
