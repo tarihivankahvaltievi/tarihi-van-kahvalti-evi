@@ -230,10 +230,10 @@
   height: 62px;
   flex: 0 0 62px;
   place-items: center;
-  border: 1px solid var(--menu-line);
+  border: 1px solid color-mix(in srgb, var(--menu-burgundy) 42%, var(--menu-line-soft));
   border-radius: 50%;
   background: #ffffff;
-  box-shadow: 3px 3px 0 var(--menu-line-soft);
+  box-shadow: 0 2px 0 color-mix(in srgb, var(--menu-line) 9%, transparent);
   color: var(--menu-burgundy);
   transition:
     color 180ms ease,
@@ -255,8 +255,8 @@
 }
 
 .categoryIconWell svg {
-  width: 37px;
-  height: 37px;
+  width: 43px;
+  height: 43px;
   overflow: visible;
 }
 
@@ -265,7 +265,7 @@
   max-width: 84px;
   color: inherit;
   font-size: 0.7rem;
-  font-weight: 720;
+  font-weight: 690;
   letter-spacing: -0.012em;
   line-height: 1.05;
   text-align: center;
@@ -1065,12 +1065,12 @@
     width: 56px;
     height: 56px;
     flex-basis: 56px;
-    box-shadow: 2px 2px 0 var(--menu-line-soft);
+    box-shadow: 2px 2px 0 color-mix(in srgb, var(--menu-line) 10%, transparent);
   }
 
   .categoryIconWell svg {
-    width: 34px;
-    height: 34px;
+    width: 40px;
+    height: 40px;
   }
 
   .categoryLabel {
