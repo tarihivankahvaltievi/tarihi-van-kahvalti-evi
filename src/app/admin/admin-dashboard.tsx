@@ -1,23 +1,20 @@
 "use client";
 
-import { useState, useTransition } from "react";
+import { useState, useTransition, useEffect } from "react";
 import Image from "next/image";
 import {
   Plus,
-  Edit,
-  Trash,
   LogOut,
   Upload,
   Check,
-  X,
   ChevronUp,
   ChevronDown,
-  Copy,
   ExternalLink,
   Search,
-  UtensilsCrossed,
-  Layers,
-  Clock,
+  ChevronRight,
+  Computer,
+  Database,
+  Volume2,
 } from "lucide-react";
 import type { MenuData, MenuItem, MenuCategory } from "../menu/menu-storage";
 
@@ -32,6 +29,9 @@ export function AdminDashboard({ initialData }: AdminDashboardProps) {
   const [searchTerm, setSearchTerm] = useState("");
   const [isPending, startTransition] = useTransition();
   const [message, setMessage] = useState<{ type: "success" | "error"; text: string } | null>(null);
+
+  // Start menu state
+  const [isStartMenuOpen, setIsStartMenuOpen] = useState(false);
 
   // Modals state
   const [editingItem, setEditingItem] = useState<MenuItem | null>(null);
@@ -48,6 +48,24 @@ export function AdminDashboard({ initialData }: AdminDashboardProps) {
   const [newDetailInput, setNewDetailInput] = useState("");
   const [newTagInput, setNewTagInput] = useState("");
 
+  // Clock state
+  const [time, setTime] = useState("");
+
+  useEffect(() => {
+    const updateTime = () => {
+      const date = new Date();
+      setTime(
+        date.toLocaleTimeString("tr-TR", {
+          hour: "2-digit",
+          minute: "2-digit",
+        })
+      );
+    };
+    updateTime();
+    const interval = setInterval(updateTime, 60000);
+    return () => clearInterval(interval);
+  }, []);
+
   const showMessage = (type: "success" | "error", text: string) => {
     setMessage({ type, text });
     setTimeout(() => setMessage(null), 4000);
@@ -61,7 +79,7 @@ export function AdminDashboard({ initialData }: AdminDashboardProps) {
       }
     } catch (err) {
       console.error(err);
-      showMessage("error", "Çıkış yapılırken bir hata oluştu");
+      showMessage("error", "Çıkış hatası");
     }
   };
 
@@ -76,7 +94,6 @@ export function AdminDashboard({ initialData }: AdminDashboardProps) {
 
   // Sync to database
   const saveStateToBackend = async (updatedData: MenuData, successMessage: string) => {
-    // Auto-update lastUpdated timestamp on any save
     const finalData = {
       ...updatedData,
       lastUpdated: getFormattedTurkishDate(),
@@ -94,11 +111,11 @@ export function AdminDashboard({ initialData }: AdminDashboardProps) {
           showMessage("success", successMessage);
         } else {
           const err = await res.json();
-          showMessage("error", err.error || "Değişiklikler kaydedilemedi");
+          showMessage("error", err.error || "Hata oluştu");
         }
       } catch (err) {
         console.error(err);
-        showMessage("error", "İletişim hatası. İnternet bağlantınızı kontrol edin.");
+        showMessage("error", "Bağlantı hatası");
       }
     });
   };
@@ -120,7 +137,7 @@ export function AdminDashboard({ initialData }: AdminDashboardProps) {
 
       if (!res.ok) {
         const err = await res.json();
-        showMessage("error", err.error || "Görsel yüklenemedi");
+        showMessage("error", err.error || "Yüklenemedi");
         return;
       }
 
@@ -139,10 +156,10 @@ export function AdminDashboard({ initialData }: AdminDashboardProps) {
           imageAlt: prev.imageAlt || `${prev.name || "Ürün"} görseli`,
         }));
       }
-      showMessage("success", "Görsel başarıyla yüklendi");
+      showMessage("success", "Dosya yüklendi");
     } catch (err) {
       console.error(err);
-      showMessage("error", "Görsel yüklenirken sunucu hatası oluştu");
+      showMessage("error", "Yükleme hatası");
     } finally {
       setUploadingImage(false);
     }
@@ -175,14 +192,13 @@ export function AdminDashboard({ initialData }: AdminDashboardProps) {
 
   const saveItemForm = () => {
     if (!itemForm.name || !itemForm.category) {
-      showMessage("error", "Lütfen ürün adı ve kategori alanlarını doldurun");
+      showMessage("error", "Eksik alanları doldurun");
       return;
     }
 
     let updatedItems = [...data.items];
 
     if (isAddingItem) {
-      // Create a unique slug from name
       const slug = itemForm.name
         .toLowerCase()
         .replace(/[^a-z0-9]+/g, "-")
@@ -211,14 +227,14 @@ export function AdminDashboard({ initialData }: AdminDashboardProps) {
     }
 
     const updatedData = { ...data, items: updatedItems };
-    saveStateToBackend(updatedData, isAddingItem ? "Yeni ürün başarıyla eklendi" : "Ürün başarıyla güncellendi");
+    saveStateToBackend(updatedData, "Ürün kaydedildi");
 
     setEditingItem(null);
     setIsAddingItem(false);
   };
 
   const deleteItem = (itemId: string, itemName: string) => {
-    if (!confirm(`"${itemName}" adlı ürünü silmek istediğinize emin misiniz?`)) return;
+    if (!confirm(`"${itemName}" silinecektir. Emin misiniz?`)) return;
 
     const updatedItems = data.items.filter((item) => item.id !== itemId);
     const updatedData = { ...data, items: updatedItems };
@@ -242,13 +258,12 @@ export function AdminDashboard({ initialData }: AdminDashboardProps) {
 
     if (targetIndex < 0 || targetIndex >= newItems.length) return;
 
-    // Swap items
     const temp = newItems[index];
     newItems[index] = newItems[targetIndex];
     newItems[targetIndex] = temp;
 
     const updatedData = { ...data, items: newItems };
-    saveStateToBackend(updatedData, "Ürün sıralaması güncellendi");
+    saveStateToBackend(updatedData, "Sıralama güncellendi");
   };
 
   // CATEGORY OPERATIONS
@@ -273,7 +288,7 @@ export function AdminDashboard({ initialData }: AdminDashboardProps) {
 
   const saveCategoryForm = () => {
     if (!categoryForm.label || !categoryForm.shortLabel || (!isAddingCategory && !categoryForm.id)) {
-      showMessage("error", "Lütfen kategori başlığı ve kısa etiket alanlarını doldurun");
+      showMessage("error", "Eksik alanları doldurun");
       return;
     }
 
@@ -285,9 +300,8 @@ export function AdminDashboard({ initialData }: AdminDashboardProps) {
         .replace(/[^a-z0-9]+/g, "")
         .slice(0, 15);
 
-      // Check for duplicate ID
       if (data.categories.some((c) => c.id === categoryId)) {
-        showMessage("error", "Bu isimde bir kategori zaten mevcut");
+        showMessage("error", "Kategori mevcut");
         return;
       }
 
@@ -308,7 +322,7 @@ export function AdminDashboard({ initialData }: AdminDashboardProps) {
     }
 
     const updatedData = { ...data, categories: updatedCategories };
-    saveStateToBackend(updatedData, isAddingCategory ? "Yeni kategori eklendi" : "Kategori güncellendi");
+    saveStateToBackend(updatedData, "Kategori kaydedildi");
 
     setEditingCategory(null);
     setIsAddingCategory(false);
@@ -316,11 +330,11 @@ export function AdminDashboard({ initialData }: AdminDashboardProps) {
 
   const deleteCategory = (catId: string, catLabel: string) => {
     if (data.items.some((item) => item.category === catId)) {
-      showMessage("error", `Bu kategoriye ait ürünler var ("${catLabel}"). Önce bu ürünlerin kategorisini değiştirin ya da ürünleri silin.`);
+      showMessage("error", `Bu kategoride ürünler var. Önce ürünleri silin.`);
       return;
     }
 
-    if (!confirm(`"${catLabel}" kategorisini silmek istediğinize emin misiniz?`)) return;
+    if (!confirm(`"${catLabel}" kategorisi silinecektir. Emin misiniz?`)) return;
 
     const updatedCategories = data.categories.filter((c) => c.id !== catId);
     const updatedData = { ...data, categories: updatedCategories };
@@ -333,462 +347,762 @@ export function AdminDashboard({ initialData }: AdminDashboardProps) {
 
     if (targetIndex < 0 || targetIndex >= newCategories.length) return;
 
-    // Swap categories
     const temp = newCategories[index];
     newCategories[index] = newCategories[targetIndex];
     newCategories[targetIndex] = temp;
 
     const updatedData = { ...data, categories: newCategories };
-    saveStateToBackend(updatedData, "Kategori sıralaması güncellendi");
+    saveStateToBackend(updatedData, "Kategori sırası güncellendi");
   };
 
-  // Filtered menu items for display
-  const filteredItems = data.items.filter((item) => {
-    const matchesCategory = selectedCategoryFilter === "all" || item.category === selectedCategoryFilter;
-    const matchesSearch =
-      item.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      item.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      (item.story && item.story.toLowerCase().includes(searchTerm.toLowerCase()));
-    return matchesCategory && matchesSearch;
-  });
+
+  // Calculate spotlight label for card preview
+  const previewVisibleTag = itemForm.tags?.find((tag) => tag === "Öne çıkan" || tag === "Yeni");
+  const previewMetaLabel =
+    itemForm.priceNote ||
+    itemForm.tags?.find((tag) => tag !== previewVisibleTag) ||
+    "Günlük hazırlanır";
 
   return (
     <div
-      className="min-h-screen flex flex-col pb-12"
+      className="min-h-screen flex flex-col pb-12 select-none"
       style={{
-        background: "var(--soft)",
-        fontFamily: "var(--font-geist-sans), sans-serif",
+        backgroundColor: "#008080", // Windows 95 Teal
+        fontFamily: "'Courier New', Courier, monospace, sans-serif",
       }}
     >
-      {/* Top Notification Toast */}
+      {/* Alert popup */}
       {message && (
         <div
-          className={`fixed top-4 right-4 z-50 px-6 py-3 rounded-xl shadow-2xl border text-sm font-medium flex items-center space-x-2 animate-bounce`}
+          className="fixed top-4 right-4 z-50 p-3 shadow-2xl border text-xs font-bold flex items-center space-x-2"
           style={{
-            backgroundColor: message.type === "success" ? "#f0fdf4" : "#fef2f2",
-            borderColor: message.type === "success" ? "#bbf7d0" : "#fecaca",
-            color: message.type === "success" ? "#166534" : "#991b1b",
+            backgroundColor: "#c0c0c0",
+            borderTop: "2px solid #ffffff",
+            borderLeft: "2px solid #ffffff",
+            borderRight: "2px solid #808080",
+            borderBottom: "2px solid #808080",
+            boxShadow: "1px 1px 0px 0px #000000",
+            color: "#000000",
           }}
         >
-          {message.type === "success" ? <Check className="h-5 w-5" /> : <X className="h-5 w-5" />}
+          <span>ℹ️</span>
           <span>{message.text}</span>
         </div>
       )}
 
-      {/* Admin Header */}
-      <header
-        className="border-b px-4 py-4 md:px-8 flex flex-col md:flex-row md:items-center md:justify-between sticky top-0 z-40 bg-white/90 backdrop-blur-md"
-        style={{ borderColor: "var(--line)" }}
+      {/* Main Desktop Window */}
+      <div
+        className="w-full max-w-6xl mx-auto my-6 p-1 border-b-2 border-r-2 border-black flex-grow flex flex-col"
+        style={{
+          backgroundColor: "#c0c0c0",
+          borderTop: "2px solid #ffffff",
+          borderLeft: "2px solid #ffffff",
+          borderRight: "2px solid #808080",
+          borderBottom: "2px solid #808080",
+          boxShadow: "1px 1px 0px 0px #000000",
+        }}
       >
-        <div className="flex items-center space-x-3 mb-4 md:mb-0">
-          <div className="relative" style={{ height: "40px", width: "32px" }}>
-            <Image
-              src="/images/brand-icon-small.png"
-              alt="Logo"
-              fill
-              sizes="32px"
-              priority
-              className="object-contain"
-            />
+        {/* Title Bar */}
+        <div
+          className="px-2 py-1 flex items-center justify-between text-white font-bold select-none text-xs"
+          style={{
+            background: "linear-gradient(90deg, #000080, #1084d0)",
+          }}
+        >
+          <div className="flex items-center space-x-1">
+            <span>📁</span>
+            <span>Tarihi Van QR Menü Yönetim Sistemi - v1.0</span>
+            {isPending && <span className="ml-2 text-yellow-300 animate-pulse">[KAYDEDİLİYOR...]</span>}
           </div>
-          <div>
-            <h1 className="text-xl font-bold font-serif flex items-center space-x-2">
-              <span style={{ color: "var(--red)" }}>Tarihi Van</span>
-              <span className="text-sm font-sans font-medium px-2 py-0.5 rounded-full bg-[#f8efe0] border border-[#e5d8bf] text-amber-800">
-                Yönetim
-              </span>
-            </h1>
-            <div className="text-xs flex items-center space-x-1" style={{ color: "var(--muted)" }}>
-              <Clock className="h-3 w-3" />
-              <span>Güncelleme: {data.lastUpdated}</span>
-              {isPending && <span className="ml-2 text-red-700 animate-pulse">(Kaydediliyor...)</span>}
-            </div>
+          <div className="flex space-x-1">
+            <button
+              onClick={handleLogout}
+              className="w-4 h-4 text-black text-xs font-bold flex items-center justify-center cursor-pointer bg-[#c0c0c0]"
+              style={{
+                borderTop: "1px solid #ffffff",
+                borderLeft: "1px solid #ffffff",
+                borderRight: "1px solid #808080",
+                borderBottom: "1px solid #808080",
+              }}
+              title="Çıkış"
+            >
+              x
+            </button>
           </div>
         </div>
 
-        <div className="flex items-center space-x-3">
+        {/* Win95 Menu Bar */}
+        <div className="flex space-x-4 px-2 py-1 border-b border-gray-400 text-xs text-black font-semibold select-none">
+          <span className="hover:bg-gray-300 px-1 cursor-pointer">Dosya</span>
+          <span className="hover:bg-gray-300 px-1 cursor-pointer">Düzenle</span>
+          <span className="hover:bg-gray-300 px-1 cursor-pointer">Görünüm</span>
           <a
             href="/menu"
             target="_blank"
             rel="noopener noreferrer"
-            className="px-4 py-2 text-xs font-semibold rounded-lg border transition-all flex items-center space-x-1 hover:bg-[#fff9ed] cursor-pointer"
-            style={{ borderColor: "var(--line)", color: "var(--ink-soft)" }}
+            className="hover:bg-gray-300 px-1 cursor-pointer flex items-center space-x-1"
           >
-            <span>Canlı Menüyü Gör</span>
-            <ExternalLink className="h-3.5 w-3.5" />
+            <span>Canlı Menü</span>
+            <ExternalLink className="h-3 w-3" />
           </a>
-
-          <button
-            onClick={handleLogout}
-            className="px-4 py-2 text-xs font-semibold rounded-lg text-white transition-all flex items-center space-x-1 cursor-pointer"
-            style={{ backgroundColor: "var(--red)" }}
-          >
-            <LogOut className="h-3.5 w-3.5" />
-            <span>Çıkış</span>
-          </button>
+          <span className="hover:bg-gray-300 px-1 cursor-pointer">Yardım</span>
         </div>
-      </header>
 
-      {/* Main Container */}
-      <main className="max-w-7xl w-full mx-auto px-4 md:px-8 mt-6 flex-grow">
-        {/* Navigation Tabs */}
-        <div className="flex border-b mb-6" style={{ borderColor: "var(--line)" }}>
+        {/* Content Tabs Header */}
+        <div className="flex space-x-1 px-2 pt-2 border-b border-gray-400 select-none">
           <button
             onClick={() => setActiveTab("items")}
-            className={`py-3 px-6 font-semibold text-sm border-b-2 transition-all flex items-center space-x-2 cursor-pointer ${
-              activeTab === "items"
-                ? "border-red-800 text-red-800"
-                : "border-transparent text-gray-500 hover:text-gray-800"
-            }`}
+            className="px-3 py-1 text-xs font-bold cursor-pointer transition-all"
+            style={{
+              backgroundColor: "#c0c0c0",
+              borderTop: activeTab === "items" ? "2px solid #ffffff" : "1px solid #ffffff",
+              borderLeft: activeTab === "items" ? "2px solid #ffffff" : "1px solid #ffffff",
+              borderRight: activeTab === "items" ? "2px solid #808080" : "1px solid #808080",
+              borderBottom: activeTab === "items" ? "2px solid #c0c0c0" : "1px solid #808080",
+              marginBottom: activeTab === "items" ? "-1px" : "0",
+              zIndex: activeTab === "items" ? 10 : 1,
+            }}
           >
-            <UtensilsCrossed className="h-4 w-4" />
-            <span>Ürün Yönetimi ({data.items.length})</span>
+            🍽️ Ürün Yönetimi ({data.items.length})
           </button>
 
           <button
             onClick={() => setActiveTab("categories")}
-            className={`py-3 px-6 font-semibold text-sm border-b-2 transition-all flex items-center space-x-2 cursor-pointer ${
-              activeTab === "categories"
-                ? "border-red-800 text-red-800"
-                : "border-transparent text-gray-500 hover:text-gray-800"
-            }`}
+            className="px-3 py-1 text-xs font-bold cursor-pointer transition-all"
+            style={{
+              backgroundColor: "#c0c0c0",
+              borderTop: activeTab === "categories" ? "2px solid #ffffff" : "1px solid #ffffff",
+              borderLeft: activeTab === "categories" ? "2px solid #ffffff" : "1px solid #ffffff",
+              borderRight: activeTab === "categories" ? "2px solid #808080" : "1px solid #808080",
+              borderBottom: activeTab === "categories" ? "2px solid #c0c0c0" : "1px solid #808080",
+              marginBottom: activeTab === "categories" ? "-1px" : "0",
+              zIndex: activeTab === "categories" ? 10 : 1,
+            }}
           >
-            <Layers className="h-4 w-4" />
-            <span>Kategori Yönetimi ({data.categories.length})</span>
+            📂 Kategori Yönetimi ({data.categories.length})
           </button>
         </div>
 
-        {/* TAB 1: ITEMS */}
-        {activeTab === "items" && (
-          <div>
-            {/* Filter and Search Bar */}
-            <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
-              <div className="flex flex-wrap items-center gap-2">
-                <button
-                  onClick={() => setSelectedCategoryFilter("all")}
-                  className={`px-3 py-1.5 rounded-full text-xs font-medium border transition-all cursor-pointer ${
-                    selectedCategoryFilter === "all"
-                      ? "bg-red-800 text-white border-red-800"
-                      : "bg-white text-gray-700 border-gray-200 hover:bg-gray-50"
-                  }`}
+        {/* Inner Window Area */}
+        <div className="p-4 flex-grow flex flex-col bg-[#c0c0c0]">
+          {/* TAB 1: MENU ITEMS */}
+          {activeTab === "items" && (
+            <div className="flex-grow flex flex-col">
+              {/* Filter controls */}
+              <div className="flex flex-col md:flex-row md:items-center justify-between gap-3 mb-4">
+                {/* Category filters */}
+                <div
+                  className="p-1 flex flex-wrap gap-1"
+                  style={{
+                    borderTop: "2px solid #808080",
+                    borderLeft: "2px solid #808080",
+                    borderRight: "2px solid #ffffff",
+                    borderBottom: "2px solid #ffffff",
+                    backgroundColor: "#e0e0e0",
+                  }}
                 >
-                  Tümü
-                </button>
-                {data.categories.map((cat) => (
                   <button
-                    key={cat.id}
-                    onClick={() => setSelectedCategoryFilter(cat.id)}
-                    className={`px-3 py-1.5 rounded-full text-xs font-medium border transition-all cursor-pointer ${
-                      selectedCategoryFilter === cat.id
-                        ? "bg-red-800 text-white border-red-800"
-                        : "bg-white text-gray-700 border-gray-200 hover:bg-gray-50"
-                    }`}
+                    onClick={() => setSelectedCategoryFilter("all")}
+                    className="px-3 py-1 text-xs font-bold cursor-pointer"
+                    style={{
+                      backgroundColor: selectedCategoryFilter === "all" ? "#d4d0c8" : "#c0c0c0",
+                      borderTop: selectedCategoryFilter === "all" ? "1px solid #808080" : "1px solid #ffffff",
+                      borderLeft: selectedCategoryFilter === "all" ? "1px solid #808080" : "1px solid #ffffff",
+                      borderRight: selectedCategoryFilter === "all" ? "1px solid #ffffff" : "1px solid #808080",
+                      borderBottom: selectedCategoryFilter === "all" ? "1px solid #ffffff" : "1px solid #808080",
+                      transform: selectedCategoryFilter === "all" ? "translate(1px, 1px)" : "none",
+                    }}
                   >
-                    {cat.shortLabel}
+                    Tümü
                   </button>
-                ))}
-              </div>
-
-              <div className="flex items-center gap-3">
-                <div className="relative flex-grow md:w-64">
-                  <input
-                    type="text"
-                    placeholder="Ürünlerde ara..."
-                    value={searchTerm}
-                    onChange={(e) => setSearchTerm(e.target.value)}
-                    className="w-full pl-9 pr-4 py-2 border rounded-lg text-sm bg-white focus:outline-none focus:border-red-800"
-                    style={{ borderColor: "var(--line)" }}
-                  />
-                  <Search className="absolute left-3 top-2.5 h-4 w-4 text-gray-400" />
+                  {data.categories.map((cat) => (
+                    <button
+                      key={cat.id}
+                      onClick={() => setSelectedCategoryFilter(cat.id)}
+                      className="px-3 py-1 text-xs font-bold cursor-pointer"
+                      style={{
+                        backgroundColor: selectedCategoryFilter === cat.id ? "#d4d0c8" : "#c0c0c0",
+                        borderTop: selectedCategoryFilter === cat.id ? "1px solid #808080" : "1px solid #ffffff",
+                        borderLeft: selectedCategoryFilter === cat.id ? "1px solid #808080" : "1px solid #ffffff",
+                        borderRight: selectedCategoryFilter === cat.id ? "1px solid #ffffff" : "1px solid #808080",
+                        borderBottom: selectedCategoryFilter === cat.id ? "1px solid #ffffff" : "1px solid #808080",
+                        transform: selectedCategoryFilter === cat.id ? "translate(1px, 1px)" : "none",
+                      }}
+                    >
+                      {cat.shortLabel}
+                    </button>
+                  ))}
                 </div>
 
+                {/* Search & Actions */}
+                <div className="flex items-center gap-2">
+                  <div className="relative">
+                    <input
+                      type="text"
+                      placeholder="Ürün ara..."
+                      value={searchTerm}
+                      onChange={(e) => setSearchTerm(e.target.value)}
+                      className="px-2 py-1.5 pl-8 text-xs bg-white text-black outline-none w-48 md:w-56"
+                      style={{
+                        borderTop: "2px solid #808080",
+                        borderLeft: "2px solid #808080",
+                        borderRight: "2px solid #ffffff",
+                        borderBottom: "2px solid #ffffff",
+                      }}
+                    />
+                    <Search className="absolute left-2.5 top-2 h-3.5 w-3.5 text-gray-500" />
+                  </div>
+
+                  <button
+                    onClick={openAddItem}
+                    className="px-4 py-1.5 text-xs text-black font-bold flex items-center space-x-1 active:scale-[0.98] cursor-pointer"
+                    style={{
+                      backgroundColor: "#c0c0c0",
+                      borderTop: "2px solid #ffffff",
+                      borderLeft: "2px solid #ffffff",
+                      borderRight: "2px solid #808080",
+                      borderBottom: "2px solid #808080",
+                      boxShadow: "1px 1px 0px 0px #000000",
+                    }}
+                  >
+                    <Plus className="h-3.5 w-3.5" />
+                    <span>Yeni Ürün</span>
+                  </button>
+                </div>
+              </div>
+
+              {/* Items List Table (Retro look) */}
+              <div
+                className="flex-grow overflow-auto"
+                style={{
+                  borderTop: "2px solid #808080",
+                  borderLeft: "2px solid #808080",
+                  borderRight: "2px solid #ffffff",
+                  borderBottom: "2px solid #ffffff",
+                  backgroundColor: "#ffffff",
+                }}
+              >
+                <table className="w-full text-left text-xs border-collapse">
+                  <thead>
+                    <tr
+                      className="bg-gray-200 text-black font-bold border-b border-gray-400 select-none sticky top-0"
+                      style={{ backgroundColor: "#d4d0c8" }}
+                    >
+                      <th className="p-2 border-r border-gray-300 w-16">Görsel</th>
+                      <th className="p-2 border-r border-gray-300">Ürün Adı</th>
+                      <th className="p-2 border-r border-gray-300">Kategori</th>
+                      <th className="p-2 border-r border-gray-300">Fiyat</th>
+                      <th className="p-2 border-r border-gray-300 text-center w-12">Sıra</th>
+                      <th className="p-2 text-center w-24">İşlemler</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-gray-200 text-black">
+                    {data.items
+                      .map((item, index) => ({ item, index }))
+                      .filter(({ item }) => {
+                        const matchesCategory = selectedCategoryFilter === "all" || item.category === selectedCategoryFilter;
+                        const matchesSearch =
+                          item.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                          item.description.toLowerCase().includes(searchTerm.toLowerCase());
+                        return matchesCategory && matchesSearch;
+                      })
+                      .map(({ item, index }) => {
+                        const categoryLabel = data.categories.find((c) => c.id === item.category)?.shortLabel || item.category;
+                        return (
+                          <tr key={item.id} className="hover:bg-gray-100">
+                            <td className="p-2 border-r border-gray-200">
+                              <div
+                                className="relative h-10 w-10 border overflow-hidden"
+                                style={{
+                                  borderTop: "1px solid #808080",
+                                  borderLeft: "1px solid #808080",
+                                  borderRight: "1px solid #ffffff",
+                                  borderBottom: "1px solid #ffffff",
+                                }}
+                              >
+                                <Image
+                                  src={item.image}
+                                  alt={item.imageAlt || item.name}
+                                  fill
+                                  sizes="40px"
+                                  className="object-cover"
+                                />
+                              </div>
+                            </td>
+                            <td className="p-2 border-r border-gray-200 font-bold">
+                              {item.name}
+                              {item.description && (
+                                <div className="text-[10px] text-gray-500 font-normal truncate max-w-md">
+                                  {item.description}
+                                </div>
+                              )}
+                            </td>
+                            <td className="p-2 border-r border-gray-200">{categoryLabel}</td>
+                            <td className="p-2 border-r border-gray-200 font-bold text-red-800">
+                              {item.price}
+                              {item.priceNote && (
+                                <span className="text-[9px] text-gray-400 font-normal ml-1">
+                                  ({item.priceNote})
+                                </span>
+                              )}
+                            </td>
+                            <td className="p-2 border-r border-gray-200">
+                              <div className="flex justify-center space-x-1">
+                                <button
+                                  onClick={() => moveItemOrder(index, "up")}
+                                  disabled={index === 0}
+                                  className="p-0.5 border bg-gray-100 disabled:opacity-30 cursor-pointer"
+                                  style={{
+                                    borderTop: "1px solid #ffffff",
+                                    borderLeft: "1px solid #ffffff",
+                                    borderRight: "1px solid #808080",
+                                    borderBottom: "1px solid #808080",
+                                  }}
+                                >
+                                  <ChevronUp className="h-3 w-3 text-black" />
+                                </button>
+                                <button
+                                  onClick={() => moveItemOrder(index, "down")}
+                                  disabled={index === data.items.length - 1}
+                                  className="p-0.5 border bg-gray-100 disabled:opacity-30 cursor-pointer"
+                                  style={{
+                                    borderTop: "1px solid #ffffff",
+                                    borderLeft: "1px solid #ffffff",
+                                    borderRight: "1px solid #808080",
+                                    borderBottom: "1px solid #808080",
+                                  }}
+                                >
+                                  <ChevronDown className="h-3 w-3 text-black" />
+                                </button>
+                              </div>
+                            </td>
+                            <td className="p-2">
+                              <div className="flex justify-center space-x-1.5">
+                                <button
+                                  onClick={() => openEditItem(item)}
+                                  className="px-1 py-0.5 border text-[10px] font-bold cursor-pointer bg-gray-100"
+                                  style={{
+                                    borderTop: "1px solid #ffffff",
+                                    borderLeft: "1px solid #ffffff",
+                                    borderRight: "1px solid #808080",
+                                    borderBottom: "1px solid #808080",
+                                  }}
+                                >
+                                  Düzenle
+                                </button>
+                                <button
+                                  onClick={() => duplicateItem(item)}
+                                  className="px-1 py-0.5 border text-[10px] font-bold cursor-pointer bg-gray-100"
+                                  style={{
+                                    borderTop: "1px solid #ffffff",
+                                    borderLeft: "1px solid #ffffff",
+                                    borderRight: "1px solid #808080",
+                                    borderBottom: "1px solid #808080",
+                                  }}
+                                >
+                                  Kopya
+                                </button>
+                                <button
+                                  onClick={() => deleteItem(item.id, item.name)}
+                                  className="px-1 py-0.5 border text-[10px] font-bold cursor-pointer bg-red-100 text-red-800"
+                                  style={{
+                                    borderTop: "1px solid #ffffff",
+                                    borderLeft: "1px solid #ffffff",
+                                    borderRight: "1px solid #808080",
+                                    borderBottom: "1px solid #808080",
+                                  }}
+                                >
+                                  Sil
+                                </button>
+                              </div>
+                            </td>
+                          </tr>
+                        );
+                      })}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          )}
+
+          {/* TAB 2: CATEGORIES */}
+          {activeTab === "categories" && (
+            <div className="flex-grow flex flex-col">
+              <div className="flex justify-end mb-4">
                 <button
-                  onClick={openAddItem}
-                  className="px-4 py-2 rounded-lg text-white font-medium text-sm flex items-center space-x-1 shadow transition-all active:scale-95 cursor-pointer"
-                  style={{ backgroundColor: "var(--red)", boxShadow: "var(--shadow-red)" }}
+                  onClick={openAddCategory}
+                  className="px-4 py-1.5 text-xs text-black font-bold flex items-center space-x-1 active:scale-[0.98] cursor-pointer"
+                  style={{
+                    backgroundColor: "#c0c0c0",
+                    borderTop: "2px solid #ffffff",
+                    borderLeft: "2px solid #ffffff",
+                    borderRight: "2px solid #808080",
+                    borderBottom: "2px solid #808080",
+                    boxShadow: "1px 1px 0px 0px #000000",
+                  }}
                 >
-                  <Plus className="h-4 w-4" />
-                  <span>Yeni Ürün</span>
+                  <Plus className="h-3.5 w-3.5" />
+                  <span>Yeni Kategori</span>
                 </button>
               </div>
-            </div>
 
-            {/* Items Listing Table/Card List */}
-            {filteredItems.length > 0 ? (
-              <div className="bg-white border rounded-xl overflow-hidden shadow-sm" style={{ borderColor: "var(--line)" }}>
-                <div className="overflow-x-auto">
-                  <table className="w-full text-left border-collapse">
-                    <thead>
-                      <tr className="bg-gray-50 text-gray-500 font-semibold text-xs border-b" style={{ borderColor: "var(--line)" }}>
-                        <th className="p-4 w-20">Görsel</th>
-                        <th className="p-4">Ürün Adı</th>
-                        <th className="p-4">Kategori</th>
-                        <th className="p-4">Fiyat</th>
-                        <th className="p-4 text-right">Sıra</th>
-                        <th className="p-4 text-center">İşlemler</th>
-                      </tr>
-                    </thead>
-                    <tbody className="divide-y text-sm" style={{ borderColor: "var(--line)" }}>
-                      {data.items
-                        .map((item, index) => ({ item, index }))
-                        .filter(({ item }) => {
-                          const matchesCategory = selectedCategoryFilter === "all" || item.category === selectedCategoryFilter;
-                          const matchesSearch =
-                            item.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                            item.description.toLowerCase().includes(searchTerm.toLowerCase());
-                          return matchesCategory && matchesSearch;
-                        })
-                        .map(({ item, index }) => {
-                          const categoryName = data.categories.find((c) => c.id === item.category)?.shortLabel || item.category;
-                          return (
-                            <tr key={item.id} className="hover:bg-[#fffcf7] transition-all">
-                              <td className="p-4">
-                                <div className="relative h-12 w-12 rounded-lg overflow-hidden border border-gray-200">
-                                  <Image
-                                    src={item.image}
-                                    alt={item.imageAlt || item.name}
-                                    fill
-                                    sizes="48px"
-                                    className="object-cover"
-                                  />
-                                </div>
-                              </td>
-                              <td className="p-4">
-                                <div className="font-semibold text-gray-900">{item.name}</div>
-                                <div className="text-xs text-gray-500 line-clamp-1 max-w-sm mt-0.5">{item.description}</div>
-                                <div className="flex gap-1 mt-1">
-                                  {item.tags.map((tag) => (
-                                    <span
-                                      key={tag}
-                                      className="text-[10px] px-1.5 py-0.5 rounded bg-amber-50 border border-amber-200 text-amber-800 font-medium"
-                                    >
-                                      {tag}
-                                    </span>
-                                  ))}
-                                </div>
-                              </td>
-                              <td className="p-4 text-gray-600 font-medium">{categoryName}</td>
-                              <td className="p-4 font-bold text-red-900">
-                                <div>{item.price}</div>
-                                {item.priceNote && <div className="text-[10px] text-gray-400 font-normal">{item.priceNote}</div>}
-                              </td>
-                              <td className="p-4 text-right">
-                                <div className="flex items-center justify-end space-x-1">
-                                  <button
-                                    onClick={() => moveItemOrder(index, "up")}
-                                    disabled={index === 0}
-                                    className="p-1 rounded text-gray-400 hover:text-gray-900 disabled:opacity-30 cursor-pointer"
-                                  >
-                                    <ChevronUp className="h-4 w-4" />
-                                  </button>
-                                  <button
-                                    onClick={() => moveItemOrder(index, "down")}
-                                    disabled={index === data.items.length - 1}
-                                    className="p-1 rounded text-gray-400 hover:text-gray-900 disabled:opacity-30 cursor-pointer"
-                                  >
-                                    <ChevronDown className="h-4 w-4" />
-                                  </button>
-                                </div>
-                              </td>
-                              <td className="p-4">
-                                <div className="flex items-center justify-center space-x-2">
-                                  <button
-                                    onClick={() => openEditItem(item)}
-                                    className="p-1.5 rounded-lg border border-gray-200 bg-white text-gray-600 hover:text-blue-600 hover:border-blue-200 transition-all cursor-pointer"
-                                    title="Düzenle"
-                                  >
-                                    <Edit className="h-4 w-4" />
-                                  </button>
+              {/* Categories Grid (Win95 Panels) */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 overflow-y-auto max-h-[60vh] p-1">
+                {data.categories.map((cat, index) => {
+                  const count = data.items.filter((item) => item.category === cat.id).length;
+                  return (
+                    <div
+                      key={cat.id}
+                      className="p-3 flex space-x-3 text-black"
+                      style={{
+                        backgroundColor: "#c0c0c0",
+                        borderTop: "1px solid #ffffff",
+                        borderLeft: "1px solid #ffffff",
+                        borderRight: "1px solid #808080",
+                        borderBottom: "1px solid #808080",
+                        boxShadow: "1px 1px 0px 0px #000000",
+                      }}
+                    >
+                      <div
+                        className="relative h-16 w-16 overflow-hidden border shrink-0 bg-[#ede6e6]"
+                        style={{
+                          borderTop: "1px solid #808080",
+                          borderLeft: "1px solid #808080",
+                          borderRight: "1px solid #ffffff",
+                          borderBottom: "1px solid #ffffff",
+                        }}
+                      >
+                        <Image src={cat.image} alt={cat.imageAlt} fill className="object-cover" />
+                      </div>
 
-                                  <button
-                                    onClick={() => duplicateItem(item)}
-                                    className="p-1.5 rounded-lg border border-gray-200 bg-white text-gray-600 hover:text-green-600 hover:border-green-200 transition-all cursor-pointer"
-                                    title="Kopyala"
-                                  >
-                                    <Copy className="h-4 w-4" />
-                                  </button>
-
-                                  <button
-                                    onClick={() => deleteItem(item.id, item.name)}
-                                    className="p-1.5 rounded-lg border border-gray-200 bg-white text-gray-600 hover:text-red-600 hover:border-red-200 transition-all cursor-pointer"
-                                    title="Sil"
-                                  >
-                                    <Trash className="h-4 w-4" />
-                                  </button>
-                                </div>
-                              </td>
-                            </tr>
-                          );
-                        })}
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-            ) : (
-              <div className="bg-white border rounded-xl p-12 text-center text-gray-500" style={{ borderColor: "var(--line)" }}>
-                Arama kriterlerine uygun ürün bulunamadı.
-              </div>
-            )}
-          </div>
-        )}
-
-        {/* TAB 2: CATEGORIES */}
-        {activeTab === "categories" && (
-          <div>
-            <div className="flex justify-end mb-6">
-              <button
-                onClick={openAddCategory}
-                className="px-4 py-2 rounded-lg text-white font-medium text-sm flex items-center space-x-1 shadow transition-all active:scale-95 cursor-pointer"
-                style={{ backgroundColor: "var(--red)", boxShadow: "var(--shadow-red)" }}
-              >
-                <Plus className="h-4 w-4" />
-                <span>Yeni Kategori</span>
-              </button>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {data.categories.map((cat, index) => {
-                const count = data.items.filter((item) => item.category === cat.id).length;
-                return (
-                  <div
-                    key={cat.id}
-                    className="bg-white rounded-xl border p-5 shadow-sm flex space-x-4 relative"
-                    style={{ borderColor: "var(--line)" }}
-                  >
-                    <div className="relative h-20 w-20 rounded-lg overflow-hidden border border-gray-200 shrink-0">
-                      <Image src={cat.image} alt={cat.imageAlt} fill className="object-cover" />
-                    </div>
-
-                    <div className="flex-grow min-w-0">
-                      <div className="flex items-start justify-between">
+                      <div className="flex-grow min-w-0 flex flex-col justify-between">
                         <div>
-                          <h3 className="font-bold text-gray-900 font-serif text-lg leading-tight">{cat.label}</h3>
-                          <div className="text-xs font-semibold text-amber-800 mt-0.5">Etiket: {cat.shortLabel}</div>
+                          <div className="flex items-start justify-between">
+                            <div>
+                              <h3 className="font-bold text-sm font-serif">{cat.label}</h3>
+                              <span className="text-[10px] text-amber-900 font-bold">Navbar: {cat.shortLabel}</span>
+                            </div>
+
+                            <div className="flex items-center space-x-1">
+                              <button
+                                onClick={() => moveCategoryOrder(index, "up")}
+                                disabled={index === 0}
+                                className="p-0.5 border disabled:opacity-30 cursor-pointer bg-gray-100"
+                                style={{
+                                  borderTop: "1px solid #ffffff",
+                                  borderLeft: "1px solid #ffffff",
+                                  borderRight: "1px solid #808080",
+                                  borderBottom: "1px solid #808080",
+                                }}
+                              >
+                                <ChevronUp className="h-3.5 w-3.5" />
+                              </button>
+                              <button
+                                onClick={() => moveCategoryOrder(index, "down")}
+                                disabled={index === data.categories.length - 1}
+                                className="p-0.5 border disabled:opacity-30 cursor-pointer bg-gray-100"
+                                style={{
+                                  borderTop: "1px solid #ffffff",
+                                  borderLeft: "1px solid #ffffff",
+                                  borderRight: "1px solid #808080",
+                                  borderBottom: "1px solid #808080",
+                                }}
+                              >
+                                <ChevronDown className="h-3.5 w-3.5" />
+                              </button>
+                            </div>
+                          </div>
+
+                          <p className="text-[10px] text-gray-600 line-clamp-2 mt-1">{cat.description}</p>
                         </div>
 
-                        <div className="flex items-center space-x-1">
-                          <button
-                            onClick={() => moveCategoryOrder(index, "up")}
-                            disabled={index === 0}
-                            className="p-1 rounded text-gray-400 hover:text-gray-900 disabled:opacity-30 cursor-pointer"
-                          >
-                            <ChevronUp className="h-4 w-4" />
-                          </button>
-                          <button
-                            onClick={() => moveCategoryOrder(index, "down")}
-                            disabled={index === data.categories.length - 1}
-                            className="p-1 rounded text-gray-400 hover:text-gray-900 disabled:opacity-30 cursor-pointer"
-                          >
-                            <ChevronDown className="h-4 w-4" />
-                          </button>
-                        </div>
-                      </div>
+                        <div className="flex items-center justify-between mt-3 pt-2 border-t border-gray-300">
+                          <span className="text-[10px] font-bold text-gray-500">
+                            📦 {count} ürün var
+                          </span>
 
-                      <p className="text-xs text-gray-500 mt-2 line-clamp-2">{cat.description}</p>
-
-                      <div className="flex items-center justify-between mt-4">
-                        <span className="text-xs font-medium text-gray-500 bg-gray-100 px-2 py-0.5 rounded-full">
-                          {count} ürün
-                        </span>
-
-                        <div className="flex space-x-2">
-                          <button
-                            onClick={() => openEditCategory(cat)}
-                            className="p-1.5 rounded-lg border border-gray-200 text-gray-600 hover:text-blue-600 hover:bg-blue-50 transition-all cursor-pointer"
-                          >
-                            <Edit className="h-3.5 w-3.5" />
-                          </button>
-                          <button
-                            onClick={() => deleteCategory(cat.id, cat.label)}
-                            className="p-1.5 rounded-lg border border-gray-200 text-gray-600 hover:text-red-600 hover:bg-red-50 transition-all cursor-pointer"
-                          >
-                            <Trash className="h-3.5 w-3.5" />
-                          </button>
+                          <div className="flex space-x-2">
+                            <button
+                              onClick={() => openEditCategory(cat)}
+                              className="px-1.5 py-0.5 border text-[10px] font-bold cursor-pointer bg-gray-100"
+                              style={{
+                                borderTop: "1px solid #ffffff",
+                                borderLeft: "1px solid #ffffff",
+                                borderRight: "1px solid #808080",
+                                borderBottom: "1px solid #808080",
+                              }}
+                            >
+                              Düzenle
+                            </button>
+                            <button
+                              onClick={() => deleteCategory(cat.id, cat.label)}
+                              className="px-1.5 py-0.5 border text-[10px] font-bold cursor-pointer bg-red-100 text-red-800"
+                              style={{
+                                borderTop: "1px solid #ffffff",
+                                borderLeft: "1px solid #ffffff",
+                                borderRight: "1px solid #808080",
+                                borderBottom: "1px solid #808080",
+                              }}
+                            >
+                              Sil
+                            </button>
+                          </div>
                         </div>
                       </div>
                     </div>
-                  </div>
-                );
-              })}
+                  );
+                })}
+              </div>
             </div>
-          </div>
-        )}
-      </main>
+          )}
+        </div>
+      </div>
 
-      {/* PRODUCT EDIT/ADD DIALOG */}
+      {/* PRODUCT EDIT/ADD WIN95 WINDOW */}
       {(editingItem || isAddingItem) && (
-        <div className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 overflow-y-auto">
-          <div className="bg-white rounded-2xl w-full max-w-4xl max-h-[90vh] overflow-hidden shadow-2xl flex flex-col md:flex-row relative">
-            {/* Dynamic Product Preview Side (Wow factor!) */}
-            <div className="w-full md:w-1/3 bg-[#f8efe0] border-r border-[#e5d8bf] p-6 flex flex-col justify-center items-center">
-              <span className="text-xs font-bold text-amber-800 uppercase tracking-widest mb-4">Kart Önizleme</span>
-              <div className="w-full max-w-[280px] bg-white rounded-xl border border-[#ebdcc3] overflow-hidden shadow-md flex flex-col text-left">
-                <div className="relative aspect-video w-full">
+        <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4 overflow-y-auto">
+          <div
+            className="w-full max-w-4xl p-1 border-b-2 border-r-2 border-black flex flex-col md:flex-row relative"
+            style={{
+              backgroundColor: "#c0c0c0",
+              borderTop: "2px solid #ffffff",
+              borderLeft: "2px solid #ffffff",
+              borderRight: "2px solid #808080",
+              borderBottom: "2px solid #808080",
+              boxShadow: "1px 1px 0px 0px #000000",
+            }}
+          >
+            {/* Left Preview Section - EXACT replication of the actual Turkish menu card */}
+            <div className="w-full md:w-2/5 p-4 border-r border-gray-400 flex flex-col justify-center items-center bg-[#f8efe0]">
+              <span className="text-[10px] font-bold text-gray-600 uppercase tracking-widest mb-4">MENÜ KART ÖNİZLEMESİ</span>
+              
+              {/* EXACT CARD REPLICATED FROM LIVE MENU */}
+              <div
+                className="w-full max-w-[340px] overflow-hidden"
+                style={{
+                  position: "relative",
+                  display: "grid",
+                  gridTemplateColumns: "126px minmax(0, 1fr)",
+                  minHeight: "142px",
+                  border: "1px solid #251d1d",
+                  borderRadius: "10px",
+                  backgroundColor: "#ffffff",
+                  color: "#1d1818",
+                  boxShadow: "2px 2px 0 rgba(29, 24, 24, 0.16)",
+                  textAlign: "left",
+                }}
+              >
+                {/* Media Section */}
+                <div
+                  style={{
+                    position: "relative",
+                    display: "block",
+                    minWidth: "0",
+                    overflow: "hidden",
+                    backgroundColor: "#ede6e6",
+                  }}
+                >
                   {itemForm.image ? (
                     <Image
                       src={itemForm.image}
                       alt={itemForm.imageAlt || "Önizleme"}
                       fill
                       className="object-cover"
+                      style={{ objectPosition: "50% 56%" }}
                     />
-                  ) : (
-                    <div className="absolute inset-0 bg-gray-100 flex items-center justify-center">Görsel yok</div>
-                  )}
-                  {itemForm.tags && itemForm.tags.includes("Öne çıkan") && (
-                    <span className="absolute top-2 left-2 text-[10px] font-bold px-2 py-0.5 bg-[#8f171a] text-white rounded">
-                      Öne çıkan
+                  ) : null}
+                  {/* Subtle bottom gradient shadow on image */}
+                  <div
+                    className="absolute inset-0 pointer-events-none"
+                    style={{
+                      background: "linear-gradient(180deg, transparent 48%, rgba(29, 24, 24, 0.16))",
+                    }}
+                  />
+                  {/* Tag badge (Öne çıkan / Yeni) */}
+                  {previewVisibleTag ? (
+                    <span
+                      style={{
+                        position: "absolute",
+                        top: "0.55rem",
+                        left: "0.55rem",
+                        zIndex: 2,
+                        display: "inline-flex",
+                        minHeight: "25px",
+                        alignItems: "center",
+                        padding: "0.22rem 0.45rem",
+                        border: "1px solid #251d1d",
+                        borderRadius: "5px",
+                        backgroundColor: "#74151d",
+                        color: "#ffffff",
+                        fontSize: "0.64rem",
+                        fontWeight: 760,
+                        lineHeight: 1,
+                      }}
+                    >
+                      {previewVisibleTag}
                     </span>
-                  )}
+                  ) : null}
                 </div>
-                <div className="p-4 flex flex-col justify-between flex-grow">
-                  <div>
-                    <div className="flex justify-between items-start gap-2 mb-1">
-                      <h4 className="font-serif font-bold text-gray-900 text-sm leading-tight">
-                        {itemForm.name || "Ürün Adı"}
-                      </h4>
-                      <span className="font-bold text-[#8f171a] text-sm shrink-0">{itemForm.price || "₺"}</span>
-                    </div>
-                    <p className="text-[11px] text-gray-500 line-clamp-2 leading-relaxed">
-                      {itemForm.description || "Ürün açıklaması burada görünecektir."}
-                    </p>
+
+                {/* Card Body */}
+                <div
+                  style={{
+                    display: "flex",
+                    minWidth: 0,
+                    flexDirection: "column",
+                    justifyContent: "center",
+                    padding: "0.82rem 0.9rem 0.72rem",
+                  }}
+                >
+                  <div
+                    style={{
+                      display: "grid",
+                      gridTemplateColumns: "minmax(0, 1fr) auto",
+                      gap: "0.55rem",
+                      alignItems: "start",
+                    }}
+                  >
+                    <span
+                      style={{
+                        display: "block",
+                        color: "#1d1818",
+                        fontFamily: "Arial, sans-serif",
+                        fontSize: "1.1rem",
+                        fontWeight: 740,
+                        letterSpacing: "-0.026em",
+                        lineHeight: 1.08,
+                      }}
+                    >
+                      {itemForm.name || "Ürün Adı"}
+                    </span>
+                    <span
+                      style={{
+                        color: "#74151d",
+                        fontFamily: "Arial, sans-serif",
+                        fontSize: "1.15rem",
+                        fontWeight: 790,
+                        letterSpacing: "-0.025em",
+                        lineHeight: 1,
+                        whiteSpace: "nowrap",
+                      }}
+                    >
+                      {itemForm.price || "₺0"}
+                    </span>
                   </div>
-                  {itemForm.priceNote && (
-                    <div className="text-[9px] text-gray-400 mt-2 italic">{itemForm.priceNote}</div>
-                  )}
+
+                  <p
+                    style={{
+                      margin: "0.48rem 0 0",
+                      overflow: "hidden",
+                      color: "#5d5554",
+                      fontSize: "0.78rem",
+                      lineHeight: 1.42,
+                      display: "-webkit-box",
+                      WebkitBoxOrient: "vertical",
+                      WebkitLineClamp: 2,
+                    }}
+                  >
+                    {itemForm.description || "Ürün açıklaması burada görüntülenecektir."}
+                  </p>
+
+                  <div
+                    style={{
+                      display: "flex",
+                      minWidth: 0,
+                      alignItems: "center",
+                      justifyContent: "space-between",
+                      gap: "0.65rem",
+                      marginTop: "auto",
+                      paddingTop: "0.56rem",
+                      color: "#6d6161",
+                      fontSize: "0.7rem",
+                      fontWeight: 680,
+                    }}
+                  >
+                    <span
+                      style={{
+                        overflow: "hidden",
+                        textOverflow: "ellipsis",
+                        whiteSpace: "nowrap",
+                      }}
+                    >
+                      {previewMetaLabel}
+                    </span>
+                    <span
+                      style={{
+                        display: "grid",
+                        width: "30px",
+                        height: "30px",
+                        flex: "0 0 30px",
+                        placeItems: "center",
+                        border: "1px solid #251d1d",
+                        borderRadius: "50%",
+                        backgroundColor: "#ffffff",
+                        color: "#74151d",
+                      }}
+                    >
+                      <ChevronRight size={15} strokeWidth={2.5} />
+                    </span>
+                  </div>
                 </div>
               </div>
             </div>
 
-            {/* Form Fields */}
-            <div className="w-full md:w-2/3 p-6 md:p-8 flex flex-col overflow-y-auto max-h-[80vh] md:max-h-none">
-              <div className="flex justify-between items-center mb-6">
-                <h2 className="text-xl font-bold font-serif text-[#211d1b]">
-                  {isAddingItem ? "Yeni Ürün Ekle" : "Ürünü Düzenle"}
-                </h2>
-                <button onClick={() => { setEditingItem(null); setIsAddingItem(false); }} className="text-gray-400 hover:text-gray-700 cursor-pointer">
-                  <X className="h-6 w-6" />
+            {/* Form Fields Section */}
+            <div className="w-full md:w-3/5 p-6 flex flex-col overflow-y-auto max-h-[80vh] md:max-h-[600px] text-black">
+              {/* Window Header */}
+              <div
+                className="px-2 py-1 flex items-center justify-between text-white font-bold select-none text-xs mb-4"
+                style={{
+                  background: "linear-gradient(90deg, #000080, #1084d0)",
+                }}
+              >
+                <span>📁 Ürün Kartı Düzenleyici</span>
+                <button
+                  onClick={() => { setEditingItem(null); setIsAddingItem(false); }}
+                  className="w-4 h-4 text-black text-xs font-bold flex items-center justify-center cursor-pointer bg-[#c0c0c0]"
+                  style={{
+                    borderTop: "1px solid #ffffff",
+                    borderLeft: "1px solid #ffffff",
+                    borderRight: "1px solid #808080",
+                    borderBottom: "1px solid #808080",
+                  }}
+                >
+                  x
                 </button>
               </div>
 
-              <div className="space-y-4 flex-grow">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {/* Form Body */}
+              <div className="space-y-3 flex-grow text-xs font-bold">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                   <div>
-                    <label className="block text-xs font-semibold text-gray-600 mb-1">Ürün Adı</label>
+                    <label className="block text-black mb-1">Ürün Adı:</label>
                     <input
                       type="text"
                       value={itemForm.name || ""}
                       onChange={(e) => setItemForm((prev) => ({ ...prev, name: e.target.value }))}
-                      placeholder="Geleneksel Van Kahvaltısı"
-                      className="w-full px-3 py-2 border rounded-lg text-sm bg-white focus:outline-none focus:border-red-800"
+                      className="w-full px-2 py-1 bg-white text-black outline-none"
+                      style={{
+                        borderTop: "2px solid #808080",
+                        borderLeft: "2px solid #808080",
+                        borderRight: "2px solid #ffffff",
+                        borderBottom: "2px solid #ffffff",
+                      }}
                     />
                   </div>
 
                   <div>
-                    <label className="block text-xs font-semibold text-gray-600 mb-1">Kategori</label>
+                    <label className="block text-black mb-1">Kategori:</label>
                     <select
                       value={itemForm.category || ""}
                       onChange={(e) => setItemForm((prev) => ({ ...prev, category: e.target.value }))}
-                      className="w-full px-3 py-2 border rounded-lg text-sm bg-white focus:outline-none focus:border-red-800"
+                      className="w-full px-2 py-1 bg-white text-black outline-none"
+                      style={{
+                        borderTop: "2px solid #808080",
+                        borderLeft: "2px solid #808080",
+                        borderRight: "2px solid #ffffff",
+                        borderBottom: "2px solid #ffffff",
+                      }}
                     >
                       {data.categories.map((cat) => (
                         <option key={cat.id} value={cat.id}>
@@ -799,69 +1113,102 @@ export function AdminDashboard({ initialData }: AdminDashboardProps) {
                   </div>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                   <div>
-                    <label className="block text-xs font-semibold text-gray-600 mb-1">Fiyat</label>
+                    <label className="block text-black mb-1">Fiyat:</label>
                     <input
                       type="text"
                       value={itemForm.price || ""}
                       onChange={(e) => setItemForm((prev) => ({ ...prev, price: e.target.value }))}
-                      placeholder="₺450"
-                      className="w-full px-3 py-2 border rounded-lg text-sm bg-white focus:outline-none focus:border-red-800 font-bold"
+                      className="w-full px-2 py-1 bg-white text-black outline-none font-bold"
+                      style={{
+                        borderTop: "2px solid #808080",
+                        borderLeft: "2px solid #808080",
+                        borderRight: "2px solid #ffffff",
+                        borderBottom: "2px solid #ffffff",
+                      }}
                     />
                   </div>
 
                   <div>
-                    <label className="block text-xs font-semibold text-gray-600 mb-1">Fiyat Notu (İsteğe Bağlı)</label>
+                    <label className="block text-black mb-1">Fiyat Notu (İsteğe Bağlı):</label>
                     <input
                       type="text"
                       value={itemForm.priceNote || ""}
                       onChange={(e) => setItemForm((prev) => ({ ...prev, priceNote: e.target.value }))}
-                      placeholder="kişi başı · en az 2 kişilik"
-                      className="w-full px-3 py-2 border rounded-lg text-sm bg-white focus:outline-none focus:border-red-800"
+                      className="w-full px-2 py-1 bg-white text-black outline-none"
+                      style={{
+                        borderTop: "2px solid #808080",
+                        borderLeft: "2px solid #808080",
+                        borderRight: "2px solid #ffffff",
+                        borderBottom: "2px solid #ffffff",
+                      }}
                     />
                   </div>
                 </div>
 
-                {/* Description & Story */}
                 <div>
-                  <label className="block text-xs font-semibold text-gray-600 mb-1">Kısa Açıklama</label>
+                  <label className="block text-black mb-1">Açıklama:</label>
                   <textarea
                     value={itemForm.description || ""}
                     onChange={(e) => setItemForm((prev) => ({ ...prev, description: e.target.value }))}
-                    placeholder="Otlu peynir, murtuğa, kavut, cacık, kete, bal-kaymak ve sınırsız çay."
-                    className="w-full px-3 py-2 border rounded-lg text-sm bg-white focus:outline-none focus:border-red-800 h-16 resize-none"
+                    className="w-full px-2 py-1 bg-white text-black outline-none h-14 resize-none"
+                    style={{
+                      borderTop: "2px solid #808080",
+                      borderLeft: "2px solid #808080",
+                      borderRight: "2px solid #ffffff",
+                      borderBottom: "2px solid #ffffff",
+                    }}
                   />
                 </div>
 
                 <div>
-                  <label className="block text-xs font-semibold text-gray-600 mb-1">Ürünün Hikayesi (Detay Sayfasında Görünür)</label>
+                  <label className="block text-black mb-1">Detaylı Hikaye:</label>
                   <textarea
                     value={itemForm.story || ""}
                     onChange={(e) => setItemForm((prev) => ({ ...prev, story: e.target.value }))}
-                    placeholder="1978'den beri masanın ortasına birlikte yenmek üzere kurduğumuz Van sofrası..."
-                    className="w-full px-3 py-2 border rounded-lg text-sm bg-white focus:outline-none focus:border-red-800 h-20 resize-none"
+                    className="w-full px-2 py-1 bg-white text-black outline-none h-14 resize-none"
+                    style={{
+                      borderTop: "2px solid #808080",
+                      borderLeft: "2px solid #808080",
+                      borderRight: "2px solid #ffffff",
+                      borderBottom: "2px solid #ffffff",
+                    }}
                   />
                 </div>
 
-                {/* Image Upload Area */}
+                {/* Image Upload */}
                 <div>
-                  <label className="block text-xs font-semibold text-gray-600 mb-1">Ürün Görseli</label>
-                  <div className="flex items-center gap-3">
+                  <label className="block text-black mb-1">Ürün Görseli (Dosya veya Link):</label>
+                  <div className="flex gap-2">
                     <input
                       type="text"
                       value={itemForm.image || ""}
                       onChange={(e) => setItemForm((prev) => ({ ...prev, image: e.target.value }))}
-                      placeholder="/images/spread.webp"
-                      className="flex-grow px-3 py-2 border rounded-lg text-sm bg-white focus:outline-none focus:border-red-800"
+                      className="flex-grow px-2 py-1 bg-white text-black outline-none"
+                      style={{
+                        borderTop: "2px solid #808080",
+                        borderLeft: "2px solid #808080",
+                        borderRight: "2px solid #ffffff",
+                        borderBottom: "2px solid #ffffff",
+                      }}
                     />
-                    <label className="px-4 py-2 border rounded-lg text-xs font-bold hover:bg-gray-50 flex items-center space-x-1 cursor-pointer shrink-0">
+                    <label
+                      className="px-3 py-1 text-black font-bold flex items-center space-x-1 cursor-pointer"
+                      style={{
+                        backgroundColor: "#c0c0c0",
+                        borderTop: "1px solid #ffffff",
+                        borderLeft: "1px solid #ffffff",
+                        borderRight: "1px solid #808080",
+                        borderBottom: "1px solid #808080",
+                      }}
+                    >
                       {uploadingImage ? (
-                        <span className="inline-block animate-spin rounded-full h-3.5 w-3.5 border-2 border-red-800 border-t-transparent" />
+                        <span className="inline-block animate-spin rounded-full h-3 w-3 border-2 border-black border-t-transparent" />
                       ) : (
                         <Upload className="h-3.5 w-3.5" />
                       )}
-                      <span>{uploadingImage ? "Yükleniyor..." : "Yükle"}</span>
+                      <span>Yükle</span>
                       <input
                         type="file"
                         accept="image/*"
@@ -871,19 +1218,12 @@ export function AdminDashboard({ initialData }: AdminDashboardProps) {
                       />
                     </label>
                   </div>
-                  <input
-                    type="text"
-                    value={itemForm.imageAlt || ""}
-                    onChange={(e) => setItemForm((prev) => ({ ...prev, imageAlt: e.target.value }))}
-                    placeholder="Görsel açıklama (Alt metin)"
-                    className="w-full px-3 py-1.5 border rounded-lg text-xs bg-white focus:outline-none focus:border-red-800 mt-1"
-                  />
                 </div>
 
-                {/* Tags Management */}
+                {/* Tags */}
                 <div>
-                  <label className="block text-xs font-semibold text-gray-600 mb-1">Etiketler</label>
-                  <div className="flex flex-wrap gap-1.5 mb-2">
+                  <label className="block text-black mb-1">Etiket Seçin:</label>
+                  <div className="flex flex-wrap gap-1 mb-2">
                     {["Öne çıkan", "Tavsiye", "Vejetaryen", "Yeni"].map((tag) => {
                       const exists = itemForm.tags?.includes(tag);
                       return (
@@ -897,11 +1237,15 @@ export function AdminDashboard({ initialData }: AdminDashboardProps) {
                               : [...current, tag];
                             setItemForm((prev) => ({ ...prev, tags: next }));
                           }}
-                          className={`text-xs px-2.5 py-1 rounded-full border transition-all cursor-pointer ${
-                            exists
-                              ? "bg-amber-100 border-amber-300 text-amber-900 font-semibold"
-                              : "bg-white border-gray-200 text-gray-600"
-                          }`}
+                          className="px-2 py-1 border text-[10px] font-bold cursor-pointer"
+                          style={{
+                            backgroundColor: exists ? "#d4d0c8" : "#c0c0c0",
+                            borderTop: exists ? "1px solid #808080" : "1px solid #ffffff",
+                            borderLeft: exists ? "1px solid #808080" : "1px solid #ffffff",
+                            borderRight: exists ? "1px solid #ffffff" : "1px solid #808080",
+                            borderBottom: exists ? "1px solid #ffffff" : "1px solid #808080",
+                            transform: exists ? "translate(0.5px, 0.5px)" : "none",
+                          }}
                         >
                           {tag}
                         </button>
@@ -911,10 +1255,16 @@ export function AdminDashboard({ initialData }: AdminDashboardProps) {
                   <div className="flex gap-2">
                     <input
                       type="text"
-                      placeholder="Özel etiket ekle..."
+                      placeholder="Özel etiket..."
                       value={newTagInput}
                       onChange={(e) => setNewTagInput(e.target.value)}
-                      className="flex-grow px-3 py-1.5 border rounded-lg text-xs bg-white focus:outline-none focus:border-red-800"
+                      className="flex-grow px-2 py-1 bg-white text-black outline-none"
+                      style={{
+                        borderTop: "2px solid #808080",
+                        borderLeft: "2px solid #808080",
+                        borderRight: "2px solid #ffffff",
+                        borderBottom: "2px solid #ffffff",
+                      }}
                     />
                     <button
                       type="button"
@@ -926,19 +1276,28 @@ export function AdminDashboard({ initialData }: AdminDashboardProps) {
                         }
                         setNewTagInput("");
                       }}
-                      className="px-3 py-1.5 rounded-lg bg-gray-800 text-white font-semibold text-xs cursor-pointer"
+                      className="px-3 py-1 bg-gray-300 border text-black font-bold cursor-pointer"
+                      style={{
+                        borderTop: "1px solid #ffffff",
+                        borderLeft: "1px solid #ffffff",
+                        borderRight: "1px solid #808080",
+                        borderBottom: "1px solid #808080",
+                      }}
                     >
                       Ekle
                     </button>
                   </div>
                 </div>
 
-                {/* Details List (Details) */}
+                {/* Details List */}
                 <div>
-                  <label className="block text-xs font-semibold text-gray-600 mb-1">Ürün Detayları (Örn: Sınırsız çay vb.)</label>
-                  <ul className="space-y-1.5 mb-2">
+                  <label className="block text-black mb-1">Ürün Detayları / Özellikleri:</label>
+                  <ul className="space-y-1 mb-2">
                     {itemForm.details?.map((detail, idx) => (
-                      <li key={idx} className="flex items-center justify-between bg-gray-50 border rounded-lg px-3 py-1 text-xs">
+                      <li
+                        key={idx}
+                        className="flex items-center justify-between px-2 py-1 text-[11px] bg-gray-100 border border-gray-300"
+                      >
                         <span>{detail}</span>
                         <button
                           type="button"
@@ -946,9 +1305,9 @@ export function AdminDashboard({ initialData }: AdminDashboardProps) {
                             const next = itemForm.details?.filter((_, i) => i !== idx);
                             setItemForm((prev) => ({ ...prev, details: next }));
                           }}
-                          className="text-red-500 hover:text-red-700 font-bold ml-2 cursor-pointer"
+                          className="text-red-700 hover:text-red-950 font-bold ml-2 cursor-pointer"
                         >
-                          Sil
+                          [Sil]
                         </button>
                       </li>
                     ))}
@@ -956,10 +1315,16 @@ export function AdminDashboard({ initialData }: AdminDashboardProps) {
                   <div className="flex gap-2">
                     <input
                       type="text"
-                      placeholder="Yeni özellik detayı yaz..."
+                      placeholder="Yeni özellik yaz..."
                       value={newDetailInput}
                       onChange={(e) => setNewDetailInput(e.target.value)}
-                      className="flex-grow px-3 py-1.5 border rounded-lg text-xs bg-white focus:outline-none focus:border-red-800"
+                      className="flex-grow px-2 py-1 bg-white text-black outline-none"
+                      style={{
+                        borderTop: "2px solid #808080",
+                        borderLeft: "2px solid #808080",
+                        borderRight: "2px solid #ffffff",
+                        borderBottom: "2px solid #ffffff",
+                      }}
                     />
                     <button
                       type="button"
@@ -969,7 +1334,13 @@ export function AdminDashboard({ initialData }: AdminDashboardProps) {
                         setItemForm((prev) => ({ ...prev, details: [...current, newDetailInput] }));
                         setNewDetailInput("");
                       }}
-                      className="px-3 py-1.5 rounded-lg bg-gray-800 text-white font-semibold text-xs cursor-pointer"
+                      className="px-3 py-1 bg-gray-300 border text-black font-bold cursor-pointer"
+                      style={{
+                        borderTop: "1px solid #ffffff",
+                        borderLeft: "1px solid #ffffff",
+                        borderRight: "1px solid #808080",
+                        borderBottom: "1px solid #808080",
+                      }}
                     >
                       Ekle
                     </button>
@@ -978,21 +1349,36 @@ export function AdminDashboard({ initialData }: AdminDashboardProps) {
               </div>
 
               {/* Action Buttons */}
-              <div className="flex justify-end gap-3 mt-8 border-t pt-4 border-gray-100">
+              <div className="flex justify-end gap-3 mt-4 border-t pt-4 border-gray-400">
                 <button
                   type="button"
                   onClick={() => { setEditingItem(null); setIsAddingItem(false); }}
-                  className="px-4 py-2 border rounded-lg text-sm font-semibold text-gray-600 hover:bg-gray-50 cursor-pointer"
+                  className="px-4 py-1.5 text-xs text-black font-bold cursor-pointer"
+                  style={{
+                    backgroundColor: "#c0c0c0",
+                    borderTop: "2px solid #ffffff",
+                    borderLeft: "2px solid #ffffff",
+                    borderRight: "2px solid #808080",
+                    borderBottom: "2px solid #808080",
+                    boxShadow: "1px 1px 0px 0px #000000",
+                  }}
                 >
                   Vazgeç
                 </button>
                 <button
                   type="button"
                   onClick={saveItemForm}
-                  className="px-5 py-2 rounded-lg text-white font-semibold text-sm flex items-center space-x-1 cursor-pointer"
-                  style={{ backgroundColor: "var(--red)" }}
+                  className="px-4 py-1.5 text-xs text-black font-bold flex items-center space-x-1 cursor-pointer"
+                  style={{
+                    backgroundColor: "#c0c0c0",
+                    borderTop: "2px solid #ffffff",
+                    borderLeft: "2px solid #ffffff",
+                    borderRight: "2px solid #808080",
+                    borderBottom: "2px solid #808080",
+                    boxShadow: "1px 1px 0px 0px #000000",
+                  }}
                 >
-                  <Check className="h-4 w-4" />
+                  <Check className="h-3.5 w-3.5" />
                   <span>Kaydet</span>
                 </button>
               </div>
@@ -1001,22 +1387,46 @@ export function AdminDashboard({ initialData }: AdminDashboardProps) {
         </div>
       )}
 
-      {/* CATEGORY EDIT/ADD DIALOG */}
+      {/* CATEGORY EDIT/ADD WINDOW */}
       {(editingCategory || isAddingCategory) && (
-        <div className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-          <div className="bg-white rounded-2xl w-full max-w-xl overflow-hidden shadow-2xl p-6 md:p-8 relative">
-            <div className="flex justify-between items-center mb-6">
-              <h2 className="text-xl font-bold font-serif text-[#211d1b]">
-                {isAddingCategory ? "Yeni Kategori Ekle" : "Kategoriyi Düzenle"}
-              </h2>
-              <button onClick={() => { setEditingCategory(null); setIsAddingCategory(false); }} className="text-gray-400 hover:text-gray-700 cursor-pointer">
-                <X className="h-6 w-6" />
+        <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4">
+          <div
+            className="w-full max-w-md p-1 border-b-2 border-r-2 border-black flex flex-col relative"
+            style={{
+              backgroundColor: "#c0c0c0",
+              borderTop: "2px solid #ffffff",
+              borderLeft: "2px solid #ffffff",
+              borderRight: "2px solid #808080",
+              borderBottom: "2px solid #808080",
+              boxShadow: "1px 1px 0px 0px #000000",
+            }}
+          >
+            {/* Title Bar */}
+            <div
+              className="px-2 py-1 flex items-center justify-between text-white font-bold select-none text-xs mb-4"
+              style={{
+                background: "linear-gradient(90deg, #000080, #1084d0)",
+              }}
+            >
+              <span>📁 Kategori Kartı Düzenleyici</span>
+              <button
+                onClick={() => { setEditingCategory(null); setIsAddingCategory(false); }}
+                className="w-4 h-4 text-black text-xs font-bold flex items-center justify-center cursor-pointer bg-[#c0c0c0]"
+                style={{
+                  borderTop: "1px solid #ffffff",
+                  borderLeft: "1px solid #ffffff",
+                  borderRight: "1px solid #808080",
+                  borderBottom: "1px solid #808080",
+                }}
+              >
+                x
               </button>
             </div>
 
-            <div className="space-y-4">
+            {/* Form Fields */}
+            <div className="p-6 text-xs font-bold text-black space-y-4">
               <div>
-                <label className="block text-xs font-semibold text-gray-600 mb-1">Kategori Başlığı</label>
+                <label className="block mb-1">Kategori Adı:</label>
                 <input
                   type="text"
                   value={categoryForm.label || ""}
@@ -1027,49 +1437,78 @@ export function AdminDashboard({ initialData }: AdminDashboardProps) {
                       shortLabel: prev.shortLabel || e.target.value.substring(0, 10),
                     }))
                   }
-                  placeholder="Sıcak Yemekler"
-                  className="w-full px-3 py-2 border rounded-lg text-sm bg-white focus:outline-none focus:border-red-800"
+                  className="w-full px-2 py-1 bg-white text-black outline-none"
+                  style={{
+                    borderTop: "2px solid #808080",
+                    borderLeft: "2px solid #808080",
+                    borderRight: "2px solid #ffffff",
+                    borderBottom: "2px solid #ffffff",
+                  }}
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-semibold text-gray-600 mb-1">Kısa Etiket (Menü Üstü Navbar İçin)</label>
+                <label className="block mb-1">Kısa Etiket (Menü Üstü Menü Navigasyonu İçin):</label>
                 <input
                   type="text"
                   value={categoryForm.shortLabel || ""}
                   onChange={(e) => setCategoryForm((prev) => ({ ...prev, shortLabel: e.target.value }))}
-                  placeholder="Sıcaklar"
-                  className="w-full px-3 py-2 border rounded-lg text-sm bg-white focus:outline-none focus:border-red-800"
+                  className="w-full px-2 py-1 bg-white text-black outline-none"
+                  style={{
+                    borderTop: "2px solid #808080",
+                    borderLeft: "2px solid #808080",
+                    borderRight: "2px solid #ffffff",
+                    borderBottom: "2px solid #ffffff",
+                  }}
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-semibold text-gray-600 mb-1">Kategori Açıklaması</label>
+                <label className="block mb-1">Açıklama:</label>
                 <textarea
                   value={categoryForm.description || ""}
                   onChange={(e) => setCategoryForm((prev) => ({ ...prev, description: e.target.value }))}
-                  placeholder="Bakır sahanda tereyağı hâlâ cızırdarken masaya gelenler."
-                  className="w-full px-3 py-2 border rounded-lg text-sm bg-white focus:outline-none focus:border-red-800 h-20 resize-none"
+                  className="w-full px-2 py-1 bg-white text-black outline-none h-16 resize-none"
+                  style={{
+                    borderTop: "2px solid #808080",
+                    borderLeft: "2px solid #808080",
+                    borderRight: "2px solid #ffffff",
+                    borderBottom: "2px solid #ffffff",
+                  }}
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-semibold text-gray-600 mb-1">Kategori Görseli</label>
-                <div className="flex items-center gap-3">
+                <label className="block mb-1">Kategori Görseli (Dosya veya Link):</label>
+                <div className="flex gap-2">
                   <input
                     type="text"
                     value={categoryForm.image || ""}
                     onChange={(e) => setCategoryForm((prev) => ({ ...prev, image: e.target.value }))}
-                    placeholder="/images/sicak.webp"
-                    className="flex-grow px-3 py-2 border rounded-lg text-sm bg-white focus:outline-none focus:border-red-800"
+                    className="flex-grow px-2 py-1 bg-white text-black outline-none"
+                    style={{
+                      borderTop: "2px solid #808080",
+                      borderLeft: "2px solid #808080",
+                      borderRight: "2px solid #ffffff",
+                      borderBottom: "2px solid #ffffff",
+                    }}
                   />
-                  <label className="px-4 py-2 border rounded-lg text-xs font-bold hover:bg-gray-50 flex items-center space-x-1 cursor-pointer shrink-0">
+                  <label
+                    className="px-3 py-1 text-black font-bold flex items-center space-x-1 cursor-pointer"
+                    style={{
+                      backgroundColor: "#c0c0c0",
+                      borderTop: "1px solid #ffffff",
+                      borderLeft: "1px solid #ffffff",
+                      borderRight: "1px solid #808080",
+                      borderBottom: "1px solid #808080",
+                    }}
+                  >
                     {uploadingImage ? (
-                      <span className="inline-block animate-spin rounded-full h-3.5 w-3.5 border-2 border-red-800 border-t-transparent" />
+                      <span className="inline-block animate-spin rounded-full h-3 w-3 border-2 border-black border-t-transparent" />
                     ) : (
                       <Upload className="h-3.5 w-3.5" />
                     )}
-                    <span>{uploadingImage ? "Yükleniyor..." : "Yükle"}</span>
+                    <span>Yükle</span>
                     <input
                       type="file"
                       accept="image/*"
@@ -1083,33 +1522,173 @@ export function AdminDashboard({ initialData }: AdminDashboardProps) {
                   type="text"
                   value={categoryForm.imageAlt || ""}
                   onChange={(e) => setCategoryForm((prev) => ({ ...prev, imageAlt: e.target.value }))}
-                  placeholder="Kategori görsel açıklaması (Alt)"
-                  className="w-full px-3 py-1.5 border rounded-lg text-xs bg-white focus:outline-none focus:border-red-800 mt-1"
+                  placeholder="Alt açıklama..."
+                  className="w-full px-2 py-1 bg-white text-black outline-none mt-1"
+                  style={{
+                    borderTop: "1px solid #808080",
+                    borderLeft: "1px solid #808080",
+                    borderRight: "2px solid #ffffff",
+                    borderBottom: "2px solid #ffffff",
+                  }}
                 />
               </div>
             </div>
 
-            <div className="flex justify-end gap-3 mt-8 border-t pt-4 border-gray-100">
+            <div className="flex justify-end gap-3 mt-4 border-t pt-4 p-6 border-gray-400">
               <button
                 type="button"
                 onClick={() => { setEditingCategory(null); setIsAddingCategory(false); }}
-                className="px-4 py-2 border rounded-lg text-sm font-semibold text-gray-600 hover:bg-gray-50 cursor-pointer"
+                className="px-4 py-1.5 text-xs text-black font-bold cursor-pointer"
+                style={{
+                  backgroundColor: "#c0c0c0",
+                  borderTop: "2px solid #ffffff",
+                  borderLeft: "2px solid #ffffff",
+                  borderRight: "2px solid #808080",
+                  borderBottom: "2px solid #808080",
+                  boxShadow: "1px 1px 0px 0px #000000",
+                }}
               >
                 Vazgeç
               </button>
               <button
                 type="button"
                 onClick={saveCategoryForm}
-                className="px-5 py-2 rounded-lg text-white font-semibold text-sm flex items-center space-x-1 cursor-pointer"
-                style={{ backgroundColor: "var(--red)" }}
+                className="px-4 py-1.5 text-xs text-black font-bold flex items-center space-x-1 cursor-pointer"
+                style={{
+                  backgroundColor: "#c0c0c0",
+                  borderTop: "2px solid #ffffff",
+                  borderLeft: "2px solid #ffffff",
+                  borderRight: "2px solid #808080",
+                  borderBottom: "2px solid #808080",
+                  boxShadow: "1px 1px 0px 0px #000000",
+                }}
               >
-                <Check className="h-4 w-4" />
+                <Check className="h-3.5 w-3.5" />
                 <span>Kaydet</span>
               </button>
             </div>
           </div>
         </div>
       )}
+
+      {/* WINDOWS 95 BOTTOM TASKBAR (Massive wow factor!) */}
+      <footer
+        className="fixed bottom-0 left-0 right-0 h-10 bg-[#c0c0c0] flex items-center justify-between px-2 z-50 select-none border-t-2 border-t-white"
+        style={{
+          borderBottom: "1px solid #000",
+          boxShadow: "inset 0 1px 0 #fff",
+        }}
+      >
+        <div className="flex items-center space-x-2">
+          {/* Start Button */}
+          <button
+            onClick={() => setIsStartMenuOpen(!isStartMenuOpen)}
+            className="px-2 py-1 text-xs font-bold text-black flex items-center space-x-1.5 cursor-pointer relative"
+            style={{
+              backgroundColor: "#c0c0c0",
+              borderTop: isStartMenuOpen ? "2px solid #808080" : "2px solid #ffffff",
+              borderLeft: isStartMenuOpen ? "2px solid #808080" : "2px solid #ffffff",
+              borderRight: isStartMenuOpen ? "2px solid #ffffff" : "2px solid #808080",
+              borderBottom: isStartMenuOpen ? "2px solid #ffffff" : "2px solid #808080",
+              boxShadow: isStartMenuOpen ? "none" : "1px 1px 0px 0px #000000",
+              transform: isStartMenuOpen ? "translate(0.5px, 0.5px)" : "none",
+            }}
+          >
+            <span className="text-sm">🏁</span>
+            <span className="font-extrabold" style={{ fontSize: "11px" }}>Başlat</span>
+          </button>
+
+          {/* Start Menu Popup */}
+          {isStartMenuOpen && (
+            <div
+              className="absolute bottom-10 left-2 w-48 border-b-2 border-r-2 border-black p-0.5 z-50 text-black flex"
+              style={{
+                backgroundColor: "#c0c0c0",
+                borderTop: "2px solid #ffffff",
+                borderLeft: "2px solid #ffffff",
+                borderRight: "2px solid #808080",
+                borderBottom: "2px solid #808080",
+                boxShadow: "1px 1px 0px 0px #000000",
+              }}
+            >
+              {/* Vertical side panel */}
+              <div
+                className="w-8 flex flex-col justify-end p-1 text-white font-extrabold text-[10px] select-none uppercase tracking-wider"
+                style={{
+                  background: "linear-gradient(180deg, #000080, #1084d0)",
+                  writingMode: "vertical-lr",
+                  transform: "rotate(180deg)",
+                }}
+              >
+                Windows 95
+              </div>
+
+              {/* Start menu options */}
+              <div className="flex-grow flex flex-col text-[11px] font-bold py-1 bg-white border border-[#808080] border-r-white border-b-white">
+                <div
+                  onClick={() => {
+                    alert("Tarihi Van Kahvaltı Evi QR Menü Yönetim Paneli\nSürüm: 1.0\nTasarım: Windows 95 Retro Edition");
+                    setIsStartMenuOpen(false);
+                  }}
+                  className="px-3 py-1.5 hover:bg-[#000080] hover:text-white cursor-pointer flex items-center space-x-2"
+                >
+                  <span>💻</span>
+                  <span>Sistem Hakkında</span>
+                </div>
+                <div
+                  onClick={() => {
+                    alert("Veritabanı: Supabase SQL Connection\nDepolama: Hybrid Cloud (Rest API)");
+                    setIsStartMenuOpen(false);
+                  }}
+                  className="px-3 py-1.5 hover:bg-[#000080] hover:text-white cursor-pointer flex items-center space-x-2"
+                >
+                  <Database className="h-3 w-3" />
+                  <span>Veritabanı Durumu</span>
+                </div>
+                <hr className="my-1 border-gray-300" />
+                <div
+                  onClick={handleLogout}
+                  className="px-3 py-1.5 hover:bg-[#000080] hover:text-white cursor-pointer flex items-center space-x-2 text-red-800 hover:text-white"
+                >
+                  <LogOut className="h-3 w-3" />
+                  <span>Oturumu Kapat</span>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* Active Tasks bar */}
+          <div
+            className="px-3 py-1 text-[11px] font-bold text-black border shrink-0 bg-gray-200"
+            style={{
+              borderTop: "1px solid #808080",
+              borderLeft: "1px solid #808080",
+              borderRight: "1px solid #ffffff",
+              borderBottom: "1px solid #ffffff",
+            }}
+          >
+            📁 Tarihi Van Menü
+          </div>
+        </div>
+
+        {/* System tray (clock and indicators) */}
+        <div
+          className="h-7 border-t-2 border-l-2 border-r-white border-b-white border flex items-center justify-between px-2 space-x-2 bg-gray-200 select-none"
+          style={{
+            borderTop: "2px solid #808080",
+            borderLeft: "2px solid #808080",
+            borderRight: "2px solid #ffffff",
+            borderBottom: "2px solid #ffffff",
+          }}
+        >
+          <div className="flex items-center space-x-1">
+            <Volume2 className="h-3.5 w-3.5 text-black shrink-0" />
+            <Computer className="h-3.5 w-3.5 text-black shrink-0" />
+            <Database className="h-3.5 w-3.5 text-green-700 shrink-0" />
+          </div>
+          <span className="text-[10px] font-bold text-black tracking-tight">{time}</span>
+        </div>
+      </footer>
     </div>
   );
 }

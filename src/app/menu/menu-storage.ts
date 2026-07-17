@@ -114,7 +114,7 @@ export async function saveMenuData(data: MenuData): Promise<boolean> {
       const filePath = getLocalFilePath();
       const formattedJson = JSON.stringify(data, null, 2);
       await fs.writeFile(filePath, formattedJson, "utf-8");
-    } catch (error) {
+    } catch {
       // Ignore read-only filesystem errors on Vercel/serverless
     }
     return supabaseSuccess;
