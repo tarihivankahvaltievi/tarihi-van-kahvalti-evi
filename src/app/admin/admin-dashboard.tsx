@@ -18,6 +18,116 @@ import {
 } from "lucide-react";
 import type { MenuData, MenuItem, MenuCategory } from "../menu/menu-storage";
 
+// Helper function to compress images on the client side
+const compressImage = (
+  file: File
+): Promise<{
+  blob: Blob;
+  filename: string;
+  originalSize: number;
+  newSize: number;
+  compressed: boolean;
+}> => {
+  return new Promise((resolve) => {
+    if (!file.type.startsWith("image/")) {
+      resolve({
+        blob: file,
+        filename: file.name,
+        originalSize: file.size,
+        newSize: file.size,
+        compressed: false,
+      });
+      return;
+    }
+
+    const reader = new FileReader();
+    reader.onload = (event) => {
+      const img = new window.Image();
+      img.onload = () => {
+        const canvas = document.createElement("canvas");
+        let width = img.width;
+        let height = img.height;
+
+        // Limit dimensions to 1200px max (perfect quality/size balance for QR menu)
+        const MAX_DIM = 1200;
+        if (width > MAX_DIM || height > MAX_DIM) {
+          if (width > height) {
+            height = Math.round((height * MAX_DIM) / width);
+            width = MAX_DIM;
+          } else {
+            width = Math.round((width * MAX_DIM) / height);
+            height = MAX_DIM;
+          }
+        }
+
+        canvas.width = width;
+        canvas.height = height;
+
+        const ctx = canvas.getContext("2d");
+        if (!ctx) {
+          resolve({
+            blob: file,
+            filename: file.name,
+            originalSize: file.size,
+            newSize: file.size,
+            compressed: false,
+          });
+          return;
+        }
+
+        ctx.drawImage(img, 0, 0, width, height);
+
+        // JPEG 85% compression - visually lossless, but reduces file size up to 90%
+        canvas.toBlob(
+          (blob) => {
+            if (blob && blob.size < file.size) {
+              const baseName = file.name.substring(0, file.name.lastIndexOf(".")) || file.name;
+              const newFilename = `${baseName}.jpg`;
+              resolve({
+                blob,
+                filename: newFilename,
+                originalSize: file.size,
+                newSize: blob.size,
+                compressed: true,
+              });
+            } else {
+              resolve({
+                blob: file,
+                filename: file.name,
+                originalSize: file.size,
+                newSize: file.size,
+                compressed: false,
+              });
+            }
+          },
+          "image/jpeg",
+          0.85
+        );
+      };
+      img.onerror = () => {
+        resolve({
+          blob: file,
+          filename: file.name,
+          originalSize: file.size,
+          newSize: file.size,
+          compressed: false,
+        });
+      };
+      img.src = event.target?.result as string;
+    };
+    reader.onerror = () => {
+      resolve({
+        blob: file,
+        filename: file.name,
+        originalSize: file.size,
+        newSize: file.size,
+        compressed: false,
+      });
+    };
+    reader.readAsDataURL(file);
+  });
+};
+
 interface AdminDashboardProps {
   initialData: MenuData;
 }
@@ -126,10 +236,12 @@ export function AdminDashboard({ initialData }: AdminDashboardProps) {
     if (!file) return;
 
     setUploadingImage(true);
-    const formData = new FormData();
-    formData.append("file", file);
 
     try {
+      const compressionResult = await compressImage(file);
+      const formData = new FormData();
+      formData.append("file", compressionResult.blob, compressionResult.filename);
+
       const res = await fetch("/api/admin/upload", {
         method: "POST",
         body: formData,
@@ -156,7 +268,20 @@ export function AdminDashboard({ initialData }: AdminDashboardProps) {
           imageAlt: prev.imageAlt || `${prev.name || "Ürün"} görseli`,
         }));
       }
-      showMessage("success", "Dosya yüklendi");
+
+      if (compressionResult.compressed) {
+        const savedPercent = Math.round(
+          ((compressionResult.originalSize - compressionResult.newSize) /
+            compressionResult.originalSize) *
+            100
+        );
+        showMessage(
+          "success",
+          `Fotoğraf başarılı şekilde sıkıştırılmıştır. (%${savedPercent} tasarruf)`
+        );
+      } else {
+        showMessage("success", "Dosya başarıyla yüklendi");
+      }
     } catch (err) {
       console.error(err);
       showMessage("error", "Yükleme hatası");
