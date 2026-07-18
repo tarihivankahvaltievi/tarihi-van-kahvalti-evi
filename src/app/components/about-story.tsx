@@ -48,10 +48,10 @@ export function AboutStory() {
         </div>
 
         <div className={styles.copy}>
-          <p className={styles.meta}>Hakkımızda · Beyoğlu</p>
+          <p className={styles.meta}>Hakkımızda</p>
           <h2 id="about-story-title" className={styles.title}>
             Van sofrası,
-            <em>Zambak Sokak&apos;ta ağır ağır kurulur.</em>
+            <em>Taksim&apos;de ağır ağır kurulur.</em>
           </h2>
           <p className={styles.lead}>
             Zambak Sokak&apos;ın kendine özgü dokusu içinde, Van kahvaltısının sevilen tatlarını aynı sofrada buluşturuyoruz. Otlu peynirden murtuğaya, sıcak pişiden ev yapımı reçellere kadar her tabağı günlük, taze ve özenli hazırlıyoruz. Nostaljik ayrıntılarla çevrili mekânımızda kahvaltıyı hızlı bir öğün değil; çayın demlendiği, sohbetin uzadığı sakin bir buluşma olarak görüyoruz.

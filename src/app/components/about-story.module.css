@@ -121,11 +121,12 @@
   max-width: 10.5em;
   margin: 0;
   color: var(--about-cream);
-  font-family: var(--font-bodoni-gf), "Bodoni Moda", Georgia, serif;
+  font-family: var(--font-bricolage-grotesque-gf), "Bricolage Grotesque", Arial, sans-serif;
   font-size: clamp(3rem, 5.2vw, 5.4rem);
-  font-weight: 600;
+  font-weight: 680;
   letter-spacing: -0.03em;
   line-height: 0.94;
+  font-optical-sizing: auto;
   text-wrap: balance;
 }
 
@@ -134,7 +135,7 @@
   max-width: 12em;
   margin-top: 0.14em;
   color: var(--about-gold);
-  font-family: var(--font-bricolage-grotesque-gf), "Bricolage Grotesque", Arial, sans-serif;
+  font-family: inherit;
   font-size: 0.78em;
   font-style: normal;
   font-weight: 680;
