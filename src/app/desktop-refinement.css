@@ -204,3 +204,91 @@
     width: 50vw !important;
   }
 }
+
+/* Desktop companion to the mobile heritage copy: one voice at every width. */
+@media (min-width: 901px) {
+  .theme-breakfast .hero-provenance {
+    width: min(100%, 29rem) !important;
+    align-items: baseline !important;
+    gap: 0.8rem !important;
+    margin: 0 0 1rem !important;
+    padding: 0 0 0.68rem !important;
+    border-bottom: 1px solid rgba(36, 23, 24, 0.2) !important;
+    color: rgba(36, 23, 24, 0.68) !important;
+    white-space: normal !important;
+  }
+
+  .theme-breakfast .hero-provenance-year {
+    min-height: 0 !important;
+    padding: 0 !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    background: transparent !important;
+    color: #821b22 !important;
+    font-family: var(--font-literata-gf), "Literata", Georgia, serif !important;
+    font-size: 1.05rem !important;
+    font-weight: 660 !important;
+    letter-spacing: -0.018em !important;
+  }
+
+  .theme-breakfast .hero-provenance-place {
+    padding: 0 !important;
+    font-size: 0.8rem !important;
+    font-weight: 570 !important;
+    letter-spacing: -0.005em !important;
+  }
+
+  .theme-breakfast .hero-provenance-place::before,
+  .theme-breakfast .hero-title-lockup::after {
+    display: none !important;
+    content: none !important;
+  }
+
+  .theme-breakfast .hero-parallax-copy h1,
+  .theme-breakfast .hero-title-lockup,
+  .theme-breakfast .hero-title-line,
+  .theme-breakfast .hero-title-line-one,
+  .theme-breakfast .hero-title-line-two {
+    color: #211817 !important;
+    font-family: var(--font-bricolage-grotesque-gf), "Bricolage Grotesque", Arial, sans-serif !important;
+    font-style: normal !important;
+    text-shadow: none !important;
+  }
+
+  .theme-breakfast .hero-parallax-copy h1 {
+    display: grid !important;
+    max-width: 7.2em !important;
+    gap: 0.04em !important;
+    font-size: clamp(3.75rem, 5vw, 4.8rem) !important;
+    font-weight: 690 !important;
+    letter-spacing: -0.03em !important;
+    line-height: 0.95 !important;
+    text-wrap: auto !important;
+  }
+
+  .theme-breakfast .hero-title-line {
+    display: block !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    font: inherit !important;
+    letter-spacing: inherit !important;
+    line-height: inherit !important;
+    white-space: normal !important;
+    text-wrap: balance !important;
+  }
+
+  .theme-breakfast .hero-title-line-two {
+    max-width: 7.2em !important;
+  }
+
+  .theme-breakfast .hero-parallax-copy p {
+    max-width: 28rem !important;
+    margin-top: 1rem !important;
+    color: rgba(36, 23, 24, 0.76) !important;
+    font-weight: 500 !important;
+  }
+
+  .theme-breakfast .hero-copy-ambient-glow {
+    display: none !important;
+  }
+}

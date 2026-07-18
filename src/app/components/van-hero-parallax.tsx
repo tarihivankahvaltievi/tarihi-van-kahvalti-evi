@@ -341,27 +341,24 @@ export function VanHeroParallax() {
             }}
           >
             <div className="hero-provenance">
-              <span className="hero-provenance-year">1978</span>
-              <span className="hero-provenance-place">Beyoğlu · Aile sofrası</span>
+              <span className="hero-provenance-year">1978&apos;den beri</span>
+              <span className="hero-provenance-place">Beyoğlu&apos;nda bir aile sofrası</span>
             </div>
             <h1 className="hero-title-lockup">
-              <span className="sr-only">Tarihi Van Kahvaltı Evi</span>
+              <span className="sr-only">Van&apos;dan geldik. Sofrayı burada kurduk.</span>
               <span className="hero-title-line hero-title-line-one" aria-hidden="true">
-                <span className="hero-title-word" style={{ "--word-index": 0 } as CSSProperties}>Tarihi</span>{" "}
-                <span className="hero-title-word" style={{ "--word-index": 1 } as CSSProperties}>Van</span>
+                Van&apos;dan geldik.
               </span>
               <span className="hero-title-line hero-title-line-two" aria-hidden="true">
-                <span className="hero-title-word" style={{ "--word-index": 2 } as CSSProperties}>Kahvaltı</span>{" "}
-                <span className="hero-title-word" style={{ "--word-index": 3 } as CSSProperties}>Evi</span>
+                Sofrayı burada kurduk.
               </span>
             </h1>
             <p className="hero-intro">
               <span className="hero-intro-mobile">
-                1978&apos;den beri Beyoğlu&apos;nda kurulan gerçek Van sofrası.
+                Otlu peynir, murtuğa, kavut, sıcak bakır sahanlar ve hep taze çay.
               </span>
               <span className="hero-intro-desktop">
-                Van&apos;dan Beyoğlu&apos;na uzanan serpme kahvaltı: otlu peynir,
-                kavut, murtuğa, sıcak bakır sahanlar ve sınırsız taze çay.
+                Otlu peynir, murtuğa, kavut, sıcak bakır sahanlar ve hep taze çay.
               </span>
             </p>
           </motion.div>
