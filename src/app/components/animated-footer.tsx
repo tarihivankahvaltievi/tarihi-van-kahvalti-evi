@@ -460,9 +460,6 @@ export function AnimatedFooter() {
         role="img"
         aria-label="İstiklal Caddesi’nde nostaljik tramvay, Galata Kulesi ve tarihi Beyoğlu silüeti"
       >
-        <span className={styles.sceneCaption} aria-hidden="true">
-          İstiklal’den Zambak Sokak’a
-        </span>
         <IstiklalWebglAtmosphere />
         <svg viewBox="0 0 1200 240" preserveAspectRatio="xMidYMax meet" className={`footer-skyline-svg ${styles.skylineSvg}`} xmlns="http://www.w3.org/2000/svg">
           <defs>
