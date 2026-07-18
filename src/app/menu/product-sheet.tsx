@@ -6,11 +6,19 @@ import Image from "next/image";
 import { createPortal } from "react-dom";
 import { useCallback, useEffect, useRef, useState } from "react";
 import styles from "./menu.module.css";
-import { menuCategories, type MenuItem } from "./menu-data";
+import type { MenuItem } from "./menu-data";
 
 const ease = [0.16, 1, 0.3, 1] as const;
 
-export function ProductSheet({ item, onClose }: { item: MenuItem; onClose: () => void }) {
+export function ProductSheet({
+  item,
+  categoryLabel,
+  onClose,
+}: {
+  item: MenuItem;
+  categoryLabel?: string;
+  onClose: () => void;
+}) {
   const reduceMotion = useReducedMotion();
   const sheetRef = useRef<HTMLDivElement>(null);
   const closeRef = useRef<HTMLButtonElement>(null);
@@ -59,7 +67,6 @@ export function ProductSheet({ item, onClose }: { item: MenuItem; onClose: () =>
     };
   }, [requestClose]);
 
-  const category = menuCategories.find((entry) => entry.id === item.category);
   const duration = reduceMotion ? 0 : 0.3;
 
   return createPortal(
@@ -95,7 +102,7 @@ export function ProductSheet({ item, onClose }: { item: MenuItem; onClose: () =>
             quality={80}
             loading="eager"
           />
-          <span className={styles.sheetCategory}>{category?.label}</span>
+          <span className={styles.sheetCategory}>{categoryLabel}</span>
         </div>
 
         <div className={styles.sheetContent}>

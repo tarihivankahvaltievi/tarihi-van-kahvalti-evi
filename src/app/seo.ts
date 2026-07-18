@@ -287,7 +287,7 @@ export const legacyRedirects = [
   ...searchLandingPaths.map((source) => ({ source, destination: "/" })),
   { source: "/iletisim", destination: "/#contact" },
   { source: "/sss", destination: "/#faq" },
-  { source: "/kafka-cafe", destination: "/#menu" },
+  { source: "/kafka-cafe", destination: "/menu#turk-kahvesi" },
   { source: "/turkish-breakfast-istanbul", destination: "/en" },
   { source: "/breakfast-near-taksim", destination: "/en" },
   { source: "/zavtrak-taksim-stambul", destination: "/" },
@@ -338,13 +338,13 @@ export function buildMenuJsonLd(
   language: ContentLanguage = "tr",
 ) {
   const isEnglish = language === "en";
-  const pageUrl = isEnglish ? englishPageUrl : siteUrl;
+  const menuUrl = isEnglish ? `${englishPageUrl}#menu` : `${siteUrl}/menu#menu`;
   const sections = isEnglish ? englishMenuSections : menuSections;
   const data = {
     "@type": "Menu",
-    "@id": `${pageUrl}#menu`,
+    "@id": menuUrl,
     name: isEnglish ? `${siteName} English Menu` : `${siteName} Menüsü`,
-    url: `${pageUrl}#menu`,
+    url: menuUrl,
     inLanguage: isEnglish ? "en" : "tr-TR",
     hasMenuSection: sections.map((section) => ({
       "@type": "MenuSection",
@@ -360,7 +360,7 @@ export function buildMenuJsonLd(
                 "@type": "Offer",
                 price: item.price,
                 priceCurrency: item.priceCurrency,
-                url: `${pageUrl}#menu`,
+                url: menuUrl,
               }
             : undefined,
       })),
@@ -429,7 +429,7 @@ export function buildRestaurantJsonLd(
   language: ContentLanguage = "tr",
 ) {
   const isEnglish = language === "en";
-  const pageUrl = isEnglish ? englishPageUrl : siteUrl;
+  const menuUrl = isEnglish ? `${englishPageUrl}#menu` : `${siteUrl}/menu#menu`;
   const data = {
     "@type": "Restaurant",
     "@id": `${siteUrl}/#restaurant`,
@@ -487,8 +487,8 @@ export function buildRestaurantJsonLd(
         closes: openingHours.closes,
       },
     ],
-    menu: `${pageUrl}#menu`,
-    hasMenu: { "@id": `${pageUrl}#menu` },
+    menu: menuUrl,
+    hasMenu: { "@id": menuUrl },
     sameAs: sameAsUrls,
   };
   return withContext ? { "@context": "https://schema.org", ...data } : data;

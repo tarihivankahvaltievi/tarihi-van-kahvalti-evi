@@ -403,6 +403,7 @@ export function VanHeroParallax() {
           aria-hidden="true"
         >
           {visibleFloatingFoods.map((item) => {
+            const isPrimaryFloatingFood = item.src.endsWith("/cheese-platter.webp");
             return (
               <div
                 className={item.className}
@@ -418,7 +419,8 @@ export function VanHeroParallax() {
                   fill
                   sizes="(max-width: 680px) 30vw, (max-width: 1080px) 26vw, 320px"
                   quality={82}
-                  loading="eager"
+                  loading={isPrimaryFloatingFood ? "eager" : "lazy"}
+                  fetchPriority={isPrimaryFloatingFood ? "high" : "auto"}
                 />
               </div>
             );
@@ -442,7 +444,8 @@ function HeroImageRow({
 }) {
   return (
     <div className={`hero-parallax-row ${reverse ? "is-reverse" : ""}`}>
-      {images.map((image) => {
+      {images.map((image, index) => {
+        const isPrimaryImage = reverse && index === 0;
         return (
           <motion.figure
             className="hero-parallax-card"
@@ -457,7 +460,8 @@ function HeroImageRow({
               fill
               sizes="(max-width: 680px) 38vw, (max-width: 1080px) 40vw, 32rem"
               quality={74}
-              loading="eager"
+              loading={isPrimaryImage ? "eager" : "lazy"}
+              fetchPriority={isPrimaryImage ? "high" : "auto"}
               style={{ objectPosition: image.position ?? "center" }}
             />
           </motion.figure>

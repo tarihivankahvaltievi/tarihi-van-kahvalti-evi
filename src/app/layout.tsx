@@ -19,6 +19,7 @@ const literata = Literata({
   style: "normal",
   axes: ["opsz"],
   display: "swap",
+  preload: false,
   variable: "--font-literata-gf",
 });
 const bricolageGrotesque = Bricolage_Grotesque({
@@ -43,7 +44,7 @@ export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
   maximumScale: 5,
-  themeColor: "#8f171a",
+  themeColor: "#7a1b22",
 };
 
 export const metadata: Metadata = {

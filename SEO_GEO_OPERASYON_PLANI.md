@@ -6,13 +6,13 @@ Bu belge, `van kahvaltıcısı` ve ilgili yerel niyetli aramalarda görünürlü
 
 ## Canlı teknik durum
 
-- Sitemap yalnız iki indekslenebilir kanonik dil URL'sini (`/` ve `/en`) içerir; eski/yönlendirilen URL'ler sitemap'e alınmaz.
+- Sitemap üç indekslenebilir kanonik URL'yi (`/`, `/en` ve `/menu`) içerir; eski/yönlendirilen URL'ler sitemap'e alınmaz.
 - Türkçe ve İngilizce sayfalar self-canonical kullanır; karşılıklı `tr`, `en` ve `x-default` hreflang hem HTML'de hem sitemap'te bulunur.
 - Sitemap kayıtlarında gerçek içerik revizyonunu gösteren `lastmod` ve sayfalarda kullanılan özgün işletme görselleri bulunur.
 - Kanonik sayfalardaki dahili bağlantılar yönlendirme zinciri oluşturmadan doğrudan `200` dönen hedeflere gider.
 - Taksim, Beyoğlu, İstanbul ve Van kahvaltısı odaklı bilinen eski URL'ler tek adımda ana sayfaya; eski İngilizce URL'ler `/en` sayfasına kalıcı yönlenir.
-- Kaldırılan `/menu`, `/iletisim`, `/sss` ve `/kafka-cafe` sayfalarının gerçek içeriği Türkçe ana sayfaya taşındı; URL'ler en yakın ana sayfa bölümüne kalıcı yönlenir.
-- Her iki kanonik sayfada `WebSite`, `WebPage`, `Restaurant`, görünür menüyle eşleşen `Menu` ve görünür sorularla eşleşen `FAQPage` şeması bulunur.
+- Güncel menü `/menu` sayfasındadır; kaldırılan `/iletisim`, `/sss` ve `/kafka-cafe` URL'leri en yakın gerçek içeriğe kalıcı yönlenir.
+- Türkçe ana sayfada `WebSite`, `WebPage`, `Restaurant` ve görünür sorularla eşleşen `FAQPage`; İngilizce sayfada bunlara ek olarak görünür menüyle eşleşen `Menu` şeması bulunur. `/menu` kendi güncel `Menu` şemasını yayımlar.
 - İngilizce `/en` sayfası turistler için menü, fiyat, konum, metro tarifi, saat, rezervasyon ve SSS içeren gerçek bir dil sürümüdür; doorway sayfası değildir.
 - `robots.txt`, Googlebot ve AI arama botlarının kanonik sayfalara erişmesine izin verir ve kanonik sitemap adresini bildirir.
 - Derleme sırasında canonical, hreflang, title, description, H1, JSON-LD, sitemap, görsel sitemap, `lastmod`, robots, yönlendirme, 404 ve dahili bağlantı sözleşmeleri otomatik test edilir.
@@ -51,7 +51,7 @@ Kaynaklar:
 
 1. Birincil kategoriyi gerçek ana faaliyete en yakın seçenek olarak doğrulayın; gereksiz kategori eklemeyin.
 2. Web sitesi alanını kanonik `https://www.tarihivankahvaltievi.com/` olarak kaydedin; rezervasyon bağlantısını gerçek rezervasyon akışına yönlendirin.
-3. Menü bağlantısını doğrudan `https://www.tarihivankahvaltievi.com/#menu` olarak kullanın.
+3. Menü bağlantısını doğrudan `https://www.tarihivankahvaltievi.com/menu` olarak kullanın.
 4. Açılış, bayram ve özel gün saatlerini önceden güncelleyin.
 5. Dış cephe, giriş, salon, serpme sofra, otlu peynir, murtuğa, kavut ve menü fotoğraflarını özgün ve güncel olarak yükleyin. Dosya adına anahtar kelime doldurmak yerine açıklayıcı metin kullanın.
 6. Hizmet/ürün alanlarında yalnız gerçekten sunulan seçenekleri listeleyin. Site menüsüyle çelişen fiyat veya ürün bırakmayın.

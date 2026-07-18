@@ -35,14 +35,14 @@ const nextConfig: NextConfig = {
   async redirects() {
     const wordpressRedirects = [
       { source: "/anasayfa", destination: "/" },
-      { source: "/tarihi-van-kahvaltisi-evi-menu", destination: "/" },
+      { source: "/tarihi-van-kahvaltisi-evi-menu", destination: "/menu" },
       { source: "/van-kahvalti", destination: "/" },
       { source: "/gercek-van-kahvaltisinda-neler-olur", destination: "/" },
       { source: "/tarihi-van-kahvalti-evi-hikayemiz", destination: "/" },
       { source: "/galeri-van-kahvalti-evi-taksim", destination: "/" },
-      { source: "/urun/van-serpme-kahvalti", destination: "/" },
-      { source: "/urun/cift-kisilik-serpme-kahvalti", destination: "/" },
-      { source: "/urun/turk-kahvesi", destination: "/" },
+      { source: "/urun/van-serpme-kahvalti", destination: "/menu#geleneksel-van-kahvaltisi" },
+      { source: "/urun/cift-kisilik-serpme-kahvalti", destination: "/menu#iki-kisilik-van-sofrasi" },
+      { source: "/urun/turk-kahvesi", destination: "/menu#turk-kahvesi" },
     ];
 
     return [

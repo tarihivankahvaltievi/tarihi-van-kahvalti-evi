@@ -5,13 +5,7 @@ import dynamic from "next/dynamic";
 import Image from "next/image";
 import { memo, useCallback, useDeferredValue, useEffect, useMemo, useRef, useState } from "react";
 import styles from "./menu.module.css";
-import {
-  menuCategories,
-  menuItems,
-  menuLastUpdated,
-  type MenuItem,
-  type MenuCategory,
-} from "./menu-data";
+import type { MenuCategory, MenuItem } from "./menu-data";
 import { MenuCategoryIcon } from "./menu-category-icons";
 
 const ProductSheet = dynamic(
@@ -120,9 +114,11 @@ function usePrefersReducedMotion() {
 const MenuCard = memo(function MenuCard({
   item,
   onOpen,
+  prioritizeImage = false,
 }: {
   item: MenuItem;
   onOpen: (item: MenuItem) => void;
+  prioritizeImage?: boolean;
 }) {
   const isSpotlight = item.tags.includes("Öne çıkan");
   const visibleTag = item.tags.find((tag) => tag === "Öne çıkan" || tag === "Yeni");
@@ -150,7 +146,8 @@ const MenuCard = memo(function MenuCard({
               : "(max-width: 680px) 36vw, (max-width: 1080px) 18vw, 180px"
           }
           quality={80}
-          loading="eager"
+          loading={prioritizeImage ? "eager" : "lazy"}
+          fetchPriority={prioritizeImage ? "high" : "auto"}
         />
         {visibleTag ? <span className={styles.tagBadge}>{visibleTag}</span> : null}
       </span>
@@ -173,13 +170,13 @@ const MenuCard = memo(function MenuCard({
 });
 
 export function MenuExperience({
-  initialCategories = menuCategories,
-  initialItems = menuItems,
-  initialLastUpdated = menuLastUpdated,
+  initialCategories,
+  initialItems,
+  initialLastUpdated,
 }: {
-  initialCategories?: MenuCategory[];
-  initialItems?: MenuItem[];
-  initialLastUpdated?: string;
+  initialCategories: MenuCategory[];
+  initialItems: MenuItem[];
+  initialLastUpdated: string;
 }) {
   const reduceMotion = usePrefersReducedMotion();
   const heroRef = useRef<HTMLElement>(null);
@@ -396,7 +393,7 @@ export function MenuExperience({
 
         {visibleItems.length > 0 ? (
           <div className={styles.menuContent}>
-            {groups.map((group) => (
+            {groups.map((group, groupIndex) => (
               <section key={group.id} className={styles.menuSection} aria-labelledby={`cat-${group.id}`}>
                 <header className={styles.sectionHeader}>
                   <div>
@@ -406,8 +403,13 @@ export function MenuExperience({
                   <span>{group.items.length} seçenek</span>
                 </header>
                 <div className={styles.menuGrid}>
-                  {group.items.map((item) => (
-                    <MenuCard key={item.id} item={item} onOpen={openItem} />
+                  {group.items.map((item, itemIndex) => (
+                    <MenuCard
+                      key={item.id}
+                      item={item}
+                      onOpen={openItem}
+                      prioritizeImage={groupIndex === 0 && itemIndex === 0}
+                    />
                   ))}
                 </div>
               </section>
@@ -436,7 +438,14 @@ export function MenuExperience({
         </footer>
       </div>
 
-      {selectedItem ? <ProductSheet key={selectedItem.id} item={selectedItem} onClose={closeItem} /> : null}
+      {selectedItem ? (
+        <ProductSheet
+          key={selectedItem.id}
+          item={selectedItem}
+          categoryLabel={initialCategories.find((category) => category.id === selectedItem.category)?.label}
+          onClose={closeItem}
+        />
+      ) : null}
     </main>
   );
 }

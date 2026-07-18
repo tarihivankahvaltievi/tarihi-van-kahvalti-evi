@@ -1171,7 +1171,7 @@ export function AnimatedFooter() {
         <div className="footer-top-section">
           <div className="footer-brand-lockup">
             <a className="footer-brand-logo" href="#top" aria-label="Başa Dön">
-              <Image src="/images/brand-icon-small.png" alt="Tarihi Van Kahvaltı Evi" width={76} height={95} loading="eager" />
+              <Image src="/images/brand-icon-small.png" alt="Tarihi Van Kahvaltı Evi" width={76} height={95} loading="lazy" />
             </a>
             <h2 className="footer-manifesto">
               Van kahvaltısı, <br />
@@ -1195,10 +1195,10 @@ export function AnimatedFooter() {
           <div className="footer-col">
             <h4 className="footer-col-title">Keşfet</h4>
             <ul className="footer-links">
-              <li><Link href="/#menu">Zengin Menü</Link></li>
+              <li><Link href="/menu">Zengin Menü</Link></li>
               <li><Link href="/#faq">Van Kahvaltısı</Link></li>
               <li><Link href="/#contact">Beyoğlu ve Taksim Kahvaltı</Link></li>
-              <li><Link href="/#menu">Kafka Cafe</Link></li>
+              <li><Link href="/menu">Kafka Cafe</Link></li>
               <li><Link href="/#contact">Konum ve Rezervasyon</Link></li>
               <li><Link href="/#faq">Sıkça Sorulan Sorular</Link></li>
               <li><Link href="/en" hrefLang="en">English Visitor Guide</Link></li>

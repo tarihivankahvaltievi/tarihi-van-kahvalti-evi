@@ -30,7 +30,7 @@ export function AboutStory() {
               fill
               sizes="(max-width: 680px) 84vw, (min-width: 720px) and (max-width: 900px) 33vw, (max-width: 900px) 80vw, 520px"
               quality={74}
-              loading="eager"
+              loading="lazy"
               decoding="async"
             />
           </figure>
@@ -41,7 +41,7 @@ export function AboutStory() {
               fill
               sizes="(max-width: 680px) 34vw, (min-width: 720px) and (max-width: 900px) 16vw, (max-width: 900px) 37vw, 220px"
               quality={74}
-              loading="eager"
+              loading="lazy"
               decoding="async"
             />
           </figure>
@@ -58,7 +58,7 @@ export function AboutStory() {
           </p>
 
           <nav className={styles.actions} aria-label="Hakkımızda bölümü sonraki adımlar">
-            <Link href="/#menu" className={`${styles.action} ${styles.menuAction}`}>
+            <Link href="/menu" className={`${styles.action} ${styles.menuAction}`}>
               <span>Sofrayı keşfet</span>
               <span className={styles.actionArrow} aria-hidden="true">↗</span>
             </Link>

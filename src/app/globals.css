@@ -17,9 +17,9 @@
   --ink-soft: #3f3f44;
   --muted: #6b6b72;
   --line: #e5d8bf;
-  --soft: #f8efe0;
+  --soft: #f4ecdf;
   --white: #ffffff;
-  --heritage-paper: #f8efe0;
+  --heritage-paper: #f4ecdf;
   --heritage-paper-light: #fff9ed;
   --heritage-paper-soft: #fbf3e5;
   --heritage-paper-mid: #ebdcc3;
@@ -462,14 +462,7 @@ body .mobile-bar button:hover {
 
 /* Navigation */
 .nav {
-  position: fixed;
   top: clamp(0.58rem, 1.55vw, 1.15rem);
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 50;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
   gap: clamp(0.62rem, 1.4vw, 1.1rem);
   width: min(1180px, calc(100% - clamp(1rem, 3.2vw, 2.3rem)));
   min-height: 70px;
@@ -513,7 +506,6 @@ body .mobile-bar button:hover {
   width: 100%;
   height: 100%;
   object-fit: contain;
-  transform: scale(1.74);
   display: block;
 }
 
@@ -523,14 +515,8 @@ body .mobile-bar button:hover {
 }
 
 .logo {
-  color: var(--ink);
-  font-family: var(--font-playfair), Georgia, serif;
-  display: grid;
   gap: 0.06rem;
   font-size: clamp(1.16rem, 1.55vw, 1.42rem);
-  font-weight: 900;
-  letter-spacing: 0;
-  line-height: 0.95;
   user-select: none;
   transition: font-size 450ms cubic-bezier(0.25, 1, 0.5, 1);
 }
@@ -542,13 +528,9 @@ body .mobile-bar button:hover {
 
 .logo-subtitle {
   display: block;
-  color: rgba(42, 42, 45, 0.62);
   font-family: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
-  font-size: 0.5em;
-  font-weight: 800;
   letter-spacing: 0.1em;
   line-height: 1;
-  text-transform: uppercase;
   white-space: nowrap;
 }
 
@@ -558,7 +540,6 @@ body .mobile-bar button:hover {
   align-items: center;
   gap: 0.3rem;
   padding: 0.24rem 0.52rem;
-  border-radius: 999px;
   font-size: 0.62rem;
   font-weight: 700;
   letter-spacing: 0.03em;
@@ -606,11 +587,7 @@ body .mobile-bar button:hover {
 
 /* Navbar Links Container */
 .nav-links {
-  position: relative;
-  display: none;
-  align-items: center;
   gap: 0.16rem;
-  color: var(--ink);
   font-size: 0.84rem;
   font-weight: 720;
   padding: 0.24rem;
@@ -622,15 +599,10 @@ body .mobile-bar button:hover {
 
 /* Magnetic Sliding Hover Pill background */
 .nav-hover-pill {
-  position: absolute;
-  height: calc(100% - 0.5rem);
-  top: 0.25rem;
   border-radius: 999px;
   background:
     linear-gradient(135deg, rgba(143, 23, 26, 0.1), rgba(197, 162, 90, 0.13));
   border: 1px solid rgba(143, 23, 26, 0.08);
-  z-index: 0;
-  pointer-events: none;
   transition:
     left 300ms cubic-bezier(0.25, 1, 0.5, 1),
     width 300ms cubic-bezier(0.25, 1, 0.5, 1),
@@ -638,18 +610,14 @@ body .mobile-bar button:hover {
 }
 
 .nav-links a {
-  position: relative;
-  z-index: 1;
   padding: 0.48rem 0.9rem;
   color: rgba(42, 42, 45, 0.78);
   transition: color 240ms var(--ease-soft);
   border-radius: 999px;
-  user-select: none;
   white-space: nowrap;
 }
 
 .nav-location {
-  display: none;
   min-height: 40px;
   align-items: center;
   gap: 0.38rem;
@@ -682,7 +650,6 @@ body .mobile-bar button:hover {
 }
 
 .nav.scrolled .order-button {
-  min-height: 40px;
   padding: 0 0.88rem;
   font-size: 0.82rem;
   box-shadow: 0 9px 20px -14px rgba(111, 16, 19, 0.7);
@@ -838,7 +805,6 @@ h2 span {
   width: 100vw;
   margin-left: -50vw;
   isolation: isolate;
-  overflow: hidden;
   padding: clamp(0.6rem, 1.6vw, 1rem) 0 clamp(1.2rem, 3.5vw, 2.8rem);
 }
 
@@ -1740,7 +1706,6 @@ h2 span {
 
   .info-hours {
     gap: 0.08rem;
-    align-items: flex-end;
     text-align: right;
   }
 
@@ -1984,7 +1949,6 @@ h2 span {
 
   .logo-wrap {
     gap: 0.5rem;
-    flex: 1 1 auto;
     min-width: 0;
   }
 
@@ -2040,7 +2004,6 @@ h2 span {
 @media (max-width: 739px) and (max-height: 700px) {
   .hero {
     min-height: 90svh;
-    padding-top: 5.45rem;
     padding-bottom: calc(5.9rem + env(safe-area-inset-bottom));
   }
 }
@@ -2457,12 +2420,10 @@ h2 span {
 }
 
 .hero {
-  display: grid;
   grid-template-columns: minmax(0, 0.92fr) minmax(420px, 1.08fr);
   align-items: center;
   gap: clamp(2rem, 5vw, 6rem);
   min-height: min(780px, 92svh);
-  overflow: hidden;
   padding: clamp(7.2rem, 8.4vw, 8.3rem) clamp(1rem, 6vw, 5.7rem) clamp(3.4rem, 5vw, 4.8rem);
   background:
     radial-gradient(circle at 78% 28%, rgba(246, 197, 21, 0.16), transparent 18rem),
@@ -2471,7 +2432,6 @@ h2 span {
 }
 
 .hero::before {
-  inset: 0;
   z-index: 1;
   background:
     linear-gradient(90deg, transparent 0 49%, rgba(255, 250, 240, 0.08) 49% 49.25%, transparent 49.25%),
@@ -2488,7 +2448,6 @@ h2 span {
   height: 5px;
   border-radius: 999px;
   background: #f6c515;
-  opacity: 1;
 }
 
 .hero h1 {
@@ -2499,11 +2458,9 @@ h2 span {
   font-weight: 950;
   line-height: 0.88;
   letter-spacing: 0;
-  text-shadow: none;
 }
 
 .hero h1 span {
-  display: inline;
   box-decoration-break: clone;
   -webkit-box-decoration-break: clone;
   background: #f6c515;
@@ -2550,7 +2507,6 @@ h2 span {
 /* Restore legacy hero and navbar */
 .nav {
   position: fixed;
-  top: 0;
   left: 50%;
   transform: translateX(-50%);
   z-index: 50;
@@ -2559,11 +2515,9 @@ h2 span {
   justify-content: space-between;
   gap: 1.2rem;
   width: min(1440px, 100%);
-  min-height: 78px;
   padding: 0 clamp(1.25rem, 4.8vw, 4.2rem);
   border: 0;
   border-bottom: 1px solid rgba(93, 42, 31, 0.13);
-  border-radius: 0;
   background:
     linear-gradient(90deg, rgba(255, 253, 248, 0.965), rgba(246, 239, 225, 0.93) 50%, rgba(255, 253, 248, 0.96)),
     linear-gradient(180deg, rgba(255, 255, 255, 0.46), rgba(255, 255, 255, 0));
@@ -2575,10 +2529,8 @@ h2 span {
 }
 
 .nav.scrolled {
-  top: 0;
   min-height: 70px;
   padding-inline: clamp(1.1rem, 4.2vw, 3.65rem);
-  border-radius: 0;
   border-color: rgba(93, 42, 31, 0.16);
   background:
     linear-gradient(90deg, rgba(255, 252, 246, 0.99), rgba(247, 240, 228, 0.965) 50%, rgba(255, 252, 246, 0.985)),
@@ -2657,7 +2609,6 @@ h2 span {
 .nav-status-pill.closed {
   border: 1px solid rgba(186, 73, 73, 0.1);
   background: rgba(186, 73, 73, 0.06);
-  color: var(--red);
 }
 
 .nav-links {
@@ -3257,11 +3208,9 @@ body.menu-sheet-open {
 
 .hero-parallax-copy::after {
   width: min(10.5rem, 52%);
-  height: 1px;
   margin-top: 0.26rem;
   background: linear-gradient(90deg, rgba(143, 23, 26, 0.62), rgba(198, 158, 84, 0.52), transparent);
   content: "";
-  transform-origin: left center;
   animation: hero-copy-line 920ms 360ms cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
@@ -3301,7 +3250,6 @@ body.menu-sheet-open {
   font-size: clamp(0.9rem, 1.08vw, 1rem);
   font-weight: 540;
   line-height: 1.48;
-  text-wrap: pretty;
 }
 
 .hero-parallax-gallery {
@@ -3495,7 +3443,6 @@ body.menu-sheet-open {
     top: 10.6rem;
     right: 0.25rem;
     left: 0.55rem;
-    width: auto;
     max-width: none;
     height: 380px;
     min-height: 380px;
@@ -3750,7 +3697,6 @@ h2 span {
 .footer-skyline-wrapper {
   z-index: 2;
   height: clamp(170px, 19vw, 250px);
-  margin-top: 0;
   border-bottom-color: rgba(33, 51, 68, 0.62);
   background:
     linear-gradient(180deg, rgba(255, 253, 248, 0.88), rgba(246, 237, 220, 0.58)),
@@ -3884,23 +3830,13 @@ h2 span {
 /* 2026-07 unified heritage system: burgundy, warm stone, restrained contour. */
 :root,
 .theme-breakfast {
-  --red: #70151c;
-  --red-dark: #4e0c12;
   --red-light: #f2dfe0;
-  --soft: #f1ebe2;
-  --white: #fff9ee;
-  --ink: #241718;
   --ink-soft: #3f2b2d;
-  --muted: #685a55;
   --line: #d1c3b1;
-  --heritage-paper: #f1ebe2;
-  --heritage-paper-light: #fff9ee;
   --heritage-paper-soft: #f7f0e6;
   --heritage-paper-mid: #ded0be;
   --heritage-paper-deep: #cbb99f;
   --heritage-ink: #241718;
-  --heritage-forest: #70151c;
-  --heritage-forest-soft: #8d252c;
   --heritage-line: rgba(28, 14, 15, 0.18);
 }
 
@@ -3910,7 +3846,7 @@ h2 span {
 .theme-breakfast .nav-links a:hover,
 .theme-breakfast .nav-location,
 .theme-breakfast .nav-location svg {
-  color: #70151c !important;
+  color: #7a1b22 !important;
 }
 
 .theme-breakfast .nav-menu-button {
@@ -3919,14 +3855,14 @@ h2 span {
   overflow: visible !important;
   border: 1px solid #170b0c !important;
   border-radius: 6px !important;
-  background: #70151c !important;
+  background: #7a1b22 !important;
   color: #fff6e5 !important;
   box-shadow: 3px 3px 0 rgba(23, 11, 12, 0.2) !important;
 }
 
 .theme-breakfast .nav-menu-button:hover,
 .theme-breakfast .nav.menu-open .nav-menu-button {
-  background: #4e0c12 !important;
+  background: #551117 !important;
   transform: translate(-1px, -1px) !important;
   box-shadow: 4px 4px 0 rgba(23, 11, 12, 0.24) !important;
 }
@@ -3949,7 +3885,7 @@ h2 span {
   border-radius: 0 !important;
   background:
     radial-gradient(circle at 92% 12%, rgba(239, 207, 145, 0.1), transparent 28%),
-    #70151c !important;
+    #7a1b22 !important;
   box-shadow: 0 8px 8px rgba(35, 7, 10, 0.12) !important;
   opacity: 0 !important;
   filter: none !important;
@@ -3961,9 +3897,7 @@ h2 span {
 .theme-breakfast .nav.menu-open .nav-menu-panel {
   background:
     radial-gradient(circle at 92% 12%, rgba(239, 207, 145, 0.1), transparent 28%),
-    #70151c !important;
-  opacity: 1 !important;
-  transform: translateY(0) !important;
+    #7a1b22 !important;
 }
 
 .theme-breakfast .nav-menu-panel a {
@@ -3992,9 +3926,8 @@ h2 span {
 .theme-breakfast .nav-menu-panel a:hover,
 .theme-breakfast .nav-menu-panel a:focus-visible {
   background: #fff4df !important;
-  color: #4e0c12 !important;
+  color: #551117 !important;
   transform: translateY(0) !important;
-  outline: none !important;
 }
 
 .theme-breakfast .nav-menu-panel a svg {
@@ -4007,22 +3940,16 @@ h2 span {
 }
 
 .theme-breakfast .nav-menu-link-meta {
-  color: currentColor !important;
-  font-size: 0.61rem !important;
   font-weight: 650 !important;
   letter-spacing: 0.09em !important;
-  opacity: 0.58 !important;
 }
 
 /* About and reviews share one calm stone room and one burgundy focal color. */
 
 /* Gallery: replace the old green accents with the About burgundy. */
 .theme-breakfast .gallery-section {
-  --gallery-green: #70151c;
-  --gallery-green-soft: #8d252c;
   --gallery-gold: #efcf91;
   border-top-color: rgba(23, 11, 12, 0.18) !important;
-  background: #f1ebe2 !important;
 }
 
 /* FAQ: compact editorial accordion with a small draw-line motion. */
@@ -4053,8 +3980,8 @@ h2 span {
   width: fit-content;
   margin-bottom: 0.9rem;
   padding-bottom: 0.35rem;
-  border-bottom: 1px solid #70151c;
-  color: #70151c;
+  border-bottom: 1px solid #7a1b22;
+  color: #7a1b22;
   font-size: 0.7rem;
   font-weight: 850;
   letter-spacing: 0.12em;
@@ -4120,21 +4047,21 @@ h2 span {
   width: 1.25rem;
   height: 1.25rem;
   place-items: center;
-  border: 1px solid #70151c;
-  color: #70151c;
+  border: 1px solid #7a1b22;
+  color: #7a1b22;
   font-size: 1rem;
   line-height: 1;
   transition: transform 300ms cubic-bezier(0.16, 1, 0.3, 1), background-color 180ms ease, color 180ms ease;
 }
 
 .faq-item[open] .faq-question::after {
-  background: #70151c;
+  background: #7a1b22;
   color: #fff4df;
   transform: rotate(45deg);
 }
 
 .faq-question:focus-visible {
-  outline: 2px solid #70151c;
+  outline: 2px solid #7a1b22;
   outline-offset: -2px;
 }
 
@@ -4245,7 +4172,7 @@ h2 span {
 /* Hero revision — fewer objects, stronger burgundy identity, earlier gallery reveal. */
 
 .theme-breakfast .hero-parallax-copy::after {
-  background: linear-gradient(90deg, #70151c, rgba(112, 21, 28, 0.22) 52%, transparent) !important;
+  background: linear-gradient(90deg, #7a1b22, rgba(122, 27, 34, 0.22) 52%, transparent) !important;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -4262,23 +4189,16 @@ h2 span {
 /* Mustard navigation — quiet weight, typographic hierarchy, hairline contour. */
 :root,
 .theme-breakfast {
-  --mustard: #c99a35;
   --mustard-deep: #aa761d;
-  --mustard-light: #e3bd67;
-  --menu-ink: #1c1812;
 }
 
 .theme-breakfast .nav-menu-panel a.nav-menu-utility,
 .theme-breakfast .nav.menu-open .nav-menu-panel a.nav-menu-utility {
-  grid-column: auto !important;
   grid-template-columns: 1.1rem 1.25rem minmax(0, 1fr) !important;
   grid-template-rows: auto !important;
   gap: 0.42rem !important;
   min-height: 82px !important;
   padding: 0.7rem 0.55rem !important;
-  border-right: 0.75px solid rgba(28, 24, 18, 0.58) !important;
-  border-bottom: 0.75px solid rgba(28, 24, 18, 0.58) !important;
-  transform: translateY(12px) !important;
 }
 
 .theme-breakfast .nav-menu-link-meta {
@@ -4532,7 +4452,6 @@ h2 span {
 .nav-menu-panel {
   position: absolute;
   top: calc(100% + 0.62rem);
-  right: 0;
   z-index: 60;
   width: min(340px, calc(100vw - 1.5rem));
   padding: 0.55rem;
@@ -4546,10 +4465,7 @@ h2 span {
   box-shadow:
     0 26px 70px rgba(35, 25, 17, 0.2),
     inset 0 1px 0 rgba(255, 255, 255, 0.82);
-  opacity: 0;
-  pointer-events: none;
   transform: translateY(-8px) scale(0.98);
-  transform-origin: top right;
   transition:
     opacity 210ms var(--ease-soft),
     transform 260ms var(--ease-soft);
@@ -4666,13 +4582,10 @@ h2 span {
 }
 
 .nav-menu-panel {
-  position: fixed !important;
   top: 78px !important;
-  right: 0 !important;
   left: 0 !important;
   z-index: 49 !important;
   width: 100% !important;
-  max-width: none !important;
   padding: clamp(1rem, 3.4vw, 2rem) clamp(1rem, 4vw, 2.5rem) !important;
   border-width: 0 0 1px !important;
   border-style: solid !important;
@@ -4682,8 +4595,6 @@ h2 span {
     linear-gradient(180deg, #203a28, #162a1d) !important;
   color: #fffaf0 !important;
   box-shadow: 0 22px 50px rgba(12, 25, 17, 0.22) !important;
-  opacity: 0 !important;
-  pointer-events: none !important;
   transform: translateY(-18px) !important;
   transition:
     opacity 220ms var(--ease-soft),
@@ -4885,7 +4796,6 @@ h2 span {
 }
 
 .nav-menu-panel a {
-  position: relative !important;
   overflow: hidden !important;
   padding: 0.2rem 0.75rem !important;
   border: 1px solid transparent !important;
@@ -4898,8 +4808,6 @@ h2 span {
 }
 
 .nav-menu-panel a::before {
-  content: "";
-  position: absolute;
   left: 0;
   top: 9px;
   bottom: 9px;
@@ -4981,7 +4889,6 @@ h2 span {
     linear-gradient(180deg, rgba(255, 250, 240, 0.045) 1px, transparent 1px),
     linear-gradient(180deg, rgba(9, 31, 19, 0.38), rgba(9, 31, 19, 0.84));
   background-size: 82px 82px, 82px 82px, auto;
-  opacity: 0;
   transform: translateY(-12px);
   transition:
     opacity 520ms ease,
@@ -5006,13 +4913,10 @@ h2 span {
   bottom: -6rem;
   width: 16rem;
   height: 16rem;
-  border-radius: 50%;
   background: radial-gradient(circle, rgba(255, 250, 240, 0.12), transparent 64%);
 }
 
 .nav.menu-open .nav-menu-ambient span {
-  opacity: 1;
-  transform: translate3d(0, 0, 0) scale(1);
   transition-delay: 120ms;
 }
 
@@ -5026,11 +4930,8 @@ h2 span {
 }
 
 .nav-menu-panel a::after {
-  content: "";
-  position: absolute;
   inset: 0;
   background: linear-gradient(100deg, transparent 0%, rgba(255, 250, 240, 0.18) 48%, transparent 62%);
-  opacity: 0;
   transform: translateX(-130%);
   transition:
     opacity 220ms ease,
@@ -5205,17 +5106,12 @@ h2 span {
 }
 
 .nav-menu-art-mark {
-  position: absolute;
   right: -0.34em;
   top: 5.2rem;
   color: rgba(238, 203, 132, 0.075);
-  font-family: var(--font-serif), Georgia, serif;
   font-size: clamp(8rem, 38vw, 20rem);
-  font-style: italic;
-  font-weight: 900;
   letter-spacing: -0.09em;
   line-height: 0.8;
-  opacity: 0;
   transform: translate3d(18%, 0, 0) rotate(-8deg) scale(0.94);
   transform-origin: 70% 30%;
   transition:
@@ -5224,13 +5120,10 @@ h2 span {
 }
 
 .nav-menu-art-steam {
-  position: absolute;
   width: 44vw;
   max-width: 320px;
   height: 46%;
   border-left: 1px solid rgba(255, 248, 226, 0.16);
-  border-radius: 50%;
-  opacity: 0;
   transform: translate3d(0, 24px, 0) rotate(18deg) scaleY(0.8);
   transition:
     opacity 580ms ease,
@@ -5245,7 +5138,6 @@ h2 span {
   background:
     linear-gradient(90deg, rgba(238, 203, 132, 0.42), rgba(238, 203, 132, 0.12), transparent) !important;
   transform: scaleX(0) !important;
-  transform-origin: left !important;
   transition: transform 540ms cubic-bezier(0.16, 1, 0.3, 1) !important;
 }
 
@@ -5327,9 +5219,7 @@ h2 span {
 .nav-menu-panel a {
   max-width: 980px !important;
   min-height: 86px !important;
-  display: grid !important;
   grid-template-columns: 3.2rem 1.65rem minmax(0, 1fr) clamp(4.9rem, 16vw, 8.2rem) 1.35rem !important;
-  align-items: center !important;
   gap: clamp(0.62rem, 1.6vw, 1rem) !important;
   padding: 0.42rem 0.2rem 0.42rem 0 !important;
   border-radius: 0 !important;
@@ -5343,7 +5233,6 @@ h2 span {
     linear-gradient(90deg, rgba(238, 203, 132, 0.12), rgba(255, 248, 226, 0.04) 42%, transparent 72%) !important;
   opacity: 0 !important;
   transform: translateX(-8%) scaleX(0.6) !important;
-  transform-origin: left !important;
   transition:
     opacity 360ms ease,
     transform 640ms cubic-bezier(0.16, 1, 0.3, 1) !important;
@@ -5356,13 +5245,10 @@ h2 span {
 }
 
 .nav-menu-link-meta {
-  display: block;
   color: rgba(255, 248, 226, 0.46);
   font-size: clamp(0.66rem, 2.6vw, 0.82rem);
-  font-weight: 760;
   letter-spacing: 0.12em;
   line-height: 1;
-  text-transform: uppercase;
   opacity: 0;
   transform: translateY(8px);
   transition:
@@ -5386,7 +5272,6 @@ h2 span {
     max-width: 15ch;
     overflow: hidden;
     font-size: 0.58rem;
-    letter-spacing: 0.1em;
     text-overflow: ellipsis;
     white-space: nowrap;
   }
@@ -5418,7 +5303,6 @@ h2 span {
   max-width: none !important;
   min-height: auto !important;
   max-height: calc(100dvh - 96px) !important;
-  display: grid !important;
   gap: 0.62rem !important;
   overflow-y: auto !important;
   padding: 0.78rem !important;
@@ -5431,8 +5315,6 @@ h2 span {
   box-shadow:
     0 30px 72px rgba(7, 21, 13, 0.34),
     inset 0 1px 0 rgba(255, 255, 255, 0.12) !important;
-  opacity: 0 !important;
-  pointer-events: none !important;
   transform: translateY(-10px) scale(0.985) !important;
   transform-origin: top right !important;
   clip-path: none !important;
@@ -5454,28 +5336,19 @@ h2 span {
 }
 
 .nav-menu-link-meta {
-  display: block !important;
   max-width: 100% !important;
-  overflow: hidden !important;
   color: rgba(255, 248, 232, 0.52) !important;
   font-size: 0.68rem !important;
   font-weight: 760 !important;
   letter-spacing: 0.08em !important;
   line-height: 1.15 !important;
-  opacity: 1 !important;
-  text-overflow: ellipsis !important;
-  text-transform: uppercase !important;
-  transform: none !important;
-  white-space: nowrap !important;
 }
 
 @media (max-width: 680px) {
   .nav-menu-panel {
     position: fixed !important;
-    top: 78px !important;
     left: 0.75rem !important;
     right: 0.75rem !important;
-    width: auto !important;
     max-height: calc(100dvh - 92px) !important;
     padding: 0.62rem !important;
     border-radius: 18px !important;
@@ -5943,7 +5816,6 @@ h2 span {
     top: 80px !important;
     left: 0.7rem !important;
     right: 0.7rem !important;
-    width: auto !important;
     min-height: min(690px, calc(100dvh - 94px)) !important;
     max-height: calc(100dvh - 94px) !important;
     padding: 0.88rem !important;
@@ -6103,7 +5975,6 @@ h2 span {
     width: min(380px, calc(100% - 34px)) !important;
     height: 52px !important;
     padding: 0 0.34rem !important;
-    border-radius: 22px !important;
     box-shadow:
       0 16px 34px rgba(24, 16, 14, 0.14),
       0 5px 12px rgba(111, 16, 19, 0.06),
@@ -7243,15 +7114,15 @@ body,
 /* Final authority layer — keep after all legacy experiments. */
 :root,
 .theme-breakfast {
-  --red: #70151c;
-  --red-dark: #4e0c12;
+  --red: #7a1b22;
+  --red-dark: #551117;
   --soft: #f1ebe2;
   --white: #fff9ee;
   --ink: #241718;
   --muted: #685a55;
   --heritage-paper: #f1ebe2;
   --heritage-paper-light: #fff9ee;
-  --heritage-forest: #70151c;
+  --heritage-forest: #7a1b22;
   --heritage-forest-soft: #8d252c;
 }
 
@@ -7269,9 +7140,7 @@ body,
 .theme-breakfast .nav.scrolled {
   min-height: 70px !important;
   padding: 0 clamp(0.9rem, 3vw, 2rem) !important;
-  border: 0 !important;
   border-bottom: 1px solid rgba(20, 9, 10, 0.22) !important;
-  border-radius: 0 !important;
   background: rgba(247, 240, 230, 0.96) !important;
   box-shadow: 0 5px 8px rgba(42, 24, 20, 0.06) !important;
   backdrop-filter: blur(14px) !important;
@@ -7289,7 +7158,7 @@ body,
   overflow: visible !important;
   border: 1px solid #170b0c !important;
   border-radius: 6px !important;
-  background: #70151c !important;
+  background: #7a1b22 !important;
   color: #fff6e5 !important;
   box-shadow: 3px 3px 0 rgba(23, 11, 12, 0.2) !important;
 }
@@ -7317,7 +7186,7 @@ body,
   border: 0 !important;
   border-bottom: 1px solid #16090b !important;
   border-radius: 0 !important;
-  background: radial-gradient(circle at 92% 12%, rgba(239, 207, 145, 0.1), transparent 28%), #70151c !important;
+  background: radial-gradient(circle at 92% 12%, rgba(239, 207, 145, 0.1), transparent 28%), #7a1b22 !important;
   box-shadow: 0 8px 8px rgba(35, 7, 10, 0.12) !important;
   filter: none !important;
   transform: translateY(-16px) !important;
@@ -7343,16 +7212,10 @@ body,
   align-items: center !important;
   gap: 0.72rem !important;
   min-height: 68px !important;
-  margin: 0 !important;
   padding: 0.55rem 1rem !important;
-  border: 0 !important;
   border-bottom: 1px solid rgba(19, 7, 9, 0.5) !important;
-  border-radius: 0 !important;
-  background: transparent !important;
   color: #fff4df !important;
-  box-shadow: none !important;
   opacity: 1 !important;
-  filter: none !important;
   transform: translateY(0) !important;
 }
 
@@ -7373,12 +7236,10 @@ body,
 
 .theme-breakfast .nav-menu-copy {
   display: grid !important;
-  grid-column: auto !important;
   gap: 0.12rem !important;
 }
 
 .theme-breakfast .nav-menu-link-text {
-  color: currentColor !important;
   font-family: var(--font-geist-sans), system-ui, sans-serif !important;
   font-size: clamp(1rem, 2vw, 1.22rem) !important;
   font-weight: 760 !important;
@@ -7394,30 +7255,30 @@ body,
 }
 
 .theme-breakfast .gallery-section {
-  --gallery-green: #70151c;
+  --gallery-green: #7a1b22;
   --gallery-green-soft: #8d252c;
   background: #f1ebe2 !important;
 }
 
 .theme-breakfast .gallery-section::before {
-  background: radial-gradient(ellipse at 88% 24%, rgba(112, 21, 28, 0.1), transparent 32%) !important;
+  background: radial-gradient(ellipse at 88% 24%, rgba(122, 27, 34, 0.1), transparent 32%) !important;
 }
 
 .theme-breakfast .gallery-head h2::after {
   border-radius: 0 !important;
-  background: linear-gradient(90deg, #efcf91, #70151c, transparent) !important;
+  background: linear-gradient(90deg, #efcf91, #7a1b22, transparent) !important;
 }
 
 .theme-breakfast .gallery-head .order-button {
   border: 1px solid #16090b !important;
   border-radius: 6px !important;
-  background: #70151c !important;
+  background: #7a1b22 !important;
   box-shadow: 5px 5px 0 rgba(23, 11, 12, 0.18) !important;
 }
 
 .theme-breakfast .mobile-bar button,
 body .mobile-bar button {
-  background: #70151c !important;
+  background: #7a1b22 !important;
   box-shadow: 0 8px 16px rgba(78, 12, 18, 0.22) !important;
 }
 
@@ -7456,7 +7317,7 @@ body .mobile-bar button {
 
 /* Hero final authority — must remain the last hero layer. */
 .theme-breakfast .hero.hero-parallax-dining {
-  background: radial-gradient(ellipse at 82% 24%, rgba(112, 21, 28, 0.075), transparent 30%), radial-gradient(ellipse at 46% 58%, rgba(181, 128, 56, 0.1), transparent 34%), #f1ebe2 !important;
+  background: radial-gradient(ellipse at 82% 24%, rgba(122, 27, 34, 0.075), transparent 30%), radial-gradient(ellipse at 46% 58%, rgba(181, 128, 56, 0.1), transparent 34%), #f1ebe2 !important;
 }
 
 .theme-breakfast .hero-parallax-card {
@@ -7527,7 +7388,7 @@ body .mobile-bar button {
 }
 
 .theme-breakfast .gallery-head h2::after {
-  background: linear-gradient(90deg, #efcf91, var(--van-blue), #70151c, transparent) !important;
+  background: linear-gradient(90deg, #efcf91, var(--van-blue), #7a1b22, transparent) !important;
 }
 
 .faq-heading-wrap > span {
@@ -7601,14 +7462,11 @@ body .mobile-bar a svg {
 .theme-breakfast .nav.scrolled .nav-menu-panel,
 .theme-breakfast .nav.menu-open .nav-menu-panel {
   grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-  gap: 0 !important;
   border-bottom-color: #102730 !important;
   background:
     radial-gradient(circle at 88% 4%, rgba(216, 229, 231, 0.16), transparent 24%),
     linear-gradient(145deg, #315c6d 0%, var(--van-blue) 42%, var(--van-blue-dark) 100%) !important;
   box-shadow: 0 10px 12px rgba(24, 49, 59, 0.16) !important;
-  clip-path: inset(0 0 100% 0);
-  opacity: 0 !important;
   transform: translateY(-8px) !important;
   transition:
     clip-path 520ms cubic-bezier(0.16, 1, 0.3, 1),
@@ -7654,13 +7512,10 @@ body .mobile-bar a svg {
 
 .theme-breakfast .nav-menu-panel a,
 .theme-breakfast .nav.menu-open .nav-menu-panel a {
-  position: relative !important;
-  z-index: 2 !important;
   min-height: 72px !important;
   border: 1px solid rgba(216, 229, 231, 0.16) !important;
   background: rgba(16, 39, 48, 0.12) !important;
   color: #f8f1e6 !important;
-  opacity: 0 !important;
   transform: translateY(16px) !important;
   transition:
     opacity 320ms ease,
@@ -7751,13 +7606,11 @@ body .mobile-bar a svg {
 .theme-breakfast .nav-menu-panel,
 .theme-breakfast .nav.scrolled .nav-menu-panel,
 .theme-breakfast .nav.menu-open .nav-menu-panel {
-  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
   gap: 0 !important;
   padding: clamp(0.85rem, 2.4vw, 1.5rem) clamp(1rem, 4vw, 3rem) !important;
   border: 0 !important;
   border-bottom: 0.75px solid var(--menu-ink) !important;
   border-radius: 0 !important;
-  background: var(--mustard) !important;
   box-shadow: 0 7px 10px rgba(28, 24, 18, 0.1) !important;
   clip-path: inset(0 0 100% 0) !important;
   opacity: 0 !important;
@@ -7981,7 +7834,6 @@ body .mobile-bar a svg {
   transform: none !important;
   width: 100vw !important;
   max-width: none !important;
-  min-height: 72px !important;
   padding-left: max(clamp(0.82rem, 3.2vw, 2.75rem), env(safe-area-inset-left)) !important;
   padding-right: max(clamp(0.82rem, 3.2vw, 2.75rem), env(safe-area-inset-right)) !important;
   border: 0 !important;
@@ -8071,7 +7923,6 @@ body .mobile-bar a svg {
   font-family: inherit !important;
   font-weight: 650 !important;
   letter-spacing: -0.035em !important;
-  line-height: 0.9 !important;
   text-shadow: 0 1px 0 rgba(255, 249, 238, 0.72), 0 12px 28px rgba(59, 38, 29, 0.1) !important;
 }
 
@@ -8086,7 +7937,6 @@ body .mobile-bar a svg {
 }
 
 .theme-breakfast .hero-title-line-two {
-  color: var(--van-blue) !important;
   font-style: italic;
   font-weight: 650 !important;
   text-shadow: 0 1px 0 rgba(255, 249, 238, 0.74), 0 12px 28px rgba(47, 86, 102, 0.13) !important;
@@ -8260,7 +8110,6 @@ body .mobile-bar a svg {
   left: 0.04em;
   z-index: -1;
   width: min(3.25em, 52%);
-  height: 2px;
   background: var(--van-blue);
   content: "";
   opacity: 0.72;
@@ -8474,7 +8323,6 @@ body .mobile-bar a svg {
     color: #1c1812;
     font-family: var(--font-literata-gf), Georgia, serif;
     font-size: clamp(1.85rem, 8vw, 2.4rem);
-    font-weight: 760;
     letter-spacing: -0.03em;
     line-height: 1;
   }
@@ -9357,7 +9205,7 @@ body .mobile-bar a svg {
 /* Shared warm-neutral surface authority. */
 :root,
 .theme-breakfast {
-  --site-beige: #f6efe4;
+  --site-beige: #f4ecdf;
   --soft: var(--site-beige);
   --white: var(--site-beige);
   --heritage-paper: var(--site-beige);
@@ -9396,7 +9244,7 @@ body .mobile-bar .mobile-bar-primary {
   height: 50px;
   border: 0;
   border-radius: 21px;
-  background: #70151c !important;
+  background: #7a1b22 !important;
   color: #ffffff !important;
   box-shadow: 0 8px 16px rgba(78, 12, 18, 0.22) !important;
   font-size: 0.7rem;
@@ -9443,11 +9291,11 @@ body .mobile-bar .mobile-bar-primary:focus-visible {
 }
 
 .theme-breakfast .hero-top-curtain {
-  background: linear-gradient(180deg, #f6efe4 0%, rgba(246, 239, 228, 0.9) 52%, rgba(246, 239, 228, 0) 100%) !important;
+  background: linear-gradient(180deg, #f4ecdf 0%, rgba(244, 236, 223, 0.9) 52%, rgba(244, 236, 223, 0) 100%) !important;
 }
 
 .theme-breakfast .hero-parallax-sticky::after {
-  background: linear-gradient(180deg, rgba(246, 239, 228, 0) 0%, rgba(246, 239, 228, 0.7) 58%, #f6efe4 100%) !important;
+  background: linear-gradient(180deg, rgba(244, 236, 223, 0) 0%, rgba(244, 236, 223, 0.7) 58%, #f4ecdf 100%) !important;
 }
 
 .footer-skyline-wrapper,
@@ -9476,7 +9324,7 @@ body .mobile-bar .mobile-bar-primary:focus-visible {
   }
 
   .theme-breakfast .hero-parallax-sticky::after {
-    background: linear-gradient(180deg, rgba(246, 239, 228, 0) 0%, rgba(246, 239, 228, 0.42) 34%, rgba(246, 239, 228, 0.9) 72%, #f6efe4 100%) !important;
+    background: linear-gradient(180deg, rgba(244, 236, 223, 0) 0%, rgba(244, 236, 223, 0.42) 34%, rgba(244, 236, 223, 0.9) 72%, #f4ecdf 100%) !important;
   }
 }
 
@@ -9568,7 +9416,7 @@ body .mobile-bar .mobile-bar-primary:focus-visible {
 }
 
 .menu-page-shell .nav.menu-open .nav-menu-button {
-  background: #74151d !important;
+  background: #7a1b22 !important;
   color: #ffffff !important;
   box-shadow: 2px 2px 0 #1d1818 !important;
 }
@@ -9587,7 +9435,7 @@ body .mobile-bar .mobile-bar-primary:focus-visible {
 }
 
 .theme-breakfast .nav.menu-open .nav-menu-button {
-  background: #74151d !important;
+  background: #7a1b22 !important;
   color: #ffffff !important;
   box-shadow: 2px 2px 0 #1d1818 !important;
 }

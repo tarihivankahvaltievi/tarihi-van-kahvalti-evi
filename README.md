@@ -23,8 +23,8 @@ npm start
 - Site geneli metadata: `src/app/layout.tsx`
 - İndekslenebilir kanonik sayfalar: Türkçe `/` ve İngilizce `/en`
 - İki dil arasında karşılıklı `hreflang` (`tr`, `en`, `x-default`) bulunur.
-- Menü, iletişim ve SSS Türkçe ana sayfada gerçek bölümler olarak yer alır.
-- Kaldırılan `/menu`, `/iletisim`, `/sss` ve `/kafka-cafe` URL'leri kalıcı olarak ana sayfadaki en yakın bölüme yönlenir.
+- İletişim ve SSS Türkçe ana sayfada, güncel QR menü ise `/menu` sayfasında yer alır.
+- Güncel ve indekslenebilir QR menü `/menu` sayfasındadır; kaldırılan `/iletisim`, `/sss` ve `/kafka-cafe` URL'leri en yakın gerçek içeriğe yönlenir.
 - Eski konu/WordPress URL'leri yalnız bilinen eşdeğer hedefe tek adım kalıcı yönlenir; bilinmeyen URL'ler gerçek `404` döner.
 - Sitemap ve tarayıcı kuralları: `src/app/sitemap.ts`, `src/app/robots.ts`
 - Otomatik SEO/HTTP sözleşmesi: `npm run test:seo`

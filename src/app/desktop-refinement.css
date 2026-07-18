@@ -12,7 +12,7 @@
     padding-inline: 1rem !important;
     border: 1px solid rgba(55, 38, 32, 0.14) !important;
     border-radius: 14px !important;
-    background: rgba(246, 239, 228, 0.96) !important;
+    background: rgba(244, 236, 223, 0.96) !important;
     box-shadow: 0 7px 8px rgba(48, 31, 27, 0.06) !important;
     backdrop-filter: blur(14px) saturate(112%) !important;
     -webkit-backdrop-filter: blur(14px) saturate(112%) !important;
@@ -62,7 +62,7 @@
 
   .theme-breakfast .hero-top-curtain {
     height: 10rem !important;
-    background: linear-gradient(180deg, #f6efe4 0%, rgba(246, 239, 228, 0.88) 62%, rgba(246, 239, 228, 0) 100%) !important;
+    background: linear-gradient(180deg, #f4ecdf 0%, rgba(244, 236, 223, 0.88) 62%, rgba(244, 236, 223, 0) 100%) !important;
   }
 
   .theme-breakfast .hero-parallax-copy {
@@ -180,7 +180,7 @@
 
   .theme-breakfast .hero-parallax-sticky::after {
     height: 24% !important;
-    background: linear-gradient(180deg, rgba(246, 239, 228, 0), #f6efe4 92%) !important;
+    background: linear-gradient(180deg, rgba(244, 236, 223, 0), #f4ecdf 92%) !important;
   }
 }
 

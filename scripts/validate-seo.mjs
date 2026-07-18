@@ -11,7 +11,8 @@ const routes = [
     path: "/",
     canonical: canonicalSiteUrl,
     language: "tr",
-    types: ["WebSite", "Restaurant", "WebPage", "Menu", "FAQPage"],
+    types: ["WebSite", "Restaurant", "WebPage", "FAQPage"],
+    restaurantMenu: `${menuPageUrl}#menu`,
     faqCount: 10,
     visibleSignals: ["van kahvaltıcısı", "beyoğlu", "taksim", "serpme kahvaltı"],
   },
@@ -20,6 +21,7 @@ const routes = [
     canonical: englishPageUrl,
     language: "en",
     types: ["WebSite", "Restaurant", "WebPage", "Menu", "FAQPage"],
+    restaurantMenu: `${englishPageUrl}#menu`,
     faqCount: 6,
     visibleSignals: [
       "authentic van breakfast",
@@ -59,20 +61,20 @@ const redirectRules = [
   ["/taksim-brunch-kahvalti", "/"],
   ["/iletisim", "/#contact"],
   ["/sss", "/#faq"],
-  ["/kafka-cafe", "/#menu"],
+  ["/kafka-cafe", "/menu#turk-kahvesi"],
   ["/turkish-breakfast-istanbul", "/en"],
   ["/breakfast-near-taksim", "/en"],
   ["/zavtrak-taksim-stambul", "/"],
   ["/arabic-breakfast-taksim", "/"],
   ["/anasayfa", "/"],
-  ["/tarihi-van-kahvaltisi-evi-menu", "/"],
+  ["/tarihi-van-kahvaltisi-evi-menu", "/menu"],
   ["/van-kahvalti", "/"],
   ["/gercek-van-kahvaltisinda-neler-olur", "/"],
   ["/tarihi-van-kahvalti-evi-hikayemiz", "/"],
   ["/galeri-van-kahvalti-evi-taksim", "/"],
-  ["/urun/van-serpme-kahvalti", "/"],
-  ["/urun/cift-kisilik-serpme-kahvalti", "/"],
-  ["/urun/turk-kahvesi", "/"],
+  ["/urun/van-serpme-kahvalti", "/menu#geleneksel-van-kahvaltisi"],
+  ["/urun/cift-kisilik-serpme-kahvalti", "/menu#iki-kisilik-van-sofrasi"],
+  ["/urun/turk-kahvesi", "/menu#turk-kahvesi"],
 ];
 
 const fail = (message) => {
@@ -221,10 +223,15 @@ for (const route of routes) {
   assert(restaurant?.geo?.latitude === 41.0367655, `${routeLabel}: enlem yanlış`);
   assert(restaurant?.geo?.longitude === 28.9829478, `${routeLabel}: boylam yanlış`);
   assert(restaurant?.sameAs?.includes(restaurant.hasMap), `${routeLabel}: Maps sameAs eksik`);
+  assert(restaurant?.menu === route.restaurantMenu, `${routeLabel}: restoran menü URL'si yanlış`);
 
   const menu = graphDocument["@graph"].find((node) => node["@type"] === "Menu");
-  assert(menu?.url === `${route.canonical}#menu`, `${routeLabel}: menü URL'si yanlış`);
-  assert(menu?.hasMenuSection?.length === 3, `${routeLabel}: menü bölümleri eksik`);
+  if (route.types.includes("Menu")) {
+    assert(menu?.url === `${route.canonical}#menu`, `${routeLabel}: menü URL'si yanlış`);
+    assert(menu?.hasMenuSection?.length === 3, `${routeLabel}: menü bölümleri eksik`);
+  } else {
+    assert(!menu, `${routeLabel}: görünür olmayan menü için şema bulunmamalı`);
+  }
 
   const faq = graphDocument["@graph"].find((node) => node["@type"] === "FAQPage");
   const questions = faq?.mainEntity?.map((item) => item.name) ?? [];
@@ -285,5 +292,5 @@ assert(missing.status === 404, "Bilinmeyen rota gerçek 404 dönmeli");
 assert(/<meta\s+name="robots"\s+content="noindex"/i.test(missingHtml), "404 sayfası noindex olmalı");
 
 console.log(
-  `SEO sözleşmesi geçti: TR ve EN kanonik sayfalar indekslenebilir; ${redirectRules.length} bilinen eski URL doğru hedefe gider; hreflang, sitemap, robots, Restaurant/Menu/FAQ şeması ve 404 doğru.`,
+  `SEO sözleşmesi geçti: TR, EN ve menü kanonik sayfaları indekslenebilir; ${redirectRules.length} bilinen eski URL doğru hedefe gider; hreflang, sitemap, robots, Restaurant/Menu/FAQ şeması ve 404 doğru.`,
 );

@@ -333,7 +333,7 @@ export default function ClientPage({ children }: { children: ReactNode }) {
               <BookOpen size={18} />
               <span className="nav-menu-copy">
                 <span className="nav-menu-link-text">Van kahvaltısı</span>
-                <span className="nav-menu-link-meta">Ana sayfada kısa cevaplar</span>
+                <span className="nav-menu-link-meta">Yöresel lezzetler ve fiyatlar</span>
               </span>
               <ChevronRight size={17} />
             </Link>

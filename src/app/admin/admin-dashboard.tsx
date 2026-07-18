@@ -557,7 +557,7 @@ export function AdminDashboard({ initialData }: AdminDashboardProps) {
           <div>
             <h1 className="text-xl font-bold font-serif flex items-center space-x-2">
               <span style={{ color: "var(--red)" }}>Tarihi Van</span>
-              <span className="text-sm font-sans font-medium px-2 py-0.5 rounded-full bg-[#f8efe0] border border-[#e5d8bf] text-amber-800">
+              <span className="text-sm font-sans font-medium px-2 py-0.5 rounded-full bg-[#f4ecdf] border border-[#e5d8bf] text-amber-800">
                 Yönetim
               </span>
             </h1>
@@ -874,7 +874,7 @@ export function AdminDashboard({ initialData }: AdminDashboardProps) {
         <div className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 overflow-y-auto">
           <div className="bg-white rounded-2xl w-full max-w-4xl max-h-[90vh] overflow-hidden shadow-2xl flex flex-col md:flex-row relative">
             {/* Dynamic Product Preview Side (Wow factor!) */}
-            <div className="w-full md:w-2/5 bg-[#f8efe0] border-r border-[#e5d8bf] p-6 flex flex-col justify-center items-center">
+            <div className="w-full md:w-2/5 bg-[#f4ecdf] border-r border-[#e5d8bf] p-6 flex flex-col justify-center items-center">
               <span className="text-xs font-bold text-amber-800 uppercase tracking-widest mb-4">Kart Önizleme</span>
               
               {/* EXACT CARD REPLICATED FROM LIVE MENU */}
@@ -941,7 +941,7 @@ export function AdminDashboard({ initialData }: AdminDashboardProps) {
                             padding: "0.22rem 0.45rem",
                             border: "1px solid #251d1d",
                             borderRadius: "5px",
-                            backgroundColor: "#74151d",
+                            backgroundColor: "#7a1b22",
                             color: "#ffffff",
                             fontSize: "0.64rem",
                             fontWeight: 760,
@@ -986,7 +986,7 @@ export function AdminDashboard({ initialData }: AdminDashboardProps) {
                         </span>
                         <span
                           style={{
-                            color: "#74151d",
+                            color: "#7a1b22",
                             fontFamily: "Arial, sans-serif",
                             fontSize: "1.15rem",
                             fontWeight: 790,
@@ -1047,7 +1047,7 @@ export function AdminDashboard({ initialData }: AdminDashboardProps) {
                             border: "1px solid #251d1d",
                             borderRadius: "50%",
                             backgroundColor: "#ffffff",
-                            color: "#74151d",
+                            color: "#7a1b22",
                           }}
                         >
                           <ChevronRight size={15} strokeWidth={2.5} />

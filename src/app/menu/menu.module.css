@@ -1,13 +1,13 @@
 .page {
-  --menu-burgundy: #74151d;
-  --menu-burgundy-deep: #541018;
+  --menu-burgundy: #7a1b22;
+  --menu-burgundy-deep: #551117;
   --menu-brass: #b48742;
   --menu-ink: #1d1818;
   --menu-muted: #5d5554;
   --menu-line: #251d1d;
   --menu-line-soft: #e5dddd;
-  --menu-surface: #f6efe4;
-  --menu-surface-soft: #f2e7d7;
+  --menu-surface: #f4ecdf;
+  --menu-surface-soft: #efe2d2;
   --menu-on-burgundy: #ffffff;
   --menu-ease: cubic-bezier(0.16, 1, 0.3, 1);
   min-height: 100vh;
@@ -99,7 +99,7 @@
   top: 72px;
   z-index: 15;
   border-bottom: 1px solid var(--menu-line);
-  background: rgba(246, 239, 228, 0.98);
+  background: rgba(244, 236, 223, 0.98);
   transition: box-shadow 220ms var(--menu-ease);
 }
 

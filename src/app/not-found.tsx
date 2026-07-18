@@ -19,7 +19,7 @@ export default function NotFound() {
         <p>Bağlantı değişmiş veya sayfa kaldırılmış olabilir.</p>
         <div className="seo-related" aria-label="Devam bağlantıları">
           <Link href="/">Ana sayfaya dön</Link>
-          <Link href="/#menu">Menüyü incele</Link>
+          <Link href="/menu">Menüyü incele</Link>
           <Link href="/#contact">İletişim ve yol tarifi</Link>
         </div>
       </section>

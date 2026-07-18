@@ -329,7 +329,7 @@ function GalleryMarqueeRow({
                 alt={isDuplicate ? "" : alt}
                 fill
                 sizes="(max-width: 760px) 58vw, (max-width: 1100px) 34vw, 360px"
-                loading="eager"
+                loading="lazy"
               />
               <span className="mosaic-overlay">
                 <span>Görüntüle</span>
