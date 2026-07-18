@@ -309,7 +309,6 @@ export function MenuExperience({
             <span className={styles.heroBrand}>Tarihi Van Kahvaltı Evi</span>
             <span className={styles.heroMenu}>Menü</span>
           </h1>
-          <p>Günlük hazırlanan lezzetler ve güncel fiyatlar</p>
         </div>
       </section>
 
@@ -320,10 +319,6 @@ export function MenuExperience({
       >
         <div className={styles.discoveryInner}>
           <div className={styles.discoveryTop}>
-            <div className={styles.discoveryTitle} aria-hidden="true">
-              <strong>Sofranı seç</strong>
-              <span>{menuCollections.length} kategori</span>
-            </div>
             <div className={styles.searchField}>
               <Search size={18} aria-hidden="true" />
               <label className={styles.srOnly} htmlFor="menu-search">Menüde ara</label>
