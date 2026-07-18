@@ -113,13 +113,13 @@ export default function LocationPage() {
         <main id="main-content" className={styles.page}>
           <section className={styles.hero} aria-labelledby="location-title">
             <div className={styles.heroCopy}>
-              <p className={styles.routeLabel}>Zambak Sokak · Beyoğlu</p>
+              <p className={styles.routeLabel}>Konum ve yol tarifi</p>
               <h1 id="location-title">
-                Taksim&apos;in yanı başında,
-                <span>sofranın başında.</span>
+                Tarihi Van Kahvaltı Evi&apos;ne
+                <span>nasıl gelinir?</span>
               </h1>
               <p className={styles.heroLead}>
-                Tarihi Van Kahvaltı Evi, Beyoğlu&apos;nun eski sokak dokusunu taşıyan Zambak Sokak&apos;ta; Taksim Meydanı ve İstiklal Caddesi çevresinden kısa bir yürüyüşle ulaşabileceğiniz tarihi bir Rum binasında yer alır.
+                Tarihi Van Kahvaltı Evi, Beyoğlu&apos;nda Zambak Sokak No:8&apos;de yer alır. Taksim Meydanı ve İstiklal Caddesi çevresinden yürüyerek ulaşabilir; güncel güzergâh için haritadan yol tarifi alabilirsiniz.
               </p>
               <div className={styles.heroActions}>
                 <a className={styles.primaryAction} href={mapsUrl} target="_blank" rel="noopener noreferrer">
@@ -160,18 +160,18 @@ export default function LocationPage() {
                   alt="Tarihi Rum binasının tuğla duvarlı iç mekânı"
                   fill
                   sizes="(max-width: 760px) 38vw, 230px"
-                  quality={76}
+                  quality={75}
                 />
               </figure>
-              <p className={styles.photoNote}>Tarihi bina · sakin sokak · uzun kahvaltı</p>
+              <p className={styles.photoNote}>Zambak Sokak No:8</p>
             </div>
           </section>
 
           <section className={styles.arrival} aria-labelledby="arrival-title">
             <header className={styles.sectionHead}>
-              <h2 id="arrival-title">Rotanı seç, gerisini sokak anlatsın.</h2>
+              <h2 id="arrival-title">Ulaşım seçenekleri</h2>
               <p>
-                Zambak Sokak&apos;a farklı yönlerden ulaşabilirsiniz. Aşağıdaki tarifler başlangıç fikri verir; canlı trafik ve yaya rotası için haritayı açın.
+                M2 Taksim Metro İstasyonu, çevredeki otobüs durakları ve araçla ulaşım için temel bilgileri aşağıda bulabilirsiniz. Güncel güzergâh için haritayı kullanın.
               </p>
             </header>
             <ol className={styles.routes}>
@@ -206,7 +206,7 @@ export default function LocationPage() {
             <div className={styles.mapIntro}>
               <div>
                 <p className={styles.mapIndex}>Zambak Sokak No:8</p>
-                <h2 id="map-title">Soframızın haritadaki yeri</h2>
+                <h2 id="map-title">Haritada konum</h2>
               </div>
               <p>
                 İşaretçiye dokunarak adres kartını açın. Haritayı hareket ettirebilir veya tek dokunuşla işletme konumuna geri dönebilirsiniz.
@@ -222,14 +222,14 @@ export default function LocationPage() {
                 alt="Tarihi Van Kahvaltı Evi'nin oymalı aynası ve tuğla duvarı"
                 fill
                 sizes="(max-width: 760px) 100vw, 42vw"
-                quality={78}
+                quality={80}
               />
             </div>
             <div className={styles.placeCopy}>
               <Utensils size={30} aria-hidden="true" />
-              <h2 id="place-title">Varınca sizi nasıl bir mekân karşılar?</h2>
+              <h2 id="place-title">Zambak Sokak&apos;taki mekân</h2>
               <p>
-                Tuğla duvarları, eski aynaları ve sokağa açılan masalarıyla mekânımız Beyoğlu&apos;nun hafızasını taşır. Burada Van kahvaltısı hızlıca yenip kalkılan bir öğün değil; demli çayın ve sohbetin ritmine bırakılan uzun bir masa hâlidir.
+                Tarihi Rum binasındaki mekânımız tuğla duvarları, eski aynaları ve sokağa açılan masalarıyla Beyoğlu&apos;nun karakterini taşır. Van kahvaltısını sakin, rahat ve özenli bir ortamda servis ediyoruz.
               </p>
               <Link href="/menu">Menüyü incele <ArrowUpRight size={17} aria-hidden="true" /></Link>
             </div>
