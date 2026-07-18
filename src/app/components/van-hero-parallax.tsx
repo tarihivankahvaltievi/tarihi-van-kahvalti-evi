@@ -345,12 +345,12 @@ export function VanHeroParallax() {
               <span className="hero-provenance-place">Beyoğlu&apos;nda bir aile sofrası</span>
             </div>
             <h1 className="hero-title-lockup">
-              <span className="sr-only">Van&apos;dan geldik. Sofrayı burada kurduk.</span>
+              <span className="sr-only">Tarihi Van Kahvaltı Evi</span>
               <span className="hero-title-line hero-title-line-one" aria-hidden="true">
-                Van&apos;dan geldik.
+                Tarihi Van
               </span>
               <span className="hero-title-line hero-title-line-two" aria-hidden="true">
-                Sofrayı burada kurduk.
+                Kahvaltı Evi
               </span>
             </h1>
             <p className="hero-intro">
