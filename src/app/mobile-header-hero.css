@@ -300,14 +300,8 @@
     gap: 0.5rem !important;
     padding-block: 2rem !important;
     margin-block: -2rem !important;
-    -webkit-mask-image: none !important;
-    mask-image: none !important;
-  }
-
-  /* Keep both moving rows inside short mobile viewports and fully opaque. */
-  .theme-breakfast .hero-parallax-sticky::after {
-    display: none !important;
-    content: none !important;
+    -webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 14%, #000 96%, transparent 100%) !important;
+    mask-image: linear-gradient(to bottom, transparent 0%, #000 14%, #000 96%, transparent 100%) !important;
   }
 
   .theme-breakfast .hero-parallax-row {
@@ -593,7 +587,7 @@
   }
 
   .theme-breakfast .hero-parallax-gallery {
-    top: 54% !important;
+    top: 66% !important;
   }
 }
 
@@ -604,9 +598,5 @@
 
   .theme-breakfast .hero-parallax-food-stage {
     top: 18.7rem !important;
-  }
-
-  .theme-breakfast .hero-parallax-gallery {
-    top: 52% !important;
   }
 }
