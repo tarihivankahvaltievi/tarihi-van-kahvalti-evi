@@ -3,7 +3,6 @@ import { request as httpsRequest } from "node:https";
 
 const baseUrl = process.env.SEO_TEST_BASE_URL ?? "http://127.0.0.1:3100";
 const canonicalSiteUrl = "https://www.tarihivankahvaltievi.com";
-const englishPageUrl = `${canonicalSiteUrl}/en`;
 const menuPageUrl = `${canonicalSiteUrl}/menu`;
 
 const routes = [
@@ -15,20 +14,6 @@ const routes = [
     restaurantMenu: `${menuPageUrl}#menu`,
     faqCount: 10,
     visibleSignals: ["van kahvaltıcısı", "beyoğlu", "taksim", "serpme kahvaltı"],
-  },
-  {
-    path: "/en",
-    canonical: englishPageUrl,
-    language: "en",
-    types: ["WebSite", "Restaurant", "WebPage", "Menu", "FAQPage"],
-    restaurantMenu: `${englishPageUrl}#menu`,
-    faqCount: 6,
-    visibleSignals: [
-      "authentic van breakfast",
-      "traditional turkish breakfast",
-      "taksim square",
-      "istanbul",
-    ],
   },
 ];
 
@@ -62,8 +47,8 @@ const redirectRules = [
   ["/iletisim", "/#contact"],
   ["/sss", "/#faq"],
   ["/kafka-cafe", "/menu#turk-kahvesi"],
-  ["/turkish-breakfast-istanbul", "/en"],
-  ["/breakfast-near-taksim", "/en"],
+  ["/turkish-breakfast-istanbul", "/"],
+  ["/breakfast-near-taksim", "/"],
   ["/zavtrak-taksim-stambul", "/"],
   ["/arabic-breakfast-taksim", "/"],
   ["/anasayfa", "/"],
@@ -103,9 +88,6 @@ const visibleHtml = (html) =>
 
 const visibleText = (html) =>
   decodeHtml(visibleHtml(html).replace(/<[^>]+>/g, " ")).replace(/\s+/g, " ").trim();
-
-const attribute = (tag, name) =>
-  decodeHtml(tag.match(new RegExp(`${name}="([^"]*)"`, "i"))?.[1] ?? "");
 
 async function fetchWithRetry(path, attempts = 30, options = {}) {
   let lastError;
@@ -172,16 +154,6 @@ for (const route of routes) {
   assert(canonicalMatches.length === 1, `${routeLabel}: tek canonical bulunmalı`);
   assert(canonicalMatches[0][1] === route.canonical, `${routeLabel}: canonical yanlış`);
 
-  const alternateTags = [...html.matchAll(/<link\b[^>]*\brel="alternate"[^>]*>/gi)].map(
-    (match) => match[0],
-  );
-  const alternates = new Map(
-    alternateTags.map((tag) => [attribute(tag, "hreflang"), attribute(tag, "href")]),
-  );
-  assert(alternates.get("tr") === canonicalSiteUrl, `${routeLabel}: tr hreflang yanlış`);
-  assert(alternates.get("en") === englishPageUrl, `${routeLabel}: en hreflang yanlış`);
-  assert(alternates.get("x-default") === canonicalSiteUrl, `${routeLabel}: x-default yanlış`);
-
   const title = decodeHtml(html.match(/<title>([^<]*)<\/title>/i)?.[1] ?? "");
   const description = decodeHtml(
     html.match(/<meta\s+name="description"\s+content="([^"]*)"/i)?.[1] ?? "",
@@ -247,22 +219,18 @@ const sitemap = await (await fetchWithRetry("/sitemap.xml")).text();
 const sitemapUrls = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map((match) => match[1]);
 const sitemapLastModified = [...sitemap.matchAll(/<lastmod>([^<]+)<\/lastmod>/g)].map((match) => match[1]);
 const sitemapImages = [...sitemap.matchAll(/<image:loc>([^<]+)<\/image:loc>/g)].map((match) => match[1]);
-assert(sitemapUrls.length === 3, "Sitemap: üç kanonik URL bulunmalı");
+assert(sitemapUrls.length === 2, "Sitemap: iki kanonik URL bulunmalı");
 assert(sitemapUrls.every((url) => canonicalUrls.has(url)), "Sitemap: kanonik olmayan URL var");
-assert(sitemapLastModified.length === 3, "Sitemap: lastmod sayısı yanlış");
+assert(sitemapLastModified.length === 2, "Sitemap: lastmod sayısı yanlış");
 assert(
   sitemapLastModified.every((value) => Number.isFinite(Date.parse(value)) && Date.parse(value) <= Date.now()),
   "Sitemap: lastmod geçerli ve gelecekte olmayan bir tarih olmalı",
 );
-assert(sitemapImages.length >= 6, "Sitemap: görseller eksik");
+assert(sitemapImages.length >= 4, "Sitemap: görseller eksik");
 assert(
   sitemapImages.every((url) => url.startsWith(`${canonicalSiteUrl}/images/`)),
   "Sitemap: görsel URL'si kanonik alan adında olmalı",
 );
-assert((sitemap.match(/hreflang="tr"/g) ?? []).length === 2, "Sitemap: tr alternates eksik");
-assert((sitemap.match(/hreflang="en"/g) ?? []).length === 2, "Sitemap: en alternates eksik");
-assert((sitemap.match(/hreflang="x-default"/g) ?? []).length === 2, "Sitemap: x-default eksik");
-
 const robots = await (await fetchWithRetry("/robots.txt")).text();
 assert(robots.includes("User-Agent: *"), "robots.txt: genel bot kuralı eksik");
 assert(robots.includes("User-Agent: OAI-SearchBot"), "robots.txt: OAI-SearchBot kuralı eksik");
@@ -292,5 +260,5 @@ assert(missing.status === 404, "Bilinmeyen rota gerçek 404 dönmeli");
 assert(/<meta\s+name="robots"\s+content="noindex"/i.test(missingHtml), "404 sayfası noindex olmalı");
 
 console.log(
-  `SEO sözleşmesi geçti: TR, EN ve menü kanonik sayfaları indekslenebilir; ${redirectRules.length} bilinen eski URL doğru hedefe gider; hreflang, sitemap, robots, Restaurant/Menu/FAQ şeması ve 404 doğru.`,
+  `SEO sözleşmesi geçti: ana sayfa ve menü kanonik sayfaları indekslenebilir; ${redirectRules.length} bilinen eski URL doğru hedefe gider; sitemap, robots, Restaurant/Menu/FAQ şeması ve 404 doğru.`,
 );

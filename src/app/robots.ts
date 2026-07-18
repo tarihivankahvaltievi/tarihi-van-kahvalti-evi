@@ -9,12 +9,12 @@ export default function robots(): MetadataRoute.Robots {
       {
         userAgent: "*",
         allow: "/",
-        disallow: ["/admin", "/api/admin/", "/_next/server/"],
+        disallow: ["/_next/server/"],
       },
       {
         userAgent: "OAI-SearchBot",
         allow: "/",
-        disallow: ["/admin", "/api/admin/", "/_next/server/"],
+        disallow: ["/_next/server/"],
       },
     ],
     sitemap: `${siteUrl}/sitemap.xml`,

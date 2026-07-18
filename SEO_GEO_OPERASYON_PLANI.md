@@ -6,14 +6,13 @@ Bu belge, `van kahvaltıcısı` ve ilgili yerel niyetli aramalarda görünürlü
 
 ## Canlı teknik durum
 
-- Sitemap üç indekslenebilir kanonik URL'yi (`/`, `/en` ve `/menu`) içerir; eski/yönlendirilen URL'ler sitemap'e alınmaz.
-- Türkçe ve İngilizce sayfalar self-canonical kullanır; karşılıklı `tr`, `en` ve `x-default` hreflang hem HTML'de hem sitemap'te bulunur.
+- Sitemap iki indekslenebilir kanonik URL'yi (`/` ve `/menu`) içerir; eski/yönlendirilen URL'ler sitemap'e alınmaz.
+- Ana sayfa ve menü sayfası self-canonical kullanır.
 - Sitemap kayıtlarında gerçek içerik revizyonunu gösteren `lastmod` ve sayfalarda kullanılan özgün işletme görselleri bulunur.
 - Kanonik sayfalardaki dahili bağlantılar yönlendirme zinciri oluşturmadan doğrudan `200` dönen hedeflere gider.
-- Taksim, Beyoğlu, İstanbul ve Van kahvaltısı odaklı bilinen eski URL'ler tek adımda ana sayfaya; eski İngilizce URL'ler `/en` sayfasına kalıcı yönlenir.
+- Taksim, Beyoğlu, İstanbul ve Van kahvaltısı odaklı bilinen eski URL'ler tek adımda ana sayfaya kalıcı yönlenir.
 - Güncel menü `/menu` sayfasındadır; kaldırılan `/iletisim`, `/sss` ve `/kafka-cafe` URL'leri en yakın gerçek içeriğe kalıcı yönlenir.
-- Türkçe ana sayfada `WebSite`, `WebPage`, `Restaurant` ve görünür sorularla eşleşen `FAQPage`; İngilizce sayfada bunlara ek olarak görünür menüyle eşleşen `Menu` şeması bulunur. `/menu` kendi güncel `Menu` şemasını yayımlar.
-- İngilizce `/en` sayfası turistler için menü, fiyat, konum, metro tarifi, saat, rezervasyon ve SSS içeren gerçek bir dil sürümüdür; doorway sayfası değildir.
+- Ana sayfada `WebSite`, `WebPage`, `Restaurant` ve görünür sorularla eşleşen `FAQPage`; `/menu` sayfasında güncel `Menu` şeması bulunur.
 - `robots.txt`, Googlebot ve AI arama botlarının kanonik sayfalara erişmesine izin verir ve kanonik sitemap adresini bildirir.
 - Derleme sırasında canonical, hreflang, title, description, H1, JSON-LD, sitemap, görsel sitemap, `lastmod`, robots, yönlendirme, 404 ve dahili bağlantı sözleşmeleri otomatik test edilir.
 
@@ -23,7 +22,7 @@ Bu belge, `van kahvaltıcısı` ve ilgili yerel niyetli aramalarda görünürlü
 - Site ve şema çalışma saatini her gün `08:00–18:00` gösteriyor. İnceleme sırasında önbellekli Google sonucunda `06:30` açılış; doğrudan Google Maps kartında ise `23:00` kapanış bilgisi görüldü. İşletme sahibi Google Business Profile içinden gerçek saatleri doğrulamalı ve tüm kanalları aynı gün eşitlemeli.
 - Site adresi `Zambak Sk. No:8, Şehit Muhtar Mahallesi, Beyoğlu, İstanbul 34435`. Google Business Profile, Instagram ve önemli dizinlerde yazım sırası dahil aynı NAP (ad, adres, telefon) kullanılmalı.
 - Doğrudan Google Maps kaydının benzersiz CID'si `10380797280962926014` olarak doğrulandı. Bu kayıttaki pin (`41.0367655, 28.9829478`) site şemasına ve doğrudan yol tarifi bağlantısına eklendi.
-- Fiyatlar değişebileceğinden ana sayfa ve İngilizce sürümdeki `450 TL` ve `180 TL` değerleri düzenli doğrulanmalı.
+- Fiyatlar değişebileceğinden menüdeki değerler düzenli doğrulanmalı.
 
 ## Üçüncü taraf NAP ve kategori denetimi — 15 Temmuz 2026
 
@@ -69,7 +68,7 @@ Kaynaklar:
 ## Ölçüm ve Search Console rutini
 
 - Google Search Console'a `https://www.tarihivankahvaltievi.com/sitemap.xml` gönderin.
-- Türkçe `/` ve İngilizce `/en` sayfalarını URL Denetleme ile birer kez kontrol edin ve gerekirse dizine ekleme isteği gönderin; tekrar tekrar istek göndermeyin.
+- Ana sayfa `/` ve menü `/menu` sayfasını URL Denetleme ile birer kez kontrol edin ve gerekirse dizine ekleme isteği gönderin; tekrar tekrar istek göndermeyin.
 - `/taksim-brunch-kahvalti`, `/taksim-kahvalti`, `/beyoglu-kahvalti`, `/van-kahvaltisi` ve diğer eski arama URL'lerinin Google yeniden taradıktan sonra ana sayfada birleştiğini kontrol edin.
 - Haftalık sorgu görünümü: `van kahvaltıcısı`, `van kahvaltısı`, `beyoğlu kahvaltı`, `taksim kahvaltı`, `turkish breakfast istanbul`, `breakfast near taksim`, `van breakfast istanbul` ve marka sorguları. Tıklama, gösterim, CTR ve ortalama konumu sayfa bazında kaydedin.
 - Google Business Profile performansında yol tarifi, arama ve web sitesi tıklamalarını aylık karşılaştırın.
@@ -79,7 +78,6 @@ Kaynaklar:
 ## GEO / yapay zekâ arama görünürlüğü
 
 - Ayrı bir “AI dosyası”, özel GEO şeması veya `llms.txt` sıralama şartı değildir. Botların erişebildiği görünür metin, güçlü iç bağlantılar, doğru yapılandırılmış veri ve güncel işletme profili esas alınır.
-- İngilizce turist soruları için `/en` sayfasında kısa cevaplar, gerçek menü/fiyat, açık adres, doğrudan Maps kaydı ve Taksim metro tarifi görünür metin olarak sunulur.
 - Sorulara kısa ve doğrudan cevap veren görünür SSS içeriği korunur. FAQ şeması semantik taşınabilirlik için mevcut olsa da Google, Mayıs 2026 itibarıyla FAQ zengin sonucunu Search'te göstermiyor; bir sıralama avantajı beklenmemeli.
 - Şemadaki her işletme iddiası sayfada görünür veya işletme sahibi tarafından doğrulanabilir olmalı. Yapay yorum, puan, ödül, hizmet alanı veya `sameAs` eklenmemeli.
 

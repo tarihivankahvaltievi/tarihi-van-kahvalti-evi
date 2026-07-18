@@ -1201,7 +1201,6 @@ export function AnimatedFooter() {
               <li><Link href="/menu">Kafka Cafe</Link></li>
               <li><Link href="/#contact">Konum ve Rezervasyon</Link></li>
               <li><Link href="/#faq">Sıkça Sorulan Sorular</Link></li>
-              <li><Link href="/en" hrefLang="en">English Visitor Guide</Link></li>
             </ul>
           </div>
 

@@ -19,7 +19,6 @@ import {
   ChevronRight,
   CircleHelp,
   Home,
-  Languages,
   MapPin,
   MessageCircle,
   UtensilsCrossed,
@@ -239,7 +238,6 @@ export default function ClientPage({ children }: { children: ReactNode }) {
             <Link href="/#gallery" onMouseEnter={handleMouseEnter}>Galeri</Link>
             <Link href="/#contact" onMouseEnter={handleMouseEnter}>Konum</Link>
             <Link href="/#faq" onMouseEnter={handleMouseEnter}>SSS</Link>
-            <Link href="/en" hrefLang="en" onMouseEnter={handleMouseEnter}>English</Link>
           </nav>
 
           <div className="nav-actions">
@@ -345,19 +343,11 @@ export default function ClientPage({ children }: { children: ReactNode }) {
               </span>
               <ChevronRight size={17} />
             </Link>
-            <Link className="nav-menu-utility" href="/en" hrefLang="en" tabIndex={menuOpen ? 0 : -1} style={{ "--item-index": 8 } as CSSProperties} onClick={() => setMenuOpen(false)}>
-              <Languages size={18} />
-              <span className="nav-menu-copy">
-                <span className="nav-menu-link-text">English</span>
-                <span className="nav-menu-link-meta">Visitor guide</span>
-              </span>
-              <ChevronRight size={17} />
-            </Link>
             <a
               className="nav-menu-utility"
               href={whatsappUrl}
               tabIndex={menuOpen ? 0 : -1}
-              style={{ "--item-index": 9 } as CSSProperties}
+              style={{ "--item-index": 8 } as CSSProperties}
               target="_blank"
               rel="noopener noreferrer"
               onClick={() => setMenuOpen(false)}
