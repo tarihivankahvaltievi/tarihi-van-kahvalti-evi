@@ -1,8 +1,20 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { Calendar, Clock, MessageCircle, Users, X } from "lucide-react";
+import {
+  CalendarDays,
+  Clock3,
+  Coffee,
+  MessageCircle,
+  Minus,
+  Plus,
+  ShieldCheck,
+  Users,
+  UtensilsCrossed,
+  X,
+} from "lucide-react";
 import { phoneE164 } from "../seo";
+import styles from "./booking-modal.module.css";
 
 interface BookingModalProps {
   isOpen: boolean;
@@ -19,11 +31,11 @@ function getTodayString() {
   return `${yyyy}-${mm}-${dd}`;
 }
 
-export function BookingModal({ 
-  isOpen, 
-  onClose, 
-  preselectedType, 
-  preselectedItem 
+export function BookingModal({
+  isOpen,
+  onClose,
+  preselectedType,
+  preselectedItem,
 }: BookingModalProps) {
   const dialogRef = useRef<HTMLDialogElement>(null);
   const [date, setDate] = useState("");
@@ -31,10 +43,9 @@ export function BookingModal({
   const [time, setTime] = useState("10:00");
   const [guests, setGuests] = useState(2);
   const [type, setType] = useState(() => preselectedType === "Kahve" ? "Kafka Cafe" : "Kahvaltı");
-  const [note, setNote] = useState(() => preselectedItem ? `Seçilen Lezzet: ${preselectedItem}` : "");
+  const [note, setNote] = useState(() => preselectedItem ? `Seçilen lezzet: ${preselectedItem}` : "");
   const [honeypot, setHoneypot] = useState("");
 
-  // Set default date to today or tomorrow
   useEffect(() => {
     queueMicrotask(() => {
       const todayStr = getTodayString();
@@ -43,56 +54,37 @@ export function BookingModal({
     });
   }, []);
 
-  // Sync modal state with native dialog
   useEffect(() => {
     const dialog = dialogRef.current;
     if (!dialog) return;
 
-    if (isOpen) {
-      if (!dialog.open) {
-        dialog.showModal();
-      }
-    } else {
-      if (dialog.open) {
-        dialog.close();
-      }
-    }
+    if (isOpen && !dialog.open) dialog.showModal();
+    if (!isOpen && dialog.open) dialog.close();
   }, [isOpen]);
 
-  // Handle closedby fallback and ESC key
   useEffect(() => {
     const dialog = dialogRef.current;
     if (!dialog) return;
 
-    const handleClose = () => {
+    const handleClose = () => onClose();
+    const handleCancel = (event: Event) => {
+      event.preventDefault();
       onClose();
     };
-
-    const handleCancel = (e: Event) => {
-      e.preventDefault();
-      onClose();
-    };
-
-    // Close when clicking backdrop
-    const handleBackdropClick = (e: MouseEvent) => {
-      if (e.target === dialog) {
-        const rect = dialog.getBoundingClientRect();
-        const isInContent = (
-          rect.top <= e.clientY &&
-          e.clientY <= rect.top + rect.height &&
-          rect.left <= e.clientX &&
-          e.clientX <= rect.left + rect.width
-        );
-        if (!isInContent) {
-          onClose();
-        }
-      }
+    const handleBackdropClick = (event: MouseEvent) => {
+      if (event.target !== dialog) return;
+      const rect = dialog.getBoundingClientRect();
+      const inside =
+        rect.top <= event.clientY &&
+        event.clientY <= rect.bottom &&
+        rect.left <= event.clientX &&
+        event.clientX <= rect.right;
+      if (!inside) onClose();
     };
 
     dialog.addEventListener("close", handleClose);
     dialog.addEventListener("cancel", handleCancel);
     dialog.addEventListener("click", handleBackdropClick);
-
     return () => {
       dialog.removeEventListener("close", handleClose);
       dialog.removeEventListener("cancel", handleCancel);
@@ -100,19 +92,15 @@ export function BookingModal({
     };
   }, [onClose]);
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
+  const handleSubmit = (event: React.FormEvent) => {
+    event.preventDefault();
 
-    // Spam bot check
     if (honeypot) {
-      console.warn("Spam detected!");
       onClose();
       return;
     }
 
-    // Format date beautifully (e.g. 27.06.2026)
     const formattedDate = date ? date.split("-").reverse().join(".") : "";
-    
     const message = `Merhaba, Tarihi Van Kahvaltı Evi için rezervasyon bilgi ve talebi:
 
 📅 Tarih: ${formattedDate}
@@ -131,94 +119,77 @@ Rezervasyonumu onaylayabilir misiniz? Şimdiden teşekkürler.`;
   return (
     <dialog
       ref={dialogRef}
-      className="booking-dialog"
+      className={styles.dialog}
       aria-labelledby="booking-title"
+      aria-describedby="booking-description"
     >
-      <div className="dialog-header">
-        <h3 id="booking-title">Masa Rezervasyonu</h3>
-        <button
-          type="button"
-          onClick={onClose}
-          className="close-button"
-          aria-label="Kapat"
-        >
-          <X size={20} />
+      <header className={styles.header}>
+        <span className={styles.headerIcon} aria-hidden="true">
+          <CalendarDays size={25} strokeWidth={1.9} />
+        </span>
+        <div className={styles.headerCopy}>
+          <h2 id="booking-title">Masa ayırtma talebi</h2>
+          <p id="booking-description">Tarih ve kişi sayısını seçin; talebinizi WhatsApp üzerinden iletin.</p>
+        </div>
+        <button type="button" onClick={onClose} className={styles.closeButton} aria-label="Rezervasyon penceresini kapat">
+          <X size={21} />
         </button>
-      </div>
+      </header>
 
-      <form onSubmit={handleSubmit} className="booking-form">
-        {/* Honeypot field (hidden from real users) */}
-        <div 
-          aria-hidden="true" 
-          style={{ 
-            position: "absolute", 
-            width: "1px", 
-            height: "1px", 
-            padding: 0, 
-            margin: "-1px", 
-            overflow: "hidden", 
-            clip: "rect(0, 0, 0, 0)", 
-            border: 0 
-          }}
-        >
+      <form onSubmit={handleSubmit} className={styles.form}>
+        <div className={styles.honeypot} aria-hidden="true">
           <label htmlFor="website_hp">Lütfen bu alanı doldurmayın</label>
           <input
             id="website_hp"
             type="text"
             name="website_hp"
             value={honeypot}
-            onChange={(e) => setHoneypot(e.target.value)}
+            onChange={(event) => setHoneypot(event.target.value)}
             tabIndex={-1}
             autoComplete="off"
           />
         </div>
 
-        <div className="form-group">
-          <span id="booking-type-label" className="form-label">Rezervasyon Tipi</span>
-          <div className="type-toggle-grid" role="group" aria-labelledby="booking-type-label">
+        <fieldset className={styles.serviceFieldset}>
+          <legend>Rezervasyon tercihi</legend>
+          <div className={styles.serviceToggle}>
             <button
               type="button"
-              className={type === "Kahvaltı" ? "active" : ""}
+              className={type === "Kahvaltı" ? styles.activeService : ""}
               aria-pressed={type === "Kahvaltı"}
               onClick={() => setType("Kahvaltı")}
             >
-              🍳 Van Kahvaltısı
+              <UtensilsCrossed size={19} aria-hidden="true" />
+              <span><strong>Van kahvaltısı</strong><small>Uzun kahvaltı masası</small></span>
             </button>
             <button
               type="button"
-              className={type === "Kafka Cafe" ? "active" : ""}
+              className={type === "Kafka Cafe" ? styles.activeService : ""}
               aria-pressed={type === "Kafka Cafe"}
               onClick={() => setType("Kafka Cafe")}
             >
-              ☕ Kafka Cafe
+              <Coffee size={19} aria-hidden="true" />
+              <span><strong>Kafka Cafe</strong><small>Kahve ve kısa buluşma</small></span>
             </button>
           </div>
-        </div>
+        </fieldset>
 
-        <div className="form-row">
-          <div className="form-group">
-            <label htmlFor="booking-date">
-              <Calendar size={15} /> Tarih
-            </label>
+        <div className={styles.fieldGrid}>
+          <label className={styles.field} htmlFor="booking-date">
+            <span><CalendarDays size={16} aria-hidden="true" /> Tarih</span>
             <input
               type="date"
               id="booking-date"
               required
               value={date}
               min={minDate}
-              onChange={(e) => setDate(e.target.value)}
+              onChange={(event) => setDate(event.target.value)}
             />
-          </div>
+          </label>
 
-          <div className="form-group">
-            <label htmlFor="booking-time">
-              <Clock size={15} /> Saat
-            </label>
-            <select
-              id="booking-time"
-              value={time}
-              onChange={(e) => setTime(e.target.value)}
-            >
+          <label className={styles.field} htmlFor="booking-time">
+            <span><Clock3 size={16} aria-hidden="true" /> Saat</span>
+            <select id="booking-time" value={time} onChange={(event) => setTime(event.target.value)}>
               <option value="09:00">09:00</option>
               <option value="09:30">09:30</option>
               <option value="10:00">10:00</option>
@@ -235,49 +206,55 @@ Rezervasyonumu onaylayabilir misiniz? Şimdiden teşekkürler.`;
               <option value="16:00">16:00</option>
               <option value="17:00">17:00</option>
             </select>
-          </div>
+          </label>
         </div>
 
-        <div className="form-group">
-          <span id="guest-count-label" className="form-label">
-            <Users size={15} /> Kişi Sayısı
-          </span>
-          <div className="guests-counter" role="group" aria-labelledby="guest-count-label">
+        <div className={styles.guestField}>
+          <div>
+            <span className={styles.fieldLabel}><Users size={16} aria-hidden="true" /> Kişi sayısı</span>
+            <small>1–30 kişi arasında seçim yapabilirsiniz.</small>
+          </div>
+          <div className={styles.guestCounter} role="group" aria-label="Kişi sayısı">
             <button
               type="button"
               aria-label="Kişi sayısını azalt"
               disabled={guests <= 1}
-              onClick={() => setGuests(guests - 1)}
+              onClick={() => setGuests((current) => current - 1)}
             >
-              -
+              <Minus size={17} />
             </button>
-            <span className="guests-value" role="status" aria-live="polite">{guests} Kişi</span>
+            <span role="status" aria-live="polite"><strong>{guests}</strong><small>kişi</small></span>
             <button
               type="button"
               aria-label="Kişi sayısını artır"
               disabled={guests >= 30}
-              onClick={() => setGuests(guests + 1)}
+              onClick={() => setGuests((current) => current + 1)}
             >
-              +
+              <Plus size={17} />
             </button>
           </div>
         </div>
 
-        <div className="form-group">
-          <label htmlFor="booking-note">Özel Not (İsteğe Bağlı)</label>
+        <label className={styles.noteField} htmlFor="booking-note">
+          <span>Not <small>isteğe bağlı</small></span>
           <textarea
             id="booking-note"
-            rows={2}
-            placeholder="Cam kenarı masa, çocuk arabası alanı, doğum günü kutlaması vb."
+            rows={3}
+            placeholder="Çocuk sandalyesi, masa tercihi veya paylaşmak istediğiniz başka bir detay"
             value={note}
             maxLength={240}
-            onChange={(e) => setNote(e.target.value)}
+            onChange={(event) => setNote(event.target.value)}
           />
-        </div>
+          <small className={styles.characterCount}>{note.length}/240</small>
+        </label>
 
-        <button type="submit" className="booking-submit-btn">
-          <MessageCircle size={18} /> Talebi WhatsApp ile İlet
-        </button>
+        <footer className={styles.actions}>
+          <p><ShieldCheck size={17} aria-hidden="true" /> Rezervasyon, işletmenin WhatsApp onayından sonra kesinleşir.</p>
+          <button type="submit" className={styles.submitButton}>
+            <MessageCircle size={19} />
+            WhatsApp ile talep gönder
+          </button>
+        </footer>
       </form>
     </dialog>
   );

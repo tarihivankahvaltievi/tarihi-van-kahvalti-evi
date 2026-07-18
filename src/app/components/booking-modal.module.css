@@ -1,0 +1,491 @@
+.dialog {
+  width: min(620px, calc(100% - 2rem));
+  max-width: 620px;
+  max-height: min(820px, calc(100dvh - 2rem));
+  margin: auto;
+  padding: 0;
+  overflow: hidden;
+  border: 1px solid #2b1d1c;
+  border-radius: 14px;
+  background: #f8f0e3;
+  color: #241b1a;
+  box-shadow: 8px 8px 0 rgba(58, 20, 22, 0.32);
+}
+
+.dialog::backdrop {
+  background: rgba(24, 15, 14, 0.72);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+}
+
+.dialog[open] {
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
+  animation: booking-enter 280ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.header {
+  display: grid;
+  grid-template-columns: 48px minmax(0, 1fr) 44px;
+  gap: 0.9rem;
+  align-items: center;
+  padding: 1.2rem 1.25rem;
+  background: #74191f;
+  color: #fff8eb;
+}
+
+.headerIcon {
+  display: grid;
+  width: 48px;
+  height: 48px;
+  place-items: center;
+  border: 1px solid rgba(255, 248, 235, 0.5);
+  color: #e2bd6f;
+}
+
+.headerCopy h2 {
+  margin: 0;
+  color: #fff8eb;
+  font-family: var(--font-bricolage-grotesque-gf), Arial, sans-serif;
+  font-size: clamp(1.45rem, 3vw, 1.9rem);
+  font-weight: 780;
+  letter-spacing: -0.03em;
+  line-height: 1.05;
+}
+
+.headerCopy p {
+  max-width: 48ch;
+  margin: 0.35rem 0 0;
+  color: rgba(255, 248, 235, 0.76);
+  font-size: 0.82rem;
+  line-height: 1.4;
+}
+
+.closeButton {
+  display: grid;
+  width: 44px;
+  height: 44px;
+  place-items: center;
+  border: 1px solid rgba(255, 248, 235, 0.46);
+  border-radius: 8px;
+  background: transparent;
+  color: #fff8eb;
+  transition: background-color 180ms ease, color 180ms ease, transform 180ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.closeButton:hover {
+  background: #fff8eb;
+  color: #74191f;
+  transform: translateY(-1px);
+}
+
+.form {
+  display: grid;
+  gap: 1rem;
+  min-height: 0;
+  padding: 1.2rem 1.25rem 1.25rem;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+.honeypot {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+
+.serviceFieldset {
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.serviceFieldset legend,
+.field > span,
+.fieldLabel,
+.noteField > span {
+  display: flex;
+  align-items: center;
+  gap: 0.42rem;
+  margin: 0 0 0.48rem;
+  color: #3d302d;
+  font-size: 0.78rem;
+  font-weight: 760;
+  line-height: 1.25;
+}
+
+.serviceToggle {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.65rem;
+}
+
+.serviceToggle button {
+  display: grid;
+  grid-template-columns: 34px minmax(0, 1fr);
+  gap: 0.65rem;
+  align-items: center;
+  min-height: 64px;
+  padding: 0.65rem 0.75rem;
+  border: 1px solid rgba(43, 29, 28, 0.24);
+  border-radius: 8px;
+  background: #fffaf1;
+  color: #554641;
+  text-align: left;
+  transition: border-color 180ms ease, background-color 180ms ease, color 180ms ease, transform 180ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.serviceToggle button > svg {
+  color: #8b2228;
+}
+
+.serviceToggle button > span {
+  display: grid;
+  gap: 0.12rem;
+}
+
+.serviceToggle strong {
+  color: inherit;
+  font-size: 0.86rem;
+  line-height: 1.2;
+}
+
+.serviceToggle small {
+  color: #72635d;
+  font-size: 0.68rem;
+  line-height: 1.25;
+}
+
+.serviceToggle button:hover {
+  border-color: #8b2228;
+  transform: translateY(-1px);
+}
+
+.serviceToggle .activeService {
+  border-color: #74191f;
+  background: #74191f;
+  color: #fff8eb;
+}
+
+.serviceToggle .activeService > svg,
+.serviceToggle .activeService small {
+  color: #e2bd6f;
+}
+
+.fieldGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+}
+
+.field {
+  min-width: 0;
+}
+
+.field > span svg,
+.fieldLabel svg {
+  color: #8b2228;
+}
+
+.field input,
+.field select,
+.noteField textarea {
+  width: 100%;
+  min-height: 48px;
+  border: 1px solid rgba(43, 29, 28, 0.28);
+  border-radius: 7px;
+  outline: 0;
+  background: #fffaf1;
+  color: #241b1a;
+  font: inherit;
+  font-size: 0.9rem;
+  font-weight: 620;
+  transition: border-color 180ms ease, box-shadow 180ms ease, background-color 180ms ease;
+}
+
+.field input,
+.field select {
+  padding: 0 0.75rem;
+}
+
+.field input:focus-visible,
+.field select:focus-visible,
+.noteField textarea:focus-visible {
+  border-color: #74191f;
+  background: #fff;
+  box-shadow: 0 0 0 3px rgba(116, 25, 31, 0.12);
+}
+
+.guestField {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 1rem;
+  align-items: center;
+  padding: 0.75rem;
+  border: 1px solid rgba(43, 29, 28, 0.22);
+  border-radius: 8px;
+  background: rgba(255, 250, 241, 0.58);
+}
+
+.guestField small {
+  display: block;
+  color: #72635d;
+  font-size: 0.7rem;
+  line-height: 1.35;
+}
+
+.guestCounter {
+  display: grid;
+  grid-template-columns: 40px 58px 40px;
+  align-items: stretch;
+  min-height: 42px;
+  overflow: hidden;
+  border: 1px solid #74191f;
+  border-radius: 7px;
+  background: #fffaf1;
+}
+
+.guestCounter button {
+  display: grid;
+  place-items: center;
+  border: 0;
+  background: transparent;
+  color: #74191f;
+}
+
+.guestCounter button:hover:not(:disabled) {
+  background: #74191f;
+  color: #fff8eb;
+}
+
+.guestCounter button:disabled {
+  color: #a89b95;
+  cursor: not-allowed;
+}
+
+.guestCounter > span {
+  display: grid;
+  place-content: center;
+  border-inline: 1px solid rgba(116, 25, 31, 0.24);
+  text-align: center;
+}
+
+.guestCounter strong {
+  font-size: 1rem;
+  line-height: 1;
+}
+
+.guestCounter small {
+  margin-top: 0.12rem;
+  color: #72635d;
+  font-size: 0.62rem;
+}
+
+.noteField {
+  position: relative;
+}
+
+.noteField > span small {
+  color: #786963;
+  font-size: 0.68rem;
+  font-weight: 600;
+}
+
+.noteField textarea {
+  min-height: 82px;
+  resize: vertical;
+  padding: 0.72rem 0.75rem 1.4rem;
+  font-weight: 500;
+  line-height: 1.45;
+}
+
+.noteField textarea::placeholder {
+  color: #75655f;
+  opacity: 1;
+}
+
+.characterCount {
+  position: absolute;
+  right: 0.65rem;
+  bottom: 0.45rem;
+  color: #786963;
+  font-size: 0.64rem;
+}
+
+.actions {
+  display: grid;
+  grid-template-columns: minmax(0, 0.85fr) minmax(240px, 1fr);
+  gap: 0.8rem;
+  align-items: center;
+  margin: 0.1rem -1.25rem -1.25rem;
+  padding: 0.9rem 1.25rem 1.05rem;
+  border-top: 1px solid rgba(43, 29, 28, 0.2);
+  background: #eee0ca;
+}
+
+.actions p {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.45rem;
+  margin: 0;
+  color: #5b4b45;
+  font-size: 0.7rem;
+  line-height: 1.4;
+}
+
+.actions p svg {
+  flex: none;
+  color: #74191f;
+}
+
+.submitButton {
+  display: inline-flex;
+  min-height: 48px;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+  border: 1px solid #4f1116;
+  border-radius: 7px;
+  background: #74191f;
+  color: #fff8eb;
+  font-size: 0.86rem;
+  font-weight: 780;
+  transition: background-color 180ms ease, transform 180ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 180ms ease;
+}
+
+.submitButton:hover {
+  background: #5b1218;
+  box-shadow: 4px 4px 0 rgba(43, 29, 28, 0.22);
+  transform: translate(-1px, -1px);
+}
+
+.closeButton:focus-visible,
+.serviceToggle button:focus-visible,
+.guestCounter button:focus-visible,
+.submitButton:focus-visible {
+  outline: 3px solid #e2bd6f;
+  outline-offset: 2px;
+}
+
+@keyframes booking-enter {
+  from { opacity: 0; transform: translateY(14px) scale(0.985); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@media (max-width: 560px) {
+  .dialog {
+    width: calc(100% - 1rem);
+    max-height: calc(100dvh - 1rem);
+    border-radius: 10px;
+    box-shadow: 4px 4px 0 rgba(58, 20, 22, 0.3);
+  }
+
+  .header {
+    grid-template-columns: 40px minmax(0, 1fr) 42px;
+    gap: 0.7rem;
+    padding: 0.9rem;
+  }
+
+  .headerIcon {
+    width: 40px;
+    height: 40px;
+  }
+
+  .headerCopy h2 {
+    font-size: 1.32rem;
+  }
+
+  .headerCopy p {
+    font-size: 0.74rem;
+  }
+
+  .form {
+    gap: 0.82rem;
+    padding: 0.9rem;
+  }
+
+  .serviceToggle {
+    gap: 0.5rem;
+  }
+
+  .serviceToggle button {
+    grid-template-columns: 28px minmax(0, 1fr);
+    gap: 0.45rem;
+    min-height: 58px;
+    padding: 0.55rem;
+  }
+
+  .serviceToggle small {
+    display: none;
+  }
+
+  .fieldGrid {
+    gap: 0.55rem;
+  }
+
+  .guestField {
+    gap: 0.7rem;
+    padding: 0.65rem;
+  }
+
+  .guestField > div:first-child > small {
+    display: none;
+  }
+
+  .actions {
+    position: sticky;
+    bottom: -0.9rem;
+    grid-template-columns: 1fr;
+    gap: 0.6rem;
+    margin: 0 -0.9rem -0.9rem;
+    padding: 0.72rem 0.9rem max(0.8rem, env(safe-area-inset-bottom));
+  }
+
+  .actions p {
+    justify-content: center;
+    text-align: center;
+  }
+}
+
+@media (max-width: 380px) {
+  .headerCopy p {
+    display: none;
+  }
+
+  .serviceToggle button {
+    grid-template-columns: 1fr;
+    justify-items: center;
+    text-align: center;
+  }
+
+  .fieldGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .guestField {
+    grid-template-columns: 1fr;
+  }
+
+  .guestCounter {
+    width: 100%;
+    grid-template-columns: 1fr 64px 1fr;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dialog[open] {
+    animation: none;
+  }
+
+  .closeButton,
+  .serviceToggle button,
+  .submitButton {
+    transition: none;
+  }
+}

@@ -37,7 +37,6 @@ export default function ClientPage({ children }: { children: ReactNode }) {
   const [isBookingOpen, setIsBookingOpen] = useState(false);
   const [preselectedItem, setPreselectedItem] = useState("");
   const [preselectedType, setPreselectedType] = useState("");
-  const [isOpenNow, setIsOpenNow] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [mobileBarHidden, setMobileBarHidden] = useState(false);
@@ -97,23 +96,6 @@ export default function ClientPage({ children }: { children: ReactNode }) {
         window.cancelAnimationFrame(scrollFrame.current);
       }
     };
-  }, [isMenuPage]);
-
-  useEffect(() => {
-    if (isMenuPage) return;
-
-    const checkOpenStatus = () => {
-      const now = new Date();
-      const utc = now.getTime() + now.getTimezoneOffset() * 60000;
-      const turkeyTime = new Date(utc + 3600000 * 3);
-      const timeInMinutes = turkeyTime.getHours() * 60 + turkeyTime.getMinutes();
-
-      setIsOpenNow(timeInMinutes >= 8 * 60 && timeInMinutes < 18 * 60);
-    };
-
-    checkOpenStatus();
-    const interval = setInterval(checkOpenStatus, 60000);
-    return () => clearInterval(interval);
   }, [isMenuPage]);
 
   useEffect(() => {
@@ -224,12 +206,6 @@ export default function ClientPage({ children }: { children: ReactNode }) {
                 <span>Kahvaltı Evi</span>
               </span>
             </Link>
-            {!isMenuPage ? (
-              <div className={`nav-status-pill ${isOpenNow ? "open" : "closed"}`}>
-                <span className="nav-status-dot" />
-                <span>{isOpenNow ? "Açık" : "Kapalı"}</span>
-              </div>
-            ) : null}
           </div>
 
           <nav className="nav-links" aria-label="Ana menü" onMouseLeave={handleMouseLeave}>
@@ -361,11 +337,6 @@ export default function ClientPage({ children }: { children: ReactNode }) {
               <ChevronRight size={17} />
             </a>
             <div className="nav-drawer-footer">
-              <div className="nav-drawer-hours">
-                <span className="nav-drawer-live-dot" aria-hidden="true" />
-                <span>Her gün</span>
-                <strong>08:00 — 18:00</strong>
-              </div>
               <button
                 type="button"
                 className="nav-drawer-book"

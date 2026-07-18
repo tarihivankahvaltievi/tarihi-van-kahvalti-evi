@@ -179,34 +179,17 @@
   }
 
   .theme-breakfast .nav-drawer-footer {
-    display: flex !important;
+    display: block !important;
     min-height: 68px !important;
-    align-items: center !important;
-    gap: 0.8rem !important;
-    justify-content: space-between !important;
     margin-top: 8px !important;
     padding: 10px 4px 0 !important;
     border-top: 1px solid rgba(255, 248, 235, 0.24) !important;
   }
 
-  .theme-breakfast .nav-drawer-hours {
-    min-width: 0 !important;
-    display: grid !important;
-    grid-template-columns: auto 1fr !important;
-    column-gap: 0.38rem !important;
-    row-gap: 0.1rem !important;
-    align-items: center !important;
-  }
-
-  .theme-breakfast .nav-drawer-hours strong {
-    grid-column: 2 !important;
-    white-space: nowrap !important;
-    font-size: 0.76rem !important;
-  }
-
   .theme-breakfast .nav-drawer-book {
-    min-width: 158px !important;
-    min-height: 44px !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    min-height: 48px !important;
     border: 0 !important;
     border-radius: 8px !important;
     background: #e0bd70 !important;
