@@ -131,8 +131,17 @@
 
 .title em {
   display: block;
+  max-width: 12em;
+  margin-top: 0.14em;
   color: var(--about-gold);
-  font-weight: 500;
+  font-family: var(--font-bricolage-grotesque-gf), "Bricolage Grotesque", Arial, sans-serif;
+  font-size: 0.78em;
+  font-style: normal;
+  font-weight: 680;
+  letter-spacing: -0.025em;
+  line-height: 1.02;
+  font-optical-sizing: auto;
+  text-wrap: balance;
 }
 
 .lead {
