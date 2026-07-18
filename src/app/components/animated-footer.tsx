@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, MapPin, MessageCircle, Phone, Clock } from "lucide-react";
 import { address, displayAddress, displayPhone, mapsUrl, openingHours, telUrl, whatsappUrl } from "../seo";
+import styles from "./animated-footer.module.css";
 
 const wallBlocks = [
   { x: -8, y: 2, w: 82, h: 28, tone: "stone" },
@@ -454,9 +455,16 @@ export function AnimatedFooter() {
     >
 
       {/* ─── Premium Live Beyoğlu Illustration ─── */}
-      <div className="footer-skyline-wrapper" aria-hidden="true">
+      <div
+        className={`footer-skyline-wrapper ${styles.skylineWrapper}`}
+        role="img"
+        aria-label="İstiklal Caddesi’nde nostaljik tramvay, Galata Kulesi ve tarihi Beyoğlu silüeti"
+      >
+        <span className={styles.sceneCaption} aria-hidden="true">
+          İstiklal’den Zambak Sokak’a
+        </span>
         <IstiklalWebglAtmosphere />
-        <svg viewBox="0 0 1200 240" preserveAspectRatio="xMidYMax meet" className="footer-skyline-svg" xmlns="http://www.w3.org/2000/svg">
+        <svg viewBox="0 0 1200 240" preserveAspectRatio="xMidYMax meet" className={`footer-skyline-svg ${styles.skylineSvg}`} xmlns="http://www.w3.org/2000/svg">
           <defs>
             <linearGradient id="sky-building-fill" x1="0" y1="0" x2="0" y2="1">
               <stop offset="0" stopColor="#fffdf7" />
@@ -502,11 +510,6 @@ export function AnimatedFooter() {
             <pattern id="stone-pattern" width="20" height="10" patternUnits="userSpaceOnUse" patternTransform="scale(0.8)">
               <path d="M0,5 H20 M10,0 V5 M0,5 V10" stroke="#8d7d67" strokeWidth="0.5" fill="none" opacity="0.3" />
             </pattern>
-            <linearGradient id="istiklal-sky-wash" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0" stopColor="#fffdf7" stopOpacity="0.96" />
-              <stop offset="0.55" stopColor="#f7ecdc" stopOpacity="0.58" />
-              <stop offset="1" stopColor="#dbc8a9" stopOpacity="0.34" />
-            </linearGradient>
             <linearGradient id="street-paving" x1="0" y1="0" x2="0" y2="1">
               <stop offset="0" stopColor="#efe5d5" />
               <stop offset="0.54" stopColor="#d5c4ab" />
@@ -524,7 +527,7 @@ export function AnimatedFooter() {
             </radialGradient>
           </defs>
 
-          <rect width="1200" height="240" fill="url(#istiklal-sky-wash)" />
+          <rect width="1200" height="240" fill="#f4ecdf" />
           <ellipse className="street-sun-glow" cx="610" cy="118" rx="260" ry="92" fill="url(#street-glow)" />
 
           {/* Subtle sky clouds */}
@@ -1060,7 +1063,7 @@ export function AnimatedFooter() {
           </g>
         </svg>
       </div>
-      <div className="footer-drawn-wall" aria-hidden="true">
+      <div className={`footer-drawn-wall ${styles.drawnWall}`} aria-hidden="true">
         <svg viewBox="0 0 1200 260" preserveAspectRatio="none" className="footer-wall-svg" xmlns="http://www.w3.org/2000/svg">
           <defs>
             <filter id="wall-grain" x="-5%" y="-10%" width="110%" height="120%">
