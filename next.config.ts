@@ -14,7 +14,7 @@ const contentSecurityPolicy = [
   "style-src 'self' 'unsafe-inline'",
   "img-src 'self' data: blob: https://*.supabase.co",
   "font-src 'self' data:",
-  "connect-src 'self' https://*.supabase.co",
+  "connect-src 'self' https://*.supabase.co https://*.cartocdn.com",
   "frame-src 'none'",
   "manifest-src 'self'",
   "worker-src 'self' blob:",

@@ -21,8 +21,8 @@ npm start
 
 - İşletme bilgileri, sayfa içeriği, yapılandırılmış veri ve eski URL yönlendirmeleri: `src/app/seo.ts`
 - Site geneli metadata: `src/app/layout.tsx`
-- İndekslenebilir kanonik sayfalar: ana sayfa `/` ve menü `/menu`
-- İletişim ve SSS Türkçe ana sayfada, güncel QR menü ise `/menu` sayfasında yer alır.
+- İndekslenebilir kanonik sayfalar: ana sayfa `/`, menü `/menu` ve konum `/konum`
+- SSS ana sayfada, güncel QR menü `/menu`, adres ve yol tarifi ise `/konum` sayfasında yer alır.
 - Güncel ve indekslenebilir QR menü `/menu` sayfasındadır; kaldırılan `/iletisim`, `/sss` ve `/kafka-cafe` URL'leri en yakın gerçek içeriğe yönlenir.
 - Eski konu/WordPress URL'leri yalnız bilinen eşdeğer hedefe tek adım kalıcı yönlenir; bilinmeyen URL'ler gerçek `404` döner.
 - Sitemap ve tarayıcı kuralları: `src/app/sitemap.ts`, `src/app/robots.ts`

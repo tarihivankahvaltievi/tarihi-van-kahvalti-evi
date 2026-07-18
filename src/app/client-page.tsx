@@ -33,6 +33,7 @@ const BookingModal = dynamic(
 export default function ClientPage({ children }: { children: ReactNode }) {
   const pathname = usePathname();
   const isMenuPage = pathname === "/menu";
+  const isLocationPage = pathname === "/konum";
   const [isBookingOpen, setIsBookingOpen] = useState(false);
   const [preselectedItem, setPreselectedItem] = useState("");
   const [preselectedType, setPreselectedType] = useState("");
@@ -236,7 +237,7 @@ export default function ClientPage({ children }: { children: ReactNode }) {
             <Link href="/#story" onMouseEnter={handleMouseEnter}>Hakkımızda</Link>
             <Link href="/menu" aria-current={isMenuPage ? "page" : undefined} onMouseEnter={handleMouseEnter}>Menü</Link>
             <Link href="/#gallery" onMouseEnter={handleMouseEnter}>Galeri</Link>
-            <Link href="/#contact" onMouseEnter={handleMouseEnter}>Konum</Link>
+            <Link href="/konum" aria-current={isLocationPage ? "page" : undefined} onMouseEnter={handleMouseEnter}>Konum</Link>
             <Link href="/#faq" onMouseEnter={handleMouseEnter}>SSS</Link>
           </nav>
 
@@ -319,7 +320,7 @@ export default function ClientPage({ children }: { children: ReactNode }) {
               </span>
               <ChevronRight size={17} />
             </Link>
-            <Link className="nav-menu-primary" href="/#contact" tabIndex={menuOpen ? 0 : -1} style={{ "--item-index": 5 } as CSSProperties} onClick={() => setMenuOpen(false)}>
+            <Link className="nav-menu-primary" href="/konum" aria-current={isLocationPage ? "page" : undefined} tabIndex={menuOpen ? 0 : -1} style={{ "--item-index": 5 } as CSSProperties} onClick={() => setMenuOpen(false)}>
               <MapPin size={18} />
               <span className="nav-menu-copy">
                 <span className="nav-menu-link-text">Konum</span>

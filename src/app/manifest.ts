@@ -47,7 +47,7 @@ export default function manifest(): MetadataRoute.Manifest {
         name: "Yol Tarifi",
         short_name: "Konum",
         description: "Zambak Sokak Beyoğlu adresi ve Taksim metrodan yol tarifi.",
-        url: "/#contact",
+        url: "/konum",
         icons: [{ src: "/icons/icon-192.png", sizes: "192x192", type: "image/png" }],
       },
       {

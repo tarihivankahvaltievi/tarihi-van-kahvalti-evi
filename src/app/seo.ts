@@ -140,7 +140,7 @@ export const searchLandingPaths = [
 // Bilinmeyen URL'ler gerçek 404 kalır; site geneli wildcard yönlendirme yapılmaz.
 export const legacyRedirects = [
   ...searchLandingPaths.map((source) => ({ source, destination: "/" })),
-  { source: "/iletisim", destination: "/#contact" },
+  { source: "/iletisim", destination: "/konum" },
   { source: "/sss", destination: "/#faq" },
   { source: "/kafka-cafe", destination: "/menu#turk-kahvesi" },
   { source: "/turkish-breakfast-istanbul", destination: "/" },

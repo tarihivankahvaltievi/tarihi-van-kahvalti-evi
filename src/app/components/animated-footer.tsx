@@ -1197,9 +1197,9 @@ export function AnimatedFooter() {
             <ul className="footer-links">
               <li><Link href="/menu">Zengin Menü</Link></li>
               <li><Link href="/#faq">Van Kahvaltısı</Link></li>
-              <li><Link href="/#contact">Beyoğlu ve Taksim Kahvaltı</Link></li>
+              <li><Link href="/konum">Beyoğlu ve Taksim Kahvaltı</Link></li>
               <li><Link href="/menu">Kafka Cafe</Link></li>
-              <li><Link href="/#contact">Konum ve Rezervasyon</Link></li>
+              <li><Link href="/konum">Konum ve Yol Tarifi</Link></li>
               <li><Link href="/#faq">Sıkça Sorulan Sorular</Link></li>
             </ul>
           </div>

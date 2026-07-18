@@ -6,8 +6,8 @@ Bu belge, `van kahvaltıcısı` ve ilgili yerel niyetli aramalarda görünürlü
 
 ## Canlı teknik durum
 
-- Sitemap iki indekslenebilir kanonik URL'yi (`/` ve `/menu`) içerir; eski/yönlendirilen URL'ler sitemap'e alınmaz.
-- Ana sayfa ve menü sayfası self-canonical kullanır.
+- Sitemap üç indekslenebilir kanonik URL'yi (`/`, `/menu` ve `/konum`) içerir; eski/yönlendirilen URL'ler sitemap'e alınmaz.
+- Ana sayfa, menü ve konum sayfası self-canonical kullanır.
 - Sitemap kayıtlarında gerçek içerik revizyonunu gösteren `lastmod` ve sayfalarda kullanılan özgün işletme görselleri bulunur.
 - Kanonik sayfalardaki dahili bağlantılar yönlendirme zinciri oluşturmadan doğrudan `200` dönen hedeflere gider.
 - Taksim, Beyoğlu, İstanbul ve Van kahvaltısı odaklı bilinen eski URL'ler tek adımda ana sayfaya kalıcı yönlenir.
@@ -68,7 +68,7 @@ Kaynaklar:
 ## Ölçüm ve Search Console rutini
 
 - Google Search Console'a `https://www.tarihivankahvaltievi.com/sitemap.xml` gönderin.
-- Ana sayfa `/` ve menü `/menu` sayfasını URL Denetleme ile birer kez kontrol edin ve gerekirse dizine ekleme isteği gönderin; tekrar tekrar istek göndermeyin.
+- Ana sayfa `/`, menü `/menu` ve konum `/konum` sayfasını URL Denetleme ile birer kez kontrol edin ve gerekirse dizine ekleme isteği gönderin; tekrar tekrar istek göndermeyin.
 - `/taksim-brunch-kahvalti`, `/taksim-kahvalti`, `/beyoglu-kahvalti`, `/van-kahvaltisi` ve diğer eski arama URL'lerinin Google yeniden taradıktan sonra ana sayfada birleştiğini kontrol edin.
 - Haftalık sorgu görünümü: `van kahvaltıcısı`, `van kahvaltısı`, `beyoğlu kahvaltı`, `taksim kahvaltı`, `turkish breakfast istanbul`, `breakfast near taksim`, `van breakfast istanbul` ve marka sorguları. Tıklama, gösterim, CTR ve ortalama konumu sayfa bazında kaydedin.
 - Google Business Profile performansında yol tarifi, arama ve web sitesi tıklamalarını aylık karşılaştırın.

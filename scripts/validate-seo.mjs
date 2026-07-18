@@ -15,6 +15,15 @@ const routes = [
     faqCount: 10,
     visibleSignals: ["van kahvaltıcısı", "beyoğlu", "taksim", "serpme kahvaltı"],
   },
+  {
+    path: "/konum",
+    canonical: `${canonicalSiteUrl}/konum`,
+    language: "tr",
+    types: ["Restaurant", "WebPage", "BreadcrumbList", "FAQPage"],
+    restaurantMenu: `${menuPageUrl}#menu`,
+    faqCount: 4,
+    visibleSignals: ["zambak sokak", "taksim", "beyoğlu", "yol tarifi"],
+  },
 ];
 
 const canonicalUrls = new Set([...routes.map((route) => route.canonical), menuPageUrl]);
@@ -44,7 +53,7 @@ const redirectRules = [
   ["/vejetaryen-kahvalti-beyoglu", "/"],
   ["/beyoglu-kahvalti-mekanlari", "/"],
   ["/taksim-brunch-kahvalti", "/"],
-  ["/iletisim", "/#contact"],
+  ["/iletisim", "/konum"],
   ["/sss", "/#faq"],
   ["/kafka-cafe", "/menu#turk-kahvesi"],
   ["/turkish-breakfast-istanbul", "/"],
@@ -219,14 +228,14 @@ const sitemap = await (await fetchWithRetry("/sitemap.xml")).text();
 const sitemapUrls = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map((match) => match[1]);
 const sitemapLastModified = [...sitemap.matchAll(/<lastmod>([^<]+)<\/lastmod>/g)].map((match) => match[1]);
 const sitemapImages = [...sitemap.matchAll(/<image:loc>([^<]+)<\/image:loc>/g)].map((match) => match[1]);
-assert(sitemapUrls.length === 2, "Sitemap: iki kanonik URL bulunmalı");
+assert(sitemapUrls.length === 3, "Sitemap: üç kanonik URL bulunmalı");
 assert(sitemapUrls.every((url) => canonicalUrls.has(url)), "Sitemap: kanonik olmayan URL var");
-assert(sitemapLastModified.length === 2, "Sitemap: lastmod sayısı yanlış");
+assert(sitemapLastModified.length === 3, "Sitemap: lastmod sayısı yanlış");
 assert(
   sitemapLastModified.every((value) => Number.isFinite(Date.parse(value)) && Date.parse(value) <= Date.now()),
   "Sitemap: lastmod geçerli ve gelecekte olmayan bir tarih olmalı",
 );
-assert(sitemapImages.length >= 4, "Sitemap: görseller eksik");
+assert(sitemapImages.length >= 7, "Sitemap: görseller eksik");
 assert(
   sitemapImages.every((url) => url.startsWith(`${canonicalSiteUrl}/images/`)),
   "Sitemap: görsel URL'si kanonik alan adında olmalı",
@@ -260,5 +269,5 @@ assert(missing.status === 404, "Bilinmeyen rota gerçek 404 dönmeli");
 assert(/<meta\s+name="robots"\s+content="noindex"/i.test(missingHtml), "404 sayfası noindex olmalı");
 
 console.log(
-  `SEO sözleşmesi geçti: ana sayfa ve menü kanonik sayfaları indekslenebilir; ${redirectRules.length} bilinen eski URL doğru hedefe gider; sitemap, robots, Restaurant/Menu/FAQ şeması ve 404 doğru.`,
+  `SEO sözleşmesi geçti: ana sayfa, menü ve konum kanonik sayfaları indekslenebilir; ${redirectRules.length} bilinen eski URL doğru hedefe gider; sitemap, robots, Restaurant/Menu/FAQ şeması ve 404 doğru.`,
 );
