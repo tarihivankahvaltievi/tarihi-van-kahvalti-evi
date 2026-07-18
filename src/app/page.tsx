@@ -7,6 +7,7 @@ import {
   buildRestaurantJsonLd,
   buildWebsiteJsonLd,
   faqItems,
+  englishUrl,
   jsonLd,
   siteUrl,
 } from "./seo";
@@ -14,6 +15,11 @@ import {
 export const metadata: Metadata = {
   alternates: {
     canonical: siteUrl,
+    languages: {
+      tr: siteUrl,
+      en: englishUrl,
+      "x-default": siteUrl,
+    },
   },
 };
 

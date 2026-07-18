@@ -8,14 +8,14 @@ import { getMenuData } from "./menu-storage";
 
 const menuUrl = `${siteUrl}/menu`;
 const menuDescription =
-  "Tarihi Van Kahvaltı Evi QR menüsü: serpme Van kahvaltısı, bakır sahanlar, yöresel lezzetler, çay ve kahve seçenekleri.";
+  "Tarihi Van Kahvaltı Evi güncel menü ve fiyatları: serpme Van kahvaltısı, bakır sahanlar, yöresel lezzetler, çay ve kahve seçenekleri.";
 
 export const metadata: Metadata = {
-  title: "QR Menü ve Fiyatlar",
+  title: "Menü ve Güncel Fiyatlar",
   description: menuDescription,
   alternates: { canonical: menuUrl },
   openGraph: {
-    title: `QR Menü ve Fiyatlar | ${siteName}`,
+    title: `Menü ve Güncel Fiyatlar | ${siteName}`,
     description: menuDescription,
     url: menuUrl,
     siteName,
@@ -32,7 +32,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: `QR Menü ve Fiyatlar | ${siteName}`,
+    title: `Menü ve Güncel Fiyatlar | ${siteName}`,
     description: menuDescription,
     images: [absoluteUrl("/images/og/menu.jpg")],
   },
@@ -56,11 +56,10 @@ async function MenuContainer() {
   await cookies(); // Force dynamic request-time execution in Next.js 16
   const { categories, items, lastUpdated } = await getMenuData();
 
-  const menuJsonLd = {
-    "@context": "https://schema.org",
+  const menuSchema = {
     "@type": "Menu",
     "@id": `${menuUrl}#menu`,
-    name: `${siteName} QR Menüsü`,
+    name: `${siteName} Menüsü`,
     description: menuDescription,
     url: menuUrl,
     inLanguage: "tr-TR",
@@ -88,6 +87,38 @@ async function MenuContainer() {
           };
         }),
     })),
+  };
+
+  const menuJsonLd = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebPage",
+        "@id": `${menuUrl}#webpage`,
+        url: menuUrl,
+        name: `Menü ve Güncel Fiyatlar | ${siteName}`,
+        description: menuDescription,
+        inLanguage: "tr-TR",
+        isPartOf: { "@id": `${siteUrl}/#website` },
+        about: { "@id": `${siteUrl}/#restaurant` },
+        mainEntity: { "@id": `${menuUrl}#menu` },
+        primaryImageOfPage: {
+          "@type": "ImageObject",
+          url: absoluteUrl("/images/og/menu.jpg"),
+          width: 1200,
+          height: 630,
+        },
+      },
+      {
+        "@type": "BreadcrumbList",
+        "@id": `${menuUrl}#breadcrumb`,
+        itemListElement: [
+          { "@type": "ListItem", position: 1, name: "Ana sayfa", item: siteUrl },
+          { "@type": "ListItem", position: 2, name: "Menü ve fiyatlar", item: menuUrl },
+        ],
+      },
+      menuSchema,
+    ],
   };
 
   return (

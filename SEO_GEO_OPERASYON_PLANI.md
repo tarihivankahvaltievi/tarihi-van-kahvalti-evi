@@ -1,93 +1,119 @@
 # SEO ve GEO operasyon planı
 
-Son teknik revizyon: 15 Temmuz 2026
+Son teknik revizyon ve dış kaynak denetimi: 19 Temmuz 2026
 
-Bu belge, `van kahvaltıcısı` ve ilgili yerel niyetli aramalarda görünürlüğü artırmak için kod dışındaki çalışmayı tarif eder. Google'da birinci sıra garanti edilemez; yerel sonuçlar alaka düzeyi, arayan kişinin mesafesi ve işletmenin bilinirliğine göre değişir.
+Bu belge, `van kahvaltıcısı`, `Beyoğlu kahvaltı`, `Taksim kahvaltı`, `Turkish breakfast near Taksim` ve ilgili yerel niyetli aramalarda organik görünürlüğü artırmak için teknik durum ile işletme hesabı gerektiren işleri birlikte izler. Google'da veya başka bir arama motorunda birinci sıra garanti edilemez. Google'ın açıkladığı yerel sonuç bileşenleri alaka düzeyi, mesafe ve bilinirliktir; teknik iyileştirmeler erişimi ve anlaşılabilirliği güçlendirir, kullanıcının konumunu veya rekabeti ortadan kaldırmaz.
 
-## Canlı teknik durum
+## Uygulanan teknik SEO/GEO kapsamı
 
-- Sitemap üç indekslenebilir kanonik URL'yi (`/`, `/menu` ve `/konum`) içerir; eski/yönlendirilen URL'ler sitemap'e alınmaz.
-- Ana sayfa, menü ve konum sayfası self-canonical kullanır.
-- Sitemap kayıtlarında gerçek içerik revizyonunu gösteren `lastmod` ve sayfalarda kullanılan özgün işletme görselleri bulunur.
-- Kanonik sayfalardaki dahili bağlantılar yönlendirme zinciri oluşturmadan doğrudan `200` dönen hedeflere gider.
-- Taksim, Beyoğlu, İstanbul ve Van kahvaltısı odaklı bilinen eski URL'ler tek adımda ana sayfaya kalıcı yönlenir.
-- Güncel menü `/menu` sayfasındadır; kaldırılan `/iletisim`, `/sss` ve `/kafka-cafe` URL'leri en yakın gerçek içeriğe kalıcı yönlenir.
-- Ana sayfada `WebSite`, `WebPage`, `Restaurant` ve görünür sorularla eşleşen `FAQPage`; `/menu` sayfasında güncel `Menu` şeması bulunur.
-- `robots.txt`, Googlebot ve AI arama botlarının kanonik sayfalara erişmesine izin verir ve kanonik sitemap adresini bildirir.
-- Derleme sırasında canonical, hreflang, title, description, H1, JSON-LD, sitemap, görsel sitemap, `lastmod`, robots, yönlendirme, 404 ve dahili bağlantı sözleşmeleri otomatik test edilir.
+- Sitemap dört indekslenebilir kanonik URL'yi içerir: `/`, `/menu`, `/konum` ve `/en`. Eski veya yönlendirilen URL'ler sitemap'e alınmaz.
+- Türkçe ana sayfa ile İngilizce ziyaretçi rehberi arasında karşılıklı `tr`, `en` ve `x-default` hreflang ilişkisi hem sayfa başlıklarında hem sitemap'te tanımlıdır.
+- `/en`, `Content-Language: en` başlığı, İngilizce metadata, tek H1, görünür ziyaretçi rehberi, Van kahvaltısı sözlüğü, SSS ve doğrulanabilir işletme bilgileriyle gerçek bir yerelleştirilmiş sayfadır; yalnızca otomatik çeviri veya anahtar kelime sayfası değildir.
+- Güncel fiyatların tek kaynağı dinamik `/menu` sayfasıdır. Ana sayfadaki sabit ve güncelliğini yitirmiş `450 TL` cevabı kaldırıldı; SSS kullanıcıyı canlı menüye yönlendirir.
+- Ana sayfada `Restaurant`, `WebSite`, `WebPage` ve görünür cevaplarla eşleşen `FAQPage`; menüde `WebPage`, `BreadcrumbList` ve `Menu`; İngilizce sayfada `Restaurant`, `WebPage`, `BreadcrumbList` ve `FAQPage` grafiği bulunur.
+- Site genelinde tek ve kararlı işletme kimlikleri (`#restaurant`, `#website`, sayfa kimlikleri), self-canonical, özgün title/description, Open Graph ve Twitter metadata kullanılır.
+- Konum sayfasındaki yaklaşık 1 MB harita JavaScript'i ilk açılıştan çıkarıldı. Erişilebilir statik konum kartı, adres ve Google Maps bağlantısı hemen gelir; MapLibre yalnız kullanıcı “Etkileşimli haritayı yükle” dediğinde yüklenir.
+- Ana sayfanın gerçek LCP görseli `eager` ve `fetchPriority=high` olarak işaretlendi; dekoratif görseller daha ölçülü kaliteyle sunulur. Yinelenen görsel/sr-only H1 ve yinelenen giriş metni kaldırıldı.
+- Footer'daki ölü politika metinleri gerçek `/gizlilik` ve `/cerez-politikasi` sayfalarına dönüştürüldü. Bu yardımcı sayfalar gezinilebilir ama arama sonucu sayfası olarak değer taşımadıkları için `noindex, follow` kullanır.
+- `robots.txt` genel botlara, Applebot'a, Google/Bing/Yandex tarayıcılarına ve `OAI-SearchBot`a açık kanonik içerik sunar; yalnız yönetim ve sunucu içi yollar kapalıdır. Kanonik sitemap adresi bildirilir.
+- IndexNow anahtarı alan adında yayımlanır ve `npm run seo:indexnow` Bing/Yandex gibi katılımcı motorlara değişen URL'leri toplu bildirir. Bu bir tarama bildirimi olup indeksleme veya sıralama garantisi değildir.
+- Eski Türkçe sorgu URL'leri en yakın gerçek içeriğe, eski İngilizce sorgu URL'leri `/en` sayfasına tek adımlı kalıcı yönlenir.
+- Derleme sonrası SEO sözleşmesi canonical, hreflang, dil başlığı, title, description, H1, görünür metin, JSON-LD, sitemap, görsel sitemap, doğru `lastmod`, robots, IndexNow anahtarı, yönlendirme, 404 ve doğrudan `200` dahili bağlantıları otomatik denetler.
 
-## Önce doğrulanacak işletme gerçekleri
+## Ölçülen performans etkisi
 
-- Google Haritalar sonucunda görünen ad `Tarihi Van Kahvaltı Evi 1978`; site şeması bu adla uyumlu hale getirildi. İşletme adına yeni anahtar kelime eklemeyin.
-- Site ve şema çalışma saatini her gün `08:00–18:00` gösteriyor. İnceleme sırasında önbellekli Google sonucunda `06:30` açılış; doğrudan Google Maps kartında ise `23:00` kapanış bilgisi görüldü. İşletme sahibi Google Business Profile içinden gerçek saatleri doğrulamalı ve tüm kanalları aynı gün eşitlemeli.
-- Site adresi `Zambak Sk. No:8, Şehit Muhtar Mahallesi, Beyoğlu, İstanbul 34435`. Google Business Profile, Instagram ve önemli dizinlerde yazım sırası dahil aynı NAP (ad, adres, telefon) kullanılmalı.
-- Doğrudan Google Maps kaydının benzersiz CID'si `10380797280962926014` olarak doğrulandı. Bu kayıttaki pin (`41.0367655, 28.9829478`) site şemasına ve doğrudan yol tarifi bağlantısına eklendi.
-- Fiyatlar değişebileceğinden menüdeki değerler düzenli doğrulanmalı.
+19 Temmuz 2026'da aynı yerel production build üzerinde Lighthouse 13.4.0 mobil laboratuvar ölçümü alındı. Bunlar saha Core Web Vitals verisi değildir fakat değişikliğin ilk yük etkisini karşılaştırır.
 
-## Üçüncü taraf NAP ve kategori denetimi — 15 Temmuz 2026
+| Sayfa | Performans | LCP | Total Blocking Time | İlk yük | A11y / Best Practices / SEO |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| Ana sayfa — önce | 77 | 6,0 sn | 120 ms | 1.015 KiB | 100 / 100 / 100 |
+| Ana sayfa — sonra | 82 | 4,6 sn | 40 ms | 947 KiB | 100 / 100 / 100 |
+| Konum — önce | 54 | 4,0 sn | 3.590 ms | 1.712 KiB | 100 / 100 / 100 |
+| Konum — sonra | 97 | 2,0 sn | 70 ms | 687 KiB | 100 / 100 / 100 |
 
-Hedef sorgular için Restoranim.net, Menü Burada, Gezip Geliyorum, Tripadvisor, Reddit, MekanRadar, RenkMobil, Yandex Maps ve Google Maps sonuçları tarandı. Kodla değiştirilemeyen aşağıdaki kayıtlar işletme hesabından düzeltilmelidir:
+Konum sayfasındaki en büyük kazanım harita kütüphanesinin kullanıcı isteğine kadar ertelenmesinden gelir. Gerçek kullanıcı verisi için Search Console Core Web Vitals raporu 28 günlük dönemlerle izlenmelidir.
 
-1. Önbellekli Google arama sonucunda kategori `Cafe`, doğrudan Maps kartında `Kahvaltı` görünüyor. Gerçek ana faaliyet kahvaltıysa Google Business Profile'da mevcut en yakın `Kahvaltı restoranı / Breakfast restaurant` kategorisi birincil kategori olarak doğrulanmalı; `Cafe` yalnız gerçekten uygunsa ikincil kalmalı.
-2. Google yüzeylerinde `06:30` açılış ve `23:00` kapanış bilgileri görülürken site `08:00–18:00` gösteriyor. Gerçek saat işletme sahibi tarafından doğrulanıp aynı gün site ve profil eşitlenmeli.
-3. RenkMobil kaydı işletmeyi yanlış biçimde `24 saat açık` ve `34421` posta koduyla gösteriyor. Kayıt sahiplenilip saat ve posta kodu düzeltilmeli veya kaynağa düzeltme bildirilmeli.
-4. Yandex Maps kaydı adresi `Zambak Sokak 10A` ve saatleri bilinmiyor olarak gösteriyor. İşletme kaydı sahiplenilip gerçek kapı numarası ve saat eklenmeli.
-5. MekanRadar kaydında telefon doğru, posta kodu `34421`. İşletme sahibi gerçek posta kodunu doğruladıktan sonra kayıt siteyle eşitlenmeli.
-6. Menü Burada'nın Taksim kahvaltıcı listesinde aynı sokaktaki başka işletmeler bulunurken Tarihi Van Kahvaltı Evi görünmüyor. Ücretsiz ve doğrulanmış işletme kaydı imkânı varsa gerçek NAP, resmi site ve menü URL'siyle eklenmeli; ücretli bağlantı paketi alınmamalı.
-7. Restoranim.net Beyoğlu kahvaltıcı listesinde işletme görünmüyor. Gerçek işletme sahipliği doğrulanabiliyorsa resmi ad, adres, telefon, çalışma saati ve siteyle başvuru yapılmalı.
+## İşletme sahibi tarafından doğrulanacak gerçekler
 
-Kaynaklar:
+Kod, işletme sahibinin erişemediğimiz Google Business Profile, Yandex Business ve üçüncü taraf dizin kayıtlarını değiştiremez. 19 Temmuz 2026 taramasında şu çelişkiler görüldü:
 
-- https://www.google.com/maps/search/Breakfast%20at%20Van%20Kahvalti%20Evi%20Istanbul
-- https://www.google.com/maps?cid=10380797280962926014
-- https://renkmobil.com/kahvalti/istanbul/tarihi-van-kahvalti-evi-1978/
-- https://yandex.com/maps/org/tarihi_van_kahvalt_ve_arap_evi/237523878781/
-- https://mekanradar.com/mekan/istanbul/beyoglu/tarihi-van-kahvalti-evi-1978
-- https://menuburada.com/restoranlar/istanbul-taksim-kahvalti
-- https://restoranim.net/istanbul/beyoglu/kahvaltici
+1. Site ve şema çalışma saatini her gün `08:00–18:00` gösteriyor; Google Maps arama görünümünde `06:30` açılış bilgisi görüldü. Gerçek saat birincil kaynaktan doğrulanmalı; site, Google, Yandex ve dizinler aynı gün eşitlenmelidir.
+2. Site adresi `Zambak Sk. No:8, Şehit Muhtar Mahallesi, Beyoğlu, İstanbul 34435`; Yandex Maps kaydı `Zambak Sokak 10A` gösteriyor ve saatleri bilinmiyor. Gerçek kapı numarası işletme belgesiyle doğrulanıp yanlış kayıt düzeltilmelidir.
+3. RenkMobil işletmeyi `24 saat açık` ve `34421` posta koduyla gösteriyor. MekanRadar da `34421` kullanıyor. Gerçek posta kodu doğrulandıktan sonra her iki kaynakta düzeltme istenmelidir.
+4. Google görünümündeki kategori `Cafe`. Gerçek ana faaliyet kahvaltıysa Google Business Profile'da mevcut en yakın kahvaltı restoranı kategorisi birincil olarak doğrulanmalı; işletme adına anahtar kelime eklenmemelidir.
+5. Sitede kullanılan telefon `+90 212 293 64 37` ve işletme adı `Tarihi Van Kahvaltı Evi 1978` tüm önemli yüzeylerde aynı yazımla tutulmalıdır.
+6. Google Maps CID'si `10380797280962926014`; sitedeki yol tarifi ve koordinatlar `41.0367655, 28.9829478` noktasına bağlıdır. Pin gerçek giriş kapısında değilse profil içinden düzeltilmelidir.
+
+Denetlenen kayıtlar:
+
+- Google Maps: https://www.google.com/maps?cid=10380797280962926014
+- Google Maps hedef sorgusu: https://www.google.com/maps/search/Breakfast%20at%20Van%20Kahvalti%20Evi%20Istanbul
+- Yandex Maps: https://yandex.com/maps/org/tarihi_van_kahvalt_ve_arap_evi/237523878781/
+- RenkMobil: https://renkmobil.com/kahvalti/istanbul/tarihi-van-kahvalti-evi-1978/
+- MekanRadar: https://mekanradar.com/mekan/istanbul/beyoglu/tarihi-van-kahvalti-evi-1978
 
 ## Google Business Profile çalışma listesi
 
-1. Birincil kategoriyi gerçek ana faaliyete en yakın seçenek olarak doğrulayın; gereksiz kategori eklemeyin.
-2. Web sitesi alanını kanonik `https://www.tarihivankahvaltievi.com/` olarak kaydedin; rezervasyon bağlantısını gerçek rezervasyon akışına yönlendirin.
-3. Menü bağlantısını doğrudan `https://www.tarihivankahvaltievi.com/menu` olarak kullanın.
-4. Açılış, bayram ve özel gün saatlerini önceden güncelleyin.
-5. Dış cephe, giriş, salon, serpme sofra, otlu peynir, murtuğa, kavut ve menü fotoğraflarını özgün ve güncel olarak yükleyin. Dosya adına anahtar kelime doldurmak yerine açıklayıcı metin kullanın.
-6. Hizmet/ürün alanlarında yalnız gerçekten sunulan seçenekleri listeleyin. Site menüsüyle çelişen fiyat veya ürün bırakmayın.
-7. Yeni yorumlara gerçek, kısa ve kişiye özel yanıt verin. Yorum karşılığında indirim sunmayın; çalışanlardan veya ilişkili kişilerden sahte yorum istemeyin.
-8. Masa üzerindeki QR kartı ve ödeme sonrası mesajıyla gönüllü yorum bağlantısı sunun. Olumlu yorum seçerek yönlendirme yapmayın.
+1. İşletme adını tabeladaki gerçek adla aynı tutun; konum veya ürün anahtar kelimesi eklemeyin.
+2. Birincil kategoriyi gerçek ana faaliyete en yakın seçenek olarak seçin; yalnız gerçekten sunulan ikincil kategorileri ekleyin.
+3. Web sitesi alanını `https://www.tarihivankahvaltievi.com/`, menü alanını doğrudan `https://www.tarihivankahvaltievi.com/menu` yapın.
+4. Gerçek adres, pin, telefon, standart saatler ve bayram/özel gün saatlerini doğrulayın. Siteyle aynı gün güncelleyin.
+5. Dış cephe, giriş, salon, serpme sofra, otlu peynir, murtuğa, kavut ve güncel menünün özgün fotoğraflarını düzenli yükleyin.
+6. Hizmet ve ürün alanlarında yalnız gerçekten sunulan seçenekleri kullanın; sitedeki canlı menüyle çelişen fiyat veya ürün bırakmayın.
+7. Gerçek müşterilerin tüm yeni yorumlarına kısa, kişisel ve olgusal yanıt verin. Yorum karşılığında hediye/indirim vermeyin; çalışanlardan, ilişkili kişilerden veya sahte hesaplardan yorum istemeyin.
+8. Masadaki QR kartı veya ödeme sonrası nötr mesajla gönüllü yorum bağlantısı sunulabilir; yalnız memnun müşterileri seçerek yönlendirme yapılmamalıdır.
+9. Profil performansında arama, web sitesi tıklaması, arama/telefon ve yol tarifi eylemlerini aylık kaydedin.
 
-## İçerik ve otorite çalışması
+## Arama motoru ve yapay zekâ keşif planı
 
-- Yeni sayfa yalnız farklı ve gerçekten yararlı bir kullanıcı ihtiyacını karşılıyorsa açılmalı. Semt adını değiştirerek çoğaltılan kapı sayfaları oluşturulmamalı.
-- Menü, fiyat, saat, telefon ve adres değişiklikleri önce sitede ve Google Business Profile'da aynı gün güncellenmeli.
-- İstanbul/Beyoğlu gastronomi rehberleri, yerel basın, turizm kaynakları ve gerçek tedarikçi/etkinlik ortaklarından editoryal bağlantı hedeflenmeli. Ücretli bağlantı veya toplu dizin paketi satın alınmamalı.
-- Marka hikâyesi için doğrulanabilir arşiv fotoğrafları, kurucu/aile bilgisi ve tarih kaynakları toplanırsa görünür yazar ve güncelleme tarihi olan özgün bir tarihçe hazırlanmalı. Doğrulanmadan Article şeması kullanılmamalı.
-- Instagram profilindeki ad, biyografi, adres, telefon ve site bağlantısı Google Business Profile ile aynı olmalı.
+### Google
 
-## Ölçüm ve Search Console rutini
+- Search Console'da alan adı mülkünü doğrulayın ve `https://www.tarihivankahvaltievi.com/sitemap.xml` gönderin.
+- `/`, `/menu`, `/konum` ve `/en` sayfalarını URL Denetleme ile bir kez kontrol edin. Yalnız gerektiğinde indeks isteği gönderin; tekrar tekrar istek göndermek taramayı hızlandırmaz.
+- Eski URL'lerin tek adımlı yönlendirmeden sonra kanonik hedefte birleşmesini, yinelenen title/canonical ve soft-404 raporlarını izleyin.
+- Haftalık sorgu grupları: marka, `van kahvaltıcısı`, `van kahvaltısı`, `beyoğlu kahvaltı`, `taksim kahvaltı`, `turkish breakfast istanbul`, `breakfast near taksim`, `van breakfast istanbul`. Sayfa bazında gösterim, tıklama, CTR ve ortalama konumu kaydedin.
 
-- Google Search Console'a `https://www.tarihivankahvaltievi.com/sitemap.xml` gönderin.
-- Ana sayfa `/`, menü `/menu` ve konum `/konum` sayfasını URL Denetleme ile birer kez kontrol edin ve gerekirse dizine ekleme isteği gönderin; tekrar tekrar istek göndermeyin.
-- `/taksim-brunch-kahvalti`, `/taksim-kahvalti`, `/beyoglu-kahvalti`, `/van-kahvaltisi` ve diğer eski arama URL'lerinin Google yeniden taradıktan sonra ana sayfada birleştiğini kontrol edin.
-- Haftalık sorgu görünümü: `van kahvaltıcısı`, `van kahvaltısı`, `beyoğlu kahvaltı`, `taksim kahvaltı`, `turkish breakfast istanbul`, `breakfast near taksim`, `van breakfast istanbul` ve marka sorguları. Tıklama, gösterim, CTR ve ortalama konumu sayfa bazında kaydedin.
-- Google Business Profile performansında yol tarifi, arama ve web sitesi tıklamalarını aylık karşılaştırın.
-- Core Web Vitals saha verisini 28 günlük dönemlerle izleyin. Tek bir laboratuvar testini sıralama sonucu gibi yorumlamayın.
-- UTM kullanılacaksa yalnız Google Business Profile web sitesi bağlantısında tutarlı etiket kullanın; kanonik URL'yi değiştirmeyin.
+### Bing, Yandex, Safari ve Opera
 
-## GEO / yapay zekâ arama görünürlüğü
+- IndexNow gönderimi dağıtımdan sonra çalıştırılır. Ayrıca Bing Webmaster Tools'a sitemap eklenip tarama hataları kontrol edilmelidir.
+- Yandex Webmaster'da alan adı doğrulanmalı, sitemap gönderilmeli ve Yandex Business kaydındaki adres/saat çelişkisi düzeltilmelidir.
+- Safari ve Opera ayrı birer arama motoru değildir. Safari/Apple yüzeyleri için Applebot'un erişimi açık tutulur; Opera'da kullanılan arama sağlayıcısının Google/Bing/Yandex tarayıcı ve indeks kuralları geçerlidir. Tarayıcı adına özel sahte schema veya sayfa üretilmez.
 
-- Ayrı bir “AI dosyası”, özel GEO şeması veya `llms.txt` sıralama şartı değildir. Botların erişebildiği görünür metin, güçlü iç bağlantılar, doğru yapılandırılmış veri ve güncel işletme profili esas alınır.
-- Sorulara kısa ve doğrudan cevap veren görünür SSS içeriği korunur. FAQ şeması semantik taşınabilirlik için mevcut olsa da Google, Mayıs 2026 itibarıyla FAQ zengin sonucunu Search'te göstermiyor; bir sıralama avantajı beklenmemeli.
-- Şemadaki her işletme iddiası sayfada görünür veya işletme sahibi tarafından doğrulanabilir olmalı. Yapay yorum, puan, ödül, hizmet alanı veya `sameAs` eklenmemeli.
+### ChatGPT ve diğer yapay zekâ sistemleri
 
-## Resmî kaynaklar
+- `OAI-SearchBot` erişimi ChatGPT arama görünürlüğü içindir; OpenAI'nin açıkladığı üzere `GPTBot` eğitim tercihini ayrı kontrol eder. Mevcut robots politikası arama botuna açık kanonik içerik sunar.
+- Google, AI Overviews/AI Mode için özel bir AI dosyası veya ek şema gerekmediğini açıklar. Ayrı `llms.txt`, “GEO schema” ya da görünmez anahtar kelime bloğu eklenmedi; yararlı görünür metin, taranabilir bağlantı, doğru schema ve güncel işletme gerçekleri güçlendirildi.
+- İngilizce ziyaretçi rehberi; turistlerin kullandığı yemek adlarını, konumu, saatleri, menü bağlantısını ve kısa cevapları görünür HTML'de sunar. Böylece bilgi yalnız script veya görsel içinde kalmaz.
+- Şemaya yapay puan, yorum, ödül, hizmet alanı, kurucu hikâyesi veya doğrulanmamış `sameAs` eklenmemelidir.
+
+## İçerik, itibar ve bağlantı çalışması
+
+- Yeni sayfa yalnız farklı ve gerçek bir kullanıcı ihtiyacını karşılıyorsa açılmalıdır. Semt adını değiştirerek çoğaltılan doorway/kapı sayfaları oluşturulmaz.
+- Doğrulanabilir arşiv fotoğrafları, kurucu/aile anlatısı ve tarih kaynağı toplanırsa görünür kaynak ve güncelleme tarihi olan özgün bir tarihçe hazırlanabilir. Doğrulanmadan `Article` şeması kullanılmaz.
+- İstanbul/Beyoğlu gastronomi rehberleri, yerel basın, turizm kaynakları ve gerçek tedarikçi/etkinlik ortaklarından editoryal anılma hedeflenir. Ücretli bağlantı, toplu dizin paketi ve otomatik misafir yazı ağı kullanılmaz.
+- Instagram ve diğer sosyal profillerde ad, adres, telefon, saat ve site URL'si Google Business Profile ile aynı tutulur.
+- Reddit ve yerel SEO topluluklarındaki saha deneyimleri; gerçek yorum, eksiksiz profil, tutarlı NAP ve yerel editoryal bağlantıların önemini tekrar ediyor. Bunlar resmî sıralama belgesi değil, yalnız operasyon fikri kaynağı olarak değerlendirilmiştir.
+
+## 30/60/90 günlük ölçüm rutini
+
+- İlk 30 gün: Search Console/Bing/Yandex doğrulama, sitemap, profil saat-adres düzeltmeleri, dört kanonik URL'nin indeks durumu ve ilk sorgu tablosu.
+- 31–60 gün: gerçek müşteri yorum akışı, fotoğraf güncellemeleri, İngilizce sorguların gösterim/CTR incelemesi, düşük CTR title/description testi. Aynı anda tek anlamlı değişiklik yapın.
+- 61–90 gün: sorgu niyetine göre yeni içeriğe gerçekten ihtiyaç olup olmadığını değerlendirin; NAP düzeltmelerinin yayılımını ve 28 günlük Core Web Vitals saha verisini karşılaştırın.
+- Sıralamayı kişiselleştirilmiş tek bir tarayıcı aramasından değil, Search Console sorgu/sayfa verisi ve profil eylemlerinden değerlendirin.
+
+## Resmî ve yardımcı araştırma kaynakları
 
 - Google yerel sıralama: https://support.google.com/business/answer/7091
-- LocalBusiness verisi: https://developers.google.com/search/docs/appearance/structured-data/local-business
-- AI özellikleri ve site görünürlüğü: https://developers.google.com/search/docs/appearance/ai-features
-- Spam politikaları: https://developers.google.com/search/docs/essentials/spam-policies
-- Başlık bağlantıları: https://developers.google.com/search/docs/appearance/title-link
-- Sitemap `lastmod` doğruluğu: https://developers.google.com/search/docs/crawling-indexing/sitemaps/build-sitemap
-- Çok dilli site yönetimi: https://developers.google.com/search/docs/specialty/international/managing-multi-regional-sites
-- FAQ sonucu değişikliği: https://developers.google.com/search/updates#removing-faq-rich-result
+- Google LocalBusiness yapılandırılmış verisi: https://developers.google.com/search/docs/appearance/structured-data/local-business
+- Google AI özellikleri ve site görünürlüğü: https://developers.google.com/search/docs/appearance/ai-features
+- Google yararlı içerik: https://developers.google.com/search/docs/fundamentals/creating-helpful-content
+- Google taranabilir bağlantılar: https://developers.google.com/search/docs/crawling-indexing/links-crawlable
+- Google hreflang: https://developers.google.com/search/docs/specialty/international/localized-versions
+- Bing Webmaster Guidelines: https://www.bing.com/webmasters/help/webmaster-guidelines-30fba23a
+- IndexNow dokümantasyonu: https://www.indexnow.org/documentation?hl=en
+- Bing IndexNow açıklaması: https://www.bing.com/webmasters/help/indexnow-0z209wby
+- Yandex indeksleme: https://yandex.com/support/webmaster/en/yandex-indexing/site-indexing
+- Yandex sitemap: https://yandex.com/support/webmaster/en/indexing-options/sitemap
+- Applebot: https://support.apple.com/en-us/119829
+- OpenAI yayıncı ve geliştirici SSS: https://help.openai.com/en/articles/12627856-publishers-and-developers-faq
+- Reddit yerel SEO tartışması (resmî olmayan saha deneyimi): https://www.reddit.com/r/localseo/comments/1uv6pvk/what_local_seo_strategies_are_still_getting_you/

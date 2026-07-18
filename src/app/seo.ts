@@ -1,6 +1,7 @@
 export const siteUrl = "https://www.tarihivankahvaltievi.com";
 export const siteName = "Tarihi Van Kahvaltı Evi";
 export const alternateName = "Tarihi Van Kahvaltı Evi 1978";
+export const englishUrl = `${siteUrl}/en`;
 
 export const homeTitle = "Van Kahvaltıcısı İstanbul | Tarihi Van Kahvaltı Evi";
 export const homeDescription =
@@ -85,7 +86,7 @@ export const faqItems = [
   {
     question: "Serpme Van kahvaltısı fiyatı ne kadar?",
     answer:
-      "Geleneksel Van kahvaltısı kişi başı yaklaşık 450 TL'dir ve en az iki kişilik servis edilir. Güncel fiyatlar için işletmeyle iletişime geçmeniz önerilir.",
+      "Serpme Van kahvaltısı en az iki kişilik servis edilir. Güncel kişi başı fiyatı ve diğer ürün fiyatlarını, ziyaret öncesinde güncellenen menü sayfasından kontrol edebilirsiniz.",
   },
   {
     question: "Taksim metrodan nasıl gidilir?",
@@ -143,8 +144,8 @@ export const legacyRedirects = [
   { source: "/iletisim", destination: "/konum" },
   { source: "/sss", destination: "/#faq" },
   { source: "/kafka-cafe", destination: "/menu#turk-kahvesi" },
-  { source: "/turkish-breakfast-istanbul", destination: "/" },
-  { source: "/breakfast-near-taksim", destination: "/" },
+  { source: "/turkish-breakfast-istanbul", destination: "/en" },
+  { source: "/breakfast-near-taksim", destination: "/en" },
   { source: "/zavtrak-taksim-stambul", destination: "/" },
   { source: "/arabic-breakfast-taksim", destination: "/" },
 ];

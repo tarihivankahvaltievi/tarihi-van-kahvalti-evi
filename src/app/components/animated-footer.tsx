@@ -1201,6 +1201,7 @@ export function AnimatedFooter() {
               <li><Link href="/menu">Kafka Cafe</Link></li>
               <li><Link href="/konum">Konum ve Yol Tarifi</Link></li>
               <li><Link href="/#faq">Sıkça Sorulan Sorular</Link></li>
+              <li><Link href="/en" hrefLang="en">English Visitor Guide</Link></li>
             </ul>
           </div>
 
@@ -1254,8 +1255,8 @@ export function AnimatedFooter() {
             © 2026 Tarihi Van Kahvaltı Evi. Tüm hakları saklıdır.
           </div>
           <div className="footer-legal-links">
-            <span aria-hidden="true">Gizlilik Politikası</span>
-            <span aria-hidden="true">Çerez Politikası</span>
+            <Link href="/gizlilik">Gizlilik Politikası</Link>
+            <Link href="/cerez-politikasi">Çerez Politikası</Link>
           </div>
         </div>
       </div>

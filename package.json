@@ -11,7 +11,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "test:seo": "node scripts/validate-seo.mjs"
+    "test:seo": "node scripts/validate-seo.mjs",
+    "seo:indexnow": "node scripts/submit-indexnow.mjs"
   },
   "dependencies": {
     "framer-motion": "^12.42.2",

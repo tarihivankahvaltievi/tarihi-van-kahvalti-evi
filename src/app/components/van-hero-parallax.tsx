@@ -345,21 +345,15 @@ export function VanHeroParallax() {
               <span className="hero-provenance-place">Beyoğlu&apos;nda bir aile sofrası</span>
             </div>
             <h1 className="hero-title-lockup">
-              <span className="sr-only">Tarihi Van Kahvaltı Evi</span>
-              <span className="hero-title-line hero-title-line-one" aria-hidden="true">
+              <span className="hero-title-line hero-title-line-one">
                 Tarihi Van
               </span>
-              <span className="hero-title-line hero-title-line-two" aria-hidden="true">
+              <span className="hero-title-line hero-title-line-two">
                 Kahvaltı Evi
               </span>
             </h1>
             <p className="hero-intro">
-              <span className="hero-intro-mobile">
-                Otlu peynir, murtuğa, kavut, sıcak bakır sahanlar ve hep taze çay.
-              </span>
-              <span className="hero-intro-desktop">
-                Otlu peynir, murtuğa, kavut, sıcak bakır sahanlar ve hep taze çay.
-              </span>
+              Otlu peynir, murtuğa, kavut, sıcak bakır sahanlar ve hep taze çay.
             </p>
           </motion.div>
         </motion.div>
@@ -400,7 +394,9 @@ export function VanHeroParallax() {
           aria-hidden="true"
         >
           {visibleFloatingFoods.map((item) => {
-            const isPrimaryFloatingFood = item.src.endsWith("/cheese-platter.webp");
+            // Mobil alan testinde gerçek LCP öğesi sucuklu yumurta görselidir.
+            // Onu ilk HTML'de yüksek öncelikle keşfedilebilir tutuyoruz.
+            const isPrimaryFloatingFood = item.src.endsWith("/sucuk-egg-pan.webp");
             return (
               <div
                 className={item.className}
@@ -415,7 +411,7 @@ export function VanHeroParallax() {
                   alt={item.alt}
                   fill
                   sizes="(max-width: 680px) 30vw, (max-width: 1080px) 26vw, 320px"
-                  quality={82}
+                  quality={isPrimaryFloatingFood ? 75 : 70}
                   loading={isPrimaryFloatingFood ? "eager" : "lazy"}
                   fetchPriority={isPrimaryFloatingFood ? "high" : "auto"}
                 />
@@ -456,7 +452,7 @@ function HeroImageRow({
               alt=""
               fill
               sizes="(max-width: 680px) 38vw, (max-width: 1080px) 40vw, 32rem"
-              quality={74}
+              quality={65}
               loading={isPrimaryImage ? "eager" : "lazy"}
               fetchPriority={isPrimaryImage ? "high" : "auto"}
               style={{ objectPosition: image.position ?? "center" }}

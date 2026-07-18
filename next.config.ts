@@ -29,7 +29,7 @@ const nextConfig: NextConfig = {
   poweredByHeader: false,
   images: {
     formats: ["image/avif", "image/webp"],
-    qualities: [74, 75, 80, 82],
+    qualities: [65, 70, 74, 75, 80, 82],
     minimumCacheTTL: 60 * 60 * 24 * 30,
   },
   async redirects() {
@@ -101,6 +101,15 @@ const nextConfig: NextConfig = {
           {
             key: "Cache-Control",
             value: "public, max-age=3600, s-maxage=86400, stale-while-revalidate=604800",
+          },
+        ],
+      },
+      {
+        source: "/en",
+        headers: [
+          {
+            key: "Content-Language",
+            value: "en",
           },
         ],
       },

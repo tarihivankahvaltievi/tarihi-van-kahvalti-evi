@@ -1,69 +1,50 @@
 "use client";
 
+import dynamic from "next/dynamic";
 import Image from "next/image";
-import { Clock3, MapPin, Navigation } from "lucide-react";
-import {
-  Map,
-  MapControls,
-  MapMarker,
-  MarkerContent,
-  MarkerLabel,
-  MarkerPopup,
-} from "@/components/ui/mapcn-marker-popup";
-import { displayAddress, mapsUrl, openingHours } from "../seo";
+import { MapPin, Navigation } from "lucide-react";
+import { useState } from "react";
+import { displayAddress, mapsUrl } from "../seo";
 import styles from "./location.module.css";
 
-const restaurantCoordinates: [number, number] = [28.9829478, 41.0367655];
+const InteractiveLocationMap = dynamic(
+  () => import("./interactive-location-map").then((module) => module.InteractiveLocationMap),
+  {
+    ssr: false,
+    loading: () => <p className={styles.mapLoading} role="status">Harita yükleniyor…</p>,
+  },
+);
 
 export function LocationMap() {
+  const [showInteractiveMap, setShowInteractiveMap] = useState(false);
+
+  if (showInteractiveMap) {
+    return <InteractiveLocationMap />;
+  }
+
   return (
-    <div className={styles.mapFrame}>
-      <Map
-        className={styles.mapCanvas}
-        center={restaurantCoordinates}
-        zoom={15.4}
-        ariaLabel="Tarihi Van Kahvaltı Evi'nin Zambak Sokak konumu"
-      >
-        <MapControls center={restaurantCoordinates} zoom={15.4} />
-        <MapMarker
-          longitude={restaurantCoordinates[0]}
-          latitude={restaurantCoordinates[1]}
-          ariaLabel="Tarihi Van Kahvaltı Evi konum bilgisini aç"
-        >
-          <MarkerContent>
-            <span className={styles.mapMarker}>
-              <span className={styles.markerPulse} aria-hidden="true" />
-              <span className={styles.markerPin} aria-hidden="true">
-                <MapPin size={22} strokeWidth={2.3} />
-              </span>
-              <MarkerLabel>Tarihi Van</MarkerLabel>
-            </span>
-          </MarkerContent>
-          <MarkerPopup className={styles.mapPopup} defaultOpen>
-            <div className={styles.popupMedia}>
-              <Image
-                src="/images/street-table.webp"
-                alt="Tarihi Van Kahvaltı Evi'nin Zambak Sokak'taki dış mekân masaları"
-                fill
-                sizes="280px"
-                quality={74}
-              />
-            </div>
-            <div className={styles.popupBody}>
-              <strong>Tarihi Van Kahvaltı Evi</strong>
-              <p><MapPin size={14} aria-hidden="true" /> {displayAddress}</p>
-              <p><Clock3 size={14} aria-hidden="true" /> {openingHours.short}</p>
-              <a href={mapsUrl} target="_blank" rel="noopener noreferrer">
-                <Navigation size={15} aria-hidden="true" />
-                Yol tarifi al
-              </a>
-            </div>
-          </MarkerPopup>
-        </MapMarker>
-      </Map>
-      <div className={styles.mapCaption}>
-        <span>Şehit Muhtar · Beyoğlu</span>
-        <span>Haritayı sürükleyebilir, yakınlaştırabilirsiniz.</span>
+    <div className={styles.mapPlaceholder}>
+      <Image
+        src="/images/street-table.webp"
+        alt=""
+        fill
+        sizes="(max-width: 760px) 92vw, 84vw"
+        quality={65}
+      />
+      <div className={styles.mapPlaceholderOverlay}>
+        <span className={styles.mapPlaceholderIcon} aria-hidden="true"><MapPin size={26} /></span>
+        <p className={styles.mapPlaceholderLabel}>Şehit Muhtar · Beyoğlu</p>
+        <h3>Tarihi Van Kahvaltı Evi haritası</h3>
+        <address>{displayAddress}</address>
+        <div className={styles.mapPlaceholderActions}>
+          <button type="button" onClick={() => setShowInteractiveMap(true)}>
+            Etkileşimli haritayı yükle
+          </button>
+          <a href={mapsUrl} target="_blank" rel="noopener noreferrer">
+            <Navigation size={17} aria-hidden="true" /> Google Haritalar&apos;da aç
+          </a>
+        </div>
+        <small>Harita yalnız istediğinizde yüklenir; böylece sayfa daha hızlı açılır.</small>
       </div>
     </div>
   );

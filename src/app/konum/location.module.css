@@ -353,6 +353,145 @@
   border-bottom: 4px solid var(--location-burgundy);
 }
 
+.mapPlaceholder {
+  position: relative;
+  min-height: 560px;
+  overflow: hidden;
+  border: 1px solid rgba(55, 44, 35, 0.16);
+  border-radius: 30px;
+  background: #e8ddcc;
+  isolation: isolate;
+}
+
+.mapPlaceholder > img {
+  z-index: -2;
+  object-fit: cover;
+  filter: saturate(0.72) contrast(0.92);
+}
+
+.mapPlaceholder::after {
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  background: linear-gradient(90deg, rgba(28, 21, 18, 0.9) 0%, rgba(28, 21, 18, 0.72) 45%, rgba(28, 21, 18, 0.25) 100%);
+  content: "";
+}
+
+.mapPlaceholderOverlay {
+  display: flex;
+  width: min(580px, 86%);
+  min-height: 560px;
+  align-items: flex-start;
+  justify-content: center;
+  flex-direction: column;
+  padding: clamp(2rem, 7vw, 5rem);
+  color: #fffaf0;
+}
+
+.mapPlaceholderIcon {
+  display: grid;
+  width: 52px;
+  height: 52px;
+  margin-bottom: 1.25rem;
+  place-items: center;
+  border: 1px solid rgba(255, 250, 240, 0.35);
+  border-radius: 50%;
+  background: #7a1b22;
+}
+
+.mapPlaceholderLabel {
+  margin: 0 0 0.65rem;
+  color: #e6c575;
+  font-size: 0.76rem;
+  font-weight: 850;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.mapPlaceholder h3 {
+  margin: 0;
+  font-family: var(--font-bodoni-gf), Georgia, serif;
+  font-size: clamp(2.4rem, 5vw, 4.6rem);
+  font-weight: 620;
+  letter-spacing: -0.04em;
+  line-height: 0.98;
+}
+
+.mapPlaceholder address {
+  max-width: 480px;
+  margin-top: 1rem;
+  font-style: normal;
+  line-height: 1.65;
+}
+
+.mapPlaceholderActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+}
+
+.mapPlaceholderActions button,
+.mapPlaceholderActions a {
+  display: inline-flex;
+  min-height: 46px;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  border: 1px solid rgba(255, 250, 240, 0.7);
+  border-radius: 999px;
+  padding: 0.7rem 1rem;
+  font: inherit;
+  font-weight: 800;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.mapPlaceholderActions button {
+  border-color: #e6c575;
+  background: #e6c575;
+  color: #241719;
+}
+
+.mapPlaceholderActions a {
+  background: rgba(36, 23, 25, 0.42);
+  color: #fffaf0;
+}
+
+.mapPlaceholder small {
+  margin-top: 1rem;
+  color: rgba(255, 250, 240, 0.76);
+  line-height: 1.5;
+}
+
+.mapLoading {
+  display: grid;
+  min-height: 560px;
+  margin: 0;
+  place-items: center;
+  border-radius: 30px;
+  background: #e8ddcc;
+  color: #5f2025;
+  font-weight: 850;
+}
+
+@media (max-width: 760px) {
+  .mapPlaceholder,
+  .mapPlaceholderOverlay,
+  .mapLoading {
+    min-height: 520px;
+  }
+
+  .mapPlaceholderOverlay {
+    width: 100%;
+    padding: 2rem;
+  }
+
+  .mapPlaceholder::after {
+    background: linear-gradient(180deg, rgba(28, 21, 18, 0.55) 0%, rgba(28, 21, 18, 0.93) 72%);
+  }
+}
+
 .mapCanvas {
   width: 100%;
   height: clamp(31rem, 58vw, 44rem);
