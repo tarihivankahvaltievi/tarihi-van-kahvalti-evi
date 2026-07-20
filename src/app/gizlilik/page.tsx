@@ -1,15 +1,12 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { LegalPageShell } from "../components/legal-page-shell";
-import { siteUrl } from "../seo";
-
-const privacyUrl = `${siteUrl}/gizlilik`;
+import { privacyUrl } from "../seo";
 
 export const metadata: Metadata = {
   title: "Gizlilik Politikası",
   description: "Tarihi Van Kahvaltı Evi web sitesi ve iletişim kanalları için gizlilik açıklaması.",
   alternates: { canonical: privacyUrl },
-  robots: { index: false, follow: true },
 };
 
 export default function PrivacyPage() {

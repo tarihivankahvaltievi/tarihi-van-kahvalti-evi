@@ -6,11 +6,13 @@ import {
   absoluteUrl,
   breakfastCultureUrl,
   breakfastGuideUrl,
+  cookiePolicyUrl,
   defaultOgImagePath,
   englishMenuUrl,
   englishUrl,
   locationUrl,
   menuUrl,
+  privacyUrl,
   siteUrl,
   storyUrl,
 } from "./seo";
@@ -160,6 +162,14 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       lastModified: liveMenuLastModified,
       images: menuImages,
       alternates: menuLanguageAlternates,
+    },
+    {
+      url: privacyUrl,
+      lastModified: pageLastModified,
+    },
+    {
+      url: cookiePolicyUrl,
+      lastModified: pageLastModified,
     },
   ];
 }

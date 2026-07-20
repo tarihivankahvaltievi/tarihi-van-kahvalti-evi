@@ -8,6 +8,8 @@ export const locationUrl = `${siteUrl}/konum`;
 export const breakfastGuideUrl = `${siteUrl}/van-kahvaltisi`;
 export const breakfastCultureUrl = `${siteUrl}/van-kahvaltisi-nedir`;
 export const storyUrl = `${siteUrl}/hikayemiz`;
+export const privacyUrl = `${siteUrl}/gizlilik`;
+export const cookiePolicyUrl = `${siteUrl}/cerez-politikasi`;
 
 export const homeTitle = "Beyoğlu Kahvaltı | Tarihi Van Kahvaltı Evi, Taksim";
 export const homeDescription =

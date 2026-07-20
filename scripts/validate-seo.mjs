@@ -1,5 +1,8 @@
 import { request as httpRequest } from "node:http";
 import { request as httpsRequest } from "node:https";
+import { readdir } from "node:fs/promises";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
 
 const baseUrl = process.env.SEO_TEST_BASE_URL ?? "http://127.0.0.1:3100";
 const canonicalSiteUrl = "https://www.tarihivankahvaltievi.com";
@@ -9,6 +12,8 @@ const englishMenuPageUrl = `${englishPageUrl}/menu`;
 const guidePageUrl = `${canonicalSiteUrl}/van-kahvaltisi`;
 const culturePageUrl = `${canonicalSiteUrl}/van-kahvaltisi-nedir`;
 const storyPageUrl = `${canonicalSiteUrl}/hikayemiz`;
+const privacyPageUrl = `${canonicalSiteUrl}/gizlilik`;
+const cookiePolicyPageUrl = `${canonicalSiteUrl}/cerez-politikasi`;
 const expectedGoogleVerification = process.env.SEO_EXPECT_GOOGLE_SITE_VERIFICATION?.trim();
 const expectedYandexVerification = process.env.SEO_EXPECT_YANDEX_SITE_VERIFICATION?.trim();
 const expectedBingVerification = process.env.SEO_EXPECT_BING_SITE_VERIFICATION?.trim();
@@ -112,7 +117,14 @@ const routes = [
   },
 ];
 
-const canonicalUrls = new Set(routes.map((route) => route.canonical));
+const legalRoutes = [
+  { path: "/gizlilik", canonical: privacyPageUrl },
+  { path: "/cerez-politikasi", canonical: cookiePolicyPageUrl },
+];
+const canonicalUrls = new Set([
+  ...routes.map((route) => route.canonical),
+  ...legalRoutes.map((route) => route.canonical),
+]);
 const internalPaths = new Set();
 const redirectRules = [
   ["/istanbul-van-kahvaltisi", "/van-kahvaltisi"],
@@ -383,6 +395,18 @@ for (const route of routes) {
   assert(questions.every((question) => summaries.includes(question)), `${routeLabel}: görünür SSS ve şema eşleşmiyor`);
 }
 
+for (const route of legalRoutes) {
+  const response = await fetchWithRetry(route.path);
+  const html = await response.text();
+  const canonicalMatches = [...html.matchAll(/<link\s+rel="canonical"\s+href="([^"]+)"/gi)];
+
+  assert(response.status === 200, `${route.path}: HTTP ${response.status}`);
+  assert(canonicalMatches.length === 1, `${route.path}: tek canonical bulunmalı`);
+  assert(canonicalMatches[0][1] === route.canonical, `${route.path}: canonical yanlış`);
+  assert(!/<meta\s+name="robots"\s+content="[^"]*noindex/i.test(html), `${route.path}: noindex olmamalı`);
+  assert((visibleHtml(html).match(/<h1\b/gi) ?? []).length === 1, `${route.path}: tam bir H1 bulunmalı`);
+}
+
 const sitemap = await (await fetchWithRetry("/sitemap.xml")).text();
 const sitemapUrls = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map((match) => match[1]);
 const sitemapLastModified = [...sitemap.matchAll(/<lastmod>([^<]+)<\/lastmod>/g)].map((match) => match[1]);
@@ -390,6 +414,8 @@ const sitemapImages = [...sitemap.matchAll(/<image:loc>([^<]+)<\/image:loc>/g)].
 assert(sitemapUrls.length === canonicalUrls.size, "Sitemap: tüm indekslenebilir kanonik URL'ler bulunmalı");
 assert(sitemapUrls.every((url) => canonicalUrls.has(url)), "Sitemap: kanonik olmayan URL var");
 assert(canonicalUrls.size === new Set(sitemapUrls).size, "Sitemap: kanonik URL eksik veya yinelenmiş");
+assert(!sitemapUrls.some((url) => new URL(url).pathname.startsWith("/admin")), "Sitemap: admin URL'si olmamalı");
+assert(!sitemapUrls.some((url) => new URL(url).pathname.startsWith("/api/")), "Sitemap: API URL'si olmamalı");
 assert(sitemapLastModified.length === canonicalUrls.size, "Sitemap: lastmod sayısı yanlış");
 assert(
   sitemapLastModified.every((value) => Number.isFinite(Date.parse(value)) && Date.parse(value) <= Date.now()),
@@ -402,6 +428,23 @@ assert(
 );
 assert(sitemap.includes('hreflang="en"'), "Sitemap: İngilizce hreflang eksik");
 assert(sitemap.includes('hreflang="x-default"'), "Sitemap: x-default hreflang eksik");
+
+const appDirectory = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../src/app");
+const appFiles = await readdir(appDirectory, { recursive: true });
+const publicPagePaths = appFiles
+  .filter((file) => file === "page.tsx" || file.endsWith("/page.tsx"))
+  .map((file) => {
+    const routePath = `/${file.replace(/\/page\.tsx$/, "")}`;
+    return routePath === "/page.tsx" ? "/" : routePath;
+  })
+  .filter((routePath) => routePath !== "/admin")
+  .sort();
+const sitemapPaths = sitemapUrls.map((url) => new URL(url).pathname).sort();
+assert(
+  JSON.stringify(sitemapPaths) === JSON.stringify(publicPagePaths),
+  `Sitemap: uygulamadaki herkese açık sayfalarla eşleşmiyor (${publicPagePaths.join(", ")})`,
+);
+
 const robots = await (await fetchWithRetry("/robots.txt")).text();
 assert(robots.includes("User-Agent: *"), "robots.txt: genel bot kuralı eksik");
 assert(robots.includes("User-Agent: OAI-SearchBot"), "robots.txt: OAI-SearchBot kuralı eksik");

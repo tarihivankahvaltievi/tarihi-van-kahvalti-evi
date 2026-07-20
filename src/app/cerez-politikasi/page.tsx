@@ -1,15 +1,12 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { LegalPageShell } from "../components/legal-page-shell";
-import { siteUrl } from "../seo";
-
-const cookieUrl = `${siteUrl}/cerez-politikasi`;
+import { cookiePolicyUrl } from "../seo";
 
 export const metadata: Metadata = {
   title: "Çerez Politikası",
   description: "Tarihi Van Kahvaltı Evi web sitesinin çerez ve yerel depolama açıklaması.",
-  alternates: { canonical: cookieUrl },
-  robots: { index: false, follow: true },
+  alternates: { canonical: cookiePolicyUrl },
 };
 
 export default function CookiePolicyPage() {
