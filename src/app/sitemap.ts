@@ -140,11 +140,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     {
       url: englishUrl,
       lastModified: pageLastModified,
-      images: uniqueImages([
-        "/images/og/van-kahvaltisi.jpg",
-        "/images/breakfast-spread.webp",
-        "/images/street-table.webp",
-      ]),
+      images: homeImages,
       alternates: homeLanguageAlternates,
     },
     {

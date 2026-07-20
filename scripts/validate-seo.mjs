@@ -30,6 +30,7 @@ const routes = [
     types: ["WebSite", "Restaurant", "WebPage", "FAQPage"],
     restaurantMenu: `${menuPageUrl}#menu`,
     faqCount: 10,
+    sharedHomeDesign: true,
     visibleSignals: ["van kahvaltıcısı", "beyoğlu", "taksim", "serpme kahvaltı"],
     hreflang: homeHreflang,
   },
@@ -79,6 +80,7 @@ const routes = [
     types: ["Restaurant", "WebPage", "BreadcrumbList", "FAQPage"],
     restaurantMenu: `${menuPageUrl}#menu`,
     faqCount: 6,
+    sharedHomeDesign: true,
     visibleSignals: ["traditional turkish breakfast", "taksim", "van breakfast", "live menu"],
     hreflang: homeHreflang,
   },
@@ -242,6 +244,34 @@ for (const route of routes) {
     );
   }
   assert(route.visibleSignals.every((signal) => lowerText.includes(signal)), `${routeLabel}: hedef görünür metin eksik`);
+
+  if (route.sharedHomeDesign) {
+    const sharedHomeClasses = [
+      "site-shell theme-breakfast",
+      "hero hero-parallax-dining",
+      "gallery-section",
+      "faq-section",
+      "footer-reimagined",
+    ];
+    assert(
+      sharedHomeClasses.every((className) => html.includes(className)),
+      `${routeLabel}: ortak ana sayfa tasarım bileşenleri eksik`,
+    );
+  }
+
+  if (route.path === "/") {
+    assert(
+      /<a[^>]+class="nav-language"(?=[^>]*hrefLang="en")(?=[^>]*href="\/en")[^>]*>/i.test(html),
+      `${routeLabel}: görünür EN dil anahtarı eksik`,
+    );
+  }
+
+  if (route.path === "/en") {
+    assert(
+      /<a[^>]+class="nav-language"(?=[^>]*hrefLang="tr")(?=[^>]*href="\/")[^>]*>/i.test(html),
+      `${routeLabel}: görünür TR dil anahtarı eksik`,
+    );
+  }
 
   if (route.hreflang) {
     for (const [language, url] of Object.entries(route.hreflang)) {

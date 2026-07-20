@@ -1,24 +1,12 @@
 import Image from "next/image";
 import Link from "next/link";
 import { BookingOpenButton } from "./booking-open-button";
+import { messagesFor, type SiteLocale } from "../home-localization";
 import styles from "./about-story.module.css";
 
-const principles = [
-  {
-    title: "Mekânın ruhu",
-    text: "Zambak Sokak'ın nostaljik ayrıntıları arasında, şehrin hızından uzak bir masa.",
-  },
-  {
-    title: "Günlük emek",
-    text: "Taze hazırlanan reçeller, sıcak pişiler ve özenle kurulan kahvaltı.",
-  },
-  {
-    title: "Van sofrası",
-    text: "Otlu peynir, murtuğa, kete ve demli çayla yöresel karakter.",
-  },
-];
+export function AboutStory({ locale = "tr" }: { locale?: SiteLocale }) {
+  const messages = messagesFor(locale);
 
-export function AboutStory() {
   return (
     <section id="story" className={styles.section} aria-labelledby="about-story-title">
       <div className={styles.inner}>
@@ -26,7 +14,7 @@ export function AboutStory() {
           <figure className={styles.tablePhoto}>
             <Image
               src="/images/hands-table.webp"
-              alt="Kahvaltı sofrasında peynir, reçel ve tahin tabaklarını uzatan eller"
+              alt={messages.about.tableAlt}
               fill
               sizes="(max-width: 680px) 84vw, (min-width: 720px) and (max-width: 900px) 33vw, (max-width: 900px) 80vw, 520px"
               quality={74}
@@ -37,7 +25,7 @@ export function AboutStory() {
           <figure className={styles.memoryPhoto}>
             <Image
               src="/images/historic-mirror.webp"
-              alt="Mekândaki oymalı çerçeveli ayna ve aynaya yansıyan tuğla duvar"
+              alt={messages.about.memoryAlt}
               fill
               sizes="(max-width: 680px) 34vw, (min-width: 720px) and (max-width: 900px) 16vw, (max-width: 900px) 37vw, 220px"
               quality={74}
@@ -48,31 +36,29 @@ export function AboutStory() {
         </div>
 
         <div className={styles.copy}>
-          <p className={styles.meta}>Hakkımızda</p>
+          <p className={styles.meta}>{messages.about.meta}</p>
           <h2 id="about-story-title" className={styles.title}>
-            Van sofrası,
-            <em>Taksim&apos;de ağır ağır kurulur.</em>
+            {messages.about.title}
+            <em>{messages.about.titleEmphasis}</em>
           </h2>
-          <p className={styles.lead}>
-            Zambak Sokak&apos;ın kendine özgü dokusu içinde, Van kahvaltısının sevilen tatlarını aynı sofrada buluşturuyoruz. Otlu peynirden murtuğaya, sıcak pişiden ev yapımı reçellere kadar her tabağı günlük, taze ve özenli hazırlıyoruz. Nostaljik ayrıntılarla çevrili mekânımızda kahvaltıyı hızlı bir öğün değil; çayın demlendiği, sohbetin uzadığı sakin bir buluşma olarak görüyoruz.
-          </p>
+          <p className={styles.lead}>{messages.about.lead}</p>
 
-          <nav className={styles.actions} aria-label="Hakkımızda bölümü sonraki adımlar">
-            <Link href="/menu" className={`${styles.action} ${styles.menuAction}`}>
-              <span>Sofrayı keşfet</span>
+          <nav className={styles.actions} aria-label={messages.about.actionsAria}>
+            <Link href={messages.menuHref} className={`${styles.action} ${styles.menuAction}`}>
+              <span>{messages.about.primaryAction}</span>
               <span className={styles.actionArrow} aria-hidden="true">↗</span>
             </Link>
             <BookingOpenButton className={`${styles.action} ${styles.bookingAction}`}>
-              Masanı ayırt
+              {messages.about.bookingAction}
             </BookingOpenButton>
           </nav>
         </div>
 
-        <ul className={styles.principles} aria-label="Tarihi Van Kahvaltı Evi'nin sofra yaklaşımı">
-          {principles.map((principle) => (
-            <li key={principle.title} className={styles.principle}>
-              <h3>{principle.title}</h3>
-              <p>{principle.text}</p>
+        <ul className={styles.principles} aria-label={messages.about.principlesAria}>
+          {messages.about.principles.map(([title, text]) => (
+            <li key={title} className={styles.principle}>
+              <h3>{title}</h3>
+              <p>{text}</p>
             </li>
           ))}
         </ul>

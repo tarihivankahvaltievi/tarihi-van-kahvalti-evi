@@ -8,20 +8,23 @@ import {
   useReducedMotion,
 } from "framer-motion";
 import { ChevronLeft, ChevronRight, X } from "lucide-react";
+import { messagesFor, type SiteLocale } from "../home-localization";
 
 interface GalleryLightboxProps {
-  gallery: [string, string][];
+  gallery: readonly (readonly [string, string])[];
+  locale?: SiteLocale;
 }
 
 type GalleryRow = {
-  items: [string, string][];
+  items: readonly (readonly [string, string])[];
   duration: number;
   offset: string;
   reverse: boolean;
   density: "featured" | "tall";
 };
 
-export function GalleryLightbox({ gallery }: GalleryLightboxProps) {
+export function GalleryLightbox({ gallery, locale = "tr" }: GalleryLightboxProps) {
+  const messages = messagesFor(locale);
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
   const [isInViewport, setIsInViewport] = useState(false);
   const galleryRef = useRef<HTMLDivElement>(null);
@@ -34,14 +37,14 @@ export function GalleryLightbox({ gallery }: GalleryLightboxProps) {
     "/images/coffee-moment.webp",
     "/images/interior-chair.webp",
     "/images/sucuk-egg.webp",
-  ].map(getImage).filter((item): item is [string, string] => Boolean(item));
+  ].map(getImage).filter((item): item is readonly [string, string] => Boolean(item));
   const tableImages = [
     "/images/breakfast-spread.webp",
     "/images/terrace-tea.webp",
     "/images/hands-table.webp",
     "/images/balcony-breakfast.webp",
     "/images/street-table.webp",
-  ].map(getImage).filter((item): item is [string, string] => Boolean(item));
+  ].map(getImage).filter((item): item is readonly [string, string] => Boolean(item));
   const galleryRows: GalleryRow[] = [
     {
       items: compactImages.length ? compactImages : gallery.slice(0, 5),
@@ -173,7 +176,7 @@ export function GalleryLightbox({ gallery }: GalleryLightboxProps) {
       <div ref={galleryRef} className="gallery-hero-shell">
         <span className="gallery-ambient gallery-ambient-one" aria-hidden="true" />
         <span className="gallery-ambient gallery-ambient-two" aria-hidden="true" />
-        <div className="mosaic gallery-marquee" aria-label="Mekan fotoğrafları">
+        <div className="mosaic gallery-marquee" aria-label={messages.gallery.aria}>
           {galleryRows.map((row) => (
             <GalleryMarqueeRow
               key={`${row.density}-${row.offset}`}
@@ -185,6 +188,7 @@ export function GalleryLightbox({ gallery }: GalleryLightboxProps) {
               duration={row.duration}
               offset={row.offset}
               density={row.density}
+              viewLabel={messages.gallery.view}
             />
           ))}
         </div>
@@ -201,7 +205,7 @@ export function GalleryLightbox({ gallery }: GalleryLightboxProps) {
               type="button"
               className="lightbox-close"
               onClick={closeLightbox}
-              aria-label="Galeri kapat"
+              aria-label={messages.gallery.close}
             >
               <X size={24} />
             </button>
@@ -210,7 +214,7 @@ export function GalleryLightbox({ gallery }: GalleryLightboxProps) {
               type="button"
               className="lightbox-nav prev"
               onClick={handlePrev}
-              aria-label="Önceki fotoğraf"
+              aria-label={messages.gallery.previous}
             >
               <ChevronLeft size={36} />
             </button>
@@ -230,7 +234,7 @@ export function GalleryLightbox({ gallery }: GalleryLightboxProps) {
               type="button"
               className="lightbox-nav next"
               onClick={handleNext}
-              aria-label="Sonraki fotoğraf"
+              aria-label={messages.gallery.next}
             >
               <ChevronRight size={36} />
             </button>
@@ -257,15 +261,17 @@ function GalleryMarqueeRow({
   duration,
   offset,
   density,
+  viewLabel,
 }: {
-  items: [string, string][];
-  gallery: [string, string][];
+  items: readonly (readonly [string, string])[];
+  gallery: readonly (readonly [string, string])[];
   openLightbox: (index: number) => void;
   reverse?: boolean;
   paused?: boolean;
   duration: number;
   offset: string;
   density: "featured" | "tall";
+  viewLabel: string;
 }) {
   const marqueeItems = [...items, ...items];
   const trackRef = useRef<HTMLDivElement>(null);
@@ -332,7 +338,7 @@ function GalleryMarqueeRow({
                 loading="lazy"
               />
               <span className="mosaic-overlay">
-                <span>Görüntüle</span>
+                <span>{viewLabel}</span>
               </span>
             </>
           );

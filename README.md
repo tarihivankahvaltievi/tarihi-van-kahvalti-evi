@@ -24,6 +24,8 @@ npm start
 - İndekslenebilir kanonik sayfalar: ana sayfa `/`, menü `/menu`, Van kahvaltısı rehberi `/van-kahvaltisi`, hikâye `/hikayemiz`, konum `/konum`, İngilizce ziyaretçi rehberi `/en` ve İngilizce canlı menü `/en/menu`
 - SSS ana sayfada, güncel QR menü `/menu`, adres ve yol tarifi ise `/konum` sayfasında yer alır.
 - Güncel ve indekslenebilir QR menü `/menu` sayfasındadır; kaldırılan `/iletisim`, `/sss` ve `/kafka-cafe` URL'leri en yakın gerçek içeriğe yönlenir.
+- Türkçe `/` ve İngilizce `/en` ana sayfaları aynı `ClientPage` + `HomeContent` bileşen ağacını kullanır. Dil metinleri ve bağlantıları `src/app/home-localization.ts` içinden gelir; iki dil için ayrı ana sayfa tasarımı oluşturulmamalıdır.
+- Üst navigasyondaki `EN` / `TR` anahtarı kullanıcıyı karşılık gelen kanonik dil URL'sine götürür. Otomatik IP veya tarayıcı dili yönlendirmesi yapılmaz.
 - Eski konu/WordPress URL'leri yalnız bilinen eşdeğer hedefe tek adım kalıcı yönlenir; bilinmeyen URL'ler gerçek `404` döner.
 - Sitemap ve tarayıcı kuralları: `src/app/sitemap.ts`, `src/app/robots.ts`. XML sitemap yalnız indekslenebilir kanonik sayfaları; bu sayfalardaki keşfedilebilir özgün görselleri ve iki karşılıklı hreflang kümesini içerir.
 - Otomatik SEO/HTTP sözleşmesi: `npm run test:seo`

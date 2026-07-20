@@ -1,6 +1,8 @@
-import { faqItems } from "../seo";
+import { messagesFor, type SiteLocale } from "../home-localization";
 
-export function FaqSection() {
+export function FaqSection({ locale = "tr" }: { locale?: SiteLocale }) {
+  const messages = messagesFor(locale);
+
   return (
     <section
       className="faq-section"
@@ -9,15 +11,13 @@ export function FaqSection() {
     >
       <div className="faq-inner">
         <div className="faq-heading-wrap">
-          <span>Merak edilenler</span>
-          <h2 id="faq-heading">
-          Sıkça Sorulan Sorular
-          </h2>
-          <p>Tarihi Van Kahvaltı Evi ve serpme kahvaltımız hakkında kısa cevaplar.</p>
+          <span>{messages.faq.eyebrow}</span>
+          <h2 id="faq-heading">{messages.faq.title}</h2>
+          <p>{messages.faq.intro}</p>
         </div>
 
         <div className="faq-list">
-          {faqItems.map((faq, index) => {
+          {messages.faq.items.map((faq, index) => {
             const answerId = `faq-answer-${index}`;
             return (
               <details

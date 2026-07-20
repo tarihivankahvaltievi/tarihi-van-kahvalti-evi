@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, MapPin, MessageCircle, Phone, Clock } from "lucide-react";
 import { address, displayAddress, displayPhone, mapsUrl, openingHours, telUrl, whatsappUrl } from "../seo";
+import { messagesFor, type SiteLocale } from "../home-localization";
 import styles from "./animated-footer.module.css";
 
 const wallBlocks = [
@@ -359,7 +360,8 @@ function IstiklalWebglAtmosphere() {
   );
 }
 
-export function AnimatedFooter() {
+export function AnimatedFooter({ locale = "tr" }: { locale?: SiteLocale }) {
+  const messages = messagesFor(locale);
   const footerRef = useRef<HTMLElement>(null);
   const [isFooterVisible, setIsFooterVisible] = useState(false);
 
@@ -367,7 +369,7 @@ export function AnimatedFooter() {
     window.dispatchEvent(
       new CustomEvent("open-booking", {
         detail: {
-          category: "Kahvaltı",
+          category: locale === "en" ? "Breakfast" : "Kahvaltı",
         },
       }),
     );
@@ -458,7 +460,7 @@ export function AnimatedFooter() {
       <div
         className={`footer-skyline-wrapper ${styles.skylineWrapper}`}
         role="img"
-        aria-label="İstiklal Caddesi’nde nostaljik tramvay, Galata Kulesi ve tarihi Beyoğlu silüeti"
+        aria-label={messages.footer.sceneAria}
       >
         <IstiklalWebglAtmosphere />
         <svg viewBox="0 0 1200 240" preserveAspectRatio="xMidYMax meet" className={`footer-skyline-svg ${styles.skylineSvg}`} xmlns="http://www.w3.org/2000/svg">
@@ -1170,19 +1172,18 @@ export function AnimatedFooter() {
         {/* Top Section: Brand Lockup & Manifesto */}
         <div className="footer-top-section">
           <div className="footer-brand-lockup">
-            <a className="footer-brand-logo" href="#top" aria-label="Başa Dön">
+            <a className="footer-brand-logo" href={messages.homeHref} aria-label={messages.footer.backToTop}>
               <Image src="/images/brand-icon-small.png" alt="Tarihi Van Kahvaltı Evi" width={76} height={95} loading="lazy" />
             </a>
             <h2 className="footer-manifesto">
-              Van kahvaltısı, <br />
-              <span className="footer-manifesto-italic">tarihle aynı sofrada.</span>
+              {messages.footer.manifesto} <br />
+              <span className="footer-manifesto-italic">{messages.footer.manifestoEmphasis}</span>
             </h2>
             <p className="footer-brand-desc">
-              1978’den beri süregelen aile yolculuğumuzda, Beyoğlu’nun kalbindeki tarihi Rum binasının dokusunu,
-              bakır sahanların tınısı ve eksilmeyen demli çayımızla buluşturuyoruz.
+              {messages.footer.description}
             </p>
             <button type="button" className="footer-cta" onClick={handleOpenBooking}>
-              Masada Yerini Ayırt <ArrowRight size={18} />
+              {messages.footer.booking} <ArrowRight size={18} />
             </button>
           </div>
         </div>
@@ -1193,21 +1194,22 @@ export function AnimatedFooter() {
         {/* Information Grid */}
         <div className="footer-grid">
           <div className="footer-col">
-            <h4 className="footer-col-title">Keşfet</h4>
+            <h4 className="footer-col-title">{messages.footer.explore}</h4>
             <ul className="footer-links">
-              <li><Link href="/menu">Zengin Menü</Link></li>
-              <li><Link href="/van-kahvaltisi">Van Kahvaltısı Rehberi</Link></li>
-              <li><Link href="/hikayemiz">1978&apos;den Beri Hikâyemiz</Link></li>
-              <li><Link href="/konum">Beyoğlu ve Taksim Kahvaltı</Link></li>
-              <li><Link href="/menu">Kafka Cafe</Link></li>
-              <li><Link href="/konum">Konum ve Yol Tarifi</Link></li>
-              <li><Link href="/#faq">Sıkça Sorulan Sorular</Link></li>
-              <li><Link href="/en" hrefLang="en">English Visitor Guide</Link></li>
+              {messages.footer.exploreLinks.map(([href, label]) => (
+                <li key={`${href}-${label}`}>
+                  {href.startsWith("http") ? (
+                    <a href={href} target="_blank" rel="noopener noreferrer">{label}</a>
+                  ) : (
+                    <Link href={href} hrefLang={href === "/en" ? "en" : href === "/" && locale === "en" ? "tr" : undefined}>{label}</Link>
+                  )}
+                </li>
+              ))}
             </ul>
           </div>
 
           <div className="footer-col">
-            <h4 className="footer-col-title">Bize Ulaşın</h4>
+            <h4 className="footer-col-title">{messages.footer.contact}</h4>
             <ul className="footer-links">
               <li>
                 <a href={telUrl}>
@@ -1218,7 +1220,7 @@ export function AnimatedFooter() {
               <li>
                 <a href={whatsappUrl} target="_blank" rel="noopener noreferrer">
                   <MessageCircle size={16} />
-                  <span className="link-text">WhatsApp İletişim</span>
+                  <span className="link-text">{messages.footer.whatsapp}</span>
                 </a>
               </li>
               <li>
@@ -1236,14 +1238,14 @@ export function AnimatedFooter() {
           <div className="footer-col footer-col-info">
             <div className="info-badge-wrapper">
               <div className="info-badge">
-                <span className="info-badge-title">2. Derece</span>
-                <span className="info-badge-subtitle">Tarihi Eser</span>
+                <span className="info-badge-title">{messages.footer.listedTitle}</span>
+                <span className="info-badge-subtitle">{messages.footer.listedSubtitle}</span>
               </div>
             </div>
             <div className="info-hours">
               <span className="hours-label">
                 <Clock size={12} style={{ display: "inline-block", marginRight: "4px", verticalAlign: "middle" }} />
-                Her Gün Açığız
+                {messages.footer.hours}
               </span>
               <span className="hours-value">{openingHours.opens} - {openingHours.closes}</span>
             </div>
@@ -1253,11 +1255,11 @@ export function AnimatedFooter() {
         {/* Bottom Legal & Copyright Strip */}
         <div className="footer-bottom">
           <div className="footer-copyright">
-            © 2026 Tarihi Van Kahvaltı Evi. Tüm hakları saklıdır.
+            {messages.footer.copyright}
           </div>
           <div className="footer-legal-links">
-            <Link href="/gizlilik">Gizlilik Politikası</Link>
-            <Link href="/cerez-politikasi">Çerez Politikası</Link>
+            <Link href="/gizlilik" hrefLang="tr">{messages.footer.privacy}</Link>
+            <Link href="/cerez-politikasi" hrefLang="tr">{messages.footer.cookies}</Link>
           </div>
         </div>
       </div>

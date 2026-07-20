@@ -11,6 +11,7 @@ import {
   useReducedMotion,
 } from "framer-motion";
 import { type CSSProperties, useEffect, useRef, useState, useSyncExternalStore } from "react";
+import { messagesFor, type SiteLocale } from "../home-localization";
 
 type HeroImage = {
   thumbnail: string;
@@ -19,7 +20,7 @@ type HeroImage = {
 
 type FloatingFood = {
   src: string;
-  alt: string;
+  altKey: "pan" | "tea" | "simit" | "omelette" | "cheese" | "greens" | "olives" | "jam";
   className: string;
   entranceOrder: number;
 };
@@ -70,49 +71,49 @@ const heroImages: HeroImage[] = [
 const floatingFoods: FloatingFood[] = [
   {
     src: "/images/hero-float/sucuk-egg-pan.webp",
-    alt: "Bakır sahanda sucuklu yumurta",
+    altKey: "pan",
     className: "hero-float-item hero-float-pan",
     entranceOrder: 2,
   },
   {
     src: "/images/hero-float/tea-glass.webp",
-    alt: "İnce belli çay",
+    altKey: "tea",
     className: "hero-float-item hero-float-tea",
     entranceOrder: 0,
   },
   {
     src: "/images/hero-float/simit-board.webp",
-    alt: "Ahşap tabakta sıcak simit",
+    altKey: "simit",
     className: "hero-float-item hero-float-simit",
     entranceOrder: 4,
   },
   {
     src: "/images/hero-float/omelette-plate.webp",
-    alt: "Kahvaltı tabağı",
+    altKey: "omelette",
     className: "hero-float-item hero-float-omelette",
     entranceOrder: 3,
   },
   {
     src: "/images/hero-float/cheese-platter.webp",
-    alt: "Van peynir tabağı",
+    altKey: "cheese",
     className: "hero-float-item hero-float-cheese-platter",
     entranceOrder: 1,
   },
   {
     src: "/images/hero-float/greens-platter.webp",
-    alt: "Taze yeşillik tabağı",
+    altKey: "greens",
     className: "hero-float-item hero-float-greens-platter",
     entranceOrder: 5,
   },
   {
     src: "/images/hero-float/black-olive-bowl.webp",
-    alt: "Siyah zeytin kasesi",
+    altKey: "olives",
     className: "hero-float-item hero-float-black-olives",
     entranceOrder: 6,
   },
   {
     src: "/images/hero-float/apricot-jam-bowl.webp",
-    alt: "Kayısı reçeli kasesi",
+    altKey: "jam",
     className: "hero-float-item hero-float-apricot-jam",
     entranceOrder: 8,
   },
@@ -135,7 +136,8 @@ const subscribeToMobileViewport = (callback: () => void) => {
 const getMobileViewportSnapshot = () =>
   window.matchMedia("(max-width: 680px)").matches;
 
-export function VanHeroParallax() {
+export function VanHeroParallax({ locale = "tr" }: { locale?: SiteLocale }) {
+  const messages = messagesFor(locale);
   const isMobile = useSyncExternalStore(
     subscribeToMobileViewport,
     getMobileViewportSnapshot,
@@ -322,7 +324,7 @@ export function VanHeroParallax() {
     <section
       ref={ref}
       className={`hero hero-parallax-dining${isHeroVisible ? " hero-is-visible" : ""}`}
-      aria-label="Tarihi Van Kahvaltı Evi ana alanı"
+      aria-label={messages.hero.aria}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
     >
@@ -341,19 +343,19 @@ export function VanHeroParallax() {
             }}
           >
             <div className="hero-provenance">
-              <span className="hero-provenance-year">1978&apos;den beri</span>
-              <span className="hero-provenance-place">Beyoğlu&apos;nda bir aile sofrası</span>
+              <span className="hero-provenance-year">{messages.hero.year}</span>
+              <span className="hero-provenance-place">{messages.hero.place}</span>
             </div>
             <h1 className="hero-title-lockup">
               <span className="hero-title-line hero-title-line-one">
-                Tarihi Van
+                {messages.hero.titleLineOne}
               </span>
               <span className="hero-title-line hero-title-line-two">
-                Kahvaltı Evi
+                {messages.hero.titleLineTwo}
               </span>
             </h1>
             <p className="hero-intro">
-              Otlu peynir, murtuğa, kavut, sıcak bakır sahanlar ve hep taze çay.
+              {messages.hero.intro}
             </p>
           </motion.div>
         </motion.div>
@@ -408,7 +410,7 @@ export function VanHeroParallax() {
               >
                 <Image
                   src={item.src}
-                  alt={item.alt}
+                  alt={messages.hero.floatingAlts[item.altKey]}
                   fill
                   sizes="(max-width: 680px) 30vw, (max-width: 1080px) 26vw, 320px"
                   quality={isPrimaryFloatingFood ? 75 : 70}

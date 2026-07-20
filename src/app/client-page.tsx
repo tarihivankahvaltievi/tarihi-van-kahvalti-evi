@@ -19,20 +19,23 @@ import {
   ChevronRight,
   CircleHelp,
   Home,
+  Languages,
   MapPin,
   MessageCircle,
   UtensilsCrossed,
 } from "lucide-react";
 import { mapsUrl, whatsappUrl } from "./seo";
+import { messagesFor, type SiteLocale } from "./home-localization";
 
 const BookingModal = dynamic(
   () => import("./components/booking-modal").then((mod) => mod.BookingModal),
   { ssr: false },
 );
 
-export default function ClientPage({ children }: { children: ReactNode }) {
+export default function ClientPage({ children, locale = "tr" }: { children: ReactNode; locale?: SiteLocale }) {
+  const messages = messagesFor(locale);
   const pathname = usePathname();
-  const isMenuPage = pathname === "/menu";
+  const isMenuPage = pathname === "/menu" || pathname === "/en/menu";
   const isLocationPage = pathname === "/konum";
   const [isBookingOpen, setIsBookingOpen] = useState(false);
   const [preselectedItem, setPreselectedItem] = useState("");
@@ -51,6 +54,10 @@ export default function ClientPage({ children }: { children: ReactNode }) {
     left: 0,
     width: 0,
   });
+
+  useEffect(() => {
+    document.documentElement.lang = messages.documentLanguage;
+  }, [messages.documentLanguage]);
 
   useEffect(() => {
     const updateScrollState = () => {
@@ -153,17 +160,17 @@ export default function ClientPage({ children }: { children: ReactNode }) {
     const handleBookingRequest = (event: Event) => {
       const detail = (event as CustomEvent<{ itemTitle?: string; category?: string }>).detail;
       setPreselectedItem(detail?.itemTitle || "");
-      setPreselectedType(detail?.category || "Kahvaltı");
+      setPreselectedType(detail?.category || (locale === "en" ? "Breakfast" : "Kahvaltı"));
       setIsBookingOpen(true);
     };
 
     window.addEventListener("open-booking", handleBookingRequest);
     return () => window.removeEventListener("open-booking", handleBookingRequest);
-  }, []);
+  }, [locale]);
 
   const handleOpenBooking = (itemTitle?: string, category?: string) => {
     setPreselectedItem(itemTitle || "");
-    setPreselectedType(category || "Kahvaltı");
+    setPreselectedType(category || (locale === "en" ? "Breakfast" : "Kahvaltı"));
     setIsBookingOpen(true);
   };
 
@@ -185,7 +192,7 @@ export default function ClientPage({ children }: { children: ReactNode }) {
 
   return (
     <>
-      <div id="top" className={`site-shell theme-breakfast ${isMenuPage ? "menu-page-shell" : ""}`}>
+      <div id="top" lang={messages.documentLanguage} className={`site-shell theme-breakfast ${isMenuPage ? "menu-page-shell" : ""}`}>
         <header className={`nav ${scrolled ? "scrolled" : ""} ${menuOpen ? "menu-open" : ""}`}>
           <div className="logo-wrap">
             <div className="logo-emblem brand-logo-mark" aria-hidden="true">
@@ -198,7 +205,7 @@ export default function ClientPage({ children }: { children: ReactNode }) {
                 className="brand-logo-image"
               />
             </div>
-            <Link className="logo" href="/#top" aria-label="Tarihi Van Kahvaltı Evi ana sayfası">
+            <Link className="logo" href={messages.homeHref} aria-label={locale === "en" ? "Tarihi Van Kahvaltı Evi English home" : "Tarihi Van Kahvaltı Evi ana sayfası"}>
               <span className="logo-word">
                 <span className="logo-tarihi">Tarihi</span><span className="logo-van">Van</span>
               </span>
@@ -208,16 +215,29 @@ export default function ClientPage({ children }: { children: ReactNode }) {
             </Link>
           </div>
 
-          <nav className="nav-links" aria-label="Ana menü" onMouseLeave={handleMouseLeave}>
+          <nav className="nav-links" aria-label={messages.nav.aria} onMouseLeave={handleMouseLeave}>
             <span className="nav-hover-pill" style={hoverStyle} />
-            <Link href="/hikayemiz" onMouseEnter={handleMouseEnter}>Hakkımızda</Link>
-            <Link href="/menu" aria-current={isMenuPage ? "page" : undefined} onMouseEnter={handleMouseEnter}>Menü</Link>
-            <Link href="/#gallery" onMouseEnter={handleMouseEnter}>Galeri</Link>
-            <Link href="/konum" aria-current={isLocationPage ? "page" : undefined} onMouseEnter={handleMouseEnter}>Konum</Link>
-            <Link href="/#faq" onMouseEnter={handleMouseEnter}>SSS</Link>
+            <Link href={messages.aboutHref} onMouseEnter={handleMouseEnter}>{messages.nav.about}</Link>
+            <Link href={messages.menuHref} aria-current={isMenuPage ? "page" : undefined} onMouseEnter={handleMouseEnter}>{messages.nav.menu}</Link>
+            <Link href={messages.galleryHref} onMouseEnter={handleMouseEnter}>{messages.nav.gallery}</Link>
+            {locale === "en" ? (
+              <a href={mapsUrl} target="_blank" rel="noopener noreferrer" onMouseEnter={handleMouseEnter}>{messages.nav.location}</a>
+            ) : (
+              <Link href="/konum" aria-current={isLocationPage ? "page" : undefined} onMouseEnter={handleMouseEnter}>{messages.nav.location}</Link>
+            )}
+            <Link href={messages.faqHref} onMouseEnter={handleMouseEnter}>{messages.nav.faq}</Link>
           </nav>
 
           <div className="nav-actions">
+            <Link
+              className="nav-language"
+              href={messages.alternateHref}
+              hrefLang={locale === "en" ? "tr" : "en"}
+              lang={locale === "en" ? "tr" : "en"}
+              aria-label={messages.alternateLanguageLabel}
+            >
+              {messages.alternateLanguage}
+            </Link>
             <a className="nav-location" href={mapsUrl} target="_blank" rel="noopener noreferrer">
               <MapPin size={16} />
               <span>Beyoğlu</span>
@@ -226,7 +246,7 @@ export default function ClientPage({ children }: { children: ReactNode }) {
               ref={menuButtonRef}
               type="button"
               className="nav-menu-button"
-              aria-label={menuOpen ? "Menüyü kapat" : "Menüyü aç"}
+              aria-label={menuOpen ? messages.nav.close : messages.nav.open}
               aria-expanded={menuOpen}
               aria-controls="site-menu"
               onClick={() => setMenuOpen((open) => !open)}
@@ -261,62 +281,62 @@ export default function ClientPage({ children }: { children: ReactNode }) {
               <span className="nav-menu-art-steam" />
             </div>
             <div className="nav-drawer-head">
-              <span id="site-menu-title" data-menu-title tabIndex={-1}>Menü</span>
+              <span id="site-menu-title" data-menu-title tabIndex={-1}>{messages.nav.panelTitle}</span>
               <small>1978 · Beyoğlu</small>
             </div>
-            <Link className="nav-menu-primary" href="/#top" tabIndex={menuOpen ? 0 : -1} style={{ "--item-index": 1 } as CSSProperties} onClick={() => setMenuOpen(false)}>
+            <Link className="nav-menu-primary" href={messages.homeHref} tabIndex={menuOpen ? 0 : -1} style={{ "--item-index": 1 } as CSSProperties} onClick={() => setMenuOpen(false)}>
               <Home size={18} />
               <span className="nav-menu-copy">
-                <span className="nav-menu-link-text">Ana sayfa</span>
-                <span className="nav-menu-link-meta">Sıcak sofra açılışı</span>
+                <span className="nav-menu-link-text">{messages.nav.home[0]}</span>
+                <span className="nav-menu-link-meta">{messages.nav.home[1]}</span>
               </span>
               <ChevronRight size={17} />
             </Link>
-            <Link className="nav-menu-primary" href="/hikayemiz" tabIndex={menuOpen ? 0 : -1} style={{ "--item-index": 2 } as CSSProperties} onClick={() => setMenuOpen(false)}>
+            <Link className="nav-menu-primary" href={messages.aboutHref} tabIndex={menuOpen ? 0 : -1} style={{ "--item-index": 2 } as CSSProperties} onClick={() => setMenuOpen(false)}>
               <BookOpen size={18} />
               <span className="nav-menu-copy">
-                <span className="nav-menu-link-text">Hakkımızda</span>
-                <span className="nav-menu-link-meta">Tarihi Rum binası</span>
+                <span className="nav-menu-link-text">{messages.nav.story[0]}</span>
+                <span className="nav-menu-link-meta">{messages.nav.story[1]}</span>
               </span>
               <ChevronRight size={17} />
             </Link>
-            <Link className="nav-menu-primary" href="/menu" aria-current={isMenuPage ? "page" : undefined} tabIndex={menuOpen ? 0 : -1} style={{ "--item-index": 3 } as CSSProperties} onClick={() => setMenuOpen(false)}>
+            <Link className="nav-menu-primary" href={messages.menuHref} aria-current={isMenuPage ? "page" : undefined} tabIndex={menuOpen ? 0 : -1} style={{ "--item-index": 3 } as CSSProperties} onClick={() => setMenuOpen(false)}>
               <BookOpen size={18} />
               <span className="nav-menu-copy">
-                <span className="nav-menu-link-text">Menü</span>
-                <span className="nav-menu-link-meta">Fiyatlar ve içerik</span>
+                <span className="nav-menu-link-text">{messages.nav.liveMenu[0]}</span>
+                <span className="nav-menu-link-meta">{messages.nav.liveMenu[1]}</span>
               </span>
               <ChevronRight size={17} />
             </Link>
-            <Link className="nav-menu-primary" href="/#gallery" tabIndex={menuOpen ? 0 : -1} style={{ "--item-index": 4 } as CSSProperties} onClick={() => setMenuOpen(false)}>
+            <Link className="nav-menu-primary" href={messages.galleryHref} tabIndex={menuOpen ? 0 : -1} style={{ "--item-index": 4 } as CSSProperties} onClick={() => setMenuOpen(false)}>
               <Camera size={18} />
               <span className="nav-menu-copy">
-                <span className="nav-menu-link-text">Galeri</span>
-                <span className="nav-menu-link-meta">Bakır, çay, masa</span>
+                <span className="nav-menu-link-text">{messages.nav.galleryItem[0]}</span>
+                <span className="nav-menu-link-meta">{messages.nav.galleryItem[1]}</span>
               </span>
               <ChevronRight size={17} />
             </Link>
-            <Link className="nav-menu-primary" href="/konum" aria-current={isLocationPage ? "page" : undefined} tabIndex={menuOpen ? 0 : -1} style={{ "--item-index": 5 } as CSSProperties} onClick={() => setMenuOpen(false)}>
+            <a className="nav-menu-primary" href={locale === "en" ? mapsUrl : "/konum"} target={locale === "en" ? "_blank" : undefined} rel={locale === "en" ? "noopener noreferrer" : undefined} aria-current={isLocationPage ? "page" : undefined} tabIndex={menuOpen ? 0 : -1} style={{ "--item-index": 5 } as CSSProperties} onClick={() => setMenuOpen(false)}>
               <MapPin size={18} />
               <span className="nav-menu-copy">
-                <span className="nav-menu-link-text">Konum</span>
-                <span className="nav-menu-link-meta">Beyoğlu rotası</span>
+                <span className="nav-menu-link-text">{messages.nav.directions[0]}</span>
+                <span className="nav-menu-link-meta">{messages.nav.directions[1]}</span>
               </span>
               <ChevronRight size={17} />
-            </Link>
-            <Link className="nav-menu-utility" href="/van-kahvaltisi" tabIndex={menuOpen ? 0 : -1} style={{ "--item-index": 6 } as CSSProperties} onClick={() => setMenuOpen(false)}>
+            </a>
+            <Link className="nav-menu-utility" href={locale === "en" ? messages.aboutHref : "/van-kahvaltisi"} tabIndex={menuOpen ? 0 : -1} style={{ "--item-index": 6 } as CSSProperties} onClick={() => setMenuOpen(false)}>
               <BookOpen size={18} />
               <span className="nav-menu-copy">
-                <span className="nav-menu-link-text">Van kahvaltısı</span>
-                <span className="nav-menu-link-meta">Yöresel lezzetler ve fiyatlar</span>
+                <span className="nav-menu-link-text">{messages.nav.breakfast[0]}</span>
+                <span className="nav-menu-link-meta">{messages.nav.breakfast[1]}</span>
               </span>
               <ChevronRight size={17} />
             </Link>
-            <Link className="nav-menu-utility" href="/#faq" tabIndex={menuOpen ? 0 : -1} style={{ "--item-index": 7 } as CSSProperties} onClick={() => setMenuOpen(false)}>
+            <Link className="nav-menu-utility" href={messages.faqHref} tabIndex={menuOpen ? 0 : -1} style={{ "--item-index": 7 } as CSSProperties} onClick={() => setMenuOpen(false)}>
               <CircleHelp size={18} />
               <span className="nav-menu-copy">
-                <span className="nav-menu-link-text">Sıkça sorulanlar</span>
-                <span className="nav-menu-link-meta">Kısa ve net cevaplar</span>
+                <span className="nav-menu-link-text">{messages.nav.questions[0]}</span>
+                <span className="nav-menu-link-meta">{messages.nav.questions[1]}</span>
               </span>
               <ChevronRight size={17} />
             </Link>
@@ -331,11 +351,27 @@ export default function ClientPage({ children }: { children: ReactNode }) {
             >
               <MessageCircle size={18} />
               <span className="nav-menu-copy">
-                <span className="nav-menu-link-text">WhatsApp</span>
-                <span className="nav-menu-link-meta">Hızlı iletişim</span>
+                <span className="nav-menu-link-text">{messages.nav.whatsapp[0]}</span>
+                <span className="nav-menu-link-meta">{messages.nav.whatsapp[1]}</span>
               </span>
               <ChevronRight size={17} />
             </a>
+            <Link
+              className="nav-menu-utility nav-menu-language"
+              href={messages.alternateHref}
+              hrefLang={locale === "en" ? "tr" : "en"}
+              lang={locale === "en" ? "tr" : "en"}
+              tabIndex={menuOpen ? 0 : -1}
+              style={{ "--item-index": 9 } as CSSProperties}
+              onClick={() => setMenuOpen(false)}
+            >
+              <Languages size={18} />
+              <span className="nav-menu-copy">
+                <span className="nav-menu-link-text">{messages.alternateLanguageLabel}</span>
+                <span className="nav-menu-link-meta">{messages.alternateLanguage}</span>
+              </span>
+              <ChevronRight size={17} />
+            </Link>
             <div className="nav-drawer-footer">
               <button
                 type="button"
@@ -347,7 +383,7 @@ export default function ClientPage({ children }: { children: ReactNode }) {
                 }}
               >
                 <Calendar size={17} />
-                <span>Masada yerini ayırt</span>
+                <span>{messages.nav.book}</span>
                 <ChevronRight size={16} />
               </button>
             </div>
@@ -357,7 +393,7 @@ export default function ClientPage({ children }: { children: ReactNode }) {
         <button
           type="button"
           className={`nav-menu-backdrop ${menuOpen ? "is-visible" : ""}`}
-          aria-label="Menüyü kapat"
+          aria-label={messages.nav.close}
           tabIndex={-1}
           onClick={() => setMenuOpen(false)}
         />
@@ -366,18 +402,18 @@ export default function ClientPage({ children }: { children: ReactNode }) {
       </div>
 
       {!isMenuPage ? (
-        <div className={`mobile-bar ${mobileBarHidden || menuOpen ? "is-hidden" : ""}`} role="navigation" aria-label="Hızlı işlemler">
-          <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" aria-label="WhatsApp üzerinden mesaj gönderin">
+        <div className={`mobile-bar ${mobileBarHidden || menuOpen ? "is-hidden" : ""}`} role="navigation" aria-label={messages.mobile.aria}>
+          <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" aria-label={messages.mobile.whatsappAria}>
             <MessageCircle size={20} />
             <span className="mobile-bar-label">WhatsApp</span>
           </a>
-          <Link className="mobile-bar-primary" href="/menu" aria-label="QR menüyü açın">
+          <Link className="mobile-bar-primary" href={messages.menuHref} aria-label={messages.mobile.menuAria}>
             <UtensilsCrossed size={22} className="mobile-bar-highlight-icon" />
-            <span className="mobile-bar-label">Menü</span>
+            <span className="mobile-bar-label">{messages.mobile.menu}</span>
           </Link>
-          <a href={mapsUrl} target="_blank" rel="noopener noreferrer" aria-label="Haritada yol tarifi alın">
+          <a href={mapsUrl} target="_blank" rel="noopener noreferrer" aria-label={messages.mobile.directionsAria}>
             <MapPin size={20} />
-            <span className="mobile-bar-label">Yol Tarifi</span>
+            <span className="mobile-bar-label">{messages.mobile.directions}</span>
           </a>
         </div>
       ) : null}
@@ -389,6 +425,7 @@ export default function ClientPage({ children }: { children: ReactNode }) {
           onClose={() => setIsBookingOpen(false)}
           preselectedType={preselectedType}
           preselectedItem={preselectedItem}
+          locale={locale}
         />
       ) : null}
     </>

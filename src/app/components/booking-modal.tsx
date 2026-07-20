@@ -14,6 +14,7 @@ import {
   X,
 } from "lucide-react";
 import { phoneE164 } from "../seo";
+import type { SiteLocale } from "../home-localization";
 import styles from "./booking-modal.module.css";
 
 interface BookingModalProps {
@@ -21,6 +22,7 @@ interface BookingModalProps {
   onClose: () => void;
   preselectedType?: string;
   preselectedItem?: string;
+  locale?: SiteLocale;
 }
 
 function getTodayString() {
@@ -36,14 +38,23 @@ export function BookingModal({
   onClose,
   preselectedType,
   preselectedItem,
+  locale = "tr",
 }: BookingModalProps) {
+  const isEnglish = locale === "en";
   const dialogRef = useRef<HTMLDialogElement>(null);
   const [date, setDate] = useState("");
   const [minDate, setMinDate] = useState("");
   const [time, setTime] = useState("10:00");
   const [guests, setGuests] = useState(2);
-  const [type, setType] = useState(() => preselectedType === "Kahve" ? "Kafka Cafe" : "Kahvaltı");
-  const [note, setNote] = useState(() => preselectedItem ? `Seçilen lezzet: ${preselectedItem}` : "");
+  const [type, setType] = useState<"breakfast" | "cafe">(() =>
+    preselectedType?.toLocaleLowerCase("tr-TR").includes("kahve") ||
+    preselectedType?.toLocaleLowerCase("en-US").includes("cafe")
+      ? "cafe"
+      : "breakfast",
+  );
+  const [note, setNote] = useState(() =>
+    preselectedItem ? `${isEnglish ? "Selected item" : "Seçilen lezzet"}: ${preselectedItem}` : "",
+  );
   const [honeypot, setHoneypot] = useState("");
 
   useEffect(() => {
@@ -101,12 +112,23 @@ export function BookingModal({
     }
 
     const formattedDate = date ? date.split("-").reverse().join(".") : "";
-    const message = `Merhaba, Tarihi Van Kahvaltı Evi için rezervasyon bilgi ve talebi:
+    const selectedService = type === "cafe" ? "Kafka Cafe" : isEnglish ? "Van breakfast" : "Kahvaltı";
+    const message = isEnglish
+      ? `Hello, I would like to request a table at Tarihi Van Kahvaltı Evi:
+
+📅 Date: ${formattedDate}
+⏰ Time: ${time}
+👥 Guests: ${guests}
+🍳 Service: ${selectedService}
+📝 Note: ${note || "None"}
+
+Could you please confirm availability? Thank you.`
+      : `Merhaba, Tarihi Van Kahvaltı Evi için rezervasyon bilgi ve talebi:
 
 📅 Tarih: ${formattedDate}
 ⏰ Saat: ${time}
 👥 Kişi Sayısı: ${guests} Kişi
-🍳 Tercih: ${type}
+🍳 Tercih: ${selectedService}
 📝 Not: ${note || "Yok"}
 
 Rezervasyonumu onaylayabilir misiniz? Şimdiden teşekkürler.`;
@@ -128,17 +150,21 @@ Rezervasyonumu onaylayabilir misiniz? Şimdiden teşekkürler.`;
           <CalendarDays size={25} strokeWidth={1.9} />
         </span>
         <div className={styles.headerCopy}>
-          <h2 id="booking-title">Masa ayırtma talebi</h2>
-          <p id="booking-description">Tarih ve kişi sayısını seçin; talebinizi WhatsApp üzerinden iletin.</p>
+          <h2 id="booking-title">{isEnglish ? "Request a table" : "Masa ayırtma talebi"}</h2>
+          <p id="booking-description">
+            {isEnglish
+              ? "Choose a date and party size, then send your request on WhatsApp."
+              : "Tarih ve kişi sayısını seçin; talebinizi WhatsApp üzerinden iletin."}
+          </p>
         </div>
-        <button type="button" onClick={onClose} className={styles.closeButton} aria-label="Rezervasyon penceresini kapat">
+        <button type="button" onClick={onClose} className={styles.closeButton} aria-label={isEnglish ? "Close reservation dialog" : "Rezervasyon penceresini kapat"}>
           <X size={21} />
         </button>
       </header>
 
       <form onSubmit={handleSubmit} className={styles.form}>
         <div className={styles.honeypot} aria-hidden="true">
-          <label htmlFor="website_hp">Lütfen bu alanı doldurmayın</label>
+          <label htmlFor="website_hp">{isEnglish ? "Leave this field empty" : "Lütfen bu alanı doldurmayın"}</label>
           <input
             id="website_hp"
             type="text"
@@ -151,32 +177,32 @@ Rezervasyonumu onaylayabilir misiniz? Şimdiden teşekkürler.`;
         </div>
 
         <fieldset className={styles.serviceFieldset}>
-          <legend>Rezervasyon tercihi</legend>
+          <legend>{isEnglish ? "Choose a service" : "Rezervasyon tercihi"}</legend>
           <div className={styles.serviceToggle}>
             <button
               type="button"
-              className={type === "Kahvaltı" ? styles.activeService : ""}
-              aria-pressed={type === "Kahvaltı"}
-              onClick={() => setType("Kahvaltı")}
+              className={type === "breakfast" ? styles.activeService : ""}
+              aria-pressed={type === "breakfast"}
+              onClick={() => setType("breakfast")}
             >
               <UtensilsCrossed size={19} aria-hidden="true" />
-              <span><strong>Van kahvaltısı</strong><small>Uzun kahvaltı masası</small></span>
+              <span><strong>{isEnglish ? "Van breakfast" : "Van kahvaltısı"}</strong><small>{isEnglish ? "A long, shared breakfast table" : "Uzun kahvaltı masası"}</small></span>
             </button>
             <button
               type="button"
-              className={type === "Kafka Cafe" ? styles.activeService : ""}
-              aria-pressed={type === "Kafka Cafe"}
-              onClick={() => setType("Kafka Cafe")}
+              className={type === "cafe" ? styles.activeService : ""}
+              aria-pressed={type === "cafe"}
+              onClick={() => setType("cafe")}
             >
               <Coffee size={19} aria-hidden="true" />
-              <span><strong>Kafka Cafe</strong><small>Kahve ve kısa buluşma</small></span>
+              <span><strong>Kafka Cafe</strong><small>{isEnglish ? "Coffee and a shorter visit" : "Kahve ve kısa buluşma"}</small></span>
             </button>
           </div>
         </fieldset>
 
         <div className={styles.fieldGrid}>
           <label className={styles.field} htmlFor="booking-date">
-            <span><CalendarDays size={16} aria-hidden="true" /> Tarih</span>
+            <span><CalendarDays size={16} aria-hidden="true" /> {isEnglish ? "Date" : "Tarih"}</span>
             <input
               type="date"
               id="booking-date"
@@ -188,7 +214,7 @@ Rezervasyonumu onaylayabilir misiniz? Şimdiden teşekkürler.`;
           </label>
 
           <label className={styles.field} htmlFor="booking-time">
-            <span><Clock3 size={16} aria-hidden="true" /> Saat</span>
+            <span><Clock3 size={16} aria-hidden="true" /> {isEnglish ? "Time" : "Saat"}</span>
             <select id="booking-time" value={time} onChange={(event) => setTime(event.target.value)}>
               <option value="09:00">09:00</option>
               <option value="09:30">09:30</option>
@@ -211,22 +237,22 @@ Rezervasyonumu onaylayabilir misiniz? Şimdiden teşekkürler.`;
 
         <div className={styles.guestField}>
           <div>
-            <span className={styles.fieldLabel}><Users size={16} aria-hidden="true" /> Kişi sayısı</span>
-            <small>1–30 kişi arasında seçim yapabilirsiniz.</small>
+            <span className={styles.fieldLabel}><Users size={16} aria-hidden="true" /> {isEnglish ? "Party size" : "Kişi sayısı"}</span>
+            <small>{isEnglish ? "Choose between 1 and 30 guests." : "1–30 kişi arasında seçim yapabilirsiniz."}</small>
           </div>
-          <div className={styles.guestCounter} role="group" aria-label="Kişi sayısı">
+          <div className={styles.guestCounter} role="group" aria-label={isEnglish ? "Party size" : "Kişi sayısı"}>
             <button
               type="button"
-              aria-label="Kişi sayısını azalt"
+              aria-label={isEnglish ? "Decrease guest count" : "Kişi sayısını azalt"}
               disabled={guests <= 1}
               onClick={() => setGuests((current) => current - 1)}
             >
               <Minus size={17} />
             </button>
-            <span role="status" aria-live="polite"><strong>{guests}</strong><small>kişi</small></span>
+            <span role="status" aria-live="polite"><strong>{guests}</strong><small>{isEnglish ? "guests" : "kişi"}</small></span>
             <button
               type="button"
-              aria-label="Kişi sayısını artır"
+              aria-label={isEnglish ? "Increase guest count" : "Kişi sayısını artır"}
               disabled={guests >= 30}
               onClick={() => setGuests((current) => current + 1)}
             >
@@ -236,11 +262,11 @@ Rezervasyonumu onaylayabilir misiniz? Şimdiden teşekkürler.`;
         </div>
 
         <label className={styles.noteField} htmlFor="booking-note">
-          <span>Not <small>isteğe bağlı</small></span>
+          <span>{isEnglish ? "Note" : "Not"} <small>{isEnglish ? "optional" : "isteğe bağlı"}</small></span>
           <textarea
             id="booking-note"
             rows={3}
-            placeholder="Çocuk sandalyesi, masa tercihi veya paylaşmak istediğiniz başka bir detay"
+            placeholder={isEnglish ? "High chair, seating preference or another helpful detail" : "Çocuk sandalyesi, masa tercihi veya paylaşmak istediğiniz başka bir detay"}
             value={note}
             maxLength={240}
             onChange={(event) => setNote(event.target.value)}
@@ -249,10 +275,10 @@ Rezervasyonumu onaylayabilir misiniz? Şimdiden teşekkürler.`;
         </label>
 
         <footer className={styles.actions}>
-          <p><ShieldCheck size={17} aria-hidden="true" /> Rezervasyon, işletmenin WhatsApp onayından sonra kesinleşir.</p>
+          <p><ShieldCheck size={17} aria-hidden="true" /> {isEnglish ? "Your table is confirmed only after the restaurant replies on WhatsApp." : "Rezervasyon, işletmenin WhatsApp onayından sonra kesinleşir."}</p>
           <button type="submit" className={styles.submitButton}>
             <MessageCircle size={19} />
-            WhatsApp ile talep gönder
+            {isEnglish ? "Send request on WhatsApp" : "WhatsApp ile talep gönder"}
           </button>
         </footer>
       </form>
