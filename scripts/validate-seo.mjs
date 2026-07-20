@@ -9,6 +9,8 @@ const englishMenuPageUrl = `${englishPageUrl}/menu`;
 const guidePageUrl = `${canonicalSiteUrl}/van-kahvaltisi`;
 const storyPageUrl = `${canonicalSiteUrl}/hikayemiz`;
 const expectedGoogleVerification = process.env.SEO_EXPECT_GOOGLE_SITE_VERIFICATION?.trim();
+const expectedYandexVerification = process.env.SEO_EXPECT_YANDEX_SITE_VERIFICATION?.trim();
+const expectedBingVerification = process.env.SEO_EXPECT_BING_SITE_VERIFICATION?.trim();
 
 const homeHreflang = {
   tr: canonicalSiteUrl,
@@ -245,6 +247,20 @@ for (const route of routes) {
       `${routeLabel}: Google Search Console doğrulama etiketi eksik`,
     );
   }
+  if (expectedYandexVerification) {
+    const escapedVerification = expectedYandexVerification.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+    assert(
+      new RegExp(`<meta\\s+name="yandex-verification"\\s+content="${escapedVerification}"`, "i").test(html),
+      `${routeLabel}: Yandex Webmaster doğrulama etiketi eksik`,
+    );
+  }
+  if (expectedBingVerification) {
+    const escapedVerification = expectedBingVerification.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+    assert(
+      new RegExp(`<meta\\s+name="msvalidate\\.01"\\s+content="${escapedVerification}"`, "i").test(html),
+      `${routeLabel}: Bing Webmaster doğrulama etiketi eksik`,
+    );
+  }
   assert(route.visibleSignals.every((signal) => lowerText.includes(signal)), `${routeLabel}: hedef görünür metin eksik`);
 
   if (route.sharedHomeDesign) {
@@ -332,6 +348,10 @@ for (const route of routes) {
   assert(restaurant?.geo?.latitude === 41.0367655, `${routeLabel}: enlem yanlış`);
   assert(restaurant?.geo?.longitude === 28.9829478, `${routeLabel}: boylam yanlış`);
   assert(restaurant?.sameAs?.includes(restaurant.hasMap), `${routeLabel}: Maps sameAs eksik`);
+  assert(
+    restaurant?.sameAs?.includes("https://yandex.com/maps/org/tarihi_van_kahvalt_ve_arap_evi/237523878781/"),
+    `${routeLabel}: Yandex Business sameAs eksik`,
+  );
   assert(restaurant?.menu === route.restaurantMenu, `${routeLabel}: restoran menü URL'si yanlış`);
 
   const menu = graphDocument["@graph"].find((node) => node["@type"] === "Menu");

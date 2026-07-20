@@ -16,14 +16,15 @@ import {
   siteName,
   siteUrl,
   telUrl,
+  yandexMapsUrl,
 } from "../seo";
 import { LocationMap } from "./location-map";
 import styles from "./location.module.css";
 
 const locationUrl = `${siteUrl}/konum`;
-const locationTitle = "Tarihi Van Kahvaltı Evi Konum | Beyoğlu Taksim";
+const locationTitle = "Beyoğlu Taksim Kahvaltı | Konum ve Yol Tarifi";
 const locationDescription =
-  "Tarihi Van Kahvaltı Evi adresi, Beyoğlu Taksim yol tarifi ve ulaşım bilgileri. Zambak Sokak'taki mekânı haritada görün; metro ve yürüyüş rotasını inceleyin.";
+  "Beyoğlu'nda Taksim Meydanı ve İstiklal Caddesi yakınındaki Tarihi Van Kahvaltı Evi'nin adresini, çalışma saatlerini, metro ve yürüyüş yol tarifini görün.";
 
 const locationFaqItems = [
   {
@@ -128,6 +129,10 @@ export default function LocationPage() {
                 </a>
                 <a className={styles.secondaryAction} href={telUrl}>
                   Gelmeden önce ara
+                  <ArrowUpRight size={17} aria-hidden="true" />
+                </a>
+                <a className={styles.secondaryAction} href={yandexMapsUrl} target="_blank" rel="noopener noreferrer">
+                  Yandex Haritalar
                   <ArrowUpRight size={17} aria-hidden="true" />
                 </a>
               </div>

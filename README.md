@@ -49,3 +49,12 @@ Site, Search Console için hazırdır:
 - Alternatif doğrulama: URL ön eki + `GOOGLE_SITE_VERIFICATION` ortam değişkeni
 
 Kurulum adımları ve doğrulama kontrolleri için `GOOGLE_SEARCH_CONSOLE_KURULUM.md` dosyasını izleyin.
+
+## Bing ve Yandex
+
+- Bing ve Yandex için aynı kanonik sitemap ve IndexNow akışı kullanılır.
+- Bing meta doğrulaması `BING_SITE_VERIFICATION`, Yandex meta doğrulaması `YANDEX_SITE_VERIFICATION` ortam değişkeniyle yayınlanır.
+- Yandex Business işletme kaydı `Restaurant.sameAs` içinde siteyle ilişkilendirilir ve konum sayfasında görünür bir Yandex Haritalar bağlantısı bulunur.
+- Dağıtımdan sonra değişen kanonik URL'leri bildirmek için `npm run seo:indexnow` çalıştırılır.
+
+Hesap doğrulama, sitemap gönderme ve işletme kaydı düzeltme adımları için `BING_YANDEX_KURULUM.md` dosyasını izleyin.

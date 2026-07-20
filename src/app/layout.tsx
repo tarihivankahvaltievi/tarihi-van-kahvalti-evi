@@ -44,6 +44,8 @@ import {
 const googleSiteVerification =
   process.env.GOOGLE_SITE_VERIFICATION?.trim() ||
   "bse69yztCBveC7uXxZ7ZxdsC4RjIJjWpxb9tlcfkF7A";
+const yandexSiteVerification = process.env.YANDEX_SITE_VERIFICATION?.trim();
+const bingSiteVerification = process.env.BING_SITE_VERIFICATION?.trim();
 
 export const viewport: Viewport = {
   width: "device-width",
@@ -81,12 +83,15 @@ export const metadata: Metadata = {
       "max-snippet": -1,
     },
   },
-  // Search Console'da "URL ön eki > HTML etiketi" yöntemi seçilirse
-  // GOOGLE_SITE_VERIFICATION ortam değişkenine yalnız content değerini girin.
-  // Önerilen "Alan adı" doğrulaması DNS üzerinden çalışır ve bunu gerektirmez.
-  verification: googleSiteVerification
-    ? { google: googleSiteVerification }
-    : undefined,
+  // Webmaster araçlarının verdiği tam etiketi değil, yalnız content değerini
+  // ilgili ortam değişkenine girin. Doğrulama etiketleri kalıcı tutulmalıdır.
+  verification: {
+    google: googleSiteVerification,
+    yandex: yandexSiteVerification,
+    other: bingSiteVerification
+      ? { "msvalidate.01": bingSiteVerification }
+      : undefined,
+  },
   openGraph: {
     title: homeTitle,
     description: homeOgDescription,

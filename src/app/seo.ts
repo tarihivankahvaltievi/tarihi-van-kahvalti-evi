@@ -8,11 +8,11 @@ export const locationUrl = `${siteUrl}/konum`;
 export const breakfastGuideUrl = `${siteUrl}/van-kahvaltisi`;
 export const storyUrl = `${siteUrl}/hikayemiz`;
 
-export const homeTitle = "Tarihi Van Kahvaltı Evi | Beyoğlu, İstanbul";
+export const homeTitle = "Beyoğlu Kahvaltı | Tarihi Van Kahvaltı Evi, Taksim";
 export const homeDescription =
-  "1978'den beri Beyoğlu Taksim'de geleneksel Van kahvaltısı: otlu peynir, murtuğa, kavut, sıcak sahanlar ve sınırsız çay. Menü, fiyatlar ve yol tarifi.";
+  "Beyoğlu'nda, Taksim Meydanı ve İstiklal Caddesi yakınında 1978'den beri geleneksel Van kahvaltısı: otlu peynir, murtuğa, kavut ve sınırsız çay. Menü ve yol tarifi.";
 export const homeOgDescription =
-  "Beyoğlu Taksim'de geleneksel Van kahvaltısı; güncel menü, açık adres, yol tarifi ve rezervasyon bilgileri.";
+  "Beyoğlu, Taksim ve İstiklal Caddesi yakınında geleneksel Van kahvaltısı; güncel menü, çalışma saatleri, açık adres ve yol tarifi.";
 
 export const displayPhone = "+90 541 525 2868";
 export const phoneE164 = "+905415252868";
@@ -49,12 +49,17 @@ export const openingHours = {
 // Doğrudan doğrulanmış Google Maps işletme kaydı (CID), genel arama sonucu değil.
 export const mapsUrl =
   "https://www.google.com/maps?cid=10380797280962926014";
+// Yandex Business'ta doğrulanacak mevcut işletme kaydı. Site ile profilin
+// adresi ve çalışma saatleri aynı tutulmalıdır.
+export const yandexMapsUrl =
+  "https://yandex.com/maps/org/tarihi_van_kahvalt_ve_arap_evi/237523878781/";
 export const whatsappUrl =
   "https://wa.me/905415252868?text=Merhaba%2C%20Tarihi%20Van%20Kahvalt%C4%B1%20Evi%20i%C3%A7in%20rezervasyon%20bilgisi%20almak%20istiyorum.";
 export const instagramUrl = "https://www.instagram.com/tarihivankahvaltievi/";
 
 export const sameAsUrls = [
   mapsUrl,
+  yandexMapsUrl,
   instagramUrl,
 ];
 
