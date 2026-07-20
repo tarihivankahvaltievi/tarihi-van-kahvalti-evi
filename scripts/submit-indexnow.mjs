@@ -10,6 +10,7 @@ const defaultUrls = [
   siteUrl,
   `${siteUrl}/menu`,
   `${siteUrl}/van-kahvaltisi`,
+  `${siteUrl}/van-kahvaltisi-nedir`,
   `${siteUrl}/hikayemiz`,
   `${siteUrl}/konum`,
   `${siteUrl}/en`,

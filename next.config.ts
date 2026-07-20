@@ -37,7 +37,7 @@ const nextConfig: NextConfig = {
       { source: "/anasayfa", destination: "/" },
       { source: "/tarihi-van-kahvaltisi-evi-menu", destination: "/menu" },
       { source: "/van-kahvalti", destination: "/van-kahvaltisi" },
-      { source: "/gercek-van-kahvaltisinda-neler-olur", destination: "/van-kahvaltisi" },
+      { source: "/gercek-van-kahvaltisinda-neler-olur", destination: "/van-kahvaltisi-nedir" },
       { source: "/tarihi-van-kahvalti-evi-hikayemiz", destination: "/hikayemiz" },
       { source: "/galeri-van-kahvalti-evi-taksim", destination: "/" },
       { source: "/urun/van-serpme-kahvalti", destination: "/menu#geleneksel-van-kahvaltisi" },

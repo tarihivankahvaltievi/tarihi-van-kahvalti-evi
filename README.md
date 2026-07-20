@@ -21,7 +21,7 @@ npm start
 
 - İşletme bilgileri, sayfa içeriği, yapılandırılmış veri ve eski URL yönlendirmeleri: `src/app/seo.ts`
 - Site geneli metadata: `src/app/layout.tsx`
-- İndekslenebilir kanonik sayfalar: ana sayfa `/`, menü `/menu`, Van kahvaltısı rehberi `/van-kahvaltisi`, hikâye `/hikayemiz`, konum `/konum`, İngilizce ziyaretçi rehberi `/en` ve İngilizce canlı menü `/en/menu`
+- İndekslenebilir kanonik sayfalar: ana sayfa `/`, menü `/menu`, yerel Van kahvaltısı rehberi `/van-kahvaltisi`, kaynaklı kültür rehberi `/van-kahvaltisi-nedir`, hikâye `/hikayemiz`, konum `/konum`, İngilizce ziyaretçi rehberi `/en` ve İngilizce canlı menü `/en/menu`
 - SSS ana sayfada, güncel QR menü `/menu`, adres ve yol tarifi ise `/konum` sayfasında yer alır.
 - Güncel ve indekslenebilir QR menü `/menu` sayfasındadır; kaldırılan `/iletisim`, `/sss` ve `/kafka-cafe` URL'leri en yakın gerçek içeriğe yönlenir.
 - Türkçe `/` ve İngilizce `/en` ana sayfaları aynı `ClientPage` + `HomeContent` bileşen ağacını kullanır. Dil metinleri ve bağlantıları `src/app/home-localization.ts` içinden gelir; iki dil için ayrı ana sayfa tasarımı oluşturulmamalıdır.

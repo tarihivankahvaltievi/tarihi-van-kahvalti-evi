@@ -260,7 +260,9 @@ export default function VanBreakfastGuidePage() {
                 </ol>
                 <p className={styles.serviceNote}>
                   <strong>Güncel bilgi:</strong> Serpme kahvaltı en az iki kişilik servis edilir. İçerik ve fiyatlar
-                  değişebileceği için ziyaret öncesinde <Link href="/menu">canlı menüyü</Link> kontrol edin.
+                  değişebileceği için ziyaret öncesinde <Link href="/menu">canlı menüyü</Link> kontrol edin. Süt
+                  evlerinden bugüne uzanan geçmişi ve tescilli temel ürünleri merak ediyorsanız
+                  {" "}<Link href="/van-kahvaltisi-nedir">Van kahvaltısı kültürü rehberini</Link> okuyun.
                 </p>
               </div>
             </section>

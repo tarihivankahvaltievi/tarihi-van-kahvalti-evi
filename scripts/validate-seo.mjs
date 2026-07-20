@@ -7,6 +7,7 @@ const menuPageUrl = `${canonicalSiteUrl}/menu`;
 const englishPageUrl = `${canonicalSiteUrl}/en`;
 const englishMenuPageUrl = `${englishPageUrl}/menu`;
 const guidePageUrl = `${canonicalSiteUrl}/van-kahvaltisi`;
+const culturePageUrl = `${canonicalSiteUrl}/van-kahvaltisi-nedir`;
 const storyPageUrl = `${canonicalSiteUrl}/hikayemiz`;
 const expectedGoogleVerification = process.env.SEO_EXPECT_GOOGLE_SITE_VERIFICATION?.trim();
 const expectedYandexVerification = process.env.SEO_EXPECT_YANDEX_SITE_VERIFICATION?.trim();
@@ -56,6 +57,15 @@ const routes = [
     restaurantMenu: `${menuPageUrl}#menu`,
     faqCount: 6,
     visibleSignals: ["van kahvaltısı", "otlu peynir", "murtuğa", "kavut", "taksim"],
+  },
+  {
+    path: "/van-kahvaltisi-nedir",
+    canonical: culturePageUrl,
+    language: "tr",
+    types: ["Restaurant", "WebPage", "BreadcrumbList", "FAQPage"],
+    restaurantMenu: `${menuPageUrl}#menu`,
+    faqCount: 6,
+    visibleSignals: ["van kahvaltısı nedir", "1947", "coğrafi işaret", "otlu peyniri", "murtuğa", "van kavut"],
   },
   {
     path: "/hikayemiz",
@@ -121,8 +131,8 @@ const redirectRules = [
   ["/zambak-sokak-kahvalti", "/konum"],
   ["/siraselviler-kahvalti", "/konum"],
   ["/kahvalti-fiyatlari", "/menu"],
-  ["/van-otlu-peynir", "/van-kahvaltisi"],
-  ["/murtuga-kavut", "/van-kahvaltisi"],
+  ["/van-otlu-peynir", "/van-kahvaltisi-nedir"],
+  ["/murtuga-kavut", "/van-kahvaltisi-nedir"],
   ["/tarihi-mekanda-kahvalti", "/hikayemiz"],
   ["/kahvalti-sonrasi-kahve", "/menu"],
   ["/vejetaryen-kahvalti-beyoglu", "/menu"],
@@ -138,7 +148,7 @@ const redirectRules = [
   ["/anasayfa", "/"],
   ["/tarihi-van-kahvaltisi-evi-menu", "/menu"],
   ["/van-kahvalti", "/van-kahvaltisi"],
-  ["/gercek-van-kahvaltisinda-neler-olur", "/van-kahvaltisi"],
+  ["/gercek-van-kahvaltisinda-neler-olur", "/van-kahvaltisi-nedir"],
   ["/tarihi-van-kahvalti-evi-hikayemiz", "/hikayemiz"],
   ["/galeri-van-kahvalti-evi-taksim", "/"],
   ["/urun/van-serpme-kahvalti", "/menu#geleneksel-van-kahvaltisi"],

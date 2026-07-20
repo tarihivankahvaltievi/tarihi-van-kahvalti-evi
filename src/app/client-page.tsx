@@ -208,7 +208,7 @@ export default function ClientPage({ children, locale = "tr" }: { children: Reac
                 className="brand-logo-image"
               />
             </div>
-            <Link className="logo" href={messages.homeHref} aria-label={locale === "en" ? "Tarihi Van Kahvaltı Evi English home" : "Tarihi Van Kahvaltı Evi ana sayfası"}>
+            <Link className="logo" href={messages.homeHref} aria-label="Tarihi Van Kahvaltı Evi">
               <span className="logo-word">
                 <span className="logo-tarihi">Tarihi</span><span className="logo-van">Van</span>
               </span>

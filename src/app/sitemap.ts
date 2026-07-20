@@ -4,6 +4,7 @@ import { menuCategories, menuItems } from "./menu/menu-data";
 import { getMenuData } from "./menu/menu-storage";
 import {
   absoluteUrl,
+  breakfastCultureUrl,
   breakfastGuideUrl,
   defaultOgImagePath,
   englishMenuUrl,
@@ -116,6 +117,17 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         "/images/breakfast-spread.webp",
         "/images/hands-table.webp",
         "/images/hero-parallax/overhead-classic.webp",
+      ]),
+    },
+    {
+      url: breakfastCultureUrl,
+      lastModified: pageLastModified,
+      images: uniqueImages([
+        "/images/og/van-kahvaltisi.jpg",
+        "/images/hero-parallax/overhead-feast.webp",
+        "/images/hero-parallax/spread-close.webp",
+        "/images/kete-detail.jpg",
+        "/images/hands-table.webp",
       ]),
     },
     {

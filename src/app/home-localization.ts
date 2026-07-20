@@ -150,6 +150,7 @@ export const homeMessages = {
       exploreLinks: [
         ["/menu", "Zengin Menü"],
         ["/van-kahvaltisi", "Van Kahvaltısı Rehberi"],
+        ["/van-kahvaltisi-nedir", "Van Kahvaltısı Nedir?"],
         ["/hikayemiz", "1978'den Beri Hikâyemiz"],
         ["/konum", "Beyoğlu ve Taksim Kahvaltı"],
         ["/menu", "Kafka Cafe"],

@@ -6,6 +6,7 @@ export const menuUrl = `${siteUrl}/menu`;
 export const englishMenuUrl = `${englishUrl}/menu`;
 export const locationUrl = `${siteUrl}/konum`;
 export const breakfastGuideUrl = `${siteUrl}/van-kahvaltisi`;
+export const breakfastCultureUrl = `${siteUrl}/van-kahvaltisi-nedir`;
 export const storyUrl = `${siteUrl}/hikayemiz`;
 
 export const homeTitle = "Beyoğlu Kahvaltı | Tarihi Van Kahvaltı Evi, Taksim";
@@ -125,8 +126,8 @@ export const faqItems = [
 export const legacyRedirects = [
   { source: "/istanbul-van-kahvaltisi", destination: "/van-kahvaltisi" },
   { source: "/serpme-van-kahvaltisi", destination: "/van-kahvaltisi" },
-  { source: "/van-otlu-peynir", destination: "/van-kahvaltisi" },
-  { source: "/murtuga-kavut", destination: "/van-kahvaltisi" },
+  { source: "/van-otlu-peynir", destination: "/van-kahvaltisi-nedir" },
+  { source: "/murtuga-kavut", destination: "/van-kahvaltisi-nedir" },
   { source: "/tarihi-mekanda-kahvalti", destination: "/hikayemiz" },
   { source: "/kahvalti-fiyatlari", destination: "/menu" },
   { source: "/kahvalti-sonrasi-kahve", destination: "/menu" },

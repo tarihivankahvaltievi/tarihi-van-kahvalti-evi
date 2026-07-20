@@ -6,11 +6,11 @@ Bu belge, `van kahvaltıcısı`, `Beyoğlu kahvaltı`, `Taksim kahvaltı`, `Turk
 
 ## Uygulanan teknik SEO/GEO kapsamı
 
-- Sitemap yedi indekslenebilir kanonik URL'yi içerir: `/`, `/menu`, `/van-kahvaltisi`, `/hikayemiz`, `/konum`, `/en` ve `/en/menu`. Eski, yönlendirilen veya `noindex` yardımcı URL'ler sitemap'e alınmaz.
+- Sitemap sekiz indekslenebilir kanonik URL'yi içerir: `/`, `/menu`, `/van-kahvaltisi`, `/van-kahvaltisi-nedir`, `/hikayemiz`, `/konum`, `/en` ve `/en/menu`. Eski, yönlendirilen veya `noindex` yardımcı URL'ler sitemap'e alınmaz.
 - Görsel sitemap kapsamı ana sayfadaki galeri/hero varlıklarını, canlı menü ürün görsellerini ve yeni rehber/hikâye sayfalarındaki gerçek görselleri sayfa bazında listeler. Yinelenen görsel URL'leri her sayfada tekilleştirilir.
 - Türkçe ana sayfa ile İngilizce ziyaretçi rehberi arasında karşılıklı `tr`, `en` ve `x-default` hreflang ilişkisi hem sayfa başlıklarında hem sitemap'te tanımlıdır.
 - Türkçe canlı menü ile İngilizce canlı menü arasında ayrı ve karşılıklı `tr`, `en` ve `x-default` hreflang kümesi bulunur. İngilizce menü, aynı Supabase menü kaynağından güncel fiyatları alır ve özgün İngilizce ürün açıklamaları sunar.
-- `/van-kahvaltisi`, otlu peynir, murtuğa, kavut, kete, cacık, servis biçimi, vejetaryen seçenekler ve ziyaret planını görünür HTML'de açıklayan kapsamlı bir kullanıcı rehberidir. `/hikayemiz`, 1978 aile yolculuğunu ve Zambak Sokak'taki mekân yaklaşımını doğrulanabilir mevcut işletme gerçekleriyle anlatır.
+- `/van-kahvaltisi`, yerel ziyaret niyeti için Taksim erişimi, servis biçimi, vejetaryen seçenekler ve ziyaret planını görünür HTML'de açıklayan kullanıcı rehberidir. `/van-kahvaltisi-nedir`, bilgi arama niyeti için 1947 süt evi geçmişini, 504 numaralı coğrafi işaret kaydını, otlu peynir, murtuğa, Van kavut ve diğer temel ürünleri resmî kaynaklarla açıklayan ayrı kültür rehberidir. `/hikayemiz`, 1978 aile yolculuğunu ve Zambak Sokak'taki mekân yaklaşımını doğrulanabilir mevcut işletme gerçekleriyle anlatır.
 - `/en`, `Content-Language: en` başlığı, İngilizce metadata, tek H1, görünür ziyaretçi rehberi, Van kahvaltısı sözlüğü, SSS ve doğrulanabilir işletme bilgileriyle gerçek bir yerelleştirilmiş sayfadır; yalnızca otomatik çeviri veya anahtar kelime sayfası değildir.
 - Güncel fiyatların tek kaynağı dinamik `/menu` sayfasıdır. Ana sayfadaki sabit ve güncelliğini yitirmiş `450 TL` cevabı kaldırıldı; SSS kullanıcıyı canlı menüye yönlendirir.
 - Ana sayfada `Restaurant`, `WebSite`, `WebPage` ve görünür cevaplarla eşleşen `FAQPage`; menüde `WebPage`, `BreadcrumbList` ve `Menu`; İngilizce sayfada `Restaurant`, `WebPage`, `BreadcrumbList` ve `FAQPage` grafiği bulunur.
@@ -21,7 +21,7 @@ Bu belge, `van kahvaltıcısı`, `Beyoğlu kahvaltı`, `Taksim kahvaltı`, `Turk
 - `robots.txt` genel botlara, Applebot'a, Google/Bing/Yandex tarayıcılarına ve `OAI-SearchBot`a açık kanonik içerik sunar; yalnız yönetim ve sunucu içi yollar kapalıdır. Kanonik sitemap adresi bildirilir.
 - IndexNow anahtarı alan adında yayımlanır ve `npm run seo:indexnow` Bing/Yandex gibi katılımcı motorlara değişen URL'leri toplu bildirir. Bu bir tarama bildirimi olup indeksleme veya sıralama garantisi değildir.
 - Eski Türkçe sorgu URL'leri en yakın gerçek içeriğe, eski İngilizce sorgu URL'leri `/en` sayfasına tek adımlı kalıcı yönlenir.
-- Derleme sonrası SEO sözleşmesi yedi kanonik sayfada canonical, hreflang, dil başlığı, title, description, H1, görünür metin, JSON-LD, sitemap, en az 50 görsel sitemap kaydı, doğru `lastmod`, robots, IndexNow anahtarı, yönlendirme, 404 ve doğrudan `200` dahili bağlantıları otomatik denetler.
+- Derleme sonrası SEO sözleşmesi sekiz kanonik sayfada canonical, hreflang, dil başlığı, title, description, H1, görünür metin, JSON-LD, sitemap, en az 50 görsel sitemap kaydı, doğru `lastmod`, robots, IndexNow anahtarı, yönlendirme, 404 ve doğrudan `200` dahili bağlantıları otomatik denetler.
 
 ## Ölçülen performans etkisi
 
@@ -72,7 +72,7 @@ Denetlenen kayıtlar:
 ### Google
 
 - Search Console'da alan adı mülkünü doğrulayın ve `https://www.tarihivankahvaltievi.com/sitemap.xml` gönderin.
-- `/`, `/menu`, `/van-kahvaltisi`, `/hikayemiz`, `/konum`, `/en` ve `/en/menu` sayfalarını URL Denetleme ile bir kez kontrol edin. Yalnız gerektiğinde indeks isteği gönderin; tekrar tekrar istek göndermek taramayı hızlandırmaz.
+- `/`, `/menu`, `/van-kahvaltisi`, `/van-kahvaltisi-nedir`, `/hikayemiz`, `/konum`, `/en` ve `/en/menu` sayfalarını URL Denetleme ile bir kez kontrol edin. Yalnız gerektiğinde indeks isteği gönderin; tekrar tekrar istek göndermek taramayı hızlandırmaz.
 - Eski URL'lerin tek adımlı yönlendirmeden sonra kanonik hedefte birleşmesini, yinelenen title/canonical ve soft-404 raporlarını izleyin.
 - Haftalık sorgu grupları: marka, `van kahvaltıcısı`, `van kahvaltısı`, `murtuğa`, `kavut`, `beyoğlu kahvaltı`, `taksim kahvaltı`, `turkish breakfast istanbul`, `breakfast near taksim`, `van breakfast menu`. Sayfa bazında gösterim, tıklama, CTR ve ortalama konumu kaydedin.
 
@@ -99,7 +99,7 @@ Denetlenen kayıtlar:
 
 ## 30/60/90 günlük ölçüm rutini
 
-- İlk 30 gün: Search Console/Bing/Yandex doğrulama, sitemap, profil saat-adres düzeltmeleri, yedi kanonik URL'nin indeks durumu ve ilk sorgu tablosu.
+- İlk 30 gün: Search Console/Bing/Yandex doğrulama, sitemap, profil saat-adres düzeltmeleri, sekiz kanonik URL'nin indeks durumu ve ilk sorgu tablosu.
 - 31–60 gün: gerçek müşteri yorum akışı, fotoğraf güncellemeleri, İngilizce sorguların gösterim/CTR incelemesi, düşük CTR title/description testi. Aynı anda tek anlamlı değişiklik yapın.
 - 61–90 gün: sorgu niyetine göre yeni içeriğe gerçekten ihtiyaç olup olmadığını değerlendirin; NAP düzeltmelerinin yayılımını ve 28 günlük Core Web Vitals saha verisini karşılaştırın.
 - Sıralamayı kişiselleştirilmiş tek bir tarayıcı aramasından değil, Search Console sorgu/sayfa verisi ve profil eylemlerinden değerlendirin.

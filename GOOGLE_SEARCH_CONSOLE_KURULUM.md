@@ -44,10 +44,11 @@ Canlı adresler:
 1. `https://www.tarihivankahvaltievi.com/`
 2. `https://www.tarihivankahvaltievi.com/menu`
 3. `https://www.tarihivankahvaltievi.com/van-kahvaltisi`
-4. `https://www.tarihivankahvaltievi.com/hikayemiz`
-5. `https://www.tarihivankahvaltievi.com/konum`
-6. `https://www.tarihivankahvaltievi.com/en`
-7. `https://www.tarihivankahvaltievi.com/en/menu`
+4. `https://www.tarihivankahvaltievi.com/van-kahvaltisi-nedir`
+5. `https://www.tarihivankahvaltievi.com/hikayemiz`
+6. `https://www.tarihivankahvaltievi.com/konum`
+7. `https://www.tarihivankahvaltievi.com/en`
+8. `https://www.tarihivankahvaltievi.com/en/menu`
 
 Bir sayfa Google'da yoksa bir kez **Dizine eklenmesini iste** seçeneğini kullanın. Aynı isteği sık sık tekrarlamayın.
 

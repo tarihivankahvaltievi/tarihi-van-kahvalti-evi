@@ -27,14 +27,14 @@ Tabela, ruhsat veya işletme belgesine göre doğru kapı numarasını teyit etm
 2. Meta etiket doğrulamasını seçin. Verilen etikette yalnız `content="..."` içindeki değeri hosting panelinde `YANDEX_SITE_VERIFICATION` ortam değişkenine girin.
 3. Siteyi yeniden dağıtın; ana sayfa kaynak kodunda `yandex-verification` etiketinin bulunduğunu kontrol edip doğrulamayı tamamlayın. Etiketi daha sonra kaldırmayın.
 4. Sitemap bölümüne `https://www.tarihivankahvaltievi.com/sitemap.xml` adresini ekleyin.
-5. Yeniden indeksleme bölümünde `/`, `/menu`, `/van-kahvaltisi`, `/hikayemiz`, `/konum`, `/en` ve `/en/menu` adreslerini bir kez gönderin.
+5. Yeniden indeksleme bölümünde `/`, `/menu`, `/van-kahvaltisi`, `/van-kahvaltisi-nedir`, `/hikayemiz`, `/konum`, `/en` ve `/en/menu` adreslerini bir kez gönderin.
 6. Site diagnostics, excluded pages ve search queries raporlarını haftalık kontrol edin.
 
 ## Bing Webmaster Tools ve Bing Places
 
 1. [Bing Webmaster Tools](https://www.bing.com/webmasters/) içinde siteyi Google Search Console'dan içe aktarın veya `https://www.tarihivankahvaltievi.com` olarak ekleyin.
 2. Meta etiket yönteminde verilen `msvalidate.01` etiketinin yalnız `content="..."` değerini hosting panelinde `BING_SITE_VERIFICATION` ortam değişkenine girin ve siteyi yeniden dağıtın.
-3. `https://www.tarihivankahvaltievi.com/sitemap.xml` sitemap'ini gönderin; URL Inspection ile yedi kanonik sayfayı kontrol edin.
+3. `https://www.tarihivankahvaltievi.com/sitemap.xml` sitemap'ini gönderin; URL Inspection ile sekiz kanonik sayfayı kontrol edin.
 4. [Bing Places for Business](https://www.bing.com/forbusiness/) içinde işletmeyi ad ve telefonla arayın. Varsa sahiplenin, yoksa tek bir kayıt açın.
 5. Yandex bölümünde doğruladığınız aynı ad, adres, telefon, pin, çalışma saatleri, kategori, web sitesi ve menü adreslerini kullanın.
 
