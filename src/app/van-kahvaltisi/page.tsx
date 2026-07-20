@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowUpRight, MapPin, UtensilsCrossed } from "lucide-react";
+import { ArrowUpRight, Clock3, MapPin, UtensilsCrossed } from "lucide-react";
 import ClientPage from "../client-page";
 import { AnimatedFooter } from "../components/animated-footer";
-import styles from "../components/editorial-page.module.css";
+import styles from "./van-breakfast.module.css";
 import {
   absoluteUrl,
   breakfastGuideUrl,
@@ -16,9 +16,9 @@ import {
   siteUrl,
 } from "../seo";
 
-const guideTitle = "Van Kahvaltısı Nedir? Lezzet Rehberi";
+const guideTitle = "Van Kahvaltısı Rehberi | Taksim ve Beyoğlu";
 const guideDescription =
-  "Van kahvaltısında neler olur? Otlu peynir, murtuğa, kavut, kete, cacık, bal-kaymak ve çay geleneğini; servis biçimini ve Taksim ziyaretini keşfedin.";
+  "Taksim ve Beyoğlu'nda Van kahvaltısı rehberi: otlu peynir, murtuğa, kavut, kete, bal-kaymak, çay geleneği, güncel menü ve ziyaret bilgileri.";
 
 const guideFaqItems = [
   {
@@ -58,7 +58,7 @@ const glossary = [
 ] as const;
 
 export const metadata: Metadata = {
-  title: guideTitle,
+  title: { absolute: guideTitle },
   description: guideDescription,
   alternates: { canonical: breakfastGuideUrl },
   openGraph: {
@@ -98,6 +98,8 @@ export default function VanBreakfastGuidePage() {
         description: guideDescription,
         inLanguage: "tr-TR",
         isPartOf: { "@id": `${siteUrl}/#website` },
+        dateModified: "2026-07-20",
+        publisher: { "@id": `${siteUrl}/#restaurant` },
         about: [
           { "@type": "Thing", name: "Van kahvaltısı" },
           { "@id": `${siteUrl}/#restaurant` },
@@ -122,44 +124,58 @@ export default function VanBreakfastGuidePage() {
         <main id="main-content" className={styles.page}>
           <article>
             <header className={styles.hero}>
-              <div>
-                <p className={styles.eyebrow}>Yöresel sofra rehberi</p>
-                <h1>
-                  Van kahvaltısı
-                  <span>nedir?</span>
-                </h1>
-                <p className={styles.lead}>
-                  Van kahvaltısı, birkaç tabağın yan yana gelmesinden fazlasıdır: otlu peynirin, sıcak yöresel
-                  lezzetlerin, hamur işlerinin, bal-kaymağın ve durmadan tazelenen çayın birlikte kurduğu paylaşım sofrasıdır.
-                  Bu rehberde sofranın temel tatlarını ve Taksim&apos;deki ziyaretinizi planlarken bilmeniz gerekenleri bulabilirsiniz.
-                </p>
-                <div className={styles.actions}>
-                  <Link className={styles.primaryAction} href="/menu#geleneksel-van-kahvaltisi">
-                    <UtensilsCrossed size={18} aria-hidden="true" /> Güncel menü ve fiyatlar
-                  </Link>
-                  <Link className={styles.secondaryAction} href="/konum">
-                    <MapPin size={18} aria-hidden="true" /> Taksim&apos;den yol tarifi
-                  </Link>
+              <div className={styles.heroInner}>
+                <div className={styles.heroCopy}>
+                  <p className={styles.kicker}>Van sofrası · Beyoğlu&apos;nda</p>
+                  <h1>
+                    Van kahvaltısı
+                    <span>nedir?</span>
+                  </h1>
+                  <p className={styles.lead}>
+                    Van kahvaltısı, birkaç tabağın yan yana gelmesinden fazlasıdır. Otlu peynirin, sıcak yöresel
+                    lezzetlerin, hamur işlerinin, bal-kaymağın ve durmadan tazelenen çayın aynı masada buluştuğu
+                    paylaşım sofrasıdır.
+                  </p>
+                  <div className={styles.actions}>
+                    <Link className={styles.primaryAction} href="/menu#geleneksel-van-kahvaltisi">
+                      <UtensilsCrossed size={18} aria-hidden="true" /> Güncel menü ve fiyatlar
+                    </Link>
+                    <Link className={styles.secondaryAction} href="/konum">
+                      <MapPin size={18} aria-hidden="true" /> Taksim&apos;den yol tarifi
+                    </Link>
+                  </div>
+                  <dl className={styles.heroFacts}>
+                    <div>
+                      <dt>Konum</dt>
+                      <dd>Taksim ve İstiklal&apos;e yürüme mesafesi</dd>
+                    </div>
+                    <div>
+                      <dt>Servis</dt>
+                      <dd>Serpme kahvaltı en az iki kişilik</dd>
+                    </div>
+                    <div>
+                      <dt>Saatler</dt>
+                      <dd>Her gün 08:00–18:00</dd>
+                    </div>
+                  </dl>
                 </div>
-              </div>
-              <div className={styles.heroVisual}>
-                <figure className={styles.heroImage}>
+                <figure className={styles.heroImage} style={{ position: "relative" }}>
                   <Image
-                    src="/images/breakfast-spread.webp"
-                    alt="Peynirler, reçeller, sıcak sahanlar ve çayla kurulu geleneksel Van kahvaltısı"
+                    src="/images/hero-table.jpg"
+                    alt="Tarihi Van Kahvaltı Evi'nde peynir, sıcak sahanlar, pişi ve çayla kurulu Van kahvaltısı sofrası"
                     fill
                     priority
-                    sizes="(max-width: 820px) calc(100vw - 2rem), 44vw"
-                    quality={80}
+                    sizes="(max-width: 860px) 100vw, 50vw"
+                    quality={82}
                   />
+                  <figcaption>Otlu peynir, sıcak sahanlar, hamur işleri ve çay; aynı masada, kendi ritminde.</figcaption>
                 </figure>
-                <p className={styles.imageNote}>Tatlı ve tuzlu tabaklar birlikte gelir; sofra paylaşarak ve acele etmeden yenir.</p>
               </div>
             </header>
 
-            <nav className={styles.quickNav} aria-label="Van kahvaltısı rehberi bölümleri">
-              <div className={styles.quickNavInner}>
-                <strong>Bu rehberde</strong>
+            <nav className={styles.guideNav} aria-label="Van kahvaltısı rehberi bölümleri">
+              <div className={styles.guideNavInner}>
+                <strong>Rehber</strong>
                 <a href="#sofrada-neler-var">Sofrada neler var?</a>
                 <a href="#nasil-servis-edilir">Nasıl servis edilir?</a>
                 <a href="#ziyaret-plani">Ziyaret planı</a>
@@ -167,18 +183,15 @@ export default function VanBreakfastGuidePage() {
               </div>
             </nav>
 
-            <section id="sofrada-neler-var" className={styles.section} aria-labelledby="glossary-title">
-              <header className={styles.sectionHeader}>
-                <div>
-                  <p className={styles.sectionLabel}>Sofranın sözlüğü</p>
-                  <h2 id="glossary-title">Van&apos;dan gelen temel tatlar</h2>
-                </div>
+            <section id="sofrada-neler-var" className={styles.flavours} aria-labelledby="glossary-title">
+              <header className={styles.sectionIntro}>
+                <h2 id="glossary-title">Van&apos;dan gelen temel tatlar</h2>
                 <p>
                   Her ürünün sofrada ayrı bir rolü vardır. Tuzlu, sıcak, tatlı ve hamur işi tabakları aynı anda
                   paylaşılır; ürünlerin günlük veya mevsimlik bulunabilirliği değişebilir.
                 </p>
               </header>
-              <dl className={styles.termGrid}>
+              <dl className={styles.flavourList}>
                 {glossary.map(([term, definition]) => (
                   <div key={term}>
                     <dt>{term}</dt>
@@ -188,8 +201,8 @@ export default function VanBreakfastGuidePage() {
               </dl>
             </section>
 
-            <section id="nasil-servis-edilir" className={styles.splitSection} aria-labelledby="service-title">
-              <figure className={styles.insetImage}>
+            <section id="nasil-servis-edilir" className={styles.service} aria-labelledby="service-title">
+              <figure className={styles.serviceImage} style={{ position: "relative" }}>
                 <Image
                   src="/images/hands-table.webp"
                   alt="Van kahvaltısı sofrasında tabakları paylaşan misafirlerin elleri"
@@ -198,8 +211,7 @@ export default function VanBreakfastGuidePage() {
                   quality={80}
                 />
               </figure>
-              <div className={styles.splitCopy}>
-                <p className={styles.sectionLabel}>Bir tabak değil, sofra</p>
+              <div className={styles.serviceCopy}>
                 <h2 id="service-title">Van kahvaltısı nasıl yenir?</h2>
                 <p>
                   Serpme servis, masadaki herkesin aynı tatları kendi ritminde paylaşmasına dayanır. Soğuk tabaklar
@@ -211,14 +223,14 @@ export default function VanBreakfastGuidePage() {
                   <li>Kete, pişi ve ekmekleri tatlı ve tuzlu eşlikçilerle farklı biçimlerde deneyin.</li>
                   <li>Çayı acele etmeden yenileyin; Van sofrasının özü uzun sohbet ve paylaşımda saklıdır.</li>
                 </ol>
-                <p className={styles.note}>
+                <p className={styles.serviceNote}>
                   <strong>Güncel bilgi:</strong> Serpme kahvaltı en az iki kişilik servis edilir. İçerik ve fiyatlar
                   değişebileceği için ziyaret öncesinde <Link href="/menu">canlı menüyü</Link> kontrol edin.
                 </p>
               </div>
             </section>
 
-            <figure className={styles.wideImage}>
+            <figure className={styles.tableMoment} style={{ position: "relative" }}>
               <Image
                 src="/images/hero-parallax/overhead-classic.webp"
                 alt="Yukarıdan görülen geleneksel Van kahvaltısı masası"
@@ -229,10 +241,9 @@ export default function VanBreakfastGuidePage() {
               <figcaption>Otlu peynirden sıcak sahanlara uzanan sofra, farklı tatların birlikte paylaşılması için kurulur.</figcaption>
             </figure>
 
-            <section id="ziyaret-plani" className={styles.section} aria-labelledby="visit-title">
-              <header className={styles.sectionHeader}>
+            <section id="ziyaret-plani" className={styles.visit} aria-labelledby="visit-title">
+              <header className={styles.visitHeader}>
                 <div>
-                  <p className={styles.sectionLabel}>Beyoğlu&apos;nda kahvaltı</p>
                   <h2 id="visit-title">Taksim&apos;de Van sofrasını planlayın</h2>
                 </div>
                 <p>
@@ -240,26 +251,21 @@ export default function VanBreakfastGuidePage() {
                   durağından yürüyerek ulaşılabilen bir konumdadır.
                 </p>
               </header>
-              <div className={styles.principleGrid}>
-                <article>
-                  <h3>Güncel menü</h3>
-                  <p>Serpme kahvaltı, sıcak sahanlar, yöresel ürünler ve içeceklerin güncel fiyatlarını tek kaynaktan inceleyin.</p>
-                  <div className={styles.actions}><Link className={styles.secondaryAction} href="/menu">Menüye git <ArrowUpRight size={16} /></Link></div>
-                </article>
-                <article>
-                  <h3>Konum ve saat</h3>
-                  <p>Her gün 08:00–18:00. Metro, yürüyüş ve güncel Google Haritalar rotasını konum sayfasında görün.</p>
-                  <div className={styles.actions}><Link className={styles.secondaryAction} href="/konum">Konumu aç <ArrowUpRight size={16} /></Link></div>
-                </article>
+              <div className={styles.visitDetails}>
+                <div className={styles.visitFacts}>
+                  <p><Clock3 size={18} aria-hidden="true" /><span><strong>Her gün 08:00–18:00</strong>Hafta sonu ve kalabalık gruplar için önceden bilgi almanız önerilir.</span></p>
+                  <p><MapPin size={18} aria-hidden="true" /><span><strong>Zambak Sokak No:8</strong>Taksim Meydanı, İstiklal Caddesi ve M2 Taksim durağından yürüyerek ulaşılabilir.</span></p>
+                </div>
+                <div className={styles.visitActions}>
+                  <Link className={styles.lightAction} href="/menu">Menü ve fiyatlar <ArrowUpRight size={16} aria-hidden="true" /></Link>
+                  <Link className={styles.outlineLightAction} href="/konum">Konumu aç <ArrowUpRight size={16} aria-hidden="true" /></Link>
+                </div>
               </div>
             </section>
 
-            <section id="sorular" className={styles.section} aria-labelledby="guide-faq-title">
-              <header className={styles.sectionHeader}>
-                <div>
-                  <p className={styles.sectionLabel}>Kısa cevaplar</p>
-                  <h2 id="guide-faq-title">Van kahvaltısı hakkında merak edilenler</h2>
-                </div>
+            <section id="sorular" className={styles.faqSection} aria-labelledby="guide-faq-title">
+              <header className={styles.sectionIntro}>
+                <h2 id="guide-faq-title">Van kahvaltısı hakkında merak edilenler</h2>
                 <p>İçerik, servis biçimi, vejetaryen seçenekler ve ziyaret zamanı hakkında doğrudan yanıtlar.</p>
               </header>
               <div className={styles.faq}>
@@ -274,8 +280,7 @@ export default function VanBreakfastGuidePage() {
           </article>
 
           <section className={styles.closing} aria-labelledby="guide-next-title">
-            <p className={styles.sectionLabel}>Sıradaki adım</p>
-            <h2 id="guide-next-title">Sofrayı ekranda değil, masada keşfedin</h2>
+            <h2 id="guide-next-title">Sofrayı ekranda değil, masada keşfedin.</h2>
             <p>{siteName}&apos;nin güncel menüsünü inceleyin veya Beyoğlu&apos;ndaki adresimize yol tarifi alın.</p>
             <div className={styles.actions}>
               <Link className={styles.primaryAction} href="/menu">Menü ve fiyatlar</Link>
