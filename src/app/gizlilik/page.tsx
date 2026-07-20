@@ -28,14 +28,15 @@ export default function PrivacyPage() {
           <li>WhatsApp üzerinden sizin gönderdiğiniz tarih, saat, kişi sayısı, tercih ve isteğe bağlı not.</li>
           <li>Telefon veya e-posta yoluyla sizin paylaştığınız iletişim ve rezervasyon bilgileri.</li>
           <li>Sunucu güvenliği için hosting sağlayıcısının tutabileceği temel istek ve hata kayıtları.</li>
-          <li>İzin vermeniz halinde Google Analytics tarafından üretilen sayfa görüntüleme ve etkileşim ölçümleri.</li>
+          <li>Google Analytics tarafından üretilen sayfa görüntüleme ve etkileşim ölçümleri.</li>
         </ul>
         <p>Site üzerindeki rezervasyon formu bilgileri kendi sunucumuza kaydetmez; gönderim düğmesi WhatsApp&apos;ta sizin onaylayacağınız bir mesaj hazırlar.</p>
       </section>
       <section>
         <h2>Üçüncü taraf hizmetleri</h2>
         <p>
-          İzin vermeniz halinde site kullanım istatistikleri için Google Analytics 4 kullanılır. Google Haritalar,
+          Site kullanım istatistikleri için Google Analytics 4 kullanılır. Google sinyalleri ve reklam
+          kişiselleştirmesi kapalıdır. Google Haritalar,
           Instagram ve WhatsApp bağlantılarını açtığınızda ilgili hizmetin kendi gizlilik koşulları geçerlidir.
           Harita, siz “Haritayı yükle” seçeneğini kullanmadan üçüncü taraf harita dosyalarını indirmez.
         </p>

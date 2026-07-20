@@ -18,18 +18,17 @@ export default function CookiePolicyPage() {
       <section>
         <h2>Herkese açık site sayfaları</h2>
         <p>
-          Ana sayfa, menü, konum ve İngilizce ziyaretçi rehberi temel içerik ve iletişim bağlantılarına analitik
-          izni vermeden de erişmenizi sağlar. Site reklam veya pazarlama çerezi kullanmaz.
+          Ana sayfa, menü, konum ve İngilizce ziyaretçi rehberi site kullanımını ölçmek için analitik çerezler
+          kullanır. Site reklam veya kişiselleştirilmiş pazarlama çerezi kullanmaz.
         </p>
       </section>
       <section>
         <h2>Google Analytics</h2>
         <p>
-          Google etiketi, açık seçiminizden önce analitik depolama reddedilmiş şekilde çalışır ve izin durumunu
-          çerezsiz sinyallerle iletebilir. Yalnız “Analitiğe izin ver” seçeneğini kullandığınızda hangi sayfaların
-          ziyaret edildiği ve siteyle nasıl etkileşim kurulduğu hakkında toplu istatistikler üretmek için analitik
-          depolama açılır. Reklam depolaması ve reklam kişiselleştirmesi her durumda kapalıdır. Tercihiniz
-          tarayıcınızın yerel depolama alanında saklanır.
+          Hangi sayfaların ziyaret edildiği ve siteyle nasıl etkileşim kurulduğu hakkında toplu istatistikler
+          üretmek için Google Analytics 4 kullanılır. Google Analytics, ziyaret ve oturumları ayırt etmek için
+          tarayıcınıza <code>_ga</code> ile başlayan analitik çerezler yerleştirebilir. Google sinyalleri ve reklam
+          kişiselleştirmesi kapalıdır.
         </p>
       </section>
       <section>
@@ -50,8 +49,8 @@ export default function CookiePolicyPage() {
         <h2>Tarayıcı ayarları ve değişiklikler</h2>
         <p>
           Tarayıcınızdan çerezleri görüntüleyebilir, silebilir veya engelleyebilirsiniz. Zorunlu yönetim çerezinin
-          engellenmesi yalnız yönetim panelinin çalışmasını etkiler. Analitik tercihinizi sıfırlamak için
-          tarayıcınızın bu siteye ait yerel depolama verilerini silebilirsiniz; sonraki ziyaretinizde seçim yeniden sunulur.
+          engellenmesi yalnız yönetim panelinin çalışmasını etkiler. Analitik çerezleri tarayıcı ayarlarınızdan
+          engelleyebilir veya bu siteye ait çerezleri dilediğiniz zaman silebilirsiniz.
         </p>
       </section>
       <section>

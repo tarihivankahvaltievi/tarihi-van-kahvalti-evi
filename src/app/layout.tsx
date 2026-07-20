@@ -134,7 +134,6 @@ export const metadata: Metadata = {
 };
 
 import { WebVitals } from "./components/web-vitals";
-import { AnalyticsConsent } from "./components/analytics-consent";
 
 const googleAnalyticsId = "G-5F3FS1NCZR";
 
@@ -149,19 +148,6 @@ export default function RootLayout({
     <html lang="tr" className={`h-full antialiased ${bodoni.variable} ${literata.variable} ${bricolageGrotesque.variable}`}>
       <head>
         <link rel="me" href={instagramUrl} />
-        <Script id="google-consent-mode" strategy="beforeInteractive">
-          {`
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('consent', 'default', {
-              analytics_storage: 'denied',
-              ad_storage: 'denied',
-              ad_user_data: 'denied',
-              ad_personalization: 'denied',
-              wait_for_update: 500
-            });
-          `}
-        </Script>
       </head>
       <body className="min-h-full flex flex-col">
         {webVitalsEndpoint?.startsWith("/") && !webVitalsEndpoint.startsWith("//") ? (
@@ -169,7 +155,6 @@ export default function RootLayout({
         ) : null}
         <a className="skip-link" href="#main-content">Ana içeriğe geç / Skip to content</a>
         {children}
-        <AnalyticsConsent />
       </body>
       <Script
         src={`https://www.googletagmanager.com/gtag/js?id=${googleAnalyticsId}`}
@@ -180,7 +165,10 @@ export default function RootLayout({
           window.dataLayer = window.dataLayer || [];
           function gtag(){dataLayer.push(arguments);}
           gtag('js', new Date());
-          gtag('config', '${googleAnalyticsId}');
+          gtag('config', '${googleAnalyticsId}', {
+            allow_google_signals: false,
+            allow_ad_personalization_signals: false
+          });
         `}
       </Script>
     </html>
