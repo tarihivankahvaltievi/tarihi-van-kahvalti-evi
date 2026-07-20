@@ -6,19 +6,23 @@ import ClientPage from "../client-page";
 import { AnimatedFooter } from "../components/animated-footer";
 import styles from "./van-breakfast.module.css";
 import {
+  address,
   absoluteUrl,
   breakfastGuideUrl,
   buildBreadcrumbJsonLd,
   buildFaqJsonLd,
   buildRestaurantJsonLd,
+  coordinates,
+  displayAddress,
   jsonLd,
+  mapsUrl,
   siteName,
   siteUrl,
 } from "../seo";
 
-const guideTitle = "Van Kahvaltısı Rehberi | Taksim ve Beyoğlu";
+const guideTitle = "Taksim'de Van Kahvaltısı | Beyoğlu Rehberi";
 const guideDescription =
-  "Taksim ve Beyoğlu'nda Van kahvaltısı rehberi: otlu peynir, murtuğa, kavut, kete, bal-kaymak, çay geleneği, güncel menü ve ziyaret bilgileri.";
+  "Taksim ve Beyoğlu'nda geleneksel Van kahvaltısı için rehber: Zambak Sokak adresi, M2 erişimi, çalışma saatleri, güncel menü ve yöresel tatlar.";
 
 const guideFaqItems = [
   {
@@ -45,6 +49,11 @@ const guideFaqItems = [
     question: "Taksim'de Van kahvaltısı için ne zaman gelmeli?",
     answer:
       "İşletme her gün 08:00–18:00 saatleri arasında açıktır. Hafta sonu veya kalabalık grup ziyaretinde masa uygunluğunu telefon ya da WhatsApp üzerinden önceden sormak önerilir.",
+  },
+  {
+    question: "Taksim Metro'dan Tarihi Van Kahvaltı Evi'ne nasıl gidilir?",
+    answer:
+      "M2 Taksim durağından Sıraselviler yönüne çıkıp Zambak Sokak'a yürüyerek ulaşabilirsiniz. İlk kez gelecek misafirler güncel rota için Google Haritalar bağlantısını kullanabilir.",
   },
 ] as const;
 
@@ -102,8 +111,34 @@ export default function VanBreakfastGuidePage() {
         publisher: { "@id": `${siteUrl}/#restaurant` },
         about: [
           { "@type": "Thing", name: "Van kahvaltısı" },
+          {
+            "@type": "Place",
+            name: "Taksim, Beyoğlu, İstanbul",
+            address: {
+              "@type": "PostalAddress",
+              streetAddress: `${address.streetAddress}, ${address.neighborhood}`,
+              addressLocality: address.locality,
+              addressRegion: address.region,
+              postalCode: address.postalCode,
+              addressCountry: address.country,
+            },
+            geo: {
+              "@type": "GeoCoordinates",
+              latitude: coordinates.latitude,
+              longitude: coordinates.longitude,
+            },
+          },
           { "@id": `${siteUrl}/#restaurant` },
         ],
+        spatialCoverage: {
+          "@type": "Place",
+          name: "Beyoğlu, İstanbul",
+          geo: {
+            "@type": "GeoCoordinates",
+            latitude: coordinates.latitude,
+            longitude: coordinates.longitude,
+          },
+        },
         mainEntity: { "@id": `${siteUrl}/#restaurant` },
         primaryImageOfPage: {
           "@type": "ImageObject",
@@ -126,35 +161,35 @@ export default function VanBreakfastGuidePage() {
             <header className={styles.hero}>
               <div className={styles.heroInner}>
                 <div className={styles.heroCopy}>
-                  <p className={styles.kicker}>Van sofrası · Beyoğlu&apos;nda</p>
+                  <p className={styles.kicker}>Taksim · Beyoğlu · 1978</p>
                   <h1>
-                    Van kahvaltısı
-                    <span>nedir?</span>
+                    Taksim&apos;de
+                    <span>Van kahvaltısı</span>
                   </h1>
                   <p className={styles.lead}>
-                    Van kahvaltısı, birkaç tabağın yan yana gelmesinden fazlasıdır. Otlu peynirin, sıcak yöresel
-                    lezzetlerin, hamur işlerinin, bal-kaymağın ve durmadan tazelenen çayın aynı masada buluştuğu
-                    paylaşım sofrasıdır.
+                    Tarihi Van Kahvaltı Evi, Taksim ve İstiklal Caddesi&apos;ne yürüme mesafesindeki Zambak Sokak&apos;ta;
+                    otlu peynir, sıcak yöresel lezzetler, hamur işleri, bal-kaymak ve demli çayla kurulan paylaşım
+                    sofrasını 1978&apos;den beri yaşatıyor.
                   </p>
                   <div className={styles.actions}>
                     <Link className={styles.primaryAction} href="/menu#geleneksel-van-kahvaltisi">
                       <UtensilsCrossed size={18} aria-hidden="true" /> Güncel menü ve fiyatlar
                     </Link>
-                    <Link className={styles.secondaryAction} href="/konum">
-                      <MapPin size={18} aria-hidden="true" /> Taksim&apos;den yol tarifi
-                    </Link>
+                    <a className={styles.secondaryAction} href={mapsUrl} target="_blank" rel="noreferrer">
+                      <MapPin size={18} aria-hidden="true" /> Google Haritalar&apos;da rota al
+                    </a>
                   </div>
                   <dl className={styles.heroFacts}>
                     <div>
-                      <dt>Konum</dt>
-                      <dd>Taksim ve İstiklal&apos;e yürüme mesafesi</dd>
+                      <dt>Adres</dt>
+                      <dd>Zambak Sk. No:8, Beyoğlu</dd>
                     </div>
                     <div>
-                      <dt>Servis</dt>
-                      <dd>Serpme kahvaltı en az iki kişilik</dd>
+                      <dt>Ulaşım</dt>
+                      <dd>M2 Taksim durağından yürüyerek</dd>
                     </div>
                     <div>
-                      <dt>Saatler</dt>
+                      <dt>Çalışma saatleri</dt>
                       <dd>Her gün 08:00–18:00</dd>
                     </div>
                   </dl>
@@ -168,17 +203,17 @@ export default function VanBreakfastGuidePage() {
                     sizes="(max-width: 860px) 100vw, 50vw"
                     quality={82}
                   />
-                  <figcaption>Otlu peynir, sıcak sahanlar, hamur işleri ve çay; aynı masada, kendi ritminde.</figcaption>
+                  <figcaption>Tarihi Van Kahvaltı Evi · Taksim, Beyoğlu</figcaption>
                 </figure>
               </div>
             </header>
 
             <nav className={styles.guideNav} aria-label="Van kahvaltısı rehberi bölümleri">
               <div className={styles.guideNavInner}>
-                <strong>Rehber</strong>
+                <strong>Yerel rehber</strong>
                 <a href="#sofrada-neler-var">Sofrada neler var?</a>
                 <a href="#nasil-servis-edilir">Nasıl servis edilir?</a>
-                <a href="#ziyaret-plani">Ziyaret planı</a>
+                <a href="#ziyaret-plani">Adres ve ulaşım</a>
                 <a href="#sorular">Kısa cevaplar</a>
               </div>
             </nav>
@@ -244,21 +279,25 @@ export default function VanBreakfastGuidePage() {
             <section id="ziyaret-plani" className={styles.visit} aria-labelledby="visit-title">
               <header className={styles.visitHeader}>
                 <div>
-                  <h2 id="visit-title">Taksim&apos;de Van sofrasını planlayın</h2>
+                  <h2 id="visit-title">Beyoğlu&apos;nda kahvaltı için açık adres</h2>
+                  <address className={styles.visitAddress}>
+                    <strong>{siteName}</strong>
+                    <span>{displayAddress}</span>
+                  </address>
                 </div>
                 <p>
-                  Tarihi Van Kahvaltı Evi, Zambak Sokak&apos;ta; Taksim Meydanı, İstiklal Caddesi ve M2 Taksim
-                  durağından yürüyerek ulaşılabilen bir konumdadır.
+                  Taksim Meydanı, İstiklal Caddesi ve M2 Taksim durağından yürüyerek ulaşılabilen konumumuz;
+                  Beyoğlu&apos;nda Van kahvaltısı planlayan misafirler için merkezi bir buluşma noktasıdır.
                 </p>
               </header>
               <div className={styles.visitDetails}>
                 <div className={styles.visitFacts}>
-                  <p><Clock3 size={18} aria-hidden="true" /><span><strong>Her gün 08:00–18:00</strong>Hafta sonu ve kalabalık gruplar için önceden bilgi almanız önerilir.</span></p>
-                  <p><MapPin size={18} aria-hidden="true" /><span><strong>Zambak Sokak No:8</strong>Taksim Meydanı, İstiklal Caddesi ve M2 Taksim durağından yürüyerek ulaşılabilir.</span></p>
+                  <p><Clock3 size={18} aria-hidden="true" /><span><strong>Her gün 08:00–18:00</strong>Hafta sonu ve kalabalık gruplar için ziyaret öncesinde masa uygunluğunu sormanız önerilir.</span></p>
+                  <p><MapPin size={18} aria-hidden="true" /><span><strong>Taksim&apos;den yürüyerek ulaşım</strong>M2 Taksim durağından Sıraselviler yönüne çıkıp Zambak Sokak&apos;a ilerleyin.</span></p>
                 </div>
                 <div className={styles.visitActions}>
                   <Link className={styles.lightAction} href="/menu">Menü ve fiyatlar <ArrowUpRight size={16} aria-hidden="true" /></Link>
-                  <Link className={styles.outlineLightAction} href="/konum">Konumu aç <ArrowUpRight size={16} aria-hidden="true" /></Link>
+                  <a className={styles.outlineLightAction} href={mapsUrl} target="_blank" rel="noreferrer">Google Haritalar&apos;da aç <ArrowUpRight size={16} aria-hidden="true" /></a>
                 </div>
               </div>
             </section>

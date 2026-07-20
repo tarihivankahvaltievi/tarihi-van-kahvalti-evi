@@ -54,7 +54,7 @@ const routes = [
     language: "tr",
     types: ["Restaurant", "WebPage", "BreadcrumbList", "FAQPage"],
     restaurantMenu: `${menuPageUrl}#menu`,
-    faqCount: 5,
+    faqCount: 6,
     visibleSignals: ["van kahvaltısı", "otlu peynir", "murtuğa", "kavut", "taksim"],
   },
   {
