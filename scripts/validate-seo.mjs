@@ -5,6 +5,7 @@ const baseUrl = process.env.SEO_TEST_BASE_URL ?? "http://127.0.0.1:3100";
 const canonicalSiteUrl = "https://www.tarihivankahvaltievi.com";
 const menuPageUrl = `${canonicalSiteUrl}/menu`;
 const englishPageUrl = `${canonicalSiteUrl}/en`;
+const expectedGoogleVerification = process.env.SEO_EXPECT_GOOGLE_SITE_VERIFICATION?.trim();
 
 const routes = [
   {
@@ -199,6 +200,16 @@ for (const route of routes) {
   );
   assert((visibleHtml(html).match(/<h1\b/gi) ?? []).length === 1, `${routeLabel}: tam bir H1 bulunmalı`);
   assert(!/<meta\s+name="robots"\s+content="[^"]*noindex/i.test(html), `${routeLabel}: noindex olmamalı`);
+  if (expectedGoogleVerification) {
+    const escapedVerification = expectedGoogleVerification.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+    assert(
+      new RegExp(
+        `<meta\\s+name="google-site-verification"\\s+content="${escapedVerification}"`,
+        "i",
+      ).test(html),
+      `${routeLabel}: Google Search Console doğrulama etiketi eksik`,
+    );
+  }
   assert(route.visibleSignals.every((signal) => lowerText.includes(signal)), `${routeLabel}: hedef görünür metin eksik`);
 
   if (route.hreflang) {
@@ -286,6 +297,15 @@ const indexNowKey = "4f9d1a7c8b6e3f205d72a941ce8b604a";
 const indexNowResponse = await fetchWithRetry(`/${indexNowKey}.txt`);
 assert(indexNowResponse.status === 200, "IndexNow: anahtar dosyası yayınlanmalı");
 assert((await indexNowResponse.text()).trim() === indexNowKey, "IndexNow: anahtar içeriği yanlış");
+
+const googleVerificationFile = "google2920058c70b54fb8.html";
+const googleVerificationResponse = await fetchWithRetry(`/${googleVerificationFile}`);
+assert(googleVerificationResponse.status === 200, "Search Console: HTML doğrulama dosyası yayınlanmalı");
+assert(
+  (await googleVerificationResponse.text()).trim() ===
+    `google-site-verification: ${googleVerificationFile}`,
+  "Search Console: HTML doğrulama dosyası içeriği yanlış",
+);
 
 for (const [path, destination] of redirectRules) {
   const response = await fetchWithRetry(path, 30, { redirect: "manual" });

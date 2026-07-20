@@ -33,3 +33,17 @@ Adres, telefon, çalışma saatleri veya fiyatlar değiştiğinde önce `seo.ts`
 ## Yayına alma
 
 Depo bir Next.js üretim sunucusu veya desteklenen bir platformda çalıştırılmalıdır. Alan adı hâlen farklı bir CMS/hostinge bağlıysa yalnızca GitHub'a push etmek canlı siteyi güncellemez; DNS ve dağıtım hedefi ayrıca bağlanmalıdır.
+
+## Google Search Console
+
+Site, Search Console için hazırdır:
+
+- Sitemap: `https://www.tarihivankahvaltievi.com/sitemap.xml`
+- Robots: `https://www.tarihivankahvaltievi.com/robots.txt`
+- Kanonik alan adı: `https://www.tarihivankahvaltievi.com`
+- HTML doğrulama dosyası: `https://www.tarihivankahvaltievi.com/google2920058c70b54fb8.html`
+- Google doğrulama meta etiketi site genelinde kalıcı olarak bulunur.
+- Önerilen doğrulama: alan adı mülkü + DNS TXT kaydı
+- Alternatif doğrulama: URL ön eki + `GOOGLE_SITE_VERIFICATION` ortam değişkeni
+
+Kurulum adımları ve doğrulama kontrolleri için `GOOGLE_SEARCH_CONSOLE_KURULUM.md` dosyasını izleyin.
