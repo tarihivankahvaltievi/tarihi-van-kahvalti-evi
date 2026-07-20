@@ -105,7 +105,7 @@ export const homeMessages = {
       tableAlt: "Kahvaltı sofrasında peynir, reçel ve tahin tabaklarını uzatan eller",
       memoryAlt: "Mekândaki oymalı çerçeveli ayna ve aynaya yansıyan tuğla duvar",
       principles: [
-        ["Mekânın ruhu", "Zambak Sokak'ın nostaljik ayrıntıları arasında, şehrin hızından uzak bir masa."],
+        ["Beyoğlu konumu", "Zambak Sokak'ta; Taksim Meydanı, İstiklal Caddesi ve M2 metro durağından yürüyerek ulaşılabilen bir masa."],
         ["Günlük emek", "Taze hazırlanan reçeller, sıcak pişiler ve özenle kurulan kahvaltı."],
         ["Van sofrası", "Otlu peynir, murtuğa, kete ve demli çayla yöresel karakter."],
       ],
@@ -236,7 +236,7 @@ export const homeMessages = {
       tableAlt: "Friends passing cheese, preserves and tahini across a shared Van breakfast table",
       memoryAlt: "An ornate historic mirror reflecting the restaurant's brick wall",
       principles: [
-        ["A sense of place", "A calm table among the nostalgic details of Zambak Street, away from the city's rush."],
+        ["Walkable from Taksim", "On Zambak Street, within walking distance of Taksim Square, İstiklal Avenue and the M2 metro."],
         ["Prepared each day", "Homemade preserves, warm pişi and a breakfast table assembled with care."],
         ["Flavours of Van", "Herb cheese, murtuğa, kete and strong Turkish tea give the table its regional character."],
       ],

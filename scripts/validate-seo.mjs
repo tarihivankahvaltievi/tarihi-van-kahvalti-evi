@@ -31,7 +31,7 @@ const routes = [
     restaurantMenu: `${menuPageUrl}#menu`,
     faqCount: 10,
     sharedHomeDesign: true,
-    visibleSignals: ["van kahvaltıcısı", "beyoğlu", "taksim", "serpme kahvaltı"],
+    visibleSignals: ["van kahvaltı evi", "beyoğlu", "taksim", "serpme kahvaltı"],
     hreflang: homeHreflang,
   },
   {

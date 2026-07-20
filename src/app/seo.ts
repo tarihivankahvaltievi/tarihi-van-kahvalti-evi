@@ -8,9 +8,9 @@ export const locationUrl = `${siteUrl}/konum`;
 export const breakfastGuideUrl = `${siteUrl}/van-kahvaltisi`;
 export const storyUrl = `${siteUrl}/hikayemiz`;
 
-export const homeTitle = "Van Kahvaltıcısı İstanbul | Tarihi Van Kahvaltı Evi";
+export const homeTitle = "Tarihi Van Kahvaltı Evi | Beyoğlu, İstanbul";
 export const homeDescription =
-  "İstanbul Beyoğlu Taksim'de geleneksel Van kahvaltısı: otlu peynir, murtuğa, kavut, sıcak sahanlar ve sınırsız çay. Menü, konum ve rezervasyon.";
+  "1978'den beri Beyoğlu Taksim'de geleneksel Van kahvaltısı: otlu peynir, murtuğa, kavut, sıcak sahanlar ve sınırsız çay. Menü, fiyatlar ve yol tarifi.";
 export const homeOgDescription =
   "Beyoğlu Taksim'de geleneksel Van kahvaltısı; güncel menü, açık adres, yol tarifi ve rezervasyon bilgileri.";
 
@@ -225,12 +225,30 @@ export function buildRestaurantJsonLd(withContext = true) {
     url: siteUrl,
     logo: `${siteUrl}/icons/icon-512.png`,
     image: [
-      `${siteUrl}/images/hero-table.jpg`,
-      `${siteUrl}/images/breakfast-spread.webp`,
-      `${siteUrl}/images/balcony-breakfast.webp`,
+      {
+        "@type": "ImageObject",
+        url: `${siteUrl}/images/hero-table.jpg`,
+        width: 1202,
+        height: 1800,
+        caption: `${siteName} geleneksel Van kahvaltısı sofrası`,
+      },
+      {
+        "@type": "ImageObject",
+        url: `${siteUrl}/images/breakfast-spread.webp`,
+        width: 1202,
+        height: 1800,
+        caption: "Otlu peynir, sıcak sahanlar ve çayla serpme Van kahvaltısı",
+      },
+      {
+        "@type": "ImageObject",
+        url: `${siteUrl}/images/balcony-breakfast.webp`,
+        width: 1202,
+        height: 1800,
+        caption: "Beyoğlu'nda Van kahvaltısı sofrası",
+      },
     ],
     description:
-      "Beyoğlu Taksim'de otlu peynir, murtuğa, kavut, sıcak sahanlar ve sınırsız çayla geleneksel serpme Van kahvaltısı sunan restoran.",
+      "1978'den beri Beyoğlu Taksim'de otlu peynir, murtuğa, kavut, sıcak sahanlar ve sınırsız çayla geleneksel serpme Van kahvaltısı sunan restoran.",
     foundingDate,
     telephone: phoneE164,
     email,
@@ -238,10 +256,11 @@ export function buildRestaurantJsonLd(withContext = true) {
       "@type": "ContactPoint",
       telephone: phoneE164,
       contactType: "reservations",
-      availableLanguage: "tr",
+      availableLanguage: ["tr", "en"],
     },
     priceRange: "₺₺",
     acceptsReservations: true,
+    inLanguage: ["tr-TR", "en"],
     servesCuisine: cuisine,
     areaServed: {
       "@type": "City",

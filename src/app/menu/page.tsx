@@ -19,7 +19,7 @@ const menuDescription =
   "Tarihi Van Kahvaltı Evi güncel menü ve fiyatları: serpme Van kahvaltısı, bakır sahanlar, yöresel lezzetler, çay ve kahve seçenekleri.";
 
 export const metadata: Metadata = {
-  title: "Menü ve Güncel Fiyatlar",
+  title: { absolute: "Van Kahvaltı Menüsü ve Fiyatları | Beyoğlu Taksim" },
   description: menuDescription,
   alternates: {
     canonical: menuUrl,
@@ -30,7 +30,7 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: `Menü ve Güncel Fiyatlar | ${siteName}`,
+    title: "Van Kahvaltı Menüsü ve Fiyatları | Beyoğlu Taksim",
     description: menuDescription,
     url: menuUrl,
     siteName,
@@ -47,7 +47,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: `Menü ve Güncel Fiyatlar | ${siteName}`,
+    title: "Van Kahvaltı Menüsü ve Fiyatları | Beyoğlu Taksim",
     description: menuDescription,
     images: [absoluteUrl("/images/og/menu.jpg")],
   },
