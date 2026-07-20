@@ -1,9 +1,22 @@
 import type { MetadataRoute } from "next";
-import { absoluteUrl, defaultOgImagePath, englishUrl, siteUrl } from "./seo";
+import { connection } from "next/server";
+import { menuCategories, menuItems } from "./menu/menu-data";
+import { getMenuData } from "./menu/menu-storage";
+import {
+  absoluteUrl,
+  breakfastGuideUrl,
+  defaultOgImagePath,
+  englishMenuUrl,
+  englishUrl,
+  locationUrl,
+  menuUrl,
+  siteUrl,
+  storyUrl,
+} from "./seo";
 
-// Yalnızca sayfa içeriği gerçekten değiştiğinde güncelleyin. Google, doğru ve
-// tutarlı lastmod değerini kullanır; her derlemede "şimdi" yazmak yanıltıcıdır.
-const contentLastModified = "2026-07-19T00:00:00+03:00";
+// lastmod yalnız görünür ana içerik gerçekten değiştiğinde güncellenir.
+// Her derlemede "şimdi" üretmek arama motorlarına yanıltıcı bir sinyal verir.
+const pageLastModified = "2026-07-20T15:00:00+03:00";
 
 const homeLanguageAlternates = {
   languages: {
@@ -13,51 +26,132 @@ const homeLanguageAlternates = {
   },
 };
 
+const menuLanguageAlternates = {
+  languages: {
+    tr: menuUrl,
+    en: englishMenuUrl,
+    "x-default": menuUrl,
+  },
+};
+
 function uniqueImages(images: string[]) {
-  return [...new Set(images)];
+  return [...new Set(images.map((image) => absoluteUrl(image)))];
 }
 
-export default function sitemap(): MetadataRoute.Sitemap {
+function menuLastModified(value: string) {
+  const monthNumbers: Record<string, string> = {
+    Ocak: "01", Şubat: "02", Mart: "03", Nisan: "04", Mayıs: "05", Haziran: "06",
+    Temmuz: "07", Ağustos: "08", Eylül: "09", Ekim: "10", Kasım: "11", Aralık: "12",
+  };
+  const match = value.trim().match(/^(\d{1,2})\s+([^\s]+)\s+(\d{4})$/);
+  const month = match ? monthNumbers[match[2]] : undefined;
+  if (!match || !month) return pageLastModified;
+
+  const parsed = `${match[3]}-${month}-${match[1].padStart(2, "0")}T12:00:00+03:00`;
+  return Date.parse(parsed) > Date.parse(pageLastModified) ? parsed : pageLastModified;
+}
+
+const homeImages = uniqueImages([
+  defaultOgImagePath,
+  "/images/hero-table.jpg",
+  "/images/breakfast-spread.webp",
+  "/images/balcony-breakfast.webp",
+  "/images/hands-table.webp",
+  "/images/interior-chair.webp",
+  "/images/tea-service.webp",
+  "/images/historic-mirror.webp",
+  "/images/terrace-tea.webp",
+  "/images/coffee-moment.webp",
+  "/images/street-table.webp",
+  "/images/sucuk-egg.webp",
+  "/images/hero-parallax/sucuk-egg-action.webp",
+  "/images/hero-parallax/balcony-full.webp",
+  "/images/hero-parallax/spread-close.webp",
+  "/images/hero-parallax/table-pisi.webp",
+  "/images/hero-parallax/historic-corner.webp",
+  "/images/hero-parallax/overhead-feast.webp",
+  "/images/hero-parallax/tea-tray.webp",
+  "/images/hero-parallax/kavurma-pan.webp",
+  "/images/hero-parallax/terrace-table.webp",
+  "/images/hero-parallax/overhead-classic.webp",
+  "/images/hero-float/sucuk-egg-pan.webp",
+  "/images/hero-float/tea-glass.webp",
+  "/images/hero-float/simit-board.webp",
+  "/images/hero-float/omelette-plate.webp",
+  "/images/hero-float/cheese-platter.webp",
+  "/images/hero-float/greens-platter.webp",
+  "/images/hero-float/black-olive-bowl.webp",
+  "/images/hero-float/apricot-jam-bowl.webp",
+]);
+
+const menuImages = uniqueImages([
+  "/images/og/menu.jpg",
+  ...menuCategories.map((category) => category.image),
+  ...menuItems.map((item) => item.image),
+]);
+
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  await connection();
+  const { lastUpdated } = await getMenuData();
+  const liveMenuLastModified = menuLastModified(lastUpdated);
+
   return [
     {
       url: siteUrl,
-      lastModified: contentLastModified,
-      images: uniqueImages([
-        absoluteUrl(defaultOgImagePath),
-        absoluteUrl("/images/breakfast-spread.webp"),
-        absoluteUrl("/images/balcony-breakfast.webp"),
-        absoluteUrl("/images/hands-table.webp"),
-      ]),
+      lastModified: pageLastModified,
+      images: homeImages,
       alternates: homeLanguageAlternates,
     },
     {
-      url: `${siteUrl}/menu`,
-      lastModified: contentLastModified,
+      url: menuUrl,
+      lastModified: liveMenuLastModified,
+      images: menuImages,
+      alternates: menuLanguageAlternates,
+    },
+    {
+      url: breakfastGuideUrl,
+      lastModified: pageLastModified,
       images: uniqueImages([
-        absoluteUrl("/images/og/menu.jpg"),
-        absoluteUrl("/images/breakfast-spread.webp"),
-        absoluteUrl("/images/sucuk-egg.webp"),
-        absoluteUrl("/images/kete-detail.jpg"),
+        "/images/og/van-kahvaltisi.jpg",
+        "/images/breakfast-spread.webp",
+        "/images/hands-table.webp",
+        "/images/hero-parallax/overhead-classic.webp",
       ]),
     },
     {
-      url: `${siteUrl}/konum`,
-      lastModified: contentLastModified,
+      url: storyUrl,
+      lastModified: pageLastModified,
       images: uniqueImages([
-        absoluteUrl("/images/street-table.webp"),
-        absoluteUrl("/images/interior-chair.webp"),
-        absoluteUrl("/images/historic-mirror.webp"),
+        "/images/historic-mirror.webp",
+        "/images/interior-chair.webp",
+        "/images/street-table.webp",
+        "/images/hands-table.webp",
+      ]),
+    },
+    {
+      url: locationUrl,
+      lastModified: pageLastModified,
+      images: uniqueImages([
+        "/images/street-table.webp",
+        "/images/interior-chair.webp",
+        "/images/historic-mirror.webp",
       ]),
     },
     {
       url: englishUrl,
-      lastModified: contentLastModified,
+      lastModified: pageLastModified,
       images: uniqueImages([
-        absoluteUrl("/images/og/van-kahvaltisi.jpg"),
-        absoluteUrl("/images/breakfast-spread.webp"),
-        absoluteUrl("/images/street-table.webp"),
+        "/images/og/van-kahvaltisi.jpg",
+        "/images/breakfast-spread.webp",
+        "/images/street-table.webp",
       ]),
       alternates: homeLanguageAlternates,
+    },
+    {
+      url: englishMenuUrl,
+      lastModified: liveMenuLastModified,
+      images: menuImages,
+      alternates: menuLanguageAlternates,
     },
   ];
 }

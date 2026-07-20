@@ -2,18 +2,33 @@ import type { Metadata } from "next";
 import { Suspense } from "react";
 import { cookies } from "next/headers";
 import ClientPage from "../client-page";
-import { absoluteUrl, jsonLd, siteName, siteUrl } from "../seo";
+import {
+  absoluteUrl,
+  buildBreadcrumbJsonLd,
+  buildRestaurantJsonLd,
+  englishMenuUrl,
+  jsonLd,
+  menuUrl,
+  siteName,
+  siteUrl,
+} from "../seo";
 import { MenuExperience } from "./menu-experience";
 import { getMenuData } from "./menu-storage";
 
-const menuUrl = `${siteUrl}/menu`;
 const menuDescription =
   "Tarihi Van Kahvaltı Evi güncel menü ve fiyatları: serpme Van kahvaltısı, bakır sahanlar, yöresel lezzetler, çay ve kahve seçenekleri.";
 
 export const metadata: Metadata = {
   title: "Menü ve Güncel Fiyatlar",
   description: menuDescription,
-  alternates: { canonical: menuUrl },
+  alternates: {
+    canonical: menuUrl,
+    languages: {
+      tr: menuUrl,
+      en: englishMenuUrl,
+      "x-default": menuUrl,
+    },
+  },
   openGraph: {
     title: `Menü ve Güncel Fiyatlar | ${siteName}`,
     description: menuDescription,
@@ -92,6 +107,7 @@ async function MenuContainer() {
   const menuJsonLd = {
     "@context": "https://schema.org",
     "@graph": [
+      buildRestaurantJsonLd(false),
       {
         "@type": "WebPage",
         "@id": `${menuUrl}#webpage`,
@@ -109,14 +125,7 @@ async function MenuContainer() {
           height: 630,
         },
       },
-      {
-        "@type": "BreadcrumbList",
-        "@id": `${menuUrl}#breadcrumb`,
-        itemListElement: [
-          { "@type": "ListItem", position: 1, name: "Ana sayfa", item: siteUrl },
-          { "@type": "ListItem", position: 2, name: "Menü ve fiyatlar", item: menuUrl },
-        ],
-      },
+      buildBreadcrumbJsonLd(menuUrl, "Menü ve fiyatlar", false),
       menuSchema,
     ],
   };

@@ -36,9 +36,9 @@ const nextConfig: NextConfig = {
     const wordpressRedirects = [
       { source: "/anasayfa", destination: "/" },
       { source: "/tarihi-van-kahvaltisi-evi-menu", destination: "/menu" },
-      { source: "/van-kahvalti", destination: "/" },
-      { source: "/gercek-van-kahvaltisinda-neler-olur", destination: "/" },
-      { source: "/tarihi-van-kahvalti-evi-hikayemiz", destination: "/" },
+      { source: "/van-kahvalti", destination: "/van-kahvaltisi" },
+      { source: "/gercek-van-kahvaltisinda-neler-olur", destination: "/van-kahvaltisi" },
+      { source: "/tarihi-van-kahvalti-evi-hikayemiz", destination: "/hikayemiz" },
       { source: "/galeri-van-kahvalti-evi-taksim", destination: "/" },
       { source: "/urun/van-serpme-kahvalti", destination: "/menu#geleneksel-van-kahvaltisi" },
       { source: "/urun/cift-kisilik-serpme-kahvalti", destination: "/menu#iki-kisilik-van-sofrasi" },
@@ -74,7 +74,7 @@ const nextConfig: NextConfig = {
         headers: [
           {
             key: "Cache-Control",
-            value: "public, max-age=3600, s-maxage=86400, stale-while-revalidate=604800",
+            value: "public, max-age=1800, s-maxage=3600, stale-while-revalidate=86400",
           },
           {
             key: "X-Robots-Tag",
@@ -105,7 +105,7 @@ const nextConfig: NextConfig = {
         ],
       },
       {
-        source: "/en",
+        source: "/en/:path*",
         headers: [
           {
             key: "Content-Language",

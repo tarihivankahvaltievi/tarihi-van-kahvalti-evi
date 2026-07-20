@@ -9,10 +9,11 @@ const keyLocation = `${siteUrl}/${key}.txt`;
 const defaultUrls = [
   siteUrl,
   `${siteUrl}/menu`,
+  `${siteUrl}/van-kahvaltisi`,
+  `${siteUrl}/hikayemiz`,
   `${siteUrl}/konum`,
   `${siteUrl}/en`,
-  `${siteUrl}/turkish-breakfast-istanbul`,
-  `${siteUrl}/breakfast-near-taksim`,
+  `${siteUrl}/en/menu`,
 ];
 
 const scriptDirectory = path.dirname(fileURLToPath(import.meta.url));

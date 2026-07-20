@@ -5,7 +5,22 @@ const baseUrl = process.env.SEO_TEST_BASE_URL ?? "http://127.0.0.1:3100";
 const canonicalSiteUrl = "https://www.tarihivankahvaltievi.com";
 const menuPageUrl = `${canonicalSiteUrl}/menu`;
 const englishPageUrl = `${canonicalSiteUrl}/en`;
+const englishMenuPageUrl = `${englishPageUrl}/menu`;
+const guidePageUrl = `${canonicalSiteUrl}/van-kahvaltisi`;
+const storyPageUrl = `${canonicalSiteUrl}/hikayemiz`;
 const expectedGoogleVerification = process.env.SEO_EXPECT_GOOGLE_SITE_VERIFICATION?.trim();
+
+const homeHreflang = {
+  tr: canonicalSiteUrl,
+  en: englishPageUrl,
+  "x-default": canonicalSiteUrl,
+};
+
+const menuHreflang = {
+  tr: menuPageUrl,
+  en: englishMenuPageUrl,
+  "x-default": menuPageUrl,
+};
 
 const routes = [
   {
@@ -16,7 +31,36 @@ const routes = [
     restaurantMenu: `${menuPageUrl}#menu`,
     faqCount: 10,
     visibleSignals: ["van kahvaltıcısı", "beyoğlu", "taksim", "serpme kahvaltı"],
-    hreflang: true,
+    hreflang: homeHreflang,
+  },
+  {
+    path: "/menu",
+    canonical: menuPageUrl,
+    language: "tr",
+    types: ["Restaurant", "WebPage", "BreadcrumbList", "Menu"],
+    restaurantMenu: `${menuPageUrl}#menu`,
+    faqCount: 0,
+    menuSectionCount: 4,
+    visibleSignals: ["menü", "van kahvaltısı", "murtuğa", "türk kahvesi"],
+    hreflang: menuHreflang,
+  },
+  {
+    path: "/van-kahvaltisi",
+    canonical: guidePageUrl,
+    language: "tr",
+    types: ["Restaurant", "WebPage", "BreadcrumbList", "FAQPage"],
+    restaurantMenu: `${menuPageUrl}#menu`,
+    faqCount: 5,
+    visibleSignals: ["van kahvaltısı", "otlu peynir", "murtuğa", "kavut", "taksim"],
+  },
+  {
+    path: "/hikayemiz",
+    canonical: storyPageUrl,
+    language: "tr",
+    types: ["Restaurant", "AboutPage", "BreadcrumbList"],
+    restaurantMenu: `${menuPageUrl}#menu`,
+    faqCount: 0,
+    visibleSignals: ["1978", "aile sofrası", "zambak sokak", "beyoğlu"],
   },
   {
     path: "/konum",
@@ -36,18 +80,29 @@ const routes = [
     restaurantMenu: `${menuPageUrl}#menu`,
     faqCount: 6,
     visibleSignals: ["traditional turkish breakfast", "taksim", "van breakfast", "live menu"],
-    hreflang: true,
+    hreflang: homeHreflang,
+  },
+  {
+    path: "/en/menu",
+    canonical: englishMenuPageUrl,
+    language: "en",
+    htmlLanguage: "tr",
+    types: ["Restaurant", "WebPage", "BreadcrumbList", "Menu"],
+    restaurantMenu: `${menuPageUrl}#menu`,
+    faqCount: 0,
+    menuSectionCount: 4,
+    visibleSignals: ["traditional van breakfast", "prices", "murtuğa", "taksim"],
+    hreflang: menuHreflang,
   },
 ];
 
-const canonicalUrls = new Set([...routes.map((route) => route.canonical), menuPageUrl]);
+const canonicalUrls = new Set(routes.map((route) => route.canonical));
 const internalPaths = new Set();
 const redirectRules = [
-  ["/istanbul-van-kahvaltisi", "/"],
-  ["/van-kahvaltisi", "/"],
+  ["/istanbul-van-kahvaltisi", "/van-kahvaltisi"],
   ["/beyoglu-kahvalti", "/"],
   ["/taksim-kahvalti", "/"],
-  ["/serpme-van-kahvaltisi", "/"],
+  ["/serpme-van-kahvaltisi", "/van-kahvaltisi"],
   ["/serpme-kahvalti-beyoglu", "/"],
   ["/istiklal-caddesi-kahvalti", "/"],
   ["/cihangir-kahvalti", "/"],
@@ -56,15 +111,15 @@ const redirectRules = [
   ["/grup-kahvaltisi", "/"],
   ["/hafta-sonu-kahvalti", "/"],
   ["/kahvalti-rezervasyon", "/"],
-  ["/kahvalti-yol-tarifi", "/"],
-  ["/zambak-sokak-kahvalti", "/"],
-  ["/siraselviler-kahvalti", "/"],
-  ["/kahvalti-fiyatlari", "/"],
-  ["/van-otlu-peynir", "/"],
-  ["/murtuga-kavut", "/"],
-  ["/tarihi-mekanda-kahvalti", "/"],
-  ["/kahvalti-sonrasi-kahve", "/"],
-  ["/vejetaryen-kahvalti-beyoglu", "/"],
+  ["/kahvalti-yol-tarifi", "/konum"],
+  ["/zambak-sokak-kahvalti", "/konum"],
+  ["/siraselviler-kahvalti", "/konum"],
+  ["/kahvalti-fiyatlari", "/menu"],
+  ["/van-otlu-peynir", "/van-kahvaltisi"],
+  ["/murtuga-kavut", "/van-kahvaltisi"],
+  ["/tarihi-mekanda-kahvalti", "/hikayemiz"],
+  ["/kahvalti-sonrasi-kahve", "/menu"],
+  ["/vejetaryen-kahvalti-beyoglu", "/menu"],
   ["/beyoglu-kahvalti-mekanlari", "/"],
   ["/taksim-brunch-kahvalti", "/"],
   ["/iletisim", "/konum"],
@@ -76,9 +131,9 @@ const redirectRules = [
   ["/arabic-breakfast-taksim", "/"],
   ["/anasayfa", "/"],
   ["/tarihi-van-kahvaltisi-evi-menu", "/menu"],
-  ["/van-kahvalti", "/"],
-  ["/gercek-van-kahvaltisinda-neler-olur", "/"],
-  ["/tarihi-van-kahvalti-evi-hikayemiz", "/"],
+  ["/van-kahvalti", "/van-kahvaltisi"],
+  ["/gercek-van-kahvaltisinda-neler-olur", "/van-kahvaltisi"],
+  ["/tarihi-van-kahvalti-evi-hikayemiz", "/hikayemiz"],
   ["/galeri-van-kahvalti-evi-taksim", "/"],
   ["/urun/van-serpme-kahvalti", "/menu#geleneksel-van-kahvaltisi"],
   ["/urun/cift-kisilik-serpme-kahvalti", "/menu#iki-kisilik-van-sofrasi"],
@@ -125,30 +180,6 @@ async function fetchWithRetry(path, attempts = 30, options = {}) {
   throw lastError;
 }
 
-const menuResponse = await fetchWithRetry("/menu");
-const menuHtml = await menuResponse.text();
-assert(menuResponse.status === 200, `/menu: HTTP ${menuResponse.status}`);
-assert(
-  menuHtml.includes(`<link rel="canonical" href="${menuPageUrl}"`),
-  "/menu: canonical yanlış",
-);
-assert((visibleHtml(menuHtml).match(/<h1\b/gi) ?? []).length === 1, "/menu: tam bir H1 bulunmalı");
-const menuJsonScripts = [
-  ...menuHtml.matchAll(/<script\s+type="application\/ld\+json">([\s\S]*?)<\/script>/gi),
-];
-assert(menuJsonScripts.length === 1, "/menu: tek JSON-LD script bulunmalı");
-const menuDocument = JSON.parse(menuJsonScripts[0][1]);
-assert(menuDocument["@context"] === "https://schema.org", "/menu: Schema.org context eksik");
-assert(Array.isArray(menuDocument["@graph"]), "/menu: @graph eksik");
-assert(
-  JSON.stringify(menuDocument["@graph"].map((node) => node["@type"])) ===
-    JSON.stringify(["WebPage", "BreadcrumbList", "Menu"]),
-  "/menu: WebPage, BreadcrumbList ve Menu şemaları birlikte bulunmalı",
-);
-const menuSchema = menuDocument["@graph"].find((node) => node["@type"] === "Menu");
-assert(menuSchema?.url === menuPageUrl, "/menu: şema URL'si yanlış");
-assert(menuSchema?.hasMenuSection?.length === 4, "/menu: dört menü bölümü bulunmalı");
-
 function requestWithHost(path, host) {
   const target = new URL(baseUrl);
   return new Promise((resolve, reject) => {
@@ -180,9 +211,9 @@ for (const route of routes) {
 
   assert(response.status === 200, `${routeLabel}: HTTP ${response.status}`);
 
-  if (route.path === "/en") {
-    assert(response.headers.get("content-language") === "en", "/en: Content-Language başlığı eksik");
-    assert(/<main\b[^>]*\blang="en"/i.test(html), "/en: İngilizce ana içerik lang işareti eksik");
+  if (route.language === "en") {
+    assert(response.headers.get("content-language") === "en", `${routeLabel}: Content-Language başlığı eksik`);
+    assert(/<main\b[^>]*\blang="en"/i.test(html), `${routeLabel}: İngilizce ana içerik lang işareti eksik`);
   }
 
   const canonicalMatches = [...html.matchAll(/<link\s+rel="canonical"\s+href="([^"]+)"/gi)];
@@ -213,7 +244,7 @@ for (const route of routes) {
   assert(route.visibleSignals.every((signal) => lowerText.includes(signal)), `${routeLabel}: hedef görünür metin eksik`);
 
   if (route.hreflang) {
-    for (const [language, url] of [["tr", canonicalSiteUrl], ["en", englishPageUrl], ["x-default", canonicalSiteUrl]]) {
+    for (const [language, url] of Object.entries(route.hreflang)) {
       assert(
         new RegExp(`hrefLang="${language}"\\s+href="${url}"`, "i").test(html) ||
           new RegExp(`href="${url}"\\s+hrefLang="${language}"`, "i").test(html),
@@ -254,8 +285,9 @@ for (const route of routes) {
 
   const menu = graphDocument["@graph"].find((node) => node["@type"] === "Menu");
   if (route.types.includes("Menu")) {
-    assert(menu?.url === `${route.canonical}#menu`, `${routeLabel}: menü URL'si yanlış`);
-    assert(menu?.hasMenuSection?.length === 3, `${routeLabel}: menü bölümleri eksik`);
+    assert(menu?.["@id"] === `${route.canonical}#menu`, `${routeLabel}: menü kimliği yanlış`);
+    assert(menu?.url === route.canonical, `${routeLabel}: menü URL'si yanlış`);
+    assert(menu?.hasMenuSection?.length === route.menuSectionCount, `${routeLabel}: menü bölümleri eksik`);
   } else {
     assert(!menu, `${routeLabel}: görünür olmayan menü için şema bulunmamalı`);
   }
@@ -274,14 +306,15 @@ const sitemap = await (await fetchWithRetry("/sitemap.xml")).text();
 const sitemapUrls = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map((match) => match[1]);
 const sitemapLastModified = [...sitemap.matchAll(/<lastmod>([^<]+)<\/lastmod>/g)].map((match) => match[1]);
 const sitemapImages = [...sitemap.matchAll(/<image:loc>([^<]+)<\/image:loc>/g)].map((match) => match[1]);
-assert(sitemapUrls.length === 4, "Sitemap: dört kanonik URL bulunmalı");
+assert(sitemapUrls.length === canonicalUrls.size, "Sitemap: tüm indekslenebilir kanonik URL'ler bulunmalı");
 assert(sitemapUrls.every((url) => canonicalUrls.has(url)), "Sitemap: kanonik olmayan URL var");
-assert(sitemapLastModified.length === 4, "Sitemap: lastmod sayısı yanlış");
+assert(canonicalUrls.size === new Set(sitemapUrls).size, "Sitemap: kanonik URL eksik veya yinelenmiş");
+assert(sitemapLastModified.length === canonicalUrls.size, "Sitemap: lastmod sayısı yanlış");
 assert(
   sitemapLastModified.every((value) => Number.isFinite(Date.parse(value)) && Date.parse(value) <= Date.now()),
   "Sitemap: lastmod geçerli ve gelecekte olmayan bir tarih olmalı",
 );
-assert(sitemapImages.length >= 10, "Sitemap: görseller eksik");
+assert(sitemapImages.length >= 50, "Sitemap: kapsamlı görsel keşif listesi eksik");
 assert(
   sitemapImages.every((url) => url.startsWith(`${canonicalSiteUrl}/images/`)),
   "Sitemap: görsel URL'si kanonik alan adında olmalı",
@@ -331,5 +364,5 @@ assert(missing.status === 404, "Bilinmeyen rota gerçek 404 dönmeli");
 assert(/<meta\s+name="robots"\s+content="noindex"/i.test(missingHtml), "404 sayfası noindex olmalı");
 
 console.log(
-  `SEO sözleşmesi geçti: Türkçe ana sayfa, güncel menü, konum ve İngilizce ziyaretçi rehberi indekslenebilir; ${redirectRules.length} bilinen eski URL doğru hedefe gider; hreflang, sitemap, IndexNow, robots, Restaurant/Menu/FAQ şeması ve 404 doğru.`,
+  `SEO sözleşmesi geçti: ${canonicalUrls.size} kanonik sayfa indekslenebilir; ${redirectRules.length} bilinen eski URL doğru hedefe gider; hreflang, kapsamlı görsel sitemap, IndexNow, robots, Restaurant/Menu/FAQ şeması ve 404 doğru.`,
 );

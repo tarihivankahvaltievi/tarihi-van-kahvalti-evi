@@ -1196,7 +1196,8 @@ export function AnimatedFooter() {
             <h4 className="footer-col-title">Keşfet</h4>
             <ul className="footer-links">
               <li><Link href="/menu">Zengin Menü</Link></li>
-              <li><Link href="/#faq">Van Kahvaltısı</Link></li>
+              <li><Link href="/van-kahvaltisi">Van Kahvaltısı Rehberi</Link></li>
+              <li><Link href="/hikayemiz">1978&apos;den Beri Hikâyemiz</Link></li>
               <li><Link href="/konum">Beyoğlu ve Taksim Kahvaltı</Link></li>
               <li><Link href="/menu">Kafka Cafe</Link></li>
               <li><Link href="/konum">Konum ve Yol Tarifi</Link></li>

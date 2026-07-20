@@ -210,7 +210,7 @@ export default function ClientPage({ children }: { children: ReactNode }) {
 
           <nav className="nav-links" aria-label="Ana menü" onMouseLeave={handleMouseLeave}>
             <span className="nav-hover-pill" style={hoverStyle} />
-            <Link href="/#story" onMouseEnter={handleMouseEnter}>Hakkımızda</Link>
+            <Link href="/hikayemiz" onMouseEnter={handleMouseEnter}>Hakkımızda</Link>
             <Link href="/menu" aria-current={isMenuPage ? "page" : undefined} onMouseEnter={handleMouseEnter}>Menü</Link>
             <Link href="/#gallery" onMouseEnter={handleMouseEnter}>Galeri</Link>
             <Link href="/konum" aria-current={isLocationPage ? "page" : undefined} onMouseEnter={handleMouseEnter}>Konum</Link>
@@ -272,7 +272,7 @@ export default function ClientPage({ children }: { children: ReactNode }) {
               </span>
               <ChevronRight size={17} />
             </Link>
-            <Link className="nav-menu-primary" href="/#story" tabIndex={menuOpen ? 0 : -1} style={{ "--item-index": 2 } as CSSProperties} onClick={() => setMenuOpen(false)}>
+            <Link className="nav-menu-primary" href="/hikayemiz" tabIndex={menuOpen ? 0 : -1} style={{ "--item-index": 2 } as CSSProperties} onClick={() => setMenuOpen(false)}>
               <BookOpen size={18} />
               <span className="nav-menu-copy">
                 <span className="nav-menu-link-text">Hakkımızda</span>
@@ -304,7 +304,7 @@ export default function ClientPage({ children }: { children: ReactNode }) {
               </span>
               <ChevronRight size={17} />
             </Link>
-            <Link className="nav-menu-utility" href="/menu" tabIndex={menuOpen ? 0 : -1} style={{ "--item-index": 6 } as CSSProperties} onClick={() => setMenuOpen(false)}>
+            <Link className="nav-menu-utility" href="/van-kahvaltisi" tabIndex={menuOpen ? 0 : -1} style={{ "--item-index": 6 } as CSSProperties} onClick={() => setMenuOpen(false)}>
               <BookOpen size={18} />
               <span className="nav-menu-copy">
                 <span className="nav-menu-link-text">Van kahvaltısı</span>

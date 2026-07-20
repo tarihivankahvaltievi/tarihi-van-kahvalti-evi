@@ -127,7 +127,7 @@ export default function EnglishVisitorPage() {
           { "@type": "ListItem", position: 2, name: "English visitor guide", item: englishUrl },
         ],
       },
-      buildFaqJsonLd(englishFaqItems, englishUrl, false),
+      buildFaqJsonLd(englishFaqItems, englishUrl, false, "en"),
     ],
   };
 
@@ -141,7 +141,7 @@ export default function EnglishVisitorPage() {
           <span>{siteName}</span>
         </Link>
         <nav aria-label="English visitor navigation">
-          <Link href="/menu">Live menu</Link>
+          <Link href="/en/menu">English menu</Link>
           <Link href="/konum">Map</Link>
           <Link href="/" hrefLang="tr">Türkçe</Link>
         </nav>
@@ -157,7 +157,7 @@ export default function EnglishVisitorPage() {
               homemade preserves and freshly brewed tea—served in a historic Beyoğlu setting since 1978.
             </p>
             <div className={styles.actions}>
-              <Link className={styles.primaryAction} href="/menu">
+              <Link className={styles.primaryAction} href="/en/menu">
                 <UtensilsCrossed size={18} aria-hidden="true" /> See the live menu
               </Link>
               <a className={styles.secondaryAction} href={mapsUrl} target="_blank" rel="noopener noreferrer">
@@ -246,7 +246,7 @@ export default function EnglishVisitorPage() {
       <footer className={styles.footer}>
         <p><strong>{siteName}</strong><span>{displayAddress}</span></p>
         <nav aria-label="Footer navigation">
-          <Link href="/menu">Live menu</Link>
+          <Link href="/en/menu">English menu</Link>
           <Link href="/konum">Location</Link>
           <Link href="/gizlilik">Privacy</Link>
           <Link href="/" hrefLang="tr">Türkçe site</Link>

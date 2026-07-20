@@ -2,6 +2,11 @@ export const siteUrl = "https://www.tarihivankahvaltievi.com";
 export const siteName = "Tarihi Van Kahvaltı Evi";
 export const alternateName = "Tarihi Van Kahvaltı Evi 1978";
 export const englishUrl = `${siteUrl}/en`;
+export const menuUrl = `${siteUrl}/menu`;
+export const englishMenuUrl = `${englishUrl}/menu`;
+export const locationUrl = `${siteUrl}/konum`;
+export const breakfastGuideUrl = `${siteUrl}/van-kahvaltisi`;
+export const storyUrl = `${siteUrl}/hikayemiz`;
 
 export const homeTitle = "Van Kahvaltıcısı İstanbul | Tarihi Van Kahvaltı Evi";
 export const homeDescription =
@@ -110,37 +115,32 @@ export const faqItems = [
   },
 ] as const;
 
-export const searchLandingPaths = [
-  "/istanbul-van-kahvaltisi",
-  "/van-kahvaltisi",
-  "/beyoglu-kahvalti",
-  "/taksim-kahvalti",
-  "/serpme-van-kahvaltisi",
-  "/serpme-kahvalti-beyoglu",
-  "/istiklal-caddesi-kahvalti",
-  "/cihangir-kahvalti",
-  "/galata-kahvalti",
-  "/aile-kahvaltisi-beyoglu",
-  "/grup-kahvaltisi",
-  "/hafta-sonu-kahvalti",
-  "/kahvalti-rezervasyon",
-  "/kahvalti-yol-tarifi",
-  "/zambak-sokak-kahvalti",
-  "/siraselviler-kahvalti",
-  "/kahvalti-fiyatlari",
-  "/van-otlu-peynir",
-  "/murtuga-kavut",
-  "/tarihi-mekanda-kahvalti",
-  "/kahvalti-sonrasi-kahve",
-  "/vejetaryen-kahvalti-beyoglu",
-  "/beyoglu-kahvalti-mekanlari",
-  "/taksim-brunch-kahvalti",
-] as const;
-
 // Yalnız bilinen eski URL'ler en yakın gerçek içeriğe tek adımda taşınır.
 // Bilinmeyen URL'ler gerçek 404 kalır; site geneli wildcard yönlendirme yapılmaz.
 export const legacyRedirects = [
-  ...searchLandingPaths.map((source) => ({ source, destination: "/" })),
+  { source: "/istanbul-van-kahvaltisi", destination: "/van-kahvaltisi" },
+  { source: "/serpme-van-kahvaltisi", destination: "/van-kahvaltisi" },
+  { source: "/van-otlu-peynir", destination: "/van-kahvaltisi" },
+  { source: "/murtuga-kavut", destination: "/van-kahvaltisi" },
+  { source: "/tarihi-mekanda-kahvalti", destination: "/hikayemiz" },
+  { source: "/kahvalti-fiyatlari", destination: "/menu" },
+  { source: "/kahvalti-sonrasi-kahve", destination: "/menu" },
+  { source: "/vejetaryen-kahvalti-beyoglu", destination: "/menu" },
+  { source: "/kahvalti-yol-tarifi", destination: "/konum" },
+  { source: "/zambak-sokak-kahvalti", destination: "/konum" },
+  { source: "/siraselviler-kahvalti", destination: "/konum" },
+  { source: "/beyoglu-kahvalti", destination: "/" },
+  { source: "/taksim-kahvalti", destination: "/" },
+  { source: "/serpme-kahvalti-beyoglu", destination: "/" },
+  { source: "/istiklal-caddesi-kahvalti", destination: "/" },
+  { source: "/cihangir-kahvalti", destination: "/" },
+  { source: "/galata-kahvalti", destination: "/" },
+  { source: "/aile-kahvaltisi-beyoglu", destination: "/" },
+  { source: "/grup-kahvaltisi", destination: "/" },
+  { source: "/hafta-sonu-kahvalti", destination: "/" },
+  { source: "/kahvalti-rezervasyon", destination: "/" },
+  { source: "/beyoglu-kahvalti-mekanlari", destination: "/" },
+  { source: "/taksim-brunch-kahvalti", destination: "/" },
   { source: "/iletisim", destination: "/konum" },
   { source: "/sss", destination: "/#faq" },
   { source: "/kafka-cafe", destination: "/menu#turk-kahvesi" },
@@ -216,7 +216,7 @@ export function buildHomeWebPageJsonLd(withContext = true) {
 }
 
 export function buildRestaurantJsonLd(withContext = true) {
-  const menuUrl = `${siteUrl}/menu#menu`;
+  const menuEntityUrl = `${menuUrl}#menu`;
   const data = {
     "@type": "Restaurant",
     "@id": `${siteUrl}/#restaurant`,
@@ -273,8 +273,8 @@ export function buildRestaurantJsonLd(withContext = true) {
         closes: openingHours.closes,
       },
     ],
-    menu: menuUrl,
-    hasMenu: { "@id": menuUrl },
+    menu: menuEntityUrl,
+    hasMenu: { "@id": menuEntityUrl },
     sameAs: sameAsUrls,
   };
   return withContext ? { "@context": "https://schema.org", ...data } : data;
@@ -284,16 +284,35 @@ export function buildFaqJsonLd(
   items: readonly { question: string; answer: string }[],
   pageUrl = siteUrl,
   withContext = true,
+  inLanguage = "tr-TR",
 ) {
   const data = {
     "@type": "FAQPage",
     "@id": `${pageUrl}#faq`,
-    inLanguage: "tr-TR",
+    inLanguage,
     mainEntity: items.map((item) => ({
       "@type": "Question",
       name: item.question,
       acceptedAnswer: { "@type": "Answer", text: item.answer },
     })),
+  };
+  return withContext ? { "@context": "https://schema.org", ...data } : data;
+}
+
+export function buildBreadcrumbJsonLd(
+  pageUrl: string,
+  currentPageName: string,
+  withContext = true,
+  homeName = "Ana sayfa",
+  homeUrl = siteUrl,
+) {
+  const data = {
+    "@type": "BreadcrumbList",
+    "@id": `${pageUrl}#breadcrumb`,
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: homeName, item: homeUrl },
+      { "@type": "ListItem", position: 2, name: currentPageName, item: pageUrl },
+    ],
   };
   return withContext ? { "@context": "https://schema.org", ...data } : data;
 }
