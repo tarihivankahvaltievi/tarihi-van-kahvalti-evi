@@ -7,18 +7,22 @@ import { createPortal } from "react-dom";
 import { useCallback, useEffect, useRef, useState } from "react";
 import styles from "./menu.module.css";
 import type { MenuItem } from "./menu-data";
+import { menuMessages, type MenuLocale } from "./menu-localization";
 
 const ease = [0.16, 1, 0.3, 1] as const;
 
 export function ProductSheet({
   item,
   categoryLabel,
+  locale = "tr",
   onClose,
 }: {
   item: MenuItem;
   categoryLabel?: string;
+  locale?: MenuLocale;
   onClose: () => void;
 }) {
+  const messages = menuMessages[locale];
   const reduceMotion = useReducedMotion();
   const sheetRef = useRef<HTMLDivElement>(null);
   const closeRef = useRef<HTMLButtonElement>(null);
@@ -74,7 +78,7 @@ export function ProductSheet({
       <motion.button
         type="button"
         className={styles.overlayBackdrop}
-        aria-label="Ürün ayrıntılarını kapat"
+        aria-label={messages.sheetClose}
         onClick={requestClose}
         initial={{ opacity: 0 }}
         animate={{ opacity: isClosing ? 0 : 1 }}
@@ -106,7 +110,7 @@ export function ProductSheet({
         </div>
 
         <div className={styles.sheetContent}>
-          <button ref={closeRef} type="button" className={styles.sheetClose} onClick={requestClose} aria-label="Kapat">
+          <button ref={closeRef} type="button" className={styles.sheetClose} onClick={requestClose} aria-label={messages.close}>
             <X size={20} />
           </button>
 
@@ -121,7 +125,7 @@ export function ProductSheet({
           <p className={styles.sheetStory}>{item.story}</p>
 
           <div className={styles.sheetRule} />
-          <h3 className={styles.sheetSectionTitle}>Bu tabakta</h3>
+          <h3 className={styles.sheetSectionTitle}>{messages.onThisPlate}</h3>
           <ul className={styles.sheetDetailsList}>
             {item.details.map((detail) => (
               <li key={detail}>
@@ -132,7 +136,7 @@ export function ProductSheet({
           </ul>
 
           <button type="button" className={styles.sheetAction} onClick={requestClose}>
-            Menüye dön <ChevronRight size={18} />
+            {messages.backToMenu} <ChevronRight size={18} />
           </button>
         </div>
       </motion.div>

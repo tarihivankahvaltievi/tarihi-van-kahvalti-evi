@@ -42,6 +42,7 @@ const routes = [
     restaurantMenu: `${menuPageUrl}#menu`,
     faqCount: 0,
     menuSectionCount: 4,
+    sharedMenuDesign: true,
     visibleSignals: ["menü", "van kahvaltısı", "murtuğa", "türk kahvesi"],
     hreflang: menuHreflang,
   },
@@ -93,6 +94,7 @@ const routes = [
     restaurantMenu: `${menuPageUrl}#menu`,
     faqCount: 0,
     menuSectionCount: 4,
+    sharedMenuDesign: true,
     visibleSignals: ["traditional van breakfast", "prices", "murtuğa", "taksim"],
     hreflang: menuHreflang,
   },
@@ -256,6 +258,25 @@ for (const route of routes) {
     assert(
       sharedHomeClasses.every((className) => html.includes(className)),
       `${routeLabel}: ortak ana sayfa tasarım bileşenleri eksik`,
+    );
+  }
+
+  if (route.sharedMenuDesign) {
+    const sharedMenuClasses = [
+      "__menuHero",
+      "__discoveryBar",
+      "__categoryNav",
+      "__menuGrid",
+      "__menuCard",
+    ];
+    assert(
+      sharedMenuClasses.every((className) => html.includes(className)),
+      `${routeLabel}: ortak menü tasarım bileşenleri eksik`,
+    );
+    const counterpart = route.language === "en" ? "/menu" : "/en/menu";
+    assert(
+      new RegExp(`<a[^>]+href="${counterpart}"[^>]*>`, "i").test(html),
+      `${routeLabel}: menü dil geçişi eşdeğer sayfaya gitmiyor`,
     );
   }
 

@@ -37,6 +37,9 @@ export default function ClientPage({ children, locale = "tr" }: { children: Reac
   const pathname = usePathname();
   const isMenuPage = pathname === "/menu" || pathname === "/en/menu";
   const isLocationPage = pathname === "/konum";
+  const alternateHref = isMenuPage
+    ? locale === "en" ? "/menu" : "/en/menu"
+    : messages.alternateHref;
   const [isBookingOpen, setIsBookingOpen] = useState(false);
   const [preselectedItem, setPreselectedItem] = useState("");
   const [preselectedType, setPreselectedType] = useState("");
@@ -231,7 +234,7 @@ export default function ClientPage({ children, locale = "tr" }: { children: Reac
           <div className="nav-actions">
             <Link
               className="nav-language"
-              href={messages.alternateHref}
+              href={alternateHref}
               hrefLang={locale === "en" ? "tr" : "en"}
               lang={locale === "en" ? "tr" : "en"}
               aria-label={messages.alternateLanguageLabel}
@@ -358,7 +361,7 @@ export default function ClientPage({ children, locale = "tr" }: { children: Reac
             </a>
             <Link
               className="nav-menu-utility nav-menu-language"
-              href={messages.alternateHref}
+              href={alternateHref}
               hrefLang={locale === "en" ? "tr" : "en"}
               lang={locale === "en" ? "tr" : "en"}
               tabIndex={menuOpen ? 0 : -1}
