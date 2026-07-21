@@ -114,6 +114,24 @@ const nextConfig: NextConfig = {
         ],
       },
       {
+        source: "/ru/:path*",
+        headers: [
+          {
+            key: "Content-Language",
+            value: "ru",
+          },
+        ],
+      },
+      {
+        source: "/ar/:path*",
+        headers: [
+          {
+            key: "Content-Language",
+            value: "ar",
+          },
+        ],
+      },
+      {
         source: "/:path*.(svg|ico)",
         headers: [
           {

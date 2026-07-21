@@ -1201,7 +1201,17 @@ export function AnimatedFooter({ locale = "tr" }: { locale?: SiteLocale }) {
                   {href.startsWith("http") ? (
                     <a href={href} target="_blank" rel="noopener noreferrer">{label}</a>
                   ) : (
-                    <Link href={href} hrefLang={href === "/en" ? "en" : href === "/" && locale === "en" ? "tr" : undefined}>{label}</Link>
+                    <Link
+                      href={href}
+                      hrefLang={
+                        href.startsWith("/en") ? "en" :
+                          href.startsWith("/ru") ? "ru" :
+                            href.startsWith("/ar") ? "ar" :
+                              href === "/" && locale === "en" ? "tr" : undefined
+                      }
+                    >
+                      {label}
+                    </Link>
                   )}
                 </li>
               ))}

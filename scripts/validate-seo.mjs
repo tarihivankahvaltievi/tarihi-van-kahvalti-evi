@@ -11,6 +11,9 @@ const englishPageUrl = `${canonicalSiteUrl}/en`;
 const englishMenuPageUrl = `${englishPageUrl}/menu`;
 const guidePageUrl = `${canonicalSiteUrl}/van-kahvaltisi`;
 const culturePageUrl = `${canonicalSiteUrl}/van-kahvaltisi-nedir`;
+const englishBreakfastBlogUrl = `${canonicalSiteUrl}/en/blog/turkish-breakfast-istanbul`;
+const russianBreakfastBlogUrl = `${canonicalSiteUrl}/ru/blog/turetskiy-zavtrak-stambul`;
+const arabicBreakfastBlogUrl = `${canonicalSiteUrl}/ar/blog/turkish-breakfast-istanbul`;
 const storyPageUrl = `${canonicalSiteUrl}/hikayemiz`;
 const privacyPageUrl = `${canonicalSiteUrl}/gizlilik`;
 const cookiePolicyPageUrl = `${canonicalSiteUrl}/cerez-politikasi`;
@@ -28,6 +31,13 @@ const menuHreflang = {
   tr: menuPageUrl,
   en: englishMenuPageUrl,
   "x-default": menuPageUrl,
+};
+
+const internationalGuideHreflang = {
+  en: englishBreakfastBlogUrl,
+  ru: russianBreakfastBlogUrl,
+  ar: arabicBreakfastBlogUrl,
+  "x-default": englishBreakfastBlogUrl,
 };
 
 const routes = [
@@ -115,6 +125,43 @@ const routes = [
     visibleSignals: ["traditional van breakfast", "prices", "murtuğa", "taksim"],
     hreflang: menuHreflang,
   },
+  {
+    path: "/en/blog/turkish-breakfast-istanbul",
+    canonical: englishBreakfastBlogUrl,
+    language: "en",
+    htmlLanguage: "tr",
+    types: ["Restaurant", "BlogPosting", "WebPage", "BreadcrumbList", "FAQPage"],
+    restaurantMenu: `${menuPageUrl}#menu`,
+    faqCount: 6,
+    sharedGuideDesign: true,
+    visibleSignals: ["turkish breakfast", "van breakfast", "taksim", "murtuğa", "since 1978"],
+    hreflang: internationalGuideHreflang,
+  },
+  {
+    path: "/ru/blog/turetskiy-zavtrak-stambul",
+    canonical: russianBreakfastBlogUrl,
+    language: "ru",
+    htmlLanguage: "tr",
+    types: ["Restaurant", "BlogPosting", "WebPage", "BreadcrumbList", "FAQPage"],
+    restaurantMenu: `${menuPageUrl}#menu`,
+    faqCount: 6,
+    sharedGuideDesign: true,
+    visibleSignals: ["турецкий завтрак", "ванский завтрак", "таксим", "муртуга", "1978"],
+    hreflang: internationalGuideHreflang,
+  },
+  {
+    path: "/ar/blog/turkish-breakfast-istanbul",
+    canonical: arabicBreakfastBlogUrl,
+    language: "ar",
+    htmlLanguage: "tr",
+    direction: "rtl",
+    types: ["Restaurant", "BlogPosting", "WebPage", "BreadcrumbList", "FAQPage"],
+    restaurantMenu: `${menuPageUrl}#menu`,
+    faqCount: 6,
+    sharedGuideDesign: true,
+    visibleSignals: ["الفطور التركي", "فطور فان", "تقسيم", "المورتوغا", "1978"],
+    hreflang: internationalGuideHreflang,
+  },
 ];
 
 const legalRoutes = [
@@ -153,10 +200,10 @@ const redirectRules = [
   ["/iletisim", "/konum"],
   ["/sss", "/#faq"],
   ["/kafka-cafe", "/menu#turk-kahvesi"],
-  ["/turkish-breakfast-istanbul", "/en"],
+  ["/turkish-breakfast-istanbul", "/en/blog/turkish-breakfast-istanbul"],
   ["/breakfast-near-taksim", "/en"],
-  ["/zavtrak-taksim-stambul", "/"],
-  ["/arabic-breakfast-taksim", "/"],
+  ["/zavtrak-taksim-stambul", "/ru/blog/turetskiy-zavtrak-stambul"],
+  ["/arabic-breakfast-taksim", "/ar/blog/turkish-breakfast-istanbul"],
   ["/anasayfa", "/"],
   ["/tarihi-van-kahvaltisi-evi-menu", "/menu"],
   ["/van-kahvalti", "/van-kahvaltisi"],
@@ -234,14 +281,20 @@ for (const route of routes) {
   const response = await fetchWithRetry(route.path);
   const html = await response.text();
   const text = visibleText(html);
-  const lowerText = text.toLocaleLowerCase(route.language === "tr" ? "tr-TR" : "en-US");
+  const lowerText = text.toLocaleLowerCase(
+    route.language === "tr" ? "tr-TR" : route.language === "ru" ? "ru-RU" : route.language === "ar" ? "ar-SA" : "en-US",
+  );
   const routeLabel = route.path;
 
   assert(response.status === 200, `${routeLabel}: HTTP ${response.status}`);
 
-  if (route.language === "en") {
-    assert(response.headers.get("content-language") === "en", `${routeLabel}: Content-Language başlığı eksik`);
-    assert(/<main\b[^>]*\blang="en"/i.test(html), `${routeLabel}: İngilizce ana içerik lang işareti eksik`);
+  if (route.language !== "tr") {
+    assert(response.headers.get("content-language") === route.language, `${routeLabel}: Content-Language başlığı eksik`);
+    assert(new RegExp(`<main\\b[^>]*\\blang="${route.language}"`, "i").test(html), `${routeLabel}: ana içerik lang işareti eksik`);
+  }
+
+  if (route.direction) {
+    assert(new RegExp(`<main\\b[^>]*\\bdir="${route.direction}"`, "i").test(html), `${routeLabel}: metin yönü eksik`);
   }
 
   const canonicalMatches = [...html.matchAll(/<link\s+rel="canonical"\s+href="([^"]+)"/gi)];
@@ -315,6 +368,14 @@ for (const route of routes) {
     assert(
       new RegExp(`<a[^>]+href="${counterpart}"[^>]*>`, "i").test(html),
       `${routeLabel}: menü dil geçişi eşdeğer sayfaya gitmiyor`,
+    );
+  }
+
+  if (route.sharedGuideDesign) {
+    const sharedGuideClasses = ["__hero", "__articleNav", "__menuList", "__reasons", "__practical", "__faq"];
+    assert(
+      sharedGuideClasses.every((className) => html.includes(className)),
+      `${routeLabel}: ortak uluslararası rehber tasarımı eksik`,
     );
   }
 
@@ -427,6 +488,8 @@ assert(
   "Sitemap: görsel URL'si kanonik alan adında olmalı",
 );
 assert(sitemap.includes('hreflang="en"'), "Sitemap: İngilizce hreflang eksik");
+assert(sitemap.includes('hreflang="ru"'), "Sitemap: Rusça hreflang eksik");
+assert(sitemap.includes('hreflang="ar"'), "Sitemap: Arapça hreflang eksik");
 assert(sitemap.includes('hreflang="x-default"'), "Sitemap: x-default hreflang eksik");
 
 const appDirectory = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../src/app");

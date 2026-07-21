@@ -4,6 +4,9 @@ export const alternateName = "Tarihi Van Kahvaltı Evi 1978";
 export const englishUrl = `${siteUrl}/en`;
 export const menuUrl = `${siteUrl}/menu`;
 export const englishMenuUrl = `${englishUrl}/menu`;
+export const englishBreakfastBlogUrl = `${siteUrl}/en/blog/turkish-breakfast-istanbul`;
+export const russianBreakfastBlogUrl = `${siteUrl}/ru/blog/turetskiy-zavtrak-stambul`;
+export const arabicBreakfastBlogUrl = `${siteUrl}/ar/blog/turkish-breakfast-istanbul`;
 export const locationUrl = `${siteUrl}/konum`;
 export const breakfastGuideUrl = `${siteUrl}/van-kahvaltisi`;
 export const breakfastCultureUrl = `${siteUrl}/van-kahvaltisi-nedir`;
@@ -152,10 +155,10 @@ export const legacyRedirects = [
   { source: "/iletisim", destination: "/konum" },
   { source: "/sss", destination: "/#faq" },
   { source: "/kafka-cafe", destination: "/menu#turk-kahvesi" },
-  { source: "/turkish-breakfast-istanbul", destination: "/en" },
+  { source: "/turkish-breakfast-istanbul", destination: "/en/blog/turkish-breakfast-istanbul" },
   { source: "/breakfast-near-taksim", destination: "/en" },
-  { source: "/zavtrak-taksim-stambul", destination: "/" },
-  { source: "/arabic-breakfast-taksim", destination: "/" },
+  { source: "/zavtrak-taksim-stambul", destination: "/ru/blog/turetskiy-zavtrak-stambul" },
+  { source: "/arabic-breakfast-taksim", destination: "/ar/blog/turkish-breakfast-istanbul" },
 ];
 
 export const localSeoFacts = [

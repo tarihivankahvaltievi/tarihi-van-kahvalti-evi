@@ -4,15 +4,18 @@ import { menuCategories, menuItems } from "./menu/menu-data";
 import { getMenuData } from "./menu/menu-storage";
 import {
   absoluteUrl,
+  arabicBreakfastBlogUrl,
   breakfastCultureUrl,
   breakfastGuideUrl,
   cookiePolicyUrl,
   defaultOgImagePath,
+  englishBreakfastBlogUrl,
   englishMenuUrl,
   englishUrl,
   locationUrl,
   menuUrl,
   privacyUrl,
+  russianBreakfastBlogUrl,
   siteUrl,
   storyUrl,
 } from "./seo";
@@ -36,6 +39,22 @@ const menuLanguageAlternates = {
     "x-default": menuUrl,
   },
 };
+
+const internationalGuideAlternates = {
+  languages: {
+    en: englishBreakfastBlogUrl,
+    ru: russianBreakfastBlogUrl,
+    ar: arabicBreakfastBlogUrl,
+    "x-default": englishBreakfastBlogUrl,
+  },
+};
+
+const internationalGuideImages = uniqueImages([
+  "/images/og/van-kahvaltisi.jpg",
+  "/images/hero-parallax/overhead-feast.webp",
+  "/images/hands-table.webp",
+  "/images/breakfast-spread.webp",
+]);
 
 function uniqueImages(images: string[]) {
   return [...new Set(images.map((image) => absoluteUrl(image)))];
@@ -162,6 +181,24 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       lastModified: liveMenuLastModified,
       images: menuImages,
       alternates: menuLanguageAlternates,
+    },
+    {
+      url: englishBreakfastBlogUrl,
+      lastModified: pageLastModified,
+      images: internationalGuideImages,
+      alternates: internationalGuideAlternates,
+    },
+    {
+      url: russianBreakfastBlogUrl,
+      lastModified: pageLastModified,
+      images: internationalGuideImages,
+      alternates: internationalGuideAlternates,
+    },
+    {
+      url: arabicBreakfastBlogUrl,
+      lastModified: pageLastModified,
+      images: internationalGuideImages,
+      alternates: internationalGuideAlternates,
     },
     {
       url: privacyUrl,
