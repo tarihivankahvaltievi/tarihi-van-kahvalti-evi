@@ -401,6 +401,23 @@
 .faq details[open] summary::after { content: "−"; }
 .faq details p { max-width: 65ch; margin: -0.35rem 0 1.4rem; color: var(--guide-body); font-family: var(--font-literata-gf), Georgia, serif; font-size: 0.93rem; line-height: 1.72; }
 
+.sources {
+  display: grid;
+  grid-template-columns: minmax(16rem, 0.7fr) minmax(0, 1.3fr);
+  gap: clamp(2.5rem, 7vw, 7rem);
+  padding: clamp(3.8rem, 7vw, 6rem) max(1.5rem, calc((100vw - 1180px) / 2));
+  border-top: 1px solid var(--guide-line);
+  background: #eee5d6;
+}
+
+.sources h2 { max-width: 14ch; color: var(--guide-burgundy); font-size: clamp(2rem, 3.8vw, 3.4rem); }
+.sources p { max-width: 58ch; margin: 1rem 0 0; color: var(--guide-body); font-family: var(--font-literata-gf), Georgia, serif; font-size: 0.91rem; line-height: 1.72; }
+.sources ul { margin: 0; padding: 0; border-top: 1px solid var(--guide-ink); list-style: none; }
+.sources li { border-bottom: 1px solid var(--guide-line); }
+.sources a { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: 1rem 0; color: var(--guide-ink); font-size: 0.82rem; font-weight: 700; line-height: 1.45; text-decoration: none; }
+.sources a:hover { color: var(--guide-burgundy); text-decoration: underline; text-underline-offset: 0.24rem; }
+.sources svg { flex: 0 0 auto; }
+
 .closing {
   display: flex;
   align-items: end;
@@ -447,7 +464,7 @@
   .hero h1 { max-width: 11ch; font-size: clamp(3rem, 14vw, 4.65rem); }
   .heroVisual { min-height: 72svh; }
   .articleNav { padding-inline: 1.25rem; }
-  .answer, .sectionHeading, .tradition, .reasons, .firstVisit > header, .practical, .faq { grid-template-columns: 1fr; }
+  .answer, .sectionHeading, .tradition, .reasons, .firstVisit > header, .practical, .faq, .sources { grid-template-columns: 1fr; }
   .answer { width: min(100% - 2.5rem, 1180px); gap: 1.5rem; padding-block: 4.5rem; }
   .sectionHeading { gap: 1.4rem; }
   .sectionHeading h2 { max-width: 15ch; }

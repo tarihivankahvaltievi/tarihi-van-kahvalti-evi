@@ -1,6 +1,5 @@
 import type { MetadataRoute } from "next";
 import { connection } from "next/server";
-import { menuCategories, menuItems } from "./menu/menu-data";
 import { getMenuData } from "./menu/menu-storage";
 import {
   absoluteUrl,
@@ -106,16 +105,15 @@ const homeImages = uniqueImages([
   "/images/hero-float/apricot-jam-bowl.webp",
 ]);
 
-const menuImages = uniqueImages([
-  "/images/og/menu.jpg",
-  ...menuCategories.map((category) => category.image),
-  ...menuItems.map((item) => item.image),
-]);
-
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   await connection();
-  const { lastUpdated } = await getMenuData();
+  const { categories, items, lastUpdated } = await getMenuData();
   const liveMenuLastModified = menuLastModified(lastUpdated);
+  const menuImages = uniqueImages([
+    "/images/og/menu.jpg",
+    ...categories.map((category) => category.image),
+    ...items.map((item) => item.image),
+  ]);
 
   return [
     {

@@ -15,6 +15,9 @@ const defaultUrls = [
   `${siteUrl}/konum`,
   `${siteUrl}/en`,
   `${siteUrl}/en/menu`,
+  `${siteUrl}/en/blog/turkish-breakfast-istanbul`,
+  `${siteUrl}/ru/blog/turetskiy-zavtrak-stambul`,
+  `${siteUrl}/ar/blog/turkish-breakfast-istanbul`,
 ];
 
 const scriptDirectory = path.dirname(fileURLToPath(import.meta.url));

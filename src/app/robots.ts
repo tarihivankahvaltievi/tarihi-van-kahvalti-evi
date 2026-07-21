@@ -14,7 +14,10 @@ export default function robots(): MetadataRoute.Robots {
         disallow: ["/api/admin/", "/_next/server/"],
       },
       {
-        userAgent: "OAI-SearchBot",
+        // Arama ve cevap-grounding botları wildcard kuralına zaten uyar;
+        // açık grup, ileride başka genel bot politikaları eklense de keşif
+        // erişimlerinin yanlışlıkla kapanmasını önler.
+        userAgent: ["Googlebot", "Bingbot", "YandexBot", "Applebot", "OAI-SearchBot", "PerplexityBot"],
         allow: "/",
         disallow: ["/api/admin/", "/_next/server/"],
       },

@@ -1,3 +1,5 @@
+import { coreVanBreakfastCitations } from "../content-sources";
+
 export type GuideLocale = "en" | "ru" | "ar";
 
 export type GuideContent = {
@@ -39,6 +41,11 @@ export type GuideContent = {
     labels: { address: string; hours: string; route: string; menu: string; call: string };
   };
   faq: { title: string; items: { question: string; answer: string }[] };
+  sources: {
+    title: string;
+    note: string;
+    items: { label: string; url: string }[];
+  };
   closing: { title: string; text: string; menu: string; directions: string };
   footer: { note: string; home: string; menu: string; directions: string };
   updatedLabel: string;
@@ -50,6 +57,27 @@ export const guidePaths = {
   en: "/en/blog/turkish-breakfast-istanbul",
   ru: "/ru/blog/turetskiy-zavtrak-stambul",
   ar: "/ar/blog/turkish-breakfast-istanbul",
+} as const;
+
+const sourceItems = {
+  en: [
+    { label: "TÜRKPATENT — Van Breakfast, geographical indication No. 504", url: coreVanBreakfastCitations[0] },
+    { label: "Republic of Türkiye Culture Portal — Van herb cheese", url: coreVanBreakfastCitations[1] },
+    { label: "Republic of Türkiye Culture Portal — Murtuğa", url: coreVanBreakfastCitations[2] },
+    { label: "TÜRKPATENT — Van kavut, geographical indication No. 390", url: coreVanBreakfastCitations[3] },
+  ],
+  ru: [
+    { label: "TÜRKPATENT — Ванский завтрак, географическое указание № 504", url: coreVanBreakfastCitations[0] },
+    { label: "Культурный портал Турции — Ванский сыр с травами", url: coreVanBreakfastCitations[1] },
+    { label: "Культурный портал Турции — Муртуга", url: coreVanBreakfastCitations[2] },
+    { label: "TÜRKPATENT — Ванский кавут, географическое указание № 390", url: coreVanBreakfastCitations[3] },
+  ],
+  ar: [
+    { label: "TÜRKPATENT — فطور فان، التسجيل الجغرافي رقم 504", url: coreVanBreakfastCitations[0] },
+    { label: "بوابة الثقافة التركية — جبن فان بالأعشاب", url: coreVanBreakfastCitations[1] },
+    { label: "بوابة الثقافة التركية — مورتوغا", url: coreVanBreakfastCitations[2] },
+    { label: "TÜRKPATENT — كافوت فان، التسجيل الجغرافي رقم 390", url: coreVanBreakfastCitations[3] },
+  ],
 } as const;
 
 export const guides: Record<GuideLocale, GuideContent> = {
@@ -216,6 +244,11 @@ export const guides: Record<GuideLocale, GuideContent> = {
         { question: "What time is best for breakfast in Istanbul?", answer: "We serve from 08:00. Earlier weekday mornings are usually calmer, while late mornings and weekends have a more social atmosphere. Availability can vary, especially for groups." },
       ],
     },
+    sources: {
+      title: "Sources and editorial note",
+      note: "The cultural definitions in this guide were checked against Türkiye’s official geographical-indication records and public culture inventory. Current restaurant dishes, availability and prices are stated separately in the live menu.",
+      items: [...sourceItems.en],
+    },
     closing: {
       title: "Come for breakfast. Stay for the table.",
       text: "Taste the ingredients that make Van breakfast distinct, in a historic Beyoğlu address shaped by a family story that began in 1978.",
@@ -321,6 +354,11 @@ export const guides: Record<GuideLocale, GuideContent> = {
         { question: "В какое время лучше приходить на завтрак?", answer: "Мы открываемся в 08:00. Утром в будни обычно спокойнее, а поздним утром и в выходные атмосфера оживлённее. Для групп доступность столов может меняться." },
       ],
     },
+    sources: {
+      title: "Источники и редакционная заметка",
+      note: "Описания культуры и блюд сверены с официальными реестрами географических указаний и культурным порталом Турции. Актуальные блюда, наличие и цены указаны отдельно в онлайн-меню.",
+      items: [...sourceItems.ru],
+    },
     closing: { title: "Приходите за завтраком. Оставайтесь ради общения.", text: "Попробуйте вкусы настоящего ванского завтрака в историческом Бейоглу — там, где семейная история продолжается с 1978 года.", menu: "Посмотреть актуальное меню", directions: "Построить маршрут" },
     footer: { note: "Традиционный ванский завтрак в Бейоглу с 1978 года.", home: "Главная на английском", menu: "Меню", directions: "Как добраться" },
     updatedLabel: "Проверено",
@@ -420,6 +458,11 @@ export const guides: Record<GuideLocale, GuideContent> = {
         { question: "هل الفطور التركي مناسب للنباتيين؟", answer: "تعتمد أصناف تقليدية كثيرة على الجبن والخضار والبيض والخبز والعسل والمربى، لكن بعض الأطباق الساخنة تحتوي على اللحم. أخبر الفريق بتفضيلاتك واسأل عن المكونات الحالية قبل الطلب." },
         { question: "ما أفضل وقت للفطور في إسطنبول؟", answer: "نقدم الفطور من الساعة 08:00. تكون صباحات أيام الأسبوع المبكرة أهدأ عادة، بينما تكون الساعات المتأخرة وعطلات نهاية الأسبوع أكثر حيوية. قد يختلف توفر الطاولات للمجموعات." },
       ],
+    },
+    sources: {
+      title: "المصادر وملاحظة التحرير",
+      note: "تمت مراجعة التعريفات الثقافية في هذا الدليل بالرجوع إلى سجلات المؤشرات الجغرافية الرسمية وبوابة الثقافة التركية. تُذكر الأطباق الحالية والتوفر والأسعار بشكل منفصل في القائمة المباشرة.",
+      items: [...sourceItems.ar],
     },
     closing: { title: "تعال من أجل الفطور، وابقَ من أجل المائدة.", text: "تذوق ما يميز فطور فان في عنوان تاريخي ببيوغلو، تصوغه قصة عائلية بدأت عام 1978.", menu: "شاهد قائمة اليوم", directions: "احصل على الاتجاهات" },
     footer: { note: "فطور فان التقليدي في بيوغلو منذ 1978.", home: "الصفحة الإنجليزية", menu: "القائمة", directions: "الاتجاهات" },

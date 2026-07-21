@@ -1,6 +1,6 @@
 import { request as httpRequest } from "node:http";
 import { request as httpsRequest } from "node:https";
-import { readdir } from "node:fs/promises";
+import { readFile, readdir } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -136,6 +136,7 @@ const routes = [
     sharedGuideDesign: true,
     visibleSignals: ["turkish breakfast", "van breakfast", "taksim", "murtuğa", "since 1978"],
     hreflang: internationalGuideHreflang,
+    sourcedGuide: true,
   },
   {
     path: "/ru/blog/turetskiy-zavtrak-stambul",
@@ -148,6 +149,7 @@ const routes = [
     sharedGuideDesign: true,
     visibleSignals: ["турецкий завтрак", "ванский завтрак", "таксим", "муртуга", "1978"],
     hreflang: internationalGuideHreflang,
+    sourcedGuide: true,
   },
   {
     path: "/ar/blog/turkish-breakfast-istanbul",
@@ -161,6 +163,7 @@ const routes = [
     sharedGuideDesign: true,
     visibleSignals: ["الفطور التركي", "فطور فان", "تقسيم", "المورتوغا", "1978"],
     hreflang: internationalGuideHreflang,
+    sourcedGuide: true,
   },
 ];
 
@@ -471,6 +474,16 @@ for (const route of routes) {
   assert(new Set(questions).size === questions.length, `${routeLabel}: şema soruları benzersiz değil`);
   assert(summaries.length === route.faqCount, `${routeLabel}: görünür SSS sayısı yanlış`);
   assert(questions.every((question) => summaries.includes(question)), `${routeLabel}: görünür SSS ve şema eşleşmiyor`);
+
+  if (route.sourcedGuide) {
+    const article = graphDocument["@graph"].find((node) => node["@type"] === "BlogPosting");
+    assert(article?.citation?.length === 4, `${routeLabel}: dört birincil kaynak citation olarak bağlanmalı`);
+    assert(article?.mentions?.length === 3, `${routeLabel}: yöresel ürün entity bağları eksik`);
+    assert(
+      article.citation.every((url) => html.includes(`href="${url}"`)),
+      `${routeLabel}: JSON-LD kaynakları görünür bağlantılarla eşleşmeli`,
+    );
+  }
 }
 
 for (const route of legalRoutes) {
@@ -550,7 +563,9 @@ for (const sitemapPath of sitemapPaths) {
 
 const robots = await (await fetchWithRetry("/robots.txt")).text();
 assert(robots.includes("User-Agent: *"), "robots.txt: genel bot kuralı eksik");
-assert(robots.includes("User-Agent: OAI-SearchBot"), "robots.txt: OAI-SearchBot kuralı eksik");
+for (const userAgent of ["Googlebot", "Bingbot", "YandexBot", "Applebot", "OAI-SearchBot", "PerplexityBot"]) {
+  assert(robots.includes(`User-Agent: ${userAgent}`), `robots.txt: ${userAgent} keşif kuralı eksik`);
+}
 assert(robots.includes(`${canonicalSiteUrl}/sitemap.xml`), "robots.txt: sitemap eksik");
 assert(!/^Disallow:\s*\/admin\s*$/im.test(robots), "robots.txt: admin noindex talimatının okunmasını engellememeli");
 assert(/^Disallow:\s*\/api\/admin\/\s*$/im.test(robots), "robots.txt: yönetim API'si taramaya kapalı olmalı");
@@ -581,6 +596,17 @@ const indexNowKey = "4f9d1a7c8b6e3f205d72a941ce8b604a";
 const indexNowResponse = await fetchWithRetry(`/${indexNowKey}.txt`);
 assert(indexNowResponse.status === 200, "IndexNow: anahtar dosyası yayınlanmalı");
 assert((await indexNowResponse.text()).trim() === indexNowKey, "IndexNow: anahtar içeriği yanlış");
+const indexNowScript = await readFile(
+  path.resolve(path.dirname(fileURLToPath(import.meta.url)), "submit-indexnow.mjs"),
+  "utf8",
+);
+for (const guidePath of [
+  "/en/blog/turkish-breakfast-istanbul",
+  "/ru/blog/turetskiy-zavtrak-stambul",
+  "/ar/blog/turkish-breakfast-istanbul",
+]) {
+  assert(indexNowScript.includes(guidePath), `IndexNow: yeni rehber varsayılan bildirim listesinde eksik (${guidePath})`);
+}
 
 const googleVerificationFile = "google2920058c70b54fb8.html";
 const googleVerificationResponse = await fetchWithRetry(`/${googleVerificationFile}`);

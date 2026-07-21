@@ -196,6 +196,22 @@ export function InternationalBreakfastGuide({ guide }: { guide: GuideContent }) 
           </div>
         </section>
 
+        <aside className={styles.sources} aria-labelledby="guide-sources-title">
+          <div>
+            <h2 id="guide-sources-title">{guide.sources.title}</h2>
+            <p>{guide.sources.note}</p>
+          </div>
+          <ul>
+            {guide.sources.items.map((source) => (
+              <li key={source.url}>
+                <a href={source.url} target="_blank" rel="noopener noreferrer">
+                  {source.label} <ArrowUpRight size={14} aria-hidden="true" />
+                </a>
+              </li>
+            ))}
+          </ul>
+        </aside>
+
         <section className={styles.closing}>
           <div>
             <h2>{guide.closing.title}</h2>

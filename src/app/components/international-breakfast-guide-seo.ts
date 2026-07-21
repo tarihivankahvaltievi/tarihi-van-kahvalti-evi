@@ -124,6 +124,7 @@ export function buildGuideJsonLd(guide: GuideContent) {
         wordCount: guideWordCount(guide),
         articleSection: "Turkish breakfast guide",
         keywords: keywords[guide.locale].join(", "),
+        citation: guide.sources.items.map((source) => source.url),
         image: [
           primaryImage,
           absoluteUrl("/images/hero-parallax/overhead-feast.webp"),
@@ -137,9 +138,13 @@ export function buildGuideJsonLd(guide: GuideContent) {
         },
         publisher: { "@id": `${siteUrl}/#restaurant` },
         about: [
-          { "@type": "Thing", name: "Turkish breakfast" },
-          { "@type": "Thing", name: "Van breakfast" },
+          { "@type": "Thing", name: "Van breakfast", sameAs: guide.sources.items[0].url },
           { "@type": "Place", name: "Beyoğlu, Istanbul" },
+        ],
+        mentions: [
+          { "@type": "Thing", name: guide.table.items[0].name, sameAs: guide.sources.items[1].url },
+          { "@type": "Thing", name: guide.table.items[1].name, sameAs: guide.sources.items[2].url },
+          { "@type": "Thing", name: guide.table.items[2].name, sameAs: guide.sources.items[3].url },
         ],
       },
       {
@@ -149,6 +154,7 @@ export function buildGuideJsonLd(guide: GuideContent) {
         name: guide.title,
         description: guide.description,
         inLanguage: guide.languageTag,
+        dateModified: modifiedDate,
         isPartOf: { "@id": `${siteUrl}/#website` },
         about: { "@id": `${siteUrl}/#restaurant` },
         mainEntity: { "@id": `${pageUrl}#article` },

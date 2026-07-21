@@ -5,6 +5,7 @@ import { ArrowDown, ArrowUpRight, BookOpen, MapPin, UtensilsCrossed } from "luci
 import ClientPage from "../client-page";
 import { AnimatedFooter } from "../components/animated-footer";
 import styles from "./culture-guide.module.css";
+import { vanBreakfastSources as sources } from "../content-sources";
 import {
   absoluteUrl,
   breakfastCultureUrl,
@@ -20,17 +21,6 @@ import {
 const pageTitle = "Van Kahvaltısı Nedir? İçindekiler ve Sofra Kültürü";
 const pageDescription =
   "Van kahvaltısı nedir, içinde neler olur? Otlu peynir, murtuğa, kavut, cacık ve gül reçelini; süt evlerinden bugüne sofra kültürüyle keşfedin.";
-
-const sources = {
-  vanBreakfast:
-    "https://ci.turkpatent.gov.tr/Files/GeographicalSigns/26210cd7-fc2e-44fa-869e-889ee83c71f2.pdf",
-  herbCheese: "https://www.kulturportali.gov.tr/turkiye/van/nealinir/van-otlu-peyniri",
-  murtuga: "https://kulturportali.gov.tr/turkiye/van/neyenir/murtuga",
-  murtugaRegistration: "https://ci.turkpatent.gov.tr/cografi-isaretler/detay/38298",
-  kavut: "https://www.kulturportali.gov.tr/turkiye/van/neyenir/gavut",
-  kavutRegistration:
-    "https://ci.turkpatent.gov.tr/Files/GeographicalSigns/026861b9-c7d0-4a7a-9910-3ac03a16bcd7.pdf",
-} as const;
 
 const cultureFaqItems = [
   {
@@ -198,10 +188,10 @@ export default function VanBreakfastCulturePage() {
         isPartOf: { "@id": `${siteUrl}/#website` },
         publisher: { "@id": `${siteUrl}/#restaurant` },
         about: [
-          { "@type": "Thing", name: "Van kahvaltısı" },
-          { "@type": "Thing", name: "Van otlu peyniri" },
-          { "@type": "Thing", name: "Murtuğa" },
-          { "@type": "Thing", name: "Van kavutu" },
+          { "@type": "Thing", name: "Van kahvaltısı", sameAs: sources.vanBreakfast },
+          { "@type": "Thing", name: "Van otlu peyniri", sameAs: sources.herbCheese },
+          { "@type": "Thing", name: "Murtuğa", sameAs: sources.murtugaRegistration },
+          { "@type": "Thing", name: "Van kavutu", sameAs: sources.kavutRegistration },
         ],
         dateModified: "2026-07-20",
         citation: Object.values(sources),

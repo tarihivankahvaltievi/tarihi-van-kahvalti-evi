@@ -34,9 +34,10 @@ Tabela, ruhsat veya işletme belgesine göre doğru kapı numarasını teyit etm
 
 1. [Bing Webmaster Tools](https://www.bing.com/webmasters/) içinde siteyi Google Search Console'dan içe aktarın veya `https://www.tarihivankahvaltievi.com` olarak ekleyin.
 2. Meta etiket yönteminde verilen `msvalidate.01` etiketinin yalnız `content="..."` değerini hosting panelinde `BING_SITE_VERIFICATION` ortam değişkenine girin ve siteyi yeniden dağıtın.
-3. `https://www.tarihivankahvaltievi.com/sitemap.xml` sitemap'ini gönderin; URL Inspection ile sekiz kanonik sayfayı kontrol edin.
+3. `https://www.tarihivankahvaltievi.com/sitemap.xml` sitemap'ini gönderin; URL Inspection ile 13 kanonik sayfanın sitemap'ten keşfedildiğini kontrol edin.
 4. [Bing Places for Business](https://www.bing.com/forbusiness/) içinde işletmeyi ad ve telefonla arayın. Varsa sahiplenin, yoksa tek bir kayıt açın.
 5. Yandex bölümünde doğruladığınız aynı ad, adres, telefon, pin, çalışma saatleri, kategori, web sitesi ve menü adreslerini kullanın.
+6. Bing Webmaster Tools içindeki **AI Performance** raporunda toplam citation, grounding sorguları ve sayfa bazlı citation aktivitesini aylık dışa aktarın. Bunlar sıralama değil, Bing/Copilot ve desteklenen partner yüzeylerinde kaynak kullanımı göstergeleridir.
 
 ## Her dağıtımdan sonra
 

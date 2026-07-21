@@ -27,7 +27,7 @@ npm start
 - Türkçe `/` ve İngilizce `/en` ana sayfaları aynı `ClientPage` + `HomeContent` bileşen ağacını kullanır. Dil metinleri ve bağlantıları `src/app/home-localization.ts` içinden gelir; iki dil için ayrı ana sayfa tasarımı oluşturulmamalıdır.
 - Üst navigasyondaki `EN` / `TR` anahtarı kullanıcıyı karşılık gelen kanonik dil URL'sine götürür. Otomatik IP veya tarayıcı dili yönlendirmesi yapılmaz.
 - Eski konu/WordPress URL'leri yalnız bilinen eşdeğer hedefe tek adım kalıcı yönlenir; bilinmeyen URL'ler gerçek `404` döner.
-- Sitemap ve tarayıcı kuralları: `src/app/sitemap.ts`, `src/app/robots.ts`. XML sitemap yalnız indekslenebilir kanonik sayfaları; bu sayfalardaki keşfedilebilir özgün görselleri ve iki karşılıklı hreflang kümesini içerir.
+- Sitemap ve tarayıcı kuralları: `src/app/sitemap.ts`, `src/app/robots.ts`. XML sitemap yalnız indekslenebilir kanonik sayfaları; canlı menüden okunan keşfedilebilir görselleri ve ana sayfa, menü ve uluslararası rehberler için üç karşılıklı hreflang kümesini içerir.
 - Otomatik SEO/HTTP sözleşmesi: `npm run test:seo`
 
 Adres, telefon, çalışma saatleri veya fiyatlar değiştiğinde önce `seo.ts` güncellenmeli; görünür içerik ile JSON-LD aynı kaynaktan beslenmelidir.

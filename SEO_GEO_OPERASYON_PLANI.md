@@ -1,13 +1,13 @@
 # SEO ve GEO operasyon planı
 
-Son teknik revizyon ve dış kaynak denetimi: 20 Temmuz 2026
+Son teknik revizyon, canlı site kontrolü ve dış kaynak denetimi: 21 Temmuz 2026
 
 Bu belge, `van kahvaltıcısı`, `Beyoğlu kahvaltı`, `Taksim kahvaltı`, `Turkish breakfast near Taksim` ve ilgili yerel niyetli aramalarda organik görünürlüğü artırmak için teknik durum ile işletme hesabı gerektiren işleri birlikte izler. Google'da veya başka bir arama motorunda birinci sıra garanti edilemez. Google'ın açıkladığı yerel sonuç bileşenleri alaka düzeyi, mesafe ve bilinirliktir; teknik iyileştirmeler erişimi ve anlaşılabilirliği güçlendirir, kullanıcının konumunu veya rekabeti ortadan kaldırmaz.
 
 ## Uygulanan teknik SEO/GEO kapsamı
 
-- Sitemap sekiz indekslenebilir kanonik URL'yi içerir: `/`, `/menu`, `/van-kahvaltisi`, `/van-kahvaltisi-nedir`, `/hikayemiz`, `/konum`, `/en` ve `/en/menu`. Eski, yönlendirilen veya `noindex` yardımcı URL'ler sitemap'e alınmaz.
-- Görsel sitemap kapsamı ana sayfadaki galeri/hero varlıklarını, canlı menü ürün görsellerini ve yeni rehber/hikâye sayfalarındaki gerçek görselleri sayfa bazında listeler. Yinelenen görsel URL'leri her sayfada tekilleştirilir.
+- Sitemap 13 indekslenebilir kanonik URL'yi içerir: altı Türkçe ana içerik sayfası, Türkçe/İngilizce menü, İngilizce ana ziyaretçi sayfası, İngilizce/Rusça/Arapça uluslararası rehberler ve iki yasal bilgilendirme sayfası. Eski, yönlendirilen, yönetim veya API URL'leri sitemap'e alınmaz.
+- Görsel sitemap kapsamı ana sayfadaki galeri/hero varlıklarını, canlı menü verisinden okunan güncel kategori/ürün görsellerini ve rehber/hikâye sayfalarındaki gerçek görselleri sayfa bazında listeler. Yinelenen görsel URL'leri her sayfada tekilleştirilir.
 - Türkçe ana sayfa ile İngilizce ziyaretçi rehberi arasında karşılıklı `tr`, `en` ve `x-default` hreflang ilişkisi hem sayfa başlıklarında hem sitemap'te tanımlıdır.
 - Türkçe canlı menü ile İngilizce canlı menü arasında ayrı ve karşılıklı `tr`, `en` ve `x-default` hreflang kümesi bulunur. İngilizce menü, aynı Supabase menü kaynağından güncel fiyatları alır ve özgün İngilizce ürün açıklamaları sunar.
 - `/van-kahvaltisi`, yerel ziyaret niyeti için Taksim erişimi, servis biçimi, vejetaryen seçenekler ve ziyaret planını görünür HTML'de açıklayan kullanıcı rehberidir. `/van-kahvaltisi-nedir`, bilgi arama niyeti için 1947 süt evi geçmişini, 504 numaralı coğrafi işaret kaydını, otlu peynir, murtuğa, Van kavut ve diğer temel ürünleri resmî kaynaklarla açıklayan ayrı kültür rehberidir. `/hikayemiz`, 1978 aile yolculuğunu ve Zambak Sokak'taki mekân yaklaşımını doğrulanabilir mevcut işletme gerçekleriyle anlatır.
@@ -17,11 +17,11 @@ Bu belge, `van kahvaltıcısı`, `Beyoğlu kahvaltı`, `Taksim kahvaltı`, `Turk
 - Site genelinde tek ve kararlı işletme kimlikleri (`#restaurant`, `#website`, sayfa kimlikleri), self-canonical, özgün title/description, Open Graph ve Twitter metadata kullanılır. İngilizce FAQ şemasının dili `en` olarak düzeltilmiştir.
 - Konum sayfasındaki yaklaşık 1 MB harita JavaScript'i ilk açılıştan çıkarıldı. Erişilebilir statik konum kartı, adres ve Google Maps bağlantısı hemen gelir; MapLibre yalnız kullanıcı “Etkileşimli haritayı yükle” dediğinde yüklenir.
 - Ana sayfanın gerçek LCP görseli `eager` ve `fetchPriority=high` olarak işaretlendi; dekoratif görseller daha ölçülü kaliteyle sunulur. Yinelenen görsel/sr-only H1 ve yinelenen giriş metni kaldırıldı.
-- Footer'daki ölü politika metinleri gerçek `/gizlilik` ve `/cerez-politikasi` sayfalarına dönüştürüldü. Bu yardımcı sayfalar gezinilebilir ama arama sonucu sayfası olarak değer taşımadıkları için `noindex, follow` kullanır.
-- `robots.txt` genel botlara, Applebot'a, Google/Bing/Yandex tarayıcılarına ve `OAI-SearchBot`a açık kanonik içerik sunar; yalnız yönetim ve sunucu içi yollar kapalıdır. Kanonik sitemap adresi bildirilir.
-- IndexNow anahtarı alan adında yayımlanır ve `npm run seo:indexnow` Bing/Yandex gibi katılımcı motorlara değişen URL'leri toplu bildirir. Bu bir tarama bildirimi olup indeksleme veya sıralama garantisi değildir.
+- Footer'daki politika metinleri gerçek, self-canonical `/gizlilik` ve `/cerez-politikasi` sayfalarına bağlanır; yönetim ve API yüzeyleri ise ayrı `noindex` ve `X-Robots-Tag` kontrolleriyle arama sonuçlarından çıkarılır.
+- `robots.txt` genel botlara ek olarak Googlebot, Bingbot, YandexBot, Applebot, `OAI-SearchBot` ve `PerplexityBot` için açık arama/grounding grubu yayımlar; yalnız yönetim API'si ve sunucu içi yollar kapalıdır. Kanonik sitemap adresi bildirilir.
+- IndexNow anahtarı alan adında yayımlanır ve `npm run seo:indexnow` Bing, Naver, Seznam gibi katılımcı motorlara değişen URL'leri toplu bildirir. Varsayılan liste yeni İngilizce, Rusça ve Arapça rehberleri de kapsar. Bu bir tarama bildirimi olup indeksleme veya sıralama garantisi değildir.
 - Eski Türkçe sorgu URL'leri en yakın gerçek içeriğe, eski İngilizce sorgu URL'leri `/en` sayfasına tek adımlı kalıcı yönlenir.
-- Derleme sonrası SEO sözleşmesi sekiz kanonik sayfada canonical, hreflang, dil başlığı, title, description, H1, görünür metin, JSON-LD, sitemap, en az 50 görsel sitemap kaydı, doğru `lastmod`, robots, IndexNow anahtarı, yönlendirme, 404 ve doğrudan `200` dahili bağlantıları otomatik denetler.
+- Derleme sonrası SEO sözleşmesi 13 kanonik sayfada canonical, hreflang, dil başlığı, title, description, H1, görünür metin, JSON-LD, sitemap, en az 50 görsel sitemap kaydı, doğru `lastmod`, altı arama/AI botu, IndexNow kapsamı, yönlendirme, 404 ve doğrudan `200` dahili bağlantıları otomatik denetler. Uluslararası rehberlerde dört görünür birincil kaynak ile JSON-LD `citation`/`sameAs` eşleşmesi de sözleşmenin parçasıdır.
 
 ## Ölçülen performans etkisi
 
@@ -85,6 +85,9 @@ Denetlenen kayıtlar:
 ### ChatGPT ve diğer yapay zekâ sistemleri
 
 - `OAI-SearchBot` erişimi ChatGPT arama görünürlüğü içindir; OpenAI'nin açıkladığı üzere `GPTBot` eğitim tercihini ayrı kontrol eder. Mevcut robots politikası arama botuna açık kanonik içerik sunar.
+- Perplexity'nin resmî yayıncı dokümanı `PerplexityBot` erişiminin arama sonuçlarında kaynak gösterimi için açık tutulmasını önerir. Bot artık robots dosyasında açıkça tanımlıdır; Vercel katmanında ek bir WAF engeli bulunmadığı canlı HTTP kontrolüyle doğrulanmıştır.
+- Bing'in Şubat 2026'da açtığı AI Performance raporu; grounding sorgularını, kaynak gösterim sayısını ve sayfa bazlı citation aktivitesini sunar. Bing Webmaster Tools doğrulandıktan sonra klasik tıklama metrikleriyle birlikte bu rapor aylık izlenmelidir.
+- Uluslararası rehberlerdeki Van kahvaltısı, otlu peynir, murtuğa ve kavut tanımları TÜRKPATENT ile T.C. Kültür Portalı kaynaklarına görünür biçimde bağlanır; aynı URL'ler `BlogPosting.citation`, `about.sameAs` ve `mentions.sameAs` alanlarında kullanılır. Bu, görünür metin ile makine-okunur iddiaları aynı kanıta bağlar.
 - Google, AI Overviews/AI Mode için özel bir AI dosyası veya ek şema gerekmediğini açıklar. Ayrı `llms.txt`, “GEO schema” ya da görünmez anahtar kelime bloğu eklenmedi; yararlı görünür metin, taranabilir bağlantı, doğru schema ve güncel işletme gerçekleri güçlendirildi.
 - İngilizce ziyaretçi rehberi ve İngilizce canlı menü; turistlerin kullandığı yemek adlarını, güncel fiyatları, konumu, saatleri ve kısa cevapları görünür HTML'de sunar. Böylece bilgi yalnız script veya görsel içinde kalmaz.
 - Şemaya yapay puan, yorum, ödül, hizmet alanı, kurucu hikâyesi veya doğrulanmamış `sameAs` eklenmemelidir.
@@ -99,7 +102,7 @@ Denetlenen kayıtlar:
 
 ## 30/60/90 günlük ölçüm rutini
 
-- İlk 30 gün: Search Console/Bing/Yandex doğrulama, sitemap, profil saat-adres düzeltmeleri, sekiz kanonik URL'nin indeks durumu ve ilk sorgu tablosu.
+- İlk 30 gün: Search Console/Bing/Yandex doğrulama, sitemap, profil saat-adres düzeltmeleri, 13 kanonik URL'nin indeks durumu ve ilk sorgu tablosu. Bing'de Search Performance yanında AI Performance / grounding sorgularının başlangıç görüntüsünü kaydedin.
 - 31–60 gün: gerçek müşteri yorum akışı, fotoğraf güncellemeleri, İngilizce sorguların gösterim/CTR incelemesi, düşük CTR title/description testi. Aynı anda tek anlamlı değişiklik yapın.
 - 61–90 gün: sorgu niyetine göre yeni içeriğe gerçekten ihtiyaç olup olmadığını değerlendirin; NAP düzeltmelerinin yayılımını ve 28 günlük Core Web Vitals saha verisini karşılaştırın.
 - Sıralamayı kişiselleştirilmiş tek bir tarayıcı aramasından değil, Search Console sorgu/sayfa verisi ve profil eylemlerinden değerlendirin.
@@ -109,14 +112,17 @@ Denetlenen kayıtlar:
 - Google yerel sıralama: https://support.google.com/business/answer/7091
 - Google LocalBusiness yapılandırılmış verisi: https://developers.google.com/search/docs/appearance/structured-data/local-business
 - Google AI özellikleri ve site görünürlüğü: https://developers.google.com/search/docs/appearance/ai-features
+- Google generative AI optimizasyon rehberi: https://developers.google.com/search/docs/fundamentals/ai-optimization-guide
 - Google yararlı içerik: https://developers.google.com/search/docs/fundamentals/creating-helpful-content
 - Google taranabilir bağlantılar: https://developers.google.com/search/docs/crawling-indexing/links-crawlable
 - Google hreflang: https://developers.google.com/search/docs/specialty/international/localized-versions
 - Bing Webmaster Guidelines: https://www.bing.com/webmasters/help/webmaster-guidelines-30fba23a
 - IndexNow dokümantasyonu: https://www.indexnow.org/documentation?hl=en
 - Bing IndexNow açıklaması: https://www.bing.com/webmasters/help/indexnow-0z209wby
+- Bing AI Performance ve GEO ölçümü: https://blogs.bing.com/webmaster/February-2026/Introducing-AI-Performance-in-Bing-Webmaster-Tools-Public-Preview
 - Yandex indeksleme: https://yandex.com/support/webmaster/en/yandex-indexing/site-indexing
 - Yandex sitemap: https://yandex.com/support/webmaster/en/indexing-options/sitemap
 - Applebot: https://support.apple.com/en-us/119829
 - OpenAI yayıncı ve geliştirici SSS: https://help.openai.com/en/articles/12627856-publishers-and-developers-faq
+- Perplexity tarayıcıları: https://docs.perplexity.ai/docs/resources/perplexity-crawlers
 - Reddit yerel SEO tartışması (resmî olmayan saha deneyimi): https://www.reddit.com/r/localseo/comments/1uv6pvk/what_local_seo_strategies_are_still_getting_you/
