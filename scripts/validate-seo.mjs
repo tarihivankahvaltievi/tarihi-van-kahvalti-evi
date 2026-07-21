@@ -379,6 +379,19 @@ for (const route of routes) {
     );
   }
 
+  if (!route.sharedGuideDesign) {
+    for (const [language, href] of Object.entries({
+      en: "/en/blog/turkish-breakfast-istanbul",
+      ru: "/ru/blog/turetskiy-zavtrak-stambul",
+      ar: "/ar/blog/turkish-breakfast-istanbul",
+    })) {
+      assert(
+        new RegExp(`<a(?=[^>]*href="${href}")(?=[^>]*hrefLang="${language}")[^>]*>`, "i").test(html),
+        `${routeLabel}: navbar ${language} rehber bağlantısı eksik`,
+      );
+    }
+  }
+
   if (route.path === "/") {
     assert(
       /<a[^>]+class="nav-language"(?=[^>]*hrefLang="en")(?=[^>]*href="\/en")[^>]*>/i.test(html),
@@ -491,6 +504,23 @@ assert(sitemap.includes('hreflang="en"'), "Sitemap: İngilizce hreflang eksik");
 assert(sitemap.includes('hreflang="ru"'), "Sitemap: Rusça hreflang eksik");
 assert(sitemap.includes('hreflang="ar"'), "Sitemap: Arapça hreflang eksik");
 assert(sitemap.includes('hreflang="x-default"'), "Sitemap: x-default hreflang eksik");
+
+for (const guideUrl of [englishBreakfastBlogUrl, russianBreakfastBlogUrl, arabicBreakfastBlogUrl]) {
+  const guideBlock = sitemap.match(
+    new RegExp(`<url>\\s*<loc>${guideUrl}</loc>([\\s\\S]*?)</url>`),
+  )?.[1];
+  assert(guideBlock, `Sitemap: rehber URL bloğu eksik (${guideUrl})`);
+  for (const [language, alternateUrl] of Object.entries(internationalGuideHreflang)) {
+    assert(
+      guideBlock.includes(`hreflang="${language}" href="${alternateUrl}"`),
+      `Sitemap: ${guideUrl} için ${language} karşılıklı hreflang eksik`,
+    );
+  }
+  assert(
+    (guideBlock.match(/<image:loc>/g) ?? []).length === 4,
+    `Sitemap: ${guideUrl} için dört keşfedilebilir görsel bulunmalı`,
+  );
+}
 
 const appDirectory = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../src/app");
 const appFiles = await readdir(appDirectory, { recursive: true });

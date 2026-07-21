@@ -62,6 +62,11 @@ export const homeMessages = {
       galleryItem: ["Galeri", "Bakır, çay, masa"],
       directions: ["Konum", "Beyoğlu rotası"],
       breakfast: ["Van kahvaltısı", "Yöresel lezzetler ve fiyatlar"],
+      internationalGuides: [
+        ["/en/blog/turkish-breakfast-istanbul", "English guide", "Traditional Turkish breakfast", "en"],
+        ["/ru/blog/turetskiy-zavtrak-stambul", "Русский гид", "Турецкий завтрак в Стамбуле", "ru"],
+        ["/ar/blog/turkish-breakfast-istanbul", "الدليل العربي", "الفطور التركي في إسطنبول", "ar"],
+      ],
       questions: ["Sıkça sorulanlar", "Kısa ve net cevaplar"],
       whatsapp: ["WhatsApp", "Hızlı iletişim"],
       book: "Masada yerini ayırt",
@@ -197,6 +202,11 @@ export const homeMessages = {
       galleryItem: ["Gallery", "Copper pans, tea and shared tables"],
       directions: ["Directions", "Find us near Taksim"],
       breakfast: ["Van breakfast", "Meet the regional specialities"],
+      internationalGuides: [
+        ["/en/blog/turkish-breakfast-istanbul", "English guide", "Traditional Turkish breakfast", "en"],
+        ["/ru/blog/turetskiy-zavtrak-stambul", "Русский гид", "Турецкий завтрак в Стамбуле", "ru"],
+        ["/ar/blog/turkish-breakfast-istanbul", "الدليل العربي", "الفطور التركي في إسطنبول", "ar"],
+      ],
       questions: ["Visitor questions", "Clear answers before you arrive"],
       whatsapp: ["WhatsApp", "Ask us directly"],
       book: "Request a table",

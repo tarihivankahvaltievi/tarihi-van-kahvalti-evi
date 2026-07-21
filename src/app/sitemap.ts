@@ -22,7 +22,7 @@ import {
 
 // lastmod yalnız görünür ana içerik gerçekten değiştiğinde güncellenir.
 // Her derlemede "şimdi" üretmek arama motorlarına yanıltıcı bir sinyal verir.
-const pageLastModified = "2026-07-20T15:00:00+03:00";
+const pageLastModified = "2026-07-21T15:00:00+03:00";
 
 const homeLanguageAlternates = {
   languages: {

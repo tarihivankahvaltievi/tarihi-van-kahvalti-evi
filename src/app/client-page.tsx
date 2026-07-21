@@ -335,7 +335,26 @@ export default function ClientPage({ children, locale = "tr" }: { children: Reac
               </span>
               <ChevronRight size={17} />
             </Link>
-            <Link className="nav-menu-utility" href={messages.faqHref} tabIndex={menuOpen ? 0 : -1} style={{ "--item-index": 7 } as CSSProperties} onClick={() => setMenuOpen(false)}>
+            {messages.nav.internationalGuides.map(([href, label, meta, language], index) => (
+              <Link
+                key={href}
+                className="nav-menu-utility nav-menu-guide"
+                href={href}
+                hrefLang={language}
+                lang={language}
+                tabIndex={menuOpen ? 0 : -1}
+                style={{ "--item-index": index + 7 } as CSSProperties}
+                onClick={() => setMenuOpen(false)}
+              >
+                <Languages size={18} />
+                <span className="nav-menu-copy">
+                  <span className="nav-menu-link-text"><bdi>{label}</bdi></span>
+                  <span className="nav-menu-link-meta"><bdi>{meta}</bdi></span>
+                </span>
+                <ChevronRight size={17} />
+              </Link>
+            ))}
+            <Link className="nav-menu-utility" href={messages.faqHref} tabIndex={menuOpen ? 0 : -1} style={{ "--item-index": 10 } as CSSProperties} onClick={() => setMenuOpen(false)}>
               <CircleHelp size={18} />
               <span className="nav-menu-copy">
                 <span className="nav-menu-link-text">{messages.nav.questions[0]}</span>
@@ -347,7 +366,7 @@ export default function ClientPage({ children, locale = "tr" }: { children: Reac
               className="nav-menu-utility"
               href={whatsappUrl}
               tabIndex={menuOpen ? 0 : -1}
-              style={{ "--item-index": 8 } as CSSProperties}
+              style={{ "--item-index": 11 } as CSSProperties}
               target="_blank"
               rel="noopener noreferrer"
               onClick={() => setMenuOpen(false)}
@@ -365,7 +384,7 @@ export default function ClientPage({ children, locale = "tr" }: { children: Reac
               hrefLang={locale === "en" ? "tr" : "en"}
               lang={locale === "en" ? "tr" : "en"}
               tabIndex={menuOpen ? 0 : -1}
-              style={{ "--item-index": 9 } as CSSProperties}
+              style={{ "--item-index": 12 } as CSSProperties}
               onClick={() => setMenuOpen(false)}
             >
               <Languages size={18} />
