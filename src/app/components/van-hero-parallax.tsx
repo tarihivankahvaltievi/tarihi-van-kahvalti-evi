@@ -354,13 +354,34 @@ export function VanHeroParallax({ locale = "tr" }: { locale?: SiteLocale }) {
               </span>
               <span className="hero-provenance-place">{messages.hero.place}</span>
             </div>
-            <h1 className="hero-title-lockup">
-              <span className="hero-title-line hero-title-line-one">
-                {messages.hero.titleLineOne}{" "}
-                <span className="hero-title-accent">{messages.hero.titleAccent}</span>
+            <h1
+              className="hero-title-lockup hero-title-dimensional"
+              aria-label={`${messages.hero.titleLineOne} ${messages.hero.titleAccent} ${messages.hero.titleLineTwo}`}
+            >
+              <span className="hero-title-line hero-title-line-one" aria-hidden="true">
+                <span
+                  className="hero-title-word"
+                  data-title={messages.hero.titleLineOne}
+                  style={{ "--title-order": 0 } as CSSProperties}
+                >
+                  {messages.hero.titleLineOne}
+                </span>
+                <span
+                  className="hero-title-word hero-title-accent"
+                  data-title={messages.hero.titleAccent}
+                  style={{ "--title-order": 1 } as CSSProperties}
+                >
+                  {messages.hero.titleAccent}
+                </span>
               </span>
-              <span className="hero-title-line hero-title-line-two">
-                {messages.hero.titleLineTwo}
+              <span className="hero-title-line hero-title-line-two" aria-hidden="true">
+                <span
+                  className="hero-title-word"
+                  data-title={messages.hero.titleLineTwo}
+                  style={{ "--title-order": 2 } as CSSProperties}
+                >
+                  {messages.hero.titleLineTwo}
+                </span>
               </span>
             </h1>
             <p className="hero-intro">
