@@ -191,7 +191,7 @@ const routes = [
     htmlLanguage: "tr",
     types: ["Restaurant", "BlogPosting", "WebPage", "BreadcrumbList", "FAQPage"],
     restaurantMenu: `${menuPageUrl}#menu`,
-    faqCount: 6,
+    faqCount: 9,
     sharedGuideDesign: true,
     visibleSignals: ["イスタンブールで味わう", "バル・カイマク", "タクシム", "1978", "水牛のカイマク", "bal kaymak var mı?"],
     hreflang: internationalGuideHreflang,
@@ -526,6 +526,13 @@ for (const route of routes) {
     assert(html.includes('/en/menu#bal-kaymak-recel'), `${routeLabel}: doğrudan bal-kaymak menü bağlantısı eksik`);
     const article = graphDocument["@graph"].find((node) => node["@type"] === "BlogPosting");
     assert(article?.mentions?.some((item) => item["@type"] === "MenuItem"), `${routeLabel}: bal-kaymak MenuItem entity bağı eksik`);
+  }
+
+  if (route.language === "ja") {
+    assert(/<nav[^>]+aria-label="パンくずリスト"/i.test(html), `${routeLabel}: görünür Japonca breadcrumb eksik`);
+    assert(html.includes('href="/en#story"'), `${routeLabel}: görünür editör/işletme geçmişi bağlantısı eksik`);
+    const article = graphDocument["@graph"].find((node) => node["@type"] === "BlogPosting");
+    assert(article?.about?.filter((item) => item.sameAs).length === 4, `${routeLabel}: resmî kaynaklı entity bağları eksik`);
   }
 }
 

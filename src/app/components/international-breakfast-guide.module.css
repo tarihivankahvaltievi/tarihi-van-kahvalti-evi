@@ -239,6 +239,9 @@
   line-height: 1.5;
 }
 
+.byline a { color: inherit; text-decoration: underline; text-underline-offset: 0.2rem; }
+.byline a:hover { color: var(--guide-paper-light); }
+
 .heroVisual {
   position: relative;
   min-height: inherit;
@@ -294,6 +297,15 @@
 .articleNav strong { color: var(--guide-burgundy); }
 .articleNav a { text-underline-offset: 0.32rem; }
 .articleNav a:hover { color: var(--guide-burgundy); text-decoration: underline; }
+
+.breadcrumbs {
+  width: min(1180px, calc(100% - 3rem));
+  margin: 0 auto;
+  padding-top: 1.25rem;
+}
+.breadcrumbs ol { display: flex; flex-wrap: wrap; gap: 0.45rem; margin: 0; padding: 0; color: var(--guide-body); font-size: 0.74rem; list-style: none; }
+.breadcrumbs li + li::before { margin-inline-end: 0.45rem; color: var(--guide-gold); content: "/"; }
+.breadcrumbs a { color: var(--guide-burgundy); font-weight: 720; text-decoration: underline; text-underline-offset: 0.2rem; }
 
 .answer {
   display: grid;
@@ -562,6 +574,7 @@
   .hero h1 { max-width: 11ch; font-size: clamp(3rem, 14vw, 4.65rem); }
   .heroVisual { min-height: 72svh; }
   .articleNav { padding-inline: 1.25rem; }
+  .breadcrumbs { width: min(100% - 2.5rem, 1180px); }
   .answer, .sectionHeading, .tradition, .reasons, .firstVisit > header, .practical, .faq, .sources { grid-template-columns: 1fr; }
   .travelerBrief > header, .phrases { grid-template-columns: 1fr; }
   .answer { width: min(100% - 2.5rem, 1180px); gap: 1.5rem; padding-block: 4.5rem; }

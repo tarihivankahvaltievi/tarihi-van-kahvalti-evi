@@ -51,6 +51,8 @@ export type GuideContent = {
   updatedLabel: string;
   dateLabel: string;
   authorLabel: string;
+  authorHref?: string;
+  breadcrumbs?: { aria: string; home: string; current: string };
   media?: {
     hero: string;
     article: string;
@@ -61,6 +63,7 @@ export type GuideContent = {
     about: string[];
     mentions: string[];
     menuItem?: { name: string; description: string; url: string };
+    entityRefs?: { name: string; type?: "Thing" | "Place"; sameAs?: string }[];
   };
   travelerBrief?: {
     label: string;
@@ -813,11 +816,14 @@ export const guides: Record<GuideLocale, GuideContent> = {
         { question: "バル・カイマクだけを注文できますか？", answer: "メニュー構成と提供状況は当日の仕込みにより変わります。来店前にオンラインメニューをご確認いただくか、店舗へお問い合わせください。ヴァン式の共有朝食と一緒に味わうと、さまざまな組み合わせを楽しめます。" },
         { question: "予約は必要ですか？", answer: "空席があれば予約なしでもご案内できます。週末、祝日、大人数での来店は、電話またはWhatsAppで事前に席の状況を確認することをおすすめします。" },
         { question: "アレルギーがある場合はどうすればよいですか？", answer: "カイマクは乳製品です。朝食には卵、小麦、ナッツ類などのアレルゲンが含まれる場合があります。注文前にスタッフへ伝え、当日の材料と交差接触の可能性をご確認ください。" },
+        { question: "営業時間と朝食を食べられる時間は？", answer: "毎日08:00〜18:00に営業し、営業時間中は朝食メニューを提供しています。祝日などの特別営業時間は変更される場合があるため、来店前に店舗へご確認ください。" },
+        { question: "来店前にメニューと価格を確認できますか？", answer: "はい。ページ内の英語メニューから、現在の料理と価格を確認できます。季節の商品や当日の提供状況は変わる場合があります。" },
+        { question: "ベジタリアンでもヴァン朝食を楽しめますか？", answer: "チーズ、野菜、卵、パン、蜂蜜、カイマク、ジャムなど肉を使わない料理が多くあります。一方、スジュクやカヴルマ入りの料理もあるため、注文時に希望を伝え、当日の材料をご確認ください。" },
       ],
     },
     sources: {
       title: "出典と編集方針",
-      note: "ヴァン朝食と郷土料理の説明は、トルコの公式地理的表示資料と文化ポータルを参照して確認しています。現在の料理、価格、提供状況は最新のオンラインメニューでご確認ください。",
+      note: "本ガイドはTarihi Van Kahvaltı Evi編集チームが、店内で現在提供する内容と実際の食卓写真を確認して作成しました。ヴァン朝食と郷土料理の定義は、トルコの公式地理的表示資料と文化ポータルを参照しています。価格と当日の提供状況は最新のオンラインメニューでご確認ください。",
       items: [...sourceItems.ja],
     },
     closing: {
@@ -830,6 +836,8 @@ export const guides: Record<GuideLocale, GuideContent> = {
     updatedLabel: "最終確認",
     dateLabel: "2026年7月21日",
     authorLabel: "Tarihi Van Kahvaltı Evi 編集チーム",
+    authorHref: "/en#story",
+    breadcrumbs: { aria: "パンくずリスト", home: "ホーム", current: "バル・カイマクガイド" },
     media: {
       hero: "/images/blog/istanbul-bal-kaymak.webp",
       article: "/images/blog/bal-kaymak-close-up.webp",
@@ -844,6 +852,13 @@ export const guides: Record<GuideLocale, GuideContent> = {
         description: "濾した蜂蜜、水牛のカイマク、季節の自家製ジャム2種",
         url: "/en/menu#bal-kaymak-recel",
       },
+      entityRefs: [
+        { name: "ヴァン朝食", sameAs: coreVanBreakfastCitations[0] },
+        { name: "ヴァン産ハーブチーズ", sameAs: coreVanBreakfastCitations[1] },
+        { name: "ムルトゥア", sameAs: coreVanBreakfastCitations[2] },
+        { name: "ヴァン・カヴット", sameAs: coreVanBreakfastCitations[3] },
+        { name: "ベヨール、イスタンブール", type: "Place" },
+      ],
     },
     travelerBrief: {
       label: "ひと目で分かる基本情報",

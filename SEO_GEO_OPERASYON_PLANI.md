@@ -93,6 +93,7 @@ Denetlenen kayıtlar:
 ### Japonca arama ve Japon turistler
 
 - `/ja/blog/istanbul-bal-kaymak` ayrı, self-canonical bir Japonca URL'dir; `ja-JP` içerik dili, `ja` HTTP başlığı, karşılıklı hreflang ve sitemap alternatifi taşır. Kullanıcılar tüm dil sürümlerine görünür dil seçiciden ulaşabilir.
+- Google'ın görünür içerik–structured data eşleşmesi politikasına göre Japonca breadcrumb, bağlantılı editör bilgisi, hazırlama/doğrulama yöntemi ve dokuz görünür SSS sayfada yer alır. `BlogPosting.about` içindeki dört yöresel varlık, sayfadaki aynı dört resmî kaynağa `sameAs` ile bağlanır; görünmeyen puan, yorum veya ödül şeması kullanılmaz.
 - Japonca rehber `イスタンブール カイマク`, `バル カイマク`, `タクシム 朝食`, `イスタンブール 朝食`, `トルコ朝食` niyetlerini; gerçek ürün içeriği, adres, saatler, çevredeki gezi noktaları ve sipariş ifadeleriyle karşılar.
 - Google'ın Japonca çok dilli site rehberine uygun biçimde önemli içerik bütünüyle Japonca ve görünür HTML olarak sunulur; dil yalnız meta etiketleriyle bildirilmez. Gerçek restoran fotoğrafı, Japonca alt metin ve açıklayıcı başlık birlikte kullanılır.
 - Google Search Console'da Japonca URL bir kez denetlenmeli ve sitemap yeniden gönderilmelidir. Japonca sorgular sayfa filtresiyle aylık izlenmeli; düşük gösterimde içerik kopyalamak yerine gerçek Japon ziyaretçilerin soruları ve Search Console verisiyle mevcut rehber geliştirilmelidir.

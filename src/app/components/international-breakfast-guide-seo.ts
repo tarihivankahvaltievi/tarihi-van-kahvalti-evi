@@ -43,7 +43,7 @@ export function buildGuideMetadata(guide: GuideContent): Metadata {
     title: { absolute: guide.title },
     description: guide.description,
     keywords: [...keywords[guide.locale]],
-    authors: [{ name: siteName, url: siteUrl }],
+    authors: [{ name: siteName, url: guide.authorHref ? absoluteUrl(guide.authorHref) : siteUrl }],
     creator: siteName,
     publisher: siteName,
     category: "travel and food guide",
@@ -156,10 +156,14 @@ export function buildGuideJsonLd(guide: GuideContent) {
           "@type": "Organization",
           "@id": `${siteUrl}/#restaurant`,
           name: siteName,
-          url: siteUrl,
+          url: guide.authorHref ? absoluteUrl(guide.authorHref) : siteUrl,
         },
         publisher: { "@id": `${siteUrl}/#restaurant` },
-        about: guide.seo?.about.map((name) => ({ "@type": "Thing", name })) ?? defaultAbout,
+        about: guide.seo?.entityRefs?.map((entity) => ({
+          "@type": entity.type ?? "Thing",
+          name: entity.name,
+          ...(entity.sameAs ? { sameAs: entity.sameAs } : {}),
+        })) ?? guide.seo?.about.map((name) => ({ "@type": "Thing", name })) ?? defaultAbout,
         mentions: [
           ...(guide.seo?.mentions.map((name) => ({ "@type": "Thing", name })) ?? defaultMentions),
           ...(guide.seo?.menuItem ? [{

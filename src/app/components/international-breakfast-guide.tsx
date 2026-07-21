@@ -57,7 +57,8 @@ export function InternationalBreakfastGuide({ guide }: { guide: GuideContent }) 
             </div>
 
             <p className={styles.byline}>
-              {guide.authorLabel} <span aria-hidden="true">·</span> {guide.updatedLabel}:{" "}
+              {guide.authorHref ? <Link href={guide.authorHref}>{guide.authorLabel}</Link> : guide.authorLabel}{" "}
+              <span aria-hidden="true">·</span> {guide.updatedLabel}:{" "}
               <time dateTime="2026-07-21">{guide.dateLabel}</time>
             </p>
           </div>
@@ -83,6 +84,15 @@ export function InternationalBreakfastGuide({ guide }: { guide: GuideContent }) 
           <a href="#plan-your-visit">{guide.nav.visit}</a>
           <a href="#questions">{guide.nav.faq}</a>
         </nav>
+
+        {guide.breadcrumbs ? (
+          <nav className={styles.breadcrumbs} aria-label={guide.breadcrumbs.aria}>
+            <ol>
+              <li><Link href="/">{guide.breadcrumbs.home}</Link></li>
+              <li aria-current="page">{guide.breadcrumbs.current}</li>
+            </ol>
+          </nav>
+        ) : null}
 
         <section id="what-is-turkish-breakfast" className={styles.answer} aria-labelledby="answer-title">
           <div className={styles.sectionLabel}>{guide.shortAnswer.label}</div>
