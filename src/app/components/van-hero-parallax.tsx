@@ -355,20 +355,18 @@ export function VanHeroParallax({ locale = "tr" }: { locale?: SiteLocale }) {
               <span className="hero-provenance-place">{messages.hero.place}</span>
             </div>
             <h1
-              className="hero-title-lockup hero-title-dimensional"
+              className="hero-title-lockup hero-title-editorial"
               aria-label={`${messages.hero.titleLineOne} ${messages.hero.titleAccent} ${messages.hero.titleLineTwo}`}
             >
               <span className="hero-title-line hero-title-line-one" aria-hidden="true">
                 <span
                   className="hero-title-word"
-                  data-title={messages.hero.titleLineOne}
                   style={{ "--title-order": 0 } as CSSProperties}
                 >
                   {messages.hero.titleLineOne}
                 </span>
                 <span
                   className="hero-title-word hero-title-accent"
-                  data-title={messages.hero.titleAccent}
                   style={{ "--title-order": 1 } as CSSProperties}
                 >
                   {messages.hero.titleAccent}
@@ -377,7 +375,6 @@ export function VanHeroParallax({ locale = "tr" }: { locale?: SiteLocale }) {
               <span className="hero-title-line hero-title-line-two" aria-hidden="true">
                 <span
                   className="hero-title-word"
-                  data-title={messages.hero.titleLineTwo}
                   style={{ "--title-order": 2 } as CSSProperties}
                 >
                   {messages.hero.titleLineTwo}

@@ -84,7 +84,7 @@ export const homeMessages = {
     hero: {
       aria: "Tarihi Van Kahvaltı Evi ana alanı",
       year: "1978",
-      yearSuffix: "'den beri",
+      yearSuffix: "’den beri",
       place: "Beyoğlu'nda bir aile sofrası",
       titleLineOne: "Tarihi",
       titleAccent: "Van",
