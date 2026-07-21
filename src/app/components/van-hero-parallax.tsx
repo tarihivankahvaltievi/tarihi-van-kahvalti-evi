@@ -119,6 +119,14 @@ const floatingFoods: FloatingFood[] = [
   },
 ];
 
+const mobileFloatingFoodClassNames = new Set([
+  "hero-float-item hero-float-pan",
+  "hero-float-item hero-float-tea",
+  "hero-float-item hero-float-simit",
+  "hero-float-item hero-float-cheese-platter",
+  "hero-float-item hero-float-greens-platter",
+]);
+
 const subscribeToMobileViewport = (callback: () => void) => {
   const mediaQuery = window.matchMedia("(max-width: 680px)");
   mediaQuery.addEventListener("change", callback);
@@ -242,6 +250,14 @@ export function VanHeroParallax({ locale = "tr" }: { locale?: SiteLocale }) {
     ),
     spring,
   );
+  const foodRotateX = useSpring(
+    useTransform(
+      scrollYProgress,
+      [0, 0.28, 0.55, 0.82],
+      still ? [0, 0, 0, 0] : isMobile ? [0, -3.8, -7.2, -8.4] : [0, -2.8, -5.2, -6.2],
+    ),
+    spring,
+  );
   const foodOpacity = useSpring(
     useTransform(
       scrollYProgress,
@@ -284,6 +300,10 @@ export function VanHeroParallax({ locale = "tr" }: { locale?: SiteLocale }) {
 
   const firstRow = heroImages.slice(0, 5);
   const secondRow = heroImages.slice(5, 10);
+  const visibleFloatingFoods = isMobile
+    ? floatingFoods.filter((item) => mobileFloatingFoodClassNames.has(item.className))
+    : floatingFoods;
+
   const handleMouseMove = (e: React.MouseEvent) => {
     if (isMobile) return;
     const rect = e.currentTarget.getBoundingClientRect();
@@ -349,69 +369,67 @@ export function VanHeroParallax({ locale = "tr" }: { locale?: SiteLocale }) {
           </motion.div>
         </motion.div>
 
-        {isMobile ? (
-          <figure className="hero-mobile-scene">
-            <Image
-              src="/images/breakfast-spread.webp"
-              alt={messages.hero.sceneAlt}
-              fill
-              sizes="100vw"
-              quality={82}
-              loading="eager"
-              fetchPriority="high"
-            />
-          </figure>
-        ) : (
-          <>
-            <motion.div
-              className="hero-parallax-gallery"
-              style={{
-                rotateX,
-                rotateZ,
-                y: galleryY,
-                opacity: galleryOpacity,
-              }}
-              aria-hidden="true"
-            >
-              <HeroImageRow images={firstRow} translate={translateX} reverse />
-              <HeroImageRow images={secondRow} translate={translateXReverse} />
-            </motion.div>
+        <motion.div
+          className="hero-parallax-gallery"
+          style={{
+            rotateX,
+            rotateZ,
+            y: galleryY,
+            opacity: galleryOpacity,
+          }}
+          aria-hidden="true"
+        >
+          <HeroImageRow
+            images={firstRow}
+            translate={translateX}
+            reverse
+            enableHover={!isMobile}
+          />
+          <HeroImageRow
+            images={secondRow}
+            translate={translateXReverse}
+            enableHover={!isMobile}
+          />
+        </motion.div>
 
-            <motion.div
-              className="hero-parallax-food-stage"
-              style={{
-                y: floatingFoodY,
-                scale: foodScale,
-                opacity: foodOpacity,
-                rotateX: rotateXMouse,
-                rotateY: rotateYMouse,
-                transformStyle: "preserve-3d",
-              }}
-              aria-hidden="true"
-            >
-              {floatingFoods.map((item) => (
-                <div
-                  className={item.className}
-                  key={item.src}
-                  style={{
-                    "--float-delay": `${90 + Math.min(item.entranceOrder, 6) * 68}ms`,
-                    "--float-index": item.entranceOrder,
-                  } as CSSProperties}
-                >
-                  <Image
-                    src={item.src}
-                    alt={messages.hero.floatingAlts[item.altKey]}
-                    fill
-                    sizes="(max-width: 1080px) 26vw, 320px"
-                    quality={item.src.endsWith("/sucuk-egg-pan.webp") ? 75 : 70}
-                    loading={item.src.endsWith("/sucuk-egg-pan.webp") ? "eager" : "lazy"}
-                    fetchPriority={item.src.endsWith("/sucuk-egg-pan.webp") ? "high" : "auto"}
-                  />
-                </div>
-              ))}
-            </motion.div>
-          </>
-        )}
+        <motion.div
+          className="hero-parallax-food-stage"
+          style={{
+            y: floatingFoodY,
+            scale: foodScale,
+            opacity: foodOpacity,
+            rotateX: isMobile ? foodRotateX : rotateXMouse,
+            rotateY: rotateYMouse,
+            transformStyle: "preserve-3d",
+          }}
+          aria-hidden="true"
+        >
+          {visibleFloatingFoods.map((item) => {
+            // Mobil alan testinde gerçek LCP öğesi sucuklu yumurta görselidir.
+            // Onu ilk HTML'de yüksek öncelikle keşfedilebilir tutuyoruz.
+            const isPrimaryFloatingFood = item.src.endsWith("/sucuk-egg-pan.webp");
+            return (
+              <div
+                className={item.className}
+                key={item.src}
+                style={{
+                  "--float-delay": `${(isMobile ? 120 : 90) + Math.min(item.entranceOrder, 6) * (isMobile ? 88 : 68)}ms`,
+                  "--float-index": item.entranceOrder,
+                } as CSSProperties}
+              >
+                <Image
+                  src={item.src}
+                  alt={messages.hero.floatingAlts[item.altKey]}
+                  fill
+                  sizes="(max-width: 680px) 30vw, (max-width: 1080px) 26vw, 320px"
+                  quality={isPrimaryFloatingFood ? 75 : 70}
+                  loading={isPrimaryFloatingFood ? "eager" : "lazy"}
+                  fetchPriority={isPrimaryFloatingFood ? "high" : "auto"}
+                />
+              </div>
+            );
+          })}
+        </motion.div>
       </div>
     </section>
   );
@@ -431,7 +449,7 @@ function HeroImageRow({
   return (
     <div className={`hero-parallax-row ${reverse ? "is-reverse" : ""}`}>
       {images.map((image, index) => {
-        const isPrimaryImage = index === 0;
+        const isPrimaryImage = reverse && index === 0;
         return (
           <motion.figure
             className="hero-parallax-card"

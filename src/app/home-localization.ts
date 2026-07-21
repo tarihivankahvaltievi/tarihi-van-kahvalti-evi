@@ -90,7 +90,6 @@ export const homeMessages = {
       titleAccent: "Van",
       titleLineTwo: "Kahvaltı Evi",
       intro: "Otlu peynir, murtuğa, kavut ve bakır sahanlar. Çayımız hep taze.",
-      sceneAlt: "Otlu peynir, sıcak bakır sahanlar, pişi ve çayla kurulan Van kahvaltısı sofrası",
       floatingAlts: {
         pan: "Bakır sahanda sucuklu yumurta",
         tea: "İnce belli çay",
@@ -237,7 +236,6 @@ export const homeMessages = {
       titleAccent: "Turkish",
       titleLineTwo: "Breakfast near Taksim",
       intro: "Van herb cheese, murtuğa, kavut and hot copper pans. Turkish tea, always freshly brewed.",
-      sceneAlt: "A Van breakfast table with regional cheeses, hot copper pans, fried bread and Turkish tea",
       floatingAlts: {
         pan: "Eggs with Turkish sucuk in a copper pan",
         tea: "Fresh Turkish tea in a tulip-shaped glass",
