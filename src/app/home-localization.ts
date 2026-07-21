@@ -104,7 +104,7 @@ export const homeMessages = {
       title: "Van sofrası,",
       titleEmphasis: "Taksim'de ağır ağır kurulur.",
       lead:
-        "Zambak Sokak'ın kendine özgü dokusunda, Van'ın sevilen tatlarını aynı sofrada buluşturuyoruz. Otlu peynirden murtuğaya, sıcak pişiden ev yapımı reçellere her tabak günlük hazırlanır. Bizim için kahvaltı hızlı bir öğün değil; çayın demlendiği, sohbetin uzadığı sakin bir buluşmadır.",
+        "Zambak Sokak'ın kendine özgü dokusu içinde, Van kahvaltısının sevilen tatlarını aynı sofrada buluşturuyoruz. Otlu peynirden murtuğaya, sıcak pişiden ev yapımı reçellere kadar her tabağı günlük, taze ve özenli hazırlıyoruz. Nostaljik ayrıntılarla çevrili mekânımızda kahvaltıyı hızlı bir öğün değil; çayın demlendiği, sohbetin uzadığı sakin bir buluşma olarak görüyoruz.",
       primaryAction: "Sofrayı keşfet",
       bookingAction: "Masanı ayırt",
       actionsAria: "Hakkımızda bölümü sonraki adımlar",
@@ -112,7 +112,7 @@ export const homeMessages = {
       tableAlt: "Kahvaltı sofrasında peynir, reçel ve tahin tabaklarını uzatan eller",
       memoryAlt: "Mekândaki oymalı çerçeveli ayna ve aynaya yansıyan tuğla duvar",
       principles: [
-        ["Beyoğlu konumu", "Zambak Sokak'ta; Taksim, İstiklal Caddesi ve M2 metrosuna birkaç adım."],
+        ["Beyoğlu konumu", "Zambak Sokak'ta; Taksim Meydanı, İstiklal Caddesi ve M2 metro durağından yürüyerek ulaşılabilen bir masa."],
         ["Günlük emek", "Taze hazırlanan reçeller, sıcak pişiler ve özenle kurulan kahvaltı."],
         ["Van sofrası", "Otlu peynir, murtuğa, kete ve demli çayla yöresel karakter."],
       ],
@@ -248,7 +248,7 @@ export const homeMessages = {
       title: "A Van breakfast table,",
       titleEmphasis: "set slowly in Taksim.",
       lead:
-        "On characterful Zambak Street, we bring Van's much-loved flavours to one generous table. From herb cheese and murtuğa to warm pişi and homemade preserves, everything is prepared fresh each day. For us, breakfast is not a quick meal; tea keeps coming, conversation lingers and the table is shared.",
+        "On characterful Zambak Street, we bring the much-loved flavours of Van to one generous table. From herb cheese and murtuğa to warm pişi and homemade preserves, everything is prepared fresh with daily care. Surrounded by the details of our historic Beyoğlu home, breakfast becomes more than a quick meal: tea keeps coming, conversation lingers and the table is shared.",
       primaryAction: "Explore the live menu",
       bookingAction: "Request a table",
       actionsAria: "Continue from our story",
@@ -256,7 +256,7 @@ export const homeMessages = {
       tableAlt: "Friends passing cheese, preserves and tahini across a shared Van breakfast table",
       memoryAlt: "An ornate historic mirror reflecting the restaurant's brick wall",
       principles: [
-        ["Walkable from Taksim", "On Zambak Street, a few steps from Taksim, İstiklal Avenue and the M2 metro."],
+        ["Walkable from Taksim", "On Zambak Street, within walking distance of Taksim Square, İstiklal Avenue and the M2 metro."],
         ["Prepared each day", "Homemade preserves, warm pişi and a breakfast table assembled with care."],
         ["Flavours of Van", "Herb cheese, murtuğa, kete and strong Turkish tea give the table its regional character."],
       ],
