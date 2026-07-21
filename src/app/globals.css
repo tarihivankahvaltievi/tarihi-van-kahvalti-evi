@@ -1,6 +1,8 @@
 @import "tailwindcss";
 
 :root {
+  /* Compatibility alias for existing brand-sans component styles. */
+  --font-bricolage-grotesque-gf: var(--font-commissioner-gf);
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
   --ease-soft: cubic-bezier(0.25, 1, 0.5, 1);
   --font-geist-sans: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
@@ -8527,7 +8529,7 @@ body .mobile-bar a svg {
 .theme-breakfast .logo:hover .logo-word > .logo-van { color: var(--red-dark) !important; }
 
 /* Hero + navigation typographic finish, July 2026.
-   Bricolage Grotesque gives the wordmark a grounded, contemporary weight. */
+   Commissioner gives the wordmark a restrained, sign-painted character. */
 .theme-breakfast .nav,
 .theme-breakfast .nav.scrolled {
   --hero-surface: #f1ebe2;

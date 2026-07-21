@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Bodoni_Moda, Bricolage_Grotesque, Literata } from "next/font/google";
+import { Bodoni_Moda, Commissioner, Literata } from "next/font/google";
 import Script from "next/script";
 import "./globals.css";
 import "./mobile-header-hero.css";
@@ -23,13 +23,13 @@ const literata = Literata({
   preload: false,
   variable: "--font-literata-gf",
 });
-const bricolageGrotesque = Bricolage_Grotesque({
+const commissioner = Commissioner({
   subsets: ["latin", "latin-ext"],
   weight: "variable",
-  axes: ["opsz", "wdth"],
+  axes: ["FLAR", "VOLM"],
   display: "swap",
   preload: false,
-  variable: "--font-bricolage-grotesque-gf",
+  variable: "--font-commissioner-gf",
 });
 import {
   defaultOgImage,
@@ -150,7 +150,7 @@ export default function RootLayout({
   const webVitalsEndpoint = process.env.NEXT_PUBLIC_WEB_VITALS_ENDPOINT;
 
   return (
-    <html lang="tr" className={`h-full antialiased ${bodoni.variable} ${literata.variable} ${bricolageGrotesque.variable}`}>
+    <html lang="tr" className={`h-full antialiased ${bodoni.variable} ${literata.variable} ${commissioner.variable}`}>
       <head>
         <link rel="me" href={instagramUrl} />
       </head>
