@@ -5,7 +5,7 @@ import { displayAddress, displayPhone, mapsUrl, openingHours, telUrl } from "../
 import { guidePaths, guides, type GuideContent } from "./international-breakfast-guide-data";
 import styles from "./international-breakfast-guide.module.css";
 
-const languageLabels = { en: "English", ru: "Русский", ar: "العربية", ko: "한국어" } as const;
+const languageLabels = { en: "English", ru: "Русский", ar: "العربية", ko: "한국어", ja: "日本語" } as const;
 
 export function InternationalBreakfastGuide({ guide }: { guide: GuideContent }) {
   const menuHref = guide.seo?.menuItem?.url ?? "/en/menu";
@@ -95,7 +95,7 @@ export function InternationalBreakfastGuide({ guide }: { guide: GuideContent }) 
         {guide.travelerBrief ? (
           <section className={styles.travelerBrief} aria-labelledby="traveler-brief-title">
             <header>
-              <p className={styles.sectionLabel}>한눈에 보기</p>
+              <p className={styles.sectionLabel}>{guide.travelerBrief.label}</p>
               <h2 id="traveler-brief-title">{guide.travelerBrief.title}</h2>
               <p>{guide.travelerBrief.intro}</p>
             </header>
@@ -124,7 +124,7 @@ export function InternationalBreakfastGuide({ guide }: { guide: GuideContent }) 
               <div><h3>{guide.travelerBrief.phrases.title}</h3><p>{guide.travelerBrief.phrases.intro}</p></div>
               <ul>
                 {guide.travelerBrief.phrases.items.map((phrase) => (
-                  <li key={phrase.turkish}><strong lang="tr">{phrase.turkish}</strong><span>{phrase.korean}</span></li>
+                  <li key={phrase.turkish}><strong lang="tr">{phrase.turkish}</strong><span>{phrase.translation}</span></li>
                 ))}
               </ul>
             </div>

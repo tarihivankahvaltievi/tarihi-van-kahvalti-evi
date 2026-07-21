@@ -6,7 +6,7 @@ Bu belge, `van kahvaltıcısı`, `Beyoğlu kahvaltı`, `Taksim kahvaltı`, `Turk
 
 ## Uygulanan teknik SEO/GEO kapsamı
 
-- Sitemap 14 indekslenebilir kanonik URL'yi içerir: altı Türkçe ana içerik sayfası, Türkçe/İngilizce menü, İngilizce ana ziyaretçi sayfası, İngilizce/Rusça/Arapça/Korece uluslararası rehberler ve iki yasal bilgilendirme sayfası. Eski, yönlendirilen, yönetim veya API URL'leri sitemap'e alınmaz.
+- Sitemap 15 indekslenebilir kanonik URL'yi içerir: altı Türkçe ana içerik sayfası, Türkçe/İngilizce menü, İngilizce ana ziyaretçi sayfası, İngilizce/Rusça/Arapça/Korece/Japonca uluslararası rehberler ve iki yasal bilgilendirme sayfası. Eski, yönlendirilen, yönetim veya API URL'leri sitemap'e alınmaz.
 - Görsel sitemap kapsamı ana sayfadaki galeri/hero varlıklarını, canlı menü verisinden okunan güncel kategori/ürün görsellerini ve rehber/hikâye sayfalarındaki gerçek görselleri sayfa bazında listeler. Yinelenen görsel URL'leri her sayfada tekilleştirilir.
 - Türkçe ana sayfa ile İngilizce ziyaretçi rehberi arasında karşılıklı `tr`, `en` ve `x-default` hreflang ilişkisi hem sayfa başlıklarında hem sitemap'te tanımlıdır.
 - Türkçe canlı menü ile İngilizce canlı menü arasında ayrı ve karşılıklı `tr`, `en` ve `x-default` hreflang kümesi bulunur. İngilizce menü, aynı Supabase menü kaynağından güncel fiyatları alır ve özgün İngilizce ürün açıklamaları sunar.
@@ -19,9 +19,9 @@ Bu belge, `van kahvaltıcısı`, `Beyoğlu kahvaltı`, `Taksim kahvaltı`, `Turk
 - Ana sayfanın gerçek LCP görseli `eager` ve `fetchPriority=high` olarak işaretlendi; dekoratif görseller daha ölçülü kaliteyle sunulur. Yinelenen görsel/sr-only H1 ve yinelenen giriş metni kaldırıldı.
 - Footer'daki politika metinleri gerçek, self-canonical `/gizlilik` ve `/cerez-politikasi` sayfalarına bağlanır; yönetim ve API yüzeyleri ise ayrı `noindex` ve `X-Robots-Tag` kontrolleriyle arama sonuçlarından çıkarılır.
 - `robots.txt` genel botlara ek olarak Googlebot, Bingbot, YandexBot, Applebot, Naver `Yeti`, `OAI-SearchBot` ve `PerplexityBot` için açık arama/grounding grubu yayımlar; yalnız yönetim API'si ve sunucu içi yollar kapalıdır. Kanonik sitemap adresi bildirilir.
-- IndexNow anahtarı alan adında yayımlanır ve `npm run seo:indexnow` Bing, Naver, Seznam gibi katılımcı motorlara değişen URL'leri toplu bildirir. Varsayılan liste yeni İngilizce, Rusça ve Arapça rehberleri de kapsar. Bu bir tarama bildirimi olup indeksleme veya sıralama garantisi değildir.
+- IndexNow anahtarı alan adında yayımlanır ve `npm run seo:indexnow` Bing, Naver, Seznam gibi katılımcı motorlara değişen URL'leri toplu bildirir. Varsayılan liste İngilizce, Rusça, Arapça, Korece ve Japonca rehberleri de kapsar. Bu bir tarama bildirimi olup indeksleme veya sıralama garantisi değildir.
 - Eski Türkçe sorgu URL'leri en yakın gerçek içeriğe, eski İngilizce sorgu URL'leri `/en` sayfasına tek adımlı kalıcı yönlenir.
-- Derleme sonrası SEO sözleşmesi 14 kanonik sayfada canonical, hreflang, dil başlığı, title, description, H1, görünür metin, JSON-LD, sitemap, en az 50 görsel sitemap kaydı, doğru `lastmod`, yedi arama/AI botu, IndexNow kapsamı, yönlendirme, 404 ve doğrudan `200` dahili bağlantıları otomatik denetler. Korece sayfada gerçek bal-kaymak görseli, doğrudan menü bağlantısı, Korece ziyaretçi bilgileri ve `MenuItem` varlığı ayrıca doğrulanır.
+- Derleme sonrası SEO sözleşmesi 15 kanonik sayfada canonical, hreflang, dil başlığı, title, description, H1, görünür metin, JSON-LD, sitemap, en az 50 görsel sitemap kaydı, doğru `lastmod`, yedi arama/AI botu, IndexNow kapsamı, yönlendirme, 404 ve doğrudan `200` dahili bağlantıları otomatik denetler. Korece ve Japonca sayfalarda gerçek bal-kaymak görseli, doğrudan menü bağlantısı, yerelleştirilmiş ziyaretçi bilgileri ve `MenuItem` varlığı ayrıca doğrulanır.
 
 ## Ölçülen performans etkisi
 
@@ -90,6 +90,14 @@ Denetlenen kayıtlar:
 - Naver Blog, Korece İstanbul gezi içerikleri ve Koreli yemek/seyahat üreticilerinde ücretli link ağı yerine gerçek editoryal deneyim hedeflenmelidir. Davet veya iş birliği varsa açıkça belirtilmeli; sahte Korece yorum üretilmemelidir.
 - Aylık sorgu kümesi: `이스탄불 발 카이막`, `이스탄불 카이막 맛집`, `터키 카이막 맛집`, `탁심 아침 식사`, `터키식 아침 식사`. Naver Search Advisor ve Search Console'da gösterim, tıklama, CTR ve hedef sayfa birlikte izlenmelidir.
 
+### Japonca arama ve Japon turistler
+
+- `/ja/blog/istanbul-bal-kaymak` ayrı, self-canonical bir Japonca URL'dir; `ja-JP` içerik dili, `ja` HTTP başlığı, karşılıklı hreflang ve sitemap alternatifi taşır. Kullanıcılar tüm dil sürümlerine görünür dil seçiciden ulaşabilir.
+- Japonca rehber `イスタンブール カイマク`, `バル カイマク`, `タクシム 朝食`, `イスタンブール 朝食`, `トルコ朝食` niyetlerini; gerçek ürün içeriği, adres, saatler, çevredeki gezi noktaları ve sipariş ifadeleriyle karşılar.
+- Google'ın Japonca çok dilli site rehberine uygun biçimde önemli içerik bütünüyle Japonca ve görünür HTML olarak sunulur; dil yalnız meta etiketleriyle bildirilmez. Gerçek restoran fotoğrafı, Japonca alt metin ve açıklayıcı başlık birlikte kullanılır.
+- Google Search Console'da Japonca URL bir kez denetlenmeli ve sitemap yeniden gönderilmelidir. Japonca sorgular sayfa filtresiyle aylık izlenmeli; düşük gösterimde içerik kopyalamak yerine gerçek Japon ziyaretçilerin soruları ve Search Console verisiyle mevcut rehber geliştirilmelidir.
+- Japonca İstanbul gezi blogları, Google Maps yorumları ve gerçek seyahat/yemek içerik üreticilerinde editoryal deneyim hedeflenmelidir. Ücretli bağlantı ağı, makine çevirisi toplu sayfalar ve sahte Japonca yorum kullanılmamalıdır.
+
 ### ChatGPT ve diğer yapay zekâ sistemleri
 
 - `OAI-SearchBot` erişimi ChatGPT arama görünürlüğü içindir; OpenAI'nin açıkladığı üzere `GPTBot` eğitim tercihini ayrı kontrol eder. Mevcut robots politikası arama botuna açık kanonik içerik sunar.
@@ -110,7 +118,7 @@ Denetlenen kayıtlar:
 
 ## 30/60/90 günlük ölçüm rutini
 
-- İlk 30 gün: Search Console/Bing/Yandex/Naver doğrulama, sitemap, profil saat-adres düzeltmeleri, 14 kanonik URL'nin indeks durumu ve ilk sorgu tablosu. Bing'de Search Performance yanında AI Performance / grounding sorgularının başlangıç görüntüsünü kaydedin.
+- İlk 30 gün: Search Console/Bing/Yandex/Naver doğrulama, sitemap, profil saat-adres düzeltmeleri, 15 kanonik URL'nin indeks durumu ve ilk sorgu tablosu. Bing'de Search Performance yanında AI Performance / grounding sorgularının başlangıç görüntüsünü kaydedin.
 - 31–60 gün: gerçek müşteri yorum akışı, fotoğraf güncellemeleri, İngilizce sorguların gösterim/CTR incelemesi, düşük CTR title/description testi. Aynı anda tek anlamlı değişiklik yapın.
 - 61–90 gün: sorgu niyetine göre yeni içeriğe gerçekten ihtiyaç olup olmadığını değerlendirin; NAP düzeltmelerinin yayılımını ve 28 günlük Core Web Vitals saha verisini karşılaştırın.
 - Sıralamayı kişiselleştirilmiş tek bir tarayıcı aramasından değil, Search Console sorgu/sayfa verisi ve profil eylemlerinden değerlendirin.
@@ -134,5 +142,6 @@ Denetlenen kayıtlar:
 - OpenAI yayıncı ve geliştirici SSS: https://help.openai.com/en/articles/12627856-publishers-and-developers-faq
 - Naver Search Advisor SEO temelleri: https://searchadvisor.naver.com/guide/seo-basic-intro
 - Naver Search Advisor içerik rehberi: https://searchadvisor.naver.com/guide/content-basic
+- Google Japonca çok dilli site rehberi: https://developers.google.com/search/docs/specialty/international/managing-multi-regional-sites?hl=ja
 - Perplexity tarayıcıları: https://docs.perplexity.ai/docs/resources/perplexity-crawlers
 - Reddit yerel SEO tartışması (resmî olmayan saha deneyimi): https://www.reddit.com/r/localseo/comments/1uv6pvk/what_local_seo_strategies_are_still_getting_you/

@@ -7,6 +7,7 @@ import {
   buildRestaurantJsonLd,
   englishBreakfastBlogUrl,
   jsonLd,
+  japaneseHoneyKaymakBlogUrl,
   koreanHoneyKaymakBlogUrl,
   russianBreakfastBlogUrl,
   siteName,
@@ -22,6 +23,7 @@ export const guideAlternates = {
   ru: russianBreakfastBlogUrl,
   ar: arabicBreakfastBlogUrl,
   ko: koreanHoneyKaymakBlogUrl,
+  ja: japaneseHoneyKaymakBlogUrl,
   "x-default": englishBreakfastBlogUrl,
 } as const;
 
@@ -30,6 +32,7 @@ const keywords = {
   ru: ["турецкий завтрак Стамбул", "ванский завтрак", "завтрак рядом с Таксим", "где позавтракать в Стамбуле", "завтрак Бейоглу"],
   ar: ["فطور تركي في إسطنبول", "فطور فان", "فطور قريب من تقسيم", "مطعم فطور إسطنبول", "فطور بيوغلو"],
   ko: ["이스탄불 발 카이막", "터키 카이막 맛집", "이스탄불 카이막 맛집", "탁심 아침 식사", "탁심 카이막", "베요글루 아침 식사", "터키식 아침 식사", "반 아침 식사", "꿀 카이막"],
+  ja: ["イスタンブール カイマク", "バル カイマク", "トルコ カイマク", "タクシム 朝食", "イスタンブール 朝食", "ベヨール 朝食", "トルコ朝食", "ヴァン朝食"],
 } as const;
 
 export function buildGuideMetadata(guide: GuideContent): Metadata {
@@ -105,7 +108,7 @@ function guideWordCount(guide: GuideContent) {
       guide.travelerBrief.intro,
       ...guide.travelerBrief.facts.flatMap((fact) => [fact.label, fact.value]),
       ...guide.travelerBrief.comparison.rows.flatMap((row) => [row.name, row.texture, row.taste]),
-      ...guide.travelerBrief.phrases.items.flatMap((phrase) => [phrase.turkish, phrase.korean]),
+      ...guide.travelerBrief.phrases.items.flatMap((phrase) => [phrase.turkish, phrase.translation]),
     ] : []),
   ].join(" ");
 

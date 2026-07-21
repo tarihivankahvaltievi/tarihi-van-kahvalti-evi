@@ -12,6 +12,7 @@ import {
   englishMenuUrl,
   englishUrl,
   koreanHoneyKaymakBlogUrl,
+  japaneseHoneyKaymakBlogUrl,
   locationUrl,
   menuUrl,
   privacyUrl,
@@ -46,6 +47,7 @@ const internationalGuideAlternates = {
     ru: russianBreakfastBlogUrl,
     ar: arabicBreakfastBlogUrl,
     ko: koreanHoneyKaymakBlogUrl,
+    ja: japaneseHoneyKaymakBlogUrl,
     "x-default": englishBreakfastBlogUrl,
   },
 };
@@ -210,6 +212,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     },
     {
       url: koreanHoneyKaymakBlogUrl,
+      lastModified: pageLastModified,
+      images: koreanHoneyKaymakImages,
+      alternates: internationalGuideAlternates,
+    },
+    {
+      url: japaneseHoneyKaymakBlogUrl,
       lastModified: pageLastModified,
       images: koreanHoneyKaymakImages,
       alternates: internationalGuideAlternates,

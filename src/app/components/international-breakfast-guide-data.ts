@@ -1,6 +1,6 @@
 import { coreVanBreakfastCitations } from "../content-sources";
 
-export type GuideLocale = "en" | "ru" | "ar" | "ko";
+export type GuideLocale = "en" | "ru" | "ar" | "ko" | "ja";
 
 export type GuideContent = {
   locale: GuideLocale;
@@ -63,6 +63,7 @@ export type GuideContent = {
     menuItem?: { name: string; description: string; url: string };
   };
   travelerBrief?: {
+    label: string;
     title: string;
     intro: string;
     facts: { label: string; value: string }[];
@@ -71,7 +72,7 @@ export type GuideContent = {
       columns: [string, string, string];
       rows: { name: string; texture: string; taste: string }[];
     };
-    phrases: { title: string; intro: string; items: { turkish: string; korean: string }[] };
+    phrases: { title: string; intro: string; items: { turkish: string; translation: string }[] };
   };
 };
 
@@ -80,6 +81,7 @@ export const guidePaths = {
   ru: "/ru/blog/turetskiy-zavtrak-stambul",
   ar: "/ar/blog/turkish-breakfast-istanbul",
   ko: "/ko/blog/istanbul-bal-kaymak",
+  ja: "/ja/blog/istanbul-bal-kaymak",
 } as const;
 
 const sourceItems = {
@@ -107,6 +109,12 @@ const sourceItems = {
     { label: "튀르키예 문화 포털 — 무르투아", url: coreVanBreakfastCitations[2] },
     { label: "TÜRKPATENT — 반 카부트 지리적 표시 등록 제390호", url: coreVanBreakfastCitations[3] },
   ],
+  ja: [
+    { label: "TÜRKPATENT — ヴァン朝食、地理的表示登録第504号", url: coreVanBreakfastCitations[0] },
+    { label: "トルコ共和国文化ポータル — ヴァン産ハーブチーズ", url: coreVanBreakfastCitations[1] },
+    { label: "トルコ共和国文化ポータル — ムルトゥア", url: coreVanBreakfastCitations[2] },
+    { label: "TÜRKPATENT — ヴァン・カヴット、地理的表示登録第390号", url: coreVanBreakfastCitations[3] },
+  ],
 } as const;
 
 export const guides: Record<GuideLocale, GuideContent> = {
@@ -119,7 +127,7 @@ export const guides: Record<GuideLocale, GuideContent> = {
     description:
       "Discover what a traditional Turkish and Van breakfast includes, why locals choose Tarihi Van Kahvaltı Evi near Taksim, and practical tips for your visit.",
     ogLocale: "en_GB",
-    ogAlternateLocales: ["ru_RU", "ar_SA", "ko_KR"],
+    ogAlternateLocales: ["ru_RU", "ar_SA", "ko_KR", "ja_JP"],
     hero: {
       note: "A visitor’s guide to breakfast in Istanbul",
       title: "Turkish breakfast,",
@@ -298,7 +306,7 @@ export const guides: Record<GuideLocale, GuideContent> = {
     description:
       "Что входит в турецкий и ванский завтрак, почему стоит выбрать Tarihi Van Kahvaltı Evi рядом с Таксимом и как подготовиться к визиту.",
     ogLocale: "ru_RU",
-    ogAlternateLocales: ["en_GB", "ar_SA", "ko_KR"],
+    ogAlternateLocales: ["en_GB", "ar_SA", "ko_KR", "ja_JP"],
     hero: {
       note: "Гид по завтраку для гостей Стамбула",
       title: "Турецкий завтрак",
@@ -403,7 +411,7 @@ export const guides: Record<GuideLocale, GuideContent> = {
     description:
       "تعرّف على مكونات الفطور التركي وفطور فان، ولماذا يختار الزوار مطعم Tarihi Van Kahvaltı Evi قرب تقسيم، مع معلومات الزيارة والأسعار.",
     ogLocale: "ar_SA",
-    ogAlternateLocales: ["en_GB", "ru_RU", "ko_KR"],
+    ogAlternateLocales: ["en_GB", "ru_RU", "ko_KR", "ja_JP"],
     hero: {
       note: "دليل الفطور لزوار إسطنبول",
       title: "الفطور التركي،",
@@ -508,7 +516,7 @@ export const guides: Record<GuideLocale, GuideContent> = {
     description:
       "이스탄불 탁심 근처에서 터키식 발 카이막을 맛보세요. 꿀과 카이막을 먹는 법, 반 아침 식사 구성, 위치와 영업시간을 한국어로 안내합니다.",
     ogLocale: "ko_KR",
-    ogAlternateLocales: ["en_GB", "ru_RU", "ar_SA"],
+    ogAlternateLocales: ["en_GB", "ru_RU", "ar_SA", "ja_JP"],
     hero: {
       note: "한국인 여행자를 위한 이스탄불 아침 식사 가이드",
       title: "이스탄불에서 만나는",
@@ -674,6 +682,7 @@ export const guides: Record<GuideLocale, GuideContent> = {
       },
     },
     travelerBrief: {
+      label: "한눈에 보기",
       title: "한국인 여행자를 위한 발 카이막 핵심 정보",
       intro: "검색 결과에서 바로 확인할 수 있도록 메뉴, 위치, 영업시간과 주문 표현을 한곳에 정리했습니다. 가격과 당일 제공 여부는 실시간 영문 메뉴가 가장 정확합니다.",
       facts: [
@@ -695,9 +704,173 @@ export const guides: Record<GuideLocale, GuideContent> = {
         title: "주문할 때 유용한 터키어",
         intro: "짧은 문장을 화면으로 보여 주거나 그대로 읽어도 됩니다. 알레르기는 주문 전에 반드시 직원에게 알려 주세요.",
         items: [
-          { turkish: "Bal kaymak var mı?", korean: "발 카이막이 있나요?" },
-          { turkish: "İki kişilik Van kahvaltısı, lütfen.", korean: "2인용 반 아침 식사 부탁합니다." },
-          { turkish: "İçinde kuruyemiş var mı?", korean: "견과류가 들어 있나요?" },
+          { turkish: "Bal kaymak var mı?", translation: "발 카이막이 있나요?" },
+          { turkish: "İki kişilik Van kahvaltısı, lütfen.", translation: "2인용 반 아침 식사 부탁합니다." },
+          { turkish: "İçinde kuruyemiş var mı?", translation: "견과류가 들어 있나요?" },
+        ],
+      },
+    },
+  },
+  ja: {
+    locale: "ja",
+    languageTag: "ja-JP",
+    direction: "ltr",
+    path: guidePaths.ja,
+    title: "イスタンブールのバル・カイマク｜タクシム近くのトルコ朝食ガイド",
+    description:
+      "イスタンブールで蜂蜜とカイマクを味わう日本人旅行者向けガイド。タクシム近くの店舗、食べ方、ヴァン朝食、営業時間、メニュー、注文に役立つトルコ語を紹介します。",
+    ogLocale: "ja_JP",
+    ogAlternateLocales: ["en_GB", "ru_RU", "ar_SA", "ko_KR"],
+    hero: {
+      note: "日本人旅行者のためのイスタンブール朝食ガイド",
+      title: "イスタンブールで味わう",
+      accent: "バル・カイマク。",
+      lead:
+        "香りのよい蜂蜜と濃厚でなめらかなカイマクを温かいパンに重ねるバル・カイマクは、トルコ朝食を代表する一品です。タクシム広場から歩けるベヨールの歴史ある店で、1978年から続くヴァン式の朝食と一緒にお楽しみください。",
+      readLabel: "バル・カイマクを知る",
+      menuLabel: "英語メニューと価格を見る",
+      imageAlt: "Tarihi Van Kahvaltı Eviで提供する蜂蜜とカイマク、チーズ、ピシ、トルコ紅茶のヴァン朝食",
+      imageCaption: "蜂蜜、カイマク、温かいパンから始まるトルコの朝。",
+    },
+    nav: {
+      label: "このガイドの内容",
+      answer: "バル・カイマクとは",
+      table: "一緒に味わう料理",
+      choose: "この店を選ぶ理由",
+      visit: "店舗・アクセス",
+      faq: "よくある質問",
+    },
+    shortAnswer: {
+      label: "まずは要点",
+      title: "バル・カイマクとは？",
+      paragraphs: [
+        "バル・カイマク（bal kaymak）は、トルコ語で蜂蜜を意味する「バル」と、乳から作る濃厚でなめらかな乳製品「カイマク」を合わせた定番の朝食です。カイマクは一般的なバターのような塩気がなく、ホイップクリームより密度があります。パンや揚げパンのピシにカイマクをのせ、蜂蜜を少量かけて味わいます。",
+        "トルコ朝食のカフヴァルトゥ（kahvaltı）は、甘い料理と塩味の料理を同じテーブルで少しずつ楽しむ食事です。バル・カイマクだけでなく、チーズ、オリーブ、卵料理、ジャム、パン、チャイと交互に味わうと、甘さと塩味のバランスがよく分かります。",
+        "Tarihi Van Kahvaltı Eviは、1978年から家族で受け継いできたヴァン朝食の文化を、ベヨールのザンバック通りにある歴史的な建物で紹介しています。タクシム広場、イスティクラル通り、ジハンギルから徒歩でアクセスできます。",
+      ],
+    },
+    table: {
+      title: "バル・カイマクと何を食べる？",
+      intro:
+        "季節や当日の仕込みによって内容は変わりますが、次の料理を組み合わせると、ヴァン朝食ならではの甘味、塩味、温かい料理のコントラストを楽しめます。",
+      items: [
+        { name: "バル・カイマク", role: "蜂蜜と濃厚な乳の組み合わせ", description: "温かいパンにカイマクをのせ、蜂蜜を少し加えます。最初から混ぜ切らず、一口ごとに割合を変えると、それぞれの香りとコクが分かります。" },
+        { name: "ピシと焼きたてのパン", role: "カイマクを受け止める温かい生地", description: "外は軽く香ばしく中はやわらかな揚げパンのピシ、または素朴なパンに合わせると、カイマクがほどよくなじみます。" },
+        { name: "ヴァン産ハーブチーズ", role: "甘味を引き立てる塩味", description: "地域のハーブを使ったヴァンを代表するチーズです。バル・カイマクの合間に少し食べると、甘味と塩味の対比がはっきりします。" },
+        { name: "ムルトゥア", role: "バターと卵の温かな郷土料理", description: "小麦粉をバターで炒め、卵を加えるヴァンの料理です。銅鍋が温かいうちにテーブルで取り分けます。" },
+        { name: "カヴット", role: "香ばしい穀物の深い味", description: "炒った穀物とバターを使うヴァンの伝統料理です。蜂蜜やペクメズと合わせると、カイマクとは異なる香ばしい甘さを楽しめます。" },
+        { name: "温かい卵料理", role: "朝食テーブルの主役", description: "目玉焼き、メネメン、スジュクやカヴルマ入りの卵料理を熱々で提供します。たくさんの小皿を一つの食事につなぐ存在です。" },
+        { name: "自家製ジャムとオリーブ", role: "甘味と塩味のリズム", description: "果実味のあるジャムと塩味のあるオリーブを交互に味わうことで、カイマクのやさしい甘さを最後まで楽しめます。" },
+        { name: "トルコのチャイ", role: "ゆっくり続く朝食のリズム", description: "チューリップ形のグラスで飲む温かいチャイが口の中を整え、さまざまな小皿を急がず味わう時間を作ります。" },
+      ],
+    },
+    tradition: {
+      title: "デザートではなく、朝食の一場面",
+      paragraphs: [
+        "バル・カイマクは食後に単独で食べるデザートというより、トルコ朝食の一部です。ハーブチーズの次に蜂蜜とカイマクをのせたパンを食べ、温かい卵料理に戻り、チャイを飲む。決まった順番はありません。",
+        "ヴァン朝食は、乳製品、穀物、地域のハーブ、温かい料理を一つの食卓で分け合う文化として知られています。大切なのは量を急いで食べることではなく、小皿を共有しながら異なる味をゆっくり比べることです。",
+        "初めてなら、まずカイマクだけを少量味わい、蜂蜜を少しずつ加えて好みの割合を探してください。アレルギーや食事制限がある場合は、注文前に当日の材料と交差接触の可能性をスタッフにご確認ください。",
+      ],
+      imageAlt: "Tarihi Van Kahvaltı Eviの食卓に並ぶ蜂蜜をかけたカイマク、パン、トルコ紅茶",
+      caption: "店内で実際に提供したカイマクと蜂蜜、パン、トルコ紅茶。",
+    },
+    reasons: {
+      title: "Tarihi Van Kahvaltı Eviを選ぶ理由",
+      intro:
+        "イスタンブールにはカイマクを味わえる店が数多くあります。当店は一皿だけでなく、ヴァンの朝食文化、家族の歴史、ベヨールらしい空間まで体験したい旅行者に向いています。",
+      items: [
+        { title: "1978年から続く家族の朝食", text: "一時的な流行のためのコンセプトではなく、家族が長年受け継いできたヴァン朝食の経験をもとに料理を用意しています。" },
+        { title: "ヴァン朝食の中で味わうカイマク", text: "蜂蜜とカイマクをピシ、ハーブチーズ、ジャム、温かい鍋料理と交互に味わい、トルコ朝食全体のバランスを体験できます。" },
+        { title: "歴史あるベヨールの空間", text: "ザンバック通りの古い建物、小さな部屋、通りに面したテーブルが食事の雰囲気を作ります。料理と場所を一緒に記憶できる店です。" },
+        { title: "タクシム観光に便利な立地", text: "タクシム広場、イスティクラル通り、ジハンギルから徒歩圏内。ベヨールやガラタ観光の一日の始まりに立ち寄れます。" },
+        { title: "二人旅にも家族旅行にも", text: "小皿を共有するスタイルは、カップル、家族、友人との旅行に適しています。週末や大人数の場合は来店前の連絡をおすすめします。" },
+        { title: "来店前に確認できる最新メニュー", text: "英語のオンラインメニューで現在の料理と価格を確認できます。季節や当日の仕込みにより提供状況が変わる場合があります。" },
+      ],
+    },
+    firstVisit: {
+      title: "バル・カイマクを楽しむ順番",
+      intro: "正式な作法はありませんが、初めての方は次の順番で味わうと素材の違いが分かりやすくなります。",
+      steps: [
+        { title: "最初にカイマクだけを味わう", text: "少量をそのまま食べ、乳のコクとなめらかな質感を確かめます。" },
+        { title: "蜂蜜を少しずつ加える", text: "一度に混ぜず、一口ごとに割合を変えて香りと甘さを調整します。" },
+        { title: "温かいパンやピシにのせる", text: "生地の温かさと食感がカイマクをやわらかくし、蜂蜜の香りを引き立てます。" },
+        { title: "塩味の料理と交互に食べる", text: "ハーブチーズ、オリーブ、卵料理を間に挟むと甘味がより鮮明になります。" },
+        { title: "チャイと一緒にゆっくり", text: "チャイで口の中を整えながら、共有する朝食の時間をお楽しみください。" },
+      ],
+    },
+    practical: {
+      title: "タクシム近くの店舗・アクセス情報",
+      text:
+        "住所はZambak Sk. No:8, Şehit Muhtar, Beyoğluです。毎日08:00〜18:00に営業しています。週末の遅い朝は混み合うことがあるため、グループの場合は電話またはWhatsAppで事前に席の状況をご確認ください。",
+      labels: { address: "住所", hours: "営業時間", route: "Googleマップで経路を見る", menu: "英語メニューと価格", call: "電話する" },
+    },
+    faq: {
+      title: "日本人旅行者からよくある質問",
+      items: [
+        { question: "バル・カイマクとは何ですか？", answer: "バルはトルコ語で蜂蜜、カイマクは乳から作る濃厚でなめらかな乳製品です。温かいパンやピシにカイマクをのせ、蜂蜜をかけて食べるトルコ朝食の定番です。" },
+        { question: "カイマクはバターや生クリームと同じですか？", answer: "同じではありません。一般的なバターのような塩気がなく、ホイップクリームより密度が高く濃厚です。原料乳や製法によって味と質感は異なります。" },
+        { question: "タクシム広場から近いですか？", answer: "はい。ベヨールのザンバック通りにあり、タクシム広場、イスティクラル通り、ジハンギルから徒歩でアクセスできます。正確な経路はページ内の公式Googleマップリンクをご利用ください。" },
+        { question: "バル・カイマクだけを注文できますか？", answer: "メニュー構成と提供状況は当日の仕込みにより変わります。来店前にオンラインメニューをご確認いただくか、店舗へお問い合わせください。ヴァン式の共有朝食と一緒に味わうと、さまざまな組み合わせを楽しめます。" },
+        { question: "予約は必要ですか？", answer: "空席があれば予約なしでもご案内できます。週末、祝日、大人数での来店は、電話またはWhatsAppで事前に席の状況を確認することをおすすめします。" },
+        { question: "アレルギーがある場合はどうすればよいですか？", answer: "カイマクは乳製品です。朝食には卵、小麦、ナッツ類などのアレルゲンが含まれる場合があります。注文前にスタッフへ伝え、当日の材料と交差接触の可能性をご確認ください。" },
+      ],
+    },
+    sources: {
+      title: "出典と編集方針",
+      note: "ヴァン朝食と郷土料理の説明は、トルコの公式地理的表示資料と文化ポータルを参照して確認しています。現在の料理、価格、提供状況は最新のオンラインメニューでご確認ください。",
+      items: [...sourceItems.ja],
+    },
+    closing: {
+      title: "バル・カイマクから、ヴァンの朝食文化へ。",
+      text: "1978年から家族で受け継ぐ朝食文化を、ベヨールの歴史ある空間でゆっくり体験してください。",
+      menu: "本日の英語メニューを見る",
+      directions: "徒歩ルートを見る",
+    },
+    footer: { note: "1978年からベヨールで続く伝統的なヴァン朝食。", home: "英語ホーム", menu: "メニュー", directions: "アクセス" },
+    updatedLabel: "最終確認",
+    dateLabel: "2026年7月21日",
+    authorLabel: "Tarihi Van Kahvaltı Evi 編集チーム",
+    media: {
+      hero: "/images/blog/istanbul-bal-kaymak.webp",
+      article: "/images/blog/bal-kaymak-close-up.webp",
+      og: "/images/og/istanbul-bal-kaymak.jpg",
+    },
+    seo: {
+      articleSection: "イスタンブールのバル・カイマクとトルコ朝食",
+      about: ["バル・カイマク", "トルコ朝食", "ヴァン朝食", "ベヨール"],
+      mentions: ["カイマク", "蜂蜜", "ピシ", "ヴァン産ハーブチーズ", "ムルトゥア", "カヴット"],
+      menuItem: {
+        name: "蜂蜜、水牛のカイマク、自家製ジャム",
+        description: "濾した蜂蜜、水牛のカイマク、季節の自家製ジャム2種",
+        url: "/en/menu#bal-kaymak-recel",
+      },
+    },
+    travelerBrief: {
+      label: "ひと目で分かる基本情報",
+      title: "日本人旅行者のための基本情報",
+      intro: "メニュー、場所、営業時間、注文に使える表現を簡潔にまとめました。価格と当日の提供状況は、最新の英語メニューが最も正確です。",
+      facts: [
+        { label: "現在のメニュー内容", value: "濾した蜂蜜、水牛のカイマク、季節の自家製ジャム2種" },
+        { label: "住所", value: "Zambak Sk. No:8, Şehit Muhtar, Beyoğlu, İstanbul" },
+        { label: "営業時間", value: "毎日 08:00〜18:00" },
+        { label: "周辺エリア", value: "タクシム広場、イスティクラル通り、ジハンギルから徒歩圏内" },
+      ],
+      comparison: {
+        title: "カイマク、バター、生クリームの違い",
+        columns: ["食品", "質感", "味と食べ方"],
+        rows: [
+          { name: "カイマク", texture: "濃厚でなめらか", taste: "乳のコクがあり、蜂蜜やパンと一緒に食べる" },
+          { name: "バター", texture: "固形で、温めると溶ける", taste: "製品により塩味があり、パンや調理に使う" },
+          { name: "生クリーム", texture: "液体、または泡立てた軽い質感", taste: "カイマクより軽く、デザートや飲み物に使われる" },
+        ],
+      },
+      phrases: {
+        title: "注文に役立つトルコ語",
+        intro: "短い文をそのまま読んだり、画面で見せたりできます。アレルギーがある場合は必ず注文前にスタッフへお伝えください。",
+        items: [
+          { turkish: "Bal kaymak var mı?", translation: "バル・カイマクはありますか？" },
+          { turkish: "İki kişilik Van kahvaltısı, lütfen.", translation: "2人分のヴァン朝食をお願いします。" },
+          { turkish: "İçinde kuruyemiş var mı?", translation: "ナッツ類は入っていますか？" },
         ],
       },
     },

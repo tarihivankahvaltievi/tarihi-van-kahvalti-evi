@@ -8,6 +8,7 @@ export const englishBreakfastBlogUrl = `${siteUrl}/en/blog/turkish-breakfast-ist
 export const russianBreakfastBlogUrl = `${siteUrl}/ru/blog/turetskiy-zavtrak-stambul`;
 export const arabicBreakfastBlogUrl = `${siteUrl}/ar/blog/turkish-breakfast-istanbul`;
 export const koreanHoneyKaymakBlogUrl = `${siteUrl}/ko/blog/istanbul-bal-kaymak`;
+export const japaneseHoneyKaymakBlogUrl = `${siteUrl}/ja/blog/istanbul-bal-kaymak`;
 export const locationUrl = `${siteUrl}/konum`;
 export const breakfastGuideUrl = `${siteUrl}/van-kahvaltisi`;
 export const breakfastCultureUrl = `${siteUrl}/van-kahvaltisi-nedir`;
@@ -161,6 +162,7 @@ export const legacyRedirects = [
   { source: "/zavtrak-taksim-stambul", destination: "/ru/blog/turetskiy-zavtrak-stambul" },
   { source: "/arabic-breakfast-taksim", destination: "/ar/blog/turkish-breakfast-istanbul" },
   { source: "/korean-bal-kaymak-istanbul", destination: "/ko/blog/istanbul-bal-kaymak" },
+  { source: "/japanese-bal-kaymak-istanbul", destination: "/ja/blog/istanbul-bal-kaymak" },
 ];
 
 export const localSeoFacts = [

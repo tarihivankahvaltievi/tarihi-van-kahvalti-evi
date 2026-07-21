@@ -19,6 +19,7 @@ const defaultUrls = [
   `${siteUrl}/ru/blog/turetskiy-zavtrak-stambul`,
   `${siteUrl}/ar/blog/turkish-breakfast-istanbul`,
   `${siteUrl}/ko/blog/istanbul-bal-kaymak`,
+  `${siteUrl}/ja/blog/istanbul-bal-kaymak`,
 ];
 
 const scriptDirectory = path.dirname(fileURLToPath(import.meta.url));

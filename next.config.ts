@@ -167,6 +167,15 @@ const nextConfig: NextConfig = {
         ],
       },
       {
+        source: "/ja/:path*",
+        headers: [
+          {
+            key: "Content-Language",
+            value: "ja",
+          },
+        ],
+      },
+      {
         source: "/:path*.(svg|ico)",
         headers: [
           {

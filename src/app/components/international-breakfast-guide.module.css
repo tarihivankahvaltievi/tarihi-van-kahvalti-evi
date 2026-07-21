@@ -125,6 +125,12 @@
   word-break: keep-all;
 }
 
+.page[data-locale="ja"] {
+  font-family: var(--font-noto-sans-jp), "Hiragino Kaku Gothic ProN", "Yu Gothic", sans-serif;
+  line-break: strict;
+  word-break: normal;
+}
+
 .page[data-locale="ko"] .hero h1,
 .page[data-locale="ko"] .hero h1 span,
 .page[data-locale="ko"] h2,
@@ -143,6 +149,33 @@
 .page[data-locale="ko"] .closing p {
   font-family: var(--font-noto-sans-kr), "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
 }
+
+.page[data-locale="ja"] .hero h1,
+.page[data-locale="ja"] .hero h1 span,
+.page[data-locale="ja"] h2,
+.page[data-locale="ja"] h3,
+.page[data-locale="ja"] .heroLead,
+.page[data-locale="ja"] .answerCopy p,
+.page[data-locale="ja"] .traditionCopy p,
+.page[data-locale="ja"] .itemDescription,
+.page[data-locale="ja"] .reasonsIntro p,
+.page[data-locale="ja"] .reasonList p,
+.page[data-locale="ja"] .firstVisit p,
+.page[data-locale="ja"] .practical p,
+.page[data-locale="ja"] .practical dd,
+.page[data-locale="ja"] .faq details p,
+.page[data-locale="ja"] .sources p,
+.page[data-locale="ja"] .closing p {
+  font-family: var(--font-noto-sans-jp), "Hiragino Kaku Gothic ProN", "Yu Gothic", sans-serif;
+}
+
+.page[data-locale="ja"] .hero h1,
+.page[data-locale="ja"] .hero h1 span,
+.page[data-locale="ja"] h2,
+.page[data-locale="ja"] h3 { letter-spacing: -0.035em; }
+
+.page[data-locale="ja"] .hero h1 span,
+.page[data-locale="ja"] .answerCopy h2 { font-style: normal; }
 
 .page[data-locale="ko"] .hero h1,
 .page[data-locale="ko"] .hero h1 span,
