@@ -60,6 +60,7 @@ const internationalGuideImages = uniqueImages([
 const koreanHoneyKaymakImages = uniqueImages([
   "/images/og/istanbul-bal-kaymak.jpg",
   "/images/blog/istanbul-bal-kaymak.webp",
+  "/images/blog/bal-kaymak-close-up.webp",
   "/images/hero-parallax/overhead-feast.webp",
   "/images/hands-table.webp",
 ]);

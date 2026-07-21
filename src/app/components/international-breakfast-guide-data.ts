@@ -60,6 +60,18 @@ export type GuideContent = {
     articleSection: string;
     about: string[];
     mentions: string[];
+    menuItem?: { name: string; description: string; url: string };
+  };
+  travelerBrief?: {
+    title: string;
+    intro: string;
+    facts: { label: string; value: string }[];
+    comparison: {
+      title: string;
+      columns: [string, string, string];
+      rows: { name: string; texture: string; taste: string }[];
+    };
+    phrases: { title: string; intro: string; items: { turkish: string; korean: string }[] };
   };
 };
 
@@ -587,8 +599,8 @@ export const guides: Record<GuideLocale, GuideContent> = {
         "반 아침 식사는 유제품, 곡물, 지역 허브와 따뜻한 요리를 한 상에 함께 놓는 전통으로 알려져 있습니다. 풍성해 보이지만 핵심은 많은 양을 빨리 먹는 데 있지 않습니다. 작은 접시를 함께 나누고 서로 다른 맛을 천천히 비교하는 것이 이 식사의 방식입니다.",
         "처음 방문한다면 발 카이막의 양을 한 번에 정하지 않아도 됩니다. 카이막을 먼저 맛보고 꿀을 조금씩 더해 자신에게 맞는 비율을 찾아보세요. 알레르기나 식단 제한이 있다면 주문 전에 직원에게 현재 재료를 확인하는 것이 좋습니다.",
       ],
-      imageAlt: "베요글루의 반 아침 식탁에서 치즈와 잼, 곡물 요리를 함께 나누는 모습",
-      caption: "한 접시가 아니라, 달고 짠 작은 맛들이 이어지는 식사입니다.",
+      imageAlt: "Tarihi Van Kahvaltı Evi 식탁의 꿀을 올린 카이막, 신선한 빵과 터키 차",
+      caption: "매장에서 실제 제공된 식탁의 카이막과 꿀, 빵, 터키 차.",
     },
     reasons: {
       title: "왜 Tarihi Van Kahvaltı Evi인가요?",
@@ -648,13 +660,46 @@ export const guides: Record<GuideLocale, GuideContent> = {
     authorLabel: "Tarihi Van Kahvaltı Evi 편집팀",
     media: {
       hero: "/images/blog/istanbul-bal-kaymak.webp",
-      article: "/images/hero-parallax/overhead-feast.webp",
+      article: "/images/blog/bal-kaymak-close-up.webp",
       og: "/images/og/istanbul-bal-kaymak.jpg",
     },
     seo: {
       articleSection: "이스탄불 발 카이막과 터키식 아침 식사",
       about: ["발 카이막", "터키식 아침 식사", "반 아침 식사", "베요글루"],
       mentions: ["카이막", "꿀", "피시", "반 허브 치즈", "무르투아", "카부트"],
+      menuItem: {
+        name: "꿀, 버팔로 카이막과 수제 잼",
+        description: "체에 거른 꿀, 버팔로 카이막, 계절에 따라 준비하는 수제 잼 2종",
+        url: "/en/menu#bal-kaymak-recel",
+      },
+    },
+    travelerBrief: {
+      title: "한국인 여행자를 위한 발 카이막 핵심 정보",
+      intro: "검색 결과에서 바로 확인할 수 있도록 메뉴, 위치, 영업시간과 주문 표현을 한곳에 정리했습니다. 가격과 당일 제공 여부는 실시간 영문 메뉴가 가장 정확합니다.",
+      facts: [
+        { label: "현재 메뉴 구성", value: "체에 거른 꿀, 버팔로 카이막, 계절 수제 잼 2종" },
+        { label: "위치", value: "Zambak Sk. No:8, Şehit Muhtar, Beyoğlu, İstanbul" },
+        { label: "영업시간", value: "매일 08:00–18:00" },
+        { label: "여행 동선", value: "탁심 광장·이스티클랄 거리·지한기르에서 도보 이동 가능" },
+      ],
+      comparison: {
+        title: "카이막·버터·생크림은 어떻게 다른가요?",
+        columns: ["음식", "질감", "맛과 먹는 법"],
+        rows: [
+          { name: "카이막", texture: "조밀하고 부드러움", taste: "고소하고 진한 우유 풍미. 꿀과 빵에 곁들임" },
+          { name: "버터", texture: "단단하거나 녹는 지방", taste: "제품에 따라 짠맛이 있으며 빵이나 조리에 사용" },
+          { name: "생크림", texture: "액체 또는 휘핑한 거품", taste: "카이막보다 가볍고 디저트와 음료에 자주 사용" },
+        ],
+      },
+      phrases: {
+        title: "주문할 때 유용한 터키어",
+        intro: "짧은 문장을 화면으로 보여 주거나 그대로 읽어도 됩니다. 알레르기는 주문 전에 반드시 직원에게 알려 주세요.",
+        items: [
+          { turkish: "Bal kaymak var mı?", korean: "발 카이막이 있나요?" },
+          { turkish: "İki kişilik Van kahvaltısı, lütfen.", korean: "2인용 반 아침 식사 부탁합니다." },
+          { turkish: "İçinde kuruyemiş var mı?", korean: "견과류가 들어 있나요?" },
+        ],
+      },
     },
   },
 };

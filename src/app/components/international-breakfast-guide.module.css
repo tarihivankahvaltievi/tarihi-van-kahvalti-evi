@@ -317,6 +317,34 @@
 
 .answerCopy p { margin: 1.25rem 0 0; }
 
+.travelerBrief {
+  padding: clamp(4.5rem, 8vw, 7rem) max(1.5rem, calc((100vw - 1180px) / 2));
+  border-block: 1px solid var(--guide-line);
+  background: #eee5d6;
+}
+
+.travelerBrief > header { display: grid; grid-template-columns: 0.45fr 1fr 1fr; gap: clamp(1.5rem, 4vw, 4rem); align-items: start; }
+.travelerBrief > header .sectionLabel { margin: 0; }
+.travelerBrief h2 { margin: 0; color: var(--guide-burgundy); font-size: clamp(2.2rem, 4vw, 4rem); line-height: 1; }
+.travelerBrief > header > p:last-child, .phrases p { margin: 0; color: var(--guide-body); line-height: 1.72; }
+.factGrid { display: grid; grid-template-columns: repeat(4, 1fr); margin: 3rem 0 0; border-top: 1px solid var(--guide-ink); }
+.factGrid > div { padding: 1.25rem 1rem 1.25rem 0; border-bottom: 1px solid var(--guide-line); }
+.factGrid dt { color: var(--guide-burgundy); font-size: 0.75rem; font-weight: 760; }
+.factGrid dd { margin: 0.55rem 0 0; color: var(--guide-ink); font-size: 0.92rem; font-weight: 620; line-height: 1.55; }
+.comparison, .phrases { margin-top: 3rem; }
+.comparison h3, .phrases h3 { margin: 0 0 1rem; color: var(--guide-burgundy); font-size: 1.45rem; }
+.comparisonScroller { overflow-x: auto; }
+.comparison table { width: 100%; min-width: 620px; border-collapse: collapse; text-align: start; }
+.comparison th, .comparison td { padding: 1rem; border: 1px solid var(--guide-line); line-height: 1.5; text-align: start; }
+.comparison thead th { background: var(--guide-green); color: var(--guide-paper-light); font-size: 0.78rem; }
+.comparison tbody th { color: var(--guide-burgundy); }
+.phrases { display: grid; grid-template-columns: 0.8fr 1.2fr; gap: clamp(2rem, 6vw, 6rem); }
+.phrases ul { margin: 0; padding: 0; border-top: 1px solid var(--guide-ink); list-style: none; }
+.phrases li { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; padding: 1rem 0; border-bottom: 1px solid var(--guide-line); }
+.phrases li strong { color: var(--guide-burgundy); }
+.phrases li span { color: var(--guide-body); }
+.briefMenuLink { display: inline-flex; align-items: center; gap: 0.45rem; margin-top: 2rem; color: var(--guide-burgundy); font-weight: 760; text-decoration: underline; text-underline-offset: 0.28rem; }
+
 .tableSection {
   padding: clamp(4.5rem, 8vw, 7.5rem) max(1.5rem, calc((100vw - 1180px) / 2));
   background: var(--guide-green);
@@ -488,6 +516,7 @@
   .brandLine { align-items: flex-start; flex-direction: column; }
   .languageSwitch { justify-content: flex-start; }
   .firstVisit ol { grid-template-columns: repeat(3, 1fr); }
+  .factGrid { grid-template-columns: repeat(2, 1fr); }
   .firstVisit li { padding-bottom: 1.6rem; }
 }
 
@@ -501,6 +530,7 @@
   .heroVisual { min-height: 72svh; }
   .articleNav { padding-inline: 1.25rem; }
   .answer, .sectionHeading, .tradition, .reasons, .firstVisit > header, .practical, .faq, .sources { grid-template-columns: 1fr; }
+  .travelerBrief > header, .phrases { grid-template-columns: 1fr; }
   .answer { width: min(100% - 2.5rem, 1180px); gap: 1.5rem; padding-block: 4.5rem; }
   .sectionHeading { gap: 1.4rem; }
   .sectionHeading h2 { max-width: 15ch; }
@@ -529,6 +559,8 @@
   .languageSwitch a { padding: 0.3rem 0.36rem; border: 1px solid rgba(255, 250, 241, 0.28); border-radius: 4px; font-size: 0.68rem; text-decoration: none; }
   .heroActions, .practicalActions, .closing > div:last-child { align-items: stretch; flex-direction: column; }
   .heroActions a, .practicalActions a, .closing a { width: 100%; }
+  .factGrid { grid-template-columns: 1fr; }
+  .phrases li { grid-template-columns: 1fr; gap: 0.35rem; }
 }
 
 @media (prefers-reduced-motion: reduce) {

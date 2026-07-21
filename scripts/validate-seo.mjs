@@ -177,7 +177,7 @@ const routes = [
     restaurantMenu: `${menuPageUrl}#menu`,
     faqCount: 6,
     sharedGuideDesign: true,
-    visibleSignals: ["이스탄불 발 카이막", "터키식 아침 식사", "탁심", "1978", "꿀"],
+    visibleSignals: ["이스탄불 발 카이막", "터키식 아침 식사", "탁심", "1978", "버팔로 카이막", "bal kaymak var mı?"],
     hreflang: internationalGuideHreflang,
     sourcedGuide: true,
   },
@@ -502,6 +502,13 @@ for (const route of routes) {
       `${routeLabel}: JSON-LD kaynakları görünür bağlantılarla eşleşmeli`,
     );
   }
+
+  if (route.language === "ko") {
+    assert(html.includes('/images/blog/bal-kaymak-close-up.webp'), `${routeLabel}: gerçek bal-kaymak görseli eksik`);
+    assert(html.includes('/en/menu#bal-kaymak-recel'), `${routeLabel}: doğrudan bal-kaymak menü bağlantısı eksik`);
+    const article = graphDocument["@graph"].find((node) => node["@type"] === "BlogPosting");
+    assert(article?.mentions?.some((item) => item["@type"] === "MenuItem"), `${routeLabel}: bal-kaymak MenuItem entity bağı eksik`);
+  }
 }
 
 for (const route of legalRoutes) {
@@ -553,8 +560,8 @@ for (const guideUrl of [englishBreakfastBlogUrl, russianBreakfastBlogUrl, arabic
     );
   }
   assert(
-    (guideBlock.match(/<image:loc>/g) ?? []).length === 4,
-    `Sitemap: ${guideUrl} için dört keşfedilebilir görsel bulunmalı`,
+    (guideBlock.match(/<image:loc>/g) ?? []).length === (guideUrl === koreanHoneyKaymakBlogUrl ? 5 : 4),
+    `Sitemap: ${guideUrl} için beklenen keşfedilebilir görseller bulunmalı`,
   );
 }
 
@@ -582,7 +589,7 @@ for (const sitemapPath of sitemapPaths) {
 
 const robots = await (await fetchWithRetry("/robots.txt")).text();
 assert(robots.includes("User-Agent: *"), "robots.txt: genel bot kuralı eksik");
-for (const userAgent of ["Googlebot", "Bingbot", "YandexBot", "Applebot", "OAI-SearchBot", "PerplexityBot"]) {
+for (const userAgent of ["Googlebot", "Bingbot", "YandexBot", "Applebot", "Yeti", "OAI-SearchBot", "PerplexityBot"]) {
   assert(robots.includes(`User-Agent: ${userAgent}`), `robots.txt: ${userAgent} keşif kuralı eksik`);
 }
 assert(robots.includes(`${canonicalSiteUrl}/sitemap.xml`), "robots.txt: sitemap eksik");

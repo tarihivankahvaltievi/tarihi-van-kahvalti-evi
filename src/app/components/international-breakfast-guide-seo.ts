@@ -29,7 +29,7 @@ const keywords = {
   en: ["Turkish breakfast Istanbul", "Van breakfast", "breakfast near Taksim", "traditional Turkish breakfast", "Beyoğlu breakfast"],
   ru: ["турецкий завтрак Стамбул", "ванский завтрак", "завтрак рядом с Таксим", "где позавтракать в Стамбуле", "завтрак Бейоглу"],
   ar: ["فطور تركي في إسطنبول", "فطور فان", "فطور قريب من تقسيم", "مطعم فطور إسطنبول", "فطور بيوغلو"],
-  ko: ["이스탄불 발 카이막", "터키 카이막 맛집", "이스탄불 카이막 맛집", "탁심 아침 식사", "터키식 아침 식사", "꿀 카이막"],
+  ko: ["이스탄불 발 카이막", "터키 카이막 맛집", "이스탄불 카이막 맛집", "탁심 아침 식사", "탁심 카이막", "베요글루 아침 식사", "터키식 아침 식사", "반 아침 식사", "꿀 카이막"],
 } as const;
 
 export function buildGuideMetadata(guide: GuideContent): Metadata {
@@ -101,6 +101,12 @@ function guideWordCount(guide: GuideContent) {
     guide.practical.text,
     ...guide.faq.items.flatMap((item) => [item.question, item.answer]),
     guide.closing.text,
+    ...(guide.travelerBrief ? [
+      guide.travelerBrief.intro,
+      ...guide.travelerBrief.facts.flatMap((fact) => [fact.label, fact.value]),
+      ...guide.travelerBrief.comparison.rows.flatMap((row) => [row.name, row.texture, row.taste]),
+      ...guide.travelerBrief.phrases.items.flatMap((phrase) => [phrase.turkish, phrase.korean]),
+    ] : []),
   ].join(" ");
 
   return copy.trim().split(/\s+/u).length;
@@ -151,7 +157,16 @@ export function buildGuideJsonLd(guide: GuideContent) {
         },
         publisher: { "@id": `${siteUrl}/#restaurant` },
         about: guide.seo?.about.map((name) => ({ "@type": "Thing", name })) ?? defaultAbout,
-        mentions: guide.seo?.mentions.map((name) => ({ "@type": "Thing", name })) ?? defaultMentions,
+        mentions: [
+          ...(guide.seo?.mentions.map((name) => ({ "@type": "Thing", name })) ?? defaultMentions),
+          ...(guide.seo?.menuItem ? [{
+            "@type": "MenuItem",
+            name: guide.seo.menuItem.name,
+            description: guide.seo.menuItem.description,
+            url: absoluteUrl(guide.seo.menuItem.url),
+            image: absoluteUrl(guide.media?.article ?? "/images/hands-table.webp"),
+          }] : []),
+        ],
       },
       {
         "@type": "WebPage",

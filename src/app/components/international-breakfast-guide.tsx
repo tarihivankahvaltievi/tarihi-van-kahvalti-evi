@@ -8,7 +8,7 @@ import styles from "./international-breakfast-guide.module.css";
 const languageLabels = { en: "English", ru: "Русский", ar: "العربية", ko: "한국어" } as const;
 
 export function InternationalBreakfastGuide({ guide }: { guide: GuideContent }) {
-  const menuHref = "/en/menu";
+  const menuHref = guide.seo?.menuItem?.url ?? "/en/menu";
 
   return (
     <main
@@ -91,6 +91,48 @@ export function InternationalBreakfastGuide({ guide }: { guide: GuideContent }) 
             {guide.shortAnswer.paragraphs.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
           </div>
         </section>
+
+        {guide.travelerBrief ? (
+          <section className={styles.travelerBrief} aria-labelledby="traveler-brief-title">
+            <header>
+              <p className={styles.sectionLabel}>한눈에 보기</p>
+              <h2 id="traveler-brief-title">{guide.travelerBrief.title}</h2>
+              <p>{guide.travelerBrief.intro}</p>
+            </header>
+            <dl className={styles.factGrid}>
+              {guide.travelerBrief.facts.map((fact) => (
+                <div key={fact.label}>
+                  <dt>{fact.label}</dt>
+                  <dd>{fact.value}</dd>
+                </div>
+              ))}
+            </dl>
+            <div className={styles.comparison}>
+              <h3>{guide.travelerBrief.comparison.title}</h3>
+              <div className={styles.comparisonScroller}>
+                <table>
+                  <thead><tr>{guide.travelerBrief.comparison.columns.map((column) => <th key={column} scope="col">{column}</th>)}</tr></thead>
+                  <tbody>
+                    {guide.travelerBrief.comparison.rows.map((row) => (
+                      <tr key={row.name}><th scope="row">{row.name}</th><td>{row.texture}</td><td>{row.taste}</td></tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div className={styles.phrases}>
+              <div><h3>{guide.travelerBrief.phrases.title}</h3><p>{guide.travelerBrief.phrases.intro}</p></div>
+              <ul>
+                {guide.travelerBrief.phrases.items.map((phrase) => (
+                  <li key={phrase.turkish}><strong lang="tr">{phrase.turkish}</strong><span>{phrase.korean}</span></li>
+                ))}
+              </ul>
+            </div>
+            <Link className={styles.briefMenuLink} href={menuHref} hrefLang="en">
+              {guide.hero.menuLabel} <ArrowUpRight size={16} aria-hidden="true" />
+            </Link>
+          </section>
+        ) : null}
 
         <section id="breakfast-table" className={styles.tableSection} aria-labelledby="table-title">
           <header className={styles.sectionHeading}>
