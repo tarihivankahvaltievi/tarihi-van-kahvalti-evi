@@ -8,6 +8,10 @@
   display: none;
 }
 
+.hero-mobile-scene {
+  display: none;
+}
+
 .theme-breakfast .nav-language {
   display: inline-flex;
   min-width: 42px;
@@ -658,16 +662,30 @@
     display: none !important;
   }
 
-  .theme-breakfast .hero-parallax-food-stage {
-    top: 20.65rem !important;
+  .theme-breakfast .hero-mobile-scene {
+    position: absolute;
+    inset: 20.5rem 0 0;
+    display: block;
+    margin: 0;
+    overflow: hidden;
+    background: #2b211b;
   }
 
-  .theme-breakfast .hero-locale-en .hero-parallax-food-stage .hero-float-tea {
-    top: 18% !important;
+  .theme-breakfast .hero-mobile-scene::after {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(244, 236, 223, 0.86) 0, rgba(244, 236, 223, 0) 12%);
+    content: "";
+    pointer-events: none;
   }
 
-  .theme-breakfast .hero-parallax-gallery {
-    top: 66% !important;
+  .theme-breakfast .hero-mobile-scene img {
+    object-fit: cover;
+    object-position: 50% 44%;
+  }
+
+  .theme-breakfast .hero-locale-en .hero-mobile-scene {
+    inset-block-start: 25.35rem;
   }
 }
 
@@ -676,11 +694,11 @@
     top: 6.7rem !important;
   }
 
-  .theme-breakfast .hero-parallax-food-stage {
-    top: 19.1rem !important;
+  .theme-breakfast .hero-mobile-scene {
+    inset-block-start: 19.2rem;
   }
 
-  .theme-breakfast .hero-locale-en .hero-parallax-food-stage .hero-float-tea {
-    top: 34% !important;
+  .theme-breakfast .hero-locale-en .hero-mobile-scene {
+    inset-block-start: 25.5rem;
   }
 }
