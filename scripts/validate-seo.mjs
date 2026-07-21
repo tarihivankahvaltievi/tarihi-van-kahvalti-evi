@@ -8,6 +8,7 @@ const baseUrl = process.env.SEO_TEST_BASE_URL ?? "http://127.0.0.1:3100";
 const canonicalSiteUrl = "https://www.tarihivankahvaltievi.com";
 const menuPageUrl = `${canonicalSiteUrl}/menu`;
 const englishPageUrl = `${canonicalSiteUrl}/en`;
+const koreanPageUrl = `${canonicalSiteUrl}/ko`;
 const englishMenuPageUrl = `${englishPageUrl}/menu`;
 const guidePageUrl = `${canonicalSiteUrl}/van-kahvaltisi`;
 const culturePageUrl = `${canonicalSiteUrl}/van-kahvaltisi-nedir`;
@@ -15,6 +16,8 @@ const englishBreakfastBlogUrl = `${canonicalSiteUrl}/en/blog/turkish-breakfast-i
 const russianBreakfastBlogUrl = `${canonicalSiteUrl}/ru/blog/turetskiy-zavtrak-stambul`;
 const arabicBreakfastBlogUrl = `${canonicalSiteUrl}/ar/blog/turkish-breakfast-istanbul`;
 const koreanHoneyKaymakBlogUrl = `${canonicalSiteUrl}/ko/blog/istanbul-bal-kaymak`;
+const koreanKaymakExplainerUrl = `${canonicalSiteUrl}/ko/blog/kaymak-nedir`;
+const koreanTurkishBreakfastBlogUrl = `${canonicalSiteUrl}/ko/blog/turkish-breakfast-istanbul`;
 const japaneseHoneyKaymakBlogUrl = `${canonicalSiteUrl}/ja/blog/istanbul-bal-kaymak`;
 const storyPageUrl = `${canonicalSiteUrl}/hikayemiz`;
 const privacyPageUrl = `${canonicalSiteUrl}/gizlilik`;
@@ -26,6 +29,7 @@ const expectedBingVerification = process.env.SEO_EXPECT_BING_SITE_VERIFICATION?.
 const homeHreflang = {
   tr: canonicalSiteUrl,
   en: englishPageUrl,
+  ko: koreanPageUrl,
   "x-default": canonicalSiteUrl,
 };
 
@@ -39,9 +43,13 @@ const internationalGuideHreflang = {
   en: englishBreakfastBlogUrl,
   ru: russianBreakfastBlogUrl,
   ar: arabicBreakfastBlogUrl,
+  ko: koreanTurkishBreakfastBlogUrl,
+  "x-default": englishBreakfastBlogUrl,
+};
+
+const honeyKaymakHreflang = {
   ko: koreanHoneyKaymakBlogUrl,
   ja: japaneseHoneyKaymakBlogUrl,
-  "x-default": englishBreakfastBlogUrl,
 };
 
 const routes = [
@@ -130,6 +138,18 @@ const routes = [
     hreflang: menuHreflang,
   },
   {
+    path: "/ko",
+    canonical: koreanPageUrl,
+    language: "ko",
+    languageTag: "ko-KR",
+    htmlLanguage: "tr",
+    types: ["Restaurant", ["WebPage", "CollectionPage"], "BreadcrumbList", "FAQPage"],
+    restaurantMenu: `${menuPageUrl}#menu`,
+    faqCount: 5,
+    visibleSignals: ["발 카이막", "카이막", "터키식 아침 식사", "탁심", "1978"],
+    hreflang: homeHreflang,
+  },
+  {
     path: "/en/blog/turkish-breakfast-istanbul",
     canonical: englishBreakfastBlogUrl,
     language: "en",
@@ -141,6 +161,7 @@ const routes = [
     visibleSignals: ["turkish breakfast", "van breakfast", "taksim", "murtuğa", "since 1978"],
     hreflang: internationalGuideHreflang,
     sourcedGuide: true,
+    citationCount: 4,
   },
   {
     path: "/ru/blog/turetskiy-zavtrak-stambul",
@@ -154,6 +175,7 @@ const routes = [
     visibleSignals: ["турецкий завтрак", "ванский завтрак", "таксим", "муртуга", "1978"],
     hreflang: internationalGuideHreflang,
     sourcedGuide: true,
+    citationCount: 4,
   },
   {
     path: "/ar/blog/turkish-breakfast-istanbul",
@@ -168,6 +190,7 @@ const routes = [
     visibleSignals: ["الفطور التركي", "فطور فان", "تقسيم", "المورتوغا", "1978"],
     hreflang: internationalGuideHreflang,
     sourcedGuide: true,
+    citationCount: 4,
   },
   {
     path: "/ko/blog/istanbul-bal-kaymak",
@@ -180,8 +203,41 @@ const routes = [
     faqCount: 6,
     sharedGuideDesign: true,
     visibleSignals: ["이스탄불 발 카이막", "터키식 아침 식사", "탁심", "1978", "버팔로 카이막", "bal kaymak var mı?"],
+    hreflang: honeyKaymakHreflang,
+    sourcedGuide: true,
+    citationCount: 4,
+    honeyKaymakGuide: true,
+  },
+  {
+    path: "/ko/blog/kaymak-nedir",
+    canonical: koreanKaymakExplainerUrl,
+    language: "ko",
+    languageTag: "ko-KR",
+    htmlLanguage: "tr",
+    types: ["Restaurant", "BlogPosting", "WebPage", "BreadcrumbList", "FAQPage"],
+    restaurantMenu: `${menuPageUrl}#menu`,
+    faqCount: 8,
+    sharedGuideDesign: true,
+    visibleSignals: ["카이막", "물소유", "발 카이막", "버터", "생크림", "bal kaymak var mı?"],
+    hreflang: { ko: koreanKaymakExplainerUrl },
+    sourcedGuide: true,
+    citationCount: 4,
+    honeyKaymakGuide: true,
+  },
+  {
+    path: "/ko/blog/turkish-breakfast-istanbul",
+    canonical: koreanTurkishBreakfastBlogUrl,
+    language: "ko",
+    languageTag: "ko-KR",
+    htmlLanguage: "tr",
+    types: ["Restaurant", "BlogPosting", "WebPage", "BreadcrumbList", "FAQPage"],
+    restaurantMenu: `${menuPageUrl}#menu`,
+    faqCount: 8,
+    sharedGuideDesign: true,
+    visibleSignals: ["터키식 아침 식사", "카흐발트", "반 아침 식사", "탁심", "무르투아", "카부트"],
     hreflang: internationalGuideHreflang,
     sourcedGuide: true,
+    citationCount: 5,
   },
   {
     path: "/ja/blog/istanbul-bal-kaymak",
@@ -194,8 +250,10 @@ const routes = [
     faqCount: 9,
     sharedGuideDesign: true,
     visibleSignals: ["イスタンブールで味わう", "バル・カイマク", "タクシム", "1978", "水牛のカイマク", "bal kaymak var mı?"],
-    hreflang: internationalGuideHreflang,
+    hreflang: honeyKaymakHreflang,
     sourcedGuide: true,
+    citationCount: 4,
+    honeyKaymakGuide: true,
   },
 ];
 
@@ -417,12 +475,12 @@ for (const route of routes) {
     );
   }
 
-  if (!route.sharedGuideDesign) {
+  if (!route.sharedGuideDesign && route.language !== "ko") {
     for (const [language, href] of Object.entries({
       en: "/en/blog/turkish-breakfast-istanbul",
       ru: "/ru/blog/turetskiy-zavtrak-stambul",
       ar: "/ar/blog/turkish-breakfast-istanbul",
-      ko: "/ko/blog/istanbul-bal-kaymak",
+      ko: "/ko",
       ja: "/ja/blog/istanbul-bal-kaymak",
     })) {
       assert(
@@ -513,7 +571,7 @@ for (const route of routes) {
 
   if (route.sourcedGuide) {
     const article = graphDocument["@graph"].find((node) => node["@type"] === "BlogPosting");
-    assert(article?.citation?.length === 4, `${routeLabel}: dört birincil kaynak citation olarak bağlanmalı`);
+    assert(article?.citation?.length === route.citationCount, `${routeLabel}: beklenen birincil kaynak citation sayısı yanlış`);
     assert(article?.mentions?.length >= 3, `${routeLabel}: yöresel ürün entity bağları eksik`);
     assert(
       article.citation.every((url) => html.includes(`href="${url}"`)),
@@ -521,7 +579,7 @@ for (const route of routes) {
     );
   }
 
-  if (["ko", "ja"].includes(route.language)) {
+  if (route.honeyKaymakGuide) {
     assert(html.includes('/images/blog/bal-kaymak-close-up.webp'), `${routeLabel}: gerçek bal-kaymak görseli eksik`);
     assert(html.includes('/en/menu#bal-kaymak-recel'), `${routeLabel}: doğrudan bal-kaymak menü bağlantısı eksik`);
     const article = graphDocument["@graph"].find((node) => node["@type"] === "BlogPosting");
@@ -574,7 +632,7 @@ assert(sitemap.includes('hreflang="ko"'), "Sitemap: Korece hreflang eksik");
 assert(sitemap.includes('hreflang="ja"'), "Sitemap: Japonca hreflang eksik");
 assert(sitemap.includes('hreflang="x-default"'), "Sitemap: x-default hreflang eksik");
 
-for (const guideUrl of [englishBreakfastBlogUrl, russianBreakfastBlogUrl, arabicBreakfastBlogUrl, koreanHoneyKaymakBlogUrl, japaneseHoneyKaymakBlogUrl]) {
+for (const guideUrl of [englishBreakfastBlogUrl, russianBreakfastBlogUrl, arabicBreakfastBlogUrl, koreanTurkishBreakfastBlogUrl]) {
   const guideBlock = sitemap.match(
     new RegExp(`<url>\\s*<loc>${guideUrl}</loc>([\\s\\S]*?)</url>`),
   )?.[1];
@@ -586,8 +644,25 @@ for (const guideUrl of [englishBreakfastBlogUrl, russianBreakfastBlogUrl, arabic
     );
   }
   assert(
-    (guideBlock.match(/<image:loc>/g) ?? []).length === ([koreanHoneyKaymakBlogUrl, japaneseHoneyKaymakBlogUrl].includes(guideUrl) ? 5 : 4),
+    (guideBlock.match(/<image:loc>/g) ?? []).length === 4,
     `Sitemap: ${guideUrl} için beklenen keşfedilebilir görseller bulunmalı`,
+  );
+}
+
+for (const guideUrl of [koreanHoneyKaymakBlogUrl, japaneseHoneyKaymakBlogUrl]) {
+  const guideBlock = sitemap.match(
+    new RegExp(`<url>\\s*<loc>${guideUrl}</loc>([\\s\\S]*?)</url>`),
+  )?.[1];
+  assert(guideBlock, `Sitemap: bal-kaymak rehber URL bloğu eksik (${guideUrl})`);
+  for (const [language, alternateUrl] of Object.entries(honeyKaymakHreflang)) {
+    assert(
+      guideBlock.includes(`hreflang="${language}" href="${alternateUrl}"`),
+      `Sitemap: ${guideUrl} için ${language} bal-kaymak hreflang eksik`,
+    );
+  }
+  assert(
+    (guideBlock.match(/<image:loc>/g) ?? []).length === 5,
+    `Sitemap: ${guideUrl} için beş keşfedilebilir görsel bulunmalı`,
   );
 }
 
@@ -656,7 +731,10 @@ for (const guidePath of [
   "/en/blog/turkish-breakfast-istanbul",
   "/ru/blog/turetskiy-zavtrak-stambul",
   "/ar/blog/turkish-breakfast-istanbul",
+  "/ko",
   "/ko/blog/istanbul-bal-kaymak",
+  "/ko/blog/kaymak-nedir",
+  "/ko/blog/turkish-breakfast-istanbul",
   "/ja/blog/istanbul-bal-kaymak",
 ]) {
   assert(indexNowScript.includes(guidePath), `IndexNow: yeni rehber varsayılan bildirim listesinde eksik (${guidePath})`);

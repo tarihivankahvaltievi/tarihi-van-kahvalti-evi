@@ -17,3 +17,11 @@ export const coreVanBreakfastCitations = [
   vanBreakfastSources.murtuga,
   vanBreakfastSources.kavutRegistration,
 ] as const;
+
+export const kaymakSources = {
+  afyonKaymakRegistration: "https://ci.turkpatent.gov.tr/cografi-isaretler/detay/37936",
+  afyonKaymakCulturePortal:
+    "https://kulturportali.gov.tr/turkiye/afyonkarahisar/nealinir/afyon-kaymagi",
+  turkishBreakfastGoTurkiye: "https://gastronomy.goturkiye.com/turkish-breakfast",
+  istanbulBreakfastGoTurkiye: "https://goturkiye.com/istanbul/the-banquet-breakfast",
+} as const;

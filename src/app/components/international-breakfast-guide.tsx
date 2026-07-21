@@ -9,6 +9,12 @@ const languageLabels = { en: "English", ru: "Русский", ar: "العربي�
 
 export function InternationalBreakfastGuide({ guide }: { guide: GuideContent }) {
   const menuHref = guide.seo?.menuItem?.url ?? "/en/menu";
+  const homeHref = guide.locale === "en" ? "/en" : guide.locale === "ko" ? "/ko" : "/";
+  const languageLinks = guide.languageLinks ?? Object.entries(guidePaths).filter(([locale]) => locale !== "ja").map(([locale, path]) => ({
+    label: languageLabels[locale as keyof typeof languageLabels],
+    href: path,
+    hrefLang: locale,
+  }));
 
   return (
     <main
@@ -22,19 +28,19 @@ export function InternationalBreakfastGuide({ guide }: { guide: GuideContent }) 
         <header className={styles.hero}>
           <div className={styles.heroCopy}>
             <div className={styles.brandLine}>
-              <Link href={guide.locale === "en" ? "/en" : "/"} aria-label="Tarihi Van Kahvaltı Evi">
+              <Link href={homeHref} aria-label="Tarihi Van Kahvaltı Evi">
                 <Image src="/images/brand-icon-small.png" alt="" width={46} height={58} priority />
                 <span>Tarihi Van Kahvaltı Evi</span>
               </Link>
               <nav className={styles.languageSwitch} aria-label="Language versions">
-                {Object.entries(guidePaths).map(([locale, path]) => (
+                {languageLinks.map((link) => (
                   <Link
-                    key={locale}
-                    href={path}
-                    hrefLang={locale}
-                    aria-current={guide.locale === locale ? "page" : undefined}
+                    key={link.href}
+                    href={link.href}
+                    hrefLang={link.hrefLang}
+                    aria-current={link.href === guide.path ? "page" : undefined}
                   >
-                    {languageLabels[locale as keyof typeof languageLabels]}
+                    {link.label}
                   </Link>
                 ))}
               </nav>
@@ -59,7 +65,7 @@ export function InternationalBreakfastGuide({ guide }: { guide: GuideContent }) 
             <p className={styles.byline}>
               {guide.authorHref ? <Link href={guide.authorHref}>{guide.authorLabel}</Link> : guide.authorLabel}{" "}
               <span aria-hidden="true">·</span> {guide.updatedLabel}:{" "}
-              <time dateTime="2026-07-21">{guide.dateLabel}</time>
+              <time dateTime={guide.dates?.visible ?? "2026-07-21"}>{guide.dateLabel}</time>
             </p>
           </div>
 
@@ -264,6 +270,25 @@ export function InternationalBreakfastGuide({ guide }: { guide: GuideContent }) 
           </ul>
         </aside>
 
+        {guide.relatedGuides?.length ? (
+          <section className={styles.related} aria-labelledby="related-guides-title">
+            <header>
+              <p>한국어로 더 알아보기</p>
+              <h2 id="related-guides-title">다음 가이드</h2>
+            </header>
+            <div>
+              {guide.relatedGuides.map((item) => (
+                <Link key={item.href} href={item.href} hrefLang="ko">
+                  <span>{item.label}</span>
+                  <h3>{item.title}</h3>
+                  <p>{item.description}</p>
+                  <b>가이드 읽기 <ArrowUpRight size={15} aria-hidden="true" /></b>
+                </Link>
+              ))}
+            </div>
+          </section>
+        ) : null}
+
         <section className={styles.closing}>
           <div>
             <h2>{guide.closing.title}</h2>
@@ -277,7 +302,7 @@ export function InternationalBreakfastGuide({ guide }: { guide: GuideContent }) 
       </article>
 
       <footer className={styles.footer}>
-        <Link href={guide.locale === "en" ? "/en" : "/"} className={styles.footerBrand}>
+        <Link href={homeHref} className={styles.footerBrand}>
           <Image src="/images/brand-icon-small.png" alt="" width={40} height={50} />
           <span>Tarihi Van Kahvaltı Evi<small>{guide.footer.note}</small></span>
         </Link>

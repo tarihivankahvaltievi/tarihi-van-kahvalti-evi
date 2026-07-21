@@ -18,7 +18,10 @@ const defaultUrls = [
   `${siteUrl}/en/blog/turkish-breakfast-istanbul`,
   `${siteUrl}/ru/blog/turetskiy-zavtrak-stambul`,
   `${siteUrl}/ar/blog/turkish-breakfast-istanbul`,
+  `${siteUrl}/ko`,
   `${siteUrl}/ko/blog/istanbul-bal-kaymak`,
+  `${siteUrl}/ko/blog/kaymak-nedir`,
+  `${siteUrl}/ko/blog/turkish-breakfast-istanbul`,
   `${siteUrl}/ja/blog/istanbul-bal-kaymak`,
 ];
 

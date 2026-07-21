@@ -6,7 +6,7 @@ Bu belge, `van kahvaltıcısı`, `Beyoğlu kahvaltı`, `Taksim kahvaltı`, `Turk
 
 ## Uygulanan teknik SEO/GEO kapsamı
 
-- Sitemap 15 indekslenebilir kanonik URL'yi içerir: altı Türkçe ana içerik sayfası, Türkçe/İngilizce menü, İngilizce ana ziyaretçi sayfası, İngilizce/Rusça/Arapça/Korece/Japonca uluslararası rehberler ve iki yasal bilgilendirme sayfası. Eski, yönlendirilen, yönetim veya API URL'leri sitemap'e alınmaz.
+- Sitemap 18 indekslenebilir kanonik URL'yi içerir: altı Türkçe ana içerik sayfası, Türkçe/İngilizce menü, İngilizce ve Korece ziyaretçi merkezleri, İngilizce/Rusça/Arapça/Korece Türk kahvaltısı rehberleri, ayrı Korece/Japonca bal-kaymak rehberleri, Korece “kaymak nedir?” bilgi rehberi ve iki yasal bilgilendirme sayfası. Eski, yönlendirilen, yönetim veya API URL'leri sitemap'e alınmaz.
 - Görsel sitemap kapsamı ana sayfadaki galeri/hero varlıklarını, canlı menü verisinden okunan güncel kategori/ürün görsellerini ve rehber/hikâye sayfalarındaki gerçek görselleri sayfa bazında listeler. Yinelenen görsel URL'leri her sayfada tekilleştirilir.
 - Türkçe ana sayfa ile İngilizce ziyaretçi rehberi arasında karşılıklı `tr`, `en` ve `x-default` hreflang ilişkisi hem sayfa başlıklarında hem sitemap'te tanımlıdır.
 - Türkçe canlı menü ile İngilizce canlı menü arasında ayrı ve karşılıklı `tr`, `en` ve `x-default` hreflang kümesi bulunur. İngilizce menü, aynı Supabase menü kaynağından güncel fiyatları alır ve özgün İngilizce ürün açıklamaları sunar.
@@ -21,7 +21,7 @@ Bu belge, `van kahvaltıcısı`, `Beyoğlu kahvaltı`, `Taksim kahvaltı`, `Turk
 - `robots.txt` genel botlara ek olarak Googlebot, Bingbot, YandexBot, Applebot, Naver `Yeti`, `OAI-SearchBot` ve `PerplexityBot` için açık arama/grounding grubu yayımlar; yalnız yönetim API'si ve sunucu içi yollar kapalıdır. Kanonik sitemap adresi bildirilir.
 - IndexNow anahtarı alan adında yayımlanır ve `npm run seo:indexnow` Bing, Naver, Seznam gibi katılımcı motorlara değişen URL'leri toplu bildirir. Varsayılan liste İngilizce, Rusça, Arapça, Korece ve Japonca rehberleri de kapsar. Bu bir tarama bildirimi olup indeksleme veya sıralama garantisi değildir.
 - Eski Türkçe sorgu URL'leri en yakın gerçek içeriğe, eski İngilizce sorgu URL'leri `/en` sayfasına tek adımlı kalıcı yönlenir.
-- Derleme sonrası SEO sözleşmesi 15 kanonik sayfada canonical, hreflang, dil başlığı, title, description, H1, görünür metin, JSON-LD, sitemap, en az 50 görsel sitemap kaydı, doğru `lastmod`, yedi arama/AI botu, IndexNow kapsamı, yönlendirme, 404 ve doğrudan `200` dahili bağlantıları otomatik denetler. Korece ve Japonca sayfalarda gerçek bal-kaymak görseli, doğrudan menü bağlantısı, yerelleştirilmiş ziyaretçi bilgileri ve `MenuItem` varlığı ayrıca doğrulanır.
+- Derleme sonrası SEO sözleşmesi 18 kanonik sayfada canonical, hreflang, dil başlığı, title, description, H1, görünür metin, JSON-LD, sitemap, en az 50 görsel sitemap kaydı, doğru `lastmod`, yedi arama/AI botu, IndexNow kapsamı, yönlendirme, 404 ve doğrudan `200` dahili bağlantıları otomatik denetler. Korece bal-kaymak sayfalarında gerçek ürün görseli, doğrudan menü bağlantısı, yerelleştirilmiş ziyaretçi bilgileri ve `MenuItem` varlığı ayrıca doğrulanır.
 
 ## Ölçülen performans etkisi
 
@@ -84,8 +84,8 @@ Denetlenen kayıtlar:
 
 ### Naver ve Koreli turistler
 
-- Naver Search Advisor'da alan adı doğrulanmalı, `https://www.tarihivankahvaltievi.com/sitemap.xml` gönderilmeli ve `/ko/blog/istanbul-bal-kaymak` için URL 수집 (URL toplama) isteği bir kez çalıştırılmalıdır. Bu işlemler işletme hesabı erişimi gerektirir.
-- Korece rehberde 발 카이막, 이스탄불 카이막 맛집, 탁심 아침 식사 niyetleri; gerçek menü içeriği, açık adres, her gün `08:00–18:00` çalışma saati, ulaşılabilir semtler ve Türkçe sipariş cümleleri görünür metin olarak sunulur.
+- Naver Search Advisor'da alan adı doğrulanmalı, `https://www.tarihivankahvaltievi.com/sitemap.xml` gönderilmeli ve `/ko`, `/ko/blog/istanbul-bal-kaymak`, `/ko/blog/kaymak-nedir`, `/ko/blog/turkish-breakfast-istanbul` için URL 수집 (URL toplama) isteği birer kez çalıştırılmalıdır. Bu işlemler işletme hesabı erişimi gerektirir.
+- Korece içerik kümesi üç ayrı niyeti çakışmadan karşılar: `/ko/blog/istanbul-bal-kaymak` yerel restoran/ziyaret niyeti (`이스탄불 카이막 맛집`, `탁심 카이막`); `/ko/blog/kaymak-nedir` bilgi niyeti (`카이막 뜻`, `카이막 맛`, `물소 카이막`); `/ko/blog/turkish-breakfast-istanbul` geniş seyahat niyeti (`터키식 아침 식사`, `탁심 아침 식사`, `카흐발트`). `/ko` bu sayfaları gerçek kullanıcı görevlerine göre bağlayan merkezdir.
 - Naver'ın içerik rehberine uygun olarak önemli bilgiler yalnız görsele gömülmez; anlamlı Korece alt metin, özgün restoran fotoğrafı ve görünür açıklama birlikte kullanılır. İlgisiz anahtar kelime tekrarına gidilmez.
 - Naver Blog, Korece İstanbul gezi içerikleri ve Koreli yemek/seyahat üreticilerinde ücretli link ağı yerine gerçek editoryal deneyim hedeflenmelidir. Davet veya iş birliği varsa açıkça belirtilmeli; sahte Korece yorum üretilmemelidir.
 - Aylık sorgu kümesi: `이스탄불 발 카이막`, `이스탄불 카이막 맛집`, `터키 카이막 맛집`, `탁심 아침 식사`, `터키식 아침 식사`. Naver Search Advisor ve Search Console'da gösterim, tıklama, CTR ve hedef sayfa birlikte izlenmelidir.
@@ -119,7 +119,7 @@ Denetlenen kayıtlar:
 
 ## 30/60/90 günlük ölçüm rutini
 
-- İlk 30 gün: Search Console/Bing/Yandex/Naver doğrulama, sitemap, profil saat-adres düzeltmeleri, 15 kanonik URL'nin indeks durumu ve ilk sorgu tablosu. Bing'de Search Performance yanında AI Performance / grounding sorgularının başlangıç görüntüsünü kaydedin.
+- İlk 30 gün: Search Console/Bing/Yandex/Naver doğrulama, sitemap, profil saat-adres düzeltmeleri, 18 kanonik URL'nin indeks durumu ve ilk sorgu tablosu. Bing'de Search Performance yanında AI Performance / grounding sorgularının başlangıç görüntüsünü kaydedin.
 - 31–60 gün: gerçek müşteri yorum akışı, fotoğraf güncellemeleri, İngilizce sorguların gösterim/CTR incelemesi, düşük CTR title/description testi. Aynı anda tek anlamlı değişiklik yapın.
 - 61–90 gün: sorgu niyetine göre yeni içeriğe gerçekten ihtiyaç olup olmadığını değerlendirin; NAP düzeltmelerinin yayılımını ve 28 günlük Core Web Vitals saha verisini karşılaştırın.
 - Sıralamayı kişiselleştirilmiş tek bir tarayıcı aramasından değil, Search Console sorgu/sayfa verisi ve profil eylemlerinden değerlendirin.

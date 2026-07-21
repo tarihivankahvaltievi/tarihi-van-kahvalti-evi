@@ -527,6 +527,25 @@
 .sources a:hover { color: var(--guide-burgundy); text-decoration: underline; text-underline-offset: 0.24rem; }
 .sources svg { flex: 0 0 auto; }
 
+.related {
+  display: grid;
+  grid-template-columns: minmax(15rem, 0.62fr) minmax(0, 1.38fr);
+  gap: clamp(2.5rem, 7vw, 7rem);
+  padding: clamp(4rem, 8vw, 7rem) max(1.5rem, calc((100vw - 1180px) / 2));
+  border-top: 1px solid var(--guide-line);
+  background: var(--guide-paper-light);
+}
+.related header > p { margin: 0 0 0.8rem; color: var(--guide-gold); font-size: 0.76rem; font-weight: 760; }
+.related h2 { margin: 0; color: var(--guide-burgundy); font-size: clamp(2.4rem, 4.5vw, 4.2rem); line-height: 1; }
+.related > div { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); border-top: 1px solid var(--guide-ink); }
+.related > div > a { display: flex; min-width: 0; flex-direction: column; padding: 1.5rem; border-bottom: 1px solid var(--guide-line); color: var(--guide-ink); text-decoration: none; }
+.related > div > a + a { border-inline-start: 1px solid var(--guide-line); }
+.related a > span { color: var(--guide-burgundy); font-size: 0.72rem; font-weight: 760; }
+.related h3 { margin: 1rem 0 0; font-size: clamp(1.25rem, 2vw, 1.7rem); line-height: 1.25; }
+.related a > p { margin: 0.8rem 0 1.5rem; color: var(--guide-body); font-size: 0.9rem; line-height: 1.7; }
+.related a > b { display: inline-flex; align-items: center; gap: 0.4rem; margin-top: auto; color: var(--guide-burgundy); font-size: 0.8rem; }
+.related a:hover h3 { color: var(--guide-burgundy); text-decoration: underline; text-underline-offset: 0.25rem; }
+
 .closing {
   display: flex;
   align-items: end;
@@ -575,7 +594,7 @@
   .heroVisual { min-height: 72svh; }
   .articleNav { padding-inline: 1.25rem; }
   .breadcrumbs { width: min(100% - 2.5rem, 1180px); }
-  .answer, .sectionHeading, .tradition, .reasons, .firstVisit > header, .practical, .faq, .sources { grid-template-columns: 1fr; }
+  .answer, .sectionHeading, .tradition, .reasons, .firstVisit > header, .practical, .faq, .sources, .related { grid-template-columns: 1fr; }
   .travelerBrief > header, .phrases { grid-template-columns: 1fr; }
   .answer { width: min(100% - 2.5rem, 1180px); gap: 1.5rem; padding-block: 4.5rem; }
   .sectionHeading { gap: 1.4rem; }
@@ -598,6 +617,9 @@
   .closing, .footer { align-items: flex-start; flex-direction: column; }
   .closing > div:last-child { margin-top: 0.6rem; }
   .footer nav { justify-content: flex-start; }
+  .related > div { grid-template-columns: 1fr; }
+  .related > div > a { padding-inline: 0; }
+  .related > div > a + a { border-inline-start: 0; }
 }
 
 @media (max-width: 440px) {

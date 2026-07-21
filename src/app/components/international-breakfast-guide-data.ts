@@ -52,6 +52,20 @@ export type GuideContent = {
   dateLabel: string;
   authorLabel: string;
   authorHref?: string;
+  dates?: {
+    published: string;
+    modified: string;
+    visible: string;
+  };
+  metadataKeywords?: string[];
+  metadataAlternates?: Record<string, string>;
+  languageLinks?: { label: string; href: string; hrefLang: string }[];
+  relatedGuides?: {
+    label: string;
+    title: string;
+    description: string;
+    href: string;
+  }[];
   breadcrumbs?: { aria: string; home: string; current: string };
   media?: {
     hero: string;
@@ -60,7 +74,7 @@ export type GuideContent = {
   };
   seo?: {
     articleSection: string;
-    about: string[];
+    about?: string[];
     mentions: string[];
     menuItem?: { name: string; description: string; url: string };
     entityRefs?: { name: string; type?: "Thing" | "Place"; sameAs?: string }[];
@@ -83,7 +97,7 @@ export const guidePaths = {
   en: "/en/blog/turkish-breakfast-istanbul",
   ru: "/ru/blog/turetskiy-zavtrak-stambul",
   ar: "/ar/blog/turkish-breakfast-istanbul",
-  ko: "/ko/blog/istanbul-bal-kaymak",
+  ko: "/ko/blog/turkish-breakfast-istanbul",
   ja: "/ja/blog/istanbul-bal-kaymak",
 } as const;
 
@@ -514,7 +528,7 @@ export const guides: Record<GuideLocale, GuideContent> = {
     locale: "ko",
     languageTag: "ko-KR",
     direction: "ltr",
-    path: guidePaths.ko,
+    path: "/ko/blog/istanbul-bal-kaymak",
     title: "이스탄불 발 카이막 맛집: 터키 꿀·카이막 가이드 | Tarihi Van",
     description:
       "이스탄불 탁심 근처에서 터키식 발 카이막을 맛보세요. 꿀과 카이막을 먹는 법, 반 아침 식사 구성, 위치와 영업시간을 한국어로 안내합니다.",
@@ -667,8 +681,37 @@ export const guides: Record<GuideLocale, GuideContent> = {
     },
     footer: { note: "1978년부터 베요글루에서 이어온 전통 반 아침 식사.", home: "영문 홈페이지", menu: "메뉴", directions: "길찾기" },
     updatedLabel: "마지막 검토",
-    dateLabel: "2026년 7월 21일",
+    dateLabel: "2026년 7월 22일",
     authorLabel: "Tarihi Van Kahvaltı Evi 편집팀",
+    dates: {
+      published: "2026-07-21T09:00:00+03:00",
+      modified: "2026-07-22T00:30:00+03:00",
+      visible: "2026-07-22",
+    },
+    metadataAlternates: {
+      ko: "https://www.tarihivankahvaltievi.com/ko/blog/istanbul-bal-kaymak",
+      ja: "https://www.tarihivankahvaltievi.com/ja/blog/istanbul-bal-kaymak",
+    },
+    languageLinks: [
+      { label: "한국어 홈", href: "/ko", hrefLang: "ko" },
+      { label: "카이막이란", href: "/ko/blog/kaymak-nedir", hrefLang: "ko" },
+      { label: "터키식 아침", href: "/ko/blog/turkish-breakfast-istanbul", hrefLang: "ko" },
+      { label: "日本語", href: "/ja/blog/istanbul-bal-kaymak", hrefLang: "ja" },
+    ],
+    relatedGuides: [
+      {
+        label: "카이막 기본 가이드",
+        title: "카이막은 무엇이고 어떤 맛일까요?",
+        description: "만드는 원리, 물소·소 카이막의 차이, 버터·생크림과 다른 점을 한국어로 정리했습니다.",
+        href: "/ko/blog/kaymak-nedir",
+      },
+      {
+        label: "이스탄불 아침 식사",
+        title: "탁심에서 즐기는 터키식 아침 식사",
+        description: "카흐발트 주문법과 반 아침 식사의 대표 메뉴, 여행 동선과 방문 팁을 확인하세요.",
+        href: "/ko/blog/turkish-breakfast-istanbul",
+      },
+    ],
     media: {
       hero: "/images/blog/istanbul-bal-kaymak.webp",
       article: "/images/blog/bal-kaymak-close-up.webp",
@@ -837,6 +880,15 @@ export const guides: Record<GuideLocale, GuideContent> = {
     dateLabel: "2026年7月21日",
     authorLabel: "Tarihi Van Kahvaltı Evi 編集チーム",
     authorHref: "/en#story",
+    metadataAlternates: {
+      ja: "https://www.tarihivankahvaltievi.com/ja/blog/istanbul-bal-kaymak",
+      ko: "https://www.tarihivankahvaltievi.com/ko/blog/istanbul-bal-kaymak",
+    },
+    languageLinks: [
+      { label: "日本語", href: "/ja/blog/istanbul-bal-kaymak", hrefLang: "ja" },
+      { label: "한국어 발 카이막", href: "/ko/blog/istanbul-bal-kaymak", hrefLang: "ko" },
+      { label: "English", href: "/en/blog/turkish-breakfast-istanbul", hrefLang: "en" },
+    ],
     breadcrumbs: { aria: "パンくずリスト", home: "ホーム", current: "バル・カイマクガイド" },
     media: {
       hero: "/images/blog/istanbul-bal-kaymak.webp",

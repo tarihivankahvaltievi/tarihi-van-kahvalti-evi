@@ -7,8 +7,7 @@ import {
   buildRestaurantJsonLd,
   englishBreakfastBlogUrl,
   jsonLd,
-  japaneseHoneyKaymakBlogUrl,
-  koreanHoneyKaymakBlogUrl,
+  koreanTurkishBreakfastBlogUrl,
   russianBreakfastBlogUrl,
   siteName,
   siteUrl,
@@ -22,8 +21,7 @@ export const guideAlternates = {
   en: englishBreakfastBlogUrl,
   ru: russianBreakfastBlogUrl,
   ar: arabicBreakfastBlogUrl,
-  ko: koreanHoneyKaymakBlogUrl,
-  ja: japaneseHoneyKaymakBlogUrl,
+  ko: koreanTurkishBreakfastBlogUrl,
   "x-default": englishBreakfastBlogUrl,
 } as const;
 
@@ -38,6 +36,11 @@ const keywords = {
 export function buildGuideMetadata(guide: GuideContent): Metadata {
   const canonical = absoluteUrl(guide.path);
   const image = absoluteUrl(guide.media?.og ?? "/images/og/van-kahvaltisi.jpg");
+  const pageKeywords = guide.metadataKeywords ?? [...keywords[guide.locale]];
+  const dates = guide.dates ?? {
+    published: publishedDate,
+    modified: modifiedDate,
+  };
 
   return {
     title: { absolute: guide.title },
@@ -49,7 +52,7 @@ export function buildGuideMetadata(guide: GuideContent): Metadata {
     category: "travel and food guide",
     alternates: {
       canonical,
-      languages: guideAlternates,
+      languages: guide.metadataAlternates ?? guideAlternates,
     },
     robots: {
       index: true,
@@ -70,10 +73,10 @@ export function buildGuideMetadata(guide: GuideContent): Metadata {
       locale: guide.ogLocale,
       alternateLocale: guide.ogAlternateLocales,
       type: "article",
-      publishedTime: publishedDate,
-      modifiedTime: modifiedDate,
+      publishedTime: dates.published,
+      modifiedTime: dates.modified,
       authors: [siteName],
-      tags: [...keywords[guide.locale]],
+      tags: pageKeywords,
       images: [{
         url: image,
         width: 1200,
@@ -132,6 +135,11 @@ export function buildGuideJsonLd(guide: GuideContent) {
     { "@type": "Thing", name: guide.table.items[1].name, sameAs: guide.sources.items[2].url },
     { "@type": "Thing", name: guide.table.items[2].name, sameAs: guide.sources.items[3].url },
   ];
+  const pageKeywords = guide.metadataKeywords ?? [...keywords[guide.locale]];
+  const dates = guide.dates ?? {
+    published: publishedDate,
+    modified: modifiedDate,
+  };
 
   const document = {
     "@context": "https://schema.org",
@@ -145,11 +153,11 @@ export function buildGuideJsonLd(guide: GuideContent) {
         url: pageUrl,
         mainEntityOfPage: { "@id": `${pageUrl}#webpage` },
         inLanguage: guide.languageTag,
-        datePublished: publishedDate,
-        dateModified: modifiedDate,
+        datePublished: dates.published,
+        dateModified: dates.modified,
         wordCount: guideWordCount(guide),
         articleSection: guide.seo?.articleSection ?? "Turkish breakfast guide",
-        keywords: keywords[guide.locale].join(", "),
+        keywords: pageKeywords.join(", "),
         citation: guide.sources.items.map((source) => source.url),
         image: articleImages,
         author: {
@@ -163,7 +171,7 @@ export function buildGuideJsonLd(guide: GuideContent) {
           "@type": entity.type ?? "Thing",
           name: entity.name,
           ...(entity.sameAs ? { sameAs: entity.sameAs } : {}),
-        })) ?? guide.seo?.about.map((name) => ({ "@type": "Thing", name })) ?? defaultAbout,
+        })) ?? guide.seo?.about?.map((name) => ({ "@type": "Thing", name })) ?? defaultAbout,
         mentions: [
           ...(guide.seo?.mentions.map((name) => ({ "@type": "Thing", name })) ?? defaultMentions),
           ...(guide.seo?.menuItem ? [{
@@ -182,7 +190,7 @@ export function buildGuideJsonLd(guide: GuideContent) {
         name: guide.title,
         description: guide.description,
         inLanguage: guide.languageTag,
-        dateModified: modifiedDate,
+        dateModified: dates.modified,
         isPartOf: { "@id": `${siteUrl}/#website` },
         about: { "@id": `${siteUrl}/#restaurant` },
         mainEntity: { "@id": `${pageUrl}#article` },

@@ -12,6 +12,9 @@ import {
   englishMenuUrl,
   englishUrl,
   koreanHoneyKaymakBlogUrl,
+  koreanKaymakExplainerUrl,
+  koreanTurkishBreakfastBlogUrl,
+  koreanUrl,
   japaneseHoneyKaymakBlogUrl,
   locationUrl,
   menuUrl,
@@ -24,11 +27,13 @@ import {
 // lastmod yalnız görünür ana içerik gerçekten değiştiğinde güncellenir.
 // Her derlemede "şimdi" üretmek arama motorlarına yanıltıcı bir sinyal verir.
 const pageLastModified = "2026-07-21T15:00:00+03:00";
+const koreanPageLastModified = "2026-07-22T00:30:00+03:00";
 
 const homeLanguageAlternates = {
   languages: {
     tr: siteUrl,
     en: englishUrl,
+    ko: koreanUrl,
     "x-default": siteUrl,
   },
 };
@@ -46,9 +51,15 @@ const internationalGuideAlternates = {
     en: englishBreakfastBlogUrl,
     ru: russianBreakfastBlogUrl,
     ar: arabicBreakfastBlogUrl,
+    ko: koreanTurkishBreakfastBlogUrl,
+    "x-default": englishBreakfastBlogUrl,
+  },
+};
+
+const honeyKaymakGuideAlternates = {
+  languages: {
     ko: koreanHoneyKaymakBlogUrl,
     ja: japaneseHoneyKaymakBlogUrl,
-    "x-default": englishBreakfastBlogUrl,
   },
 };
 
@@ -193,6 +204,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       alternates: menuLanguageAlternates,
     },
     {
+      url: koreanUrl,
+      lastModified: koreanPageLastModified,
+      images: koreanHoneyKaymakImages,
+      alternates: homeLanguageAlternates,
+    },
+    {
       url: englishBreakfastBlogUrl,
       lastModified: pageLastModified,
       images: internationalGuideImages,
@@ -212,15 +229,26 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     },
     {
       url: koreanHoneyKaymakBlogUrl,
-      lastModified: pageLastModified,
+      lastModified: koreanPageLastModified,
       images: koreanHoneyKaymakImages,
+      alternates: honeyKaymakGuideAlternates,
+    },
+    {
+      url: koreanKaymakExplainerUrl,
+      lastModified: koreanPageLastModified,
+      images: koreanHoneyKaymakImages,
+    },
+    {
+      url: koreanTurkishBreakfastBlogUrl,
+      lastModified: koreanPageLastModified,
+      images: internationalGuideImages,
       alternates: internationalGuideAlternates,
     },
     {
       url: japaneseHoneyKaymakBlogUrl,
       lastModified: pageLastModified,
       images: koreanHoneyKaymakImages,
-      alternates: internationalGuideAlternates,
+      alternates: honeyKaymakGuideAlternates,
     },
     {
       url: privacyUrl,

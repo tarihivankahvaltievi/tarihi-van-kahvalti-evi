@@ -9,6 +9,7 @@ import {
   faqItems,
   englishUrl,
   jsonLd,
+  koreanUrl,
   siteUrl,
 } from "./seo";
 
@@ -18,6 +19,7 @@ export const metadata: Metadata = {
     languages: {
       tr: siteUrl,
       en: englishUrl,
+      ko: koreanUrl,
       "x-default": siteUrl,
     },
   },

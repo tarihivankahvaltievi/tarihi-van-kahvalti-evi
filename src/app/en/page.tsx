@@ -8,6 +8,7 @@ import {
   buildRestaurantJsonLd,
   englishUrl,
   jsonLd,
+  koreanUrl,
   siteName,
   siteUrl,
 } from "../seo";
@@ -24,6 +25,7 @@ export const metadata: Metadata = {
     languages: {
       tr: siteUrl,
       en: englishUrl,
+      ko: koreanUrl,
       "x-default": siteUrl,
     },
   },
@@ -33,7 +35,7 @@ export const metadata: Metadata = {
     url: englishUrl,
     siteName,
     locale: "en_US",
-    alternateLocale: ["tr_TR"],
+    alternateLocale: ["tr_TR", "ko_KR"],
     type: "website",
     images: [
       {
