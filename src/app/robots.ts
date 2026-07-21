@@ -9,12 +9,14 @@ export default function robots(): MetadataRoute.Robots {
       {
         userAgent: "*",
         allow: "/",
-        disallow: ["/admin", "/api/admin/", "/_next/server/"],
+        // /admin is intentionally crawlable so bots can read its noindex
+        // response. Blocking it here could leave the bare URL indexed.
+        disallow: ["/api/admin/", "/_next/server/"],
       },
       {
         userAgent: "OAI-SearchBot",
         allow: "/",
-        disallow: ["/admin", "/api/admin/", "/_next/server/"],
+        disallow: ["/api/admin/", "/_next/server/"],
       },
     ],
     sitemap: `${siteUrl}/sitemap.xml`,

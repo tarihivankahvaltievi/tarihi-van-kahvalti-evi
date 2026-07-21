@@ -173,6 +173,7 @@ const canonicalUrls = new Set([
   ...legalRoutes.map((route) => route.canonical),
 ]);
 const internalPaths = new Set();
+const internalLinkSources = new Map();
 const redirectRules = [
   ["/istanbul-van-kahvaltisi", "/van-kahvaltisi"],
   ["/beyoglu-kahvalti", "/"],
@@ -419,7 +420,10 @@ for (const route of routes) {
   for (const match of html.matchAll(/<a\b[^>]*\bhref="([^"]+)"/gi)) {
     const href = decodeHtml(match[1]);
     if (!href.startsWith("/")) continue;
-    internalPaths.add(new URL(href, baseUrl).pathname);
+    const internalPath = new URL(href, baseUrl).pathname;
+    internalPaths.add(internalPath);
+    if (!internalLinkSources.has(internalPath)) internalLinkSources.set(internalPath, new Set());
+    if (internalPath !== route.path) internalLinkSources.get(internalPath).add(route.path);
   }
 
   const jsonScripts = [...html.matchAll(/<script\s+type="application\/ld\+json">([\s\S]*?)<\/script>/gi)];
@@ -537,11 +541,41 @@ assert(
   JSON.stringify(sitemapPaths) === JSON.stringify(publicPagePaths),
   `Sitemap: uygulamadaki herkese açık sayfalarla eşleşmiyor (${publicPagePaths.join(", ")})`,
 );
+for (const sitemapPath of sitemapPaths) {
+  assert(
+    (internalLinkSources.get(sitemapPath)?.size ?? 0) > 0,
+    `Dahili bağlantı ağı: ${sitemapPath} başka bir indekslenebilir sayfadan bağlanmalı`,
+  );
+}
 
 const robots = await (await fetchWithRetry("/robots.txt")).text();
 assert(robots.includes("User-Agent: *"), "robots.txt: genel bot kuralı eksik");
 assert(robots.includes("User-Agent: OAI-SearchBot"), "robots.txt: OAI-SearchBot kuralı eksik");
 assert(robots.includes(`${canonicalSiteUrl}/sitemap.xml`), "robots.txt: sitemap eksik");
+assert(!/^Disallow:\s*\/admin\s*$/im.test(robots), "robots.txt: admin noindex talimatının okunmasını engellememeli");
+assert(/^Disallow:\s*\/api\/admin\/\s*$/im.test(robots), "robots.txt: yönetim API'si taramaya kapalı olmalı");
+
+const adminResponse = await fetchWithRetry("/admin");
+const adminHtml = await adminResponse.text();
+assert(adminResponse.status === 200, "Admin: giriş yüzeyi erişilebilir olmalı");
+assert(
+  /<meta\s+name="robots"\s+content="[^"]*noindex[^"]*nofollow/i.test(adminHtml),
+  "Admin: HTML noindex, nofollow etiketi eksik",
+);
+assert(
+  adminResponse.headers.get("x-robots-tag")?.includes("noindex"),
+  "Admin: X-Robots-Tag noindex başlığı eksik",
+);
+assert(
+  adminResponse.headers.get("cache-control")?.includes("no-store"),
+  "Admin: özel içerik önbelleğe alınmamalı",
+);
+
+const adminApiResponse = await fetchWithRetry("/api/admin/menu", 30, { redirect: "manual" });
+assert(
+  adminApiResponse.headers.get("x-robots-tag")?.includes("noindex"),
+  "Admin API: X-Robots-Tag noindex başlığı eksik",
+);
 
 const indexNowKey = "4f9d1a7c8b6e3f205d72a941ce8b604a";
 const indexNowResponse = await fetchWithRetry(`/${indexNowKey}.txt`);
