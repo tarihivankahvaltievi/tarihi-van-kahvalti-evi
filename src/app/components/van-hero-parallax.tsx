@@ -323,7 +323,7 @@ export function VanHeroParallax({ locale = "tr" }: { locale?: SiteLocale }) {
   return (
     <section
       ref={ref}
-      className={`hero hero-parallax-dining${isHeroVisible ? " hero-is-visible" : ""}`}
+      className={`hero hero-parallax-dining hero-locale-${locale}${isHeroVisible ? " hero-is-visible" : ""}`}
       aria-label={messages.hero.aria}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
@@ -343,12 +343,21 @@ export function VanHeroParallax({ locale = "tr" }: { locale?: SiteLocale }) {
             }}
           >
             <div className="hero-provenance">
-              <span className="hero-provenance-year">{messages.hero.year}</span>
+              <span
+                className="hero-provenance-year"
+                aria-label={locale === "en"
+                  ? `${messages.hero.yearSuffix} ${messages.hero.year}`
+                  : `${messages.hero.year}${messages.hero.yearSuffix}`}
+              >
+                <strong aria-hidden="true">{messages.hero.year}</strong>
+                <small aria-hidden="true">{messages.hero.yearSuffix}</small>
+              </span>
               <span className="hero-provenance-place">{messages.hero.place}</span>
             </div>
             <h1 className="hero-title-lockup">
               <span className="hero-title-line hero-title-line-one">
-                {messages.hero.titleLineOne}
+                {messages.hero.titleLineOne}{" "}
+                <span className="hero-title-accent">{messages.hero.titleAccent}</span>
               </span>
               <span className="hero-title-line hero-title-line-two">
                 {messages.hero.titleLineTwo}

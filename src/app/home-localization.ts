@@ -83,11 +83,13 @@ export const homeMessages = {
     },
     hero: {
       aria: "Tarihi Van Kahvaltı Evi ana alanı",
-      year: "1978'den beri",
+      year: "1978",
+      yearSuffix: "'den beri",
       place: "Beyoğlu'nda bir aile sofrası",
-      titleLineOne: "Tarihi Van",
+      titleLineOne: "Tarihi",
+      titleAccent: "Van",
       titleLineTwo: "Kahvaltı Evi",
-      intro: "Otlu peynir, murtuğa, kavut, sıcak bakır sahanlar ve hep taze çay.",
+      intro: "Otlu peynir, murtuğa, kavut ve bakır sahanlar. Çayımız hep taze.",
       floatingAlts: {
         pan: "Bakır sahanda sucuklu yumurta",
         tea: "İnce belli çay",
@@ -227,11 +229,13 @@ export const homeMessages = {
     },
     hero: {
       aria: "Tarihi Van Kahvaltı Evi introduction",
-      year: "Since 1978",
+      year: "1978",
+      yearSuffix: "Since",
       place: "A family table in Beyoğlu",
-      titleLineOne: "Traditional Turkish",
+      titleLineOne: "Traditional",
+      titleAccent: "Turkish",
       titleLineTwo: "Breakfast near Taksim",
-      intro: "Van herb cheese, murtuğa, kavut, hot copper pans and freshly brewed Turkish tea.",
+      intro: "Van herb cheese, murtuğa, kavut and hot copper pans. Turkish tea, always freshly brewed.",
       floatingAlts: {
         pan: "Eggs with Turkish sucuk in a copper pan",
         tea: "Fresh Turkish tea in a tulip-shaped glass",

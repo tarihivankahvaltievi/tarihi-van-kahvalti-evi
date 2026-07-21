@@ -517,52 +517,74 @@
   }
 }
 
-/*
- * Mobile hero copy, July 2026.
- * Treat the founding date as provenance, not a promotional badge. The shorter,
- * place-specific headline lets the food remain the hero's only illustration.
- */
+/* Mobile hero copy: a quiet origin signature instead of a generic eyebrow. */
 @media (max-width: 680px) {
   .theme-breakfast .hero-parallax-copy {
-    top: 7.15rem !important;
-    width: min(calc(100vw - 32px), 23rem) !important;
+    top: 7.35rem !important;
+    left: clamp(1.125rem, 5.6vw, 1.5rem) !important;
+    width: min(calc(100vw - 2.25rem), 23rem) !important;
     max-width: 23rem !important;
     gap: 0 !important;
   }
 
   .theme-breakfast .hero-provenance {
-    display: flex !important;
-    width: min(100%, 21rem) !important;
-    align-items: baseline !important;
-    gap: 0.55rem !important;
-    margin: 0 0 0.72rem !important;
-    padding: 0 0 0.54rem !important;
-    border-bottom: 1px solid rgba(36, 23, 24, 0.2) !important;
-    color: rgba(36, 23, 24, 0.7) !important;
+    display: grid !important;
+    width: fit-content !important;
+    grid-template-columns: auto minmax(0, 1fr) !important;
+    align-items: center !important;
+    column-gap: 0.78rem !important;
+    margin: 0 0 1.05rem !important;
+    padding: 0 !important;
+    border: 0 !important;
+    color: #211817 !important;
     white-space: normal !important;
     animation: none !important;
   }
 
   .theme-breakfast .hero-provenance-year {
+    display: grid !important;
     min-height: 0 !important;
+    grid-template-columns: auto !important;
+    gap: 0.05rem !important;
     padding: 0 !important;
     border: 0 !important;
     border-radius: 0 !important;
     background: transparent !important;
     color: #821b22 !important;
-    font-family: var(--font-literata-gf), "Literata", Georgia, serif !important;
-    font-size: clamp(0.83rem, 3.6vw, 0.94rem) !important;
-    font-weight: 660 !important;
-    letter-spacing: -0.018em !important;
+    font-family: var(--font-bricolage-grotesque-gf), "Bricolage Grotesque", Arial, sans-serif !important;
+    line-height: 1 !important;
+  }
+
+  .theme-breakfast .hero-provenance-year strong {
+    font-size: clamp(1.28rem, 5.6vw, 1.48rem) !important;
+    font-weight: 680 !important;
+    letter-spacing: -0.035em !important;
+  }
+
+  .theme-breakfast .hero-provenance-year small {
+    font-size: 0.7rem !important;
+    font-weight: 610 !important;
+    letter-spacing: -0.006em !important;
+  }
+
+  .theme-breakfast .hero-locale-en .hero-provenance-year small {
+    order: -1;
+    font-size: 0.65rem !important;
+    letter-spacing: 0.015em !important;
+    text-transform: lowercase;
   }
 
   .theme-breakfast .hero-provenance-place {
+    display: block !important;
+    max-width: 12.5rem !important;
     padding: 0 !important;
-    color: rgba(36, 23, 24, 0.67) !important;
-    font-size: clamp(0.65rem, 2.75vw, 0.73rem) !important;
-    font-weight: 570 !important;
-    letter-spacing: -0.005em !important;
-    line-height: 1.25 !important;
+    color: rgba(33, 24, 23, 0.72) !important;
+    font-family: var(--font-bricolage-grotesque-gf), "Bricolage Grotesque", Arial, sans-serif !important;
+    font-size: clamp(0.84rem, 3.5vw, 0.92rem) !important;
+    font-weight: 470 !important;
+    letter-spacing: 0 !important;
+    line-height: 1.22 !important;
+    text-wrap: balance !important;
   }
 
   .theme-breakfast .hero-provenance-place::before,
@@ -584,12 +606,14 @@
 
   .theme-breakfast .hero-parallax-copy h1 {
     display: grid !important;
-    max-width: 8.8em !important;
-    gap: 0.04em !important;
-    font-size: clamp(2.25rem, 10vw, 2.65rem) !important;
-    font-weight: 690 !important;
-    letter-spacing: -0.028em !important;
-    line-height: 0.96 !important;
+    max-width: 8.9em !important;
+    gap: 0.08em !important;
+    font-size: clamp(2.38rem, 10.8vw, 2.82rem) !important;
+    font-weight: 620 !important;
+    letter-spacing: -0.036em !important;
+    line-height: 0.94 !important;
+    font-optical-sizing: auto !important;
+    font-variation-settings: "opsz" 60, "wdth" 94 !important;
     text-wrap: auto !important;
   }
 
@@ -608,13 +632,21 @@
     max-width: 8.7em !important;
   }
 
+  .theme-breakfast .hero-title-accent {
+    color: #821b22 !important;
+    font: inherit !important;
+  }
+
   .theme-breakfast .hero-parallax-copy p {
-    max-width: 20.5rem !important;
-    margin: 0.82rem 0 0 !important;
-    color: rgba(36, 23, 24, 0.76) !important;
-    font-size: clamp(0.86rem, 3.65vw, 0.96rem) !important;
-    font-weight: 500 !important;
-    line-height: 1.45 !important;
+    max-width: 20rem !important;
+    margin: 1rem 0 0 !important;
+    color: rgba(33, 24, 23, 0.76) !important;
+    font-family: var(--font-literata-gf), "Literata", Georgia, serif !important;
+    font-size: 1rem !important;
+    font-weight: 430 !important;
+    letter-spacing: -0.012em !important;
+    line-height: 1.48 !important;
+    text-wrap: pretty !important;
     animation: none !important;
   }
 
@@ -623,7 +655,11 @@
   }
 
   .theme-breakfast .hero-parallax-food-stage {
-    top: 20.25rem !important;
+    top: 20.65rem !important;
+  }
+
+  .theme-breakfast .hero-locale-en .hero-parallax-food-stage .hero-float-tea {
+    top: 18% !important;
   }
 
   .theme-breakfast .hero-parallax-gallery {
@@ -633,10 +669,10 @@
 
 @media (max-width: 680px) and (max-height: 720px) {
   .theme-breakfast .hero-parallax-copy {
-    top: 6.55rem !important;
+    top: 6.7rem !important;
   }
 
   .theme-breakfast .hero-parallax-food-stage {
-    top: 18.7rem !important;
+    top: 19.1rem !important;
   }
 }
