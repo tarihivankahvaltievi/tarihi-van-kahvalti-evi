@@ -7,6 +7,7 @@ import {
   buildRestaurantJsonLd,
   englishBreakfastBlogUrl,
   jsonLd,
+  koreanHoneyKaymakBlogUrl,
   russianBreakfastBlogUrl,
   siteName,
   siteUrl,
@@ -20,6 +21,7 @@ export const guideAlternates = {
   en: englishBreakfastBlogUrl,
   ru: russianBreakfastBlogUrl,
   ar: arabicBreakfastBlogUrl,
+  ko: koreanHoneyKaymakBlogUrl,
   "x-default": englishBreakfastBlogUrl,
 } as const;
 
@@ -27,11 +29,12 @@ const keywords = {
   en: ["Turkish breakfast Istanbul", "Van breakfast", "breakfast near Taksim", "traditional Turkish breakfast", "Beyoğlu breakfast"],
   ru: ["турецкий завтрак Стамбул", "ванский завтрак", "завтрак рядом с Таксим", "где позавтракать в Стамбуле", "завтрак Бейоглу"],
   ar: ["فطور تركي في إسطنبول", "فطور فان", "فطور قريب من تقسيم", "مطعم فطور إسطنبول", "فطور بيوغلو"],
+  ko: ["이스탄불 발 카이막", "터키 카이막 맛집", "이스탄불 카이막 맛집", "탁심 아침 식사", "터키식 아침 식사", "꿀 카이막"],
 } as const;
 
 export function buildGuideMetadata(guide: GuideContent): Metadata {
   const canonical = absoluteUrl(guide.path);
-  const image = absoluteUrl("/images/og/van-kahvaltisi.jpg");
+  const image = absoluteUrl(guide.media?.og ?? "/images/og/van-kahvaltisi.jpg");
 
   return {
     title: { absolute: guide.title },
@@ -105,7 +108,21 @@ function guideWordCount(guide: GuideContent) {
 
 export function buildGuideJsonLd(guide: GuideContent) {
   const pageUrl = absoluteUrl(guide.path);
-  const primaryImage = absoluteUrl("/images/og/van-kahvaltisi.jpg");
+  const primaryImage = absoluteUrl(guide.media?.og ?? "/images/og/van-kahvaltisi.jpg");
+  const articleImages = [
+    primaryImage,
+    absoluteUrl(guide.media?.hero ?? "/images/hero-parallax/overhead-feast.webp"),
+    absoluteUrl(guide.media?.article ?? "/images/hands-table.webp"),
+  ];
+  const defaultAbout = [
+    { "@type": "Thing", name: "Van breakfast", sameAs: guide.sources.items[0].url },
+    { "@type": "Place", name: "Beyoğlu, Istanbul" },
+  ];
+  const defaultMentions = [
+    { "@type": "Thing", name: guide.table.items[0].name, sameAs: guide.sources.items[1].url },
+    { "@type": "Thing", name: guide.table.items[1].name, sameAs: guide.sources.items[2].url },
+    { "@type": "Thing", name: guide.table.items[2].name, sameAs: guide.sources.items[3].url },
+  ];
 
   const document = {
     "@context": "https://schema.org",
@@ -122,14 +139,10 @@ export function buildGuideJsonLd(guide: GuideContent) {
         datePublished: publishedDate,
         dateModified: modifiedDate,
         wordCount: guideWordCount(guide),
-        articleSection: "Turkish breakfast guide",
+        articleSection: guide.seo?.articleSection ?? "Turkish breakfast guide",
         keywords: keywords[guide.locale].join(", "),
         citation: guide.sources.items.map((source) => source.url),
-        image: [
-          primaryImage,
-          absoluteUrl("/images/hero-parallax/overhead-feast.webp"),
-          absoluteUrl("/images/hands-table.webp"),
-        ],
+        image: articleImages,
         author: {
           "@type": "Organization",
           "@id": `${siteUrl}/#restaurant`,
@@ -137,15 +150,8 @@ export function buildGuideJsonLd(guide: GuideContent) {
           url: siteUrl,
         },
         publisher: { "@id": `${siteUrl}/#restaurant` },
-        about: [
-          { "@type": "Thing", name: "Van breakfast", sameAs: guide.sources.items[0].url },
-          { "@type": "Place", name: "Beyoğlu, Istanbul" },
-        ],
-        mentions: [
-          { "@type": "Thing", name: guide.table.items[0].name, sameAs: guide.sources.items[1].url },
-          { "@type": "Thing", name: guide.table.items[1].name, sameAs: guide.sources.items[2].url },
-          { "@type": "Thing", name: guide.table.items[2].name, sameAs: guide.sources.items[3].url },
-        ],
+        about: guide.seo?.about.map((name) => ({ "@type": "Thing", name })) ?? defaultAbout,
+        mentions: guide.seo?.mentions.map((name) => ({ "@type": "Thing", name })) ?? defaultMentions,
       },
       {
         "@type": "WebPage",
@@ -166,7 +172,13 @@ export function buildGuideJsonLd(guide: GuideContent) {
           caption: guide.hero.imageAlt,
         },
       },
-      buildBreadcrumbJsonLd(pageUrl, guide.title, false, siteName, guide.locale === "en" ? `${siteUrl}/en` : siteUrl),
+      buildBreadcrumbJsonLd(
+        pageUrl,
+        guide.title,
+        false,
+        siteName,
+        guide.locale === "en" ? `${siteUrl}/en` : siteUrl,
+      ),
       buildFaqJsonLd(guide.faq.items, pageUrl, false, guide.languageTag),
     ],
   };

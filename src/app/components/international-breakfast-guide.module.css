@@ -120,6 +120,42 @@
   letter-spacing: 0;
 }
 
+.page[data-locale="ko"] {
+  font-family: var(--font-noto-sans-kr), "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+  word-break: keep-all;
+}
+
+.page[data-locale="ko"] .hero h1,
+.page[data-locale="ko"] .hero h1 span,
+.page[data-locale="ko"] h2,
+.page[data-locale="ko"] h3,
+.page[data-locale="ko"] .heroLead,
+.page[data-locale="ko"] .answerCopy p,
+.page[data-locale="ko"] .traditionCopy p,
+.page[data-locale="ko"] .itemDescription,
+.page[data-locale="ko"] .reasonsIntro p,
+.page[data-locale="ko"] .reasonList p,
+.page[data-locale="ko"] .firstVisit p,
+.page[data-locale="ko"] .practical p,
+.page[data-locale="ko"] .practical dd,
+.page[data-locale="ko"] .faq details p,
+.page[data-locale="ko"] .sources p,
+.page[data-locale="ko"] .closing p {
+  font-family: var(--font-noto-sans-kr), "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+}
+
+.page[data-locale="ko"] .hero h1,
+.page[data-locale="ko"] .hero h1 span,
+.page[data-locale="ko"] h2,
+.page[data-locale="ko"] h3 {
+  letter-spacing: -0.03em;
+}
+
+.page[data-locale="ko"] .hero h1 span,
+.page[data-locale="ko"] .answerCopy h2 {
+  font-style: normal;
+}
+
 .heroLead {
   max-width: 58ch;
   margin: 1.65rem 0 0;

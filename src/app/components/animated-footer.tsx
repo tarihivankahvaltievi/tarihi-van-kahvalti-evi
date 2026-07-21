@@ -1206,7 +1206,8 @@ export function AnimatedFooter({ locale = "tr" }: { locale?: SiteLocale }) {
                       hrefLang={
                         href.startsWith("/en") ? "en" :
                           href.startsWith("/ru") ? "ru" :
-                            href.startsWith("/ar") ? "ar" :
+                          href.startsWith("/ar") ? "ar" :
+                            href.startsWith("/ko") ? "ko" :
                               href === "/" && locale === "en" ? "tr" : undefined
                       }
                     >

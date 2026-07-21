@@ -1,6 +1,6 @@
 import { coreVanBreakfastCitations } from "../content-sources";
 
-export type GuideLocale = "en" | "ru" | "ar";
+export type GuideLocale = "en" | "ru" | "ar" | "ko";
 
 export type GuideContent = {
   locale: GuideLocale;
@@ -51,12 +51,23 @@ export type GuideContent = {
   updatedLabel: string;
   dateLabel: string;
   authorLabel: string;
+  media?: {
+    hero: string;
+    article: string;
+    og: string;
+  };
+  seo?: {
+    articleSection: string;
+    about: string[];
+    mentions: string[];
+  };
 };
 
 export const guidePaths = {
   en: "/en/blog/turkish-breakfast-istanbul",
   ru: "/ru/blog/turetskiy-zavtrak-stambul",
   ar: "/ar/blog/turkish-breakfast-istanbul",
+  ko: "/ko/blog/istanbul-bal-kaymak",
 } as const;
 
 const sourceItems = {
@@ -78,6 +89,12 @@ const sourceItems = {
     { label: "بوابة الثقافة التركية — مورتوغا", url: coreVanBreakfastCitations[2] },
     { label: "TÜRKPATENT — كافوت فان، التسجيل الجغرافي رقم 390", url: coreVanBreakfastCitations[3] },
   ],
+  ko: [
+    { label: "TÜRKPATENT — 반(Van) 아침 식사 지리적 표시 등록 제504호", url: coreVanBreakfastCitations[0] },
+    { label: "튀르키예 문화 포털 — 반 허브 치즈", url: coreVanBreakfastCitations[1] },
+    { label: "튀르키예 문화 포털 — 무르투아", url: coreVanBreakfastCitations[2] },
+    { label: "TÜRKPATENT — 반 카부트 지리적 표시 등록 제390호", url: coreVanBreakfastCitations[3] },
+  ],
 } as const;
 
 export const guides: Record<GuideLocale, GuideContent> = {
@@ -90,7 +107,7 @@ export const guides: Record<GuideLocale, GuideContent> = {
     description:
       "Discover what a traditional Turkish and Van breakfast includes, why locals choose Tarihi Van Kahvaltı Evi near Taksim, and practical tips for your visit.",
     ogLocale: "en_GB",
-    ogAlternateLocales: ["ru_RU", "ar_SA"],
+    ogAlternateLocales: ["ru_RU", "ar_SA", "ko_KR"],
     hero: {
       note: "A visitor’s guide to breakfast in Istanbul",
       title: "Turkish breakfast,",
@@ -269,7 +286,7 @@ export const guides: Record<GuideLocale, GuideContent> = {
     description:
       "Что входит в турецкий и ванский завтрак, почему стоит выбрать Tarihi Van Kahvaltı Evi рядом с Таксимом и как подготовиться к визиту.",
     ogLocale: "ru_RU",
-    ogAlternateLocales: ["en_GB", "ar_SA"],
+    ogAlternateLocales: ["en_GB", "ar_SA", "ko_KR"],
     hero: {
       note: "Гид по завтраку для гостей Стамбула",
       title: "Турецкий завтрак",
@@ -374,7 +391,7 @@ export const guides: Record<GuideLocale, GuideContent> = {
     description:
       "تعرّف على مكونات الفطور التركي وفطور فان، ولماذا يختار الزوار مطعم Tarihi Van Kahvaltı Evi قرب تقسيم، مع معلومات الزيارة والأسعار.",
     ogLocale: "ar_SA",
-    ogAlternateLocales: ["en_GB", "ru_RU"],
+    ogAlternateLocales: ["en_GB", "ru_RU", "ko_KR"],
     hero: {
       note: "دليل الفطور لزوار إسطنبول",
       title: "الفطور التركي،",
@@ -469,5 +486,175 @@ export const guides: Record<GuideLocale, GuideContent> = {
     updatedLabel: "آخر مراجعة",
     dateLabel: "21 يوليو 2026",
     authorLabel: "فريق تحرير Tarihi Van Kahvaltı Evi",
+  },
+  ko: {
+    locale: "ko",
+    languageTag: "ko-KR",
+    direction: "ltr",
+    path: guidePaths.ko,
+    title: "이스탄불 발 카이막 맛집: 터키 꿀·카이막 가이드 | Tarihi Van",
+    description:
+      "이스탄불 탁심 근처에서 터키식 발 카이막을 맛보세요. 꿀과 카이막을 먹는 법, 반 아침 식사 구성, 위치와 영업시간을 한국어로 안내합니다.",
+    ogLocale: "ko_KR",
+    ogAlternateLocales: ["en_GB", "ru_RU", "ar_SA"],
+    hero: {
+      note: "한국인 여행자를 위한 이스탄불 아침 식사 가이드",
+      title: "이스탄불에서 만나는",
+      accent: "발 카이막.",
+      lead:
+        "향긋한 꿀과 부드럽고 진한 카이막을 따뜻한 빵에 함께 올리는 발 카이막은 터키식 아침 식사의 가장 기억에 남는 한입입니다. 탁심 광장에서 걸어갈 수 있는 베요글루의 역사적인 공간에서, 1978년부터 이어온 반(Van)식 아침 식사와 함께 즐겨 보세요.",
+      readLabel: "발 카이막부터 알아보기",
+      menuLabel: "영문 메뉴와 가격 보기",
+      imageAlt: "꿀과 카이막, 치즈, 피시, 차가 차려진 Tarihi Van Kahvaltı Evi의 반식 아침 식탁",
+      imageCaption: "꿀 한 스푼, 카이막 한 조각, 따뜻한 빵 한입에서 시작되는 터키의 아침.",
+    },
+    nav: {
+      label: "이 가이드에서",
+      answer: "발 카이막이란",
+      table: "함께 나오는 음식",
+      choose: "이곳을 찾는 이유",
+      visit: "방문 정보",
+      faq: "자주 묻는 질문",
+    },
+    shortAnswer: {
+      label: "먼저, 핵심만",
+      title: "발 카이막은 어떤 음식인가요?",
+      paragraphs: [
+        "발 카이막(bal kaymak)은 꿀을 뜻하는 ‘발(bal)’과 진하고 부드러운 유제품인 ‘카이막(kaymak)’을 함께 먹는 터키의 대표적인 아침 조합입니다. 카이막은 버터처럼 짜지 않고 생크림보다 밀도 있는 질감이 특징입니다. 따뜻한 빵이나 피시에 카이막을 먼저 얹고 꿀을 곁들이면 고소함과 꽃향기 나는 단맛이 자연스럽게 이어집니다.",
+        "터키식 아침 식사인 카흐발트(kahvaltı)는 달콤한 음식과 짭짤한 음식을 한 상에서 번갈아 맛보는 식사입니다. 발 카이막만 단독으로 주문하기보다 치즈, 올리브, 달걀 요리, 잼, 빵, 차와 함께 천천히 즐길 때 그 매력이 더 잘 드러납니다.",
+        "Tarihi Van Kahvaltı Evi는 1978년부터 이어온 가족의 반 아침 식사 문화를 베요글루 잠박 거리의 역사적인 건물에서 선보입니다. 탁심 광장, 이스티클랄 거리, 지한기르에서 걸어서 방문할 수 있습니다.",
+      ],
+    },
+    table: {
+      title: "발 카이막과 무엇을 함께 먹나요?",
+      intro:
+        "계절과 당일 준비 상황에 따라 세부 구성은 달라질 수 있지만, 다음 음식들은 발 카이막을 중심으로 반 아침 식사의 단맛과 짠맛을 균형 있게 경험하게 해 줍니다.",
+      items: [
+        {
+          name: "발 카이막",
+          role: "꿀과 진한 우유 풍미의 조합",
+          description:
+            "따뜻한 빵에 카이막을 넉넉히 올린 뒤 꿀을 조금 더합니다. 처음부터 모두 섞기보다 한입씩 비율을 바꿔 보면 카이막의 고소함과 꿀의 향을 각각 느낄 수 있습니다.",
+        },
+        {
+          name: "피시와 신선한 빵",
+          role: "발 카이막을 담는 따뜻한 한입",
+          description:
+            "갓 튀긴 피시의 가벼운 바삭함과 부드러운 속살, 또는 담백한 빵은 꿀과 카이막을 가장 편하게 즐기는 바탕이 됩니다.",
+        },
+        {
+          name: "반 허브 치즈",
+          role: "달콤함을 깨우는 짭짤한 맛",
+          description:
+            "향긋한 지역 허브가 들어간 반의 대표 치즈입니다. 발 카이막 사이에 조금씩 맛보면 단맛과 짠맛의 대비가 선명해집니다.",
+        },
+        {
+          name: "무르투아",
+          role: "버터와 달걀의 따뜻한 풍미",
+          description:
+            "밀가루를 버터에 볶고 달걀을 더하는 반의 따뜻한 음식입니다. 팬이 따뜻할 때 조금씩 나누어 먹는 것이 좋습니다.",
+        },
+        {
+          name: "카부트",
+          role: "구운 곡물의 깊은 고소함",
+          description:
+            "볶은 곡물과 버터를 바탕으로 한 반의 전통 음식입니다. 꿀이나 페크메즈와 곁들이면 발 카이막과는 다른 고소한 단맛을 비교할 수 있습니다.",
+        },
+        {
+          name: "따뜻한 달걀 팬",
+          role: "식탁의 든든한 중심",
+          description:
+            "달걀 프라이, 메네멘, 수죽 또는 카부르마를 넣은 달걀 요리가 뜨겁게 제공되어 여러 작은 접시를 하나의 식사로 이어 줍니다.",
+        },
+        {
+          name: "수제 잼과 올리브",
+          role: "달고 짠 맛의 리듬",
+          description:
+            "잼의 과일 향과 올리브의 짭짤함을 번갈아 맛보면 발 카이막의 부드러운 단맛이 지루하지 않게 이어집니다.",
+        },
+        {
+          name: "터키 차이",
+          role: "천천히 이어지는 아침의 리듬",
+          description:
+            "튤립 모양 잔에 담긴 따뜻한 차이는 입안을 가볍게 정리하고, 여러 접시를 서두르지 않고 즐기도록 식사의 속도를 만들어 줍니다.",
+        },
+      ],
+    },
+    tradition: {
+      title: "디저트가 아니라, 아침 식사의 한 장면",
+      paragraphs: [
+        "발 카이막은 식사 끝에 따로 먹는 디저트라기보다 터키식 아침 식탁의 일부입니다. 허브 치즈 한입 다음에 꿀과 카이막을 올린 빵을 먹고, 다시 따뜻한 달걀 요리와 차로 이어 가는 자유로운 순서가 자연스럽습니다.",
+        "반 아침 식사는 유제품, 곡물, 지역 허브와 따뜻한 요리를 한 상에 함께 놓는 전통으로 알려져 있습니다. 풍성해 보이지만 핵심은 많은 양을 빨리 먹는 데 있지 않습니다. 작은 접시를 함께 나누고 서로 다른 맛을 천천히 비교하는 것이 이 식사의 방식입니다.",
+        "처음 방문한다면 발 카이막의 양을 한 번에 정하지 않아도 됩니다. 카이막을 먼저 맛보고 꿀을 조금씩 더해 자신에게 맞는 비율을 찾아보세요. 알레르기나 식단 제한이 있다면 주문 전에 직원에게 현재 재료를 확인하는 것이 좋습니다.",
+      ],
+      imageAlt: "베요글루의 반 아침 식탁에서 치즈와 잼, 곡물 요리를 함께 나누는 모습",
+      caption: "한 접시가 아니라, 달고 짠 작은 맛들이 이어지는 식사입니다.",
+    },
+    reasons: {
+      title: "왜 Tarihi Van Kahvaltı Evi인가요?",
+      intro:
+        "이스탄불에는 카이막을 파는 곳이 많습니다. 이곳은 발 카이막 한 접시뿐 아니라 반 지역의 아침 문화, 가족의 역사, 베요글루의 공간까지 함께 경험하고 싶은 여행자에게 어울립니다.",
+      items: [
+        { title: "1978년부터 이어진 가족의 식탁", text: "유행을 위해 만든 콘셉트가 아니라 오랜 시간 이어온 가족의 반 아침 식사 경험을 바탕으로 음식을 준비합니다." },
+        { title: "발 카이막을 한 상 안에서 경험", text: "꿀과 카이막을 피시, 허브 치즈, 잼, 따뜻한 팬 요리와 번갈아 맛보며 터키식 아침 식사의 균형을 이해할 수 있습니다." },
+        { title: "역사적인 베요글루 공간", text: "잠박 거리의 오래된 건물, 작은 방과 거리 쪽 테이블이 식사의 분위기를 만듭니다. 실제 공간과 아침 식탁을 함께 기억하게 됩니다." },
+        { title: "탁심 여행 동선에 편리한 위치", text: "탁심 광장과 이스티클랄 거리, 지한기르에서 걸어갈 수 있어 베요글루와 갈라타 여행을 시작하기 좋습니다." },
+        { title: "둘이서도, 가족과도 좋은 공유 방식", text: "여러 접시를 나누는 구성은 커플, 가족, 친구 여행에 잘 맞습니다. 주말이나 인원이 많은 경우 방문 전에 연락하는 것을 권합니다." },
+        { title: "방문 전 확인할 수 있는 실시간 메뉴", text: "영문 온라인 메뉴에서 현재 음식과 가격을 확인할 수 있습니다. 계절과 당일 준비에 따라 제공 여부가 달라질 수 있습니다." },
+      ],
+    },
+    firstVisit: {
+      title: "발 카이막을 더 맛있게 즐기는 순서",
+      intro: "정해진 예절은 없지만, 처음이라면 다음 순서가 각 재료의 차이를 느끼는 데 도움이 됩니다.",
+      steps: [
+        { title: "카이막만 먼저 맛보기", text: "작은 양을 먼저 맛보며 우유의 고소함과 질감을 확인하세요." },
+        { title: "꿀을 조금씩 더하기", text: "한 번에 섞지 말고 한입마다 비율을 바꿔 향과 단맛을 조절해 보세요." },
+        { title: "따뜻한 빵과 피시 사용하기", text: "빵의 온기와 식감이 카이막을 부드럽게 풀어 주고 꿀의 향을 살려 줍니다." },
+        { title: "짭짤한 음식과 번갈아 먹기", text: "허브 치즈, 올리브, 달걀을 사이에 맛보면 단맛이 더 또렷해집니다." },
+        { title: "차를 곁들이며 천천히 즐기기", text: "차이는 입안을 정리하고 공유 식탁의 여유로운 속도를 이어 줍니다." },
+      ],
+    },
+    practical: {
+      title: "탁심 근처 발 카이막 방문 정보",
+      text:
+        "주소는 Zambak Sk. No:8, Şehit Muhtar, Beyoğlu입니다. 매일 08:00–18:00에 문을 엽니다. 주말 늦은 아침에는 붐빌 수 있으므로 단체 방문이라면 전화나 WhatsApp으로 미리 좌석 상황을 확인하세요.",
+      labels: { address: "주소", hours: "영업시간", route: "Google 지도에서 길찾기", menu: "영문 메뉴와 가격", call: "전화하기" },
+    },
+    faq: {
+      title: "한국인 여행자가 자주 묻는 질문",
+      items: [
+        { question: "발 카이막은 무엇인가요?", answer: "발은 터키어로 꿀, 카이막은 우유에서 얻는 진하고 부드러운 유제품입니다. 따뜻한 빵이나 피시에 카이막을 올리고 꿀을 곁들여 먹는 터키식 아침 식사의 대표 조합입니다." },
+        { question: "카이막은 버터나 생크림과 같은가요?", answer: "완전히 같지 않습니다. 카이막은 일반적인 버터처럼 짜지 않고, 휘핑한 생크림보다 더 조밀하고 진한 질감을 가집니다. 생산 방식과 원유에 따라 맛과 질감은 달라질 수 있습니다." },
+        { question: "Tarihi Van Kahvaltı Evi는 탁심 광장에서 가까운가요?", answer: "네. 베요글루 잠박 거리에 있으며 탁심 광장, 이스티클랄 거리, 지한기르에서 걸어갈 수 있습니다. 정확한 도보 경로는 페이지의 인증된 Google 지도 링크를 이용하세요." },
+        { question: "발 카이막만 주문할 수 있나요?", answer: "메뉴 구성과 제공 여부는 당일 준비 상황에 따라 달라질 수 있습니다. 방문 전 온라인 메뉴를 확인하거나 매장에 문의하세요. 반식 공유 아침과 함께 맛보면 다양한 조합을 경험할 수 있습니다." },
+        { question: "예약이 필요한가요?", answer: "자리가 있으면 예약 없이도 방문할 수 있습니다. 주말, 공휴일, 단체 방문은 전화나 WhatsApp으로 미리 좌석 상황을 확인하는 것을 권합니다." },
+        { question: "알레르기가 있으면 어떻게 해야 하나요?", answer: "카이막은 유제품이며 아침 식탁에는 달걀, 글루텐, 견과류 등 알레르기 유발 재료가 포함될 수 있습니다. 주문 전에 직원에게 알레르기를 알리고 당일 사용하는 재료와 교차 접촉 가능성을 확인하세요." },
+      ],
+    },
+    sources: {
+      title: "출처와 편집 안내",
+      note: "반 아침 식사와 지역 음식에 대한 설명은 튀르키예의 공식 지리적 표시 자료와 문화 포털을 기준으로 검토했습니다. 매장의 현재 구성, 가격, 제공 여부는 실시간 메뉴에서 별도로 확인할 수 있습니다.",
+      items: [...sourceItems.ko],
+    },
+    closing: {
+      title: "발 카이막 한입에서 반의 아침 식탁으로.",
+      text: "1978년부터 이어온 가족의 아침 문화를 베요글루의 역사적인 공간에서 천천히 경험해 보세요.",
+      menu: "오늘의 영문 메뉴 보기",
+      directions: "도보 길찾기",
+    },
+    footer: { note: "1978년부터 베요글루에서 이어온 전통 반 아침 식사.", home: "영문 홈페이지", menu: "메뉴", directions: "길찾기" },
+    updatedLabel: "마지막 검토",
+    dateLabel: "2026년 7월 21일",
+    authorLabel: "Tarihi Van Kahvaltı Evi 편집팀",
+    media: {
+      hero: "/images/blog/istanbul-bal-kaymak.webp",
+      article: "/images/hero-parallax/overhead-feast.webp",
+      og: "/images/og/istanbul-bal-kaymak.jpg",
+    },
+    seo: {
+      articleSection: "이스탄불 발 카이막과 터키식 아침 식사",
+      about: ["발 카이막", "터키식 아침 식사", "반 아침 식사", "베요글루"],
+      mentions: ["카이막", "꿀", "피시", "반 허브 치즈", "무르투아", "카부트"],
+    },
   },
 };

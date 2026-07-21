@@ -5,7 +5,7 @@ import { displayAddress, displayPhone, mapsUrl, openingHours, telUrl } from "../
 import { guidePaths, guides, type GuideContent } from "./international-breakfast-guide-data";
 import styles from "./international-breakfast-guide.module.css";
 
-const languageLabels = { en: "English", ru: "Русский", ar: "العربية" } as const;
+const languageLabels = { en: "English", ru: "Русский", ar: "العربية", ko: "한국어" } as const;
 
 export function InternationalBreakfastGuide({ guide }: { guide: GuideContent }) {
   const menuHref = "/en/menu";
@@ -64,7 +64,7 @@ export function InternationalBreakfastGuide({ guide }: { guide: GuideContent }) 
 
           <figure className={styles.heroVisual}>
             <Image
-              src="/images/hero-parallax/overhead-feast.webp"
+              src={guide.media?.hero ?? "/images/hero-parallax/overhead-feast.webp"}
               alt={guide.hero.imageAlt}
               fill
               priority
@@ -114,7 +114,7 @@ export function InternationalBreakfastGuide({ guide }: { guide: GuideContent }) 
         <section className={styles.tradition} aria-labelledby="tradition-title">
           <figure>
             <Image
-              src="/images/hands-table.webp"
+              src={guide.media?.article ?? "/images/hands-table.webp"}
               alt={guide.tradition.imageAlt}
               fill
               sizes="(max-width: 840px) 100vw, 48vw"

@@ -11,6 +11,7 @@ import {
   englishBreakfastBlogUrl,
   englishMenuUrl,
   englishUrl,
+  koreanHoneyKaymakBlogUrl,
   locationUrl,
   menuUrl,
   privacyUrl,
@@ -44,6 +45,7 @@ const internationalGuideAlternates = {
     en: englishBreakfastBlogUrl,
     ru: russianBreakfastBlogUrl,
     ar: arabicBreakfastBlogUrl,
+    ko: koreanHoneyKaymakBlogUrl,
     "x-default": englishBreakfastBlogUrl,
   },
 };
@@ -53,6 +55,13 @@ const internationalGuideImages = uniqueImages([
   "/images/hero-parallax/overhead-feast.webp",
   "/images/hands-table.webp",
   "/images/breakfast-spread.webp",
+]);
+
+const koreanHoneyKaymakImages = uniqueImages([
+  "/images/og/istanbul-bal-kaymak.jpg",
+  "/images/blog/istanbul-bal-kaymak.webp",
+  "/images/hero-parallax/overhead-feast.webp",
+  "/images/hands-table.webp",
 ]);
 
 function uniqueImages(images: string[]) {
@@ -196,6 +205,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       url: arabicBreakfastBlogUrl,
       lastModified: pageLastModified,
       images: internationalGuideImages,
+      alternates: internationalGuideAlternates,
+    },
+    {
+      url: koreanHoneyKaymakBlogUrl,
+      lastModified: pageLastModified,
+      images: koreanHoneyKaymakImages,
       alternates: internationalGuideAlternates,
     },
     {

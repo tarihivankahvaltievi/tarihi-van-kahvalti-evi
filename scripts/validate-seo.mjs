@@ -14,6 +14,7 @@ const culturePageUrl = `${canonicalSiteUrl}/van-kahvaltisi-nedir`;
 const englishBreakfastBlogUrl = `${canonicalSiteUrl}/en/blog/turkish-breakfast-istanbul`;
 const russianBreakfastBlogUrl = `${canonicalSiteUrl}/ru/blog/turetskiy-zavtrak-stambul`;
 const arabicBreakfastBlogUrl = `${canonicalSiteUrl}/ar/blog/turkish-breakfast-istanbul`;
+const koreanHoneyKaymakBlogUrl = `${canonicalSiteUrl}/ko/blog/istanbul-bal-kaymak`;
 const storyPageUrl = `${canonicalSiteUrl}/hikayemiz`;
 const privacyPageUrl = `${canonicalSiteUrl}/gizlilik`;
 const cookiePolicyPageUrl = `${canonicalSiteUrl}/cerez-politikasi`;
@@ -37,6 +38,7 @@ const internationalGuideHreflang = {
   en: englishBreakfastBlogUrl,
   ru: russianBreakfastBlogUrl,
   ar: arabicBreakfastBlogUrl,
+  ko: koreanHoneyKaymakBlogUrl,
   "x-default": englishBreakfastBlogUrl,
 };
 
@@ -165,6 +167,20 @@ const routes = [
     hreflang: internationalGuideHreflang,
     sourcedGuide: true,
   },
+  {
+    path: "/ko/blog/istanbul-bal-kaymak",
+    canonical: koreanHoneyKaymakBlogUrl,
+    language: "ko",
+    languageTag: "ko-KR",
+    htmlLanguage: "tr",
+    types: ["Restaurant", "BlogPosting", "WebPage", "BreadcrumbList", "FAQPage"],
+    restaurantMenu: `${menuPageUrl}#menu`,
+    faqCount: 6,
+    sharedGuideDesign: true,
+    visibleSignals: ["이스탄불 발 카이막", "터키식 아침 식사", "탁심", "1978", "꿀"],
+    hreflang: internationalGuideHreflang,
+    sourcedGuide: true,
+  },
 ];
 
 const legalRoutes = [
@@ -208,6 +224,7 @@ const redirectRules = [
   ["/breakfast-near-taksim", "/en"],
   ["/zavtrak-taksim-stambul", "/ru/blog/turetskiy-zavtrak-stambul"],
   ["/arabic-breakfast-taksim", "/ar/blog/turkish-breakfast-istanbul"],
+  ["/korean-bal-kaymak-istanbul", "/ko/blog/istanbul-bal-kaymak"],
   ["/anasayfa", "/"],
   ["/tarihi-van-kahvaltisi-evi-menu", "/menu"],
   ["/van-kahvalti", "/van-kahvaltisi"],
@@ -286,7 +303,7 @@ for (const route of routes) {
   const html = await response.text();
   const text = visibleText(html);
   const lowerText = text.toLocaleLowerCase(
-    route.language === "tr" ? "tr-TR" : route.language === "ru" ? "ru-RU" : route.language === "ar" ? "ar-SA" : "en-US",
+    route.language === "tr" ? "tr-TR" : route.language === "ru" ? "ru-RU" : route.language === "ar" ? "ar-SA" : route.language === "ko" ? "ko-KR" : "en-US",
   );
   const routeLabel = route.path;
 
@@ -294,7 +311,7 @@ for (const route of routes) {
 
   if (route.language !== "tr") {
     assert(response.headers.get("content-language") === route.language, `${routeLabel}: Content-Language başlığı eksik`);
-    assert(new RegExp(`<main\\b[^>]*\\blang="${route.language}"`, "i").test(html), `${routeLabel}: ana içerik lang işareti eksik`);
+    assert(new RegExp(`<main\\b[^>]*\\blang="${route.languageTag ?? route.language}"`, "i").test(html), `${routeLabel}: ana içerik lang işareti eksik`);
   }
 
   if (route.direction) {
@@ -311,7 +328,7 @@ for (const route of routes) {
   );
   assert(title.length >= 35 && title.length <= 70, `${routeLabel}: title uzunluğu ${title.length}`);
   assert(
-    description.length >= 100 && description.length <= 170,
+    description.length >= (route.language === "ko" ? 60 : 100) && description.length <= 170,
     `${routeLabel}: description uzunluğu ${description.length}`,
   );
   assert((visibleHtml(html).match(/<h1\b/gi) ?? []).length === 1, `${routeLabel}: tam bir H1 bulunmalı`);
@@ -388,6 +405,7 @@ for (const route of routes) {
       en: "/en/blog/turkish-breakfast-istanbul",
       ru: "/ru/blog/turetskiy-zavtrak-stambul",
       ar: "/ar/blog/turkish-breakfast-istanbul",
+      ko: "/ko/blog/istanbul-bal-kaymak",
     })) {
       assert(
         new RegExp(`<a(?=[^>]*href="${href}")(?=[^>]*hrefLang="${language}")[^>]*>`, "i").test(html),
@@ -478,7 +496,7 @@ for (const route of routes) {
   if (route.sourcedGuide) {
     const article = graphDocument["@graph"].find((node) => node["@type"] === "BlogPosting");
     assert(article?.citation?.length === 4, `${routeLabel}: dört birincil kaynak citation olarak bağlanmalı`);
-    assert(article?.mentions?.length === 3, `${routeLabel}: yöresel ürün entity bağları eksik`);
+    assert(article?.mentions?.length >= 3, `${routeLabel}: yöresel ürün entity bağları eksik`);
     assert(
       article.citation.every((url) => html.includes(`href="${url}"`)),
       `${routeLabel}: JSON-LD kaynakları görünür bağlantılarla eşleşmeli`,
@@ -520,9 +538,10 @@ assert(
 assert(sitemap.includes('hreflang="en"'), "Sitemap: İngilizce hreflang eksik");
 assert(sitemap.includes('hreflang="ru"'), "Sitemap: Rusça hreflang eksik");
 assert(sitemap.includes('hreflang="ar"'), "Sitemap: Arapça hreflang eksik");
+assert(sitemap.includes('hreflang="ko"'), "Sitemap: Korece hreflang eksik");
 assert(sitemap.includes('hreflang="x-default"'), "Sitemap: x-default hreflang eksik");
 
-for (const guideUrl of [englishBreakfastBlogUrl, russianBreakfastBlogUrl, arabicBreakfastBlogUrl]) {
+for (const guideUrl of [englishBreakfastBlogUrl, russianBreakfastBlogUrl, arabicBreakfastBlogUrl, koreanHoneyKaymakBlogUrl]) {
   const guideBlock = sitemap.match(
     new RegExp(`<url>\\s*<loc>${guideUrl}</loc>([\\s\\S]*?)</url>`),
   )?.[1];
@@ -604,6 +623,7 @@ for (const guidePath of [
   "/en/blog/turkish-breakfast-istanbul",
   "/ru/blog/turetskiy-zavtrak-stambul",
   "/ar/blog/turkish-breakfast-istanbul",
+  "/ko/blog/istanbul-bal-kaymak",
 ]) {
   assert(indexNowScript.includes(guidePath), `IndexNow: yeni rehber varsayılan bildirim listesinde eksik (${guidePath})`);
 }

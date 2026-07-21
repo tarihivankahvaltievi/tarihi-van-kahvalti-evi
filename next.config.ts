@@ -158,6 +158,15 @@ const nextConfig: NextConfig = {
         ],
       },
       {
+        source: "/ko/:path*",
+        headers: [
+          {
+            key: "Content-Language",
+            value: "ko",
+          },
+        ],
+      },
+      {
         source: "/:path*.(svg|ico)",
         headers: [
           {
