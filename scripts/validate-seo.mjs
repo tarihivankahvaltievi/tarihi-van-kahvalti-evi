@@ -609,6 +609,12 @@ for (const route of legalRoutes) {
 const sitemap = await (await fetchWithRetry("/sitemap.xml")).text();
 const sitemapUrls = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map((match) => match[1]);
 const sitemapLastModified = [...sitemap.matchAll(/<lastmod>([^<]+)<\/lastmod>/g)].map((match) => match[1]);
+const sitemapChangeFrequencies = [...sitemap.matchAll(/<changefreq>([^<]+)<\/changefreq>/g)].map(
+  (match) => match[1],
+);
+const sitemapPriorities = [...sitemap.matchAll(/<priority>([^<]+)<\/priority>/g)].map(
+  (match) => Number(match[1]),
+);
 const sitemapImages = [...sitemap.matchAll(/<image:loc>([^<]+)<\/image:loc>/g)].map((match) => match[1]);
 assert(sitemapUrls.length === canonicalUrls.size, "Sitemap: tüm indekslenebilir kanonik URL'ler bulunmalı");
 assert(sitemapUrls.every((url) => canonicalUrls.has(url)), "Sitemap: kanonik olmayan URL var");
@@ -619,6 +625,20 @@ assert(sitemapLastModified.length === canonicalUrls.size, "Sitemap: lastmod say�
 assert(
   sitemapLastModified.every((value) => Number.isFinite(Date.parse(value)) && Date.parse(value) <= Date.now()),
   "Sitemap: lastmod geçerli ve gelecekte olmayan bir tarih olmalı",
+);
+assert(
+  sitemapChangeFrequencies.length === canonicalUrls.size &&
+    sitemapChangeFrequencies.every((value) => ["weekly", "monthly", "yearly"].includes(value)),
+  "Sitemap: her URL için geçerli changefreq bulunmalı",
+);
+assert(
+  sitemapPriorities.length === canonicalUrls.size &&
+    sitemapPriorities.every((value) => Number.isFinite(value) && value >= 0 && value <= 1),
+  "Sitemap: her URL için 0-1 aralığında priority bulunmalı",
+);
+assert(
+  sitemap.includes(`<loc>${canonicalSiteUrl}</loc>`) && sitemap.includes("<priority>1</priority>"),
+  "Sitemap: ana sayfa en yüksek önceliğe sahip olmalı",
 );
 assert(sitemapImages.length >= 50, "Sitemap: kapsamlı görsel keşif listesi eksik");
 assert(
@@ -773,5 +793,5 @@ assert(missing.status === 404, "Bilinmeyen rota gerçek 404 dönmeli");
 assert(/<meta\s+name="robots"\s+content="noindex"/i.test(missingHtml), "404 sayfası noindex olmalı");
 
 console.log(
-  `SEO sözleşmesi geçti: ${canonicalUrls.size} kanonik sayfa indekslenebilir; ${redirectRules.length} bilinen eski URL doğru hedefe gider; hreflang, kapsamlı görsel sitemap, IndexNow, robots, Restaurant/Menu/FAQ şeması ve 404 doğru.`,
+  `SEO sözleşmesi geçti: ${canonicalUrls.size} kanonik sayfa indekslenebilir; ${redirectRules.length} bilinen eski URL doğru hedefe gider; hreflang, öncelik ve güncellenme sıklığı içeren kapsamlı görsel sitemap, IndexNow, robots, Restaurant/Menu/FAQ şeması ve 404 doğru.`,
 );

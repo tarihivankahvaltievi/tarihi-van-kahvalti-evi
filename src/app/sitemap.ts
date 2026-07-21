@@ -142,18 +142,24 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     {
       url: siteUrl,
       lastModified: pageLastModified,
+      changeFrequency: "weekly",
+      priority: 1,
       images: homeImages,
       alternates: homeLanguageAlternates,
     },
     {
       url: menuUrl,
       lastModified: liveMenuLastModified,
+      changeFrequency: "weekly",
+      priority: 0.9,
       images: menuImages,
       alternates: menuLanguageAlternates,
     },
     {
       url: breakfastGuideUrl,
       lastModified: pageLastModified,
+      changeFrequency: "monthly",
+      priority: 0.8,
       images: uniqueImages([
         "/images/og/van-kahvaltisi.jpg",
         "/images/breakfast-spread.webp",
@@ -164,6 +170,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     {
       url: breakfastCultureUrl,
       lastModified: pageLastModified,
+      changeFrequency: "monthly",
+      priority: 0.8,
       images: uniqueImages([
         "/images/og/van-kahvaltisi.jpg",
         "/images/hero-parallax/overhead-feast.webp",
@@ -175,6 +183,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     {
       url: storyUrl,
       lastModified: pageLastModified,
+      changeFrequency: "yearly",
+      priority: 0.6,
       images: uniqueImages([
         "/images/historic-mirror.webp",
         "/images/interior-chair.webp",
@@ -185,6 +195,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     {
       url: locationUrl,
       lastModified: pageLastModified,
+      changeFrequency: "monthly",
+      priority: 0.8,
       images: uniqueImages([
         "/images/street-table.webp",
         "/images/interior-chair.webp",
@@ -194,69 +206,93 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     {
       url: englishUrl,
       lastModified: pageLastModified,
+      changeFrequency: "weekly",
+      priority: 0.9,
       images: homeImages,
       alternates: homeLanguageAlternates,
     },
     {
       url: englishMenuUrl,
       lastModified: liveMenuLastModified,
+      changeFrequency: "weekly",
+      priority: 0.8,
       images: menuImages,
       alternates: menuLanguageAlternates,
     },
     {
       url: koreanUrl,
       lastModified: koreanPageLastModified,
+      changeFrequency: "weekly",
+      priority: 0.8,
       images: koreanHoneyKaymakImages,
       alternates: homeLanguageAlternates,
     },
     {
       url: englishBreakfastBlogUrl,
       lastModified: pageLastModified,
+      changeFrequency: "monthly",
+      priority: 0.7,
       images: internationalGuideImages,
       alternates: internationalGuideAlternates,
     },
     {
       url: russianBreakfastBlogUrl,
       lastModified: pageLastModified,
+      changeFrequency: "monthly",
+      priority: 0.7,
       images: internationalGuideImages,
       alternates: internationalGuideAlternates,
     },
     {
       url: arabicBreakfastBlogUrl,
       lastModified: pageLastModified,
+      changeFrequency: "monthly",
+      priority: 0.7,
       images: internationalGuideImages,
       alternates: internationalGuideAlternates,
     },
     {
       url: koreanHoneyKaymakBlogUrl,
       lastModified: koreanPageLastModified,
+      changeFrequency: "monthly",
+      priority: 0.7,
       images: koreanHoneyKaymakImages,
       alternates: honeyKaymakGuideAlternates,
     },
     {
       url: koreanKaymakExplainerUrl,
       lastModified: koreanPageLastModified,
+      changeFrequency: "monthly",
+      priority: 0.6,
       images: koreanHoneyKaymakImages,
     },
     {
       url: koreanTurkishBreakfastBlogUrl,
       lastModified: koreanPageLastModified,
+      changeFrequency: "monthly",
+      priority: 0.7,
       images: internationalGuideImages,
       alternates: internationalGuideAlternates,
     },
     {
       url: japaneseHoneyKaymakBlogUrl,
       lastModified: pageLastModified,
+      changeFrequency: "monthly",
+      priority: 0.7,
       images: koreanHoneyKaymakImages,
       alternates: honeyKaymakGuideAlternates,
     },
     {
       url: privacyUrl,
       lastModified: pageLastModified,
+      changeFrequency: "yearly",
+      priority: 0.3,
     },
     {
       url: cookiePolicyUrl,
       lastModified: pageLastModified,
+      changeFrequency: "yearly",
+      priority: 0.3,
     },
   ];
 }
