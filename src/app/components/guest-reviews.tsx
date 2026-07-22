@@ -2,7 +2,6 @@
 
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { ArrowLeft, ArrowRight, ExternalLink, Star } from "lucide-react";
-import Image from "next/image";
 import { useState } from "react";
 import { messagesFor, type SiteLocale } from "../home-localization";
 import { mapsUrl } from "../seo";
@@ -21,10 +20,9 @@ export function GuestReviews({ locale = "tr" }: { locale?: SiteLocale }) {
     setActiveIndex((current) => (current + nextDirection + reviews.length) % reviews.length);
   };
 
-  const motionDistance = reduceMotion ? 0 : direction * 12;
   const transition = {
-    duration: reduceMotion ? 0.12 : 0.44,
-    ease: [0.22, 1, 0.36, 1] as const,
+    duration: reduceMotion ? 0.12 : 0.38,
+    ease: [0.16, 1, 0.3, 1] as const,
   };
 
   return (
@@ -44,42 +42,21 @@ export function GuestReviews({ locale = "tr" }: { locale?: SiteLocale }) {
           </div>
         </header>
 
-        <div className={styles.plaque}>
-          <aside className={styles.identityPanel}>
-            <span className={styles.brandSeal} aria-hidden="true">
-              <Image
-                src="/images/brand-icon-small.png"
-                alt=""
-                width={96}
-                height={96}
-                sizes="72px"
-              />
-            </span>
-
-            <div
-              className={styles.rating}
-              aria-label={`${messages.reviews.rating} ${messages.reviews.ratingLabel}`}
-            >
-              <strong>{messages.reviews.rating}</strong>
-              <div>
+        <div className={styles.note}>
+          <div className={styles.stage} aria-live="polite" aria-atomic="true">
+            <div className={styles.cardMeta}>
+              <div
+                className={styles.rating}
+                aria-label={`${messages.reviews.rating} ${messages.reviews.ratingLabel}`}
+              >
+                <strong>{messages.reviews.rating}</strong>
                 <span className={styles.stars} aria-hidden="true">
                   {Array.from({ length: 5 }, (_, star) => (
-                    <Star key={star} size={14} fill="currentColor" />
+                    <Star key={star} size={13} fill="currentColor" />
                   ))}
                 </span>
                 <small>{messages.reviews.count}</small>
               </div>
-            </div>
-
-            <span className={styles.position} aria-hidden="true">
-              <strong>{String(activeIndex + 1).padStart(2, "0")}</strong>
-              <small>/ {String(reviews.length).padStart(2, "0")}</small>
-            </span>
-          </aside>
-
-          <div className={styles.stage} aria-live="polite" aria-atomic="true">
-            <div className={styles.cardMeta}>
-              <span className={styles.eyebrow}>{messages.reviews.ratingLabel}</span>
               <div className={styles.reviewMeta}>
                 <span>{activeReview.time}</span>
               </div>
@@ -91,23 +68,29 @@ export function GuestReviews({ locale = "tr" }: { locale?: SiteLocale }) {
                 className={styles.review}
                 initial={{
                   opacity: 0,
-                  x: motionDistance,
-                  y: reduceMotion ? 0 : 6,
-                  filter: reduceMotion ? "blur(0px)" : "blur(4px)",
+                  x: reduceMotion ? 0 : direction * 10,
+                  clipPath: reduceMotion
+                    ? "inset(0% 0% 0% 0%)"
+                    : direction > 0
+                      ? "inset(0% 100% 0% 0%)"
+                      : "inset(0% 0% 0% 100%)",
                 }}
-                animate={{ opacity: 1, x: 0, y: 0, filter: "blur(0px)" }}
+                animate={{ opacity: 1, x: 0, clipPath: "inset(0% 0% 0% 0%)" }}
                 exit={{
                   opacity: 0,
-                  x: -motionDistance * 0.65,
-                  y: reduceMotion ? 0 : -4,
-                  filter: reduceMotion ? "blur(0px)" : "blur(2px)",
+                  x: reduceMotion ? 0 : direction * -7,
+                  clipPath: reduceMotion
+                    ? "inset(0% 0% 0% 0%)"
+                    : direction > 0
+                      ? "inset(0% 0% 0% 100%)"
+                      : "inset(0% 100% 0% 0%)",
                 }}
                 transition={transition}
               >
                 <motion.blockquote
                   initial={{ opacity: 0, y: reduceMotion ? 0 : 7 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ ...transition, delay: reduceMotion ? 0 : 0.04 }}
+                  transition={{ ...transition, delay: reduceMotion ? 0 : 0.05 }}
                 >
                   {activeReview.quote}
                 </motion.blockquote>
@@ -115,7 +98,7 @@ export function GuestReviews({ locale = "tr" }: { locale?: SiteLocale }) {
                 <motion.footer
                   initial={{ opacity: 0, y: reduceMotion ? 0 : 5 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ ...transition, delay: reduceMotion ? 0 : 0.09 }}
+                  transition={{ ...transition, delay: reduceMotion ? 0 : 0.1 }}
                 >
                   <strong>{activeReview.name}</strong>
                 </motion.footer>
@@ -133,21 +116,29 @@ export function GuestReviews({ locale = "tr" }: { locale?: SiteLocale }) {
                 <ExternalLink size={15} aria-hidden="true" />
               </a>
 
-              <div className={styles.controls}>
-                <button
-                  type="button"
-                  onClick={() => moveReview(-1)}
-                  aria-label={messages.reviews.previous}
-                >
-                  <ArrowLeft size={18} aria-hidden="true" />
-                </button>
-                <button
-                  type="button"
-                  onClick={() => moveReview(1)}
-                  aria-label={messages.reviews.next}
-                >
-                  <ArrowRight size={18} aria-hidden="true" />
-                </button>
+              <div className={styles.navigation}>
+                <span className={styles.progress} aria-hidden="true">
+                  {reviews.map((review, index) => (
+                    <i key={review.name} data-active={index === activeIndex} />
+                  ))}
+                </span>
+
+                <div className={styles.controls}>
+                  <button
+                    type="button"
+                    onClick={() => moveReview(-1)}
+                    aria-label={messages.reviews.previous}
+                  >
+                    <ArrowLeft size={18} aria-hidden="true" />
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => moveReview(1)}
+                    aria-label={messages.reviews.next}
+                  >
+                    <ArrowRight size={18} aria-hidden="true" />
+                  </button>
+                </div>
               </div>
             </div>
           </div>
