@@ -20,10 +20,10 @@ export function GuestReviews({ locale = "tr" }: { locale?: SiteLocale }) {
     setActiveIndex((current) => (current + nextDirection + reviews.length) % reviews.length);
   };
 
-  const motionDistance = reduceMotion ? 0 : direction * 18;
+  const motionDistance = reduceMotion ? 0 : direction * 14;
   const transition = {
-    duration: reduceMotion ? 0.12 : 0.42,
-    ease: [0.16, 1, 0.3, 1] as const,
+    duration: reduceMotion ? 0.12 : 0.38,
+    ease: [0.22, 1, 0.36, 1] as const,
   };
 
   return (
@@ -36,92 +36,94 @@ export function GuestReviews({ locale = "tr" }: { locale?: SiteLocale }) {
       <div className={styles.inner}>
         <header className={styles.header}>
           <div className={styles.headingCopy}>
-            <p className={styles.sourceLabel}>{messages.reviews.googleLabel}</p>
             <h2 id="guest-reviews-title" className={styles.title}>
               {messages.reviews.title} <span>{messages.reviews.titleAccent}</span>
             </h2>
             <p className={styles.intro}>{messages.reviews.intro}</p>
           </div>
-
         </header>
 
-        <div className={styles.stage}>
-          <aside
-            className={styles.reviewSummary}
-            aria-label={`${messages.reviews.rating} ${messages.reviews.ratingLabel}`}
-          >
-            <span className={styles.googleSource}>
-              <span aria-hidden="true">G</span>
-              {messages.reviews.googleLabel}
-            </span>
-
-            <div className={styles.summaryScore}>
+        <div className={styles.stage} aria-live="polite" aria-atomic="true">
+          <div className={styles.cardMeta}>
+            <div
+              className={styles.rating}
+              aria-label={`${messages.reviews.rating} ${messages.reviews.ratingLabel}`}
+            >
               <strong>{messages.reviews.rating}</strong>
-              <span className={styles.summaryStars} aria-hidden="true">
-                {Array.from({ length: 5 }, (_, star) => (
-                  <Star key={star} size={16} fill="currentColor" />
-                ))}
-              </span>
-              <small>{messages.reviews.count}</small>
-            </div>
-
-            <span className={styles.quoteGlyph} aria-hidden="true">“</span>
-          </aside>
-
-          <div className={styles.reviewPanel} aria-live="polite" aria-atomic="true">
-            <div className={styles.reviewTopline}>
-              <span className={styles.reviewNumber} aria-hidden="true">
-                {String(activeIndex + 1).padStart(2, "0")}
-              </span>
-              <span>{activeReview.time}</span>
-            </div>
-
-            <AnimatePresence mode="wait" initial={false} custom={direction}>
-              <motion.article
-                key={activeReview.name}
-                className={styles.review}
-                initial={{ opacity: 0, x: motionDistance }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: -motionDistance }}
-                transition={transition}
-              >
-                <blockquote>{activeReview.quote}</blockquote>
-
-                <footer>
-                  <span className={styles.avatar} aria-hidden="true">
-                    {activeReview.name.charAt(0)}
-                  </span>
-                  <div>
-                    <strong>{activeReview.name}</strong>
-                    <small>{messages.reviews.googleLabel}</small>
-                  </div>
-                </footer>
-              </motion.article>
-            </AnimatePresence>
-
-            <div className={styles.reviewFooter}>
-              <a href={mapsUrl} target="_blank" rel="noopener noreferrer">
-                <span>{messages.reviews.viewAll}</span>
-                <ExternalLink size={15} aria-hidden="true" />
-              </a>
-
-              <div className={styles.controls}>
-                <span aria-hidden="true">{String(reviews.length).padStart(2, "0")}</span>
-                <button
-                  type="button"
-                  onClick={() => moveReview(-1)}
-                  aria-label={messages.reviews.previous}
-                >
-                  <ArrowLeft size={18} aria-hidden="true" />
-                </button>
-                <button
-                  type="button"
-                  onClick={() => moveReview(1)}
-                  aria-label={messages.reviews.next}
-                >
-                  <ArrowRight size={18} aria-hidden="true" />
-                </button>
+              <div>
+                <span className={styles.stars} aria-hidden="true">
+                  {Array.from({ length: 5 }, (_, star) => (
+                    <Star key={star} size={14} fill="currentColor" />
+                  ))}
+                </span>
+                <small>{messages.reviews.count}</small>
               </div>
+            </div>
+
+            <div className={styles.reviewMeta}>
+              <span>{activeReview.time}</span>
+              <span aria-hidden="true">
+                {String(activeIndex + 1).padStart(2, "0")} / {String(reviews.length).padStart(2, "0")}
+              </span>
+            </div>
+          </div>
+
+          <AnimatePresence mode="popLayout" initial={false} custom={direction}>
+            <motion.article
+              key={activeReview.name}
+              className={styles.review}
+              initial={{
+                opacity: 0,
+                x: motionDistance,
+                filter: reduceMotion ? "blur(0px)" : "blur(5px)",
+              }}
+              animate={{ opacity: 1, x: 0, filter: "blur(0px)" }}
+              exit={{
+                opacity: 0,
+                x: -motionDistance * 0.65,
+                filter: reduceMotion ? "blur(0px)" : "blur(3px)",
+              }}
+              transition={transition}
+            >
+              <motion.blockquote
+                initial={{ opacity: 0, y: reduceMotion ? 0 : 7 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ ...transition, delay: reduceMotion ? 0 : 0.04 }}
+              >
+                {activeReview.quote}
+              </motion.blockquote>
+
+              <motion.footer
+                initial={{ opacity: 0, y: reduceMotion ? 0 : 5 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ ...transition, delay: reduceMotion ? 0 : 0.09 }}
+              >
+                <strong>{activeReview.name}</strong>
+              </motion.footer>
+            </motion.article>
+          </AnimatePresence>
+
+          <div className={styles.reviewFooter}>
+            <a href={mapsUrl} target="_blank" rel="noopener noreferrer">
+              <span>{messages.reviews.viewAll}</span>
+              <ExternalLink size={15} aria-hidden="true" />
+            </a>
+
+            <div className={styles.controls}>
+              <button
+                type="button"
+                onClick={() => moveReview(-1)}
+                aria-label={messages.reviews.previous}
+              >
+                <ArrowLeft size={18} aria-hidden="true" />
+              </button>
+              <button
+                type="button"
+                onClick={() => moveReview(1)}
+                aria-label={messages.reviews.next}
+              >
+                <ArrowRight size={18} aria-hidden="true" />
+              </button>
             </div>
           </div>
         </div>
