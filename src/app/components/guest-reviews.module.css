@@ -1,6 +1,6 @@
 .section {
-  --review-red: #741820;
-  --review-red-deep: #4a0d13;
+  --review-red: #7a1b22;
+  --review-red-deep: #4d0e14;
   --review-cream: #fff8ec;
   --review-ink: #2e1a1c;
   --review-muted: #725e5a;
@@ -13,13 +13,8 @@
 }
 
 .section::before {
-  position: absolute;
-  inset: 0;
-  content: "";
-  pointer-events: none;
-  background:
-    radial-gradient(circle at 6% 8%, rgba(239, 207, 145, 0.12), transparent 25%),
-    radial-gradient(circle at 94% 88%, rgba(54, 5, 11, 0.24), transparent 28%);
+  display: none;
+  content: none;
 }
 
 .inner {
@@ -116,9 +111,10 @@
   grid-template-columns: minmax(0, 1.12fr) minmax(21rem, 0.88fr);
   min-height: clamp(29rem, 42vw, 34rem);
   overflow: hidden;
-  border-radius: 12px;
+  border: 1px solid rgba(19, 7, 9, 0.68);
+  border-radius: 10px;
   background: var(--review-cream);
-  box-shadow: 8px 8px 0 var(--review-red-deep);
+  box-shadow: 0 1px 0 rgba(255, 248, 236, 0.15);
 }
 
 .media {
@@ -126,6 +122,7 @@
   min-height: 100%;
   overflow: hidden;
   background: #3d1417;
+  border-right: 1px solid rgba(19, 7, 9, 0.68);
 }
 
 .media::after {
@@ -164,6 +161,7 @@
   padding: clamp(2rem, 3.6vw, 3.25rem) clamp(1.65rem, 3.5vw, 3.15rem) 1.4rem;
   background: var(--review-cream);
   color: var(--review-ink);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.28);
 }
 
 .review {
@@ -220,6 +218,7 @@
   height: 2.55rem;
   flex: 0 0 2.55rem;
   place-items: center;
+  border: 1px solid rgba(19, 7, 9, 0.58);
   border-radius: 50%;
   background: var(--review-red);
   color: var(--review-cream);
@@ -249,7 +248,7 @@
   gap: 1rem;
   margin-top: 1.4rem;
   padding-top: 1.15rem;
-  border-top: 1px solid rgba(46, 26, 28, 0.14);
+  border-top: 1px solid rgba(19, 7, 9, 0.22);
 }
 
 .reviewFooter > a {
@@ -287,7 +286,7 @@
   height: 2.65rem;
   padding: 0;
   place-items: center;
-  border: 1px solid rgba(116, 24, 32, 0.38);
+  border: 1px solid rgba(19, 7, 9, 0.48);
   border-radius: 50%;
   background: transparent;
   color: var(--review-red);
@@ -320,7 +319,8 @@
 @media (max-width: 760px) {
   .inner {
     width: min(100% - 2rem, 36rem);
-    padding: 3.35rem 0 3.75rem;
+    padding: 2.65rem 0 3.75rem;
+    border-top: 1px solid rgba(19, 7, 9, 0.22);
   }
 
   .header {
@@ -381,12 +381,14 @@
     grid-template-columns: 1fr;
     grid-template-rows: minmax(13rem, 58vw) auto;
     min-height: 0;
-    border-radius: 10px;
-    box-shadow: 5px 5px 0 var(--review-red-deep);
+    border-radius: 9px;
+    box-shadow: 0 1px 0 rgba(255, 248, 236, 0.12);
   }
 
   .media {
     min-height: 0;
+    border-right: 0;
+    border-bottom: 1px solid rgba(19, 7, 9, 0.68);
   }
 
   .placeLabel {
@@ -431,7 +433,7 @@
   }
 }
 
-@media (max-width: 390px) {
+@media (max-width: 480px) {
   .inner {
     width: min(100% - 1.5rem, 36rem);
   }
