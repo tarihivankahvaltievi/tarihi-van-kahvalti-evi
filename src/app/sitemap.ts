@@ -19,6 +19,8 @@ import {
   locationUrl,
   menuUrl,
   privacyUrl,
+  reservationUrl,
+  englishReservationUrl,
   russianBreakfastBlogUrl,
   siteUrl,
   storyUrl,
@@ -154,6 +156,34 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.9,
       images: menuImages,
       alternates: menuLanguageAlternates,
+    },
+    {
+      url: reservationUrl,
+      lastModified: pageLastModified,
+      changeFrequency: "weekly",
+      priority: 0.9,
+      images: homeImages,
+      alternates: {
+        languages: {
+          tr: reservationUrl,
+          en: englishReservationUrl,
+          "x-default": reservationUrl,
+        },
+      },
+    },
+    {
+      url: englishReservationUrl,
+      lastModified: pageLastModified,
+      changeFrequency: "weekly",
+      priority: 0.9,
+      images: homeImages,
+      alternates: {
+        languages: {
+          tr: reservationUrl,
+          en: englishReservationUrl,
+          "x-default": reservationUrl,
+        },
+      },
     },
     {
       url: breakfastGuideUrl,
