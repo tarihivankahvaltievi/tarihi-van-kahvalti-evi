@@ -3,7 +3,7 @@
 import dynamic from "next/dynamic";
 import Image from "next/image";
 import Link from "next/link";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 import {
   useEffect,
   useRef,
@@ -34,15 +34,11 @@ const BookingModal = dynamic(
 
 export default function ClientPage({ children, locale = "tr" }: { children: ReactNode; locale?: SiteLocale }) {
   const messages = messagesFor(locale);
-  const router = useRouter();
   const pathname = usePathname();
   const isMenuPage = pathname === "/menu" || pathname === "/en/menu";
-  const isReservationPage = pathname === "/rezervasyon" || pathname === "/en/rezervasyon";
   const isLocationPage = pathname === "/konum";
   const alternateHref = isMenuPage
     ? locale === "en" ? "/menu" : "/en/menu"
-    : isReservationPage
-    ? locale === "en" ? "/rezervasyon" : "/en/rezervasyon"
     : messages.alternateHref;
   const [isBookingOpen, setIsBookingOpen] = useState(false);
   const [preselectedItem, setPreselectedItem] = useState("");
@@ -166,25 +162,19 @@ export default function ClientPage({ children, locale = "tr" }: { children: Reac
   useEffect(() => {
     const handleBookingRequest = (event: Event) => {
       const detail = (event as CustomEvent<{ itemTitle?: string; category?: string }>).detail;
-      const query = new URLSearchParams();
-      if (detail?.itemTitle) query.set("item", detail.itemTitle);
-      if (detail?.category) query.set("type", detail.category);
-      const target = locale === "en" ? `/en/rezervasyon` : `/rezervasyon`;
-      const fullTarget = query.toString() ? `${target}?${query.toString()}` : target;
-      router.push(fullTarget);
+      setPreselectedItem(detail?.itemTitle || "");
+      setPreselectedType(detail?.category || (locale === "en" ? "Breakfast" : "Kahvaltı"));
+      setIsBookingOpen(true);
     };
 
     window.addEventListener("open-booking", handleBookingRequest);
     return () => window.removeEventListener("open-booking", handleBookingRequest);
-  }, [locale, router]);
+  }, [locale]);
 
   const handleOpenBooking = (itemTitle?: string, category?: string) => {
-    const query = new URLSearchParams();
-    if (itemTitle) query.set("item", itemTitle);
-    if (category) query.set("type", category);
-    const target = locale === "en" ? `/en/rezervasyon` : `/rezervasyon`;
-    const fullTarget = query.toString() ? `${target}?${query.toString()}` : target;
-    router.push(fullTarget);
+    setPreselectedItem(itemTitle || "");
+    setPreselectedType(category || (locale === "en" ? "Breakfast" : "Kahvaltı"));
+    setIsBookingOpen(true);
   };
 
   const handleMouseEnter = (event: MouseEvent<HTMLAnchorElement>) => {
@@ -232,7 +222,6 @@ export default function ClientPage({ children, locale = "tr" }: { children: Reac
             <span className="nav-hover-pill" style={hoverStyle} />
             <Link href={messages.aboutHref} onMouseEnter={handleMouseEnter}>{messages.nav.about}</Link>
             <Link href={messages.menuHref} aria-current={isMenuPage ? "page" : undefined} onMouseEnter={handleMouseEnter}>{messages.nav.menu}</Link>
-            <Link href={messages.reservationHref} aria-current={isReservationPage ? "page" : undefined} onMouseEnter={handleMouseEnter}>{locale === "en" ? "Reservation" : "Rezervasyon"}</Link>
             <Link href={messages.galleryHref} onMouseEnter={handleMouseEnter}>{messages.nav.gallery}</Link>
             {locale === "en" ? (
               <a href={mapsUrl} target="_blank" rel="noopener noreferrer" onMouseEnter={handleMouseEnter}>{messages.nav.location}</a>
@@ -406,16 +395,19 @@ export default function ClientPage({ children, locale = "tr" }: { children: Reac
               <ChevronRight size={17} />
             </Link>
             <div className="nav-drawer-footer">
-              <Link
+              <button
+                type="button"
                 className="nav-drawer-book"
-                href={messages.reservationHref}
                 tabIndex={menuOpen ? 0 : -1}
-                onClick={() => setMenuOpen(false)}
+                onClick={() => {
+                  setMenuOpen(false);
+                  handleOpenBooking();
+                }}
               >
                 <Calendar size={17} />
                 <span>{messages.nav.book}</span>
                 <ChevronRight size={16} />
-              </Link>
+              </button>
             </div>
           </div>
         </header>
