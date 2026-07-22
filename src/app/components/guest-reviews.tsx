@@ -43,7 +43,7 @@ export function GuestReviews({ locale = "tr" }: { locale?: SiteLocale }) {
           </div>
         </header>
 
-        <div className={styles.deck}>
+        <div className={styles.plaque}>
           <div className={styles.stage} aria-live="polite" aria-atomic="true">
             <div className={styles.cardMeta}>
               <div
@@ -63,9 +63,6 @@ export function GuestReviews({ locale = "tr" }: { locale?: SiteLocale }) {
 
               <div className={styles.reviewMeta}>
                 <span>{activeReview.time}</span>
-                <span aria-hidden="true">
-                  {String(activeIndex + 1).padStart(2, "0")} / {String(reviews.length).padStart(2, "0")}
-                </span>
               </div>
             </div>
 
@@ -103,14 +100,18 @@ export function GuestReviews({ locale = "tr" }: { locale?: SiteLocale }) {
                 </motion.footer>
               </motion.article>
             </AnimatePresence>
-          </div>
 
-          <div className={styles.reviewFooter}>
-            <a href={mapsUrl} target="_blank" rel="noopener noreferrer">
+            <a className={styles.viewAll} href={mapsUrl} target="_blank" rel="noopener noreferrer">
               <span>{messages.reviews.viewAll}</span>
               <ExternalLink size={15} aria-hidden="true" />
             </a>
+          </div>
 
+          <div className={styles.controlRail}>
+            <span className={styles.position} aria-hidden="true">
+              <strong>{String(activeIndex + 1).padStart(2, "0")}</strong>
+              <small>/ {String(reviews.length).padStart(2, "0")}</small>
+            </span>
             <div className={styles.controls}>
               <button
                 type="button"
