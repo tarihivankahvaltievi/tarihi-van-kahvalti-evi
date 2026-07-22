@@ -2,6 +2,7 @@
 
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { ArrowLeft, ArrowRight, ExternalLink, Star } from "lucide-react";
+import Image from "next/image";
 import { useState } from "react";
 import { messagesFor, type SiteLocale } from "../home-localization";
 import { mapsUrl } from "../seo";
@@ -20,9 +21,9 @@ export function GuestReviews({ locale = "tr" }: { locale?: SiteLocale }) {
     setActiveIndex((current) => (current + nextDirection + reviews.length) % reviews.length);
   };
 
-  const motionDistance = reduceMotion ? 0 : direction * 14;
+  const motionDistance = reduceMotion ? 0 : direction * 12;
   const transition = {
-    duration: reduceMotion ? 0.12 : 0.38,
+    duration: reduceMotion ? 0.12 : 0.44,
     ease: [0.22, 1, 0.36, 1] as const,
   };
 
@@ -44,42 +45,62 @@ export function GuestReviews({ locale = "tr" }: { locale?: SiteLocale }) {
         </header>
 
         <div className={styles.plaque}>
+          <aside className={styles.identityPanel}>
+            <span className={styles.brandSeal} aria-hidden="true">
+              <Image
+                src="/images/brand-icon-small.png"
+                alt=""
+                width={96}
+                height={96}
+                sizes="72px"
+              />
+            </span>
+
+            <div
+              className={styles.rating}
+              aria-label={`${messages.reviews.rating} ${messages.reviews.ratingLabel}`}
+            >
+              <strong>{messages.reviews.rating}</strong>
+              <div>
+                <span className={styles.stars} aria-hidden="true">
+                  {Array.from({ length: 5 }, (_, star) => (
+                    <Star key={star} size={14} fill="currentColor" />
+                  ))}
+                </span>
+                <small>{messages.reviews.count}</small>
+              </div>
+            </div>
+
+            <span className={styles.position} aria-hidden="true">
+              <strong>{String(activeIndex + 1).padStart(2, "0")}</strong>
+              <small>/ {String(reviews.length).padStart(2, "0")}</small>
+            </span>
+          </aside>
+
           <div className={styles.stage} aria-live="polite" aria-atomic="true">
             <div className={styles.cardMeta}>
-              <div
-                className={styles.rating}
-                aria-label={`${messages.reviews.rating} ${messages.reviews.ratingLabel}`}
-              >
-                <strong>{messages.reviews.rating}</strong>
-                <div>
-                  <span className={styles.stars} aria-hidden="true">
-                    {Array.from({ length: 5 }, (_, star) => (
-                      <Star key={star} size={14} fill="currentColor" />
-                    ))}
-                  </span>
-                  <small>{messages.reviews.count}</small>
-                </div>
-              </div>
-
+              <span className={styles.eyebrow}>{messages.reviews.ratingLabel}</span>
               <div className={styles.reviewMeta}>
                 <span>{activeReview.time}</span>
               </div>
             </div>
 
-            <AnimatePresence mode="popLayout" initial={false} custom={direction}>
+            <AnimatePresence mode="wait" initial={false} custom={direction}>
               <motion.article
                 key={activeReview.name}
                 className={styles.review}
                 initial={{
                   opacity: 0,
                   x: motionDistance,
-                  filter: reduceMotion ? "blur(0px)" : "blur(5px)",
+                  y: reduceMotion ? 0 : 6,
+                  filter: reduceMotion ? "blur(0px)" : "blur(4px)",
                 }}
-                animate={{ opacity: 1, x: 0, filter: "blur(0px)" }}
+                animate={{ opacity: 1, x: 0, y: 0, filter: "blur(0px)" }}
                 exit={{
                   opacity: 0,
                   x: -motionDistance * 0.65,
-                  filter: reduceMotion ? "blur(0px)" : "blur(3px)",
+                  y: reduceMotion ? 0 : -4,
+                  filter: reduceMotion ? "blur(0px)" : "blur(2px)",
                 }}
                 transition={transition}
               >
@@ -101,32 +122,33 @@ export function GuestReviews({ locale = "tr" }: { locale?: SiteLocale }) {
               </motion.article>
             </AnimatePresence>
 
-            <a className={styles.viewAll} href={mapsUrl} target="_blank" rel="noopener noreferrer">
-              <span>{messages.reviews.viewAll}</span>
-              <ExternalLink size={15} aria-hidden="true" />
-            </a>
-          </div>
+            <div className={styles.cardFooter}>
+              <a
+                className={styles.viewAll}
+                href={mapsUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <span>{messages.reviews.viewAll}</span>
+                <ExternalLink size={15} aria-hidden="true" />
+              </a>
 
-          <div className={styles.controlRail}>
-            <span className={styles.position} aria-hidden="true">
-              <strong>{String(activeIndex + 1).padStart(2, "0")}</strong>
-              <small>/ {String(reviews.length).padStart(2, "0")}</small>
-            </span>
-            <div className={styles.controls}>
-              <button
-                type="button"
-                onClick={() => moveReview(-1)}
-                aria-label={messages.reviews.previous}
-              >
-                <ArrowLeft size={18} aria-hidden="true" />
-              </button>
-              <button
-                type="button"
-                onClick={() => moveReview(1)}
-                aria-label={messages.reviews.next}
-              >
-                <ArrowRight size={18} aria-hidden="true" />
-              </button>
+              <div className={styles.controls}>
+                <button
+                  type="button"
+                  onClick={() => moveReview(-1)}
+                  aria-label={messages.reviews.previous}
+                >
+                  <ArrowLeft size={18} aria-hidden="true" />
+                </button>
+                <button
+                  type="button"
+                  onClick={() => moveReview(1)}
+                  aria-label={messages.reviews.next}
+                >
+                  <ArrowRight size={18} aria-hidden="true" />
+                </button>
+              </div>
             </div>
           </div>
         </div>
