@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { ArrowLeft, ArrowRight, ExternalLink, Star } from "lucide-react";
 import { useState } from "react";
@@ -44,50 +43,35 @@ export function GuestReviews({ locale = "tr" }: { locale?: SiteLocale }) {
             <p className={styles.intro}>{messages.reviews.intro}</p>
           </div>
 
-          <div
-            className={styles.proof}
+        </header>
+
+        <div className={styles.stage}>
+          <aside
+            className={styles.reviewSummary}
             aria-label={`${messages.reviews.rating} ${messages.reviews.ratingLabel}`}
           >
-            <strong>{messages.reviews.rating}</strong>
-            <div>
-              <span className={styles.proofStars} aria-hidden="true">
+            <span className={styles.googleSource}>
+              <span aria-hidden="true">G</span>
+              {messages.reviews.googleLabel}
+            </span>
+
+            <div className={styles.summaryScore}>
+              <strong>{messages.reviews.rating}</strong>
+              <span className={styles.summaryStars} aria-hidden="true">
                 {Array.from({ length: 5 }, (_, star) => (
-                  <Star key={star} size={14} fill="currentColor" />
+                  <Star key={star} size={16} fill="currentColor" />
                 ))}
               </span>
               <small>{messages.reviews.count}</small>
             </div>
-          </div>
-        </header>
 
-        <div className={styles.stage}>
-          <div className={styles.media}>
-            <AnimatePresence mode="wait" initial={false}>
-              <motion.div
-                key={activeReview.photo}
-                className={styles.mediaMotion}
-                initial={{ opacity: 0, scale: reduceMotion ? 1 : 1.025 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0 }}
-                transition={transition}
-              >
-                <Image
-                  src={activeReview.photo}
-                  alt={activeReview.alt}
-                  fill
-                  sizes="(max-width: 760px) calc(100vw - 32px), 56vw"
-                  quality={75}
-                />
-              </motion.div>
-            </AnimatePresence>
-            <span className={styles.placeLabel}>{messages.reviews.photoLabel}</span>
-          </div>
+            <span className={styles.quoteGlyph} aria-hidden="true">“</span>
+          </aside>
 
           <div className={styles.reviewPanel} aria-live="polite" aria-atomic="true">
             <div className={styles.reviewTopline}>
-              <span className={styles.googleSource}>
-                <span aria-hidden="true">G</span>
-                {messages.reviews.googleLabel}
+              <span className={styles.reviewNumber} aria-hidden="true">
+                {String(activeIndex + 1).padStart(2, "0")}
               </span>
               <span>{activeReview.time}</span>
             </div>
@@ -101,12 +85,6 @@ export function GuestReviews({ locale = "tr" }: { locale?: SiteLocale }) {
                 exit={{ opacity: 0, x: -motionDistance }}
                 transition={transition}
               >
-                <span className={styles.stars} aria-hidden="true">
-                  {Array.from({ length: 5 }, (_, star) => (
-                    <Star key={star} size={15} fill="currentColor" />
-                  ))}
-                </span>
-
                 <blockquote>{activeReview.quote}</blockquote>
 
                 <footer>
@@ -128,9 +106,7 @@ export function GuestReviews({ locale = "tr" }: { locale?: SiteLocale }) {
               </a>
 
               <div className={styles.controls}>
-                <span aria-hidden="true">
-                  {String(activeIndex + 1).padStart(2, "0")} / {String(reviews.length).padStart(2, "0")}
-                </span>
+                <span aria-hidden="true">{String(reviews.length).padStart(2, "0")}</span>
                 <button
                   type="button"
                   onClick={() => moveReview(-1)}
