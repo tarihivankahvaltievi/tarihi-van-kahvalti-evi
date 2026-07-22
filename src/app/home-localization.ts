@@ -107,16 +107,16 @@ export const homeMessages = {
       titleEmphasis: "Taksim'de ağır ağır kurulur.",
       lead:
         "Zambak Sokak'ın kendine özgü dokusu içinde, Van kahvaltısının sevilen tatlarını aynı sofrada buluşturuyoruz. Otlu peynirden murtuğaya, sıcak pişiden ev yapımı reçellere kadar her tabağı günlük, taze ve özenli hazırlıyoruz. Nostaljik ayrıntılarla çevrili mekânımızda kahvaltıyı hızlı bir öğün değil; çayın demlendiği, sohbetin uzadığı sakin bir buluşma olarak görüyoruz.",
-      primaryAction: "Sofrayı keşfet",
-      bookingAction: "Masanı ayırt",
+      primaryAction: "Menüyü incele",
+      bookingAction: "Rezervasyon yap",
       actionsAria: "Hakkımızda bölümü sonraki adımlar",
       principlesAria: "Tarihi Van Kahvaltı Evi'nin sofra yaklaşımı",
       tableAlt: "Kahvaltı sofrasında peynir, reçel ve tahin tabaklarını uzatan eller",
       memoryAlt: "Mekândaki oymalı çerçeveli ayna ve aynaya yansıyan tuğla duvar",
       principles: [
-        ["Beyoğlu konumu", "Zambak Sokak'ta; Taksim Meydanı, İstiklal Caddesi ve M2 metro durağından yürüyerek ulaşılabilen bir masa."],
-        ["Günlük emek", "Taze hazırlanan reçeller, sıcak pişiler ve özenle kurulan kahvaltı."],
-        ["Van sofrası", "Otlu peynir, murtuğa, kete ve demli çayla yöresel karakter."],
+        ["Beyoğlu konumu", "Zambak Sokak'ta; Taksim Meydanı, İstiklal Caddesi ve M2 Taksim durağına yürüme mesafesindeyiz."],
+        ["Günlük emek", "Her sabah hazırlanan reçeller, sıcak pişiler ve özenle kurulan kahvaltı."],
+        ["Van sofrası", "Otlu peynir, murtuğa, kete ve demli çayla kurulan yöresel sofra."],
       ],
     },
     gallery: {

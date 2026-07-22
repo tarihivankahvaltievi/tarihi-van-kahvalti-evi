@@ -46,7 +46,7 @@ export function AboutStory({ locale = "tr" }: { locale?: SiteLocale }) {
           <nav className={styles.actions} aria-label={messages.about.actionsAria}>
             <Link href={messages.menuHref} className={`${styles.action} ${styles.menuAction}`}>
               <span>{messages.about.primaryAction}</span>
-              <span className={styles.actionArrow} aria-hidden="true">↗</span>
+              <span className={styles.actionArrow} aria-hidden="true">→</span>
             </Link>
             <BookingOpenButton className={`${styles.action} ${styles.bookingAction}`}>
               {messages.about.bookingAction}

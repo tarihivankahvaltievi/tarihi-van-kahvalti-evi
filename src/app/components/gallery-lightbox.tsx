@@ -23,6 +23,19 @@ type GalleryRow = {
   density: "featured" | "tall";
 };
 
+function stopMarqueeAnimation(animation: AnimationPlaybackControls | null) {
+  if (!animation) return;
+
+  try {
+    animation.stop();
+  } catch (error) {
+    // A route change can detach the marquee before Motion commits its final frame.
+    if (!(error instanceof DOMException) || error.name !== "InvalidStateError") {
+      throw error;
+    }
+  }
+}
+
 export function GalleryLightbox({ gallery, locale = "tr" }: GalleryLightboxProps) {
   const messages = messagesFor(locale);
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
@@ -284,7 +297,7 @@ function GalleryMarqueeRow({
 
     const animationConfig = `${reverse}:${duration}`;
     if (animationConfigRef.current !== animationConfig) {
-      animationRef.current?.stop();
+      stopMarqueeAnimation(animationRef.current);
       animationRef.current = animateMini(
         track,
         {
@@ -306,7 +319,7 @@ function GalleryMarqueeRow({
   }, [duration, paused, reverse]);
 
   useEffect(() => () => {
-    animationRef.current?.stop();
+    stopMarqueeAnimation(animationRef.current);
     animationRef.current = null;
   }, []);
 
