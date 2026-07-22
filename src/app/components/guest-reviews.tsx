@@ -84,6 +84,14 @@ export function GuestReviews({ locale = "tr" }: { locale?: SiteLocale }) {
           </div>
 
           <div className={styles.reviewPanel} aria-live="polite" aria-atomic="true">
+            <div className={styles.reviewTopline}>
+              <span className={styles.googleSource}>
+                <span aria-hidden="true">G</span>
+                {messages.reviews.googleLabel}
+              </span>
+              <span>{activeReview.time}</span>
+            </div>
+
             <AnimatePresence mode="wait" initial={false} custom={direction}>
               <motion.article
                 key={activeReview.name}
@@ -93,14 +101,11 @@ export function GuestReviews({ locale = "tr" }: { locale?: SiteLocale }) {
                 exit={{ opacity: 0, x: -motionDistance }}
                 transition={transition}
               >
-                <div className={styles.reviewMeta}>
-                  <span className={styles.stars} aria-hidden="true">
-                    {Array.from({ length: 5 }, (_, star) => (
-                      <Star key={star} size={15} fill="currentColor" />
-                    ))}
-                  </span>
-                  <span>{activeReview.time}</span>
-                </div>
+                <span className={styles.stars} aria-hidden="true">
+                  {Array.from({ length: 5 }, (_, star) => (
+                    <Star key={star} size={15} fill="currentColor" />
+                  ))}
+                </span>
 
                 <blockquote>{activeReview.quote}</blockquote>
 
