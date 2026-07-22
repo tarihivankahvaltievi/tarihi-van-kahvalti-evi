@@ -20,8 +20,6 @@ const koreanKaymakExplainerUrl = `${canonicalSiteUrl}/ko/blog/kaymak-nedir`;
 const koreanTurkishBreakfastBlogUrl = `${canonicalSiteUrl}/ko/blog/turkish-breakfast-istanbul`;
 const japaneseHoneyKaymakBlogUrl = `${canonicalSiteUrl}/ja/blog/istanbul-bal-kaymak`;
 const storyPageUrl = `${canonicalSiteUrl}/hikayemiz`;
-const reservationPageUrl = `${canonicalSiteUrl}/rezervasyon`;
-const englishReservationPageUrl = `${canonicalSiteUrl}/en/reservation`;
 const privacyPageUrl = `${canonicalSiteUrl}/gizlilik`;
 const cookiePolicyPageUrl = `${canonicalSiteUrl}/cerez-politikasi`;
 const expectedGoogleVerification = process.env.SEO_EXPECT_GOOGLE_SITE_VERIFICATION?.trim();
@@ -259,15 +257,13 @@ const routes = [
   },
 ];
 
-const simpleRoutes = [
+const legalRoutes = [
   { path: "/gizlilik", canonical: privacyPageUrl },
   { path: "/cerez-politikasi", canonical: cookiePolicyPageUrl },
-  { path: "/rezervasyon", canonical: reservationPageUrl },
-  { path: "/en/reservation", canonical: englishReservationPageUrl },
 ];
 const canonicalUrls = new Set([
   ...routes.map((route) => route.canonical),
-  ...simpleRoutes.map((route) => route.canonical),
+  ...legalRoutes.map((route) => route.canonical),
 ]);
 const internalPaths = new Set();
 const internalLinkSources = new Map();
@@ -598,7 +594,7 @@ for (const route of routes) {
   }
 }
 
-for (const route of simpleRoutes) {
+for (const route of legalRoutes) {
   const response = await fetchWithRetry(route.path);
   const html = await response.text();
   const canonicalMatches = [...html.matchAll(/<link\s+rel="canonical"\s+href="([^"]+)"/gi)];

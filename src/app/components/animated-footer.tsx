@@ -365,6 +365,16 @@ export function AnimatedFooter({ locale = "tr" }: { locale?: SiteLocale }) {
   const footerRef = useRef<HTMLElement>(null);
   const [isFooterVisible, setIsFooterVisible] = useState(false);
 
+  const handleOpenBooking = () => {
+    window.dispatchEvent(
+      new CustomEvent("open-booking", {
+        detail: {
+          category: locale === "en" ? "Breakfast" : "Kahvaltı",
+        },
+      }),
+    );
+  };
+
   useEffect(() => {
     const footer = footerRef.current;
     if (!footer) return;
@@ -1172,9 +1182,9 @@ export function AnimatedFooter({ locale = "tr" }: { locale?: SiteLocale }) {
             <p className="footer-brand-desc">
               {messages.footer.description}
             </p>
-            <Link className="footer-cta" href={locale === "en" ? "/en/reservation" : "/rezervasyon"}>
+            <button type="button" className="footer-cta" onClick={handleOpenBooking}>
               {messages.footer.booking} <ArrowRight size={18} />
-            </Link>
+            </button>
           </div>
         </div>
 
