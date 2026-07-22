@@ -28,6 +28,9 @@ import {
 // Her derlemede "şimdi" üretmek arama motorlarına yanıltıcı bir sinyal verir.
 const pageLastModified = "2026-07-21T15:00:00+03:00";
 const koreanPageLastModified = "2026-07-22T00:30:00+03:00";
+const reservationLastModified = "2026-07-22T17:00:00+03:00";
+const reservationUrl = absoluteUrl("/rezervasyon");
+const englishReservationUrl = absoluteUrl("/en/reservation");
 
 const homeLanguageAlternates = {
   languages: {
@@ -43,6 +46,14 @@ const menuLanguageAlternates = {
     tr: menuUrl,
     en: englishMenuUrl,
     "x-default": menuUrl,
+  },
+};
+
+const reservationLanguageAlternates = {
+  languages: {
+    tr: reservationUrl,
+    en: englishReservationUrl,
+    "x-default": reservationUrl,
   },
 };
 
@@ -218,6 +229,28 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.8,
       images: menuImages,
       alternates: menuLanguageAlternates,
+    },
+    {
+      url: reservationUrl,
+      lastModified: reservationLastModified,
+      changeFrequency: "yearly",
+      priority: 0.7,
+      images: uniqueImages([
+        "/images/breakfast-spread.webp",
+        "/images/historic-mirror.webp",
+      ]),
+      alternates: reservationLanguageAlternates,
+    },
+    {
+      url: englishReservationUrl,
+      lastModified: reservationLastModified,
+      changeFrequency: "yearly",
+      priority: 0.6,
+      images: uniqueImages([
+        "/images/breakfast-spread.webp",
+        "/images/historic-mirror.webp",
+      ]),
+      alternates: reservationLanguageAlternates,
     },
     {
       url: koreanUrl,
