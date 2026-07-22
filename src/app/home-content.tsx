@@ -3,6 +3,7 @@ import { AnimatedFooter } from "./components/animated-footer";
 import { BookingOpenButton } from "./components/booking-open-button";
 import { FaqSection } from "./components/faq-section";
 import { GalleryLightbox } from "./components/gallery-lightbox";
+import { GuestReviews } from "./components/guest-reviews";
 import { VanHeroParallax } from "./components/van-hero-parallax";
 import { messagesFor, type SiteLocale } from "./home-localization";
 
@@ -16,6 +17,8 @@ export function HomeContent({ locale = "tr" }: { locale?: SiteLocale }) {
       <VanHeroParallax locale={locale} />
 
       <AboutStory locale={locale} />
+
+      <GuestReviews locale={locale} />
 
       <section id="gallery" className="gallery-section">
         <div className="gallery-head">
