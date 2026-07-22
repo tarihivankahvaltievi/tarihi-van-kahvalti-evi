@@ -1,5 +1,6 @@
 "use client";
 
+import dynamic from "next/dynamic";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -26,17 +27,22 @@ import {
 import { mapsUrl, whatsappUrl } from "./seo";
 import { messagesFor, type SiteLocale } from "./home-localization";
 
+const BookingModal = dynamic(
+  () => import("./components/booking-modal").then((mod) => mod.BookingModal),
+  { ssr: false },
+);
+
 export default function ClientPage({ children, locale = "tr" }: { children: ReactNode; locale?: SiteLocale }) {
   const messages = messagesFor(locale);
   const pathname = usePathname();
   const isMenuPage = pathname === "/menu" || pathname === "/en/menu";
-  const isReservationPage = pathname === "/rezervasyon" || pathname === "/en/reservation";
   const isLocationPage = pathname === "/konum";
   const alternateHref = isMenuPage
     ? locale === "en" ? "/menu" : "/en/menu"
-    : isReservationPage
-      ? locale === "en" ? "/rezervasyon" : "/en/reservation"
     : messages.alternateHref;
+  const [isBookingOpen, setIsBookingOpen] = useState(false);
+  const [preselectedItem, setPreselectedItem] = useState("");
+  const [preselectedType, setPreselectedType] = useState("");
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [mobileBarHidden, setMobileBarHidden] = useState(false);
@@ -153,6 +159,24 @@ export default function ClientPage({ children, locale = "tr" }: { children: Reac
     };
   }, [menuOpen]);
 
+  useEffect(() => {
+    const handleBookingRequest = (event: Event) => {
+      const detail = (event as CustomEvent<{ itemTitle?: string; category?: string }>).detail;
+      setPreselectedItem(detail?.itemTitle || "");
+      setPreselectedType(detail?.category || (locale === "en" ? "Breakfast" : "Kahvaltı"));
+      setIsBookingOpen(true);
+    };
+
+    window.addEventListener("open-booking", handleBookingRequest);
+    return () => window.removeEventListener("open-booking", handleBookingRequest);
+  }, [locale]);
+
+  const handleOpenBooking = (itemTitle?: string, category?: string) => {
+    setPreselectedItem(itemTitle || "");
+    setPreselectedType(category || (locale === "en" ? "Breakfast" : "Kahvaltı"));
+    setIsBookingOpen(true);
+  };
+
   const handleMouseEnter = (event: MouseEvent<HTMLAnchorElement>) => {
     const target = event.currentTarget;
     setHoverStyle({
@@ -171,7 +195,7 @@ export default function ClientPage({ children, locale = "tr" }: { children: Reac
 
   return (
     <>
-      <div id="top" lang={messages.documentLanguage} className={`site-shell theme-breakfast ${isMenuPage ? "menu-page-shell" : ""} ${isReservationPage ? "reservation-page-shell" : ""}`}>
+      <div id="top" lang={messages.documentLanguage} className={`site-shell theme-breakfast ${isMenuPage ? "menu-page-shell" : ""}`}>
         <header className={`nav ${scrolled ? "scrolled" : ""} ${menuOpen ? "menu-open" : ""}`}>
           <div className="logo-wrap">
             <div className="logo-emblem brand-logo-mark" aria-hidden="true">
@@ -371,16 +395,19 @@ export default function ClientPage({ children, locale = "tr" }: { children: Reac
               <ChevronRight size={17} />
             </Link>
             <div className="nav-drawer-footer">
-              <Link
+              <button
+                type="button"
                 className="nav-drawer-book"
-                href={locale === "en" ? "/en/reservation" : "/rezervasyon"}
                 tabIndex={menuOpen ? 0 : -1}
-                onClick={() => setMenuOpen(false)}
+                onClick={() => {
+                  setMenuOpen(false);
+                  handleOpenBooking();
+                }}
               >
                 <Calendar size={17} />
                 <span>{messages.nav.book}</span>
                 <ChevronRight size={16} />
-              </Link>
+              </button>
             </div>
           </div>
         </header>
@@ -396,7 +423,7 @@ export default function ClientPage({ children, locale = "tr" }: { children: Reac
         {children}
       </div>
 
-      {!isMenuPage && !isReservationPage ? (
+      {!isMenuPage ? (
         <div className={`mobile-bar ${mobileBarHidden || menuOpen ? "is-hidden" : ""}`} role="navigation" aria-label={messages.mobile.aria}>
           <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" aria-label={messages.mobile.whatsappAria}>
             <MessageCircle size={20} />
@@ -413,6 +440,16 @@ export default function ClientPage({ children, locale = "tr" }: { children: Reac
         </div>
       ) : null}
 
+      {isBookingOpen ? (
+        <BookingModal
+          key={`${isBookingOpen}-${preselectedType}-${preselectedItem}`}
+          isOpen={isBookingOpen}
+          onClose={() => setIsBookingOpen(false)}
+          preselectedType={preselectedType}
+          preselectedItem={preselectedItem}
+          locale={locale}
+        />
+      ) : null}
     </>
   );
 }
