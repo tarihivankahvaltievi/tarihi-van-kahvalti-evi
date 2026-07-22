@@ -10,6 +10,8 @@ const menuPageUrl = `${canonicalSiteUrl}/menu`;
 const englishPageUrl = `${canonicalSiteUrl}/en`;
 const koreanPageUrl = `${canonicalSiteUrl}/ko`;
 const englishMenuPageUrl = `${englishPageUrl}/menu`;
+const reservationPageUrl = `${canonicalSiteUrl}/rezervasyon`;
+const englishReservationPageUrl = `${englishPageUrl}/reservation`;
 const guidePageUrl = `${canonicalSiteUrl}/van-kahvaltisi`;
 const culturePageUrl = `${canonicalSiteUrl}/van-kahvaltisi-nedir`;
 const englishBreakfastBlogUrl = `${canonicalSiteUrl}/en/blog/turkish-breakfast-istanbul`;
@@ -37,6 +39,12 @@ const menuHreflang = {
   tr: menuPageUrl,
   en: englishMenuPageUrl,
   "x-default": menuPageUrl,
+};
+
+const reservationHreflang = {
+  tr: reservationPageUrl,
+  en: englishReservationPageUrl,
+  "x-default": reservationPageUrl,
 };
 
 const internationalGuideHreflang = {
@@ -136,6 +144,27 @@ const routes = [
     sharedMenuDesign: true,
     visibleSignals: ["traditional van breakfast", "prices", "murtuğa", "taksim"],
     hreflang: menuHreflang,
+  },
+  {
+    path: "/rezervasyon",
+    canonical: reservationPageUrl,
+    language: "tr",
+    types: ["Restaurant", "WebPage", "BreadcrumbList"],
+    restaurantMenu: `${menuPageUrl}#menu`,
+    faqCount: 0,
+    visibleSignals: ["rezervasyon oluştur", "van kahvaltısı", "whatsapp", "kişi sayısı"],
+    hreflang: reservationHreflang,
+  },
+  {
+    path: "/en/reservation",
+    canonical: englishReservationPageUrl,
+    language: "en",
+    htmlLanguage: "tr",
+    types: ["Restaurant", "WebPage", "BreadcrumbList"],
+    restaurantMenu: `${menuPageUrl}#menu`,
+    faqCount: 0,
+    visibleSignals: ["request a table", "van breakfast", "whatsapp", "party size"],
+    hreflang: reservationHreflang,
   },
   {
     path: "/ko",
@@ -279,7 +308,7 @@ const redirectRules = [
   ["/aile-kahvaltisi-beyoglu", "/"],
   ["/grup-kahvaltisi", "/"],
   ["/hafta-sonu-kahvalti", "/"],
-  ["/kahvalti-rezervasyon", "/"],
+  ["/kahvalti-rezervasyon", "/rezervasyon"],
   ["/kahvalti-yol-tarifi", "/konum"],
   ["/zambak-sokak-kahvalti", "/konum"],
   ["/siraselviler-kahvalti", "/konum"],

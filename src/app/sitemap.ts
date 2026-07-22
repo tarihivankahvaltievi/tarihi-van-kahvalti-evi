@@ -46,6 +46,14 @@ const menuLanguageAlternates = {
   },
 };
 
+const reservationLanguageAlternates = {
+  languages: {
+    tr: `${siteUrl}/rezervasyon`,
+    en: `${siteUrl}/en/reservation`,
+    "x-default": `${siteUrl}/rezervasyon`,
+  },
+};
+
 const internationalGuideAlternates = {
   languages: {
     en: englishBreakfastBlogUrl,
@@ -156,6 +164,14 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       alternates: menuLanguageAlternates,
     },
     {
+      url: `${siteUrl}/rezervasyon`,
+      lastModified: "2026-07-22T18:30:00+03:00",
+      changeFrequency: "monthly",
+      priority: 0.9,
+      images: uniqueImages(["/images/hero-parallax/overhead-feast.webp"]),
+      alternates: reservationLanguageAlternates,
+    },
+    {
       url: breakfastGuideUrl,
       lastModified: pageLastModified,
       changeFrequency: "monthly",
@@ -218,6 +234,14 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.8,
       images: menuImages,
       alternates: menuLanguageAlternates,
+    },
+    {
+      url: `${siteUrl}/en/reservation`,
+      lastModified: "2026-07-22T18:30:00+03:00",
+      changeFrequency: "monthly",
+      priority: 0.8,
+      images: uniqueImages(["/images/hero-parallax/overhead-feast.webp"]),
+      alternates: reservationLanguageAlternates,
     },
     {
       url: koreanUrl,

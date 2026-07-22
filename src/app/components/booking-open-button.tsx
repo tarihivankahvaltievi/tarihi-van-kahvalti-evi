@@ -1,6 +1,7 @@
 "use client";
 
 import { Calendar, Camera } from "lucide-react";
+import { usePathname, useRouter } from "next/navigation";
 import type { ButtonHTMLAttributes } from "react";
 
 type BookingOpenButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
@@ -19,6 +20,8 @@ export function BookingOpenButton({
   ...props
 }: BookingOpenButtonProps) {
   const Icon = icon === "camera" ? Camera : Calendar;
+  const pathname = usePathname();
+  const router = useRouter();
 
   return (
     <button
@@ -31,14 +34,11 @@ export function BookingOpenButton({
           return;
         }
 
-        window.dispatchEvent(
-          new CustomEvent("open-booking", {
-            detail: {
-              category,
-              itemTitle,
-            },
-          }),
-        );
+        const destination = pathname.startsWith("/en") ? "/en/reservation" : "/rezervasyon";
+        const search = new URLSearchParams();
+        if (category) search.set("service", category);
+        if (itemTitle) search.set("item", itemTitle);
+        router.push(search.size ? `${destination}?${search.toString()}` : destination);
       }}
     >
       <Icon size={17} />

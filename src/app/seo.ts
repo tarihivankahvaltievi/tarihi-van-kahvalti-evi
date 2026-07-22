@@ -154,7 +154,7 @@ export const legacyRedirects = [
   { source: "/aile-kahvaltisi-beyoglu", destination: "/" },
   { source: "/grup-kahvaltisi", destination: "/" },
   { source: "/hafta-sonu-kahvalti", destination: "/" },
-  { source: "/kahvalti-rezervasyon", destination: "/" },
+  { source: "/kahvalti-rezervasyon", destination: "/rezervasyon" },
   { source: "/beyoglu-kahvalti-mekanlari", destination: "/" },
   { source: "/taksim-brunch-kahvalti", destination: "/" },
   { source: "/iletisim", destination: "/konum" },
