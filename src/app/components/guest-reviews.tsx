@@ -43,65 +43,67 @@ export function GuestReviews({ locale = "tr" }: { locale?: SiteLocale }) {
           </div>
         </header>
 
-        <div className={styles.stage} aria-live="polite" aria-atomic="true">
-          <div className={styles.cardMeta}>
-            <div
-              className={styles.rating}
-              aria-label={`${messages.reviews.rating} ${messages.reviews.ratingLabel}`}
-            >
-              <strong>{messages.reviews.rating}</strong>
-              <div>
-                <span className={styles.stars} aria-hidden="true">
-                  {Array.from({ length: 5 }, (_, star) => (
-                    <Star key={star} size={14} fill="currentColor" />
-                  ))}
+        <div className={styles.deck}>
+          <div className={styles.stage} aria-live="polite" aria-atomic="true">
+            <div className={styles.cardMeta}>
+              <div
+                className={styles.rating}
+                aria-label={`${messages.reviews.rating} ${messages.reviews.ratingLabel}`}
+              >
+                <strong>{messages.reviews.rating}</strong>
+                <div>
+                  <span className={styles.stars} aria-hidden="true">
+                    {Array.from({ length: 5 }, (_, star) => (
+                      <Star key={star} size={14} fill="currentColor" />
+                    ))}
+                  </span>
+                  <small>{messages.reviews.count}</small>
+                </div>
+              </div>
+
+              <div className={styles.reviewMeta}>
+                <span>{activeReview.time}</span>
+                <span aria-hidden="true">
+                  {String(activeIndex + 1).padStart(2, "0")} / {String(reviews.length).padStart(2, "0")}
                 </span>
-                <small>{messages.reviews.count}</small>
               </div>
             </div>
 
-            <div className={styles.reviewMeta}>
-              <span>{activeReview.time}</span>
-              <span aria-hidden="true">
-                {String(activeIndex + 1).padStart(2, "0")} / {String(reviews.length).padStart(2, "0")}
-              </span>
-            </div>
+            <AnimatePresence mode="popLayout" initial={false} custom={direction}>
+              <motion.article
+                key={activeReview.name}
+                className={styles.review}
+                initial={{
+                  opacity: 0,
+                  x: motionDistance,
+                  filter: reduceMotion ? "blur(0px)" : "blur(5px)",
+                }}
+                animate={{ opacity: 1, x: 0, filter: "blur(0px)" }}
+                exit={{
+                  opacity: 0,
+                  x: -motionDistance * 0.65,
+                  filter: reduceMotion ? "blur(0px)" : "blur(3px)",
+                }}
+                transition={transition}
+              >
+                <motion.blockquote
+                  initial={{ opacity: 0, y: reduceMotion ? 0 : 7 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ ...transition, delay: reduceMotion ? 0 : 0.04 }}
+                >
+                  {activeReview.quote}
+                </motion.blockquote>
+
+                <motion.footer
+                  initial={{ opacity: 0, y: reduceMotion ? 0 : 5 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ ...transition, delay: reduceMotion ? 0 : 0.09 }}
+                >
+                  <strong>{activeReview.name}</strong>
+                </motion.footer>
+              </motion.article>
+            </AnimatePresence>
           </div>
-
-          <AnimatePresence mode="popLayout" initial={false} custom={direction}>
-            <motion.article
-              key={activeReview.name}
-              className={styles.review}
-              initial={{
-                opacity: 0,
-                x: motionDistance,
-                filter: reduceMotion ? "blur(0px)" : "blur(5px)",
-              }}
-              animate={{ opacity: 1, x: 0, filter: "blur(0px)" }}
-              exit={{
-                opacity: 0,
-                x: -motionDistance * 0.65,
-                filter: reduceMotion ? "blur(0px)" : "blur(3px)",
-              }}
-              transition={transition}
-            >
-              <motion.blockquote
-                initial={{ opacity: 0, y: reduceMotion ? 0 : 7 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ ...transition, delay: reduceMotion ? 0 : 0.04 }}
-              >
-                {activeReview.quote}
-              </motion.blockquote>
-
-              <motion.footer
-                initial={{ opacity: 0, y: reduceMotion ? 0 : 5 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ ...transition, delay: reduceMotion ? 0 : 0.09 }}
-              >
-                <strong>{activeReview.name}</strong>
-              </motion.footer>
-            </motion.article>
-          </AnimatePresence>
 
           <div className={styles.reviewFooter}>
             <a href={mapsUrl} target="_blank" rel="noopener noreferrer">

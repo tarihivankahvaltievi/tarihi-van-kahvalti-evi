@@ -51,14 +51,64 @@
   text-wrap: pretty;
 }
 
+.deck {
+  --note-height-offset: 4.35rem;
+  position: relative;
+  isolation: isolate;
+  width: min(100%, 56rem);
+}
+
+.deck::before,
+.deck::after {
+  position: absolute;
+  width: calc(100% - 12px);
+  height: calc(100% - var(--note-height-offset));
+  content: "";
+  clip-path: polygon(
+    0 0,
+    calc(100% - 28px) 0,
+    100% 28px,
+    100% 100%,
+    14px 100%,
+    0 calc(100% - 14px)
+  );
+  pointer-events: none;
+}
+
+.deck::before {
+  z-index: -2;
+  top: 13px;
+  left: 18px;
+  background: var(--review-red-deep);
+  transform: rotate(0.9deg);
+}
+
+.deck::after {
+  z-index: -1;
+  top: -6px;
+  left: -5px;
+  background: var(--review-gold);
+  opacity: 0.82;
+  transform: rotate(-0.8deg);
+}
+
 .stage {
-  width: min(100%, 66rem);
+  position: relative;
+  z-index: 1;
+  width: calc(100% - 12px);
+  margin-left: 6px;
   overflow: hidden;
   padding: clamp(1.35rem, 2.8vw, 2.15rem) clamp(1.4rem, 3.4vw, 2.8rem) 0;
-  border-radius: 12px;
+  clip-path: polygon(
+    0 0,
+    calc(100% - 28px) 0,
+    100% 28px,
+    100% 100%,
+    14px 100%,
+    0 calc(100% - 14px)
+  );
   background: var(--review-cream);
   color: var(--review-ink);
-  box-shadow: 9px 9px 0 var(--review-red-deep);
 }
 
 .cardMeta {
@@ -159,20 +209,21 @@
 }
 
 .reviewFooter {
+  position: relative;
+  z-index: 2;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
-  margin-inline: calc(clamp(1.4rem, 3.4vw, 2.8rem) * -1);
-  padding: 0.85rem clamp(1.4rem, 3.4vw, 2.8rem);
-  background: var(--review-cream-deep);
+  margin-top: 1rem;
+  padding: 0 0.15rem;
 }
 
 .reviewFooter > a {
   display: inline-flex;
   align-items: center;
   gap: 0.4rem;
-  color: var(--review-red);
+  color: var(--review-cream);
   font-size: 0.76rem;
   font-weight: 740;
   line-height: 1.25;
@@ -181,7 +232,7 @@
 
 .reviewFooter > a:hover {
   gap: 0.58rem;
-  color: var(--review-red-deep);
+  color: var(--review-gold);
 }
 
 .controls {
@@ -196,8 +247,8 @@
   padding: 0;
   place-items: center;
   border: 0;
-  border-radius: 7px;
-  background: #e8d6bc;
+  border-radius: 6px;
+  background: var(--review-cream-deep);
   color: var(--review-red);
   touch-action: manipulation;
   transition: background-color 160ms ease, color 160ms ease, transform 130ms ease,
@@ -205,14 +256,14 @@
 }
 
 .controls button:last-child {
-  background: var(--review-red);
-  color: var(--review-cream);
-  box-shadow: 3px 3px 0 rgba(77, 14, 20, 0.22);
+  background: var(--review-gold);
+  color: var(--review-red-deep);
+  box-shadow: 3px 3px 0 var(--review-red-deep);
 }
 
 .controls button:hover {
-  background: var(--review-red-deep);
-  color: var(--review-cream);
+  background: var(--review-cream);
+  color: var(--review-red);
 }
 
 .controls button:active {
@@ -251,8 +302,42 @@
 
   .stage {
     padding: 1rem 1rem 0;
-    border-radius: 10px;
-    box-shadow: 7px 7px 0 var(--review-red-deep);
+    clip-path: polygon(
+      0 0,
+      calc(100% - 23px) 0,
+      100% 23px,
+      100% 100%,
+      11px 100%,
+      0 calc(100% - 11px)
+    );
+  }
+
+  .deck {
+    --note-height-offset: 4rem;
+  }
+
+  .deck::before,
+  .deck::after {
+    clip-path: polygon(
+      0 0,
+      calc(100% - 23px) 0,
+      100% 23px,
+      100% 100%,
+      11px 100%,
+      0 calc(100% - 11px)
+    );
+  }
+
+  .deck::before {
+    top: 10px;
+    left: 15px;
+    transform: rotate(0.75deg);
+  }
+
+  .deck::after {
+    top: -4px;
+    left: -3px;
+    transform: rotate(-0.65deg);
   }
 
   .cardMeta {
@@ -303,8 +388,8 @@
   }
 
   .reviewFooter {
-    margin-inline: -1rem;
-    padding: 0.7rem 1rem;
+    margin-top: 0.85rem;
+    padding: 0 0.1rem;
   }
 
   .reviewFooter > a {
