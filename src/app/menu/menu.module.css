@@ -553,6 +553,16 @@
 }
 
 .sheetLayer {
+  /* The sheet is portaled to <body>, outside .page, so it needs its own tokens. */
+  --menu-burgundy: #7a1b22;
+  --menu-burgundy-deep: #551117;
+  --menu-brass: #b48742;
+  --menu-ink: #1d1818;
+  --menu-muted: #5d5554;
+  --menu-line: #251d1d;
+  --menu-line-soft: #e5dddd;
+  --menu-surface: #f4ecdf;
+
   position: fixed;
   inset: 0;
   z-index: 120;
