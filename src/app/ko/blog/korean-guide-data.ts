@@ -214,7 +214,7 @@ export const kaymakExplainerGuide: GuideContent = {
     menuItem: {
       name: "꿀, 버팔로 카이막과 수제 잼",
       description: "체에 거른 꿀, 버팔로 카이막, 계절에 따라 준비하는 수제 잼 2종",
-      url: "/en/menu#bal-kaymak-recel",
+      url: "/en/menu#bal-kaymak",
     },
   },
   relatedGuides: [
@@ -420,7 +420,7 @@ export const turkishBreakfastKoreanGuide: GuideContent = {
     menuItem: {
       name: "전통 반 아침 식사",
       description: "반 허브 치즈, 무르투아, 카부트, 자즉, 케테, 발 카이막과 무제한 차로 구성된 최소 2인 공유 아침 식사",
-      url: "/en/menu#geleneksel-van-kahvaltisi",
+      url: "/en/menu#serpme-fix-menu",
     },
   },
   relatedGuides: [

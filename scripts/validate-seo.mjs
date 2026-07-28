@@ -71,9 +71,9 @@ const routes = [
     types: ["Restaurant", "WebPage", "BreadcrumbList", "Menu"],
     restaurantMenu: `${menuPageUrl}#menu`,
     faqCount: 0,
-    menuSectionCount: 4,
+    menuSectionCount: 18,
     sharedMenuDesign: true,
-    visibleSignals: ["menü", "van kahvaltısı", "murtuğa", "türk kahvesi"],
+    visibleSignals: ["menü", "serpme fix menü", "murtuğa", "türk kahvesi"],
     hreflang: menuHreflang,
   },
   {
@@ -132,9 +132,9 @@ const routes = [
     types: ["Restaurant", "WebPage", "BreadcrumbList", "Menu"],
     restaurantMenu: `${menuPageUrl}#menu`,
     faqCount: 0,
-    menuSectionCount: 4,
+    menuSectionCount: 18,
     sharedMenuDesign: true,
-    visibleSignals: ["traditional van breakfast", "prices", "murtuğa", "taksim"],
+    visibleSignals: ["serpme fix menu", "prices", "murtuğa", "taksim"],
     hreflang: menuHreflang,
   },
   {
@@ -306,8 +306,8 @@ const redirectRules = [
   ["/gercek-van-kahvaltisinda-neler-olur", "/van-kahvaltisi-nedir"],
   ["/tarihi-van-kahvalti-evi-hikayemiz", "/hikayemiz"],
   ["/galeri-van-kahvalti-evi-taksim", "/"],
-  ["/urun/van-serpme-kahvalti", "/menu#geleneksel-van-kahvaltisi"],
-  ["/urun/cift-kisilik-serpme-kahvalti", "/menu#iki-kisilik-van-sofrasi"],
+  ["/urun/van-serpme-kahvalti", "/menu#serpme-fix-menu"],
+  ["/urun/cift-kisilik-serpme-kahvalti", "/menu#van-golu-tabagi"],
   ["/urun/turk-kahvesi", "/menu#turk-kahvesi"],
 ];
 
@@ -581,7 +581,7 @@ for (const route of routes) {
 
   if (route.honeyKaymakGuide) {
     assert(html.includes('/images/blog/bal-kaymak-close-up.webp'), `${routeLabel}: gerçek bal-kaymak görseli eksik`);
-    assert(html.includes('/en/menu#bal-kaymak-recel'), `${routeLabel}: doğrudan bal-kaymak menü bağlantısı eksik`);
+    assert(html.includes('/en/menu#bal-kaymak'), `${routeLabel}: doğrudan bal-kaymak menü bağlantısı eksik`);
     const article = graphDocument["@graph"].find((node) => node["@type"] === "BlogPosting");
     assert(article?.mentions?.some((item) => item["@type"] === "MenuItem"), `${routeLabel}: bal-kaymak MenuItem entity bağı eksik`);
   }

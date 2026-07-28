@@ -698,13 +698,17 @@ export function AdminDashboard({ initialData }: AdminDashboardProps) {
                             <tr key={item.id} className="hover:bg-[#fffcf7] transition-all">
                               <td className="p-4">
                                 <div className="relative h-12 w-12 rounded-lg overflow-hidden border border-gray-200">
-                                  <Image
-                                    src={item.image}
-                                    alt={item.imageAlt || item.name}
-                                    fill
-                                    sizes="48px"
-                                    className="object-cover"
-                                  />
+                                  {item.image ? (
+                                    <Image
+                                      src={item.image}
+                                      alt={item.imageAlt || item.name}
+                                      fill
+                                      sizes="48px"
+                                      className="object-cover"
+                                    />
+                                  ) : (
+                                    <UtensilsCrossed className="absolute inset-0 m-auto h-5 w-5 text-gray-400" />
+                                  )}
                                 </div>
                               </td>
                               <td className="p-4">
@@ -810,7 +814,11 @@ export function AdminDashboard({ initialData }: AdminDashboardProps) {
                     style={{ borderColor: "var(--line)" }}
                   >
                     <div className="relative h-20 w-20 rounded-lg overflow-hidden border border-gray-200 shrink-0">
-                      <Image src={cat.image} alt={cat.imageAlt} fill className="object-cover" />
+                      {cat.image ? (
+                        <Image src={cat.image} alt={cat.imageAlt} fill className="object-cover" />
+                      ) : (
+                        <Layers className="absolute inset-0 m-auto h-7 w-7 text-gray-400" />
+                      )}
                     </div>
 
                     <div className="flex-grow min-w-0">

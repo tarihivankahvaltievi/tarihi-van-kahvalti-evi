@@ -1,6 +1,6 @@
 "use client";
 
-import { ChevronRight, Search, X } from "lucide-react";
+import { ChevronRight, Search, UtensilsCrossed, X } from "lucide-react";
 import dynamic from "next/dynamic";
 import Image from "next/image";
 import { memo, useCallback, useDeferredValue, useEffect, useMemo, useRef, useState } from "react";
@@ -58,7 +58,7 @@ const turkishMenuCollections: MenuCollection[] = [
   {
     id: "from-van",
     label: "Van’dan",
-    description: "Otlu peynirden keteye, yöre hafızasını taşıyan lezzetler.",
+    description: "Otlu peynir, çemen, kavut ve murtuğayla yöre hafızasını taşıyan lezzetler.",
     icon: "van",
   },
   {
@@ -103,7 +103,7 @@ const englishMenuCollections: MenuCollection[] = [
   {
     id: "from-van",
     label: "From Van",
-    description: "Regional flavours from herb cheese to kete.",
+    description: "Regional flavours including herb cheese, çemen, kavut and murtuğa.",
     icon: "van",
   },
   {
@@ -125,6 +125,15 @@ const menuCollections: Record<MenuLocale, MenuCollection[]> = {
   en: englishMenuCollections,
 };
 
+const categoryCollections: Record<Exclude<MenuCollectionId, "all">, ReadonlySet<string>> = {
+  breakfast: new Set(["kahvalti-menuleri", "peynirler", "zeytinler", "gozlemeler"]),
+  pans: new Set(["omletler", "menemenler", "yumurtalar", "sahanlar"]),
+  jams: new Set(["receller", "ballar"]),
+  "from-van": new Set(["yoresel-tatlar", "peynirler"]),
+  "hot-drinks": new Set(["sicak-icecekler", "bitki-caylari", "sicak-kahveler"]),
+  "cold-drinks": new Set(["soft-icecekler", "soguk-icecekler", "soguk-kahveler", "milkshake-frozen-smoothie"]),
+};
+
 function normalize(value: string, locale: MenuLocale) {
   return value
     .toLocaleLowerCase(locale === "en" ? "en-US" : "tr-TR")
@@ -136,15 +145,7 @@ function normalize(value: string, locale: MenuLocale) {
 function isItemInCollection(item: MenuItem, collection: MenuCollectionId) {
   if (collection === "all") return true;
 
-  const isJam = item.id === "bal-kaymak-recel";
-  const isColdDrink = item.id === "ev-limonatasi";
-
-  if (collection === "breakfast") return item.category === "sofra" && !isJam;
-  if (collection === "pans") return item.category === "sicaklar";
-  if (collection === "jams") return isJam;
-  if (collection === "from-van") return item.category === "vandan";
-  if (collection === "hot-drinks") return item.category === "icecekler" && !isColdDrink;
-  return item.category === "icecekler" && isColdDrink;
+  return categoryCollections[collection].has(item.category);
 }
 
 function usePrefersReducedMotion() {
@@ -189,19 +190,25 @@ const MenuCard = memo(function MenuCard({
       aria-label={messages.cardAria(item.name, item.price)}
     >
       <span className={styles.cardMedia}>
-        <Image
-          src={item.image}
-          alt={item.imageAlt}
-          fill
-          sizes={
-            isSpotlight
-              ? "(max-width: 680px) 36vw, (max-width: 1080px) 38vw, 480px"
-              : "(max-width: 680px) 36vw, (max-width: 1080px) 18vw, 180px"
-          }
-          quality={80}
-          loading={prioritizeImage ? "eager" : "lazy"}
-          fetchPriority={prioritizeImage ? "high" : "auto"}
-        />
+        {item.image ? (
+          <Image
+            src={item.image}
+            alt={item.imageAlt}
+            fill
+            sizes={
+              isSpotlight
+                ? "(max-width: 680px) 36vw, (max-width: 1080px) 38vw, 480px"
+                : "(max-width: 680px) 36vw, (max-width: 1080px) 18vw, 180px"
+            }
+            quality={80}
+            loading={prioritizeImage ? "eager" : "lazy"}
+            fetchPriority={prioritizeImage ? "high" : "auto"}
+          />
+        ) : (
+          <span className={styles.mediaPlaceholder} aria-hidden="true">
+            <UtensilsCrossed />
+          </span>
+        )}
         {visibleTag ? <span className={styles.tagBadge}>{visibleTag}</span> : null}
       </span>
 

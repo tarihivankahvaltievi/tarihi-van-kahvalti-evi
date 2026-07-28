@@ -96,7 +96,7 @@ async function EnglishMenuContent() {
             name: item.name,
             alternateName: original?.name,
             description: item.description,
-            image: absoluteUrl(item.image),
+            image: item.image ? absoluteUrl(item.image) : undefined,
             offers: numericPrice ? {
               "@type": "Offer",
               price: numericPrice,

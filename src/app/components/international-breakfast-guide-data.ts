@@ -724,7 +724,7 @@ export const guides: Record<GuideLocale, GuideContent> = {
       menuItem: {
         name: "꿀, 버팔로 카이막과 수제 잼",
         description: "체에 거른 꿀, 버팔로 카이막, 계절에 따라 준비하는 수제 잼 2종",
-        url: "/en/menu#bal-kaymak-recel",
+        url: "/en/menu#bal-kaymak",
       },
     },
     travelerBrief: {
@@ -902,7 +902,7 @@ export const guides: Record<GuideLocale, GuideContent> = {
       menuItem: {
         name: "蜂蜜、水牛のカイマク、自家製ジャム",
         description: "濾した蜂蜜、水牛のカイマク、季節の自家製ジャム2種",
-        url: "/en/menu#bal-kaymak-recel",
+        url: "/en/menu#bal-kaymak",
       },
       entityRefs: [
         { name: "ヴァン朝食", sameAs: coreVanBreakfastCitations[0] },

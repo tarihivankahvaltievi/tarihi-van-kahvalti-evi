@@ -172,7 +172,7 @@ export default function VanBreakfastGuidePage() {
                     sofrasını 1978&apos;den beri yaşatıyor.
                   </p>
                   <div className={styles.actions}>
-                    <Link className={styles.primaryAction} href="/menu#geleneksel-van-kahvaltisi">
+                    <Link className={styles.primaryAction} href="/menu#serpme-fix-menu">
                       <UtensilsCrossed size={18} aria-hidden="true" /> Güncel menü ve fiyatlar
                     </Link>
                     <a className={styles.secondaryAction} href={mapsUrl} target="_blank" rel="noreferrer">

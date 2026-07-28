@@ -40,8 +40,8 @@ const nextConfig: NextConfig = {
       { source: "/gercek-van-kahvaltisinda-neler-olur", destination: "/van-kahvaltisi-nedir" },
       { source: "/tarihi-van-kahvalti-evi-hikayemiz", destination: "/hikayemiz" },
       { source: "/galeri-van-kahvalti-evi-taksim", destination: "/" },
-      { source: "/urun/van-serpme-kahvalti", destination: "/menu#geleneksel-van-kahvaltisi" },
-      { source: "/urun/cift-kisilik-serpme-kahvalti", destination: "/menu#iki-kisilik-van-sofrasi" },
+      { source: "/urun/van-serpme-kahvalti", destination: "/menu#serpme-fix-menu" },
+      { source: "/urun/cift-kisilik-serpme-kahvalti", destination: "/menu#van-golu-tabagi" },
       { source: "/urun/turk-kahvesi", destination: "/menu#turk-kahvesi" },
     ];
 

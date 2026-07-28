@@ -79,7 +79,7 @@ const koreanHoneyKaymakImages = uniqueImages([
 ]);
 
 function uniqueImages(images: string[]) {
-  return [...new Set(images.map((image) => absoluteUrl(image)))];
+  return [...new Set(images.filter(Boolean).map((image) => absoluteUrl(image)))];
 }
 
 function menuLastModified(value: string) {

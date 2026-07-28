@@ -4,6 +4,21 @@ export type MenuCategoryId = string;
 export type MenuFilterId = "all" | string;
 export type MenuTag = "Öne çıkan" | "Tavsiye" | "Vejetaryen" | "Yeni" | string;
 
+export type MenuCategoryTranslation = {
+  label?: string;
+  shortLabel?: string;
+  description?: string;
+  imageAlt?: string;
+};
+
+export type MenuItemTranslation = {
+  name?: string;
+  description?: string;
+  story?: string;
+  imageAlt?: string;
+  details?: string[];
+};
+
 export type MenuCategory = {
   id: MenuCategoryId;
   label: string;
@@ -11,6 +26,9 @@ export type MenuCategory = {
   description: string;
   image: string;
   imageAlt: string;
+  translations?: {
+    en?: MenuCategoryTranslation;
+  };
 };
 
 export type MenuItem = {
@@ -25,6 +43,9 @@ export type MenuItem = {
   imageAlt: string;
   tags: MenuTag[];
   details: string[];
+  translations?: {
+    en?: MenuItemTranslation;
+  };
 };
 
 export const menuCategories = menuDataJson.categories as MenuCategory[];

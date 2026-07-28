@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, useReducedMotion } from "framer-motion";
-import { Check, ChevronRight, X } from "lucide-react";
+import { Check, ChevronRight, UtensilsCrossed, X } from "lucide-react";
 import Image from "next/image";
 import { createPortal } from "react-dom";
 import { useCallback, useEffect, useRef, useState } from "react";
@@ -98,14 +98,20 @@ export function ProductSheet({
         }}
       >
         <div className={styles.sheetMedia}>
-          <Image
-            src={item.image}
-            alt={item.imageAlt}
-            fill
-            sizes="(max-width: 680px) 100vw, 430px"
-            quality={80}
-            loading="eager"
-          />
+          {item.image ? (
+            <Image
+              src={item.image}
+              alt={item.imageAlt}
+              fill
+              sizes="(max-width: 680px) 100vw, 430px"
+              quality={80}
+              loading="eager"
+            />
+          ) : (
+            <span className={styles.mediaPlaceholder} aria-hidden="true">
+              <UtensilsCrossed />
+            </span>
+          )}
           <span className={styles.sheetCategory}>{categoryLabel}</span>
         </div>
 

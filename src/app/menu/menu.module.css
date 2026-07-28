@@ -428,6 +428,23 @@
   transition: transform 420ms var(--menu-ease);
 }
 
+.mediaPlaceholder {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  background:
+    radial-gradient(circle at 50% 35%, rgba(184, 132, 65, 0.22), transparent 42%),
+    linear-gradient(145deg, #f4ecdf, #ded0c7);
+  color: rgba(122, 27, 34, 0.62);
+}
+
+.mediaPlaceholder svg {
+  width: clamp(32px, 18%, 72px);
+  height: auto;
+  stroke-width: 1.35;
+}
+
 .menuCard:not(.spotlightCard) .cardMedia img {
   object-position: 50% 56%;
 }

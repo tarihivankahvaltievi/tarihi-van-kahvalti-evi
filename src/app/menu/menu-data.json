@@ -1,283 +1,4170 @@
 {
   "categories": [
     {
-      "id": "sofra",
-      "label": "Van Sofraları",
-      "shortLabel": "Sofralar",
-      "description": "Paylaşmak için kurulan serpme sofralar ve kahvaltı tabakları.",
-      "image": "/images/hero-parallax/overhead-classic.webp",
-      "imageAlt": "Kuşbakışı kurulmuş geleneksel Van kahvaltısı sofrası"
+      "id": "kahvalti-menuleri",
+      "label": "Kahvaltı Menüleri",
+      "shortLabel": "Kahvaltı",
+      "description": "Serpme kahvaltı ve tek kişilik kahvaltı tabakları.",
+      "image": "",
+      "imageAlt": "",
+      "translations": {
+        "en": {
+          "label": "Breakfast Menus",
+          "shortLabel": "Breakfast",
+          "description": "Shared breakfasts and individual breakfast plates.",
+          "imageAlt": ""
+        }
+      }
     },
     {
-      "id": "sicaklar",
-      "label": "Bakır Sahanlar",
-      "shortLabel": "Sıcaklar",
-      "description": "Mutfaktan çıktığı anda, tereyağı hâlâ cızırdarken masaya gelenler.",
-      "image": "/images/sucuk-egg.webp",
-      "imageAlt": "Bakır sahanda sıcak sucuklu yumurta"
+      "id": "peynirler",
+      "label": "Peynirler",
+      "shortLabel": "Peynir",
+      "description": "Van kahvaltısına eşlik eden yöresel ve klasik peynirler.",
+      "image": "",
+      "imageAlt": "",
+      "translations": {
+        "en": {
+          "label": "Cheeses",
+          "shortLabel": "Cheese",
+          "description": "Regional and classic cheeses served with Van breakfast.",
+          "imageAlt": ""
+        }
+      }
     },
     {
-      "id": "vandan",
-      "label": "Van’dan Gelenler",
-      "shortLabel": "Van’dan",
-      "description": "Otlu peynirden keteye, yöre hafızasını taşıyan kahvaltılıklar.",
-      "image": "/images/kete-detail.jpg",
-      "imageAlt": "Kat kat dokulu geleneksel Van ketesi"
+      "id": "zeytinler",
+      "label": "Zeytinler & Söğüş",
+      "shortLabel": "Zeytin",
+      "description": "Zeytin çeşitleri, zeytin ezmesi ve taze söğüş tabağı.",
+      "image": "",
+      "imageAlt": "",
+      "translations": {
+        "en": {
+          "label": "Olives & Salad",
+          "shortLabel": "Olives",
+          "description": "Olive varieties, olive paste and a fresh salad plate.",
+          "imageAlt": ""
+        }
+      }
     },
     {
-      "id": "icecekler",
-      "label": "Çay & Kahve",
-      "shortLabel": "İçecekler",
-      "description": "Sofranın ritmini koruyan taze çaylar ve Kafka Cafe kahveleri.",
-      "image": "/images/tea-service.webp",
-      "imageAlt": "İnce belli bardaklarda taze çay servisi"
+      "id": "gozlemeler",
+      "label": "Gözlemeler",
+      "shortLabel": "Gözleme",
+      "description": "Farklı iç harçlarla sıcak hazırlanan gözlemeler.",
+      "image": "",
+      "imageAlt": "",
+      "translations": {
+        "en": {
+          "label": "Gözleme",
+          "shortLabel": "Gözleme",
+          "description": "Turkish flatbreads prepared hot with a choice of fillings.",
+          "imageAlt": ""
+        }
+      }
+    },
+    {
+      "id": "yoresel-tatlar",
+      "label": "Yöresel Tatlar",
+      "shortLabel": "Yöresel",
+      "description": "Van kahvaltı kültüründen gelen geleneksel sıcak ve soğuk lezzetler.",
+      "image": "",
+      "imageAlt": "",
+      "translations": {
+        "en": {
+          "label": "Traditional Tastes",
+          "shortLabel": "Traditional",
+          "description": "Traditional hot and cold specialities from Van breakfast culture.",
+          "imageAlt": ""
+        }
+      }
+    },
+    {
+      "id": "receller",
+      "label": "Tarihi Anne Reçelleri",
+      "shortLabel": "Reçel",
+      "description": "Kahvaltı sofraları için meyve reçelleri ve sürülebilir tatlılar.",
+      "image": "",
+      "imageAlt": "",
+      "translations": {
+        "en": {
+          "label": "Historical Mother's Jams",
+          "shortLabel": "Jams",
+          "description": "Fruit preserves and sweet spreads for the breakfast table.",
+          "imageAlt": ""
+        }
+      }
+    },
+    {
+      "id": "ballar",
+      "label": "Ballar & Kahvaltılık Tatlılar",
+      "shortLabel": "Bal",
+      "description": "Bal, kaymak, tereyağı, tahin ve pekmez çeşitleri.",
+      "image": "",
+      "imageAlt": "",
+      "translations": {
+        "en": {
+          "label": "Honey & Sweet Breakfast Sides",
+          "shortLabel": "Honey",
+          "description": "Honey, clotted cream, butter, tahini and molasses selections.",
+          "imageAlt": ""
+        }
+      }
+    },
+    {
+      "id": "omletler",
+      "label": "Omletler",
+      "shortLabel": "Omlet",
+      "description": "Sade ve farklı malzemelerle hazırlanan sıcak omletler.",
+      "image": "",
+      "imageAlt": "",
+      "translations": {
+        "en": {
+          "label": "Omelettes",
+          "shortLabel": "Omelettes",
+          "description": "Hot omelettes prepared plain or with a choice of ingredients.",
+          "imageAlt": ""
+        }
+      }
+    },
+    {
+      "id": "menemenler",
+      "label": "Menemenler",
+      "shortLabel": "Menemen",
+      "description": "Domates ve yumurta temelli, farklı malzemelerle hazırlanan menemenler.",
+      "image": "",
+      "imageAlt": "",
+      "translations": {
+        "en": {
+          "label": "Menemen",
+          "shortLabel": "Menemen",
+          "description": "Turkish scrambled eggs with tomatoes and a choice of additions.",
+          "imageAlt": ""
+        }
+      }
+    },
+    {
+      "id": "yumurtalar",
+      "label": "Yumurtalar",
+      "shortLabel": "Yumurta",
+      "description": "Bakır sahanda hazırlanan yumurta ve kuymak çeşitleri.",
+      "image": "",
+      "imageAlt": "",
+      "translations": {
+        "en": {
+          "label": "Eggs",
+          "shortLabel": "Eggs",
+          "description": "Egg dishes and kuymak prepared and served in a pan.",
+          "imageAlt": ""
+        }
+      }
+    },
+    {
+      "id": "sahanlar",
+      "label": "Sahanlar",
+      "shortLabel": "Sahan",
+      "description": "Sıcak servis edilen sucuk, sosis, kavurma ve pastırma tabakları.",
+      "image": "",
+      "imageAlt": "",
+      "translations": {
+        "en": {
+          "label": "Pan Dishes",
+          "shortLabel": "Pan dishes",
+          "description": "Hot pan dishes with sausage, roast beef or pastrami.",
+          "imageAlt": ""
+        }
+      }
+    },
+    {
+      "id": "sicak-icecekler",
+      "label": "Sıcak İçecekler",
+      "shortLabel": "Sıcak",
+      "description": "Çay, sıcak çikolata, salep ve sütlü sıcak içecekler.",
+      "image": "",
+      "imageAlt": "",
+      "translations": {
+        "en": {
+          "label": "Hot Drinks",
+          "shortLabel": "Hot drinks",
+          "description": "Tea, hot chocolate, salep and warm milk drinks.",
+          "imageAlt": ""
+        }
+      }
+    },
+    {
+      "id": "bitki-caylari",
+      "label": "Bitki Çayları",
+      "shortLabel": "Bitki Çayı",
+      "description": "Farklı bitki, meyve ve baharat aromalarından çaylar.",
+      "image": "",
+      "imageAlt": "",
+      "translations": {
+        "en": {
+          "label": "Herbal Teas",
+          "shortLabel": "Herbal teas",
+          "description": "Teas with a selection of herbs, fruits and spices.",
+          "imageAlt": ""
+        }
+      }
+    },
+    {
+      "id": "soft-icecekler",
+      "label": "Soft İçecekler",
+      "shortLabel": "Soft",
+      "description": "Su, gazlı içecekler, maden suyu ve meyveli içecekler.",
+      "image": "",
+      "imageAlt": "",
+      "translations": {
+        "en": {
+          "label": "Soft Drinks",
+          "shortLabel": "Soft drinks",
+          "description": "Water, carbonated drinks, mineral water and fruit drinks.",
+          "imageAlt": ""
+        }
+      }
+    },
+    {
+      "id": "soguk-icecekler",
+      "label": "Soğuk İçecekler",
+      "shortLabel": "Soğuk",
+      "description": "Limonata, taze meyve suyu ve ferah soğuk içecekler.",
+      "image": "",
+      "imageAlt": "",
+      "translations": {
+        "en": {
+          "label": "Cold Drinks",
+          "shortLabel": "Cold drinks",
+          "description": "Lemonades, fresh fruit juices and refreshing cold drinks.",
+          "imageAlt": ""
+        }
+      }
+    },
+    {
+      "id": "sicak-kahveler",
+      "label": "Sıcak Kahveler",
+      "shortLabel": "Kahve",
+      "description": "Espresso bazlı kahveler ve Türk kahvesi çeşitleri.",
+      "image": "",
+      "imageAlt": "",
+      "translations": {
+        "en": {
+          "label": "Hot Coffees",
+          "shortLabel": "Hot coffee",
+          "description": "Espresso-based coffees and Turkish coffee varieties.",
+          "imageAlt": ""
+        }
+      }
+    },
+    {
+      "id": "soguk-kahveler",
+      "label": "Soğuk Kahveler",
+      "shortLabel": "Soğuk Kahve",
+      "description": "Buzlu kahveler, cold brew ve frappe seçenekleri.",
+      "image": "",
+      "imageAlt": "",
+      "translations": {
+        "en": {
+          "label": "Cold Coffees",
+          "shortLabel": "Cold coffee",
+          "description": "Iced coffees, cold brew and frappe.",
+          "imageAlt": ""
+        }
+      }
+    },
+    {
+      "id": "milkshake-frozen-smoothie",
+      "label": "Milkshake, Frozen & Smoothie",
+      "shortLabel": "Özel İçecek",
+      "description": "Meyve ve tatlı aromalarıyla hazırlanan özel soğuk içecekler.",
+      "image": "",
+      "imageAlt": "",
+      "translations": {
+        "en": {
+          "label": "Milkshake, Frozen & Smoothie",
+          "shortLabel": "Special drinks",
+          "description": "Special cold drinks in a range of fruit and dessert flavours.",
+          "imageAlt": ""
+        }
+      }
     }
   ],
   "items": [
     {
-      "id": "geleneksel-van-kahvaltisi",
-      "category": "sofra",
-      "name": "Geleneksel Van Kahvaltısı",
-      "description": "Otlu peynir, murtuğa, kavut, cacık, kete, bal-kaymak ve sınırsız çay.",
-      "story": "1978’den beri masanın ortasına birlikte yenmek üzere kurduğumuz Van sofrası. Yöresel ürünler, ev yapımı dokunuşlar ve sıcak bakır sahanlarla tamamlanır.",
-      "price": "₺450",
-      "priceNote": "kişi başı · en az 2 kişilik",
-      "image": "/images/breakfast-spread.webp",
-      "imageAlt": "Peynirler, sıcak sahanlar ve çayla kurulmuş geleneksel Van kahvaltısı sofrası",
-      "tags": ["Öne çıkan", "Tavsiye"],
-      "details": ["En az iki kişilik servis", "Sınırsız taze çay", "Günlük hazırlanan eşlikçiler"]
+      "id": "serpme-fix-menu",
+      "category": "kahvalti-menuleri",
+      "name": "Serpme Fix Menü",
+      "description": "Otlu Van peyniri, kavut, murtuğa, jaji, çemen, bal, kaymak, beyaz peynir, örgü peyniri, köy peyniri, taze peynir, yeşil ve siyah zeytin, domates, salatalık, haşlanmış yumurta, tereyağı, tahin-pekmez ve reçel.",
+      "story": "Otlu Van peyniri, kavut, murtuğa, jaji, çemen, bal, kaymak, beyaz peynir, örgü peyniri, köy peyniri, taze peynir, yeşil ve siyah zeytin, domates, salatalık, haşlanmış yumurta, tereyağı, tahin-pekmez ve reçel.",
+      "price": "₺970",
+      "priceNote": "kişi başı",
+      "image": "",
+      "imageAlt": "",
+      "tags": [
+        "Öne çıkan"
+      ],
+      "details": [
+        "Kişi başı servis",
+        "Sınırsız çay",
+        "Bir sıcak seçenek: menemen, peynirli yumurta, sucuklu yumurta veya pişi tabağı"
+      ],
+      "translations": {
+        "en": {
+          "name": "Serpme Fix Menu",
+          "description": "Herb cheese, kavut, murtuğa, jaji, çemen, honey, clotted cream, assorted cheeses, green and black olives, tomatoes, cucumber, hard-boiled egg, butter, tahini-molasses and jam.",
+          "story": "Herb cheese, kavut, murtuğa, jaji, çemen, honey, clotted cream, assorted cheeses, green and black olives, tomatoes, cucumber, hard-boiled egg, butter, tahini-molasses and jam.",
+          "imageAlt": "",
+          "details": [
+            "Per person",
+            "Unlimited Turkish tea",
+            "One hot option: menemen, eggs with cheese, eggs with sucuk or fried dough plate"
+          ]
+        }
+      }
     },
     {
-      "id": "iki-kisilik-van-sofrasi",
-      "category": "sofra",
-      "name": "İki Kişilik Van Sofrası",
-      "description": "Sıcak sahan, yöresel peynirler, ev reçelleri ve demli çayla kompakt sofra.",
-      "story": "İki kişilik daha derli toplu bir Van sofrası isteyen misafirlerimiz için sıcak ve soğuk lezzetleri dengeli porsiyonlarda bir araya getiriyoruz.",
-      "price": "₺860",
-      "priceNote": "iki kişilik",
-      "image": "/images/hero-parallax/overhead-classic.webp",
-      "imageAlt": "İki kişilik hazırlanmış Van kahvaltısı masası",
-      "tags": ["Yeni"],
-      "details": ["İki kişilik servis", "Bir sıcak sahan", "İki kişiye sınırsız çay"]
+      "id": "van-golu-tabagi",
+      "category": "kahvalti-menuleri",
+      "name": "Van Gölü Tabağı",
+      "description": "Otlu Van peyniri, beyaz peynir, örgü peyniri, taze kaşar, yeşil ve siyah zeytin, domates, salatalık, jaji, haşlanmış yumurta, tereyağı, tahin-pekmez ve reçel.",
+      "story": "Otlu Van peyniri, beyaz peynir, örgü peyniri, taze kaşar, yeşil ve siyah zeytin, domates, salatalık, jaji, haşlanmış yumurta, tereyağı, tahin-pekmez ve reçel.",
+      "price": "₺740",
+      "priceNote": "kişi başı",
+      "image": "",
+      "imageAlt": "",
+      "tags": [],
+      "details": [
+        "Kişi başı servis",
+        "2 adet çay",
+        "Peynirler, zeytinler, söğüş, yumurta ve tatlı eşlikçiler"
+      ],
+      "translations": {
+        "en": {
+          "name": "Van Gölü Plate",
+          "description": "Herb cheese, white cheese, braided cheese, fresh kashar, green and black olives, tomatoes, cucumber, jaji, hard-boiled egg, butter, tahini-molasses and jam.",
+          "story": "Herb cheese, white cheese, braided cheese, fresh kashar, green and black olives, tomatoes, cucumber, jaji, hard-boiled egg, butter, tahini-molasses and jam.",
+          "imageAlt": "",
+          "details": [
+            "Per person",
+            "2 Turkish teas",
+            "Cheeses, olives, salad, egg and sweet breakfast sides"
+          ]
+        }
+      }
     },
     {
-      "id": "peynir-zeytin-seckisi",
-      "category": "sofra",
-      "name": "Peynir & Zeytin Seçkisi",
-      "description": "Van otlu peyniri, günlük peynirler, yeşil ve siyah zeytin.",
-      "story": "Van kahvaltısının karakterini önce otlu peynir kurar. Farklı dokudaki peynirleri ve zeytinleri her lokmada denge sağlayacak biçimde aynı tabakta buluşturuyoruz.",
-      "price": "₺220",
-      "image": "/images/hero-float/cheese-platter.webp",
-      "imageAlt": "Van otlu peyniri, farklı peynirler ve zeytinlerden oluşan kahvaltı tabağı",
-      "tags": ["Vejetaryen"],
-      "details": ["Van otlu peyniri", "Günlük peynir seçkisi", "Yeşil ve siyah zeytin"]
+      "id": "pisi-tabagi",
+      "category": "kahvalti-menuleri",
+      "name": "Pişi Tabağı",
+      "description": "Tulum peyniri, mevsim reçeli ve Nutella eşliğinde servis edilen sıcak pişi tabağı.",
+      "story": "Tulum peyniri, mevsim reçeli ve Nutella eşliğinde servis edilen sıcak pişi tabağı.",
+      "price": "₺350",
+      "image": "",
+      "imageAlt": "",
+      "tags": [],
+      "details": [
+        "Sıcak pişi",
+        "Tulum peyniri",
+        "Mevsim reçeli ve Nutella"
+      ],
+      "translations": {
+        "en": {
+          "name": "Fried Dough Plate",
+          "description": "Warm fried dough served with goat cheese, seasonal jam and Nutella.",
+          "story": "Warm fried dough served with goat cheese, seasonal jam and Nutella.",
+          "imageAlt": "",
+          "details": [
+            "Warm fried dough",
+            "Goat cheese",
+            "Seasonal jam and Nutella"
+          ]
+        }
+      }
     },
     {
-      "id": "bal-kaymak-recel",
-      "category": "sofra",
-      "name": "Bal, Kaymak & Ev Reçelleri",
-      "description": "Süzme bal, manda kaymağı ve mevsime göre hazırlanan iki ev reçeli.",
-      "story": "Sofranın tatlı tarafını tek bir yoğun tada bırakmıyoruz. Süzme balı kaymakla, ev reçellerini ise sıcak hamur işleriyle eşleştiriyoruz.",
-      "price": "₺195",
-      "image": "/images/hero-float/apricot-jam-bowl.webp",
-      "imageAlt": "Küçük kasede ev yapımı kayısı reçeli, bal ve kaymak sunumu",
-      "tags": ["Vejetaryen"],
-      "details": ["Süzme bal", "Manda kaymağı", "İki çeşit mevsimlik ev reçeli"]
+      "id": "yumurtali-ekmek-tabagi",
+      "category": "kahvalti-menuleri",
+      "name": "Yumurtalı Ekmek Tabağı",
+      "description": "Beyaz peynir, mevsim reçeli ve zeytin ezmesi eşliğinde servis edilen yumurtalı ekmek.",
+      "story": "Beyaz peynir, mevsim reçeli ve zeytin ezmesi eşliğinde servis edilen yumurtalı ekmek.",
+      "price": "₺350",
+      "image": "",
+      "imageAlt": "",
+      "tags": [],
+      "details": [
+        "Yumurtalı ekmek",
+        "Beyaz peynir",
+        "Mevsim reçeli ve zeytin ezmesi"
+      ],
+      "translations": {
+        "en": {
+          "name": "Egg Bread Plate",
+          "description": "Egg bread served with white cheese, seasonal jam and olive paste.",
+          "story": "Egg bread served with white cheese, seasonal jam and olive paste.",
+          "imageAlt": "",
+          "details": [
+            "Egg bread",
+            "White cheese",
+            "Seasonal jam and olive paste"
+          ]
+        }
+      }
+    },
+    {
+      "id": "tulum-peyniri",
+      "category": "peynirler",
+      "name": "Tulum Peyniri",
+      "description": "Kahvaltı sofrası için porsiyon peynir servisi.",
+      "story": "Tulum Peyniri, sipariş üzerine hazırlanarak servis edilir.",
+      "price": "₺290",
+      "image": "",
+      "imageAlt": "",
+      "tags": [],
+      "details": [
+        "Porsiyon servis",
+        "Kahvaltılık peynir"
+      ],
+      "translations": {
+        "en": {
+          "name": "Goat Cheese",
+          "description": "A portion of cheese for the breakfast table.",
+          "story": "Goat Cheese is prepared to order and served fresh.",
+          "imageAlt": "",
+          "details": [
+            "Portion serving",
+            "Breakfast cheese"
+          ]
+        }
+      }
+    },
+    {
+      "id": "taze-kasar",
+      "category": "peynirler",
+      "name": "Taze Kaşar",
+      "description": "Kahvaltı sofrası için porsiyon peynir servisi.",
+      "story": "Taze Kaşar, sipariş üzerine hazırlanarak servis edilir.",
+      "price": "₺280",
+      "image": "",
+      "imageAlt": "",
+      "tags": [],
+      "details": [
+        "Porsiyon servis",
+        "Kahvaltılık peynir"
+      ],
+      "translations": {
+        "en": {
+          "name": "Fresh Kashar",
+          "description": "A portion of cheese for the breakfast table.",
+          "story": "Fresh Kashar is prepared to order and served fresh.",
+          "imageAlt": "",
+          "details": [
+            "Portion serving",
+            "Breakfast cheese"
+          ]
+        }
+      }
+    },
+    {
+      "id": "peynir-tabagi",
+      "category": "peynirler",
+      "name": "Peynir Tabağı",
+      "description": "Kahvaltı sofrası için porsiyon peynir servisi.",
+      "story": "Peynir Tabağı, sipariş üzerine hazırlanarak servis edilir.",
+      "price": "₺360",
+      "image": "",
+      "imageAlt": "",
+      "tags": [],
+      "details": [
+        "Porsiyon servis",
+        "Kahvaltılık peynir"
+      ],
+      "translations": {
+        "en": {
+          "name": "Cheese Plate",
+          "description": "A portion of cheese for the breakfast table.",
+          "story": "Cheese Plate is prepared to order and served fresh.",
+          "imageAlt": "",
+          "details": [
+            "Portion serving",
+            "Breakfast cheese"
+          ]
+        }
+      }
+    },
+    {
+      "id": "koy-peyniri",
+      "category": "peynirler",
+      "name": "Köy Peyniri",
+      "description": "Kahvaltı sofrası için porsiyon peynir servisi.",
+      "story": "Köy Peyniri, sipariş üzerine hazırlanarak servis edilir.",
+      "price": "₺260",
+      "image": "",
+      "imageAlt": "",
+      "tags": [],
+      "details": [
+        "Porsiyon servis",
+        "Kahvaltılık peynir"
+      ],
+      "translations": {
+        "en": {
+          "name": "Village Cheese",
+          "description": "A portion of cheese for the breakfast table.",
+          "story": "Village Cheese is prepared to order and served fresh.",
+          "imageAlt": "",
+          "details": [
+            "Portion serving",
+            "Breakfast cheese"
+          ]
+        }
+      }
+    },
+    {
+      "id": "beyaz-peynir",
+      "category": "peynirler",
+      "name": "Beyaz Peynir",
+      "description": "Kahvaltı sofrası için porsiyon peynir servisi.",
+      "story": "Beyaz Peynir, sipariş üzerine hazırlanarak servis edilir.",
+      "price": "₺280",
+      "image": "",
+      "imageAlt": "",
+      "tags": [],
+      "details": [
+        "Porsiyon servis",
+        "Kahvaltılık peynir"
+      ],
+      "translations": {
+        "en": {
+          "name": "White Cheese",
+          "description": "A portion of cheese for the breakfast table.",
+          "story": "White Cheese is prepared to order and served fresh.",
+          "imageAlt": "",
+          "details": [
+            "Portion serving",
+            "Breakfast cheese"
+          ]
+        }
+      }
+    },
+    {
+      "id": "otlu-peynir",
+      "category": "peynirler",
+      "name": "Otlu Peynir",
+      "description": "Kahvaltı sofrası için porsiyon peynir servisi.",
+      "story": "Otlu Peynir, sipariş üzerine hazırlanarak servis edilir.",
+      "price": "₺310",
+      "image": "",
+      "imageAlt": "",
+      "tags": [],
+      "details": [
+        "Porsiyon servis",
+        "Kahvaltılık peynir"
+      ],
+      "translations": {
+        "en": {
+          "name": "Herb Cheese",
+          "description": "A portion of cheese for the breakfast table.",
+          "story": "Herb Cheese is prepared to order and served fresh.",
+          "imageAlt": "",
+          "details": [
+            "Portion serving",
+            "Breakfast cheese"
+          ]
+        }
+      }
+    },
+    {
+      "id": "cecil-peyniri",
+      "category": "peynirler",
+      "name": "Cecil Peyniri",
+      "description": "Kahvaltı sofrası için porsiyon peynir servisi.",
+      "story": "Cecil Peyniri, sipariş üzerine hazırlanarak servis edilir.",
+      "price": "₺270",
+      "image": "",
+      "imageAlt": "",
+      "tags": [],
+      "details": [
+        "Porsiyon servis",
+        "Kahvaltılık peynir"
+      ],
+      "translations": {
+        "en": {
+          "name": "Chechil Cheese",
+          "description": "A portion of cheese for the breakfast table.",
+          "story": "Chechil Cheese is prepared to order and served fresh.",
+          "imageAlt": "",
+          "details": [
+            "Portion serving",
+            "Breakfast cheese"
+          ]
+        }
+      }
+    },
+    {
+      "id": "eski-kasar",
+      "category": "peynirler",
+      "name": "Eski Kaşar",
+      "description": "Kahvaltı sofrası için porsiyon peynir servisi.",
+      "story": "Eski Kaşar, sipariş üzerine hazırlanarak servis edilir.",
+      "price": "₺250",
+      "image": "",
+      "imageAlt": "",
+      "tags": [],
+      "details": [
+        "Porsiyon servis",
+        "Kahvaltılık peynir"
+      ],
+      "translations": {
+        "en": {
+          "name": "Mature Kashar",
+          "description": "A portion of cheese for the breakfast table.",
+          "story": "Mature Kashar is prepared to order and served fresh.",
+          "imageAlt": "",
+          "details": [
+            "Portion serving",
+            "Breakfast cheese"
+          ]
+        }
+      }
+    },
+    {
+      "id": "siyah-zeytin",
+      "category": "zeytinler",
+      "name": "Siyah Zeytin",
+      "description": "Kahvaltı sofrası için porsiyon zeytin servisi.",
+      "story": "Siyah Zeytin, sipariş üzerine hazırlanarak servis edilir.",
+      "price": "₺250",
+      "image": "",
+      "imageAlt": "",
+      "tags": [],
+      "details": [
+        "Porsiyon servis",
+        "Kahvaltılık eşlikçi"
+      ],
+      "translations": {
+        "en": {
+          "name": "Black Olives",
+          "description": "A portion of olives for the breakfast table.",
+          "story": "Black Olives is prepared to order and served fresh.",
+          "imageAlt": "",
+          "details": [
+            "Portion serving",
+            "Breakfast side"
+          ]
+        }
+      }
+    },
+    {
+      "id": "yesil-zeytin",
+      "category": "zeytinler",
+      "name": "Yeşil Zeytin",
+      "description": "Kahvaltı sofrası için porsiyon zeytin servisi.",
+      "story": "Yeşil Zeytin, sipariş üzerine hazırlanarak servis edilir.",
+      "price": "₺260",
+      "image": "",
+      "imageAlt": "",
+      "tags": [],
+      "details": [
+        "Porsiyon servis",
+        "Kahvaltılık eşlikçi"
+      ],
+      "translations": {
+        "en": {
+          "name": "Green Olives",
+          "description": "A portion of olives for the breakfast table.",
+          "story": "Green Olives is prepared to order and served fresh.",
+          "imageAlt": "",
+          "details": [
+            "Portion serving",
+            "Breakfast side"
+          ]
+        }
+      }
+    },
+    {
+      "id": "siyah-zeytin-ezmesi",
+      "category": "zeytinler",
+      "name": "Siyah Zeytin Ezmesi",
+      "description": "Kahvaltı sofrası için porsiyon zeytin servisi.",
+      "story": "Siyah Zeytin Ezmesi, sipariş üzerine hazırlanarak servis edilir.",
+      "price": "₺250",
+      "image": "",
+      "imageAlt": "",
+      "tags": [],
+      "details": [
+        "Porsiyon servis",
+        "Kahvaltılık eşlikçi"
+      ],
+      "translations": {
+        "en": {
+          "name": "Black Olive Paste",
+          "description": "A portion of olives for the breakfast table.",
+          "story": "Black Olive Paste is prepared to order and served fresh.",
+          "imageAlt": "",
+          "details": [
+            "Portion serving",
+            "Breakfast side"
+          ]
+        }
+      }
+    },
+    {
+      "id": "karisik-zeytin",
+      "category": "zeytinler",
+      "name": "Karışık Zeytin",
+      "description": "Yeşil ve siyah zeytinlerden oluşan karışık porsiyon.",
+      "story": "Yeşil ve siyah zeytinlerden oluşan karışık porsiyon.",
+      "price": "₺250",
+      "image": "",
+      "imageAlt": "",
+      "tags": [],
+      "details": [
+        "Porsiyon servis",
+        "Kahvaltılık eşlikçi"
+      ],
+      "translations": {
+        "en": {
+          "name": "Mixed Olives",
+          "description": "A portion of olives for the breakfast table.",
+          "story": "Yeşil ve siyah zeytinlerden oluşan karışık porsiyon.",
+          "imageAlt": "",
+          "details": [
+            "Portion serving",
+            "Breakfast side"
+          ]
+        }
+      }
+    },
+    {
+      "id": "sogus",
+      "category": "zeytinler",
+      "name": "Söğüş",
+      "description": "Domates, salatalık ve mevsim yeşilliklerinden taze söğüş tabağı.",
+      "story": "Domates, salatalık ve mevsim yeşilliklerinden taze söğüş tabağı.",
+      "price": "₺260",
+      "image": "",
+      "imageAlt": "",
+      "tags": [],
+      "details": [
+        "Porsiyon servis",
+        "Kahvaltılık eşlikçi"
+      ],
+      "translations": {
+        "en": {
+          "name": "Salad",
+          "description": "A portion of olives for the breakfast table.",
+          "story": "Domates, salatalık ve mevsim yeşilliklerinden taze söğüş tabağı.",
+          "imageAlt": "",
+          "details": [
+            "Portion serving",
+            "Breakfast side"
+          ]
+        }
+      }
+    },
+    {
+      "id": "peynirli-gozleme",
+      "category": "gozlemeler",
+      "name": "Peynirli Gözleme",
+      "description": "Seçilen iç harçla hazırlanıp sıcak servis edilen gözleme.",
+      "story": "Peynirli Gözleme, sipariş üzerine hazırlanarak servis edilir.",
+      "price": "₺310",
+      "image": "",
+      "imageAlt": "",
+      "tags": [],
+      "details": [
+        "Sıcak servis",
+        "Gözleme"
+      ],
+      "translations": {
+        "en": {
+          "name": "Cheese Gözleme",
+          "description": "Turkish flatbread prepared with the selected filling and served hot.",
+          "story": "Cheese Gözleme is prepared to order and served fresh.",
+          "imageAlt": "",
+          "details": [
+            "Served hot",
+            "Turkish flatbread"
+          ]
+        }
+      }
+    },
+    {
+      "id": "kasarli-gozleme",
+      "category": "gozlemeler",
+      "name": "Kaşarlı Gözleme",
+      "description": "Seçilen iç harçla hazırlanıp sıcak servis edilen gözleme.",
+      "story": "Kaşarlı Gözleme, sipariş üzerine hazırlanarak servis edilir.",
+      "price": "₺310",
+      "image": "",
+      "imageAlt": "",
+      "tags": [],
+      "details": [
+        "Sıcak servis",
+        "Gözleme"
+      ],
+      "translations": {
+        "en": {
+          "name": "Kashar Cheese Gözleme",
+          "description": "Turkish flatbread prepared with the selected filling and served hot.",
+          "story": "Kashar Cheese Gözleme is prepared to order and served fresh.",
+          "imageAlt": "",
+          "details": [
+            "Served hot",
+            "Turkish flatbread"
+          ]
+        }
+      }
+    },
+    {
+      "id": "patatesli-gozleme",
+      "category": "gozlemeler",
+      "name": "Patatesli Gözleme",
+      "description": "Seçilen iç harçla hazırlanıp sıcak servis edilen gözleme.",
+      "story": "Patatesli Gözleme, sipariş üzerine hazırlanarak servis edilir.",
+      "price": "₺300",
+      "image": "",
+      "imageAlt": "",
+      "tags": [],
+      "details": [
+        "Sıcak servis",
+        "Gözleme"
+      ],
+      "translations": {
+        "en": {
+          "name": "Potato Gözleme",
+          "description": "Turkish flatbread prepared with the selected filling and served hot.",
+          "story": "Potato Gözleme is prepared to order and served fresh.",
+          "imageAlt": "",
+          "details": [
+            "Served hot",
+            "Turkish flatbread"
+          ]
+        }
+      }
+    },
+    {
+      "id": "ispanakli-gozleme",
+      "category": "gozlemeler",
+      "name": "Ispanaklı Gözleme",
+      "description": "Seçilen iç harçla hazırlanıp sıcak servis edilen gözleme.",
+      "story": "Ispanaklı Gözleme, sipariş üzerine hazırlanarak servis edilir.",
+      "price": "₺290",
+      "image": "",
+      "imageAlt": "",
+      "tags": [],
+      "details": [
+        "Sıcak servis",
+        "Gözleme"
+      ],
+      "translations": {
+        "en": {
+          "name": "Spinach Gözleme",
+          "description": "Turkish flatbread prepared with the selected filling and served hot.",
+          "story": "Spinach Gözleme is prepared to order and served fresh.",
+          "imageAlt": "",
+          "details": [
+            "Served hot",
+            "Turkish flatbread"
+          ]
+        }
+      }
+    },
+    {
+      "id": "mantarli-gozleme",
+      "category": "gozlemeler",
+      "name": "Mantarlı Gözleme",
+      "description": "Seçilen iç harçla hazırlanıp sıcak servis edilen gözleme.",
+      "story": "Mantarlı Gözleme, sipariş üzerine hazırlanarak servis edilir.",
+      "price": "₺310",
+      "image": "",
+      "imageAlt": "",
+      "tags": [],
+      "details": [
+        "Sıcak servis",
+        "Gözleme"
+      ],
+      "translations": {
+        "en": {
+          "name": "Mushroom Gözleme",
+          "description": "Turkish flatbread prepared with the selected filling and served hot.",
+          "story": "Mushroom Gözleme is prepared to order and served fresh.",
+          "imageAlt": "",
+          "details": [
+            "Served hot",
+            "Turkish flatbread"
+          ]
+        }
+      }
+    },
+    {
+      "id": "sucuklu-gozleme",
+      "category": "gozlemeler",
+      "name": "Sucuklu Gözleme",
+      "description": "Seçilen iç harçla hazırlanıp sıcak servis edilen gözleme.",
+      "story": "Sucuklu Gözleme, sipariş üzerine hazırlanarak servis edilir.",
+      "price": "₺370",
+      "image": "",
+      "imageAlt": "",
+      "tags": [],
+      "details": [
+        "Sıcak servis",
+        "Gözleme"
+      ],
+      "translations": {
+        "en": {
+          "name": "Sucuk Gözleme",
+          "description": "Turkish flatbread prepared with the selected filling and served hot.",
+          "story": "Sucuk Gözleme is prepared to order and served fresh.",
+          "imageAlt": "",
+          "details": [
+            "Served hot",
+            "Turkish flatbread"
+          ]
+        }
+      }
+    },
+    {
+      "id": "kavurmali-gozleme",
+      "category": "gozlemeler",
+      "name": "Kavurmalı Gözleme",
+      "description": "Seçilen iç harçla hazırlanıp sıcak servis edilen gözleme.",
+      "story": "Kavurmalı Gözleme, sipariş üzerine hazırlanarak servis edilir.",
+      "price": "₺390",
+      "image": "",
+      "imageAlt": "",
+      "tags": [],
+      "details": [
+        "Sıcak servis",
+        "Gözleme"
+      ],
+      "translations": {
+        "en": {
+          "name": "Roast Beef Gözleme",
+          "description": "Turkish flatbread prepared with the selected filling and served hot.",
+          "story": "Roast Beef Gözleme is prepared to order and served fresh.",
+          "imageAlt": "",
+          "details": [
+            "Served hot",
+            "Turkish flatbread"
+          ]
+        }
+      }
+    },
+    {
+      "id": "pastirmali-gozleme",
+      "category": "gozlemeler",
+      "name": "Pastırmalı Gözleme",
+      "description": "Seçilen iç harçla hazırlanıp sıcak servis edilen gözleme.",
+      "story": "Pastırmalı Gözleme, sipariş üzerine hazırlanarak servis edilir.",
+      "price": "₺390",
+      "image": "",
+      "imageAlt": "",
+      "tags": [],
+      "details": [
+        "Sıcak servis",
+        "Gözleme"
+      ],
+      "translations": {
+        "en": {
+          "name": "Pastrami Gözleme",
+          "description": "Turkish flatbread prepared with the selected filling and served hot.",
+          "story": "Pastrami Gözleme is prepared to order and served fresh.",
+          "imageAlt": "",
+          "details": [
+            "Served hot",
+            "Turkish flatbread"
+          ]
+        }
+      }
+    },
+    {
+      "id": "special-gozleme",
+      "category": "gozlemeler",
+      "name": "Special Gözleme",
+      "description": "Seçilen iç harçla hazırlanıp sıcak servis edilen gözleme.",
+      "story": "Special Gözleme, sipariş üzerine hazırlanarak servis edilir.",
+      "price": "₺350",
+      "image": "",
+      "imageAlt": "",
+      "tags": [],
+      "details": [
+        "Sıcak servis",
+        "Gözleme"
+      ],
+      "translations": {
+        "en": {
+          "name": "Special Gözleme",
+          "description": "Turkish flatbread prepared with the selected filling and served hot.",
+          "story": "Special Gözleme is prepared to order and served fresh.",
+          "imageAlt": "",
+          "details": [
+            "Served hot",
+            "Turkish flatbread"
+          ]
+        }
+      }
+    },
+    {
+      "id": "gozleme-ekstra-peynir",
+      "category": "gozlemeler",
+      "name": "Ekstra Peynir",
+      "description": "Gözleme siparişine eklenebilen ekstra peynir.",
+      "story": "Gözleme siparişine eklenebilen ekstra peynir.",
+      "price": "₺70",
+      "priceNote": "ekstra",
+      "image": "",
+      "imageAlt": "",
+      "tags": [],
+      "details": [
+        "Gözleme için ek ürün",
+        "Ekstra peynir"
+      ],
+      "translations": {
+        "en": {
+          "name": "Extra Cheese",
+          "description": "Extra cheese available with any gözleme order.",
+          "story": "Extra cheese available with any gözleme order.",
+          "imageAlt": "",
+          "details": [
+            "Add-on for gözleme",
+            "Extra cheese"
+          ]
+        }
+      }
+    },
+    {
+      "id": "cevizli-cemen",
+      "category": "yoresel-tatlar",
+      "name": "Cevizli Çemen",
+      "description": "Van kahvaltı kültüründen gelen yöresel lezzet.",
+      "story": "Cevizli Çemen, sipariş üzerine hazırlanarak servis edilir.",
+      "price": "₺240",
+      "image": "",
+      "imageAlt": "",
+      "tags": [],
+      "details": [
+        "Yöresel tarif",
+        "Kahvaltılık servis"
+      ],
+      "translations": {
+        "en": {
+          "name": "Çemen with Walnut",
+          "description": "A regional speciality from Van breakfast culture.",
+          "story": "Çemen with Walnut is prepared to order and served fresh.",
+          "imageAlt": "",
+          "details": [
+            "Regional recipe",
+            "Breakfast serving"
+          ]
+        }
+      }
+    },
+    {
+      "id": "tereyagli-jaji",
+      "category": "yoresel-tatlar",
+      "name": "Tereyağlı Jaji",
+      "description": "Van kahvaltı kültüründen gelen yöresel lezzet.",
+      "story": "Tereyağlı Jaji, sipariş üzerine hazırlanarak servis edilir.",
+      "price": "₺260",
+      "image": "",
+      "imageAlt": "",
+      "tags": [],
+      "details": [
+        "Yöresel tarif",
+        "Kahvaltılık servis"
+      ],
+      "translations": {
+        "en": {
+          "name": "Jaji with Butter",
+          "description": "A regional speciality from Van breakfast culture.",
+          "story": "Jaji with Butter is prepared to order and served fresh.",
+          "imageAlt": "",
+          "details": [
+            "Regional recipe",
+            "Breakfast serving"
+          ]
+        }
+      }
+    },
+    {
+      "id": "balli-cevizli-kavut",
+      "category": "yoresel-tatlar",
+      "name": "Ballı Cevizli Kavut",
+      "description": "Van kahvaltı kültüründen gelen yöresel lezzet.",
+      "story": "Ballı Cevizli Kavut, sipariş üzerine hazırlanarak servis edilir.",
+      "price": "₺280",
+      "image": "",
+      "imageAlt": "",
+      "tags": [],
+      "details": [
+        "Yöresel tarif",
+        "Kahvaltılık servis"
+      ],
+      "translations": {
+        "en": {
+          "name": "Kavut with Walnut and Honey",
+          "description": "A regional speciality from Van breakfast culture.",
+          "story": "Kavut with Walnut and Honey is prepared to order and served fresh.",
+          "imageAlt": "",
+          "details": [
+            "Regional recipe",
+            "Breakfast serving"
+          ]
+        }
+      }
+    },
+    {
+      "id": "tereyagli-cevizli-murtuga",
+      "category": "yoresel-tatlar",
+      "name": "Tereyağlı Cevizli Murtuğa",
+      "description": "Van kahvaltı kültüründen gelen yöresel lezzet.",
+      "story": "Tereyağlı Cevizli Murtuğa, sipariş üzerine hazırlanarak servis edilir.",
+      "price": "₺260",
+      "image": "",
+      "imageAlt": "",
+      "tags": [],
+      "details": [
+        "Yöresel tarif",
+        "Kahvaltılık servis"
+      ],
+      "translations": {
+        "en": {
+          "name": "Murtuğa with Walnut and Butter",
+          "description": "A regional speciality from Van breakfast culture.",
+          "story": "Murtuğa with Walnut and Butter is prepared to order and served fresh.",
+          "imageAlt": "",
+          "details": [
+            "Regional recipe",
+            "Breakfast serving"
+          ]
+        }
+      }
+    },
+    {
+      "id": "kayisi-receli",
+      "category": "receller",
+      "name": "Kayısı Reçeli",
+      "description": "Kahvaltı sofrası için porsiyon tatlı eşlikçi.",
+      "story": "Kayısı Reçeli, sipariş üzerine hazırlanarak servis edilir.",
+      "price": "₺300",
+      "image": "",
+      "imageAlt": "",
+      "tags": [],
+      "details": [
+        "Porsiyon servis",
+        "Kahvaltılık tatlı"
+      ],
+      "translations": {
+        "en": {
+          "name": "Apricot Jam",
+          "description": "A sweet portion for the breakfast table.",
+          "story": "Apricot Jam is prepared to order and served fresh.",
+          "imageAlt": "",
+          "details": [
+            "Portion serving",
+            "Sweet breakfast side"
+          ]
+        }
+      }
+    },
+    {
+      "id": "ayva-receli",
+      "category": "receller",
+      "name": "Ayva Reçeli",
+      "description": "Kahvaltı sofrası için porsiyon tatlı eşlikçi.",
+      "story": "Ayva Reçeli, sipariş üzerine hazırlanarak servis edilir.",
+      "price": "₺320",
+      "image": "",
+      "imageAlt": "",
+      "tags": [],
+      "details": [
+        "Porsiyon servis",
+        "Kahvaltılık tatlı"
+      ],
+      "translations": {
+        "en": {
+          "name": "Quince Jam",
+          "description": "A sweet portion for the breakfast table.",
+          "story": "Quince Jam is prepared to order and served fresh.",
+          "imageAlt": "",
+          "details": [
+            "Portion serving",
+            "Sweet breakfast side"
+          ]
+        }
+      }
+    },
+    {
+      "id": "portakal-receli",
+      "category": "receller",
+      "name": "Portakal Reçeli",
+      "description": "Kahvaltı sofrası için porsiyon tatlı eşlikçi.",
+      "story": "Portakal Reçeli, sipariş üzerine hazırlanarak servis edilir.",
+      "price": "₺300",
+      "image": "",
+      "imageAlt": "",
+      "tags": [],
+      "details": [
+        "Porsiyon servis",
+        "Kahvaltılık tatlı"
+      ],
+      "translations": {
+        "en": {
+          "name": "Orange Jam",
+          "description": "A sweet portion for the breakfast table.",
+          "story": "Orange Jam is prepared to order and served fresh.",
+          "imageAlt": "",
+          "details": [
+            "Portion serving",
+            "Sweet breakfast side"
+          ]
+        }
+      }
+    },
+    {
+      "id": "cilek-receli",
+      "category": "receller",
+      "name": "Çilek Reçeli",
+      "description": "Kahvaltı sofrası için porsiyon tatlı eşlikçi.",
+      "story": "Çilek Reçeli, sipariş üzerine hazırlanarak servis edilir.",
+      "price": "₺300",
+      "image": "",
+      "imageAlt": "",
+      "tags": [],
+      "details": [
+        "Porsiyon servis",
+        "Kahvaltılık tatlı"
+      ],
+      "translations": {
+        "en": {
+          "name": "Strawberry Jam",
+          "description": "A sweet portion for the breakfast table.",
+          "story": "Strawberry Jam is prepared to order and served fresh.",
+          "imageAlt": "",
+          "details": [
+            "Portion serving",
+            "Sweet breakfast side"
+          ]
+        }
+      }
+    },
+    {
+      "id": "ceviz-receli",
+      "category": "receller",
+      "name": "Ceviz Reçeli",
+      "description": "Kahvaltı sofrası için porsiyon tatlı eşlikçi.",
+      "story": "Ceviz Reçeli, sipariş üzerine hazırlanarak servis edilir.",
+      "price": "₺380",
+      "image": "",
+      "imageAlt": "",
+      "tags": [],
+      "details": [
+        "Porsiyon servis",
+        "Kahvaltılık tatlı"
+      ],
+      "translations": {
+        "en": {
+          "name": "Walnut Jam",
+          "description": "A sweet portion for the breakfast table.",
+          "story": "Walnut Jam is prepared to order and served fresh.",
+          "imageAlt": "",
+          "details": [
+            "Portion serving",
+            "Sweet breakfast side"
+          ]
+        }
+      }
+    },
+    {
+      "id": "nutella",
+      "category": "receller",
+      "name": "Nutella",
+      "description": "Kahvaltı sofrası için porsiyon tatlı eşlikçi.",
+      "story": "Nutella, sipariş üzerine hazırlanarak servis edilir.",
+      "price": "₺280",
+      "image": "",
+      "imageAlt": "",
+      "tags": [],
+      "details": [
+        "Porsiyon servis",
+        "Kahvaltılık tatlı"
+      ],
+      "translations": {
+        "en": {
+          "name": "Hazelnut Spread",
+          "description": "A sweet portion for the breakfast table.",
+          "story": "Hazelnut Spread is prepared to order and served fresh.",
+          "imageAlt": "",
+          "details": [
+            "Portion serving",
+            "Sweet breakfast side"
+          ]
+        }
+      }
+    },
+    {
+      "id": "bal",
+      "category": "ballar",
+      "name": "Bal",
+      "description": "Kahvaltı sofrası için porsiyon servis.",
+      "story": "Bal, sipariş üzerine hazırlanarak servis edilir.",
+      "price": "₺280",
+      "image": "",
+      "imageAlt": "",
+      "tags": [],
+      "details": [
+        "Porsiyon servis",
+        "Kahvaltılık eşlikçi"
+      ],
+      "translations": {
+        "en": {
+          "name": "Honey",
+          "description": "A portion for the breakfast table.",
+          "story": "Honey is prepared to order and served fresh.",
+          "imageAlt": "",
+          "details": [
+            "Portion serving",
+            "Breakfast side"
+          ]
+        }
+      }
+    },
+    {
+      "id": "kaymak",
+      "category": "ballar",
+      "name": "Kaymak",
+      "description": "Kahvaltı sofrası için porsiyon servis.",
+      "story": "Kaymak, sipariş üzerine hazırlanarak servis edilir.",
+      "price": "₺320",
+      "image": "",
+      "imageAlt": "",
+      "tags": [],
+      "details": [
+        "Porsiyon servis",
+        "Kahvaltılık eşlikçi"
+      ],
+      "translations": {
+        "en": {
+          "name": "Clotted Cream",
+          "description": "A portion for the breakfast table.",
+          "story": "Clotted Cream is prepared to order and served fresh.",
+          "imageAlt": "",
+          "details": [
+            "Portion serving",
+            "Breakfast side"
+          ]
+        }
+      }
+    },
+    {
+      "id": "bal-kaymak",
+      "category": "ballar",
+      "name": "Bal - Kaymak",
+      "description": "Kahvaltı sofrası için porsiyon servis.",
+      "story": "Bal - Kaymak, sipariş üzerine hazırlanarak servis edilir.",
+      "price": "₺300",
+      "image": "",
+      "imageAlt": "",
+      "tags": [],
+      "details": [
+        "Porsiyon servis",
+        "Kahvaltılık eşlikçi"
+      ],
+      "translations": {
+        "en": {
+          "name": "Clotted Cream and Honey",
+          "description": "A portion for the breakfast table.",
+          "story": "Clotted Cream and Honey is prepared to order and served fresh.",
+          "imageAlt": "",
+          "details": [
+            "Portion serving",
+            "Breakfast side"
+          ]
+        }
+      }
+    },
+    {
+      "id": "tereyagi",
+      "category": "ballar",
+      "name": "Tereyağı",
+      "description": "Kahvaltı sofrası için porsiyon servis.",
+      "story": "Tereyağı, sipariş üzerine hazırlanarak servis edilir.",
+      "price": "₺320",
+      "image": "",
+      "imageAlt": "",
+      "tags": [],
+      "details": [
+        "Porsiyon servis",
+        "Kahvaltılık eşlikçi"
+      ],
+      "translations": {
+        "en": {
+          "name": "Butter",
+          "description": "A portion for the breakfast table.",
+          "story": "Butter is prepared to order and served fresh.",
+          "imageAlt": "",
+          "details": [
+            "Portion serving",
+            "Breakfast side"
+          ]
+        }
+      }
+    },
+    {
+      "id": "bal-tereyagi",
+      "category": "ballar",
+      "name": "Bal - Tereyağı",
+      "description": "Kahvaltı sofrası için porsiyon servis.",
+      "story": "Bal - Tereyağı, sipariş üzerine hazırlanarak servis edilir.",
+      "price": "₺320",
+      "image": "",
+      "imageAlt": "",
+      "tags": [],
+      "details": [
+        "Porsiyon servis",
+        "Kahvaltılık eşlikçi"
+      ],
+      "translations": {
+        "en": {
+          "name": "Honey and Butter",
+          "description": "A portion for the breakfast table.",
+          "story": "Honey and Butter is prepared to order and served fresh.",
+          "imageAlt": "",
+          "details": [
+            "Portion serving",
+            "Breakfast side"
+          ]
+        }
+      }
+    },
+    {
+      "id": "tahin",
+      "category": "ballar",
+      "name": "Tahin",
+      "description": "Kahvaltı sofrası için porsiyon servis.",
+      "story": "Tahin, sipariş üzerine hazırlanarak servis edilir.",
+      "price": "₺280",
+      "image": "",
+      "imageAlt": "",
+      "tags": [],
+      "details": [
+        "Porsiyon servis",
+        "Kahvaltılık eşlikçi"
+      ],
+      "translations": {
+        "en": {
+          "name": "Tahini",
+          "description": "A portion for the breakfast table.",
+          "story": "Tahini is prepared to order and served fresh.",
+          "imageAlt": "",
+          "details": [
+            "Portion serving",
+            "Breakfast side"
+          ]
+        }
+      }
+    },
+    {
+      "id": "tahin-pekmez",
+      "category": "ballar",
+      "name": "Tahin - Pekmez",
+      "description": "Kahvaltı sofrası için porsiyon servis.",
+      "story": "Tahin - Pekmez, sipariş üzerine hazırlanarak servis edilir.",
+      "price": "₺280",
+      "image": "",
+      "imageAlt": "",
+      "tags": [],
+      "details": [
+        "Porsiyon servis",
+        "Kahvaltılık eşlikçi"
+      ],
+      "translations": {
+        "en": {
+          "name": "Tahini and Molasses",
+          "description": "A portion for the breakfast table.",
+          "story": "Tahini and Molasses is prepared to order and served fresh.",
+          "imageAlt": "",
+          "details": [
+            "Portion serving",
+            "Breakfast side"
+          ]
+        }
+      }
+    },
+    {
+      "id": "pekmez",
+      "category": "ballar",
+      "name": "Pekmez",
+      "description": "Kahvaltı sofrası için porsiyon servis.",
+      "story": "Pekmez, sipariş üzerine hazırlanarak servis edilir.",
+      "price": "₺280",
+      "image": "",
+      "imageAlt": "",
+      "tags": [],
+      "details": [
+        "Porsiyon servis",
+        "Kahvaltılık eşlikçi"
+      ],
+      "translations": {
+        "en": {
+          "name": "Grape Molasses",
+          "description": "A portion for the breakfast table.",
+          "story": "Grape Molasses is prepared to order and served fresh.",
+          "imageAlt": "",
+          "details": [
+            "Portion serving",
+            "Breakfast side"
+          ]
+        }
+      }
+    },
+    {
+      "id": "sade-omlet",
+      "category": "omletler",
+      "name": "Sade Omlet",
+      "description": "Seçilen malzemeyle hazırlanıp sıcak servis edilen omlet.",
+      "story": "Sade Omlet, sipariş üzerine hazırlanarak servis edilir.",
+      "price": "₺300",
+      "image": "",
+      "imageAlt": "",
+      "tags": [],
+      "details": [
+        "Yumurta",
+        "Sıcak servis"
+      ],
+      "translations": {
+        "en": {
+          "name": "Plain Omelette",
+          "description": "Omelette prepared with the selected ingredient and served hot.",
+          "story": "Plain Omelette is prepared to order and served fresh.",
+          "imageAlt": "",
+          "details": [
+            "Eggs",
+            "Served hot"
+          ]
+        }
+      }
+    },
+    {
+      "id": "peynirli-omlet",
+      "category": "omletler",
+      "name": "Peynirli Omlet",
+      "description": "Seçilen malzemeyle hazırlanıp sıcak servis edilen omlet.",
+      "story": "Peynirli Omlet, sipariş üzerine hazırlanarak servis edilir.",
+      "price": "₺340",
+      "image": "",
+      "imageAlt": "",
+      "tags": [],
+      "details": [
+        "Yumurta",
+        "Sıcak servis"
+      ],
+      "translations": {
+        "en": {
+          "name": "Cheese Omelette",
+          "description": "Omelette prepared with the selected ingredient and served hot.",
+          "story": "Cheese Omelette is prepared to order and served fresh.",
+          "imageAlt": "",
+          "details": [
+            "Eggs",
+            "Served hot"
+          ]
+        }
+      }
+    },
+    {
+      "id": "mantarli-omlet",
+      "category": "omletler",
+      "name": "Mantarlı Omlet",
+      "description": "Seçilen malzemeyle hazırlanıp sıcak servis edilen omlet.",
+      "story": "Mantarlı Omlet, sipariş üzerine hazırlanarak servis edilir.",
+      "price": "₺360",
+      "image": "",
+      "imageAlt": "",
+      "tags": [],
+      "details": [
+        "Yumurta",
+        "Sıcak servis"
+      ],
+      "translations": {
+        "en": {
+          "name": "Mushroom Omelette",
+          "description": "Omelette prepared with the selected ingredient and served hot.",
+          "story": "Mushroom Omelette is prepared to order and served fresh.",
+          "imageAlt": "",
+          "details": [
+            "Eggs",
+            "Served hot"
+          ]
+        }
+      }
+    },
+    {
+      "id": "sosisli-omlet",
+      "category": "omletler",
+      "name": "Sosisli Omlet",
+      "description": "Seçilen malzemeyle hazırlanıp sıcak servis edilen omlet.",
+      "story": "Sosisli Omlet, sipariş üzerine hazırlanarak servis edilir.",
+      "price": "₺350",
+      "image": "",
+      "imageAlt": "",
+      "tags": [],
+      "details": [
+        "Yumurta",
+        "Sıcak servis"
+      ],
+      "translations": {
+        "en": {
+          "name": "Hot Dog Omelette",
+          "description": "Omelette prepared with the selected ingredient and served hot.",
+          "story": "Hot Dog Omelette is prepared to order and served fresh.",
+          "imageAlt": "",
+          "details": [
+            "Eggs",
+            "Served hot"
+          ]
+        }
+      }
+    },
+    {
+      "id": "sucuklu-omlet",
+      "category": "omletler",
+      "name": "Sucuklu Omlet",
+      "description": "Seçilen malzemeyle hazırlanıp sıcak servis edilen omlet.",
+      "story": "Sucuklu Omlet, sipariş üzerine hazırlanarak servis edilir.",
+      "price": "₺370",
+      "image": "",
+      "imageAlt": "",
+      "tags": [],
+      "details": [
+        "Yumurta",
+        "Sıcak servis"
+      ],
+      "translations": {
+        "en": {
+          "name": "Sucuk Omelette",
+          "description": "Omelette prepared with the selected ingredient and served hot.",
+          "story": "Sucuk Omelette is prepared to order and served fresh.",
+          "imageAlt": "",
+          "details": [
+            "Eggs",
+            "Served hot"
+          ]
+        }
+      }
+    },
+    {
+      "id": "kavurmali-omlet",
+      "category": "omletler",
+      "name": "Kavurmalı Omlet",
+      "description": "Seçilen malzemeyle hazırlanıp sıcak servis edilen omlet.",
+      "story": "Kavurmalı Omlet, sipariş üzerine hazırlanarak servis edilir.",
+      "price": "₺390",
+      "image": "",
+      "imageAlt": "",
+      "tags": [],
+      "details": [
+        "Yumurta",
+        "Sıcak servis"
+      ],
+      "translations": {
+        "en": {
+          "name": "Roast Beef Omelette",
+          "description": "Omelette prepared with the selected ingredient and served hot.",
+          "story": "Roast Beef Omelette is prepared to order and served fresh.",
+          "imageAlt": "",
+          "details": [
+            "Eggs",
+            "Served hot"
+          ]
+        }
+      }
+    },
+    {
+      "id": "pastirmali-omlet",
+      "category": "omletler",
+      "name": "Pastırmalı Omlet",
+      "description": "Seçilen malzemeyle hazırlanıp sıcak servis edilen omlet.",
+      "story": "Pastırmalı Omlet, sipariş üzerine hazırlanarak servis edilir.",
+      "price": "₺390",
+      "image": "",
+      "imageAlt": "",
+      "tags": [],
+      "details": [
+        "Yumurta",
+        "Sıcak servis"
+      ],
+      "translations": {
+        "en": {
+          "name": "Pastrami Omelette",
+          "description": "Omelette prepared with the selected ingredient and served hot.",
+          "story": "Pastrami Omelette is prepared to order and served fresh.",
+          "imageAlt": "",
+          "details": [
+            "Eggs",
+            "Served hot"
+          ]
+        }
+      }
+    },
+    {
+      "id": "et-karisik-omlet",
+      "category": "omletler",
+      "name": "Et Karışık Omlet",
+      "description": "Seçilen malzemeyle hazırlanıp sıcak servis edilen omlet.",
+      "story": "Et Karışık Omlet, sipariş üzerine hazırlanarak servis edilir.",
+      "price": "₺390",
+      "image": "",
+      "imageAlt": "",
+      "tags": [],
+      "details": [
+        "Yumurta",
+        "Sıcak servis"
+      ],
+      "translations": {
+        "en": {
+          "name": "Mixed Meat Omelette",
+          "description": "Omelette prepared with the selected ingredient and served hot.",
+          "story": "Mixed Meat Omelette is prepared to order and served fresh.",
+          "imageAlt": "",
+          "details": [
+            "Eggs",
+            "Served hot"
+          ]
+        }
+      }
+    },
+    {
+      "id": "sebze-karisik-omlet",
+      "category": "omletler",
+      "name": "Sebze Karışık Omlet",
+      "description": "Seçilen malzemeyle hazırlanıp sıcak servis edilen omlet.",
+      "story": "Sebze Karışık Omlet, sipariş üzerine hazırlanarak servis edilir.",
+      "price": "₺360",
+      "image": "",
+      "imageAlt": "",
+      "tags": [],
+      "details": [
+        "Yumurta",
+        "Sıcak servis"
+      ],
+      "translations": {
+        "en": {
+          "name": "Mixed Vegetable Omelette",
+          "description": "Omelette prepared with the selected ingredient and served hot.",
+          "story": "Mixed Vegetable Omelette is prepared to order and served fresh.",
+          "imageAlt": "",
+          "details": [
+            "Eggs",
+            "Served hot"
+          ]
+        }
+      }
+    },
+    {
+      "id": "sade-menemen",
+      "category": "menemenler",
+      "name": "Sade Menemen",
+      "description": "Domates ve yumurta temeliyle hazırlanıp sıcak servis edilen menemen.",
+      "story": "Sade Menemen, sipariş üzerine hazırlanarak servis edilir.",
+      "price": "₺310",
+      "image": "",
+      "imageAlt": "",
+      "tags": [],
+      "details": [
+        "Domates",
+        "Yumurta",
+        "Sıcak servis"
+      ],
+      "translations": {
+        "en": {
+          "name": "Plain Menemen",
+          "description": "Turkish scrambled eggs with tomatoes, prepared with the selected ingredient and served hot.",
+          "story": "Plain Menemen is prepared to order and served fresh.",
+          "imageAlt": "",
+          "details": [
+            "Tomatoes",
+            "Eggs",
+            "Served hot"
+          ]
+        }
+      }
+    },
+    {
+      "id": "mantarli-menemen",
+      "category": "menemenler",
+      "name": "Mantarlı Menemen",
+      "description": "Domates ve yumurta temeliyle hazırlanıp sıcak servis edilen menemen.",
+      "story": "Mantarlı Menemen, sipariş üzerine hazırlanarak servis edilir.",
+      "price": "₺340",
+      "image": "",
+      "imageAlt": "",
+      "tags": [],
+      "details": [
+        "Domates",
+        "Yumurta",
+        "Sıcak servis"
+      ],
+      "translations": {
+        "en": {
+          "name": "Mushroom Menemen",
+          "description": "Turkish scrambled eggs with tomatoes, prepared with the selected ingredient and served hot.",
+          "story": "Mushroom Menemen is prepared to order and served fresh.",
+          "imageAlt": "",
+          "details": [
+            "Tomatoes",
+            "Eggs",
+            "Served hot"
+          ]
+        }
+      }
+    },
+    {
+      "id": "peynirli-menemen",
+      "category": "menemenler",
+      "name": "Peynirli Menemen",
+      "description": "Domates ve yumurta temeliyle hazırlanıp sıcak servis edilen menemen.",
+      "story": "Peynirli Menemen, sipariş üzerine hazırlanarak servis edilir.",
+      "price": "₺340",
+      "image": "",
+      "imageAlt": "",
+      "tags": [],
+      "details": [
+        "Domates",
+        "Yumurta",
+        "Sıcak servis"
+      ],
+      "translations": {
+        "en": {
+          "name": "Cheese Menemen",
+          "description": "Turkish scrambled eggs with tomatoes, prepared with the selected ingredient and served hot.",
+          "story": "Cheese Menemen is prepared to order and served fresh.",
+          "imageAlt": "",
+          "details": [
+            "Tomatoes",
+            "Eggs",
+            "Served hot"
+          ]
+        }
+      }
+    },
+    {
+      "id": "sucuklu-menemen",
+      "category": "menemenler",
+      "name": "Sucuklu Menemen",
+      "description": "Domates ve yumurta temeliyle hazırlanıp sıcak servis edilen menemen.",
+      "story": "Sucuklu Menemen, sipariş üzerine hazırlanarak servis edilir.",
+      "price": "₺370",
+      "image": "",
+      "imageAlt": "",
+      "tags": [],
+      "details": [
+        "Domates",
+        "Yumurta",
+        "Sıcak servis"
+      ],
+      "translations": {
+        "en": {
+          "name": "Sucuk Menemen",
+          "description": "Turkish scrambled eggs with tomatoes, prepared with the selected ingredient and served hot.",
+          "story": "Sucuk Menemen is prepared to order and served fresh.",
+          "imageAlt": "",
+          "details": [
+            "Tomatoes",
+            "Eggs",
+            "Served hot"
+          ]
+        }
+      }
+    },
+    {
+      "id": "kavurmali-menemen",
+      "category": "menemenler",
+      "name": "Kavurmalı Menemen",
+      "description": "Domates ve yumurta temeliyle hazırlanıp sıcak servis edilen menemen.",
+      "story": "Kavurmalı Menemen, sipariş üzerine hazırlanarak servis edilir.",
+      "price": "₺390",
+      "image": "",
+      "imageAlt": "",
+      "tags": [],
+      "details": [
+        "Domates",
+        "Yumurta",
+        "Sıcak servis"
+      ],
+      "translations": {
+        "en": {
+          "name": "Roast Beef Menemen",
+          "description": "Turkish scrambled eggs with tomatoes, prepared with the selected ingredient and served hot.",
+          "story": "Roast Beef Menemen is prepared to order and served fresh.",
+          "imageAlt": "",
+          "details": [
+            "Tomatoes",
+            "Eggs",
+            "Served hot"
+          ]
+        }
+      }
+    },
+    {
+      "id": "pastirmali-menemen",
+      "category": "menemenler",
+      "name": "Pastırmalı Menemen",
+      "description": "Domates ve yumurta temeliyle hazırlanıp sıcak servis edilen menemen.",
+      "story": "Pastırmalı Menemen, sipariş üzerine hazırlanarak servis edilir.",
+      "price": "₺390",
+      "image": "",
+      "imageAlt": "",
+      "tags": [],
+      "details": [
+        "Domates",
+        "Yumurta",
+        "Sıcak servis"
+      ],
+      "translations": {
+        "en": {
+          "name": "Pastrami Menemen",
+          "description": "Turkish scrambled eggs with tomatoes, prepared with the selected ingredient and served hot.",
+          "story": "Pastrami Menemen is prepared to order and served fresh.",
+          "imageAlt": "",
+          "details": [
+            "Tomatoes",
+            "Eggs",
+            "Served hot"
+          ]
+        }
+      }
+    },
+    {
+      "id": "sahanda-yumurta",
+      "category": "yumurtalar",
+      "name": "Sahanda Yumurta",
+      "description": "Seçilen malzemeyle sahanda hazırlanıp sıcak servis edilen yumurta.",
+      "story": "Sahanda Yumurta, sipariş üzerine hazırlanarak servis edilir.",
+      "price": "₺200",
+      "image": "",
+      "imageAlt": "",
+      "tags": [],
+      "details": [
+        "Sahanda hazırlanır",
+        "Sıcak servis"
+      ],
+      "translations": {
+        "en": {
+          "name": "Fried Eggs",
+          "description": "Eggs prepared in a pan with the selected ingredient and served hot.",
+          "story": "Fried Eggs is prepared to order and served fresh.",
+          "imageAlt": "",
+          "details": [
+            "Prepared in a pan",
+            "Served hot"
+          ]
+        }
+      }
+    },
+    {
+      "id": "patatesli-yumurta",
+      "category": "yumurtalar",
+      "name": "Patatesli Yumurta",
+      "description": "Seçilen malzemeyle sahanda hazırlanıp sıcak servis edilen yumurta.",
+      "story": "Patatesli Yumurta, sipariş üzerine hazırlanarak servis edilir.",
+      "price": "₺300",
+      "image": "",
+      "imageAlt": "",
+      "tags": [],
+      "details": [
+        "Sahanda hazırlanır",
+        "Sıcak servis"
+      ],
+      "translations": {
+        "en": {
+          "name": "Eggs with Potato",
+          "description": "Eggs prepared in a pan with the selected ingredient and served hot.",
+          "story": "Eggs with Potato is prepared to order and served fresh.",
+          "imageAlt": "",
+          "details": [
+            "Prepared in a pan",
+            "Served hot"
+          ]
+        }
+      }
+    },
+    {
+      "id": "ispanakli-yumurta",
+      "category": "yumurtalar",
+      "name": "Ispanaklı Yumurta",
+      "description": "Seçilen malzemeyle sahanda hazırlanıp sıcak servis edilen yumurta.",
+      "story": "Ispanaklı Yumurta, sipariş üzerine hazırlanarak servis edilir.",
+      "price": "₺330",
+      "image": "",
+      "imageAlt": "",
+      "tags": [],
+      "details": [
+        "Sahanda hazırlanır",
+        "Sıcak servis"
+      ],
+      "translations": {
+        "en": {
+          "name": "Eggs with Spinach",
+          "description": "Eggs prepared in a pan with the selected ingredient and served hot.",
+          "story": "Eggs with Spinach is prepared to order and served fresh.",
+          "imageAlt": "",
+          "details": [
+            "Prepared in a pan",
+            "Served hot"
+          ]
+        }
+      }
+    },
+    {
+      "id": "peynirli-yumurta",
+      "category": "yumurtalar",
+      "name": "Peynirli Yumurta",
+      "description": "Seçilen malzemeyle sahanda hazırlanıp sıcak servis edilen yumurta.",
+      "story": "Peynirli Yumurta, sipariş üzerine hazırlanarak servis edilir.",
+      "price": "₺300",
+      "image": "",
+      "imageAlt": "",
+      "tags": [],
+      "details": [
+        "Sahanda hazırlanır",
+        "Sıcak servis"
+      ],
+      "translations": {
+        "en": {
+          "name": "Eggs with Cheese",
+          "description": "Eggs prepared in a pan with the selected ingredient and served hot.",
+          "story": "Eggs with Cheese is prepared to order and served fresh.",
+          "imageAlt": "",
+          "details": [
+            "Prepared in a pan",
+            "Served hot"
+          ]
+        }
+      }
     },
     {
       "id": "sucuklu-yumurta",
-      "category": "sicaklar",
-      "name": "Sahanda Sucuklu Yumurta",
-      "description": "Kasap sucuğu ve köy yumurtası, bakır sahanda sıcak servis.",
-      "story": "Sucuk dilimlerini önce bakır sahanda çeviriyor, köy yumurtasını ardından ekliyoruz. Sarısı akışkan, kenarları sıcak kalacak anda servis ediyoruz.",
-      "price": "₺180",
-      "image": "/images/sucuk-egg.webp",
-      "imageAlt": "Bakır sahanda sucuk dilimleri ve akışkan sarılı yumurta",
-      "tags": ["Öne çıkan", "Tavsiye"],
-      "details": ["Kasap sucuğu", "Köy yumurtası", "Bakır sahanda servis"]
+      "category": "yumurtalar",
+      "name": "Sucuklu Yumurta",
+      "description": "Seçilen malzemeyle sahanda hazırlanıp sıcak servis edilen yumurta.",
+      "story": "Sucuklu Yumurta, sipariş üzerine hazırlanarak servis edilir.",
+      "price": "₺320",
+      "image": "",
+      "imageAlt": "",
+      "tags": [],
+      "details": [
+        "Sahanda hazırlanır",
+        "Sıcak servis"
+      ],
+      "translations": {
+        "en": {
+          "name": "Eggs with Sucuk",
+          "description": "Eggs prepared in a pan with the selected ingredient and served hot.",
+          "story": "Eggs with Sucuk is prepared to order and served fresh.",
+          "imageAlt": "",
+          "details": [
+            "Prepared in a pan",
+            "Served hot"
+          ]
+        }
+      }
     },
     {
-      "id": "murtuga",
-      "category": "sicaklar",
-      "name": "Murtuğa",
-      "description": "Un, tereyağı ve yumurtayla hazırlanan doyurucu Van klasiği.",
-      "story": "Murtuğa, az malzemeyle güçlü bir sofra kuran Van mutfağının en güzel örneklerinden. Tereyağının kokusu çıkana kadar pişirip sıcak servis ediyoruz.",
-      "price": "₺160",
-      "image": "/images/hero-parallax/overhead-feast.webp",
-      "imageAlt": "Bakır sahanlar ve yöresel tabaklarla kurulu Van kahvaltısı",
-      "tags": ["Tavsiye", "Vejetaryen"],
-      "details": ["Tereyağı", "Yumurta", "Geleneksel Van tarifi"]
+      "id": "mantarli-yumurta",
+      "category": "yumurtalar",
+      "name": "Mantarlı Yumurta",
+      "description": "Seçilen malzemeyle sahanda hazırlanıp sıcak servis edilen yumurta.",
+      "story": "Mantarlı Yumurta, sipariş üzerine hazırlanarak servis edilir.",
+      "price": "₺330",
+      "image": "",
+      "imageAlt": "",
+      "tags": [],
+      "details": [
+        "Sahanda hazırlanır",
+        "Sıcak servis"
+      ],
+      "translations": {
+        "en": {
+          "name": "Eggs with Mushroom",
+          "description": "Eggs prepared in a pan with the selected ingredient and served hot.",
+          "story": "Eggs with Mushroom is prepared to order and served fresh.",
+          "imageAlt": "",
+          "details": [
+            "Prepared in a pan",
+            "Served hot"
+          ]
+        }
+      }
     },
     {
-      "id": "kavut",
-      "category": "sicaklar",
-      "name": "Kavut",
-      "description": "Kavrulmuş un ve tereyağıyla hazırlanan tatlı, tok kıvamlı sıcak.",
-      "story": "Kavutun sade görünümünün arkasında uzun bir yöre geleneği var. Kavrulmuş unun tok aromasını dengeli bir kıvamla masaya getiriyoruz.",
-      "price": "₺145",
-      "image": "/images/hero-parallax/spread-close.webp",
-      "imageAlt": "Kahvaltı sofrasında bakır sahan ve yöresel Van lezzetleri",
-      "tags": ["Vejetaryen"],
-      "details": ["Kavrulmuş un", "Tereyağı", "Sıcak servis"]
-    },
-    {
-      "id": "menemen",
-      "category": "sicaklar",
-      "name": "Tereyağlı Menemen",
-      "description": "Domates, köy biberi ve yumurta; bakır sahanda sulu kıvamda.",
-      "story": "Domates ve biberi tereyağında kısa süre çevirip yumurtayı en son ekliyoruz. Ekmeği sahana uzatacak kadar sulu, tadı yoğun kalıyor.",
-      "price": "₺175",
-      "image": "/images/hero-float/sucuk-egg-pan.webp",
-      "imageAlt": "Bakır sahanda sıcak tereyağlı menemen",
-      "tags": ["Vejetaryen"],
-      "details": ["Köy biberi", "Günlük domates", "Bakır sahanda servis"]
+      "id": "sosisli-yumurta",
+      "category": "yumurtalar",
+      "name": "Sosisli Yumurta",
+      "description": "Seçilen malzemeyle sahanda hazırlanıp sıcak servis edilen yumurta.",
+      "story": "Sosisli Yumurta, sipariş üzerine hazırlanarak servis edilir.",
+      "price": "₺300",
+      "image": "",
+      "imageAlt": "",
+      "tags": [],
+      "details": [
+        "Sahanda hazırlanır",
+        "Sıcak servis"
+      ],
+      "translations": {
+        "en": {
+          "name": "Eggs with Hot Dog",
+          "description": "Eggs prepared in a pan with the selected ingredient and served hot.",
+          "story": "Eggs with Hot Dog is prepared to order and served fresh.",
+          "imageAlt": "",
+          "details": [
+            "Prepared in a pan",
+            "Served hot"
+          ]
+        }
+      }
     },
     {
       "id": "kavurmali-yumurta",
-      "category": "sicaklar",
+      "category": "yumurtalar",
       "name": "Kavurmalı Yumurta",
-      "description": "Dana kavurma ve köy yumurtası, tereyağlı bakır sahanda.",
-      "story": "Yumuşak dana kavurmayı tereyağında ısıtıp yumurtayla bir araya getiriyoruz. Güçlü, sıcak ve paylaşmaya uygun bir sahan.",
-      "price": "₺240",
-      "image": "/images/hero-parallax/kavurma-pan.webp",
-      "imageAlt": "Bakır tavada yumurtayla pişirilmiş dana kavurma",
-      "tags": ["Yeni"],
-      "details": ["Dana kavurma", "Köy yumurtası", "Tereyağlı pişirim"]
+      "description": "Seçilen malzemeyle sahanda hazırlanıp sıcak servis edilen yumurta.",
+      "story": "Kavurmalı Yumurta, sipariş üzerine hazırlanarak servis edilir.",
+      "price": "₺350",
+      "image": "",
+      "imageAlt": "",
+      "tags": [],
+      "details": [
+        "Sahanda hazırlanır",
+        "Sıcak servis"
+      ],
+      "translations": {
+        "en": {
+          "name": "Eggs with Roast Beef",
+          "description": "Eggs prepared in a pan with the selected ingredient and served hot.",
+          "story": "Eggs with Roast Beef is prepared to order and served fresh.",
+          "imageAlt": "",
+          "details": [
+            "Prepared in a pan",
+            "Served hot"
+          ]
+        }
+      }
     },
     {
-      "id": "otlu-peynirli-omlet",
-      "category": "sicaklar",
-      "name": "Otlu Peynirli Omlet",
-      "description": "Van otlu peyniri ve taze yeşillikle yumuşak kıvamlı omlet.",
-      "story": "Otlu peynirin belirgin aromasını yumuşak pişmiş yumurta ve taze yeşillikle dengeliyoruz. Masaya sıcak ve kabarık geliyor.",
-      "price": "₺190",
-      "image": "/images/hero-float/omelette-plate.webp",
-      "imageAlt": "Yeşillik ve zeytinle servis edilen otlu peynirli omlet",
-      "tags": ["Vejetaryen"],
-      "details": ["Van otlu peyniri", "Köy yumurtası", "Taze yeşillik"]
+      "id": "kuymak",
+      "category": "yumurtalar",
+      "name": "Kuymak",
+      "description": "Mısır unu ve peynirle hazırlanan sıcak kuymak.",
+      "story": "Mısır unu ve peynirle hazırlanan sıcak kuymak.",
+      "price": "₺320",
+      "image": "",
+      "imageAlt": "",
+      "tags": [],
+      "details": [
+        "Sahanda hazırlanır",
+        "Sıcak servis"
+      ],
+      "translations": {
+        "en": {
+          "name": "Kuymak (Cornmeal and Cheese)",
+          "description": "Eggs prepared in a pan with the selected ingredient and served hot.",
+          "story": "Mısır unu ve peynirle hazırlanan sıcak kuymak.",
+          "imageAlt": "",
+          "details": [
+            "Prepared in a pan",
+            "Served hot"
+          ]
+        }
+      }
     },
     {
-      "id": "van-otlu-peyniri",
-      "category": "vandan",
-      "name": "Van Otlu Peyniri",
-      "description": "Yöresel otların aromasıyla olgunlaşan Van sofrasının imza peyniri.",
-      "story": "Sofraya koyduğumuz otlu peynir yalnızca bir eşlikçi değil, Van kahvaltısının hafızasıdır. Güçlü aromasını taze yeşillik ve çayla dengeleriz.",
-      "price": "₺165",
-      "image": "/images/hero-float/cheese-platter.webp",
-      "imageAlt": "Dilimlenmiş Van otlu peyniri ve kahvaltılık peynir tabağı",
-      "tags": ["Öne çıkan", "Vejetaryen"],
-      "details": ["Yöresel ot aroması", "Olgunlaştırılmış peynir", "Van’dan gelen lezzet"]
+      "id": "pastirmali-yumurta",
+      "category": "yumurtalar",
+      "name": "Pastırmalı Yumurta",
+      "description": "Seçilen malzemeyle sahanda hazırlanıp sıcak servis edilen yumurta.",
+      "story": "Pastırmalı Yumurta, sipariş üzerine hazırlanarak servis edilir.",
+      "price": "₺350",
+      "image": "",
+      "imageAlt": "",
+      "tags": [],
+      "details": [
+        "Sahanda hazırlanır",
+        "Sıcak servis"
+      ],
+      "translations": {
+        "en": {
+          "name": "Eggs with Pastrami",
+          "description": "Eggs prepared in a pan with the selected ingredient and served hot.",
+          "story": "Eggs with Pastrami is prepared to order and served fresh.",
+          "imageAlt": "",
+          "details": [
+            "Prepared in a pan",
+            "Served hot"
+          ]
+        }
+      }
     },
     {
-      "id": "kete",
-      "category": "vandan",
-      "name": "Van Ketesi",
-      "description": "Kat kat dokulu, tereyağlı içli yöresel hamur işi.",
-      "story": "Ketenin katlarını dağıtmadan, içini yumuşak tutacak şekilde ısıtıyoruz. Bal ve kaymakla buluştuğunda sofranın en sakin ama akılda kalan lokmalarından biri olur.",
+      "id": "salcali-sahanda-sosis",
+      "category": "sahanlar",
+      "name": "Salçalı Sahanda Sosis",
+      "description": "Sahanda hazırlanıp sıcak servis edilen kahvaltılık.",
+      "story": "Salçalı Sahanda Sosis, sipariş üzerine hazırlanarak servis edilir.",
+      "price": "₺350",
+      "image": "",
+      "imageAlt": "",
+      "tags": [],
+      "details": [
+        "Sahanda hazırlanır",
+        "Sıcak servis"
+      ],
+      "translations": {
+        "en": {
+          "name": "Hot Dog with Tomato Sauce",
+          "description": "Prepared in a pan and served hot.",
+          "story": "Hot Dog with Tomato Sauce is prepared to order and served fresh.",
+          "imageAlt": "",
+          "details": [
+            "Prepared in a pan",
+            "Served hot"
+          ]
+        }
+      }
+    },
+    {
+      "id": "sahanda-kavurma",
+      "category": "sahanlar",
+      "name": "Sahanda Kavurma",
+      "description": "Sahanda hazırlanıp sıcak servis edilen kahvaltılık.",
+      "story": "Sahanda Kavurma, sipariş üzerine hazırlanarak servis edilir.",
+      "price": "₺350",
+      "image": "",
+      "imageAlt": "",
+      "tags": [],
+      "details": [
+        "Sahanda hazırlanır",
+        "Sıcak servis"
+      ],
+      "translations": {
+        "en": {
+          "name": "Roast Beef Pan",
+          "description": "Prepared in a pan and served hot.",
+          "story": "Roast Beef Pan is prepared to order and served fresh.",
+          "imageAlt": "",
+          "details": [
+            "Prepared in a pan",
+            "Served hot"
+          ]
+        }
+      }
+    },
+    {
+      "id": "sahanda-sucuk",
+      "category": "sahanlar",
+      "name": "Sahanda Sucuk",
+      "description": "Sahanda hazırlanıp sıcak servis edilen kahvaltılık.",
+      "story": "Sahanda Sucuk, sipariş üzerine hazırlanarak servis edilir.",
+      "price": "₺350",
+      "image": "",
+      "imageAlt": "",
+      "tags": [],
+      "details": [
+        "Sahanda hazırlanır",
+        "Sıcak servis"
+      ],
+      "translations": {
+        "en": {
+          "name": "Sucuk Pan",
+          "description": "Prepared in a pan and served hot.",
+          "story": "Sucuk Pan is prepared to order and served fresh.",
+          "imageAlt": "",
+          "details": [
+            "Prepared in a pan",
+            "Served hot"
+          ]
+        }
+      }
+    },
+    {
+      "id": "sahanda-pastirma",
+      "category": "sahanlar",
+      "name": "Sahanda Pastırma",
+      "description": "Sahanda hazırlanıp sıcak servis edilen kahvaltılık.",
+      "story": "Sahanda Pastırma, sipariş üzerine hazırlanarak servis edilir.",
+      "price": "₺350",
+      "image": "",
+      "imageAlt": "",
+      "tags": [],
+      "details": [
+        "Sahanda hazırlanır",
+        "Sıcak servis"
+      ],
+      "translations": {
+        "en": {
+          "name": "Pastrami Pan",
+          "description": "Prepared in a pan and served hot.",
+          "story": "Pastrami Pan is prepared to order and served fresh.",
+          "imageAlt": "",
+          "details": [
+            "Prepared in a pan",
+            "Served hot"
+          ]
+        }
+      }
+    },
+    {
+      "id": "cay",
+      "category": "sicak-icecekler",
+      "name": "Çay",
+      "description": "Sipariş üzerine hazırlanıp sıcak servis edilir.",
+      "story": "Çay, sipariş üzerine hazırlanarak servis edilir.",
+      "price": "₺70",
+      "image": "",
+      "imageAlt": "",
+      "tags": [],
+      "details": [
+        "Sıcak servis"
+      ],
+      "translations": {
+        "en": {
+          "name": "Turkish Tea",
+          "description": "Prepared to order and served hot.",
+          "story": "Turkish Tea is prepared to order and served fresh.",
+          "imageAlt": "",
+          "details": [
+            "Served hot"
+          ]
+        }
+      }
+    },
+    {
+      "id": "buyuk-cay",
+      "category": "sicak-icecekler",
+      "name": "Büyük Çay",
+      "description": "Sipariş üzerine hazırlanıp sıcak servis edilir.",
+      "story": "Büyük Çay, sipariş üzerine hazırlanarak servis edilir.",
+      "price": "₺130",
+      "image": "",
+      "imageAlt": "",
+      "tags": [],
+      "details": [
+        "Sıcak servis"
+      ],
+      "translations": {
+        "en": {
+          "name": "Large Turkish Tea",
+          "description": "Prepared to order and served hot.",
+          "story": "Large Turkish Tea is prepared to order and served fresh.",
+          "imageAlt": "",
+          "details": [
+            "Served hot"
+          ]
+        }
+      }
+    },
+    {
+      "id": "sicak-cikolata",
+      "category": "sicak-icecekler",
+      "name": "Sıcak Çikolata",
+      "description": "Sipariş üzerine hazırlanıp sıcak servis edilir.",
+      "story": "Sıcak Çikolata, sipariş üzerine hazırlanarak servis edilir.",
+      "price": "₺220",
+      "image": "",
+      "imageAlt": "",
+      "tags": [],
+      "details": [
+        "Sıcak servis"
+      ],
+      "translations": {
+        "en": {
+          "name": "Hot Chocolate",
+          "description": "Prepared to order and served hot.",
+          "story": "Hot Chocolate is prepared to order and served fresh.",
+          "imageAlt": "",
+          "details": [
+            "Served hot"
+          ]
+        }
+      }
+    },
+    {
+      "id": "beyaz-sicak-cikolata",
+      "category": "sicak-icecekler",
+      "name": "Beyaz Sıcak Çikolata",
+      "description": "Sipariş üzerine hazırlanıp sıcak servis edilir.",
+      "story": "Beyaz Sıcak Çikolata, sipariş üzerine hazırlanarak servis edilir.",
+      "price": "₺230",
+      "image": "",
+      "imageAlt": "",
+      "tags": [],
+      "details": [
+        "Sıcak servis"
+      ],
+      "translations": {
+        "en": {
+          "name": "White Hot Chocolate",
+          "description": "Prepared to order and served hot.",
+          "story": "White Hot Chocolate is prepared to order and served fresh.",
+          "imageAlt": "",
+          "details": [
+            "Served hot"
+          ]
+        }
+      }
+    },
+    {
+      "id": "sahlep",
+      "category": "sicak-icecekler",
+      "name": "Sahlep",
+      "description": "Sipariş üzerine hazırlanıp sıcak servis edilir.",
+      "story": "Sahlep, sipariş üzerine hazırlanarak servis edilir.",
+      "price": "₺220",
+      "image": "",
+      "imageAlt": "",
+      "tags": [],
+      "details": [
+        "Sıcak servis"
+      ],
+      "translations": {
+        "en": {
+          "name": "Salep",
+          "description": "Prepared to order and served hot.",
+          "story": "Salep is prepared to order and served fresh.",
+          "imageAlt": "",
+          "details": [
+            "Served hot"
+          ]
+        }
+      }
+    },
+    {
+      "id": "chai-tea-latte",
+      "category": "sicak-icecekler",
+      "name": "Chai Tea Latte",
+      "description": "Sipariş üzerine hazırlanıp sıcak servis edilir.",
+      "story": "Chai Tea Latte, sipariş üzerine hazırlanarak servis edilir.",
+      "price": "₺230",
+      "image": "",
+      "imageAlt": "",
+      "tags": [],
+      "details": [
+        "Sıcak servis"
+      ],
+      "translations": {
+        "en": {
+          "name": "Chai Tea Latte",
+          "description": "Prepared to order and served hot.",
+          "story": "Chai Tea Latte is prepared to order and served fresh.",
+          "imageAlt": "",
+          "details": [
+            "Served hot"
+          ]
+        }
+      }
+    },
+    {
+      "id": "balli-sut",
+      "category": "sicak-icecekler",
+      "name": "Ballı Süt",
+      "description": "Sipariş üzerine hazırlanıp sıcak servis edilir.",
+      "story": "Ballı Süt, sipariş üzerine hazırlanarak servis edilir.",
+      "price": "₺220",
+      "image": "",
+      "imageAlt": "",
+      "tags": [],
+      "details": [
+        "Sıcak servis"
+      ],
+      "translations": {
+        "en": {
+          "name": "Milk with Honey",
+          "description": "Prepared to order and served hot.",
+          "story": "Milk with Honey is prepared to order and served fresh.",
+          "imageAlt": "",
+          "details": [
+            "Served hot"
+          ]
+        }
+      }
+    },
+    {
+      "id": "sicak-sut",
+      "category": "sicak-icecekler",
+      "name": "Sıcak Süt",
+      "description": "Sipariş üzerine hazırlanıp sıcak servis edilir.",
+      "story": "Sıcak Süt, sipariş üzerine hazırlanarak servis edilir.",
       "price": "₺120",
-      "image": "/images/kete-detail.jpg",
-      "imageAlt": "Katmanlı dokusu görünen geleneksel Van ketesi",
-      "tags": ["Vejetaryen"],
-      "details": ["Tereyağlı hamur", "Kat kat doku", "Ilık servis"]
+      "image": "",
+      "imageAlt": "",
+      "tags": [],
+      "details": [
+        "Sıcak servis"
+      ],
+      "translations": {
+        "en": {
+          "name": "Hot Milk",
+          "description": "Prepared to order and served hot.",
+          "story": "Hot Milk is prepared to order and served fresh.",
+          "imageAlt": "",
+          "details": [
+            "Served hot"
+          ]
+        }
+      }
     },
     {
-      "id": "pisi-sepeti",
-      "category": "vandan",
-      "name": "Sıcak Pişi Sepeti",
-      "description": "Dışı hafif çıtır, içi yumuşak dört adet sıcak pişi.",
-      "story": "Pişileri siparişle kızartıyor, yağını dinlendirip sıcak servis ediyoruz. Bal-kaymak ve peynir tabaklarının en sevilen eşlikçisi.",
-      "price": "₺135",
-      "priceNote": "4 adet",
-      "image": "/images/hero-parallax/table-pisi.webp",
-      "imageAlt": "Ahşap sunum tahtasında sıcak pişiler ve kahvaltı tabağı",
-      "tags": ["Tavsiye", "Vejetaryen"],
-      "details": ["Dört adet", "Siparişle hazırlanır", "Sıcak servis"]
+      "id": "yesil-cay",
+      "category": "bitki-caylari",
+      "name": "Yeşil Çay",
+      "description": "Demlenerek sıcak servis edilen bitki çayı.",
+      "story": "Yeşil Çay, sipariş üzerine hazırlanarak servis edilir.",
+      "price": "₺270",
+      "image": "",
+      "imageAlt": "",
+      "tags": [],
+      "details": [
+        "Demleme çay",
+        "Sıcak servis"
+      ],
+      "translations": {
+        "en": {
+          "name": "Green Tea",
+          "description": "Herbal tea brewed and served hot.",
+          "story": "Green Tea is prepared to order and served fresh.",
+          "imageAlt": "",
+          "details": [
+            "Brewed tea",
+            "Served hot"
+          ]
+        }
+      }
     },
     {
-      "id": "van-cacigi",
-      "category": "vandan",
-      "name": "Van Cacığı",
-      "description": "Süzme yoğurt, salatalık ve taze otlarla yoğun kahvaltılık cacık.",
-      "story": "Van cacığını içecek kıvamında değil, ekmeğe sürülecek yoğunlukta hazırlıyoruz. Taze otlar ve salatalıkla sofraya ferahlık getiriyor.",
-      "price": "₺110",
-      "image": "/images/hero-float/greens-platter.webp",
-      "imageAlt": "Taze yeşilliklerle servis edilen yoğun kıvamlı Van cacığı",
-      "tags": ["Vejetaryen"],
-      "details": ["Süzme yoğurt", "Taze salatalık", "Mevsim yeşillikleri"]
+      "id": "nar-cicegi-cayi",
+      "category": "bitki-caylari",
+      "name": "Nar Çiçeği",
+      "description": "Demlenerek sıcak servis edilen bitki çayı.",
+      "story": "Nar Çiçeği, sipariş üzerine hazırlanarak servis edilir.",
+      "price": "₺260",
+      "image": "",
+      "imageAlt": "",
+      "tags": [],
+      "details": [
+        "Demleme çay",
+        "Sıcak servis"
+      ],
+      "translations": {
+        "en": {
+          "name": "Pomegranate Blossom Tea",
+          "description": "Herbal tea brewed and served hot.",
+          "story": "Pomegranate Blossom Tea is prepared to order and served fresh.",
+          "imageAlt": "",
+          "details": [
+            "Brewed tea",
+            "Served hot"
+          ]
+        }
+      }
     },
     {
-      "id": "simit-ekmek-sepeti",
-      "category": "vandan",
-      "name": "Simit & Sıcak Ekmek",
-      "description": "Çıtır simit, sıcak ekmek ve tereyağıyla sofra tamamlayıcısı.",
-      "story": "Peynir, reçel ve sıcak sahanlar arasında geçişi sağlayan ekmek sepetini sıcak tutarak servis ediyoruz.",
-      "price": "₺95",
-      "image": "/images/hero-float/simit-board.webp",
-      "imageAlt": "Ahşap tahta üzerinde simit ve sıcak kahvaltılık ekmekler",
-      "tags": ["Vejetaryen"],
-      "details": ["Çıtır simit", "Sıcak ekmek", "Tereyağı"]
+      "id": "papatya-cayi",
+      "category": "bitki-caylari",
+      "name": "Papatya",
+      "description": "Demlenerek sıcak servis edilen bitki çayı.",
+      "story": "Papatya, sipariş üzerine hazırlanarak servis edilir.",
+      "price": "₺280",
+      "image": "",
+      "imageAlt": "",
+      "tags": [],
+      "details": [
+        "Demleme çay",
+        "Sıcak servis"
+      ],
+      "translations": {
+        "en": {
+          "name": "Chamomile Tea",
+          "description": "Herbal tea brewed and served hot.",
+          "story": "Chamomile Tea is prepared to order and served fresh.",
+          "imageAlt": "",
+          "details": [
+            "Brewed tea",
+            "Served hot"
+          ]
+        }
+      }
     },
     {
-      "id": "sinirsiz-cay",
-      "category": "icecekler",
-      "name": "Sınırsız Taze Çay",
-      "description": "İnce belli bardakta, sofra boyunca tazelenen demli çay.",
-      "story": "Bizim için kahvaltının süresini saat değil, çayın demi belirler. Sofra boyunca bardakları taze çayla yenileriz; sohbet aceleye gelmez.",
-      "price": "₺85",
-      "priceNote": "serpme kahvaltıya dahil",
-      "image": "/images/tea-service.webp",
-      "imageAlt": "İnce belli bardaklarda servis edilen taze demlenmiş Türk çayı",
-      "tags": ["Tavsiye", "Vejetaryen"],
-      "details": ["Taze dem", "Sınırsız servis", "İnce belli bardak"]
+      "id": "ihlamur-cayi",
+      "category": "bitki-caylari",
+      "name": "Ihlamur",
+      "description": "Demlenerek sıcak servis edilen bitki çayı.",
+      "story": "Ihlamur, sipariş üzerine hazırlanarak servis edilir.",
+      "price": "₺290",
+      "image": "",
+      "imageAlt": "",
+      "tags": [],
+      "details": [
+        "Demleme çay",
+        "Sıcak servis"
+      ],
+      "translations": {
+        "en": {
+          "name": "Linden Tea",
+          "description": "Herbal tea brewed and served hot.",
+          "story": "Linden Tea is prepared to order and served fresh.",
+          "imageAlt": "",
+          "details": [
+            "Brewed tea",
+            "Served hot"
+          ]
+        }
+      }
     },
     {
-      "id": "turk-kahvesi",
-      "category": "icecekler",
-      "name": "Geleneksel Türk Kahvesi",
-      "description": "Bakır cezvede yavaş pişirilen, köpüklü Türk kahvesi.",
-      "story": "Kafka Cafe köşemizde kahveyi acele etmeden, köpüğünü koruyarak pişiriyoruz. Uzayan kahvaltının ardından küçük ama belirgin bir kapanış.",
-      "price": "₺95",
-      "image": "/images/coffee-moment.webp",
-      "imageAlt": "Kahvaltı sonrasında sunulan köpüklü Türk kahvesi",
-      "tags": ["Vejetaryen"],
-      "details": ["Bakır cezvede pişirim", "Köpüklü servis", "Kafka Cafe seçkisi"]
+      "id": "ada-cayi",
+      "category": "bitki-caylari",
+      "name": "Ada Çayı",
+      "description": "Demlenerek sıcak servis edilen bitki çayı.",
+      "story": "Ada Çayı, sipariş üzerine hazırlanarak servis edilir.",
+      "price": "₺270",
+      "image": "",
+      "imageAlt": "",
+      "tags": [],
+      "details": [
+        "Demleme çay",
+        "Sıcak servis"
+      ],
+      "translations": {
+        "en": {
+          "name": "Sage Tea",
+          "description": "Herbal tea brewed and served hot.",
+          "story": "Sage Tea is prepared to order and served fresh.",
+          "imageAlt": "",
+          "details": [
+            "Brewed tea",
+            "Served hot"
+          ]
+        }
+      }
     },
     {
-      "id": "sutlu-turk-kahvesi",
-      "category": "icecekler",
-      "name": "Sütlü Türk Kahvesi",
-      "description": "Yumuşak içimli, sütle ağır ağır pişirilen Türk kahvesi.",
-      "story": "Klasik Türk kahvesinin yoğunluğunu sütle yumuşatıyor, köpüğünü koruyarak küçük fincanda servis ediyoruz.",
-      "price": "₺105",
-      "image": "/images/og/kafka-cafe.jpg",
-      "imageAlt": "Sütle hazırlanmış köpüklü Türk kahvesi fincanı",
-      "tags": ["Yeni", "Vejetaryen"],
-      "details": ["Sütle pişirim", "Yumuşak içim", "Köpüklü servis"]
+      "id": "kusburnu-cayi",
+      "category": "bitki-caylari",
+      "name": "Kuşburnu",
+      "description": "Demlenerek sıcak servis edilen bitki çayı.",
+      "story": "Kuşburnu, sipariş üzerine hazırlanarak servis edilir.",
+      "price": "₺270",
+      "image": "",
+      "imageAlt": "",
+      "tags": [],
+      "details": [
+        "Demleme çay",
+        "Sıcak servis"
+      ],
+      "translations": {
+        "en": {
+          "name": "Rosehip Tea",
+          "description": "Herbal tea brewed and served hot.",
+          "story": "Rosehip Tea is prepared to order and served fresh.",
+          "imageAlt": "",
+          "details": [
+            "Brewed tea",
+            "Served hot"
+          ]
+        }
+      }
+    },
+    {
+      "id": "elma-cayi",
+      "category": "bitki-caylari",
+      "name": "Elma",
+      "description": "Demlenerek sıcak servis edilen bitki çayı.",
+      "story": "Elma, sipariş üzerine hazırlanarak servis edilir.",
+      "price": "₺260",
+      "image": "",
+      "imageAlt": "",
+      "tags": [],
+      "details": [
+        "Demleme çay",
+        "Sıcak servis"
+      ],
+      "translations": {
+        "en": {
+          "name": "Apple Tea",
+          "description": "Herbal tea brewed and served hot.",
+          "story": "Apple Tea is prepared to order and served fresh.",
+          "imageAlt": "",
+          "details": [
+            "Brewed tea",
+            "Served hot"
+          ]
+        }
+      }
+    },
+    {
+      "id": "portakal-cayi",
+      "category": "bitki-caylari",
+      "name": "Portakal",
+      "description": "Demlenerek sıcak servis edilen bitki çayı.",
+      "story": "Portakal, sipariş üzerine hazırlanarak servis edilir.",
+      "price": "₺260",
+      "image": "",
+      "imageAlt": "",
+      "tags": [],
+      "details": [
+        "Demleme çay",
+        "Sıcak servis"
+      ],
+      "translations": {
+        "en": {
+          "name": "Orange Tea",
+          "description": "Herbal tea brewed and served hot.",
+          "story": "Orange Tea is prepared to order and served fresh.",
+          "imageAlt": "",
+          "details": [
+            "Brewed tea",
+            "Served hot"
+          ]
+        }
+      }
+    },
+    {
+      "id": "tarcin-cayi",
+      "category": "bitki-caylari",
+      "name": "Tarçın",
+      "description": "Demlenerek sıcak servis edilen bitki çayı.",
+      "story": "Tarçın, sipariş üzerine hazırlanarak servis edilir.",
+      "price": "₺280",
+      "image": "",
+      "imageAlt": "",
+      "tags": [],
+      "details": [
+        "Demleme çay",
+        "Sıcak servis"
+      ],
+      "translations": {
+        "en": {
+          "name": "Cinnamon Tea",
+          "description": "Herbal tea brewed and served hot.",
+          "story": "Cinnamon Tea is prepared to order and served fresh.",
+          "imageAlt": "",
+          "details": [
+            "Brewed tea",
+            "Served hot"
+          ]
+        }
+      }
+    },
+    {
+      "id": "kis-cayi",
+      "category": "bitki-caylari",
+      "name": "Kış Çayı",
+      "description": "Demlenerek sıcak servis edilen bitki çayı.",
+      "story": "Kış Çayı, sipariş üzerine hazırlanarak servis edilir.",
+      "price": "₺310",
+      "image": "",
+      "imageAlt": "",
+      "tags": [],
+      "details": [
+        "Demleme çay",
+        "Sıcak servis"
+      ],
+      "translations": {
+        "en": {
+          "name": "Winter Tea",
+          "description": "Herbal tea brewed and served hot.",
+          "story": "Winter Tea is prepared to order and served fresh.",
+          "imageAlt": "",
+          "details": [
+            "Brewed tea",
+            "Served hot"
+          ]
+        }
+      }
+    },
+    {
+      "id": "special-bitki-cayi",
+      "category": "bitki-caylari",
+      "name": "Special",
+      "description": "Demlenerek sıcak servis edilen bitki çayı.",
+      "story": "Special, sipariş üzerine hazırlanarak servis edilir.",
+      "price": "₺290",
+      "image": "",
+      "imageAlt": "",
+      "tags": [],
+      "details": [
+        "Demleme çay",
+        "Sıcak servis"
+      ],
+      "translations": {
+        "en": {
+          "name": "Special Herbal Tea",
+          "description": "Herbal tea brewed and served hot.",
+          "story": "Special Herbal Tea is prepared to order and served fresh.",
+          "imageAlt": "",
+          "details": [
+            "Brewed tea",
+            "Served hot"
+          ]
+        }
+      }
+    },
+    {
+      "id": "su",
+      "category": "soft-icecekler",
+      "name": "Su",
+      "description": "Soğuk servis edilen içecek.",
+      "story": "Su, sipariş üzerine hazırlanarak servis edilir.",
+      "price": "₺60",
+      "image": "",
+      "imageAlt": "",
+      "tags": [],
+      "details": [
+        "Soğuk servis"
+      ],
+      "translations": {
+        "en": {
+          "name": "Water",
+          "description": "Served cold.",
+          "story": "Water is prepared to order and served fresh.",
+          "imageAlt": "",
+          "details": [
+            "Served cold"
+          ]
+        }
+      }
+    },
+    {
+      "id": "cola",
+      "category": "soft-icecekler",
+      "name": "Cola",
+      "description": "Soğuk servis edilen içecek.",
+      "story": "Cola, sipariş üzerine hazırlanarak servis edilir.",
+      "price": "₺160",
+      "image": "",
+      "imageAlt": "",
+      "tags": [],
+      "details": [
+        "Soğuk servis"
+      ],
+      "translations": {
+        "en": {
+          "name": "Cola",
+          "description": "Served cold.",
+          "story": "Cola is prepared to order and served fresh.",
+          "imageAlt": "",
+          "details": [
+            "Served cold"
+          ]
+        }
+      }
+    },
+    {
+      "id": "cola-zero",
+      "category": "soft-icecekler",
+      "name": "Cola Zero",
+      "description": "Soğuk servis edilen içecek.",
+      "story": "Cola Zero, sipariş üzerine hazırlanarak servis edilir.",
+      "price": "₺160",
+      "image": "",
+      "imageAlt": "",
+      "tags": [],
+      "details": [
+        "Soğuk servis"
+      ],
+      "translations": {
+        "en": {
+          "name": "Cola Zero",
+          "description": "Served cold.",
+          "story": "Cola Zero is prepared to order and served fresh.",
+          "imageAlt": "",
+          "details": [
+            "Served cold"
+          ]
+        }
+      }
+    },
+    {
+      "id": "fanta",
+      "category": "soft-icecekler",
+      "name": "Fanta",
+      "description": "Soğuk servis edilen içecek.",
+      "story": "Fanta, sipariş üzerine hazırlanarak servis edilir.",
+      "price": "₺160",
+      "image": "",
+      "imageAlt": "",
+      "tags": [],
+      "details": [
+        "Soğuk servis"
+      ],
+      "translations": {
+        "en": {
+          "name": "Fanta",
+          "description": "Served cold.",
+          "story": "Fanta is prepared to order and served fresh.",
+          "imageAlt": "",
+          "details": [
+            "Served cold"
+          ]
+        }
+      }
+    },
+    {
+      "id": "sprite",
+      "category": "soft-icecekler",
+      "name": "Sprite",
+      "description": "Soğuk servis edilen içecek.",
+      "story": "Sprite, sipariş üzerine hazırlanarak servis edilir.",
+      "price": "₺160",
+      "image": "",
+      "imageAlt": "",
+      "tags": [],
+      "details": [
+        "Soğuk servis"
+      ],
+      "translations": {
+        "en": {
+          "name": "Sprite",
+          "description": "Served cold.",
+          "story": "Sprite is prepared to order and served fresh.",
+          "imageAlt": "",
+          "details": [
+            "Served cold"
+          ]
+        }
+      }
+    },
+    {
+      "id": "schweppes",
+      "category": "soft-icecekler",
+      "name": "Schweppes",
+      "description": "Soğuk servis edilen içecek.",
+      "story": "Schweppes, sipariş üzerine hazırlanarak servis edilir.",
+      "price": "₺170",
+      "image": "",
+      "imageAlt": "",
+      "tags": [],
+      "details": [
+        "Soğuk servis"
+      ],
+      "translations": {
+        "en": {
+          "name": "Schweppes",
+          "description": "Served cold.",
+          "story": "Schweppes is prepared to order and served fresh.",
+          "imageAlt": "",
+          "details": [
+            "Served cold"
+          ]
+        }
+      }
+    },
+    {
+      "id": "maden-suyu",
+      "category": "soft-icecekler",
+      "name": "Maden Suyu",
+      "description": "Soğuk servis edilen içecek.",
+      "story": "Maden Suyu, sipariş üzerine hazırlanarak servis edilir.",
+      "price": "₺120",
+      "image": "",
+      "imageAlt": "",
+      "tags": [],
+      "details": [
+        "Soğuk servis"
+      ],
+      "translations": {
+        "en": {
+          "name": "Mineral Water",
+          "description": "Served cold.",
+          "story": "Mineral Water is prepared to order and served fresh.",
+          "imageAlt": "",
+          "details": [
+            "Served cold"
+          ]
+        }
+      }
+    },
+    {
+      "id": "elmali-maden-suyu",
+      "category": "soft-icecekler",
+      "name": "Elmalı Maden Suyu",
+      "description": "Soğuk servis edilen içecek.",
+      "story": "Elmalı Maden Suyu, sipariş üzerine hazırlanarak servis edilir.",
+      "price": "₺130",
+      "image": "",
+      "imageAlt": "",
+      "tags": [],
+      "details": [
+        "Soğuk servis"
+      ],
+      "translations": {
+        "en": {
+          "name": "Apple Mineral Water",
+          "description": "Served cold.",
+          "story": "Apple Mineral Water is prepared to order and served fresh.",
+          "imageAlt": "",
+          "details": [
+            "Served cold"
+          ]
+        }
+      }
+    },
+    {
+      "id": "limonlu-maden-suyu",
+      "category": "soft-icecekler",
+      "name": "Limonlu Maden Suyu",
+      "description": "Soğuk servis edilen içecek.",
+      "story": "Limonlu Maden Suyu, sipariş üzerine hazırlanarak servis edilir.",
+      "price": "₺130",
+      "image": "",
+      "imageAlt": "",
+      "tags": [],
+      "details": [
+        "Soğuk servis"
+      ],
+      "translations": {
+        "en": {
+          "name": "Lemon Mineral Water",
+          "description": "Served cold.",
+          "story": "Lemon Mineral Water is prepared to order and served fresh.",
+          "imageAlt": "",
+          "details": [
+            "Served cold"
+          ]
+        }
+      }
+    },
+    {
+      "id": "fuse-tea",
+      "category": "soft-icecekler",
+      "name": "Fuse Tea",
+      "description": "Mango, şeftali veya limon aroması seçeneği.",
+      "story": "Mango, şeftali veya limon aroması seçeneği.",
+      "price": "₺160",
+      "image": "",
+      "imageAlt": "",
+      "tags": [],
+      "details": [
+        "Mango",
+        "Şeftali",
+        "Limon"
+      ],
+      "translations": {
+        "en": {
+          "name": "Fuse Tea",
+          "description": "Served cold.",
+          "story": "Mango, şeftali veya limon aroması seçeneği.",
+          "imageAlt": "",
+          "details": [
+            "Mango",
+            "Peach",
+            "Lemon"
+          ]
+        }
+      }
+    },
+    {
+      "id": "cappy",
+      "category": "soft-icecekler",
+      "name": "Cappy",
+      "description": "Vişne, şeftali veya portakal aroması seçeneği.",
+      "story": "Vişne, şeftali veya portakal aroması seçeneği.",
+      "price": "₺160",
+      "image": "",
+      "imageAlt": "",
+      "tags": [],
+      "details": [
+        "Vişne",
+        "Şeftali",
+        "Portakal"
+      ],
+      "translations": {
+        "en": {
+          "name": "Cappy",
+          "description": "Served cold.",
+          "story": "Vişne, şeftali veya portakal aroması seçeneği.",
+          "imageAlt": "",
+          "details": [
+            "Sour cherry",
+            "Peach",
+            "Orange"
+          ]
+        }
+      }
+    },
+    {
+      "id": "red-bull",
+      "category": "soft-icecekler",
+      "name": "Red Bull",
+      "description": "Soğuk servis edilen içecek.",
+      "story": "Red Bull, sipariş üzerine hazırlanarak servis edilir.",
+      "price": "₺250",
+      "image": "",
+      "imageAlt": "",
+      "tags": [],
+      "details": [
+        "Soğuk servis"
+      ],
+      "translations": {
+        "en": {
+          "name": "Red Bull",
+          "description": "Served cold.",
+          "story": "Red Bull is prepared to order and served fresh.",
+          "imageAlt": "",
+          "details": [
+            "Served cold"
+          ]
+        }
+      }
+    },
+    {
+      "id": "cool-lime",
+      "category": "soguk-icecekler",
+      "name": "Cool Lime",
+      "description": "Soğuk ve ferah servis edilen içecek.",
+      "story": "Cool Lime, sipariş üzerine hazırlanarak servis edilir.",
+      "price": "₺210",
+      "image": "",
+      "imageAlt": "",
+      "tags": [],
+      "details": [
+        "Soğuk servis"
+      ],
+      "translations": {
+        "en": {
+          "name": "Cool Lime",
+          "description": "A refreshing drink served cold.",
+          "story": "Cool Lime is prepared to order and served fresh.",
+          "imageAlt": "",
+          "details": [
+            "Served cold"
+          ]
+        }
+      }
+    },
+    {
+      "id": "hibiscus",
+      "category": "soguk-icecekler",
+      "name": "Hibiscus",
+      "description": "Soğuk ve ferah servis edilen içecek.",
+      "story": "Hibiscus, sipariş üzerine hazırlanarak servis edilir.",
+      "price": "₺210",
+      "image": "",
+      "imageAlt": "",
+      "tags": [],
+      "details": [
+        "Soğuk servis"
+      ],
+      "translations": {
+        "en": {
+          "name": "Hibiscus",
+          "description": "A refreshing drink served cold.",
+          "story": "Hibiscus is prepared to order and served fresh.",
+          "imageAlt": "",
+          "details": [
+            "Served cold"
+          ]
+        }
+      }
+    },
+    {
+      "id": "limonata",
+      "category": "soguk-icecekler",
+      "name": "Limonata",
+      "description": "Soğuk ve ferah servis edilen içecek.",
+      "story": "Limonata, sipariş üzerine hazırlanarak servis edilir.",
+      "price": "₺180",
+      "image": "",
+      "imageAlt": "",
+      "tags": [],
+      "details": [
+        "Soğuk servis"
+      ],
+      "translations": {
+        "en": {
+          "name": "Lemonade",
+          "description": "A refreshing drink served cold.",
+          "story": "Lemonade is prepared to order and served fresh.",
+          "imageAlt": "",
+          "details": [
+            "Served cold"
+          ]
+        }
+      }
+    },
+    {
+      "id": "cilekli-limonata",
+      "category": "soguk-icecekler",
+      "name": "Çilekli Limonata",
+      "description": "Soğuk ve ferah servis edilen içecek.",
+      "story": "Çilekli Limonata, sipariş üzerine hazırlanarak servis edilir.",
+      "price": "₺190",
+      "image": "",
+      "imageAlt": "",
+      "tags": [],
+      "details": [
+        "Soğuk servis"
+      ],
+      "translations": {
+        "en": {
+          "name": "Strawberry Lemonade",
+          "description": "A refreshing drink served cold.",
+          "story": "Strawberry Lemonade is prepared to order and served fresh.",
+          "imageAlt": "",
+          "details": [
+            "Served cold"
+          ]
+        }
+      }
+    },
+    {
+      "id": "taze-portakal-suyu",
+      "category": "soguk-icecekler",
+      "name": "Taze Portakal Suyu",
+      "description": "Soğuk ve ferah servis edilen içecek.",
+      "story": "Taze Portakal Suyu, sipariş üzerine hazırlanarak servis edilir.",
+      "price": "₺240",
+      "image": "",
+      "imageAlt": "",
+      "tags": [],
+      "details": [
+        "Soğuk servis"
+      ],
+      "translations": {
+        "en": {
+          "name": "Fresh Orange Juice",
+          "description": "A refreshing drink served cold.",
+          "story": "Fresh Orange Juice is prepared to order and served fresh.",
+          "imageAlt": "",
+          "details": [
+            "Served cold"
+          ]
+        }
+      }
+    },
+    {
+      "id": "taze-nar-suyu",
+      "category": "soguk-icecekler",
+      "name": "Taze Nar Suyu",
+      "description": "Soğuk ve ferah servis edilen içecek.",
+      "story": "Taze Nar Suyu, sipariş üzerine hazırlanarak servis edilir.",
+      "price": "₺160",
+      "image": "",
+      "imageAlt": "",
+      "tags": [],
+      "details": [
+        "Soğuk servis"
+      ],
+      "translations": {
+        "en": {
+          "name": "Fresh Pomegranate Juice",
+          "description": "A refreshing drink served cold.",
+          "story": "Fresh Pomegranate Juice is prepared to order and served fresh.",
+          "imageAlt": "",
+          "details": [
+            "Served cold"
+          ]
+        }
+      }
+    },
+    {
+      "id": "mix-nar-portakal-suyu",
+      "category": "soguk-icecekler",
+      "name": "Mix Nar / Portakal Suyu",
+      "description": "Soğuk ve ferah servis edilen içecek.",
+      "story": "Mix Nar / Portakal Suyu, sipariş üzerine hazırlanarak servis edilir.",
+      "price": "₺140",
+      "image": "",
+      "imageAlt": "",
+      "tags": [],
+      "details": [
+        "Soğuk servis"
+      ],
+      "translations": {
+        "en": {
+          "name": "Mixed Pomegranate / Orange Juice",
+          "description": "A refreshing drink served cold.",
+          "story": "Mixed Pomegranate / Orange Juice is prepared to order and served fresh.",
+          "imageAlt": "",
+          "details": [
+            "Served cold"
+          ]
+        }
+      }
+    },
+    {
+      "id": "churchill",
+      "category": "soguk-icecekler",
+      "name": "Churchill",
+      "description": "Soğuk ve ferah servis edilen içecek.",
+      "story": "Churchill, sipariş üzerine hazırlanarak servis edilir.",
+      "price": "₺260",
+      "image": "",
+      "imageAlt": "",
+      "tags": [],
+      "details": [
+        "Soğuk servis"
+      ],
+      "translations": {
+        "en": {
+          "name": "Churchill",
+          "description": "A refreshing drink served cold.",
+          "story": "Churchill is prepared to order and served fresh.",
+          "imageAlt": "",
+          "details": [
+            "Served cold"
+          ]
+        }
+      }
+    },
+    {
+      "id": "ayran",
+      "category": "soguk-icecekler",
+      "name": "Ayran",
+      "description": "Soğuk ve ferah servis edilen içecek.",
+      "story": "Ayran, sipariş üzerine hazırlanarak servis edilir.",
+      "price": "₺260",
+      "image": "",
+      "imageAlt": "",
+      "tags": [],
+      "details": [
+        "Soğuk servis"
+      ],
+      "translations": {
+        "en": {
+          "name": "Ayran",
+          "description": "A refreshing drink served cold.",
+          "story": "Ayran is prepared to order and served fresh.",
+          "imageAlt": "",
+          "details": [
+            "Served cold"
+          ]
+        }
+      }
+    },
+    {
+      "id": "espresso",
+      "category": "sicak-kahveler",
+      "name": "Espresso",
+      "description": "Sipariş üzerine hazırlanıp sıcak servis edilen kahve.",
+      "story": "Espresso, sipariş üzerine hazırlanarak servis edilir.",
+      "price": "₺220",
+      "image": "",
+      "imageAlt": "",
+      "tags": [],
+      "details": [
+        "Sipariş üzerine hazırlanır",
+        "Sıcak servis"
+      ],
+      "translations": {
+        "en": {
+          "name": "Espresso",
+          "description": "Coffee prepared to order and served hot.",
+          "story": "Espresso is prepared to order and served fresh.",
+          "imageAlt": "",
+          "details": [
+            "Prepared to order",
+            "Served hot"
+          ]
+        }
+      }
+    },
+    {
+      "id": "double-espresso",
+      "category": "sicak-kahveler",
+      "name": "Double Espresso",
+      "description": "Sipariş üzerine hazırlanıp sıcak servis edilen kahve.",
+      "story": "Double Espresso, sipariş üzerine hazırlanarak servis edilir.",
+      "price": "₺310",
+      "image": "",
+      "imageAlt": "",
+      "tags": [],
+      "details": [
+        "Sipariş üzerine hazırlanır",
+        "Sıcak servis"
+      ],
+      "translations": {
+        "en": {
+          "name": "Double Espresso",
+          "description": "Coffee prepared to order and served hot.",
+          "story": "Double Espresso is prepared to order and served fresh.",
+          "imageAlt": "",
+          "details": [
+            "Prepared to order",
+            "Served hot"
+          ]
+        }
+      }
+    },
+    {
+      "id": "americano",
+      "category": "sicak-kahveler",
+      "name": "Americano",
+      "description": "Sipariş üzerine hazırlanıp sıcak servis edilen kahve.",
+      "story": "Americano, sipariş üzerine hazırlanarak servis edilir.",
+      "price": "₺250",
+      "image": "",
+      "imageAlt": "",
+      "tags": [],
+      "details": [
+        "Sipariş üzerine hazırlanır",
+        "Sıcak servis"
+      ],
+      "translations": {
+        "en": {
+          "name": "Americano",
+          "description": "Coffee prepared to order and served hot.",
+          "story": "Americano is prepared to order and served fresh.",
+          "imageAlt": "",
+          "details": [
+            "Prepared to order",
+            "Served hot"
+          ]
+        }
+      }
+    },
+    {
+      "id": "cappuccino",
+      "category": "sicak-kahveler",
+      "name": "Cappuccino",
+      "description": "Sipariş üzerine hazırlanıp sıcak servis edilen kahve.",
+      "story": "Cappuccino, sipariş üzerine hazırlanarak servis edilir.",
+      "price": "₺270",
+      "image": "",
+      "imageAlt": "",
+      "tags": [],
+      "details": [
+        "Sipariş üzerine hazırlanır",
+        "Sıcak servis"
+      ],
+      "translations": {
+        "en": {
+          "name": "Cappuccino",
+          "description": "Coffee prepared to order and served hot.",
+          "story": "Cappuccino is prepared to order and served fresh.",
+          "imageAlt": "",
+          "details": [
+            "Prepared to order",
+            "Served hot"
+          ]
+        }
+      }
+    },
+    {
+      "id": "latte",
+      "category": "sicak-kahveler",
+      "name": "Latte",
+      "description": "Sipariş üzerine hazırlanıp sıcak servis edilen kahve.",
+      "story": "Latte, sipariş üzerine hazırlanarak servis edilir.",
+      "price": "₺270",
+      "image": "",
+      "imageAlt": "",
+      "tags": [],
+      "details": [
+        "Sipariş üzerine hazırlanır",
+        "Sıcak servis"
+      ],
+      "translations": {
+        "en": {
+          "name": "Latte",
+          "description": "Coffee prepared to order and served hot.",
+          "story": "Latte is prepared to order and served fresh.",
+          "imageAlt": "",
+          "details": [
+            "Prepared to order",
+            "Served hot"
+          ]
+        }
+      }
     },
     {
       "id": "filtre-kahve",
-      "category": "icecekler",
-      "name": "Günün Filtre Kahvesi",
-      "description": "Kafka Cafe’nin günlük çekirdeğiyle dengeli ve temiz fincan.",
-      "story": "Günün çekirdeğini aromasını örselemeden demliyor, kahvaltı sonrasında uzun sohbetlere eşlik edecek dengeli bir fincan hazırlıyoruz.",
-      "price": "₺120",
-      "image": "/images/terrace-tea.webp",
-      "imageAlt": "Teras masasında servis edilen sıcak filtre kahve",
-      "tags": ["Vejetaryen"],
-      "details": ["Günlük çekirdek", "Taze demleme", "Kafka Cafe seçkisi"]
+      "category": "sicak-kahveler",
+      "name": "Filtre Kahve",
+      "description": "Sipariş üzerine hazırlanıp sıcak servis edilen kahve.",
+      "story": "Filtre Kahve, sipariş üzerine hazırlanarak servis edilir.",
+      "price": "₺210",
+      "image": "",
+      "imageAlt": "",
+      "tags": [],
+      "details": [
+        "Sipariş üzerine hazırlanır",
+        "Sıcak servis"
+      ],
+      "translations": {
+        "en": {
+          "name": "Filter Coffee",
+          "description": "Coffee prepared to order and served hot.",
+          "story": "Filter Coffee is prepared to order and served fresh.",
+          "imageAlt": "",
+          "details": [
+            "Prepared to order",
+            "Served hot"
+          ]
+        }
+      }
     },
     {
-      "id": "ev-limonatasi",
-      "category": "icecekler",
-      "name": "Ev Yapımı Limonata",
-      "description": "Taze limon, az şeker ve mevsim otlarıyla ferah içim.",
-      "story": "Limon kabuğunun aromasını taze suyla buluşturup şekerini baskın olmayacak ölçüde tutuyoruz. Kahvaltının sıcaklarına serin bir eşlikçi.",
-      "price": "₺115",
-      "image": "/images/hero-parallax/tea-tray.webp",
-      "imageAlt": "Kahvaltı masasında soğuk ev yapımı limonata servisi",
-      "tags": ["Vejetaryen"],
-      "details": ["Taze limon", "Az şekerli", "Soğuk servis"]
+      "id": "flat-white",
+      "category": "sicak-kahveler",
+      "name": "Flat White",
+      "description": "Sipariş üzerine hazırlanıp sıcak servis edilen kahve.",
+      "story": "Flat White, sipariş üzerine hazırlanarak servis edilir.",
+      "price": "₺270",
+      "image": "",
+      "imageAlt": "",
+      "tags": [],
+      "details": [
+        "Sipariş üzerine hazırlanır",
+        "Sıcak servis"
+      ],
+      "translations": {
+        "en": {
+          "name": "Flat White",
+          "description": "Coffee prepared to order and served hot.",
+          "story": "Flat White is prepared to order and served fresh.",
+          "imageAlt": "",
+          "details": [
+            "Prepared to order",
+            "Served hot"
+          ]
+        }
+      }
+    },
+    {
+      "id": "mocha",
+      "category": "sicak-kahveler",
+      "name": "Mocha",
+      "description": "Sipariş üzerine hazırlanıp sıcak servis edilen kahve.",
+      "story": "Mocha, sipariş üzerine hazırlanarak servis edilir.",
+      "price": "₺290",
+      "image": "",
+      "imageAlt": "",
+      "tags": [],
+      "details": [
+        "Sipariş üzerine hazırlanır",
+        "Sıcak servis"
+      ],
+      "translations": {
+        "en": {
+          "name": "Mocha",
+          "description": "Coffee prepared to order and served hot.",
+          "story": "Mocha is prepared to order and served fresh.",
+          "imageAlt": "",
+          "details": [
+            "Prepared to order",
+            "Served hot"
+          ]
+        }
+      }
+    },
+    {
+      "id": "white-chocolate-mocha",
+      "category": "sicak-kahveler",
+      "name": "White Chocolate Mocha",
+      "description": "Sipariş üzerine hazırlanıp sıcak servis edilen kahve.",
+      "story": "White Chocolate Mocha, sipariş üzerine hazırlanarak servis edilir.",
+      "price": "₺290",
+      "image": "",
+      "imageAlt": "",
+      "tags": [],
+      "details": [
+        "Sipariş üzerine hazırlanır",
+        "Sıcak servis"
+      ],
+      "translations": {
+        "en": {
+          "name": "White Chocolate Mocha",
+          "description": "Coffee prepared to order and served hot.",
+          "story": "White Chocolate Mocha is prepared to order and served fresh.",
+          "imageAlt": "",
+          "details": [
+            "Prepared to order",
+            "Served hot"
+          ]
+        }
+      }
+    },
+    {
+      "id": "macchiato",
+      "category": "sicak-kahveler",
+      "name": "Macchiato",
+      "description": "Sipariş üzerine hazırlanıp sıcak servis edilen kahve.",
+      "story": "Macchiato, sipariş üzerine hazırlanarak servis edilir.",
+      "price": "₺250",
+      "image": "",
+      "imageAlt": "",
+      "tags": [],
+      "details": [
+        "Sipariş üzerine hazırlanır",
+        "Sıcak servis"
+      ],
+      "translations": {
+        "en": {
+          "name": "Macchiato",
+          "description": "Coffee prepared to order and served hot.",
+          "story": "Macchiato is prepared to order and served fresh.",
+          "imageAlt": "",
+          "details": [
+            "Prepared to order",
+            "Served hot"
+          ]
+        }
+      }
+    },
+    {
+      "id": "cortado",
+      "category": "sicak-kahveler",
+      "name": "Cortado",
+      "description": "Sipariş üzerine hazırlanıp sıcak servis edilen kahve.",
+      "story": "Cortado, sipariş üzerine hazırlanarak servis edilir.",
+      "price": "₺260",
+      "image": "",
+      "imageAlt": "",
+      "tags": [],
+      "details": [
+        "Sipariş üzerine hazırlanır",
+        "Sıcak servis"
+      ],
+      "translations": {
+        "en": {
+          "name": "Cortado",
+          "description": "Coffee prepared to order and served hot.",
+          "story": "Cortado is prepared to order and served fresh.",
+          "imageAlt": "",
+          "details": [
+            "Prepared to order",
+            "Served hot"
+          ]
+        }
+      }
+    },
+    {
+      "id": "turk-kahvesi",
+      "category": "sicak-kahveler",
+      "name": "Türk Kahvesi",
+      "description": "Sipariş üzerine hazırlanıp sıcak servis edilen kahve.",
+      "story": "Türk Kahvesi, sipariş üzerine hazırlanarak servis edilir.",
+      "price": "₺160",
+      "image": "",
+      "imageAlt": "",
+      "tags": [],
+      "details": [
+        "Sipariş üzerine hazırlanır",
+        "Sıcak servis"
+      ],
+      "translations": {
+        "en": {
+          "name": "Turkish Coffee",
+          "description": "Coffee prepared to order and served hot.",
+          "story": "Turkish Coffee is prepared to order and served fresh.",
+          "imageAlt": "",
+          "details": [
+            "Prepared to order",
+            "Served hot"
+          ]
+        }
+      }
+    },
+    {
+      "id": "double-turk-kahvesi",
+      "category": "sicak-kahveler",
+      "name": "Double Türk Kahvesi",
+      "description": "Sipariş üzerine hazırlanıp sıcak servis edilen kahve.",
+      "story": "Double Türk Kahvesi, sipariş üzerine hazırlanarak servis edilir.",
+      "price": "₺290",
+      "image": "",
+      "imageAlt": "",
+      "tags": [],
+      "details": [
+        "Sipariş üzerine hazırlanır",
+        "Sıcak servis"
+      ],
+      "translations": {
+        "en": {
+          "name": "Double Turkish Coffee",
+          "description": "Coffee prepared to order and served hot.",
+          "story": "Double Turkish Coffee is prepared to order and served fresh.",
+          "imageAlt": "",
+          "details": [
+            "Prepared to order",
+            "Served hot"
+          ]
+        }
+      }
+    },
+    {
+      "id": "osmanli-kahvesi",
+      "category": "sicak-kahveler",
+      "name": "Osmanlı Kahvesi",
+      "description": "Sipariş üzerine hazırlanıp sıcak servis edilen kahve.",
+      "story": "Osmanlı Kahvesi, sipariş üzerine hazırlanarak servis edilir.",
+      "price": "₺210",
+      "image": "",
+      "imageAlt": "",
+      "tags": [],
+      "details": [
+        "Sipariş üzerine hazırlanır",
+        "Sıcak servis"
+      ],
+      "translations": {
+        "en": {
+          "name": "Ottoman Coffee",
+          "description": "Coffee prepared to order and served hot.",
+          "story": "Ottoman Coffee is prepared to order and served fresh.",
+          "imageAlt": "",
+          "details": [
+            "Prepared to order",
+            "Served hot"
+          ]
+        }
+      }
+    },
+    {
+      "id": "damla-sakizli-turk-kahvesi",
+      "category": "sicak-kahveler",
+      "name": "Damla Sakızlı Türk Kahvesi",
+      "description": "Sipariş üzerine hazırlanıp sıcak servis edilen kahve.",
+      "story": "Damla Sakızlı Türk Kahvesi, sipariş üzerine hazırlanarak servis edilir.",
+      "price": "₺190",
+      "image": "",
+      "imageAlt": "",
+      "tags": [],
+      "details": [
+        "Sipariş üzerine hazırlanır",
+        "Sıcak servis"
+      ],
+      "translations": {
+        "en": {
+          "name": "Mastic Turkish Coffee",
+          "description": "Coffee prepared to order and served hot.",
+          "story": "Mastic Turkish Coffee is prepared to order and served fresh.",
+          "imageAlt": "",
+          "details": [
+            "Prepared to order",
+            "Served hot"
+          ]
+        }
+      }
+    },
+    {
+      "id": "frambuazli-turk-kahvesi",
+      "category": "sicak-kahveler",
+      "name": "Frambuazlı Türk Kahvesi",
+      "description": "Sipariş üzerine hazırlanıp sıcak servis edilen kahve.",
+      "story": "Frambuazlı Türk Kahvesi, sipariş üzerine hazırlanarak servis edilir.",
+      "price": "₺190",
+      "image": "",
+      "imageAlt": "",
+      "tags": [],
+      "details": [
+        "Sipariş üzerine hazırlanır",
+        "Sıcak servis"
+      ],
+      "translations": {
+        "en": {
+          "name": "Raspberry Turkish Coffee",
+          "description": "Coffee prepared to order and served hot.",
+          "story": "Raspberry Turkish Coffee is prepared to order and served fresh.",
+          "imageAlt": "",
+          "details": [
+            "Prepared to order",
+            "Served hot"
+          ]
+        }
+      }
+    },
+    {
+      "id": "ice-americano",
+      "category": "soguk-kahveler",
+      "name": "Ice Americano",
+      "description": "Buzla hazırlanıp soğuk servis edilen kahve.",
+      "story": "Ice Americano, sipariş üzerine hazırlanarak servis edilir.",
+      "price": "₺250",
+      "image": "",
+      "imageAlt": "",
+      "tags": [],
+      "details": [
+        "Buzlu",
+        "Soğuk servis"
+      ],
+      "translations": {
+        "en": {
+          "name": "Iced Americano",
+          "description": "Coffee prepared with ice and served cold.",
+          "story": "Iced Americano is prepared to order and served fresh.",
+          "imageAlt": "",
+          "details": [
+            "Iced",
+            "Served cold"
+          ]
+        }
+      }
+    },
+    {
+      "id": "ice-latte",
+      "category": "soguk-kahveler",
+      "name": "Ice Latte",
+      "description": "Buzla hazırlanıp soğuk servis edilen kahve.",
+      "story": "Ice Latte, sipariş üzerine hazırlanarak servis edilir.",
+      "price": "₺270",
+      "image": "",
+      "imageAlt": "",
+      "tags": [],
+      "details": [
+        "Buzlu",
+        "Soğuk servis"
+      ],
+      "translations": {
+        "en": {
+          "name": "Iced Latte",
+          "description": "Coffee prepared with ice and served cold.",
+          "story": "Iced Latte is prepared to order and served fresh.",
+          "imageAlt": "",
+          "details": [
+            "Iced",
+            "Served cold"
+          ]
+        }
+      }
+    },
+    {
+      "id": "ice-turk-kahvesi",
+      "category": "soguk-kahveler",
+      "name": "Ice Türk Kahvesi",
+      "description": "Buzla hazırlanıp soğuk servis edilen kahve.",
+      "story": "Ice Türk Kahvesi, sipariş üzerine hazırlanarak servis edilir.",
+      "price": "₺160",
+      "image": "",
+      "imageAlt": "",
+      "tags": [],
+      "details": [
+        "Buzlu",
+        "Soğuk servis"
+      ],
+      "translations": {
+        "en": {
+          "name": "Iced Turkish Coffee",
+          "description": "Coffee prepared with ice and served cold.",
+          "story": "Iced Turkish Coffee is prepared to order and served fresh.",
+          "imageAlt": "",
+          "details": [
+            "Iced",
+            "Served cold"
+          ]
+        }
+      }
+    },
+    {
+      "id": "ice-filtre-kahve",
+      "category": "soguk-kahveler",
+      "name": "Ice Filtre Kahve",
+      "description": "Buzla hazırlanıp soğuk servis edilen kahve.",
+      "story": "Ice Filtre Kahve, sipariş üzerine hazırlanarak servis edilir.",
+      "price": "₺210",
+      "image": "",
+      "imageAlt": "",
+      "tags": [],
+      "details": [
+        "Buzlu",
+        "Soğuk servis"
+      ],
+      "translations": {
+        "en": {
+          "name": "Iced Filter Coffee",
+          "description": "Coffee prepared with ice and served cold.",
+          "story": "Iced Filter Coffee is prepared to order and served fresh.",
+          "imageAlt": "",
+          "details": [
+            "Iced",
+            "Served cold"
+          ]
+        }
+      }
+    },
+    {
+      "id": "ice-mocha",
+      "category": "soguk-kahveler",
+      "name": "Ice Mocha",
+      "description": "Buzla hazırlanıp soğuk servis edilen kahve.",
+      "story": "Ice Mocha, sipariş üzerine hazırlanarak servis edilir.",
+      "price": "₺290",
+      "image": "",
+      "imageAlt": "",
+      "tags": [],
+      "details": [
+        "Buzlu",
+        "Soğuk servis"
+      ],
+      "translations": {
+        "en": {
+          "name": "Iced Mocha",
+          "description": "Coffee prepared with ice and served cold.",
+          "story": "Iced Mocha is prepared to order and served fresh.",
+          "imageAlt": "",
+          "details": [
+            "Iced",
+            "Served cold"
+          ]
+        }
+      }
+    },
+    {
+      "id": "ice-white-mocha",
+      "category": "soguk-kahveler",
+      "name": "Ice White Mocha",
+      "description": "Buzla hazırlanıp soğuk servis edilen kahve.",
+      "story": "Ice White Mocha, sipariş üzerine hazırlanarak servis edilir.",
+      "price": "₺290",
+      "image": "",
+      "imageAlt": "",
+      "tags": [],
+      "details": [
+        "Buzlu",
+        "Soğuk servis"
+      ],
+      "translations": {
+        "en": {
+          "name": "Iced White Mocha",
+          "description": "Coffee prepared with ice and served cold.",
+          "story": "Iced White Mocha is prepared to order and served fresh.",
+          "imageAlt": "",
+          "details": [
+            "Iced",
+            "Served cold"
+          ]
+        }
+      }
+    },
+    {
+      "id": "ice-chai-tea-latte",
+      "category": "soguk-kahveler",
+      "name": "Ice Chai Tea Latte",
+      "description": "Buzla hazırlanıp soğuk servis edilen kahve.",
+      "story": "Ice Chai Tea Latte, sipariş üzerine hazırlanarak servis edilir.",
+      "price": "₺230",
+      "image": "",
+      "imageAlt": "",
+      "tags": [],
+      "details": [
+        "Buzlu",
+        "Soğuk servis"
+      ],
+      "translations": {
+        "en": {
+          "name": "Iced Chai Tea Latte",
+          "description": "Coffee prepared with ice and served cold.",
+          "story": "Iced Chai Tea Latte is prepared to order and served fresh.",
+          "imageAlt": "",
+          "details": [
+            "Iced",
+            "Served cold"
+          ]
+        }
+      }
+    },
+    {
+      "id": "cold-brew",
+      "category": "soguk-kahveler",
+      "name": "Cold Brew",
+      "description": "Buzla hazırlanıp soğuk servis edilen kahve.",
+      "story": "Cold Brew, sipariş üzerine hazırlanarak servis edilir.",
+      "price": "₺260",
+      "image": "",
+      "imageAlt": "",
+      "tags": [],
+      "details": [
+        "Buzlu",
+        "Soğuk servis"
+      ],
+      "translations": {
+        "en": {
+          "name": "Cold Brew",
+          "description": "Coffee prepared with ice and served cold.",
+          "story": "Cold Brew is prepared to order and served fresh.",
+          "imageAlt": "",
+          "details": [
+            "Iced",
+            "Served cold"
+          ]
+        }
+      }
+    },
+    {
+      "id": "frappe",
+      "category": "soguk-kahveler",
+      "name": "Frappe",
+      "description": "Buzla hazırlanıp soğuk servis edilen kahve.",
+      "story": "Frappe, sipariş üzerine hazırlanarak servis edilir.",
+      "price": "₺270",
+      "image": "",
+      "imageAlt": "",
+      "tags": [],
+      "details": [
+        "Buzlu",
+        "Soğuk servis"
+      ],
+      "translations": {
+        "en": {
+          "name": "Frappe",
+          "description": "Coffee prepared with ice and served cold.",
+          "story": "Frappe is prepared to order and served fresh.",
+          "imageAlt": "",
+          "details": [
+            "Iced",
+            "Served cold"
+          ]
+        }
+      }
+    },
+    {
+      "id": "milkshake",
+      "category": "milkshake-frozen-smoothie",
+      "name": "Milkshake",
+      "description": "18 aroma seçeneğinden biriyle hazırlanır.",
+      "story": "18 aroma seçeneğinden biriyle hazırlanır.",
+      "price": "₺290",
+      "image": "",
+      "imageAlt": "",
+      "tags": [],
+      "details": [
+        "Mango",
+        "Çilek",
+        "Çikolata",
+        "Kivi",
+        "Nar",
+        "Frambuaz",
+        "Şeftali",
+        "Karamel",
+        "Orman Meyveli",
+        "Yeşil Elma",
+        "Kavun",
+        "Çarkıfelek",
+        "Böğürtlen",
+        "Karpuz",
+        "Ananas",
+        "Muz",
+        "Karadut",
+        "Vanilya"
+      ],
+      "translations": {
+        "en": {
+          "name": "Milkshake",
+          "description": "Prepared with a choice of 18 flavours.",
+          "story": "Prepared with a choice of 18 flavours.",
+          "imageAlt": "",
+          "details": [
+            "Mango",
+            "Strawberry",
+            "Chocolate",
+            "Kiwi",
+            "Pomegranate",
+            "Raspberry",
+            "Peach",
+            "Caramel",
+            "Forest Fruit",
+            "Green Apple",
+            "Melon",
+            "Passion Fruit",
+            "Blackberry",
+            "Watermelon",
+            "Pineapple",
+            "Banana",
+            "Black Mulberry",
+            "Vanilla"
+          ]
+        }
+      }
+    },
+    {
+      "id": "frozen",
+      "category": "milkshake-frozen-smoothie",
+      "name": "Frozen",
+      "description": "18 aroma seçeneğinden biriyle hazırlanır.",
+      "story": "18 aroma seçeneğinden biriyle hazırlanır.",
+      "price": "₺240",
+      "image": "",
+      "imageAlt": "",
+      "tags": [],
+      "details": [
+        "Mango",
+        "Çilek",
+        "Çikolata",
+        "Kivi",
+        "Nar",
+        "Frambuaz",
+        "Şeftali",
+        "Karamel",
+        "Orman Meyveli",
+        "Yeşil Elma",
+        "Kavun",
+        "Çarkıfelek",
+        "Böğürtlen",
+        "Karpuz",
+        "Ananas",
+        "Muz",
+        "Karadut",
+        "Vanilya"
+      ],
+      "translations": {
+        "en": {
+          "name": "Frozen",
+          "description": "Prepared with a choice of 18 flavours.",
+          "story": "Prepared with a choice of 18 flavours.",
+          "imageAlt": "",
+          "details": [
+            "Mango",
+            "Strawberry",
+            "Chocolate",
+            "Kiwi",
+            "Pomegranate",
+            "Raspberry",
+            "Peach",
+            "Caramel",
+            "Forest Fruit",
+            "Green Apple",
+            "Melon",
+            "Passion Fruit",
+            "Blackberry",
+            "Watermelon",
+            "Pineapple",
+            "Banana",
+            "Black Mulberry",
+            "Vanilla"
+          ]
+        }
+      }
+    },
+    {
+      "id": "smoothie",
+      "category": "milkshake-frozen-smoothie",
+      "name": "Smoothie",
+      "description": "Muz, çilek veya Oreo seçeneğiyle hazırlanır.",
+      "story": "Muz, çilek veya Oreo seçeneğiyle hazırlanır.",
+      "price": "₺310",
+      "image": "",
+      "imageAlt": "",
+      "tags": [],
+      "details": [
+        "Muz",
+        "Çilek",
+        "Oreo"
+      ],
+      "translations": {
+        "en": {
+          "name": "Smoothie",
+          "description": "Prepared with banana, strawberry or Oreo.",
+          "story": "Prepared with banana, strawberry or Oreo.",
+          "imageAlt": "",
+          "details": [
+            "Banana",
+            "Strawberry",
+            "Oreo"
+          ]
+        }
+      }
     }
   ],
-  "lastUpdated": "16 Temmuz 2026"
+  "lastUpdated": "28 Temmuz 2026"
 }

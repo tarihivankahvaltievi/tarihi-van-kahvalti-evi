@@ -227,7 +227,7 @@ export default function VanBreakfastCulturePage() {
                   <a className={styles.primaryAction} href="#kisa-cevap">
                     1 dakikada öğren <ArrowDown size={17} aria-hidden="true" />
                   </a>
-                  <Link className={styles.secondaryAction} href="/menu#geleneksel-van-kahvaltisi">
+                  <Link className={styles.secondaryAction} href="/menu#serpme-fix-menu">
                     Güncel soframızı gör <UtensilsCrossed size={17} aria-hidden="true" />
                   </Link>
                 </div>
@@ -434,7 +434,7 @@ export default function VanBreakfastCulturePage() {
                   Sokak&apos;ta her gün 08.00–18.00 arasında açıktır.
                 </p>
                 <div className={styles.visitActions}>
-                  <Link className={styles.lightAction} href="/menu#geleneksel-van-kahvaltisi">
+                  <Link className={styles.lightAction} href="/menu#serpme-fix-menu">
                     Menü ve güncel fiyatlar <UtensilsCrossed size={17} aria-hidden="true" />
                   </Link>
                   <a className={styles.outlineLightAction} href={mapsUrl} target="_blank" rel="noopener noreferrer">

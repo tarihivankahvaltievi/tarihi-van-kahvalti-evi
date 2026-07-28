@@ -90,7 +90,7 @@ async function MenuContainer() {
             "@type": "MenuItem",
             name: item.name,
             description: item.description,
-            image: absoluteUrl(item.image),
+            image: item.image ? absoluteUrl(item.image) : undefined,
             offers: numericPrice
               ? {
                   "@type": "Offer",

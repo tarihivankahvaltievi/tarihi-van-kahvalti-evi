@@ -8,6 +8,14 @@ export interface MenuCategory {
   description: string;
   image: string;
   imageAlt: string;
+  translations?: {
+    en?: {
+      label?: string;
+      shortLabel?: string;
+      description?: string;
+      imageAlt?: string;
+    };
+  };
 }
 
 export interface MenuItem {
@@ -22,6 +30,15 @@ export interface MenuItem {
   imageAlt: string;
   tags: string[];
   details: string[];
+  translations?: {
+    en?: {
+      name?: string;
+      description?: string;
+      story?: string;
+      imageAlt?: string;
+      details?: string[];
+    };
+  };
 }
 
 export interface MenuData {
