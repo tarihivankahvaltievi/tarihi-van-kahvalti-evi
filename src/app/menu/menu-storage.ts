@@ -49,6 +49,43 @@ export interface MenuData {
 
 const getLocalFilePath = () => path.join(process.cwd(), "src/app/menu/menu-data.json");
 
+async function readLocalMenuData(): Promise<MenuData | null> {
+  try {
+    const rawData = await fs.readFile(getLocalFilePath(), "utf-8");
+    return JSON.parse(rawData) as MenuData;
+  } catch (error) {
+    console.error("Error reading local menu-data.json:", error);
+    return null;
+  }
+}
+
+function mergeBundledImages(data: MenuData, bundledData: MenuData): MenuData {
+  const bundledItems = new Map(bundledData.items.map((item) => [item.id, item]));
+
+  return {
+    ...data,
+    items: data.items.map((item) => {
+      const bundledItem = bundledItems.get(item.id);
+      if (item.image || !bundledItem?.image) return item;
+
+      return {
+        ...item,
+        image: bundledItem.image,
+        imageAlt: item.imageAlt || bundledItem.imageAlt,
+        translations: {
+          ...item.translations,
+          en: {
+            ...item.translations?.en,
+            imageAlt:
+              item.translations?.en?.imageAlt ||
+              bundledItem.translations?.en?.imageAlt,
+          },
+        },
+      };
+    }),
+  };
+}
+
 // Helper to check if Supabase is configured
 export function isSupabaseConfigured() {
   return !!(process.env.SUPABASE_URL && process.env.SUPABASE_SERVICE_ROLE_KEY);
@@ -106,21 +143,16 @@ async function saveToSupabase(data: MenuData): Promise<boolean> {
 }
 
 export async function getMenuData(): Promise<MenuData> {
+  const bundledData = await readLocalMenuData();
+
   // Try Supabase first if configured
   if (isSupabaseConfigured()) {
     const data = await fetchFromSupabase();
-    if (data) return data;
+    if (data) return bundledData ? mergeBundledImages(data, bundledData) : data;
   }
 
   // Fallback to local file system
-  try {
-    const filePath = getLocalFilePath();
-    const rawData = await fs.readFile(filePath, "utf-8");
-    return JSON.parse(rawData) as MenuData;
-  } catch (error) {
-    console.error("Error reading local menu-data.json, returning empty structure:", error);
-    return { categories: [], items: [], lastUpdated: "" };
-  }
+  return bundledData || { categories: [], items: [], lastUpdated: "" };
 }
 
 export async function saveMenuData(data: MenuData): Promise<boolean> {
