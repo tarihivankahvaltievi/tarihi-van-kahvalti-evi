@@ -389,10 +389,90 @@ add("milkshake-frozen-smoothie", [
 ]);
 
 const ids = new Set();
+const itemImages = {
+  "serpme-fix-menu": "serpme-fix-menu.webp",
+  "van-golu-tabagi": "van-golu-tabagi.webp",
+  "pisi-tabagi": "pisi-tabagi.webp",
+  "yumurtali-ekmek-tabagi": "yumurtali-ekmek-tabagi.webp",
+  "tulum-peyniri": "tulum-peyniri.webp",
+  "taze-kasar": "taze-kasar.webp",
+  "peynir-tabagi": "peynir-tabagi.webp",
+  "koy-peyniri": "koy-peyniri.webp",
+  "beyaz-peynir": "beyaz-peynir.webp",
+  "otlu-peynir": "otlu-peynir.webp",
+  "cecil-peyniri": "cecil-peyniri.webp",
+  "eski-kasar": "eski-kasar.webp",
+  "siyah-zeytin": "siyah-zeytin.webp",
+  "yesil-zeytin": "yesil-zeytin.webp",
+  "siyah-zeytin-ezmesi": "siyah-zeytin-ezmesi.webp",
+  "karisik-zeytin": "karisik-zeytin.webp",
+  "sogus": "sogus.webp",
+  "peynirli-gozleme": "gozleme.webp",
+  "kasarli-gozleme": "gozleme.webp",
+  "patatesli-gozleme": "gozleme.webp",
+  "ispanakli-gozleme": "gozleme.webp",
+  "mantarli-gozleme": "gozleme.webp",
+  "sucuklu-gozleme": "gozleme.webp",
+  "kavurmali-gozleme": "gozleme.webp",
+  "pastirmali-gozleme": "gozleme.webp",
+  "special-gozleme": "gozleme.webp",
+  "cevizli-cemen": "cevizli-cemen.webp",
+  "tereyagli-jaji": "tereyagli-jaji.webp",
+  "balli-cevizli-kavut": "balli-cevizli-kavut.webp",
+  "tereyagli-cevizli-murtuga": "tereyagli-cevizli-murtuga.webp",
+  "kayisi-receli": "kayisi-receli.webp",
+  "ayva-receli": "ayva-receli.webp",
+  "portakal-receli": "portakal-receli.webp",
+  "cilek-receli": "cilek-receli.webp",
+  "ceviz-receli": "ceviz-receli.webp",
+  "nutella": "nutella.webp",
+  "bal": "bal.webp",
+  "kaymak": "kaymak.webp",
+  "bal-kaymak": "bal-kaymak.webp",
+  "tereyagi": "tereyagi.webp",
+  "bal-tereyagi": "bal-tereyagi.webp",
+  "tahin": "tahin.webp",
+  "tahin-pekmez": "tahin-pekmez.webp",
+  "pekmez": "pekmez.webp",
+  "et-karisik-omlet": "et-karisik-omlet.webp",
+  "sebze-karisik-omlet": "sebze-karisik-omlet.webp",
+  "sade-menemen": "sade-menemen.webp",
+  "mantarli-menemen": "mantarli-menemen.webp",
+  "peynirli-menemen": "peynirli-menemen.webp",
+  "sucuklu-menemen": "sucuklu-menemen.webp",
+  "kavurmali-menemen": "kavurmali-menemen.webp",
+  "pastirmali-menemen": "pastirmali-menemen.webp",
+  "sahanda-yumurta": "sahanda-yumurta.webp",
+  "patatesli-yumurta": "patatesli-yumurta.webp",
+  "ispanakli-yumurta": "ispanakli-yumurta.webp",
+  "peynirli-yumurta": "peynirli-yumurta.webp",
+  "sucuklu-yumurta": "sucuklu-yumurta.webp",
+  "mantarli-yumurta": "mantarli-yumurta.webp",
+  "sosisli-yumurta": "sosisli-yumurta.webp",
+  "kavurmali-yumurta": "kavurmali-yumurta.webp",
+  "kuymak": "kuymak.webp",
+  "pastirmali-yumurta": "pastirmali-yumurta.webp",
+  "salcali-sahanda-sosis": "salcali-sahanda-sosis.webp",
+  "sahanda-kavurma": "sahanda-kavurma.webp",
+  "sahanda-sucuk": "sahanda-sucuk.webp",
+  "sahanda-pastirma": "sahanda-pastirma.webp",
+  "latte": "latte.webp",
+  "turk-kahvesi": "turk-kahvesi.webp",
+  "ice-latte": "ice-latte.webp",
+  "milkshake": "milkshake.webp",
+};
+
 for (const item of rawItems) {
   if (!categoryById.has(item.category)) throw new Error(`Unknown category: ${item.category}`);
   if (ids.has(item.id)) throw new Error(`Duplicate item id: ${item.id}`);
   ids.add(item.id);
+
+  const imageFile = itemImages[item.id];
+  if (imageFile) {
+    item.image = `/images/menu-products/${imageFile}`;
+    item.imageAlt = `${item.name} ürün görseli`;
+    item.translations.en.imageAlt = `${item.translations.en.name} product image`;
+  }
 }
 
 const menuData = {

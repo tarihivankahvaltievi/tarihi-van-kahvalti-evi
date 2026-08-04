@@ -298,8 +298,8 @@
       "story": "Otlu Van peyniri, kavut, murtuğa, jaji, çemen, bal, kaymak, beyaz peynir, örgü peyniri, köy peyniri, taze peynir, yeşil ve siyah zeytin, domates, salatalık, haşlanmış yumurta, tereyağı, tahin-pekmez ve reçel.",
       "price": "₺970",
       "priceNote": "kişi başı",
-      "image": "",
-      "imageAlt": "",
+      "image": "/images/menu-products/serpme-fix-menu.webp",
+      "imageAlt": "Serpme Fix Menü ürün görseli",
       "tags": [
         "Öne çıkan"
       ],
@@ -313,7 +313,7 @@
           "name": "Serpme Fix Menu",
           "description": "Herb cheese, kavut, murtuğa, jaji, çemen, honey, clotted cream, assorted cheeses, green and black olives, tomatoes, cucumber, hard-boiled egg, butter, tahini-molasses and jam.",
           "story": "Herb cheese, kavut, murtuğa, jaji, çemen, honey, clotted cream, assorted cheeses, green and black olives, tomatoes, cucumber, hard-boiled egg, butter, tahini-molasses and jam.",
-          "imageAlt": "",
+          "imageAlt": "Serpme Fix Menu product image",
           "details": [
             "Per person",
             "Unlimited Turkish tea",
@@ -330,8 +330,8 @@
       "story": "Otlu Van peyniri, beyaz peynir, örgü peyniri, taze kaşar, yeşil ve siyah zeytin, domates, salatalık, jaji, haşlanmış yumurta, tereyağı, tahin-pekmez ve reçel.",
       "price": "₺740",
       "priceNote": "kişi başı",
-      "image": "",
-      "imageAlt": "",
+      "image": "/images/menu-products/van-golu-tabagi.webp",
+      "imageAlt": "Van Gölü Tabağı ürün görseli",
       "tags": [],
       "details": [
         "Kişi başı servis",
@@ -343,7 +343,7 @@
           "name": "Van Gölü Plate",
           "description": "Herb cheese, white cheese, braided cheese, fresh kashar, green and black olives, tomatoes, cucumber, jaji, hard-boiled egg, butter, tahini-molasses and jam.",
           "story": "Herb cheese, white cheese, braided cheese, fresh kashar, green and black olives, tomatoes, cucumber, jaji, hard-boiled egg, butter, tahini-molasses and jam.",
-          "imageAlt": "",
+          "imageAlt": "Van Gölü Plate product image",
           "details": [
             "Per person",
             "2 Turkish teas",
@@ -359,8 +359,8 @@
       "description": "Tulum peyniri, mevsim reçeli ve Nutella eşliğinde servis edilen sıcak pişi tabağı.",
       "story": "Tulum peyniri, mevsim reçeli ve Nutella eşliğinde servis edilen sıcak pişi tabağı.",
       "price": "₺350",
-      "image": "",
-      "imageAlt": "",
+      "image": "/images/menu-products/pisi-tabagi.webp",
+      "imageAlt": "Pişi Tabağı ürün görseli",
       "tags": [],
       "details": [
         "Sıcak pişi",
@@ -372,7 +372,7 @@
           "name": "Fried Dough Plate",
           "description": "Warm fried dough served with goat cheese, seasonal jam and Nutella.",
           "story": "Warm fried dough served with goat cheese, seasonal jam and Nutella.",
-          "imageAlt": "",
+          "imageAlt": "Fried Dough Plate product image",
           "details": [
             "Warm fried dough",
             "Goat cheese",
@@ -388,8 +388,8 @@
       "description": "Beyaz peynir, mevsim reçeli ve zeytin ezmesi eşliğinde servis edilen yumurtalı ekmek.",
       "story": "Beyaz peynir, mevsim reçeli ve zeytin ezmesi eşliğinde servis edilen yumurtalı ekmek.",
       "price": "₺350",
-      "image": "",
-      "imageAlt": "",
+      "image": "/images/menu-products/yumurtali-ekmek-tabagi.webp",
+      "imageAlt": "Yumurtalı Ekmek Tabağı ürün görseli",
       "tags": [],
       "details": [
         "Yumurtalı ekmek",
@@ -401,7 +401,7 @@
           "name": "Egg Bread Plate",
           "description": "Egg bread served with white cheese, seasonal jam and olive paste.",
           "story": "Egg bread served with white cheese, seasonal jam and olive paste.",
-          "imageAlt": "",
+          "imageAlt": "Egg Bread Plate product image",
           "details": [
             "Egg bread",
             "White cheese",
@@ -417,8 +417,8 @@
       "description": "Kahvaltı sofrası için porsiyon peynir servisi.",
       "story": "Tulum Peyniri, sipariş üzerine hazırlanarak servis edilir.",
       "price": "₺290",
-      "image": "",
-      "imageAlt": "",
+      "image": "/images/menu-products/tulum-peyniri.webp",
+      "imageAlt": "Tulum Peyniri ürün görseli",
       "tags": [],
       "details": [
         "Porsiyon servis",
@@ -429,7 +429,7 @@
           "name": "Goat Cheese",
           "description": "A portion of cheese for the breakfast table.",
           "story": "Goat Cheese is prepared to order and served fresh.",
-          "imageAlt": "",
+          "imageAlt": "Goat Cheese product image",
           "details": [
             "Portion serving",
             "Breakfast cheese"
@@ -444,8 +444,8 @@
       "description": "Kahvaltı sofrası için porsiyon peynir servisi.",
       "story": "Taze Kaşar, sipariş üzerine hazırlanarak servis edilir.",
       "price": "₺280",
-      "image": "",
-      "imageAlt": "",
+      "image": "/images/menu-products/taze-kasar.webp",
+      "imageAlt": "Taze Kaşar ürün görseli",
       "tags": [],
       "details": [
         "Porsiyon servis",
@@ -456,7 +456,7 @@
           "name": "Fresh Kashar",
           "description": "A portion of cheese for the breakfast table.",
           "story": "Fresh Kashar is prepared to order and served fresh.",
-          "imageAlt": "",
+          "imageAlt": "Fresh Kashar product image",
           "details": [
             "Portion serving",
             "Breakfast cheese"
@@ -471,8 +471,8 @@
       "description": "Kahvaltı sofrası için porsiyon peynir servisi.",
       "story": "Peynir Tabağı, sipariş üzerine hazırlanarak servis edilir.",
       "price": "₺360",
-      "image": "",
-      "imageAlt": "",
+      "image": "/images/menu-products/peynir-tabagi.webp",
+      "imageAlt": "Peynir Tabağı ürün görseli",
       "tags": [],
       "details": [
         "Porsiyon servis",
@@ -483,7 +483,7 @@
           "name": "Cheese Plate",
           "description": "A portion of cheese for the breakfast table.",
           "story": "Cheese Plate is prepared to order and served fresh.",
-          "imageAlt": "",
+          "imageAlt": "Cheese Plate product image",
           "details": [
             "Portion serving",
             "Breakfast cheese"
@@ -498,8 +498,8 @@
       "description": "Kahvaltı sofrası için porsiyon peynir servisi.",
       "story": "Köy Peyniri, sipariş üzerine hazırlanarak servis edilir.",
       "price": "₺260",
-      "image": "",
-      "imageAlt": "",
+      "image": "/images/menu-products/koy-peyniri.webp",
+      "imageAlt": "Köy Peyniri ürün görseli",
       "tags": [],
       "details": [
         "Porsiyon servis",
@@ -510,7 +510,7 @@
           "name": "Village Cheese",
           "description": "A portion of cheese for the breakfast table.",
           "story": "Village Cheese is prepared to order and served fresh.",
-          "imageAlt": "",
+          "imageAlt": "Village Cheese product image",
           "details": [
             "Portion serving",
             "Breakfast cheese"
@@ -525,8 +525,8 @@
       "description": "Kahvaltı sofrası için porsiyon peynir servisi.",
       "story": "Beyaz Peynir, sipariş üzerine hazırlanarak servis edilir.",
       "price": "₺280",
-      "image": "",
-      "imageAlt": "",
+      "image": "/images/menu-products/beyaz-peynir.webp",
+      "imageAlt": "Beyaz Peynir ürün görseli",
       "tags": [],
       "details": [
         "Porsiyon servis",
@@ -537,7 +537,7 @@
           "name": "White Cheese",
           "description": "A portion of cheese for the breakfast table.",
           "story": "White Cheese is prepared to order and served fresh.",
-          "imageAlt": "",
+          "imageAlt": "White Cheese product image",
           "details": [
             "Portion serving",
             "Breakfast cheese"
@@ -552,8 +552,8 @@
       "description": "Kahvaltı sofrası için porsiyon peynir servisi.",
       "story": "Otlu Peynir, sipariş üzerine hazırlanarak servis edilir.",
       "price": "₺310",
-      "image": "",
-      "imageAlt": "",
+      "image": "/images/menu-products/otlu-peynir.webp",
+      "imageAlt": "Otlu Peynir ürün görseli",
       "tags": [],
       "details": [
         "Porsiyon servis",
@@ -564,7 +564,7 @@
           "name": "Herb Cheese",
           "description": "A portion of cheese for the breakfast table.",
           "story": "Herb Cheese is prepared to order and served fresh.",
-          "imageAlt": "",
+          "imageAlt": "Herb Cheese product image",
           "details": [
             "Portion serving",
             "Breakfast cheese"
@@ -579,8 +579,8 @@
       "description": "Kahvaltı sofrası için porsiyon peynir servisi.",
       "story": "Cecil Peyniri, sipariş üzerine hazırlanarak servis edilir.",
       "price": "₺270",
-      "image": "",
-      "imageAlt": "",
+      "image": "/images/menu-products/cecil-peyniri.webp",
+      "imageAlt": "Cecil Peyniri ürün görseli",
       "tags": [],
       "details": [
         "Porsiyon servis",
@@ -591,7 +591,7 @@
           "name": "Chechil Cheese",
           "description": "A portion of cheese for the breakfast table.",
           "story": "Chechil Cheese is prepared to order and served fresh.",
-          "imageAlt": "",
+          "imageAlt": "Chechil Cheese product image",
           "details": [
             "Portion serving",
             "Breakfast cheese"
@@ -606,8 +606,8 @@
       "description": "Kahvaltı sofrası için porsiyon peynir servisi.",
       "story": "Eski Kaşar, sipariş üzerine hazırlanarak servis edilir.",
       "price": "₺250",
-      "image": "",
-      "imageAlt": "",
+      "image": "/images/menu-products/eski-kasar.webp",
+      "imageAlt": "Eski Kaşar ürün görseli",
       "tags": [],
       "details": [
         "Porsiyon servis",
@@ -618,7 +618,7 @@
           "name": "Mature Kashar",
           "description": "A portion of cheese for the breakfast table.",
           "story": "Mature Kashar is prepared to order and served fresh.",
-          "imageAlt": "",
+          "imageAlt": "Mature Kashar product image",
           "details": [
             "Portion serving",
             "Breakfast cheese"
@@ -633,8 +633,8 @@
       "description": "Kahvaltı sofrası için porsiyon zeytin servisi.",
       "story": "Siyah Zeytin, sipariş üzerine hazırlanarak servis edilir.",
       "price": "₺250",
-      "image": "",
-      "imageAlt": "",
+      "image": "/images/menu-products/siyah-zeytin.webp",
+      "imageAlt": "Siyah Zeytin ürün görseli",
       "tags": [],
       "details": [
         "Porsiyon servis",
@@ -645,7 +645,7 @@
           "name": "Black Olives",
           "description": "A portion of olives for the breakfast table.",
           "story": "Black Olives is prepared to order and served fresh.",
-          "imageAlt": "",
+          "imageAlt": "Black Olives product image",
           "details": [
             "Portion serving",
             "Breakfast side"
@@ -660,8 +660,8 @@
       "description": "Kahvaltı sofrası için porsiyon zeytin servisi.",
       "story": "Yeşil Zeytin, sipariş üzerine hazırlanarak servis edilir.",
       "price": "₺260",
-      "image": "",
-      "imageAlt": "",
+      "image": "/images/menu-products/yesil-zeytin.webp",
+      "imageAlt": "Yeşil Zeytin ürün görseli",
       "tags": [],
       "details": [
         "Porsiyon servis",
@@ -672,7 +672,7 @@
           "name": "Green Olives",
           "description": "A portion of olives for the breakfast table.",
           "story": "Green Olives is prepared to order and served fresh.",
-          "imageAlt": "",
+          "imageAlt": "Green Olives product image",
           "details": [
             "Portion serving",
             "Breakfast side"
@@ -687,8 +687,8 @@
       "description": "Kahvaltı sofrası için porsiyon zeytin servisi.",
       "story": "Siyah Zeytin Ezmesi, sipariş üzerine hazırlanarak servis edilir.",
       "price": "₺250",
-      "image": "",
-      "imageAlt": "",
+      "image": "/images/menu-products/siyah-zeytin-ezmesi.webp",
+      "imageAlt": "Siyah Zeytin Ezmesi ürün görseli",
       "tags": [],
       "details": [
         "Porsiyon servis",
@@ -699,7 +699,7 @@
           "name": "Black Olive Paste",
           "description": "A portion of olives for the breakfast table.",
           "story": "Black Olive Paste is prepared to order and served fresh.",
-          "imageAlt": "",
+          "imageAlt": "Black Olive Paste product image",
           "details": [
             "Portion serving",
             "Breakfast side"
@@ -714,8 +714,8 @@
       "description": "Yeşil ve siyah zeytinlerden oluşan karışık porsiyon.",
       "story": "Yeşil ve siyah zeytinlerden oluşan karışık porsiyon.",
       "price": "₺250",
-      "image": "",
-      "imageAlt": "",
+      "image": "/images/menu-products/karisik-zeytin.webp",
+      "imageAlt": "Karışık Zeytin ürün görseli",
       "tags": [],
       "details": [
         "Porsiyon servis",
@@ -726,7 +726,7 @@
           "name": "Mixed Olives",
           "description": "A portion of olives for the breakfast table.",
           "story": "Yeşil ve siyah zeytinlerden oluşan karışık porsiyon.",
-          "imageAlt": "",
+          "imageAlt": "Mixed Olives product image",
           "details": [
             "Portion serving",
             "Breakfast side"
@@ -741,8 +741,8 @@
       "description": "Domates, salatalık ve mevsim yeşilliklerinden taze söğüş tabağı.",
       "story": "Domates, salatalık ve mevsim yeşilliklerinden taze söğüş tabağı.",
       "price": "₺260",
-      "image": "",
-      "imageAlt": "",
+      "image": "/images/menu-products/sogus.webp",
+      "imageAlt": "Söğüş ürün görseli",
       "tags": [],
       "details": [
         "Porsiyon servis",
@@ -753,7 +753,7 @@
           "name": "Salad",
           "description": "A portion of olives for the breakfast table.",
           "story": "Domates, salatalık ve mevsim yeşilliklerinden taze söğüş tabağı.",
-          "imageAlt": "",
+          "imageAlt": "Salad product image",
           "details": [
             "Portion serving",
             "Breakfast side"
@@ -768,8 +768,8 @@
       "description": "Seçilen iç harçla hazırlanıp sıcak servis edilen gözleme.",
       "story": "Peynirli Gözleme, sipariş üzerine hazırlanarak servis edilir.",
       "price": "₺310",
-      "image": "",
-      "imageAlt": "",
+      "image": "/images/menu-products/gozleme.webp",
+      "imageAlt": "Peynirli Gözleme ürün görseli",
       "tags": [],
       "details": [
         "Sıcak servis",
@@ -780,7 +780,7 @@
           "name": "Cheese Gözleme",
           "description": "Turkish flatbread prepared with the selected filling and served hot.",
           "story": "Cheese Gözleme is prepared to order and served fresh.",
-          "imageAlt": "",
+          "imageAlt": "Cheese Gözleme product image",
           "details": [
             "Served hot",
             "Turkish flatbread"
@@ -795,8 +795,8 @@
       "description": "Seçilen iç harçla hazırlanıp sıcak servis edilen gözleme.",
       "story": "Kaşarlı Gözleme, sipariş üzerine hazırlanarak servis edilir.",
       "price": "₺310",
-      "image": "",
-      "imageAlt": "",
+      "image": "/images/menu-products/gozleme.webp",
+      "imageAlt": "Kaşarlı Gözleme ürün görseli",
       "tags": [],
       "details": [
         "Sıcak servis",
@@ -807,7 +807,7 @@
           "name": "Kashar Cheese Gözleme",
           "description": "Turkish flatbread prepared with the selected filling and served hot.",
           "story": "Kashar Cheese Gözleme is prepared to order and served fresh.",
-          "imageAlt": "",
+          "imageAlt": "Kashar Cheese Gözleme product image",
           "details": [
             "Served hot",
             "Turkish flatbread"
@@ -822,8 +822,8 @@
       "description": "Seçilen iç harçla hazırlanıp sıcak servis edilen gözleme.",
       "story": "Patatesli Gözleme, sipariş üzerine hazırlanarak servis edilir.",
       "price": "₺300",
-      "image": "",
-      "imageAlt": "",
+      "image": "/images/menu-products/gozleme.webp",
+      "imageAlt": "Patatesli Gözleme ürün görseli",
       "tags": [],
       "details": [
         "Sıcak servis",
@@ -834,7 +834,7 @@
           "name": "Potato Gözleme",
           "description": "Turkish flatbread prepared with the selected filling and served hot.",
           "story": "Potato Gözleme is prepared to order and served fresh.",
-          "imageAlt": "",
+          "imageAlt": "Potato Gözleme product image",
           "details": [
             "Served hot",
             "Turkish flatbread"
@@ -849,8 +849,8 @@
       "description": "Seçilen iç harçla hazırlanıp sıcak servis edilen gözleme.",
       "story": "Ispanaklı Gözleme, sipariş üzerine hazırlanarak servis edilir.",
       "price": "₺290",
-      "image": "",
-      "imageAlt": "",
+      "image": "/images/menu-products/gozleme.webp",
+      "imageAlt": "Ispanaklı Gözleme ürün görseli",
       "tags": [],
       "details": [
         "Sıcak servis",
@@ -861,7 +861,7 @@
           "name": "Spinach Gözleme",
           "description": "Turkish flatbread prepared with the selected filling and served hot.",
           "story": "Spinach Gözleme is prepared to order and served fresh.",
-          "imageAlt": "",
+          "imageAlt": "Spinach Gözleme product image",
           "details": [
             "Served hot",
             "Turkish flatbread"
@@ -876,8 +876,8 @@
       "description": "Seçilen iç harçla hazırlanıp sıcak servis edilen gözleme.",
       "story": "Mantarlı Gözleme, sipariş üzerine hazırlanarak servis edilir.",
       "price": "₺310",
-      "image": "",
-      "imageAlt": "",
+      "image": "/images/menu-products/gozleme.webp",
+      "imageAlt": "Mantarlı Gözleme ürün görseli",
       "tags": [],
       "details": [
         "Sıcak servis",
@@ -888,7 +888,7 @@
           "name": "Mushroom Gözleme",
           "description": "Turkish flatbread prepared with the selected filling and served hot.",
           "story": "Mushroom Gözleme is prepared to order and served fresh.",
-          "imageAlt": "",
+          "imageAlt": "Mushroom Gözleme product image",
           "details": [
             "Served hot",
             "Turkish flatbread"
@@ -903,8 +903,8 @@
       "description": "Seçilen iç harçla hazırlanıp sıcak servis edilen gözleme.",
       "story": "Sucuklu Gözleme, sipariş üzerine hazırlanarak servis edilir.",
       "price": "₺370",
-      "image": "",
-      "imageAlt": "",
+      "image": "/images/menu-products/gozleme.webp",
+      "imageAlt": "Sucuklu Gözleme ürün görseli",
       "tags": [],
       "details": [
         "Sıcak servis",
@@ -915,7 +915,7 @@
           "name": "Sucuk Gözleme",
           "description": "Turkish flatbread prepared with the selected filling and served hot.",
           "story": "Sucuk Gözleme is prepared to order and served fresh.",
-          "imageAlt": "",
+          "imageAlt": "Sucuk Gözleme product image",
           "details": [
             "Served hot",
             "Turkish flatbread"
@@ -930,8 +930,8 @@
       "description": "Seçilen iç harçla hazırlanıp sıcak servis edilen gözleme.",
       "story": "Kavurmalı Gözleme, sipariş üzerine hazırlanarak servis edilir.",
       "price": "₺390",
-      "image": "",
-      "imageAlt": "",
+      "image": "/images/menu-products/gozleme.webp",
+      "imageAlt": "Kavurmalı Gözleme ürün görseli",
       "tags": [],
       "details": [
         "Sıcak servis",
@@ -942,7 +942,7 @@
           "name": "Roast Beef Gözleme",
           "description": "Turkish flatbread prepared with the selected filling and served hot.",
           "story": "Roast Beef Gözleme is prepared to order and served fresh.",
-          "imageAlt": "",
+          "imageAlt": "Roast Beef Gözleme product image",
           "details": [
             "Served hot",
             "Turkish flatbread"
@@ -957,8 +957,8 @@
       "description": "Seçilen iç harçla hazırlanıp sıcak servis edilen gözleme.",
       "story": "Pastırmalı Gözleme, sipariş üzerine hazırlanarak servis edilir.",
       "price": "₺390",
-      "image": "",
-      "imageAlt": "",
+      "image": "/images/menu-products/gozleme.webp",
+      "imageAlt": "Pastırmalı Gözleme ürün görseli",
       "tags": [],
       "details": [
         "Sıcak servis",
@@ -969,7 +969,7 @@
           "name": "Pastrami Gözleme",
           "description": "Turkish flatbread prepared with the selected filling and served hot.",
           "story": "Pastrami Gözleme is prepared to order and served fresh.",
-          "imageAlt": "",
+          "imageAlt": "Pastrami Gözleme product image",
           "details": [
             "Served hot",
             "Turkish flatbread"
@@ -984,8 +984,8 @@
       "description": "Seçilen iç harçla hazırlanıp sıcak servis edilen gözleme.",
       "story": "Special Gözleme, sipariş üzerine hazırlanarak servis edilir.",
       "price": "₺350",
-      "image": "",
-      "imageAlt": "",
+      "image": "/images/menu-products/gozleme.webp",
+      "imageAlt": "Special Gözleme ürün görseli",
       "tags": [],
       "details": [
         "Sıcak servis",
@@ -996,7 +996,7 @@
           "name": "Special Gözleme",
           "description": "Turkish flatbread prepared with the selected filling and served hot.",
           "story": "Special Gözleme is prepared to order and served fresh.",
-          "imageAlt": "",
+          "imageAlt": "Special Gözleme product image",
           "details": [
             "Served hot",
             "Turkish flatbread"
@@ -1039,8 +1039,8 @@
       "description": "Van kahvaltı kültüründen gelen yöresel lezzet.",
       "story": "Cevizli Çemen, sipariş üzerine hazırlanarak servis edilir.",
       "price": "₺240",
-      "image": "",
-      "imageAlt": "",
+      "image": "/images/menu-products/cevizli-cemen.webp",
+      "imageAlt": "Cevizli Çemen ürün görseli",
       "tags": [],
       "details": [
         "Yöresel tarif",
@@ -1051,7 +1051,7 @@
           "name": "Çemen with Walnut",
           "description": "A regional speciality from Van breakfast culture.",
           "story": "Çemen with Walnut is prepared to order and served fresh.",
-          "imageAlt": "",
+          "imageAlt": "Çemen with Walnut product image",
           "details": [
             "Regional recipe",
             "Breakfast serving"
@@ -1066,8 +1066,8 @@
       "description": "Van kahvaltı kültüründen gelen yöresel lezzet.",
       "story": "Tereyağlı Jaji, sipariş üzerine hazırlanarak servis edilir.",
       "price": "₺260",
-      "image": "",
-      "imageAlt": "",
+      "image": "/images/menu-products/tereyagli-jaji.webp",
+      "imageAlt": "Tereyağlı Jaji ürün görseli",
       "tags": [],
       "details": [
         "Yöresel tarif",
@@ -1078,7 +1078,7 @@
           "name": "Jaji with Butter",
           "description": "A regional speciality from Van breakfast culture.",
           "story": "Jaji with Butter is prepared to order and served fresh.",
-          "imageAlt": "",
+          "imageAlt": "Jaji with Butter product image",
           "details": [
             "Regional recipe",
             "Breakfast serving"
@@ -1093,8 +1093,8 @@
       "description": "Van kahvaltı kültüründen gelen yöresel lezzet.",
       "story": "Ballı Cevizli Kavut, sipariş üzerine hazırlanarak servis edilir.",
       "price": "₺280",
-      "image": "",
-      "imageAlt": "",
+      "image": "/images/menu-products/balli-cevizli-kavut.webp",
+      "imageAlt": "Ballı Cevizli Kavut ürün görseli",
       "tags": [],
       "details": [
         "Yöresel tarif",
@@ -1105,7 +1105,7 @@
           "name": "Kavut with Walnut and Honey",
           "description": "A regional speciality from Van breakfast culture.",
           "story": "Kavut with Walnut and Honey is prepared to order and served fresh.",
-          "imageAlt": "",
+          "imageAlt": "Kavut with Walnut and Honey product image",
           "details": [
             "Regional recipe",
             "Breakfast serving"
@@ -1120,8 +1120,8 @@
       "description": "Van kahvaltı kültüründen gelen yöresel lezzet.",
       "story": "Tereyağlı Cevizli Murtuğa, sipariş üzerine hazırlanarak servis edilir.",
       "price": "₺260",
-      "image": "",
-      "imageAlt": "",
+      "image": "/images/menu-products/tereyagli-cevizli-murtuga.webp",
+      "imageAlt": "Tereyağlı Cevizli Murtuğa ürün görseli",
       "tags": [],
       "details": [
         "Yöresel tarif",
@@ -1132,7 +1132,7 @@
           "name": "Murtuğa with Walnut and Butter",
           "description": "A regional speciality from Van breakfast culture.",
           "story": "Murtuğa with Walnut and Butter is prepared to order and served fresh.",
-          "imageAlt": "",
+          "imageAlt": "Murtuğa with Walnut and Butter product image",
           "details": [
             "Regional recipe",
             "Breakfast serving"
@@ -1147,8 +1147,8 @@
       "description": "Kahvaltı sofrası için porsiyon tatlı eşlikçi.",
       "story": "Kayısı Reçeli, sipariş üzerine hazırlanarak servis edilir.",
       "price": "₺300",
-      "image": "",
-      "imageAlt": "",
+      "image": "/images/menu-products/kayisi-receli.webp",
+      "imageAlt": "Kayısı Reçeli ürün görseli",
       "tags": [],
       "details": [
         "Porsiyon servis",
@@ -1159,7 +1159,7 @@
           "name": "Apricot Jam",
           "description": "A sweet portion for the breakfast table.",
           "story": "Apricot Jam is prepared to order and served fresh.",
-          "imageAlt": "",
+          "imageAlt": "Apricot Jam product image",
           "details": [
             "Portion serving",
             "Sweet breakfast side"
@@ -1174,8 +1174,8 @@
       "description": "Kahvaltı sofrası için porsiyon tatlı eşlikçi.",
       "story": "Ayva Reçeli, sipariş üzerine hazırlanarak servis edilir.",
       "price": "₺320",
-      "image": "",
-      "imageAlt": "",
+      "image": "/images/menu-products/ayva-receli.webp",
+      "imageAlt": "Ayva Reçeli ürün görseli",
       "tags": [],
       "details": [
         "Porsiyon servis",
@@ -1186,7 +1186,7 @@
           "name": "Quince Jam",
           "description": "A sweet portion for the breakfast table.",
           "story": "Quince Jam is prepared to order and served fresh.",
-          "imageAlt": "",
+          "imageAlt": "Quince Jam product image",
           "details": [
             "Portion serving",
             "Sweet breakfast side"
@@ -1201,8 +1201,8 @@
       "description": "Kahvaltı sofrası için porsiyon tatlı eşlikçi.",
       "story": "Portakal Reçeli, sipariş üzerine hazırlanarak servis edilir.",
       "price": "₺300",
-      "image": "",
-      "imageAlt": "",
+      "image": "/images/menu-products/portakal-receli.webp",
+      "imageAlt": "Portakal Reçeli ürün görseli",
       "tags": [],
       "details": [
         "Porsiyon servis",
@@ -1213,7 +1213,7 @@
           "name": "Orange Jam",
           "description": "A sweet portion for the breakfast table.",
           "story": "Orange Jam is prepared to order and served fresh.",
-          "imageAlt": "",
+          "imageAlt": "Orange Jam product image",
           "details": [
             "Portion serving",
             "Sweet breakfast side"
@@ -1228,8 +1228,8 @@
       "description": "Kahvaltı sofrası için porsiyon tatlı eşlikçi.",
       "story": "Çilek Reçeli, sipariş üzerine hazırlanarak servis edilir.",
       "price": "₺300",
-      "image": "",
-      "imageAlt": "",
+      "image": "/images/menu-products/cilek-receli.webp",
+      "imageAlt": "Çilek Reçeli ürün görseli",
       "tags": [],
       "details": [
         "Porsiyon servis",
@@ -1240,7 +1240,7 @@
           "name": "Strawberry Jam",
           "description": "A sweet portion for the breakfast table.",
           "story": "Strawberry Jam is prepared to order and served fresh.",
-          "imageAlt": "",
+          "imageAlt": "Strawberry Jam product image",
           "details": [
             "Portion serving",
             "Sweet breakfast side"
@@ -1255,8 +1255,8 @@
       "description": "Kahvaltı sofrası için porsiyon tatlı eşlikçi.",
       "story": "Ceviz Reçeli, sipariş üzerine hazırlanarak servis edilir.",
       "price": "₺380",
-      "image": "",
-      "imageAlt": "",
+      "image": "/images/menu-products/ceviz-receli.webp",
+      "imageAlt": "Ceviz Reçeli ürün görseli",
       "tags": [],
       "details": [
         "Porsiyon servis",
@@ -1267,7 +1267,7 @@
           "name": "Walnut Jam",
           "description": "A sweet portion for the breakfast table.",
           "story": "Walnut Jam is prepared to order and served fresh.",
-          "imageAlt": "",
+          "imageAlt": "Walnut Jam product image",
           "details": [
             "Portion serving",
             "Sweet breakfast side"
@@ -1282,8 +1282,8 @@
       "description": "Kahvaltı sofrası için porsiyon tatlı eşlikçi.",
       "story": "Nutella, sipariş üzerine hazırlanarak servis edilir.",
       "price": "₺280",
-      "image": "",
-      "imageAlt": "",
+      "image": "/images/menu-products/nutella.webp",
+      "imageAlt": "Nutella ürün görseli",
       "tags": [],
       "details": [
         "Porsiyon servis",
@@ -1294,7 +1294,7 @@
           "name": "Hazelnut Spread",
           "description": "A sweet portion for the breakfast table.",
           "story": "Hazelnut Spread is prepared to order and served fresh.",
-          "imageAlt": "",
+          "imageAlt": "Hazelnut Spread product image",
           "details": [
             "Portion serving",
             "Sweet breakfast side"
@@ -1309,8 +1309,8 @@
       "description": "Kahvaltı sofrası için porsiyon servis.",
       "story": "Bal, sipariş üzerine hazırlanarak servis edilir.",
       "price": "₺280",
-      "image": "",
-      "imageAlt": "",
+      "image": "/images/menu-products/bal.webp",
+      "imageAlt": "Bal ürün görseli",
       "tags": [],
       "details": [
         "Porsiyon servis",
@@ -1321,7 +1321,7 @@
           "name": "Honey",
           "description": "A portion for the breakfast table.",
           "story": "Honey is prepared to order and served fresh.",
-          "imageAlt": "",
+          "imageAlt": "Honey product image",
           "details": [
             "Portion serving",
             "Breakfast side"
@@ -1336,8 +1336,8 @@
       "description": "Kahvaltı sofrası için porsiyon servis.",
       "story": "Kaymak, sipariş üzerine hazırlanarak servis edilir.",
       "price": "₺320",
-      "image": "",
-      "imageAlt": "",
+      "image": "/images/menu-products/kaymak.webp",
+      "imageAlt": "Kaymak ürün görseli",
       "tags": [],
       "details": [
         "Porsiyon servis",
@@ -1348,7 +1348,7 @@
           "name": "Clotted Cream",
           "description": "A portion for the breakfast table.",
           "story": "Clotted Cream is prepared to order and served fresh.",
-          "imageAlt": "",
+          "imageAlt": "Clotted Cream product image",
           "details": [
             "Portion serving",
             "Breakfast side"
@@ -1363,8 +1363,8 @@
       "description": "Kahvaltı sofrası için porsiyon servis.",
       "story": "Bal - Kaymak, sipariş üzerine hazırlanarak servis edilir.",
       "price": "₺300",
-      "image": "",
-      "imageAlt": "",
+      "image": "/images/menu-products/bal-kaymak.webp",
+      "imageAlt": "Bal - Kaymak ürün görseli",
       "tags": [],
       "details": [
         "Porsiyon servis",
@@ -1375,7 +1375,7 @@
           "name": "Clotted Cream and Honey",
           "description": "A portion for the breakfast table.",
           "story": "Clotted Cream and Honey is prepared to order and served fresh.",
-          "imageAlt": "",
+          "imageAlt": "Clotted Cream and Honey product image",
           "details": [
             "Portion serving",
             "Breakfast side"
@@ -1390,8 +1390,8 @@
       "description": "Kahvaltı sofrası için porsiyon servis.",
       "story": "Tereyağı, sipariş üzerine hazırlanarak servis edilir.",
       "price": "₺320",
-      "image": "",
-      "imageAlt": "",
+      "image": "/images/menu-products/tereyagi.webp",
+      "imageAlt": "Tereyağı ürün görseli",
       "tags": [],
       "details": [
         "Porsiyon servis",
@@ -1402,7 +1402,7 @@
           "name": "Butter",
           "description": "A portion for the breakfast table.",
           "story": "Butter is prepared to order and served fresh.",
-          "imageAlt": "",
+          "imageAlt": "Butter product image",
           "details": [
             "Portion serving",
             "Breakfast side"
@@ -1417,8 +1417,8 @@
       "description": "Kahvaltı sofrası için porsiyon servis.",
       "story": "Bal - Tereyağı, sipariş üzerine hazırlanarak servis edilir.",
       "price": "₺320",
-      "image": "",
-      "imageAlt": "",
+      "image": "/images/menu-products/bal-tereyagi.webp",
+      "imageAlt": "Bal - Tereyağı ürün görseli",
       "tags": [],
       "details": [
         "Porsiyon servis",
@@ -1429,7 +1429,7 @@
           "name": "Honey and Butter",
           "description": "A portion for the breakfast table.",
           "story": "Honey and Butter is prepared to order and served fresh.",
-          "imageAlt": "",
+          "imageAlt": "Honey and Butter product image",
           "details": [
             "Portion serving",
             "Breakfast side"
@@ -1444,8 +1444,8 @@
       "description": "Kahvaltı sofrası için porsiyon servis.",
       "story": "Tahin, sipariş üzerine hazırlanarak servis edilir.",
       "price": "₺280",
-      "image": "",
-      "imageAlt": "",
+      "image": "/images/menu-products/tahin.webp",
+      "imageAlt": "Tahin ürün görseli",
       "tags": [],
       "details": [
         "Porsiyon servis",
@@ -1456,7 +1456,7 @@
           "name": "Tahini",
           "description": "A portion for the breakfast table.",
           "story": "Tahini is prepared to order and served fresh.",
-          "imageAlt": "",
+          "imageAlt": "Tahini product image",
           "details": [
             "Portion serving",
             "Breakfast side"
@@ -1471,8 +1471,8 @@
       "description": "Kahvaltı sofrası için porsiyon servis.",
       "story": "Tahin - Pekmez, sipariş üzerine hazırlanarak servis edilir.",
       "price": "₺280",
-      "image": "",
-      "imageAlt": "",
+      "image": "/images/menu-products/tahin-pekmez.webp",
+      "imageAlt": "Tahin - Pekmez ürün görseli",
       "tags": [],
       "details": [
         "Porsiyon servis",
@@ -1483,7 +1483,7 @@
           "name": "Tahini and Molasses",
           "description": "A portion for the breakfast table.",
           "story": "Tahini and Molasses is prepared to order and served fresh.",
-          "imageAlt": "",
+          "imageAlt": "Tahini and Molasses product image",
           "details": [
             "Portion serving",
             "Breakfast side"
@@ -1498,8 +1498,8 @@
       "description": "Kahvaltı sofrası için porsiyon servis.",
       "story": "Pekmez, sipariş üzerine hazırlanarak servis edilir.",
       "price": "₺280",
-      "image": "",
-      "imageAlt": "",
+      "image": "/images/menu-products/pekmez.webp",
+      "imageAlt": "Pekmez ürün görseli",
       "tags": [],
       "details": [
         "Porsiyon servis",
@@ -1510,7 +1510,7 @@
           "name": "Grape Molasses",
           "description": "A portion for the breakfast table.",
           "story": "Grape Molasses is prepared to order and served fresh.",
-          "imageAlt": "",
+          "imageAlt": "Grape Molasses product image",
           "details": [
             "Portion serving",
             "Breakfast side"
@@ -1714,8 +1714,8 @@
       "description": "Seçilen malzemeyle hazırlanıp sıcak servis edilen omlet.",
       "story": "Et Karışık Omlet, sipariş üzerine hazırlanarak servis edilir.",
       "price": "₺390",
-      "image": "",
-      "imageAlt": "",
+      "image": "/images/menu-products/et-karisik-omlet.webp",
+      "imageAlt": "Et Karışık Omlet ürün görseli",
       "tags": [],
       "details": [
         "Yumurta",
@@ -1726,7 +1726,7 @@
           "name": "Mixed Meat Omelette",
           "description": "Omelette prepared with the selected ingredient and served hot.",
           "story": "Mixed Meat Omelette is prepared to order and served fresh.",
-          "imageAlt": "",
+          "imageAlt": "Mixed Meat Omelette product image",
           "details": [
             "Eggs",
             "Served hot"
@@ -1741,8 +1741,8 @@
       "description": "Seçilen malzemeyle hazırlanıp sıcak servis edilen omlet.",
       "story": "Sebze Karışık Omlet, sipariş üzerine hazırlanarak servis edilir.",
       "price": "₺360",
-      "image": "",
-      "imageAlt": "",
+      "image": "/images/menu-products/sebze-karisik-omlet.webp",
+      "imageAlt": "Sebze Karışık Omlet ürün görseli",
       "tags": [],
       "details": [
         "Yumurta",
@@ -1753,7 +1753,7 @@
           "name": "Mixed Vegetable Omelette",
           "description": "Omelette prepared with the selected ingredient and served hot.",
           "story": "Mixed Vegetable Omelette is prepared to order and served fresh.",
-          "imageAlt": "",
+          "imageAlt": "Mixed Vegetable Omelette product image",
           "details": [
             "Eggs",
             "Served hot"
@@ -1768,8 +1768,8 @@
       "description": "Domates ve yumurta temeliyle hazırlanıp sıcak servis edilen menemen.",
       "story": "Sade Menemen, sipariş üzerine hazırlanarak servis edilir.",
       "price": "₺310",
-      "image": "",
-      "imageAlt": "",
+      "image": "/images/menu-products/sade-menemen.webp",
+      "imageAlt": "Sade Menemen ürün görseli",
       "tags": [],
       "details": [
         "Domates",
@@ -1781,7 +1781,7 @@
           "name": "Plain Menemen",
           "description": "Turkish scrambled eggs with tomatoes, prepared with the selected ingredient and served hot.",
           "story": "Plain Menemen is prepared to order and served fresh.",
-          "imageAlt": "",
+          "imageAlt": "Plain Menemen product image",
           "details": [
             "Tomatoes",
             "Eggs",
@@ -1797,8 +1797,8 @@
       "description": "Domates ve yumurta temeliyle hazırlanıp sıcak servis edilen menemen.",
       "story": "Mantarlı Menemen, sipariş üzerine hazırlanarak servis edilir.",
       "price": "₺340",
-      "image": "",
-      "imageAlt": "",
+      "image": "/images/menu-products/mantarli-menemen.webp",
+      "imageAlt": "Mantarlı Menemen ürün görseli",
       "tags": [],
       "details": [
         "Domates",
@@ -1810,7 +1810,7 @@
           "name": "Mushroom Menemen",
           "description": "Turkish scrambled eggs with tomatoes, prepared with the selected ingredient and served hot.",
           "story": "Mushroom Menemen is prepared to order and served fresh.",
-          "imageAlt": "",
+          "imageAlt": "Mushroom Menemen product image",
           "details": [
             "Tomatoes",
             "Eggs",
@@ -1826,8 +1826,8 @@
       "description": "Domates ve yumurta temeliyle hazırlanıp sıcak servis edilen menemen.",
       "story": "Peynirli Menemen, sipariş üzerine hazırlanarak servis edilir.",
       "price": "₺340",
-      "image": "",
-      "imageAlt": "",
+      "image": "/images/menu-products/peynirli-menemen.webp",
+      "imageAlt": "Peynirli Menemen ürün görseli",
       "tags": [],
       "details": [
         "Domates",
@@ -1839,7 +1839,7 @@
           "name": "Cheese Menemen",
           "description": "Turkish scrambled eggs with tomatoes, prepared with the selected ingredient and served hot.",
           "story": "Cheese Menemen is prepared to order and served fresh.",
-          "imageAlt": "",
+          "imageAlt": "Cheese Menemen product image",
           "details": [
             "Tomatoes",
             "Eggs",
@@ -1855,8 +1855,8 @@
       "description": "Domates ve yumurta temeliyle hazırlanıp sıcak servis edilen menemen.",
       "story": "Sucuklu Menemen, sipariş üzerine hazırlanarak servis edilir.",
       "price": "₺370",
-      "image": "",
-      "imageAlt": "",
+      "image": "/images/menu-products/sucuklu-menemen.webp",
+      "imageAlt": "Sucuklu Menemen ürün görseli",
       "tags": [],
       "details": [
         "Domates",
@@ -1868,7 +1868,7 @@
           "name": "Sucuk Menemen",
           "description": "Turkish scrambled eggs with tomatoes, prepared with the selected ingredient and served hot.",
           "story": "Sucuk Menemen is prepared to order and served fresh.",
-          "imageAlt": "",
+          "imageAlt": "Sucuk Menemen product image",
           "details": [
             "Tomatoes",
             "Eggs",
@@ -1884,8 +1884,8 @@
       "description": "Domates ve yumurta temeliyle hazırlanıp sıcak servis edilen menemen.",
       "story": "Kavurmalı Menemen, sipariş üzerine hazırlanarak servis edilir.",
       "price": "₺390",
-      "image": "",
-      "imageAlt": "",
+      "image": "/images/menu-products/kavurmali-menemen.webp",
+      "imageAlt": "Kavurmalı Menemen ürün görseli",
       "tags": [],
       "details": [
         "Domates",
@@ -1897,7 +1897,7 @@
           "name": "Roast Beef Menemen",
           "description": "Turkish scrambled eggs with tomatoes, prepared with the selected ingredient and served hot.",
           "story": "Roast Beef Menemen is prepared to order and served fresh.",
-          "imageAlt": "",
+          "imageAlt": "Roast Beef Menemen product image",
           "details": [
             "Tomatoes",
             "Eggs",
@@ -1913,8 +1913,8 @@
       "description": "Domates ve yumurta temeliyle hazırlanıp sıcak servis edilen menemen.",
       "story": "Pastırmalı Menemen, sipariş üzerine hazırlanarak servis edilir.",
       "price": "₺390",
-      "image": "",
-      "imageAlt": "",
+      "image": "/images/menu-products/pastirmali-menemen.webp",
+      "imageAlt": "Pastırmalı Menemen ürün görseli",
       "tags": [],
       "details": [
         "Domates",
@@ -1926,7 +1926,7 @@
           "name": "Pastrami Menemen",
           "description": "Turkish scrambled eggs with tomatoes, prepared with the selected ingredient and served hot.",
           "story": "Pastrami Menemen is prepared to order and served fresh.",
-          "imageAlt": "",
+          "imageAlt": "Pastrami Menemen product image",
           "details": [
             "Tomatoes",
             "Eggs",
@@ -1942,8 +1942,8 @@
       "description": "Seçilen malzemeyle sahanda hazırlanıp sıcak servis edilen yumurta.",
       "story": "Sahanda Yumurta, sipariş üzerine hazırlanarak servis edilir.",
       "price": "₺200",
-      "image": "",
-      "imageAlt": "",
+      "image": "/images/menu-products/sahanda-yumurta.webp",
+      "imageAlt": "Sahanda Yumurta ürün görseli",
       "tags": [],
       "details": [
         "Sahanda hazırlanır",
@@ -1954,7 +1954,7 @@
           "name": "Fried Eggs",
           "description": "Eggs prepared in a pan with the selected ingredient and served hot.",
           "story": "Fried Eggs is prepared to order and served fresh.",
-          "imageAlt": "",
+          "imageAlt": "Fried Eggs product image",
           "details": [
             "Prepared in a pan",
             "Served hot"
@@ -1969,8 +1969,8 @@
       "description": "Seçilen malzemeyle sahanda hazırlanıp sıcak servis edilen yumurta.",
       "story": "Patatesli Yumurta, sipariş üzerine hazırlanarak servis edilir.",
       "price": "₺300",
-      "image": "",
-      "imageAlt": "",
+      "image": "/images/menu-products/patatesli-yumurta.webp",
+      "imageAlt": "Patatesli Yumurta ürün görseli",
       "tags": [],
       "details": [
         "Sahanda hazırlanır",
@@ -1981,7 +1981,7 @@
           "name": "Eggs with Potato",
           "description": "Eggs prepared in a pan with the selected ingredient and served hot.",
           "story": "Eggs with Potato is prepared to order and served fresh.",
-          "imageAlt": "",
+          "imageAlt": "Eggs with Potato product image",
           "details": [
             "Prepared in a pan",
             "Served hot"
@@ -1996,8 +1996,8 @@
       "description": "Seçilen malzemeyle sahanda hazırlanıp sıcak servis edilen yumurta.",
       "story": "Ispanaklı Yumurta, sipariş üzerine hazırlanarak servis edilir.",
       "price": "₺330",
-      "image": "",
-      "imageAlt": "",
+      "image": "/images/menu-products/ispanakli-yumurta.webp",
+      "imageAlt": "Ispanaklı Yumurta ürün görseli",
       "tags": [],
       "details": [
         "Sahanda hazırlanır",
@@ -2008,7 +2008,7 @@
           "name": "Eggs with Spinach",
           "description": "Eggs prepared in a pan with the selected ingredient and served hot.",
           "story": "Eggs with Spinach is prepared to order and served fresh.",
-          "imageAlt": "",
+          "imageAlt": "Eggs with Spinach product image",
           "details": [
             "Prepared in a pan",
             "Served hot"
@@ -2023,8 +2023,8 @@
       "description": "Seçilen malzemeyle sahanda hazırlanıp sıcak servis edilen yumurta.",
       "story": "Peynirli Yumurta, sipariş üzerine hazırlanarak servis edilir.",
       "price": "₺300",
-      "image": "",
-      "imageAlt": "",
+      "image": "/images/menu-products/peynirli-yumurta.webp",
+      "imageAlt": "Peynirli Yumurta ürün görseli",
       "tags": [],
       "details": [
         "Sahanda hazırlanır",
@@ -2035,7 +2035,7 @@
           "name": "Eggs with Cheese",
           "description": "Eggs prepared in a pan with the selected ingredient and served hot.",
           "story": "Eggs with Cheese is prepared to order and served fresh.",
-          "imageAlt": "",
+          "imageAlt": "Eggs with Cheese product image",
           "details": [
             "Prepared in a pan",
             "Served hot"
@@ -2050,8 +2050,8 @@
       "description": "Seçilen malzemeyle sahanda hazırlanıp sıcak servis edilen yumurta.",
       "story": "Sucuklu Yumurta, sipariş üzerine hazırlanarak servis edilir.",
       "price": "₺320",
-      "image": "",
-      "imageAlt": "",
+      "image": "/images/menu-products/sucuklu-yumurta.webp",
+      "imageAlt": "Sucuklu Yumurta ürün görseli",
       "tags": [],
       "details": [
         "Sahanda hazırlanır",
@@ -2062,7 +2062,7 @@
           "name": "Eggs with Sucuk",
           "description": "Eggs prepared in a pan with the selected ingredient and served hot.",
           "story": "Eggs with Sucuk is prepared to order and served fresh.",
-          "imageAlt": "",
+          "imageAlt": "Eggs with Sucuk product image",
           "details": [
             "Prepared in a pan",
             "Served hot"
@@ -2077,8 +2077,8 @@
       "description": "Seçilen malzemeyle sahanda hazırlanıp sıcak servis edilen yumurta.",
       "story": "Mantarlı Yumurta, sipariş üzerine hazırlanarak servis edilir.",
       "price": "₺330",
-      "image": "",
-      "imageAlt": "",
+      "image": "/images/menu-products/mantarli-yumurta.webp",
+      "imageAlt": "Mantarlı Yumurta ürün görseli",
       "tags": [],
       "details": [
         "Sahanda hazırlanır",
@@ -2089,7 +2089,7 @@
           "name": "Eggs with Mushroom",
           "description": "Eggs prepared in a pan with the selected ingredient and served hot.",
           "story": "Eggs with Mushroom is prepared to order and served fresh.",
-          "imageAlt": "",
+          "imageAlt": "Eggs with Mushroom product image",
           "details": [
             "Prepared in a pan",
             "Served hot"
@@ -2104,8 +2104,8 @@
       "description": "Seçilen malzemeyle sahanda hazırlanıp sıcak servis edilen yumurta.",
       "story": "Sosisli Yumurta, sipariş üzerine hazırlanarak servis edilir.",
       "price": "₺300",
-      "image": "",
-      "imageAlt": "",
+      "image": "/images/menu-products/sosisli-yumurta.webp",
+      "imageAlt": "Sosisli Yumurta ürün görseli",
       "tags": [],
       "details": [
         "Sahanda hazırlanır",
@@ -2116,7 +2116,7 @@
           "name": "Eggs with Hot Dog",
           "description": "Eggs prepared in a pan with the selected ingredient and served hot.",
           "story": "Eggs with Hot Dog is prepared to order and served fresh.",
-          "imageAlt": "",
+          "imageAlt": "Eggs with Hot Dog product image",
           "details": [
             "Prepared in a pan",
             "Served hot"
@@ -2131,8 +2131,8 @@
       "description": "Seçilen malzemeyle sahanda hazırlanıp sıcak servis edilen yumurta.",
       "story": "Kavurmalı Yumurta, sipariş üzerine hazırlanarak servis edilir.",
       "price": "₺350",
-      "image": "",
-      "imageAlt": "",
+      "image": "/images/menu-products/kavurmali-yumurta.webp",
+      "imageAlt": "Kavurmalı Yumurta ürün görseli",
       "tags": [],
       "details": [
         "Sahanda hazırlanır",
@@ -2143,7 +2143,7 @@
           "name": "Eggs with Roast Beef",
           "description": "Eggs prepared in a pan with the selected ingredient and served hot.",
           "story": "Eggs with Roast Beef is prepared to order and served fresh.",
-          "imageAlt": "",
+          "imageAlt": "Eggs with Roast Beef product image",
           "details": [
             "Prepared in a pan",
             "Served hot"
@@ -2158,8 +2158,8 @@
       "description": "Mısır unu ve peynirle hazırlanan sıcak kuymak.",
       "story": "Mısır unu ve peynirle hazırlanan sıcak kuymak.",
       "price": "₺320",
-      "image": "",
-      "imageAlt": "",
+      "image": "/images/menu-products/kuymak.webp",
+      "imageAlt": "Kuymak ürün görseli",
       "tags": [],
       "details": [
         "Sahanda hazırlanır",
@@ -2170,7 +2170,7 @@
           "name": "Kuymak (Cornmeal and Cheese)",
           "description": "Eggs prepared in a pan with the selected ingredient and served hot.",
           "story": "Mısır unu ve peynirle hazırlanan sıcak kuymak.",
-          "imageAlt": "",
+          "imageAlt": "Kuymak (Cornmeal and Cheese) product image",
           "details": [
             "Prepared in a pan",
             "Served hot"
@@ -2185,8 +2185,8 @@
       "description": "Seçilen malzemeyle sahanda hazırlanıp sıcak servis edilen yumurta.",
       "story": "Pastırmalı Yumurta, sipariş üzerine hazırlanarak servis edilir.",
       "price": "₺350",
-      "image": "",
-      "imageAlt": "",
+      "image": "/images/menu-products/pastirmali-yumurta.webp",
+      "imageAlt": "Pastırmalı Yumurta ürün görseli",
       "tags": [],
       "details": [
         "Sahanda hazırlanır",
@@ -2197,7 +2197,7 @@
           "name": "Eggs with Pastrami",
           "description": "Eggs prepared in a pan with the selected ingredient and served hot.",
           "story": "Eggs with Pastrami is prepared to order and served fresh.",
-          "imageAlt": "",
+          "imageAlt": "Eggs with Pastrami product image",
           "details": [
             "Prepared in a pan",
             "Served hot"
@@ -2212,8 +2212,8 @@
       "description": "Sahanda hazırlanıp sıcak servis edilen kahvaltılık.",
       "story": "Salçalı Sahanda Sosis, sipariş üzerine hazırlanarak servis edilir.",
       "price": "₺350",
-      "image": "",
-      "imageAlt": "",
+      "image": "/images/menu-products/salcali-sahanda-sosis.webp",
+      "imageAlt": "Salçalı Sahanda Sosis ürün görseli",
       "tags": [],
       "details": [
         "Sahanda hazırlanır",
@@ -2224,7 +2224,7 @@
           "name": "Hot Dog with Tomato Sauce",
           "description": "Prepared in a pan and served hot.",
           "story": "Hot Dog with Tomato Sauce is prepared to order and served fresh.",
-          "imageAlt": "",
+          "imageAlt": "Hot Dog with Tomato Sauce product image",
           "details": [
             "Prepared in a pan",
             "Served hot"
@@ -2239,8 +2239,8 @@
       "description": "Sahanda hazırlanıp sıcak servis edilen kahvaltılık.",
       "story": "Sahanda Kavurma, sipariş üzerine hazırlanarak servis edilir.",
       "price": "₺350",
-      "image": "",
-      "imageAlt": "",
+      "image": "/images/menu-products/sahanda-kavurma.webp",
+      "imageAlt": "Sahanda Kavurma ürün görseli",
       "tags": [],
       "details": [
         "Sahanda hazırlanır",
@@ -2251,7 +2251,7 @@
           "name": "Roast Beef Pan",
           "description": "Prepared in a pan and served hot.",
           "story": "Roast Beef Pan is prepared to order and served fresh.",
-          "imageAlt": "",
+          "imageAlt": "Roast Beef Pan product image",
           "details": [
             "Prepared in a pan",
             "Served hot"
@@ -2266,8 +2266,8 @@
       "description": "Sahanda hazırlanıp sıcak servis edilen kahvaltılık.",
       "story": "Sahanda Sucuk, sipariş üzerine hazırlanarak servis edilir.",
       "price": "₺350",
-      "image": "",
-      "imageAlt": "",
+      "image": "/images/menu-products/sahanda-sucuk.webp",
+      "imageAlt": "Sahanda Sucuk ürün görseli",
       "tags": [],
       "details": [
         "Sahanda hazırlanır",
@@ -2278,7 +2278,7 @@
           "name": "Sucuk Pan",
           "description": "Prepared in a pan and served hot.",
           "story": "Sucuk Pan is prepared to order and served fresh.",
-          "imageAlt": "",
+          "imageAlt": "Sucuk Pan product image",
           "details": [
             "Prepared in a pan",
             "Served hot"
@@ -2293,8 +2293,8 @@
       "description": "Sahanda hazırlanıp sıcak servis edilen kahvaltılık.",
       "story": "Sahanda Pastırma, sipariş üzerine hazırlanarak servis edilir.",
       "price": "₺350",
-      "image": "",
-      "imageAlt": "",
+      "image": "/images/menu-products/sahanda-pastirma.webp",
+      "imageAlt": "Sahanda Pastırma ürün görseli",
       "tags": [],
       "details": [
         "Sahanda hazırlanır",
@@ -2305,7 +2305,7 @@
           "name": "Pastrami Pan",
           "description": "Prepared in a pan and served hot.",
           "story": "Pastrami Pan is prepared to order and served fresh.",
-          "imageAlt": "",
+          "imageAlt": "Pastrami Pan product image",
           "details": [
             "Prepared in a pan",
             "Served hot"
@@ -3458,8 +3458,8 @@
       "description": "Sipariş üzerine hazırlanıp sıcak servis edilen kahve.",
       "story": "Latte, sipariş üzerine hazırlanarak servis edilir.",
       "price": "₺270",
-      "image": "",
-      "imageAlt": "",
+      "image": "/images/menu-products/latte.webp",
+      "imageAlt": "Latte ürün görseli",
       "tags": [],
       "details": [
         "Sipariş üzerine hazırlanır",
@@ -3470,7 +3470,7 @@
           "name": "Latte",
           "description": "Coffee prepared to order and served hot.",
           "story": "Latte is prepared to order and served fresh.",
-          "imageAlt": "",
+          "imageAlt": "Latte product image",
           "details": [
             "Prepared to order",
             "Served hot"
@@ -3647,8 +3647,8 @@
       "description": "Sipariş üzerine hazırlanıp sıcak servis edilen kahve.",
       "story": "Türk Kahvesi, sipariş üzerine hazırlanarak servis edilir.",
       "price": "₺160",
-      "image": "",
-      "imageAlt": "",
+      "image": "/images/menu-products/turk-kahvesi.webp",
+      "imageAlt": "Türk Kahvesi ürün görseli",
       "tags": [],
       "details": [
         "Sipariş üzerine hazırlanır",
@@ -3659,7 +3659,7 @@
           "name": "Turkish Coffee",
           "description": "Coffee prepared to order and served hot.",
           "story": "Turkish Coffee is prepared to order and served fresh.",
-          "imageAlt": "",
+          "imageAlt": "Turkish Coffee product image",
           "details": [
             "Prepared to order",
             "Served hot"
@@ -3809,8 +3809,8 @@
       "description": "Buzla hazırlanıp soğuk servis edilen kahve.",
       "story": "Ice Latte, sipariş üzerine hazırlanarak servis edilir.",
       "price": "₺270",
-      "image": "",
-      "imageAlt": "",
+      "image": "/images/menu-products/ice-latte.webp",
+      "imageAlt": "Ice Latte ürün görseli",
       "tags": [],
       "details": [
         "Buzlu",
@@ -3821,7 +3821,7 @@
           "name": "Iced Latte",
           "description": "Coffee prepared with ice and served cold.",
           "story": "Iced Latte is prepared to order and served fresh.",
-          "imageAlt": "",
+          "imageAlt": "Iced Latte product image",
           "details": [
             "Iced",
             "Served cold"
@@ -4025,8 +4025,8 @@
       "description": "18 aroma seçeneğinden biriyle hazırlanır.",
       "story": "18 aroma seçeneğinden biriyle hazırlanır.",
       "price": "₺290",
-      "image": "",
-      "imageAlt": "",
+      "image": "/images/menu-products/milkshake.webp",
+      "imageAlt": "Milkshake ürün görseli",
       "tags": [],
       "details": [
         "Mango",
@@ -4053,7 +4053,7 @@
           "name": "Milkshake",
           "description": "Prepared with a choice of 18 flavours.",
           "story": "Prepared with a choice of 18 flavours.",
-          "imageAlt": "",
+          "imageAlt": "Milkshake product image",
           "details": [
             "Mango",
             "Strawberry",
