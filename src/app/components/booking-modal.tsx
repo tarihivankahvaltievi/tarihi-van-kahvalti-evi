@@ -163,10 +163,12 @@ Rezervasyonumu onaylayabilir misiniz? Şimdiden teşekkürler.`;
     <dialog
       ref={dialogRef}
       className={styles.dialog}
+      aria-modal="true"
       aria-labelledby="booking-title"
       aria-describedby="booking-description"
     >
       <header className={styles.header}>
+        <span className={styles.sheetHandle} aria-hidden="true" />
         <span className={styles.headerIcon} aria-hidden="true">
           <CalendarDays size={25} strokeWidth={1.9} />
         </span>
