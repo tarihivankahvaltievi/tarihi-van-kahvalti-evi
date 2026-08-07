@@ -26,8 +26,29 @@ function getCategoryIcon(categoryId: string): MenuCategoryIconName {
 }
 
 function getCategoryNavLabel(category: MenuCategory, locale: MenuLocale) {
-  if (category.id === "receller") return locale === "en" ? "Preserves" : "Reçeller";
-  return category.label.length <= 18 ? category.label : category.shortLabel || category.label;
+  if (locale === "en") return category.shortLabel || category.label;
+
+  const turkishLabels: Record<string, string> = {
+    "kahvalti-menuleri": "Kahvaltı",
+    peynirler: "Peynirler",
+    zeytinler: "Zeytinler",
+    gozlemeler: "Gözlemeler",
+    "yoresel-tatlar": "Yöresel",
+    receller: "Reçeller",
+    ballar: "Ballar",
+    omletler: "Omletler",
+    menemenler: "Menemenler",
+    yumurtalar: "Yumurtalar",
+    sahanlar: "Sahanlar",
+    "sicak-icecekler": "Sıcak içecekler",
+    "bitki-caylari": "Bitki çayları",
+    "soft-icecekler": "Soft içecekler",
+    "soguk-icecekler": "Soğuk içecekler",
+    "sicak-kahveler": "Sıcak kahveler",
+    "soguk-kahveler": "Soğuk kahveler",
+    "milkshake-frozen-smoothie": "Özel içecekler",
+  };
+  return turkishLabels[category.id] ?? category.shortLabel ?? category.label;
 }
 
 function normalize(value: string, locale: MenuLocale) {
@@ -138,6 +159,7 @@ export function MenuExperience({
   const searchInputRef = useRef<HTMLInputElement>(null);
   const searchSessionRef = useRef(false);
   const categoryNavRef = useRef<HTMLElement>(null);
+  const scrollIntentRef = useRef<{ categoryId: string; timeout: number } | null>(null);
   const [activeCategory, setActiveCategory] = useState("all");
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedItem, setSelectedItem] = useState<MenuItem | null>(null);
@@ -201,13 +223,22 @@ export function MenuExperience({
   const openItem = useCallback((item: MenuItem) => setSelectedItem(item), []);
   const closeItem = useCallback(() => setSelectedItem(null), []);
 
-  const centerCategoryButton = useCallback((categoryId: string, behavior: ScrollBehavior = "smooth") => {
+  const centerCategoryButton = useCallback((categoryId: string) => {
     const trigger = categoryNavRef.current?.querySelector<HTMLButtonElement>(`[data-category-id="${categoryId}"]`);
     const rail = categoryNavRef.current;
     if (!trigger || !rail) return;
+
+    const railRect = rail.getBoundingClientRect();
+    const triggerRect = trigger.getBoundingClientRect();
+    const comfortInset = Math.min(48, railRect.width * 0.16);
+    const comfortablyVisible =
+      triggerRect.left >= railRect.left + comfortInset &&
+      triggerRect.right <= railRect.right - comfortInset;
+    if (comfortablyVisible) return;
+
     rail.scrollTo({
       left: trigger.offsetLeft - (rail.clientWidth - trigger.offsetWidth) / 2,
-      behavior: reduceMotion ? "auto" : behavior,
+      behavior: reduceMotion ? "auto" : "smooth",
     });
   }, [reduceMotion]);
 
@@ -217,6 +248,14 @@ export function MenuExperience({
     setSearchTerm("");
     setActiveCategory(categoryId);
     centerCategoryButton(categoryId);
+
+    if (scrollIntentRef.current) window.clearTimeout(scrollIntentRef.current.timeout);
+    scrollIntentRef.current = {
+      categoryId,
+      timeout: window.setTimeout(() => {
+        scrollIntentRef.current = null;
+      }, 1200),
+    };
 
     window.requestAnimationFrame(() => {
       window.requestAnimationFrame(() => {
@@ -243,6 +282,16 @@ export function MenuExperience({
       if (!catalog || !results) return;
 
       const marker = 72 + catalog.getBoundingClientRect().height + 24;
+      const scrollIntent = scrollIntentRef.current;
+      if (scrollIntent) {
+        const intendedSection = scrollIntent.categoryId === "all"
+          ? results
+          : document.getElementById(`menu-section-${scrollIntent.categoryId}`);
+        if (!intendedSection || Math.abs(intendedSection.getBoundingClientRect().top - marker) > 18) return;
+        window.clearTimeout(scrollIntent.timeout);
+        scrollIntentRef.current = null;
+      }
+
       if (results.getBoundingClientRect().top > marker) {
         setActiveCategory("all");
         return;
@@ -258,19 +307,29 @@ export function MenuExperience({
     const handleScroll = () => {
       if (frame === null) frame = window.requestAnimationFrame(updateActiveCategory);
     };
+    const cancelScrollIntent = () => {
+      if (!scrollIntentRef.current) return;
+      window.clearTimeout(scrollIntentRef.current.timeout);
+      scrollIntentRef.current = null;
+    };
 
     updateActiveCategory();
     window.addEventListener("scroll", handleScroll, { passive: true });
     window.addEventListener("resize", handleScroll);
+    window.addEventListener("wheel", cancelScrollIntent, { passive: true });
+    window.addEventListener("touchstart", cancelScrollIntent, { passive: true });
     return () => {
       window.removeEventListener("scroll", handleScroll);
       window.removeEventListener("resize", handleScroll);
+      window.removeEventListener("wheel", cancelScrollIntent);
+      window.removeEventListener("touchstart", cancelScrollIntent);
       if (frame !== null) window.cancelAnimationFrame(frame);
+      if (scrollIntentRef.current) window.clearTimeout(scrollIntentRef.current.timeout);
     };
   }, [deferredSearch, navigableCategories]);
 
   useEffect(() => {
-    centerCategoryButton(activeCategory, "auto");
+    centerCategoryButton(activeCategory);
   }, [activeCategory, centerCategoryButton]);
 
   const handleSearchFocus = () => {
@@ -346,7 +405,7 @@ export function MenuExperience({
                 label: getCategoryNavLabel(category, locale),
                 icon: getCategoryIcon(category.id),
               })),
-            ].map((category, index) => (
+            ].map((category) => (
               <button
                 key={category.id}
                 type="button"
@@ -355,7 +414,6 @@ export function MenuExperience({
                 aria-current={activeCategory === category.id ? "true" : undefined}
                 aria-controls="menu-results"
                 aria-label={messages.showCategory(category.label)}
-                style={{ animationDelay: `${index * 34}ms` }}
                 onClick={() => selectCategory(category.id)}
               >
                 <span className={styles.categoryIconWell} aria-hidden="true">
