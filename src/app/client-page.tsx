@@ -423,22 +423,32 @@ export default function ClientPage({ children, locale = "tr" }: { children: Reac
         {children}
       </div>
 
-      {!isMenuPage ? (
-        <div className={`mobile-bar ${mobileBarHidden || menuOpen ? "is-hidden" : ""}`} role="navigation" aria-label={messages.mobile.aria}>
+      <div className={`mobile-bar ${mobileBarHidden || menuOpen ? "is-hidden" : ""}`} role="navigation" aria-label={messages.mobile.aria}>
           <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" aria-label={messages.mobile.whatsappAria}>
             <MessageCircle size={20} />
             <span className="mobile-bar-label">WhatsApp</span>
           </a>
-          <Link className="mobile-bar-primary" href={messages.menuHref} aria-label={messages.mobile.menuAria}>
-            <UtensilsCrossed size={22} className="mobile-bar-highlight-icon" />
-            <span className="mobile-bar-label">{messages.mobile.menu}</span>
-          </Link>
+          {isMenuPage ? (
+            <button
+              type="button"
+              className="mobile-bar-primary"
+              aria-label={locale === "en" ? "Request a table" : "Rezervasyon yap"}
+              onClick={() => handleOpenBooking()}
+            >
+              <Calendar size={22} className="mobile-bar-highlight-icon" />
+              <span className="mobile-bar-label">{locale === "en" ? "Book" : "Rezervasyon"}</span>
+            </button>
+          ) : (
+            <Link className="mobile-bar-primary" href={messages.menuHref} aria-label={messages.mobile.menuAria}>
+              <UtensilsCrossed size={22} className="mobile-bar-highlight-icon" />
+              <span className="mobile-bar-label">{messages.mobile.menu}</span>
+            </Link>
+          )}
           <a href={mapsUrl} target="_blank" rel="noopener noreferrer" aria-label={messages.mobile.directionsAria}>
             <MapPin size={20} />
             <span className="mobile-bar-label">{messages.mobile.directions}</span>
           </a>
-        </div>
-      ) : null}
+      </div>
 
       {isBookingOpen ? (
         <BookingModal

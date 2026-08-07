@@ -14,125 +14,21 @@ const ProductSheet = dynamic(
   { ssr: false },
 );
 
-type MenuCollectionId =
-  | "all"
-  | "breakfast"
-  | "pans"
-  | "jams"
-  | "from-van"
-  | "hot-drinks"
-  | "cold-drinks";
+type MenuCategoryIconName = "all" | "breakfast" | "pan" | "jam" | "van" | "hot-drink" | "cold-drink";
 
-type MenuCollection = {
-  id: MenuCollectionId;
-  label: string;
-  description: string;
-  icon: "all" | "breakfast" | "pan" | "jam" | "van" | "hot-drink" | "cold-drink";
-};
+function getCategoryIcon(categoryId: string): MenuCategoryIconName {
+  if (["omletler", "menemenler", "yumurtalar", "sahanlar"].includes(categoryId)) return "pan";
+  if (["receller", "ballar"].includes(categoryId)) return "jam";
+  if (["yoresel-tatlar", "peynirler"].includes(categoryId)) return "van";
+  if (["sicak-icecekler", "bitki-caylari", "sicak-kahveler"].includes(categoryId)) return "hot-drink";
+  if (["soft-icecekler", "soguk-icecekler", "soguk-kahveler", "milkshake-frozen-smoothie"].includes(categoryId)) return "cold-drink";
+  return "breakfast";
+}
 
-const turkishMenuCollections: MenuCollection[] = [
-  {
-    id: "all",
-    label: "Tüm sofra",
-    description: "Sofradaki bütün lezzetleri bir arada keşfedin.",
-    icon: "all",
-  },
-  {
-    id: "breakfast",
-    label: "Kahvaltılıklar",
-    description: "Paylaşımlık Van sofraları, peynirler ve kahvaltı tabakları.",
-    icon: "breakfast",
-  },
-  {
-    id: "pans",
-    label: "Sahanlar",
-    description: "Tereyağı hâlâ cızırdarken masaya gelen sıcak bakır sahanlar.",
-    icon: "pan",
-  },
-  {
-    id: "jams",
-    label: "Reçeller",
-    description: "Ev yapımı reçeller, bal ve kaymakla sofranın tatlı köşesi.",
-    icon: "jam",
-  },
-  {
-    id: "from-van",
-    label: "Van’dan",
-    description: "Otlu peynir, çemen, kavut ve murtuğayla yöre hafızasını taşıyan lezzetler.",
-    icon: "van",
-  },
-  {
-    id: "hot-drinks",
-    label: "Sıcak içecekler",
-    description: "İnce belli bardakta taze çay ve ağır ağır pişen kahveler.",
-    icon: "hot-drink",
-  },
-  {
-    id: "cold-drinks",
-    label: "Soğuk içecekler",
-    description: "Kahvaltının sıcaklarına ferah ve ev yapımı eşlikçiler.",
-    icon: "cold-drink",
-  },
-];
-
-const englishMenuCollections: MenuCollection[] = [
-  {
-    id: "all",
-    label: "Full menu",
-    description: "Explore every flavour on our breakfast table.",
-    icon: "all",
-  },
-  {
-    id: "breakfast",
-    label: "Breakfast",
-    description: "Shared Van breakfasts, cheeses and breakfast plates.",
-    icon: "breakfast",
-  },
-  {
-    id: "pans",
-    label: "Hot pans",
-    description: "Hot copper-pan dishes served while the butter is still sizzling.",
-    icon: "pan",
-  },
-  {
-    id: "jams",
-    label: "Preserves",
-    description: "Homemade preserves, honey and clotted cream for the sweet side of the table.",
-    icon: "jam",
-  },
-  {
-    id: "from-van",
-    label: "From Van",
-    description: "Regional flavours including herb cheese, çemen, kavut and murtuğa.",
-    icon: "van",
-  },
-  {
-    id: "hot-drinks",
-    label: "Hot drinks",
-    description: "Fresh Turkish tea and slowly brewed coffee.",
-    icon: "hot-drink",
-  },
-  {
-    id: "cold-drinks",
-    label: "Cold drinks",
-    description: "Cool, homemade companions to a warm breakfast.",
-    icon: "cold-drink",
-  },
-];
-
-const menuCollections: Record<MenuLocale, MenuCollection[]> = {
-  tr: turkishMenuCollections,
-  en: englishMenuCollections,
-};
-
-const categoryCollections: Record<Exclude<MenuCollectionId, "all">, ReadonlySet<string>> = {
-  breakfast: new Set(["kahvalti-menuleri", "peynirler", "zeytinler", "gozlemeler"]),
-  pans: new Set(["omletler", "menemenler", "yumurtalar", "sahanlar"]),
-  jams: new Set(["receller", "ballar"]),
-  "from-van": new Set(["yoresel-tatlar", "peynirler"]),
-  "hot-drinks": new Set(["sicak-icecekler", "bitki-caylari", "sicak-kahveler"]),
-  "cold-drinks": new Set(["soft-icecekler", "soguk-icecekler", "soguk-kahveler", "milkshake-frozen-smoothie"]),
-};
+function getCategoryNavLabel(category: MenuCategory, locale: MenuLocale) {
+  if (category.id === "receller") return locale === "en" ? "Preserves" : "Reçeller";
+  return category.label.length <= 18 ? category.label : category.shortLabel || category.label;
+}
 
 function normalize(value: string, locale: MenuLocale) {
   return value
@@ -140,12 +36,6 @@ function normalize(value: string, locale: MenuLocale) {
     .normalize("NFD")
     .replace(/[\u0300-\u036f]/g, "")
     .trim();
-}
-
-function isItemInCollection(item: MenuItem, collection: MenuCollectionId) {
-  if (collection === "all") return true;
-
-  return categoryCollections[collection].has(item.category);
 }
 
 function usePrefersReducedMotion() {
@@ -175,6 +65,7 @@ const MenuCard = memo(function MenuCard({
 }) {
   const messages = menuMessages[locale];
   const isSpotlight = item.tags.includes(messages.featuredTag);
+  const [imageFailed, setImageFailed] = useState(false);
   const visibleTag = item.tags.find((tag) => tag === messages.featuredTag || tag === messages.newTag);
   const metaLabel =
     item.priceNote ||
@@ -190,7 +81,7 @@ const MenuCard = memo(function MenuCard({
       aria-label={messages.cardAria(item.name, item.price)}
     >
       <span className={styles.cardMedia}>
-        {item.image ? (
+        {item.image && !imageFailed ? (
           <Image
             src={item.image}
             alt={item.imageAlt}
@@ -203,6 +94,7 @@ const MenuCard = memo(function MenuCard({
             quality={80}
             loading={prioritizeImage ? "eager" : "lazy"}
             fetchPriority={prioritizeImage ? "high" : "auto"}
+            onError={() => setImageFailed(true)}
           />
         ) : (
           <span className={styles.mediaPlaceholder} aria-hidden="true">
@@ -241,12 +133,12 @@ export function MenuExperience({
   locale?: MenuLocale;
 }) {
   const messages = menuMessages[locale];
-  const collections = menuCollections[locale];
   const reduceMotion = usePrefersReducedMotion();
   const heroRef = useRef<HTMLElement>(null);
   const searchInputRef = useRef<HTMLInputElement>(null);
   const searchSessionRef = useRef(false);
-  const [activeCollection, setActiveCollection] = useState<MenuCollectionId>("all");
+  const categoryNavRef = useRef<HTMLElement>(null);
+  const [activeCategory, setActiveCategory] = useState("all");
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedItem, setSelectedItem] = useState<MenuItem | null>(null);
   const [isCatalogPinned, setIsCatalogPinned] = useState(false);
@@ -287,71 +179,99 @@ export function MenuExperience({
   const visibleItems = useMemo(() => {
     const query = normalize(deferredSearch, locale);
     return initialItems.filter((item) => {
-      if (!isItemInCollection(item, activeCollection)) return false;
       if (!query) return true;
       return normalizedMenuCopy.get(item.id)?.includes(query) ?? false;
     });
-  }, [initialItems, activeCollection, deferredSearch, locale, normalizedMenuCopy]);
+  }, [initialItems, deferredSearch, locale, normalizedMenuCopy]);
 
   const groups = useMemo(() => {
-    if (activeCollection !== "all" && !deferredSearch) {
-      const collection = collections.find((entry) => entry.id === activeCollection)!;
-      return [{
-        id: `collection-${collection.id}`,
-        label: collection.label,
-        description: collection.description,
-        items: visibleItems,
-      }];
-    }
-
     return initialCategories
         .map((category) => ({
           ...category,
           items: visibleItems.filter((item) => item.category === category.id),
         }))
         .filter((group) => group.items.length > 0);
-  }, [activeCollection, collections, deferredSearch, initialCategories, visibleItems]);
+  }, [initialCategories, visibleItems]);
+
+  const navigableCategories = useMemo(
+    () => initialCategories.filter((category) => initialItems.some((item) => item.category === category.id)),
+    [initialCategories, initialItems],
+  );
 
   const openItem = useCallback((item: MenuItem) => setSelectedItem(item), []);
   const closeItem = useCallback(() => setSelectedItem(null), []);
 
-  const alignResults = () => {
+  const centerCategoryButton = useCallback((categoryId: string, behavior: ScrollBehavior = "smooth") => {
+    const trigger = categoryNavRef.current?.querySelector<HTMLButtonElement>(`[data-category-id="${categoryId}"]`);
+    const rail = categoryNavRef.current;
+    if (!trigger || !rail) return;
+    rail.scrollTo({
+      left: trigger.offsetLeft - (rail.clientWidth - trigger.offsetWidth) / 2,
+      behavior: reduceMotion ? "auto" : behavior,
+    });
+  }, [reduceMotion]);
+
+  const selectCategory = (categoryId: string) => {
+    searchSessionRef.current = false;
+    searchInputRef.current?.blur();
+    setSearchTerm("");
+    setActiveCategory(categoryId);
+    centerCategoryButton(categoryId);
+
     window.requestAnimationFrame(() => {
       window.requestAnimationFrame(() => {
-        const results = document.getElementById("menu-results");
-        const discovery = document.getElementById("menu-catalog");
-        if (!results || !discovery) return;
-
-        const stickyOffset = 72 + discovery.getBoundingClientRect().height;
-        const targetTop = results.getBoundingClientRect().top + window.scrollY - stickyOffset;
-        window.scrollTo({
-          top: Math.max(0, targetTop),
-          behavior: reduceMotion ? "auto" : "smooth",
-        });
+        const catalog = document.getElementById("menu-catalog");
+        const target = categoryId === "all"
+          ? document.getElementById("menu-results")
+          : document.getElementById(`menu-section-${categoryId}`);
+        if (!catalog || !target) return;
+        const stickyOffset = 72 + catalog.getBoundingClientRect().height + 14;
+        const targetTop = target.getBoundingClientRect().top + window.scrollY - stickyOffset;
+        window.scrollTo({ top: Math.max(0, targetTop), behavior: reduceMotion ? "auto" : "smooth" });
       });
     });
   };
 
-  const selectCollection = (collection: MenuCollectionId, trigger?: HTMLButtonElement) => {
-    const catalog = document.getElementById("menu-catalog");
-    const shouldAlignResults =
-      isCatalogPinned || searchSessionRef.current || (catalog?.getBoundingClientRect().top ?? Number.POSITIVE_INFINITY) <= 73;
+  useEffect(() => {
+    if (deferredSearch) return;
 
-    searchSessionRef.current = false;
-    searchInputRef.current?.blur();
-    setSearchTerm("");
-    setActiveCollection(collection);
-    if (trigger) {
-      const categoryRail = trigger.parentElement;
-      categoryRail?.scrollTo({
-        left: trigger.offsetLeft - (categoryRail.clientWidth - trigger.offsetWidth) / 2,
-        behavior: reduceMotion ? "auto" : "smooth",
-      });
-    }
-    if (shouldAlignResults) {
-      alignResults();
-    }
-  };
+    let frame: number | null = null;
+    const updateActiveCategory = () => {
+      frame = null;
+      const catalog = document.getElementById("menu-catalog");
+      const results = document.getElementById("menu-results");
+      if (!catalog || !results) return;
+
+      const marker = 72 + catalog.getBoundingClientRect().height + 24;
+      if (results.getBoundingClientRect().top > marker) {
+        setActiveCategory("all");
+        return;
+      }
+
+      let nextCategory = navigableCategories[0]?.id ?? "all";
+      for (const category of navigableCategories) {
+        const section = document.getElementById(`menu-section-${category.id}`);
+        if (section && section.getBoundingClientRect().top <= marker) nextCategory = category.id;
+      }
+      setActiveCategory((current) => current === nextCategory ? current : nextCategory);
+    };
+    const handleScroll = () => {
+      if (frame === null) frame = window.requestAnimationFrame(updateActiveCategory);
+    };
+
+    updateActiveCategory();
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    window.addEventListener("resize", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("resize", handleScroll);
+      if (frame !== null) window.cancelAnimationFrame(frame);
+    };
+  }, [deferredSearch, navigableCategories]);
+
+  useEffect(() => {
+    centerCategoryButton(activeCategory, "auto");
+  }, [activeCategory, centerCategoryButton]);
 
   const handleSearchFocus = () => {
     searchSessionRef.current = true;
@@ -395,7 +315,7 @@ export function MenuExperience({
                 onChange={(event) => {
                   const nextSearch = event.target.value;
                   setSearchTerm(nextSearch);
-                  if (nextSearch) setActiveCollection("all");
+                  if (nextSearch) setActiveCategory("all");
                 }}
                 autoComplete="off"
                 inputMode="search"
@@ -418,22 +338,30 @@ export function MenuExperience({
             </div>
           </div>
 
-          <nav className={styles.categoryNav} aria-label={messages.categoriesAria}>
-            {collections.map((collection, index) => (
+          <nav ref={categoryNavRef} className={styles.categoryNav} aria-label={messages.categoriesAria}>
+            {[
+              { id: "all", label: locale === "en" ? "Full menu" : "Tüm sofra", icon: "all" as const },
+              ...navigableCategories.map((category) => ({
+                id: category.id,
+                label: getCategoryNavLabel(category, locale),
+                icon: getCategoryIcon(category.id),
+              })),
+            ].map((category, index) => (
               <button
-                key={collection.id}
+                key={category.id}
                 type="button"
-                className={activeCollection === collection.id ? styles.activeCategory : ""}
-                aria-pressed={activeCollection === collection.id}
+                data-category-id={category.id}
+                className={activeCategory === category.id ? styles.activeCategory : ""}
+                aria-current={activeCategory === category.id ? "true" : undefined}
                 aria-controls="menu-results"
-                aria-label={messages.showCategory(collection.label)}
+                aria-label={messages.showCategory(category.label)}
                 style={{ animationDelay: `${index * 34}ms` }}
-                onClick={(event) => selectCollection(collection.id, event.currentTarget)}
+                onClick={() => selectCategory(category.id)}
               >
                 <span className={styles.categoryIconWell} aria-hidden="true">
-                  <MenuCategoryIcon name={collection.icon} />
+                  <MenuCategoryIcon name={category.icon} />
                 </span>
-                <span className={styles.categoryLabel}>{collection.label}</span>
+                <span className={styles.categoryLabel}>{category.label}</span>
               </button>
             ))}
           </nav>
@@ -453,7 +381,7 @@ export function MenuExperience({
         {visibleItems.length > 0 ? (
           <div className={styles.menuContent}>
             {groups.map((group, groupIndex) => (
-              <section key={group.id} className={styles.menuSection} aria-labelledby={`cat-${group.id}`}>
+              <section id={`menu-section-${group.id}`} key={group.id} className={styles.menuSection} aria-labelledby={`cat-${group.id}`}>
                 <header className={styles.sectionHeader}>
                   <div>
                     <h2 id={`cat-${group.id}`}>{group.label}</h2>
@@ -484,7 +412,7 @@ export function MenuExperience({
               type="button"
               onClick={() => {
                 setSearchTerm("");
-                setActiveCollection("all");
+                setActiveCategory("all");
               }}
             >
               {messages.showAll}

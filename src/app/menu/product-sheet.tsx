@@ -27,6 +27,7 @@ export function ProductSheet({
   const sheetRef = useRef<HTMLDivElement>(null);
   const closeRef = useRef<HTMLButtonElement>(null);
   const [isClosing, setIsClosing] = useState(false);
+  const [imageFailed, setImageFailed] = useState(false);
   const requestClose = useCallback(() => setIsClosing(true), []);
 
   useEffect(() => {
@@ -98,7 +99,7 @@ export function ProductSheet({
         }}
       >
         <div className={styles.sheetMedia}>
-          {item.image ? (
+          {item.image && !imageFailed ? (
             <Image
               src={item.image}
               alt={item.imageAlt}
@@ -106,6 +107,7 @@ export function ProductSheet({
               sizes="(max-width: 680px) 100vw, 430px"
               quality={80}
               loading="eager"
+              onError={() => setImageFailed(true)}
             />
           ) : (
             <span className={styles.mediaPlaceholder} aria-hidden="true">

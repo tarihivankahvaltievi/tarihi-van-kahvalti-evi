@@ -310,11 +310,6 @@
   min-width: 0;
 }
 
-.menuSection + .menuSection {
-  content-visibility: auto;
-  contain-intrinsic-block-size: auto 900px;
-}
-
 .sectionHeader {
   position: relative;
   display: flex;
@@ -918,7 +913,7 @@
 
 @media (max-width: 760px) {
   .page {
-    padding-bottom: max(2.8rem, env(safe-area-inset-bottom));
+    padding-bottom: max(7rem, calc(5.5rem + env(safe-area-inset-bottom)));
   }
 
   .menuHero {

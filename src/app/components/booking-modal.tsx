@@ -42,6 +42,7 @@ export function BookingModal({
 }: BookingModalProps) {
   const isEnglish = locale === "en";
   const dialogRef = useRef<HTMLDialogElement>(null);
+  const backdropPressRef = useRef<{ x: number; y: number } | null>(null);
   const [date, setDate] = useState("");
   const [minDate, setMinDate] = useState("");
   const [time, setTime] = useState("10:00");
@@ -69,7 +70,14 @@ export function BookingModal({
     const dialog = dialogRef.current;
     if (!dialog) return;
 
-    if (isOpen && !dialog.open) dialog.showModal();
+    if (isOpen && !dialog.open) {
+      const previousOverflow = document.body.style.overflow;
+      document.body.style.overflow = "hidden";
+      dialog.showModal();
+      return () => {
+        document.body.style.overflow = previousOverflow;
+      };
+    }
     if (!isOpen && dialog.open) dialog.close();
   }, [isOpen]);
 
@@ -82,24 +90,37 @@ export function BookingModal({
       event.preventDefault();
       onClose();
     };
-    const handleBackdropClick = (event: MouseEvent) => {
-      if (event.target !== dialog) return;
+    const isBackdropPoint = (event: PointerEvent) => {
+      if (event.target !== dialog) return false;
       const rect = dialog.getBoundingClientRect();
-      const inside =
+      return !(
         rect.top <= event.clientY &&
         event.clientY <= rect.bottom &&
         rect.left <= event.clientX &&
-        event.clientX <= rect.right;
-      if (!inside) onClose();
+        event.clientX <= rect.right
+      );
+    };
+    const handlePointerDown = (event: PointerEvent) => {
+      backdropPressRef.current = isBackdropPoint(event)
+        ? { x: event.clientX, y: event.clientY }
+        : null;
+    };
+    const handlePointerUp = (event: PointerEvent) => {
+      const start = backdropPressRef.current;
+      backdropPressRef.current = null;
+      if (!start || !isBackdropPoint(event)) return;
+      if (Math.hypot(event.clientX - start.x, event.clientY - start.y) <= 8) onClose();
     };
 
     dialog.addEventListener("close", handleClose);
     dialog.addEventListener("cancel", handleCancel);
-    dialog.addEventListener("click", handleBackdropClick);
+    dialog.addEventListener("pointerdown", handlePointerDown);
+    dialog.addEventListener("pointerup", handlePointerUp);
     return () => {
       dialog.removeEventListener("close", handleClose);
       dialog.removeEventListener("cancel", handleCancel);
-      dialog.removeEventListener("click", handleBackdropClick);
+      dialog.removeEventListener("pointerdown", handlePointerDown);
+      dialog.removeEventListener("pointerup", handlePointerUp);
     };
   }, [onClose]);
 
