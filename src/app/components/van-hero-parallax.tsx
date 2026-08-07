@@ -440,7 +440,7 @@ export function VanHeroParallax({ locale = "tr" }: { locale?: SiteLocale }) {
                   alt={messages.hero.floatingAlts[item.altKey]}
                   fill
                   sizes="(max-width: 680px) 30vw, (max-width: 1080px) 26vw, 320px"
-                  quality={isPrimaryFloatingFood ? 75 : 70}
+                  quality={70}
                   loading={isPrimaryFloatingFood ? "eager" : "lazy"}
                   fetchPriority={isPrimaryFloatingFood ? "high" : "auto"}
                 />
@@ -480,7 +480,7 @@ function HeroImageRow({
               src={image.thumbnail}
               alt=""
               fill
-              sizes="(max-width: 680px) 38vw, (max-width: 1080px) 40vw, 32rem"
+              sizes="(max-width: 680px) 34vw, (max-width: 1080px) 40vw, 32rem"
               quality={65}
               loading={isPrimaryImage ? "eager" : "lazy"}
               fetchPriority={isPrimaryImage ? "high" : "auto"}

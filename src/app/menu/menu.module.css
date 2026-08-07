@@ -37,13 +37,28 @@
   padding: clamp(2.25rem, 5vw, 4.3rem) max(1.25rem, calc((100% - 1160px) / 2));
   place-items: center;
   border-bottom: 1px solid var(--menu-line);
-  background:
-    linear-gradient(90deg, rgba(31, 12, 13, 0.86), rgba(74, 16, 21, 0.72)),
-    url("/images/hero-table.jpg") center 58% / cover;
+  background: var(--menu-burgundy-deep);
   text-align: center;
 }
 
+.menuHero::after {
+  position: absolute;
+  z-index: 1;
+  inset: 0;
+  background: linear-gradient(90deg, rgba(31, 12, 13, 0.86), rgba(74, 16, 21, 0.72));
+  content: "";
+  pointer-events: none;
+}
+
+.heroImage {
+  z-index: 0;
+  object-fit: cover;
+  object-position: center 58%;
+}
+
 .heroContent {
+  position: relative;
+  z-index: 2;
   display: grid;
   justify-items: center;
 }
@@ -915,7 +930,10 @@
     min-height: 154px;
     margin-top: 72px;
     padding: 1.45rem 1rem 1.2rem;
-    background-position: center 62%;
+  }
+
+  .heroImage {
+    object-position: center 62%;
   }
 
   .heroContent h1 {

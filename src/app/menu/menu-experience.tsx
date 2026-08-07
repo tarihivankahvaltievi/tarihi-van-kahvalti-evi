@@ -77,12 +77,10 @@ const MenuCard = memo(function MenuCard({
   item,
   onOpen,
   locale,
-  prioritizeImage = false,
 }: {
   item: MenuItem;
   onOpen: (item: MenuItem) => void;
   locale: MenuLocale;
-  prioritizeImage?: boolean;
 }) {
   const messages = menuMessages[locale];
   const isSpotlight = item.tags.includes(messages.featuredTag);
@@ -112,9 +110,7 @@ const MenuCard = memo(function MenuCard({
                 ? "(max-width: 680px) 36vw, (max-width: 1080px) 38vw, 480px"
                 : "(max-width: 680px) 36vw, (max-width: 1080px) 18vw, 180px"
             }
-            quality={80}
-            loading={prioritizeImage ? "eager" : "lazy"}
-            fetchPriority={prioritizeImage ? "high" : "auto"}
+            quality={70}
             onError={() => setImageFailed(true)}
           />
         ) : (
@@ -347,6 +343,15 @@ export function MenuExperience({
   return (
     <main id="main-content" className={styles.page} lang={messages.pageLanguage}>
       <section ref={heroRef} className={styles.menuHero} aria-labelledby="menu-page-title">
+        <Image
+          className={styles.heroImage}
+          src="/images/hero-table.jpg"
+          alt=""
+          fill
+          sizes="100vw"
+          quality={70}
+          preload
+        />
         <div className={styles.heroContent}>
           <h1 id="menu-page-title">
             <span className={styles.heroBrand}>Tarihi Van Kahvaltı Evi</span>
@@ -438,7 +443,7 @@ export function MenuExperience({
 
         {visibleItems.length > 0 ? (
           <div className={styles.menuContent}>
-            {groups.map((group, groupIndex) => (
+            {groups.map((group) => (
               <section id={`menu-section-${group.id}`} key={group.id} className={styles.menuSection} aria-labelledby={`cat-${group.id}`}>
                 <header className={styles.sectionHeader}>
                   <div>
@@ -448,13 +453,12 @@ export function MenuExperience({
                   <span>{messages.optionCount(group.items.length)}</span>
                 </header>
                 <div className={styles.menuGrid}>
-                  {group.items.map((item, itemIndex) => (
+                  {group.items.map((item) => (
                     <MenuCard
                       key={item.id}
                       item={item}
                       onOpen={openItem}
                       locale={locale}
-                      prioritizeImage={groupIndex === 0 && itemIndex === 0}
                     />
                   ))}
                 </div>
