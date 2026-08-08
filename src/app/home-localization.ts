@@ -135,6 +135,13 @@ export const homeMessages = {
       photoLabel: "Mekândan bir kare",
       reviews: [
         {
+          name: "AZRA KAPKAÇ",
+          time: "6 gün önce",
+          quote: "Kesinlikle 5 yıldızı hak eden bir mekan! Her şey çok taze, lezzetli ve özenle hazırlanmıştı. Çeşit bolluğu ve ürünlerin kalitesi tek kelimeyle harikaydı. Ayrıca çalışanların güler yüzlü ve hızlı hizmeti de ortamın sıcaklığını iki katına çıkartıyorrr. Güne mutlu ve enerjik başlamak için bundan daha iyi bir adres olamaz. Gönül rahatlığıyla tavsiye ediyorum",
+          photo: "/images/interior-chair.webp",
+          alt: "Mekândaki nostaljik telefon, koltuk ve çiçekler",
+        },
+        {
           name: "Emine Pektaş",
           time: "22 saat önce",
           quote: "Harika🫨🩷",
@@ -238,13 +245,6 @@ export const homeMessages = {
           quote: "Kahvaltısı harikaydı herkese öneririm  Ferdi beye teşekkür ederiz",
           photo: "/images/balcony-breakfast.webp",
           alt: "Tarihi binanın balkonunda kurulan Van kahvaltısı sofrası",
-        },
-        {
-          name: "AZRA KAPKAÇ",
-          time: "6 gün önce",
-          quote: "Kesinlikle 5 yıldızı hak eden bir mekan! Her şey çok taze, lezzetli ve özenle hazırlanmıştı. Çeşit bolluğu ve ürünlerin kalitesi tek kelimeyle harikaydı. Ayrıca çalışanların güler yüzlü ve hızlı hizmeti de ortamın sıcaklığını iki katına çıkartıyorrr. Güne mutlu ve enerjik başlamak için bundan daha iyi bir adres olamaz. Gönül rahatlığıyla tavsiye ediyorum",
-          photo: "/images/interior-chair.webp",
-          alt: "Mekândaki nostaljik telefon, koltuk ve çiçekler",
         },
         {
           name: "Duygu Dogan",
@@ -438,6 +438,13 @@ export const homeMessages = {
       photoLabel: "A moment from the restaurant",
       reviews: [
         {
+          name: "AZRA KAPKAÇ",
+          time: "6 days ago",
+          quote: "Kesinlikle 5 yıldızı hak eden bir mekan! Her şey çok taze, lezzetli ve özenle hazırlanmıştı. Çeşit bolluğu ve ürünlerin kalitesi tek kelimeyle harikaydı. Ayrıca çalışanların güler yüzlü ve hızlı hizmeti de ortamın sıcaklığını iki katına çıkartıyorrr. Güne mutlu ve enerjik başlamak için bundan daha iyi bir adres olamaz. Gönül rahatlığıyla tavsiye ediyorum",
+          photo: "/images/interior-chair.webp",
+          alt: "The restaurant's vintage telephone, armchair and flowers",
+        },
+        {
           name: "Emine Pektaş",
           time: "22 hours ago",
           quote: "Harika🫨🩷",
@@ -541,13 +548,6 @@ export const homeMessages = {
           quote: "Kahvaltısı harikaydı herkese öneririm  Ferdi beye teşekkür ederiz",
           photo: "/images/balcony-breakfast.webp",
           alt: "A Van breakfast table set on the historic building's balcony",
-        },
-        {
-          name: "AZRA KAPKAÇ",
-          time: "6 days ago",
-          quote: "Kesinlikle 5 yıldızı hak eden bir mekan! Her şey çok taze, lezzetli ve özenle hazırlanmıştı. Çeşit bolluğu ve ürünlerin kalitesi tek kelimeyle harikaydı. Ayrıca çalışanların güler yüzlü ve hızlı hizmeti de ortamın sıcaklığını iki katına çıkartıyorrr. Güne mutlu ve enerjik başlamak için bundan daha iyi bir adres olamaz. Gönül rahatlığıyla tavsiye ediyorum",
-          photo: "/images/interior-chair.webp",
-          alt: "The restaurant's vintage telephone, armchair and flowers",
         },
         {
           name: "Duygu Dogan",
