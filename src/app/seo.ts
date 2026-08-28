@@ -51,10 +51,10 @@ export const coordinates = {
 };
 
 export const openingHours = {
-  opens: "08:00",
-  closes: "18:00",
+  opens: "07:00",
+  closes: "22:00",
   days: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
-  short: "Her gün 08:00 - 18:00",
+  short: "Her gün 07:00 - 22:00",
 };
 
 // Doğrudan doğrulanmış Google Maps işletme kaydı (CID), genel arama sonucu değil.
@@ -98,7 +98,7 @@ export const faqItems = [
   },
   {
     question: "Çalışma saatleri nedir?",
-    answer: `${siteName} haftanın 7 günü 08:00 - 18:00 saatleri arasında hizmet verir.`,
+    answer: `${siteName} haftanın 7 günü 07:00 - 22:00 saatleri arasında hizmet verir.`,
   },
   {
     question: "Rezervasyon nasıl yapılır?",

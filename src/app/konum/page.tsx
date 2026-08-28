@@ -43,7 +43,7 @@ const locationFaqItems = [
   },
   {
     question: "Tarihi Van Kahvaltı Evi hangi saatlerde açık?",
-    answer: `${siteName} haftanın her günü 08:00–18:00 saatleri arasında açıktır. Hafta sonu yoğunluğu için gelmeden önce ${displayPhone} numarasından bilgi alabilirsiniz.`,
+    answer: `${siteName} haftanın her günü 07:00–22:00 saatleri arasında açıktır. Hafta sonu yoğunluğu için gelmeden önce ${displayPhone} numarasından bilgi alabilirsiniz.`,
   },
 ] as const;
 

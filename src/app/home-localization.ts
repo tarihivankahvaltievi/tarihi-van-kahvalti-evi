@@ -21,7 +21,7 @@ export const englishFaqItems = [
   {
     question: "What time is Tarihi Van Kahvaltı Evi open?",
     answer:
-      "Tarihi Van Kahvaltı Evi is open every day from 08:00 to 18:00. Please contact the restaurant before travelling on public holidays or with a large group.",
+      "Tarihi Van Kahvaltı Evi is open every day from 07:00 to 22:00. Please contact the restaurant before travelling on public holidays or with a large group.",
   },
   {
     question: "Where can I see the current menu and prices?",

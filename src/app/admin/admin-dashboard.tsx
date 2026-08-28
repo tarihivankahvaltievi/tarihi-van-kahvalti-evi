@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useTransition } from "react";
+import { useState, useTransition, useMemo } from "react";
 import Image from "next/image";
 import {
   Plus,
@@ -19,8 +19,30 @@ import {
   UtensilsCrossed,
   Layers,
   Clock,
+  Calendar,
+  CalendarDays,
+  CalendarCheck,
+  Phone,
+  MessageCircle,
+  Users,
+  Bell,
+  Download,
+  Smartphone,
+  Info,
+  CheckCircle2,
+  XCircle,
+  AlertCircle,
+  RefreshCw,
+  Share2,
 } from "lucide-react";
 import type { MenuData, MenuItem, MenuCategory } from "../menu/menu-storage";
+import type {
+  Reservation,
+  ReservationData,
+  ReservationStatus,
+  ServiceType,
+} from "../reservations/reservation-storage";
+
 
 // Helper function to compress images on the client side
 const compressImage = (
@@ -134,15 +156,48 @@ const compressImage = (
 
 interface AdminDashboardProps {
   initialData: MenuData;
+  initialReservations?: ReservationData;
+  calendarFeedUrl?: string;
+  webcalFeedUrl?: string;
 }
 
-export function AdminDashboard({ initialData }: AdminDashboardProps) {
+export function AdminDashboard({
+  initialData,
+  initialReservations,
+  calendarFeedUrl = "",
+  webcalFeedUrl = "",
+}: AdminDashboardProps) {
   const [data, setData] = useState<MenuData>(initialData);
-  const [activeTab, setActiveTab] = useState<"items" | "categories">("items");
+  const [reservations, setReservations] = useState<Reservation[]>(
+    initialReservations?.reservations || []
+  );
+  const [activeTab, setActiveTab] = useState<"items" | "categories" | "reservations">("items");
   const [selectedCategoryFilter, setSelectedCategoryFilter] = useState<string>("all");
   const [searchTerm, setSearchTerm] = useState("");
   const [isPending, startTransition] = useTransition();
   const [message, setMessage] = useState<{ type: "success" | "error"; text: string } | null>(null);
+
+  // Reservation filter & search states
+  const [reservationFilter, setReservationFilter] = useState<
+    "all" | "upcoming" | "today" | "pending" | "confirmed" | "cancelled"
+  >("all");
+  const [reservationSearch, setReservationSearch] = useState("");
+  const [isAddingReservation, setIsAddingReservation] = useState(false);
+  const [showIosGuide, setShowIosGuide] = useState(false);
+  const [copiedFeed, setCopiedFeed] = useState(false);
+  const [isRefreshingReservations, setIsRefreshingReservations] = useState(false);
+
+  // Reservation form state
+  const [reservationForm, setReservationForm] = useState<Partial<Reservation>>({
+    customerName: "",
+    customerPhone: "",
+    date: new Date().toISOString().split("T")[0],
+    time: "10:00",
+    guests: 2,
+    serviceType: "breakfast",
+    note: "",
+    status: "confirmed",
+  });
 
   // Modals state
   const [editingItem, setEditingItem] = useState<MenuItem | null>(null);
@@ -170,6 +225,194 @@ export function AdminDashboard({ initialData }: AdminDashboardProps) {
     setMessage({ type, text });
     setTimeout(() => setMessage(null), 4000);
   };
+
+  // Copy calendar subscription feed link
+  const copyCalendarLink = async () => {
+    try {
+      await navigator.clipboard.writeText(calendarFeedUrl);
+      setCopiedFeed(true);
+      showMessage("success", "iPhone Takvim linki panoya kopyalandı!");
+      setTimeout(() => setCopiedFeed(false), 3000);
+    } catch {
+      showMessage("error", "Link kopyalanamadı");
+    }
+  };
+
+  // Refresh reservations from server
+  const refreshReservations = async () => {
+    setIsRefreshingReservations(true);
+    try {
+      const res = await fetch("/api/reservations");
+      if (res.ok) {
+        const json = await res.json();
+        setReservations(json.reservations || []);
+        showMessage("success", "Rezervasyon listesi güncellendi");
+      }
+    } catch (err) {
+      console.error(err);
+      showMessage("error", "Rezervasyonlar yüklenemedi");
+    } finally {
+      setIsRefreshingReservations(false);
+    }
+  };
+
+  // Update reservation status
+  const handleUpdateReservationStatus = async (id: string, newStatus: ReservationStatus) => {
+    try {
+      const res = await fetch(`/api/reservations/${id}`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ status: newStatus }),
+      });
+      if (res.ok) {
+        setReservations((prev) =>
+          prev.map((r) => (r.id === id ? { ...r, status: newStatus } : r))
+        );
+        const statusLabel =
+          newStatus === "confirmed"
+            ? "Onaylandı"
+            : newStatus === "cancelled"
+            ? "İptal Edildi"
+            : "Beklemeye Alındı";
+        showMessage("success", `Rezervasyon ${statusLabel}`);
+      } else {
+        showMessage("error", "Durum güncellenemedi");
+      }
+    } catch (err) {
+      console.error(err);
+      showMessage("error", "Sunucu hatası");
+    }
+  };
+
+  // Delete reservation
+  const handleDeleteReservation = async (id: string, name: string) => {
+    if (!confirm(`"${name}" adına açılan rezervasyonu silmek istediğinize emin misiniz?`)) return;
+    try {
+      const res = await fetch(`/api/reservations/${id}`, {
+        method: "DELETE",
+      });
+      if (res.ok) {
+        setReservations((prev) => prev.filter((r) => r.id !== id));
+        showMessage("success", "Rezervasyon silindi");
+      } else {
+        showMessage("error", "Rezervasyon silinemedi");
+      }
+    } catch (err) {
+      console.error(err);
+      showMessage("error", "Sunucu hatası");
+    }
+  };
+
+  // Save manual reservation form
+  const handleSaveReservationForm = async () => {
+    if (!reservationForm.customerName || !reservationForm.customerPhone || !reservationForm.date || !reservationForm.time) {
+      showMessage("error", "Lütfen ad soyad, telefon, tarih ve saat alanlarını doldurun");
+      return;
+    }
+
+    try {
+      const res = await fetch("/api/reservations", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(reservationForm),
+      });
+
+      if (res.ok) {
+        const json = await res.json();
+        if (json.reservation) {
+          setReservations((prev) => [json.reservation, ...prev]);
+          showMessage("success", "Yeni rezervasyon eklendi ve iPhone takviminize işlendi!");
+          setIsAddingReservation(false);
+          setReservationForm({
+            customerName: "",
+            customerPhone: "",
+            date: new Date().toISOString().split("T")[0],
+            time: "10:00",
+            guests: 2,
+            serviceType: "breakfast",
+            note: "",
+            status: "confirmed",
+          });
+        }
+      } else {
+        const err = await res.json();
+        showMessage("error", err.error || "Rezervasyon kaydedilemedi");
+      }
+    } catch (err) {
+      console.error(err);
+      showMessage("error", "Sunucu hatası");
+    }
+  };
+
+  // Counts & Stats
+  const todayStr = new Date().toISOString().split("T")[0];
+  const pendingCount = useMemo(
+    () => reservations.filter((r) => r.status === "pending").length,
+    [reservations]
+  );
+  const todayCount = useMemo(
+    () => reservations.filter((r) => r.date === todayStr && r.status !== "cancelled").length,
+    [reservations, todayStr]
+  );
+  const upcomingCount = useMemo(
+    () => reservations.filter((r) => r.date >= todayStr && r.status !== "cancelled").length,
+    [reservations, todayStr]
+  );
+
+  // Relative time helper
+  const getReservationRelativeTime = (dateStr: string) => {
+    if (!dateStr) return "";
+    const [year, month, day] = dateStr.split("-").map(Number);
+    const target = new Date(year, month - 1, day);
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    target.setHours(0, 0, 0, 0);
+
+    const diffDays = Math.round((target.getTime() - today.getTime()) / (1000 * 60 * 60 * 24));
+    if (diffDays === 0) return "Bugün";
+    if (diffDays === 1) return "Yarın";
+    if (diffDays === -1) return "Dün";
+    if (diffDays < -1) return `${Math.abs(diffDays)} gün önce`;
+    if (diffDays < 30) return `${diffDays} gün sonra`;
+    const diffMonths = Math.round(diffDays / 30);
+    return `${diffMonths} ay sonra`;
+  };
+
+  // Format Turkish Date Long
+  const formatTurkishDateLong = (dateStr: string) => {
+    if (!dateStr) return "";
+    const [year, month, day] = dateStr.split("-").map(Number);
+    const d = new Date(year, month - 1, day);
+    return d.toLocaleDateString("tr-TR", {
+      day: "numeric",
+      month: "long",
+      year: "numeric",
+      weekday: "short",
+    });
+  };
+
+  // Filtered reservations
+  const filteredReservations = useMemo(() => {
+    return reservations.filter((r) => {
+      if (reservationFilter === "pending" && r.status !== "pending") return false;
+      if (reservationFilter === "confirmed" && r.status !== "confirmed") return false;
+      if (reservationFilter === "cancelled" && r.status !== "cancelled") return false;
+      if (reservationFilter === "today" && r.date !== todayStr) return false;
+      if (reservationFilter === "upcoming" && (r.date < todayStr || r.status === "cancelled")) return false;
+
+      if (reservationSearch.trim()) {
+        const search = reservationSearch.toLowerCase();
+        const matchesName = (r.customerName || "").toLowerCase().includes(search);
+        const matchesPhone = (r.customerPhone || "").includes(search);
+        const matchesNote = (r.note || "").toLowerCase().includes(search);
+        const matchesId = (r.id || "").toLowerCase().includes(search);
+        return matchesName || matchesPhone || matchesNote || matchesId;
+      }
+
+      return true;
+    });
+  }, [reservations, reservationFilter, reservationSearch, todayStr]);
+
 
   const handleLogout = async () => {
     try {
@@ -595,12 +838,29 @@ export function AdminDashboard({ initialData }: AdminDashboardProps) {
       {/* Main Container */}
       <main className="max-w-7xl w-full mx-auto px-4 md:px-8 mt-6 flex-grow">
         {/* Navigation Tabs */}
-        <div className="flex border-b mb-6" style={{ borderColor: "var(--line)" }}>
+        <div className="flex border-b mb-6 overflow-x-auto scrollbar-thin" style={{ borderColor: "var(--line)" }}>
+          <button
+            onClick={() => setActiveTab("reservations")}
+            className={`py-3 px-5 font-semibold text-sm border-b-2 transition-all flex items-center space-x-2 cursor-pointer shrink-0 ${
+              activeTab === "reservations"
+                ? "border-red-800 text-red-800 bg-red-50/50"
+                : "border-transparent text-gray-500 hover:text-gray-800"
+            }`}
+          >
+            <CalendarCheck className="h-4 w-4" />
+            <span>Rezervasyonlar & iPhone Takvimi ({reservations.length})</span>
+            {pendingCount > 0 && (
+              <span className="ml-1.5 px-2 py-0.5 text-xs rounded-full bg-amber-500 text-white font-bold animate-pulse">
+                {pendingCount}
+              </span>
+            )}
+          </button>
+
           <button
             onClick={() => setActiveTab("items")}
-            className={`py-3 px-6 font-semibold text-sm border-b-2 transition-all flex items-center space-x-2 cursor-pointer ${
+            className={`py-3 px-5 font-semibold text-sm border-b-2 transition-all flex items-center space-x-2 cursor-pointer shrink-0 ${
               activeTab === "items"
-                ? "border-red-800 text-red-800"
+                ? "border-red-800 text-red-800 bg-red-50/50"
                 : "border-transparent text-gray-500 hover:text-gray-800"
             }`}
           >
@@ -610,9 +870,9 @@ export function AdminDashboard({ initialData }: AdminDashboardProps) {
 
           <button
             onClick={() => setActiveTab("categories")}
-            className={`py-3 px-6 font-semibold text-sm border-b-2 transition-all flex items-center space-x-2 cursor-pointer ${
+            className={`py-3 px-5 font-semibold text-sm border-b-2 transition-all flex items-center space-x-2 cursor-pointer shrink-0 ${
               activeTab === "categories"
-                ? "border-red-800 text-red-800"
+                ? "border-red-800 text-red-800 bg-red-50/50"
                 : "border-transparent text-gray-500 hover:text-gray-800"
             }`}
           >
@@ -620,6 +880,379 @@ export function AdminDashboard({ initialData }: AdminDashboardProps) {
             <span>Kategori Yönetimi ({data.categories.length})</span>
           </button>
         </div>
+
+        {/* TAB: RESERVATIONS & IPHONE CALENDAR */}
+        {activeTab === "reservations" && (
+          <div className="space-y-6">
+            {/* Top Card: iPhone Live Calendar Sync Hero */}
+            <div className="rounded-2xl p-6 md:p-8 bg-gradient-to-br from-[#1c1817] via-[#2a1c1b] to-[#1a1211] text-[#fff8eb] shadow-xl border border-[#3e2c2a] relative overflow-hidden">
+              <div className="absolute right-0 top-0 -mt-6 -mr-6 w-48 h-48 bg-red-800/10 rounded-full blur-3xl pointer-events-none" />
+
+              <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6 relative z-10">
+                <div className="max-w-2xl space-y-2">
+                  <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-red-950/80 border border-red-700/50 text-red-300 text-xs font-semibold">
+                    <Smartphone className="h-3.5 w-3.5" />
+                    <span>Apple & iPhone Takvim Entegrasyonu</span>
+                  </div>
+                  <h2 className="text-xl md:text-2xl font-bold font-serif tracking-tight text-white">
+                    iPhone Takviminizle Canlı Otomatik Senkronizasyon
+                  </h2>
+                  <p className="text-sm text-stone-300 leading-relaxed">
+                    Müşteriler masa ayırttığında (2 ay, 6 ay sonrasına olsa bile) rezervasyonlar doğrudan iPhone Takviminize işlenir. 
+                    Etkinlikten <strong>1 gün önce</strong> ve <strong>2 saat önce</strong> otomatik bildirim alırsınız.
+                  </p>
+                </div>
+
+                <div className="flex flex-wrap gap-3 items-center">
+                  {webcalFeedUrl ? (
+                    <a
+                      href={webcalFeedUrl}
+                      className="px-5 py-3 rounded-xl bg-white text-stone-900 font-bold text-sm hover:bg-stone-100 transition-all flex items-center space-x-2 shadow-lg cursor-pointer shrink-0"
+                    >
+                      <Smartphone className="h-4 w-4 text-red-800" />
+                      <span>iPhone Takvimime Bağla</span>
+                    </a>
+                  ) : null}
+
+                  <button
+                    onClick={copyCalendarLink}
+                    className="px-4 py-3 rounded-xl bg-stone-800/80 hover:bg-stone-700/80 border border-stone-700 text-stone-200 font-semibold text-sm transition-all flex items-center space-x-2 cursor-pointer shrink-0"
+                  >
+                    {copiedFeed ? <Check className="h-4 w-4 text-emerald-400" /> : <Copy className="h-4 w-4" />}
+                    <span>{copiedFeed ? "Kopyalandı!" : "Takvim Linkini Kopyala"}</span>
+                  </button>
+
+                  <button
+                    onClick={() => setShowIosGuide(!showIosGuide)}
+                    className="px-4 py-3 rounded-xl bg-stone-800/50 hover:bg-stone-700/50 border border-stone-700/60 text-stone-300 font-semibold text-sm transition-all flex items-center space-x-1.5 cursor-pointer shrink-0"
+                  >
+                    <Info className="h-4 w-4 text-amber-400" />
+                    <span>{showIosGuide ? "Rehberi Kapat" : "Kurulum Rehberi"}</span>
+                  </button>
+                </div>
+              </div>
+
+              {/* Collapsible iOS Setup Guide */}
+              {showIosGuide && (
+                <div className="mt-6 pt-6 border-t border-stone-700/80 grid grid-cols-1 md:grid-cols-3 gap-4 text-xs text-stone-300">
+                  <div className="bg-stone-900/70 p-4 rounded-xl border border-stone-800 space-y-1">
+                    <div className="font-bold text-white text-sm flex items-center space-x-1.5">
+                      <span className="w-5 h-5 rounded-full bg-red-800 text-white flex items-center justify-center text-xs">1</span>
+                      <span>Linke Dokunun</span>
+                    </div>
+                    <p className="text-stone-300">
+                      iPhone&apos;unuzda Safari ile panele girip <strong>&quot;iPhone Takvimime Bağla&quot;</strong> butonuna dokunun.
+                    </p>
+                  </div>
+
+                  <div className="bg-stone-900/70 p-4 rounded-xl border border-stone-800 space-y-1">
+                    <div className="font-bold text-white text-sm flex items-center space-x-1.5">
+                      <span className="w-5 h-5 rounded-full bg-red-800 text-white flex items-center justify-center text-xs">2</span>
+                      <span>Abone Ol&apos;u Seçin</span>
+                    </div>
+                    <p className="text-stone-300">
+                      Apple Takvim açıldığında ekrandaki <strong>&quot;Abone Ol&quot; (Subscribe)</strong> seçeneğine tıklayın.
+                    </p>
+                  </div>
+
+                  <div className="bg-stone-900/70 p-4 rounded-xl border border-stone-800 space-y-1">
+                    <div className="font-bold text-white text-sm flex items-center space-x-1.5">
+                      <span className="w-5 h-5 rounded-full bg-emerald-700 text-white flex items-center justify-center text-xs">3</span>
+                      <span>Hazır!</span>
+                    </div>
+                    <p className="text-stone-300">
+                      Artık tüm rezervasyonlar arka planda iPhone&apos;unuza düşer ve alarmlar otomatik çalar.
+                    </p>
+                  </div>
+                </div>
+              )}
+            </div>
+
+            {/* Statistics Cards */}
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+              <div className="bg-white p-4 rounded-xl border border-gray-200 shadow-sm">
+                <div className="text-xs font-semibold text-gray-500 uppercase tracking-wider flex items-center space-x-1">
+                  <Calendar className="h-3.5 w-3.5 text-gray-400" />
+                  <span>Toplam Rezervasyon</span>
+                </div>
+                <div className="text-2xl font-bold font-serif text-gray-900 mt-1">{reservations.length}</div>
+              </div>
+
+              <div className="bg-white p-4 rounded-xl border border-gray-200 shadow-sm">
+                <div className="text-xs font-semibold text-blue-600 uppercase tracking-wider flex items-center space-x-1">
+                  <Clock className="h-3.5 w-3.5 text-blue-500" />
+                  <span>Yaklaşanlar</span>
+                </div>
+                <div className="text-2xl font-bold font-serif text-blue-900 mt-1">{upcomingCount}</div>
+              </div>
+
+              <div className="bg-white p-4 rounded-xl border border-gray-200 shadow-sm">
+                <div className="text-xs font-semibold text-amber-600 uppercase tracking-wider flex items-center space-x-1">
+                  <Bell className="h-3.5 w-3.5 text-amber-500" />
+                  <span>Bekleyen Talepler</span>
+                </div>
+                <div className="text-2xl font-bold font-serif text-amber-900 mt-1">{pendingCount}</div>
+              </div>
+
+              <div className="bg-white p-4 rounded-xl border border-gray-200 shadow-sm">
+                <div className="text-xs font-semibold text-emerald-600 uppercase tracking-wider flex items-center space-x-1">
+                  <UtensilsCrossed className="h-3.5 w-3.5 text-emerald-500" />
+                  <span>Bugünün Masaları</span>
+                </div>
+                <div className="text-2xl font-bold font-serif text-emerald-900 mt-1">{todayCount}</div>
+              </div>
+            </div>
+
+            {/* Filters, Search & Action Bar */}
+            <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+              <div className="flex flex-wrap items-center gap-2">
+                {[
+                  { id: "all", label: "Tümü", count: reservations.length },
+                  { id: "upcoming", label: "Yaklaşanlar", count: upcomingCount },
+                  { id: "today", label: "Bugün", count: todayCount },
+                  { id: "pending", label: "Bekleyenler", count: pendingCount },
+                  { id: "confirmed", label: "Onaylananlar", count: reservations.filter((r) => r.status === "confirmed").length },
+                  { id: "cancelled", label: "İptaller", count: reservations.filter((r) => r.status === "cancelled").length },
+                ].map((tab) => (
+                  <button
+                    key={tab.id}
+                    onClick={() => setReservationFilter(tab.id as any)}
+                    className={`px-3 py-1.5 rounded-full text-xs font-medium border transition-all cursor-pointer flex items-center space-x-1 ${
+                      reservationFilter === tab.id
+                        ? "bg-red-800 text-white border-red-800 shadow-sm"
+                        : "bg-white text-gray-700 border-gray-200 hover:bg-gray-50"
+                    }`}
+                  >
+                    <span>{tab.label}</span>
+                    <span className={`text-[10px] px-1.5 py-0.2 rounded-full ${reservationFilter === tab.id ? "bg-red-900 text-white" : "bg-gray-100 text-gray-600"}`}>
+                      {tab.count}
+                    </span>
+                  </button>
+                ))}
+              </div>
+
+              <div className="flex items-center gap-3">
+                <div className="relative min-w-[200px] flex-grow md:flex-grow-0">
+                  <Search className="absolute left-3 top-2.5 h-4 w-4 text-gray-400" />
+                  <input
+                    type="text"
+                    value={reservationSearch}
+                    onChange={(e) => setReservationSearch(e.target.value)}
+                    placeholder="İsim, tel veya not ara..."
+                    className="w-full pl-9 pr-3 py-2 border rounded-lg text-xs bg-white focus:outline-none focus:border-red-800"
+                  />
+                </div>
+
+                <button
+                  onClick={refreshReservations}
+                  disabled={isRefreshingReservations}
+                  title="Listeyi Yenile"
+                  className="p-2 rounded-lg border border-gray-200 bg-white hover:bg-gray-50 text-gray-600 cursor-pointer shrink-0"
+                >
+                  <RefreshCw className={`h-4 w-4 ${isRefreshingReservations ? "animate-spin text-red-800" : ""}`} />
+                </button>
+
+                <button
+                  onClick={() => setIsAddingReservation(true)}
+                  className="px-4 py-2 rounded-lg text-white font-medium text-xs flex items-center space-x-1 shadow transition-all active:scale-95 cursor-pointer shrink-0"
+                  style={{ backgroundColor: "var(--red)" }}
+                >
+                  <Plus className="h-4 w-4" />
+                  <span>Manuel Rezervasyon Ekle</span>
+                </button>
+              </div>
+            </div>
+
+            {/* Reservations Cards List */}
+            {filteredReservations.length === 0 ? (
+              <div className="bg-white rounded-2xl border border-gray-200 p-12 text-center text-gray-500">
+                <CalendarDays className="h-12 w-12 mx-auto text-gray-300 mb-3" />
+                <h3 className="text-base font-bold text-gray-700">Kayıtlı Rezervasyon Bulunamadı</h3>
+                <p className="text-xs text-gray-500 mt-1 max-w-md mx-auto">
+                  {reservationSearch
+                    ? "Arama kriterlerinize uygun rezervasyon bulunamadı."
+                    : "Henüz bu filtreye ait rezervasyon talebi bulunmuyor. Yeni bir rezervasyon ekleyebilirsiniz."}
+                </p>
+                <button
+                  onClick={() => setIsAddingReservation(true)}
+                  className="mt-4 px-4 py-2 rounded-lg bg-red-800 text-white text-xs font-semibold inline-flex items-center space-x-1 cursor-pointer"
+                >
+                  <Plus className="h-3.5 w-3.5" />
+                  <span>Yeni Rezervasyon Ekle</span>
+                </button>
+              </div>
+            ) : (
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                {filteredReservations.map((res) => {
+                  const relativeLabel = getReservationRelativeTime(res.date);
+                  const isPast = res.date < todayStr;
+                  const cleanPhone = (res.customerPhone || "").replace(/\D/g, "");
+
+                  return (
+                    <div
+                      key={res.id}
+                      className={`bg-white rounded-2xl border transition-all p-5 shadow-sm flex flex-col justify-between relative ${
+                        res.status === "pending"
+                          ? "border-amber-300 ring-2 ring-amber-100"
+                          : res.status === "cancelled"
+                          ? "border-gray-200 opacity-60 bg-gray-50/50"
+                          : "border-gray-200 hover:border-red-200 hover:shadow-md"
+                      }`}
+                    >
+                      <div>
+                        {/* Card Top: Date, Time & Status Badge */}
+                        <div className="flex items-start justify-between gap-2 mb-3 pb-3 border-b border-gray-100">
+                          <div>
+                            <div className="text-sm font-bold text-gray-900 flex items-center space-x-1.5">
+                              <Calendar className="h-4 w-4 text-red-800 shrink-0" />
+                              <span>{formatTurkishDateLong(res.date)}</span>
+                            </div>
+                            <div className="text-xs font-semibold text-gray-600 flex items-center space-x-1 mt-0.5">
+                              <Clock className="h-3.5 w-3.5 text-gray-400" />
+                              <span>Saat: {res.time}</span>
+                              <span className="mx-1 text-gray-300">•</span>
+                              <span className={`text-[11px] font-medium px-1.5 py-0.2 rounded ${isPast ? "bg-gray-100 text-gray-500" : "bg-blue-50 text-blue-700"}`}>
+                                {relativeLabel}
+                              </span>
+                            </div>
+                          </div>
+
+                          <span
+                            className={`text-[11px] font-bold px-2.5 py-1 rounded-full shrink-0 flex items-center space-x-1 ${
+                              res.status === "confirmed"
+                                ? "bg-emerald-100 text-emerald-800"
+                                : res.status === "cancelled"
+                                ? "bg-rose-100 text-rose-800"
+                                : "bg-amber-100 text-amber-900 animate-pulse"
+                            }`}
+                          >
+                            {res.status === "confirmed" ? (
+                              <>
+                                <CheckCircle2 className="h-3 w-3" />
+                                <span>Onaylandı</span>
+                              </>
+                            ) : res.status === "cancelled" ? (
+                              <>
+                                <XCircle className="h-3 w-3" />
+                                <span>İptal</span>
+                              </>
+                            ) : (
+                              <>
+                                <AlertCircle className="h-3 w-3" />
+                                <span>Bekliyor</span>
+                              </>
+                            )}
+                          </span>
+                        </div>
+
+                        {/* Customer Information */}
+                        <div className="space-y-2 mb-4">
+                          <div>
+                            <span className="text-[10px] uppercase font-bold text-gray-400 tracking-wider block">Müşteri</span>
+                            <div className="text-base font-bold text-gray-900">{res.customerName}</div>
+                          </div>
+
+                          <div className="flex items-center space-x-2">
+                            <a
+                              href={`tel:${res.customerPhone}`}
+                              className="inline-flex items-center space-x-1 px-2.5 py-1 rounded-md bg-gray-100 hover:bg-gray-200 text-gray-800 text-xs font-semibold transition-colors"
+                            >
+                              <Phone className="h-3 w-3 text-emerald-600" />
+                              <span>{res.customerPhone}</span>
+                            </a>
+
+                            {cleanPhone && (
+                              <a
+                                href={`https://wa.me/${cleanPhone}`}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="inline-flex items-center space-x-1 px-2.5 py-1 rounded-md bg-emerald-50 hover:bg-emerald-100 text-emerald-800 text-xs font-semibold transition-colors"
+                              >
+                                <MessageCircle className="h-3 w-3 text-emerald-600" />
+                                <span>WhatsApp</span>
+                              </a>
+                            )}
+                          </div>
+
+                          <div className="flex items-center gap-3 text-xs text-gray-600 pt-1">
+                            <span className="inline-flex items-center space-x-1">
+                              <Users className="h-3.5 w-3.5 text-gray-400" />
+                              <strong>{res.guests} Kişi</strong>
+                            </span>
+                            <span className="text-gray-300">•</span>
+                            <span className="inline-flex items-center space-x-1">
+                              <UtensilsCrossed className="h-3.5 w-3.5 text-gray-400" />
+                              <span>{res.serviceType === "cafe" ? "Kafka Cafe" : "Van Kahvaltısı"}</span>
+                            </span>
+                          </div>
+
+                          {res.note && (
+                            <div className="bg-amber-50/70 border border-amber-100 rounded-lg p-2.5 text-xs text-amber-950 italic mt-2">
+                              &ldquo;{res.note}&rdquo;
+                            </div>
+                          )}
+                        </div>
+                      </div>
+
+                      {/* Card Footer: Quick Actions */}
+                      <div className="pt-3 border-t border-gray-100 flex items-center justify-between gap-2 mt-2">
+                        <div className="flex items-center space-x-1.5">
+                          {res.status !== "confirmed" && (
+                            <button
+                              onClick={() => handleUpdateReservationStatus(res.id, "confirmed")}
+                              className="px-2.5 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-semibold transition-all cursor-pointer flex items-center space-x-1"
+                            >
+                              <Check className="h-3 w-3" />
+                              <span>Onayla</span>
+                            </button>
+                          )}
+
+                          {res.status !== "cancelled" && (
+                            <button
+                              onClick={() => handleUpdateReservationStatus(res.id, "cancelled")}
+                              className="px-2.5 py-1.5 rounded-lg bg-rose-50 hover:bg-rose-100 text-rose-700 text-xs font-semibold transition-all cursor-pointer"
+                            >
+                              İptal Et
+                            </button>
+                          )}
+
+                          {res.status !== "pending" && (
+                            <button
+                              onClick={() => handleUpdateReservationStatus(res.id, "pending")}
+                              className="px-2 py-1.5 rounded-lg bg-gray-100 hover:bg-gray-200 text-gray-700 text-xs transition-all cursor-pointer"
+                              title="Beklemeye Al"
+                            >
+                              Beklet
+                            </button>
+                          )}
+                        </div>
+
+                        <div className="flex items-center space-x-1">
+                          <a
+                            href={`/api/reservations/${res.id}/ics`}
+                            download={`rezervasyon-${res.id}.ics`}
+                            title="Takvime Ekle (.ics)"
+                            className="p-1.5 rounded-lg text-gray-400 hover:text-gray-900 hover:bg-gray-100 transition-colors"
+                          >
+                            <Download className="h-4 w-4" />
+                          </a>
+
+                          <button
+                            onClick={() => handleDeleteReservation(res.id, res.customerName)}
+                            title="Rezervasyonu Sil"
+                            className="p-1.5 rounded-lg text-gray-400 hover:text-rose-600 hover:bg-rose-50 transition-colors cursor-pointer"
+                          >
+                            <Trash className="h-4 w-4" />
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            )}
+          </div>
+        )}
 
         {/* TAB 1: ITEMS */}
         {activeTab === "items" && (
@@ -1464,6 +2097,157 @@ export function AdminDashboard({ initialData }: AdminDashboardProps) {
           </div>
         </div>
       )}
+
+      {/* MANUAL RESERVATION ADD DIALOG */}
+      {isAddingReservation && (
+        <div className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+          <div className="bg-white rounded-2xl w-full max-w-lg overflow-hidden shadow-2xl p-6 md:p-8 relative">
+            <div className="flex justify-between items-center mb-6">
+              <div>
+                <h2 className="text-xl font-bold font-serif text-[#211d1b]">
+                  Yeni Rezervasyon Ekle
+                </h2>
+                <p className="text-xs text-gray-500 mt-0.5">
+                  Telefonla veya dükkanda alınan rezervasyonu girin; doğrudan iPhone takviminize işlensin.
+                </p>
+              </div>
+              <button
+                onClick={() => setIsAddingReservation(false)}
+                className="text-gray-400 hover:text-gray-700 cursor-pointer"
+              >
+                <X className="h-6 w-6" />
+              </button>
+            </div>
+
+            <div className="space-y-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div>
+                  <label className="block text-xs font-semibold text-gray-600 mb-1">Müşteri Ad Soyad *</label>
+                  <input
+                    type="text"
+                    required
+                    value={reservationForm.customerName || ""}
+                    onChange={(e) => setReservationForm((prev) => ({ ...prev, customerName: e.target.value }))}
+                    placeholder="örn. Ali Yılmaz"
+                    className="w-full px-3 py-2 border rounded-lg text-sm bg-white focus:outline-none focus:border-red-800"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-xs font-semibold text-gray-600 mb-1">Telefon Numarası *</label>
+                  <input
+                    type="tel"
+                    required
+                    value={reservationForm.customerPhone || ""}
+                    onChange={(e) => setReservationForm((prev) => ({ ...prev, customerPhone: e.target.value }))}
+                    placeholder="05XX XXX XX XX"
+                    className="w-full px-3 py-2 border rounded-lg text-sm bg-white focus:outline-none focus:border-red-800"
+                  />
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div>
+                  <label className="block text-xs font-semibold text-gray-600 mb-1">Tarih *</label>
+                  <input
+                    type="date"
+                    required
+                    value={reservationForm.date || ""}
+                    onChange={(e) => setReservationForm((prev) => ({ ...prev, date: e.target.value }))}
+                    className="w-full px-3 py-2 border rounded-lg text-sm bg-white focus:outline-none focus:border-red-800"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-xs font-semibold text-gray-600 mb-1">Saat *</label>
+                  <select
+                    value={reservationForm.time || "10:00"}
+                    onChange={(e) => setReservationForm((prev) => ({ ...prev, time: e.target.value }))}
+                    className="w-full px-3 py-2 border rounded-lg text-sm bg-white focus:outline-none focus:border-red-800"
+                  >
+                    <option value="08:00">08:00</option>
+                    <option value="08:30">08:30</option>
+                    <option value="09:00">09:00</option>
+                    <option value="09:30">09:30</option>
+                    <option value="10:00">10:00</option>
+                    <option value="10:30">10:30</option>
+                    <option value="11:00">11:00</option>
+                    <option value="11:30">11:30</option>
+                    <option value="12:00">12:00</option>
+                    <option value="12:30">12:30</option>
+                    <option value="13:00">13:00</option>
+                    <option value="13:30">13:30</option>
+                    <option value="14:00">14:00</option>
+                    <option value="14:30">14:30</option>
+                    <option value="15:00">15:00</option>
+                    <option value="16:00">16:00</option>
+                    <option value="17:00">17:00</option>
+                    <option value="18:00">18:00</option>
+                    <option value="19:00">19:00</option>
+                    <option value="20:00">20:00</option>
+                  </select>
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div>
+                  <label className="block text-xs font-semibold text-gray-600 mb-1">Kişi Sayısı</label>
+                  <input
+                    type="number"
+                    min={1}
+                    max={50}
+                    value={reservationForm.guests || 2}
+                    onChange={(e) => setReservationForm((prev) => ({ ...prev, guests: Number(e.target.value) || 2 }))}
+                    className="w-full px-3 py-2 border rounded-lg text-sm bg-white focus:outline-none focus:border-red-800"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-xs font-semibold text-gray-600 mb-1">Hizmet Türü</label>
+                  <select
+                    value={reservationForm.serviceType || "breakfast"}
+                    onChange={(e) => setReservationForm((prev) => ({ ...prev, serviceType: e.target.value as ServiceType }))}
+                    className="w-full px-3 py-2 border rounded-lg text-sm bg-white focus:outline-none focus:border-red-800"
+                  >
+                    <option value="breakfast">Van Kahvaltısı</option>
+                    <option value="cafe">Kafka Cafe</option>
+                  </select>
+                </div>
+              </div>
+
+              <div>
+                <label className="block text-xs font-semibold text-gray-600 mb-1">Not / Özel İstek</label>
+                <textarea
+                  value={reservationForm.note || ""}
+                  onChange={(e) => setReservationForm((prev) => ({ ...prev, note: e.target.value }))}
+                  placeholder="Masa konumu, bebek sandalyesi vb."
+                  className="w-full px-3 py-2 border rounded-lg text-sm bg-white focus:outline-none focus:border-red-800 h-20 resize-none"
+                />
+              </div>
+            </div>
+
+            <div className="flex justify-end gap-3 mt-8 border-t pt-4 border-gray-100">
+              <button
+                type="button"
+                onClick={() => setIsAddingReservation(false)}
+                className="px-4 py-2 border rounded-lg text-sm font-semibold text-gray-600 hover:bg-gray-50 cursor-pointer"
+              >
+                Vazgeç
+              </button>
+              <button
+                type="button"
+                onClick={handleSaveReservationForm}
+                className="px-5 py-2 rounded-lg text-white font-semibold text-sm flex items-center space-x-1 cursor-pointer"
+                style={{ backgroundColor: "var(--red)" }}
+              >
+                <Check className="h-4 w-4" />
+                <span>Kaydet & Takvime Ekle</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
+

@@ -48,7 +48,7 @@ const guideFaqItems = [
   {
     question: "Taksim'de Van kahvaltısı için ne zaman gelmeli?",
     answer:
-      "İşletme her gün 08:00–18:00 saatleri arasında açıktır. Hafta sonu veya kalabalık grup ziyaretinde masa uygunluğunu telefon ya da WhatsApp üzerinden önceden sormak önerilir.",
+      "İşletme her gün 07:00–22:00 saatleri arasında açıktır. Hafta sonu veya kalabalık grup ziyaretinde masa uygunluğunu telefon ya da WhatsApp üzerinden önceden sormak önerilir.",
   },
   {
     question: "Taksim Metro'dan Tarihi Van Kahvaltı Evi'ne nasıl gidilir?",
@@ -190,7 +190,7 @@ export default function VanBreakfastGuidePage() {
                     </div>
                     <div>
                       <dt>Çalışma saatleri</dt>
-                      <dd>Her gün 08:00–18:00</dd>
+                      <dd>Her gün 07:00–22:00</dd>
                     </div>
                   </dl>
                 </div>
@@ -294,7 +294,7 @@ export default function VanBreakfastGuidePage() {
               </header>
               <div className={styles.visitDetails}>
                 <div className={styles.visitFacts}>
-                  <p><Clock3 size={18} aria-hidden="true" /><span><strong>Her gün 08:00–18:00</strong>Hafta sonu ve kalabalık gruplar için ziyaret öncesinde masa uygunluğunu sormanız önerilir.</span></p>
+                  <p><Clock3 size={18} aria-hidden="true" /><span><strong>Her gün 07:00–22:00</strong>Hafta sonu ve kalabalık gruplar için ziyaret öncesinde masa uygunluğunu sormanız önerilir.</span></p>
                   <p><MapPin size={18} aria-hidden="true" /><span><strong>Taksim&apos;den yürüyerek ulaşım</strong>M2 Taksim durağından Sıraselviler yönüne çıkıp Zambak Sokak&apos;a ilerleyin.</span></p>
                 </div>
                 <div className={styles.visitActions}>
