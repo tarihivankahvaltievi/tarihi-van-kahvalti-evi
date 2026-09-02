@@ -143,6 +143,7 @@ export const metadata: Metadata = {
 import { WebVitals } from "./components/web-vitals";
 
 const googleAnalyticsId = "G-5F3FS1NCZR";
+const googleAdsId = process.env.NEXT_PUBLIC_GOOGLE_ADS_ID ?? "AW-6565770329";
 
 export default function RootLayout({
   children,
@@ -165,14 +166,18 @@ export default function RootLayout({
       </body>
       <Script
         src={`https://www.googletagmanager.com/gtag/js?id=${googleAnalyticsId}`}
-        strategy="lazyOnload"
+        strategy="afterInteractive"
       />
-      <Script id="google-analytics" strategy="lazyOnload">
+      <Script id="google-analytics" strategy="afterInteractive">
         {`
           window.dataLayer = window.dataLayer || [];
           function gtag(){dataLayer.push(arguments);}
           gtag('js', new Date());
           gtag('config', '${googleAnalyticsId}', {
+            allow_google_signals: false,
+            allow_ad_personalization_signals: false
+          });
+          gtag('config', '${googleAdsId}', {
             allow_google_signals: false,
             allow_ad_personalization_signals: false
           });

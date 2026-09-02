@@ -22,10 +22,10 @@ import {
   Languages,
   MapPin,
   MessageCircle,
-  UtensilsCrossed,
 } from "lucide-react";
 import { mapsUrl, whatsappUrl } from "./seo";
 import { messagesFor, type SiteLocale } from "./home-localization";
+import { trackEvent } from "./analytics";
 
 const BookingModal = dynamic(
   () => import("./components/booking-modal").then((mod) => mod.BookingModal),
@@ -165,6 +165,7 @@ export default function ClientPage({ children, locale = "tr" }: { children: Reac
       setPreselectedItem(detail?.itemTitle || "");
       setPreselectedType(detail?.category || (locale === "en" ? "Breakfast" : "Kahvaltı"));
       setIsBookingOpen(true);
+      trackEvent("booking_modal_open", { locale, entry_point: "content" });
     };
 
     window.addEventListener("open-booking", handleBookingRequest);
@@ -175,6 +176,7 @@ export default function ClientPage({ children, locale = "tr" }: { children: Reac
     setPreselectedItem(itemTitle || "");
     setPreselectedType(category || (locale === "en" ? "Breakfast" : "Kahvaltı"));
     setIsBookingOpen(true);
+    trackEvent("booking_modal_open", { locale, entry_point: "site_navigation" });
   };
 
   const handleMouseEnter = (event: MouseEvent<HTMLAnchorElement>) => {
@@ -241,7 +243,13 @@ export default function ClientPage({ children, locale = "tr" }: { children: Reac
             >
               {messages.alternateLanguage}
             </Link>
-            <a className="nav-location" href={mapsUrl} target="_blank" rel="noopener noreferrer">
+            <a
+              className="nav-location"
+              href={mapsUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => trackEvent("contact_click", { contact_method: "directions", surface: "header" })}
+            >
               <MapPin size={16} />
               <span>Beyoğlu</span>
             </a>
@@ -369,7 +377,10 @@ export default function ClientPage({ children, locale = "tr" }: { children: Reac
               style={{ "--item-index": 11 } as CSSProperties}
               target="_blank"
               rel="noopener noreferrer"
-              onClick={() => setMenuOpen(false)}
+              onClick={() => {
+                setMenuOpen(false);
+                trackEvent("contact_click", { contact_method: "whatsapp", surface: "navigation_drawer" });
+              }}
             >
               <MessageCircle size={18} />
               <span className="nav-menu-copy">
@@ -424,27 +435,32 @@ export default function ClientPage({ children, locale = "tr" }: { children: Reac
       </div>
 
       <div className={`mobile-bar ${mobileBarHidden || menuOpen ? "is-hidden" : ""}`} role="navigation" aria-label={messages.mobile.aria}>
-          <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" aria-label={messages.mobile.whatsappAria}>
+          <a
+            href={whatsappUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={messages.mobile.whatsappAria}
+            onClick={() => trackEvent("contact_click", { contact_method: "whatsapp", surface: "mobile_bar" })}
+          >
             <MessageCircle size={20} />
             <span className="mobile-bar-label">WhatsApp</span>
           </a>
-          {isMenuPage ? (
-            <button
-              type="button"
-              className="mobile-bar-primary"
-              aria-label={locale === "en" ? "Request a table" : "Rezervasyon yap"}
-              onClick={() => handleOpenBooking()}
-            >
-              <Calendar size={22} className="mobile-bar-highlight-icon" />
-              <span className="mobile-bar-label">{locale === "en" ? "Book" : "Rezervasyon"}</span>
-            </button>
-          ) : (
-            <Link className="mobile-bar-primary" href={messages.menuHref} aria-label={messages.mobile.menuAria}>
-              <UtensilsCrossed size={22} className="mobile-bar-highlight-icon" />
-              <span className="mobile-bar-label">{messages.mobile.menu}</span>
-            </Link>
-          )}
-          <a href={mapsUrl} target="_blank" rel="noopener noreferrer" aria-label={messages.mobile.directionsAria}>
+          <button
+            type="button"
+            className="mobile-bar-primary"
+            aria-label={locale === "en" ? "Request a table" : "Rezervasyon yap"}
+            onClick={() => handleOpenBooking()}
+          >
+            <Calendar size={22} className="mobile-bar-highlight-icon" />
+            <span className="mobile-bar-label">{locale === "en" ? "Book" : "Rezervasyon"}</span>
+          </button>
+          <a
+            href={mapsUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={messages.mobile.directionsAria}
+            onClick={() => trackEvent("contact_click", { contact_method: "directions", surface: "mobile_bar" })}
+          >
             <MapPin size={20} />
             <span className="mobile-bar-label">{messages.mobile.directions}</span>
           </a>

@@ -19,6 +19,7 @@ import {
 } from "lucide-react";
 import { phoneE164 } from "../seo";
 import type { SiteLocale } from "../home-localization";
+import { trackBookingLead, trackEvent } from "../analytics";
 import styles from "./booking-modal.module.css";
 
 interface BookingModalProps {
@@ -193,6 +194,7 @@ export function BookingModal({
           createdId = json.reservation.id;
           icsDownloadUrl = json.icsUrl || `/api/reservations/${createdId}/ics`;
           gCalUrl = json.googleCalendarUrl || "";
+          trackBookingLead({ locale, service_type: type });
         }
       }
     } catch (err) {
@@ -234,6 +236,7 @@ Rezervasyonumu onaylayabilir misiniz? Şimdiden teşekkürler.`;
 
     const whatsappUrl = `https://wa.me/${phoneE164.replace("+", "")}?text=${encodeURIComponent(message)}`;
     window.open(whatsappUrl, "_blank", "noopener,noreferrer");
+    trackEvent("booking_whatsapp_handoff", { locale, service_type: type, reservation_saved: Boolean(createdId) });
 
     // 3. Set submitted state to show confirmation & customer calendar button
     setSubmittedData({
