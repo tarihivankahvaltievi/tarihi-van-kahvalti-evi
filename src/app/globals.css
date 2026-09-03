@@ -455,7 +455,6 @@ body .mobile-bar button:hover {
 
 /* Exempt images, observation elements, and dialogue overlays from massive transitions */
 .site-shell img,
-.booking-dialog,
 .lightbox-dialog,
 .mosaic-item,
 [data-reveal] {
@@ -659,8 +658,7 @@ body .mobile-bar button:hover {
 
 /* Call to Action Buttons */
 .order-button,
-.gallery-head a,
-.booking-submit-btn {
+.gallery-head a {
   display: inline-flex;
   min-height: 46px;
   align-items: center;
@@ -679,8 +677,7 @@ body .mobile-bar button:hover {
 }
 
 .order-button,
-.gallery-head a,
-.booking-submit-btn {
+.gallery-head a {
   border: 0;
   background: var(--red);
   color: var(--white);
@@ -693,14 +690,12 @@ body .mobile-bar button:hover {
 }
 
 .order-button:active,
-.mobile-bar a:active,
-.booking-submit-btn:active {
+.mobile-bar a:active {
   transform: scale(0.97);
 }
 
 .order-button:hover,
-.gallery-head a:hover,
-.booking-submit-btn:hover {
+.gallery-head a:hover {
   background: var(--red-dark);
   box-shadow: 0 15px 35px rgba(124, 18, 20, 0.25);
   transform: translateY(-1px);
@@ -1104,201 +1099,7 @@ h2 span {
   letter-spacing: 0.05em;
 }
 
-/* Booking Dialog */
-.booking-dialog {
-  border: none;
-  border-radius: 24px;
-  padding: 0;
-  background: var(--white);
-  max-width: 480px;
-  width: 92%;
-  box-shadow: 0 30px 80px rgba(42, 42, 45, 0.25);
-  overflow: hidden;
-  outline: none;
-}
-
-.booking-dialog::backdrop {
-  background: rgba(26, 22, 22, 0.7);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-}
-
-.booking-dialog[open] {
-  animation: modal-show 350ms var(--ease-out);
-}
-
-@keyframes modal-show {
-  from {
-    opacity: 0;
-    transform: scale(0.96) translateY(12px);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1) translateY(0);
-  }
-}
-
-.dialog-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 1.5rem;
-  border-bottom: 1px solid var(--line);
-  background: var(--soft);
-}
-
-.dialog-header h3 {
-  margin: 0;
-  font-size: 1.4rem;
-  font-weight: 700;
-  color: var(--ink);
-}
-
-.close-button {
-  background: transparent;
-  border: none;
-  color: var(--muted);
-  width: 32px;
-  height: 32px;
-  border-radius: 999px;
-  display: grid;
-  place-items: center;
-  transition: all 180ms ease;
-}
-
-.close-button:hover {
-  background: rgba(0, 0, 0, 0.05);
-  color: var(--red);
-}
-
-.booking-form {
-  padding: 1.5rem;
-  display: flex;
-  flex-direction: column;
-  gap: 1.25rem;
-}
-
-.form-group {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-}
-
-.form-group label,
-.form-group .form-label {
-  font-size: 0.85rem;
-  font-weight: 600;
-  color: var(--ink-soft);
-  display: inline-flex;
-  align-items: center;
-  gap: 0.4rem;
-}
-
-.form-group label svg,
-.form-group .form-label svg {
-  color: var(--gold);
-}
-
-.type-toggle-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 0.6rem;
-}
-
-.type-toggle-grid button {
-  background: var(--white);
-  border: 1px solid #eae8e1;
-  border-radius: 12px;
-  padding: 0.75rem;
-  font-size: 0.88rem;
-  font-weight: 600;
-  color: var(--muted);
-  transition: all 200ms ease;
-}
-
-.type-toggle-grid button:hover {
-  border-color: var(--gold);
-  color: var(--gold-dark);
-}
-
-.type-toggle-grid button.active {
-  background: var(--gold-light);
-  border-color: var(--gold);
-  color: var(--gold-dark);
-}
-
-.form-row {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 0.8rem;
-}
-
-.booking-form input,
-.booking-form select,
-.booking-form textarea {
-  border: 1px solid #eae8e1;
-  border-radius: 12px;
-  padding: 0.75rem;
-  font-size: 0.92rem;
-  color: var(--ink);
-  background: var(--white);
-  outline: none;
-  transition: all 200ms ease;
-}
-
-.booking-form input:focus,
-.booking-form select:focus,
-.booking-form textarea:focus {
-  border-color: var(--red);
-  box-shadow: 0 0 0 3px rgba(154, 28, 31, 0.08);
-}
-
-.guests-counter {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  border: 1px solid #eae8e1;
-  border-radius: 12px;
-  padding: 0.4rem;
-  background: var(--white);
-}
-
-.guests-counter button {
-  width: 36px;
-  height: 36px;
-  border-radius: 8px;
-  border: none;
-  background: var(--soft);
-  color: var(--ink);
-  font-size: 1.25rem;
-  font-weight: 600;
-  display: grid;
-  place-items: center;
-  transition: all 180ms ease;
-}
-
-.guests-counter button:hover:not(:disabled) {
-  background: var(--red-light);
-  color: var(--red);
-}
-
-.guests-counter button:disabled {
-  opacity: 0.4;
-  cursor: not-allowed;
-}
-
-.guests-value {
-  font-weight: 600;
-  font-size: 0.95rem;
-  color: var(--ink);
-}
-
-.booking-submit-btn {
-  margin-top: 0.5rem;
-  width: 100%;
-  min-height: 48px;
-  font-size: 0.92rem;
-}/* Footer */
+/* Footer */
 /* ═══════════════════════════════════════════════════════════
    PREMIUM LIGHT FOOTER (FERAH & BEYOĞLU DİNAMİK)
    ═══════════════════════════════════════════════════════════ */
@@ -3649,9 +3450,7 @@ h2 span {
 
 .order-button,
 .gallery-head a,
-.booking-submit-btn,
-.nav .order-button,
-.booking-submit-btn {
+.nav .order-button {
   background: linear-gradient(180deg, #456a49, var(--red-dark));
   color: var(--white) !important;
   box-shadow: var(--shadow-red);
@@ -3659,15 +3458,9 @@ h2 span {
 
 .order-button:hover,
 .gallery-head a:hover,
-.booking-submit-btn:hover,
 .nav .order-button:hover {
   background: linear-gradient(180deg, #4f7652, #1e3827);
   box-shadow: 0 15px 34px rgba(36, 63, 43, 0.24);
-}
-
-.booking-dialog {
-  border-color: rgba(185, 139, 67, 0.18);
-  background-color: rgba(255, 250, 240, 0.86);
 }
 
 /* [CONSOLIDATED] Hero parallax dining, story-band, red-story overrides moved to final block below (~line 18500+) */
