@@ -9,13 +9,13 @@ const contentSecurityPolicy = [
   "object-src 'none'",
   "form-action 'self'",
   "frame-ancestors 'none'",
-  `script-src 'self' 'unsafe-inline' https://www.googletagmanager.com${isDev ? " 'unsafe-eval'" : ""}`,
+  `script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.googleadservices.com https://googleads.g.doubleclick.net${isDev ? " 'unsafe-eval'" : ""}`,
   "script-src-attr 'none'",
   "style-src 'self' 'unsafe-inline'",
-  "img-src 'self' data: blob: https://*.supabase.co https://*.google-analytics.com https://*.googletagmanager.com",
+  "img-src 'self' data: blob: https://*.supabase.co https://*.google-analytics.com https://*.googletagmanager.com https://www.googleadservices.com https://googleads.g.doubleclick.net https://*.google.com https://*.google.com.tr",
   "font-src 'self' data:",
-  "connect-src 'self' https://*.supabase.co https://*.cartocdn.com https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com",
-  "frame-src 'none'",
+  "connect-src 'self' https://*.supabase.co https://*.cartocdn.com https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com https://www.googleadservices.com https://googleads.g.doubleclick.net https://*.google.com https://*.google.com.tr",
+  "frame-src 'none' https://bid.g.doubleclick.net",
   "manifest-src 'self'",
   "worker-src 'self' blob:",
   "upgrade-insecure-requests",
@@ -56,6 +56,18 @@ const nextConfig: NextConfig = {
         ...redirect,
         permanent: true,
       })),
+    ];
+  },
+  async rewrites() {
+    return [
+      {
+        source: "/breakfast/taksim",
+        destination: "/en",
+      },
+      {
+        source: "/van-kahvaltisi/taksim",
+        destination: "/van-kahvaltisi",
+      },
     ];
   },
   async headers() {

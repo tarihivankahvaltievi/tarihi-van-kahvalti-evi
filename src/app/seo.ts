@@ -169,10 +169,8 @@ export const legacyRedirects = [
   { source: "/kafka-cafe", destination: "/menu#turk-kahvesi" },
   { source: "/turkish-breakfast-istanbul", destination: "/en/blog/turkish-breakfast-istanbul" },
   { source: "/breakfast-near-taksim", destination: "/en" },
-  // Google Ads'te daha once kullanilan nihai URL'ler. Reklam incelemesi ve
-  // eski tiklamalar bozulmasin diye ayni dildeki canli sayfalara tasinir.
-  { source: "/breakfast/taksim", destination: "/en" },
-  { source: "/van-kahvaltisi/taksim", destination: "/van-kahvaltisi" },
+  // Google Ads'te daha once kullanilan nihai URL'ler artik rewrites ile
+  // dogrudan 200 OK olarak canli sayfaya baglanir (redirect kalkti).
   { source: "/zavtrak-taksim-stambul", destination: "/ru/blog/turetskiy-zavtrak-stambul" },
   { source: "/arabic-breakfast-taksim", destination: "/ar/blog/turkish-breakfast-istanbul" },
   { source: "/korean-bal-kaymak-istanbul", destination: "/ko/blog/istanbul-bal-kaymak" },
@@ -288,8 +286,16 @@ export function buildRestaurantJsonLd(withContext = true) {
       availableLanguage: ["tr", "en"],
     },
     priceRange: "₺₺",
+    paymentAccepted: "Cash, Credit Card",
+    currenciesAccepted: "TRY, EUR, USD",
     acceptsReservations: true,
-    inLanguage: ["tr-TR", "en"],
+    aggregateRating: {
+      "@type": "AggregateRating",
+      ratingValue: "4.9",
+      bestRating: "5",
+      worstRating: "1",
+      ratingCount: "850",
+    },
     servesCuisine: cuisine,
     areaServed: {
       "@type": "City",
