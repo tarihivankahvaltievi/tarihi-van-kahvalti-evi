@@ -446,7 +446,7 @@ export default function ClientPage({ children, locale = "tr" }: { children: Reac
         {children}
       </div>
 
-      <div className={`mobile-bar ${mobileBarHidden || menuOpen ? "is-hidden" : ""}`} role="navigation" aria-label={messages.mobile.aria}>
+      <div className={`mobile-bar ${mobileBarHidden || menuOpen || isReservationPage ? "is-hidden" : ""}`} role="navigation" aria-label={messages.mobile.aria}>
           <a
             href={whatsappUrl}
             target="_blank"

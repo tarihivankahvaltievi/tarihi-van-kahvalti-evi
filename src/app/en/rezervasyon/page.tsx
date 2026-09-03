@@ -1,7 +1,5 @@
 import type { Metadata } from "next";
 import { Suspense } from "react";
-import Link from "next/link";
-import { Clock3, MapPin, ShieldCheck, Star } from "lucide-react";
 import ClientPage from "../../client-page";
 import { AnimatedFooter } from "../../components/animated-footer";
 import {
@@ -12,7 +10,6 @@ import {
   displayPhone,
   englishReservationUrl,
   jsonLd,
-  openingHours,
   reservationUrl,
   siteName,
   siteUrl,
@@ -20,35 +17,25 @@ import {
 import { ReservationView } from "../../rezervasyon/reservation-view";
 import styles from "../../rezervasyon/reservation.module.css";
 
-const pageTitle = "Table Reservation | Tarihi Van Breakfast House, Taksim Istanbul";
+const pageTitle = "Table Reservation | Tarihi Van Breakfast House, Beyoğlu Taksim";
 const pageDescription =
-  "Book your table at Tarihi Van Kahvaltı Evi near Taksim Square, Istanbul. Experience traditional Van breakfast, regional cheeses, kaymak, and freshly brewed Turkish tea with fast WhatsApp confirmation.";
+  "Reserve your table at Tarihi Van Kahvaltı Evi in Beyoğlu, Taksim. Fresh Van breakfast spread, artisanal cheeses, honey kaymak, hot pans and endless Turkish tea.";
 
-const englishReservationFaqItems = [
+const reservationFaqItems = [
   {
     question: "How is my reservation confirmed?",
     answer:
-      "When you send your reservation request, your details are instantly forwarded to our team via WhatsApp. We check table availability and confirm within 5–10 minutes.",
+      "When you send your request, details are sent to our restaurant WhatsApp line and confirmed within 5–10 minutes.",
   },
   {
-    question: "Is there a deposit or booking fee?",
+    question: "Is there any fee or deposit required?",
     answer:
-      "No. Table reservations at Tarihi Van Kahvaltı Evi are completely free of charge. No deposit or credit card is required. You pay after enjoying your breakfast at the restaurant.",
+      "No, table reservations are completely free and no deposit is required.",
   },
   {
-    question: "How can I modify or cancel my booking?",
+    question: "How can I change or cancel my reservation?",
     answer:
-      "Simply reply to our WhatsApp confirmation message or call us at +90 541 525 2868 to change your arrival time, guest count, or cancel your table.",
-  },
-  {
-    question: "Can you accommodate large travel groups or families?",
-    answer:
-      "Yes. We regularly host travel groups, large families, and gatherings from 8 up to 50 guests. We arrange connected tables in our historic indoor dining room or outdoor terrace.",
-  },
-  {
-    question: "What happens if we arrive late?",
-    answer:
-      "During peak weekend hours, reserved tables are held for 15 minutes past your booked time. If you run into traffic or delays, simply send us a quick WhatsApp note and we will hold your table.",
+      "Simply send us a message on WhatsApp or call us at +90 541 525 2868 to update your time or party size.",
   },
 ] as const;
 
@@ -74,7 +61,7 @@ export const metadata: Metadata = {
         url: absoluteUrl("/images/breakfast-spread.webp"),
         width: 1200,
         height: 800,
-        alt: "Tarihi Van Breakfast House Table Reservation",
+        alt: "Tarihi Van Breakfast Table",
       },
     ],
   },
@@ -98,7 +85,7 @@ export default function EnglishReservationPage() {
         name: pageTitle,
         description: pageDescription,
         inLanguage: "en-US",
-        isPartOf: { "@id": `${siteUrl}/en#website` },
+        isPartOf: { "@id": `${siteUrl}/#website` },
         about: { "@id": `${siteUrl}/#restaurant` },
         mainEntity: {
           "@type": "FoodEstablishment",
@@ -121,7 +108,7 @@ export default function EnglishReservationPage() {
           { "@type": "ListItem", position: 2, name: "Reservation", item: englishReservationUrl },
         ],
       },
-      buildFaqJsonLd(englishReservationFaqItems, englishReservationUrl, true),
+      buildFaqJsonLd(reservationFaqItems, englishReservationUrl, true),
     ],
   };
 
@@ -134,126 +121,20 @@ export default function EnglishReservationPage() {
       <ClientPage locale="en">
         <main id="main-content" className={styles.page}>
           <div className={styles.container}>
-            {/* Breadcrumb */}
-            <nav className={styles.breadcrumb} aria-label="Breadcrumb navigation">
-              <Link href="/en">Home</Link>
-              <span className={styles.breadcrumbSeparator}>/</span>
-              <span className={styles.breadcrumbCurrent}>Reservation</span>
-            </nav>
-
-            {/* Hero Header */}
-            <header className={styles.heroHeader}>
-              <div className={styles.eyebrowBadge}>
-                <span className={styles.eyebrowDot} />
-                <span>Since 1978 • Beyoğlu Zambak Street</span>
-              </div>
-              <h1 className={styles.heroTitle}>
-                Reserve Your Table at
+            <header className={styles.header}>
+              <p className={styles.kicker}>Beyoğlu Zambak Street</p>
+              <h1 className={styles.title}>
+                Table Reservation
                 <em>Tarihi Van</em>
               </h1>
-              <p className={styles.heroLead}>
-                Secure your spot for Istanbul&apos;s authentic Van breakfast: artisanal cheeses, hot copper egg pans, buffalo kaymak with honeycomb, and unlimited fresh Turkish tea. Fast WhatsApp confirmation.
+              <p className={styles.lead}>
+                Secure your table in our historic Beyoğlu building for authentic Van breakfast, regional cheeses, hot copper pans and endless tea.
               </p>
-
-              <div className={styles.heroTrustBadges}>
-                <span className={styles.heroTrustBadge}>
-                  <Star size={16} className={styles.ratingStar} fill="currentColor" />
-                  <strong>4.9 Rating</strong> (1,300+ Google Reviews)
-                </span>
-                <span className={styles.heroTrustBadge}>
-                  <Clock3 size={16} />
-                  <span>Open Daily {openingHours.opens} – {openingHours.closes}</span>
-                </span>
-                <span className={styles.heroTrustBadge}>
-                  <ShieldCheck size={16} />
-                  <span>Free Cancellation & Fast Confirmation</span>
-                </span>
-                <span className={styles.heroTrustBadge}>
-                  <MapPin size={16} />
-                  <span>Taksim Zambak Street</span>
-                </span>
-              </div>
             </header>
 
-            {/* Interactive Reservation Experience */}
-            <Suspense fallback={<div style={{ minHeight: "500px" }} />}>
+            <Suspense fallback={<div style={{ minHeight: "420px" }} />}>
               <ReservationView locale="en" />
             </Suspense>
-
-            {/* Frequently Asked Questions */}
-            <section
-              style={{
-                marginTop: "4rem",
-                padding: "2.5rem clamp(1.2rem, 3vw, 2.5rem)",
-                background: "#fffdf9",
-                borderRadius: "18px",
-                border: "1px solid rgba(116, 25, 31, 0.12)",
-                boxShadow: "0 10px 30px rgba(64, 48, 28, 0.05)",
-              }}
-              aria-labelledby="rezervasyon-faq-title-en"
-            >
-              <div style={{ textAlign: "center", marginBottom: "2rem" }}>
-                <span
-                  style={{
-                    fontSize: "0.76rem",
-                    fontWeight: 750,
-                    textTransform: "uppercase",
-                    letterSpacing: "0.07em",
-                    color: "#74191f",
-                  }}
-                >
-                  Visitor Questions
-                </span>
-                <h2
-                  id="rezervasyon-faq-title-en"
-                  style={{
-                    fontFamily: "var(--font-literata-gf), Georgia, serif",
-                    fontSize: "clamp(1.5rem, 3vw, 2rem)",
-                    fontWeight: 700,
-                    color: "#211d1b",
-                    margin: "0.35rem 0 0",
-                  }}
-                >
-                  Frequently Asked Questions About Reservations
-                </h2>
-              </div>
-
-              <div style={{ display: "grid", gap: "1rem", maxWidth: "880px", margin: "0 auto" }}>
-                {englishReservationFaqItems.map((item) => (
-                  <details
-                    key={item.question}
-                    style={{
-                      border: "1px solid rgba(43, 29, 28, 0.14)",
-                      borderRadius: "12px",
-                      padding: "1rem 1.25rem",
-                      background: "#fffaf2",
-                    }}
-                  >
-                    <summary
-                      style={{
-                        fontWeight: 720,
-                        fontSize: "0.96rem",
-                        color: "#211d1b",
-                        cursor: "pointer",
-                        outline: "none",
-                      }}
-                    >
-                      {item.question}
-                    </summary>
-                    <p
-                      style={{
-                        margin: "0.75rem 0 0",
-                        fontSize: "0.88rem",
-                        lineHeight: 1.55,
-                        color: "#5c4f48",
-                      }}
-                    >
-                      {item.answer}
-                    </p>
-                  </details>
-                ))}
-              </div>
-            </section>
           </div>
         </main>
         <AnimatedFooter locale="en" />

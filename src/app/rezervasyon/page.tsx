@@ -1,7 +1,5 @@
 import type { Metadata } from "next";
 import { Suspense } from "react";
-import Link from "next/link";
-import { Clock3, MapPin, ShieldCheck, Star } from "lucide-react";
 import ClientPage from "../client-page";
 import { AnimatedFooter } from "../components/animated-footer";
 import {
@@ -12,7 +10,6 @@ import {
   displayPhone,
   englishReservationUrl,
   jsonLd,
-  openingHours,
   reservationUrl,
   siteName,
   siteUrl,
@@ -20,35 +17,25 @@ import {
 import { ReservationView } from "./reservation-view";
 import styles from "./reservation.module.css";
 
-const pageTitle = "Beyoğlu Rezervasyon | Tarihi Van Kahvaltı Evi, Taksim";
+const pageTitle = "Masa Rezervasyonu | Tarihi Van Kahvaltı Evi, Beyoğlu Taksim";
 const pageDescription =
-  "Tarihi Van Kahvaltı Evi'nde masanızı ayırtın. 1978'den beri Beyoğlu Zambak Sokak'ta serpme Van kahvaltısı, otlu peynir, murtuğa ve semaver çayı için WhatsApp ile hızlı rezervasyon.";
+  "Tarihi Van Kahvaltı Evi'nde masanızı ayırtın. Beyoğlu Zambak Sokak'ta serpme Van kahvaltısı, otlu peynir, murtuğa ve semaver çayı için WhatsApp ile hızlı masa rezervasyonu.";
 
 const reservationFaqItems = [
   {
     question: "Rezervasyon nasıl onaylanır?",
     answer:
-      "Formu doldurup talebinizi ilettiğinizde, bilgileriniz doğrudan restoran yetkilimizin WhatsApp hattına aktarılır. Ekibimiz müsaitlik durumunu kontrol ederek ortalama 5–10 dakika içinde rezervasyonunuzu teyit eder.",
+      "Talebinizi ilettiğinizde bilgileriniz restoran yetkilimizin WhatsApp hattına aktarılır ve ortalama 5–10 dakika içinde teyit edilir.",
   },
   {
-    question: "Rezervasyon için ön ödeme veya kapora gerekiyor mu?",
+    question: "Rezervasyon ücretli mi veya kapora gerekiyor mu?",
     answer:
-      "Hayır. Tarihi Van Kahvaltı Evi'nde rezervasyonlar tamamen ücretsizdir ve kapora talep edilmez. Hesabınızı restoranda kahvaltı deneyiminiz sonrasında ödersiniz.",
+      "Hayır, rezervasyonlarımız tamamen ücretsizdir ve kapora talep edilmez.",
   },
   {
-    question: "Rezervasyonumu nasıl değiştirebilir veya iptal edebilirim?",
+    question: "Rezervasyonumu nasıl değiştirebilirim?",
     answer:
-      "Planınız değiştiğinde WhatsApp mesajınıza yanıt vererek veya +90 541 525 2868 numaralı telefonumuzdan bize ulaşarak rezervasyon saatinizi, kişi sayınızı güncelleyebilir ya da iptal edebilirsiniz.",
-  },
-  {
-    question: "Grup kahvaltıları ve özel buluşmalar için yer ayrılıyor mu?",
-    answer:
-      "Evet. 8 kişiden 50 kişiye kadar kalabalık aile buluşmaları, şirket kahvaltıları ve arkadaş grupları için tarihi salonumuzda veya açık alanda bir arada oturabileceğiniz özel masalar organize edilmektedir.",
-  },
-  {
-    question: "Rezervasyon saatine geç kalırsak masamız bekletilir mi?",
-    answer:
-      "Hafta sonu ve yoğun saatlerde masalarınız rezervasyon saatinizden itibaren 15 dakika süreyle adınıza ayrılmış olarak bekletilir. Gecikme yaşanması durumunda WhatsApp üzerinden bize haber vermeniz durumunda masanız korunur.",
+      "WhatsApp üzerinden mesaj göndererek veya +90 541 525 2868 numaralı telefonumuzdan bizi arayarak saati veya kişi sayısını güncelleyebilirsiniz.",
   },
 ] as const;
 
@@ -74,7 +61,7 @@ export const metadata: Metadata = {
         url: absoluteUrl("/images/breakfast-spread.webp"),
         width: 1200,
         height: 800,
-        alt: "Tarihi Van Kahvaltı Evi Rezervasyon Masası",
+        alt: "Tarihi Van Kahvaltı Evi Masası",
       },
     ],
   },
@@ -134,126 +121,20 @@ export default function ReservationPage() {
       <ClientPage locale="tr">
         <main id="main-content" className={styles.page}>
           <div className={styles.container}>
-            {/* Breadcrumb */}
-            <nav className={styles.breadcrumb} aria-label="Sayfa yolu">
-              <Link href="/">Ana sayfa</Link>
-              <span className={styles.breadcrumbSeparator}>/</span>
-              <span className={styles.breadcrumbCurrent}>Rezervasyon</span>
-            </nav>
-
-            {/* Hero Header */}
-            <header className={styles.heroHeader}>
-              <div className={styles.eyebrowBadge}>
-                <span className={styles.eyebrowDot} />
-                <span>1978&apos;den Beri Beyoğlu Zambak Sokak</span>
-              </div>
-              <h1 className={styles.heroTitle}>
-                Tarihi Van Kahvaltı Evi&apos;nde
-                <em>Masanızı Ayırtın</em>
+            <header className={styles.header}>
+              <p className={styles.kicker}>Beyoğlu Zambak Sokak</p>
+              <h1 className={styles.title}>
+                Masa Rezervasyonu
+                <em>Tarihi Van</em>
               </h1>
-              <p className={styles.heroLead}>
-                Otlu peynirden sıcak sahanlara, taze demlenen semaver çayından sıcacık pişiler ve murtuğaya kadar uzanan zengin Van kahvaltısı için yerinizi kolayca ayırtın; doğrudan WhatsApp ile teyit alın.
+              <p className={styles.lead}>
+                Zambak Sokak&apos;taki tarihi Rum binamızda; otlu peynir, sıcak sahanlar, murtuğa ve eksilmeyen demli çayımız için masanızı ayırtın.
               </p>
-
-              <div className={styles.heroTrustBadges}>
-                <span className={styles.heroTrustBadge}>
-                  <Star size={16} className={styles.ratingStar} fill="currentColor" />
-                  <strong>4.9 Puan</strong> (1.300+ Google Yorumu)
-                </span>
-                <span className={styles.heroTrustBadge}>
-                  <Clock3 size={16} />
-                  <span>{openingHours.short}</span>
-                </span>
-                <span className={styles.heroTrustBadge}>
-                  <ShieldCheck size={16} />
-                  <span>Ücretsiz İptal ve Hızlı Teyit</span>
-                </span>
-                <span className={styles.heroTrustBadge}>
-                  <MapPin size={16} />
-                  <span>Taksim Zambak Sokak</span>
-                </span>
-              </div>
             </header>
 
-            {/* Interactive Reservation Experience */}
-            <Suspense fallback={<div style={{ minHeight: "500px" }} />}>
+            <Suspense fallback={<div style={{ minHeight: "420px" }} />}>
               <ReservationView locale="tr" />
             </Suspense>
-
-            {/* Frequently Asked Questions */}
-            <section
-              style={{
-                marginTop: "4rem",
-                padding: "2.5rem clamp(1.2rem, 3vw, 2.5rem)",
-                background: "#fffdf9",
-                borderRadius: "18px",
-                border: "1px solid rgba(116, 25, 31, 0.12)",
-                boxShadow: "0 10px 30px rgba(64, 48, 28, 0.05)",
-              }}
-              aria-labelledby="rezervasyon-faq-title"
-            >
-              <div style={{ textAlign: "center", marginBottom: "2rem" }}>
-                <span
-                  style={{
-                    fontSize: "0.76rem",
-                    fontWeight: 750,
-                    textTransform: "uppercase",
-                    letterSpacing: "0.07em",
-                    color: "#74191f",
-                  }}
-                >
-                  Merak Edilenler
-                </span>
-                <h2
-                  id="rezervasyon-faq-title"
-                  style={{
-                    fontFamily: "var(--font-literata-gf), Georgia, serif",
-                    fontSize: "clamp(1.5rem, 3vw, 2rem)",
-                    fontWeight: 700,
-                    color: "#211d1b",
-                    margin: "0.35rem 0 0",
-                  }}
-                >
-                  Rezervasyon Hakkında Sıkça Sorulan Sorular
-                </h2>
-              </div>
-
-              <div style={{ display: "grid", gap: "1rem", maxWidth: "880px", margin: "0 auto" }}>
-                {reservationFaqItems.map((item) => (
-                  <details
-                    key={item.question}
-                    style={{
-                      border: "1px solid rgba(43, 29, 28, 0.14)",
-                      borderRadius: "12px",
-                      padding: "1rem 1.25rem",
-                      background: "#fffaf2",
-                    }}
-                  >
-                    <summary
-                      style={{
-                        fontWeight: 720,
-                        fontSize: "0.96rem",
-                        color: "#211d1b",
-                        cursor: "pointer",
-                        outline: "none",
-                      }}
-                    >
-                      {item.question}
-                    </summary>
-                    <p
-                      style={{
-                        margin: "0.75rem 0 0",
-                        fontSize: "0.88rem",
-                        lineHeight: 1.55,
-                        color: "#5c4f48",
-                      }}
-                    >
-                      {item.answer}
-                    </p>
-                  </details>
-                ))}
-              </div>
-            </section>
           </div>
         </main>
         <AnimatedFooter locale="tr" />
