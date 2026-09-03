@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowUpRight, Clock3, MapPin, UtensilsCrossed } from "lucide-react";
+import { ArrowUpRight, CalendarCheck, Clock3, MapPin, UtensilsCrossed } from "lucide-react";
 import ClientPage from "../client-page";
 import { AnimatedFooter } from "../components/animated-footer";
 import styles from "./van-breakfast.module.css";
@@ -172,11 +172,14 @@ export default function VanBreakfastGuidePage() {
                     sofrasını 1978&apos;den beri yaşatıyor.
                   </p>
                   <div className={styles.actions}>
-                    <Link className={styles.primaryAction} href="/menu#serpme-fix-menu">
-                      <UtensilsCrossed size={18} aria-hidden="true" /> Güncel menü ve fiyatlar
+                    <Link className={styles.primaryAction} href="/rezervasyon">
+                      <CalendarCheck size={18} aria-hidden="true" /> Masa Rezervasyonu Yap
+                    </Link>
+                    <Link className={styles.secondaryAction} href="/menu#serpme-fix-menu">
+                      <UtensilsCrossed size={18} aria-hidden="true" /> Menü ve Fiyatlar
                     </Link>
                     <a className={styles.secondaryAction} href={mapsUrl} target="_blank" rel="noreferrer">
-                      <MapPin size={18} aria-hidden="true" /> Google Haritalar&apos;da rota al
+                      <MapPin size={18} aria-hidden="true" /> Yol Tarifi
                     </a>
                   </div>
                   <dl className={styles.heroFacts}>
@@ -324,7 +327,8 @@ export default function VanBreakfastGuidePage() {
             <h2 id="guide-next-title">Sofrayı ekranda değil, masada keşfedin.</h2>
             <p>{siteName}&apos;nin güncel menüsünü inceleyin veya Beyoğlu&apos;ndaki adresimize yol tarifi alın.</p>
             <div className={styles.actions}>
-              <Link className={styles.primaryAction} href="/menu">Menü ve fiyatlar</Link>
+              <Link className={styles.primaryAction} href="/rezervasyon">Masa Rezervasyonu Yap</Link>
+              <Link className={styles.secondaryAction} href="/menu">Menü ve Fiyatlar</Link>
               <Link className={styles.secondaryAction} href="/hikayemiz">1978&apos;den beri hikâyemiz</Link>
             </div>
           </section>
