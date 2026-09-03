@@ -1,6 +1,5 @@
 import type { Metadata, Viewport } from "next";
 import { Bodoni_Moda, Commissioner, Literata } from "next/font/google";
-import Script from "next/script";
 import "./globals.css";
 import "./mobile-header-hero.css";
 import "./desktop-refinement.css";
@@ -154,6 +153,21 @@ export default function RootLayout({
   return (
     <html lang="tr" className={`h-full antialiased ${bodoni.variable} ${literata.variable} ${commissioner.variable}`}>
       <head>
+        {/* Google tag (gtag.js) */}
+        <script
+          async
+          src={`https://www.googletagmanager.com/gtag/js?id=${googleAdsId}`}
+        />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', '${googleAdsId}');
+          `,
+          }}
+        />
         <link rel="me" href={instagramUrl} />
       </head>
       <body className="min-h-full flex flex-col">
@@ -163,21 +177,6 @@ export default function RootLayout({
         <a className="skip-link" href="#main-content">Ana içeriğe geç / Skip to content / 본문으로 건너뛰기</a>
         {children}
       </body>
-      <Script
-        src={`https://www.googletagmanager.com/gtag/js?id=${googleAdsId}`}
-        strategy="afterInteractive"
-      />
-      <Script id="google-tag" strategy="afterInteractive">
-        {`
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          gtag('js', new Date());
-          gtag('config', '${googleAdsId}', {
-            allow_google_signals: false,
-            allow_ad_personalization_signals: false
-          });
-        `}
-      </Script>
     </html>
   );
 }
