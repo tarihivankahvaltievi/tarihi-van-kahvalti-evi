@@ -23,7 +23,7 @@ export function HomeContent({ locale = "tr" }: { locale?: SiteLocale }) {
       <section id="gallery" className="gallery-section">
         <div className="gallery-head">
           <h2>
-            {messages.gallery.title} <span>{messages.gallery.titleAccent}</span>
+            {messages.gallery.title}{" "}<span>{messages.gallery.titleAccent}</span>
           </h2>
           <BookingOpenButton className="order-button" icon="camera">
             {messages.gallery.booking}

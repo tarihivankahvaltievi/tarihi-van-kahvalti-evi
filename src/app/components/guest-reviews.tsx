@@ -36,7 +36,7 @@ export function GuestReviews({ locale = "tr" }: { locale?: SiteLocale }) {
         <header className={styles.header}>
           <div className={styles.headingCopy}>
             <h2 id="guest-reviews-title" className={styles.title}>
-              {messages.reviews.title} <span>{messages.reviews.titleAccent}</span>
+              {messages.reviews.title}{" "}<span>{messages.reviews.titleAccent}</span>
             </h2>
             <p className={styles.intro}>{messages.reviews.intro}</p>
           </div>
