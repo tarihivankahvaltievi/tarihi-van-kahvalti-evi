@@ -249,38 +249,8 @@ Müsaitlik durumunu teyit edebilir misiniz? Teşekkürler.`;
 
   return (
     <div className={styles.container}>
-      <div className={styles.floatingWrapper}>
-        {/* Floating Organic Food Elements */}
-        <div className={`${styles.floatFood} ${styles.floatTea}`} aria-hidden="true">
-          <Image
-            src="/images/hero-float/tea-glass.webp"
-            alt="Demli Van Çayı"
-            width={96}
-            height={114}
-            priority
-          />
-        </div>
-
-        <div className={`${styles.floatFood} ${styles.floatPan}`} aria-hidden="true">
-          <Image
-            src="/images/hero-float/sucuk-egg-pan.webp"
-            alt="Bakır Sahanda Sucuklu Yumurta"
-            width={112}
-            height={98}
-          />
-        </div>
-
-        <div className={`${styles.floatFood} ${styles.floatSimit}`} aria-hidden="true">
-          <Image
-            src="/images/hero-float/simit-board.webp"
-            alt="Taze Simit"
-            width={90}
-            height={90}
-          />
-        </div>
-
-        {/* Liquid Glass Card */}
-        <section className={styles.glassCard} aria-labelledby="form-heading">
+      {/* Liquid Glass Card */}
+      <section className={styles.glassCard} aria-labelledby="form-heading">
           {/* Sleek Liquid Glass Header */}
           <div className={styles.cardHeader}>
             <div className={styles.brandWrap}>
@@ -598,23 +568,6 @@ Müsaitlik durumunu teyit edebilir misiniz? Teşekkürler.`;
             </form>
           )}
         </section>
-      </div>
-
-      {/* Quick Venue Micro-Pills Under Card */}
-      <div className={styles.quickInfoBar}>
-        <a href={telUrl} className={styles.infoPill}>
-          <Phone size={13} />
-          <span>{displayPhone}</span>
-        </a>
-        <a href={mapsUrl} target="_blank" rel="noopener noreferrer" className={styles.infoPill}>
-          <MapPin size={13} />
-          <span>{displayAddress}</span>
-        </a>
-        <div className={styles.infoPill}>
-          <Clock size={13} />
-          <span>{openingHours.short}</span>
-        </div>
-      </div>
 
       {/* Cool Venue Ambiance Photo Strip (Directly Below Form) */}
       <div className={styles.venueGallerySection}>
@@ -647,6 +600,22 @@ Müsaitlik durumunu teyit edebilir misiniz? Teşekkürler.`;
               </div>
             </div>
           ))}
+        </div>
+      </div>
+
+      {/* Quick Venue Contact Info Below Photos */}
+      <div className={styles.quickInfoBar}>
+        <a href={telUrl} className={styles.infoPill}>
+          <Phone size={13} />
+          <span>{displayPhone}</span>
+        </a>
+        <a href={mapsUrl} target="_blank" rel="noopener noreferrer" className={styles.infoPill}>
+          <MapPin size={13} />
+          <span>{displayAddress}</span>
+        </a>
+        <div className={styles.infoPill}>
+          <Clock size={13} />
+          <span>{openingHours.short}</span>
         </div>
       </div>
     </div>

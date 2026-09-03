@@ -28,8 +28,8 @@
   --res-gold: #c5a25a;
 
   min-height: 100vh;
-  padding-top: 76px;
-  padding-bottom: 3rem;
+  padding-top: clamp(96px, 12vw, 120px);
+  padding-bottom: 3.5rem;
   background: var(--res-bg-ambient);
   color: var(--res-ink);
   overflow-x: clip;
@@ -40,77 +40,6 @@
   margin: 0 auto;
   padding-inline: clamp(0.75rem, 3.5vw, 1.5rem);
   position: relative;
-}
-
-/* --------------------------------------------------------------------------
-   Floating Food Items (Organic Floating Bobbing Animations)
-   -------------------------------------------------------------------------- */
-.floatingWrapper {
-  position: relative;
-  width: 100%;
-}
-
-.floatFood {
-  position: absolute;
-  pointer-events: none;
-  z-index: 20;
-  user-select: none;
-  filter: drop-shadow(0 14px 24px rgba(45, 12, 16, 0.26));
-  will-change: transform;
-}
-
-/* Tea Glass (Top Right) */
-.floatTea {
-  top: -24px;
-  right: -24px;
-  width: 96px;
-  height: 114px;
-  animation: floatBobTea 6s ease-in-out infinite;
-}
-
-/* Sahan / Pan (Bottom Left) */
-.floatPan {
-  bottom: 60px;
-  left: -38px;
-  width: 112px;
-  height: 98px;
-  animation: floatBobPan 7.5s ease-in-out infinite;
-}
-
-/* Simit (Top Left, Desktop only) */
-.floatSimit {
-  top: 60px;
-  left: -48px;
-  width: 90px;
-  height: 90px;
-  animation: floatBobSimit 8s ease-in-out infinite;
-}
-
-@keyframes floatBobTea {
-  0%, 100% {
-    transform: translateY(0px) rotate(0deg);
-  }
-  50% {
-    transform: translateY(-12px) rotate(3deg);
-  }
-}
-
-@keyframes floatBobPan {
-  0%, 100% {
-    transform: translateY(0px) rotate(0deg);
-  }
-  50% {
-    transform: translateY(10px) rotate(-2.5deg);
-  }
-}
-
-@keyframes floatBobSimit {
-  0%, 100% {
-    transform: translateY(0px) rotate(0deg) scale(1);
-  }
-  50% {
-    transform: translateY(-8px) rotate(-4deg) scale(1.03);
-  }
 }
 
 /* --------------------------------------------------------------------------
@@ -698,27 +627,9 @@
    Mobile Viewport Refinements
    -------------------------------------------------------------------------- */
 @media (max-width: 580px) {
-  .floatSimit {
-    display: none;
-  }
-
-  .floatTea {
-    width: 72px;
-    height: 86px;
-    top: -16px;
-    right: -10px;
-  }
-
-  .floatPan {
-    width: 82px;
-    height: 72px;
-    bottom: 50px;
-    left: -14px;
-  }
-
   .page {
-    padding-top: 68px;
-    padding-bottom: 2rem;
+    padding-top: 92px;
+    padding-bottom: 2.5rem;
   }
 
   .container {
