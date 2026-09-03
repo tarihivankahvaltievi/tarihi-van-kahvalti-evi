@@ -10,7 +10,7 @@ declare global {
   }
 }
 
-const googleAdsConversionId = process.env.NEXT_PUBLIC_GOOGLE_ADS_ID ?? "AW-6565770329";
+const googleAdsConversionId = process.env.NEXT_PUBLIC_GOOGLE_ADS_ID ?? "AW-17869229892";
 const bookingConversionLabel = process.env.NEXT_PUBLIC_GOOGLE_ADS_BOOKING_CONVERSION_LABEL;
 
 function sendEvent(name: string, parameters: AnalyticsParameters) {
