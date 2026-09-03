@@ -11,6 +11,7 @@ import {
   englishBreakfastBlogUrl,
   englishMenuUrl,
   englishUrl,
+  englishReservationUrl,
   koreanHoneyKaymakBlogUrl,
   koreanKaymakExplainerUrl,
   koreanTurkishBreakfastBlogUrl,
@@ -19,6 +20,7 @@ import {
   locationUrl,
   menuUrl,
   privacyUrl,
+  reservationUrl,
   russianBreakfastBlogUrl,
   siteUrl,
   storyUrl,
@@ -43,6 +45,14 @@ const menuLanguageAlternates = {
     tr: menuUrl,
     en: englishMenuUrl,
     "x-default": menuUrl,
+  },
+};
+
+const reservationLanguageAlternates = {
+  languages: {
+    tr: reservationUrl,
+    en: englishReservationUrl,
+    "x-default": reservationUrl,
   },
 };
 
@@ -154,6 +164,29 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.9,
       images: menuImages,
       alternates: menuLanguageAlternates,
+    },
+    {
+      url: reservationUrl,
+      lastModified: pageLastModified,
+      changeFrequency: "weekly",
+      priority: 0.9,
+      images: uniqueImages([
+        "/images/breakfast-spread.webp",
+        "/images/balcony-breakfast.webp",
+        "/images/interior-chair.webp",
+      ]),
+      alternates: reservationLanguageAlternates,
+    },
+    {
+      url: englishReservationUrl,
+      lastModified: pageLastModified,
+      changeFrequency: "weekly",
+      priority: 0.85,
+      images: uniqueImages([
+        "/images/breakfast-spread.webp",
+        "/images/balcony-breakfast.webp",
+      ]),
+      alternates: reservationLanguageAlternates,
     },
     {
       url: breakfastGuideUrl,

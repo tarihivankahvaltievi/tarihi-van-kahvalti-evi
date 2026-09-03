@@ -3,10 +3,9 @@ import { isAdminAuthenticated } from "@/app/admin/auth-helper";
 import {
   getReservationData,
   addReservation,
-  type Reservation,
   type ServiceType,
 } from "@/app/reservations/reservation-storage";
-import { siteUrl } from "@/app/seo";
+import { displayAddress, siteUrl } from "@/app/seo";
 
 export async function GET() {
   try {
@@ -84,8 +83,8 @@ export async function POST(request: Request) {
     const endStr = `${endDate.getFullYear()}${pad(endDate.getMonth() + 1)}${pad(endDate.getDate())}T${pad(endDate.getHours())}${pad(endDate.getMinutes())}00`;
 
     const gCalTitle = encodeURIComponent(`🍳 Tarihi Van Kahvaltı Evi Rezervasyonu (${newReservation.guests} Kişi)`);
-    const gCalDetails = encodeURIComponent(`Rezervasyon No: ${newReservation.id}\nAd: ${newReservation.customerName}\nKişi: ${newReservation.guests}\nNot: ${newReservation.note || "-"}\nAdres: Kılıçali Paşa Mah. Defterdar Yokuşu No:52/A Cihangir, Beyoğlu / İstanbul`);
-    const gCalLocation = encodeURIComponent("Tarihi Van Kahvaltı Evi, Cihangir, Beyoğlu, İstanbul");
+    const gCalDetails = encodeURIComponent(`Rezervasyon No: ${newReservation.id}\nAd: ${newReservation.customerName}\nKişi: ${newReservation.guests}\nNot: ${newReservation.note || "-"}\nAdres: ${displayAddress}`);
+    const gCalLocation = encodeURIComponent(`Tarihi Van Kahvaltı Evi, ${displayAddress}`);
     const googleCalendarUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${gCalTitle}&dates=${startStr}/${endStr}&details=${gCalDetails}&location=${gCalLocation}&ctz=Europe/Istanbul`;
 
     return NextResponse.json({

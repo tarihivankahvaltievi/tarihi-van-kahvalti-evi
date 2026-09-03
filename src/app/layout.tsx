@@ -140,6 +140,7 @@ export const metadata: Metadata = {
 };
 
 import { WebVitals } from "./components/web-vitals";
+import { AnalyticsAutoTracker } from "./analytics";
 
 const googleAdsId = process.env.NEXT_PUBLIC_GOOGLE_ADS_ID ?? "AW-17869229892";
 
@@ -171,6 +172,7 @@ export default function RootLayout({
         <link rel="me" href={instagramUrl} />
       </head>
       <body className="min-h-full flex flex-col">
+        <AnalyticsAutoTracker />
         {webVitalsEndpoint?.startsWith("/") && !webVitalsEndpoint.startsWith("//") ? (
           <WebVitals endpoint={webVitalsEndpoint} />
         ) : null}

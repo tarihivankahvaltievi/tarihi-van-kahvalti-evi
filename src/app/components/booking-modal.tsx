@@ -91,8 +91,11 @@ export function BookingModal({
   // Reset submitted state when modal re-opens
   useEffect(() => {
     if (isOpen) {
-      setSubmittedData(null);
-      setIsSubmitting(false);
+      const timer = setTimeout(() => {
+        setSubmittedData(null);
+        setIsSubmitting(false);
+      }, 0);
+      return () => clearTimeout(timer);
     }
   }, [isOpen]);
 

@@ -33,7 +33,6 @@ import {
   XCircle,
   AlertCircle,
   RefreshCw,
-  Share2,
 } from "lucide-react";
 import type { MenuData, MenuItem, MenuCategory } from "../menu/menu-storage";
 import type {
@@ -1016,7 +1015,11 @@ export function AdminDashboard({
                 ].map((tab) => (
                   <button
                     key={tab.id}
-                    onClick={() => setReservationFilter(tab.id as any)}
+                    onClick={() =>
+                      setReservationFilter(
+                        tab.id as "all" | "upcoming" | "today" | "pending" | "confirmed" | "cancelled",
+                      )
+                    }
                     className={`px-3 py-1.5 rounded-full text-xs font-medium border transition-all cursor-pointer flex items-center space-x-1 ${
                       reservationFilter === tab.id
                         ? "bg-red-800 text-white border-red-800 shadow-sm"

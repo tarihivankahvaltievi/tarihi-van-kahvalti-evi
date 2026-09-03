@@ -42,6 +42,7 @@ export const homeMessages = {
     alternateLanguageLabel: "English",
     alternateHref: "/en",
     homeHref: "/#top",
+    reservationHref: "/rezervasyon",
     menuHref: "/menu",
     aboutHref: "/hikayemiz",
     galleryHref: "/#gallery",
@@ -314,6 +315,7 @@ export const homeMessages = {
       booking: "Masada Yerini Ayırt",
       explore: "Keşfet",
       exploreLinks: [
+        ["/rezervasyon", "Masa Rezervasyonu"],
         ["/menu", "Zengin Menü"],
         ["/van-kahvaltisi", "Van Kahvaltısı Rehberi"],
         ["/van-kahvaltisi-nedir", "Van Kahvaltısı Nedir?"],
@@ -345,6 +347,7 @@ export const homeMessages = {
     alternateLanguageLabel: "Türkçe",
     alternateHref: "/",
     homeHref: "/en#top",
+    reservationHref: "/en/rezervasyon",
     menuHref: "/en/menu",
     aboutHref: "/en#story",
     galleryHref: "/en#gallery",
@@ -617,6 +620,7 @@ export const homeMessages = {
       booking: "Request a Table",
       explore: "Explore",
       exploreLinks: [
+        ["/en/rezervasyon", "Table Reservation"],
         ["/en/menu", "Live English Menu"],
         ["/en/blog/turkish-breakfast-istanbul", "Complete Turkish Breakfast Guide"],
         ["/ru/blog/turetskiy-zavtrak-stambul", "Русский гид"],

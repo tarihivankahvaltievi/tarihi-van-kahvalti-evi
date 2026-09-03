@@ -53,8 +53,8 @@ export default function manifest(): MetadataRoute.Manifest {
       {
         name: "Rezervasyon",
         short_name: "Rezervasyon",
-        description: "Telefon ve WhatsApp ile kahvaltı rezervasyon bilgisi.",
-        url: "/#contact",
+        description: "Masa ayırtma talebi ve WhatsApp ile hızlı teyit.",
+        url: "/rezervasyon",
         icons: [{ src: "/icons/icon-192.png", sizes: "192x192", type: "image/png" }],
       },
     ],

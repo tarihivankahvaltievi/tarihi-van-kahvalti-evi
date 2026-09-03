@@ -13,6 +13,8 @@ export const koreanKaymakExplainerUrl = `${siteUrl}/ko/blog/kaymak-nedir`;
 export const koreanTurkishBreakfastBlogUrl = `${siteUrl}/ko/blog/turkish-breakfast-istanbul`;
 export const japaneseHoneyKaymakBlogUrl = `${siteUrl}/ja/blog/istanbul-bal-kaymak`;
 export const locationUrl = `${siteUrl}/konum`;
+export const reservationUrl = `${siteUrl}/rezervasyon`;
+export const englishReservationUrl = `${englishUrl}/rezervasyon`;
 export const breakfastGuideUrl = `${siteUrl}/van-kahvaltisi`;
 export const breakfastCultureUrl = `${siteUrl}/van-kahvaltisi-nedir`;
 export const storyUrl = `${siteUrl}/hikayemiz`;
@@ -154,7 +156,12 @@ export const legacyRedirects = [
   { source: "/aile-kahvaltisi-beyoglu", destination: "/" },
   { source: "/grup-kahvaltisi", destination: "/" },
   { source: "/hafta-sonu-kahvalti", destination: "/" },
-  { source: "/kahvalti-rezervasyon", destination: "/" },
+  { source: "/kahvalti-rezervasyon", destination: "/rezervasyon" },
+  { source: "/reservation", destination: "/rezervasyon" },
+  { source: "/booking", destination: "/rezervasyon" },
+  { source: "/masa-ayirt", destination: "/rezervasyon" },
+  { source: "/en/reservation", destination: "/en/rezervasyon" },
+  { source: "/en/booking", destination: "/en/rezervasyon" },
   { source: "/beyoglu-kahvalti-mekanlari", destination: "/" },
   { source: "/taksim-brunch-kahvalti", destination: "/" },
   { source: "/iletisim", destination: "/konum" },

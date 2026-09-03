@@ -1,9 +1,8 @@
 "use client";
 
-import dynamic from "next/dynamic";
 import Image from "next/image";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import {
   useEffect,
   useRef,
@@ -22,27 +21,24 @@ import {
   Languages,
   MapPin,
   MessageCircle,
+  Phone,
 } from "lucide-react";
-import { mapsUrl, whatsappUrl } from "./seo";
+import { displayPhone, mapsUrl, telUrl, whatsappUrl } from "./seo";
 import { messagesFor, type SiteLocale } from "./home-localization";
 import { trackEvent } from "./analytics";
 
-const BookingModal = dynamic(
-  () => import("./components/booking-modal").then((mod) => mod.BookingModal),
-  { ssr: false },
-);
-
 export default function ClientPage({ children, locale = "tr" }: { children: ReactNode; locale?: SiteLocale }) {
   const messages = messagesFor(locale);
+  const router = useRouter();
   const pathname = usePathname();
   const isMenuPage = pathname === "/menu" || pathname === "/en/menu";
   const isLocationPage = pathname === "/konum";
+  const isReservationPage = pathname === "/rezervasyon" || pathname === "/en/rezervasyon";
   const alternateHref = isMenuPage
     ? locale === "en" ? "/menu" : "/en/menu"
+    : isReservationPage
+    ? locale === "en" ? "/rezervasyon" : "/en/rezervasyon"
     : messages.alternateHref;
-  const [isBookingOpen, setIsBookingOpen] = useState(false);
-  const [preselectedItem, setPreselectedItem] = useState("");
-  const [preselectedType, setPreselectedType] = useState("");
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [mobileBarHidden, setMobileBarHidden] = useState(false);
@@ -162,22 +158,21 @@ export default function ClientPage({ children, locale = "tr" }: { children: Reac
   useEffect(() => {
     const handleBookingRequest = (event: Event) => {
       const detail = (event as CustomEvent<{ itemTitle?: string; category?: string }>).detail;
-      setPreselectedItem(detail?.itemTitle || "");
-      setPreselectedType(detail?.category || (locale === "en" ? "Breakfast" : "Kahvaltı"));
-      setIsBookingOpen(true);
-      trackEvent("booking_modal_open", { locale, entry_point: "content" });
+      const targetPath = locale === "en" ? "/en/rezervasyon" : "/rezervasyon";
+      const params = new URLSearchParams();
+      if (detail?.category) {
+        params.set("service", detail.category.toLowerCase().includes("cafe") ? "cafe" : "breakfast");
+      }
+      if (detail?.itemTitle) {
+        params.set("item", detail.itemTitle);
+      }
+      const queryStr = params.toString() ? `?${params.toString()}` : "";
+      router.push(`${targetPath}${queryStr}`);
     };
 
     window.addEventListener("open-booking", handleBookingRequest);
     return () => window.removeEventListener("open-booking", handleBookingRequest);
-  }, [locale]);
-
-  const handleOpenBooking = (itemTitle?: string, category?: string) => {
-    setPreselectedItem(itemTitle || "");
-    setPreselectedType(category || (locale === "en" ? "Breakfast" : "Kahvaltı"));
-    setIsBookingOpen(true);
-    trackEvent("booking_modal_open", { locale, entry_point: "site_navigation" });
-  };
+  }, [locale, router]);
 
   const handleMouseEnter = (event: MouseEvent<HTMLAnchorElement>) => {
     const target = event.currentTarget;
@@ -224,6 +219,9 @@ export default function ClientPage({ children, locale = "tr" }: { children: Reac
             <span className="nav-hover-pill" style={hoverStyle} />
             <Link href={messages.aboutHref} onMouseEnter={handleMouseEnter}>{messages.nav.about}</Link>
             <Link href={messages.menuHref} aria-current={isMenuPage ? "page" : undefined} onMouseEnter={handleMouseEnter}>{messages.nav.menu}</Link>
+            <Link href={locale === "en" ? "/en/rezervasyon" : "/rezervasyon"} aria-current={isReservationPage ? "page" : undefined} onMouseEnter={handleMouseEnter}>
+              {locale === "en" ? "Reservation" : "Rezervasyon"}
+            </Link>
             <Link href={messages.galleryHref} onMouseEnter={handleMouseEnter}>{messages.nav.gallery}</Link>
             {locale === "en" ? (
               <a href={mapsUrl} target="_blank" rel="noopener noreferrer" onMouseEnter={handleMouseEnter}>{messages.nav.location}</a>
@@ -389,6 +387,23 @@ export default function ClientPage({ children, locale = "tr" }: { children: Reac
               </span>
               <ChevronRight size={17} />
             </a>
+            <a
+              className="nav-menu-utility"
+              href={telUrl}
+              tabIndex={menuOpen ? 0 : -1}
+              style={{ "--item-index": 12 } as CSSProperties}
+              onClick={() => {
+                setMenuOpen(false);
+                trackEvent("contact_click", { contact_method: "phone", surface: "navigation_drawer" });
+              }}
+            >
+              <Phone size={18} />
+              <span className="nav-menu-copy">
+                <span className="nav-menu-link-text">{locale === "en" ? "Call Directly" : "Hemen Ara"}</span>
+                <span className="nav-menu-link-meta">{displayPhone}</span>
+              </span>
+              <ChevronRight size={17} />
+            </a>
             <Link
               className="nav-menu-utility nav-menu-language"
               href={alternateHref}
@@ -406,19 +421,16 @@ export default function ClientPage({ children, locale = "tr" }: { children: Reac
               <ChevronRight size={17} />
             </Link>
             <div className="nav-drawer-footer">
-              <button
-                type="button"
+              <Link
+                href={locale === "en" ? "/en/rezervasyon" : "/rezervasyon"}
                 className="nav-drawer-book"
                 tabIndex={menuOpen ? 0 : -1}
-                onClick={() => {
-                  setMenuOpen(false);
-                  handleOpenBooking();
-                }}
+                onClick={() => setMenuOpen(false)}
               >
                 <Calendar size={17} />
                 <span>{messages.nav.book}</span>
                 <ChevronRight size={16} />
-              </button>
+              </Link>
             </div>
           </div>
         </header>
@@ -445,15 +457,15 @@ export default function ClientPage({ children, locale = "tr" }: { children: Reac
             <MessageCircle size={20} />
             <span className="mobile-bar-label">WhatsApp</span>
           </a>
-          <button
-            type="button"
+          <Link
+            href={locale === "en" ? "/en/rezervasyon" : "/rezervasyon"}
             className="mobile-bar-primary"
             aria-label={locale === "en" ? "Request a table" : "Rezervasyon yap"}
-            onClick={() => handleOpenBooking()}
+            onClick={() => trackEvent("booking_modal_open", { locale, entry_point: "mobile_bar" })}
           >
             <Calendar size={22} className="mobile-bar-highlight-icon" />
             <span className="mobile-bar-label">{locale === "en" ? "Book" : "Rezervasyon"}</span>
-          </button>
+          </Link>
           <a
             href={mapsUrl}
             target="_blank"
@@ -465,17 +477,6 @@ export default function ClientPage({ children, locale = "tr" }: { children: Reac
             <span className="mobile-bar-label">{messages.mobile.directions}</span>
           </a>
       </div>
-
-      {isBookingOpen ? (
-        <BookingModal
-          key={`${isBookingOpen}-${preselectedType}-${preselectedItem}`}
-          isOpen={isBookingOpen}
-          onClose={() => setIsBookingOpen(false)}
-          preselectedType={preselectedType}
-          preselectedItem={preselectedItem}
-          locale={locale}
-        />
-      ) : null}
     </>
   );
 }
