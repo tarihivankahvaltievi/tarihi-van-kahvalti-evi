@@ -674,11 +674,21 @@ Müsaitlik durumunu teyit edebilir misiniz? Teşekkürler.`;
       </section>
 
       <div className={styles.quickInfoBar}>
-        <a href={telUrl} className={styles.infoPill}>
+        <a
+          href={telUrl}
+          className={styles.infoPill}
+          onClick={() => trackEvent("contact_click", { contact_method: "phone", surface: "reservation_page" })}
+        >
           <Phone size={13} />
           <span>{displayPhone}</span>
         </a>
-        <a href={mapsUrl} target="_blank" rel="noopener noreferrer" className={styles.infoPill}>
+        <a
+          href={mapsUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className={styles.infoPill}
+          onClick={() => trackEvent("contact_click", { contact_method: "directions", surface: "reservation_page" })}
+        >
           <MapPin size={13} />
           <span>{displayAddress}</span>
         </a>
