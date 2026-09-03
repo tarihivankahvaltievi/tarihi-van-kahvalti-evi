@@ -1,12 +1,12 @@
 # SEO ve GEO operasyon planı
 
-Son teknik revizyon, canlı site kontrolü ve dış kaynak denetimi: 21 Temmuz 2026
+Son teknik revizyon: 3 Eylül 2026 · Son dış kaynak/NAP denetimi: 21 Temmuz 2026
 
 Bu belge, `van kahvaltıcısı`, `Beyoğlu kahvaltı`, `Taksim kahvaltı`, `Turkish breakfast near Taksim` ve ilgili yerel niyetli aramalarda organik görünürlüğü artırmak için teknik durum ile işletme hesabı gerektiren işleri birlikte izler. Google'da veya başka bir arama motorunda birinci sıra garanti edilemez. Google'ın açıkladığı yerel sonuç bileşenleri alaka düzeyi, mesafe ve bilinirliktir; teknik iyileştirmeler erişimi ve anlaşılabilirliği güçlendirir, kullanıcının konumunu veya rekabeti ortadan kaldırmaz.
 
 ## Uygulanan teknik SEO/GEO kapsamı
 
-- Sitemap 18 indekslenebilir kanonik URL'yi içerir: altı Türkçe ana içerik sayfası, Türkçe/İngilizce menü, İngilizce ve Korece ziyaretçi merkezleri, İngilizce/Rusça/Arapça/Korece Türk kahvaltısı rehberleri, ayrı Korece/Japonca bal-kaymak rehberleri, Korece “kaymak nedir?” bilgi rehberi ve iki yasal bilgilendirme sayfası. Eski, yönlendirilen, yönetim veya API URL'leri sitemap'e alınmaz.
+- Sitemap 20 indekslenebilir kanonik URL'yi içerir: Türkçe ana içerik ve rezervasyon sayfaları, Türkçe/İngilizce menü ve rezervasyon sayfaları, İngilizce ve Korece ziyaretçi merkezleri, İngilizce/Rusça/Arapça/Korece Türk kahvaltısı rehberleri, ayrı Korece/Japonca bal-kaymak rehberleri, Korece “kaymak nedir?” bilgi rehberi ve iki yasal bilgilendirme sayfası. Eski, yönlendirilen, yönetim veya API URL'leri sitemap'e alınmaz.
 - Görsel sitemap kapsamı ana sayfadaki galeri/hero varlıklarını, canlı menü verisinden okunan güncel kategori/ürün görsellerini ve rehber/hikâye sayfalarındaki gerçek görselleri sayfa bazında listeler. Yinelenen görsel URL'leri her sayfada tekilleştirilir.
 - Türkçe ana sayfa ile İngilizce ziyaretçi rehberi arasında karşılıklı `tr`, `en` ve `x-default` hreflang ilişkisi hem sayfa başlıklarında hem sitemap'te tanımlıdır.
 - Türkçe canlı menü ile İngilizce canlı menü arasında ayrı ve karşılıklı `tr`, `en` ve `x-default` hreflang kümesi bulunur. İngilizce menü, aynı Supabase menü kaynağından güncel fiyatları alır ve özgün İngilizce ürün açıklamaları sunar.
@@ -15,13 +15,15 @@ Bu belge, `van kahvaltıcısı`, `Beyoğlu kahvaltı`, `Taksim kahvaltı`, `Turk
 - Güncel fiyatların tek kaynağı dinamik `/menu` sayfasıdır. Ana sayfadaki sabit ve güncelliğini yitirmiş `450 TL` cevabı kaldırıldı; SSS kullanıcıyı canlı menüye yönlendirir.
 - Ana sayfada `Restaurant`, `WebSite`, `WebPage` ve görünür cevaplarla eşleşen `FAQPage`; menüde `WebPage`, `BreadcrumbList` ve `Menu`; İngilizce sayfada `Restaurant`, `WebPage`, `BreadcrumbList` ve `FAQPage` grafiği bulunur.
 - Site genelinde tek ve kararlı işletme kimlikleri (`#restaurant`, `#website`, sayfa kimlikleri), self-canonical, özgün title/description, Open Graph ve Twitter metadata kullanılır. İngilizce FAQ şemasının dili `en` olarak düzeltilmiştir.
+- Türkçe ve İngilizce rezervasyon sayfaları karşılıklı `hreflang`, self-canonical, görünür ve şemayla birebir eşleşen rezervasyon SSS'leri, `ReserveAction`, adres/ulaşım bağlantıları, çalışma saatleri ve doğrulanmış işletme koordinatlarını taşır. Eski `/booking`, `/reservation`, `/masa-ayirt` ve dil eşdeğerleri tek adımla kanonik rezervasyon URL'lerine yönlenir.
+- Site genelindeki coğrafi meta sinyalleri `TR-34`, Beyoğlu/İstanbul ve işletme koordinatlarıyla ortak kaynaktan üretilir. `Restaurant.geo`, `PostalAddress`, Google Maps CID ve görünür adres aynı veri kaynağına bağlıdır.
 - Konum sayfasındaki yaklaşık 1 MB harita JavaScript'i ilk açılıştan çıkarıldı. Erişilebilir statik konum kartı, adres ve Google Maps bağlantısı hemen gelir; MapLibre yalnız kullanıcı “Etkileşimli haritayı yükle” dediğinde yüklenir.
 - Ana sayfanın gerçek LCP görseli `eager` ve `fetchPriority=high` olarak işaretlendi; dekoratif görseller daha ölçülü kaliteyle sunulur. Yinelenen görsel/sr-only H1 ve yinelenen giriş metni kaldırıldı.
-- Footer'daki politika metinleri gerçek, self-canonical `/gizlilik` ve `/cerez-politikasi` sayfalarına bağlanır; yönetim ve API yüzeyleri ise ayrı `noindex` ve `X-Robots-Tag` kontrolleriyle arama sonuçlarından çıkarılır.
+- Footer'daki politika metinleri gerçek, self-canonical `/gizlilik` ve `/cerez-politikasi` sayfalarına bağlanır; yönetim ve tüm API yüzeyleri ise robots engeli ile `X-Robots-Tag` kontrolleriyle arama sonuçlarından çıkarılır. Rezervasyon JSON uç noktasındaki kişisel veriler yalnız yönetici oturumuyla okunabilir.
 - `robots.txt` genel botlara ek olarak Googlebot, Bingbot, YandexBot, Applebot, Naver `Yeti`, `OAI-SearchBot` ve `PerplexityBot` için açık arama/grounding grubu yayımlar; yalnız yönetim API'si ve sunucu içi yollar kapalıdır. Kanonik sitemap adresi bildirilir.
 - IndexNow anahtarı alan adında yayımlanır ve `npm run seo:indexnow` Bing, Naver, Seznam gibi katılımcı motorlara değişen URL'leri toplu bildirir. Varsayılan liste İngilizce, Rusça, Arapça, Korece ve Japonca rehberleri de kapsar. Bu bir tarama bildirimi olup indeksleme veya sıralama garantisi değildir.
 - Eski Türkçe sorgu URL'leri en yakın gerçek içeriğe, eski İngilizce sorgu URL'leri `/en` sayfasına tek adımlı kalıcı yönlenir.
-- Derleme sonrası SEO sözleşmesi 18 kanonik sayfada canonical, hreflang, dil başlığı, title, description, H1, görünür metin, JSON-LD, sitemap, en az 50 görsel sitemap kaydı, doğru `lastmod`, yedi arama/AI botu, IndexNow kapsamı, yönlendirme, 404 ve doğrudan `200` dahili bağlantıları otomatik denetler. Korece bal-kaymak sayfalarında gerçek ürün görseli, doğrudan menü bağlantısı, yerelleştirilmiş ziyaretçi bilgileri ve `MenuItem` varlığı ayrıca doğrulanır.
+- Derleme sonrası SEO sözleşmesi 20 kanonik sayfada canonical, hreflang, dil başlığı, title, description, H1, görünür metin, JSON-LD, sitemap, en az 50 görsel sitemap kaydı, doğru `lastmod`, yedi arama/AI botu, IndexNow kapsamı, yönlendirme, 404 ve doğrudan `200` dahili bağlantıları otomatik denetler. Rezervasyon sayfalarında görünür SSS–şema eşleşmesi, coğrafi meta etiketleri ve kanonik `ReserveAction`; Korece bal-kaymak sayfalarında gerçek ürün görseli, doğrudan menü bağlantısı, yerelleştirilmiş ziyaretçi bilgileri ve `MenuItem` varlığı ayrıca doğrulanır.
 
 ## Ölçülen performans etkisi
 
@@ -40,7 +42,7 @@ Konum sayfasındaki en büyük kazanım harita kütüphanesinin kullanıcı iste
 
 Kod, işletme sahibinin erişemediğimiz Google Business Profile, Yandex Business ve üçüncü taraf dizin kayıtlarını değiştiremez. 19 Temmuz 2026 taramasında şu çelişkiler görüldü:
 
-1. Site ve şema çalışma saatini her gün `08:00–18:00` gösteriyor; Google Maps arama görünümünde `06:30` açılış bilgisi görüldü. Gerçek saat birincil kaynaktan doğrulanmalı; site, Google, Yandex ve dizinler aynı gün eşitlenmelidir.
+1. Site ve şema çalışma saatini her gün `07:00–22:00` gösteriyor; 21 Temmuz dış kaynak taramasında Google Maps arama görünümünde `06:30` açılış bilgisi görülmüştü. Gerçek saat birincil kaynaktan yeniden doğrulanmalı; site, Google, Yandex ve dizinler aynı gün eşitlenmelidir.
 2. Site adresi `Zambak Sk. No:8, Şehit Muhtar Mahallesi, Beyoğlu, İstanbul 34435`; Yandex Maps kaydı `Zambak Sokak 10A` gösteriyor ve saatleri bilinmiyor. Gerçek kapı numarası işletme belgesiyle doğrulanıp yanlış kayıt düzeltilmelidir.
 3. RenkMobil işletmeyi `24 saat açık` ve `34421` posta koduyla gösteriyor. MekanRadar da `34421` kullanıyor. Gerçek posta kodu doğrulandıktan sonra her iki kaynakta düzeltme istenmelidir.
 4. Google görünümündeki kategori `Cafe`. Gerçek ana faaliyet kahvaltıysa Google Business Profile'da mevcut en yakın kahvaltı restoranı kategorisi birincil olarak doğrulanmalı; işletme adına anahtar kelime eklenmemelidir.

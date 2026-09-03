@@ -1,4 +1,5 @@
 import type { Reservation } from "./reservation-storage";
+import { displayAddress } from "../seo.ts";
 
 function escapeIcalText(text: string): string {
   if (!text) return "";
@@ -31,7 +32,7 @@ function formatUtcTimestamp(isoString?: string): string {
   return `${d.getUTCFullYear()}${pad(d.getUTCMonth() + 1)}${pad(d.getUTCDate())}T${pad(d.getUTCHours())}${pad(d.getUTCMinutes())}${pad(d.getUTCSeconds())}Z`;
 }
 
-const LOCATION = "Tarihi Van Kahvaltı Evi, Kılıçali Paşa Mah. Defterdar Yokuşu No:52/A, Cihangir, Beyoğlu / İstanbul";
+const LOCATION = `Tarihi Van Kahvaltı Evi, ${displayAddress}`;
 
 export function generateSingleReservationIcs(reservation: Reservation): string {
   const { startStr, endStr } = formatIcalDateTime(reservation.date, reservation.time);
@@ -45,7 +46,7 @@ export function generateSingleReservationIcs(reservation: Reservation): string {
     `🍽️ Tercih: ${serviceLabel}`,
     `📝 Not: ${reservation.note || "Yok"}`,
     `📌 Durum: ${reservation.status === "confirmed" ? "Onaylandı" : reservation.status === "cancelled" ? "İptal Edildi" : "Bekliyor"}`,
-    `\n📍 Tarihi Van Kahvaltı Evi - Cihangir / Beyoğlu`,
+    `\n📍 Tarihi Van Kahvaltı Evi - Zambak Sokak / Beyoğlu`,
     `💬 WhatsApp'tan Yaz: https://wa.me/${(reservation.customerPhone || "").replace(/\D/g, "")}`,
   ];
 

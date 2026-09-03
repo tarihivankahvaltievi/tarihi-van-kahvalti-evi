@@ -1,13 +1,13 @@
 import { NextResponse } from "next/server";
 import { cookies } from "next/headers";
-import { getSessionHash } from "@/app/admin/auth-helper";
+import { getAdminPassword, getSessionHash, safeEqual } from "@/app/admin/auth-helper";
 
 export async function POST(request: Request) {
   try {
     const { password } = await request.json();
 
-    const expectedPassword = process.env.ADMIN_PASSWORD || "tarihivan1978";
-    if (password === expectedPassword) {
+    const expectedPassword = getAdminPassword();
+    if (typeof password === "string" && safeEqual(password, expectedPassword)) {
       const hash = getSessionHash(expectedPassword);
       const cookieStore = await cookies();
 

@@ -26,7 +26,11 @@ export interface ReservationData {
 }
 
 const getLocalFilePath = () =>
-  path.join(process.cwd(), "src/app/reservations/reservations-data.json");
+  path.join(
+    process.cwd(),
+    "src/app/reservations",
+    path.basename(process.env.RESERVATION_DATA_FILE || "reservations-data.json"),
+  );
 
 // Helper to check if Supabase is configured
 export function isSupabaseConfigured() {
@@ -35,15 +39,20 @@ export function isSupabaseConfigured() {
 
 // Generate default calendar feed token
 export function getCalendarFeedToken(): string {
-  const secret = process.env.ADMIN_PASSWORD || "tarihivan1978";
-  return crypto.createHash("sha256").update(`calendar-feed-${secret}`).digest("hex").slice(0, 24);
+  const secret = process.env.CALENDAR_FEED_SECRET || process.env.ADMIN_PASSWORD;
+  if (!secret && process.env.NODE_ENV === "production") {
+    throw new Error("CALENDAR_FEED_SECRET veya ADMIN_PASSWORD tanımlanmalıdır.");
+  }
+  const tokenSecret = secret || "development-only-calendar-secret";
+  return crypto.createHash("sha256").update(`calendar-feed-${tokenSecret}`).digest("hex").slice(0, 24);
 }
 
 // Validate calendar feed token
 export function isValidCalendarFeedToken(token?: string | null): boolean {
   if (!token) return false;
   const expected = getCalendarFeedToken();
-  return token === expected;
+  if (token.length !== expected.length) return false;
+  return crypto.timingSafeEqual(Buffer.from(token), Buffer.from(expected));
 }
 
 async function readLocalReservationData(): Promise<ReservationData> {
@@ -145,7 +154,7 @@ export async function addReservation(
   
   // Format unique friendly ID e.g. "van-20261015-842"
   const dateCompact = (reservationInput.date || "").replace(/-/g, "");
-  const randomSuffix = Math.floor(100 + Math.random() * 900);
+  const randomSuffix = crypto.randomBytes(6).toString("hex");
   const id = `van-${dateCompact || Date.now()}-${randomSuffix}`;
 
   const newReservation: Reservation = {
@@ -157,7 +166,10 @@ export async function addReservation(
 
   // Add to top of list
   data.reservations = [newReservation, ...data.reservations];
-  await saveReservationData(data);
+  const saved = await saveReservationData(data);
+  if (!saved) {
+    throw new Error("Rezervasyon kalıcı depolamaya kaydedilemedi.");
+  }
   return newReservation;
 }
 

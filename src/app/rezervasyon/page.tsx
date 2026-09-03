@@ -6,38 +6,19 @@ import {
   absoluteUrl,
   buildFaqJsonLd,
   buildRestaurantJsonLd,
-  displayAddress,
-  displayPhone,
   englishReservationUrl,
   jsonLd,
   reservationUrl,
   siteName,
   siteUrl,
 } from "../seo";
+import { reservationFaqItems } from "./reservation-content";
 import { ReservationView } from "./reservation-view";
 import styles from "./reservation.module.css";
 
 const pageTitle = "Masa Rezervasyonu | Tarihi Van Kahvaltı Evi, Beyoğlu Taksim";
 const pageDescription =
-  "Tarihi Van Kahvaltı Evi'nde masanızı ayırtın. Beyoğlu Zambak Sokak'ta serpme Van kahvaltısı, otlu peynir, murtuğa ve semaver çayı için WhatsApp ile hızlı masa rezervasyonu.";
-
-const reservationFaqItems = [
-  {
-    question: "Rezervasyon nasıl onaylanır?",
-    answer:
-      "Talebinizi ilettiğinizde bilgileriniz restoran yetkilimizin WhatsApp hattına aktarılır ve ortalama 5–10 dakika içinde teyit edilir.",
-  },
-  {
-    question: "Rezervasyon ücretli mi veya kapora gerekiyor mu?",
-    answer:
-      "Hayır, rezervasyonlarımız tamamen ücretsizdir ve kapora talep edilmez.",
-  },
-  {
-    question: "Rezervasyonumu nasıl değiştirebilirim?",
-    answer:
-      "WhatsApp üzerinden mesaj göndererek veya +90 541 525 2868 numaralı telefonumuzdan bizi arayarak saati veya kişi sayısını güncelleyebilirsiniz.",
-  },
-] as const;
+  "Tarihi Van Kahvaltı Evi'nde masanızı ayırtın. Beyoğlu Zambak Sokak'ta Van kahvaltısı, otlu peynir, murtuğa ve semaver çayı için WhatsApp ile masa rezervasyonu.";
 
 export const metadata: Metadata = {
   title: { absolute: pageTitle },
@@ -45,8 +26,9 @@ export const metadata: Metadata = {
   alternates: {
     canonical: reservationUrl,
     languages: {
-      "tr-TR": reservationUrl,
-      "en-US": englishReservationUrl,
+      tr: reservationUrl,
+      en: englishReservationUrl,
+      "x-default": reservationUrl,
     },
   },
   openGraph: {
@@ -87,13 +69,21 @@ export default function ReservationPage() {
         inLanguage: "tr-TR",
         isPartOf: { "@id": `${siteUrl}/#website` },
         about: { "@id": `${siteUrl}/#restaurant` },
-        mainEntity: {
-          "@type": "FoodEstablishment",
-          "@id": `${siteUrl}/#restaurant`,
-          name: siteName,
-          acceptsReservations: "True",
-          telephone: displayPhone,
-          address: displayAddress,
+        mainEntity: { "@id": `${siteUrl}/#restaurant` },
+        potentialAction: {
+          "@type": "ReserveAction",
+          target: {
+            "@type": "EntryPoint",
+            urlTemplate: reservationUrl,
+            actionPlatform: [
+              "https://schema.org/DesktopWebPlatform",
+              "https://schema.org/MobileWebPlatform",
+            ],
+          },
+          result: {
+            "@type": "FoodEstablishmentReservation",
+            name: `${siteName} masa rezervasyonu`,
+          },
         },
         primaryImageOfPage: {
           "@type": "ImageObject",
@@ -119,7 +109,7 @@ export default function ReservationPage() {
         dangerouslySetInnerHTML={{ __html: jsonLd(reservationJsonLd) }}
       />
       <ClientPage locale="tr">
-        <main id="main-content" className={styles.page}>
+        <main id="main-content" className={styles.page} lang="tr-TR">
           <Suspense fallback={<div style={{ minHeight: "420px" }} />}>
             <ReservationView locale="tr" />
           </Suspense>

@@ -35,7 +35,9 @@ import {
   homeDescription,
   homeOgDescription,
   homeTitle,
+  coordinates,
   instagramUrl,
+  address,
   siteName,
   siteUrl,
 } from "./seo";
@@ -67,6 +69,12 @@ export const metadata: Metadata = {
   creator: siteName,
   publisher: siteName,
   category: "restaurant",
+  other: {
+    "geo.region": "TR-34",
+    "geo.placename": `${address.locality}, ${address.region}`,
+    "geo.position": `${coordinates.latitude};${coordinates.longitude}`,
+    ICBM: `${coordinates.latitude}, ${coordinates.longitude}`,
+  },
   referrer: "strict-origin-when-cross-origin",
   formatDetection: {
     telephone: true,

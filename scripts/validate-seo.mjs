@@ -10,6 +10,8 @@ const menuPageUrl = `${canonicalSiteUrl}/menu`;
 const englishPageUrl = `${canonicalSiteUrl}/en`;
 const koreanPageUrl = `${canonicalSiteUrl}/ko`;
 const englishMenuPageUrl = `${englishPageUrl}/menu`;
+const reservationPageUrl = `${canonicalSiteUrl}/rezervasyon`;
+const englishReservationPageUrl = `${englishPageUrl}/rezervasyon`;
 const guidePageUrl = `${canonicalSiteUrl}/van-kahvaltisi`;
 const culturePageUrl = `${canonicalSiteUrl}/van-kahvaltisi-nedir`;
 const englishBreakfastBlogUrl = `${canonicalSiteUrl}/en/blog/turkish-breakfast-istanbul`;
@@ -37,6 +39,12 @@ const menuHreflang = {
   tr: menuPageUrl,
   en: englishMenuPageUrl,
   "x-default": menuPageUrl,
+};
+
+const reservationHreflang = {
+  tr: reservationPageUrl,
+  en: englishReservationPageUrl,
+  "x-default": reservationPageUrl,
 };
 
 const internationalGuideHreflang = {
@@ -75,6 +83,30 @@ const routes = [
     sharedMenuDesign: true,
     visibleSignals: ["menü", "serpme fix menü", "murtuğa", "türk kahvesi"],
     hreflang: menuHreflang,
+  },
+  {
+    path: "/rezervasyon",
+    canonical: reservationPageUrl,
+    language: "tr",
+    types: ["Restaurant", "WebPage", "BreadcrumbList", "FAQPage"],
+    restaurantMenu: `${menuPageUrl}#menu`,
+    faqCount: 3,
+    visibleSignals: ["masa rezervasyonu", "beyoğlu", "zambak sokak", "taksim meydanı", "5–10 dakika"],
+    hreflang: reservationHreflang,
+    reservationPage: true,
+  },
+  {
+    path: "/en/rezervasyon",
+    canonical: englishReservationPageUrl,
+    language: "en",
+    languageTag: "en-US",
+    htmlLanguage: "tr",
+    types: ["Restaurant", "WebPage", "BreadcrumbList", "FAQPage"],
+    restaurantMenu: `${menuPageUrl}#menu`,
+    faqCount: 3,
+    visibleSignals: ["table reservation", "beyoğlu", "zambak street", "taksim square", "5–10 minutes"],
+    hreflang: reservationHreflang,
+    reservationPage: true,
   },
   {
     path: "/van-kahvaltisi",
@@ -279,7 +311,12 @@ const redirectRules = [
   ["/aile-kahvaltisi-beyoglu", "/"],
   ["/grup-kahvaltisi", "/"],
   ["/hafta-sonu-kahvalti", "/"],
-  ["/kahvalti-rezervasyon", "/"],
+  ["/kahvalti-rezervasyon", "/rezervasyon"],
+  ["/reservation", "/rezervasyon"],
+  ["/booking", "/rezervasyon"],
+  ["/masa-ayirt", "/rezervasyon"],
+  ["/en/reservation", "/en/rezervasyon"],
+  ["/en/booking", "/en/rezervasyon"],
   ["/kahvalti-yol-tarifi", "/konum"],
   ["/zambak-sokak-kahvalti", "/konum"],
   ["/siraselviler-kahvalti", "/konum"],
@@ -544,6 +581,11 @@ for (const route of routes) {
   assert(restaurant?.hasMap === "https://www.google.com/maps?cid=10380797280962926014", `${routeLabel}: Maps CID yanlış`);
   assert(restaurant?.geo?.latitude === 41.0367655, `${routeLabel}: enlem yanlış`);
   assert(restaurant?.geo?.longitude === 28.9829478, `${routeLabel}: boylam yanlış`);
+  assert(
+    restaurant?.potentialAction?.["@type"] === "ReserveAction" &&
+      restaurant?.potentialAction?.target?.urlTemplate === reservationPageUrl,
+    `${routeLabel}: merkezi rezervasyon eylemi eksik`,
+  );
   assert(restaurant?.sameAs?.includes(restaurant.hasMap), `${routeLabel}: Maps sameAs eksik`);
   assert(
     restaurant?.sameAs?.includes("https://yandex.com/maps/org/tarihi_van_kahvalt_ve_arap_evi/237523878781/"),
@@ -568,6 +610,19 @@ for (const route of routes) {
   assert(new Set(questions).size === questions.length, `${routeLabel}: şema soruları benzersiz değil`);
   assert(summaries.length === route.faqCount, `${routeLabel}: görünür SSS sayısı yanlış`);
   assert(questions.every((question) => summaries.includes(question)), `${routeLabel}: görünür SSS ve şema eşleşmiyor`);
+
+  assert(/<meta\s+name="geo\.region"\s+content="TR-34"/i.test(html), `${routeLabel}: geo.region eksik`);
+  assert(/<meta\s+name="geo\.position"\s+content="41\.0367655;28\.9829478"/i.test(html), `${routeLabel}: geo.position eksik`);
+  assert(/<meta\s+name="ICBM"\s+content="41\.0367655, 28\.9829478"/i.test(html), `${routeLabel}: ICBM koordinatı eksik`);
+
+  if (route.reservationPage) {
+    const webPage = graphDocument["@graph"].find((node) => node["@type"] === "WebPage");
+    assert(webPage?.potentialAction?.["@type"] === "ReserveAction", `${routeLabel}: sayfa rezervasyon eylemi eksik`);
+    assert(
+      webPage?.potentialAction?.target?.urlTemplate === route.canonical,
+      `${routeLabel}: rezervasyon eylemi kanonik hedefe gitmeli`,
+    );
+  }
 
   if (route.sourcedGuide) {
     const article = graphDocument["@graph"].find((node) => node["@type"] === "BlogPosting");
@@ -715,7 +770,7 @@ for (const userAgent of ["Googlebot", "Bingbot", "YandexBot", "Applebot", "Yeti"
 }
 assert(robots.includes(`${canonicalSiteUrl}/sitemap.xml`), "robots.txt: sitemap eksik");
 assert(!/^Disallow:\s*\/admin\s*$/im.test(robots), "robots.txt: admin noindex talimatının okunmasını engellememeli");
-assert(/^Disallow:\s*\/api\/admin\/\s*$/im.test(robots), "robots.txt: yönetim API'si taramaya kapalı olmalı");
+assert(/^Disallow:\s*\/api\/\s*$/im.test(robots), "robots.txt: kişisel ve yönetim API'leri taramaya kapalı olmalı");
 
 const adminResponse = await fetchWithRetry("/admin");
 const adminHtml = await adminResponse.text();
@@ -739,6 +794,33 @@ assert(
   "Admin API: X-Robots-Tag noindex başlığı eksik",
 );
 
+const privateReservationResponse = await fetchWithRetry("/api/reservations/non-existent", 30, {
+  redirect: "manual",
+});
+assert(privateReservationResponse.status === 401, "Rezervasyon API: anonim kişisel veri erişimi engellenmeli");
+assert(
+  privateReservationResponse.headers.get("x-robots-tag")?.includes("noindex"),
+  "Rezervasyon API: X-Robots-Tag noindex başlığı eksik",
+);
+assert(
+  privateReservationResponse.headers.get("cache-control")?.includes("no-store"),
+  "Rezervasyon API: kişisel yanıtlar önbelleğe alınmamalı",
+);
+
+for (const [payload, label] of [
+  [{ customerName: "A", customerPhone: "123", date: "2099-10-10", time: "10:00" }, "alan doğrulama"],
+  [{ customerName: "Test User", customerPhone: "+905551112233", date: "2099-02-31", time: "10:00" }, "takvim tarihi"],
+  [{ customerName: "Test User", customerPhone: "+905551112233", date: "2000-01-01", time: "10:00" }, "geçmiş tarih"],
+  [{ customerName: "Test User", customerPhone: "+905551112233", date: "2099-10-10", time: "22:30" }, "çalışma saati"],
+]) {
+  const response = await fetchWithRetry("/api/reservations", 30, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(payload),
+  });
+  assert(response.status === 400, `Rezervasyon API: ${label} reddedilmeli`);
+}
+
 const indexNowKey = "4f9d1a7c8b6e3f205d72a941ce8b604a";
 const indexNowResponse = await fetchWithRetry(`/${indexNowKey}.txt`);
 assert(indexNowResponse.status === 200, "IndexNow: anahtar dosyası yayınlanmalı");
@@ -756,6 +838,8 @@ for (const guidePath of [
   "/ko/blog/kaymak-nedir",
   "/ko/blog/turkish-breakfast-istanbul",
   "/ja/blog/istanbul-bal-kaymak",
+  "/rezervasyon",
+  "/en/rezervasyon",
 ]) {
   assert(indexNowScript.includes(guidePath), `IndexNow: yeni rehber varsayılan bildirim listesinde eksik (${guidePath})`);
 }

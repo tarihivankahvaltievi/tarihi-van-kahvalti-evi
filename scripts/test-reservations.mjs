@@ -1,17 +1,39 @@
-import {
+import { rm } from "node:fs/promises";
+import path from "node:path";
+
+const temporaryDataFile = path.join(
+  process.cwd(),
+  "src/app/reservations",
+  `.reservations-test-${process.pid}-${Date.now()}.json`,
+);
+process.env.RESERVATION_DATA_FILE = temporaryDataFile;
+
+const {
   addReservation,
   getReservationData,
   updateReservation,
   deleteReservation,
   getCalendarFeedToken,
   isValidCalendarFeedToken,
-} from "../src/app/reservations/reservation-storage.ts";
-import {
-  generateSingleReservationIcs,
-  generateCalendarFeedIcs,
-} from "../src/app/reservations/ical-helper.ts";
+} = await import("../src/app/reservations/reservation-storage.ts");
+const { generateSingleReservationIcs, generateCalendarFeedIcs } = await import(
+  "../src/app/reservations/ical-helper.ts"
+);
+
+function futureDateParts(daysAhead = 60) {
+  const date = new Date();
+  date.setUTCDate(date.getUTCDate() + daysAhead);
+  const yyyy = date.getUTCFullYear();
+  const mm = String(date.getUTCMonth() + 1).padStart(2, "0");
+  const dd = String(date.getUTCDate()).padStart(2, "0");
+  return {
+    iso: `${yyyy}-${mm}-${dd}`,
+    ical: `${yyyy}${mm}${dd}`,
+  };
+}
 
 async function runTests() {
+  const testDate = futureDateParts();
   console.log("--- 🧪 REZERVASYON & IPHONE TAKVİM TESTİ BAŞLIYOR ---");
 
   // 1. Test token generation & validation
@@ -25,11 +47,11 @@ async function runTests() {
   }
   console.log("✅ Token doğrulama güvenlik testi başarılı.");
 
-  // 2. Add Test Reservation (2 months in the future)
+  // 2. Add Test Reservation (roughly 2 months in the future)
   const testRes = await addReservation({
     customerName: "Baran Demir (Test)",
     customerPhone: "05321234567",
-    date: "2026-10-28",
+    date: testDate.iso,
     time: "11:00",
     guests: 4,
     serviceType: "breakfast",
@@ -50,8 +72,11 @@ async function runTests() {
   if (!singleIcs.includes("TRIGGER:-P1D") || !singleIcs.includes("TRIGGER:-PT2H")) {
     throw new Error("Otomatik bildirim alarmları (VALARM) eksik!");
   }
-  if (!singleIcs.includes("TZID=Europe/Istanbul:20261028T110000")) {
+  if (!singleIcs.includes(`TZID=Europe/Istanbul:${testDate.ical}T110000`)) {
     throw new Error("Tarih ve saat formatı hatalı!");
+  }
+  if (!singleIcs.includes("Zambak Sk. No:8") || singleIcs.includes("Defterdar Yokuşu")) {
+    throw new Error("Takvim konumu güncel kanonik işletme adresiyle eşleşmiyor!");
   }
   console.log("✅ Tekil .ICS çıktısı RFC 5545 standartlarına %100 uygun.");
 
@@ -83,7 +108,11 @@ async function runTests() {
   console.log("\n🎉 TÜM TESTLER BAŞARIYLA TAMAMLANDI!");
 }
 
-runTests().catch((err) => {
+try {
+  await runTests();
+} catch (err) {
   console.error("❌ TEST HATASI:", err);
-  process.exit(1);
-});
+  process.exitCode = 1;
+} finally {
+  await rm(temporaryDataFile, { force: true });
+}

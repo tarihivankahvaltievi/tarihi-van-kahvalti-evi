@@ -6,14 +6,13 @@ import {
   absoluteUrl,
   buildFaqJsonLd,
   buildRestaurantJsonLd,
-  displayAddress,
-  displayPhone,
   englishReservationUrl,
   jsonLd,
   reservationUrl,
   siteName,
   siteUrl,
 } from "../../seo";
+import { englishReservationFaqItems } from "../../rezervasyon/reservation-content";
 import { ReservationView } from "../../rezervasyon/reservation-view";
 import styles from "../../rezervasyon/reservation.module.css";
 
@@ -21,32 +20,15 @@ const pageTitle = "Table Reservation | Tarihi Van Breakfast House, Beyoğlu Taks
 const pageDescription =
   "Reserve your table at Tarihi Van Kahvaltı Evi in Beyoğlu, Taksim. Fresh Van breakfast spread, artisanal cheeses, honey kaymak, hot pans and endless Turkish tea.";
 
-const reservationFaqItems = [
-  {
-    question: "How is my reservation confirmed?",
-    answer:
-      "When you send your request, details are sent to our restaurant WhatsApp line and confirmed within 5–10 minutes.",
-  },
-  {
-    question: "Is there any fee or deposit required?",
-    answer:
-      "No, table reservations are completely free and no deposit is required.",
-  },
-  {
-    question: "How can I change or cancel my reservation?",
-    answer:
-      "Simply send us a message on WhatsApp or call us at +90 541 525 2868 to update your time or party size.",
-  },
-] as const;
-
 export const metadata: Metadata = {
   title: { absolute: pageTitle },
   description: pageDescription,
   alternates: {
     canonical: englishReservationUrl,
     languages: {
-      "tr-TR": reservationUrl,
-      "en-US": englishReservationUrl,
+      tr: reservationUrl,
+      en: englishReservationUrl,
+      "x-default": reservationUrl,
     },
   },
   openGraph: {
@@ -77,7 +59,7 @@ export default function EnglishReservationPage() {
   const reservationJsonLd = {
     "@context": "https://schema.org",
     "@graph": [
-      buildRestaurantJsonLd(true),
+      buildRestaurantJsonLd(false),
       {
         "@type": "WebPage",
         "@id": `${englishReservationUrl}#webpage`,
@@ -87,13 +69,21 @@ export default function EnglishReservationPage() {
         inLanguage: "en-US",
         isPartOf: { "@id": `${siteUrl}/#website` },
         about: { "@id": `${siteUrl}/#restaurant` },
-        mainEntity: {
-          "@type": "FoodEstablishment",
-          "@id": `${siteUrl}/#restaurant`,
-          name: siteName,
-          acceptsReservations: "True",
-          telephone: displayPhone,
-          address: displayAddress,
+        mainEntity: { "@id": `${siteUrl}/#restaurant` },
+        potentialAction: {
+          "@type": "ReserveAction",
+          target: {
+            "@type": "EntryPoint",
+            urlTemplate: englishReservationUrl,
+            actionPlatform: [
+              "https://schema.org/DesktopWebPlatform",
+              "https://schema.org/MobileWebPlatform",
+            ],
+          },
+          result: {
+            "@type": "FoodEstablishmentReservation",
+            name: `${siteName} table reservation`,
+          },
         },
         primaryImageOfPage: {
           "@type": "ImageObject",
@@ -108,7 +98,7 @@ export default function EnglishReservationPage() {
           { "@type": "ListItem", position: 2, name: "Reservation", item: englishReservationUrl },
         ],
       },
-      buildFaqJsonLd(reservationFaqItems, englishReservationUrl, true),
+      buildFaqJsonLd(englishReservationFaqItems, englishReservationUrl, false, "en-US"),
     ],
   };
 
@@ -119,7 +109,7 @@ export default function EnglishReservationPage() {
         dangerouslySetInnerHTML={{ __html: jsonLd(reservationJsonLd) }}
       />
       <ClientPage locale="en">
-        <main id="main-content" className={styles.page}>
+        <main id="main-content" className={styles.page} lang="en-US">
           <Suspense fallback={<div style={{ minHeight: "420px" }} />}>
             <ReservationView locale="en" />
           </Suspense>

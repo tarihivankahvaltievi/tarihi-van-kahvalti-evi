@@ -11,6 +11,11 @@ export async function GET(
   props: { params: Promise<{ id: string }> }
 ) {
   try {
+    const authenticated = await isAdminAuthenticated();
+    if (!authenticated) {
+      return NextResponse.json({ error: "Yetkisiz işlem" }, { status: 401 });
+    }
+
     const { id } = await props.params;
     const reservation = await getReservationById(id);
     if (!reservation) {

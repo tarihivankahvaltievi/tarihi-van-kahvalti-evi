@@ -11,7 +11,7 @@ export default function robots(): MetadataRoute.Robots {
         allow: "/",
         // /admin is intentionally crawlable so bots can read its noindex
         // response. Blocking it here could leave the bare URL indexed.
-        disallow: ["/api/admin/", "/_next/server/"],
+        disallow: ["/api/", "/_next/server/"],
       },
       {
         // Arama ve cevap-grounding botları wildcard kuralına zaten uyar;
@@ -19,7 +19,7 @@ export default function robots(): MetadataRoute.Robots {
         // erişimlerinin yanlışlıkla kapanmasını önler.
         userAgent: ["Googlebot", "Bingbot", "YandexBot", "Applebot", "Yeti", "OAI-SearchBot", "PerplexityBot"],
         allow: "/",
-        disallow: ["/api/admin/", "/_next/server/"],
+        disallow: ["/api/", "/_next/server/"],
       },
     ],
     sitemap: `${siteUrl}/sitemap.xml`,

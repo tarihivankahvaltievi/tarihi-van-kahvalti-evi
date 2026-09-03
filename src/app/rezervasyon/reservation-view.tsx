@@ -19,6 +19,7 @@ import {
 import { displayAddress, displayPhone, mapsUrl, openingHours, phoneE164, telUrl } from "../seo";
 import type { SiteLocale } from "../home-localization";
 import { trackBookingLead, trackEvent } from "../analytics";
+import { englishReservationFaqItems, reservationFaqItems } from "./reservation-content";
 import styles from "./reservation.module.css";
 
 interface ReservationViewProps {
@@ -36,7 +37,7 @@ interface SubmittedBooking {
   guests: number;
   serviceType: string;
   seatingArea: string;
-  icsUrl: string;
+  icsUrl?: string;
   googleCalendarUrl?: string;
 }
 
@@ -144,6 +145,11 @@ export function ReservationView({
 
     setIsSubmitting(true);
 
+    // Open synchronously while the submit click still carries user activation.
+    // Some mobile browsers block a new WhatsApp tab after the API await.
+    const whatsappWindow = window.open("", "_blank");
+    if (whatsappWindow) whatsappWindow.opener = null;
+
     const formattedDate = date ? date.split("-").reverse().join(".") : "";
     const serviceLabel =
       serviceType === "cafe"
@@ -224,7 +230,11 @@ Müsaitlik durumunu teyit edebilir misiniz? Teşekkürler.`;
 
     const cleanPhone = phoneE164.replace("+", "");
     const whatsappUrl = `https://wa.me/${cleanPhone}?text=${encodeURIComponent(message)}`;
-    window.open(whatsappUrl, "_blank", "noopener,noreferrer");
+    if (whatsappWindow && !whatsappWindow.closed) {
+      whatsappWindow.location.replace(whatsappUrl);
+    } else {
+      window.location.assign(whatsappUrl);
+    }
     trackEvent("booking_whatsapp_handoff", {
       locale,
       service_type: serviceType,
@@ -240,7 +250,7 @@ Müsaitlik durumunu teyit edebilir misiniz? Teşekkürler.`;
       guests,
       serviceType: serviceLabel,
       seatingArea: seatingLabel,
-      icsUrl: icsDownloadUrl || `/api/reservations/${createdId}/ics`,
+      icsUrl: icsDownloadUrl || undefined,
       googleCalendarUrl: gCalUrl,
     });
 
@@ -326,7 +336,7 @@ Müsaitlik durumunu teyit edebilir misiniz? Teşekkürler.`;
           </div>
 
           {submittedData ? (
-            <div className={styles.successCard}>
+            <div className={styles.successCard} role="status" aria-live="polite">
               <div className={styles.successIcon} aria-hidden="true">
                 <CheckCircle2 size={28} />
               </div>
@@ -360,37 +370,36 @@ Müsaitlik durumunu teyit edebilir misiniz? Teşekkürler.`;
                 </div>
               </dl>
 
-              <div className={styles.calButtons}>
-                <a
-                  href={submittedData.icsUrl}
-                  download={`tarihi-van-rezervasyon-${submittedData.id}.ics`}
-                  className={styles.appleBtn}
-                >
-                  <span>🍎</span>
-                  {isEnglish ? "Apple Calendar (.ics)" : "Apple Takvimi"}
-                </a>
-
-                {submittedData.googleCalendarUrl ? (
-                  <a
-                    href={submittedData.googleCalendarUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className={styles.googleBtn}
-                  >
-                    <span>📅</span>
-                    Google Calendar
-                  </a>
-                ) : (
+              {submittedData.icsUrl ? (
+                <div className={styles.calButtons}>
                   <a
                     href={submittedData.icsUrl}
                     download={`tarihi-van-rezervasyon-${submittedData.id}.ics`}
-                    className={styles.googleBtn}
+                    className={styles.appleBtn}
                   >
-                    <span>📅</span>
-                    .ics İndir
+                    <span>🍎</span>
+                    {isEnglish ? "Apple Calendar (.ics)" : "Apple Takvimi"}
                   </a>
-                )}
-              </div>
+
+                  {submittedData.googleCalendarUrl ? (
+                    <a
+                      href={submittedData.googleCalendarUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={styles.googleBtn}
+                    >
+                      <span>📅</span>
+                      Google Calendar
+                    </a>
+                  ) : null}
+                </div>
+              ) : (
+                <p className={styles.calendarNotice}>
+                  {isEnglish
+                    ? "WhatsApp is ready. Calendar links appear after the booking is saved successfully."
+                    : "WhatsApp hazır. Takvim bağlantıları rezervasyon kaydı başarıyla oluştuğunda gösterilir."}
+                </p>
+              )}
 
               <button
                 type="button"
@@ -428,8 +437,11 @@ Müsaitlik durumunu teyit edebilir misiniz? Teşekkürler.`;
                   </label>
                   <input
                     id="form-guest-name"
+                    name="name"
                     type="text"
                     required
+                    autoComplete="name"
+                    minLength={2}
                     maxLength={70}
                     placeholder={isEnglish ? "e.g. Ahmet Yılmaz" : "örn. Ahmet Yılmaz"}
                     value={customerName}
@@ -444,9 +456,15 @@ Müsaitlik durumunu teyit edebilir misiniz? Teşekkürler.`;
                   </label>
                   <input
                     id="form-guest-phone"
+                    name="tel"
                     type="tel"
                     required
+                    autoComplete="tel"
+                    inputMode="tel"
+                    minLength={10}
                     maxLength={25}
+                    pattern="[0-9+()\s-]{10,25}"
+                    title={isEnglish ? "Enter a valid phone number" : "Geçerli bir telefon numarası girin"}
                     placeholder={isEnglish ? "+90 5XX XXX XX XX" : "05XX XXX XX XX"}
                     value={customerPhone}
                     onChange={(e) => setCustomerPhone(e.target.value)}
@@ -464,6 +482,7 @@ Müsaitlik durumunu teyit edebilir misiniz? Teşekkürler.`;
                   </label>
                   <input
                     id="form-guest-date"
+                    name="reservation-date"
                     type="date"
                     required
                     value={date}
@@ -480,6 +499,7 @@ Müsaitlik durumunu teyit edebilir misiniz? Teşekkürler.`;
                   </label>
                   <select
                     id="form-guest-time"
+                    name="reservation-time"
                     value={time}
                     onChange={(e) => setTime(e.target.value)}
                     className={styles.select}
@@ -515,7 +535,11 @@ Müsaitlik durumunu teyit edebilir misiniz? Teşekkürler.`;
                   <label className={styles.label}>
                     <span>{isEnglish ? "Party Size" : "Kişi Sayısı"}</span>
                   </label>
-                  <div className={styles.counterWrap} role="group" aria-label="Kişi Sayısı">
+                  <div
+                    className={styles.counterWrap}
+                    role="group"
+                    aria-label={isEnglish ? "Party size" : "Kişi sayısı"}
+                  >
                     <button
                       type="button"
                       disabled={guests <= 1}
@@ -547,6 +571,7 @@ Müsaitlik durumunu teyit edebilir misiniz? Teşekkürler.`;
                   </label>
                   <select
                     id="form-guest-area"
+                    name="seating-area"
                     value={seatingArea}
                     onChange={(e) => setSeatingArea(e.target.value as "indoor" | "street" | "balcony")}
                     className={styles.select}
@@ -566,6 +591,7 @@ Müsaitlik durumunu teyit edebilir misiniz? Teşekkürler.`;
                 </label>
                 <input
                   id="form-guest-note"
+                  name="note"
                   type="text"
                   maxLength={140}
                   placeholder={
@@ -584,6 +610,7 @@ Müsaitlik durumunu teyit edebilir misiniz? Teşekkürler.`;
                 <button
                   type="submit"
                   disabled={isSubmitting}
+                  aria-busy={isSubmitting}
                   className={styles.submitBtn}
                 >
                   <MessageCircle size={18} />
@@ -660,6 +687,51 @@ Müsaitlik durumunu teyit edebilir misiniz? Teşekkürler.`;
           <span>{openingHours.short}</span>
         </div>
       </div>
+
+      <section className={styles.bookingGuide} aria-labelledby="booking-guide-heading">
+        <div className={styles.guideIntro}>
+          <h2 id="booking-guide-heading" className={styles.guideTitle}>
+            {isEnglish ? "Plan your visit" : "Ziyaretinizi planlayın"}
+          </h2>
+          <p className={styles.guideLead}>
+            {isEnglish
+              ? "Tarihi Van Kahvaltı Evi is on Zambak Street in Beyoğlu, within walking distance of Taksim Square and İstiklal Avenue. Breakfast and Kafka Cafe tables are available every day."
+              : "Tarihi Van Kahvaltı Evi, Beyoğlu Zambak Sokak'ta; Taksim Meydanı ve İstiklal Caddesi'ne yürüme mesafesindedir. Van kahvaltısı ve Kafka Cafe için haftanın her günü masa talebi oluşturabilirsiniz."}
+          </p>
+        </div>
+
+        <dl className={styles.visitFacts}>
+          <div>
+            <dt>{isEnglish ? "Confirmation" : "Teyit"}</dt>
+            <dd>{isEnglish ? "Usually within 5–10 minutes on WhatsApp" : "Genellikle 5–10 dakika içinde WhatsApp'tan"}</dd>
+          </div>
+          <div>
+            <dt>{isEnglish ? "Hours" : "Saatler"}</dt>
+            <dd>{isEnglish ? "Every day, 07:00–22:00" : openingHours.short}</dd>
+          </div>
+          <div>
+            <dt>{isEnglish ? "Address" : "Adres"}</dt>
+            <dd>{displayAddress}</dd>
+          </div>
+        </dl>
+
+        <div className={styles.guideLinks}>
+          <a href={isEnglish ? "/en/menu" : "/menu"}>{isEnglish ? "See the live menu and prices" : "Güncel menü ve fiyatları görün"}</a>
+          <a href="/konum">{isEnglish ? "Open directions and transport details" : "Yol tarifi ve ulaşım bilgilerini açın"}</a>
+        </div>
+
+        <div className={styles.reservationFaq} aria-labelledby="reservation-faq-heading">
+          <h2 id="reservation-faq-heading" className={styles.faqTitle}>
+            {isEnglish ? "Reservation questions" : "Rezervasyon hakkında sık sorulanlar"}
+          </h2>
+          {(isEnglish ? englishReservationFaqItems : reservationFaqItems).map((item) => (
+            <details key={item.question} className={styles.faqItem}>
+              <summary>{item.question}</summary>
+              <p>{item.answer}</p>
+            </details>
+          ))}
+        </div>
+      </section>
     </div>
   );
 }

@@ -323,6 +323,21 @@ export function buildRestaurantJsonLd(withContext = true) {
     ],
     menu: menuEntityUrl,
     hasMenu: { "@id": menuEntityUrl },
+    potentialAction: {
+      "@type": "ReserveAction",
+      target: {
+        "@type": "EntryPoint",
+        urlTemplate: reservationUrl,
+        actionPlatform: [
+          "https://schema.org/DesktopWebPlatform",
+          "https://schema.org/MobileWebPlatform",
+        ],
+      },
+      result: {
+        "@type": "FoodEstablishmentReservation",
+        name: `${siteName} masa rezervasyonu`,
+      },
+    },
     sameAs: sameAsUrls,
   };
   return withContext ? { "@context": "https://schema.org", ...data } : data;

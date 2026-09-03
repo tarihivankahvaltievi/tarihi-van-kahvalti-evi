@@ -553,6 +553,14 @@ a.infoPill:hover {
   gap: 0.65rem;
 }
 
+.calendarNotice {
+  max-width: 48ch;
+  margin: 0;
+  color: var(--res-muted);
+  font-size: 0.78rem;
+  line-height: 1.5;
+}
+
 .appleBtn,
 .googleBtn,
 .anotherBtn {
@@ -582,6 +590,142 @@ a.infoPill:hover {
   border: 0;
 }
 
+.bookingGuide {
+  margin-top: clamp(3.5rem, 8vw, 6.5rem);
+  padding-top: clamp(2.25rem, 5vw, 4rem);
+  border-top: 1px solid #c9bfc0;
+}
+
+.guideIntro {
+  display: grid;
+  grid-template-columns: minmax(14rem, 0.72fr) minmax(20rem, 1.28fr);
+  gap: clamp(2rem, 6vw, 6rem);
+  align-items: start;
+}
+
+.guideTitle,
+.faqTitle {
+  margin: 0;
+  color: var(--res-ink);
+  font-family: var(--font-literata-gf), Georgia, serif;
+  font-weight: 650;
+  line-height: 1.08;
+  letter-spacing: -0.03em;
+  text-wrap: balance;
+}
+
+.guideTitle { font-size: clamp(2rem, 4.6vw, 3.75rem); }
+
+.guideLead {
+  max-width: 66ch;
+  margin: 0;
+  color: var(--res-ink-soft);
+  font-size: clamp(1rem, 1.7vw, 1.18rem);
+  line-height: 1.75;
+  text-wrap: pretty;
+}
+
+.visitFacts {
+  display: grid;
+  grid-template-columns: 0.85fr 0.7fr 1.45fr;
+  margin: clamp(2.25rem, 5vw, 4rem) 0 0;
+  border-block: 1px solid #c9bfc0;
+}
+
+.visitFacts > div {
+  min-width: 0;
+  padding: 1.25rem clamp(0.85rem, 2.2vw, 1.65rem);
+}
+
+.visitFacts > div:first-child { padding-left: 0; }
+.visitFacts > div + div { border-left: 1px solid #c9bfc0; }
+
+.visitFacts dt {
+  margin-bottom: 0.45rem;
+  color: var(--res-burgundy);
+  font-size: 0.72rem;
+  font-weight: 760;
+}
+
+.visitFacts dd {
+  margin: 0;
+  color: var(--res-ink-soft);
+  font-size: 0.85rem;
+  line-height: 1.55;
+}
+
+.guideLinks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem 1.5rem;
+  margin-top: 1.25rem;
+}
+
+.guideLinks a {
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  color: var(--res-burgundy-dark);
+  font-size: 0.83rem;
+  font-weight: 720;
+  text-underline-offset: 0.24em;
+}
+
+.guideLinks a:focus-visible,
+.faqItem summary:focus-visible {
+  outline: 3px solid rgba(128, 26, 34, 0.28);
+  outline-offset: 3px;
+}
+
+.reservationFaq {
+  width: min(780px, 100%);
+  margin: clamp(3.75rem, 8vw, 6.5rem) auto 0;
+}
+
+.faqTitle {
+  margin-bottom: 1.25rem;
+  font-size: clamp(1.7rem, 3.3vw, 2.55rem);
+}
+
+.faqItem { border-top: 1px solid #c9bfc0; }
+.faqItem:last-child { border-bottom: 1px solid #c9bfc0; }
+
+.faqItem summary {
+  position: relative;
+  min-height: 62px;
+  padding: 1.15rem 2.5rem 1.15rem 0;
+  color: var(--res-ink);
+  cursor: pointer;
+  font-size: 0.95rem;
+  font-weight: 700;
+  line-height: 1.45;
+  list-style: none;
+}
+
+.faqItem summary::-webkit-details-marker { display: none; }
+
+.faqItem summary::after {
+  position: absolute;
+  top: 50%;
+  right: 0.2rem;
+  color: var(--res-burgundy);
+  content: "+";
+  font-size: 1.35rem;
+  font-weight: 450;
+  transform: translateY(-50%);
+}
+
+.faqItem[open] summary::after { content: "−"; }
+
+.faqItem p {
+  max-width: 68ch;
+  margin: -0.25rem 0 1.35rem;
+  color: var(--res-ink-soft);
+  font-size: 0.88rem;
+  line-height: 1.72;
+  text-wrap: pretty;
+}
+
 @media (max-width: 900px) {
   .container { width: min(740px, calc(100% - 2rem)); }
   .glassCard { grid-template-columns: 1fr; }
@@ -598,6 +742,15 @@ a.infoPill:hover {
   }
 
   .photoCard { height: 190px; scroll-snap-align: start; }
+
+  .guideIntro { gap: 2.5rem; }
+  .visitFacts { grid-template-columns: 1fr 1fr; }
+  .visitFacts > div:nth-child(3) {
+    grid-column: 1 / -1;
+    padding-left: 0;
+    border-top: 1px solid #c9bfc0;
+    border-left: 0;
+  }
 }
 
 @media (max-width: 620px) {
@@ -647,6 +800,18 @@ a.infoPill:hover {
   .infoPill + .infoPill { border-top: 1px solid #cec4c5; border-left: 0; }
   .successCard { padding: 2rem 1.2rem; }
   .calButtons { grid-template-columns: 1fr; }
+
+  .bookingGuide { margin-inline: 1.2rem; }
+  .guideIntro { display: block; }
+  .guideLead { margin-top: 1.25rem; }
+  .visitFacts { grid-template-columns: 1fr; }
+  .visitFacts > div,
+  .visitFacts > div:first-child,
+  .visitFacts > div:nth-child(3) { padding: 1rem 0; }
+  .visitFacts > div + div,
+  .visitFacts > div:nth-child(3) { grid-column: auto; border-top: 1px solid #c9bfc0; border-left: 0; }
+  .guideLinks { display: grid; gap: 0.25rem; }
+  .reservationFaq { margin-top: 3.5rem; }
 }
 
 @media (prefers-reduced-motion: reduce) {

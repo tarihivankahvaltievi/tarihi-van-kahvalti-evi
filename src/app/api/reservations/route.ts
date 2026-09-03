@@ -45,24 +45,71 @@ export async function POST(request: Request) {
       return NextResponse.json({ success: true, message: "İşlem tamamlandı" });
     }
 
-    // Validation
-    if (!customerName || !customerPhone || !date || !time) {
+    const normalizedName = String(customerName ?? "").trim();
+    const normalizedPhone = String(customerPhone ?? "").trim();
+    const normalizedDate = String(date ?? "").trim();
+    const normalizedTime = String(time ?? "").trim();
+    const phoneDigits = normalizedPhone.replace(/\D/g, "");
+    const todayParts = new Intl.DateTimeFormat("en-CA", {
+      timeZone: "Europe/Istanbul",
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit",
+    }).formatToParts(new Date());
+    const todayPart = (type: "year" | "month" | "day") =>
+      todayParts.find((part) => part.type === type)?.value ?? "";
+    const todayInIstanbul = `${todayPart("year")}-${todayPart("month")}-${todayPart("day")}`;
+
+    // Validate server-side as well as in the browser. This protects the admin
+    // calendar from malformed or past entries sent directly to the endpoint.
+    if (
+      normalizedName.length < 2 ||
+      normalizedName.length > 70 ||
+      phoneDigits.length < 10 ||
+      phoneDigits.length > 15 ||
+      !/^\d{4}-\d{2}-\d{2}$/.test(normalizedDate) ||
+      !/^\d{2}:\d{2}$/.test(normalizedTime)
+    ) {
       return NextResponse.json(
-        { error: "Lütfen ad soyad, telefon, tarih ve saat alanlarını doldurunuz." },
+        { error: "Ad, telefon, tarih veya saat bilgisi geçersiz." },
         { status: 400 }
       );
     }
 
-    const guestCount = Math.max(1, Math.min(50, Number(guests) || 2));
+    const parsedDate = new Date(`${normalizedDate}T${normalizedTime}:00+03:00`);
+    const [year, month, day] = normalizedDate.split("-").map(Number);
+    const [hours, minutes] = normalizedTime.split(":").map(Number);
+    const calendarDate = new Date(Date.UTC(year, month - 1, day));
+    const isRealCalendarDate =
+      calendarDate.getUTCFullYear() === year &&
+      calendarDate.getUTCMonth() === month - 1 &&
+      calendarDate.getUTCDate() === day;
+    if (
+      !Number.isFinite(parsedDate.getTime()) ||
+      !isRealCalendarDate ||
+      normalizedDate < todayInIstanbul ||
+      hours < 7 ||
+      hours > 22 ||
+      (hours === 22 && minutes > 0) ||
+      minutes < 0 ||
+      minutes > 59
+    ) {
+      return NextResponse.json(
+        { error: "Lütfen bugünden sonraki geçerli bir tarih ve çalışma saatleri içinde bir saat seçin." },
+        { status: 400 },
+      );
+    }
+
+    const guestCount = Math.max(1, Math.min(40, Math.trunc(Number(guests) || 2)));
     const validServiceType: ServiceType =
       serviceType === "cafe" ? "cafe" : "breakfast";
 
     const newReservation = await addReservation({
-      customerName: String(customerName).trim().slice(0, 100),
-      customerPhone: String(customerPhone).trim().slice(0, 30),
+      customerName: normalizedName,
+      customerPhone: normalizedPhone,
       customerEmail: customerEmail ? String(customerEmail).trim().slice(0, 100) : undefined,
-      date: String(date).trim(),
-      time: String(time).trim(),
+      date: normalizedDate,
+      time: normalizedTime,
       guests: guestCount,
       serviceType: validServiceType,
       note: note ? String(note).trim().slice(0, 300) : undefined,
@@ -73,11 +120,17 @@ export async function POST(request: Request) {
     const icsUrl = `${baseUrl}/api/reservations/${newReservation.id}/ics`;
 
     // Google Calendar direct template link
-    const [year, month, day] = newReservation.date.split("-");
+    const [reservationYear, reservationMonth, reservationDay] = newReservation.date.split("-");
     const [hour, min] = newReservation.time.split(":");
-    const startStr = `${year}${month}${day}T${hour}${min}00`;
+    const startStr = `${reservationYear}${reservationMonth}${reservationDay}T${hour}${min}00`;
     // 2 hours end
-    const startDate = new Date(Number(year), Number(month) - 1, Number(day), Number(hour), Number(min));
+    const startDate = new Date(
+      Number(reservationYear),
+      Number(reservationMonth) - 1,
+      Number(reservationDay),
+      Number(hour),
+      Number(min),
+    );
     const endDate = new Date(startDate.getTime() + 2 * 60 * 60 * 1000);
     const pad = (n: number) => String(n).padStart(2, "0");
     const endStr = `${endDate.getFullYear()}${pad(endDate.getMonth() + 1)}${pad(endDate.getDate())}T${pad(endDate.getHours())}${pad(endDate.getMinutes())}00`;
