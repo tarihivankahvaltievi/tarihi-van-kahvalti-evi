@@ -772,6 +772,15 @@ assert(robots.includes(`${canonicalSiteUrl}/sitemap.xml`), "robots.txt: sitemap 
 assert(!/^Disallow:\s*\/admin\s*$/im.test(robots), "robots.txt: admin noindex talimatının okunmasını engellememeli");
 assert(/^Disallow:\s*\/api\/\s*$/im.test(robots), "robots.txt: kişisel ve yönetim API'leri taramaya kapalı olmalı");
 
+const llmsResponse = await fetchWithRetry("/llms.txt");
+const llms = await llmsResponse.text();
+assert(llmsResponse.ok, "llms.txt: 200 dönmeli");
+assert(llmsResponse.headers.get("content-type")?.startsWith("text/plain"), "llms.txt: düz metin dönmeli");
+assert(llms.includes("# Tarihi Van Kahvaltı Evi"), "llms.txt: işletme adı eksik");
+assert(llms.includes(menuPageUrl), "llms.txt: canlı menü kaynağı eksik");
+assert(llms.includes(reservationPageUrl), "llms.txt: rezervasyon kaynağı eksik");
+assert(llms.includes("Citation guidance"), "llms.txt: alıntı yönlendirmesi eksik");
+
 const adminResponse = await fetchWithRetry("/admin");
 const adminHtml = await adminResponse.text();
 assert(adminResponse.status === 200, "Admin: giriş yüzeyi erişilebilir olmalı");

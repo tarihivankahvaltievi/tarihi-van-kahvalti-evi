@@ -289,13 +289,10 @@ export function buildRestaurantJsonLd(withContext = true) {
     paymentAccepted: "Cash, Credit Card",
     currenciesAccepted: "TRY, EUR, USD",
     acceptsReservations: true,
-    aggregateRating: {
-      "@type": "AggregateRating",
-      ratingValue: "4.9",
-      bestRating: "5",
-      worstRating: "1",
-      ratingCount: "850",
-    },
+    // Değerlendirme puanı, işletmenin kendi sayfasında doğrulanabilir yorum
+    // kaynağı olmadan işaretlemeye eklenmez. Böylece schema, kaynaklanamayan
+    // üçüncü taraf puanlarını beyan etmez ve yerel işletme verisi güvenilir
+    // kalır.
     servesCuisine: cuisine,
     areaServed: {
       "@type": "City",
