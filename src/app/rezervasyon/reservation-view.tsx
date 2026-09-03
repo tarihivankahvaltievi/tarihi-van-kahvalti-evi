@@ -249,20 +249,58 @@ Müsaitlik durumunu teyit edebilir misiniz? Teşekkürler.`;
 
   return (
     <div className={styles.container}>
-      {/* Liquid Glass Card */}
       <section className={styles.glassCard} aria-labelledby="form-heading">
-          {/* Sleek Liquid Glass Header */}
+          <div className={styles.introPanel}>
+            <Image
+              src="/images/hero-parallax/historic-corner.webp"
+              alt={
+                isEnglish
+                  ? "The historic dining room at Tarihi Van Kahvaltı Evi"
+                  : "Tarihi Van Kahvaltı Evi'nin tarihi iç salonu"
+              }
+              fill
+              loading="eager"
+              fetchPriority="high"
+              sizes="(max-width: 760px) 100vw, 420px"
+              className={styles.introImage}
+            />
+            <div className={styles.introShade} />
+            <div className={styles.introContent}>
+              <p className={styles.introLocation}>
+                <MapPin size={15} aria-hidden="true" />
+                {isEnglish ? "Zambak Street, Beyoğlu" : "Zambak Sokak, Beyoğlu"}
+              </p>
+              <h1 id="form-heading" className={styles.brandTitle}>
+                {isEnglish ? "Your table is waiting." : "Sofrada yeriniz hazır."}
+              </h1>
+              <p className={styles.introText}>
+                {isEnglish
+                  ? "Choose a time and send your request. We confirm availability personally on WhatsApp."
+                  : "Günü ve saati seçin; müsaitliği WhatsApp üzerinden bizzat teyit edelim."}
+              </p>
+              <div className={styles.introFacts} aria-label={isEnglish ? "Reservation details" : "Rezervasyon bilgileri"}>
+                <span>{isEnglish ? "Since 1978" : "1978'den beri"}</span>
+                <span>{isEnglish ? "No deposit" : "Kapora yok"}</span>
+              </div>
+            </div>
+          </div>
+
+          <div className={styles.bookingPanel}>
           <div className={styles.cardHeader}>
             <div className={styles.brandWrap}>
-              <span className={styles.brandEyebrow}>
-                {isEnglish ? "Tarihi Van • Beyoğlu" : "Tarihi Van • Taksim"}
-              </span>
-              <h1 id="form-heading" className={styles.brandTitle}>
-                {isEnglish ? "Table Reservation" : "Masa Rezervasyonu"}
-              </h1>
+              <h2 className={styles.formTitle}>
+                {isEnglish ? "Table reservation" : "Masa rezervasyonu"}
+              </h2>
+              <p className={styles.formHint}>
+                {isEnglish ? "Usually confirmed in 5–10 minutes" : "Genellikle 5–10 dakika içinde teyit edilir"}
+              </p>
             </div>
 
-            <div className={styles.serviceToggle} role="radiogroup" aria-label="Hizmet Tercihi">
+            <div
+              className={styles.serviceToggle}
+              role="radiogroup"
+              aria-label={isEnglish ? "Service preference" : "Hizmet tercihi"}
+            >
               <button
                 type="button"
                 role="radio"
@@ -567,22 +605,27 @@ Müsaitlik durumunu teyit edebilir misiniz? Teşekkürler.`;
               </div>
             </form>
           )}
+          </div>
         </section>
 
-      {/* Cool Venue Ambiance Photo Strip (Directly Below Form) */}
-      <div className={styles.venueGallerySection}>
+      <section className={styles.venueGallerySection} aria-labelledby="venue-heading">
         <div className={styles.galleryHeader}>
-          <span className={styles.galleryEyebrow}>
-            {isEnglish ? "🏛️ Venue & Tables" : "🏛️ Mekân & Masalar"}
-          </span>
-          <span className={styles.galleryHint}>
+          <div>
+            <h2 id="venue-heading" className={styles.galleryTitle}>
+              {isEnglish ? "Choose your corner" : "Köşenizi seçin"}
+            </h2>
+            <p className={styles.galleryHint}>
+              {isEnglish ? "A table for every pace of Beyoğlu" : "Beyoğlu'nun her ritmine uygun bir masa"}
+            </p>
+          </div>
+          <span className={styles.galleryMeta}>
             {isEnglish ? "Beyoğlu Zambak Street since 1978" : "1978'den günümüze Zambak Sokak"}
           </span>
         </div>
 
         <div className={styles.photoStrip}>
           {venuePhotos.map((photo) => (
-            <div key={photo.src} className={styles.photoCard}>
+            <figure key={photo.src} className={styles.photoCard}>
               <Image
                 src={photo.src}
                 alt={isEnglish ? photo.titleEn : photo.title}
@@ -598,12 +641,11 @@ Müsaitlik durumunu teyit edebilir misiniz? Teşekkürler.`;
                   {isEnglish ? photo.titleEn : photo.title}
                 </h3>
               </div>
-            </div>
+            </figure>
           ))}
         </div>
-      </div>
+      </section>
 
-      {/* Quick Venue Contact Info Below Photos */}
       <div className={styles.quickInfoBar}>
         <a href={telUrl} className={styles.infoPill}>
           <Phone size={13} />
@@ -613,7 +655,7 @@ Müsaitlik durumunu teyit edebilir misiniz? Teşekkürler.`;
           <MapPin size={13} />
           <span>{displayAddress}</span>
         </a>
-        <div className={styles.infoPill}>
+        <div className={styles.infoPill} aria-label={isEnglish ? "Opening hours" : "Çalışma saatleri"}>
           <Clock size={13} />
           <span>{openingHours.short}</span>
         </div>
