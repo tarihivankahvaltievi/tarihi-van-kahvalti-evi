@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import Image from "next/image";
 import {
   Calendar,
   CheckCircle2,
@@ -67,7 +66,7 @@ export function ReservationView({
   const [customerName, setCustomerName] = useState("");
   const [customerPhone, setCustomerPhone] = useState("");
   const [note, setNote] = useState(() =>
-    initialItem ? `${isEnglish ? "Special item" : "Seçilen lezzet"}: ${initialItem}` : "",
+    initialItem ? `${isEnglish ? "Item" : "Seçim"}: ${initialItem}` : "",
   );
   const [honeypot, setHoneypot] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -84,7 +83,7 @@ export function ReservationView({
 
   const seatingLabels: Record<"indoor" | "street" | "balcony", { tr: string; en: string }> = {
     indoor: {
-      tr: "İç Salon",
+      tr: "İç Salon (Mekân İçi)",
       en: "Indoor Dining",
     },
     street: {
@@ -151,7 +150,7 @@ export function ReservationView({
       console.error("Booking submission error:", err);
     }
 
-    // Format WhatsApp Message
+    // Direct WhatsApp message formatting
     const calendarLine = icsDownloadUrl
       ? isEnglish
         ? `\n📅 Add to Calendar:\n${icsDownloadUrl}`
@@ -159,21 +158,21 @@ export function ReservationView({
       : "";
 
     const message = isEnglish
-      ? `Hello, I would like to reserve a table at Tarihi Van Kahvaltı Evi:
+      ? `Hello, I'd like to book a table at Tarihi Van Kahvaltı Evi:
 
-${createdId ? `📋 Reservation: #${createdId}\n` : ""}👤 Name: ${customerName}
+${createdId ? `📋 Booking Code: #${createdId}\n` : ""}👤 Name: ${customerName}
 📞 Phone: ${customerPhone}
 📅 Date: ${formattedDate}
 ⏰ Time: ${time}
 👥 Guests: ${guests} Person(s)
-🍳 Service: ${serviceLabel}
+🍳 Option: ${serviceLabel}
 🪑 Area: ${seatingLabel}
 📝 Note: ${note || "None"}${calendarLine}
 
 Could you please confirm table availability? Thank you.`
       : `Merhaba, Tarihi Van Kahvaltı Evi için masa rezervasyonu talebi:
 
-${createdId ? `📋 Rezervasyon No: #${createdId}\n` : ""}👤 Ad Soyad: ${customerName}
+${createdId ? `📋 Rezervasyon Kodu: #${createdId}\n` : ""}👤 Ad Soyad: ${customerName}
 📞 Telefon: ${customerPhone}
 📅 Tarih: ${formattedDate}
 ⏰ Saat: ${time}
@@ -210,83 +209,58 @@ Müsaitlik durumunu teyit edebilir misiniz? Teşekkürler.`;
   };
 
   return (
-    <div className={styles.grid}>
-      {/* ------------------------------------------------------------------ */}
-      {/* Left: Venue Context & Atmosphere                                   */}
-      {/* ------------------------------------------------------------------ */}
-      <aside className={styles.aside} aria-label={isEnglish ? "Restaurant Information" : "Mekân Bilgileri"}>
-        <div className={styles.photoCard}>
-          <Image
-            src="/images/breakfast-spread.webp"
-            alt={isEnglish ? "Tarihi Van Breakfast Table" : "Tarihi Van Kahvaltı Sofrası"}
-            fill
-            sizes="(max-width: 840px) 100vw, 42vw"
-            priority
-            quality={80}
-          />
-          <span className={styles.photoTag}>
-            {isEnglish ? "Zambak Street • Since 1978" : "Beyoğlu Zambak Sokak • 1978'den beri"}
-          </span>
-        </div>
-
-        <div className={styles.venueDetails}>
-          <a href={telUrl} className={styles.venueItem}>
-            <Phone size={16} />
-            <span>{displayPhone}</span>
-          </a>
-          <a href={mapsUrl} target="_blank" rel="noopener noreferrer" className={styles.venueItem}>
-            <MapPin size={16} />
-            <span>{displayAddress}</span>
-          </a>
-          <div className={styles.venueItem}>
-            <Clock size={16} />
-            <span>{openingHours.short}</span>
+    <div className={styles.container}>
+      <section className={styles.glassCard} aria-labelledby="form-heading">
+        {/* Sleek Liquid Glass Header */}
+        <div className={styles.cardHeader}>
+          <div className={styles.brandWrap}>
+            <span className={styles.brandEyebrow}>
+              {isEnglish ? "Tarihi Van • Beyoğlu" : "Tarihi Van • Taksim"}
+            </span>
+            <h1 id="form-heading" className={styles.brandTitle}>
+              {isEnglish ? "Table Reservation" : "Masa Rezervasyonu"}
+            </h1>
           </div>
-        </div>
 
-        <div className={styles.quoteBlock}>
-          <p>
-            {isEnglish
-              ? "“A true Istanbul classic. Freshly prepared regional Van specialties and endless hot tea in a charming historic building.”"
-              : "“Zambak Sokak'ta çayın hiç eksilmediği, otlu peynir ve murtuğanın en tazesinin sunulduğu gerçek bir aile sofrası.”"}
-          </p>
-          <small>{isEnglish ? "Google Reviews • 4.9 Rating" : "Google Yorumları • 4.9 Puan"}</small>
-        </div>
-      </aside>
+          <div className={styles.serviceToggle} role="radiogroup" aria-label="Hizmet Tercihi">
+            <button
+              type="button"
+              role="radio"
+              aria-checked={serviceType === "breakfast"}
+              className={`${styles.serviceTab} ${serviceType === "breakfast" ? styles.serviceTabActive : ""}`}
+              onClick={() => setServiceType("breakfast")}
+            >
+              <UtensilsCrossed size={14} />
+              <span>{isEnglish ? "Breakfast" : "Van Kahvaltısı"}</span>
+            </button>
 
-      {/* ------------------------------------------------------------------ */}
-      {/* Right: The Clean, Fast Reservation Card                            */}
-      {/* ------------------------------------------------------------------ */}
-      <section className={styles.card} aria-labelledby="form-title">
-        <div className={styles.cardHead}>
-          <div>
-            <h2 id="form-title" className={styles.cardHeadTitle}>
-              {submittedData
-                ? isEnglish ? "Reservation Request Sent" : "Rezervasyon Talebiniz Alındı"
-                : isEnglish ? "Reserve a Table" : "Masada Yerinizi Ayırtın"}
-            </h2>
-            <p className={styles.cardHeadNote}>
-              {submittedData
-                ? isEnglish ? "Saved to our schedule and forwarded to WhatsApp." : "WhatsApp üzerinden iletildi; takviminize ekleyebilirsiniz."
-                : isEnglish ? "Select your party and time; confirm on WhatsApp." : "Tarih ve kişi sayısını seçin; WhatsApp ile hızlı teyit alın."}
-            </p>
+            <button
+              type="button"
+              role="radio"
+              aria-checked={serviceType === "cafe"}
+              className={`${styles.serviceTab} ${serviceType === "cafe" ? styles.serviceTabActive : ""}`}
+              onClick={() => setServiceType("cafe")}
+            >
+              <Coffee size={14} />
+              <span>Kafka Cafe</span>
+            </button>
           </div>
         </div>
 
         {submittedData ? (
           <div className={styles.successCard}>
             <div className={styles.successIcon} aria-hidden="true">
-              <CheckCircle2 size={32} />
+              <CheckCircle2 size={28} />
             </div>
 
-            <h3 className={styles.successHeading}>
-              {isEnglish ? "We Look Forward to Welcoming You!" : "Sizi Ağırlamaktan Mutluluk Duyarız!"}
-            </h3>
+            <h2 className={styles.successHeading}>
+              {isEnglish ? "Request Sent on WhatsApp" : "Talebiniz WhatsApp ile İletildi"}
+            </h2>
 
             <p className={styles.successText}>
               {isEnglish
-                ? "Your reservation request has been forwarded to our team via WhatsApp. You can add it directly to your personal calendar below:"
-                : "Talebiniz yetkili ekibimize iletildi. Unutmamak için bu randevuyu kendi takviminize kaydedebilirsiniz:"}
+                ? "Your reservation has been submitted. You can quickly add this table booking to your personal calendar below:"
+                : "Rezervasyon talebiniz iletildi. Unutmamak için randevuyu telefon takviminize tek tıkla kaydedebilirsiniz:"}
             </p>
 
             <dl className={styles.summaryBox}>
@@ -303,8 +277,8 @@ Müsaitlik durumunu teyit edebilir misiniz? Teşekkürler.`;
                 <dd>{submittedData.date} — {submittedData.time}</dd>
               </div>
               <div className={styles.summaryRow}>
-                <dt>{isEnglish ? "Party & Area" : "Kişi & Alan"}</dt>
-                <dd>{submittedData.guests} {isEnglish ? "Guests" : "Kişi"} • {submittedData.seatingArea}</dd>
+                <dt>{isEnglish ? "Details" : "Detay"}</dt>
+                <dd>{submittedData.guests} {isEnglish ? "Guests" : "Kişi"} • {submittedData.serviceType}</dd>
               </div>
             </dl>
 
@@ -348,19 +322,19 @@ Müsaitlik durumunu teyit edebilir misiniz? Teşekkürler.`;
               }}
               className={styles.anotherBtn}
             >
-              <RotateCcw size={14} style={{ display: "inline-block", marginRight: "6px", verticalAlign: "middle" }} />
-              {isEnglish ? "Make another reservation" : "Yeni bir rezervasyon yap"}
+              <RotateCcw size={13} style={{ display: "inline-block", marginRight: "5px", verticalAlign: "middle" }} />
+              {isEnglish ? "New Reservation" : "Yeni Rezervasyon Yap"}
             </button>
           </div>
         ) : (
           <form onSubmit={handleSubmit} className={styles.cardForm}>
             {/* Honeypot */}
             <div className={styles.honeypot} aria-hidden="true">
-              <label htmlFor="website_hp">Leave empty</label>
+              <label htmlFor="hp_check">Leave empty</label>
               <input
-                id="website_hp"
+                id="hp_check"
                 type="text"
-                name="website_hp"
+                name="hp_check"
                 value={honeypot}
                 onChange={(e) => setHoneypot(e.target.value)}
                 tabIndex={-1}
@@ -368,42 +342,17 @@ Müsaitlik durumunu teyit edebilir misiniz? Teşekkürler.`;
               />
             </div>
 
-            {/* Service Toggle */}
-            <div className={styles.serviceToggle} role="radiogroup" aria-label="Servis Tercihi">
-              <button
-                type="button"
-                role="radio"
-                aria-checked={serviceType === "breakfast"}
-                className={`${styles.serviceTab} ${serviceType === "breakfast" ? styles.serviceTabActive : ""}`}
-                onClick={() => setServiceType("breakfast")}
-              >
-                <UtensilsCrossed size={16} />
-                <span>{isEnglish ? "Van Breakfast" : "Van Kahvaltısı"}</span>
-              </button>
-
-              <button
-                type="button"
-                role="radio"
-                aria-checked={serviceType === "cafe"}
-                className={`${styles.serviceTab} ${serviceType === "cafe" ? styles.serviceTabActive : ""}`}
-                onClick={() => setServiceType("cafe")}
-              >
-                <Coffee size={16} />
-                <span>Kafka Cafe</span>
-              </button>
-            </div>
-
-            {/* Name and Phone */}
-            <div className={styles.fieldRow}>
+            {/* Row 1: Name and Phone (Side-by-side) */}
+            <div className={styles.gridRow}>
               <div className={styles.field}>
-                <label htmlFor="res-name" className={styles.label}>
+                <label htmlFor="form-guest-name" className={styles.label}>
                   <span>{isEnglish ? "Full Name" : "Ad Soyad"}</span>
                 </label>
                 <input
-                  id="res-name"
+                  id="form-guest-name"
                   type="text"
                   required
-                  maxLength={80}
+                  maxLength={70}
                   placeholder={isEnglish ? "e.g. Ahmet Yılmaz" : "örn. Ahmet Yılmaz"}
                   value={customerName}
                   onChange={(e) => setCustomerName(e.target.value)}
@@ -412,14 +361,14 @@ Müsaitlik durumunu teyit edebilir misiniz? Teşekkürler.`;
               </div>
 
               <div className={styles.field}>
-                <label htmlFor="res-phone" className={styles.label}>
-                  <span>{isEnglish ? "Phone Number" : "Telefon Numarası"}</span>
+                <label htmlFor="form-guest-phone" className={styles.label}>
+                  <span>{isEnglish ? "Phone" : "Telefon"}</span>
                 </label>
                 <input
-                  id="res-phone"
+                  id="form-guest-phone"
                   type="tel"
                   required
-                  maxLength={30}
+                  maxLength={25}
                   placeholder={isEnglish ? "+90 5XX XXX XX XX" : "05XX XXX XX XX"}
                   value={customerPhone}
                   onChange={(e) => setCustomerPhone(e.target.value)}
@@ -428,15 +377,15 @@ Müsaitlik durumunu teyit edebilir misiniz? Teşekkürler.`;
               </div>
             </div>
 
-            {/* Date and Time */}
-            <div className={styles.fieldRow}>
+            {/* Row 2: Date and Time (Side-by-side) */}
+            <div className={styles.gridRow}>
               <div className={styles.field}>
-                <label htmlFor="res-date" className={styles.label}>
-                  <Calendar size={14} />
+                <label htmlFor="form-guest-date" className={styles.label}>
+                  <Calendar size={13} />
                   <span>{isEnglish ? "Date" : "Tarih"}</span>
                 </label>
                 <input
-                  id="res-date"
+                  id="form-guest-date"
                   type="date"
                   required
                   value={date}
@@ -447,12 +396,12 @@ Müsaitlik durumunu teyit edebilir misiniz? Teşekkürler.`;
               </div>
 
               <div className={styles.field}>
-                <label htmlFor="res-time" className={styles.label}>
-                  <Clock size={14} />
+                <label htmlFor="form-guest-time" className={styles.label}>
+                  <Clock size={13} />
                   <span>{isEnglish ? "Time" : "Saat"}</span>
                 </label>
                 <select
-                  id="res-time"
+                  id="form-guest-time"
                   value={time}
                   onChange={(e) => setTime(e.target.value)}
                   className={styles.select}
@@ -482,8 +431,8 @@ Müsaitlik durumunu teyit edebilir misiniz? Teşekkürler.`;
               </div>
             </div>
 
-            {/* Guests and Seating Area */}
-            <div className={styles.fieldRow}>
+            {/* Row 3: Party Size & Seating Area (Side-by-side) */}
+            <div className={styles.gridRow}>
               <div className={styles.field}>
                 <label className={styles.label}>
                   <span>{isEnglish ? "Party Size" : "Kişi Sayısı"}</span>
@@ -496,7 +445,7 @@ Müsaitlik durumunu teyit edebilir misiniz? Teşekkürler.`;
                     onClick={() => setGuests((c) => Math.max(1, c - 1))}
                     className={styles.counterBtn}
                   >
-                    <Minus size={16} />
+                    <Minus size={15} />
                   </button>
                   <div className={styles.counterValue}>
                     <strong>{guests}</strong>
@@ -504,85 +453,97 @@ Müsaitlik durumunu teyit edebilir misiniz? Teşekkürler.`;
                   </div>
                   <button
                     type="button"
-                    disabled={guests >= 50}
+                    disabled={guests >= 40}
                     aria-label={isEnglish ? "Increase guests" : "Kişi sayısını artır"}
-                    onClick={() => setGuests((c) => Math.min(50, c + 1))}
+                    onClick={() => setGuests((c) => Math.min(40, c + 1))}
                     className={styles.counterBtn}
                   >
-                    <Plus size={16} />
+                    <Plus size={15} />
                   </button>
                 </div>
               </div>
 
               <div className={styles.field}>
-                <label className={styles.label}>
-                  <span>{isEnglish ? "Area Preference" : "Masa Tercihi"}</span>
+                <label htmlFor="form-guest-area" className={styles.label}>
+                  <span>{isEnglish ? "Seating Area" : "Masa Tercihi"}</span>
                 </label>
-                <div className={styles.seatingOptions} role="radiogroup" aria-label="Masa Tercihi">
-                  {(["indoor", "street", "balcony"] as const).map((area) => (
-                    <button
-                      key={area}
-                      type="button"
-                      role="radio"
-                      aria-checked={seatingArea === area}
-                      className={`${styles.seatingBtn} ${seatingArea === area ? styles.seatingBtnActive : ""}`}
-                      onClick={() => setSeatingArea(area)}
-                    >
-                      {seatingLabels[area][isEnglish ? "en" : "tr"]}
-                    </button>
-                  ))}
-                </div>
+                <select
+                  id="form-guest-area"
+                  value={seatingArea}
+                  onChange={(e) => setSeatingArea(e.target.value as "indoor" | "street" | "balcony")}
+                  className={styles.select}
+                >
+                  <option value="indoor">{isEnglish ? "Indoor Dining Room" : "İç Salon (Varsayılan)"}</option>
+                  <option value="street">{isEnglish ? "Zambak Street (Outdoor)" : "Zambak Sokak (Dış)"}</option>
+                  <option value="balcony">{isEnglish ? "Terrace / Window" : "Teras / Cam Kenarı"}</option>
+                </select>
               </div>
             </div>
 
-            {/* Note */}
+            {/* Row 4: Note (Single line compact) */}
             <div className={styles.field}>
-              <label htmlFor="res-note" className={styles.label}>
-                <span>{isEnglish ? "Special Request" : "Not"}</span>
+              <label htmlFor="form-guest-note" className={styles.label}>
+                <span>{isEnglish ? "Special Request" : "Özel Not"}</span>
                 <small>({isEnglish ? "optional" : "isteğe bağlı"})</small>
               </label>
-              <textarea
-                id="res-note"
-                rows={2}
-                maxLength={240}
+              <input
+                id="form-guest-note"
+                type="text"
+                maxLength={140}
                 placeholder={
                   isEnglish
-                    ? "High chair, window table, celebration note..."
-                    : "Bebek sandalyesi, masa tercihi veya paylaşmak istediğiniz başka bir detay..."
+                    ? "e.g. High chair, window side, celebration..."
+                    : "örn. Bebek sandalyesi, kutlama vb."
                 }
                 value={note}
                 onChange={(e) => setNote(e.target.value)}
-                className={styles.textarea}
+                className={styles.input}
               />
             </div>
 
-            {/* Submit Block */}
+            {/* Row 5: Action Button & Micro-Assurance */}
             <div className={styles.submitBlock}>
               <button
                 type="submit"
                 disabled={isSubmitting}
                 className={styles.submitBtn}
               >
-                <MessageCircle size={19} />
+                <MessageCircle size={18} />
                 <span>
                   {isSubmitting
                     ? isEnglish ? "Processing..." : "Hazırlanıyor..."
-                    : isEnglish ? "Send Request on WhatsApp →" : "WhatsApp ile Talep Gönder →"}
+                    : isEnglish ? "Reserve via WhatsApp →" : "WhatsApp ile Hemen Ayırt →"}
                 </span>
               </button>
 
-              <p className={styles.notice}>
-                <ShieldCheck size={14} style={{ color: "#2e7d32", flex: "none" }} />
+              <p className={styles.microNotice}>
+                <ShieldCheck size={13} style={{ color: "#237829", flex: "none" }} />
                 <span>
                   {isEnglish
-                    ? "Your table is confirmed by the restaurant on WhatsApp. Free cancellation."
-                    : "Rezervasyon, işletmenin WhatsApp onayından sonra kesinleşir."}
+                    ? "Free reservation • Instant confirmation on WhatsApp"
+                    : "Ücretsiz rezervasyon • Anında WhatsApp teyidi"}
                 </span>
               </p>
             </div>
           </form>
         )}
       </section>
+
+      {/* Quick Venue Micro-Pills Under Card */}
+      <div className={styles.quickInfoBar}>
+        <a href={telUrl} className={styles.infoPill}>
+          <Phone size={13} />
+          <span>{displayPhone}</span>
+        </a>
+        <a href={mapsUrl} target="_blank" rel="noopener noreferrer" className={styles.infoPill}>
+          <MapPin size={13} />
+          <span>{displayAddress}</span>
+        </a>
+        <div className={styles.infoPill}>
+          <Clock size={13} />
+          <span>{openingHours.short}</span>
+        </div>
+      </div>
     </div>
   );
 }

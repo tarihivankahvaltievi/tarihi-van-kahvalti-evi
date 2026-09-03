@@ -120,22 +120,9 @@ export default function ReservationPage() {
       />
       <ClientPage locale="tr">
         <main id="main-content" className={styles.page}>
-          <div className={styles.container}>
-            <header className={styles.header}>
-              <p className={styles.kicker}>Beyoğlu Zambak Sokak</p>
-              <h1 className={styles.title}>
-                Masa Rezervasyonu
-                <em>Tarihi Van</em>
-              </h1>
-              <p className={styles.lead}>
-                Zambak Sokak&apos;taki tarihi Rum binamızda; otlu peynir, sıcak sahanlar, murtuğa ve eksilmeyen demli çayımız için masanızı ayırtın.
-              </p>
-            </header>
-
-            <Suspense fallback={<div style={{ minHeight: "420px" }} />}>
-              <ReservationView locale="tr" />
-            </Suspense>
-          </div>
+          <Suspense fallback={<div style={{ minHeight: "420px" }} />}>
+            <ReservationView locale="tr" />
+          </Suspense>
         </main>
         <AnimatedFooter locale="tr" />
       </ClientPage>

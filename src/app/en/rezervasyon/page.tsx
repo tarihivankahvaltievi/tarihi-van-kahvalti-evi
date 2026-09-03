@@ -120,22 +120,9 @@ export default function EnglishReservationPage() {
       />
       <ClientPage locale="en">
         <main id="main-content" className={styles.page}>
-          <div className={styles.container}>
-            <header className={styles.header}>
-              <p className={styles.kicker}>Beyoğlu Zambak Street</p>
-              <h1 className={styles.title}>
-                Table Reservation
-                <em>Tarihi Van</em>
-              </h1>
-              <p className={styles.lead}>
-                Secure your table in our historic Beyoğlu building for authentic Van breakfast, regional cheeses, hot copper pans and endless tea.
-              </p>
-            </header>
-
-            <Suspense fallback={<div style={{ minHeight: "420px" }} />}>
-              <ReservationView locale="en" />
-            </Suspense>
-          </div>
+          <Suspense fallback={<div style={{ minHeight: "420px" }} />}>
+            <ReservationView locale="en" />
+          </Suspense>
         </main>
         <AnimatedFooter locale="en" />
       </ClientPage>
