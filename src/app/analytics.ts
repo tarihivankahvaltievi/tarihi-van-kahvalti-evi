@@ -11,7 +11,8 @@ declare global {
 }
 
 const googleAdsConversionId = process.env.NEXT_PUBLIC_GOOGLE_ADS_ID ?? "AW-17869229892";
-const bookingConversionLabel = process.env.NEXT_PUBLIC_GOOGLE_ADS_BOOKING_CONVERSION_LABEL;
+const bookingConversionLabel =
+  process.env.NEXT_PUBLIC_GOOGLE_ADS_BOOKING_CONVERSION_LABEL ?? "1soqCKS9uu0cEMSe28hC";
 
 function sendEvent(name: string, parameters: AnalyticsParameters) {
   if (typeof window === "undefined") return;
