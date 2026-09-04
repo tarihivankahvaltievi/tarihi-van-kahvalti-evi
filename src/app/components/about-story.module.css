@@ -309,12 +309,14 @@
 
 @media (max-width: 900px) {
   .section {
-    background: var(--about-cream-soft);
-    color: var(--about-ink);
+    background: var(--about-burgundy);
+    color: var(--about-cream);
   }
 
   .section::before {
-    background: none;
+    background:
+      radial-gradient(circle at 12% 14%, rgba(239, 207, 145, 0.12), transparent 28%),
+      radial-gradient(circle at 88% 82%, rgba(43, 3, 8, 0.3), transparent 34%);
   }
 
   .inner {
@@ -334,12 +336,12 @@
   }
 
   .tablePhoto {
-    box-shadow: 0.7rem 0.7rem 0 rgba(112, 21, 28, 0.2);
+    box-shadow: 0.7rem 0.7rem 0 rgba(35, 5, 9, 0.35);
   }
 
   .memoryPhoto {
-    outline-color: var(--about-cream-soft);
-    box-shadow: 0 0 0 1px rgba(112, 21, 28, 0.32);
+    outline-color: var(--about-burgundy);
+    box-shadow: 0 0 0 1px rgba(239, 207, 145, 0.35);
   }
 
   .copy {
@@ -349,44 +351,45 @@
 
   .meta {
     margin-bottom: 1.15rem;
-    color: var(--about-blue);
+    color: var(--about-gold);
     font-size: 0.78rem;
   }
 
   .meta::after {
-    background: rgba(47, 86, 102, 0.34);
+    background: rgba(239, 207, 145, 0.4);
   }
 
   .title {
     max-width: 10em;
-    color: var(--about-ink);
+    color: var(--about-cream);
     font-size: clamp(3rem, 8.8vw, 4.45rem);
   }
 
   .title em {
-    color: #7a1c24;
+    color: var(--about-gold);
   }
 
   .lead {
     max-width: 42rem;
-    color: var(--about-body);
+    color: rgba(255, 247, 233, 0.9);
     font-size: 1rem;
     line-height: 1.58;
   }
 
   .menuAction {
-    border-color: var(--about-burgundy);
-    background: var(--about-burgundy);
-    color: var(--about-cream);
+    border-color: var(--about-cream);
+    background: var(--about-cream);
+    color: var(--about-burgundy-dark);
   }
 
   .bookingAction {
-    border-color: rgba(55, 29, 32, 0.45);
-    color: var(--about-ink);
+    border-color: rgba(239, 207, 145, 0.58);
+    background: transparent;
+    color: var(--about-cream);
   }
 
   .action:focus-visible {
-    outline-color: var(--about-burgundy);
+    outline-color: var(--about-gold);
   }
 
   .principles {
@@ -396,7 +399,7 @@
     margin-inline: calc(clamp(2rem, 6vw, 3.5rem) * -1);
     margin-bottom: calc(clamp(3.5rem, 8vw, 5rem) * -1);
     padding: 1.25rem clamp(2rem, 6vw, 3.5rem) 1.5rem;
-    border-top: 0;
+    border-top: 1px solid rgba(239, 207, 145, 0.25);
     background: var(--about-burgundy);
   }
 
@@ -470,19 +473,21 @@
 
   .tablePhoto {
     inset: 0 8% 7% 0;
-    box-shadow: 0.45rem 0.45rem 0 rgba(112, 21, 28, 0.2);
+    box-shadow: 0.45rem 0.45rem 0 rgba(35, 5, 9, 0.35);
   }
 
   .memoryPhoto {
     width: 37%;
     height: 40%;
     outline-width: 0.24rem;
+    outline-color: var(--about-burgundy);
   }
 
   .meta {
     margin-bottom: 0.9rem;
     font-size: 0.75rem;
     letter-spacing: 0.06em;
+    color: var(--about-gold);
   }
 
   .title {

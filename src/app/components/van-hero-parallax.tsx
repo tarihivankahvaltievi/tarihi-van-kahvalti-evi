@@ -41,36 +41,53 @@ const heroSlides: HeroSlide[] = [
 export function VanHeroParallax({ locale = "tr" }: { locale?: SiteLocale }) {
   const messages = messagesFor(locale);
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [previousSlide, setPreviousSlide] = useState<number | null>(null);
 
   useEffect(() => {
     const timer = setInterval(() => {
-      setCurrentSlide((prev) => (prev + 1) % heroSlides.length);
-    }, 6000);
+      setCurrentSlide((prev) => {
+        setPreviousSlide(prev);
+        return (prev + 1) % heroSlides.length;
+      });
+    }, 6800);
     return () => clearInterval(timer);
   }, []);
 
+  const handleSelectSlide = (index: number) => {
+    if (index !== currentSlide) {
+      setPreviousSlide(currentSlide);
+      setCurrentSlide(index);
+    }
+  };
+
   return (
-    <section className="hero-section" aria-label={messages.hero.aria}>
-      {heroSlides.map((slide, index) => (
-        <div
-          key={slide.image}
-          className={`hero-slide ${index === currentSlide ? "active" : ""}`}
-          style={{ backgroundImage: `url(${slide.image})` }}
-          role="img"
-          aria-label={locale === "en" ? slide.altEn : slide.altTr}
-        />
-      ))}
+    <section className="hero-section hero hero-parallax-dining" aria-label={messages.hero.aria}>
+      {heroSlides.map((slide, index) => {
+        const isActive = index === currentSlide;
+        const isExiting = index === previousSlide;
+        return (
+          <div
+            key={slide.image}
+            className={`hero-slide ${isActive ? "active" : isExiting ? "exiting" : ""}`}
+            style={{ backgroundImage: `url(${slide.image})` }}
+            role="img"
+            aria-label={locale === "en" ? slide.altEn : slide.altTr}
+          />
+        );
+      })}
 
       <div className="hero-overlay" aria-hidden="true" />
 
       <div className="container hero-content">
         <div className="hero-content-inner animate-fade-in">
           <div className="hero-subtitle">
-            {locale === "en" ? "SINCE 1978 · BEYOĞLU, ISTANBUL" : "1978'DEN BERİ BEYOĞLU"}
+            <span className="hero-subtitle-dot" aria-hidden="true">◆</span>
+            <span>{locale === "en" ? "SINCE 1978 · BEYOĞLU, ISTANBUL" : "1978'DEN BERİ BEYOĞLU"}</span>
+            <span className="hero-subtitle-dot" aria-hidden="true">◆</span>
           </div>
-          <h1 className="hero-title font-serif">
-            TARİHİ VAN <br />
-            <span className="gold-text-gradient">KAHVALTI EVİ</span>
+          <h1 className="hero-title">
+            <span className="hero-title-main">TARİHİ VAN</span>
+            <span className="hero-title-accent">KAHVALTI EVİ</span>
           </h1>
           <p className="hero-tagline">
             {locale === "en"
@@ -97,7 +114,7 @@ export function VanHeroParallax({ locale = "tr" }: { locale?: SiteLocale }) {
             key={index}
             type="button"
             className={`indicator-dot ${index === currentSlide ? "active" : ""}`}
-            onClick={() => setCurrentSlide(index)}
+            onClick={() => handleSelectSlide(index)}
             aria-label={`Slide ${index + 1}`}
           />
         ))}
@@ -108,7 +125,7 @@ export function VanHeroParallax({ locale = "tr" }: { locale?: SiteLocale }) {
           <svg viewBox="0 0 1440 100" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
             <path
               d="M0,32 C320,82 400,-18 800,62 C1100,122 1200,12 1440,42 L1440,100 L0,100 Z"
-              style={{ fill: "var(--accent-gold, #c5a25a)", opacity: 0.45 }}
+              style={{ fill: "rgba(200, 159, 83, 0.3)" }}
             />
             <path
               d="M0,40 C320,90 400,-10 800,70 C1100,130 1200,20 1440,50 L1440,100 L0,100 Z"
