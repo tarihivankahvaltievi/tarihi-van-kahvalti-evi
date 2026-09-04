@@ -16,6 +16,16 @@ export function AtmosphereBanner({ locale = "tr" }: { locale?: string }) {
           className={styles.anchorImg}
           priority
         />
+        <div className={styles.notchLogoWrap}>
+          <Image
+            src="/images/brand-logo-burgundy.png"
+            alt="Tarihi Van Kahvaltı Evi"
+            width={54}
+            height={37}
+            className={styles.notchLogo}
+            priority
+          />
+        </div>
       </div>
 
       <div className={styles.overlay} />
