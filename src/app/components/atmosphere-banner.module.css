@@ -2,12 +2,9 @@
   position: relative;
   z-index: 10;
   margin-top: -30px;
-  min-height: 520px;
-  padding: 180px 20px 170px;
-  background-image: url('/images/atmosphere-banner-bg.jpg');
-  background-position: center 48%;
-  background-size: cover;
-  background-repeat: no-repeat;
+  min-height: 540px;
+  padding: 160px 20px 170px;
+  background-color: #231210;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -15,14 +12,32 @@
   overflow: visible;
 }
 
+.bgWrapper {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.bgImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 46%;
+}
+
 .overlay {
   position: absolute;
   inset: 0;
+  z-index: 2;
   background: linear-gradient(
     to bottom,
-    rgba(35, 18, 16, 0.45) 0%,
-    rgba(35, 18, 16, 0.55) 50%,
-    rgba(35, 18, 16, 0.5) 100%
+    rgba(28, 14, 14, 0.48) 0%,
+    rgba(28, 14, 14, 0.58) 50%,
+    rgba(28, 14, 14, 0.52) 100%
   );
   pointer-events: none;
 }
@@ -38,7 +53,7 @@
 
 .anchorImg {
   display: block;
-  width: 74px;
+  width: 84px;
   height: auto;
 }
 
@@ -55,61 +70,96 @@
 
 .notchLogo {
   display: block;
-  width: 27px;
+  width: 44px;
   height: auto;
-  filter: drop-shadow(0 1px 2px rgba(64, 32, 33, 0.18));
+  filter: drop-shadow(0 2px 5px rgba(0, 0, 0, 0.22));
 }
-
 
 .textContainer {
   position: relative;
   z-index: 15;
-  max-width: 900px;
+  max-width: 880px;
   margin: 0 auto;
-  padding: 0 15px;
+  padding: 0 20px;
 }
 
 .heading {
-  font-family: "NOCTADO", Georgia, serif;
-  font-size: 36px;
+  font-family: var(--font-bodoni-gf), "NOCTADO", Georgia, serif;
+  font-style: italic;
+  font-size: 34px;
   font-weight: 400;
   color: #ffffff;
-  line-height: 1.15;
-  letter-spacing: -0.01em;
+  line-height: 1.4;
+  letter-spacing: 0.01em;
   margin: 0;
-  text-shadow: 0 3px 12px rgba(0, 0, 0, 0.4);
+  text-shadow: 0 3px 14px rgba(0, 0, 0, 0.75), 0 5px 28px rgba(0, 0, 0, 0.55);
 }
 
 .line {
   display: inline-block;
-  font-family: "NOCTADO", Georgia, serif;
+}
+
+/* Bottom Architectural Cutout Transition */
+.bottomTransition {
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: 70px;
+  z-index: 18;
+  pointer-events: none;
+  overflow: hidden;
+  line-height: 0;
+}
+
+.transitionSvg {
+  display: block;
+  width: 100%;
+  height: 100%;
 }
 
 @media (min-width: 768px) {
   .section2 {
-    min-height: 600px;
-    padding: 220px 20px;
+    min-height: 620px;
+    padding: 210px 20px 200px;
   }
   .heading {
-    font-size: 58px;
+    font-size: 44px;
+  }
+  .bottomTransition {
+    height: 90px;
+  }
+  .anchorImg {
+    width: 90px;
+  }
+  .notchLogoWrap {
+    top: 8px;
+  }
+  .notchLogo {
+    width: 48px;
   }
 }
 
 @media (max-width: 480px) {
   .section2 {
-    min-height: 460px;
-    padding: 150px 15px 150px;
+    min-height: 480px;
+    padding: 140px 18px 130px;
   }
   .heading {
-    font-size: 32px;
+    font-size: 23px;
+    line-height: 1.45;
   }
   .anchorImg {
-    width: 64px;
+    width: 78px;
   }
   .notchLogoWrap {
     top: 6px;
   }
   .notchLogo {
-    width: 23px;
+    width: 38px;
+  }
+  .bottomTransition {
+    height: 55px;
   }
 }

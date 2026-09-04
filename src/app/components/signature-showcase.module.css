@@ -12,15 +12,7 @@
 }
 
 .topCurveBorder {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 52px;
-  background: url('/hamour/section-3-bg-top.png') center top repeat-x;
-  background-size: contain;
-  pointer-events: none;
-  z-index: 18;
+  display: none;
 }
 
 .container {
