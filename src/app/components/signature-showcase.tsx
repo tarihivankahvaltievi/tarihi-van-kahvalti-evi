@@ -49,10 +49,10 @@ const TABS: TabData[] = [
     nameEn: "Main Courses",
     iconInactive: "/hamour/mi_tab-input-3-img-1.png",
     iconActive: "/hamour/mi_tab-input-3-img-2.png",
-    plateImg: "/hamour/amr1_tab-2-content-img-1.png",
-    floating1: "/hamour/amr2_section-3-tab-2-img-1.png",
-    floating2: "/hamour/amr3_section-3-tab-2-img-2.png",
-    floating3: "/hamour/amr4_section-3-tab-2-img-3.png",
+    plateImg: "/hamour/van_plate_menemen.png",
+    floating1: "/hamour/van_float_tomato.png",
+    floating2: "/hamour/van_float_pepper.png",
+    floating3: "/hamour/van_float_onion.png",
     title: "Hamour Lezzetleriyle Tanışın!",
     titleEn: "Meet Hamour Delights!",
     desc: "Hamour’un mutfağında doğallık ve kalite buluşuyor. Organik ve taze ürünlerle hazırlanan ana yemeklerimiz, her lokmada sağlığı ve lezzeti bir araya getiriyor. Özenle seçilmiş malzemelerle hazırlanan bu özel menü, unutulmaz bir tat deneyimi sunuyor.",
@@ -230,13 +230,15 @@ export function SignatureShowcase({ locale = "tr" }: { locale?: string }) {
             data-aos-duration="1000"
             data-aos-delay="150"
           >
-            <Image
-              src={current.floating1}
-              alt=""
-              width={140}
-              height={140}
-              className={styles.floatAsset}
-            />
+            <div className={styles.floatBob1}>
+              <Image
+                src={current.floating1}
+                alt=""
+                width={140}
+                height={140}
+                className={styles.floatAsset}
+              />
+            </div>
           </div>
 
           <div
@@ -248,13 +250,15 @@ export function SignatureShowcase({ locale = "tr" }: { locale?: string }) {
             data-aos-duration="1000"
             data-aos-delay="300"
           >
-            <Image
-              src={current.floating2}
-              alt=""
-              width={130}
-              height={130}
-              className={styles.floatAsset}
-            />
+            <div className={styles.floatBob2}>
+              <Image
+                src={current.floating2}
+                alt=""
+                width={130}
+                height={130}
+                className={styles.floatAsset}
+              />
+            </div>
           </div>
 
           <div
@@ -266,13 +270,15 @@ export function SignatureShowcase({ locale = "tr" }: { locale?: string }) {
             data-aos-duration="1000"
             data-aos-delay="450"
           >
-            <Image
-              src={current.floating3}
-              alt=""
-              width={135}
-              height={135}
-              className={styles.floatAsset}
-            />
+            <div className={styles.floatBob3}>
+              <Image
+                src={current.floating3}
+                alt=""
+                width={135}
+                height={135}
+                className={styles.floatAsset}
+              />
+            </div>
           </div>
 
           {/* Central Plate Presentation - Enters smoothly from right to left */}
