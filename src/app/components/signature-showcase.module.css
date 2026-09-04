@@ -31,117 +31,136 @@
   z-index: 10;
 }
 
-/* 6 Category Tabs in 3x2 Grid */
-.navGrid {
+/* 3 Luxury Category Tabs */
+.tabNavWrapper {
+  max-width: 620px;
+  margin: 0 auto 38px;
+  padding: 0 12px;
+}
+
+.tabNav {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 8px;
-  max-width: 900px;
-  margin: 0 auto 40px;
-  justify-content: center;
+  gap: 12px;
+  background: rgba(255, 255, 255, 0.48);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  padding: 7px;
+  border-radius: 20px;
+  border: 1px solid rgba(184, 134, 76, 0.25);
+  box-shadow: 0 8px 24px rgba(60, 30, 10, 0.06);
 }
 
-@media (min-width: 992px) {
-  .navGrid {
-    grid-template-columns: repeat(6, 1fr);
-    gap: 14px;
-    margin-bottom: 60px;
-  }
-}
-
-.navLink {
+.tabBtn {
   position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 14px 6px 10px;
-  background: rgba(255, 255, 255, 0.28);
-  backdrop-filter: blur(8px);
-  border: 1px solid rgba(255, 255, 255, 0.4);
-  border-radius: 36px 0 36px 0;
+  padding: 16px 10px 14px;
+  background: transparent;
+  border: 1.5px solid transparent;
+  border-radius: 15px;
   cursor: pointer;
-  transition: all 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  text-align: center;
+  transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
   user-select: none;
-  width: 100%;
 }
 
-.navLink:hover {
-  background: rgba(255, 255, 255, 0.5);
+.tabBtn:hover {
+  background: rgba(255, 255, 255, 0.65);
   transform: translateY(-2px);
 }
 
-.navLink.active {
-  background: #ffffff;
-  border-color: #ffffff;
-  box-shadow: 0 10px 24px rgba(64, 32, 33, 0.12);
+.tabBtnActive {
+  background: #ffffff !important;
+  border-color: rgba(168, 125, 73, 0.42) !important;
+  box-shadow: 0 10px 24px rgba(120, 70, 30, 0.14), 0 2px 6px rgba(0, 0, 0, 0.04);
   transform: translateY(-2px);
 }
 
 .iconWrapper {
-  position: relative;
-  display: block;
-  width: 48px;
-  height: 40px;
-  margin: 0 auto 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 38px;
+  margin-bottom: 6px;
+  transition: transform 0.28s ease;
+}
+
+.tabBtnActive .iconWrapper {
+  transform: scale(1.1);
 }
 
 .iconImg {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  max-width: 100%;
-  max-height: 100%;
+  width: auto;
+  height: 32px;
   object-fit: contain;
-  transition: opacity 0.35s ease;
+  opacity: 0.62;
+  filter: brightness(0.3) sepia(0.5) hue-rotate(350deg);
+  transition: all 0.28s ease;
 }
 
-.iconInactive {
+.tabBtnActive .iconImg {
   opacity: 1;
+  filter: brightness(0.2) sepia(0.9) saturate(2.5) hue-rotate(345deg);
 }
 
-.iconActive {
-  opacity: 0;
-}
-
-.iconHidden {
-  opacity: 0;
-}
-
-.iconVisible {
-  opacity: 1;
-}
-
-.navText {
-  display: block;
-  font-family: "Causten", system-ui, sans-serif;
-  font-size: 13px;
-  font-weight: 500;
-  color: #ffffff;
+.tabText {
+  font-family: var(--font-playfair, "Playfair Display", serif);
+  font-size: 15.5px;
+  font-weight: 600;
+  color: #5c3a21;
+  letter-spacing: 0.3px;
   line-height: 1.2;
-  transition: color 0.35s ease;
+  transition: color 0.28s ease;
   white-space: nowrap;
 }
 
-.active .navText {
-  color: #402021;
-  font-weight: 600;
+.tabBtnActive .tabText {
+  color: #2c1505;
+  font-weight: 700;
+}
+
+.activeIndicator {
+  position: absolute;
+  bottom: 4px;
+  width: 22px;
+  height: 3px;
+  background: #a87d49;
+  border-radius: 2px;
+  animation: indicatorPop 0.3s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes indicatorPop {
+  0% { transform: scaleX(0.2); opacity: 0; }
+  100% { transform: scaleX(1); opacity: 1; }
 }
 
 @media (min-width: 992px) {
-  .navLink {
-    padding: 22px 10px 16px;
-    border-radius: 40px 0 40px 0;
+  .tabNavWrapper {
+    max-width: 680px;
+    margin-bottom: 50px;
+  }
+  .tabBtn {
+    padding: 18px 16px 15px;
   }
   .iconWrapper {
-    width: 60px;
-    height: 50px;
-    margin-bottom: 10px;
+    width: 52px;
+    height: 42px;
+    margin-bottom: 8px;
   }
-  .navText {
-    font-size: 15px;
+  .iconImg {
+    height: 36px;
+  }
+  .tabText {
+    font-size: 17px;
+  }
+  .activeIndicator {
+    width: 26px;
+    height: 3.5px;
   }
 }
 
@@ -367,21 +386,34 @@
   .section3 {
     padding: 60px 10px 70px;
   }
-  .navGrid {
-    gap: 6px;
-    margin-bottom: 30px;
+  .tabNavWrapper {
+    margin-bottom: 24px;
+    padding: 0 4px;
   }
-  .navLink {
-    padding: 12px 4px 8px;
-    border-radius: 28px 0 28px 0;
+  .tabNav {
+    gap: 6px;
+    padding: 5px;
+    border-radius: 16px;
+  }
+  .tabBtn {
+    padding: 10px 4px 8px;
+    border-radius: 12px;
   }
   .iconWrapper {
-    width: 38px;
-    height: 32px;
+    width: 34px;
+    height: 28px;
     margin-bottom: 4px;
   }
-  .navText {
-    font-size: 11.5px;
+  .iconImg {
+    height: 24px;
+  }
+  .tabText {
+    font-size: 12.5px;
+  }
+  .activeIndicator {
+    bottom: 3px;
+    width: 16px;
+    height: 2.5px;
   }
   .plateArea {
     max-width: 310px;

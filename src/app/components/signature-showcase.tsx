@@ -26,112 +26,58 @@ interface TabData {
 
 const TABS: TabData[] = [
   {
-    id: "royal-breakfast",
-    name: "Royal Breakfast",
-    nameEn: "Royal Breakfast",
-    iconInactive: "/hamour/mi_tab-input-4-img-1.png",
+    id: "omletler",
+    name: "Omletler",
+    nameEn: "Omelettes",
+    iconInactive: "/hamour/mi_tab-input-4-img-2_1.png",
     iconActive: "/hamour/mi_tab-input-4-img-2_1.png",
     plateImg: "/hamour/van_plate_royal.png",
     floating1: "/hamour/van_float_jam.png",
     floating2: "/hamour/van_float_olives.png",
     floating3: "/hamour/van_float_cheese.png",
-    title: "Güne Hamour'da Başla!",
-    titleEn: "Start the Day at Hamour!",
-    desc: "Hamour’da yapılan kahvaltı, özenle seçilmiş malzemelerle hazırlanan özel lezzetlerle güne başlamak isteyenlere unutulmaz bir deneyim sunuyor. Sağlıklı, doyurucu ve zarif sunumlarıyla her damak zevkine hitap eden bu kahvaltı, gününüze taptaze bir dokunuş katıyor.",
-    descEn: "Breakfast at Hamour offers an unforgettable experience for those who want to start the day with special delicacies prepared with carefully selected ingredients.",
-    btnText: "Menü",
-    btnTextEn: "Menu",
+    title: "Güne Van Usulü Sahanda Omletle Başla!",
+    titleEn: "Start the Day with Van Omelette!",
+    desc: "Tarihi Van Kahvaltı Evi'nin tereyağlı, sucuklu ve taze organik yumurtalarla hazırlanan enfes sahanda omletleri ile güne lezzet dolu ve doyurucu bir başlangıç yapın.",
+    descEn: "Start your day delightfully with Tarihi Van Kahvaltı Evi's butter-fried, sucuk-infused omelettes prepared with fresh organic eggs.",
+    btnText: "Menüyü İncele",
+    btnTextEn: "View Menu",
     btnHref: "/menu",
   },
   {
-    id: "ana-yemekler",
-    name: "Ana Yemekler",
-    nameEn: "Main Courses",
-    iconInactive: "/hamour/mi_tab-input-3-img-1.png",
+    id: "sahanlar",
+    name: "Sahanlar",
+    nameEn: "Pan Dishes",
+    iconInactive: "/hamour/mi_tab-input-3-img-2.png",
     iconActive: "/hamour/mi_tab-input-3-img-2.png",
     plateImg: "/hamour/van_plate_menemen.png",
     floating1: "/hamour/van_float_tomato.png",
     floating2: "/hamour/van_float_pepper.png",
     floating3: "/hamour/van_float_onion.png",
-    title: "Hamour Lezzetleriyle Tanışın!",
-    titleEn: "Meet Hamour Delights!",
-    desc: "Hamour’un mutfağında doğallık ve kalite buluşuyor. Organik ve taze ürünlerle hazırlanan ana yemeklerimiz, her lokmada sağlığı ve lezzeti bir araya getiriyor. Özenle seçilmiş malzemelerle hazırlanan bu özel menü, unutulmaz bir tat deneyimi sunuyor.",
-    descEn: "Naturalness and quality meet in Hamour's kitchen. Our main courses prepared with organic and fresh products bring health and flavor together in every bite.",
-    btnText: "Menü",
-    btnTextEn: "Menu",
-    btnHref: "/menu",
-  },
-  {
-    id: "alkollu-icecekler",
-    name: "Alkollü İçecekler",
-    nameEn: "Alcoholic Drinks",
-    iconInactive: "/hamour/mi_tab-input-1-img-1.png",
-    iconActive: "/hamour/mi_tab-input-1-img-2.png",
-    plateImg: "/hamour/amr1_tab-3-content-img-1.png",
-    floating1: "/hamour/amr2_section-3-tab-3-img-1.png",
-    floating2: "/hamour/amr3_section-3-tab-3-img-2.png",
-    floating3: "/hamour/amr4_section-3-tab-3-img-3.png",
-    title: "Her Yudumda Eşsiz Lezzet!",
-    titleEn: "Unique Flavor in Every Sip!",
-    desc: "Hamour’un alkollü içecek menüsü, dünya standartlarında kırmızı ve beyaz şaraplardan şampanyaya, özenle hazırlanan kokteyllerden özel viski çeşitlerine kadar geniş bir yelpaze sunuyor. Kaliteli ve seçkin içeceklerle, lezzet deneyiminizi en üst düzeye çıkarıyor; her damakta unutulmaz izler bırakıyoruz.",
-    descEn: "Hamour's alcoholic beverage menu offers a wide range of world-class wines, champagne, craft cocktails and select spirits.",
-    btnText: "Menü",
-    btnTextEn: "Menu",
+    title: "Bakır Sahanda Geleneksel Van Lezzetleri!",
+    titleEn: "Traditional Van Delights in Copper Pans!",
+    desc: "Köz tadında taze domatesler, çıtır biberler ve organik yumurtaların bakır sahanda buluştuğu efsanevi Van menemeni ve sıcak sahan lezzetlerimiz masanızda tütüyor.",
+    descEn: "Our legendary Van menemen and sizzling pan delicacies, combining fresh tomatoes, peppers, and organic eggs in a traditional copper sahan.",
+    btnText: "Menüyü İncele",
+    btnTextEn: "View Menu",
     btnHref: "/menu",
   },
   {
     id: "icecekler",
     name: "İçecekler",
     nameEn: "Beverages",
-    iconInactive: "/hamour/mi_tab-input-2-img-1.png",
+    iconInactive: "/hamour/mi_tab-input-2-img-2.png",
     iconActive: "/hamour/mi_tab-input-2-img-2.png",
     plateImg: "/hamour/amr1_tab-4-content-img-1.png",
     floating1: "/hamour/amr2_section-3-tab-4-img-1.png",
     floating2: "/hamour/amr3_section-3-tab-4-img-2.png",
     floating3: "/hamour/amr4_section-3-tab-4-img-3.png",
-    title: "Hamour'da Her An Kutlamaya Değer!",
-    titleEn: "Every Moment is Worth Celebrating at Hamour!",
-    desc: "Hamour’un içecek menüsü, zengin çay çeşitleri, sağlıklı smoothie’ler ve eşsiz kahve seçenekleriyle her anınıza eşlik ediyor. Doğal aromalarla hazırlanan sıcak ve soğuk içeceklerimiz, her damak zevkine hitap eden keyifli bir deneyim sunuyor.",
-    descEn: "Hamour's drink menu accompanies every moment with rich tea varieties, healthy smoothies, and distinct coffee choices.",
-    btnText: "Menü",
-    btnTextEn: "Menu",
+    title: "Van Semaveri & Ferahlatıcı İçecekler!",
+    titleEn: "Van Samovar & Refreshing Drinks!",
+    desc: "Tavşan kanı demiyle gün boyu tüten geleneksel Van semaver çayı, taze sıkılmış meyve suları ve közde Türk kahvesiyle kahvaltı keyfinizi taçlandırın.",
+    descEn: "Crown your breakfast experience with traditional Van samovar tea brewing all day, freshly squeezed fruit juices, and authentic Turkish coffee.",
+    btnText: "Menüyü İncele",
+    btnTextEn: "View Menu",
     btnHref: "/menu",
-  },
-  {
-    id: "patiseri",
-    name: "Patiseri",
-    nameEn: "Patisserie",
-    iconInactive: "/hamour/mi_patisseria-beyaz_1.png",
-    iconActive: "/hamour/mi_patisseria.png",
-    plateImg: "/hamour/amr1_tab-5-content-img-1.png",
-    floating1: "/hamour/amr2_section-3-tab-5-img-1.png",
-    floating2: "/hamour/amr3_section-3-tab-5-img-2.png",
-    floating3: "/hamour/amr4_section-3-tab-5-img-3.png",
-    title: "Güne Anlam Katan Hamour Lezzetleri!",
-    titleEn: "Hamour Delights Adding Meaning to the Day!",
-    desc: "Hamour’un patiseri bölümü, günlük taze kruvasanlar, özenle hazırlanan ekmekler, pastalar ve tatlılarla lezzet dolu anlar sunuyor. Her biri özenle hazırlanan bu özel tatlar, Hamour’un zarif dokunuşlarıyla buluşarak, misafirlerimize Fransız esintili bir tatlı deneyimi yaşatıyor.",
-    descEn: "Hamour's patisserie section offers moments full of flavor with daily fresh croissants, artisan breads, and pastries.",
-    btnText: "Menü",
-    btnTextEn: "Menu",
-    btnHref: "/menu",
-  },
-  {
-    id: "pasta",
-    name: "Pasta",
-    nameEn: "Cakes",
-    iconInactive: "/hamour/mi_pasta-beyaz.png",
-    iconActive: "/hamour/mi_pasta.png",
-    plateImg: "/hamour/amr1_pasta-siparisi.png",
-    floating1: "/hamour/amr2_pasta-siparisi-2.png",
-    floating2: "/hamour/amr3_pasta-siparisi-3.png",
-    floating3: "/hamour/amr4_pasta-siparisi-4.png",
-    title: "Özel Günlere Anlam Katan Hamour Pastaları!",
-    titleEn: "Hamour Cakes Adding Meaning to Special Days!",
-    desc: "Hamour’un pasta bölümü, günlük taze hazırlanan pastaları, özenle seçilmiş malzemelerle tasarlanan özel tatlıları ve zarif sunumlarıyla unutulmaz anlara eşlik ediyor. Her biri titizlikle hazırlanan bu pastalar, Hamour’un zarif dokunuşlarıyla birleşerek misafirlerimize sadece bir tatlı değil, özel günlerini taçlandıracak Fransız esintili bir lezzet deneyimi sunuyor.",
-    descEn: "Hamour's cake department accompanies unforgettable moments with fresh daily cakes and exquisite sweets.",
-    btnText: "Sipariş Vermek İçin Ara",
-    btnTextEn: "Call to Order",
-    btnHref: "tel:+905320502717",
   },
 ];
 
@@ -154,9 +100,9 @@ export function SignatureShowcase({ locale = "tr" }: { locale?: string }) {
       const rect = sectionRef.current.getBoundingClientRect();
       const windowHeight = window.innerHeight;
       const currentPos = windowHeight - rect.top;
-      const totalDist = windowHeight + rect.height * 0.45;
+      const totalDist = (windowHeight + rect.height * 0.45) || 1;
       const progress = Math.max(0, Math.min(1, currentPos / totalDist));
-      setScrollProgress(progress);
+      setScrollProgress(Number.isFinite(progress) ? progress : 0);
     };
 
     window.addEventListener("mousemove", handleMouseMove);
@@ -169,7 +115,8 @@ export function SignatureShowcase({ locale = "tr" }: { locale?: string }) {
     };
   }, []);
 
-  const current = TABS[activeTab];
+  const safeTabIdx = Math.max(0, Math.min(activeTab, TABS.length - 1));
+  const current = TABS[safeTabIdx] || TABS[0];
 
   // Upward translation offsets as user scrolls (comes from bottom to top)
   const upOffset1 = (1 - scrollProgress) * 65;
@@ -182,40 +129,35 @@ export function SignatureShowcase({ locale = "tr" }: { locale?: string }) {
       <div className={styles.topCurveBorder} aria-hidden="true" />
 
       <div className={styles.container}>
-        {/* Category Tabs in 3x2 Grid */}
-        <div className={styles.navGrid}>
-          {TABS.map((tab, idx) => {
-            const isActive = idx === activeTab;
-            return (
-              <button
-                key={tab.id}
-                type="button"
-                className={`${styles.navLink} ${isActive ? styles.active : ""}`}
-                onClick={() => setActiveTab(idx)}
-                data-aos="fade-up"
-                data-aos-duration="1000"
-                data-aos-delay={(idx + 1) * 80}
-              >
-                <span className={styles.iconWrapper}>
-                  <Image
-                    src={tab.iconInactive}
-                    alt=""
-                    width={56}
-                    height={48}
-                    className={`${styles.iconImg} ${styles.iconInactive} ${isActive ? styles.iconHidden : ""}`}
-                  />
-                  <Image
-                    src={tab.iconActive}
-                    alt=""
-                    width={56}
-                    height={48}
-                    className={`${styles.iconImg} ${styles.iconActive} ${isActive ? styles.iconVisible : ""}`}
-                  />
-                </span>
-                <span className={styles.navText}>{isEn ? tab.nameEn : tab.name}</span>
-              </button>
-            );
-          })}
+        {/* Category Tabs: 3 Luxury Buttons */}
+        <div className={styles.tabNavWrapper} data-aos="fade-up" data-aos-duration="900">
+          <div className={styles.tabNav} role="tablist" aria-label="Menü Kategorileri">
+            {TABS.map((tab, idx) => {
+              const isActive = idx === safeTabIdx;
+              return (
+                <button
+                  key={tab.id}
+                  type="button"
+                  role="tab"
+                  aria-selected={isActive}
+                  className={`${styles.tabBtn} ${isActive ? styles.tabBtnActive : ""}`}
+                  onClick={() => setActiveTab(idx)}
+                >
+                  <span className={styles.iconWrapper}>
+                    <Image
+                      src={tab.iconActive}
+                      alt=""
+                      width={38}
+                      height={34}
+                      className={styles.iconImg}
+                    />
+                  </span>
+                  <span className={styles.tabText}>{isEn ? tab.nameEn : tab.name}</span>
+                  {isActive && <span className={styles.activeIndicator} aria-hidden="true" />}
+                </button>
+              );
+            })}
+          </div>
         </div>
 
         {/* Tab Content Pane */}
@@ -226,9 +168,6 @@ export function SignatureShowcase({ locale = "tr" }: { locale?: string }) {
             style={{
               transform: `translate(${-(mousePos.x * 2) / 10}px, ${upOffset1 + -(mousePos.y * 2) / 10}px)`,
             }}
-            data-aos="fade-up"
-            data-aos-duration="1000"
-            data-aos-delay="150"
           >
             <div className={styles.floatBob1}>
               <Image
@@ -246,9 +185,6 @@ export function SignatureShowcase({ locale = "tr" }: { locale?: string }) {
             style={{
               transform: `translate(${-(mousePos.x * 4) / 10}px, ${upOffset2 + -(mousePos.y * 4) / 10}px)`,
             }}
-            data-aos="fade-up"
-            data-aos-duration="1000"
-            data-aos-delay="300"
           >
             <div className={styles.floatBob2}>
               <Image
@@ -266,9 +202,6 @@ export function SignatureShowcase({ locale = "tr" }: { locale?: string }) {
             style={{
               transform: `translate(${-(mousePos.x * 3) / 10}px, ${upOffset3 + -(mousePos.y * 3) / 10}px)`,
             }}
-            data-aos="fade-up"
-            data-aos-duration="1000"
-            data-aos-delay="450"
           >
             <div className={styles.floatBob3}>
               <Image
@@ -283,11 +216,7 @@ export function SignatureShowcase({ locale = "tr" }: { locale?: string }) {
 
           {/* Central Plate Presentation - Enters smoothly from right to left */}
           <div className={styles.plateArea}>
-            <div
-              className={styles.plateWrapper}
-              data-aos="fade-left"
-              data-aos-duration="1000"
-            >
+            <div className={styles.plateWrapper}>
               {/* Concentric Arch Contour Rings */}
               <div className={styles.contourArch} aria-hidden="true" />
               <Image
@@ -302,11 +231,7 @@ export function SignatureShowcase({ locale = "tr" }: { locale?: string }) {
           </div>
 
           {/* Article / Description */}
-          <div
-            className={styles.article}
-            data-aos="fade-up"
-            data-aos-duration="1000"
-          >
+          <div className={styles.article}>
             <h3 className={styles.articleTitle}>
               {isEn ? current.titleEn : current.title}
             </h3>

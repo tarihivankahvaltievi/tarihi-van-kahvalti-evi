@@ -77,13 +77,25 @@ export default function ClientPage({ children, locale = "tr" }: { children: Reac
           }
         });
       },
-      { threshold: 0.1, rootMargin: "0px 0px -40px 0px" }
+      { threshold: 0.05, rootMargin: "0px 0px -20px 0px" }
     );
 
-    const elements = document.querySelectorAll("[data-aos]");
-    elements.forEach((el) => observer.observe(el));
+    const observeNewElements = () => {
+      const elements = document.querySelectorAll("[data-aos]:not(.aos-animate)");
+      elements.forEach((el) => observer.observe(el));
+    };
 
-    return () => observer.disconnect();
+    observeNewElements();
+
+    const mutationObserver = new MutationObserver(() => {
+      observeNewElements();
+    });
+    mutationObserver.observe(document.body, { childList: true, subtree: true });
+
+    return () => {
+      observer.disconnect();
+      mutationObserver.disconnect();
+    };
   }, [pathname]);
 
 
