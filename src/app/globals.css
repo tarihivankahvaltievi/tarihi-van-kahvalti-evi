@@ -1,5 +1,77 @@
 @import "tailwindcss";
 
+@font-face {
+  font-family: 'NOCTADO';
+  src: url('/fonts/noctado/NOCTADO.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Causten';
+  src: url('/fonts/causten/Causten-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Causten';
+  src: url('/fonts/causten/Causten-Medium.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Causten';
+  src: url('/fonts/causten/Causten-SemiBold.woff2') format('woff2');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Causten';
+  src: url('/fonts/causten/Causten-Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Hamour AOS Scroll Animations */
+[data-aos] {
+  transition-property: transform, opacity;
+  transition-duration: 1000ms;
+  transition-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  will-change: transform, opacity;
+}
+[data-aos="fade-up"] {
+  transform: translate3d(0, 40px, 0);
+  opacity: 0;
+}
+[data-aos="fade-up"].aos-animate {
+  transform: translate3d(0, 0, 0);
+  opacity: 1;
+}
+[data-aos="fade-left"] {
+  transform: translate3d(40px, 0, 0);
+  opacity: 0;
+}
+[data-aos="fade-left"].aos-animate {
+  transform: translate3d(0, 0, 0);
+  opacity: 1;
+}
+[data-aos="fade-right"] {
+  transform: translate3d(-40px, 0, 0);
+  opacity: 0;
+}
+[data-aos="fade-right"].aos-animate {
+  transform: translate3d(0, 0, 0);
+  opacity: 1;
+}
+
 :root {
   /* Compatibility alias for existing brand-sans component styles. */
   --font-bricolage-grotesque-gf: var(--font-commissioner-gf);

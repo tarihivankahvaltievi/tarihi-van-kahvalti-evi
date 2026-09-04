@@ -1,64 +1,204 @@
 .footer {
-  --cream: #fff7ea;
-  --gold: #f2cf9b;
   position: relative;
   overflow: hidden;
-  isolation: isolate;
-  background: #35191a !important;
-  color: var(--cream);
-  padding: clamp(5rem, 9vw, 8rem) 0 1.5rem;
+  z-index: 30;
+  margin-top: -30px;
+  padding: 100px 20px 60px;
+  background-color: #231513;
+  background-image: url('/hamour/footer-bg.png');
+  background-position: top center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  text-align: center;
 }
 
-.imageWash {
-  position: absolute;
-  inset: 0;
-  z-index: -1;
-  background: linear-gradient(180deg, rgba(47, 21, 22, .9), rgba(47, 21, 22, .98)), url("/images/historic-mirror.webp") center / cover;
-  filter: saturate(.72);
+.container {
+  width: 100%;
+  max-width: 1140px;
+  margin: 0 auto;
+  padding: 0 15px;
 }
 
-.container { width: min(100% - 2.5rem, 1080px); margin: 0 auto; text-align: center; }
-.crestLink { display: inline-grid; place-items: center; margin: 0 0 1.25rem; padding: .25rem; border: 0; background: transparent; color: inherit; transition: transform 180ms ease; }
-.crestLink:hover { transform: translateY(-3px); }
-.crest { width: 62px; height: auto; object-fit: contain; filter: brightness(0) invert(1) sepia(.16) saturate(.82); }
-
-.brandLockup { margin-bottom: clamp(2.5rem, 5vw, 4rem); }
-.brandLockup p { margin: 0 0 .55rem; color: var(--gold); font-family: var(--font-commissioner-gf), system-ui, sans-serif; font-size: .7rem; font-weight: 750; letter-spacing: .18em; }
-.brandLockup h2 { margin: 0; color: var(--cream); font-family: var(--font-bodoni-gf), Georgia, serif; font-size: clamp(2rem, 4vw, 3.55rem); font-weight: 500; letter-spacing: .03em; line-height: 1; text-wrap: balance; }
-
-.manifesto { max-width: 710px; margin: 0 auto clamp(2rem, 4vw, 3rem); }
-.manifesto h3 { margin: 0 0 1.1rem; color: var(--gold); font-family: var(--font-bodoni-gf), Georgia, serif; font-size: clamp(1.85rem, 3.3vw, 2.85rem); font-weight: 500; letter-spacing: -.025em; line-height: 1.08; }
-.manifesto h3 em { font-style: italic; font-weight: 450; }
-.manifesto p { margin: 0; color: rgba(255,247,234,.87); font-family: var(--font-commissioner-gf), system-ui, sans-serif; font-size: clamp(.93rem, 1.2vw, 1.04rem); line-height: 1.72; text-wrap: pretty; }
-
-.contactLine { display: flex; flex-wrap: wrap; justify-content: center; gap: .5rem 1.25rem; margin-bottom: clamp(2.5rem, 4.5vw, 3.7rem); color: rgba(255,247,234,.88); font-family: var(--font-commissioner-gf), system-ui, sans-serif; font-size: .82rem; font-weight: 650; }
-.contactLine > * { padding-bottom: .3rem; border-bottom: 1px solid rgba(242,207,155,.45); }
-.contactLine a { color: inherit; text-decoration: none; transition: color 180ms ease; }
-.contactLine a:hover { color: var(--gold); }
-
-.lower { display: flex; align-items: center; justify-content: center; gap: 1.5rem; padding: 1.35rem 0; border-top: 1px solid rgba(255,247,234,.22); border-bottom: 1px solid rgba(255,247,234,.22); }
-.nav { display: flex; flex-wrap: wrap; justify-content: center; gap: .6rem 1.4rem; }
-.nav a, .social { color: var(--cream); font-family: var(--font-bodoni-gf), Georgia, serif; font-size: 1.05rem; font-weight: 500; text-decoration: none; transition: color 180ms ease; }
-.nav a:hover, .social:hover { color: var(--gold); }
-.social { padding-left: 1.5rem; border-left: 1px solid rgba(255,247,234,.25); color: var(--gold); }
-
-.legal { display: flex; align-items: center; justify-content: space-between; gap: 1.2rem; padding-top: 1.4rem; color: rgba(255,247,234,.68); font-family: var(--font-commissioner-gf), system-ui, sans-serif; font-size: .75rem; }
-.legal > div { display: flex; flex-wrap: wrap; align-items: center; justify-content: end; gap: 1rem; }
-.legal a { color: inherit; text-decoration: none; }
-.legal a:hover { color: var(--gold); }
-.legal button { display: inline-flex; align-items: center; gap: .35rem; padding: 0; border: 0; background: transparent; color: var(--gold); font: inherit; font-weight: 700; }
-
-@media (max-width: 650px) {
-  .footer { padding: 4.6rem 0 1.3rem; }
-  .container { width: min(100% - 2rem, 620px); }
-  .crest { width: 50px; }
-  .brandLockup h2 { font-size: clamp(1.8rem, 9vw, 2.4rem); }
-  .contactLine { gap: .55rem .9rem; margin-bottom: 2.2rem; }
-  .lower { display: grid; gap: 1rem; }
-  .nav { gap: .55rem 1rem; }
-  .social { padding: 0; border: 0; }
-  .legal { flex-direction: column; text-align: center; }
-  .legal > div { justify-content: center; }
+.footerVector {
+  padding-bottom: 28px;
 }
 
-@media (prefers-reduced-motion: reduce) { .crestLink, .contactLine a, .nav a, .social { transition: none; } }
+.footerVector a {
+  display: inline-block;
+  transition: transform 0.3s ease;
+}
+
+.footerVector a:hover {
+  transform: scale(1.06);
+}
+
+.vectorImg {
+  display: block;
+  width: 70px;
+  height: auto;
+  margin: 0 auto;
+}
+
+.footerLogo {
+  padding-bottom: 35px;
+}
+
+.footerLogo a {
+  display: inline-block;
+}
+
+.brandLogoImg {
+  display: block;
+  width: 240px;
+  height: auto;
+  margin: 0 auto;
+}
+
+.footerText {
+  padding-bottom: 38px;
+  max-width: 880px;
+  margin: 0 auto;
+}
+
+.textTitle {
+  font-family: "NOCTADO", Georgia, serif;
+  font-size: 28px;
+  font-weight: 400;
+  line-height: 1.25;
+  color: #f9e8d5;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+@media (min-width: 768px) {
+  .textTitle {
+    font-size: 38px;
+    margin-bottom: 24px;
+  }
+}
+
+.textParagraph {
+  font-family: "Causten", system-ui, sans-serif;
+  font-size: 15px;
+  font-weight: 300;
+  line-height: 1.65;
+  color: #ffffff;
+  text-align: center;
+  margin: 0;
+  opacity: 0.95;
+}
+
+@media (min-width: 768px) {
+  .textParagraph {
+    font-size: 18px;
+    line-height: 1.7;
+  }
+}
+
+.footerSocial {
+  padding-bottom: 32px;
+}
+
+.socialList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.socialList li a {
+  display: block;
+  transition: transform 0.35s ease, opacity 0.35s ease;
+}
+
+.socialList li a:hover {
+  transform: translateY(-4px);
+  opacity: 0.85;
+}
+
+.footerMenu {
+  padding-bottom: 32px;
+}
+
+.nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px 30px;
+  justify-content: center;
+  align-items: center;
+}
+
+.nav a {
+  display: block;
+  font-family: "NOCTADO", Georgia, serif;
+  font-size: 19px;
+  font-weight: 400;
+  color: #ffffff;
+  padding: 6px 10px;
+  text-decoration: none;
+  transition: color 0.35s ease;
+}
+
+.nav a:hover {
+  color: #f9e8d5;
+}
+
+.footerBot {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px 24px;
+  justify-content: center;
+  align-items: center;
+  max-width: 860px;
+  margin: 0 auto;
+  padding-top: 28px;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.footerBot a,
+.footerBot span {
+  font-family: "Causten", system-ui, sans-serif;
+  font-size: 12px;
+  font-weight: 300;
+  color: rgba(255, 255, 255, 0.65);
+  text-decoration: none;
+  transition: color 0.35s ease;
+}
+
+.footerBot a:hover {
+  color: #f9e8d5;
+}
+
+@media (max-width: 480px) {
+  .footer {
+    padding: 80px 15px 40px;
+  }
+  .vectorImg {
+    width: 55px;
+  }
+  .brandLogoImg {
+    width: 200px;
+  }
+  .textTitle {
+    font-size: 24px;
+  }
+  .textParagraph {
+    font-size: 13.5px;
+    line-height: 1.6;
+  }
+  .nav a {
+    font-size: 17px;
+    padding: 4px 8px;
+  }
+  .footerBot {
+    gap: 8px 14px;
+  }
+  .footerBot a,
+  .footerBot span {
+    font-size: 11px;
+  }
+}

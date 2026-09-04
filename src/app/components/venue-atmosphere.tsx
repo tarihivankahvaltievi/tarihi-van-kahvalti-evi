@@ -1,55 +1,102 @@
-"use client";
-
 import Image from "next/image";
-import { Phone, Calendar } from "lucide-react";
-import { BookingOpenButton } from "./booking-open-button";
-import { displayPhone, telUrl } from "../seo";
-import { messagesFor, type SiteLocale } from "../home-localization";
+import Link from "next/link";
 import styles from "./venue-atmosphere.module.css";
 
-export function VenueAtmosphere({ locale = "tr" }: { locale?: SiteLocale }) {
-  const messages = messagesFor(locale);
-  const venue = messages.venue;
+export function VenueAtmosphere({ locale = "tr" }: { locale?: string }) {
+  const isEn = locale === "en";
 
   return (
-    <section className={styles.section} aria-labelledby="venue-heading">
-      <div className={styles.bg}>
+    <section className={styles.section4} id="keyif-dolu-anlar">
+      {/* Top Anchor Notch */}
+      <div className={styles.topAnchor} aria-hidden="true">
         <Image
-          src="/images/balcony-breakfast.webp"
-          alt="Tarihi Van Kahvaltı Evi Balkon ve İç Mekan Atmosferi"
-          fill
-          sizes="100vw"
-          className={styles.bgImage}
-          quality={78}
+          src="/hamour/anchor-2.png"
+          alt=""
+          width={70}
+          height={35}
+          className={styles.topAnchorImg}
+          priority
         />
-        <div className={styles.bgOverlay} />
+      </div>
+
+      {/* Atmospheric Background Image */}
+      <div className={styles.bgOverlay} aria-hidden="true">
+        <Image
+          src="/hamour/back1_section-4-img.jpg"
+          alt="Keyif Dolu Anlar Sizi Bekliyor!"
+          fill
+          className={styles.bgImg}
+        />
       </div>
 
       <div className={styles.container}>
-        <div className={styles.grid}>
+        <div className={styles.contentRow}>
           <div className={styles.headCol}>
-            <p className={styles.badge}>{venue.badge}</p>
-            <h2 id="venue-heading" className={styles.title}>
-              {venue.title}
-            </h2>
-            <p className={styles.subtitle}>{venue.subtitle}</p>
+            <div className={styles.head}>
+              <h2
+                data-aos="fade-up"
+                data-aos-duration="1000"
+                data-aos-anchor-placement="top-bottom"
+                data-aos-delay="100"
+                className={styles.title}
+              >
+                {isEn
+                  ? "Delightful Moments Await You!"
+                  : "Keyif Dolu Anlar Sizi Bekliyor!"}
+              </h2>
+              <p
+                data-aos="fade-up"
+                data-aos-duration="1000"
+                data-aos-anchor-placement="top-bottom"
+                data-aos-delay="200"
+                className={styles.subtitle}
+              >
+                {isEn
+                  ? "Hamour's enchanting atmosphere combines with its flavors!"
+                  : "Hamour'un büyüleyici atmosferi lezzetleriyle birleşiyor!"}
+              </p>
+            </div>
           </div>
 
           <div className={styles.articleCol}>
-            <p className={styles.desc}>{venue.description}</p>
-
-            <div className={styles.actions}>
-              <a href={telUrl} className={styles.phoneBtn}>
-                <Phone size={18} aria-hidden="true" />
-                <span>{venue.callAction} ({displayPhone})</span>
-              </a>
-              <BookingOpenButton className={styles.reserveBtn}>
-                <Calendar size={18} aria-hidden="true" />
-                <span>{venue.reservationAction}</span>
-              </BookingOpenButton>
+            <div className={styles.article}>
+              <div
+                className={styles.richtext}
+                data-aos="fade-up"
+                data-aos-duration="1000"
+                data-aos-anchor-placement="top-bottom"
+                data-aos-delay="300"
+              >
+                <p>
+                  {isEn
+                    ? "Bringing together the culture of patisserie, brasserie and bistro, Hamour proudly presents an authentic taste experience to its guests. We invite you to Hamour to experience delightful moments in this unique atmosphere!"
+                    : "Hamour, patiseri, brasserie ve bistro kültürünü bir araya getirerek, özgün bir lezzet deneyimini misafirlerine iftiharla sunuyor. Bu eşsiz atmosferde, keyif dolu anlar yaşamak için sizleri Hamour'a bekliyoruz!"}
+                </p>
+              </div>
+              <Link
+                href="tel:+905320502717"
+                data-aos="fade-up"
+                data-aos-duration="1000"
+                data-aos-anchor-placement="top-bottom"
+                data-aos-delay="400"
+                className={styles.btn}
+              >
+                {isEn ? "Call Us" : "Bizi Ara"}
+              </Link>
             </div>
           </div>
         </div>
+      </div>
+
+      {/* Bottom Arch Notch Transition to Footer */}
+      <div className={styles.botAnchor} aria-hidden="true">
+        <Image
+          src="/hamour/anchor-1.png"
+          alt=""
+          width={70}
+          height={35}
+          className={styles.botAnchorImg}
+        />
       </div>
     </section>
   );

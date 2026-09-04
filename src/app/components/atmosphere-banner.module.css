@@ -1,98 +1,99 @@
-.section {
+.section2 {
   position: relative;
-  min-height: min(56rem, 74vw);
-  overflow: hidden;
-  isolation: isolate;
-  display: grid;
-  place-items: center;
-  background: #35191a;
-  color: #fff9ef;
+  z-index: 10;
+  margin-top: -30px;
+  min-height: 480px;
+  padding: 160px 20px;
+  background: url('/hamour/bn_section-2-bg.jpg') center center / cover no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  overflow: visible;
 }
 
-.bg,
-.bgImage,
-.bgOverlay,
-.bgVignette {
+.overlay {
   position: absolute;
   inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(35, 20, 16, 0.45) 0%,
+    rgba(35, 20, 16, 0.6) 50%,
+    rgba(35, 20, 16, 0.5) 100%
+  );
+  pointer-events: none;
 }
 
-.bg { z-index: -1; }
-
-.bgImage {
-  object-fit: cover;
-  object-position: center;
-  filter: saturate(0.92) brightness(0.7);
-  transform: scale(1.02);
-  transition: transform 12s cubic-bezier(0.16, 1, 0.3, 1);
+.topAnchor {
+  position: absolute;
+  top: -1px;
+  left: 50%;
+  transform: translateX(-50%);
+  pointer-events: none;
+  z-index: 15;
 }
 
-.section:hover .bgImage { transform: scale(1.06); }
-
-.bgOverlay {
-  background: linear-gradient(90deg, rgba(46, 21, 22, 0.82), rgba(46, 21, 22, 0.32) 52%, rgba(46, 21, 22, 0.8));
+.anchorImg {
+  display: block;
+  width: 60px;
+  height: auto;
 }
 
-.bgVignette {
-  background: linear-gradient(180deg, rgba(20, 8, 9, 0.24), transparent 42%, rgba(20, 8, 9, 0.52));
+.botAnchor {
+  position: absolute;
+  bottom: -1px;
+  left: 50%;
+  transform: translateX(-50%) rotate(180deg);
+  pointer-events: none;
+  z-index: 15;
 }
 
-.container {
-  width: min(100% - 2.5rem, 920px);
-  padding: clamp(6rem, 12vw, 11rem) 0;
-  text-align: center;
+.anchorImgRotated {
+  display: block;
+  width: 60px;
+  height: auto;
 }
 
-.locationBadge {
-  margin: 0 0 1.25rem;
-  color: #f4d7a9;
-  font-family: var(--font-commissioner-gf), system-ui, sans-serif;
-  font-size: 0.72rem;
-  font-weight: 700;
-  letter-spacing: 0.16em;
-}
-
-.title {
-  max-width: 14ch;
-  margin: 0 auto 1.25rem;
-  color: #fff7e9;
-  font-family: var(--font-bodoni-gf), Georgia, serif;
-  font-size: clamp(3rem, 7vw, 6.1rem);
-  font-weight: 500;
-  letter-spacing: -0.035em;
-  line-height: 0.94;
-  text-wrap: balance;
-}
-
-.wordAccent { color: #f5d09c; font-style: italic; }
-
-.lead {
-  max-width: 50ch;
-  margin: 0 auto 0.8rem;
-  color: rgba(255, 249, 239, 0.94);
-  font-family: var(--font-literata-gf), Georgia, serif;
-  font-size: clamp(1.05rem, 1.7vw, 1.4rem);
-  line-height: 1.58;
-  text-wrap: pretty;
-}
-
-.subtext {
+.textContainer {
+  position: relative;
+  z-index: 12;
+  max-width: 900px;
   margin: 0 auto;
-  color: rgba(255, 249, 239, 0.76);
-  font-family: var(--font-commissioner-gf), system-ui, sans-serif;
-  font-size: clamp(0.82rem, 1vw, 0.95rem);
-  line-height: 1.65;
-  text-wrap: pretty;
+  padding: 0 15px;
 }
 
-@media (max-width: 700px) {
-  .section { min-height: 37rem; }
-  .container { width: min(100% - 2rem, 620px); padding: 6.5rem 0; }
-  .title { max-width: 10ch; font-size: clamp(2.75rem, 14vw, 4.4rem); }
-  .lead { font-size: 1.05rem; }
-  .bgOverlay { background: linear-gradient(180deg, rgba(46, 21, 22, 0.68), rgba(46, 21, 22, 0.38) 55%, rgba(46, 21, 22, 0.84)); }
+.heading {
+  font-family: "NOCTADO", Georgia, serif;
+  font-size: 34px;
+  font-weight: 400;
+  color: #ffffff;
+  line-height: 1.18;
+  letter-spacing: -0.01em;
+  margin: 0;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.35);
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .bgImage { transform: none; transition: none; }
+.wordSpan {
+  display: inline-block;
+  font-family: "NOCTADO", Georgia, serif;
+}
+
+@media (min-width: 768px) {
+  .section2 {
+    min-height: 560px;
+    padding: 220px 20px;
+  }
+  .heading {
+    font-size: 58px;
+  }
+}
+
+@media (max-width: 480px) {
+  .section2 {
+    min-height: 420px;
+    padding: 130px 15px;
+  }
+  .heading {
+    font-size: 30px;
+  }
 }

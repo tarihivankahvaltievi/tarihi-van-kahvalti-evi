@@ -1,43 +1,53 @@
-"use client";
-
 import Image from "next/image";
-import { messagesFor, type SiteLocale } from "../home-localization";
 import styles from "./atmosphere-banner.module.css";
 
-export function AtmosphereBanner({ locale = "tr" }: { locale?: SiteLocale }) {
-  const messages = messagesFor(locale);
-  const atmosphere = messages.atmosphere;
+export function AtmosphereBanner({ locale = "tr" }: { locale?: string }) {
+  const isEn = locale === "en";
+
+  const words = isEn
+    ? ["Elegance", "and", "Flavor", "Meet", "at Hamour!"]
+    : ["Zarafet", "ve", "Lezzet", "Hamour’da", "Buluşuyor!"];
 
   return (
-    <section className={styles.section} aria-label={atmosphere.locationBadge}>
-      <div className={styles.bg}>
+    <section className={styles.section2} id="atmosphere-banner">
+      <div className={styles.topAnchor} aria-hidden="true">
         <Image
-          src="/images/hero-parallax/terrace-table.webp"
-          alt="Tarihi Van Kahvaltı Evi Beyoğlu Zambak Sokak"
-          fill
-          priority={false}
-          className={styles.bgImage}
-          quality={80}
+          src="/hamour/anchor-1.png"
+          alt=""
+          width={70}
+          height={35}
+          className={styles.anchorImg}
+          priority
         />
-        <div className={styles.bgOverlay} />
-        <div className={styles.bgVignette} />
       </div>
 
-      <div className={styles.container}>
-        <p className={styles.locationBadge}>{atmosphere.locationBadge}</p>
-        <h2 className={styles.title}>
-          {atmosphere.words.map((word, idx) => (
+      <div className={styles.overlay} />
+
+      <div className={styles.textContainer}>
+        <h2 className={styles.heading}>
+          {words.map((word, index) => (
             <span
-              key={`${word}-${idx}`}
-              className={idx === 1 || idx === 3 ? styles.wordAccent : undefined}
+              key={index}
+              data-aos="fade-up"
+              data-aos-duration="1000"
+              data-aos-anchor-placement="top-bottom"
+              data-aos-delay={(index + 1) * 100}
+              className={styles.wordSpan}
             >
-              {word}{" "}
+              {word}&nbsp;
             </span>
           ))}
         </h2>
+      </div>
 
-        <p className={styles.lead}>{atmosphere.lead}</p>
-        <p className={styles.subtext}>{atmosphere.subtext}</p>
+      <div className={styles.botAnchor} aria-hidden="true">
+        <Image
+          src="/hamour/anchor-1.png"
+          alt=""
+          width={70}
+          height={35}
+          className={styles.anchorImgRotated}
+        />
       </div>
     </section>
   );

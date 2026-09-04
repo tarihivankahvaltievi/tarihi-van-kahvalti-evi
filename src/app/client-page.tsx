@@ -69,6 +69,25 @@ export default function ClientPage({ children, locale = "tr" }: { children: Reac
   }, []);
 
   useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("aos-animate");
+          }
+        });
+      },
+      { threshold: 0.1, rootMargin: "0px 0px -40px 0px" }
+    );
+
+    const elements = document.querySelectorAll("[data-aos]");
+    elements.forEach((el) => observer.observe(el));
+
+    return () => observer.disconnect();
+  }, [pathname]);
+
+
+  useEffect(() => {
     if (!menuOpen) {
       return;
     }
