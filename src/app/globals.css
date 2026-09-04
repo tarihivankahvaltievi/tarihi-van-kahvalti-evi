@@ -9885,8 +9885,8 @@ body .mobile-bar .mobile-bar-primary:focus-visible {
 /* 7. Hero Section */
 .hero-section {
   position: relative;
-  height: 90vh;
-  min-height: 560px;
+  height: 92vh;
+  min-height: 580px;
   display: flex;
   align-items: center;
   background: #140708;
@@ -9895,8 +9895,7 @@ body .mobile-bar .mobile-bar-primary:focus-visible {
 
 .hero-slide {
   position: absolute;
-  top: 0;
-  left: 0;
+  inset: 0;
   width: 100%;
   height: 100%;
   background-size: cover;
@@ -9905,19 +9904,28 @@ body .mobile-bar .mobile-bar-primary:focus-visible {
   z-index: 0;
   will-change: transform, opacity;
   transform: scale(1);
-  transition: opacity 1.4s cubic-bezier(0.4, 0, 0.2, 1);
+  pointer-events: none;
 }
 
-.hero-slide.exiting {
-  opacity: 0;
-  z-index: 1;
-  transition: opacity 1.4s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.hero-slide.active {
-  opacity: 1;
+.hero-slide.is-active {
   z-index: 2;
-  animation: heroKenBurns 7.5s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+  animation: heroFadeIn 1.6s cubic-bezier(0.4, 0, 0.2, 1) forwards, heroKenBurns 7.5s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+}
+
+.hero-slide.is-exiting {
+  opacity: 1;
+  z-index: 1;
+  transform: scale(1.075);
+  transition: opacity 1.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes heroFadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 
 @keyframes heroKenBurns {
@@ -9929,7 +9937,7 @@ body .mobile-bar .mobile-bar-primary:focus-visible {
   }
 }
 
-/* Neutral photographic vignette - NO RED FILTER */
+/* Neutral photographic vignette */
 .hero-section .hero-overlay {
   position: absolute;
   top: 0;
@@ -9940,7 +9948,8 @@ body .mobile-bar .mobile-bar-primary:focus-visible {
     to bottom,
     rgba(16, 9, 10, 0.46) 0%,
     rgba(16, 9, 10, 0.15) 42%,
-    rgba(16, 9, 10, 0.72) 100%
+    rgba(16, 9, 10, 0.62) 80%,
+    rgba(16, 9, 10, 0.76) 100%
   ) !important;
   z-index: 3;
 }
@@ -9952,6 +9961,7 @@ body .mobile-bar .mobile-bar-primary:focus-visible {
   width: 100%;
   margin: 0 auto;
   padding: 0 2rem;
+  text-align: center;
 }
 
 .hero-subtitle {
@@ -9975,14 +9985,14 @@ body .mobile-bar .mobile-bar-primary:focus-visible {
 }
 
 .hero-title {
-  font-family: var(--font-bodoni-gf), var(--font-literata-gf), Georgia, serif;
+  font-family: "NOCTADO", Georgia, serif;
   font-size: 3.9rem;
-  line-height: 1.08;
-  margin-bottom: 1.5rem;
-  font-weight: 650;
-  letter-spacing: 0.03em;
+  line-height: 1.05;
+  margin-bottom: 1.4rem;
+  font-weight: 400;
+  letter-spacing: 0.04em;
   text-transform: uppercase;
-  text-shadow: 0 3px 14px rgba(0, 0, 0, 0.55);
+  text-shadow: 0 3px 14px rgba(0, 0, 0, 0.65);
 }
 
 .hero-title-main {
@@ -9992,19 +10002,19 @@ body .mobile-bar .mobile-bar-primary:focus-visible {
 
 .hero-title-accent {
   display: block;
-  color: #d6af66;
+  color: #f7dbab;
   font-style: italic;
-  font-weight: 500;
+  font-weight: 400;
   letter-spacing: 0.05em;
 }
 
 .hero-tagline {
-  font-family: var(--font-commissioner-gf), -apple-system, BlinkMacSystemFont, sans-serif;
+  font-family: "Causten", var(--font-commissioner-gf), system-ui, sans-serif;
   font-size: 1.12rem;
   color: rgba(255, 249, 240, 0.92);
-  margin-bottom: 2.4rem;
+  margin: 0 auto 2.2rem;
   max-width: 600px;
-  line-height: 1.68;
+  line-height: 1.6;
   font-weight: 400;
   text-shadow: 0 2px 8px rgba(0, 0, 0, 0.65);
 }
@@ -10013,33 +10023,34 @@ body .mobile-bar .mobile-bar-primary:focus-visible {
   display: flex;
   gap: 1.25rem;
   align-items: center;
+  justify-content: center;
 }
 
 .btn-primary {
-  background: #c89f53;
-  color: #280507;
-  border: 1px solid #d6af66;
-  font-family: var(--font-commissioner-gf), sans-serif;
+  background: rgba(168, 125, 73, 0.92) !important;
+  color: #ffffff !important;
+  border: none !important;
+  font-family: "Causten", var(--font-commissioner-gf), sans-serif;
   font-weight: 700;
-  letter-spacing: 0.09em;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
-  font-size: 0.86rem;
-  padding: 0.95rem 2.2rem;
-  border-radius: 4px;
+  font-size: 0.92rem;
+  padding: 1rem 2.4rem;
+  border-radius: 8px !important;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   text-decoration: none;
   cursor: pointer;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
-  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.4);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .btn-primary:hover {
   transform: translateY(-2px);
-  background: #d6af66;
-  color: #240306;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.45);
+  background: #b8864d !important;
+  color: #ffffff !important;
+  box-shadow: 0 6px 22px rgba(0, 0, 0, 0.5);
 }
 
 .btn-secondary-hero {
@@ -10048,19 +10059,19 @@ body .mobile-bar .mobile-bar-primary:focus-visible {
   border: 1px solid rgba(255, 249, 240, 0.42);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
-  font-family: var(--font-commissioner-gf), sans-serif;
+  font-family: "Causten", var(--font-commissioner-gf), sans-serif;
   font-weight: 600;
-  letter-spacing: 0.09em;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
-  font-size: 0.86rem;
-  padding: 0.95rem 2.1rem;
-  border-radius: 4px;
+  font-size: 0.92rem;
+  padding: 1rem 2.2rem;
+  border-radius: 8px !important;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   text-decoration: none;
   cursor: pointer;
-  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .btn-secondary-hero:hover {
@@ -10073,19 +10084,20 @@ body .mobile-bar .mobile-bar-primary:focus-visible {
 /* 8. Carousel Indicators */
 .carousel-indicators {
   position: absolute;
-  bottom: 2.2rem;
+  bottom: 6.2rem;
   left: 50%;
   transform: translateX(-50%);
   display: flex;
   gap: 0.65rem;
-  z-index: 5;
+  align-items: center;
+  z-index: 15;
 }
 
 .indicator-dot {
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  background: rgba(255, 249, 240, 0.4);
+  background: rgba(255, 249, 240, 0.45);
   border: none;
   cursor: pointer;
   transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
@@ -10093,46 +10105,39 @@ body .mobile-bar .mobile-bar-primary:focus-visible {
 }
 
 .indicator-dot:hover {
-  background: rgba(255, 249, 240, 0.8);
+  background: rgba(255, 249, 240, 0.85);
 }
 
 .indicator-dot.active {
-  background: #c89f53;
-  width: 24px;
-  border-radius: 4px;
+  background: #a87d49;
+  width: 26px;
+  border-radius: 5px;
 }
 
 /* 9. Wave Divider Bottom Transition */
 .hero-bottom-transition {
   position: absolute;
-  bottom: 0;
+  bottom: -1px;
   left: 0;
+  right: 0;
   width: 100%;
-  height: 50px;
+  height: 85px;
   z-index: 10;
   pointer-events: none;
-}
-
-.wave-divider {
-  position: absolute !important;
-  bottom: -2px !important;
-  left: -1% !important;
-  width: 102% !important;
-  height: 50px;
   overflow: hidden;
   line-height: 0;
-  margin: 0;
-  z-index: 10;
-  background: transparent;
-  transform: scaleY(1.2) translateY(2px);
-  transform-origin: bottom;
 }
 
-.wave-divider svg {
+@media (min-width: 768px) {
+  .hero-bottom-transition {
+    height: 120px;
+  }
+}
+
+.hero-wave-svg {
   display: block;
   width: 100%;
   height: 100%;
-  filter: drop-shadow(0px -4px 6px rgba(0, 0, 0, 0.15));
 }
 
 /* 10. Responsive Breakpoints */

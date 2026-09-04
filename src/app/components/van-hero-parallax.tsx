@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { messagesFor, type SiteLocale } from "../home-localization";
 
 type HeroSlide = {
@@ -42,33 +42,54 @@ export function VanHeroParallax({ locale = "tr" }: { locale?: SiteLocale }) {
   const messages = messagesFor(locale);
   const [currentSlide, setCurrentSlide] = useState(0);
   const [previousSlide, setPreviousSlide] = useState<number | null>(null);
+  const timerRef = useRef<NodeJS.Timeout | null>(null);
+  const exitingTimerRef = useRef<NodeJS.Timeout | null>(null);
 
-  useEffect(() => {
-    const timer = setInterval(() => {
+  const startSlideTimer = () => {
+    if (timerRef.current) clearInterval(timerRef.current);
+    timerRef.current = setInterval(() => {
       setCurrentSlide((prev) => {
         setPreviousSlide(prev);
+        if (exitingTimerRef.current) clearTimeout(exitingTimerRef.current);
+        exitingTimerRef.current = setTimeout(() => {
+          setPreviousSlide(null);
+        }, 1800);
         return (prev + 1) % heroSlides.length;
       });
-    }, 6800);
-    return () => clearInterval(timer);
+    }, 6500);
+  };
+
+  useEffect(() => {
+    startSlideTimer();
+    return () => {
+      if (timerRef.current) clearInterval(timerRef.current);
+      if (exitingTimerRef.current) clearTimeout(exitingTimerRef.current);
+    };
   }, []);
 
   const handleSelectSlide = (index: number) => {
-    if (index !== currentSlide) {
-      setPreviousSlide(currentSlide);
-      setCurrentSlide(index);
-    }
+    if (index === currentSlide) return;
+    setPreviousSlide(currentSlide);
+    setCurrentSlide(index);
+    if (exitingTimerRef.current) clearTimeout(exitingTimerRef.current);
+    exitingTimerRef.current = setTimeout(() => {
+      setPreviousSlide(null);
+    }, 1800);
+    startSlideTimer();
   };
 
   return (
     <section className="hero-section hero hero-parallax-dining" aria-label={messages.hero.aria}>
+      {/* Background Slides with Flawless Ken Burns Zoom & Crossfade */}
       {heroSlides.map((slide, index) => {
         const isActive = index === currentSlide;
         const isExiting = index === previousSlide;
+        if (!isActive && !isExiting) return null;
+
         return (
           <div
             key={slide.image}
-            className={`hero-slide ${isActive ? "active" : isExiting ? "exiting" : ""}`}
+            className={`hero-slide ${isActive ? "is-active" : "is-exiting"}`}
             style={{ backgroundImage: `url(${slide.image})` }}
             role="img"
             aria-label={locale === "en" ? slide.altEn : slide.altTr}
@@ -108,6 +129,7 @@ export function VanHeroParallax({ locale = "tr" }: { locale?: SiteLocale }) {
         </div>
       </div>
 
+      {/* Slide Indicators: active amber pill & subtle circle dots */}
       <div className="carousel-indicators">
         {heroSlides.map((_, index) => (
           <button
@@ -120,19 +142,30 @@ export function VanHeroParallax({ locale = "tr" }: { locale?: SiteLocale }) {
         ))}
       </div>
 
+      {/* Hero Bottom Organic Wave Cutout Transition */}
       <div className="hero-bottom-transition" aria-hidden="true">
-        <div className="wave-divider to-story">
-          <svg viewBox="0 0 1440 100" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-            <path
-              d="M0,32 C320,82 400,-18 800,62 C1100,122 1200,12 1440,42 L1440,100 L0,100 Z"
-              style={{ fill: "rgba(200, 159, 83, 0.3)" }}
-            />
-            <path
-              d="M0,40 C320,90 400,-10 800,70 C1100,130 1200,20 1440,50 L1440,100 L0,100 Z"
-              style={{ fill: "#7a1b22" }}
-            />
-          </svg>
-        </div>
+        <svg
+          viewBox="0 0 1440 120"
+          preserveAspectRatio="none"
+          className="hero-wave-svg"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          {/* Subtle dark depth ribbon along the wave */}
+          <path
+            d="M0,62 C220,28 440,22 700,56 C960,88 1200,98 1440,48 L1440,120 L0,120 Z"
+            fill="rgba(24, 12, 14, 0.25)"
+          />
+          {/* Subtle translucent highlight ribbon */}
+          <path
+            d="M0,66 C220,32 440,26 700,60 C960,92 1200,102 1440,52 L1440,120 L0,120 Z"
+            fill="rgba(255, 255, 255, 0.35)"
+          />
+          {/* Main solid white wave connecting seamlessly into Section 1 */}
+          <path
+            d="M0,70 C220,36 440,30 700,64 C960,96 1200,106 1440,56 L1440,120 L0,120 Z"
+            fill="#ffffff"
+          />
+        </svg>
       </div>
     </section>
   );
