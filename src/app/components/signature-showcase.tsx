@@ -154,9 +154,12 @@ export function SignatureShowcase({ locale = "tr" }: { locale?: string }) {
   const current = TABS[activeTab];
 
   return (
-    <section className={styles.section3} id="hamour-menu-showcase">
+    <section className={styles.section3} id="menumuz">
+      {/* Top Wavy Arched Cutout Border */}
+      <div className={styles.topCurveBorder} aria-hidden="true" />
+
       <div className={styles.container}>
-        {/* Category Tabs */}
+        {/* Category Tabs in 3x2 Grid */}
         <div className={styles.navGrid}>
           {TABS.map((tab, idx) => {
             const isActive = idx === activeTab;
@@ -204,8 +207,8 @@ export function SignatureShowcase({ locale = "tr" }: { locale?: string }) {
             <Image
               src={current.floating1}
               alt=""
-              width={160}
-              height={160}
+              width={140}
+              height={140}
               className={styles.floatAsset}
             />
           </div>
@@ -219,8 +222,8 @@ export function SignatureShowcase({ locale = "tr" }: { locale?: string }) {
             <Image
               src={current.floating2}
               alt=""
-              width={120}
-              height={120}
+              width={110}
+              height={110}
               className={styles.floatAsset}
             />
           </div>
@@ -234,51 +237,47 @@ export function SignatureShowcase({ locale = "tr" }: { locale?: string }) {
             <Image
               src={current.floating3}
               alt=""
-              width={140}
-              height={140}
+              width={130}
+              height={130}
               className={styles.floatAsset}
             />
           </div>
 
-          <div className={styles.contentRow}>
-            {/* Dish Plate Column */}
-            <div className={styles.plateCol}>
-              <div
-                className={styles.plateWrapper}
-                data-aos="fade-right"
-                data-aos-duration="1000"
-              >
-                {/* Decorative concentric arch lines background */}
-                <div className={styles.contourArch} aria-hidden="true" />
-                <Image
-                  src={current.plateImg}
-                  alt={isEn ? current.titleEn : current.title}
-                  width={520}
-                  height={520}
-                  className={styles.plateImg}
-                  priority
-                />
-              </div>
+          {/* Central Plate Presentation */}
+          <div className={styles.plateArea}>
+            <div
+              className={styles.plateWrapper}
+              data-aos="fade-right"
+              data-aos-duration="1000"
+            >
+              {/* Concentric Arch Contour Rings */}
+              <div className={styles.contourArch} aria-hidden="true" />
+              <Image
+                src={current.plateImg}
+                alt={isEn ? current.titleEn : current.title}
+                width={500}
+                height={500}
+                className={styles.plateImg}
+                priority
+              />
             </div>
+          </div>
 
-            {/* Article Column */}
-            <div className={styles.articleCol}>
-              <div
-                className={styles.article}
-                data-aos="fade-left"
-                data-aos-duration="1000"
-              >
-                <h3 className={styles.articleTitle}>
-                  {isEn ? current.titleEn : current.title}
-                </h3>
-                <p className={styles.articleDesc}>
-                  {isEn ? current.descEn : current.desc}
-                </p>
-                <Link href={current.btnHref} className={styles.articleBtn}>
-                  {isEn ? current.btnTextEn : current.btnText}
-                </Link>
-              </div>
-            </div>
+          {/* Article / Description */}
+          <div
+            className={styles.article}
+            data-aos="fade-up"
+            data-aos-duration="1000"
+          >
+            <h3 className={styles.articleTitle}>
+              {isEn ? current.titleEn : current.title}
+            </h3>
+            <p className={styles.articleDesc}>
+              {isEn ? current.descEn : current.desc}
+            </p>
+            <Link href={current.btnHref} className={styles.articleBtn}>
+              {isEn ? current.btnTextEn : current.btnText}
+            </Link>
           </div>
         </div>
       </div>

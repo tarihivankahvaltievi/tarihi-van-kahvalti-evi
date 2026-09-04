@@ -4,18 +4,15 @@ import styles from "./atmosphere-banner.module.css";
 export function AtmosphereBanner({ locale = "tr" }: { locale?: string }) {
   const isEn = locale === "en";
 
-  const words = isEn
-    ? ["Elegance", "and", "Flavor", "Meet", "at Hamour!"]
-    : ["Zarafet", "ve", "Lezzet", "Hamour’da", "Buluşuyor!"];
-
   return (
     <section className={styles.section2} id="atmosphere-banner">
+      {/* Top White Arch Notch Dipping from Section 1 into Section 2 */}
       <div className={styles.topAnchor} aria-hidden="true">
         <Image
-          src="/hamour/anchor-1.png"
+          src="/hamour/anchor-1_3.png"
           alt=""
-          width={70}
-          height={35}
+          width={74}
+          height={51}
           className={styles.anchorImg}
           priority
         />
@@ -25,29 +22,26 @@ export function AtmosphereBanner({ locale = "tr" }: { locale?: string }) {
 
       <div className={styles.textContainer}>
         <h2 className={styles.heading}>
-          {words.map((word, index) => (
-            <span
-              key={index}
-              data-aos="fade-up"
-              data-aos-duration="1000"
-              data-aos-anchor-placement="top-bottom"
-              data-aos-delay={(index + 1) * 100}
-              className={styles.wordSpan}
-            >
-              {word}&nbsp;
-            </span>
-          ))}
+          <span
+            data-aos="fade-up"
+            data-aos-duration="1000"
+            data-aos-anchor-placement="top-bottom"
+            data-aos-delay="100"
+            className={styles.line}
+          >
+            {isEn ? "Elegance and Flavor" : "Zarafet ve Lezzet"}
+          </span>
+          <br />
+          <span
+            data-aos="fade-up"
+            data-aos-duration="1000"
+            data-aos-anchor-placement="top-bottom"
+            data-aos-delay="300"
+            className={styles.line}
+          >
+            {isEn ? "Meet at Hamour!" : "Hamour’da Buluşuyor!"}
+          </span>
         </h2>
-      </div>
-
-      <div className={styles.botAnchor} aria-hidden="true">
-        <Image
-          src="/hamour/anchor-1.png"
-          alt=""
-          width={70}
-          height={35}
-          className={styles.anchorImgRotated}
-        />
       </div>
     </section>
   );

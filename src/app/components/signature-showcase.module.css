@@ -2,7 +2,7 @@
   position: relative;
   z-index: 15;
   margin-top: -30px;
-  padding: 80px 15px 100px;
+  padding: 80px 15px 90px;
   background-color: #f2e3d0;
   background-image: url('/hamour/section-3-bg-bot.jpg');
   background-position: center top;
@@ -11,21 +11,33 @@
   overflow: hidden;
 }
 
-.container {
-  width: 100%;
-  max-width: 1200px;
-  margin: 0 auto;
-  position: relative;
-  z-index: 5;
+.topCurveBorder {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 52px;
+  background: url('/hamour/section-3-bg-top.png') center top repeat-x;
+  background-size: contain;
+  pointer-events: none;
+  z-index: 18;
 }
 
-/* 6 Category Tabs */
+.container {
+  width: 100%;
+  max-width: 1140px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 10;
+}
+
+/* 6 Category Tabs in 3x2 Grid */
 .navGrid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 10px;
+  gap: 8px;
   max-width: 900px;
-  margin: 0 auto 50px;
+  margin: 0 auto 40px;
   justify-content: center;
 }
 
@@ -33,7 +45,7 @@
   .navGrid {
     grid-template-columns: repeat(6, 1fr);
     gap: 14px;
-    margin-bottom: 70px;
+    margin-bottom: 60px;
   }
 }
 
@@ -43,7 +55,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 16px 8px 12px;
+  padding: 14px 6px 10px;
   background: rgba(255, 255, 255, 0.28);
   backdrop-filter: blur(8px);
   border: 1px solid rgba(255, 255, 255, 0.4);
@@ -63,7 +75,7 @@
 .navLink.active {
   background: #ffffff;
   border-color: #ffffff;
-  box-shadow: 0 10px 25px rgba(64, 32, 33, 0.12);
+  box-shadow: 0 10px 24px rgba(64, 32, 33, 0.12);
   transform: translateY(-2px);
 }
 
@@ -71,8 +83,8 @@
   position: relative;
   display: block;
   width: 48px;
-  height: 42px;
-  margin: 0 auto 8px;
+  height: 40px;
+  margin: 0 auto 6px;
 }
 
 .iconImg {
@@ -108,7 +120,7 @@
   font-size: 13px;
   font-weight: 500;
   color: #ffffff;
-  line-height: 1.25;
+  line-height: 1.2;
   transition: color 0.35s ease;
   white-space: nowrap;
 }
@@ -125,8 +137,8 @@
   }
   .iconWrapper {
     width: 60px;
-    height: 52px;
-    margin-bottom: 12px;
+    height: 50px;
+    margin-bottom: 10px;
   }
   .navText {
     font-size: 15px;
@@ -136,8 +148,12 @@
 /* Tab Content Pane */
 .tabContentPane {
   position: relative;
-  min-height: 450px;
+  min-height: 520px;
   animation: paneFadeIn 0.5s ease-out;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
 }
 
 @keyframes paneFadeIn {
@@ -155,7 +171,7 @@
 .movingImg {
   position: absolute;
   pointer-events: none;
-  z-index: 8;
+  z-index: 12;
   transition: transform 0.1s linear;
 }
 
@@ -163,102 +179,82 @@
   display: block;
   width: auto;
   height: auto;
-  filter: drop-shadow(0 12px 20px rgba(0, 0, 0, 0.15));
+  filter: drop-shadow(0 14px 22px rgba(0, 0, 0, 0.16));
 }
 
 .moving1 {
-  top: -20px;
+  top: 10px;
   left: 2%;
   animation: floatSlow1 6s ease-in-out infinite alternate;
 }
 
 .moving2 {
-  top: 15%;
+  top: 35px;
   right: 4%;
   animation: floatSlow2 7s ease-in-out infinite alternate;
 }
 
 .moving3 {
-  bottom: 2%;
-  left: 6%;
+  top: 220px;
+  left: 5%;
   animation: floatSlow3 8s ease-in-out infinite alternate;
 }
 
 @keyframes floatSlow1 {
   0% { transform: translate(0, 0) rotate(0deg); }
-  100% { transform: translate(10px, 14px) rotate(4deg); }
+  100% { transform: translate(8px, 12px) rotate(4deg); }
 }
 
 @keyframes floatSlow2 {
   0% { transform: translate(0, 0) rotate(0deg); }
-  100% { transform: translate(-12px, 16px) rotate(-5deg); }
+  100% { transform: translate(-10px, 14px) rotate(-5deg); }
 }
 
 @keyframes floatSlow3 {
   0% { transform: translate(0, 0) rotate(0deg); }
-  100% { transform: translate(14px, -10px) rotate(6deg); }
+  100% { transform: translate(12px, -8px) rotate(6deg); }
 }
 
-/* Content Layout */
-.contentRow {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 30px;
-}
-
-@media (min-width: 992px) {
-  .contentRow {
-    flex-direction: row;
-    gap: 60px;
-  }
-}
-
-.plateCol {
+/* Plate Area */
+.plateArea {
+  position: relative;
   width: 100%;
-  max-width: 440px;
+  max-width: 420px;
+  margin: 0 auto 30px;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-@media (min-width: 992px) {
-  .plateCol {
-    width: 50%;
-    max-width: 540px;
+@media (min-width: 768px) {
+  .plateArea {
+    max-width: 480px;
+    margin-bottom: 40px;
   }
 }
 
 .plateWrapper {
   position: relative;
   width: 100%;
-  max-width: 380px;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-@media (min-width: 992px) {
-  .plateWrapper {
-    max-width: 480px;
-  }
-}
-
 .contourArch {
   position: absolute;
-  inset: -15px;
+  inset: -20px;
   border-radius: 50%;
-  border: 1px solid rgba(180, 90, 56, 0.25);
+  border: 1.5px solid rgba(255, 255, 255, 0.65);
   pointer-events: none;
 }
 
 .contourArch::after {
   content: "";
   position: absolute;
-  inset: -20px;
+  inset: -16px;
   border-radius: 50%;
-  border: 1px dashed rgba(180, 90, 56, 0.18);
+  border: 1px dashed rgba(180, 90, 56, 0.3);
 }
 
 .plateImg {
@@ -267,68 +263,61 @@
   height: auto;
   max-width: 100%;
   object-fit: contain;
-  filter: drop-shadow(0 20px 30px rgba(64, 32, 33, 0.18));
+  filter: drop-shadow(0 20px 35px rgba(64, 32, 33, 0.22));
 }
 
-.articleCol {
-  width: 100%;
-  max-width: 520px;
-  text-align: center;
-}
-
-@media (min-width: 992px) {
-  .articleCol {
-    width: 50%;
-    text-align: left;
-  }
-}
-
+/* Article Description */
 .article {
-  padding: 10px 0;
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  text-align: center;
 }
 
 .articleTitle {
   font-family: "NOCTADO", Georgia, serif;
-  font-size: 32px;
+  font-size: 34px;
   font-weight: 400;
   color: #402021;
   line-height: 1.15;
-  margin-bottom: 18px;
+  margin: 0 auto 20px;
   letter-spacing: -0.01em;
 }
 
 @media (min-width: 768px) {
   .articleTitle {
-    font-size: 46px;
+    font-size: 48px;
     margin-bottom: 24px;
   }
 }
 
 .articleDesc {
-  font-family: "Causten", system-ui, sans-serif;
-  font-size: 15px;
+  font-family: "NOCTADO", Georgia, serif;
+  font-size: 21px;
   font-weight: 400;
-  color: #402021;
-  line-height: 1.6;
-  margin-bottom: 30px;
+  color: #b45a38;
+  line-height: 1.25;
+  margin: 0 auto 30px;
+  max-width: 360px;
+  text-align: center;
 }
 
 @media (min-width: 768px) {
   .articleDesc {
-    font-size: 18px;
-    line-height: 1.65;
+    font-size: 26px;
+    max-width: 680px;
     margin-bottom: 36px;
   }
 }
 
 .articleBtn {
   display: inline-block;
-  width: 260px;
+  width: 270px;
   max-width: calc(100% - 20px);
   padding: 12px 10px;
   margin: 0 auto;
   font-family: "NOCTADO", Georgia, serif;
-  font-size: 20px;
+  font-size: 21px;
   line-height: 1;
   color: #402021;
   border: 1px solid #b45a38;
@@ -350,30 +339,50 @@
   }
   .navGrid {
     gap: 6px;
+    margin-bottom: 30px;
   }
   .navLink {
     padding: 12px 4px 8px;
     border-radius: 28px 0 28px 0;
   }
   .iconWrapper {
-    width: 40px;
-    height: 34px;
-    margin-bottom: 6px;
+    width: 38px;
+    height: 32px;
+    margin-bottom: 4px;
   }
   .navText {
-    font-size: 11px;
+    font-size: 11.5px;
   }
-  .plateWrapper {
-    max-width: 300px;
+  .plateArea {
+    max-width: 310px;
+    margin-bottom: 24px;
+  }
+  .moving1 {
+    width: 75px;
+    top: -5px;
+    left: 2%;
+  }
+  .moving2 {
+    width: 65px;
+    top: 20px;
+    right: 2%;
+  }
+  .moving3 {
+    width: 65px;
+    top: 170px;
+    left: 4%;
   }
   .articleTitle {
-    font-size: 26px;
+    font-size: 28px;
+    margin-bottom: 16px;
   }
   .articleDesc {
-    font-size: 14px;
+    font-size: 19.5px;
+    max-width: 330px;
+    margin-bottom: 25px;
   }
   .articleBtn {
-    font-size: 18px;
-    width: 220px;
+    font-size: 19px;
+    width: 240px;
   }
 }

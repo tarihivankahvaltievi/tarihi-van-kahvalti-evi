@@ -2,14 +2,25 @@
   position: relative;
   overflow: hidden;
   z-index: 30;
-  margin-top: -30px;
-  padding: 100px 20px 60px;
+  margin-top: -50px;
+  padding: 90px 0 60px;
   background-color: #231513;
   background-image: url('/hamour/footer-bg.png');
   background-position: top center;
   background-size: cover;
   background-repeat: no-repeat;
   text-align: center;
+}
+
+.footer:before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  height: 100px;
+  background: url('/hamour/footer-bg.png') top center no-repeat;
+  z-index: -1;
 }
 
 .container {
@@ -20,89 +31,82 @@
 }
 
 .footerVector {
-  padding-bottom: 28px;
+  padding-bottom: 35px;
 }
 
 .footerVector a {
-  display: inline-block;
-  transition: transform 0.3s ease;
+  display: block;
+  max-width: 80px;
+  margin: 0 auto;
+  transition: transform 0.35s ease;
 }
 
 .footerVector a:hover {
-  transform: scale(1.06);
+  transform: scale(1.08);
 }
 
 .vectorImg {
   display: block;
-  width: 70px;
+  max-width: 100%;
+  width: 75px;
   height: auto;
   margin: 0 auto;
 }
 
 .footerLogo {
-  padding-bottom: 35px;
+  padding-bottom: 40px;
 }
 
 .footerLogo a {
-  display: inline-block;
+  display: block;
+  max-width: 300px;
+  margin: 0 auto;
 }
 
 .brandLogoImg {
   display: block;
-  width: 240px;
+  max-width: 100%;
+  width: 260px;
   height: auto;
   margin: 0 auto;
 }
 
 .footerText {
-  padding-bottom: 38px;
-  max-width: 880px;
+  padding-bottom: 40px;
+  width: 1200px;
+  max-width: 100%;
   margin: 0 auto;
 }
 
 .textTitle {
   font-family: "NOCTADO", Georgia, serif;
-  font-size: 28px;
-  font-weight: 400;
+  font-size: 35px;
   line-height: 1.25;
   color: #f9e8d5;
   text-align: center;
+  font-weight: 400;
   margin-bottom: 20px;
-}
-
-@media (min-width: 768px) {
-  .textTitle {
-    font-size: 38px;
-    margin-bottom: 24px;
-  }
 }
 
 .textParagraph {
   font-family: "Causten", system-ui, sans-serif;
-  font-size: 15px;
-  font-weight: 300;
-  line-height: 1.65;
+  font-size: 20px;
+  line-height: 1.35;
   color: #ffffff;
   text-align: center;
-  margin: 0;
-  opacity: 0.95;
-}
-
-@media (min-width: 768px) {
-  .textParagraph {
-    font-size: 18px;
-    line-height: 1.7;
-  }
+  font-weight: 300;
+  margin: 0 auto;
+  max-width: 880px;
 }
 
 .footerSocial {
-  padding-bottom: 32px;
+  padding-bottom: 30px;
 }
 
 .socialList {
   display: flex;
   flex-wrap: wrap;
-  gap: 16px;
+  gap: 12px;
   justify-content: center;
   align-items: center;
   padding: 0;
@@ -112,22 +116,27 @@
 
 .socialList li a {
   display: block;
-  transition: transform 0.35s ease, opacity 0.35s ease;
 }
 
-.socialList li a:hover {
-  transform: translateY(-4px);
-  opacity: 0.85;
+.socialList li a img {
+  display: block;
+  max-width: 100%;
+  transform: translateY(0);
+  transition: transform 0.4s ease;
+}
+
+.socialList li a:hover img {
+  transform: translateY(-5px);
 }
 
 .footerMenu {
-  padding-bottom: 32px;
+  padding-bottom: 30px;
 }
 
 .nav {
   display: flex;
   flex-wrap: wrap;
-  gap: 15px 30px;
+  gap: 12px 24px;
   justify-content: center;
   align-items: center;
 }
@@ -135,12 +144,11 @@
 .nav a {
   display: block;
   font-family: "NOCTADO", Georgia, serif;
-  font-size: 19px;
-  font-weight: 400;
+  font-size: 20px;
   color: #ffffff;
-  padding: 6px 10px;
+  padding: 8px 12px;
   text-decoration: none;
-  transition: color 0.35s ease;
+  transition: color 0.4s ease;
 }
 
 .nav a:hover {
@@ -150,55 +158,83 @@
 .footerBot {
   display: flex;
   flex-wrap: wrap;
-  gap: 14px 24px;
+  gap: 18px;
   justify-content: center;
   align-items: center;
-  max-width: 860px;
+  width: 890px;
+  max-width: 100%;
   margin: 0 auto;
-  padding-top: 28px;
+  padding-top: 25px;
   border-top: 1px solid rgba(255, 255, 255, 0.12);
 }
 
 .footerBot a,
 .footerBot span {
   font-family: "Causten", system-ui, sans-serif;
+  display: block;
   font-size: 12px;
   font-weight: 300;
-  color: rgba(255, 255, 255, 0.65);
+  color: #ffffff;
+  padding: 6px 10px;
   text-decoration: none;
-  transition: color 0.35s ease;
+  transition: color 0.4s ease;
 }
 
 .footerBot a:hover {
   color: #f9e8d5;
 }
 
-@media (max-width: 480px) {
+.seoHiddenLink {
+  opacity: 0.15;
+  font-size: 10px;
+  padding: 2px 4px !important;
+}
+
+@media (max-width: 768px) {
   .footer {
-    padding: 80px 15px 40px;
+    padding: 75px 15px 45px;
+    margin-top: -45px;
+  }
+  .footerVector {
+    padding-bottom: 25px;
   }
   .vectorImg {
-    width: 55px;
+    width: 60px;
+  }
+  .footerLogo {
+    padding-bottom: 28px;
   }
   .brandLogoImg {
-    width: 200px;
+    width: 210px;
+  }
+  .footerText {
+    padding-bottom: 28px;
   }
   .textTitle {
     font-size: 24px;
+    margin-bottom: 14px;
   }
   .textParagraph {
-    font-size: 13.5px;
-    line-height: 1.6;
+    font-size: 14px;
+    line-height: 1.45;
+  }
+  .footerSocial {
+    padding-bottom: 24px;
+  }
+  .footerMenu {
+    padding-bottom: 24px;
   }
   .nav a {
     font-size: 17px;
-    padding: 4px 8px;
+    padding: 6px 8px;
   }
   .footerBot {
-    gap: 8px 14px;
+    gap: 8px 12px;
+    padding-top: 20px;
   }
   .footerBot a,
   .footerBot span {
     font-size: 11px;
+    padding: 2px 4px;
   }
 }

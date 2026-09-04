@@ -39,9 +39,11 @@ export function HomeContent({ locale = "tr" }: { locale?: SiteLocale }) {
         {/* Section 4: Historic Venue & Hospitality (Hamour Section 4) */}
         <VenueAtmosphere locale={locale} />
 
-        {/* SEO Required FAQ & Gallery hooks */}
+        {/* SEO Required FAQ & Gallery hooks - kept in DOM for schema & crawling without interrupting visual flow */}
         <div className="gallery-section" style={{ display: "none" }} aria-hidden="true" />
-        <FaqSection locale={locale} />
+        <div style={{ display: "none" }} aria-hidden="true">
+          <FaqSection locale={locale} />
+        </div>
       </main>
 
       {/* Footer (Hamour Footer) */}
