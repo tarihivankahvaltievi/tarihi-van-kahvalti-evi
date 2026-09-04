@@ -33,22 +33,22 @@
 
 /* 3 Luxury Category Tabs */
 .tabNavWrapper {
-  max-width: 620px;
-  margin: 0 auto 38px;
+  max-width: 640px;
+  margin: 0 auto 44px;
   padding: 0 12px;
 }
 
 .tabNav {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 12px;
-  background: rgba(255, 255, 255, 0.48);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  padding: 7px;
-  border-radius: 20px;
-  border: 1px solid rgba(184, 134, 76, 0.25);
-  box-shadow: 0 8px 24px rgba(60, 30, 10, 0.06);
+  gap: 10px;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.72) 0%, rgba(248, 240, 230, 0.58) 100%);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  padding: 8px;
+  border-radius: 22px;
+  border: 1px solid rgba(184, 134, 76, 0.3);
+  box-shadow: 0 12px 32px rgba(60, 25, 10, 0.08), inset 0 1px 1px rgba(255, 255, 255, 0.9);
 }
 
 .tabBtn {
@@ -57,26 +57,29 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 16px 10px 14px;
-  background: transparent;
-  border: 1.5px solid transparent;
-  border-radius: 15px;
+  padding: 16px 12px 14px;
+  background: rgba(255, 255, 255, 0.35);
+  border: 1.5px solid rgba(184, 134, 76, 0.15);
+  border-radius: 16px;
   cursor: pointer;
-  transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
   outline: none;
   -webkit-tap-highlight-color: transparent;
   user-select: none;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.6);
 }
 
 .tabBtn:hover {
-  background: rgba(255, 255, 255, 0.65);
+  background: rgba(255, 255, 255, 0.75);
+  border-color: rgba(184, 134, 76, 0.38);
   transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(100, 50, 20, 0.09);
 }
 
 .tabBtnActive {
-  background: #ffffff !important;
-  border-color: rgba(168, 125, 73, 0.42) !important;
-  box-shadow: 0 10px 24px rgba(120, 70, 30, 0.14), 0 2px 6px rgba(0, 0, 0, 0.04);
+  background: linear-gradient(180deg, #ffffff 0%, #fdfbf7 100%) !important;
+  border-color: #a87d49 !important;
+  box-shadow: 0 12px 28px rgba(168, 125, 73, 0.22), 0 3px 8px rgba(45, 20, 5, 0.08), inset 0 1px 0 #ffffff !important;
   transform: translateY(-2px);
 }
 
@@ -84,53 +87,54 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 44px;
-  height: 38px;
-  margin-bottom: 6px;
-  transition: transform 0.28s ease;
+  width: 48px;
+  height: 40px;
+  margin-bottom: 7px;
+  transition: transform 0.3s ease;
 }
 
 .tabBtnActive .iconWrapper {
-  transform: scale(1.1);
+  transform: scale(1.12);
 }
 
 .iconImg {
   width: auto;
   height: 32px;
   object-fit: contain;
-  opacity: 0.62;
-  filter: brightness(0.3) sepia(0.5) hue-rotate(350deg);
-  transition: all 0.28s ease;
+  opacity: 0.72;
+  filter: sepia(0.6) saturate(1.8) hue-rotate(345deg) brightness(0.45);
+  transition: all 0.3s ease;
 }
 
 .tabBtnActive .iconImg {
   opacity: 1;
-  filter: brightness(0.2) sepia(0.9) saturate(2.5) hue-rotate(345deg);
+  filter: sepia(1) saturate(3.5) hue-rotate(345deg) brightness(0.38);
 }
 
 .tabText {
-  font-family: var(--font-playfair, "Playfair Display", serif);
-  font-size: 15.5px;
+  font-family: var(--font-playfair, "Playfair Display", Georgia, serif);
+  font-size: 16px;
   font-weight: 600;
-  color: #5c3a21;
-  letter-spacing: 0.3px;
+  color: #5c381e;
+  letter-spacing: 0.4px;
   line-height: 1.2;
-  transition: color 0.28s ease;
+  transition: color 0.3s ease;
   white-space: nowrap;
 }
 
 .tabBtnActive .tabText {
-  color: #2c1505;
+  color: #240f02;
   font-weight: 700;
 }
 
 .activeIndicator {
   position: absolute;
   bottom: 4px;
-  width: 22px;
-  height: 3px;
-  background: #a87d49;
-  border-radius: 2px;
+  width: 26px;
+  height: 3.5px;
+  background: linear-gradient(90deg, #c49658, #8f5a25);
+  border-radius: 3px;
+  box-shadow: 0 1px 4px rgba(168, 125, 73, 0.4);
   animation: indicatorPop 0.3s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
@@ -141,14 +145,14 @@
 
 @media (min-width: 992px) {
   .tabNavWrapper {
-    max-width: 680px;
-    margin-bottom: 50px;
+    max-width: 700px;
+    margin-bottom: 54px;
   }
   .tabBtn {
     padding: 18px 16px 15px;
   }
   .iconWrapper {
-    width: 52px;
+    width: 54px;
     height: 42px;
     margin-bottom: 8px;
   }
@@ -156,18 +160,18 @@
     height: 36px;
   }
   .tabText {
-    font-size: 17px;
+    font-size: 17.5px;
   }
   .activeIndicator {
-    width: 26px;
-    height: 3.5px;
+    width: 32px;
+    height: 4px;
   }
 }
 
 /* Tab Content Pane */
 .tabContentPane {
   position: relative;
-  min-height: 520px;
+  min-height: 500px;
   animation: paneFadeIn 0.5s ease-out;
   display: flex;
   flex-direction: column;
@@ -186,78 +190,12 @@
   }
 }
 
-/* Floating Parallax Elements */
-.movingImg {
-  position: absolute;
-  pointer-events: none;
-  z-index: 12;
-  transition: transform 0.1s linear;
-}
-
-.floatBob1 {
-  width: 100%;
-  height: 100%;
-  animation: floatSlow1 6s ease-in-out infinite alternate;
-}
-
-.floatBob2 {
-  width: 100%;
-  height: 100%;
-  animation: floatSlow2 7.5s ease-in-out infinite alternate;
-}
-
-.floatBob3 {
-  width: 100%;
-  height: 100%;
-  animation: floatSlow3 8.5s ease-in-out infinite alternate;
-}
-
-.floatAsset {
-  display: block;
-  width: 100%;
-  height: auto;
-  filter: drop-shadow(0 16px 24px rgba(45, 20, 10, 0.20)) drop-shadow(0 4px 8px rgba(0, 0, 0, 0.08));
-}
-
-.moving1 {
-  width: 125px;
-  top: 10px;
-  left: 2%;
-}
-
-.moving2 {
-  width: 130px;
-  top: 35px;
-  right: 4%;
-}
-
-.moving3 {
-  width: 120px;
-  top: 220px;
-  left: 5%;
-}
-
-@keyframes floatSlow1 {
-  0% { transform: translate(0, 0) rotate(0deg); }
-  100% { transform: translate(8px, 12px) rotate(4deg); }
-}
-
-@keyframes floatSlow2 {
-  0% { transform: translate(0, 0) rotate(0deg); }
-  100% { transform: translate(-10px, 14px) rotate(-5deg); }
-}
-
-@keyframes floatSlow3 {
-  0% { transform: translate(0, 0) rotate(0deg); }
-  100% { transform: translate(12px, -8px) rotate(6deg); }
-}
-
 /* Plate Area */
 .plateArea {
   position: relative;
   width: 100%;
-  max-width: 420px;
-  margin: 0 auto 30px;
+  max-width: 440px;
+  margin: 0 auto 32px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -416,23 +354,8 @@
     height: 2.5px;
   }
   .plateArea {
-    max-width: 310px;
+    max-width: 330px;
     margin-bottom: 24px;
-  }
-  .moving1 {
-    width: 82px;
-    top: -5px;
-    left: 2%;
-  }
-  .moving2 {
-    width: 78px;
-    top: 20px;
-    right: 2%;
-  }
-  .moving3 {
-    width: 80px;
-    top: 185px;
-    left: 3%;
   }
   .articleTitle {
     font-size: 28px;

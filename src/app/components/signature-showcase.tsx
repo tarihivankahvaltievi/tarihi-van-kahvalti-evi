@@ -2,19 +2,15 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useState, useEffect, useRef } from "react";
+import { useState } from "react";
 import styles from "./signature-showcase.module.css";
 
 interface TabData {
   id: string;
   name: string;
   nameEn: string;
-  iconInactive: string;
   iconActive: string;
   plateImg: string;
-  floating1: string;
-  floating2: string;
-  floating3: string;
   title: string;
   titleEn: string;
   desc: string;
@@ -29,12 +25,8 @@ const TABS: TabData[] = [
     id: "omletler",
     name: "Omletler",
     nameEn: "Omelettes",
-    iconInactive: "/hamour/mi_tab-input-4-img-2_1.png",
     iconActive: "/hamour/mi_tab-input-4-img-2_1.png",
     plateImg: "/hamour/van_plate_royal.png",
-    floating1: "/hamour/van_float_jam.png",
-    floating2: "/hamour/van_float_olives.png",
-    floating3: "/hamour/van_float_cheese.png",
     title: "Güne Van Usulü Sahanda Omletle Başla!",
     titleEn: "Start the Day with Van Omelette!",
     desc: "Tarihi Van Kahvaltı Evi'nin tereyağlı, sucuklu ve taze organik yumurtalarla hazırlanan enfes sahanda omletleri ile güne lezzet dolu ve doyurucu bir başlangıç yapın.",
@@ -47,12 +39,8 @@ const TABS: TabData[] = [
     id: "sahanlar",
     name: "Sahanlar",
     nameEn: "Pan Dishes",
-    iconInactive: "/hamour/mi_tab-input-3-img-2.png",
     iconActive: "/hamour/mi_tab-input-3-img-2.png",
     plateImg: "/hamour/van_plate_menemen.png",
-    floating1: "/hamour/van_float_tomato.png",
-    floating2: "/hamour/van_float_pepper.png",
-    floating3: "/hamour/van_float_onion.png",
     title: "Bakır Sahanda Geleneksel Van Lezzetleri!",
     titleEn: "Traditional Van Delights in Copper Pans!",
     desc: "Köz tadında taze domatesler, çıtır biberler ve organik yumurtaların bakır sahanda buluştuğu efsanevi Van menemeni ve sıcak sahan lezzetlerimiz masanızda tütüyor.",
@@ -65,16 +53,12 @@ const TABS: TabData[] = [
     id: "icecekler",
     name: "İçecekler",
     nameEn: "Beverages",
-    iconInactive: "/hamour/mi_tab-input-2-img-2.png",
     iconActive: "/hamour/mi_tab-input-2-img-2.png",
-    plateImg: "/hamour/amr1_tab-4-content-img-1.png",
-    floating1: "/hamour/amr2_section-3-tab-4-img-1.png",
-    floating2: "/hamour/amr3_section-3-tab-4-img-2.png",
-    floating3: "/hamour/amr4_section-3-tab-4-img-3.png",
-    title: "Van Semaveri & Ferahlatıcı İçecekler!",
-    titleEn: "Van Samovar & Refreshing Drinks!",
-    desc: "Tavşan kanı demiyle gün boyu tüten geleneksel Van semaver çayı, taze sıkılmış meyve suları ve közde Türk kahvesiyle kahvaltı keyfinizi taçlandırın.",
-    descEn: "Crown your breakfast experience with traditional Van samovar tea brewing all day, freshly squeezed fruit juices, and authentic Turkish coffee.",
+    plateImg: "/hamour/van_plate_coffee.png",
+    title: "Van Kedisi Özel Latte & Semaver Keyfi!",
+    titleEn: "Special Van Cat Latte & Samovar Delight!",
+    desc: "Tarihi Van Kahvaltı Evi'nin imza lezzeti Van Kedisi latte artlı taze çekirdek kahveleri ve gün boyu tüten geleneksel semaver çayıyla kahvaltı keyfinizi taçlandırın.",
+    descEn: "Crown your breakfast experience with Tarihi Van Kahvaltı Evi's signature freshly brewed coffee featuring authentic Van Cat latte art, and our traditional samovar tea brewing all day.",
     btnText: "Menüyü İncele",
     btnTextEn: "View Menu",
     btnHref: "/menu",
@@ -84,47 +68,12 @@ const TABS: TabData[] = [
 export function SignatureShowcase({ locale = "tr" }: { locale?: string }) {
   const isEn = locale === "en";
   const [activeTab, setActiveTab] = useState(0);
-  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
-  const [scrollProgress, setScrollProgress] = useState(0);
-  const sectionRef = useRef<HTMLElement>(null);
-
-  useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      const x = (window.innerWidth / 2 - e.clientX) / 25;
-      const y = (window.innerHeight / 2 - e.clientY) / 25;
-      setMousePos({ x, y });
-    };
-
-    const handleScroll = () => {
-      if (!sectionRef.current) return;
-      const rect = sectionRef.current.getBoundingClientRect();
-      const windowHeight = window.innerHeight;
-      const currentPos = windowHeight - rect.top;
-      const totalDist = (windowHeight + rect.height * 0.45) || 1;
-      const progress = Math.max(0, Math.min(1, currentPos / totalDist));
-      setScrollProgress(Number.isFinite(progress) ? progress : 0);
-    };
-
-    window.addEventListener("mousemove", handleMouseMove);
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    handleScroll();
-
-    return () => {
-      window.removeEventListener("mousemove", handleMouseMove);
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
 
   const safeTabIdx = Math.max(0, Math.min(activeTab, TABS.length - 1));
   const current = TABS[safeTabIdx] || TABS[0];
 
-  // Upward translation offsets as user scrolls (comes from bottom to top)
-  const upOffset1 = (1 - scrollProgress) * 65;
-  const upOffset2 = (1 - scrollProgress) * 85;
-  const upOffset3 = (1 - scrollProgress) * 75;
-
   return (
-    <section ref={sectionRef} className={styles.section3} id="menumuz">
+    <section className={styles.section3} id="menumuz">
       {/* Top Wavy Arched Cutout Border */}
       <div className={styles.topCurveBorder} aria-hidden="true" />
 
@@ -147,8 +96,8 @@ export function SignatureShowcase({ locale = "tr" }: { locale?: string }) {
                     <Image
                       src={tab.iconActive}
                       alt=""
-                      width={38}
-                      height={34}
+                      width={40}
+                      height={36}
                       className={styles.iconImg}
                     />
                   </span>
@@ -162,59 +111,7 @@ export function SignatureShowcase({ locale = "tr" }: { locale?: string }) {
 
         {/* Tab Content Pane */}
         <div className={styles.tabContentPane} key={current.id}>
-          {/* Floating Ingredients Parallax - Move from bottom to top on scroll */}
-          <div
-            className={`${styles.movingImg} ${styles.moving1}`}
-            style={{
-              transform: `translate(${-(mousePos.x * 2) / 10}px, ${upOffset1 + -(mousePos.y * 2) / 10}px)`,
-            }}
-          >
-            <div className={styles.floatBob1}>
-              <Image
-                src={current.floating1}
-                alt=""
-                width={140}
-                height={140}
-                className={styles.floatAsset}
-              />
-            </div>
-          </div>
-
-          <div
-            className={`${styles.movingImg} ${styles.moving2}`}
-            style={{
-              transform: `translate(${-(mousePos.x * 4) / 10}px, ${upOffset2 + -(mousePos.y * 4) / 10}px)`,
-            }}
-          >
-            <div className={styles.floatBob2}>
-              <Image
-                src={current.floating2}
-                alt=""
-                width={130}
-                height={130}
-                className={styles.floatAsset}
-              />
-            </div>
-          </div>
-
-          <div
-            className={`${styles.movingImg} ${styles.moving3}`}
-            style={{
-              transform: `translate(${-(mousePos.x * 3) / 10}px, ${upOffset3 + -(mousePos.y * 3) / 10}px)`,
-            }}
-          >
-            <div className={styles.floatBob3}>
-              <Image
-                src={current.floating3}
-                alt=""
-                width={135}
-                height={135}
-                className={styles.floatAsset}
-              />
-            </div>
-          </div>
-
-          {/* Central Plate Presentation - Enters smoothly from right to left */}
+          {/* Central Plate / Dish Presentation */}
           <div className={styles.plateArea}>
             <div className={styles.plateWrapper}>
               {/* Concentric Arch Contour Rings */}
@@ -222,8 +119,8 @@ export function SignatureShowcase({ locale = "tr" }: { locale?: string }) {
               <Image
                 src={current.plateImg}
                 alt={isEn ? current.titleEn : current.title}
-                width={500}
-                height={500}
+                width={520}
+                height={520}
                 className={styles.plateImg}
                 priority
               />
