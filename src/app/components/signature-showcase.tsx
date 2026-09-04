@@ -25,7 +25,7 @@ const TABS: TabData[] = [
     id: "omletler",
     name: "Omletler",
     nameEn: "Omelettes",
-    iconActive: "/hamour/mi_tab-input-4-img-2_1.png",
+    iconActive: "/images/tab-icons/icon-omletler.png",
     plateImg: "/hamour/van_plate_royal.webp",
     title: "Güne Van Usulü Sahanda Omletle Başla!",
     titleEn: "Start the Day with Van Omelette!",
@@ -39,7 +39,7 @@ const TABS: TabData[] = [
     id: "sahanlar",
     name: "Sahanlar",
     nameEn: "Pan Dishes",
-    iconActive: "/hamour/mi_tab-input-3-img-2.png",
+    iconActive: "/images/tab-icons/icon-sahanlar.png",
     plateImg: "/hamour/van_plate_menemen.webp",
     title: "Bakır Sahanda Geleneksel Van Lezzetleri!",
     titleEn: "Traditional Van Delights in Copper Pans!",
@@ -53,7 +53,7 @@ const TABS: TabData[] = [
     id: "icecekler",
     name: "İçecekler",
     nameEn: "Beverages",
-    iconActive: "/hamour/mi_tab-input-2-img-2.png",
+    iconActive: "/images/tab-icons/icon-icecekler.png",
     plateImg: "/hamour/van_plate_coffee.webp",
     title: "Van Kedisi Özel Latte & Semaver Keyfi!",
     titleEn: "Special Van Cat Latte & Samovar Delight!",
@@ -95,9 +95,9 @@ export function SignatureShowcase({ locale = "tr" }: { locale?: string }) {
                   <span className={styles.iconWrapper}>
                     <Image
                       src={tab.iconActive}
-                      alt=""
-                      width={40}
-                      height={36}
+                      alt={isEn ? tab.nameEn : tab.name}
+                      width={44}
+                      height={44}
                       className={styles.iconImg}
                     />
                   </span>
