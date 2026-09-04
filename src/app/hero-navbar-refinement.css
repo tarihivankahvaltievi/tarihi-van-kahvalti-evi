@@ -160,6 +160,7 @@
 
 .hero-cinematic .hero-content-inner {
   max-width: 640px;
+  text-align: center;
 }
 
 .hero-cinematic .hero-subtitle {
@@ -207,7 +208,7 @@
 .hero-cinematic .hero-title.hero-title-visual {
   width: min(100%, 39rem);
   max-width: none;
-  margin: -0.25rem 0 0.8rem;
+  margin: -0.25rem auto 0.8rem;
   line-height: 0;
   text-shadow: none;
 }
@@ -221,7 +222,7 @@
 
 .hero-cinematic .hero-tagline {
   max-width: 31rem;
-  margin: 0 0 1.65rem;
+  margin: 0 auto 1.65rem;
   color: rgba(255, 250, 241, 0.9);
   font-size: clamp(1rem, 1.35vw, 1.15rem);
   font-weight: 430;
@@ -234,8 +235,8 @@
 .hero-cinematic .hero-actions {
   display: flex;
   align-items: center;
-  justify-content: flex-start;
-  gap: 1.2rem;
+  justify-content: center;
+  gap: 0.75rem;
 }
 
 .hero-cinematic .btn-primary,
@@ -254,28 +255,20 @@
 }
 
 .hero-cinematic .btn-secondary-hero {
-  gap: 0.55rem;
-  padding-inline: 0.2rem;
-  border: 0;
-  border-bottom: 1px solid rgba(255, 250, 241, 0.56);
-  border-radius: 0 !important;
-  background: transparent;
+  padding-inline: 1.35rem;
+  border: 1px solid rgba(244, 218, 190, 0.24);
+  border-radius: 5px !important;
+  background: #70171d;
+  color: #fffaf1;
   backdrop-filter: none;
   -webkit-backdrop-filter: none;
+  box-shadow: 0 5px 8px rgba(15, 5, 6, 0.26);
 }
 
 .hero-cinematic .btn-secondary-hero:hover {
-  border-color: #edcb8a;
-  background: transparent;
-}
-
-.hero-action-arrow {
-  font-size: 1rem;
-  transition: transform 240ms cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.hero-cinematic .btn-secondary-hero:hover .hero-action-arrow {
-  transform: translate3d(2px, -2px, 0);
+  border-color: rgba(244, 218, 190, 0.42);
+  background: #861e25;
+  color: #fffaf1;
 }
 
 .hero-cinematic .carousel-indicators {
@@ -426,21 +419,12 @@
 
   .hero-cinematic .hero-content {
     padding: 0 1.25rem clamp(6.6rem, 14svh, 7.5rem);
-    text-align: left;
+    text-align: center;
   }
 
   .hero-cinematic .hero-content-inner {
     max-width: 23rem;
-  }
-
-  .hero-cinematic .hero-subtitle {
-    margin-bottom: 0.72rem;
-    font-size: 0.65rem;
-    letter-spacing: 0.15em;
-  }
-
-  .hero-subtitle-rule {
-    width: 1.8rem;
+    margin-inline: auto;
   }
 
   .hero-cinematic .hero-title {
@@ -454,33 +438,35 @@
   .hero-cinematic .hero-title.hero-title-visual {
     width: min(100%, 25rem);
     max-width: none;
-    margin: -0.1rem 0 0.7rem;
+    margin: -0.1rem auto 0.7rem;
   }
 
   .hero-cinematic .hero-tagline {
     max-width: 21rem;
-    margin-bottom: 1.15rem;
+    margin: 0 auto 1.15rem;
     font-size: 0.94rem !important;
     line-height: 1.42 !important;
   }
 
   .hero-cinematic .hero-actions {
     max-width: none;
-    flex-flow: row wrap;
+    flex-flow: row nowrap;
     align-items: center;
-    gap: 0.9rem;
+    justify-content: center;
+    gap: 0.6rem;
   }
 
   .hero-cinematic .btn-primary,
   .hero-cinematic .btn-secondary-hero {
     min-height: 44px;
-    width: auto;
-    padding: 0.68rem 1rem;
-    font-size: 0.73rem;
+    width: min(10rem, calc(50% - 0.3rem));
+    padding: 0.68rem 0.65rem;
+    font-size: 0.7rem;
+    letter-spacing: 0.065em;
   }
 
   .hero-cinematic .btn-secondary-hero {
-    padding-inline: 0.12rem;
+    padding-inline: 0.55rem;
   }
 
   .hero-cinematic .carousel-indicators {

@@ -102,10 +102,6 @@ export function VanHeroParallax({ locale = "tr" }: { locale?: SiteLocale }) {
 
       <div className="container hero-content">
         <div className="hero-content-inner animate-fade-in">
-          <div className="hero-subtitle">
-            <span className="hero-subtitle-rule" aria-hidden="true" />
-            <span>{locale === "en" ? "BEYOĞLU · SINCE 1978" : "BEYOĞLU · 1978"}</span>
-          </div>
           <h1 className="hero-title hero-title-visual">
             <span className="sr-only">Tarihi Van Kahvaltı Evi</span>
             <Image
@@ -130,8 +126,7 @@ export function VanHeroParallax({ locale = "tr" }: { locale?: SiteLocale }) {
               href={locale === "en" ? "/en/rezervasyon" : "/rezervasyon"}
               className="btn btn-secondary-hero"
             >
-              <span>{locale === "en" ? "BOOK A TABLE" : "MASA AYIR"}</span>
-              <span className="hero-action-arrow" aria-hidden="true">↗</span>
+              {locale === "en" ? "MAKE A RESERVATION" : "REZERVASYON YAP"}
             </Link>
           </div>
         </div>
