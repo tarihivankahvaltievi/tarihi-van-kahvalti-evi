@@ -7,23 +7,15 @@ import {
   useEffect,
   useRef,
   useState,
-  type CSSProperties,
-  type MouseEvent,
   type ReactNode,
 } from "react";
 import {
-  BookOpen,
   Calendar,
-  Camera,
-  ChevronRight,
-  CircleHelp,
-  Home,
-  Languages,
   MapPin,
   MessageCircle,
   Phone,
 } from "lucide-react";
-import { displayPhone, mapsUrl, telUrl, whatsappUrl } from "./seo";
+import { displayPhone, instagramUrl, mapsUrl, telUrl, whatsappUrl } from "./seo";
 import { messagesFor, type SiteLocale } from "./home-localization";
 import { trackEvent } from "./analytics";
 
@@ -48,11 +40,7 @@ export default function ClientPage({ children, locale = "tr" }: { children: Reac
   const mobileBarHiddenRef = useRef(false);
   const menuButtonRef = useRef<HTMLButtonElement>(null);
   const menuPanelRef = useRef<HTMLDivElement>(null);
-  const [hoverStyle, setHoverStyle] = useState<CSSProperties>({
-    opacity: 0,
-    left: 0,
-    width: 0,
-  });
+
 
   useEffect(() => {
     document.documentElement.lang = messages.documentLanguage;
@@ -174,274 +162,271 @@ export default function ClientPage({ children, locale = "tr" }: { children: Reac
     return () => window.removeEventListener("open-booking", handleBookingRequest);
   }, [locale, router]);
 
-  const handleMouseEnter = (event: MouseEvent<HTMLAnchorElement>) => {
-    const target = event.currentTarget;
-    setHoverStyle({
-      opacity: 1,
-      left: target.offsetLeft,
-      width: target.offsetWidth,
-    });
-  };
 
-  const handleMouseLeave = () => {
-    setHoverStyle((prev) => ({
-      ...prev,
-      opacity: 0,
-    }));
-  };
 
   return (
     <>
       <div id="top" lang={messages.documentLanguage} className={`site-shell theme-breakfast ${isMenuPage ? "menu-page-shell" : ""}`}>
-        <header className={`nav ${scrolled ? "scrolled" : ""} ${menuOpen ? "menu-open" : ""}`}>
-          <div className="logo-wrap">
-            <div className="logo-emblem brand-logo-mark" aria-hidden="true">
-              <Image
-                src="/images/brand-icon-small.png"
-                alt="Tarihi Van Kahvaltı Evi"
-                width={54}
-                height={68}
-                loading="eager"
-                className="brand-logo-image"
-              />
+        <header className={`header-wrapper ${scrolled ? "is-scrolled" : ""}`}>
+          <div className="navbar-topbar">
+            <div className="topbar-container">
+              <div className="topbar-left">
+                <a
+                  href={telUrl}
+                  className="topbar-info"
+                  onClick={() => trackEvent("contact_click", { contact_method: "phone", surface: "topbar" })}
+                >
+                  <Phone size={13} />
+                  <span>{displayPhone}</span>
+                </a>
+              </div>
+              <div className="topbar-right">
+                <a
+                  href={instagramUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="topbar-social-link"
+                  title="Instagram"
+                  aria-label="Instagram"
+                  onClick={() => trackEvent("contact_click", { contact_method: "instagram", surface: "topbar" })}
+                >
+                  <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                    <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                  </svg>
+                </a>
+                <a
+                  href={whatsappUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="topbar-social-link"
+                  title="WhatsApp"
+                  aria-label="WhatsApp"
+                  onClick={() => trackEvent("contact_click", { contact_method: "whatsapp", surface: "topbar" })}
+                >
+                  <MessageCircle size={14} />
+                </a>
+                <span className="topbar-separator" aria-hidden="true">|</span>
+                <Link
+                  className="topbar-lang-toggle"
+                  href={alternateHref}
+                  hrefLang={locale === "en" ? "tr" : "en"}
+                  lang={locale === "en" ? "tr" : "en"}
+                  aria-label={messages.alternateLanguageLabel}
+                >
+                  {locale === "en" ? "TR" : "EN"}
+                </Link>
+              </div>
             </div>
-            <Link className="logo" href={messages.homeHref} aria-label="Tarihi Van Kahvaltı Evi">
-              <span className="logo-word">
-                <span className="logo-tarihi">Tarihi</span><span className="logo-van">Van</span>
-              </span>
-              <span className="logo-subtitle">
-                <span>Kahvaltı Evi</span>
-              </span>
-            </Link>
           </div>
 
-          <nav className="nav-links" aria-label={messages.nav.aria} onMouseLeave={handleMouseLeave}>
-            <span className="nav-hover-pill" style={hoverStyle} />
-            <Link href={messages.aboutHref} onMouseEnter={handleMouseEnter}>{messages.nav.about}</Link>
-            <Link href={messages.menuHref} aria-current={isMenuPage ? "page" : undefined} onMouseEnter={handleMouseEnter}>{messages.nav.menu}</Link>
-            <Link href={locale === "en" ? "/en/rezervasyon" : "/rezervasyon"} aria-current={isReservationPage ? "page" : undefined} onMouseEnter={handleMouseEnter}>
-              {locale === "en" ? "Reservation" : "Rezervasyon"}
-            </Link>
-            <Link href={messages.galleryHref} onMouseEnter={handleMouseEnter}>{messages.nav.gallery}</Link>
-            {locale === "en" ? (
-              <a href={mapsUrl} target="_blank" rel="noopener noreferrer" onMouseEnter={handleMouseEnter}>{messages.nav.location}</a>
-            ) : (
-              <Link href="/konum" aria-current={isLocationPage ? "page" : undefined} onMouseEnter={handleMouseEnter}>{messages.nav.location}</Link>
+          <nav className="glass-nav">
+            <div className="nav-container">
+              <Link
+                className="nav-logo"
+                href={messages.homeHref}
+                aria-label="Tarihi Van Kahvaltı Evi"
+                onClick={(e) => {
+                  setMenuOpen(false);
+                  if (pathname === "/" || pathname === "/en") {
+                    e.preventDefault();
+                    window.scrollTo({ top: 0, behavior: "smooth" });
+                  }
+                }}
+              >
+                <div className="nav-logo-emblem" aria-hidden="true">
+                  <Image
+                    src="/images/brand-icon-small.png"
+                    alt="Tarihi Van Kahvaltı Evi"
+                    width={42}
+                    height={52}
+                    loading="eager"
+                    className="brand-logo-image"
+                  />
+                </div>
+                <div className="nav-logo-text">
+                  <span className="nav-logo-main">TARİHİ VAN</span>
+                  <span className="nav-logo-sub">KAHVALTI EVİ</span>
+                </div>
+              </Link>
+
+              <ul className="nav-links">
+                <li>
+                  <Link
+                    href={messages.homeHref}
+                    className={`nav-link ${pathname === "/" || pathname === "/en" ? "active" : ""}`}
+                  >
+                    {locale === "en" ? "HOME" : "ANA SAYFA"}
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href={messages.aboutHref}
+                    className={`nav-link ${pathname === "/hikayemiz" ? "active" : ""}`}
+                  >
+                    {locale === "en" ? "ABOUT US" : "HİKAYEMİZ"}
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href={messages.menuHref}
+                    className={`nav-link ${isMenuPage ? "active" : ""}`}
+                  >
+                    {locale === "en" ? "MENU" : "MENÜ"}
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href={locale === "en" ? "/en/rezervasyon" : "/rezervasyon"}
+                    className={`nav-link ${isReservationPage ? "active" : ""}`}
+                  >
+                    {locale === "en" ? "RESERVATION" : "REZERVASYON"}
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href={messages.galleryHref}
+                    className="nav-link"
+                  >
+                    {locale === "en" ? "GALLERY" : "GALERİ"}
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href={messages.faqHref}
+                    className="nav-link"
+                  >
+                    {locale === "en" ? "FAQ" : "SSS"}
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="/konum"
+                    className={`nav-link ${isLocationPage ? "active" : ""}`}
+                  >
+                    {locale === "en" ? "LOCATION" : "KONUM"}
+                  </Link>
+                </li>
+              </ul>
+
+              <button
+                ref={menuButtonRef}
+                type="button"
+                className={`mobile-toggle ${menuOpen ? "open" : ""}`}
+                aria-label={menuOpen ? messages.nav.close : messages.nav.open}
+                aria-expanded={menuOpen}
+                aria-controls="mobile-drawer-menu"
+                onClick={() => setMenuOpen((open) => !open)}
+              >
+                <span className="toggle-bar top-bar" />
+                <span className="toggle-bar mid-bar" />
+                <span className="toggle-bar bot-bar" />
+              </button>
+            </div>
+
+            {menuOpen && (
+              <div
+                id="mobile-drawer-menu"
+                ref={menuPanelRef}
+                className="mobile-drawer"
+                role="dialog"
+                aria-modal="true"
+              >
+                <ul className="mobile-links">
+                  <li>
+                    <Link
+                      href={messages.homeHref}
+                      className={`mobile-link ${pathname === "/" || pathname === "/en" ? "active" : ""}`}
+                      onClick={() => setMenuOpen(false)}
+                    >
+                      {locale === "en" ? "ANA SAYFA" : "ANA SAYFA"}
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      href={messages.aboutHref}
+                      className={`mobile-link ${pathname === "/hikayemiz" ? "active" : ""}`}
+                      onClick={() => setMenuOpen(false)}
+                    >
+                      {locale === "en" ? "HİKAYEMİZ" : "HİKAYEMİZ"}
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      href={messages.menuHref}
+                      className={`mobile-link ${isMenuPage ? "active" : ""}`}
+                      onClick={() => setMenuOpen(false)}
+                    >
+                      {locale === "en" ? "MENÜ" : "MENÜ"}
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      href={locale === "en" ? "/en/rezervasyon" : "/rezervasyon"}
+                      className={`mobile-link ${isReservationPage ? "active" : ""}`}
+                      onClick={() => setMenuOpen(false)}
+                    >
+                      {locale === "en" ? "REZERVASYON" : "REZERVASYON"}
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      href={messages.galleryHref}
+                      className="mobile-link"
+                      onClick={() => setMenuOpen(false)}
+                    >
+                      {locale === "en" ? "GALERİ" : "GALERİ"}
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      href={messages.faqHref}
+                      className="mobile-link"
+                      onClick={() => setMenuOpen(false)}
+                    >
+                      {locale === "en" ? "SSS" : "SSS"}
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      href="/konum"
+                      className={`mobile-link ${isLocationPage ? "active" : ""}`}
+                      onClick={() => setMenuOpen(false)}
+                    >
+                      {locale === "en" ? "KONUM" : "KONUM"}
+                    </Link>
+                  </li>
+                </ul>
+                <div className="mobile-drawer-actions">
+                  <a
+                    href={whatsappUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="mobile-drawer-whatsapp-btn"
+                    onClick={() => {
+                      setMenuOpen(false);
+                      trackEvent("contact_click", { contact_method: "whatsapp", surface: "mobile_drawer" });
+                    }}
+                  >
+                    <MessageCircle size={16} />
+                    <span>{locale === "en" ? "WhatsApp Reservation" : "WhatsApp Rezervasyon"}</span>
+                  </a>
+                </div>
+              </div>
             )}
-            <Link href={messages.faqHref} onMouseEnter={handleMouseEnter}>{messages.nav.faq}</Link>
           </nav>
-
-          <div className="nav-actions">
-            <Link
-              className="nav-language"
-              href={alternateHref}
-              hrefLang={locale === "en" ? "tr" : "en"}
-              lang={locale === "en" ? "tr" : "en"}
-              aria-label={messages.alternateLanguageLabel}
-            >
-              {messages.alternateLanguage}
-            </Link>
-            <a
-              className="nav-location"
-              href={mapsUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={() => trackEvent("contact_click", { contact_method: "directions", surface: "header" })}
-            >
-              <MapPin size={16} />
-              <span>Beyoğlu</span>
-            </a>
-            <button
-              ref={menuButtonRef}
-              type="button"
-              className="nav-menu-button"
-              aria-label={menuOpen ? messages.nav.close : messages.nav.open}
-              aria-expanded={menuOpen}
-              aria-controls="site-menu"
-              onClick={() => setMenuOpen((open) => !open)}
-            >
-              <span className="nav-menu-glyph" aria-hidden="true">
-                <span />
-                <span />
-                <span />
-              </span>
-            </button>
-          </div>
-
-          <div
-            ref={menuPanelRef}
-            id="site-menu"
-            className="nav-menu-panel"
-            role="dialog"
-            aria-modal="true"
-            aria-hidden={!menuOpen}
-            inert={!menuOpen}
-            aria-labelledby="site-menu-title"
-          >
-            <div className="nav-menu-ambient" aria-hidden="true">
-              <span />
-              <span />
-              <span />
-            </div>
-            <div className="nav-menu-art" aria-hidden="true">
-              <span className="nav-menu-art-mark">Van</span>
-              <span className="nav-menu-art-line" />
-              <span className="nav-menu-art-steam" />
-              <span className="nav-menu-art-steam" />
-            </div>
-            <div className="nav-drawer-head">
-              <span id="site-menu-title" data-menu-title tabIndex={-1}>{messages.nav.panelTitle}</span>
-              <small>1978 · Beyoğlu</small>
-            </div>
-            <Link className="nav-menu-primary" href={messages.homeHref} tabIndex={menuOpen ? 0 : -1} style={{ "--item-index": 1 } as CSSProperties} onClick={() => setMenuOpen(false)}>
-              <Home size={18} />
-              <span className="nav-menu-copy">
-                <span className="nav-menu-link-text">{messages.nav.home[0]}</span>
-                <span className="nav-menu-link-meta">{messages.nav.home[1]}</span>
-              </span>
-              <ChevronRight size={17} />
-            </Link>
-            <Link className="nav-menu-primary" href={messages.aboutHref} tabIndex={menuOpen ? 0 : -1} style={{ "--item-index": 2 } as CSSProperties} onClick={() => setMenuOpen(false)}>
-              <BookOpen size={18} />
-              <span className="nav-menu-copy">
-                <span className="nav-menu-link-text">{messages.nav.story[0]}</span>
-                <span className="nav-menu-link-meta">{messages.nav.story[1]}</span>
-              </span>
-              <ChevronRight size={17} />
-            </Link>
-            <Link className="nav-menu-primary" href={messages.menuHref} aria-current={isMenuPage ? "page" : undefined} tabIndex={menuOpen ? 0 : -1} style={{ "--item-index": 3 } as CSSProperties} onClick={() => setMenuOpen(false)}>
-              <BookOpen size={18} />
-              <span className="nav-menu-copy">
-                <span className="nav-menu-link-text">{messages.nav.liveMenu[0]}</span>
-                <span className="nav-menu-link-meta">{messages.nav.liveMenu[1]}</span>
-              </span>
-              <ChevronRight size={17} />
-            </Link>
-            <Link className="nav-menu-primary" href={messages.galleryHref} tabIndex={menuOpen ? 0 : -1} style={{ "--item-index": 4 } as CSSProperties} onClick={() => setMenuOpen(false)}>
-              <Camera size={18} />
-              <span className="nav-menu-copy">
-                <span className="nav-menu-link-text">{messages.nav.galleryItem[0]}</span>
-                <span className="nav-menu-link-meta">{messages.nav.galleryItem[1]}</span>
-              </span>
-              <ChevronRight size={17} />
-            </Link>
-            <a className="nav-menu-primary" href={locale === "en" ? mapsUrl : "/konum"} target={locale === "en" ? "_blank" : undefined} rel={locale === "en" ? "noopener noreferrer" : undefined} aria-current={isLocationPage ? "page" : undefined} tabIndex={menuOpen ? 0 : -1} style={{ "--item-index": 5 } as CSSProperties} onClick={() => setMenuOpen(false)}>
-              <MapPin size={18} />
-              <span className="nav-menu-copy">
-                <span className="nav-menu-link-text">{messages.nav.directions[0]}</span>
-                <span className="nav-menu-link-meta">{messages.nav.directions[1]}</span>
-              </span>
-              <ChevronRight size={17} />
-            </a>
-            <Link className="nav-menu-utility" href={locale === "en" ? messages.aboutHref : "/van-kahvaltisi"} tabIndex={menuOpen ? 0 : -1} style={{ "--item-index": 6 } as CSSProperties} onClick={() => setMenuOpen(false)}>
-              <BookOpen size={18} />
-              <span className="nav-menu-copy">
-                <span className="nav-menu-link-text">{messages.nav.breakfast[0]}</span>
-                <span className="nav-menu-link-meta">{messages.nav.breakfast[1]}</span>
-              </span>
-              <ChevronRight size={17} />
-            </Link>
-            {messages.nav.internationalGuides.map(([href, label, meta, language], index) => (
-              <Link
-                key={href}
-                className="nav-menu-utility nav-menu-guide"
-                href={href}
-                hrefLang={language}
-                lang={language}
-                tabIndex={menuOpen ? 0 : -1}
-                style={{ "--item-index": index + 7 } as CSSProperties}
-                onClick={() => setMenuOpen(false)}
-              >
-                <Languages size={18} />
-                <span className="nav-menu-copy">
-                  <span className="nav-menu-link-text"><bdi>{label}</bdi></span>
-                  <span className="nav-menu-link-meta"><bdi>{meta}</bdi></span>
-                </span>
-                <ChevronRight size={17} />
-              </Link>
-            ))}
-            <Link className="nav-menu-utility" href={messages.faqHref} tabIndex={menuOpen ? 0 : -1} style={{ "--item-index": 10 } as CSSProperties} onClick={() => setMenuOpen(false)}>
-              <CircleHelp size={18} />
-              <span className="nav-menu-copy">
-                <span className="nav-menu-link-text">{messages.nav.questions[0]}</span>
-                <span className="nav-menu-link-meta">{messages.nav.questions[1]}</span>
-              </span>
-              <ChevronRight size={17} />
-            </Link>
-            <a
-              className="nav-menu-utility"
-              href={whatsappUrl}
-              tabIndex={menuOpen ? 0 : -1}
-              style={{ "--item-index": 11 } as CSSProperties}
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={() => {
-                setMenuOpen(false);
-                trackEvent("contact_click", { contact_method: "whatsapp", surface: "navigation_drawer" });
-              }}
-            >
-              <MessageCircle size={18} />
-              <span className="nav-menu-copy">
-                <span className="nav-menu-link-text">{messages.nav.whatsapp[0]}</span>
-                <span className="nav-menu-link-meta">{messages.nav.whatsapp[1]}</span>
-              </span>
-              <ChevronRight size={17} />
-            </a>
-            <a
-              className="nav-menu-utility"
-              href={telUrl}
-              tabIndex={menuOpen ? 0 : -1}
-              style={{ "--item-index": 12 } as CSSProperties}
-              onClick={() => {
-                setMenuOpen(false);
-                trackEvent("contact_click", { contact_method: "phone", surface: "navigation_drawer" });
-              }}
-            >
-              <Phone size={18} />
-              <span className="nav-menu-copy">
-                <span className="nav-menu-link-text">{locale === "en" ? "Call Directly" : "Hemen Ara"}</span>
-                <span className="nav-menu-link-meta">{displayPhone}</span>
-              </span>
-              <ChevronRight size={17} />
-            </a>
-            <Link
-              className="nav-menu-utility nav-menu-language"
-              href={alternateHref}
-              hrefLang={locale === "en" ? "tr" : "en"}
-              lang={locale === "en" ? "tr" : "en"}
-              tabIndex={menuOpen ? 0 : -1}
-              style={{ "--item-index": 12 } as CSSProperties}
-              onClick={() => setMenuOpen(false)}
-            >
-              <Languages size={18} />
-              <span className="nav-menu-copy">
-                <span className="nav-menu-link-text">{messages.alternateLanguageLabel}</span>
-                <span className="nav-menu-link-meta">{messages.alternateLanguage}</span>
-              </span>
-              <ChevronRight size={17} />
-            </Link>
-            <div className="nav-drawer-footer">
-              <Link
-                href={locale === "en" ? "/en/rezervasyon" : "/rezervasyon"}
-                className="nav-drawer-book"
-                tabIndex={menuOpen ? 0 : -1}
-                onClick={() => setMenuOpen(false)}
-              >
-                <Calendar size={17} />
-                <span>{messages.nav.book}</span>
-                <ChevronRight size={16} />
-              </Link>
-            </div>
-          </div>
         </header>
 
-        <button
-          type="button"
-          className={`nav-menu-backdrop ${menuOpen ? "is-visible" : ""}`}
-          aria-label={messages.nav.close}
-          tabIndex={-1}
-          onClick={() => setMenuOpen(false)}
-        />
+        {menuOpen && (
+          <button
+            type="button"
+            className="mobile-drawer-backdrop"
+            aria-label={messages.nav.close}
+            tabIndex={-1}
+            onClick={() => setMenuOpen(false)}
+          />
+        )}
 
         {children}
       </div>
