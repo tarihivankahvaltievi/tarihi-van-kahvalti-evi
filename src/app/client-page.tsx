@@ -166,6 +166,7 @@ export default function ClientPage({ children, locale = "tr" }: { children: Reac
                     height={48}
                     loading="eager"
                     className="brand-logo-image"
+                    style={{ width: "100%", height: "auto" }}
                   />
                 </div>
                 <div className="nav-logo-text">

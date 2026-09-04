@@ -17,24 +17,14 @@ export function SignatureShowcase({ locale = "tr" }: { locale?: SiteLocale }) {
 
   return (
     <section id="signature-menu" className={styles.section} aria-labelledby="showcase-title">
-      {/* Top Decorative Transition Anchor */}
-      <div className={styles.topAnchor} aria-hidden="true">
-        <svg viewBox="0 0 120 28" fill="none" xmlns="http://www.w3.org/2000/svg" className={styles.anchorSvg}>
-          <path d="M0 0C30 0 45 28 60 28C75 28 90 0 120 0H0Z" fill="#240b0e" />
-        </svg>
-      </div>
-
       <div className={styles.container}>
-        {/* Section Header */}
         <header className={styles.header}>
-          <span className={styles.eyebrow}>{showcase.eyebrow}</span>
           <h2 id="showcase-title" className={styles.title}>
             {showcase.title} <span className={styles.titleAccent}>{showcase.titleAccent}</span>
           </h2>
           <p className={styles.lead}>{showcase.lead}</p>
         </header>
 
-        {/* Category Navigation Tabs (Mobile Horizontally Scrollable) */}
         <div className={styles.tabsTrackWrapper}>
           <div className={styles.tabsTrack} role="tablist" aria-label={showcase.title}>
             {showcase.tabs.map((tab, idx) => {
@@ -47,35 +37,23 @@ export function SignatureShowcase({ locale = "tr" }: { locale?: SiteLocale }) {
                   aria-selected={isActive}
                   aria-controls={`panel-${tab.id}`}
                   tabIndex={isActive ? 0 : -1}
-                  className={`${styles.tabBtn} ${isActive ? styles.tabBtnActive : ""}`}
-                  onClick={() => setActiveTabId(tab.id)}
-                >
-                  <span className={styles.tabIconWrap}>
-                    <Image
-                      src={tab.icon}
-                      alt=""
-                      width={44}
-                      height={44}
-                      className={styles.tabIcon}
-                      aria-hidden="true"
-                    />
-                  </span>
-                  <span className={styles.tabLabel}>{tab.label}</span>
-                  <span className={styles.tabIndex}>0{idx + 1}</span>
+                className={`${styles.tabBtn} ${isActive ? styles.tabBtnActive : ""}`}
+                onClick={() => setActiveTabId(tab.id)}
+              >
+                <span className={styles.tabIndex}>{idx + 1}</span>
+                <span className={styles.tabLabel}>{tab.label}</span>
                 </button>
               );
             })}
           </div>
         </div>
 
-        {/* Tab Content Card Panel */}
         <div
           id={`panel-${activeTab.id}`}
           role="tabpanel"
           aria-labelledby={`tab-${activeTab.id}`}
           className={styles.panel}
         >
-          {/* Dish Photography Frame */}
           <div className={styles.visualCol}>
             <div className={styles.imageFrame}>
               <Image
@@ -94,7 +72,6 @@ export function SignatureShowcase({ locale = "tr" }: { locale?: SiteLocale }) {
             </div>
           </div>
 
-          {/* Editorial Dish Details */}
           <div className={styles.infoCol}>
             <div className={styles.metaRow}>
               <span className={styles.counter}>0{activeIndex + 1} / 0{showcase.tabs.length}</span>

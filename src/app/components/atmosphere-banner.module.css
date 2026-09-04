@@ -1,153 +1,98 @@
 .section {
   position: relative;
+  min-height: min(56rem, 74vw);
   overflow: hidden;
-  background-color: #240b0e;
-  color: #ffffff;
-  padding-block: clamp(6.5rem, 12vw, 11rem);
-  text-align: center;
   isolation: isolate;
+  display: grid;
+  place-items: center;
+  background: #35191a;
+  color: #fff9ef;
 }
 
-/* ─── Top Anchor (Arched transition from white section) ─── */
-.topAnchor {
-  position: absolute;
-  top: -1px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 140px;
-  height: 32px;
-  z-index: 10;
-  pointer-events: none;
-}
-
-.anchorSvg {
-  display: block;
-  width: 100%;
-  height: 100%;
-}
-
-/* ─── Background & Overlays ─── */
-.bg {
-  position: absolute;
-  inset: 0;
-  z-index: -1;
-}
-
-.bgImage {
-  object-fit: cover;
-  object-position: center 40%;
-  filter: brightness(0.42) saturate(1.15);
-  transform: scale(1.05);
-  transition: transform 10s ease-out;
-}
-
-.section:hover .bgImage {
-  transform: scale(1.08);
-}
-
-.bgOverlay {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    180deg,
-    rgba(36, 11, 14, 0.72) 0%,
-    rgba(36, 11, 14, 0.55) 50%,
-    rgba(36, 11, 14, 0.85) 100%
-  );
-}
-
+.bg,
+.bgImage,
+.bgOverlay,
 .bgVignette {
   position: absolute;
   inset: 0;
-  background: radial-gradient(circle at center, transparent 40%, rgba(20, 5, 7, 0.6) 100%);
 }
 
-/* ─── Typography & Content ─── */
+.bg { z-index: -1; }
+
+.bgImage {
+  object-fit: cover;
+  object-position: center;
+  filter: saturate(0.92) brightness(0.7);
+  transform: scale(1.02);
+  transition: transform 12s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.section:hover .bgImage { transform: scale(1.06); }
+
+.bgOverlay {
+  background: linear-gradient(90deg, rgba(46, 21, 22, 0.82), rgba(46, 21, 22, 0.32) 52%, rgba(46, 21, 22, 0.8));
+}
+
+.bgVignette {
+  background: linear-gradient(180deg, rgba(20, 8, 9, 0.24), transparent 42%, rgba(20, 8, 9, 0.52));
+}
+
 .container {
-  width: min(100% - 2.5rem, 960px);
-  margin-inline: auto;
-  position: relative;
-  z-index: 2;
-}
-
-.badgeWrapper {
-  margin-bottom: 1.5rem;
+  width: min(100% - 2.5rem, 920px);
+  padding: clamp(6rem, 12vw, 11rem) 0;
+  text-align: center;
 }
 
 .locationBadge {
-  display: inline-block;
-  font-family: var(--font-commissioner-gf), sans-serif;
-  font-size: 0.8rem;
+  margin: 0 0 1.25rem;
+  color: #f4d7a9;
+  font-family: var(--font-commissioner-gf), system-ui, sans-serif;
+  font-size: 0.72rem;
   font-weight: 700;
-  letter-spacing: 0.26em;
-  color: #dfb77c;
-  padding: 6px 18px;
-  border-radius: 40px;
-  border: 1px solid rgba(223, 183, 124, 0.35);
-  background: rgba(36, 11, 14, 0.45);
-  backdrop-filter: blur(8px);
+  letter-spacing: 0.16em;
 }
 
 .title {
-  font-family: var(--font-bodoni-gf), serif;
-  font-size: clamp(2.6rem, 6.2vw, 5.2rem);
-  font-weight: 400;
-  line-height: 1.12;
-  letter-spacing: -0.015em;
-  margin: 0 0 1.6rem;
+  max-width: 14ch;
+  margin: 0 auto 1.25rem;
+  color: #fff7e9;
+  font-family: var(--font-bodoni-gf), Georgia, serif;
+  font-size: clamp(3rem, 7vw, 6.1rem);
+  font-weight: 500;
+  letter-spacing: -0.035em;
+  line-height: 0.94;
   text-wrap: balance;
 }
 
-.wordIvory {
-  color: #fbf8f3;
-}
-
-.wordGold {
-  font-style: italic;
-  color: #dfb77c;
-  font-weight: 400;
-}
+.wordAccent { color: #f5d09c; font-style: italic; }
 
 .lead {
-  font-family: var(--font-literata-gf), Georgia, serif;
-  font-size: clamp(1.1rem, 1.4vw, 1.35rem);
-  line-height: 1.65;
-  color: rgba(251, 248, 243, 0.9);
-  max-width: 680px;
+  max-width: 50ch;
   margin: 0 auto 0.8rem;
+  color: rgba(255, 249, 239, 0.94);
+  font-family: var(--font-literata-gf), Georgia, serif;
+  font-size: clamp(1.05rem, 1.7vw, 1.4rem);
+  line-height: 1.58;
   text-wrap: pretty;
 }
 
 .subtext {
-  font-family: var(--font-commissioner-gf), sans-serif;
-  font-size: clamp(0.9rem, 1.05vw, 0.98rem);
-  letter-spacing: 0.08em;
-  color: #c59b63;
-  margin: 0;
-  text-transform: uppercase;
+  margin: 0 auto;
+  color: rgba(255, 249, 239, 0.76);
+  font-family: var(--font-commissioner-gf), system-ui, sans-serif;
+  font-size: clamp(0.82rem, 1vw, 0.95rem);
+  line-height: 1.65;
+  text-wrap: pretty;
 }
 
-/* ─── Mobile Responsiveness ─── */
-@media (max-width: 640px) {
-  .section {
-    padding-block: 5.5rem;
-  }
+@media (max-width: 700px) {
+  .section { min-height: 37rem; }
+  .container { width: min(100% - 2rem, 620px); padding: 6.5rem 0; }
+  .title { max-width: 10ch; font-size: clamp(2.75rem, 14vw, 4.4rem); }
+  .lead { font-size: 1.05rem; }
+  .bgOverlay { background: linear-gradient(180deg, rgba(46, 21, 22, 0.68), rgba(46, 21, 22, 0.38) 55%, rgba(46, 21, 22, 0.84)); }
+}
 
-  .topAnchor {
-    width: 110px;
-    height: 24px;
-  }
-
-  .title {
-    font-size: 2.35rem;
-    line-height: 1.18;
-  }
-
-  .lead {
-    font-size: 1.02rem;
-  }
-
-  .subtext {
-    font-size: 0.82rem;
-  }
+@media (prefers-reduced-motion: reduce) {
+  .bgImage { transform: none; transition: none; }
 }

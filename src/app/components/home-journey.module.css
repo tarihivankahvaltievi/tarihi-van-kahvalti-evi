@@ -1,0 +1,16 @@
+.gallery { position: relative; overflow: hidden; padding: clamp(5rem, 9vw, 8.5rem) 0; background: #35191a; color: #fff8ed; }
+.gallery::before { position: absolute; inset: 0; content: ""; pointer-events: none; background: linear-gradient(90deg, rgba(53,25,26,.92), rgba(53,25,26,.55)), url("/images/tea-service.webp") center / cover; opacity: .5; }
+.galleryHead { position: relative; z-index: 1; display: flex; align-items: end; justify-content: space-between; gap: 2rem; width: min(100% - 2.5rem, 1140px); margin: 0 auto clamp(1.8rem, 4vw, 3.2rem); }
+.galleryHead h2 { max-width: 8ch; margin: 0; color: #fff8ed; font-family: var(--font-bodoni-gf), Georgia, serif; font-size: clamp(3rem, 6vw, 5.4rem); font-weight: 500; letter-spacing: -.035em; line-height: .94; text-wrap: balance; }
+.galleryHead h2 span { color: #f2cf9b; font-style: italic; font-weight: 450; }
+.galleryBooking { position: relative; z-index: 2; display: inline-flex; align-items: center; gap: .5rem; min-height: 3.1rem; padding: .75rem 1rem; border: 1px solid rgba(255,248,237,.78); border-radius: 0; background: transparent; color: #fff8ed; font-family: var(--font-commissioner-gf), system-ui, sans-serif; font-size: .83rem; font-weight: 750; letter-spacing: .04em; transition: background-color 180ms ease, color 180ms ease, transform 180ms ease; }
+.galleryBooking:hover { background: #f2cf9b; color: #35191a; transform: translateY(-2px); }
+.gallery :global(.gallery-hero-shell) { position: relative; z-index: 1; width: min(100% - 2.5rem, 1220px) !important; margin: 0 auto !important; background: transparent !important; }
+.gallery :global(.gallery-ambient) { display: none; }
+.gallery :global(.gallery-marquee) { background: transparent !important; }
+.gallery :global(.gallery-marquee::before), .gallery :global(.gallery-marquee::after) { display: none !important; }
+.gallery :global(.gallery-marquee-card) { border: 1px solid rgba(255,248,237,.48) !important; border-radius: 0 !important; box-shadow: none !important; }
+.gallery :global(.gallery-marquee-card:hover), .gallery :global(.gallery-marquee-card:focus-visible) { border-color: #f2cf9b !important; transform: translateY(-5px) !important; }
+.gallery :global(.mosaic-overlay) { background: linear-gradient(180deg, transparent 42%, rgba(40,18,19,.7)) !important; }
+@media (max-width: 650px) { .gallery { padding: 4.2rem 0; } .galleryHead { align-items: start; width: min(100% - 2rem, 620px); } .galleryHead h2 { font-size: clamp(2.6rem, 12vw, 3.6rem); } .galleryBooking { flex: 0 0 auto; min-height: 2.8rem; padding: .65rem .8rem; font-size: .76rem; } .gallery :global(.gallery-hero-shell) { width: calc(100% - 1rem) !important; } }
+@media (prefers-reduced-motion: reduce) { .galleryBooking { transition: none; } }

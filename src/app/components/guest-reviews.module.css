@@ -1,263 +1,31 @@
-.section {
-  --rev-bg: #fcfaf7;
-  --rev-burgundy: #3c161a;
-  --rev-gold: #c59b63;
-  --rev-gold-light: #dfb77c;
-  --rev-ink: #221517;
-  --rev-muted: #6b5c5e;
-  position: relative;
-  overflow: hidden;
-  background-color: var(--rev-bg);
-  color: var(--rev-ink);
-  padding-block: clamp(4.5rem, 8vw, 7.5rem);
-}
-
-.inner {
-  width: min(100% - 2.5rem, 1080px);
-  margin-inline: auto;
-  position: relative;
-  z-index: 2;
-}
-
-.header {
-  text-align: center;
-  max-width: 720px;
-  margin-inline: auto;
-  margin-bottom: clamp(2.5rem, 4.5vw, 4rem);
-}
-
-.eyebrow {
-  display: inline-block;
-  font-family: var(--font-commissioner-gf), sans-serif;
-  font-size: 0.82rem;
-  font-weight: 700;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  color: var(--rev-gold);
-  margin-bottom: 0.8rem;
-}
-
-.title {
-  font-family: var(--font-bodoni-gf), serif;
-  font-size: clamp(2.4rem, 5vw, 4.2rem);
-  font-weight: 500;
-  line-height: 1.1;
-  letter-spacing: -0.02em;
-  color: var(--rev-burgundy);
-  margin: 0 0 1rem;
-  text-wrap: balance;
-}
-
-.title span {
-  font-style: italic;
-  font-weight: 400;
-  color: var(--rev-gold);
-}
-
-.intro {
-  font-family: var(--font-literata-gf), Georgia, serif;
-  font-size: clamp(1.05rem, 1.25vw, 1.2rem);
-  line-height: 1.62;
-  color: var(--rev-muted);
-  margin: 0;
-  text-wrap: pretty;
-}
-
-/* ─── Guest Book Card ─── */
-.note {
-  max-width: 860px;
-  margin-inline: auto;
-}
-
-.stage {
-  background: #ffffff;
-  border: 1px solid rgba(197, 155, 99, 0.25);
-  border-radius: 6px;
-  box-shadow: 0 16px 44px -10px rgba(60, 22, 26, 0.08);
-  padding: clamp(2rem, 4.5vw, 3.5rem);
-  display: flex;
-  flex-direction: column;
-}
-
-.cardMeta {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 1rem;
-  padding-bottom: 1.5rem;
-  border-bottom: 1px solid rgba(197, 155, 99, 0.2);
-  margin-bottom: 2rem;
-}
-
-.rating {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-}
-
-.rating strong {
-  font-family: var(--font-bodoni-gf), serif;
-  font-size: 1.6rem;
-  font-weight: 700;
-  color: var(--rev-burgundy);
-  line-height: 1;
-}
-
-.stars {
-  display: flex;
-  align-items: center;
-  gap: 3px;
-  color: #e5a93b;
-}
-
-.rating small {
-  font-family: var(--font-commissioner-gf), sans-serif;
-  font-size: 0.88rem;
-  font-weight: 600;
-  color: var(--rev-muted);
-}
-
-.reviewMeta {
-  font-family: var(--font-commissioner-gf), sans-serif;
-  font-size: 0.82rem;
-  letter-spacing: 0.04em;
-  color: var(--rev-gold);
-}
-
-/* ─── Review Quote ─── */
-.review {
-  margin: 0 0 2.2rem;
-}
-
-.review blockquote {
-  font-family: var(--font-literata-gf), Georgia, serif;
-  font-size: clamp(1.12rem, 1.5vw, 1.35rem);
-  line-height: 1.7;
-  color: var(--rev-burgundy);
-  margin: 0 0 1.5rem;
-  position: relative;
-  quotes: "“" "”";
-}
-
-.review blockquote::before {
-  content: "“";
-  font-family: var(--font-bodoni-gf), serif;
-  font-size: 3.5rem;
-  line-height: 0;
-  position: relative;
-  top: 1.2rem;
-  left: -0.3rem;
-  color: var(--rev-gold);
-  opacity: 0.45;
-}
-
-.review footer strong {
-  font-family: var(--font-commissioner-gf), sans-serif;
-  font-size: 1rem;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--rev-burgundy);
-}
-
-/* ─── Card Footer & Navigation ─── */
-.cardFooter {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 1.5rem;
-  padding-top: 1.5rem;
-  border-top: 1px solid rgba(197, 155, 99, 0.2);
-}
-
-.viewAll {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  font-family: var(--font-commissioner-gf), sans-serif;
-  font-size: 0.9rem;
-  font-weight: 600;
-  color: var(--rev-burgundy);
-  text-decoration: none;
-  transition: color 0.25s ease;
-}
-
-.viewAll:hover {
-  color: var(--rev-gold);
-}
-
-.navigation {
-  display: flex;
-  align-items: center;
-  gap: 1.4rem;
-}
-
-.progress {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-
-.progress i {
-  display: block;
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: rgba(197, 155, 99, 0.3);
-  transition: all 0.3s ease;
-}
-
-.progress i[data-active="true"] {
-  width: 22px;
-  border-radius: 4px;
-  background: var(--rev-burgundy);
-}
-
-.controls {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-.controls button {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  border: 1px solid rgba(197, 155, 99, 0.35);
-  background: #ffffff;
-  color: var(--rev-burgundy);
-  cursor: pointer;
-  transition: all 0.25s ease;
-}
-
-.controls button:hover {
-  background: var(--rev-burgundy);
-  border-color: var(--rev-burgundy);
-  color: #ffffff;
-}
-
-@media (max-width: 640px) {
-  .section {
-    padding-block: 3.5rem;
-  }
-
-  .stage {
-    padding: 1.5rem;
-  }
-
-  .cardFooter {
-    flex-direction: column;
-    align-items: stretch;
-    gap: 1rem;
-  }
-
-  .navigation {
-    justify-content: space-between;
-    width: 100%;
-  }
-}
+.section { --wine: #402021; --clay: #ad6248; position: relative; overflow: hidden; background: #fff; color: var(--wine); padding: clamp(5rem, 9vw, 8.5rem) 0; }
+.inner { width: min(100% - 2.5rem, 1080px); margin: 0 auto; }
+.header { max-width: 680px; margin: 0 auto clamp(2.5rem, 5vw, 4.5rem); text-align: center; }
+.eyebrow { margin: 0 0 .8rem; color: var(--clay); font-family: var(--font-commissioner-gf), system-ui, sans-serif; font-size: .7rem; font-weight: 750; letter-spacing: .15em; }
+.title { margin: 0 0 1rem; font-family: var(--font-bodoni-gf), Georgia, serif; font-size: clamp(2.7rem, 5.8vw, 5rem); font-weight: 500; letter-spacing: -.035em; line-height: .97; text-wrap: balance; }
+.title span { color: var(--clay); font-style: italic; font-weight: 450; }
+.intro { margin: 0; color: #635351; font-family: var(--font-literata-gf), Georgia, serif; font-size: clamp(1rem, 1.35vw, 1.18rem); line-height: 1.62; text-wrap: pretty; }
+.note { max-width: 890px; margin: 0 auto; }
+.stage { padding: clamp(1.75rem, 4vw, 3.5rem) 0 0; border-top: 1px solid rgba(64,32,33,.26); border-bottom: 1px solid rgba(64,32,33,.26); }
+.cardMeta { display: flex; align-items: center; justify-content: space-between; gap: 1rem; margin-bottom: clamp(1.7rem, 3vw, 2.6rem); }
+.rating { display: flex; align-items: center; gap: .6rem; }
+.rating strong { color: var(--wine); font-family: var(--font-bodoni-gf), Georgia, serif; font-size: 2rem; line-height: 1; }
+.stars { display: flex; gap: 2px; color: var(--clay); }
+.rating small, .reviewMeta { color: #71615e; font-family: var(--font-commissioner-gf), system-ui, sans-serif; font-size: .78rem; font-weight: 650; }
+.review { margin: 0 0 clamp(2rem, 4vw, 3.6rem); }
+.review blockquote { max-width: 29ch; margin: 0; color: var(--wine); font-family: var(--font-bodoni-gf), Georgia, serif; font-size: clamp(2rem, 4.4vw, 3.65rem); font-weight: 500; letter-spacing: -.03em; line-height: 1.08; text-wrap: balance; }
+.review blockquote::before { color: var(--clay); content: "“"; }
+.review footer { margin-top: 1.3rem; }
+.review footer strong { color: var(--clay); font-family: var(--font-commissioner-gf), system-ui, sans-serif; font-size: .75rem; font-weight: 750; letter-spacing: .12em; }
+.cardFooter { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: 1rem 0 1.3rem; border-top: 1px solid rgba(64,32,33,.16); }
+.viewAll { display: inline-flex; align-items: center; gap: .45rem; color: var(--wine); font-family: var(--font-commissioner-gf), system-ui, sans-serif; font-size: .83rem; font-weight: 750; text-decoration: none; }
+.viewAll:hover { color: var(--clay); }
+.navigation { display: flex; align-items: center; gap: 1rem; }
+.progress { display: flex; gap: 5px; }
+.progress i { width: 5px; height: 5px; background: rgba(64,32,33,.22); border-radius: 50%; transition: width 180ms ease, background-color 180ms ease; }
+.progress i[data-active="true"] { width: 24px; border-radius: 0; background: var(--wine); }
+.controls { display: flex; gap: .35rem; }
+.controls button { display: inline-grid; width: 2.5rem; height: 2.5rem; place-items: center; border: 1px solid rgba(64,32,33,.38); border-radius: 0; background: transparent; color: var(--wine); transition: background-color 180ms ease, color 180ms ease; }
+.controls button:hover { background: var(--wine); color: #fff8ed; }
+@media (max-width: 650px) { .section { padding: 4.2rem 0; } .inner { width: min(100% - 2rem, 620px); } .eyebrow { font-size: .64rem; } .title { font-size: clamp(2.45rem, 12vw, 3.5rem); } .cardMeta { align-items: start; flex-direction: column; } .review blockquote { max-width: 100%; font-size: clamp(1.9rem, 10.2vw, 2.8rem); } .cardFooter { align-items: start; flex-direction: column; } .navigation { justify-content: space-between; width: 100%; } }
+@media (prefers-reduced-motion: reduce) { .progress i, .controls button { transition: none; } }

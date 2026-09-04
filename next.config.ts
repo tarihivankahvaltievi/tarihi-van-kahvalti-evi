@@ -29,7 +29,7 @@ const nextConfig: NextConfig = {
   poweredByHeader: false,
   images: {
     formats: ["image/avif", "image/webp"],
-    qualities: [65, 70, 74, 75, 80, 82],
+    qualities: [65, 70, 74, 75, 78, 80, 82, 84],
     minimumCacheTTL: 60 * 60 * 24 * 30,
   },
   async redirects() {
