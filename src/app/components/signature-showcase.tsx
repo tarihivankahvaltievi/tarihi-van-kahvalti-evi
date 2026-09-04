@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import styles from "./signature-showcase.module.css";
 
 interface TabData {
@@ -31,10 +31,10 @@ const TABS: TabData[] = [
     nameEn: "Royal Breakfast",
     iconInactive: "/hamour/mi_tab-input-4-img-1.png",
     iconActive: "/hamour/mi_tab-input-4-img-2_1.png",
-    plateImg: "/hamour/amr1_tab-1-content-img-1.png",
-    floating1: "/hamour/amr2_section-3-tab-1-img-1.png",
-    floating2: "/hamour/amr3_section-3-tab-1-img-2.png",
-    floating3: "/hamour/amr4_section-3-tab-1-img-3_1.png",
+    plateImg: "/hamour/van_plate_royal.png",
+    floating1: "/hamour/van_float_jam.png",
+    floating2: "/hamour/van_float_olives.png",
+    floating3: "/hamour/van_float_cheese.png",
     title: "Güne Hamour'da Başla!",
     titleEn: "Start the Day at Hamour!",
     desc: "Hamour’da yapılan kahvaltı, özenle seçilmiş malzemelerle hazırlanan özel lezzetlerle güne başlamak isteyenlere unutulmaz bir deneyim sunuyor. Sağlıklı, doyurucu ve zarif sunumlarıyla her damak zevkine hitap eden bu kahvaltı, gününüze taptaze bir dokunuş katıyor.",
@@ -139,6 +139,8 @@ export function SignatureShowcase({ locale = "tr" }: { locale?: string }) {
   const isEn = locale === "en";
   const [activeTab, setActiveTab] = useState(0);
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+  const [scrollProgress, setScrollProgress] = useState(0);
+  const sectionRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
@@ -147,14 +149,35 @@ export function SignatureShowcase({ locale = "tr" }: { locale?: string }) {
       setMousePos({ x, y });
     };
 
+    const handleScroll = () => {
+      if (!sectionRef.current) return;
+      const rect = sectionRef.current.getBoundingClientRect();
+      const windowHeight = window.innerHeight;
+      const currentPos = windowHeight - rect.top;
+      const totalDist = windowHeight + rect.height * 0.45;
+      const progress = Math.max(0, Math.min(1, currentPos / totalDist));
+      setScrollProgress(progress);
+    };
+
     window.addEventListener("mousemove", handleMouseMove);
-    return () => window.removeEventListener("mousemove", handleMouseMove);
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll();
+
+    return () => {
+      window.removeEventListener("mousemove", handleMouseMove);
+      window.removeEventListener("scroll", handleScroll);
+    };
   }, []);
 
   const current = TABS[activeTab];
 
+  // Upward translation offsets as user scrolls (comes from bottom to top)
+  const upOffset1 = (1 - scrollProgress) * 65;
+  const upOffset2 = (1 - scrollProgress) * 85;
+  const upOffset3 = (1 - scrollProgress) * 75;
+
   return (
-    <section className={styles.section3} id="menumuz">
+    <section ref={sectionRef} className={styles.section3} id="menumuz">
       {/* Top Wavy Arched Cutout Border */}
       <div className={styles.topCurveBorder} aria-hidden="true" />
 
@@ -197,12 +220,15 @@ export function SignatureShowcase({ locale = "tr" }: { locale?: string }) {
 
         {/* Tab Content Pane */}
         <div className={styles.tabContentPane} key={current.id}>
-          {/* Floating Ingredients Parallax */}
+          {/* Floating Ingredients Parallax - Move from bottom to top on scroll */}
           <div
             className={`${styles.movingImg} ${styles.moving1}`}
             style={{
-              transform: `translate(${-(mousePos.x * 2) / 10}px, ${-(mousePos.y * 2) / 10}px)`,
+              transform: `translate(${-(mousePos.x * 2) / 10}px, ${upOffset1 + -(mousePos.y * 2) / 10}px)`,
             }}
+            data-aos="fade-up"
+            data-aos-duration="1000"
+            data-aos-delay="150"
           >
             <Image
               src={current.floating1}
@@ -216,26 +242,14 @@ export function SignatureShowcase({ locale = "tr" }: { locale?: string }) {
           <div
             className={`${styles.movingImg} ${styles.moving2}`}
             style={{
-              transform: `translate(${-(mousePos.x * 6) / 10}px, ${-(mousePos.y * 6) / 10}px)`,
+              transform: `translate(${-(mousePos.x * 4) / 10}px, ${upOffset2 + -(mousePos.y * 4) / 10}px)`,
             }}
+            data-aos="fade-up"
+            data-aos-duration="1000"
+            data-aos-delay="300"
           >
             <Image
               src={current.floating2}
-              alt=""
-              width={110}
-              height={110}
-              className={styles.floatAsset}
-            />
-          </div>
-
-          <div
-            className={`${styles.movingImg} ${styles.moving3}`}
-            style={{
-              transform: `translate(${-(mousePos.x * 4) / 10}px, ${-(mousePos.y * 4) / 10}px)`,
-            }}
-          >
-            <Image
-              src={current.floating3}
               alt=""
               width={130}
               height={130}
@@ -243,11 +257,29 @@ export function SignatureShowcase({ locale = "tr" }: { locale?: string }) {
             />
           </div>
 
-          {/* Central Plate Presentation */}
+          <div
+            className={`${styles.movingImg} ${styles.moving3}`}
+            style={{
+              transform: `translate(${-(mousePos.x * 3) / 10}px, ${upOffset3 + -(mousePos.y * 3) / 10}px)`,
+            }}
+            data-aos="fade-up"
+            data-aos-duration="1000"
+            data-aos-delay="450"
+          >
+            <Image
+              src={current.floating3}
+              alt=""
+              width={135}
+              height={135}
+              className={styles.floatAsset}
+            />
+          </div>
+
+          {/* Central Plate Presentation - Enters smoothly from right to left */}
           <div className={styles.plateArea}>
             <div
               className={styles.plateWrapper}
-              data-aos="fade-right"
+              data-aos="fade-left"
               data-aos-duration="1000"
             >
               {/* Concentric Arch Contour Rings */}

@@ -239,6 +239,18 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  animation: plateSlideFromRight 0.85s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes plateSlideFromRight {
+  0% {
+    opacity: 0;
+    transform: translateX(75px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
 
 .contourArch {
@@ -358,19 +370,19 @@
     margin-bottom: 24px;
   }
   .moving1 {
-    width: 75px;
+    width: 82px;
     top: -5px;
     left: 2%;
   }
   .moving2 {
-    width: 65px;
+    width: 78px;
     top: 20px;
     right: 2%;
   }
   .moving3 {
-    width: 65px;
-    top: 170px;
-    left: 4%;
+    width: 80px;
+    top: 185px;
+    left: 3%;
   }
   .articleTitle {
     font-size: 28px;
