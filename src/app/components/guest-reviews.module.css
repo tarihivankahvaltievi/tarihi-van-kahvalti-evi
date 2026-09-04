@@ -1,382 +1,263 @@
 .section {
-  --review-red: #7a1b22;
-  --review-red-deep: #4d0e14;
-  --review-cream: #fff8ec;
-  --review-cream-deep: #f0dfc2;
-  --review-ink: #321a1b;
-  --review-muted: #765f5b;
-  --review-gold: #d4a044;
+  --rev-bg: #fcfaf7;
+  --rev-burgundy: #3c161a;
+  --rev-gold: #c59b63;
+  --rev-gold-light: #dfb77c;
+  --rev-ink: #221517;
+  --rev-muted: #6b5c5e;
+  position: relative;
   overflow: hidden;
-  scroll-margin-top: 5.5rem;
-  background: var(--review-red);
-  color: var(--review-cream);
+  background-color: var(--rev-bg);
+  color: var(--rev-ink);
+  padding-block: clamp(4.5rem, 8vw, 7.5rem);
 }
 
 .inner {
-  width: min(1180px, calc(100% - 3rem));
+  width: min(100% - 2.5rem, 1080px);
   margin-inline: auto;
-  padding: clamp(4.25rem, 6.5vw, 6.25rem) 0 clamp(4.5rem, 7vw, 6.5rem);
+  position: relative;
+  z-index: 2;
 }
 
 .header {
-  margin-bottom: clamp(1.75rem, 3vw, 2.65rem);
+  text-align: center;
+  max-width: 720px;
+  margin-inline: auto;
+  margin-bottom: clamp(2.5rem, 4.5vw, 4rem);
 }
 
-.headingCopy {
-  max-width: 45rem;
+.eyebrow {
+  display: inline-block;
+  font-family: var(--font-commissioner-gf), sans-serif;
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--rev-gold);
+  margin-bottom: 0.8rem;
 }
 
 .title {
-  max-width: 13ch;
-  margin: 0;
-  color: var(--review-cream);
-  font-family: var(--font-commissioner-gf), Arial, sans-serif;
-  font-size: clamp(3.1rem, 5.2vw, 5.15rem);
-  font-weight: 670;
-  letter-spacing: -0.035em;
-  line-height: 0.96;
+  font-family: var(--font-bodoni-gf), serif;
+  font-size: clamp(2.4rem, 5vw, 4.2rem);
+  font-weight: 500;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: var(--rev-burgundy);
+  margin: 0 0 1rem;
   text-wrap: balance;
 }
 
 .title span {
-  color: var(--review-gold);
+  font-style: italic;
+  font-weight: 400;
+  color: var(--rev-gold);
 }
 
 .intro {
-  max-width: 38rem;
-  margin: 1.1rem 0 0;
-  color: rgba(255, 248, 236, 0.84);
-  font-size: clamp(0.98rem, 1.15vw, 1.08rem);
-  line-height: 1.6;
+  font-family: var(--font-literata-gf), Georgia, serif;
+  font-size: clamp(1.05rem, 1.25vw, 1.2rem);
+  line-height: 1.62;
+  color: var(--rev-muted);
+  margin: 0;
   text-wrap: pretty;
 }
 
+/* ─── Guest Book Card ─── */
 .note {
-  --cut: 2.25rem;
-  position: relative;
-  width: min(100%, 55rem);
-  filter: drop-shadow(10px 10px 0 var(--review-red-deep));
+  max-width: 860px;
+  margin-inline: auto;
 }
 
 .stage {
-  position: relative;
+  background: #ffffff;
+  border: 1px solid rgba(197, 155, 99, 0.25);
+  border-radius: 6px;
+  box-shadow: 0 16px 44px -10px rgba(60, 22, 26, 0.08);
+  padding: clamp(2rem, 4.5vw, 3.5rem);
   display: flex;
-  min-height: 24rem;
   flex-direction: column;
-  padding: clamp(1.4rem, 2.8vw, 2.15rem) clamp(1.5rem, 4vw, 3.2rem) 1.15rem;
-  clip-path: polygon(0 0, calc(100% - var(--cut)) 0, 100% var(--cut), 100% 100%, 0 100%);
-  background: var(--review-cream);
-  color: var(--review-ink);
-}
-
-.stage::after {
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: var(--cut);
-  height: var(--cut);
-  background: var(--review-cream-deep);
-  clip-path: polygon(0 0, 100% 100%, 0 100%);
-  content: "";
 }
 
 .cardMeta {
   display: flex;
-  min-height: 2rem;
   align-items: center;
   justify-content: space-between;
-  gap: 1.25rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid rgba(197, 155, 99, 0.2);
+  margin-bottom: 2rem;
 }
 
 .rating {
   display: flex;
   align-items: center;
-  gap: 0.65rem;
+  gap: 0.75rem;
 }
 
-.rating > strong {
-  color: var(--review-red);
-  font-family: var(--font-commissioner-gf), Arial, sans-serif;
-  font-size: 1.35rem;
-  font-weight: 760;
-  font-variant-numeric: tabular-nums;
-  letter-spacing: -0.03em;
+.rating strong {
+  font-family: var(--font-bodoni-gf), serif;
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--rev-burgundy);
   line-height: 1;
 }
 
 .stars {
   display: flex;
-  gap: 0.08rem;
-  color: var(--review-gold);
+  align-items: center;
+  gap: 3px;
+  color: #e5a93b;
 }
 
-.rating small,
+.rating small {
+  font-family: var(--font-commissioner-gf), sans-serif;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--rev-muted);
+}
+
 .reviewMeta {
-  color: var(--review-muted);
-  font-size: 0.7rem;
-  line-height: 1.3;
+  font-family: var(--font-commissioner-gf), sans-serif;
+  font-size: 0.82rem;
+  letter-spacing: 0.04em;
+  color: var(--rev-gold);
 }
 
+/* ─── Review Quote ─── */
 .review {
-  display: flex;
-  min-height: clamp(14rem, 20vw, 16.25rem);
-  flex: 1;
-  flex-direction: column;
-  justify-content: space-between;
-  padding: clamp(1.8rem, 3.8vw, 3.15rem) 0 clamp(1.3rem, 2.8vw, 2rem);
-  will-change: transform, opacity, clip-path;
+  margin: 0 0 2.2rem;
 }
 
 .review blockquote {
-  max-width: 31ch;
-  margin: 0;
-  color: var(--review-ink);
   font-family: var(--font-literata-gf), Georgia, serif;
-  font-size: clamp(1.45rem, 2.5vw, 2.15rem);
-  font-weight: 610;
-  letter-spacing: -0.018em;
-  line-height: 1.35;
-  text-wrap: pretty;
-}
-
-.review blockquote::before,
-.review blockquote::after {
-  color: var(--review-red);
+  font-size: clamp(1.12rem, 1.5vw, 1.35rem);
+  line-height: 1.7;
+  color: var(--rev-burgundy);
+  margin: 0 0 1.5rem;
+  position: relative;
+  quotes: "“" "”";
 }
 
 .review blockquote::before {
   content: "“";
-  margin-left: -0.38em;
-}
-
-.review blockquote::after {
-  content: "”";
-}
-
-.review footer {
-  margin-top: 1.5rem;
+  font-family: var(--font-bodoni-gf), serif;
+  font-size: 3.5rem;
+  line-height: 0;
+  position: relative;
+  top: 1.2rem;
+  left: -0.3rem;
+  color: var(--rev-gold);
+  opacity: 0.45;
 }
 
 .review footer strong {
-  color: var(--review-red);
-  font-family: var(--font-commissioner-gf), Arial, sans-serif;
-  font-size: 0.88rem;
-  font-weight: 760;
+  font-family: var(--font-commissioner-gf), sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--rev-burgundy);
 }
 
+/* ─── Card Footer & Navigation ─── */
 .cardFooter {
   display: flex;
-  min-height: 3.75rem;
   align-items: center;
   justify-content: space-between;
-  gap: 1rem;
-  padding-top: 0.85rem;
-  box-shadow: inset 0 1px 0 rgba(50, 26, 27, 0.15);
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(197, 155, 99, 0.2);
 }
 
 .viewAll {
   display: inline-flex;
   align-items: center;
-  gap: 0.42rem;
-  color: var(--review-red);
-  font-size: 0.73rem;
-  font-weight: 760;
-  line-height: 1.25;
-  transition: gap 180ms cubic-bezier(0.16, 1, 0.3, 1), color 180ms ease;
+  gap: 0.5rem;
+  font-family: var(--font-commissioner-gf), sans-serif;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--rev-burgundy);
+  text-decoration: none;
+  transition: color 0.25s ease;
 }
 
 .viewAll:hover {
-  gap: 0.62rem;
-  color: var(--review-red-deep);
+  color: var(--rev-gold);
 }
 
 .navigation {
   display: flex;
   align-items: center;
-  gap: 1rem;
+  gap: 1.4rem;
 }
 
 .progress {
   display: flex;
-  gap: 0.28rem;
+  align-items: center;
+  gap: 6px;
 }
 
 .progress i {
-  width: 1.25rem;
-  height: 0.18rem;
-  background: #d8c8ae;
-  transform: scaleX(0.72);
-  transition: transform 280ms cubic-bezier(0.16, 1, 0.3, 1), background-color 180ms ease;
+  display: block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba(197, 155, 99, 0.3);
+  transition: all 0.3s ease;
 }
 
 .progress i[data-active="true"] {
-  background: var(--review-red);
-  transform: scaleX(1);
+  width: 22px;
+  border-radius: 4px;
+  background: var(--rev-burgundy);
 }
 
 .controls {
   display: flex;
-  gap: 0.45rem;
+  align-items: center;
+  gap: 0.5rem;
 }
 
 .controls button {
-  display: grid;
-  width: 2.9rem;
-  height: 2.9rem;
-  padding: 0;
-  place-items: center;
-  border: 0;
-  border-radius: 3px;
-  background: var(--review-cream-deep);
-  color: var(--review-red);
-  touch-action: manipulation;
-  transition: background-color 150ms ease, color 150ms ease, transform 130ms ease,
-    box-shadow 180ms cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.controls button:last-child {
-  background: var(--review-red);
-  color: var(--review-cream);
-  box-shadow: 3px 3px 0 rgba(77, 14, 20, 0.24);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid rgba(197, 155, 99, 0.35);
+  background: #ffffff;
+  color: var(--rev-burgundy);
+  cursor: pointer;
+  transition: all 0.25s ease;
 }
 
 .controls button:hover {
-  background: var(--review-red-deep);
-  color: var(--review-cream);
+  background: var(--rev-burgundy);
+  border-color: var(--rev-burgundy);
+  color: #ffffff;
 }
 
-.controls button:active {
-  transform: translateY(1px) scale(0.96);
-  box-shadow: none;
-}
-
-.controls button:focus-visible,
-.viewAll:focus-visible {
-  outline: 3px solid var(--review-gold);
-  outline-offset: 3px;
-}
-
-@media (max-width: 760px) {
-  .inner {
-    width: min(100% - 1.5rem, 36rem);
-    padding: 2.35rem 0 3.25rem;
-  }
-
-  .header {
-    margin-bottom: 1.4rem;
-  }
-
-  .title {
-    max-width: 10.5ch;
-    font-size: clamp(2.25rem, 10vw, 3rem);
-    letter-spacing: -0.03em;
-    line-height: 0.98;
-  }
-
-  .intro {
-    margin-top: 0.85rem;
-    font-size: 0.9rem;
-    line-height: 1.48;
-  }
-
-  .note {
-    --cut: 1.55rem;
-    filter: drop-shadow(7px 7px 0 var(--review-red-deep));
+@media (max-width: 640px) {
+  .section {
+    padding-block: 3.5rem;
   }
 
   .stage {
-    min-height: 20rem;
-    padding: 0.9rem 1rem 0.7rem;
-  }
-
-  .cardMeta {
-    min-height: 1.7rem;
-    padding-right: 1.2rem;
-  }
-
-  .rating {
-    gap: 0.45rem;
-  }
-
-  .rating > strong {
-    font-size: 1.2rem;
-  }
-
-  .stars svg {
-    width: 10px;
-    height: 10px;
-  }
-
-  .rating small,
-  .reviewMeta {
-    font-size: 0.61rem;
-  }
-
-  .review {
-    min-height: 12rem;
-    padding: 1.25rem 0 1rem;
-  }
-
-  .review blockquote {
-    max-width: 30ch;
-    font-size: clamp(1.08rem, 4.8vw, 1.28rem);
-    line-height: 1.42;
-  }
-
-  .review footer {
-    margin-top: 1rem;
-  }
-
-  .review footer strong {
-    font-size: 0.78rem;
+    padding: 1.5rem;
   }
 
   .cardFooter {
-    min-height: 3.35rem;
-    padding-top: 0.65rem;
-  }
-
-  .viewAll {
-    max-width: 8.5rem;
-    font-size: 0.64rem;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 1rem;
   }
 
   .navigation {
-    gap: 0.55rem;
-  }
-
-  .progress {
-    display: none;
-  }
-
-  .controls {
-    gap: 0.38rem;
-  }
-
-  .controls button {
-    width: 2.55rem;
-    height: 2.55rem;
-  }
-}
-
-@media (max-width: 360px) {
-  .rating small {
-    display: none;
-  }
-
-  .viewAll span {
-    max-width: 7rem;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .review {
-    will-change: auto;
-  }
-
-  .progress i,
-  .controls button,
-  .viewAll {
-    transition-duration: 0.01ms;
+    justify-content: space-between;
+    width: 100%;
   }
 }

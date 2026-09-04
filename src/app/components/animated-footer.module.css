@@ -1,29 +1,337 @@
-:global(.footer-reimagined) .skylineWrapper {
+.footer {
+  --ft-burgundy: #240b0e;
+  --ft-burgundy-dark: #190507;
+  --ft-cream: #fbf8f3;
+  --ft-gold: #c59b63;
+  --ft-gold-light: #dfb77c;
+  --ft-muted: rgba(251, 248, 243, 0.75);
+  position: relative;
+  overflow: hidden;
+  background-color: var(--ft-burgundy);
+  color: var(--ft-cream);
+  padding-top: clamp(5rem, 8vw, 7.5rem);
+  padding-bottom: clamp(2rem, 4vw, 3.5rem);
   isolation: isolate;
-  background: var(--site-beige, #f4ecdf) !important;
-  border-top-color: rgba(107, 81, 55, 0.15);
-  border-bottom-color: rgba(42, 42, 45, 0.72);
 }
 
-.skylineSvg {
+/* ─── Top Anchor (Arched transition from light section) ─── */
+.topAnchor {
+  position: absolute;
+  top: -1px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 140px;
+  height: 30px;
+  z-index: 10;
+  pointer-events: none;
+}
+
+.anchorSvg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.container {
+  width: min(100% - 2.5rem, 1200px);
+  margin-inline: auto;
   position: relative;
   z-index: 2;
+  text-align: center;
 }
 
-.drawnWall {
-  border-top: 1px solid rgba(58, 43, 29, 0.42);
-  background: #6b5137;
+/* ─── Brand Crest & Logo ─── */
+.vectorWrapper {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1.5rem;
 }
 
+.crestLink {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.crestLink:hover {
+  transform: translateY(-4px) scale(1.05);
+}
+
+.vectorImg {
+  object-fit: contain;
+  filter: drop-shadow(0 4px 16px rgba(0, 0, 0, 0.35));
+}
+
+.brandTitleWrap {
+  margin-bottom: 2.2rem;
+}
+
+.brandTitle {
+  font-family: var(--font-bodoni-gf), serif;
+  font-size: clamp(1.8rem, 3.8vw, 3.2rem);
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  color: #fbf8f3;
+  margin: 0 0 0.4rem;
+}
+
+.brandSubtitle {
+  font-family: var(--font-commissioner-gf), sans-serif;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.28em;
+  color: var(--ft-gold);
+}
+
+/* ─── Brand Manifesto ─── */
+.manifestoWrapper {
+  max-width: 820px;
+  margin-inline: auto;
+  margin-bottom: clamp(2.5rem, 4vw, 3.5rem);
+}
+
+.manifestoHeading {
+  font-family: var(--font-bodoni-gf), serif;
+  font-size: clamp(1.6rem, 2.6vw, 2.3rem);
+  font-weight: 400;
+  line-height: 1.25;
+  color: var(--ft-gold-light);
+  margin: 0 0 1rem;
+}
+
+.manifestoHeading span {
+  font-style: italic;
+}
+
+.manifestoText {
+  font-family: var(--font-literata-gf), Georgia, serif;
+  font-size: clamp(0.98rem, 1.15vw, 1.12rem);
+  line-height: 1.75;
+  color: var(--ft-muted);
+  margin: 0;
+  text-wrap: pretty;
+}
+
+/* ─── Social & Contact Icons (Hamour style) ─── */
+.socialGroup {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: clamp(2.5rem, 4.5vw, 3.5rem);
+}
+
+.socialIcon {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.75rem 1.4rem;
+  border-radius: 40px;
+  border: 1px solid rgba(197, 155, 99, 0.35);
+  background: rgba(36, 11, 14, 0.6);
+  color: var(--ft-cream);
+  text-decoration: none;
+  font-family: var(--font-commissioner-gf), sans-serif;
+  font-size: 0.88rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.socialIcon:hover {
+  background: var(--ft-gold);
+  border-color: var(--ft-gold);
+  color: #190507;
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(197, 155, 99, 0.3);
+}
+
+.socialLabel {
+  display: inline-block;
+}
+
+/* ─── Navigation Links ─── */
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: clamp(1rem, 2.5vw, 2.5rem);
+  padding-block: 1.8rem;
+  border-top: 1px solid rgba(197, 155, 99, 0.2);
+  border-bottom: 1px solid rgba(197, 155, 99, 0.2);
+  margin-bottom: clamp(2rem, 3.5vw, 3rem);
+}
+
+.navLink {
+  font-family: var(--font-commissioner-gf), sans-serif;
+  font-size: 0.92rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  color: #ffffff;
+  text-decoration: none;
+  transition: color 0.25s ease;
+  padding: 4px 8px;
+}
+
+.navLink:hover {
+  color: var(--ft-gold-light);
+}
+
+/* ─── Concierge & Heritage Bar ─── */
+.conciergeBar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: clamp(1.5rem, 3.5vw, 3.5rem);
+  background: rgba(25, 5, 7, 0.45);
+  border: 1px solid rgba(197, 155, 99, 0.18);
+  border-radius: 6px;
+  padding: clamp(1.2rem, 2vw, 1.8rem);
+  margin-bottom: clamp(2.5rem, 4vw, 3.5rem);
+}
+
+.conciergeItem {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  text-align: left;
+}
+
+.conciergeIcon {
+  color: var(--ft-gold);
+  flex-shrink: 0;
+}
+
+.conciergeTitle {
+  display: block;
+  font-family: var(--font-commissioner-gf), sans-serif;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #fbf8f3;
+  letter-spacing: 0.02em;
+}
+
+.conciergeSub {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-commissioner-gf), sans-serif;
+  font-size: 0.82rem;
+  color: var(--ft-muted);
+}
+
+.statusDot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.statusOpen {
+  background-color: #22c55e;
+  box-shadow: 0 0 8px rgba(34, 197, 94, 0.6);
+}
+
+.statusClosed {
+  background-color: #ef4444;
+}
+
+.conciergeDivider {
+  width: 1px;
+  height: 38px;
+  background: rgba(197, 155, 99, 0.25);
+}
+
+/* ─── Bottom Legal Strip ─── */
+.bot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1.2rem;
+  padding-top: 1rem;
+}
+
+.copyright {
+  font-family: var(--font-commissioner-gf), sans-serif;
+  font-size: 0.82rem;
+  color: rgba(251, 248, 243, 0.6);
+  letter-spacing: 0.02em;
+}
+
+.botLinks {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.botLink {
+  font-family: var(--font-commissioner-gf), sans-serif;
+  font-size: 0.82rem;
+  color: rgba(251, 248, 243, 0.6);
+  text-decoration: none;
+  transition: color 0.25s ease;
+}
+
+.botLink:hover {
+  color: var(--ft-gold-light);
+}
+
+.backToTopBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: transparent;
+  border: 1px solid rgba(197, 155, 99, 0.3);
+  color: var(--ft-gold);
+  font-family: var(--font-commissioner-gf), sans-serif;
+  font-size: 0.78rem;
+  font-weight: 600;
+  padding: 5px 12px;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.backToTopBtn:hover {
+  background: var(--ft-gold);
+  color: #190507;
+}
+
+/* ─── Mobile Responsiveness ─── */
 @media (max-width: 768px) {
-  :global(.footer-reimagined) .skylineWrapper {
-    height: clamp(172px, 46vw, 198px);
-    min-height: 172px;
-    max-height: 198px;
+  .footer {
+    padding-top: 4.5rem;
+    padding-bottom: 2rem;
   }
 
-  :global(.footer-reimagined) .skylineSvg {
-    width: 142vw;
-    transform: translateX(-21vw) scale(1.02);
+  .conciergeBar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.2rem;
+  }
+
+  .conciergeDivider {
+    display: none;
+  }
+
+  .bot {
+    flex-direction: column;
+    text-align: center;
+    gap: 1rem;
+  }
+
+  .botLinks {
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1rem;
   }
 }

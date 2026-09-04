@@ -1,0 +1,153 @@
+.section {
+  position: relative;
+  overflow: hidden;
+  background-color: #240b0e;
+  color: #ffffff;
+  padding-block: clamp(6.5rem, 12vw, 11rem);
+  text-align: center;
+  isolation: isolate;
+}
+
+/* ─── Top Anchor (Arched transition from white section) ─── */
+.topAnchor {
+  position: absolute;
+  top: -1px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 140px;
+  height: 32px;
+  z-index: 10;
+  pointer-events: none;
+}
+
+.anchorSvg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/* ─── Background & Overlays ─── */
+.bg {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+}
+
+.bgImage {
+  object-fit: cover;
+  object-position: center 40%;
+  filter: brightness(0.42) saturate(1.15);
+  transform: scale(1.05);
+  transition: transform 10s ease-out;
+}
+
+.section:hover .bgImage {
+  transform: scale(1.08);
+}
+
+.bgOverlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(36, 11, 14, 0.72) 0%,
+    rgba(36, 11, 14, 0.55) 50%,
+    rgba(36, 11, 14, 0.85) 100%
+  );
+}
+
+.bgVignette {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at center, transparent 40%, rgba(20, 5, 7, 0.6) 100%);
+}
+
+/* ─── Typography & Content ─── */
+.container {
+  width: min(100% - 2.5rem, 960px);
+  margin-inline: auto;
+  position: relative;
+  z-index: 2;
+}
+
+.badgeWrapper {
+  margin-bottom: 1.5rem;
+}
+
+.locationBadge {
+  display: inline-block;
+  font-family: var(--font-commissioner-gf), sans-serif;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.26em;
+  color: #dfb77c;
+  padding: 6px 18px;
+  border-radius: 40px;
+  border: 1px solid rgba(223, 183, 124, 0.35);
+  background: rgba(36, 11, 14, 0.45);
+  backdrop-filter: blur(8px);
+}
+
+.title {
+  font-family: var(--font-bodoni-gf), serif;
+  font-size: clamp(2.6rem, 6.2vw, 5.2rem);
+  font-weight: 400;
+  line-height: 1.12;
+  letter-spacing: -0.015em;
+  margin: 0 0 1.6rem;
+  text-wrap: balance;
+}
+
+.wordIvory {
+  color: #fbf8f3;
+}
+
+.wordGold {
+  font-style: italic;
+  color: #dfb77c;
+  font-weight: 400;
+}
+
+.lead {
+  font-family: var(--font-literata-gf), Georgia, serif;
+  font-size: clamp(1.1rem, 1.4vw, 1.35rem);
+  line-height: 1.65;
+  color: rgba(251, 248, 243, 0.9);
+  max-width: 680px;
+  margin: 0 auto 0.8rem;
+  text-wrap: pretty;
+}
+
+.subtext {
+  font-family: var(--font-commissioner-gf), sans-serif;
+  font-size: clamp(0.9rem, 1.05vw, 0.98rem);
+  letter-spacing: 0.08em;
+  color: #c59b63;
+  margin: 0;
+  text-transform: uppercase;
+}
+
+/* ─── Mobile Responsiveness ─── */
+@media (max-width: 640px) {
+  .section {
+    padding-block: 5.5rem;
+  }
+
+  .topAnchor {
+    width: 110px;
+    height: 24px;
+  }
+
+  .title {
+    font-size: 2.35rem;
+    line-height: 1.18;
+  }
+
+  .lead {
+    font-size: 1.02rem;
+  }
+
+  .subtext {
+    font-size: 0.82rem;
+  }
+}
