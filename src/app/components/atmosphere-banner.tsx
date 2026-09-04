@@ -24,8 +24,8 @@ export function AtmosphereBanner({ locale = "tr" }: { locale?: string }) {
         <Image
           src="/hamour/anchor-1_3.png"
           alt=""
-          width={84}
-          height={58}
+          width={96}
+          height={66}
           className={styles.anchorImg}
           priority
         />
@@ -33,8 +33,8 @@ export function AtmosphereBanner({ locale = "tr" }: { locale?: string }) {
           <Image
             src="/images/brand-emblem-colored.png"
             alt="Tarihi Van Kahvaltı Evi"
-            width={44}
-            height={30}
+            width={72}
+            height={49}
             className={styles.notchLogo}
             priority
           />
@@ -45,12 +45,12 @@ export function AtmosphereBanner({ locale = "tr" }: { locale?: string }) {
 
       <div className={styles.textContainer}>
         <h2 className={styles.heading}>
-          <span
+          <em
             data-aos="fade-up"
             data-aos-duration="1000"
             data-aos-anchor-placement="top-bottom"
             data-aos-delay="100"
-            className={styles.line}
+            className={styles.italicQuote}
           >
             {isEn ? (
               <>
@@ -65,31 +65,31 @@ export function AtmosphereBanner({ locale = "tr" }: { locale?: string }) {
                 Van’ın kadim lezzetleriyle kurulan en sıcak aile sofrası.”
               </>
             )}
-          </span>
+          </em>
         </h2>
       </div>
 
-      {/* Bottom Architectural Cutout Transition to Section 3 */}
+      {/* Bottom Architectural Cutout Transition to Section 3 (Non-wavy Bursa Heritage Arch) */}
       <div className={styles.bottomTransition} aria-hidden="true">
         <svg
-          viewBox="0 0 1440 90"
+          viewBox="0 0 1440 120"
           preserveAspectRatio="none"
           className={styles.transitionSvg}
           xmlns="http://www.w3.org/2000/svg"
         >
-          {/* Subtle depth shadow ribbon along the curve */}
+          {/* Layer 1: Subtle dark depth shadow ribbon along the arch */}
           <path
-            d="M0,27 Q720,77 1440,27 L1440,90 L0,90 Z"
-            fill="rgba(24, 12, 14, 0.25)"
+            d="M0,97 C380,97 560,24 720,17 C880,24 1060,97 1440,97 L1440,120 L0,120 Z"
+            fill="rgba(24, 12, 14, 0.28)"
           />
-          {/* Subtle translucent highlight ribbon */}
+          {/* Layer 2: Subtle translucent highlight ribbon */}
           <path
-            d="M0,31 Q720,81 1440,31 L1440,90 L0,90 Z"
-            fill="rgba(255, 255, 255, 0.3)"
+            d="M0,101 C380,101 560,28 720,21 C880,28 1060,101 1440,101 L1440,120 L0,120 Z"
+            fill="rgba(255, 255, 255, 0.35)"
           />
-          {/* Main solid beige arch connecting seamlessly into Section 3 */}
+          {/* Layer 3: Main solid warm beige arch connecting seamlessly into Section 3 */}
           <path
-            d="M0,35 Q720,85 1440,35 L1440,90 L0,90 Z"
+            d="M0,105 C380,105 560,32 720,25 C880,32 1060,105 1440,105 L1440,120 L0,120 Z"
             fill="#f2e3d0"
           />
         </svg>
