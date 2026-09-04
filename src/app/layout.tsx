@@ -3,6 +3,7 @@ import { Bodoni_Moda, Commissioner, Literata } from "next/font/google";
 import "./globals.css";
 import "./mobile-header-hero.css";
 import "./desktop-refinement.css";
+import "./hero-navbar-refinement.css";
 
 const bodoni = Bodoni_Moda({
   subsets: ["latin", "latin-ext"],

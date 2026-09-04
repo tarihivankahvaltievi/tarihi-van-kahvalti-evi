@@ -474,7 +474,7 @@ for (const route of routes) {
   if (route.sharedHomeDesign) {
     const sharedHomeClasses = [
       "site-shell theme-breakfast",
-      "hero hero-parallax-dining",
+      "hero-section hero-cinematic",
       "gallery-section",
       "faq-section",
       "footer-reimagined",

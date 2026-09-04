@@ -53,10 +53,10 @@ export function VanHeroParallax({ locale = "tr" }: { locale?: SiteLocale }) {
         if (exitingTimerRef.current) clearTimeout(exitingTimerRef.current);
         exitingTimerRef.current = setTimeout(() => {
           setPreviousSlide(null);
-        }, 1800);
+        }, 1500);
         return (prev + 1) % heroSlides.length;
       });
-    }, 6500);
+    }, 7000);
   };
 
   useEffect(() => {
@@ -74,25 +74,25 @@ export function VanHeroParallax({ locale = "tr" }: { locale?: SiteLocale }) {
     if (exitingTimerRef.current) clearTimeout(exitingTimerRef.current);
     exitingTimerRef.current = setTimeout(() => {
       setPreviousSlide(null);
-    }, 1800);
+    }, 1500);
     startSlideTimer();
   };
 
   return (
-    <section className="hero-section hero hero-parallax-dining" aria-label={messages.hero.aria}>
-      {/* Background Slides with Flawless Ken Burns Zoom & Crossfade */}
+    <section className="hero-section hero-cinematic" aria-label={messages.hero.aria}>
+      {/* Keep every frame mounted so the next photograph is decoded before its reveal. */}
       {heroSlides.map((slide, index) => {
         const isActive = index === currentSlide;
         const isExiting = index === previousSlide;
-        if (!isActive && !isExiting) return null;
 
         return (
           <div
             key={slide.image}
-            className={`hero-slide ${isActive ? "is-active" : "is-exiting"}`}
+            className={`hero-slide hero-slide-${(index % 3) + 1} ${isActive ? "is-active" : ""} ${isExiting ? "is-exiting" : ""}`}
             style={{ backgroundImage: `url(${slide.image})` }}
             role="img"
             aria-label={locale === "en" ? slide.altEn : slide.altTr}
+            aria-hidden={!isActive}
           />
         );
       })}
@@ -102,9 +102,8 @@ export function VanHeroParallax({ locale = "tr" }: { locale?: SiteLocale }) {
       <div className="container hero-content">
         <div className="hero-content-inner animate-fade-in">
           <div className="hero-subtitle">
-            <span className="hero-subtitle-dot" aria-hidden="true">◆</span>
-            <span>{locale === "en" ? "SINCE 1978 · BEYOĞLU, ISTANBUL" : "1978'DEN BERİ BEYOĞLU"}</span>
-            <span className="hero-subtitle-dot" aria-hidden="true">◆</span>
+            <span className="hero-subtitle-rule" aria-hidden="true" />
+            <span>{locale === "en" ? "BEYOĞLU · SINCE 1978" : "BEYOĞLU · 1978"}</span>
           </div>
           <h1 className="hero-title">
             <span className="hero-title-main">TARİHİ VAN</span>
@@ -112,32 +111,33 @@ export function VanHeroParallax({ locale = "tr" }: { locale?: SiteLocale }) {
           </h1>
           <p className="hero-tagline">
             {locale === "en"
-              ? "Authentic Van breakfast traditions, herb cheese, sizzling copper pans and unending fresh tea in a historic Beyoğlu building."
-              : "Tarihi Rum binasında, Van'dan gelen hakiki lezzetler, bakır sahanlar ve yarım asırlık aile misafirperverliği."}
+              ? "A family table bringing the breakfast traditions of Van to Beyoğlu."
+              : "Van'ın sofra geleneği, yarım asırdır aynı aile sıcaklığıyla Beyoğlu'nda."}
           </p>
           <div className="hero-actions">
             <Link href={messages.menuHref} className="btn btn-primary">
-              {locale === "en" ? "MENÜLERİ İNCELE" : "MENÜLERİ İNCELE"}
+              {locale === "en" ? "VIEW MENU" : "MENÜYÜ GÖR"}
             </Link>
             <Link
               href={locale === "en" ? "/en/rezervasyon" : "/rezervasyon"}
               className="btn btn-secondary-hero"
             >
-              {locale === "en" ? "REZERVASYON" : "REZERVASYON"}
+              <span>{locale === "en" ? "BOOK A TABLE" : "MASA AYIR"}</span>
+              <span className="hero-action-arrow" aria-hidden="true">↗</span>
             </Link>
           </div>
         </div>
       </div>
 
-      {/* Slide Indicators: active amber pill & subtle circle dots */}
-      <div className="carousel-indicators">
+      <div className="carousel-indicators" role="group" aria-label={locale === "en" ? "Hero photographs" : "Hero fotoğrafları"}>
         {heroSlides.map((_, index) => (
           <button
             key={index}
             type="button"
             className={`indicator-dot ${index === currentSlide ? "active" : ""}`}
             onClick={() => handleSelectSlide(index)}
-            aria-label={`Slide ${index + 1}`}
+            aria-label={locale === "en" ? `Show photograph ${index + 1}` : `${index + 1}. fotoğrafı göster`}
+            aria-current={index === currentSlide ? "true" : undefined}
           />
         ))}
       </div>
