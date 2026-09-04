@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { messagesFor, type SiteLocale } from "../home-localization";
@@ -105,9 +106,16 @@ export function VanHeroParallax({ locale = "tr" }: { locale?: SiteLocale }) {
             <span className="hero-subtitle-rule" aria-hidden="true" />
             <span>{locale === "en" ? "BEYOĞLU · SINCE 1978" : "BEYOĞLU · 1978"}</span>
           </div>
-          <h1 className="hero-title">
-            <span className="hero-title-main">TARİHİ VAN</span>
-            <span className="hero-title-accent">KAHVALTI EVİ</span>
+          <h1 className="hero-title hero-title-visual">
+            <span className="sr-only">Tarihi Van Kahvaltı Evi</span>
+            <Image
+              src="/images/hero-title-lockup-heritage.png"
+              alt=""
+              width={1560}
+              height={560}
+              priority
+              className="hero-title-lockup-image"
+            />
           </h1>
           <p className="hero-tagline">
             {locale === "en"
