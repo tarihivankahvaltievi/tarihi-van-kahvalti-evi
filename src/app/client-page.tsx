@@ -311,10 +311,6 @@ export default function ClientPage({ children, locale = "tr" }: { children: Reac
               aria-modal="true"
               aria-hidden={!menuOpen}
             >
-              <div className="mobile-drawer-heading" tabIndex={-1} data-menu-title>
-                <span>{locale === "en" ? "DISCOVER" : "KEŞFET"}</span>
-                <p>{locale === "en" ? "A table with a story." : "Hikâyesi olan bir sofra."}</p>
-              </div>
               <ul className="mobile-links">
                 <li>
                   <Link
