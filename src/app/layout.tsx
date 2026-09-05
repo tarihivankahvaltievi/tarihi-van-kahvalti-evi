@@ -167,23 +167,21 @@ export default function RootLayout({
         <link rel="me" href={instagramUrl} />
       </head>
       <body className="min-h-full flex flex-col">
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              window.dataLayer = window.dataLayer || [];
-              function gtag(){dataLayer.push(arguments);}
-              window.gtag = gtag;
-              gtag('js', new Date());
-              gtag('config', '${googleAdsId}', {
-                allow_enhanced_conversions: true
-              });
-            `,
-          }}
-        />
         <Script
-          strategy="afterInteractive"
           src={`https://www.googletagmanager.com/gtag/js?id=${googleAdsId}`}
+          strategy="afterInteractive"
         />
+        <Script id="google-ads-gtag-init" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            window.gtag = gtag;
+            gtag('js', new Date());
+            gtag('config', '${googleAdsId}', {
+              allow_enhanced_conversions: true
+            });
+          `}
+        </Script>
         <AnalyticsAutoTracker />
         {webVitalsEndpoint?.startsWith("/") && !webVitalsEndpoint.startsWith("//") ? (
           <WebVitals endpoint={webVitalsEndpoint} />
