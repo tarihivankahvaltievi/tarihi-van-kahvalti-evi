@@ -35,14 +35,9 @@ export function AnimatedFooter({ locale = "tr" }: { locale?: string }) {
           data-aos-anchor-placement="top-bottom"
           data-aos-delay="100"
         >
-          <Link href="/" aria-label="Tarihi Van Kahvaltı Evi">
-            <Image
-              src="/images/brand-logo-burgundy.png"
-              alt="Tarihi Van Kahvaltı Evi"
-              width={260}
-              height={55}
-              className={styles.brandLogoImg}
-            />
+          <Link href="/" aria-label="Tarihi Van Kahvaltı Evi" className={styles.brandTitleLink}>
+            <span className={styles.brandProvenance}>1978 · BEYOĞLU</span>
+            <span className={styles.brandName}>TARİHİ VAN KAHVALTI EVİ</span>
           </Link>
         </div>
 

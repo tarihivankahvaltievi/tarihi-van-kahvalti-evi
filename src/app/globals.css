@@ -9105,7 +9105,7 @@ body,
 .theme-breakfast .hero-parallax-sticky,
 .theme-breakfast .gallery-section,
 .faq-section,
-.footer-reimagined,
+.footer-reimagined:not(#hamour-footer),
 .seo-page {
   background: var(--site-beige) !important;
   background-color: var(--site-beige) !important;
@@ -9189,8 +9189,8 @@ body .mobile-bar .mobile-bar-primary:focus-visible {
   background-color: var(--site-beige) !important;
 }
 
-.footer-reimagined::before,
-.footer-reimagined::after {
+.footer-reimagined:not(#hamour-footer)::before,
+.footer-reimagined:not(#hamour-footer)::after {
   background: none !important;
 }
 
@@ -9399,7 +9399,7 @@ body .mobile-bar .mobile-bar-primary:focus-visible {
 }
 
 /* Footer sequence: information first; the İstiklal scene closes the page. */
-.footer-reimagined {
+.footer-reimagined:not(#hamour-footer) {
   display: flex;
   flex-direction: column;
 }
