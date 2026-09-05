@@ -52,8 +52,8 @@ export function VenueAtmosphere({ locale = "tr" }: { locale?: string }) {
             className={styles.subtitle}
           >
             {isEn
-              ? "Hamour'un büyüleyici atmosferi lezzetleriyle birleşiyor!"
-              : "Hamour'un büyüleyici atmosferi lezzetleriyle birleşiyor!"}
+              ? "The enchanting ambience of our historic townhouse meets the timeless flavors of Van."
+              : "Tarihi Rum konağımızın büyüleyici atmosferi, Van’ın eşsiz lezzetleriyle buluşuyor."}
           </p>
         </div>
 
@@ -67,8 +67,8 @@ export function VenueAtmosphere({ locale = "tr" }: { locale?: string }) {
           >
             <p>
               {isEn
-                ? "Bringing together the culture of patisserie, brasserie and bistro, Hamour proudly presents an authentic taste experience to its guests. We invite you to Hamour to experience delightful moments in this unique atmosphere!"
-                : "Hamour, patiseri, brasserie ve bistro kültürünü bir araya getirerek, özgün bir lezzet deneyimini misafirlerine iftiharla sunuyor. Bu eşsiz atmosferde, keyif dolu anlar yaşamak için sizleri Hamour'a bekliyoruz!"}
+                ? "Blending our heritage breakfast tradition since 1978 with the historic charm of Beyoğlu, we offer an authentic culinary gathering place. Whether under the high ceilings of our heritage rooms or at our lively street-side tables, we invite you to experience heartwarming breakfast moments at Tarihi Van Kahvaltı Evi!"
+                : "1978'den beri süregelen sofra kültürümüzü, Beyoğlu'nun yaşayan tarihi ve sıcacık misafirperverliğimizle harmanlayarak misafirlerimize unutulmaz bir deneyim sunuyoruz. Yüksek tavanlı ferah salonlarımızda veya sokak masalarımızda, dostlarınızla ve ailenizle keyif dolu anlar yaşamak için sizleri Tarihi Van Kahvaltı Evi'ne bekliyoruz!"}
             </p>
           </div>
           <Link

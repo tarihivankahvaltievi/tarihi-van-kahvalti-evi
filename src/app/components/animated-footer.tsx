@@ -16,12 +16,12 @@ export function AnimatedFooter({ locale = "tr" }: { locale?: string }) {
           data-aos-anchor-placement="top-bottom"
           data-aos-delay="100"
         >
-          <Link href="/" aria-label="Hamour">
+          <Link href="/" aria-label="Tarihi Van Kahvaltı Evi">
             <Image
-              src="/hamour/logo-vector-icon.png"
-              alt="Hamour"
+              src="/images/brand-emblem-colored.png"
+              alt="Tarihi Van Kahvaltı Evi"
               width={75}
-              height={50}
+              height={51}
               className={styles.vectorImg}
             />
           </Link>
@@ -35,10 +35,10 @@ export function AnimatedFooter({ locale = "tr" }: { locale?: string }) {
           data-aos-anchor-placement="top-bottom"
           data-aos-delay="100"
         >
-          <Link href="/" aria-label="Hamour">
+          <Link href="/" aria-label="Tarihi Van Kahvaltı Evi">
             <Image
-              src="/hamour/logo_logo.png"
-              alt="Hamour"
+              src="/images/brand-logo-burgundy.png"
+              alt="Tarihi Van Kahvaltı Evi"
               width={260}
               height={55}
               className={styles.brandLogoImg}
@@ -56,13 +56,13 @@ export function AnimatedFooter({ locale = "tr" }: { locale?: string }) {
         >
           <h4 className={styles.textTitle}>
             {isEn
-              ? "The Longed-for Flavors Are at Hamour!"
-              : "Hamour’da Özlenen O Lezzetler Var!"}
+              ? "The Timeless Flavors of Van Breakfast in Beyoğlu"
+              : "Van Sofrasının Özlenen Lezzetleri Beyoğlu’nda!"}
           </h4>
           <p className={styles.textParagraph}>
             {isEn
-              ? "Hamour was born with the dream of eliminating the need to travel to far countries to pursue the taste of freshly baked breads and cakes that leave a lasting mark on our palate. Embracing this idea with great passion, it turned into a unique place where our guests will feel like they are on a magical street in Paris and discover Hamour's authentic delicacies!"
-              : "Hamour, fırından çıkan taptaze ekmek kokusunu, damağımızda iz bırakan pastaların lezzetini ve bu tatların peşine düşmek için uzak ülkelere gitme gerekliliğini ortadan kaldırma hayaliyle doğdu. Büyük bir tutkuyla sahiplendiğimiz bu fikir, misafirlerimizin kendilerini Paris’in büyülü bir caddesinde hissedecekleri ve Hamour’un özgün lezzetlerini keşfedecekleri eşsiz bir mekana dönüştü!"}
+              ? "Since 1978, in our historic Greek townhouse in Taksim, our family has brought the genuine flavors, generosity, and warmth of Van breakfast culture to Istanbul. From protected-origin herb cheese to wild Karakovan honeycomb and oven-warm kete, we invite you to experience an authentic morning feast."
+              : "1978 yılından bu yana, Taksim'in tarihi Rum konağında aile emeğiyle kurduğumuz sofralarda; Van yaylalarının hakiki lezzetlerini, cömertliğini ve samimiyetini yaşatıyoruz. Otlu peynirden karakovan balına, sıcak Van ketesinden sahanda lezzetlerimize kadar her anı bir kutlamaya dönüştürmek için sizleri bekliyoruz."}
           </p>
         </div>
 
@@ -76,7 +76,7 @@ export function AnimatedFooter({ locale = "tr" }: { locale?: string }) {
               data-aos-delay="100"
             >
               <a
-                href="https://www.instagram.com/hamour.ist"
+                href="https://www.instagram.com/tarihivankahvaltievi/"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Instagram"
@@ -96,14 +96,14 @@ export function AnimatedFooter({ locale = "tr" }: { locale?: string }) {
               data-aos-delay="200"
             >
               <a
-                href="https://www.facebook.com/hamour.ist"
+                href="https://www.google.com/maps?cid=10380797280962926014"
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label="Facebook"
+                aria-label="Google Maps"
               >
                 <Image
                   src="/hamour/facebook.png"
-                  alt="Facebook"
+                  alt="Harita ve Konum"
                   width={42}
                   height={42}
                 />
