@@ -3,48 +3,12 @@
 import Image from "next/image";
 import Link from "next/link";
 import { motion, useReducedMotion } from "framer-motion";
-import { ArrowRight, Sparkles, Landmark, HeartHandshake } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import styles from "./about-story.module.css";
 
 export function AboutStory({ locale = "tr" }: { locale?: string }) {
   const isEn = locale === "en";
   const reduceMotion = useReducedMotion();
-
-  const highlights = isEn
-    ? [
-        {
-          icon: Sparkles,
-          title: "Authentic Plateau Delicacies",
-          desc: "Direct from Van: protected-origin herb cheese, wild Karakovan honeycomb & clotted cream",
-        },
-        {
-          icon: HeartHandshake,
-          title: "Family Heritage Since 1978",
-          desc: "Three generations of hospitality, generous breakfast spreads, and enduring family warmth",
-        },
-        {
-          icon: Landmark,
-          title: "Historic Greek Townhouse",
-          desc: "A registered 18th-century cultural heritage gem nestled in Beyoğlu Zambak Street",
-        },
-      ]
-    : [
-        {
-          icon: Sparkles,
-          title: "Hakiki Yayla Lezzetleri",
-          desc: "Van'dan sofranıza coğrafi işaretli otlu peynir, Karakovan petek balı ve manda kaymağı",
-        },
-        {
-          icon: HeartHandshake,
-          title: "1978'den Beri Aile Mirası",
-          desc: "Üç kuşaktır değişmeyen samimiyet, cömert sofra bereketi ve hakiki misafirperverlik",
-        },
-        {
-          icon: Landmark,
-          title: "Tarihi Rum Konağı",
-          desc: "Beyoğlu Zambak Sokak'ta 18. yüzyıldan bugüne yaşayan 2. derece tescilli tarihi atmosfer",
-        },
-      ];
 
   return (
     <section className={styles.section1} id="hakkimizda">
@@ -191,34 +155,6 @@ export function AboutStory({ locale = "tr" }: { locale?: string }) {
               </span>
             </p>
           </motion.div>
-
-          {/* 3 Heritage Highlight Badges */}
-          <div className={styles.highlightsGrid}>
-            {highlights.map((item, idx) => {
-              const IconComp = item.icon;
-              return (
-                <motion.div
-                  key={idx}
-                  className={styles.highlightCard}
-                  initial={reduceMotion ? false : { opacity: 0, y: 22 }}
-                  whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
-                  viewport={{ once: true, amount: 0.2 }}
-                  transition={{
-                    duration: 0.6,
-                    delay: reduceMotion ? 0 : 0.42 + idx * 0.1,
-                    ease: [0.16, 1, 0.3, 1],
-                  }}
-                  whileHover={reduceMotion ? undefined : { y: -3, transition: { duration: 0.25 } }}
-                >
-                  <div className={styles.highlightIconBox}>
-                    <IconComp className={styles.highlightIcon} />
-                  </div>
-                  <h3 className={styles.highlightTitle}>{item.title}</h3>
-                  <p className={styles.highlightDesc}>{item.desc}</p>
-                </motion.div>
-              );
-            })}
-          </div>
 
           {/* Interactive CTA Link */}
           <motion.div

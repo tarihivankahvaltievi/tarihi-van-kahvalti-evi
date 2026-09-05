@@ -204,81 +204,6 @@
   }
 }
 
-/* Highlights Grid */
-.highlightsGrid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 16px;
-  width: 100%;
-  max-width: 860px;
-  margin: 0 auto 42px;
-}
-
-@media (min-width: 768px) {
-  .highlightsGrid {
-    grid-template-columns: repeat(3, 1fr);
-    gap: 18px;
-  }
-}
-
-.highlightCard {
-  background: #fbf7f1;
-  border: 1px solid rgba(180, 90, 56, 0.16);
-  border-radius: 10px;
-  padding: 22px 18px;
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-  box-shadow: 0 2px 8px rgba(64, 32, 33, 0.03);
-}
-
-.highlightCard:hover {
-  border-color: rgba(180, 90, 56, 0.45);
-  background: #fffdf9;
-  box-shadow: 0 8px 24px rgba(180, 90, 56, 0.1);
-}
-
-.highlightIconBox {
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
-  background: rgba(180, 90, 56, 0.09);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 14px;
-  color: #b45a38;
-  transition: transform 0.3s ease;
-}
-
-.highlightCard:hover .highlightIconBox {
-  transform: scale(1.08);
-}
-
-.highlightIcon {
-  width: 21px;
-  height: 21px;
-}
-
-.highlightTitle {
-  font-family: "NOCTADO", Georgia, serif;
-  font-size: 18px;
-  font-weight: 500;
-  color: #402021;
-  margin: 0 0 8px 0;
-  line-height: 1.25;
-}
-
-.highlightDesc {
-  font-family: "Causten", system-ui, sans-serif;
-  font-size: 13.5px;
-  line-height: 1.48;
-  color: #614a4b;
-  margin: 0;
-}
-
 /* Action CTA */
 .btnWrapper {
   margin: 0 auto;
@@ -363,19 +288,6 @@
     font-size: 14.5px;
     max-width: 330px;
     line-height: 1.5;
-  }
-  .highlightsGrid {
-    gap: 12px;
-    margin-bottom: 32px;
-  }
-  .highlightCard {
-    padding: 18px 14px;
-  }
-  .highlightTitle {
-    font-size: 17px;
-  }
-  .highlightDesc {
-    font-size: 13px;
   }
   .btn {
     font-size: 19px;
