@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { ArrowUpRight, CalendarDays, Phone } from "lucide-react";
 import styles from "./venue-atmosphere.module.css";
 
 export function VenueAtmosphere({ locale = "tr" }: { locale?: string }) {
@@ -35,6 +36,10 @@ export function VenueAtmosphere({ locale = "tr" }: { locale?: string }) {
       <div className={styles.overlay} aria-hidden="true" />
 
       <div className={styles.container}>
+        <div className={styles.eyebrow} data-aos="fade-up">
+          <span>{isEn ? "BEYOĞLU · SINCE 1978" : "BEYOĞLU · 1978'DEN BERİ"}</span>
+        </div>
+
         <div className={styles.head}>
           <h2
             data-aos="fade-up"
@@ -62,30 +67,27 @@ export function VenueAtmosphere({ locale = "tr" }: { locale?: string }) {
           </p>
         </div>
 
-        <div className={styles.article}>
+        <div className={styles.article} data-aos="fade-up" data-aos-delay="120">
           <div
             className={styles.richtext}
-            data-aos="fade-up"
-            data-aos-duration="1000"
-            data-aos-anchor-placement="top-bottom"
-            data-aos-delay="300"
           >
             <p>
               {isEn
-                ? "Blending our heritage breakfast tradition since 1978 with the historic charm of Beyoğlu, we offer an authentic culinary gathering place. Whether under the high ceilings of our heritage rooms or at our lively street-side tables, we invite you to experience heartwarming breakfast moments at Tarihi Van Kahvaltı Evi!"
-                : "1978'den beri süregelen sofra kültürümüzü, Beyoğlu'nun yaşayan tarihi ve sıcacık misafirperverliğimizle harmanlayarak misafirlerimize unutulmaz bir deneyim sunuyoruz. Yüksek tavanlı ferah salonlarımızda veya sokak masalarımızda, dostlarınızla ve ailenizle keyif dolu anlar yaşamak için sizleri Tarihi Van Kahvaltı Evi'ne bekliyoruz!"}
+                ? "In our historic rooms and at our street-side tables, the generous spirit of Van meets the warmth of Beyoğlu."
+                : "Tarihi salonlarımızda ya da sokak masalarımızda, Van sofrasının cömertliği Beyoğlu'nun sıcaklığıyla buluşuyor."}
             </p>
           </div>
-          <Link
-            href="tel:+905320502717"
-            data-aos="fade-up"
-            data-aos-duration="1000"
-            data-aos-anchor-placement="top-bottom"
-            data-aos-delay="400"
-            className={styles.btn}
-          >
-            {isEn ? "Call Us" : "Bizi Ara"}
-          </Link>
+          <div className={styles.actions}>
+            <Link href="tel:+905415252868" className={`${styles.btn} ${styles.primaryBtn}`}>
+              <Phone aria-hidden="true" />
+              {isEn ? "Call us" : "Bizi ara"}
+            </Link>
+            <Link href={isEn ? "/en/rezervasyon" : "/rezervasyon"} className={styles.btn}>
+              <CalendarDays aria-hidden="true" />
+              {isEn ? "Book a table" : "Masa ayırt"}
+              <ArrowUpRight aria-hidden="true" className={styles.arrow} />
+            </Link>
+          </div>
         </div>
       </div>
     </section>

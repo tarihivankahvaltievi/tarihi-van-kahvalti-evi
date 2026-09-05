@@ -1,5 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
+import { ArrowUpRight, Camera, Clock3, MapPin, Phone } from "lucide-react";
+import { displayPhone, mapsUrl, openingHours, telUrl } from "../seo";
 import styles from "./animated-footer.module.css";
 
 export function AnimatedFooter({ locale = "tr" }: { locale?: string }) {
@@ -51,60 +53,20 @@ export function AnimatedFooter({ locale = "tr" }: { locale?: string }) {
         >
           <h4 className={styles.textTitle}>
             {isEn
-              ? "The Timeless Flavors of Van Breakfast in Beyoğlu"
-              : "Van Sofrasının Özlenen Lezzetleri Beyoğlu’nda!"}
+              ? "The timeless flavors of Van, in Beyoğlu"
+              : "Van sofrasının özlenen lezzetleri Beyoğlu’nda"}
           </h4>
           <p className={styles.textParagraph}>
             {isEn
-              ? "Since 1978, in our historic Greek townhouse in Taksim, our family has brought the genuine flavors, generosity, and warmth of Van breakfast culture to Istanbul. From protected-origin herb cheese to wild Karakovan honeycomb and oven-warm kete, we invite you to experience an authentic morning feast."
-              : "1978 yılından bu yana, Taksim'in tarihi Rum konağında aile emeğiyle kurduğumuz sofralarda; Van yaylalarının hakiki lezzetlerini, cömertliğini ve samimiyetini yaşatıyoruz. Otlu peynirden karakovan balına, sıcak Van ketesinden sahanda lezzetlerimize kadar her anı bir kutlamaya dönüştürmek için sizleri bekliyoruz."}
+              ? "A generous Van breakfast table, served with the warmth of a family home in the heart of Beyoğlu."
+              : "Beyoğlu'nun kalbinde, aile sıcaklığıyla kurulan cömert bir Van kahvaltısı sofrası."}
           </p>
         </div>
 
-        {/* Social Icons */}
-        <div className={styles.footerSocial}>
-          <ul className={styles.socialList}>
-            <li
-              data-aos="fade-up"
-              data-aos-duration="1000"
-              data-aos-anchor-placement="top-bottom"
-              data-aos-delay="100"
-            >
-              <a
-                href="https://www.instagram.com/tarihivankahvaltievi/"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Instagram"
-              >
-                <Image
-                  src="/hamour/instagram.png"
-                  alt="Instagram"
-                  width={42}
-                  height={42}
-                />
-              </a>
-            </li>
-            <li
-              data-aos="fade-up"
-              data-aos-duration="1000"
-              data-aos-anchor-placement="top-bottom"
-              data-aos-delay="200"
-            >
-              <a
-                href="https://www.google.com/maps?cid=10380797280962926014"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Google Maps"
-              >
-                <Image
-                  src="/hamour/facebook.png"
-                  alt="Harita ve Konum"
-                  width={42}
-                  height={42}
-                />
-              </a>
-            </li>
-          </ul>
+        <div className={styles.quickLinks} data-aos="fade-up" data-aos-delay="160">
+          <a href={telUrl} className={styles.quickLink}><Phone aria-hidden="true" /><span><small>{isEn ? "Call" : "Telefon"}</small>{displayPhone}</span></a>
+          <a href={mapsUrl} target="_blank" rel="noopener noreferrer" className={styles.quickLink}><MapPin aria-hidden="true" /><span><small>{isEn ? "Location" : "Konum"}</small>{isEn ? "Get directions" : "Yol tarifi al"}</span><ArrowUpRight aria-hidden="true" className={styles.quickArrow} /></a>
+          <div className={styles.quickLink}><Clock3 aria-hidden="true" /><span><small>{isEn ? "Opening hours" : "Çalışma saatleri"}</small>{openingHours.short}</span></div>
         </div>
 
         {/* Navigation Menu */}
@@ -116,10 +78,11 @@ export function AnimatedFooter({ locale = "tr" }: { locale?: string }) {
             data-aos-anchor-placement="top-bottom"
             data-aos-delay="100"
           >
-            <Link href="/hikayemiz">{isEn ? "Our Story" : "Hikayemiz"}</Link>
+            <Link href="/hikayemiz">{isEn ? "Our Story" : "Hikâyemiz"}</Link>
             <Link href="/menu">{isEn ? "Menu" : "Menü"}</Link>
             <Link href="/konum">{isEn ? "Contact" : "İletişim"}</Link>
           </nav>
+          <a href="https://www.instagram.com/tarihivankahvaltievi/" target="_blank" rel="noopener noreferrer" className={styles.instagramLink}><Camera aria-hidden="true" /> Instagram</a>
         </div>
 
         {/* Bottom Legal / Copyright */}

@@ -271,3 +271,37 @@
     padding: 2px 4px;
   }
 }
+
+/* Compact closing section: the brand and practical next step carry the hierarchy. */
+.footer { margin-top: -24px; padding: 5.8rem 0 2.5rem; }
+.footer:before { height: 76px; }
+.container { width: min(100% - 2rem, 920px); max-width: none; padding: 0; }
+.footerVector { padding-bottom: 1rem; }
+.footerVector a { width: 4.35rem; transition: transform 220ms var(--ease-out); }
+.footerLogo { padding-bottom: 1.65rem; }
+.brandTitleLink { gap: 0.3rem; transition: transform 220ms var(--ease-out); }
+.brandTitleLink:hover { transform: translateY(-2px); }
+.brandProvenance { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.25em; }
+.brandName { font-size: clamp(1.65rem, 3.2vw, 2.15rem); letter-spacing: 0.045em; line-height: 1.1; }
+.footerText { width: min(100%, 680px); padding-bottom: 1.75rem; }
+.textTitle { margin: 0 0 0.75rem; font-size: clamp(1.8rem, 3.5vw, 2.6rem); line-height: 1.12; }
+.textParagraph { max-width: 38rem; font-size: 1rem; color: rgba(255, 255, 255, 0.86); }
+.quickLinks { display: flex; flex-wrap: wrap; gap: 0.7rem; justify-content: center; margin: 0 auto 1.75rem; }
+.quickLink { display: flex; flex: 1 1 12rem; align-items: center; min-height: 4.25rem; gap: 0.7rem; padding: 0.7rem 0.85rem; border: 1px solid rgba(249, 232, 213, 0.17); background: rgba(255, 246, 230, 0.045); color: #fff4e6; text-align: left; transition: transform 200ms var(--ease-out), background-color 200ms var(--ease-out), border-color 200ms var(--ease-out); }
+.quickLink > svg { width: 1.15rem; height: 1.15rem; flex: 0 0 auto; color: #dfba70; }
+.quickLink span { display: grid; gap: 0.15rem; font-family: "Causten", system-ui, sans-serif; font-size: 0.82rem; font-weight: 650; }
+.quickLink small { color: rgba(255, 239, 213, 0.66); font-size: 0.65rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; }
+.quickArrow { margin-left: auto; }
+a.quickLink:hover { transform: translateY(-2px); border-color: rgba(223, 186, 112, 0.78); background: rgba(223, 186, 112, 0.1); }
+.footerMenu { display: flex; align-items: center; justify-content: center; gap: 1rem 1.4rem; padding-bottom: 1.55rem; }
+.nav { gap: 0.25rem 1.1rem; }
+.nav a { padding: 0.45rem 0; font-size: 1.05rem; transition: color 200ms ease; }
+.nav a:hover { color: #dfba70; }
+.instagramLink { display: inline-flex; align-items: center; gap: 0.4rem; color: #f9e8d5; font-family: "Causten", system-ui, sans-serif; font-size: 0.8rem; font-weight: 700; }
+.instagramLink svg { width: 1rem; height: 1rem; color: #dfba70; }
+.footerBot { gap: 0.25rem 0.8rem; width: min(100%, 48rem); padding-top: 1.25rem; }
+.footerBot a, .footerBot span { padding: 0.25rem; font-size: 0.7rem; font-weight: 500; color: rgba(255, 255, 255, 0.75); }
+.seoHiddenLink { font-size: 0.62rem !important; }
+.footerVector a:focus-visible, .brandTitleLink:focus-visible, .quickLink:focus-visible, .instagramLink:focus-visible { outline: 3px solid #dfba70; outline-offset: 3px; }
+@media (max-width: 768px) { .footer { margin-top: -20px; padding: 5rem 0 2rem; } .footerVector a { width: 3.75rem; } .brandProvenance { font-size: 0.64rem; letter-spacing: 0.21em; } .brandName { font-size: 1.53rem; } .textTitle { font-size: 2rem; } .textParagraph { font-size: 0.95rem; } .quickLinks { display: grid; grid-template-columns: 1fr; margin-bottom: 1.45rem; } .quickLink { min-height: 3.75rem; } .footerMenu { flex-direction: column; gap: 0.6rem; padding-bottom: 1.25rem; } .nav a { font-size: 1rem; } .footerBot { gap: 0.25rem 0.55rem; padding-top: 1rem; } .footerBot a, .footerBot span { font-size: 0.67rem; } }
+@media (prefers-reduced-motion: reduce) { .footerVector a, .brandTitleLink, .quickLink { transition-duration: 150ms; } .footerVector a:hover, .brandTitleLink:hover, a.quickLink:hover { transform: none; } }

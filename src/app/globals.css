@@ -72,6 +72,16 @@
   opacity: 1;
 }
 
+@media (prefers-reduced-motion: reduce) {
+  [data-aos],
+  [data-aos="fade-up"],
+  [data-aos="fade-left"],
+  [data-aos="fade-right"] {
+    transform: none;
+    transition: opacity 150ms ease;
+  }
+}
+
 :root {
   /* Compatibility alias for existing brand-sans component styles. */
   --font-bricolage-grotesque-gf: var(--font-commissioner-gf);
@@ -10211,4 +10221,3 @@ body .mobile-bar .mobile-bar-primary:focus-visible {
     margin-bottom: 2rem;
   }
 }
-

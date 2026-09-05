@@ -1,11 +1,11 @@
 .section4 {
   position: relative;
   z-index: 20;
-  margin-top: -50px;
-  padding: 110px 0 95px;
+  margin-top: -24px;
+  padding: clamp(6.25rem, 10vw, 9rem) 0 clamp(5.5rem, 8vw, 7.5rem);
   background-color: #231210;
   text-align: center;
-  overflow: visible;
+  overflow: hidden;
 }
 
 .topAnchor {
@@ -36,18 +36,16 @@
   height: 100%;
   object-fit: cover;
   object-position: center 25%;
-  transform: scale(1.02);
+  transform: scale(1.045);
+  animation: venue-breathe 18s ease-in-out infinite alternate;
 }
 
 .overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(
-    180deg,
-    rgba(28, 14, 12, 0.78) 0%,
-    rgba(28, 14, 12, 0.64) 50%,
-    rgba(24, 11, 10, 0.86) 100%
-  );
+  background:
+    linear-gradient(180deg, rgba(27, 12, 10, 0.72) 0%, rgba(27, 12, 10, 0.48) 38%, rgba(22, 9, 8, 0.88) 100%),
+    linear-gradient(90deg, rgba(35, 15, 13, 0.42), transparent 45%, rgba(35, 15, 13, 0.34));
   z-index: 1;
 }
 
@@ -55,78 +53,94 @@
   position: relative;
   z-index: 5;
   width: 100%;
-  max-width: 1140px;
+  max-width: 1040px;
   margin: 0 auto;
   padding: 0 15px;
+}
+
+.eyebrow {
+  margin-bottom: 1.3rem;
+}
+
+.eyebrow span {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #e2bd74;
+  font-family: "Causten", system-ui, sans-serif;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+}
+
+.eyebrow span::before,
+.eyebrow span::after {
+  width: 1.75rem;
+  height: 1px;
+  background: currentColor;
+  content: "";
+  opacity: 0.65;
 }
 
 .head {
   position: relative;
   text-align: center;
-  margin-bottom: 28px;
+  margin-bottom: 2rem;
 }
 
 .title {
   font-family: "NOCTADO", Georgia, serif;
-  font-size: 32px;
+  font-size: clamp(2.65rem, 5.2vw, 4.6rem);
   font-weight: 400;
   color: #f9e8d5;
   line-height: 1.1;
-  margin: 0 auto 20px;
+  margin: 0 auto 1.1rem;
   letter-spacing: -0.01em;
   text-align: center;
-  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
-}
-
-@media (min-width: 768px) {
-  .title {
-    font-size: 58px;
-    margin-bottom: 25px;
-  }
+  text-shadow: 0 3px 20px rgba(0, 0, 0, 0.48);
 }
 
 .subtitle {
   font-family: "Causten", system-ui, sans-serif;
-  font-size: 22px;
-  line-height: 1.35;
-  font-weight: 300;
-  color: #ffffff;
-  max-width: 440px;
+  font-size: clamp(1rem, 1.75vw, 1.25rem);
+  line-height: 1.55;
+  font-weight: 500;
+  color: rgba(255, 250, 244, 0.94);
+  max-width: 38rem;
   margin: 0 auto;
   text-align: center;
   text-shadow: 0 1px 6px rgba(0, 0, 0, 0.35);
 }
 
-@media (min-width: 768px) {
-  .subtitle {
-    font-size: 28px;
-    max-width: 700px;
-  }
-}
-
 .article {
   position: relative;
+  max-width: 42rem;
+  margin: 0 auto;
+  padding: clamp(1.4rem, 3vw, 2.1rem);
+  border: 1px solid rgba(248, 230, 204, 0.25);
+  background: rgba(40, 18, 16, 0.48);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.22), inset 0 1px 0 rgba(255, 247, 231, 0.13);
+  backdrop-filter: blur(8px);
   text-align: center;
 }
 
 .richtext p {
-  font-family: "NOCTADO", Georgia, serif;
-  font-size: 21px;
+  font-family: "Causten", system-ui, sans-serif;
+  font-size: clamp(1rem, 1.5vw, 1.13rem);
   font-weight: 400;
   color: #f9e8d5;
-  line-height: 1.35;
-  margin: 0 auto 40px;
-  max-width: 380px;
+  line-height: 1.65;
+  margin: 0 auto 1.45rem;
+  max-width: 34rem;
   text-align: center;
   text-shadow: 0 1px 6px rgba(0, 0, 0, 0.35);
 }
 
-@media (min-width: 768px) {
-  .richtext p {
-    font-size: 28px;
-    max-width: 740px;
-    margin-bottom: 48px;
-  }
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.7rem;
 }
 
 .btn {
@@ -134,23 +148,29 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 270px;
-  padding: 13px 20px;
-  max-width: calc(100% - 20px);
-  margin: 0 auto;
-  font-family: "NOCTADO", Georgia, serif;
-  font-size: 20px;
-  letter-spacing: 0.04em;
+  min-height: 48px;
+  padding: 0.75rem 1rem;
+  font-family: "Causten", system-ui, sans-serif;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
   line-height: 1;
-  color: #f9e8d5;
-  border: 1.5px solid rgba(255, 255, 255, 0.85);
-  background: rgba(36, 17, 15, 0.45);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+  color: #fff7e9;
+  border: 1px solid rgba(255, 248, 235, 0.62);
+  background: rgba(36, 17, 15, 0.25);
   text-decoration: none;
-  transition: all 0.35s ease;
+  transition: transform 220ms var(--ease-out), background-color 220ms var(--ease-out), border-color 220ms var(--ease-out), color 220ms var(--ease-out);
   cursor: pointer;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+  gap: 0.5rem;
+}
+
+.btn svg { width: 1rem; height: 1rem; }
+.btn .arrow { margin-left: -0.1rem; }
+
+.primaryBtn {
+  border-color: #dfba70;
+  background: #d1aa60;
+  color: #2b1712;
 }
 
 .btn:hover {
@@ -158,35 +178,44 @@
   border-color: #7a1b22;
   color: #ffffff;
   transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(122, 27, 34, 0.45);
 }
+
+.primaryBtn:hover { background: #e0bb71; border-color: #e0bb71; color: #2b1712; }
+.btn:focus-visible { outline: 3px solid #f6d88e; outline-offset: 3px; }
+
+@keyframes venue-breathe { from { transform: scale(1.045); } to { transform: scale(1.11); } }
 
 @media (max-width: 480px) {
   .section4 {
-    padding: 85px 15px 75px;
-    margin-top: -45px;
+    padding: 5.7rem 1rem 5rem;
+    margin-top: -20px;
   }
   .topAnchorImg {
     width: 65px;
   }
   .title {
-    font-size: 30px;
-    line-height: 1.15;
+    font-size: clamp(2.45rem, 11vw, 3.25rem);
+    line-height: 1.05;
   }
   .subtitle {
-    font-size: 18px;
-    line-height: 1.35;
-    max-width: 330px;
+    font-size: 1rem;
+    line-height: 1.55;
+    max-width: 20rem;
   }
   .richtext p {
-    font-size: 19px;
-    line-height: 1.35;
-    max-width: 330px;
-    margin-bottom: 35px;
+    font-size: 0.98rem;
+    line-height: 1.6;
+    margin-bottom: 1.25rem;
   }
   .btn {
-    font-size: 18px;
-    width: 230px;
-    padding: 12px 16px;
+    flex: 1 1 8rem;
+    font-size: 0.78rem;
+    padding-inline: 0.6rem;
   }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bgImg { animation: none; transform: scale(1.045); }
+  .btn { transition: background-color 150ms ease, border-color 150ms ease, color 150ms ease; }
+  .btn:hover { transform: none; }
 }
