@@ -5,7 +5,7 @@ type AnalyticsParameters = Record<string, AnalyticsValue>;
 
 declare global {
   interface Window {
-    dataLayer?: unknown[][];
+    dataLayer?: (unknown[] | IArguments)[];
     gtag?: (...args: unknown[]) => void;
   }
 }
@@ -14,16 +14,23 @@ const googleAdsConversionId = process.env.NEXT_PUBLIC_GOOGLE_ADS_ID ?? "AW-17869
 const bookingConversionLabel =
   process.env.NEXT_PUBLIC_GOOGLE_ADS_BOOKING_CONVERSION_LABEL ?? "1soqCKS9uu0cEMSe28hC";
 
-function sendEvent(name: string, parameters: AnalyticsParameters = {}) {
-  if (typeof window === "undefined") return;
-
-  if (typeof window.gtag === "function") {
-    window.gtag("event", name, parameters);
-    return;
-  }
+function getGtag(): (...args: unknown[]) => void {
+  if (typeof window === "undefined") return () => {};
+  if (typeof window.gtag === "function") return window.gtag;
 
   window.dataLayer = window.dataLayer || [];
-  window.dataLayer.push(["event", name, parameters]);
+  const fn = function () {
+    // eslint-disable-next-line prefer-rest-params
+    window.dataLayer?.push(arguments);
+  };
+  window.gtag = fn;
+  return fn;
+}
+
+function sendEvent(name: string, parameters: AnalyticsParameters = {}) {
+  if (typeof window === "undefined") return;
+  const gtag = getGtag();
+  gtag("event", name, parameters);
 }
 
 /**

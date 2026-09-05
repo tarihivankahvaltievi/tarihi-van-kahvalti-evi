@@ -164,17 +164,15 @@ export default function RootLayout({
   return (
     <html lang="tr" className={`h-full antialiased ${bodoni.variable} ${literata.variable} ${commissioner.variable}`}>
       <head>
-        <Script
-          strategy="afterInteractive"
-          src={`https://www.googletagmanager.com/gtag/js?id=${googleAdsId}`}
-        />
-        <Script
-          id="google-ads-gtag-init"
-          strategy="afterInteractive"
+        <link rel="me" href={instagramUrl} />
+      </head>
+      <body className="min-h-full flex flex-col">
+        <script
           dangerouslySetInnerHTML={{
             __html: `
               window.dataLayer = window.dataLayer || [];
               function gtag(){dataLayer.push(arguments);}
+              window.gtag = gtag;
               gtag('js', new Date());
               gtag('config', '${googleAdsId}', {
                 allow_enhanced_conversions: true
@@ -182,9 +180,10 @@ export default function RootLayout({
             `,
           }}
         />
-        <link rel="me" href={instagramUrl} />
-      </head>
-      <body className="min-h-full flex flex-col">
+        <Script
+          strategy="afterInteractive"
+          src={`https://www.googletagmanager.com/gtag/js?id=${googleAdsId}`}
+        />
         <AnalyticsAutoTracker />
         {webVitalsEndpoint?.startsWith("/") && !webVitalsEndpoint.startsWith("//") ? (
           <WebVitals endpoint={webVitalsEndpoint} />
