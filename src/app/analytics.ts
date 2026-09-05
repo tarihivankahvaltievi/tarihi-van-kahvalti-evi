@@ -33,39 +33,70 @@ function sendEvent(name: string, parameters: AnalyticsParameters = {}) {
 export function trackEvent(name: string, parameters: AnalyticsParameters = {}) {
   sendEvent(name, parameters);
 
-  // Send Google Ads conversion events for high-intent customer actions
+  // Send Google Ads conversion and interaction events for high-intent customer actions
   if (name === "contact_click") {
     const method = String(parameters.contact_method || "").toLowerCase();
+    const surface = String(parameters.surface || "website");
+
+    // Standard contact event
+    sendEvent("contact", {
+      method,
+      surface,
+    });
+
     if (method === "phone" || method === "call") {
       sendEvent("conversion", {
         send_to: googleAdsConversionId,
         event_category: "phone_call",
-        event_label: String(parameters.surface || "website"),
+        event_label: surface,
+        value: 1.0,
+        currency: "TRY",
       });
     } else if (method === "directions" || method === "maps") {
       sendEvent("conversion", {
         send_to: googleAdsConversionId,
         event_category: "directions",
-        event_label: String(parameters.surface || "website"),
+        event_label: surface,
+        value: 1.0,
+        currency: "TRY",
       });
     } else if (method === "whatsapp") {
       sendEvent("conversion", {
         send_to: googleAdsConversionId,
         event_category: "whatsapp",
-        event_label: String(parameters.surface || "website"),
+        event_label: surface,
+        value: 1.0,
+        currency: "TRY",
       });
     }
   }
 }
 
 export function trackBookingLead(parameters: AnalyticsParameters = {}) {
-  sendEvent("generate_lead", parameters);
+  // Fire standard GA4 lead generation event
+  sendEvent("generate_lead", {
+    currency: "TRY",
+    value: 1.0,
+    ...parameters,
+  });
 
+  // Fire primary Google Ads conversion event with exact conversion label
   if (bookingConversionLabel) {
     sendEvent("conversion", {
       send_to: `${googleAdsConversionId}/${bookingConversionLabel}`,
+      value: 1.0,
+      currency: "TRY",
+      transaction_id: String(parameters.reservation_id || ""),
     });
   }
+
+  // Also send fallback conversion to parent tag ID
+  sendEvent("conversion", {
+    send_to: googleAdsConversionId,
+    event_category: "reservation_lead",
+    value: 1.0,
+    currency: "TRY",
+  });
 }
 
 /**

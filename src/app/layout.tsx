@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from "next";
+import Script from "next/script";
 import { Bodoni_Moda, Commissioner, Literata } from "next/font/google";
 import "./globals.css";
 import "./mobile-header-hero.css";
@@ -163,19 +164,22 @@ export default function RootLayout({
   return (
     <html lang="tr" className={`h-full antialiased ${bodoni.variable} ${literata.variable} ${commissioner.variable}`}>
       <head>
-        {/* Google tag (gtag.js) */}
-        <script
-          async
+        <Script
+          strategy="afterInteractive"
           src={`https://www.googletagmanager.com/gtag/js?id=${googleAdsId}`}
         />
-        <script
+        <Script
+          id="google-ads-gtag-init"
+          strategy="afterInteractive"
           dangerouslySetInnerHTML={{
             __html: `
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', '${googleAdsId}');
-          `,
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', '${googleAdsId}', {
+                allow_enhanced_conversions: true
+              });
+            `,
           }}
         />
         <link rel="me" href={instagramUrl} />
