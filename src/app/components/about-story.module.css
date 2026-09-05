@@ -2,60 +2,10 @@
   position: relative;
   z-index: 5;
   margin-top: 0;
-  padding: 85px 20px 95px;
-  background: linear-gradient(180deg, #ffffff 0%, #fdfbf7 50%, #ffffff 100%);
+  padding: 88px 20px 96px;
+  background: #fff;
   text-align: center;
   overflow: hidden;
-}
-
-/* Luminous Warm Aura behind content */
-.bgAura {
-  position: absolute;
-  top: 25%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 700px;
-  height: 500px;
-  background: radial-gradient(
-    ellipse at center,
-    rgba(214, 175, 120, 0.12) 0%,
-    rgba(214, 175, 120, 0.04) 50%,
-    transparent 72%
-  );
-  pointer-events: none;
-  z-index: 1;
-  filter: blur(24px);
-}
-
-/* Watermark */
-.watermarkWrap {
-  position: absolute;
-  top: 48%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 100%;
-  max-width: 820px;
-  pointer-events: none;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 1;
-  overflow: hidden;
-}
-
-.watermarkInner {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.watermarkImg {
-  display: block;
-  width: 100%;
-  max-width: 620px;
-  height: auto;
-  opacity: 0.065;
-  filter: grayscale(100%) sepia(25%);
 }
 
 .container {
@@ -74,59 +24,17 @@
   align-items: center;
 }
 
-/* Kicker Badge */
-.badgeWrapper {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 12px;
-  margin-bottom: 24px;
-}
-
 .crestMini {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  filter: drop-shadow(0 3px 8px rgba(180, 90, 56, 0.18));
+  margin-bottom: 22px;
 }
 
 .crestMiniImg {
   width: 50px;
   height: auto;
   object-fit: contain;
-}
-
-.kickerRow {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-}
-
-.kickerDiamond {
-  font-size: 7px;
-  color: #c49658;
-  line-height: 1;
-}
-
-.kickerLine {
-  display: inline-block;
-  width: 32px;
-  height: 1px;
-  background: linear-gradient(90deg, rgba(180, 90, 56, 0.15), rgba(180, 90, 56, 0.65));
-}
-
-.kickerRow .kickerLine:last-of-type {
-  background: linear-gradient(90deg, rgba(180, 90, 56, 0.65), rgba(180, 90, 56, 0.15));
-}
-
-.kickerText {
-  font-family: "Causten", system-ui, sans-serif;
-  font-size: 12px;
-  font-weight: 600;
-  color: #a85834;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
 }
 
 /* Headings */
@@ -136,8 +44,8 @@
   font-weight: 400;
   color: #361518;
   line-height: 1.2;
-  margin: 0 auto 22px;
-  letter-spacing: -0.015em;
+  margin: 0 auto 26px;
+  letter-spacing: -0.025em;
   text-align: center;
 }
 
@@ -147,9 +55,8 @@
 
 .titleLineAccent {
   display: block;
-  font-style: italic;
-  color: #6e242a;
-  margin-top: 4px;
+  color: #7c2929;
+  margin-top: 2px;
 }
 
 @media (min-width: 768px) {
@@ -160,104 +67,37 @@
   }
 }
 
-/* Decorative Divider */
-.flourishDivider {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 14px;
-  margin: 0 auto 32px;
-  width: 100%;
-  max-width: 240px;
+.intro {
+  max-width: 700px;
+  margin: 0 auto 46px;
 }
 
-.flourishLine {
-  flex: 1;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(197, 162, 90, 0.75), transparent);
-}
-
-.flourishDiamond {
-  font-size: 8px;
-  color: #c49658;
-  line-height: 1;
-}
-
-/* Luxury Editorial Quote Pod */
-.quotePod {
-  position: relative;
-  max-width: 720px;
-  width: 100%;
-  margin: 0 auto 34px;
-  padding: 28px 32px 24px;
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.92) 0%, rgba(253, 249, 242, 0.82) 100%);
-  border: 1px solid rgba(197, 162, 90, 0.32);
-  border-radius: 16px;
-  box-shadow: 0 10px 32px rgba(80, 40, 20, 0.05), inset 0 1px 1px rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-}
-
-.quoteMark {
-  position: absolute;
-  top: -14px;
-  left: 32px;
-  font-family: var(--font-bodoni-gf), Georgia, serif;
-  font-size: 54px;
-  line-height: 1;
-  color: #c49658;
-  opacity: 0.55;
-  pointer-events: none;
-}
-
-.quoteText {
+.intro p {
   font-family: var(--font-bodoni-gf), "Bodoni Moda", Georgia, serif !important;
   font-style: italic !important;
   font-weight: 400;
-  font-size: 21px;
-  color: #381a17;
-  line-height: 1.48;
-  margin: 0 0 14px;
+  font-size: 22px;
+  color: #3b211d;
+  line-height: 1.45;
+  margin: 0;
   text-align: center;
 }
 
 @media (min-width: 768px) {
-  .quoteText {
+  .intro p {
     font-size: 24px;
     line-height: 1.45;
   }
 }
 
-.quoteAuthor {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-}
-
-.authorLine {
-  width: 24px;
-  height: 1px;
-  background: rgba(197, 162, 90, 0.45);
-}
-
-.authorName {
-  font-family: "Causten", system-ui, sans-serif;
-  font-size: 12px;
-  font-weight: 500;
-  letter-spacing: 0.06em;
-  color: #8a6540;
-  font-style: normal;
-}
-
 /* Narrative Body */
 .richtext {
-  margin-bottom: 36px;
+  margin-bottom: 42px;
   width: 100%;
   max-width: 720px;
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 22px;
 }
 
 .richtext p span {
@@ -265,11 +105,11 @@
   font-family: "Causten", system-ui, sans-serif;
   font-size: 15.5px;
   font-weight: 400;
-  color: #4e3226;
-  line-height: 1.68;
+  color: #402b25;
+  line-height: 1.72;
   margin: 0 auto;
   text-align: center;
-  opacity: 0.94;
+  opacity: 1;
 }
 
 @media (min-width: 768px) {

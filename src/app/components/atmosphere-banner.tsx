@@ -8,16 +8,14 @@ export function AtmosphereBanner({ locale = "tr" }: { locale?: string }) {
   const isEn = locale === "en";
   const reduceMotion = useReducedMotion();
 
-  const quoteLines = isEn
+  const headingLines = isEn
     ? [
-        "“Since 1978 in Beyoğlu,",
-        "the warmest family table shaped",
-        "by authentic Van traditions.”",
+        "A Van Table,",
+        "at Home in Beyoğlu.",
       ]
     : [
-        "“1978’den beri Beyoğlu’nda,",
-        "Van’ın kadim lezzetleriyle kurulan",
-        "en sıcak aile sofrası.”",
+        "Van Sofrası,",
+        "Beyoğlu'nda.",
       ];
 
   return (
@@ -83,25 +81,9 @@ export function AtmosphereBanner({ locale = "tr" }: { locale?: string }) {
       <div className={styles.overlay} />
 
       <div className={styles.textContainer}>
-        {/* Heritage Kicker Badge */}
-        <motion.div
-          className={styles.kickerBadge}
-          initial={reduceMotion ? false : { opacity: 0, y: 14 }}
-          whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.25 }}
-          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-        >
-          <span className={styles.kickerLine} aria-hidden="true" />
-          <span className={styles.kickerText}>
-            {isEn ? "BEYOĞLU • SINCE 1978" : "BEYOĞLU • 1978'DEN BERİ"}
-          </span>
-          <span className={styles.kickerLine} aria-hidden="true" />
-        </motion.div>
-
-        {/* Animated Staggered Quote Heading */}
         <h2 className={styles.heading}>
-          <em className={styles.italicQuote}>
-            {quoteLines.map((line, idx) => (
+          <span className={styles.headingText}>
+            {headingLines.map((line, idx) => (
               <motion.span
                 key={idx}
                 className={styles.quoteLine}
@@ -125,67 +107,11 @@ export function AtmosphereBanner({ locale = "tr" }: { locale?: string }) {
                 {line}
               </motion.span>
             ))}
-          </em>
+          </span>
         </h2>
-
-        {/* Decorative Heritage Flourish */}
-        <motion.div
-          className={styles.flourishWrap}
-          initial={reduceMotion ? false : { opacity: 0, scaleX: 0 }}
-          whileInView={reduceMotion ? undefined : { opacity: 1, scaleX: 1 }}
-          viewport={{ once: true, amount: 0.25 }}
-          transition={{ duration: 0.7, delay: 0.6, ease: [0.16, 1, 0.3, 1] }}
-          aria-hidden="true"
-        >
-          <span className={styles.flourishLine} />
-          <span className={styles.flourishDiamond}>◆</span>
-          <span className={styles.flourishLine} />
-        </motion.div>
       </div>
 
-      {/* Bottom Architectural Cutout Transition to Section 3 (Filled with Section 3's exact background texture) */}
-      <div className={styles.bottomTransition} aria-hidden="true">
-        <svg
-          viewBox="0 0 1440 120"
-          preserveAspectRatio="none"
-          className={styles.transitionSvg}
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <defs>
-            <pattern
-              id="section3BgPattern"
-              patternUnits="userSpaceOnUse"
-              width="100%"
-              height="100%"
-            >
-              <image
-                href="/hamour/section-3-bg-bot.jpg"
-                x="0"
-                y="0"
-                width="100%"
-                height="100%"
-                preserveAspectRatio="xMidYMin slice"
-              />
-            </pattern>
-          </defs>
-
-          {/* Layer 1: Subtle dark depth shadow ribbon along the arch */}
-          <path
-            d="M0,97 C380,97 560,24 720,17 C880,24 1060,97 1440,97 L1440,120 L0,120 Z"
-            fill="rgba(24, 12, 14, 0.32)"
-          />
-          {/* Layer 2: Subtle translucent highlight ribbon */}
-          <path
-            d="M0,101 C380,101 560,28 720,21 C880,28 1060,101 1440,101 L1440,120 L0,120 Z"
-            fill="rgba(255, 255, 255, 0.4)"
-          />
-          {/* Layer 3: Solid arch filled with Section 3's exact background texture */}
-          <path
-            d="M0,105 C380,105 560,32 720,25 C880,32 1060,105 1440,105 L1440,120 L0,120 Z"
-            fill="url(#section3BgPattern)"
-          />
-        </svg>
-      </div>
+      <div className={styles.bottomTransition} aria-hidden="true" />
     </section>
   );
 }

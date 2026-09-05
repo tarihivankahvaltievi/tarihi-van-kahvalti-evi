@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRef } from "react";
 import { motion, useReducedMotion, useInView } from "framer-motion";
-import { ArrowRight, Sparkles, Landmark, HeartHandshake } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import styles from "./about-story.module.css";
 
 export function AboutStory({ locale = "tr" }: { locale?: string }) {
@@ -15,80 +15,12 @@ export function AboutStory({ locale = "tr" }: { locale?: string }) {
 
   const easeLuxury = [0.16, 1, 0.3, 1] as const;
 
-  const stats = isEn
-    ? [
-        {
-          icon: HeartHandshake,
-          num: "1978",
-          label: "Three Generations",
-          sub: "Family Heritage",
-        },
-        {
-          icon: Landmark,
-          num: "18th C.",
-          label: "Historic Greek House",
-          sub: "Beyoğlu Zambak St.",
-        },
-        {
-          icon: Sparkles,
-          num: "100%",
-          label: "Authentic Van Plateaus",
-          sub: "Protected Origin",
-        },
-      ]
-    : [
-        {
-          icon: HeartHandshake,
-          num: "1978",
-          label: "Üç Kuşak",
-          sub: "Aile Mirası",
-        },
-        {
-          icon: Landmark,
-          num: "18. YY",
-          label: "Tarihi Rum Konağı",
-          sub: "Beyoğlu Zambak Sokak",
-        },
-        {
-          icon: Sparkles,
-          num: "%100",
-          label: "Hakiki Van Yaylası",
-          sub: "Coğrafi İşaretli",
-        },
-      ];
-
   return (
     <section ref={sectionRef} className={styles.section1} id="hakkimizda">
-      {/* Background Luminous Aura & Heritage Watermark */}
-      <div className={styles.bgAura} aria-hidden="true" />
-
-      <div className={styles.watermarkWrap} aria-hidden="true">
-        <motion.div
-          initial={reduceMotion ? false : { opacity: 0, scale: 0.92 }}
-          animate={
-            isInView
-              ? { opacity: 0.065, scale: 1 }
-              : { opacity: 0, scale: 0.92 }
-          }
-          transition={{ duration: 1.4, ease: easeLuxury }}
-          className={styles.watermarkInner}
-        >
-          <Image
-            src="/images/brand-emblem-colored.png"
-            alt=""
-            width={720}
-            height={492}
-            className={styles.watermarkImg}
-            priority
-          />
-        </motion.div>
-      </div>
-
       <div className={styles.container}>
         <div className={styles.article}>
-          {/* Top Heritage Emblem & Kicker Badge */}
           <motion.div
-            className={styles.badgeWrapper}
+            className={styles.crestMini}
             initial={reduceMotion ? false : { opacity: 0, y: -16 }}
             animate={
               isInView
@@ -107,18 +39,8 @@ export function AboutStory({ locale = "tr" }: { locale?: string }) {
                 priority
               />
             </div>
-            <div className={styles.kickerRow}>
-              <span className={styles.kickerDiamond}>◆</span>
-              <span className={styles.kickerLine} aria-hidden="true" />
-              <span className={styles.kickerText}>
-                {isEn ? "SINCE 1978 • BEYOĞLU, ISTANBUL" : "1978'DEN BERİ • BEYOĞLU ZAMBAK SOKAK"}
-              </span>
-              <span className={styles.kickerLine} aria-hidden="true" />
-              <span className={styles.kickerDiamond}>◆</span>
-            </div>
           </motion.div>
 
-          {/* Staggered Heading Reveal with Tok Physics */}
           <h2 className={styles.title}>
             <motion.span
               className={styles.titleLine}
@@ -130,7 +52,7 @@ export function AboutStory({ locale = "tr" }: { locale?: string }) {
               }
               transition={{ duration: 0.8, delay: 0.1, ease: easeLuxury }}
             >
-              {isEn ? "Experience the Living Heritage" : "Van Sofrasının Asırlık Mirası,"}
+              {isEn ? "The Warmth of a Van Table" : "Van Sofrasının Sıcaklığı"}
             </motion.span>
             <motion.span
               className={styles.titleLineAccent}
@@ -142,30 +64,12 @@ export function AboutStory({ locale = "tr" }: { locale?: string }) {
               }
               transition={{ duration: 0.8, delay: 0.22, ease: easeLuxury }}
             >
-              {isEn ? "of Authentic Van Breakfast" : "Beyoğlu'nun En Sıcak Masasında"}
+              {isEn ? "in the Heart of Beyoğlu" : "Beyoğlu'nun Kalbinde"}
             </motion.span>
           </h2>
 
-          {/* Elegant Divider Flourish */}
           <motion.div
-            className={styles.flourishDivider}
-            initial={reduceMotion ? false : { opacity: 0, scaleX: 0 }}
-            animate={
-              isInView
-                ? { opacity: 1, scaleX: 1 }
-                : { opacity: 0, scaleX: 0 }
-            }
-            transition={{ duration: 0.85, delay: 0.32, ease: easeLuxury }}
-            aria-hidden="true"
-          >
-            <span className={styles.flourishLine} />
-            <span className={styles.flourishDiamond}>◆</span>
-            <span className={styles.flourishLine} />
-          </motion.div>
-
-          {/* Luxury Editorial Quote Pod */}
-          <motion.div
-            className={styles.quotePod}
+            className={styles.intro}
             initial={reduceMotion ? false : { opacity: 0, y: 24, scale: 0.98 }}
             animate={
               isInView
@@ -174,30 +78,21 @@ export function AboutStory({ locale = "tr" }: { locale?: string }) {
             }
             transition={{ duration: 0.85, delay: 0.38, ease: easeLuxury }}
           >
-            <div className={styles.quoteMark} aria-hidden="true">“</div>
-            <p className={styles.quoteText}>
+            <p>
               {isEn ? (
                 <>
-                  For us, breakfast is an invitation to slow down—a generous table shared with loved
-                  ones, oven-warm Van kete, and stories told over freshly brewed tea.
+                  A generous breakfast, warm bread from the oven and unhurried conversation—this is
+                  our invitation to gather around the table.
                 </>
               ) : (
                 <>
-                  Bizim için kahvaltı; telaşsız bir sabahın, taş fırından yeni çıkan sıcak Van ketesinin ve
-                  sevdiklerinizle paylaşılan cömert bir sofranın en samimi davetidir.
+                  Taze ürünler, fırından çıkan sıcak kete ve uzun sohbetler için kurulan cömert bir
+                  sofra. Bizim kahvaltı anlayışımız bu kadar yalın.
                 </>
               )}
             </p>
-            <div className={styles.quoteAuthor}>
-              <span className={styles.authorLine} />
-              <span className={styles.authorName}>
-                {isEn ? "Historic Van Breakfast House Family" : "Tarihi Van Kahvaltı Evi Ailesi"}
-              </span>
-              <span className={styles.authorLine} />
-            </div>
           </motion.div>
 
-          {/* Rich Narrative Story Body in Balanced Dual Paragraphs */}
           <div className={styles.richtext}>
             <motion.p
               initial={reduceMotion ? false : { opacity: 0, y: 20 }}
@@ -231,35 +126,6 @@ export function AboutStory({ locale = "tr" }: { locale?: string }) {
             </motion.p>
           </div>
 
-          {/* Sleek Prestige Heritage Strip */}
-          <motion.div
-            className={styles.heritageStrip}
-            initial={reduceMotion ? false : { opacity: 0, y: 20 }}
-            animate={
-              isInView
-                ? { opacity: 1, y: 0 }
-                : { opacity: 0, y: 20 }
-            }
-            transition={{ duration: 0.75, delay: 0.65, ease: easeLuxury }}
-          >
-            {stats.map((stat, idx) => {
-              const IconComp = stat.icon;
-              return (
-                <div key={idx} className={styles.heritageItem}>
-                  <div className={styles.heritageIconWrap}>
-                    <IconComp className={styles.heritageIcon} />
-                  </div>
-                  <div className={styles.heritageTextWrap}>
-                    <span className={styles.heritageNum}>{stat.num}</span>
-                    <span className={styles.heritageLabel}>{stat.label}</span>
-                    <span className={styles.heritageSub}>{stat.sub}</span>
-                  </div>
-                </div>
-              );
-            })}
-          </motion.div>
-
-          {/* Interactive Luxury CTA Link */}
           <motion.div
             className={styles.btnWrapper}
             initial={reduceMotion ? false : { opacity: 0, y: 18 }}
