@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { messagesFor, type SiteLocale } from "../home-localization";
 
 type HeroSlide = {
@@ -43,12 +43,40 @@ export function VanHeroParallax({ locale = "tr" }: { locale?: SiteLocale }) {
   const messages = messagesFor(locale);
   const [currentSlide, setCurrentSlide] = useState(0);
   const [previousSlide, setPreviousSlide] = useState<number | null>(null);
+  const timerRef = useRef<NodeJS.Timeout | null>(null);
+  const exitingTimerRef = useRef<NodeJS.Timeout | null>(null);
+
+  const startSlideTimer = () => {
+    if (timerRef.current) clearInterval(timerRef.current);
+    timerRef.current = setInterval(() => {
+      setCurrentSlide((prev) => {
+        setPreviousSlide(prev);
+        if (exitingTimerRef.current) clearTimeout(exitingTimerRef.current);
+        exitingTimerRef.current = setTimeout(() => {
+          setPreviousSlide(null);
+        }, 1500);
+        return (prev + 1) % heroSlides.length;
+      });
+    }, 7000);
+  };
+
+  useEffect(() => {
+    startSlideTimer();
+    return () => {
+      if (timerRef.current) clearInterval(timerRef.current);
+      if (exitingTimerRef.current) clearTimeout(exitingTimerRef.current);
+    };
+  }, []);
 
   const handleSelectSlide = (index: number) => {
     if (index === currentSlide) return;
     setPreviousSlide(currentSlide);
     setCurrentSlide(index);
-    window.setTimeout(() => setPreviousSlide(null), 1500);
+    if (exitingTimerRef.current) clearTimeout(exitingTimerRef.current);
+    exitingTimerRef.current = setTimeout(() => {
+      setPreviousSlide(null);
+    }, 1500);
+    startSlideTimer();
   };
 
   return (
@@ -89,7 +117,6 @@ export function VanHeroParallax({ locale = "tr" }: { locale?: SiteLocale }) {
               priority
               className="hero-title-lockup-image"
             />
-            <span className="hero-mobile-title" aria-hidden="true">TARİHİ VAN<br />KAHVALTI EVİ</span>
           </h1>
           <p className="hero-tagline">
             {locale === "en"
