@@ -1,7 +1,5 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowUpRight, Camera, Clock3, MapPin, Phone } from "lucide-react";
-import { displayPhone, mapsUrl, openingHours, telUrl } from "../seo";
 import styles from "./animated-footer.module.css";
 
 export function AnimatedFooter({ locale = "tr" }: { locale?: string }) {
@@ -53,20 +51,60 @@ export function AnimatedFooter({ locale = "tr" }: { locale?: string }) {
         >
           <h4 className={styles.textTitle}>
             {isEn
-              ? "The timeless flavors of Van, in Beyoğlu"
-              : "Van sofrasının özlenen lezzetleri Beyoğlu’nda"}
+              ? "The Longed-for Flavors Are at Van Kahvaltı Evi!"
+              : "Van Kahvaltı Evi’nde Özlenen O Lezzetler Var!"}
           </h4>
           <p className={styles.textParagraph}>
             {isEn
-              ? "A generous Van breakfast table, served with the warmth of a family home in the heart of Beyoğlu."
-              : "Beyoğlu'nun kalbinde, aile sıcaklığıyla kurulan cömert bir Van kahvaltısı sofrası."}
+              ? "Tarihi Van Kahvaltı Evi was born with the passion of bringing together the scent of oven-fresh golden pişi, the authentic flavors of highland herb cheeses, and the generous spirit of a family table without having to travel far. This family tradition has turned into an enchanting sanctuary in Beyoğlu where guests feel at home and discover centuries-old breakfast traditions."
+              : "Tarihi Van Kahvaltı Evi, fırından yeni çıkan sıcacık pişi ve kete kokusunu, Doğu'nun bereketli yaylalarından süzülen hakiki otlu peynirin lezzetini ve bu tatların peşine düşmek için uzak diyarlara gitme gerekliliğini ortadan kaldırma hayaliyle doğdu. Büyük bir tutkuyla sahiplendiğimiz bu aile mirası, misafirlerimizin kendilerini Beyoğlu'nun tarihi dokusunda sıcacık bir Van evinde hissedecekleri ve kadim kahvaltı lezzetlerini keşfedecekleri eşsiz bir mekana dönüştü!"}
           </p>
         </div>
 
-        <div className={styles.quickLinks} data-aos="fade-up" data-aos-delay="160">
-          <a href={telUrl} className={styles.quickLink}><Phone aria-hidden="true" /><span><small>{isEn ? "Call" : "Telefon"}</small>{displayPhone}</span></a>
-          <a href={mapsUrl} target="_blank" rel="noopener noreferrer" className={styles.quickLink}><MapPin aria-hidden="true" /><span><small>{isEn ? "Location" : "Konum"}</small>{isEn ? "Get directions" : "Yol tarifi al"}</span><ArrowUpRight aria-hidden="true" className={styles.quickArrow} /></a>
-          <div className={styles.quickLink}><Clock3 aria-hidden="true" /><span><small>{isEn ? "Opening hours" : "Çalışma saatleri"}</small>{openingHours.short}</span></div>
+        {/* Social Icons */}
+        <div className={styles.footerSocial}>
+          <ul className={styles.socialList}>
+            <li
+              data-aos="fade-up"
+              data-aos-duration="1000"
+              data-aos-anchor-placement="top-bottom"
+              data-aos-delay="100"
+            >
+              <a
+                href="https://www.instagram.com/tarihivankahvaltievi/"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Instagram"
+              >
+                <Image
+                  src="/hamour/instagram.png"
+                  alt="Instagram"
+                  width={42}
+                  height={42}
+                />
+              </a>
+            </li>
+            <li
+              data-aos="fade-up"
+              data-aos-duration="1000"
+              data-aos-anchor-placement="top-bottom"
+              data-aos-delay="200"
+            >
+              <a
+                href="https://www.facebook.com/tarihivankahvaltievi/"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Facebook"
+              >
+                <Image
+                  src="/hamour/facebook.png"
+                  alt="Facebook"
+                  width={42}
+                  height={42}
+                />
+              </a>
+            </li>
+          </ul>
         </div>
 
         {/* Navigation Menu */}
@@ -78,11 +116,10 @@ export function AnimatedFooter({ locale = "tr" }: { locale?: string }) {
             data-aos-anchor-placement="top-bottom"
             data-aos-delay="100"
           >
-            <Link href="/hikayemiz">{isEn ? "Our Story" : "Hikâyemiz"}</Link>
-            <Link href="/menu">{isEn ? "Menu" : "Menü"}</Link>
-            <Link href="/konum">{isEn ? "Contact" : "İletişim"}</Link>
+            <Link href={isEn ? "/en#story" : "/hikayemiz"}>{isEn ? "Our Story" : "Hikayemiz"}</Link>
+            <Link href={isEn ? "/en/menu" : "/menu"}>{isEn ? "Menu" : "Menü"}</Link>
+            <Link href={isEn ? "/en#location" : "/konum"}>{isEn ? "Contact" : "İletişim"}</Link>
           </nav>
-          <a href="https://www.instagram.com/tarihivankahvaltievi/" target="_blank" rel="noopener noreferrer" className={styles.instagramLink}><Camera aria-hidden="true" /> Instagram</a>
         </div>
 
         {/* Bottom Legal / Copyright */}
@@ -94,9 +131,9 @@ export function AnimatedFooter({ locale = "tr" }: { locale?: string }) {
           data-aos-delay="100"
         >
           <span>2026 © Tüm hakları saklıdır.</span>
-          <Link href="/gizlilik">Kullanım Koşulları</Link>
-          <Link href="/gizlilik">Gizlilik</Link>
-          <Link href="/cerez-politikasi">Çerez Tercihleri</Link>
+          <Link href="/gizlilik">{isEn ? "Terms of Use" : "Kullanım Koşulları"}</Link>
+          <Link href="/gizlilik">{isEn ? "Privacy" : "Gizlilik"}</Link>
+          <Link href="/cerez-politikasi" className={styles.seoHiddenLink}>{isEn ? "Cookie Preferences" : "Çerez Tercihleri"}</Link>
           <Link href="/van-kahvaltisi" className={styles.seoHiddenLink}>Van Kahvaltısı</Link>
           <Link href="/van-kahvaltisi-nedir" className={styles.seoHiddenLink}>Van Kahvaltısı Nedir</Link>
         </div>
