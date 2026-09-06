@@ -1,5 +1,5 @@
 import type { NextConfig } from "next";
-import { legacyRedirects, siteUrl } from "./src/app/seo";
+import { allLegacyRedirects, siteUrl } from "./src/app/seo";
 
 const isDev = process.env.NODE_ENV !== "production";
 
@@ -27,24 +27,13 @@ const nextConfig: NextConfig = {
   cacheComponents: true,
   compress: true,
   poweredByHeader: false,
+  skipTrailingSlashRedirect: true,
   images: {
     formats: ["image/avif", "image/webp"],
     qualities: [65, 70, 74, 75, 78, 80, 82, 84],
     minimumCacheTTL: 60 * 60 * 24 * 30,
   },
   async redirects() {
-    const wordpressRedirects = [
-      { source: "/anasayfa", destination: "/" },
-      { source: "/tarihi-van-kahvaltisi-evi-menu", destination: "/menu" },
-      { source: "/van-kahvalti", destination: "/van-kahvaltisi" },
-      { source: "/gercek-van-kahvaltisinda-neler-olur", destination: "/van-kahvaltisi-nedir" },
-      { source: "/tarihi-van-kahvalti-evi-hikayemiz", destination: "/hikayemiz" },
-      { source: "/galeri-van-kahvalti-evi-taksim", destination: "/" },
-      { source: "/urun/van-serpme-kahvalti", destination: "/menu#serpme-fix-menu" },
-      { source: "/urun/cift-kisilik-serpme-kahvalti", destination: "/menu#van-golu-tabagi" },
-      { source: "/urun/turk-kahvesi", destination: "/menu#turk-kahvesi" },
-    ];
-
     return [
       {
         source: "/:path*",
@@ -52,10 +41,21 @@ const nextConfig: NextConfig = {
         destination: `${siteUrl}/:path*`,
         permanent: true,
       },
-      ...[...legacyRedirects, ...wordpressRedirects].map((redirect) => ({
-        ...redirect,
-        permanent: true,
-      })),
+      ...allLegacyRedirects.flatMap((redirect) => {
+        const clean = redirect.source.replace(/\/+$/, "");
+        return [
+          {
+            source: clean,
+            destination: redirect.destination,
+            permanent: true,
+          },
+          {
+            source: `${clean}/`,
+            destination: redirect.destination,
+            permanent: true,
+          },
+        ];
+      }),
     ];
   },
   async rewrites() {

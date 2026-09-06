@@ -477,7 +477,7 @@ for (const route of routes) {
       "hero-section hero-cinematic",
       "gallery-section",
       "faq-section",
-      "footer-reimagined",
+      "hamour-footer",
     ];
     assert(
       sharedHomeClasses.every((className) => html.includes(className)),
@@ -866,7 +866,16 @@ for (const [path, destination] of redirectRules) {
   const response = await fetchWithRetry(path, 30, { redirect: "manual" });
   assert(response.status === 308, `Eski URL kalıcı 308 dönmeli: ${path}`);
   assert(response.headers.get("location") === destination, `Eski URL hedefi yanlış: ${path}`);
+
+  const slashPath = `${path.replace(/\/+$/, "")}/`;
+  const slashResponse = await fetchWithRetry(slashPath, 30, { redirect: "manual" });
+  assert(slashResponse.status === 308, `Eski URL slash'li hali tek adımda 308 dönmeli: ${slashPath}`);
+  assert(slashResponse.headers.get("location") === destination, `Eski URL slash'li hali tek adımda hedefe gitmeli: ${slashPath}`);
 }
+
+const normalSlashResponse = await fetchWithRetry("/menu/", 30, { redirect: "manual" });
+assert(normalSlashResponse.status === 308, "Normal sayfa slash'li hali tek adımda 308 dönmeli: /menu/");
+assert(normalSlashResponse.headers.get("location") === "/menu", "Normal sayfa slash'li hali /menu'ye gitmeli");
 
 for (const path of internalPaths) {
   const response = await fetchWithRetry(path, 30, { redirect: "manual" });

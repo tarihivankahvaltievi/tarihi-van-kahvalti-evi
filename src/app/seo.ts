@@ -169,13 +169,26 @@ export const legacyRedirects = [
   { source: "/kafka-cafe", destination: "/menu#turk-kahvesi" },
   { source: "/turkish-breakfast-istanbul", destination: "/en/blog/turkish-breakfast-istanbul" },
   { source: "/breakfast-near-taksim", destination: "/en" },
-  // Google Ads'te daha once kullanilan nihai URL'ler artik rewrites ile
-  // dogrudan 200 OK olarak canli sayfaya baglanir (redirect kalkti).
+  // Çok dilli eski açılış URL'leri doğrudan ilgili dilin kanonik rehberine tek adımda kalıcı yönlendirilir.
   { source: "/zavtrak-taksim-stambul", destination: "/ru/blog/turetskiy-zavtrak-stambul" },
   { source: "/arabic-breakfast-taksim", destination: "/ar/blog/turkish-breakfast-istanbul" },
   { source: "/korean-bal-kaymak-istanbul", destination: "/ko/blog/istanbul-bal-kaymak" },
   { source: "/japanese-bal-kaymak-istanbul", destination: "/ja/blog/istanbul-bal-kaymak" },
 ];
+
+export const wordpressRedirects = [
+  { source: "/anasayfa", destination: "/" },
+  { source: "/tarihi-van-kahvaltisi-evi-menu", destination: "/menu" },
+  { source: "/van-kahvalti", destination: "/van-kahvaltisi" },
+  { source: "/gercek-van-kahvaltisinda-neler-olur", destination: "/van-kahvaltisi-nedir" },
+  { source: "/tarihi-van-kahvalti-evi-hikayemiz", destination: "/hikayemiz" },
+  { source: "/galeri-van-kahvalti-evi-taksim", destination: "/" },
+  { source: "/urun/van-serpme-kahvalti", destination: "/menu#serpme-fix-menu" },
+  { source: "/urun/cift-kisilik-serpme-kahvalti", destination: "/menu#van-golu-tabagi" },
+  { source: "/urun/turk-kahvesi", destination: "/menu#turk-kahvesi" },
+];
+
+export const allLegacyRedirects = [...legacyRedirects, ...wordpressRedirects];
 
 export const localSeoFacts = [
   {
