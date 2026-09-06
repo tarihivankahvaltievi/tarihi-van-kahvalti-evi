@@ -3,24 +3,13 @@
   overflow: hidden;
   z-index: 30;
   margin-top: -50px;
-  padding: 90px 0 60px;
-  background-color: #231513;
-  background-image: url('/hamour/footer-bg.png');
-  background-position: top center;
-  background-size: cover;
-  background-repeat: no-repeat;
+  padding: 95px 0 60px;
+  background-color: #3e1f20 !important;
+  background-image: url('/hamour/footer-bg.png') !important;
+  background-position: top center !important;
+  background-size: cover !important;
+  background-repeat: no-repeat !important;
   text-align: center;
-}
-
-.footer:before {
-  content: "";
-  position: absolute;
-  left: 0;
-  top: 0;
-  right: 0;
-  height: 100px;
-  background: url('/hamour/footer-bg.png') top center no-repeat;
-  z-index: -1;
 }
 
 .container {

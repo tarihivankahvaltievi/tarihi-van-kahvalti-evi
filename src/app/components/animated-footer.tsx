@@ -6,7 +6,7 @@ export function AnimatedFooter({ locale = "tr" }: { locale?: string }) {
   const isEn = locale === "en";
 
   return (
-    <footer className={`${styles.footer} footer-reimagined`} id="hamour-footer">
+    <footer className={styles.footer} id="hamour-footer">
       <div className={styles.container}>
         {/* Flower Vector Emblem */}
         <div

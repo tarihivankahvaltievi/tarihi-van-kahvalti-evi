@@ -10221,3 +10221,19 @@ body .mobile-bar .mobile-bar-primary:focus-visible {
     margin-bottom: 2rem;
   }
 }
+
+/* Hamour Dark Chocolate Footer */
+#hamour-footer {
+  background-color: #3e1f20 !important;
+  background-image: url('/hamour/footer-bg.png') !important;
+  background-position: top center !important;
+  background-size: cover !important;
+  background-repeat: no-repeat !important;
+}
+
+#hamour-footer::before,
+#hamour-footer::after {
+  display: none !important;
+  content: none !important;
+}
+
