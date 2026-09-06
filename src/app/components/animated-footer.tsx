@@ -36,7 +36,6 @@ export function AnimatedFooter({ locale = "tr" }: { locale?: string }) {
           data-aos-delay="100"
         >
           <Link href="/" aria-label="Tarihi Van Kahvaltı Evi" className={styles.brandTitleLink}>
-            <span className={styles.brandProvenance}>1978 · BEYOĞLU</span>
             <span className={styles.brandName}>TARİHİ VAN KAHVALTI EVİ</span>
           </Link>
         </div>
