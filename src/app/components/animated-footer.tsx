@@ -118,6 +118,8 @@ export function AnimatedFooter({ locale = "tr" }: { locale?: string }) {
           >
             <Link href={isEn ? "/en#story" : "/hikayemiz"}>{isEn ? "Our Story" : "Hikayemiz"}</Link>
             <Link href={isEn ? "/en/menu" : "/menu"}>{isEn ? "Menu" : "Menü"}</Link>
+            <Link href="/van-kahvaltisi">{isEn ? "Breakfast Guide" : "Van Kahvaltısı"}</Link>
+            <Link href="/van-kahvaltisi-nedir">{isEn ? "Van Breakfast History" : "Van Kahvaltısı Nedir?"}</Link>
             <Link href={isEn ? "/en#location" : "/konum"}>{isEn ? "Contact" : "İletişim"}</Link>
           </nav>
         </div>
@@ -131,11 +133,8 @@ export function AnimatedFooter({ locale = "tr" }: { locale?: string }) {
           data-aos-delay="100"
         >
           <span>2026 © Tüm hakları saklıdır.</span>
-          <Link href="/gizlilik">{isEn ? "Terms of Use" : "Kullanım Koşulları"}</Link>
-          <Link href="/gizlilik">{isEn ? "Privacy" : "Gizlilik"}</Link>
-          <Link href="/cerez-politikasi" className={styles.seoHiddenLink}>{isEn ? "Cookie Preferences" : "Çerez Tercihleri"}</Link>
-          <Link href="/van-kahvaltisi" className={styles.seoHiddenLink}>Van Kahvaltısı</Link>
-          <Link href="/van-kahvaltisi-nedir" className={styles.seoHiddenLink}>Van Kahvaltısı Nedir</Link>
+          <Link href="/gizlilik">{isEn ? "Privacy Policy" : "Gizlilik Politikası"}</Link>
+          <Link href="/cerez-politikasi">{isEn ? "Cookie Policy" : "Çerez Politikası"}</Link>
         </div>
       </div>
     </footer>

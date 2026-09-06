@@ -188,11 +188,28 @@ const nextConfig: NextConfig = {
         ],
       },
       {
+        source: "/llms.txt",
+        headers: [
+          {
+            key: "X-Robots-Tag",
+            value: "noindex",
+          },
+          {
+            key: "Cache-Control",
+            value: "public, max-age=3600, s-maxage=86400, stale-while-revalidate=604800",
+          },
+        ],
+      },
+      {
         source: "/:path*.(svg|ico)",
         headers: [
           {
             key: "Cache-Control",
             value: "public, max-age=86400, stale-while-revalidate=604800",
+          },
+          {
+            key: "X-Robots-Tag",
+            value: "noindex",
           },
         ],
       },

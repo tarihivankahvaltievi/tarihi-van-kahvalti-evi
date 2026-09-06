@@ -21,7 +21,13 @@ export function proxy(request: NextRequest) {
     return NextResponse.redirect(destination, 308);
   }
 
-  // 2. Direct single-hop resolution for all legacy/redirected paths (eliminates redirect chains)
+  // 2. Legacy WooCommerce query cleanup (?wc-ajax=...) -> redirect to clean canonical URL
+  if (request.nextUrl.searchParams.has("wc-ajax")) {
+    const cleanUrl = new URL(pathname, request.url);
+    return NextResponse.redirect(cleanUrl, 308);
+  }
+
+  // 3. Direct single-hop resolution for all legacy/redirected paths (eliminates redirect chains)
   const legacyTarget = redirectMap.get(pathname);
   if (legacyTarget) {
     const destination = new URL(`${legacyTarget}${search}`, request.url);

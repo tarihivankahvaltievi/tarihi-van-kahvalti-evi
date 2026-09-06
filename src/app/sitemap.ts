@@ -318,14 +318,14 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     {
       url: privacyUrl,
       lastModified: pageLastModified,
-      changeFrequency: "yearly",
-      priority: 0.3,
+      changeFrequency: "monthly",
+      priority: 0.5,
     },
     {
       url: cookiePolicyUrl,
       lastModified: pageLastModified,
-      changeFrequency: "yearly",
-      priority: 0.3,
+      changeFrequency: "monthly",
+      priority: 0.5,
     },
   ];
 }

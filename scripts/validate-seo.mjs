@@ -776,6 +776,7 @@ const llmsResponse = await fetchWithRetry("/llms.txt");
 const llms = await llmsResponse.text();
 assert(llmsResponse.ok, "llms.txt: 200 dönmeli");
 assert(llmsResponse.headers.get("content-type")?.startsWith("text/plain"), "llms.txt: düz metin dönmeli");
+assert(llmsResponse.headers.get("x-robots-tag")?.includes("noindex"), "llms.txt: arama motoru indekslemesine kapalı (noindex) olmalı");
 assert(llms.includes("# Tarihi Van Kahvaltı Evi"), "llms.txt: işletme adı eksik");
 assert(llms.includes(menuPageUrl), "llms.txt: canlı menü kaynağı eksik");
 assert(llms.includes(reservationPageUrl), "llms.txt: rezervasyon kaynağı eksik");
@@ -849,6 +850,8 @@ for (const guidePath of [
   "/ja/blog/istanbul-bal-kaymak",
   "/rezervasyon",
   "/en/rezervasyon",
+  "/gizlilik",
+  "/cerez-politikasi",
 ]) {
   assert(indexNowScript.includes(guidePath), `IndexNow: yeni rehber varsayılan bildirim listesinde eksik (${guidePath})`);
 }
@@ -876,6 +879,10 @@ for (const [path, destination] of redirectRules) {
 const normalSlashResponse = await fetchWithRetry("/menu/", 30, { redirect: "manual" });
 assert(normalSlashResponse.status === 308, "Normal sayfa slash'li hali tek adımda 308 dönmeli: /menu/");
 assert(normalSlashResponse.headers.get("location") === "/menu", "Normal sayfa slash'li hali /menu'ye gitmeli");
+
+const wcAjaxResponse = await fetchWithRetry("/?wc-ajax=%%endpoint%%", 30, { redirect: "manual" });
+assert(wcAjaxResponse.status === 308, "wc-ajax sorgusu temiz kanonik URL'ye yönlenmeli");
+assert(wcAjaxResponse.headers.get("location") === "/", "wc-ajax sorgusu ana sayfaya yönlenmeli");
 
 for (const path of internalPaths) {
   const response = await fetchWithRetry(path, 30, { redirect: "manual" });
