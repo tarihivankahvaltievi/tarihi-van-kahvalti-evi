@@ -9,7 +9,7 @@ import {
   useState,
   type ReactNode,
 } from "react";
-import { MessageCircle } from "lucide-react";
+import { MessageCircle, Calendar, X } from "lucide-react";
 import { whatsappUrl } from "./seo";
 import { messagesFor, type SiteLocale } from "./home-localization";
 import { trackEvent } from "./analytics";
@@ -137,7 +137,7 @@ export default function ClientPage({ children, locale = "tr" }: { children: Reac
     window.addEventListener("keydown", handleKeyDown);
     const menuButton = menuButtonRef.current;
     const focusFrame = window.requestAnimationFrame(() => {
-      menuPanelRef.current?.querySelector<HTMLElement>("[data-menu-title]")?.focus();
+      menuPanelRef.current?.querySelector<HTMLElement>(".drawer-close-trigger, a")?.focus();
     });
     const previousOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
@@ -174,8 +174,8 @@ export default function ClientPage({ children, locale = "tr" }: { children: Reac
   return (
     <>
       <div id="top" lang={messages.documentLanguage} className={`site-shell theme-breakfast ${isMenuPage ? "menu-page-shell" : ""}`}>
-        <header className={`header-wrapper ${scrolled ? "is-scrolled" : ""}`}>
-          <nav className="glass-nav">
+        <header className={`header-wrapper ${scrolled ? "is-scrolled" : ""} ${menuOpen ? "drawer-is-open" : ""}`}>
+          <nav className="glass-nav" aria-label={messages.nav.aria}>
             <div className="nav-container">
               <Link
                 className="nav-logo"
@@ -193,35 +193,29 @@ export default function ClientPage({ children, locale = "tr" }: { children: Reac
                   <Image
                     src="/images/brand-icon-small.png"
                     alt="Tarihi Van Kahvaltı Evi"
-                    width={38}
-                    height={48}
+                    width={36}
+                    height={46}
                     loading="eager"
                     className="brand-logo-image"
                     style={{ width: "100%", height: "auto" }}
                   />
                 </div>
                 <div className="nav-logo-text">
-                  <span className="nav-logo-provenance">1978 · BEYOĞLU</span>
                   <span className="nav-logo-main">TARİHİ VAN</span>
-                  <span className="nav-logo-sub">KAHVALTI EVİ</span>
+                  <span className="nav-logo-sub">
+                    KAHVALTI EVİ<span className="nav-logo-sub-tag"> · 1978 BEYOĞLU</span>
+                  </span>
                 </div>
               </Link>
 
+              {/* Desktop Primary Navigation Links */}
               <ul className="nav-links">
-                <li>
-                  <Link
-                    href={messages.homeHref}
-                    className={`nav-link ${pathname === "/" || pathname === "/en" ? "active" : ""}`}
-                  >
-                    {locale === "en" ? "HOME" : "ANA SAYFA"}
-                  </Link>
-                </li>
                 <li>
                   <Link
                     href={messages.aboutHref}
                     className={`nav-link ${pathname === "/hikayemiz" ? "active" : ""}`}
                   >
-                    {locale === "en" ? "ABOUT US" : "HİKAYEMİZ"}
+                    {locale === "en" ? "OUR STORY" : "HİKAYEMİZ"}
                   </Link>
                 </li>
                 <li>
@@ -234,10 +228,10 @@ export default function ClientPage({ children, locale = "tr" }: { children: Reac
                 </li>
                 <li>
                   <Link
-                    href={locale === "en" ? "/en/rezervasyon" : "/rezervasyon"}
-                    className={`nav-link ${isReservationPage ? "active" : ""}`}
+                    href="/van-kahvaltisi"
+                    className={`nav-link ${pathname === "/van-kahvaltisi" ? "active" : ""}`}
                   >
-                    {locale === "en" ? "RESERVATION" : "REZERVASYON"}
+                    {locale === "en" ? "VAN BREAKFAST" : "VAN KAHVALTISI"}
                   </Link>
                 </li>
                 <li>
@@ -250,166 +244,237 @@ export default function ClientPage({ children, locale = "tr" }: { children: Reac
                 </li>
                 <li>
                   <Link
-                    href={messages.faqHref}
-                    className="nav-link"
-                  >
-                    {locale === "en" ? "FAQ" : "SSS"}
-                  </Link>
-                </li>
-                <li>
-                  <Link
                     href="/konum"
                     className={`nav-link ${isLocationPage ? "active" : ""}`}
                   >
                     {locale === "en" ? "LOCATION" : "KONUM"}
                   </Link>
                 </li>
-                <li className="nav-lang-item">
-                  <Link
-                    className="nav-language"
-                    href={alternateHref}
-                    hrefLang={locale === "en" ? "tr" : "en"}
-                    lang={locale === "en" ? "tr" : "en"}
-                    aria-label={messages.alternateLanguageLabel}
-                  >
-                    {locale === "en" ? "TR" : "EN"}
-                  </Link>
-                </li>
               </ul>
 
-              <div className="nav-actions-mobile">
+              {/* Desktop Action Cluster */}
+              <div className="nav-actions-desktop">
                 <Link
-                  className="nav-language"
+                  className="nav-lang-toggle"
                   href={alternateHref}
                   hrefLang={locale === "en" ? "tr" : "en"}
                   lang={locale === "en" ? "tr" : "en"}
                   aria-label={messages.alternateLanguageLabel}
                 >
-                  {locale === "en" ? "TR" : "EN"}
+                  <span className={locale === "tr" ? "lang-opt is-active" : "lang-opt"}>TR</span>
+                  <span className="lang-divider" aria-hidden="true">/</span>
+                  <span className={locale === "en" ? "lang-opt is-active" : "lang-opt"}>EN</span>
+                </Link>
+                <Link
+                  href={locale === "en" ? "/en/rezervasyon" : "/rezervasyon"}
+                  className={`nav-reserve-btn ${isReservationPage ? "is-active" : ""}`}
+                  onClick={() => {
+                    trackEvent("booking_cta_click", { location: "header_desktop", surface: "navbar" });
+                  }}
+                >
+                  <span>{locale === "en" ? "Reserve Table" : "Masa Ayırt"}</span>
+                </Link>
+              </div>
+
+              {/* Mobile Action Cluster */}
+              <div className="nav-actions-mobile">
+                <Link
+                  className="mobile-lang-badge"
+                  href={alternateHref}
+                  hrefLang={locale === "en" ? "tr" : "en"}
+                  lang={locale === "en" ? "tr" : "en"}
+                  aria-label={messages.alternateLanguageLabel}
+                >
+                  <span>{locale === "en" ? "TR" : "EN"}</span>
                 </Link>
                 <button
                   ref={menuButtonRef}
                   type="button"
-                  className={`mobile-toggle ${menuOpen ? "open" : ""}`}
+                  className={`luxury-hamburger ${menuOpen ? "is-open" : ""}`}
                   aria-label={menuOpen ? messages.nav.close : messages.nav.open}
                   aria-expanded={menuOpen}
-                  aria-controls="mobile-drawer-menu"
+                  aria-controls="mobile-editorial-drawer"
                   onClick={() => setMenuOpen((open) => !open)}
                 >
-                  <span className="toggle-bar top-bar" />
-                  <span className="toggle-bar mid-bar" />
-                  <span className="toggle-bar bot-bar" />
+                  <span className="hamburger-line bar-top" />
+                  <span className="hamburger-line bar-bottom" />
                 </button>
               </div>
             </div>
+          </nav>
+        </header>
 
-            <div
-              id="mobile-drawer-menu"
-              ref={menuPanelRef}
-              className={`mobile-drawer ${menuOpen ? "open" : ""}`}
-              role="dialog"
-              aria-modal="true"
-              aria-hidden={!menuOpen}
+        {/* Full-Height Mobile Editorial Sheet Drawer */}
+        <div
+          id="mobile-editorial-drawer"
+          ref={menuPanelRef}
+          className={`mobile-editorial-drawer ${menuOpen ? "is-open" : ""}`}
+          role="dialog"
+          aria-modal="true"
+          aria-hidden={!menuOpen}
+          aria-label={messages.nav.aria}
+        >
+          <div className="drawer-header">
+            <div className="drawer-brand">
+              <Image
+                src="/images/brand-icon-small.png"
+                alt=""
+                width={26}
+                height={34}
+                aria-hidden="true"
+                className="drawer-brand-emblem"
+              />
+              <div className="drawer-brand-text">
+                <span className="drawer-brand-title">TARİHİ VAN</span>
+                <span className="drawer-brand-sub">1978 · BEYOĞLU</span>
+              </div>
+            </div>
+            <button
+              type="button"
+              className="drawer-close-trigger"
+              aria-label={messages.nav.close}
+              onClick={() => setMenuOpen(false)}
             >
-              <ul className="mobile-links">
+              <X size={20} aria-hidden="true" />
+            </button>
+          </div>
+
+          <div className="drawer-body">
+            <nav className="drawer-nav" aria-label={messages.nav.aria}>
+              <ul className="drawer-nav-list">
                 <li>
                   <Link
                     href={messages.homeHref}
-                    className={`mobile-link ${pathname === "/" || pathname === "/en" ? "active" : ""}`}
+                    className={`drawer-nav-link ${pathname === "/" || pathname === "/en" ? "is-active" : ""}`}
                     onClick={() => setMenuOpen(false)}
                   >
-                    {locale === "en" ? "ANA SAYFA" : "ANA SAYFA"}
+                    <span className="drawer-link-num">01</span>
+                    <div className="drawer-link-content">
+                      <span className="drawer-link-title">{locale === "en" ? "Home" : "Ana Sayfa"}</span>
+                      <span className="drawer-link-desc">{locale === "en" ? "A table waiting in Beyoğlu" : "Sıcak sofra açılışı"}</span>
+                    </div>
                   </Link>
                 </li>
                 <li>
                   <Link
                     href={messages.aboutHref}
-                    className={`mobile-link ${pathname === "/hikayemiz" ? "active" : ""}`}
+                    className={`drawer-nav-link ${pathname === "/hikayemiz" ? "is-active" : ""}`}
                     onClick={() => setMenuOpen(false)}
                   >
-                    {locale === "en" ? "HİKAYEMİZ" : "HİKAYEMİZ"}
+                    <span className="drawer-link-num">02</span>
+                    <div className="drawer-link-content">
+                      <span className="drawer-link-title">{locale === "en" ? "Our Story" : "Hikayemiz"}</span>
+                      <span className="drawer-link-desc">{locale === "en" ? "A family tradition since 1978" : "1978'den bugüne aile emeği"}</span>
+                    </div>
                   </Link>
                 </li>
                 <li>
                   <Link
                     href={messages.menuHref}
-                    className={`mobile-link ${isMenuPage ? "active" : ""}`}
+                    className={`drawer-nav-link ${isMenuPage ? "is-active" : ""}`}
                     onClick={() => setMenuOpen(false)}
                   >
-                    {locale === "en" ? "MENÜ" : "MENÜ"}
+                    <span className="drawer-link-num">03</span>
+                    <div className="drawer-link-content">
+                      <span className="drawer-link-title">{locale === "en" ? "Menu & Prices" : "Menü ve Fiyatlar"}</span>
+                      <span className="drawer-link-desc">{locale === "en" ? "Traditional Van table & warm pans" : "Serpme kahvaltı ve bakır sahanlar"}</span>
+                    </div>
                   </Link>
                 </li>
                 <li>
                   <Link
-                    href={locale === "en" ? "/en/rezervasyon" : "/rezervasyon"}
-                    className={`mobile-link ${isReservationPage ? "active" : ""}`}
+                    href="/van-kahvaltisi"
+                    className={`drawer-nav-link ${pathname === "/van-kahvaltisi" ? "is-active" : ""}`}
                     onClick={() => setMenuOpen(false)}
                   >
-                    {locale === "en" ? "REZERVASYON" : "REZERVASYON"}
+                    <span className="drawer-link-num">04</span>
+                    <div className="drawer-link-content">
+                      <span className="drawer-link-title">{locale === "en" ? "Van Breakfast" : "Van Kahvaltısı"}</span>
+                      <span className="drawer-link-desc">{locale === "en" ? "Herb cheese, murtuğa, kavut" : "Otlu peynir, murtuğa ve kavut"}</span>
+                    </div>
                   </Link>
                 </li>
                 <li>
                   <Link
                     href={messages.galleryHref}
-                    className="mobile-link"
+                    className="drawer-nav-link"
                     onClick={() => setMenuOpen(false)}
                   >
-                    {locale === "en" ? "GALERİ" : "GALERİ"}
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href={messages.faqHref}
-                    className="mobile-link"
-                    onClick={() => setMenuOpen(false)}
-                  >
-                    {locale === "en" ? "SSS" : "SSS"}
+                    <span className="drawer-link-num">05</span>
+                    <div className="drawer-link-content">
+                      <span className="drawer-link-title">{locale === "en" ? "Gallery" : "Galeri"}</span>
+                      <span className="drawer-link-desc">{locale === "en" ? "Atmosphere & breakfast moments" : "Mekan ve sofra anları"}</span>
+                    </div>
                   </Link>
                 </li>
                 <li>
                   <Link
                     href="/konum"
-                    className={`mobile-link ${isLocationPage ? "active" : ""}`}
+                    className={`drawer-nav-link ${isLocationPage ? "is-active" : ""}`}
                     onClick={() => setMenuOpen(false)}
                   >
-                    {locale === "en" ? "KONUM" : "KONUM"}
+                    <span className="drawer-link-num">06</span>
+                    <div className="drawer-link-content">
+                      <span className="drawer-link-title">{locale === "en" ? "Location & Contact" : "Konum ve Ulaşım"}</span>
+                      <span className="drawer-link-desc">{locale === "en" ? "Zambak Street, Taksim / Beyoğlu" : "Zambak Sokak, Taksim / Beyoğlu"}</span>
+                    </div>
                   </Link>
                 </li>
               </ul>
-              <div className="mobile-drawer-actions">
-                <Link
-                  className="mobile-drawer-lang-btn"
-                  href={alternateHref}
-                  hrefLang={locale === "en" ? "tr" : "en"}
-                  lang={locale === "en" ? "tr" : "en"}
-                  onClick={() => setMenuOpen(false)}
-                >
-                  <span>{locale === "en" ? "Türkçe versiyona geç (TR)" : "Switch to English (EN)"}</span>
-                </Link>
-                <a
-                  href={whatsappUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="mobile-drawer-whatsapp-btn"
-                  onClick={() => {
-                    setMenuOpen(false);
-                    trackEvent("contact_click", { contact_method: "whatsapp", surface: "mobile_drawer" });
-                  }}
-                >
-                  <MessageCircle size={16} />
-                  <span>{locale === "en" ? "WhatsApp Reservation" : "WhatsApp Rezervasyon"}</span>
-                </a>
-                <div className="mobile-drawer-intl-list">
-                  <Link href="/en/blog/turkish-breakfast-istanbul" hrefLang="en" onClick={() => setMenuOpen(false)}>English Guide</Link>
-                  <Link href="/ru/blog/turetskiy-zavtrak-stambul" hrefLang="ru" onClick={() => setMenuOpen(false)}>Русский гид</Link>
-                  <Link href="/ar/blog/turkish-breakfast-istanbul" hrefLang="ar" onClick={() => setMenuOpen(false)}>دليل تركي</Link>
-                  <Link href="/ko" hrefLang="ko" onClick={() => setMenuOpen(false)}>한국어 안내</Link>
-                  <Link href="/ja/blog/istanbul-bal-kaymak" hrefLang="ja" onClick={() => setMenuOpen(false)}>日本語ガイド</Link>
-                </div>
+            </nav>
+
+            <div className="drawer-cta-section">
+              <Link
+                href={locale === "en" ? "/en/rezervasyon" : "/rezervasyon"}
+                className="drawer-cta-reserve"
+                onClick={() => {
+                  setMenuOpen(false);
+                  trackEvent("booking_cta_click", { location: "drawer_mobile_primary", surface: "mobile_drawer" });
+                }}
+              >
+                <Calendar size={18} aria-hidden="true" />
+                <span>{locale === "en" ? "Reserve a Table" : "Masa Rezervasyonu"}</span>
+              </Link>
+              <a
+                href={whatsappUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="drawer-cta-whatsapp"
+                onClick={() => {
+                  setMenuOpen(false);
+                  trackEvent("contact_click", { contact_method: "whatsapp", surface: "mobile_drawer" });
+                }}
+              >
+                <MessageCircle size={18} aria-hidden="true" />
+                <span>{locale === "en" ? "WhatsApp Concierge" : "WhatsApp İletişim"}</span>
+              </a>
+            </div>
+
+            <div className="drawer-footer">
+              <p className="drawer-venue-info">
+                <span>{locale === "en" ? "Open Daily: 07:00 – 22:00" : "Her Gün: 07:00 – 22:00"}</span>
+                <span className="drawer-info-sep" aria-hidden="true">·</span>
+                <span>Beyoğlu, İstanbul</span>
+              </p>
+              <Link
+                className="drawer-lang-switch-btn"
+                href={alternateHref}
+                hrefLang={locale === "en" ? "tr" : "en"}
+                lang={locale === "en" ? "tr" : "en"}
+                onClick={() => setMenuOpen(false)}
+              >
+                <span>{locale === "en" ? "Türkçe versiyona geç (TR)" : "Switch to English (EN)"}</span>
+              </Link>
+              <div className="drawer-intl-guide-chips">
+                <Link href="/en/blog/turkish-breakfast-istanbul" hrefLang="en" onClick={() => setMenuOpen(false)}>English Guide</Link>
+                <Link href="/ko" hrefLang="ko" onClick={() => setMenuOpen(false)}>한국어 안내</Link>
+                <Link href="/ru/blog/turetskiy-zavtrak-stambul" hrefLang="ru" onClick={() => setMenuOpen(false)}>Русский гид</Link>
+                <Link href="/ar/blog/turkish-breakfast-istanbul" hrefLang="ar" onClick={() => setMenuOpen(false)}>دليل تركي</Link>
+                <Link href="/ja/blog/istanbul-bal-kaymak" hrefLang="ja" onClick={() => setMenuOpen(false)}>日本語</Link>
               </div>
             </div>
-          </nav>
-        </header>
+          </div>
+        </div>
 
         <button
           type="button"
