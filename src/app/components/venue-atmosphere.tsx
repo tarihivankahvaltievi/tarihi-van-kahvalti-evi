@@ -19,13 +19,16 @@ export function VenueAtmosphere({ locale = "tr" }: { locale?: string }) {
         />
       </div>
 
-      {/* Atmospheric Background Image */}
+      {/* Atmospheric Background Image - Tarihi Van Kahvaltı Evi Authentic Venue Photo */}
       <div className={styles.bgOverlay} aria-hidden="true">
         <Image
-          src="/hamour/back1_section-4-img.jpg"
-          alt={isEn ? "Delightful Moments Await You!" : "Keyif Dolu Anlar Sizi Bekliyor!"}
+          src="/images/balcony-breakfast.webp"
+          alt={isEn ? "Historic Greek Townhouse & Balcony Breakfast - Tarihi Van Kahvaltı Evi" : "Tarihi Rum Konağı Balkonunda Kahvaltı - Tarihi Van Kahvaltı Evi"}
           fill
+          sizes="100vw"
+          quality={85}
           className={styles.bgImg}
+          priority
         />
       </div>
 
