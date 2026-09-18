@@ -49,6 +49,7 @@ export function trackEvent(name: string, parameters: AnalyticsParameters = {}) {
     sendEvent("contact", {
       method,
       surface,
+      transport_type: "beacon",
     });
 
     if (method === "phone" || method === "call") {
@@ -58,6 +59,7 @@ export function trackEvent(name: string, parameters: AnalyticsParameters = {}) {
         event_label: surface,
         value: 1.0,
         currency: "TRY",
+        transport_type: "beacon",
       });
     } else if (method === "directions" || method === "maps") {
       sendEvent("conversion", {
@@ -66,6 +68,7 @@ export function trackEvent(name: string, parameters: AnalyticsParameters = {}) {
         event_label: surface,
         value: 1.0,
         currency: "TRY",
+        transport_type: "beacon",
       });
     } else if (method === "whatsapp") {
       sendEvent("conversion", {
@@ -74,6 +77,7 @@ export function trackEvent(name: string, parameters: AnalyticsParameters = {}) {
         event_label: surface,
         value: 1.0,
         currency: "TRY",
+        transport_type: "beacon",
       });
     }
   }
@@ -84,6 +88,7 @@ export function trackBookingLead(parameters: AnalyticsParameters = {}) {
   sendEvent("generate_lead", {
     currency: "TRY",
     value: 1.0,
+    transport_type: "beacon",
     ...parameters,
   });
 
@@ -94,6 +99,7 @@ export function trackBookingLead(parameters: AnalyticsParameters = {}) {
       value: 1.0,
       currency: "TRY",
       transaction_id: String(parameters.reservation_id || ""),
+      transport_type: "beacon",
     });
   }
 
@@ -103,6 +109,7 @@ export function trackBookingLead(parameters: AnalyticsParameters = {}) {
     event_category: "reservation_lead",
     value: 1.0,
     currency: "TRY",
+    transport_type: "beacon",
   });
 }
 

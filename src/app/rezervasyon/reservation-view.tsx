@@ -188,12 +188,24 @@ export function ReservationView({
           createdId = json.reservation.id;
           icsDownloadUrl = json.icsUrl || `/api/reservations/${createdId}/ics`;
           gCalUrl = json.googleCalendarUrl || "";
-          trackBookingLead({ locale, service_type: serviceType });
         }
       }
     } catch (err) {
       console.error("Booking submission error:", err);
     }
+
+    // Always track primary Google Ads conversion & GA4 lead event
+    trackBookingLead({
+      locale,
+      service_type: serviceType,
+      reservation_id: createdId,
+    });
+
+    trackEvent("booking_whatsapp_handoff", {
+      locale,
+      service_type: serviceType,
+      reservation_saved: Boolean(createdId),
+    });
 
     // Direct WhatsApp message formatting
     const calendarLine = icsDownloadUrl
@@ -230,16 +242,14 @@ Müsaitlik durumunu teyit edebilir misiniz? Teşekkürler.`;
 
     const cleanPhone = phoneE164.replace("+", "");
     const whatsappUrl = `https://wa.me/${cleanPhone}?text=${encodeURIComponent(message)}`;
+
     if (whatsappWindow && !whatsappWindow.closed) {
       whatsappWindow.location.replace(whatsappUrl);
     } else {
-      window.location.assign(whatsappUrl);
+      setTimeout(() => {
+        window.location.assign(whatsappUrl);
+      }, 250);
     }
-    trackEvent("booking_whatsapp_handoff", {
-      locale,
-      service_type: serviceType,
-      reservation_saved: Boolean(createdId),
-    });
 
     setSubmittedData({
       id: createdId || `VAN-${date.replace(/-/g, "")}`,

@@ -164,6 +164,8 @@ export default function RootLayout({
   return (
     <html lang="tr" className={`h-full antialiased ${bodoni.variable} ${literata.variable} ${commissioner.variable}`}>
       <head>
+        <link rel="preconnect" href="https://www.googletagmanager.com" />
+        <link rel="preconnect" href="https://googleads.g.doubleclick.net" />
         <link rel="me" href={instagramUrl} />
       </head>
       <body className="min-h-full flex flex-col">
@@ -171,17 +173,21 @@ export default function RootLayout({
           src={`https://www.googletagmanager.com/gtag/js?id=${googleAdsId}`}
           strategy="afterInteractive"
         />
-        <Script id="google-ads-gtag-init" strategy="afterInteractive">
-          {`
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            window.gtag = gtag;
-            gtag('js', new Date());
-            gtag('config', '${googleAdsId}', {
-              allow_enhanced_conversions: true
-            });
-          `}
-        </Script>
+        <Script
+          id="google-ads-gtag-init"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              window.gtag = gtag;
+              gtag('js', new Date());
+              gtag('config', '${googleAdsId}', {
+                allow_enhanced_conversions: true
+              });
+            `,
+          }}
+        />
         <AnalyticsAutoTracker />
         {webVitalsEndpoint?.startsWith("/") && !webVitalsEndpoint.startsWith("//") ? (
           <WebVitals endpoint={webVitalsEndpoint} />
