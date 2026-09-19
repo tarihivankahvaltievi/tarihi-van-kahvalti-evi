@@ -575,9 +575,47 @@ a.infoPill:hover {
   text-decoration: none;
 }
 
-.appleBtn { border: 0; background: var(--res-ink); color: #fff; }
-.googleBtn { border: 1px solid #2368c4; background: #fff; color: #1557aa; }
+.appleBtn {
+  border: 0;
+  background: #000000;
+  color: #fff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.16);
+  transition: background 0.2s ease, transform 0.15s ease;
+}
+
+.appleBtn:hover {
+  background: #1f1f1f;
+  transform: translateY(-1px);
+}
+
+.googleBtn {
+  border: 1px solid #2368c4;
+  background: #fff;
+  color: #1557aa;
+  transition: all 0.2s ease;
+}
+
+.googleBtn:hover {
+  background: #f4f8fe;
+  transform: translateY(-1px);
+}
+
 .anotherBtn { border: 0; background: transparent; color: var(--res-burgundy); }
+
+.calendarPageLink {
+  display: inline-block;
+  margin-top: 0.35rem;
+  color: var(--res-burgundy);
+  font-size: 0.82rem;
+  font-weight: 700;
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+
+.calendarPageLink:hover {
+  text-decoration: underline;
+  color: var(--res-burgundy-dark);
+}
 
 .honeypot {
   position: absolute;

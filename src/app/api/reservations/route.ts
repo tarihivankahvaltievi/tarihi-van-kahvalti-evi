@@ -118,6 +118,7 @@ export async function POST(request: Request) {
 
     const baseUrl = siteUrl || "https://www.tarihivankahvaltievi.com";
     const icsUrl = `${baseUrl}/api/reservations/${newReservation.id}/ics`;
+    const calendarPageUrl = `${baseUrl}/rezervasyon/takvim/${newReservation.id}`;
 
     // Google Calendar direct template link
     const [reservationYear, reservationMonth, reservationDay] = newReservation.date.split("-");
@@ -144,6 +145,7 @@ export async function POST(request: Request) {
       success: true,
       reservation: newReservation,
       icsUrl,
+      calendarPageUrl,
       googleCalendarUrl,
     });
   } catch (error) {

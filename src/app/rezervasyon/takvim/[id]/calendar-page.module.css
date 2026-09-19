@@ -1,0 +1,276 @@
+.page {
+  --res-ink: #211a1b;
+  --res-ink-soft: #514748;
+  --res-muted: #6f6263;
+  --res-line: #d8cece;
+  --res-surface: #ffffff;
+  --res-wash: #f8f6f6;
+  --res-burgundy: #801a22;
+  --res-burgundy-dark: #621119;
+  --res-gold: #d8b86f;
+  --res-green: #15803d;
+  min-height: 100vh;
+  padding: clamp(3rem, 6vw, 5.5rem) 1.25rem clamp(4rem, 8vw, 6rem);
+  background: linear-gradient(180deg, #f8f7f7 0%, #f1eeee 68%, #ebe7e7 100%);
+  color: var(--res-ink);
+  font-family: var(--font-sans), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+.container {
+  width: min(640px, 100%);
+  margin-inline: auto;
+}
+
+.card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 18px;
+  background: var(--res-surface);
+  box-shadow: 0 16px 36px rgba(48, 28, 31, 0.09), 0 2px 6px rgba(0, 0, 0, 0.04);
+  border: 1px solid rgba(216, 206, 206, 0.65);
+}
+
+.cardTop {
+  padding: 2.2rem 2rem 1.8rem;
+  text-align: center;
+  border-bottom: 1px dashed var(--res-line);
+  background: linear-gradient(180deg, #fff 0%, var(--res-wash) 100%);
+}
+
+.badgeSuccess {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.4rem 0.95rem;
+  border-radius: 999px;
+  background: #eaf6ed;
+  color: var(--res-green);
+  font-size: 0.85rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.brandName {
+  font-size: 0.88rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--res-burgundy);
+  margin: 0 0 0.35rem;
+}
+
+.title {
+  margin: 0 0 0.65rem;
+  font-family: var(--font-literata-gf), Georgia, serif;
+  font-size: clamp(1.6rem, 3.2vw, 2.1rem);
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--res-ink);
+  letter-spacing: -0.025em;
+}
+
+.subtitle {
+  margin: 0 auto;
+  max-width: 44ch;
+  color: var(--res-ink-soft);
+  font-size: 0.92rem;
+  line-height: 1.5;
+}
+
+.detailsBody {
+  padding: 1.8rem 2rem;
+}
+
+.summaryGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.9rem 1.2rem;
+  background: var(--res-wash);
+  padding: 1.25rem;
+  border-radius: 12px;
+  border: 1px solid rgba(216, 206, 206, 0.5);
+  margin-bottom: 1.8rem;
+}
+
+.infoItem {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.infoItemFull {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  padding-top: 0.4rem;
+  border-top: 1px solid rgba(216, 206, 206, 0.6);
+}
+
+.infoLabel {
+  font-size: 0.76rem;
+  font-weight: 600;
+  color: var(--res-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.infoValue {
+  font-size: 0.96rem;
+  font-weight: 700;
+  color: var(--res-ink);
+  word-break: break-word;
+}
+
+.actionsSection {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.appleCalendarBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.65rem;
+  width: 100%;
+  min-height: 54px;
+  padding: 0.85rem 1.4rem;
+  border-radius: 12px;
+  background: #000000;
+  color: #ffffff;
+  font-size: 1.02rem;
+  font-weight: 700;
+  text-decoration: none;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.22);
+  transition: transform 0.15s ease, background 0.2s ease, box-shadow 0.2s ease;
+}
+
+.appleCalendarBtn:hover {
+  background: #1f1f1f;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.28);
+}
+
+.appleCalendarBtn:active {
+  transform: translateY(0);
+}
+
+.appleIcon {
+  font-size: 1.35rem;
+  line-height: 1;
+}
+
+.secondaryRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+}
+
+.googleBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  min-height: 48px;
+  padding: 0.65rem 1rem;
+  border-radius: 10px;
+  background: #ffffff;
+  color: #1a73e8;
+  border: 1.5px solid #1a73e8;
+  font-size: 0.88rem;
+  font-weight: 700;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.googleBtn:hover {
+  background: #f4f8fe;
+  transform: translateY(-1px);
+}
+
+.mapsBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  min-height: 48px;
+  padding: 0.65rem 1rem;
+  border-radius: 10px;
+  background: #ffffff;
+  color: var(--res-burgundy);
+  border: 1.5px solid var(--res-burgundy);
+  font-size: 0.88rem;
+  font-weight: 700;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.mapsBtn:hover {
+  background: #fdf5f5;
+  transform: translateY(-1px);
+}
+
+.tipBox {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.7rem;
+  margin-top: 1.4rem;
+  padding: 0.9rem 1.1rem;
+  border-radius: 10px;
+  background: #fff9e6;
+  border: 1px solid #f0de9d;
+  color: #7a5806;
+  font-size: 0.82rem;
+  line-height: 1.45;
+}
+
+.tipIcon {
+  flex-shrink: 0;
+  font-size: 1.1rem;
+  margin-top: 0.05rem;
+}
+
+.cardFooter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.2rem 2rem;
+  background: var(--res-wash);
+  border-top: 1px solid var(--res-line);
+  font-size: 0.82rem;
+  color: var(--res-muted);
+}
+
+.homeLink {
+  color: var(--res-burgundy);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.homeLink:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 520px) {
+  .cardTop {
+    padding: 1.8rem 1.2rem 1.4rem;
+  }
+  .detailsBody {
+    padding: 1.4rem 1.2rem;
+  }
+  .summaryGrid {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+    padding: 1rem;
+  }
+  .secondaryRow {
+    grid-template-columns: 1fr;
+  }
+  .cardFooter {
+    flex-direction: column;
+    gap: 0.6rem;
+    text-align: center;
+    padding: 1rem 1.2rem;
+  }
+}

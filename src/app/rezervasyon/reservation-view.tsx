@@ -16,7 +16,7 @@ import {
   ShieldCheck,
   UtensilsCrossed,
 } from "lucide-react";
-import { displayAddress, displayPhone, mapsUrl, openingHours, phoneE164, telUrl } from "../seo";
+import { displayAddress, displayPhone, mapsUrl, openingHours, phoneE164, siteUrl, telUrl } from "../seo";
 import type { SiteLocale } from "../home-localization";
 import { trackBookingLead, trackEvent } from "../analytics";
 import { englishReservationFaqItems, reservationFaqItems } from "./reservation-content";
@@ -38,6 +38,7 @@ interface SubmittedBooking {
   serviceType: string;
   seatingArea: string;
   icsUrl?: string;
+  calendarPageUrl?: string;
   googleCalendarUrl?: string;
 }
 
@@ -162,6 +163,7 @@ export function ReservationView({
 
     let createdId = "";
     let icsDownloadUrl = "";
+    let calendarPageUrl = "";
     let gCalUrl = "";
 
     try {
@@ -187,6 +189,7 @@ export function ReservationView({
         if (json.reservation) {
           createdId = json.reservation.id;
           icsDownloadUrl = json.icsUrl || `/api/reservations/${createdId}/ics`;
+          calendarPageUrl = json.calendarPageUrl || `${siteUrl}/rezervasyon/takvim/${createdId}`;
           gCalUrl = json.googleCalendarUrl || "";
         }
       }
@@ -207,11 +210,14 @@ export function ReservationView({
       reservation_saved: Boolean(createdId),
     });
 
-    // Direct WhatsApp message formatting
-    const calendarLine = icsDownloadUrl
+    // Direct WhatsApp message formatting with dedicated iPhone calendar link
+    const calendarTargetUrl =
+      calendarPageUrl || (createdId ? `${siteUrl}/rezervasyon/takvim/${createdId}` : icsDownloadUrl);
+
+    const calendarLine = calendarTargetUrl
       ? isEnglish
-        ? `\n📅 Add to Calendar:\n${icsDownloadUrl}`
-        : `\n📅 Takvime Ekle:\n${icsDownloadUrl}`
+        ? `\n\n📅 Add to iPhone / Calendar:\n${calendarTargetUrl}`
+        : `\n\n📅 iPhone / Takvime Ekle:\n${calendarTargetUrl}`
       : "";
 
     const message = isEnglish
@@ -261,6 +267,7 @@ Müsaitlik durumunu teyit edebilir misiniz? Teşekkürler.`;
       serviceType: serviceLabel,
       seatingArea: seatingLabel,
       icsUrl: icsDownloadUrl || undefined,
+      calendarPageUrl: calendarPageUrl || (createdId ? `/rezervasyon/takvim/${createdId}` : undefined),
       googleCalendarUrl: gCalUrl,
     });
 
@@ -381,28 +388,45 @@ Müsaitlik durumunu teyit edebilir misiniz? Teşekkürler.`;
               </dl>
 
               {submittedData.icsUrl ? (
-                <div className={styles.calButtons}>
-                  <a
-                    href={submittedData.icsUrl}
-                    download={`tarihi-van-rezervasyon-${submittedData.id}.ics`}
-                    className={styles.appleBtn}
-                  >
-                    <span>🍎</span>
-                    {isEnglish ? "Apple Calendar (.ics)" : "Apple Takvimi"}
-                  </a>
-
-                  {submittedData.googleCalendarUrl ? (
+                <>
+                  <div className={styles.calButtons}>
                     <a
-                      href={submittedData.googleCalendarUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className={styles.googleBtn}
+                      href={submittedData.icsUrl}
+                      className={styles.appleBtn}
+                      title={isEnglish ? "Add to iPhone / Apple Calendar" : "iPhone / Apple Takvimine Ekle"}
                     >
-                      <span>📅</span>
-                      Google Calendar
+                      <span aria-hidden="true">🍏</span>
+                      {isEnglish ? "iPhone / Apple Calendar" : "iPhone / Apple Takvimi"}
+                    </a>
+
+                    {submittedData.googleCalendarUrl ? (
+                      <a
+                        href={submittedData.googleCalendarUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className={styles.googleBtn}
+                      >
+                        <span aria-hidden="true">📅</span>
+                        Google Calendar
+                      </a>
+                    ) : null}
+                  </div>
+
+                  <p className={styles.calendarNotice}>
+                    {isEnglish
+                      ? "💡 Tap the Apple Calendar button to open iPhone Calendar with your name, phone, party size, and map location."
+                      : "💡 iPhone Takvimi butonuna dokunduğunuzda randevunuz (Ad Soyad, Telefon, Kişi Sayısı ve Konum) otomatik eklenir."}
+                  </p>
+
+                  {submittedData.calendarPageUrl ? (
+                    <a
+                      href={submittedData.calendarPageUrl}
+                      className={styles.calendarPageLink}
+                    >
+                      {isEnglish ? "View Booking & Calendar Page →" : "Rezervasyon & Takvim Detay Sayfası →"}
                     </a>
                   ) : null}
-                </div>
+                </>
               ) : (
                 <p className={styles.calendarNotice}>
                   {isEnglish

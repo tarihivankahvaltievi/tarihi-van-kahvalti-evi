@@ -69,16 +69,34 @@ async function runTests() {
   if (!singleIcs.includes("BEGIN:VCALENDAR") || !singleIcs.includes("END:VCALENDAR")) {
     throw new Error("Geçersiz VCALENDAR yapısı!");
   }
+  if (!singleIcs.includes("METHOD:PUBLISH")) {
+    throw new Error("RFC 5545 standartlarına göre METHOD:PUBLISH olmalıdır!");
+  }
+  if (!singleIcs.includes("BEGIN:VTIMEZONE") || !singleIcs.includes("TZID:Europe/Istanbul")) {
+    throw new Error("Europe/Istanbul VTIMEZONE bloğu eksik!");
+  }
   if (!singleIcs.includes("TRIGGER:-P1D") || !singleIcs.includes("TRIGGER:-PT2H")) {
     throw new Error("Otomatik bildirim alarmları (VALARM) eksik!");
   }
   if (!singleIcs.includes(`TZID=Europe/Istanbul:${testDate.ical}T110000`)) {
     throw new Error("Tarih ve saat formatı hatalı!");
   }
+  if (!singleIcs.includes("Baran Demir (Test)")) {
+    throw new Error("Müşteri adı takvim çıktısında yer almıyor!");
+  }
+  if (!singleIcs.includes("05321234567")) {
+    throw new Error("Müşteri telefon numarası takvim çıktısında yer almıyor!");
+  }
+  if (!singleIcs.includes("4 Kişi")) {
+    throw new Error("Kişi sayısı takvim çıktısında yer almıyor!");
+  }
+  if (!singleIcs.includes("GEO:")) {
+    throw new Error("Apple Maps koordinatları (GEO) eksik!");
+  }
   if (!singleIcs.includes("Zambak Sk. No:8") || singleIcs.includes("Defterdar Yokuşu")) {
     throw new Error("Takvim konumu güncel kanonik işletme adresiyle eşleşmiyor!");
   }
-  console.log("✅ Tekil .ICS çıktısı RFC 5545 standartlarına %100 uygun.");
+  console.log("✅ Tekil .ICS çıktısı RFC 5545 ve iPhone standartlarına %100 uygun.");
 
   // 4. Test Calendar Feed .ICS Output
   const data = await getReservationData();

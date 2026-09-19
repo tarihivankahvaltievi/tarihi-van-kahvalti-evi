@@ -1,5 +1,5 @@
 import type { Reservation } from "./reservation-storage";
-import { displayAddress } from "../seo.ts";
+import { coordinates, displayAddress, displayPhone, mapsUrl, siteUrl } from "../seo.ts";
 
 function escapeIcalText(text: string): string {
   if (!text) return "";
@@ -34,32 +34,56 @@ function formatUtcTimestamp(isoString?: string): string {
 
 const LOCATION = `Tarihi Van Kahvaltı Evi, ${displayAddress}`;
 
+const VTIMEZONE_BLOCK = [
+  "BEGIN:VTIMEZONE",
+  "TZID:Europe/Istanbul",
+  "X-LIC-LOCATION:Europe/Istanbul",
+  "BEGIN:STANDARD",
+  "TZOFFSETFROM:+0300",
+  "TZOFFSETTO:+0300",
+  "TZNAME:TRT",
+  "DTSTART:19700101T000000",
+  "END:STANDARD",
+  "END:VTIMEZONE",
+].join("\r\n");
+
 export function generateSingleReservationIcs(reservation: Reservation): string {
   const { startStr, endStr } = formatIcalDateTime(reservation.date, reservation.time);
   const dtstamp = formatUtcTimestamp(reservation.updatedAt || reservation.createdAt);
   const serviceLabel = reservation.serviceType === "cafe" ? "Kafka Cafe" : "Van Kahvaltısı";
 
   const descriptionLines = [
-    `🍳 Rezervasyon: ${reservation.customerName}`,
-    `📞 Telefon: ${reservation.customerPhone || "Belirtilmedi"}`,
+    `🍳 Tarihi Van Kahvaltı Evi Masa Rezervasyonu`,
+    ``,
+    `👤 Rezervasyon Sahibi: ${reservation.customerName}`,
+    `📞 Telefon Numarası: ${reservation.customerPhone || "Belirtilmedi"}`,
     `👥 Kişi Sayısı: ${reservation.guests} Kişi`,
-    `🍽️ Tercih: ${serviceLabel}`,
+    `🍽️ Hizmet: ${serviceLabel}`,
+    `📋 Rezervasyon Kodu: #${reservation.id}`,
     `📝 Not: ${reservation.note || "Yok"}`,
-    `📌 Durum: ${reservation.status === "confirmed" ? "Onaylandı" : reservation.status === "cancelled" ? "İptal Edildi" : "Bekliyor"}`,
-    `\n📍 Tarihi Van Kahvaltı Evi - Zambak Sokak / Beyoğlu`,
-    `💬 WhatsApp'tan Yaz: https://wa.me/${(reservation.customerPhone || "").replace(/\D/g, "")}`,
+    `📌 Durum: ${reservation.status === "confirmed" ? "Onaylandı" : "Teyit Bekliyor"}`,
+    ``,
+    `📍 Mekan: Tarihi Van Kahvaltı Evi (1978)`,
+    `🏢 Adres: ${displayAddress}`,
+    `📞 Mekan İletişim: ${displayPhone}`,
+    `🗺️ Harita & Yol Tarifi: ${mapsUrl}`,
+    `🌐 Web: ${siteUrl}`,
   ];
 
   const description = escapeIcalText(descriptionLines.join("\n"));
-  const summary = escapeIcalText(`🍳 Rezervasyon: ${reservation.customerName} (${reservation.guests} Kişi - ${serviceLabel})`);
-  const status = reservation.status === "cancelled" ? "CANCELLED" : reservation.status === "confirmed" ? "CONFIRMED" : "TENTATIVE";
+  const summary = escapeIcalText(`🍳 Tarihi Van Kahvaltı Evi | ${reservation.customerName} (${reservation.guests} Kişi)`);
+  const status = reservation.status === "cancelled" ? "CANCELLED" : reservation.status === "confirmed" ? "CONFIRMED" : "CONFIRMED";
+  const geoCoord = `${coordinates.latitude.toFixed(6)};${coordinates.longitude.toFixed(6)}`;
 
   const icsLines = [
     "BEGIN:VCALENDAR",
     "VERSION:2.0",
     "PRODID:-//Tarihi Van Kahvalti Evi//Reservation System//TR",
     "CALSCALE:GREGORIAN",
-    "METHOD:REQUEST",
+    "METHOD:PUBLISH",
+    "X-WR-CALNAME:Tarihi Van Kahvaltı Evi Rezervasyonu",
+    "X-WR-TIMEZONE:Europe/Istanbul",
+    VTIMEZONE_BLOCK,
     "BEGIN:VEVENT",
     `UID:res-${reservation.id}@tarihivankahvaltievi.com`,
     `DTSTAMP:${dtstamp}`,
@@ -68,15 +92,18 @@ export function generateSingleReservationIcs(reservation: Reservation): string {
     `SUMMARY:${summary}`,
     `DESCRIPTION:${description}`,
     `LOCATION:${escapeIcalText(LOCATION)}`,
+    `GEO:${geoCoord}`,
+    `URL:${siteUrl}/rezervasyon`,
     `STATUS:${status}`,
+    "TRANSP:OPAQUE",
     "BEGIN:VALARM",
     "ACTION:DISPLAY",
-    "DESCRIPTION:Yarın Tarihi Van Kahvaltı Evi Rezervasyonu",
+    `DESCRIPTION:Yarın Tarihi Van Kahvaltı Evi Rezervasyonunuz Var (${reservation.guests} Kişi)`,
     "TRIGGER:-P1D",
     "END:VALARM",
     "BEGIN:VALARM",
     "ACTION:DISPLAY",
-    "DESCRIPTION:2 Saat Sonra Tarihi Van Kahvaltı Evi Rezervasyonu",
+    `DESCRIPTION:2 Saat Sonra Tarihi Van Kahvaltı Evi Rezervasyonunuz Var (${reservation.guests} Kişi)`,
     "TRIGGER:-PT2H",
     "END:VALARM",
     "END:VEVENT",
@@ -142,6 +169,7 @@ export function generateCalendarFeedIcs(reservations: Reservation[]): string {
     "X-WR-CALNAME:Tarihi Van Kahvaltı Evi Rezervasyonları",
     "X-WR-CALDESC:Siteden ve işletmeden alınan masa rezervasyonları canlı akışı",
     "X-WR-TIMEZONE:Europe/Istanbul",
+    VTIMEZONE_BLOCK,
     "REFRESH-INTERVAL;VALUE=DURATION:PT15M",
     "X-PUBLISHED-TTL:PT15M",
     ...eventBlocks,
