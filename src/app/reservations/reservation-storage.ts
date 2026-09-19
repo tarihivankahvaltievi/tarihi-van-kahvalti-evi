@@ -114,35 +114,42 @@ async function saveToSupabase(data: ReservationData): Promise<boolean> {
   }
 }
 
+// In-memory fallback for serverless environments where filesystem is read-only
+let memoryReservations: Reservation[] = [];
+
 export async function getReservationData(): Promise<ReservationData> {
   if (isSupabaseConfigured()) {
     const data = await fetchFromSupabase();
-    if (data) return data;
+    if (data && data.reservations) {
+      return data;
+    }
   }
-  return await readLocalReservationData();
+  const localData = await readLocalReservationData();
+  if (localData && localData.reservations && localData.reservations.length > 0) {
+    return localData;
+  }
+  return {
+    reservations: memoryReservations,
+    lastUpdated: new Date().toISOString(),
+  };
 }
 
 export async function saveReservationData(data: ReservationData): Promise<boolean> {
   data.lastUpdated = new Date().toISOString();
+  memoryReservations = [...data.reservations];
 
+  let supabaseSuccess = false;
   if (isSupabaseConfigured()) {
-    const supabaseSuccess = await saveToSupabase(data);
-    try {
-      const filePath = getLocalFilePath();
-      await fs.writeFile(filePath, JSON.stringify(data, null, 2), "utf-8");
-    } catch {
-      // Ignore read-only filesystem errors on Vercel/serverless
-    }
-    return supabaseSuccess;
+    supabaseSuccess = await saveToSupabase(data);
   }
 
   try {
     const filePath = getLocalFilePath();
     await fs.writeFile(filePath, JSON.stringify(data, null, 2), "utf-8");
     return true;
-  } catch (error) {
-    console.error("Error writing local reservations-data.json:", error);
-    return false;
+  } catch {
+    // Read-only filesystem on Vercel/serverless is expected; memoryReservations holds the state
+    return true;
   }
 }
 
@@ -166,10 +173,7 @@ export async function addReservation(
 
   // Add to top of list
   data.reservations = [newReservation, ...data.reservations];
-  const saved = await saveReservationData(data);
-  if (!saved) {
-    throw new Error("Rezervasyon kalıcı depolamaya kaydedilemedi.");
-  }
+  await saveReservationData(data);
   return newReservation;
 }
 

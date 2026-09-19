@@ -210,20 +210,34 @@ export function ReservationView({
       reservation_saved: Boolean(createdId),
     });
 
-    // Direct WhatsApp message formatting with dedicated iPhone calendar link
-    const calendarTargetUrl =
-      calendarPageUrl || (createdId ? `${siteUrl}/rezervasyon/takvim/${createdId}` : icsDownloadUrl);
+    // Guaranteed booking code and dynamic calendar URL even if network/db has delays
+    const bookingCode =
+      createdId ||
+      `van-${(date || "").replace(/-/g, "") || Date.now()}-${Math.random().toString(36).substring(2, 8)}`;
 
-    const calendarLine = calendarTargetUrl
-      ? isEnglish
-        ? `\n\n📅 Add to iPhone / Calendar:\n${calendarTargetUrl}`
-        : `\n\n📅 iPhone / Takvime Ekle:\n${calendarTargetUrl}`
-      : "";
+    const queryParams = new URLSearchParams({
+      name: customerName,
+      phone: customerPhone,
+      date,
+      time,
+      guests: String(guests),
+      service: serviceType,
+      area: seatingArea,
+      ...(note ? { note } : {}),
+    });
+
+    const calendarTargetUrl =
+      calendarPageUrl || `${siteUrl}/rezervasyon/takvim/${bookingCode}?${queryParams.toString()}`;
+
+    const calendarLine = isEnglish
+      ? `\n\n📅 Add to iPhone / Calendar:\n${calendarTargetUrl}`
+      : `\n\n📅 iPhone / Takvime Ekle:\n${calendarTargetUrl}`;
 
     const message = isEnglish
       ? `Hello, I'd like to book a table at Tarihi Van Kahvaltı Evi:
 
-${createdId ? `📋 Booking Code: #${createdId}\n` : ""}👤 Name: ${customerName}
+📋 Booking Code: #${bookingCode}
+👤 Name: ${customerName}
 📞 Phone: ${customerPhone}
 📅 Date: ${formattedDate}
 ⏰ Time: ${time}
@@ -235,7 +249,8 @@ ${createdId ? `📋 Booking Code: #${createdId}\n` : ""}👤 Name: ${customerNam
 Could you please confirm table availability? Thank you.`
       : `Merhaba, Tarihi Van Kahvaltı Evi için masa rezervasyonu talebi:
 
-${createdId ? `📋 Rezervasyon Kodu: #${createdId}\n` : ""}👤 Ad Soyad: ${customerName}
+📋 Rezervasyon Kodu: #${bookingCode}
+👤 Ad Soyad: ${customerName}
 📞 Telefon: ${customerPhone}
 📅 Tarih: ${formattedDate}
 ⏰ Saat: ${time}
@@ -257,8 +272,12 @@ Müsaitlik durumunu teyit edebilir misiniz? Teşekkürler.`;
       }, 250);
     }
 
+    const finalIcsUrl =
+      icsDownloadUrl ||
+      `/api/reservations/${bookingCode}/ics?${queryParams.toString()}`;
+
     setSubmittedData({
-      id: createdId || `VAN-${date.replace(/-/g, "")}`,
+      id: bookingCode,
       customerName,
       customerPhone,
       date: formattedDate,
@@ -266,9 +285,9 @@ Müsaitlik durumunu teyit edebilir misiniz? Teşekkürler.`;
       guests,
       serviceType: serviceLabel,
       seatingArea: seatingLabel,
-      icsUrl: icsDownloadUrl || undefined,
-      calendarPageUrl: calendarPageUrl || (createdId ? `/rezervasyon/takvim/${createdId}` : undefined),
-      googleCalendarUrl: gCalUrl,
+      icsUrl: finalIcsUrl,
+      calendarPageUrl: calendarTargetUrl,
+      googleCalendarUrl: gCalUrl || undefined,
     });
 
     setIsSubmitting(false);

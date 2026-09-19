@@ -10,11 +10,37 @@ export async function GET(
     const { id } = await props.params;
     const reservation = await getReservationById(id);
 
-    if (!reservation) {
+    const url = new URL(_request.url);
+    const nameParam = url.searchParams.get("name");
+    const phoneParam = url.searchParams.get("phone");
+    const dateParam = url.searchParams.get("date");
+    const timeParam = url.searchParams.get("time");
+    const guestsParam = url.searchParams.get("guests");
+    const serviceParam = url.searchParams.get("service");
+    const noteParam = url.searchParams.get("note");
+
+    let effectiveReservation = reservation;
+    if (!effectiveReservation && (nameParam || dateParam)) {
+      effectiveReservation = {
+        id,
+        customerName: nameParam || "Misafir",
+        customerPhone: phoneParam || "",
+        date: dateParam || new Date().toISOString().slice(0, 10),
+        time: timeParam || "10:00",
+        guests: Number(guestsParam) || 2,
+        serviceType: serviceParam === "cafe" ? "cafe" : "breakfast",
+        note: noteParam || undefined,
+        status: "confirmed",
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString(),
+      };
+    }
+
+    if (!effectiveReservation) {
       return new NextResponse("Rezervasyon bulunamadı", { status: 404 });
     }
 
-    const icsContent = generateSingleReservationIcs(reservation);
+    const icsContent = generateSingleReservationIcs(effectiveReservation);
 
     return new NextResponse(icsContent, {
       status: 200,

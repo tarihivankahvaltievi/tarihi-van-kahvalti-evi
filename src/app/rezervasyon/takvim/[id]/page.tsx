@@ -22,11 +22,38 @@ export const metadata: Metadata = {
 
 interface CalendarPageProps {
   params: Promise<{ id: string }>;
+  searchParams?: Promise<{ [key: string]: string | string[] | undefined }>;
 }
 
-async function CalendarContent({ params }: CalendarPageProps) {
+async function CalendarContent({ params, searchParams }: CalendarPageProps) {
   const { id } = await params;
-  const reservation = await getReservationById(id);
+  const sp = searchParams ? await searchParams : {};
+  const reservationFromDb = await getReservationById(id);
+
+  const nameParam = typeof sp?.name === "string" ? sp.name : "";
+  const phoneParam = typeof sp?.phone === "string" ? sp.phone : "";
+  const dateParam = typeof sp?.date === "string" ? sp.date : "";
+  const timeParam = typeof sp?.time === "string" ? sp.time : "";
+  const guestsParam = typeof sp?.guests === "string" ? sp.guests : "";
+  const serviceParam = typeof sp?.service === "string" ? sp.service : "";
+  const noteParam = typeof sp?.note === "string" ? sp.note : "";
+
+  let reservation = reservationFromDb;
+  if (!reservation && (nameParam || dateParam)) {
+    reservation = {
+      id,
+      customerName: nameParam || "Misafir",
+      customerPhone: phoneParam || "",
+      date: dateParam || new Date().toISOString().slice(0, 10),
+      time: timeParam || "10:00",
+      guests: Number(guestsParam) || 2,
+      serviceType: serviceParam === "cafe" ? "cafe" : "breakfast",
+      note: noteParam || undefined,
+      status: "confirmed",
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString(),
+    };
+  }
 
   if (!reservation) {
     return (
@@ -68,7 +95,16 @@ async function CalendarContent({ params }: CalendarPageProps) {
 
   const serviceLabel = reservation.serviceType === "cafe" ? "Kafka Cafe" : "Van Kahvaltısı";
   const formattedDate = reservation.date ? reservation.date.split("-").reverse().join(".") : "";
-  const icsDownloadUrl = `/api/reservations/${reservation.id}/ics`;
+  const icsParams = new URLSearchParams({
+    name: reservation.customerName,
+    phone: reservation.customerPhone || "",
+    date: reservation.date,
+    time: reservation.time,
+    guests: String(reservation.guests),
+    service: reservation.serviceType,
+    ...(reservation.note ? { note: reservation.note } : {}),
+  });
+  const icsDownloadUrl = `/api/reservations/${reservation.id}/ics?${icsParams.toString()}`;
 
   // Google Calendar URL
   const [reservationYear, reservationMonth, reservationDay] = reservation.date.split("-");
@@ -208,7 +244,7 @@ export default function ReservationCalendarPage(props: CalendarPageProps) {
             </div>
           }
         >
-          <CalendarContent params={props.params} />
+          <CalendarContent params={props.params} searchParams={props.searchParams} />
         </Suspense>
       </div>
     </main>

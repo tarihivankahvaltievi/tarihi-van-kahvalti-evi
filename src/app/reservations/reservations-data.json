@@ -1,4 +1,18 @@
 {
-  "reservations": [],
-  "lastUpdated": "2026-08-28T08:33:29.929Z"
+  "reservations": [
+    {
+      "customerName": "Baran",
+      "customerPhone": "50109441921",
+      "date": "2026-09-26",
+      "time": "12:00",
+      "guests": 5,
+      "serviceType": "breakfast",
+      "note": "İç Salon (Mekân İçi) | Test",
+      "status": "pending",
+      "id": "van-20260926-9960220e63f7",
+      "createdAt": "2026-09-19T12:14:03.404Z",
+      "updatedAt": "2026-09-19T12:14:03.404Z"
+    }
+  ],
+  "lastUpdated": "2026-09-19T12:14:03.405Z"
 }
