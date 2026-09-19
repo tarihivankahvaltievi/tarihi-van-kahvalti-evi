@@ -65,9 +65,9 @@ async function readLocalReservationData(): Promise<ReservationData> {
   }
 }
 
-// Fetch from Supabase Rest API
+// Fetch from Supabase Rest API (stored in menu_state with id: 2 for cross-lambda persistence)
 async function fetchFromSupabase(): Promise<ReservationData | null> {
-  const url = `${process.env.SUPABASE_URL}/rest/v1/reservation_state?select=data&limit=1`;
+  const url = `${process.env.SUPABASE_URL}/rest/v1/menu_state?id=eq.2&select=data&limit=1`;
   try {
     const res = await fetch(url, {
       headers: {
@@ -80,7 +80,7 @@ async function fetchFromSupabase(): Promise<ReservationData | null> {
       return null;
     }
     const list = await res.json();
-    if (list && list.length > 0) {
+    if (list && list.length > 0 && list[0]?.data?.reservations) {
       return list[0].data as ReservationData;
     }
   } catch (error) {
@@ -89,9 +89,9 @@ async function fetchFromSupabase(): Promise<ReservationData | null> {
   return null;
 }
 
-// Save to Supabase Rest API (Upsert)
+// Save to Supabase Rest API (Upsert into menu_state with id: 2)
 async function saveToSupabase(data: ReservationData): Promise<boolean> {
-  const url = `${process.env.SUPABASE_URL}/rest/v1/reservation_state`;
+  const url = `${process.env.SUPABASE_URL}/rest/v1/menu_state`;
   try {
     const res = await fetch(url, {
       method: "POST",
@@ -101,7 +101,7 @@ async function saveToSupabase(data: ReservationData): Promise<boolean> {
         "Content-Type": "application/json",
         Prefer: "resolution=merge-duplicates",
       },
-      body: JSON.stringify({ id: 1, data }),
+      body: JSON.stringify({ id: 2, data }),
     });
     if (!res.ok) {
       console.error("Supabase reservation upsert failed", res.status, await res.text());

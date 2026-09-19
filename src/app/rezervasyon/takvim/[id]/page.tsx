@@ -39,12 +39,18 @@ async function CalendarContent({ params, searchParams }: CalendarPageProps) {
   const noteParam = typeof sp?.note === "string" ? sp.note : "";
 
   let reservation = reservationFromDb;
-  if (!reservation && (nameParam || dateParam)) {
+  if (!reservation) {
+    let fallbackDate = dateParam;
+    const idDateMatch = id.match(/van-(\d{4})(\d{2})(\d{2})/);
+    if (!fallbackDate && idDateMatch) {
+      fallbackDate = `${idDateMatch[1]}-${idDateMatch[2]}-${idDateMatch[3]}`;
+    }
+
     reservation = {
       id,
-      customerName: nameParam || "Misafir",
+      customerName: nameParam || "Değerli Misafirimiz",
       customerPhone: phoneParam || "",
-      date: dateParam || new Date().toISOString().slice(0, 10),
+      date: fallbackDate || new Date().toISOString().slice(0, 10),
       time: timeParam || "10:00",
       guests: Number(guestsParam) || 2,
       serviceType: serviceParam === "cafe" ? "cafe" : "breakfast",
@@ -53,44 +59,6 @@ async function CalendarContent({ params, searchParams }: CalendarPageProps) {
       createdAt: new Date().toISOString(),
       updatedAt: new Date().toISOString(),
     };
-  }
-
-  if (!reservation) {
-    return (
-      <div className={styles.card}>
-        <div className={styles.cardTop}>
-          <p className={styles.brandName}>{siteName}</p>
-          <h1 className={styles.title}>Rezervasyon Bulunamadı</h1>
-          <p className={styles.subtitle}>
-            #{id} numaralı rezervasyon kaydı bulunamadı veya süresi dolmuş olabilir.
-          </p>
-        </div>
-        <div className={styles.detailsBody}>
-          <p style={{ color: "var(--res-ink-soft)", lineHeight: 1.6, marginBottom: "1.5rem" }}>
-            Rezervasyon teyidi veya yeni bir masa ayırtmak için doğrudan WhatsApp hattımızla görüşebilirsiniz.
-          </p>
-          <div className={styles.actionsSection}>
-            <a
-              href={`https://wa.me/${phoneE164.replace("+", "")}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={styles.appleCalendarBtn}
-              style={{ background: "#25D366" }}
-            >
-              <MessageCircle size={20} />
-              WhatsApp ile İletişime Geç
-            </a>
-            <Link href="/rezervasyon" className={styles.mapsBtn}>
-              Yeni Rezervasyon Oluştur
-            </Link>
-          </div>
-        </div>
-        <div className={styles.cardFooter}>
-          <span>{siteName} • Beyoğlu / Taksim</span>
-          <Link href="/" className={styles.homeLink}>Ana Sayfaya Dön</Link>
-        </div>
-      </div>
-    );
   }
 
   const serviceLabel = reservation.serviceType === "cafe" ? "Kafka Cafe" : "Van Kahvaltısı";

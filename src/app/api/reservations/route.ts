@@ -117,8 +117,17 @@ export async function POST(request: Request) {
     });
 
     const baseUrl = siteUrl || "https://www.tarihivankahvaltievi.com";
-    const icsUrl = `${baseUrl}/api/reservations/${newReservation.id}/ics`;
-    const calendarPageUrl = `${baseUrl}/rezervasyon/takvim/${newReservation.id}`;
+    const queryParams = new URLSearchParams({
+      name: newReservation.customerName,
+      phone: newReservation.customerPhone,
+      date: newReservation.date,
+      time: newReservation.time,
+      guests: String(newReservation.guests),
+      service: newReservation.serviceType,
+      ...(newReservation.note ? { note: newReservation.note } : {}),
+    });
+    const icsUrl = `${baseUrl}/api/reservations/${newReservation.id}/ics?${queryParams.toString()}`;
+    const calendarPageUrl = `${baseUrl}/rezervasyon/takvim/${newReservation.id}?${queryParams.toString()}`;
 
     // Google Calendar direct template link
     const [reservationYear, reservationMonth, reservationDay] = newReservation.date.split("-");

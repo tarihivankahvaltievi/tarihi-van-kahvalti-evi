@@ -20,12 +20,18 @@ export async function GET(
     const noteParam = url.searchParams.get("note");
 
     let effectiveReservation = reservation;
-    if (!effectiveReservation && (nameParam || dateParam)) {
+    if (!effectiveReservation) {
+      let fallbackDate = dateParam;
+      const idDateMatch = id.match(/van-(\d{4})(\d{2})(\d{2})/);
+      if (!fallbackDate && idDateMatch) {
+        fallbackDate = `${idDateMatch[1]}-${idDateMatch[2]}-${idDateMatch[3]}`;
+      }
+
       effectiveReservation = {
         id,
-        customerName: nameParam || "Misafir",
+        customerName: nameParam || "Değerli Misafirimiz",
         customerPhone: phoneParam || "",
-        date: dateParam || new Date().toISOString().slice(0, 10),
+        date: fallbackDate || new Date().toISOString().slice(0, 10),
         time: timeParam || "10:00",
         guests: Number(guestsParam) || 2,
         serviceType: serviceParam === "cafe" ? "cafe" : "breakfast",
@@ -34,10 +40,6 @@ export async function GET(
         createdAt: new Date().toISOString(),
         updatedAt: new Date().toISOString(),
       };
-    }
-
-    if (!effectiveReservation) {
-      return new NextResponse("Rezervasyon bulunamadı", { status: 404 });
     }
 
     const icsContent = generateSingleReservationIcs(effectiveReservation);
