@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Suspense } from "react";
+import { connection } from "next/server";
 import {
   Calendar,
   CheckCircle2,
@@ -26,6 +27,7 @@ interface CalendarPageProps {
 }
 
 async function CalendarContent({ params, searchParams }: CalendarPageProps) {
+  await connection();
   const { id } = await params;
   const sp = searchParams ? await searchParams : {};
   const reservationFromDb = await getReservationById(id);
