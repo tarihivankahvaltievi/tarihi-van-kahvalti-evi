@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, useReducedMotion } from "framer-motion";
-import { Check, ChevronRight, X } from "lucide-react";
+import { Check, Calendar, X } from "lucide-react";
 import Image from "next/image";
 import { createPortal } from "react-dom";
 import { useCallback, useEffect, useRef, useState } from "react";
@@ -29,6 +29,20 @@ export function ProductSheet({
   const [isClosing, setIsClosing] = useState(false);
   const [imageFailed, setImageFailed] = useState(false);
   const requestClose = useCallback(() => setIsClosing(true), []);
+
+  const handleBookTable = () => {
+    requestClose();
+    if (typeof window !== "undefined") {
+      window.dispatchEvent(
+        new CustomEvent("open-booking", {
+          detail: {
+            itemTitle: item.name,
+            category: categoryLabel,
+          },
+        }),
+      );
+    }
+  };
 
   useEffect(() => {
     const previousOverflow = document.body.style.overflow;
@@ -72,13 +86,13 @@ export function ProductSheet({
     };
   }, [requestClose]);
 
-  const duration = reduceMotion ? 0 : 0.3;
+  const duration = reduceMotion ? 0 : 0.28;
 
   return createPortal(
-    <div className={styles.sheetLayer}>
+    <div className={styles.sheetOverlay}>
       <motion.button
         type="button"
-        className={styles.overlayBackdrop}
+        className={styles.sheetBackdrop}
         aria-label={messages.sheetClose}
         onClick={requestClose}
         initial={{ opacity: 0 }}
@@ -87,60 +101,78 @@ export function ProductSheet({
       />
       <motion.div
         ref={sheetRef}
-        className={`${styles.productSheet} ${!item.image || imageFailed ? styles.sheetWithoutMedia : ""}`}
+        className={`${styles.sheetCard} ${!item.image || imageFailed ? styles.sheetCardWithoutMedia : ""}`}
         role="dialog"
         aria-modal="true"
         aria-labelledby="product-sheet-title"
-        initial={reduceMotion ? false : { y: 28, opacity: 0, scale: 0.99 }}
-        animate={isClosing ? { y: 22, opacity: 0, scale: 0.995 } : { y: 0, opacity: 1, scale: 1 }}
+        initial={reduceMotion ? false : { y: 26, opacity: 0, scale: 0.985 }}
+        animate={isClosing ? { y: 20, opacity: 0, scale: 0.99 } : { y: 0, opacity: 1, scale: 1 }}
         transition={{ duration, ease }}
         onAnimationComplete={() => {
           if (isClosing) onClose();
         }}
       >
         {item.image && !imageFailed ? (
-          <div className={styles.sheetMedia}>
+          <div className={styles.sheetMediaPane}>
             <Image
               src={item.image}
-              alt={item.imageAlt}
+              alt={item.imageAlt || item.name}
               fill
-              sizes="(max-width: 680px) 100vw, 430px"
-              quality={80}
+              sizes="(max-width: 960px) 100vw, 460px"
+              quality={82}
               loading="eager"
               onError={() => setImageFailed(true)}
             />
-            <span className={styles.sheetCategory}>{categoryLabel}</span>
+            {categoryLabel ? (
+              <span className={styles.sheetCategoryBadge}>{categoryLabel}</span>
+            ) : null}
           </div>
         ) : null}
 
-        <div className={styles.sheetContent}>
-          <button ref={closeRef} type="button" className={styles.sheetClose} onClick={requestClose} aria-label={messages.close}>
-            <X size={20} />
+        <div className={styles.sheetContentPane}>
+          <button
+            ref={closeRef}
+            type="button"
+            className={styles.sheetCloseBtn}
+            onClick={requestClose}
+            aria-label={messages.close}
+          >
+            <X size={19} />
           </button>
 
-          <div className={styles.sheetTitleRow}>
-            <h2 id="product-sheet-title">{item.name}</h2>
+          <div className={styles.sheetHeaderRow}>
+            <h2 id="product-sheet-title" className={styles.sheetTitle}>{item.name}</h2>
             <div className={styles.sheetPriceBlock}>
-              <strong>{item.price}</strong>
-              {item.priceNote ? <span>{item.priceNote}</span> : null}
+              <span className={styles.sheetPriceText}>{item.price}</span>
+              {item.priceNote ? (
+                <span className={styles.sheetPriceNote}>{item.priceNote}</span>
+              ) : null}
             </div>
           </div>
 
-          <p className={styles.sheetStory}>{item.story}</p>
+          <p className={styles.sheetStory}>{item.story || item.description}</p>
 
-          <div className={styles.sheetRule} />
-          <h3 className={styles.sheetSectionTitle}>{messages.onThisPlate}</h3>
-          <ul className={styles.sheetDetailsList}>
-            {item.details.map((detail) => (
-              <li key={detail}>
-                <Check size={15} strokeWidth={2.2} />
-                <span>{detail}</span>
-              </li>
-            ))}
-          </ul>
+          {item.details && item.details.length > 0 ? (
+            <>
+              <h3 className={styles.sheetDetailsTitle}>{messages.onThisPlate}</h3>
+              <ul className={styles.sheetIngredientsList}>
+                {item.details.map((detail) => (
+                  <li key={detail} className={styles.sheetIngredientItem}>
+                    <Check size={16} strokeWidth={2.2} />
+                    <span>{detail}</span>
+                  </li>
+                ))}
+              </ul>
+            </>
+          ) : null}
 
-          <button type="button" className={styles.sheetAction} onClick={requestClose}>
-            {messages.backToMenu} <ChevronRight size={18} />
+          <button
+            type="button"
+            className={styles.sheetBookingCta}
+            onClick={handleBookTable}
+          >
+            <Calendar size={18} />
+            <span>{messages.reserveDish}</span>
           </button>
         </div>
       </motion.div>

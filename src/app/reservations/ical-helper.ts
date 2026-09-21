@@ -47,41 +47,83 @@ const VTIMEZONE_BLOCK = [
   "END:VTIMEZONE",
 ].join("\r\n");
 
-export function generateSingleReservationIcs(reservation: Reservation): string {
+export function generateSingleReservationIcs(
+  reservation: Reservation,
+  locale: "tr" | "en" = "tr"
+): string {
+  const isEnglish = locale === "en";
   const { startStr, endStr } = formatIcalDateTime(reservation.date, reservation.time);
   const dtstamp = formatUtcTimestamp(reservation.updatedAt || reservation.createdAt);
-  const serviceLabel = reservation.serviceType === "cafe" ? "Kafka Cafe" : "Van Kahvaltısı";
+  const serviceLabel = reservation.serviceType === "cafe"
+    ? "Kafka Cafe"
+    : isEnglish
+    ? "Van Traditional Breakfast"
+    : "Van Kahvaltısı";
 
-  const descriptionLines = [
-    `🍳 Tarihi Van Kahvaltı Evi Masa Rezervasyonu`,
-    ``,
-    `👤 Rezervasyon Sahibi: ${reservation.customerName}`,
-    `📞 Telefon Numarası: ${reservation.customerPhone || "Belirtilmedi"}`,
-    `👥 Kişi Sayısı: ${reservation.guests} Kişi`,
-    `🍽️ Hizmet: ${serviceLabel}`,
-    `📋 Rezervasyon Kodu: #${reservation.id}`,
-    `📝 Not: ${reservation.note || "Yok"}`,
-    `📌 Durum: ${reservation.status === "confirmed" ? "Onaylandı" : "Teyit Bekliyor"}`,
-    ``,
-    `📍 Mekan: Tarihi Van Kahvaltı Evi (1978)`,
-    `🏢 Adres: ${displayAddress}`,
-    `📞 Mekan İletişim: ${displayPhone}`,
-    `🗺️ Harita & Yol Tarifi: ${mapsUrl}`,
-    `🌐 Web: ${siteUrl}`,
-  ];
+  const descriptionLines = isEnglish
+    ? [
+        `🍳 Tarihi Van Breakfast House Table Reservation`,
+        ``,
+        `👤 Guest: ${reservation.customerName}`,
+        `📞 Phone: ${reservation.customerPhone || "Not provided"}`,
+        `👥 Party Size: ${reservation.guests} ${reservation.guests > 1 ? "Guests" : "Guest"}`,
+        `🍽️ Service: ${serviceLabel}`,
+        `📋 Booking Code: #${reservation.id}`,
+        `📝 Note: ${reservation.note || "None"}`,
+        `📌 Status: Confirmed / Pending WhatsApp Confirmation`,
+        ``,
+        `📍 Venue: Tarihi Van Breakfast House (Since 1978)`,
+        `🏢 Address: ${displayAddress}`,
+        `📞 Contact: ${displayPhone}`,
+        `🗺️ Google Maps & Directions: ${mapsUrl}`,
+        `🌐 Website: ${siteUrl}/en`,
+      ]
+    : [
+        `🍳 Tarihi Van Kahvaltı Evi Masa Rezervasyonu`,
+        ``,
+        `👤 Rezervasyon Sahibi: ${reservation.customerName}`,
+        `📞 Telefon Numarası: ${reservation.customerPhone || "Belirtilmedi"}`,
+        `👥 Kişi Sayısı: ${reservation.guests} Kişi`,
+        `🍽️ Hizmet: ${serviceLabel}`,
+        `📋 Rezervasyon Kodu: #${reservation.id}`,
+        `📝 Not: ${reservation.note || "Yok"}`,
+        `📌 Durum: Onaylandı / WhatsApp Teyitli`,
+        ``,
+        `📍 Mekan: Tarihi Van Kahvaltı Evi (1978'den Beri)`,
+        `🏢 Adres: ${displayAddress}`,
+        `📞 Mekan İletişim: ${displayPhone}`,
+        `🗺️ Harita & Yol Tarifi: ${mapsUrl}`,
+        `🌐 Web: ${siteUrl}`,
+      ];
 
   const description = escapeIcalText(descriptionLines.join("\n"));
-  const summary = escapeIcalText(`🍳 Tarihi Van Kahvaltı Evi | ${reservation.customerName} (${reservation.guests} Kişi)`);
-  const status = reservation.status === "cancelled" ? "CANCELLED" : reservation.status === "confirmed" ? "CONFIRMED" : "CONFIRMED";
+  const summary = escapeIcalText(
+    isEnglish
+      ? `🍳 Tarihi Van Breakfast | ${reservation.customerName} (${reservation.guests} ${reservation.guests > 1 ? "Guests" : "Guest"})`
+      : `🍳 Tarihi Van Kahvaltı Evi | ${reservation.customerName} (${reservation.guests} Kişi)`
+  );
+  const calName = isEnglish
+    ? "Tarihi Van Breakfast House Reservation"
+    : "Tarihi Van Kahvaltı Evi Rezervasyonu";
+
+  const alarm1Desc = isEnglish
+    ? `Tomorrow: Tarihi Van Breakfast House table booking (${reservation.guests} Guests)`
+    : `Yarın Tarihi Van Kahvaltı Evi Rezervasyonunuz Var (${reservation.guests} Kişi)`;
+
+  const alarm2Desc = isEnglish
+    ? `In 2 Hours: Tarihi Van Breakfast House table booking (${reservation.guests} Guests)`
+    : `2 Saat Sonra Tarihi Van Kahvaltı Evi Rezervasyonunuz Var (${reservation.guests} Kişi)`;
+
+  const status = reservation.status === "cancelled" ? "CANCELLED" : "CONFIRMED";
   const geoCoord = `${coordinates.latitude.toFixed(6)};${coordinates.longitude.toFixed(6)}`;
 
   const icsLines = [
     "BEGIN:VCALENDAR",
     "VERSION:2.0",
-    "PRODID:-//Tarihi Van Kahvalti Evi//Reservation System//TR",
+    "PRODID:-//Tarihi Van Kahvalti Evi//Reservation System//EN",
     "CALSCALE:GREGORIAN",
     "METHOD:PUBLISH",
-    "X-WR-CALNAME:Tarihi Van Kahvaltı Evi Rezervasyonu",
+    `X-WR-CALNAME:${calName}`,
     "X-WR-TIMEZONE:Europe/Istanbul",
     VTIMEZONE_BLOCK,
     "BEGIN:VEVENT",
@@ -93,17 +135,20 @@ export function generateSingleReservationIcs(reservation: Reservation): string {
     `DESCRIPTION:${description}`,
     `LOCATION:${escapeIcalText(LOCATION)}`,
     `GEO:${geoCoord}`,
-    `URL:${siteUrl}/rezervasyon`,
+    `URL:${siteUrl}${isEnglish ? "/en" : ""}/rezervasyon`,
     `STATUS:${status}`,
+    "CLASS:PUBLIC",
+    "PRIORITY:1",
+    "CATEGORIES:DINING,BREAKFAST,RESTAURANT",
     "TRANSP:OPAQUE",
     "BEGIN:VALARM",
     "ACTION:DISPLAY",
-    `DESCRIPTION:Yarın Tarihi Van Kahvaltı Evi Rezervasyonunuz Var (${reservation.guests} Kişi)`,
+    `DESCRIPTION:${escapeIcalText(alarm1Desc)}`,
     "TRIGGER:-P1D",
     "END:VALARM",
     "BEGIN:VALARM",
     "ACTION:DISPLAY",
-    `DESCRIPTION:2 Saat Sonra Tarihi Van Kahvaltı Evi Rezervasyonunuz Var (${reservation.guests} Kişi)`,
+    `DESCRIPTION:${escapeIcalText(alarm2Desc)}`,
     "TRIGGER:-PT2H",
     "END:VALARM",
     "END:VEVENT",

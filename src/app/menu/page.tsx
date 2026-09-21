@@ -12,6 +12,7 @@ import {
   siteName,
   siteUrl,
 } from "../seo";
+import { AnimatedFooter } from "../components/animated-footer";
 import { MenuExperience } from "./menu-experience";
 import { getMenuData } from "./menu-storage";
 
@@ -139,6 +140,7 @@ async function MenuContainer() {
           initialItems={items}
           initialLastUpdated={lastUpdated}
         />
+        <AnimatedFooter locale="tr" />
       </ClientPage>
     </>
   );

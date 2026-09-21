@@ -1,20 +1,39 @@
+/* ==========================================================================
+   TARİHİ VAN KAHVALTI EVİ — MENÜ SAYFASI (GASTRONOMİ EDİTORYAL MİZANPAJ)
+   Ana sayfa ile kusursuz uyumlu, yapay zeka/şablon hissinden uzak,
+   köklü Beyoğlu Rum konağı ve Van kahvaltı kültürünü yansıtan tasarım sistemi.
+   ========================================================================== */
+
 .page {
-  --menu-wine: #701a22;
-  --menu-wine-deep: #36070a;
-  --menu-gold: #c89f53;
-  --menu-forest: #294833;
-  --menu-ink: #21191a;
-  --menu-muted: #64595a;
-  --menu-line: #cfc6c2;
-  --menu-line-strong: #8a7c78;
-  --menu-canvas: #f7f6f2;
-  --menu-surface: #ffffff;
-  --menu-ease: cubic-bezier(0.16, 1, 0.3, 1);
+  --wine-dark: #2d0b0f;
+  --wine-deep: #36070a;
+  --wine: #701a22;
+  --wine-soft: #8a242d;
+  --terracotta: #ad6248;
+  --gold: #c49658;
+  --gold-muted: #d5b078;
+  --gold-light: #f7eddc;
+  --canvas-bg: #fbf7f0;
+  --canvas-warm: #f4ecdf;
+  --card-surface: #ffffff;
+  --ink: #240f02;
+  --ink-secondary: #4a3630;
+  --muted: #786560;
+  --line-brass: rgba(184, 134, 76, 0.24);
+  --line-subtle: rgba(184, 134, 76, 0.14);
+  --shadow-warm: 0 14px 34px rgba(60, 25, 10, 0.06);
+  --shadow-hover: 0 20px 42px rgba(60, 25, 10, 0.12);
+  --shadow-glow: 0 0 0 1px rgba(184, 134, 76, 0.38), 0 8px 24px rgba(184, 134, 76, 0.15);
+  --ease-editorial: cubic-bezier(0.16, 1, 0.3, 1);
+
   min-height: 100vh;
-  padding-bottom: max(4rem, env(safe-area-inset-bottom));
-  background: var(--menu-canvas);
-  color: var(--menu-ink);
-  font-family: var(--font-commissioner-gf), Arial, sans-serif;
+  background-color: var(--canvas-bg);
+  background-image:
+    radial-gradient(ellipse at 50% 0%, rgba(244, 236, 223, 0.6) 0%, transparent 70%),
+    linear-gradient(180deg, #fbf7f0 0%, #f7f1e6 100%);
+  color: var(--ink);
+  font-family: var(--font-commissioner-gf), "Causten", system-ui, sans-serif;
+  overflow-x: hidden;
 }
 
 .srOnly {
@@ -29,657 +48,1259 @@
   border: 0;
 }
 
+/* --------------------------------------------------------------------------
+   1. EDITORIAL MASTHEAD / HERO
+   -------------------------------------------------------------------------- */
+
 .menuHero {
   position: relative;
-  display: grid;
-  min-height: clamp(390px, 49vw, 590px);
-  overflow: hidden;
-  place-items: end start;
-  background: var(--menu-wine-deep);
-}
-
-.menuHero::after {
-  position: absolute;
-  z-index: 1;
-  inset: 0;
+  z-index: 5;
+  padding: clamp(3.2rem, 7vw, 5.5rem) 1.5rem clamp(2.5rem, 5vw, 4rem);
+  text-align: center;
   background:
-    linear-gradient(90deg, rgba(30, 5, 7, 0.91) 0%, rgba(45, 7, 10, 0.66) 42%, rgba(28, 8, 9, 0.13) 76%),
-    linear-gradient(0deg, rgba(21, 8, 8, 0.6) 0%, transparent 48%);
-  content: "";
-  pointer-events: none;
+    linear-gradient(180deg, rgba(45, 11, 15, 0.94) 0%, rgba(54, 7, 10, 0.9) 100%),
+    url("/hamour/section-1-bg.jpg") center/cover;
+  color: #fff9f0;
+  border-bottom: 1px solid rgba(196, 150, 88, 0.28);
+  box-shadow: 0 12px 36px rgba(33, 7, 9, 0.22);
 }
 
-.heroImage {
-  object-fit: cover;
-  object-position: center 54%;
-  filter: saturate(0.9) contrast(1.04);
+.heroAnchorNotch {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1.2rem;
 }
 
-.heroContent {
-  position: relative;
-  z-index: 2;
-  display: grid;
-  width: min(1160px, calc(100% - 3rem));
+.anchorImg {
+  width: 64px;
+  height: auto;
+  opacity: 0.9;
+  filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.35));
+}
+
+.heroContainer {
+  max-width: 900px;
   margin: 0 auto;
-  padding: clamp(3rem, 7vw, 6.2rem) 0;
-  color: #fffaf1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.heroEmblem {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+.heroEmblemImg {
+  width: 44px;
+  height: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 4px 10px rgba(196, 150, 88, 0.45));
 }
 
 .heroProvenance {
   display: inline-flex;
-  width: fit-content;
   align-items: center;
-  gap: 0.7rem;
-  color: #e3bd73;
+  gap: 0.75rem;
+  color: var(--gold-muted);
+  font-family: var(--font-commissioner-gf), sans-serif;
   font-size: 0.72rem;
-  font-weight: 680;
-  letter-spacing: 0.19em;
+  font-weight: 700;
+  letter-spacing: 0.24em;
   text-transform: uppercase;
+  margin-bottom: 0.6rem;
 }
 
-.heroProvenance::before {
-  width: 2.5rem;
+.heroProvenance::before,
+.heroProvenance::after {
+  content: "";
+  display: inline-block;
+  width: 32px;
   height: 1px;
   background: currentColor;
-  content: "";
+  opacity: 0.6;
 }
 
-.heroContent h1 {
-  max-width: 8ch;
-  margin: 0.34rem 0 0;
-  color: #fffaf1;
-  font-family: var(--font-bodoni-gf), var(--font-literata-gf), Georgia, serif;
-  font-size: clamp(4.25rem, 9vw, 6rem);
-  font-variation-settings: "opsz" 72;
-  font-weight: 620;
-  letter-spacing: -0.035em;
-  line-height: 0.9;
-  text-wrap: balance;
+.heroTitle {
+  margin: 0;
+  font-family: "NOCTADO", var(--font-bodoni-gf), Georgia, serif;
+  font-size: clamp(2.4rem, 5.5vw, 4.4rem);
+  font-weight: 400;
+  color: #fff9f0;
+  line-height: 1.08;
+  letter-spacing: -0.025em;
+  text-shadow: 0 2px 14px rgba(0, 0, 0, 0.4);
 }
 
-.heroContent p {
-  max-width: 47ch;
-  margin: 1.15rem 0 0;
-  color: rgba(255, 250, 241, 0.89);
+.heroIntro {
+  max-width: 660px;
+  margin: 1.2rem auto 0;
   font-family: var(--font-literata-gf), Georgia, serif;
-  font-size: clamp(0.98rem, 1.5vw, 1.13rem);
-  line-height: 1.62;
-  text-wrap: pretty;
+  font-size: clamp(1rem, 1.6vw, 1.18rem);
+  font-style: italic;
+  line-height: 1.65;
+  color: rgba(255, 249, 240, 0.88);
 }
+
+/* Hospitality Badges Strip */
+.heroBadgesStrip {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0.8rem 1.4rem;
+  margin-top: 2.2rem;
+  padding: 0.85rem 1.4rem;
+  background: rgba(255, 255, 255, 0.07);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(196, 150, 88, 0.32);
+  border-radius: 999px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+}
+
+.badgeItem {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #fff4e0;
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.badgeItem svg {
+  color: var(--gold-muted);
+}
+
+.badgeDivider {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--gold-muted);
+  opacity: 0.6;
+}
+
+/* --------------------------------------------------------------------------
+   2. GRAND CENTERPIECE (SERPME VAN SOFRASI SHOWCASE)
+   -------------------------------------------------------------------------- */
+
+.centerpieceWrapper {
+  width: min(1200px, calc(100% - 2.5rem));
+  margin: -2rem auto clamp(2.5rem, 5vw, 4.2rem);
+  position: relative;
+  z-index: 10;
+}
+
+.centerpieceCard {
+  display: grid;
+  grid-template-columns: minmax(320px, 1.15fr) minmax(320px, 1fr);
+  background: var(--card-surface);
+  border-radius: 20px;
+  border: 1px solid rgba(184, 134, 76, 0.35);
+  box-shadow: 0 22px 50px rgba(60, 25, 10, 0.12), 0 2px 10px rgba(60, 25, 10, 0.04);
+  overflow: hidden;
+  transition: box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.centerpieceCard:hover {
+  border-color: rgba(184, 134, 76, 0.55);
+  box-shadow: 0 28px 60px rgba(60, 25, 10, 0.16);
+}
+
+.centerpieceMedia {
+  position: relative;
+  min-height: 380px;
+  overflow: hidden;
+  background: #2b1114;
+}
+
+.centerpieceMedia img {
+  object-fit: cover;
+  object-position: center;
+  transition: transform 0.8s var(--ease-editorial);
+}
+
+.centerpieceCard:hover .centerpieceMedia img {
+  transform: scale(1.035);
+}
+
+.centerpieceBadge {
+  position: absolute;
+  top: 1.25rem;
+  left: 1.25rem;
+  z-index: 3;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.45rem 0.95rem;
+  background: linear-gradient(135deg, var(--wine) 0%, var(--wine-deep) 100%);
+  color: #fff9f0;
+  border: 1px solid rgba(196, 150, 88, 0.4);
+  border-radius: 999px;
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  box-shadow: 0 4px 14px rgba(45, 11, 15, 0.4);
+}
+
+.centerpieceContent {
+  padding: clamp(2rem, 4vw, 3.2rem);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: linear-gradient(180deg, #ffffff 0%, #fdfbf7 100%);
+}
+
+.centerpieceTopRow {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 0.8rem;
+}
+
+.centerpieceLabel {
+  font-size: 0.76rem;
+  font-weight: 750;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--terracotta);
+}
+
+.centerpiecePriceLockup {
+  text-align: right;
+}
+
+.centerpiecePrice {
+  font-family: var(--font-bodoni-gf), Georgia, serif;
+  font-size: clamp(1.8rem, 3vw, 2.4rem);
+  font-weight: 600;
+  color: var(--wine);
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+
+.centerpiecePriceNote {
+  display: block;
+  font-size: 0.72rem;
+  color: var(--muted);
+  margin-top: 0.25rem;
+  font-weight: 550;
+}
+
+.centerpieceTitle {
+  margin: 0 0 1rem;
+  font-family: "NOCTADO", var(--font-bodoni-gf), Georgia, serif;
+  font-size: clamp(1.8rem, 3.2vw, 2.6rem);
+  font-weight: 400;
+  color: var(--wine-dark);
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+}
+
+.centerpieceDesc {
+  margin: 0 0 1.6rem;
+  font-family: var(--font-literata-gf), Georgia, serif;
+  font-size: 0.96rem;
+  line-height: 1.68;
+  color: var(--ink-secondary);
+}
+
+.centerpieceFeatures {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.6rem 1.2rem;
+  margin-bottom: 2rem;
+  padding: 1rem;
+  background: rgba(244, 236, 223, 0.45);
+  border: 1px solid var(--line-brass);
+  border-radius: 12px;
+}
+
+.featureItem {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.featureBullet {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--terracotta);
+  flex-shrink: 0;
+}
+
+.centerpieceActions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.9rem;
+}
+
+.btnPrimaryBook {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  min-height: 48px;
+  padding: 0 1.6rem;
+  background: linear-gradient(135deg, var(--wine) 0%, var(--wine-deep) 100%);
+  color: #fff9f0;
+  border: 1px solid rgba(196, 150, 88, 0.4);
+  border-radius: 12px;
+  font-size: 0.88rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-decoration: none;
+  cursor: pointer;
+  box-shadow: 0 8px 20px rgba(112, 26, 34, 0.28);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
+}
+
+.btnPrimaryBook:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px rgba(112, 26, 34, 0.38);
+  filter: brightness(1.05);
+}
+
+.btnSecondaryDetails {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  min-height: 48px;
+  padding: 0 1.4rem;
+  background: transparent;
+  color: var(--wine-dark);
+  border: 1.5px solid var(--line-brass);
+  border-radius: 12px;
+  font-size: 0.86rem;
+  font-weight: 650;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btnSecondaryDetails:hover {
+  background: rgba(184, 134, 76, 0.1);
+  border-color: var(--gold);
+  color: var(--wine);
+}
+
+/* --------------------------------------------------------------------------
+   3. LUXURY STICKY DISCOVERY RAIL (CATEGORIES & SEARCH)
+   -------------------------------------------------------------------------- */
 
 .discoveryBar {
   position: sticky;
-  top: 72px;
-  z-index: 20;
-  border-bottom: 1px solid var(--menu-line);
-  background: rgba(247, 246, 242, 0.97);
-  transition: box-shadow 220ms ease;
+  top: 68px;
+  z-index: 30;
+  width: 100%;
+  background: rgba(251, 247, 240, 0.94);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(184, 134, 76, 0.25);
+  box-shadow: 0 8px 24px rgba(60, 25, 10, 0.04);
+  transition: box-shadow 0.25s ease, background-color 0.25s ease;
 }
 
 .discoveryPinned {
-  box-shadow: 0 5px 8px rgba(44, 28, 28, 0.08);
+  box-shadow: 0 12px 32px rgba(60, 25, 10, 0.09);
+  background: rgba(251, 247, 240, 0.98);
 }
 
 .discoveryInner {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(260px, 340px);
-  grid-template-areas: "categories search";
-  gap: 1.5rem;
-  width: min(1160px, calc(100% - 3rem));
+  max-width: 1200px;
   margin: 0 auto;
-  padding: 0.78rem 0;
-}
-
-.discoveryTop { grid-area: search; }
-
-.searchField {
+  padding: 0.75rem 1.25rem;
   display: flex;
-  min-height: 48px;
   align-items: center;
-  gap: 0.6rem;
-  padding: 0 0.82rem;
-  border-bottom: 1px solid var(--menu-line-strong);
-  background: transparent;
-  color: var(--menu-wine);
-  transition: border-color 160ms ease, background-color 160ms ease;
+  justify-content: space-between;
+  gap: 1.2rem;
 }
 
-.searchField:focus-within {
-  border-color: var(--menu-wine);
-  background: var(--menu-surface);
-}
-
-.searchField input {
-  width: 100%;
-  min-width: 0;
-  border: 0;
-  outline: 0;
-  background: transparent;
-  color: var(--menu-ink);
-  font: inherit;
-  font-size: 0.91rem;
-  font-weight: 570;
-}
-
-.searchField input::placeholder { color: #665b5c; opacity: 1; }
-
-.searchField button {
-  display: grid;
-  width: 32px;
-  height: 32px;
-  flex: 0 0 32px;
-  place-items: center;
-  border: 0;
-  border-radius: 50%;
-  background: var(--menu-wine);
-  color: #fff;
-}
-
+/* Luxury Category Tabs Navigation */
 .categoryNav {
-  grid-area: categories;
   display: flex;
-  min-width: 0;
   align-items: center;
-  gap: 0.3rem;
+  gap: 0.4rem;
   overflow-x: auto;
   overscroll-behavior-inline: contain;
   scroll-behavior: smooth;
   scrollbar-width: none;
   -webkit-overflow-scrolling: touch;
-  -webkit-mask-image: linear-gradient(90deg, #000 0, #000 calc(100% - 1.5rem), transparent 100%);
-  mask-image: linear-gradient(90deg, #000 0, #000 calc(100% - 1.5rem), transparent 100%);
+  padding: 0.25rem 0.2rem;
+  min-width: 0;
+  flex: 1 1 auto;
 }
 
-.categoryNav::-webkit-scrollbar { display: none; }
+.categoryNav::-webkit-scrollbar {
+  display: none;
+}
 
-.categoryNav button {
-  display: flex;
-  min-width: max-content;
-  min-height: 48px;
-  flex: 0 0 auto;
+.categoryTabBtn {
+  position: relative;
+  display: inline-flex;
   align-items: center;
-  gap: 0.42rem;
-  padding: 0.35rem 0.72rem;
+  gap: 0.5rem;
+  min-height: 44px;
+  padding: 0.45rem 0.95rem;
+  background: transparent;
   border: 1px solid transparent;
   border-radius: 999px;
-  background: transparent;
-  color: var(--menu-ink);
+  color: var(--ink-secondary);
+  font-family: var(--font-commissioner-gf), "Causten", sans-serif;
+  font-size: 0.8rem;
+  font-weight: 650;
+  letter-spacing: 0.01em;
+  white-space: nowrap;
+  cursor: pointer;
+  user-select: none;
   -webkit-tap-highlight-color: transparent;
-  transition: color 160ms ease, background-color 160ms ease, border-color 160ms ease, transform 160ms var(--menu-ease);
+  transition: color 0.2s ease, background-color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+  flex-shrink: 0;
+}
+
+.categoryTabBtn:hover {
+  background: rgba(255, 255, 255, 0.7);
+  border-color: rgba(184, 134, 76, 0.28);
+  color: var(--wine);
+}
+
+.categoryTabBtn.activeCategory {
+  background: linear-gradient(135deg, var(--wine) 0%, var(--wine-deep) 100%);
+  border-color: rgba(184, 134, 76, 0.5);
+  color: #fff9f0;
+  box-shadow: 0 4px 14px rgba(112, 26, 34, 0.28);
 }
 
 .categoryIconWell {
   display: grid;
-  width: 27px;
-  height: 27px;
-  flex: 0 0 27px;
   place-items: center;
-  color: var(--menu-wine);
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+  transition: filter 0.2s ease;
 }
 
-.categoryIconWell img { width: 25px; height: 25px; object-fit: contain; }
-
-.categoryLabel {
-  font-size: 0.73rem;
-  font-weight: 670;
-  letter-spacing: -0.01em;
-  line-height: 1;
-  white-space: nowrap;
+.categoryIconWell img {
+  width: 22px;
+  height: 22px;
+  object-fit: contain;
 }
 
-.categoryNav button.activeCategory {
-  border-color: var(--menu-wine);
-  background: var(--menu-wine);
+.categoryTabBtn.activeCategory .categoryIconWell {
+  filter: brightness(0) invert(1);
+}
+
+/* Refined Editorial Search Input */
+.searchWrapper {
+  position: relative;
+  flex: 0 0 280px;
+}
+
+.searchBox {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  min-height: 42px;
+  padding: 0 0.85rem;
+  background: #ffffff;
+  border: 1px solid rgba(184, 134, 76, 0.32);
+  border-radius: 999px;
+  box-shadow: 0 2px 8px rgba(60, 25, 10, 0.03);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.searchBox:focus-within {
+  border-color: var(--wine);
+  box-shadow: 0 0 0 3px rgba(184, 134, 76, 0.18);
+}
+
+.searchBox svg {
+  color: var(--terracotta);
+  flex-shrink: 0;
+}
+
+.searchInput {
+  width: 100%;
+  min-width: 0;
+  border: none;
+  outline: none;
+  background: transparent;
+  color: var(--ink);
+  font-family: inherit;
+  font-size: 0.85rem;
+  font-weight: 550;
+}
+
+.searchInput::placeholder {
+  color: var(--muted);
+  font-size: 0.8rem;
+  font-family: var(--font-literata-gf), Georgia, serif;
+  font-style: italic;
+}
+
+.searchClearBtn {
+  display: grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  border: none;
+  border-radius: 50%;
+  background: var(--canvas-warm);
+  color: var(--ink);
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: background-color 0.2s ease;
+}
+
+.searchClearBtn:hover {
+  background: var(--wine);
   color: #fff;
 }
 
-.categoryNav button.activeCategory .categoryIconWell { filter: brightness(0) invert(1); }
-
-.categoryNav button:focus-visible,
-.searchField button:focus-visible,
-.menuCard:focus-visible,
-.sheetClose:focus-visible,
-.sheetAction:focus-visible,
-.emptyState button:focus-visible {
-  outline: 3px solid var(--menu-gold);
-  outline-offset: 3px;
-}
+/* --------------------------------------------------------------------------
+   4. MENU RESULTS CONTAINER & SECTION HEADERS
+   -------------------------------------------------------------------------- */
 
 .menuContainer {
-  width: min(1160px, calc(100% - 3rem));
+  max-width: 1200px;
   margin: 0 auto;
-  padding-top: 2rem;
-  scroll-margin-top: 150px;
+  padding: clamp(2rem, 4vw, 3.5rem) 1.25rem clamp(4rem, 8vw, 7rem);
 }
 
-.resultLine {
+.statusSummary {
   display: flex;
-  min-height: 24px;
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
-  margin-bottom: clamp(2rem, 4vw, 3.5rem);
-  color: var(--menu-muted);
-  font-size: 0.75rem;
-  font-weight: 590;
+  margin-bottom: 2.2rem;
+  padding-bottom: 0.8rem;
+  border-bottom: 1px solid var(--line-subtle);
+  color: var(--muted);
+  font-size: 0.82rem;
+  font-weight: 600;
 }
 
-.resultLine span:last-child { color: var(--menu-wine); }
-.menuContent { display: grid; gap: clamp(4.5rem, 8vw, 7.5rem); }
-.menuSection { min-width: 0; }
+.statusLiveCount {
+  color: var(--wine);
+  font-weight: 750;
+}
+
+.currencyNote {
+  font-size: 0.76rem;
+  color: var(--terracotta);
+  font-weight: 650;
+}
+
+.menuSectionsGroup {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(3.5rem, 6vw, 5.5rem);
+}
+
+.menuSection {
+  scroll-margin-top: 140px;
+}
 
 .sectionHeader {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
-  gap: 2rem;
-  align-items: end;
-  margin-bottom: 1.4rem;
-  padding-bottom: 1.1rem;
-  border-bottom: 1px solid var(--menu-line-strong);
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1.5rem;
+  margin-bottom: 1.8rem;
+  padding-bottom: 1rem;
+  border-bottom: 1.5px solid rgba(184, 134, 76, 0.35);
+  position: relative;
 }
 
-.sectionHeader h2 {
+.sectionHeader::after {
+  content: "";
+  position: absolute;
+  bottom: -1.5px;
+  left: 0;
+  width: 80px;
+  height: 2px;
+  background: var(--wine);
+}
+
+.sectionTitleGroup h2 {
   margin: 0;
-  color: var(--menu-wine-deep);
-  font-family: var(--font-bodoni-gf), var(--font-literata-gf), Georgia, serif;
-  font-size: clamp(2.5rem, 5vw, 4.6rem);
-  font-variation-settings: "opsz" 60;
-  font-weight: 610;
-  letter-spacing: -0.035em;
-  line-height: 0.96;
-  text-wrap: balance;
+  font-family: "NOCTADO", var(--font-bodoni-gf), Georgia, serif;
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  font-weight: 400;
+  color: var(--wine-dark);
+  line-height: 1.1;
+  letter-spacing: -0.025em;
 }
 
-.sectionHeader p {
-  max-width: 55ch;
-  margin: 0.55rem 0 0;
-  color: var(--menu-muted);
+.sectionTitleGroup p {
+  margin: 0.45rem 0 0;
   font-family: var(--font-literata-gf), Georgia, serif;
-  font-size: 0.9rem;
+  font-size: clamp(0.88rem, 1.3vw, 0.98rem);
+  color: var(--muted);
   line-height: 1.55;
-  text-wrap: pretty;
 }
 
-.sectionHeader > span {
-  padding-bottom: 0.18rem;
-  color: var(--menu-wine);
-  font-size: 0.73rem;
-  font-weight: 690;
+.sectionCountBadge {
+  font-size: 0.76rem;
+  font-weight: 750;
+  color: var(--terracotta);
   white-space: nowrap;
+  letter-spacing: 0.05em;
 }
+
+/* --------------------------------------------------------------------------
+   5. ARTISANAL DISH CARDS GRID
+   -------------------------------------------------------------------------- */
 
 .menuGrid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  column-gap: clamp(2rem, 5vw, 4.5rem);
-  border-top: 1px solid var(--menu-line);
+  gap: clamp(1.2rem, 2.5vw, 2rem);
 }
 
 .menuCard {
   position: relative;
-  display: grid;
-  grid-template-columns: 96px minmax(0, 1fr);
-  min-width: 0;
-  min-height: 116px;
-  padding: 0;
-  overflow: hidden;
-  border: 0;
-  border-bottom: 1px solid var(--menu-line);
-  border-radius: 0;
-  background: transparent;
-  color: var(--menu-ink);
-  contain: layout paint style;
-  text-align: left;
-  transition: background-color 180ms ease, color 180ms ease;
-}
-
-.menuCard.textOnlyCard { grid-template-columns: 1fr; min-height: 104px; }
-
-.spotlightCard {
-  grid-template-columns: minmax(210px, 0.74fr) minmax(0, 1.26fr);
-  grid-column: 1 / -1;
-  min-height: 270px;
-  margin-bottom: 1.15rem;
-  border: 0;
-  background: var(--menu-wine-deep);
-  color: #fffaf1;
-}
-
-.cardMedia {
-  position: relative;
-  display: block;
-  min-width: 0;
-  overflow: hidden;
-  background: #d9d4d0;
-}
-
-.cardMedia::after {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(0deg, rgba(35, 11, 12, 0.28), transparent 48%);
-  content: "";
-  pointer-events: none;
-}
-
-.cardMedia img { object-fit: cover; transition: transform 520ms var(--menu-ease); }
-.menuCard:not(.spotlightCard) .cardMedia img { object-position: center; }
-
-.tagBadge,
-.textTag {
-  display: inline-flex;
-  width: fit-content;
-  min-height: 24px;
-  align-items: center;
-  padding: 0.28rem 0.5rem;
-  background: var(--menu-wine);
-  color: #fff;
-  font-size: 0.63rem;
-  font-weight: 680;
-  line-height: 1;
-}
-
-.tagBadge { position: absolute; z-index: 2; top: 0.65rem; left: 0.65rem; }
-.textTag { position: absolute; top: 0.85rem; left: 0; }
-.textTag + .cardBody { padding-top: 2.65rem; }
-
-.cardBody {
   display: flex;
-  min-width: 0;
   flex-direction: column;
-  justify-content: center;
-  padding: 1rem 0.3rem 0.9rem 1rem;
+  background: var(--card-surface);
+  border-radius: 16px;
+  border: 1px solid var(--line-brass);
+  box-shadow: var(--shadow-warm);
+  overflow: hidden;
+  text-align: left;
+  cursor: pointer;
+  transition: transform 0.28s var(--ease-editorial), box-shadow 0.28s var(--ease-editorial), border-color 0.28s ease;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
 }
 
-.textOnlyCard .cardBody { padding-left: 0; }
-.spotlightCard .cardBody { padding: clamp(1.7rem, 4vw, 3.5rem); }
+.menuCard:hover {
+  transform: translateY(-4px);
+  border-color: rgba(184, 134, 76, 0.5);
+  box-shadow: var(--shadow-hover);
+}
 
-.cardHeading {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
-  gap: 1rem;
+.menuCard:focus-visible {
+  outline: 3px solid var(--gold);
+  outline-offset: 3px;
+}
+
+.dishMedia {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  background: #f1ece4;
+  overflow: hidden;
+}
+
+.dishMedia img {
+  object-fit: cover;
+  object-position: center;
+  transition: transform 0.6s var(--ease-editorial);
+}
+
+.menuCard:hover .dishMedia img {
+  transform: scale(1.045);
+}
+
+.dishTagBadge {
+  position: absolute;
+  top: 0.75rem;
+  left: 0.75rem;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.3rem 0.65rem;
+  background: linear-gradient(135deg, var(--wine) 0%, var(--wine-deep) 100%);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 999px;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+}
+
+.dishBody {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+  padding: 1.25rem 1.4rem 1.2rem;
+}
+
+.dishHeadRow {
+  display: flex;
   align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 0.45rem;
 }
 
-.cardTitle {
-  color: var(--menu-ink);
-  font-family: var(--font-literata-gf), Georgia, serif;
-  font-size: clamp(0.98rem, 1.3vw, 1.1rem);
-  font-weight: 670;
-  letter-spacing: -0.02em;
-  line-height: 1.18;
-  text-wrap: balance;
+.dishTitle {
+  margin: 0;
+  font-family: var(--font-bodoni-gf), var(--font-literata-gf), Georgia, serif;
+  font-size: clamp(1.1rem, 1.5vw, 1.28rem);
+  font-weight: 600;
+  color: var(--wine-dark);
+  line-height: 1.25;
+  letter-spacing: -0.015em;
 }
 
-.cardPrice {
-  color: var(--menu-wine);
-  font-size: 0.98rem;
+.dishPrice {
+  font-family: var(--font-bodoni-gf), Georgia, serif;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--wine);
   font-variant-numeric: tabular-nums;
-  font-weight: 720;
-  letter-spacing: -0.02em;
-  line-height: 1;
   white-space: nowrap;
 }
 
-.spotlightCard .cardTitle {
-  color: #fffaf1;
-  font-family: var(--font-bodoni-gf), var(--font-literata-gf), Georgia, serif;
-  font-size: clamp(2rem, 4vw, 3.8rem);
-  font-weight: 610;
-  letter-spacing: -0.035em;
-  line-height: 0.98;
-}
-
-.spotlightCard .cardPrice { color: #e3bd73; font-size: clamp(1.25rem, 2.5vw, 1.8rem); }
-
-.cardDescription {
-  display: -webkit-box;
-  margin-top: 0.45rem;
-  overflow: hidden;
-  color: var(--menu-muted);
-  font-size: 0.78rem;
-  line-height: 1.45;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 2;
-  text-wrap: pretty;
-}
-
-.spotlightCard .cardDescription {
-  max-width: 58ch;
-  margin-top: 0.9rem;
-  color: rgba(255, 250, 241, 0.78);
+.dishDesc {
+  margin: 0 0 1rem;
   font-family: var(--font-literata-gf), Georgia, serif;
-  font-size: clamp(0.88rem, 1.2vw, 1rem);
-  line-height: 1.62;
-  -webkit-line-clamp: 4;
+  font-size: 0.85rem;
+  line-height: 1.55;
+  color: var(--muted);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
-.cardMeta {
+.dishFooter {
   display: flex;
-  min-width: 0;
   align-items: center;
   justify-content: space-between;
-  gap: 0.7rem;
+  gap: 0.5rem;
   margin-top: auto;
-  padding-top: 0.65rem;
-  color: #74696a;
-  font-size: 0.67rem;
-  font-weight: 590;
+  padding-top: 0.8rem;
+  border-top: 1px solid rgba(184, 134, 76, 0.15);
 }
 
-.spotlightCard .cardMeta { color: rgba(255, 250, 241, 0.68); }
-.cardMeta > span:first-child { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-
-.cardDetailCue {
-  display: grid;
-  width: 29px;
-  height: 29px;
-  flex: 0 0 29px;
-  place-items: center;
-  border: 1px solid var(--menu-line-strong);
-  border-radius: 50%;
-  color: var(--menu-wine);
-  transition: background-color 160ms ease, color 160ms ease, transform 160ms var(--menu-ease);
+.dishServingNote {
+  font-size: 0.72rem;
+  color: var(--terracotta);
+  font-weight: 600;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
-.spotlightCard .cardDetailCue { border-color: rgba(255, 250, 241, 0.45); color: #fffaf1; }
+.dishDetailPrompt {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-size: 0.74rem;
+  font-weight: 700;
+  color: var(--wine);
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.menuCard:hover .dishDetailPrompt {
+  color: var(--wine-deep);
+  transform: translateX(3px);
+}
+
+/* Text-Only Card Variant (for items without pictures) */
+.menuCardTextOnly {
+  min-height: 130px;
+}
+
+.menuCardTextOnly .dishBody {
+  padding: 1.4rem;
+}
+
+/* --------------------------------------------------------------------------
+   6. EMPTY SEARCH STATE
+   -------------------------------------------------------------------------- */
 
 .emptyState {
-  display: grid;
-  max-width: 620px;
-  min-height: 300px;
-  place-items: center;
-  align-content: center;
-  gap: 0.8rem;
-  margin: 4rem auto;
-  border-top: 1px solid var(--menu-line-strong);
-  border-bottom: 1px solid var(--menu-line-strong);
-  color: var(--menu-muted);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   text-align: center;
+  max-width: 520px;
+  margin: 4rem auto;
+  padding: 3rem 2rem;
+  background: var(--card-surface);
+  border: 1px solid var(--line-brass);
+  border-radius: 20px;
+  box-shadow: var(--shadow-warm);
 }
 
-.emptyState svg { color: var(--menu-wine); }
-.emptyState h2 { margin: 0; color: var(--menu-ink); font-family: var(--font-bodoni-gf), Georgia, serif; font-size: 2rem; letter-spacing: -0.03em; }
-.emptyState p { margin: 0; }
-.emptyState button,
-.sheetAction { min-height: 46px; padding: 0.65rem 1rem; border: 0; background: var(--menu-wine); color: #fff; font-weight: 680; }
-
-.menuNote {
-  display: grid;
-  grid-template-columns: auto minmax(0, 1fr);
-  gap: 2rem;
-  align-items: start;
-  margin-top: clamp(4.5rem, 9vw, 8rem);
-  padding: 1.25rem 0;
-  border-top: 1px solid var(--menu-line-strong);
-  color: var(--menu-muted);
-  font-size: 0.75rem;
-  line-height: 1.55;
+.emptyState svg {
+  color: var(--terracotta);
+  margin-bottom: 1rem;
 }
-.menuNote span { color: var(--menu-wine); font-weight: 690; white-space: nowrap; }
-.menuNote p { max-width: 70ch; margin: 0; }
 
-.sheetLayer {
-  --menu-wine: #701a22;
-  --menu-wine-deep: #36070a;
-  --menu-gold: #c89f53;
-  --menu-ink: #21191a;
-  --menu-muted: #64595a;
-  --menu-line: #cfc6c2;
-  --menu-canvas: #f7f6f2;
+.emptyState h3 {
+  margin: 0 0 0.6rem;
+  font-family: var(--font-bodoni-gf), Georgia, serif;
+  font-size: 1.6rem;
+  color: var(--wine-dark);
+}
+
+.emptyState p {
+  margin: 0 0 1.5rem;
+  color: var(--muted);
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.btnResetSearch {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 0 1.5rem;
+  background: var(--wine);
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.btnResetSearch:hover {
+  background: var(--wine-deep);
+}
+
+/* --------------------------------------------------------------------------
+   7. ATMOSPHERIC CLOSING / RESERVATION BANNER
+   -------------------------------------------------------------------------- */
+
+.atmosphereSection {
+  position: relative;
+  margin-top: clamp(4rem, 8vw, 7rem);
+  padding: clamp(4rem, 7vw, 6rem) 1.5rem;
+  background:
+    linear-gradient(180deg, rgba(45, 11, 15, 0.92) 0%, rgba(35, 8, 11, 0.96) 100%),
+    url("/images/balcony-breakfast.webp") center/cover;
+  border-radius: 24px;
+  border: 1px solid rgba(196, 150, 88, 0.32);
+  color: #fff9f0;
+  text-align: center;
+  overflow: hidden;
+  box-shadow: 0 20px 50px rgba(35, 8, 11, 0.25);
+}
+
+.atmosphereContainer {
+  max-width: 760px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 2;
+}
+
+.atmosphereTitle {
+  margin: 0 0 1rem;
+  font-family: "NOCTADO", var(--font-bodoni-gf), Georgia, serif;
+  font-size: clamp(2.2rem, 4.5vw, 3.6rem);
+  font-weight: 400;
+  line-height: 1.15;
+  color: #fff9f0;
+}
+
+.atmosphereDesc {
+  margin: 0 auto 2.2rem;
+  font-family: var(--font-literata-gf), Georgia, serif;
+  font-size: clamp(0.95rem, 1.5vw, 1.12rem);
+  line-height: 1.7;
+  color: rgba(255, 249, 240, 0.88);
+}
+
+.btnAtmosphereBook {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-height: 52px;
+  padding: 0 2.2rem;
+  background: linear-gradient(135deg, #c49658 0%, #9a7438 100%);
+  color: #240f02;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  border-radius: 12px;
+  font-size: 0.92rem;
+  font-weight: 750;
+  letter-spacing: 0.04em;
+  text-decoration: none;
+  cursor: pointer;
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.3);
+  transition: transform 0.2s ease, filter 0.2s ease;
+}
+
+.btnAtmosphereBook:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.08);
+}
+
+/* Dietary / Allergen Footer Notice */
+.menuDisclaimer {
+  margin-top: 2rem;
+  padding: 1.2rem 0;
+  border-top: 1px solid var(--line-subtle);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  font-size: 0.76rem;
+  color: var(--muted);
+}
+
+.disclaimerDate {
+  color: var(--wine);
+  font-weight: 700;
+}
+
+.disclaimerText {
+  max-width: 650px;
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* --------------------------------------------------------------------------
+   8. ARTISANAL PRODUCT SHEET (TASTING NOTES MODAL)
+   -------------------------------------------------------------------------- */
+
+.sheetOverlay {
   position: fixed;
   inset: 0;
   z-index: 1200;
   display: grid;
-  padding: 1rem;
   place-items: center;
-  font-family: var(--font-commissioner-gf), Arial, sans-serif;
+  padding: 1.5rem;
+  font-family: var(--font-commissioner-gf), "Causten", sans-serif;
 }
 
-.overlayBackdrop {
+.sheetBackdrop {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
+  background: rgba(26, 7, 10, 0.82);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   border: 0;
-  background: rgba(24, 7, 9, 0.78);
   cursor: default;
-  backdrop-filter: blur(3px);
 }
 
-.productSheet {
+.sheetCard {
   position: relative;
   z-index: 2;
   display: grid;
-  grid-template-columns: minmax(280px, 0.92fr) minmax(0, 1.08fr);
-  width: min(900px, 100%);
-  max-height: min(740px, calc(100svh - 2rem));
+  grid-template-columns: minmax(320px, 1fr) minmax(360px, 1.2fr);
+  width: min(940px, 100%);
+  max-height: min(760px, calc(100svh - 3rem));
+  background: var(--canvas-bg);
+  border-radius: 20px;
+  border: 1px solid rgba(184, 134, 76, 0.4);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.45);
   overflow: hidden;
-  border-radius: 10px;
-  background: var(--menu-canvas);
-  box-shadow: 0 8px 0 rgba(19, 4, 6, 0.34);
 }
 
-.sheetWithoutMedia { grid-template-columns: 1fr; width: min(560px, 100%); }
-
-.sheetMedia { position: relative; min-height: 540px; background: #d8d2ce; }
-.sheetMedia::after { position: absolute; inset: 0; background: linear-gradient(0deg, rgba(30, 7, 9, 0.45), transparent 52%); content: ""; pointer-events: none; }
-.sheetMedia img { object-fit: cover; }
-.sheetCategory { position: absolute; z-index: 2; bottom: 1rem; left: 1rem; padding: 0.42rem 0.62rem; background: var(--menu-wine); color: #fff; font-size: 0.7rem; font-weight: 680; }
-
-.sheetContent { position: relative; overflow-y: auto; padding: clamp(2rem, 4vw, 3.3rem); }
-.sheetClose { position: absolute; top: 0.9rem; right: 0.9rem; display: grid; width: 40px; height: 40px; place-items: center; border: 1px solid var(--menu-line); border-radius: 50%; background: var(--menu-canvas); color: var(--menu-ink); }
-.sheetTitleRow { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 1rem; align-items: start; padding-top: 2rem; }
-.sheetTitleRow h2 { margin: 0; color: var(--menu-wine-deep); font-family: var(--font-bodoni-gf), Georgia, serif; font-size: clamp(2.25rem, 4.5vw, 3.6rem); font-weight: 610; letter-spacing: -0.035em; line-height: 0.96; text-wrap: balance; }
-.sheetPriceBlock { display: grid; gap: 0.3rem; justify-items: end; text-align: right; }
-.sheetPriceBlock strong { color: var(--menu-wine); font-size: clamp(1.35rem, 3vw, 2rem); font-variant-numeric: tabular-nums; line-height: 1; }
-.sheetPriceBlock span { max-width: 15ch; color: var(--menu-muted); font-size: 0.67rem; line-height: 1.25; }
-.sheetStory { margin: 1.25rem 0 0; color: var(--menu-muted); font-family: var(--font-literata-gf), Georgia, serif; font-size: 0.94rem; line-height: 1.65; text-wrap: pretty; }
-.sheetRule { height: 1px; margin: 1.5rem 0 1.1rem; background: var(--menu-line); }
-.sheetSectionTitle { margin: 0 0 0.65rem; color: var(--menu-wine); font-size: 0.92rem; font-weight: 700; }
-.sheetDetailsList { display: grid; gap: 0; margin: 0; padding: 0; list-style: none; }
-.sheetDetailsList li { display: flex; min-height: 40px; align-items: center; gap: 0.58rem; border-top: 1px solid var(--menu-line); color: var(--menu-ink); font-size: 0.82rem; font-weight: 570; }
-.sheetDetailsList li:first-child { border-top: 0; }
-.sheetDetailsList svg { flex: none; color: var(--menu-wine); }
-.sheetAction { display: inline-flex; width: 100%; align-items: center; justify-content: center; gap: 0.42rem; margin-top: 1.35rem; }
-
-@media (hover: hover) and (pointer: fine) {
-  .categoryNav button:hover { border-color: var(--menu-line-strong); color: var(--menu-wine); }
-  .categoryNav button.activeCategory:hover { border-color: var(--menu-wine-deep); background: var(--menu-wine-deep); color: #fff; }
-  .menuCard:hover { background: #fff; }
-  .menuCard:hover .cardMedia img { transform: scale(1.045); }
-  .menuCard:hover .cardDetailCue { background: var(--menu-wine); color: #fff; transform: translateX(2px); }
-  .spotlightCard:hover { background: #470a0e; }
-  .spotlightCard:hover .cardDetailCue { background: #fffaf1; color: var(--menu-wine-deep); }
-  .sheetClose:hover { background: var(--menu-wine); color: #fff; }
-  .sheetAction:hover, .emptyState button:hover { background: var(--menu-wine-deep); }
+.sheetCardWithoutMedia {
+  grid-template-columns: 1fr;
+  width: min(580px, 100%);
 }
 
-@media (max-width: 900px) {
-  .discoveryInner { grid-template-columns: 1fr minmax(230px, 280px); width: min(100% - 2rem, 760px); gap: 0.8rem; }
-  .menuContainer { width: min(100% - 2rem, 760px); }
-  .menuGrid { grid-template-columns: 1fr; }
-  .spotlightCard { grid-column: auto; }
+.sheetMediaPane {
+  position: relative;
+  min-height: 480px;
+  background: #250a0d;
 }
 
-@media (max-width: 760px) {
-  .page { padding-bottom: max(6rem, calc(4.5rem + env(safe-area-inset-bottom))); }
-  .menuHero { min-height: 330px; place-items: end start; }
-  .menuHero::after { background: linear-gradient(0deg, rgba(34, 6, 9, 0.9) 0%, rgba(42, 7, 10, 0.42) 70%, rgba(31, 6, 8, 0.18) 100%); }
-  .heroImage { object-position: center 47%; }
-  .heroContent { width: calc(100% - 2rem); padding: 2.1rem 0; }
-  .heroProvenance { font-size: 0.64rem; letter-spacing: 0.16em; }
-  .heroProvenance::before { width: 1.65rem; }
-  .heroContent h1 { margin-top: 0.3rem; font-size: clamp(3.45rem, 18vw, 4.7rem); }
-  .heroContent p { max-width: 34ch; margin-top: 0.8rem; font-size: 0.86rem; line-height: 1.5; }
-
-  .discoveryBar { top: 72px; }
-  .discoveryInner { grid-template-columns: 1fr; grid-template-areas: "search" "categories"; gap: 0.38rem; width: 100%; padding: 0.45rem 0 0.32rem; }
-  .discoveryTop { padding: 0 1rem; }
-  .searchField { min-height: 42px; padding-inline: 0.6rem; border: 1px solid var(--menu-line-strong); background: var(--menu-surface); }
-  .searchField input { font-size: 1rem; }
-  .categoryNav { gap: 0.15rem; padding: 0 1rem 0.08rem; scroll-padding-inline: 1rem; }
-  .categoryNav button { min-height: 42px; padding: 0.3rem 0.58rem; }
-  .categoryIconWell { width: 24px; height: 24px; flex-basis: 24px; }
-  .categoryIconWell img { width: 22px; height: 22px; }
-  .categoryLabel { font-size: 0.68rem; }
-
-  .menuContainer { width: calc(100% - 1.5rem); padding-top: 1.2rem; scroll-margin-top: 160px; }
-  .resultLine { margin-bottom: 1.5rem; font-size: 0.68rem; }
-  .resultLine:not(.searchResultLine) { display: none; }
-  .resultLine.searchResultLine { display: flex; }
-  .menuContent { gap: 4.2rem; }
-  .sectionHeader { gap: 0.75rem; margin-bottom: 0.7rem; padding-bottom: 0.9rem; }
-  .sectionHeader h2 { font-size: clamp(2.3rem, 11vw, 3.2rem); }
-  .sectionHeader p { max-width: 33ch; margin-top: 0.35rem; font-size: 0.78rem; line-height: 1.45; }
-  .sectionHeader > span { align-self: start; padding-top: 0.35rem; font-size: 0.67rem; }
-
-  .menuGrid { column-gap: 0; }
-  .menuCard { grid-template-columns: 84px minmax(0, 1fr); min-height: 105px; }
-  .menuCard.textOnlyCard { grid-template-columns: 1fr; min-height: 94px; }
-  .cardBody { padding: 0.82rem 0.1rem 0.72rem 0.82rem; }
-  .textOnlyCard .cardBody { padding-left: 0; }
-  .cardHeading { gap: 0.65rem; }
-  .cardTitle { font-size: 0.96rem; line-height: 1.15; }
-  .cardPrice { font-size: 0.91rem; }
-  .cardDescription { margin-top: 0.36rem; font-size: 0.73rem; -webkit-line-clamp: 2; }
-  .cardMeta { padding-top: 0.5rem; }
-
-  .spotlightCard { grid-template-columns: 1fr; min-height: 0; margin-bottom: 0.9rem; }
-  .spotlightCard .cardMedia { min-height: 210px; aspect-ratio: 16 / 10; }
-  .spotlightCard .cardBody { padding: 1.3rem 1.15rem 1.15rem; }
-  .spotlightCard .cardTitle { font-size: clamp(2rem, 9vw, 2.7rem); }
-  .spotlightCard .cardPrice { font-size: 1.25rem; }
-  .spotlightCard .cardDescription { margin-top: 0.65rem; font-size: 0.8rem; line-height: 1.52; -webkit-line-clamp: 3; }
-  .tagBadge { top: 0.55rem; left: 0.55rem; }
-
-  .menuNote { grid-template-columns: 1fr; gap: 0.5rem; margin-top: 4rem; }
-  .menuNote span { white-space: normal; }
-
-  .sheetLayer { padding: 0; place-items: end center; }
-  .productSheet, .sheetWithoutMedia { grid-template-columns: 1fr; width: 100%; max-height: min(92svh, 860px); border-radius: 10px 10px 0 0; box-shadow: none; }
-  .sheetMedia { min-height: clamp(230px, 36svh, 330px); }
-  .sheetContent { padding: 1.4rem 1.15rem max(1.4rem, env(safe-area-inset-bottom)); }
-  .sheetTitleRow { gap: 0.75rem; padding-top: 1.4rem; }
-  .sheetTitleRow h2 { font-size: clamp(2.1rem, 10vw, 3rem); }
-  .sheetPriceBlock strong { font-size: 1.35rem; }
-  .sheetClose { top: 0.7rem; right: 0.7rem; width: 38px; height: 38px; }
+.sheetMediaPane img {
+  object-fit: cover;
+  object-position: center;
 }
 
-@media (max-width: 390px) {
-  .menuHero { min-height: 305px; }
-  .heroContent h1 { font-size: 3.45rem; }
-  .heroContent p { font-size: 0.81rem; }
-  .sectionHeader { grid-template-columns: 1fr; }
-  .sectionHeader > span { padding-top: 0; }
-  .spotlightCard .cardMedia { min-height: 190px; }
+.sheetCategoryBadge {
+  position: absolute;
+  top: 1.25rem;
+  left: 1.25rem;
+  z-index: 2;
+  padding: 0.35rem 0.8rem;
+  background: var(--wine);
+  color: #fff9f0;
+  border-radius: 999px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
 }
 
+.sheetContentPane {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: clamp(2rem, 4vw, 3rem);
+  overflow-y: auto;
+  background: linear-gradient(180deg, #fbf7f0 0%, #f7f1e6 100%);
+}
+
+.sheetCloseBtn {
+  position: absolute;
+  top: 1.25rem;
+  right: 1.25rem;
+  z-index: 10;
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  background: var(--canvas-warm);
+  border: 1px solid var(--line-brass);
+  border-radius: 50%;
+  color: var(--ink);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.sheetCloseBtn:hover {
+  background: var(--wine);
+  color: #ffffff;
+  border-color: var(--wine);
+}
+
+.sheetHeaderRow {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: 1rem;
+  margin-bottom: 0.8rem;
+  padding-bottom: 0.8rem;
+  border-bottom: 1.5px solid var(--line-brass);
+}
+
+.sheetTitle {
+  margin: 0;
+  font-family: "NOCTADO", var(--font-bodoni-gf), Georgia, serif;
+  font-size: clamp(1.8rem, 3vw, 2.4rem);
+  font-weight: 400;
+  color: var(--wine-dark);
+  line-height: 1.15;
+}
+
+.sheetPriceBlock {
+  text-align: right;
+  flex-shrink: 0;
+}
+
+.sheetPriceText {
+  font-family: var(--font-bodoni-gf), Georgia, serif;
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--wine);
+  line-height: 1;
+}
+
+.sheetPriceNote {
+  display: block;
+  font-size: 0.72rem;
+  color: var(--muted);
+  margin-top: 0.2rem;
+}
+
+.sheetStory {
+  margin: 1rem 0 1.4rem;
+  font-family: var(--font-literata-gf), Georgia, serif;
+  font-size: 0.95rem;
+  line-height: 1.68;
+  color: var(--ink-secondary);
+}
+
+.sheetDetailsTitle {
+  margin: 0 0 0.8rem;
+  font-size: 0.84rem;
+  font-weight: 750;
+  color: var(--terracotta);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.sheetIngredientsList {
+  list-style: none;
+  margin: 0 0 2rem;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+}
+
+.sheetIngredientItem {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.sheetIngredientItem svg {
+  color: var(--terracotta);
+  flex-shrink: 0;
+}
+
+.sheetBookingCta {
+  margin-top: auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  min-height: 48px;
+  padding: 0 1.5rem;
+  background: linear-gradient(135deg, var(--wine) 0%, var(--wine-deep) 100%);
+  color: #fff9f0;
+  border: 1px solid rgba(196, 150, 88, 0.4);
+  border-radius: 12px;
+  font-size: 0.9rem;
+  font-weight: 750;
+  letter-spacing: 0.03em;
+  text-decoration: none;
+  cursor: pointer;
+  box-shadow: 0 6px 18px rgba(112, 26, 34, 0.25);
+  transition: all 0.2s ease;
+}
+
+.sheetBookingCta:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px rgba(112, 26, 34, 0.35);
+  filter: brightness(1.05);
+}
+
+/* --------------------------------------------------------------------------
+   9. RESPONSIVE BREAKPOINTS (MOBILE & TABLET REFINEMENT)
+   -------------------------------------------------------------------------- */
+
+@media (max-width: 960px) {
+  .centerpieceCard {
+    grid-template-columns: 1fr;
+  }
+
+  .centerpieceMedia {
+    min-height: 260px;
+    aspect-ratio: 16 / 9;
+  }
+
+  .dishGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .discoveryInner {
+    flex-direction: column-reverse;
+    align-items: stretch;
+    gap: 0.8rem;
+    padding: 0.6rem 1rem;
+  }
+
+  .searchWrapper {
+    flex: 1 1 auto;
+    width: 100%;
+  }
+
+  .sheetCard {
+    grid-template-columns: 1fr;
+    max-height: 88svh;
+  }
+
+  .sheetMediaPane {
+    min-height: 220px;
+    max-height: 260px;
+  }
+}
+
+@media (max-width: 640px) {
+  .menuHero {
+    padding: 2.6rem 1rem 2.2rem;
+  }
+
+  .heroTitle {
+    font-size: 2.2rem;
+  }
+
+  .heroIntro {
+    font-size: 0.94rem;
+  }
+
+  .heroBadgesStrip {
+    border-radius: 16px;
+    padding: 0.75rem 1rem;
+    gap: 0.6rem 1rem;
+  }
+
+  .badgeItem {
+    font-size: 0.74rem;
+  }
+
+  .centerpieceWrapper {
+    margin-top: -1.5rem;
+    width: calc(100% - 1.5rem);
+  }
+
+  .centerpieceContent {
+    padding: 1.5rem 1.25rem;
+  }
+
+  .centerpieceFeatures {
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+  }
+
+  .centerpieceActions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .btnPrimaryBook,
+  .btnSecondaryDetails {
+    width: 100%;
+  }
+
+  .sectionHeader {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.6rem;
+  }
+
+  .dishBody {
+    padding: 1.1rem 1.15rem 1rem;
+  }
+
+  .atmosphereSection {
+    border-radius: 16px;
+    padding: 3rem 1.25rem;
+  }
+
+  .sheetOverlay {
+    padding: 0;
+    place-items: end center;
+  }
+
+  .sheetCard {
+    border-radius: 20px 20px 0 0;
+    max-height: 90svh;
+    width: 100%;
+  }
+}
+
+/* Reduced Motion Override */
 @media (prefers-reduced-motion: reduce) {
-  .page *, .page *::before, .page *::after,
-  .sheetLayer *, .sheetLayer *::before, .sheetLayer *::after {
-    scroll-behavior: auto !important;
-    transition-duration: 0.01ms !important;
+  .page *,
+  .page *::before,
+  .page *::after {
     animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }

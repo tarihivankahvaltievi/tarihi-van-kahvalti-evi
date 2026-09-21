@@ -749,7 +749,7 @@ const publicPagePaths = appFiles
     const routePath = `/${file.replace(/\/page\.tsx$/, "")}`;
     return routePath === "/page.tsx" ? "/" : routePath;
   })
-  .filter((routePath) => routePath !== "/admin")
+  .filter((routePath) => routePath !== "/admin" && !routePath.includes("["))
   .sort();
 const sitemapPaths = sitemapUrls.map((url) => new URL(url).pathname).sort();
 assert(

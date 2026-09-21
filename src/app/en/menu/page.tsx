@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { cookies } from "next/headers";
 import { Suspense } from "react";
 import ClientPage from "../../client-page";
+import { AnimatedFooter } from "../../components/animated-footer";
 import { localizeMenuData, localizeMenuDate } from "../../menu/menu-localization";
 import { MenuExperience } from "../../menu/menu-experience";
 import { getMenuData } from "../../menu/menu-storage";
@@ -145,6 +146,7 @@ async function EnglishMenuContent() {
           initialItems={localized.items}
           initialLastUpdated={localizeMenuDate("en", lastUpdated)}
         />
+        <AnimatedFooter locale="en" />
       </ClientPage>
     </>
   );

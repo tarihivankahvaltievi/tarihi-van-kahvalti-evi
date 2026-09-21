@@ -252,6 +252,117 @@
   text-decoration: underline;
 }
 
+.inAppBanner {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  padding: 0.95rem 1.15rem;
+  border-radius: 12px;
+  background: #fef7e0;
+  border: 1.5px solid #f6d166;
+  color: #7d5a00;
+  box-shadow: 0 2px 8px rgba(246, 209, 102, 0.25);
+  animation: fadeIn 0.3s ease-out;
+}
+
+.compassIcon {
+  flex-shrink: 0;
+  color: #c48b00;
+  margin-top: 0.1rem;
+}
+
+.inAppText {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  font-size: 0.85rem;
+  line-height: 1.45;
+}
+
+.inAppText strong {
+  color: #5c4100;
+  font-size: 0.9rem;
+}
+
+.inAppText p {
+  margin: 0;
+  color: #705200;
+}
+
+.hintModal {
+  padding: 0.9rem 1.15rem;
+  border-radius: 10px;
+  background: #eef7ff;
+  border: 1.5px solid #70b4ff;
+  color: #0b4e8c;
+  font-size: 0.84rem;
+  line-height: 1.5;
+  box-shadow: 0 4px 14px rgba(11, 78, 140, 0.12);
+  animation: pulseIn 0.3s ease-out;
+}
+
+.hintModal p {
+  margin: 0;
+}
+
+.auxRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.65rem;
+  margin-top: 0.2rem;
+}
+
+.auxBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  min-height: 40px;
+  padding: 0.5rem 0.8rem;
+  border-radius: 8px;
+  background: var(--res-wash);
+  color: var(--res-ink-soft);
+  border: 1px solid var(--res-line);
+  font-size: 0.78rem;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  font-family: inherit;
+}
+
+.auxBtn:hover {
+  background: #ffffff;
+  color: var(--res-ink);
+  border-color: var(--res-ink-soft);
+}
+
+.copiedIcon {
+  color: var(--res-green);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulseIn {
+  from {
+    opacity: 0;
+    transform: scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
 @media (max-width: 520px) {
   .cardTop {
     padding: 1.8rem 1.2rem 1.4rem;

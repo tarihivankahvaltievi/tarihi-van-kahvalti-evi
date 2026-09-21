@@ -138,9 +138,8 @@ export async function saveReservationData(data: ReservationData): Promise<boolea
   data.lastUpdated = new Date().toISOString();
   memoryReservations = [...data.reservations];
 
-  let supabaseSuccess = false;
   if (isSupabaseConfigured()) {
-    supabaseSuccess = await saveToSupabase(data);
+    await saveToSupabase(data);
   }
 
   try {

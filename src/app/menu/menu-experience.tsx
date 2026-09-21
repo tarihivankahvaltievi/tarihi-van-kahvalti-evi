@@ -1,8 +1,19 @@
 "use client";
 
-import { ChevronRight, Search, X } from "lucide-react";
+import {
+  ArrowRight,
+  Calendar,
+  Check,
+  ChevronRight,
+  Flame,
+  Search,
+  Sparkles,
+  UtensilsCrossed,
+  X,
+} from "lucide-react";
 import dynamic from "next/dynamic";
 import Image from "next/image";
+import Link from "next/link";
 import { memo, useCallback, useDeferredValue, useEffect, useMemo, useRef, useState } from "react";
 import styles from "./menu.module.css";
 import type { MenuCategory, MenuItem } from "./menu-data";
@@ -29,24 +40,24 @@ function getCategoryNavLabel(category: MenuCategory, locale: MenuLocale) {
   if (locale === "en") return category.shortLabel || category.label;
 
   const turkishLabels: Record<string, string> = {
-    "kahvalti-menuleri": "Kahvaltı",
-    peynirler: "Peynirler",
-    zeytinler: "Zeytinler",
-    gozlemeler: "Gözlemeler",
-    "yoresel-tatlar": "Yöresel",
-    receller: "Reçeller",
-    ballar: "Ballar",
+    "kahvalti-menuleri": "Kahvaltı Menüleri",
+    peynirler: "Yöresel Peynirler",
+    zeytinler: "Zeytin & Söğüş",
+    gozlemeler: "Gözleme & Hamur İşi",
+    "yoresel-tatlar": "Van Yöresel Lezzetleri",
+    receller: "Anne Reçelleri",
+    ballar: "Ballar & Kaymak",
     omletler: "Omletler",
     menemenler: "Menemenler",
     yumurtalar: "Yumurtalar",
-    sahanlar: "Sahanlar",
-    "sicak-icecekler": "Sıcak içecekler",
-    "bitki-caylari": "Bitki çayları",
-    "soft-icecekler": "Soft içecekler",
-    "soguk-icecekler": "Soğuk içecekler",
-    "sicak-kahveler": "Sıcak kahveler",
-    "soguk-kahveler": "Soğuk kahveler",
-    "milkshake-frozen-smoothie": "Özel içecekler",
+    sahanlar: "Bakır Sahanlar",
+    "sicak-icecekler": "Sıcak İçecekler & Semaver",
+    "bitki-caylari": "Bitki Çayları",
+    "soft-icecekler": "Soft İçecekler",
+    "soguk-icecekler": "Soğuk İçecekler",
+    "sicak-kahveler": "Sıcak Kahveler",
+    "soguk-kahveler": "Soğuk Kahveler",
+    "milkshake-frozen-smoothie": "Özel İçecekler",
   };
   return turkishLabels[category.id] ?? category.shortLabel ?? category.label;
 }
@@ -83,53 +94,61 @@ const MenuCard = memo(function MenuCard({
   locale: MenuLocale;
 }) {
   const messages = menuMessages[locale];
-  const isSpotlight = item.tags.includes(messages.featuredTag);
   const [imageFailed, setImageFailed] = useState(false);
-  const visibleTag = item.tags.find((tag) => tag === messages.featuredTag || tag === messages.newTag);
+  const visibleTag = item.tags.find((tag) => tag === messages.featuredTag || tag === messages.newTag || tag === "Tavsiye" || tag === "Recommended");
   const metaLabel =
     item.priceNote ||
     item.tags.find((tag) => tag !== visibleTag) ||
     messages.daily;
 
+  const hasImage = item.image && !imageFailed;
+
   return (
     <button
       id={item.id}
       type="button"
-      className={`${styles.menuCard} ${isSpotlight ? styles.spotlightCard : ""} ${!item.image || imageFailed ? styles.textOnlyCard : ""}`}
+      className={`${styles.menuCard} ${!hasImage ? styles.menuCardTextOnly : ""}`}
       onClick={() => onOpen(item)}
       aria-label={messages.cardAria(item.name, item.price)}
     >
-      {item.image && !imageFailed ? (
-        <span className={styles.cardMedia}>
+      {hasImage ? (
+        <div className={styles.dishMedia}>
           <Image
             src={item.image}
-            alt={item.imageAlt}
+            alt={item.imageAlt || item.name}
             fill
-            sizes={
-              isSpotlight
-                ? "(max-width: 680px) 36vw, (max-width: 1080px) 38vw, 480px"
-                : "(max-width: 680px) 36vw, (max-width: 1080px) 18vw, 180px"
-            }
-            quality={70}
+            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 560px"
+            quality={78}
             onError={() => setImageFailed(true)}
           />
-          {visibleTag ? <span className={styles.tagBadge}>{visibleTag}</span> : null}
+          {visibleTag ? (
+            <span className={styles.dishTagBadge}>
+              <Sparkles size={12} />
+              <span>{visibleTag}</span>
+            </span>
+          ) : null}
+        </div>
+      ) : visibleTag ? (
+        <span className={styles.dishTagBadge} style={{ position: "static", margin: "1rem 1.4rem 0" }}>
+          <Sparkles size={12} />
+          <span>{visibleTag}</span>
         </span>
-      ) : visibleTag ? <span className={styles.textTag}>{visibleTag}</span> : null}
+      ) : null}
 
-      <span className={styles.cardBody}>
-        <span className={styles.cardHeading}>
-          <span className={styles.cardTitle}>{item.name}</span>
-          <span className={styles.cardPrice}>{item.price}</span>
-        </span>
-        <span className={styles.cardDescription}>{item.description}</span>
-        <span className={styles.cardMeta}>
-          <span>{metaLabel}</span>
-          <span className={styles.cardDetailCue} aria-hidden="true">
-            <ChevronRight size={18} strokeWidth={2.1} />
+      <div className={styles.dishBody}>
+        <div className={styles.dishHeadRow}>
+          <h3 className={styles.dishTitle}>{item.name}</h3>
+          <span className={styles.dishPrice}>{item.price}</span>
+        </div>
+        <p className={styles.dishDesc}>{item.description}</p>
+        <div className={styles.dishFooter}>
+          <span className={styles.dishServingNote}>{metaLabel}</span>
+          <span className={styles.dishDetailPrompt} aria-hidden="true">
+            <span>{messages.viewPlateDetails}</span>
+            <ArrowRight size={13} />
           </span>
-        </span>
-      </span>
+        </div>
+      </div>
     </button>
   );
 });
@@ -149,12 +168,21 @@ export function MenuExperience({
   const reduceMotion = usePrefersReducedMotion();
   const heroRef = useRef<HTMLElement>(null);
   const searchInputRef = useRef<HTMLInputElement>(null);
-  const categoryNavRef = useRef<HTMLElement>(null);
+  const categoryNavRef = useRef<HTMLDivElement>(null);
   const [activeCategory, setActiveCategory] = useState("all");
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedItem, setSelectedItem] = useState<MenuItem | null>(null);
   const [isCatalogPinned, setIsCatalogPinned] = useState(false);
   const deferredSearch = useDeferredValue(searchTerm);
+
+  // Find the signature centerpiece item (Serpme Fix Menü)
+  const signatureSerpmeItem = useMemo(() => {
+    return (
+      initialItems.find((item) => item.id === "serpme-fix-menu") ||
+      initialItems.find((item) => item.category === "kahvalti-menuleri") ||
+      null
+    );
+  }, [initialItems]);
 
   const normalizedMenuCopy = useMemo(() => {
     return new Map(
@@ -180,9 +208,9 @@ export function MenuExperience({
 
     const observer = new IntersectionObserver(
       ([entry]) => {
-        setIsCatalogPinned(!entry.isIntersecting && entry.boundingClientRect.bottom <= 73);
+        setIsCatalogPinned(!entry.isIntersecting && entry.boundingClientRect.bottom <= 72);
       },
-      { rootMargin: "-73px 0px 0px", threshold: 0 },
+      { rootMargin: "-72px 0px 0px", threshold: 0 },
     );
     observer.observe(hero);
     return () => observer.disconnect();
@@ -198,11 +226,11 @@ export function MenuExperience({
 
   const groups = useMemo(() => {
     return initialCategories
-        .map((category) => ({
-          ...category,
-          items: visibleItems.filter((item) => item.category === category.id),
-        }))
-        .filter((group) => group.items.length > 0);
+      .map((category) => ({
+        ...category,
+        items: visibleItems.filter((item) => item.category === category.id),
+      }))
+      .filter((group) => group.items.length > 0);
   }, [initialCategories, visibleItems]);
 
   const navigableCategories = useMemo(
@@ -243,7 +271,7 @@ export function MenuExperience({
         const catalog = document.getElementById("menu-catalog");
         const target = document.getElementById("menu-results");
         if (!catalog || !target) return;
-        const stickyOffset = 72 + catalog.getBoundingClientRect().height + 14;
+        const stickyOffset = 68 + catalog.getBoundingClientRect().height + 14;
         const targetTop = target.getBoundingClientRect().top + window.scrollY - stickyOffset;
         window.scrollTo({ top: Math.max(0, targetTop), behavior: reduceMotion ? "auto" : "smooth" });
       });
@@ -255,7 +283,7 @@ export function MenuExperience({
   }, [activeCategory, centerCategoryButton]);
 
   const handleSearchFocus = () => {
-    if (!window.matchMedia("(max-width: 760px)").matches) return;
+    if (!window.matchMedia("(max-width: 768px)").matches) return;
     const catalog = document.getElementById("menu-catalog");
     if (!catalog || catalog.getBoundingClientRect().top <= 72) return;
 
@@ -265,34 +293,192 @@ export function MenuExperience({
     });
   };
 
+  const handleCenterpieceBooking = () => {
+    if (typeof window !== "undefined") {
+      window.dispatchEvent(
+        new CustomEvent("open-booking", {
+          detail: {
+            itemTitle: signatureSerpmeItem?.name || "Serpme Van Kahvaltısı",
+            category: "Kahvaltı",
+          },
+        }),
+      );
+    }
+  };
+
   return (
     <main id="main-content" className={styles.page} lang={messages.pageLanguage}>
+      {/* 1. EDITORIAL MASTHEAD HERO */}
       <section ref={heroRef} className={styles.menuHero} aria-labelledby="menu-page-title">
-        <Image
-          className={styles.heroImage}
-          src="/images/hands-table.webp"
-          alt=""
-          fill
-          sizes="100vw"
-          quality={70}
-          preload
-        />
-        <div className={styles.heroContent}>
+        <div className={styles.heroAnchorNotch} aria-hidden="true">
+          <Image
+            src="/hamour/anchor-2.png"
+            alt=""
+            width={64}
+            height={36}
+            className={styles.anchorImg}
+            priority
+          />
+        </div>
+
+        <div className={styles.heroContainer}>
+          <div className={styles.heroEmblem} aria-hidden="true">
+            <Image
+              src="/images/brand-emblem-colored.png"
+              alt="Tarihi Van Kahvaltı Evi"
+              width={52}
+              height={36}
+              className={styles.heroEmblemImg}
+              priority
+            />
+          </div>
+
           <span className={styles.heroProvenance}>{messages.heroProvenance}</span>
-          <h1 id="menu-page-title">{messages.heroMenu}</h1>
-          <p>{messages.heroIntro}</p>
+          <h1 id="menu-page-title" className={styles.heroTitle}>{messages.heroMenu}</h1>
+          <p className={styles.heroIntro}>{messages.heroIntro}</p>
+
+          <div className={styles.heroBadgesStrip}>
+            <span className={styles.badgeItem}>
+              <UtensilsCrossed size={15} />
+              <span>{messages.badgeSamovar}</span>
+            </span>
+            <span className={styles.badgeDivider} aria-hidden="true" />
+            <span className={styles.badgeItem}>
+              <Sparkles size={15} />
+              <span>{messages.badgeCheese}</span>
+            </span>
+            <span className={styles.badgeDivider} aria-hidden="true" />
+            <span className={styles.badgeItem}>
+              <Flame size={15} />
+              <span>{messages.badgePan}</span>
+            </span>
+            <span className={styles.badgeDivider} aria-hidden="true" />
+            <span className={styles.badgeItem}>
+              <Check size={15} />
+              <span>{messages.badgeOven}</span>
+            </span>
+          </div>
         </div>
       </section>
 
-      <section
+      {/* 2. GRAND SIGNATURE CENTERPIECE (Shown when not actively searching) */}
+      {!searchTerm && (activeCategory === "all" || activeCategory === "kahvalti-menuleri") && signatureSerpmeItem ? (
+        <section className={styles.centerpieceWrapper} aria-label={messages.centerpieceTitle}>
+          <div className={styles.centerpieceCard}>
+            <div className={styles.centerpieceMedia}>
+              <Image
+                src={signatureSerpmeItem.image || "/images/breakfast-spread.webp"}
+                alt={signatureSerpmeItem.imageAlt || signatureSerpmeItem.name}
+                fill
+                priority
+                sizes="(max-width: 960px) 100vw, 620px"
+                quality={85}
+              />
+              <span className={styles.centerpieceBadge}>
+                <Sparkles size={13} />
+                <span>{messages.centerpieceBadge}</span>
+              </span>
+            </div>
+
+            <div className={styles.centerpieceContent}>
+              <div className={styles.centerpieceTopRow}>
+                <span className={styles.centerpieceLabel}>
+                  {locale === "en" ? "HISTORIC BEYOĞLU TRADITION" : "TARİHİ BEYOĞLU GELENEĞİ"}
+                </span>
+                <div className={styles.centerpiecePriceLockup}>
+                  <span className={styles.centerpiecePrice}>{signatureSerpmeItem.price}</span>
+                  <span className={styles.centerpiecePriceNote}>
+                    {signatureSerpmeItem.priceNote || messages.centerpiecePerPerson}
+                  </span>
+                </div>
+              </div>
+
+              <h2 className={styles.centerpieceTitle}>{messages.centerpieceTitle}</h2>
+              <p className={styles.centerpieceDesc}>{signatureSerpmeItem.description}</p>
+
+              <div className={styles.centerpieceFeatures}>
+                <div className={styles.featureItem}>
+                  <span className={styles.featureBullet} />
+                  <span>{locale === "en" ? "Unlimited Samovar Tea" : "Sınırsız Semaver Çayı"}</span>
+                </div>
+                <div className={styles.featureItem}>
+                  <span className={styles.featureBullet} />
+                  <span>{locale === "en" ? "Authentic Van Herb Cheese" : "Hakiki Van Otlu Peyniri"}</span>
+                </div>
+                <div className={styles.featureItem}>
+                  <span className={styles.featureBullet} />
+                  <span>{locale === "en" ? "Sizzling Murtuğa & Hot Choice" : "Bakır Sahanda Sıcak Murtuğa"}</span>
+                </div>
+                <div className={styles.featureItem}>
+                  <span className={styles.featureBullet} />
+                  <span>{locale === "en" ? "Fresh Hot Pişi & Oven Kete" : "Taş Fırından Kete & Taze Pişi"}</span>
+                </div>
+              </div>
+
+              <div className={styles.centerpieceActions}>
+                <button
+                  type="button"
+                  className={styles.btnPrimaryBook}
+                  onClick={handleCenterpieceBooking}
+                >
+                  <Calendar size={18} />
+                  <span>{messages.centerpieceBook}</span>
+                </button>
+                <button
+                  type="button"
+                  className={styles.btnSecondaryDetails}
+                  onClick={() => openItem(signatureSerpmeItem)}
+                >
+                  <span>{messages.centerpieceDetails}</span>
+                  <ChevronRight size={17} />
+                </button>
+              </div>
+            </div>
+          </div>
+        </section>
+      ) : null}
+
+      {/* 3. LUXURY STICKY DISCOVERY RAIL */}
+      <nav
         id="menu-catalog"
         className={`${styles.discoveryBar} ${isCatalogPinned ? styles.discoveryPinned : ""}`}
         aria-label={messages.navigationAria}
       >
         <div className={styles.discoveryInner}>
-          <div className={styles.discoveryTop}>
-            <div className={styles.searchField}>
-              <Search size={18} aria-hidden="true" />
+          <div ref={categoryNavRef} className={styles.categoryNav} role="tablist">
+            {[
+              { id: "all", label: locale === "en" ? "Full Table" : "Tüm Sofra", icon: "all" as const },
+              ...navigableCategories.map((category) => ({
+                id: category.id,
+                label: getCategoryNavLabel(category, locale),
+                icon: getCategoryIcon(category.id),
+              })),
+            ].map((category) => {
+              const isActive = activeCategory === category.id;
+              return (
+                <button
+                  key={category.id}
+                  type="button"
+                  role="tab"
+                  data-category-id={category.id}
+                  className={`${styles.categoryTabBtn} ${isActive ? styles.activeCategory : ""}`}
+                  aria-selected={isActive}
+                  aria-controls="menu-results"
+                  aria-label={messages.showCategory(category.label)}
+                  onClick={() => selectCategory(category.id)}
+                >
+                  <span className={styles.categoryIconWell} aria-hidden="true">
+                    <MenuCategoryIcon name={category.icon} />
+                  </span>
+                  <span>{category.label}</span>
+                </button>
+              );
+            })}
+          </div>
+
+          <div className={styles.searchWrapper}>
+            <div className={styles.searchBox}>
+              <Search size={16} aria-hidden="true" />
               <label className={styles.srOnly} htmlFor="menu-search">{messages.searchLabel}</label>
               <input
                 ref={searchInputRef}
@@ -310,6 +496,7 @@ export function MenuExperience({
                 enterKeyHint="search"
                 aria-controls="menu-results"
                 onFocus={handleSearchFocus}
+                className={styles.searchInput}
               />
               {searchTerm ? (
                 <button
@@ -319,63 +506,46 @@ export function MenuExperience({
                     window.requestAnimationFrame(() => searchInputRef.current?.focus());
                   }}
                   aria-label={messages.clearSearch}
+                  className={styles.searchClearBtn}
                 >
-                  <X size={17} />
+                  <X size={14} />
                 </button>
               ) : null}
             </div>
           </div>
-
-          <nav ref={categoryNavRef} className={styles.categoryNav} aria-label={messages.categoriesAria}>
-            {[
-              { id: "all", label: locale === "en" ? "Full menu" : "Tüm sofra", icon: "all" as const },
-              ...navigableCategories.map((category) => ({
-                id: category.id,
-                label: getCategoryNavLabel(category, locale),
-                icon: getCategoryIcon(category.id),
-              })),
-            ].map((category) => (
-              <button
-                key={category.id}
-                type="button"
-                data-category-id={category.id}
-                className={activeCategory === category.id ? styles.activeCategory : ""}
-                aria-current={activeCategory === category.id ? "true" : undefined}
-                aria-controls="menu-results"
-                aria-label={messages.showCategory(category.label)}
-                onClick={() => selectCategory(category.id)}
-              >
-                <span className={styles.categoryIconWell} aria-hidden="true">
-                  <MenuCategoryIcon name={category.icon} />
-                </span>
-                <span className={styles.categoryLabel}>{category.label}</span>
-              </button>
-            ))}
-          </nav>
         </div>
-      </section>
+      </nav>
 
+      {/* 4. MENU ITEMS CONTAINER */}
       <div id="menu-results" className={styles.menuContainer}>
-        <div className={`${styles.resultLine} ${searchTerm ? styles.searchResultLine : ""}`} aria-live="polite">
-          <span>
+        <div className={styles.statusSummary} aria-live="polite">
+          <span className={styles.statusLiveCount}>
             {searchTerm
               ? messages.searchResult(searchTerm, visibleItems.length)
               : messages.showing(visibleItems.length)}
           </span>
-          <span>{messages.prices}</span>
+          <span className={styles.currencyNote}>{messages.prices}</span>
         </div>
 
         {visibleItems.length > 0 ? (
-          <div className={styles.menuContent}>
+          <div className={styles.menuSectionsGroup}>
             {groups.map((group) => (
-              <section id={`menu-section-${group.id}`} key={group.id} className={styles.menuSection} aria-labelledby={`cat-${group.id}`}>
+              <section
+                id={`menu-section-${group.id}`}
+                key={group.id}
+                className={styles.menuSection}
+                aria-labelledby={`cat-${group.id}`}
+              >
                 <header className={styles.sectionHeader}>
-                  <div>
+                  <div className={styles.sectionTitleGroup}>
                     <h2 id={`cat-${group.id}`}>{group.label}</h2>
                     <p>{group.description}</p>
                   </div>
-                  <span>{messages.optionCount(group.items.length)}</span>
+                  <span className={styles.sectionCountBadge}>
+                    {messages.optionCount(group.items.length)}
+                  </span>
                 </header>
+
                 <div className={styles.menuGrid}>
                   {group.items.map((item) => (
                     <MenuCard
@@ -391,11 +561,12 @@ export function MenuExperience({
           </div>
         ) : (
           <div className={styles.emptyState}>
-            <Search size={30} />
-            <h2>{messages.emptyTitle}</h2>
+            <Search size={36} />
+            <h3>{messages.emptyTitle}</h3>
             <p>{messages.emptyText}</p>
             <button
               type="button"
+              className={styles.btnResetSearch}
               onClick={() => {
                 setSearchTerm("");
                 setActiveCategory("all");
@@ -406,17 +577,40 @@ export function MenuExperience({
           </div>
         )}
 
-        <footer className={styles.menuNote}>
-          <span>{messages.updated} · {initialLastUpdated}</span>
-          <p>{messages.availability}</p>
+        {/* 5. ATMOSPHERIC RESERVATION BANNER */}
+        <section className={styles.atmosphereSection} aria-labelledby="atmosphere-banner-title">
+          <div className={styles.atmosphereContainer}>
+            <h2 id="atmosphere-banner-title" className={styles.atmosphereTitle}>
+              {messages.atmosphereTitle}
+            </h2>
+            <p className={styles.atmosphereDesc}>
+              {messages.atmosphereDesc}
+            </p>
+            <Link
+              href={locale === "en" ? "/en/rezervasyon" : "/rezervasyon"}
+              className={styles.btnAtmosphereBook}
+            >
+              <Calendar size={18} />
+              <span>{messages.atmosphereAction}</span>
+            </Link>
+          </div>
+        </section>
+
+        {/* 6. DISCLAIMER & LAST UPDATED FOOTER */}
+        <footer className={styles.menuDisclaimer}>
+          <span className={styles.disclaimerDate}>
+            {messages.updated} · {initialLastUpdated}
+          </span>
+          <p className={styles.disclaimerText}>{messages.availability}</p>
         </footer>
       </div>
 
+      {/* 7. PRODUCT SHEET TASTING MODAL */}
       {selectedItem ? (
         <ProductSheet
           key={selectedItem.id}
           item={selectedItem}
-          categoryLabel={initialCategories.find((category) => category.id === selectedItem.category)?.label}
+          categoryLabel={initialCategories.find((cat) => cat.id === selectedItem.category)?.label}
           locale={locale}
           onClose={closeItem}
         />

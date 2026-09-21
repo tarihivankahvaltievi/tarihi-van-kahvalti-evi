@@ -18,6 +18,7 @@ export async function GET(
     const guestsParam = url.searchParams.get("guests");
     const serviceParam = url.searchParams.get("service");
     const noteParam = url.searchParams.get("note");
+    const localeParam = (url.searchParams.get("locale") || url.searchParams.get("lang") || "tr") as "tr" | "en";
 
     let effectiveReservation = reservation;
     if (!effectiveReservation) {
@@ -42,13 +43,20 @@ export async function GET(
       };
     }
 
-    const icsContent = generateSingleReservationIcs(effectiveReservation);
+    const icsContent = generateSingleReservationIcs(
+      effectiveReservation,
+      localeParam === "en" ? "en" : "tr"
+    );
+
+    const dlParam = url.searchParams.get("dl");
+    const disposition = dlParam === "1" ? "attachment" : "inline";
+    const filenamePrefix = localeParam === "en" ? "reservation" : "rezervasyon";
 
     return new NextResponse(icsContent, {
       status: 200,
       headers: {
-        "Content-Type": "text/calendar; charset=utf-8",
-        "Content-Disposition": `attachment; filename="rezervasyon-${id}.ics"`,
+        "Content-Type": "text/calendar; charset=utf-8; method=PUBLISH",
+        "Content-Disposition": `${disposition}; filename="${filenamePrefix}-${id}.ics"`,
         "Cache-Control": "no-cache, no-store, max-age=0, must-revalidate",
       },
     });

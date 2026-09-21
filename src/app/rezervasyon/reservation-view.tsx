@@ -181,6 +181,7 @@ export function ReservationView({
           serviceType,
           note: fullNote,
           honeypot,
+          locale: isEnglish ? "en" : "tr",
         }),
       });
 
@@ -223,11 +224,12 @@ export function ReservationView({
       guests: String(guests),
       service: serviceType,
       area: seatingArea,
+      ...(isEnglish ? { lang: "en", locale: "en" } : {}),
       ...(note ? { note } : {}),
     });
 
     const calendarTargetUrl =
-      calendarPageUrl || `${siteUrl}/rezervasyon/takvim/${bookingCode}?${queryParams.toString()}`;
+      calendarPageUrl || `${siteUrl}${isEnglish ? "/en" : ""}/rezervasyon/takvim/${bookingCode}?${queryParams.toString()}`;
 
     const calendarLine = isEnglish
       ? `\n\n📅 Add to iPhone / Calendar:\n${calendarTargetUrl}`

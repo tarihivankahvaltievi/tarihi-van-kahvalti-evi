@@ -2,14 +2,10 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Suspense } from "react";
 import { connection } from "next/server";
-import {
-  Calendar,
-  CheckCircle2,
-  MapPin,
-  MessageCircle,
-} from "lucide-react";
+import { CheckCircle2 } from "lucide-react";
 import { getReservationById } from "@/app/reservations/reservation-storage";
-import { displayAddress, displayPhone, mapsUrl, phoneE164, siteName, siteUrl } from "@/app/seo";
+import { displayAddress, displayPhone, mapsUrl, siteName, siteUrl } from "@/app/seo";
+import { CalendarActions } from "./calendar-actions";
 import styles from "./calendar-page.module.css";
 
 export const metadata: Metadata = {
@@ -63,7 +59,12 @@ async function CalendarContent({ params, searchParams }: CalendarPageProps) {
     };
   }
 
-  const serviceLabel = reservation.serviceType === "cafe" ? "Kafka Cafe" : "Van Kahvaltısı";
+  const isEnglish = sp?.lang === "en" || sp?.locale === "en";
+  const serviceLabel = reservation.serviceType === "cafe"
+    ? "Kafka Cafe"
+    : isEnglish
+    ? "Van Traditional Breakfast"
+    : "Van Kahvaltısı";
   const formattedDate = reservation.date ? reservation.date.split("-").reverse().join(".") : "";
   const icsParams = new URLSearchParams({
     name: reservation.customerName,
@@ -72,6 +73,7 @@ async function CalendarContent({ params, searchParams }: CalendarPageProps) {
     time: reservation.time,
     guests: String(reservation.guests),
     service: reservation.serviceType,
+    locale: isEnglish ? "en" : "tr",
     ...(reservation.note ? { note: reservation.note } : {}),
   });
   const icsDownloadUrl = `/api/reservations/${reservation.id}/ics?${icsParams.toString()}`;
@@ -91,8 +93,16 @@ async function CalendarContent({ params, searchParams }: CalendarPageProps) {
   const pad = (n: number) => String(n).padStart(2, "0");
   const endStr = `${endDate.getFullYear()}${pad(endDate.getMonth() + 1)}${pad(endDate.getDate())}T${pad(endDate.getHours())}${pad(endDate.getMinutes())}00`;
 
-  const gCalTitle = encodeURIComponent(`🍳 Tarihi Van Kahvaltı Evi | ${reservation.customerName} (${reservation.guests} Kişi)`);
-  const gCalDetails = encodeURIComponent(`🍳 Tarihi Van Kahvaltı Evi Rezervasyonu\n\n👤 Misafir: ${reservation.customerName}\n📞 Telefon: ${reservation.customerPhone}\n👥 Kişi: ${reservation.guests} Kişi\n🍽️ Seçim: ${serviceLabel}\n📋 Kod: #${reservation.id}\n📝 Not: ${reservation.note || "Yok"}\n\n📍 Adres: ${displayAddress}\n📞 İletişim: ${displayPhone}\n🌐 Web: ${siteUrl}`);
+  const gCalTitle = encodeURIComponent(
+    isEnglish
+      ? `🍳 Tarihi Van Breakfast | ${reservation.customerName} (${reservation.guests} ${reservation.guests > 1 ? "Guests" : "Guest"})`
+      : `🍳 Tarihi Van Kahvaltı Evi | ${reservation.customerName} (${reservation.guests} Kişi)`
+  );
+  const gCalDetails = encodeURIComponent(
+    isEnglish
+      ? `🍳 Tarihi Van Breakfast House Reservation\n\n👤 Guest: ${reservation.customerName}\n📞 Phone: ${reservation.customerPhone}\n👥 Party Size: ${reservation.guests} Persons\n🍽️ Choice: ${serviceLabel}\n📋 Booking Code: #${reservation.id}\n📝 Note: ${reservation.note || "None"}\n\n📍 Address: ${displayAddress}\n📞 Contact: ${displayPhone}\n🌐 Website: ${siteUrl}/en`
+      : `🍳 Tarihi Van Kahvaltı Evi Rezervasyonu\n\n👤 Misafir: ${reservation.customerName}\n📞 Telefon: ${reservation.customerPhone}\n👥 Kişi: ${reservation.guests} Kişi\n🍽️ Seçim: ${serviceLabel}\n📋 Kod: #${reservation.id}\n📝 Not: ${reservation.note || "Yok"}\n\n📍 Adres: ${displayAddress}\n📞 İletişim: ${displayPhone}\n🌐 Web: ${siteUrl}`
+  );
   const gCalLocation = encodeURIComponent(`Tarihi Van Kahvaltı Evi, ${displayAddress}`);
   const googleCalendarUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${gCalTitle}&dates=${startStr}/${endStr}&details=${gCalDetails}&location=${gCalLocation}&ctz=Europe/Istanbul`;
 
@@ -101,12 +111,16 @@ async function CalendarContent({ params, searchParams }: CalendarPageProps) {
       <div className={styles.cardTop}>
         <span className={styles.badgeSuccess}>
           <CheckCircle2 size={16} />
-          Rezervasyon Kaydedildi
+          {isEnglish ? "Reservation Confirmed" : "Rezervasyon Kaydedildi"}
         </span>
-        <p className={styles.brandName}>{siteName}</p>
-        <h1 className={styles.title}>Randevuyu Takvime Ekle</h1>
+        <p className={styles.brandName}>{isEnglish ? "Tarihi Van Breakfast House" : siteName}</p>
+        <h1 className={styles.title}>
+          {isEnglish ? "Add to Your Calendar" : "Randevuyu Takvime Ekle"}
+        </h1>
         <p className={styles.subtitle}>
-          Unutmamak için rezervasyonunuzu telefon takviminize tek tıkla ekleyebilirsiniz.
+          {isEnglish
+            ? "Save this table booking directly to your iPhone or Google Calendar so you don't forget."
+            : "Unutmamak için rezervasyonunuzu telefon takviminize tek tıkla ekleyebilirsiniz."}
         </p>
       </div>
 
@@ -114,89 +128,72 @@ async function CalendarContent({ params, searchParams }: CalendarPageProps) {
         {/* Summary Details */}
         <div className={styles.summaryGrid}>
           <div className={styles.infoItem}>
-            <span className={styles.infoLabel}>Misafir Adı</span>
+            <span className={styles.infoLabel}>{isEnglish ? "Guest Name" : "Misafir Adı"}</span>
             <span className={styles.infoValue}>{reservation.customerName}</span>
           </div>
 
           <div className={styles.infoItem}>
-            <span className={styles.infoLabel}>Telefon Numarası</span>
-            <span className={styles.infoValue}>{reservation.customerPhone || "Belirtilmedi"}</span>
+            <span className={styles.infoLabel}>{isEnglish ? "Phone Number" : "Telefon Numarası"}</span>
+            <span className={styles.infoValue}>{reservation.customerPhone || (isEnglish ? "Not provided" : "Belirtilmedi")}</span>
           </div>
 
           <div className={styles.infoItem}>
-            <span className={styles.infoLabel}>Tarih & Saat</span>
+            <span className={styles.infoLabel}>{isEnglish ? "Date & Time" : "Tarih & Saat"}</span>
             <span className={styles.infoValue}>{formattedDate} — {reservation.time}</span>
           </div>
 
           <div className={styles.infoItem}>
-            <span className={styles.infoLabel}>Kişi & Tercih</span>
-            <span className={styles.infoValue}>{reservation.guests} Kişi • {serviceLabel}</span>
+            <span className={styles.infoLabel}>{isEnglish ? "Party & Service" : "Kişi & Tercih"}</span>
+            <span className={styles.infoValue}>
+              {reservation.guests} {isEnglish ? (reservation.guests > 1 ? "Guests" : "Guest") : "Kişi"} • {serviceLabel}
+            </span>
           </div>
 
           {reservation.note ? (
             <div className={styles.infoItemFull}>
-              <span className={styles.infoLabel}>Masa Notu / İstek</span>
+              <span className={styles.infoLabel}>{isEnglish ? "Special Request / Note" : "Masa Notu / İstek"}</span>
               <span className={styles.infoValue} style={{ fontWeight: 500 }}>{reservation.note}</span>
             </div>
           ) : null}
 
           <div className={styles.infoItemFull}>
-            <span className={styles.infoLabel}>Mekan & Adres</span>
+            <span className={styles.infoLabel}>{isEnglish ? "Venue & Address" : "Mekan & Adres"}</span>
             <span className={styles.infoValue} style={{ fontSize: "0.88rem", fontWeight: 600 }}>
               {displayAddress}
             </span>
           </div>
         </div>
 
-        {/* Action Buttons */}
-        <div className={styles.actionsSection}>
-          {/* Apple Calendar Primary Button */}
-          <a
-            href={icsDownloadUrl}
-            className={styles.appleCalendarBtn}
-            title="iPhone veya Mac Takviminize Ekleyin"
-          >
-            <span className={styles.appleIcon} aria-hidden="true">🍏</span>
-            <span>iPhone / Apple Takvimine Ekle</span>
-          </a>
+        {/* Action Buttons & In-App Browser Guidance */}
+        <CalendarActions
+          icsUrl={icsDownloadUrl}
+          googleCalendarUrl={googleCalendarUrl}
+          mapsUrl={mapsUrl}
+          isEnglish={isEnglish}
+          pageUrl={`${siteUrl}/rezervasyon/takvim/${reservation.id}?${icsParams.toString()}`}
+        />
 
-          {/* Secondary Buttons Row */}
-          <div className={styles.secondaryRow}>
-            <a
-              href={googleCalendarUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={styles.googleBtn}
-            >
-              <Calendar size={16} />
-              <span>Google Takvim</span>
-            </a>
-
-            <a
-              href={mapsUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={styles.mapsBtn}
-            >
-              <MapPin size={16} />
-              <span>Yol Tarifi Al</span>
-            </a>
-          </div>
-        </div>
-
-        {/* Smart iOS / In-App Browser Guidance */}
+        {/* Smart iOS / Safari Guidance */}
         <div className={styles.tipBox} role="note">
           <span className={styles.tipIcon} aria-hidden="true">💡</span>
           <div>
-            <strong>iPhone Kullanıcıları İçin İpucu:</strong> &quot;iPhone / Apple Takvimine Ekle&quot; butonuna dokunduğunuzda Takvim uygulamanız otomatik açılır. Eğer bağlantıyı WhatsApp içinden açtıysanız ve takvim açılmazsa, sağ alttaki <strong>Safari (🧭)</strong> simgesine dokunarak Safari&apos;de açabilirsiniz.
+            {isEnglish ? (
+              <>
+                <strong>iPhone & Apple Calendar:</strong> Tapping &quot;Add to iPhone / Apple Calendar&quot; opens your iOS Calendar sheet with prefilled details, reminders, and map location. Tap &quot;Add&quot; in the top right of your screen to save it.
+              </>
+            ) : (
+              <>
+                <strong>iPhone & Apple Takvim:</strong> &quot;iPhone / Apple Takvimine Ekle&quot; butonuna dokunduğunuzda Takvim uygulamanız açılır; kişi sayısı, ad soyad, telefon ve konum otomatik gelir. Sağ üstteki &quot;Ekle&quot;ye dokunarak kaydedebilirsiniz.
+              </>
+            )}
           </div>
         </div>
       </div>
 
       <div className={styles.cardFooter}>
-        <span>Tarihi Van Kahvaltı Evi • Kod: #{reservation.id}</span>
-        <Link href="/" className={styles.homeLink}>
-          Ana Sayfaya Dön
+        <span>{isEnglish ? "Tarihi Van Breakfast House" : siteName} • {isEnglish ? "Code" : "Kod"}: #{reservation.id}</span>
+        <Link href={isEnglish ? "/en" : "/"} className={styles.homeLink}>
+          {isEnglish ? "Back to Homepage" : "Ana Sayfaya Dön"}
         </Link>
       </div>
     </div>
