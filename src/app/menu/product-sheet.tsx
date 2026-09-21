@@ -168,11 +168,11 @@ export function ProductSheet({
 
           <button
             type="button"
-            className={styles.sheetBookingCta}
+            className={styles.primaryActionBtn}
             onClick={handleBookTable}
           >
-            <Calendar size={18} />
             <span>{messages.reserveDish}</span>
+            <Calendar size={18} />
           </button>
         </div>
       </motion.div>
