@@ -148,7 +148,12 @@ export async function getMenuData(): Promise<MenuData> {
   // Try Supabase first if configured
   if (isSupabaseConfigured()) {
     const data = await fetchFromSupabase();
-    if (data) return bundledData ? mergeBundledImages(data, bundledData) : data;
+    if (data && Array.isArray(data.categories) && Array.isArray(data.items)) {
+      return bundledData ? mergeBundledImages(data, bundledData) : data;
+    }
+    if (data) {
+      console.error("Supabase menu data is incomplete; using bundled menu data instead.");
+    }
   }
 
   // Fallback to local file system

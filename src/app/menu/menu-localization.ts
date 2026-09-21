@@ -17,7 +17,9 @@ const englishTags: Record<string, string> = {
 export const menuMessages = {
   tr: {
     pageLanguage: "tr",
-    heroMenu: "Menü",
+    heroMenu: "Menümüz",
+    heroProvenance: "1978 · Beyoğlu",
+    heroIntro: "Van sofrasının bereketi, aile mutfağımızın tarifleri ve bakır sahanlardan yükselen tanıdık kokular.",
     navigationAria: "Menüde gezinme",
     searchLabel: "Menüde ara",
     searchPlaceholder: "Menüde lezzet ara…",
@@ -44,7 +46,9 @@ export const menuMessages = {
   },
   en: {
     pageLanguage: "en",
-    heroMenu: "Menu",
+    heroMenu: "Our menu",
+    heroProvenance: "Since 1978 · Beyoğlu",
+    heroIntro: "The abundance of a Van breakfast, recipes from our family kitchen and familiar aromas rising from copper pans.",
     navigationAria: "Browse the menu",
     searchLabel: "Search the menu",
     searchPlaceholder: "Search dishes…",

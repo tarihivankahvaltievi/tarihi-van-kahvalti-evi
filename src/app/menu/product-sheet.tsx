@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, useReducedMotion } from "framer-motion";
-import { Check, ChevronRight, UtensilsCrossed, X } from "lucide-react";
+import { Check, ChevronRight, X } from "lucide-react";
 import Image from "next/image";
 import { createPortal } from "react-dom";
 import { useCallback, useEffect, useRef, useState } from "react";
@@ -87,7 +87,7 @@ export function ProductSheet({
       />
       <motion.div
         ref={sheetRef}
-        className={styles.productSheet}
+        className={`${styles.productSheet} ${!item.image || imageFailed ? styles.sheetWithoutMedia : ""}`}
         role="dialog"
         aria-modal="true"
         aria-labelledby="product-sheet-title"
@@ -98,8 +98,8 @@ export function ProductSheet({
           if (isClosing) onClose();
         }}
       >
-        <div className={styles.sheetMedia}>
-          {item.image && !imageFailed ? (
+        {item.image && !imageFailed ? (
+          <div className={styles.sheetMedia}>
             <Image
               src={item.image}
               alt={item.imageAlt}
@@ -109,13 +109,9 @@ export function ProductSheet({
               loading="eager"
               onError={() => setImageFailed(true)}
             />
-          ) : (
-            <span className={styles.mediaPlaceholder} aria-hidden="true">
-              <UtensilsCrossed />
-            </span>
-          )}
-          <span className={styles.sheetCategory}>{categoryLabel}</span>
-        </div>
+            <span className={styles.sheetCategory}>{categoryLabel}</span>
+          </div>
+        ) : null}
 
         <div className={styles.sheetContent}>
           <button ref={closeRef} type="button" className={styles.sheetClose} onClick={requestClose} aria-label={messages.close}>

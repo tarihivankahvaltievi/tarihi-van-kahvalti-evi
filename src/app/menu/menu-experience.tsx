@@ -1,6 +1,6 @@
 "use client";
 
-import { ChevronRight, Search, UtensilsCrossed, X } from "lucide-react";
+import { ChevronRight, Search, X } from "lucide-react";
 import dynamic from "next/dynamic";
 import Image from "next/image";
 import { memo, useCallback, useDeferredValue, useEffect, useMemo, useRef, useState } from "react";
@@ -95,12 +95,12 @@ const MenuCard = memo(function MenuCard({
     <button
       id={item.id}
       type="button"
-      className={`${styles.menuCard} ${isSpotlight ? styles.spotlightCard : ""}`}
+      className={`${styles.menuCard} ${isSpotlight ? styles.spotlightCard : ""} ${!item.image || imageFailed ? styles.textOnlyCard : ""}`}
       onClick={() => onOpen(item)}
       aria-label={messages.cardAria(item.name, item.price)}
     >
-      <span className={styles.cardMedia}>
-        {item.image && !imageFailed ? (
+      {item.image && !imageFailed ? (
+        <span className={styles.cardMedia}>
           <Image
             src={item.image}
             alt={item.imageAlt}
@@ -113,13 +113,9 @@ const MenuCard = memo(function MenuCard({
             quality={70}
             onError={() => setImageFailed(true)}
           />
-        ) : (
-          <span className={styles.mediaPlaceholder} aria-hidden="true">
-            <UtensilsCrossed />
-          </span>
-        )}
-        {visibleTag ? <span className={styles.tagBadge}>{visibleTag}</span> : null}
-      </span>
+          {visibleTag ? <span className={styles.tagBadge}>{visibleTag}</span> : null}
+        </span>
+      ) : visibleTag ? <span className={styles.textTag}>{visibleTag}</span> : null}
 
       <span className={styles.cardBody}>
         <span className={styles.cardHeading}>
@@ -153,9 +149,7 @@ export function MenuExperience({
   const reduceMotion = usePrefersReducedMotion();
   const heroRef = useRef<HTMLElement>(null);
   const searchInputRef = useRef<HTMLInputElement>(null);
-  const searchSessionRef = useRef(false);
   const categoryNavRef = useRef<HTMLElement>(null);
-  const scrollIntentRef = useRef<{ categoryId: string; timeout: number } | null>(null);
   const [activeCategory, setActiveCategory] = useState("all");
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedItem, setSelectedItem] = useState<MenuItem | null>(null);
@@ -197,10 +191,10 @@ export function MenuExperience({
   const visibleItems = useMemo(() => {
     const query = normalize(deferredSearch, locale);
     return initialItems.filter((item) => {
-      if (!query) return true;
-      return normalizedMenuCopy.get(item.id)?.includes(query) ?? false;
+      if (query) return normalizedMenuCopy.get(item.id)?.includes(query) ?? false;
+      return activeCategory === "all" || item.category === activeCategory;
     });
-  }, [initialItems, deferredSearch, locale, normalizedMenuCopy]);
+  }, [activeCategory, initialItems, deferredSearch, locale, normalizedMenuCopy]);
 
   const groups = useMemo(() => {
     return initialCategories
@@ -239,26 +233,15 @@ export function MenuExperience({
   }, [reduceMotion]);
 
   const selectCategory = (categoryId: string) => {
-    searchSessionRef.current = false;
     searchInputRef.current?.blur();
     setSearchTerm("");
     setActiveCategory(categoryId);
     centerCategoryButton(categoryId);
 
-    if (scrollIntentRef.current) window.clearTimeout(scrollIntentRef.current.timeout);
-    scrollIntentRef.current = {
-      categoryId,
-      timeout: window.setTimeout(() => {
-        scrollIntentRef.current = null;
-      }, 1200),
-    };
-
     window.requestAnimationFrame(() => {
       window.requestAnimationFrame(() => {
         const catalog = document.getElementById("menu-catalog");
-        const target = categoryId === "all"
-          ? document.getElementById("menu-results")
-          : document.getElementById(`menu-section-${categoryId}`);
+        const target = document.getElementById("menu-results");
         if (!catalog || !target) return;
         const stickyOffset = 72 + catalog.getBoundingClientRect().height + 14;
         const targetTop = target.getBoundingClientRect().top + window.scrollY - stickyOffset;
@@ -268,68 +251,10 @@ export function MenuExperience({
   };
 
   useEffect(() => {
-    if (deferredSearch) return;
-
-    let frame: number | null = null;
-    const updateActiveCategory = () => {
-      frame = null;
-      const catalog = document.getElementById("menu-catalog");
-      const results = document.getElementById("menu-results");
-      if (!catalog || !results) return;
-
-      const marker = 72 + catalog.getBoundingClientRect().height + 24;
-      const scrollIntent = scrollIntentRef.current;
-      if (scrollIntent) {
-        const intendedSection = scrollIntent.categoryId === "all"
-          ? results
-          : document.getElementById(`menu-section-${scrollIntent.categoryId}`);
-        if (!intendedSection || Math.abs(intendedSection.getBoundingClientRect().top - marker) > 18) return;
-        window.clearTimeout(scrollIntent.timeout);
-        scrollIntentRef.current = null;
-      }
-
-      if (results.getBoundingClientRect().top > marker) {
-        setActiveCategory("all");
-        return;
-      }
-
-      let nextCategory = navigableCategories[0]?.id ?? "all";
-      for (const category of navigableCategories) {
-        const section = document.getElementById(`menu-section-${category.id}`);
-        if (section && section.getBoundingClientRect().top <= marker) nextCategory = category.id;
-      }
-      setActiveCategory((current) => current === nextCategory ? current : nextCategory);
-    };
-    const handleScroll = () => {
-      if (frame === null) frame = window.requestAnimationFrame(updateActiveCategory);
-    };
-    const cancelScrollIntent = () => {
-      if (!scrollIntentRef.current) return;
-      window.clearTimeout(scrollIntentRef.current.timeout);
-      scrollIntentRef.current = null;
-    };
-
-    updateActiveCategory();
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    window.addEventListener("resize", handleScroll);
-    window.addEventListener("wheel", cancelScrollIntent, { passive: true });
-    window.addEventListener("touchstart", cancelScrollIntent, { passive: true });
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-      window.removeEventListener("resize", handleScroll);
-      window.removeEventListener("wheel", cancelScrollIntent);
-      window.removeEventListener("touchstart", cancelScrollIntent);
-      if (frame !== null) window.cancelAnimationFrame(frame);
-      if (scrollIntentRef.current) window.clearTimeout(scrollIntentRef.current.timeout);
-    };
-  }, [deferredSearch, navigableCategories]);
-
-  useEffect(() => {
     centerCategoryButton(activeCategory);
   }, [activeCategory, centerCategoryButton]);
 
   const handleSearchFocus = () => {
-    searchSessionRef.current = true;
     if (!window.matchMedia("(max-width: 760px)").matches) return;
     const catalog = document.getElementById("menu-catalog");
     if (!catalog || catalog.getBoundingClientRect().top <= 72) return;
@@ -345,7 +270,7 @@ export function MenuExperience({
       <section ref={heroRef} className={styles.menuHero} aria-labelledby="menu-page-title">
         <Image
           className={styles.heroImage}
-          src="/images/hero-table.jpg"
+          src="/images/hands-table.webp"
           alt=""
           fill
           sizes="100vw"
@@ -353,10 +278,9 @@ export function MenuExperience({
           preload
         />
         <div className={styles.heroContent}>
-          <h1 id="menu-page-title">
-            <span className={styles.heroBrand}>Tarihi Van Kahvaltı Evi</span>
-            <span className={styles.heroMenu}>{messages.heroMenu}</span>
-          </h1>
+          <span className={styles.heroProvenance}>{messages.heroProvenance}</span>
+          <h1 id="menu-page-title">{messages.heroMenu}</h1>
+          <p>{messages.heroIntro}</p>
         </div>
       </section>
 
