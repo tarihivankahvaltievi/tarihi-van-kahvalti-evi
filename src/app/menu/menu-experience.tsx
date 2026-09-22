@@ -1,484 +1,654 @@
 "use client";
 
-import { ArrowRight, Search, X } from "lucide-react";
-import dynamic from "next/dynamic";
 import Image from "next/image";
 import Link from "next/link";
-import { memo, useCallback, useDeferredValue, useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { X, Calendar, Phone } from "lucide-react";
 import styles from "./menu.module.css";
 import type { MenuCategory, MenuItem } from "./menu-data";
-import { MenuCategoryIcon } from "./menu-category-icons";
-import { menuMessages, type MenuLocale } from "./menu-localization";
+import type { MenuLocale } from "./menu-localization";
 
-const ProductSheet = dynamic(
-  () => import("./product-sheet").then((module) => module.ProductSheet),
-  { ssr: false },
-);
-
-type MenuCategoryIconName = "all" | "breakfast" | "pan" | "jam" | "van" | "hot-drink" | "cold-drink";
-
-type MenuChapter = {
+export type HamourChapter = {
   id: string;
-  label: Record<MenuLocale, string>;
-  icon: MenuCategoryIconName;
-  categories: string[];
+  label: { tr: string; en: string };
+  iconWhite: string;
+  iconDark: string;
+  headTitle: { tr: string; en: string };
+  headDescription: { tr: string; en: string };
+  sections: {
+    title: { tr: string; en: string };
+    categories: string[];
+  }[];
+  heroImageFallback: string;
 };
 
-const menuChapters: MenuChapter[] = [
-  { id: "all", label: { tr: "Tüm Menü", en: "Full Menu" }, icon: "all", categories: [] },
+const HAMOUR_CHAPTERS: HamourChapter[] = [
   {
-    id: "kahvalti",
-    label: { tr: "Kahvaltı", en: "Breakfast" },
-    icon: "breakfast",
-    categories: ["kahvalti-menuleri", "peynirler", "zeytinler", "gozlemeler"],
+    id: "serpme-kahvalti",
+    label: { tr: "Serpme Kahvaltı", en: "Royal Breakfast" },
+    iconWhite: "/hamour/mi_tab-input-4-img-2_1.png",
+    iconDark: "/hamour/mi_tab-input-4-img-1.png",
+    headTitle: {
+      tr: "Güne Van Kahvaltı Evi'nde Başla!",
+      en: "Start the Day at Tarihi Van Kahvaltı Evi!",
+    },
+    headDescription: {
+      tr: "Tarihi Van Kahvaltı Evi'nde yapılan kahvaltı, Van'ın kadim topraklarından özenle seçilmiş malzemelerle hazırlanan zengin sofralarla güne başlamak isteyenlere unutulmaz bir deneyim sunuyor. Doyurucu, doğal ve geleneksel sunumlarıyla her damak zevkine hitap eden bu sofra, gününüze taptaze bir bereket katıyor.",
+      en: "Breakfast at Tarihi Van Kahvaltı Evi offers an unforgettable start to your day with bountiful spreads prepared with ingredients carefully sourced from ancient Van pastures. Wholesome, natural, and timeless, this feast brings vibrant energy to your morning.",
+    },
+    sections: [
+      {
+        title: { tr: "KAHVALTI MENÜLERİ", en: "BREAKFAST MENUS" },
+        categories: ["kahvalti-menuleri"],
+      },
+      {
+        title: { tr: "GÖZLEMELER & PİŞİ", en: "FLATBREADS & PİŞİ" },
+        categories: ["gozlemeler"],
+      },
+    ],
+    heroImageFallback: "/images/menu-products/serpme-fix-menu.webp",
   },
   {
-    id: "van-sofrasi",
-    label: { tr: "Van Sofrası", en: "Van Table" },
-    icon: "van",
-    categories: ["yoresel-tatlar", "receller", "ballar"],
+    id: "sahandan-sicaklar",
+    label: { tr: "Sahandan Sıcaklar", en: "Hot Pan Dishes" },
+    iconWhite: "/hamour/mi_tab-input-3-img-2.png",
+    iconDark: "/hamour/mi_tab-input-3-img-1.png",
+    headTitle: {
+      tr: "Bakır Sahanda Geleneksel Van Lezzetleri!",
+      en: "Traditional Hot Delights in Copper Pans!",
+    },
+    headDescription: {
+      tr: "Köz tadında olgunlaşmış taze domatesler, çıtır sivri biberler ve organik köy yumurtalarının bakır sahanda buluştuğu efsanevi menemenlerimiz, tereyağlı omletlerimiz ve cızırdayan kavurmalarımız masanızda tütüyor.",
+      en: "Legendary menemen made with ripe vine tomatoes, crisp green peppers, and farm-fresh organic eggs in copper pans, alongside butter-seared omelettes and sizzling roasted meats.",
+    },
+    sections: [
+      {
+        title: { tr: "MENEMENLER", en: "MENEMEN SPECIALTIES" },
+        categories: ["menemenler"],
+      },
+      {
+        title: { tr: "OMLETLER", en: "OMELETTES" },
+        categories: ["omletler"],
+      },
+      {
+        title: { tr: "SAHANDA YUMURTALAR", en: "FRIED EGGS" },
+        categories: ["yumurtalar"],
+      },
+      {
+        title: { tr: "SAHAN LEZZETLERİ & KUYMAK", en: "PAN SPECIALTIES & KUYMAK" },
+        categories: ["sahanlar"],
+      },
+    ],
+    heroImageFallback: "/images/menu-products/sucuklu-menemen.webp",
   },
   {
-    id: "sicaklar",
-    label: { tr: "Sahandan", en: "From the Pan" },
-    icon: "pan",
-    categories: ["omletler", "menemenler", "yumurtalar", "sahanlar"],
+    id: "yoresel-tatlar",
+    label: { tr: "Yöresel Lezzetler", en: "Heritage Flavors" },
+    iconWhite: "/hamour/mi_tab-input-1-img-2.png",
+    iconDark: "/hamour/mi_tab-input-1-img-1.png",
+    headTitle: {
+      tr: "Van'ın Kadim Sofrası & Miras Tatlar!",
+      en: "Van's Ancient Table & Heritage Delights!",
+    },
+    headDescription: {
+      tr: "Asırlardır süregelen Van mutfağının baş tacı lezzetleri: tereyağında kavrulan cevizli murtuğa, buğdayın öğütülmesiyle hazırlanan şerbetli kavut ve süzme yoğurtla harmanlanan jaji.",
+      en: "The most authentic recipes of centuries-old Van breakfast culture: butter-roasted walnut murtuğa, honey-sweetened ground wheat kavut, and strained herb yogurt jaji.",
+    },
+    sections: [
+      {
+        title: { tr: "VAN MİRASI LEZZETLER", en: "VAN HERITAGE DELIGHTS" },
+        categories: ["yoresel-tatlar"],
+      },
+    ],
+    heroImageFallback: "/images/menu-products/tereyagli-cevizli-murtuga.webp",
   },
   {
-    id: "caylar",
-    label: { tr: "Çay & Sıcak", en: "Tea & Hot" },
-    icon: "hot-drink",
-    categories: ["sicak-icecekler", "bitki-caylari"],
+    id: "peynirler-soguklar",
+    label: { tr: "Peynir & Soğuklar", en: "Cheeses & Cold" },
+    iconWhite: "/hamour/mi_patisseria-beyaz_1.png",
+    iconDark: "/hamour/mi_patisseria.png",
+    headTitle: {
+      tr: "Yayla Peynirleri & Taze Bahçe Söğüşü!",
+      en: "Highland Cheeses & Garden Fresh Salad!",
+    },
+    headDescription: {
+      tr: "Van'ın yaylalarından toplanan 25 çeşit şifalı otla hazırlanan hakiki Van otlu peyniri, dinlendirilmiş tulum peynirleri, örgü peyniri ve sofraya tazelik katan taze söğüş tabağı.",
+      en: "Authentic Van herb cheese crafted with 25 varieties of wild mountain herbs, aged tulum, string cheeses, and crisp Mediterranean salad spreads.",
+    },
+    sections: [
+      {
+        title: { tr: "GELENEKSEL VAN PEYNİRLERİ", en: "TRADITIONAL VAN CHEESES" },
+        categories: ["peynirler"],
+      },
+      {
+        title: { tr: "ZEYTİNLER & SÖĞÜŞ", en: "OLIVES & FRESH SALAD" },
+        categories: ["zeytinler"],
+      },
+    ],
+    heroImageFallback: "/images/menu-products/otlu-peynir.webp",
   },
   {
-    id: "kahveler",
-    label: { tr: "Kahveler", en: "Coffee" },
-    icon: "jam",
-    categories: ["sicak-kahveler", "soguk-kahveler"],
+    id: "receller-ballar",
+    label: { tr: "Reçeller & Ballar", en: "Jams & Honeys" },
+    iconWhite: "/hamour/mi_pasta-beyaz.png",
+    iconDark: "/hamour/mi_pasta.png",
+    headTitle: {
+      tr: "Karakovan Balları & Tarihi Anne Reçelleri!",
+      en: "High-Plateau Honey & Mother's Jams!",
+    },
+    headDescription: {
+      tr: "Yüksek rakımlı yaylaların el değmemiş kır çiçeklerinden süzülen saf Karakovan petek balı, manda kaymağı ve anne eliyle geleneksel yöntemlerle pişirilen meşhur ceviz reçelleri.",
+      en: "Pure raw comb honey collected from pristine wildflower plateaus, thick water-buffalo kaymak, and mother's hand-crafted green walnut preserves.",
+    },
+    sections: [
+      {
+        title: { tr: "BALLAR & KAHVALTILIK TATLILAR", en: "HONEYS & BREAKFAST SWEETS" },
+        categories: ["ballar"],
+      },
+      {
+        title: { tr: "TARİHİ ANNE REÇELLERİ", en: "HISTORICAL MOTHER'S JAMS" },
+        categories: ["receller"],
+      },
+    ],
+    heroImageFallback: "/images/menu-products/bal-kaymak.webp",
   },
   {
-    id: "soguklar",
-    label: { tr: "Soğuk İçecek", en: "Cold Drinks" },
-    icon: "cold-drink",
-    categories: ["soft-icecekler", "soguk-icecekler", "milkshake-frozen-smoothie"],
+    id: "icecekler",
+    label: { tr: "Çay, Kahve & İçecek", en: "Drinks & Coffee" },
+    iconWhite: "/hamour/mi_tab-input-2-img-2.png",
+    iconDark: "/hamour/mi_tab-input-2-img-1.png",
+    headTitle: {
+      tr: "Közde Semaver Çayı & Tarihi Türk Kahvesi!",
+      en: "Samovar Tea & Historic Turkish Coffee!",
+    },
+    headDescription: {
+      tr: "Kahvaltı keyfini taçlandıran ince belli bardakta tavşan kanı demlik çaylarımız, bakır cezvede pişirilen geleneksel Türk kahvelerimiz ve tazeleyici soğuk içeceklerimiz.",
+      en: "Amber-brewed Turkish tea served in traditional tulip glasses, frothy Turkish coffee brewed in copper pots, and refreshing artisan cold beverages.",
+    },
+    sections: [
+      {
+        title: { tr: "SICAK ÇAYLAR & İÇECEKLER", en: "HOT TEAS & BEVERAGES" },
+        categories: ["sicak-icecekler"],
+      },
+      {
+        title: { tr: "TÜRK KAHVESİ & KAHVELER", en: "TURKISH COFFEE & SPECIALTY" },
+        categories: ["sicak-kahveler"],
+      },
+      {
+        title: { tr: "DOĞAL BİTKİ ÇAYLARI", en: "NATURAL HERBAL TEAS" },
+        categories: ["bitki-caylari"],
+      },
+      {
+        title: { tr: "SOĞUK KAHVELER", en: "ICED COFFEES" },
+        categories: ["soguk-kahveler"],
+      },
+      {
+        title: { tr: "SOĞUK VE TAZE İÇECEKLER", en: "COLD & FRESH BEVERAGES" },
+        categories: ["soft-icecekler", "soguk-icecekler"],
+      },
+      {
+        title: { tr: "SMOOTHIE & MILKSHAKE", en: "SMOOTHIES & MILKSHAKES" },
+        categories: ["milkshake-frozen-smoothie"],
+      },
+    ],
+    heroImageFallback: "/images/menu-products/turk-kahvesi.webp",
   },
 ];
 
-function normalize(value: string, locale: MenuLocale) {
-  return value
-    .toLocaleLowerCase(locale === "en" ? "en-US" : "tr-TR")
-    .normalize("NFD")
-    .replace(/[\u0300-\u036f]/g, "")
-    .trim();
+const categoryFallbacks: Record<string, string> = {
+  "kahvalti-menuleri": "/images/menu-products/serpme-fix-menu.webp",
+  gozlemeler: "/images/menu-products/gozleme.webp",
+  peynirler: "/images/menu-products/otlu-peynir.webp",
+  zeytinler: "/images/menu-products/karisik-zeytin.webp",
+  "yoresel-tatlar": "/images/menu-products/tereyagli-cevizli-murtuga.webp",
+  receller: "/images/menu-products/ceviz-receli.webp",
+  ballar: "/images/menu-products/bal-kaymak.webp",
+  omletler: "/images/menu-products/et-karisik-omlet.webp",
+  menemenler: "/images/menu-products/sucuklu-menemen.webp",
+  yumurtalar: "/images/menu-products/sahanda-sucuk.webp",
+  sahanlar: "/images/menu-products/sahanda-kavurma.webp",
+  "sicak-icecekler": "/images/tea-service.webp",
+  "bitki-caylari": "/images/tea-service.webp",
+  "soft-icecekler": "/images/menu-products/milkshake.webp",
+  "soguk-icecekler": "/images/menu-products/milkshake.webp",
+  "sicak-kahveler": "/images/menu-products/turk-kahvesi.webp",
+  "soguk-kahveler": "/images/menu-products/ice-latte.webp",
+  "milkshake-frozen-smoothie": "/images/menu-products/milkshake.webp",
+};
+
+export function getItemImage(item: MenuItem, fallback: string): string {
+  if (item.image && item.image.trim() !== "") {
+    return item.image;
+  }
+  return categoryFallbacks[item.category] || fallback;
 }
 
-function usePrefersReducedMotion() {
-  const [reduceMotion, setReduceMotion] = useState(false);
-
-  useEffect(() => {
-    const media = window.matchMedia("(prefers-reduced-motion: reduce)");
-    const update = () => setReduceMotion(media.matches);
-    update();
-    media.addEventListener("change", update);
-    return () => media.removeEventListener("change", update);
-  }, []);
-
-  return reduceMotion;
-}
-
-const MenuRow = memo(function MenuRow({
-  item,
-  onOpen,
-  locale,
-  featured = false,
-}: {
-  item: MenuItem;
-  onOpen: (item: MenuItem) => void;
-  locale: MenuLocale;
-  featured?: boolean;
-}) {
-  const messages = menuMessages[locale];
-  const [imageFailed, setImageFailed] = useState(false);
-  const visibleTag = item.tags.find(
-    (tag) => tag === messages.featuredTag || tag === messages.newTag || tag === "Tavsiye" || tag === "Recommended",
-  );
-  const hasImage = Boolean(item.image && !imageFailed);
-
-  return (
-    <button
-      id={item.id}
-      type="button"
-      className={`${styles.menuRow} ${hasImage ? styles.menuRowWithImage : styles.menuRowTextOnly} ${featured ? styles.menuRowFeatured : ""}`}
-      onClick={() => onOpen(item)}
-      aria-label={messages.cardAria(item.name, item.price)}
-    >
-      {hasImage ? (
-        <span className={styles.menuRowMedia}>
-          <Image
-            src={item.image!}
-            alt={item.imageAlt || item.name}
-            fill
-            sizes="(max-width: 760px) calc(100vw - 40px), 360px"
-            quality={78}
-            onError={() => setImageFailed(true)}
-          />
-        </span>
-      ) : null}
-
-      <span className={styles.menuRowBody}>
-        <span className={styles.menuRowHeading}>
-          <span className={styles.menuRowTitle}>{item.name}</span>
-          <span className={styles.menuRowLeader} aria-hidden="true" />
-          <span className={styles.menuRowPrice}>{item.price}</span>
-        </span>
-        <span className={styles.menuRowDescription}>{item.description}</span>
-        {visibleTag ? <span className={styles.menuRowTag}>{visibleTag}</span> : null}
-      </span>
-
-      <span className={styles.menuRowArrow} aria-hidden="true">
-        <ArrowRight size={16} />
-      </span>
-    </button>
-  );
-});
-
-export function MenuExperience({
-  initialCategories,
-  initialItems,
-  initialLastUpdated,
-  locale = "tr",
-}: {
+interface MenuExperienceProps {
   initialCategories: MenuCategory[];
   initialItems: MenuItem[];
   initialLastUpdated: string;
   locale?: MenuLocale;
-}) {
-  const messages = menuMessages[locale];
-  const reduceMotion = usePrefersReducedMotion();
-  const heroRef = useRef<HTMLElement>(null);
-  const searchInputRef = useRef<HTMLInputElement>(null);
-  const [activeChapter, setActiveChapter] = useState("all");
-  const [searchTerm, setSearchTerm] = useState("");
-  const [selectedItem, setSelectedItem] = useState<MenuItem | null>(null);
-  const [isCatalogPinned, setIsCatalogPinned] = useState(false);
-  const deferredSearch = useDeferredValue(searchTerm);
+}
 
-  const signatureSerpmeItem = useMemo(
-    () =>
-      initialItems.find((item) => item.id === "serpme-fix-menu") ||
-      initialItems.find((item) => item.category === "kahvalti-menuleri") ||
-      null,
-    [initialItems],
-  );
+export function MenuExperience({
+  initialCategories,
+  initialItems,
+  locale = "tr",
+}: MenuExperienceProps) {
+  const isEn = locale === "en";
 
-  const searchableCopy = useMemo(
-    () =>
-      new Map(
-        initialItems.map((item) => [
-          item.id,
-          normalize([item.name, item.description, item.story, ...item.tags, ...item.details].join(" "), locale),
-        ]),
-      ),
-    [initialItems, locale],
-  );
+  // Active Chapter
+  const [activeChapterId, setActiveChapterId] = useState<string>("serpme-kahvalti");
+  const activeChapter = useMemo(() => {
+    return (
+      HAMOUR_CHAPTERS.find((ch) => ch.id === activeChapterId) || HAMOUR_CHAPTERS[0]
+    );
+  }, [activeChapterId]);
+
+  // Chapter Items
+  const chapterItems = useMemo(() => {
+    const validCatIds = new Set(
+      activeChapter.sections.flatMap((sec) => sec.categories),
+    );
+    return initialItems.filter((it) => validCatIds.has(it.category));
+  }, [activeChapter, initialItems]);
+
+  // Active item for desktop preview
+  const [activeItemId, setActiveItemId] = useState<string>("");
 
   useEffect(() => {
-    document.documentElement.classList.add("menu-scroll-root");
-    document.body.classList.add("menu-scroll-root");
-    return () => {
-      document.documentElement.classList.remove("menu-scroll-root");
-      document.body.classList.remove("menu-scroll-root");
-    };
+    if (chapterItems.length > 0) {
+      setActiveItemId(chapterItems[0].id);
+    }
+  }, [chapterItems]);
+
+  const activeItem = useMemo(() => {
+    return chapterItems.find((it) => it.id === activeItemId) || chapterItems[0] || null;
+  }, [chapterItems, activeItemId]);
+
+  // Modal Item (for mobile click & desktop detail view)
+  const [modalItem, setModalItem] = useState<MenuItem | null>(null);
+
+  const handleOpenModal = useCallback((item: MenuItem) => {
+    setModalItem(item);
   }, []);
 
-  useEffect(() => {
-    const hero = heroRef.current;
-    if (!hero) return;
-
-    const observer = new IntersectionObserver(
-      ([entry]) => setIsCatalogPinned(!entry.isIntersecting && entry.boundingClientRect.bottom <= 72),
-      { rootMargin: "-72px 0px 0px", threshold: 0 },
-    );
-    observer.observe(hero);
-    return () => observer.disconnect();
+  const handleCloseModal = useCallback(() => {
+    setModalItem(null);
   }, []);
 
-  const activeChapterDefinition = menuChapters.find((chapter) => chapter.id === activeChapter) ?? menuChapters[0];
-
-  const visibleItems = useMemo(() => {
-    const query = normalize(deferredSearch, locale);
-    return initialItems.filter((item) => {
-      if (query) return searchableCopy.get(item.id)?.includes(query) ?? false;
-      return activeChapterDefinition.id === "all" || activeChapterDefinition.categories.includes(item.category);
-    });
-  }, [activeChapterDefinition, deferredSearch, initialItems, locale, searchableCopy]);
-
-  const groups = useMemo(
-    () =>
-      initialCategories
-        .map((category) => ({
-          ...category,
-          items: visibleItems.filter((item) => item.category === category.id),
-        }))
-        .filter((group) => group.items.length > 0),
-    [initialCategories, visibleItems],
-  );
-
-  const openItem = useCallback((item: MenuItem) => setSelectedItem(item), []);
-  const closeItem = useCallback(() => setSelectedItem(null), []);
-
-  const scrollToResults = () => {
-    window.requestAnimationFrame(() => {
-      const target = document.getElementById("menu-results");
-      const catalog = document.getElementById("menu-catalog");
-      if (!target || !catalog) return;
-      const offset = 72 + catalog.getBoundingClientRect().height + 18;
-      const top = target.getBoundingClientRect().top + window.scrollY - offset;
-      window.scrollTo({ top: Math.max(0, top), behavior: reduceMotion ? "auto" : "smooth" });
-    });
-  };
-
-  const selectChapter = (chapterId: string) => {
-    setSearchTerm("");
-    setActiveChapter(chapterId);
-    searchInputRef.current?.blur();
-    scrollToResults();
-  };
-
-  const handleBooking = () => {
-    window.dispatchEvent(
-      new CustomEvent("open-booking", {
-        detail: {
-          itemTitle: signatureSerpmeItem?.name || "Serpme Van Kahvaltısı",
-          category: "Kahvaltı",
-        },
-      }),
-    );
-  };
+  const activePreviewImage = activeItem
+    ? getItemImage(activeItem, activeChapter.heroImageFallback)
+    : activeChapter.heroImageFallback;
 
   return (
-    <main id="main-content" className={styles.page} lang={messages.pageLanguage}>
-      <section ref={heroRef} className={styles.menuHero} aria-labelledby="menu-page-title">
-        <Image
-          src="/images/hero-parallax/overhead-feast.webp"
-          alt={
-            locale === "en"
-              ? "A generous Van breakfast table set with copper pans, tea and regional dishes"
-              : "Bakır sahanlar, çay ve yöresel lezzetlerle kurulmuş zengin Van kahvaltısı sofrası"
-          }
-          fill
-          priority
-          quality={84}
-          sizes="100vw"
-          className={styles.heroImage}
-        />
-        <div className={styles.heroShade} aria-hidden="true" />
-        <div className={styles.heroContent}>
-          <p className={styles.heroProvenance}>1978 · BEYOĞLU</p>
-          <h1 id="menu-page-title" className={styles.heroTitle}>
-            {locale === "en" ? "The Van breakfast," : "Van kahvaltısı,"}
-            <span>{locale === "en" ? "served as it should be." : "olması gerektiği gibi."}</span>
-          </h1>
-          <p className={styles.heroIntro}>
-            {locale === "en"
-              ? "Highland cheeses, warm copper pans and samovar tea. Explore our current menu and prices."
-              : "Yayla peynirleri, sıcak bakır sahanlar ve semaver çayı. Güncel menümüzü ve fiyatlarımızı keşfedin."}
-          </p>
+    <main className={styles.menuContainer}>
+      {/* ====================================================================
+          1. BANNER SECTION (.banner)
+          ==================================================================== */}
+      <section className={styles.banner}>
+        <div className={styles.bannerImg}>
+          <Image
+            src="/images/breakfast-spread.webp"
+            alt={isEn ? "Tarihi Van Kahvaltı Evi Menu" : "Tarihi Van Kahvaltı Evi Menü"}
+            fill
+            priority
+            sizes="100vw"
+            quality={85}
+          />
+        </div>
 
-          {signatureSerpmeItem ? (
-            <div className={styles.heroSignature}>
-              <div className={styles.heroSignatureCopy}>
-                <span>{locale === "en" ? "Our signature table" : "İmza soframız"}</span>
-                <strong>{signatureSerpmeItem.name}</strong>
-              </div>
-              <div className={styles.heroSignaturePrice}>
-                <strong>{signatureSerpmeItem.price}</strong>
-                {signatureSerpmeItem.priceNote ? <span>{signatureSerpmeItem.priceNote}</span> : null}
-              </div>
-              <div className={styles.heroActions}>
-                <button type="button" onClick={() => openItem(signatureSerpmeItem)} className={styles.heroDetailButton}>
-                  {locale === "en" ? "See the table" : "Sofrayı incele"}
-                  <ArrowRight size={17} />
-                </button>
-                <button type="button" onClick={handleBooking} className={styles.heroBookingButton}>
-                  {locale === "en" ? "Reserve" : "Masa ayırt"}
-                </button>
-              </div>
-            </div>
-          ) : null}
+        <div className={styles.bannerText}>
+          <h1 className={styles.bannerTitle}>
+            {isEn ? "Menu" : "Menü"}
+          </h1>
+        </div>
+
+        <div className={styles.bannerVector}>
+          <Image
+            src="/hamour/logo-vector-icon.png"
+            alt="Emblem"
+            width={65}
+            height={55}
+            className={styles.bannerVectorImg}
+          />
         </div>
       </section>
 
-      <nav
-        id="menu-catalog"
-        className={`${styles.discoveryBar} ${isCatalogPinned ? styles.discoveryPinned : ""}`}
-        aria-label={messages.navigationAria}
-      >
-        <div className={styles.discoveryInner}>
-          <div className={styles.chapterNav} aria-label={locale === "en" ? "Menu sections" : "Menü bölümleri"}>
-            {menuChapters.map((chapter) => {
-              const isActive = activeChapter === chapter.id && !searchTerm;
+      {/* ====================================================================
+          2. SECTION-3: TABS & MENU ITEMS (.section-3)
+          ==================================================================== */}
+      <section className={styles.section3}>
+        {/* Arch Vector Emblem */}
+        <div className={styles.logoVectorImg} aria-hidden="true">
+          <Image
+            src="/hamour/main-logo-vector-2.png"
+            alt="Vector Logo"
+            width={80}
+            height={55}
+          />
+        </div>
+
+        <div className={styles.container}>
+          {/* CATEGORY TABS (.nav-pills) */}
+          <ul className={styles.navPills} role="tablist" aria-label="Menu Categories">
+            {HAMOUR_CHAPTERS.map((chapter) => {
+              const isActive = chapter.id === activeChapterId;
               return (
-                <button
-                  key={chapter.id}
-                  type="button"
-                  className={`${styles.chapterButton} ${isActive ? styles.activeChapter : ""}`}
-                  aria-pressed={isActive}
-                  onClick={() => selectChapter(chapter.id)}
-                >
-                  <span className={styles.chapterIcon} aria-hidden="true">
-                    <MenuCategoryIcon name={chapter.icon} />
-                  </span>
-                  <span>{chapter.label[locale]}</span>
-                </button>
+                <li key={chapter.id} className={styles.navItem} role="presentation">
+                  <button
+                    type="button"
+                    role="tab"
+                    aria-selected={isActive}
+                    className={`${styles.navLink} ${isActive ? styles.navLinkActive : ""}`}
+                    onClick={() => setActiveChapterId(chapter.id)}
+                  >
+                    <span className={styles.navLinkIcon}>
+                      <Image
+                        src={chapter.iconWhite}
+                        alt=""
+                        width={64}
+                        height={52}
+                        className={styles.navLinkIconWhite}
+                      />
+                      <Image
+                        src={chapter.iconDark}
+                        alt=""
+                        width={64}
+                        height={52}
+                        className={styles.navLinkIconDark}
+                      />
+                    </span>
+                    <span className={styles.navLinkText}>
+                      {isEn ? chapter.label.en : chapter.label.tr}
+                    </span>
+                  </button>
+                </li>
               );
             })}
+          </ul>
+
+          {/* TAB HEAD (.head) */}
+          <div className={styles.tabHead}>
+            <h2 className={styles.tabHeadTitle}>
+              {isEn ? activeChapter.headTitle.en : activeChapter.headTitle.tr}
+            </h2>
+            <p className={styles.tabHeadDesc}>
+              {isEn
+                ? activeChapter.headDescription.en
+                : activeChapter.headDescription.tr}
+            </p>
           </div>
 
-          <div className={styles.searchBox}>
-            <Search size={18} aria-hidden="true" />
-            <label className={styles.srOnly} htmlFor="menu-search">{messages.searchLabel}</label>
-            <input
-              ref={searchInputRef}
-              id="menu-search"
-              type="search"
-              placeholder={locale === "en" ? "Search the menu" : "Menüde ara"}
-              value={searchTerm}
-              onChange={(event) => {
-                setSearchTerm(event.target.value);
-                if (event.target.value) setActiveChapter("all");
-              }}
-              autoComplete="off"
-              inputMode="search"
-              enterKeyHint="search"
-              aria-controls="menu-results"
-              className={styles.searchInput}
-            />
-            {searchTerm ? (
-              <button
-                type="button"
-                onClick={() => {
-                  setSearchTerm("");
-                  searchInputRef.current?.focus();
-                }}
-                aria-label={messages.clearSearch}
-                className={styles.searchClearButton}
-              >
-                <X size={16} />
-              </button>
-            ) : null}
+          {/* MENU LIST ARTICLE (.menu-list-article) */}
+          <div className={styles.menuListArticle}>
+            {/* Desktop Left Image Preview (.menu-img-animate) */}
+            <div className={styles.menuImgAnimate}>
+              <div className={styles.menuImg}>
+                <AnimatePresence mode="wait">
+                  <motion.div
+                    key={activeItem?.id || activeChapter.id}
+                    initial={{ opacity: 0.6, scale: 1.02 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0.7 }}
+                    transition={{ duration: 0.35, ease: "easeOut" }}
+                    style={{ width: "100%", height: "100%", position: "relative" }}
+                  >
+                    <Image
+                      src={activePreviewImage}
+                      alt={activeItem?.name || "Menu item"}
+                      fill
+                      sizes="50vw"
+                      quality={85}
+                      style={{ objectFit: "cover" }}
+                    />
+                  </motion.div>
+                </AnimatePresence>
+
+                {activeItem && (
+                  <div className={styles.menuImgBadge}>
+                    <div>
+                      <div className={styles.menuImgBadgeTitle}>
+                        {isEn && activeItem.translations?.en?.name
+                          ? activeItem.translations.en.name
+                          : activeItem.name}
+                      </div>
+                    </div>
+                    <div className={styles.menuImgBadgePrice}>
+                      {activeItem.price}
+                    </div>
+                  </div>
+                )}
+              </div>
+            </div>
+
+            {/* Right Scrollable Menu Article (.menu-article) */}
+            <div className={styles.menuArticle}>
+              <div className={styles.menuArticleScroll}>
+                {activeChapter.sections.map((section, secIdx) => {
+                  const sectionCategorySet = new Set(section.categories);
+                  const itemsInSection = initialItems.filter((it) =>
+                    sectionCategorySet.has(it.category),
+                  );
+
+                  if (itemsInSection.length === 0) return null;
+
+                  return (
+                    <div key={secIdx} className={styles.subSection}>
+                      <h2 className={styles.subCategoryTitle}>
+                        {isEn ? section.title.en : section.title.tr}
+                      </h2>
+
+                      {itemsInSection.map((item) => {
+                        const isCurrentActive = activeItem?.id === item.id;
+                        const itemImg = getItemImage(
+                          item,
+                          activeChapter.heroImageFallback,
+                        );
+                        const displayName =
+                          isEn && item.translations?.en?.name
+                            ? item.translations.en.name
+                            : item.name;
+                        const displayDesc =
+                          isEn && item.translations?.en?.description
+                            ? item.translations.en.description
+                            : item.description;
+
+                        return (
+                          <div
+                            key={item.id}
+                            className={`${styles.menuItem} ${isCurrentActive ? styles.menuItemActive : ""}`}
+                            onMouseEnter={() => setActiveItemId(item.id)}
+                            onClick={() => {
+                              setActiveItemId(item.id);
+                              // On mobile or on click, open detail modal
+                              handleOpenModal(item);
+                            }}
+                          >
+                            {/* Mobile Thumbnail */}
+                            <div className={styles.menuItemThumb}>
+                              <Image
+                                src={itemImg}
+                                alt={displayName}
+                                width={72}
+                                height={72}
+                              />
+                            </div>
+
+                            <div className={styles.menuItemContent}>
+                              <div className={styles.menuItemHeader}>
+                                <h3 className={styles.menuItemTitle}>
+                                  {displayName}
+                                </h3>
+                                <span className={styles.menuItemPrice}>
+                                  {item.price}
+                                </span>
+                              </div>
+
+                              {displayDesc && (
+                                <p className={styles.menuItemDesc}>
+                                  {displayDesc}
+                                </p>
+                              )}
+
+                              {item.tags && item.tags.length > 0 && (
+                                <div className={styles.menuItemTags}>
+                                  {item.tags.map((tag, idx) => (
+                                    <span key={idx} className={styles.menuItemTag}>
+                                      {tag}
+                                    </span>
+                                  ))}
+                                </div>
+                              )}
+                            </div>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
           </div>
         </div>
-      </nav>
+      </section>
 
-      <div id="menu-results" className={styles.menuContainer}>
-        <header className={styles.resultsHeader}>
-          <div>
-            <p className={styles.resultsContext}>
-              {searchTerm
-                ? messages.searchResult(searchTerm, visibleItems.length)
-                : activeChapterDefinition.label[locale]}
-            </p>
-            <h2>{locale === "en" ? "Choose what belongs on your table." : "Sofranıza yakışanı seçin."}</h2>
-          </div>
-          <div className={styles.resultsMeta} aria-live="polite">
-            <strong>{visibleItems.length}</strong>
-            <span>{locale === "en" ? "items · current ₺ prices" : "lezzet · güncel ₺ fiyat"}</span>
-          </div>
-        </header>
+      {/* ====================================================================
+          3. SECTION-4: VENUE ATMOSPHERE (.section-4)
+          "Keyif Dolu Anlar Sizi Bekliyor!"
+          ==================================================================== */}
+      <section className={styles.section4}>
+        {/* Top Pointed Anchor Notch */}
+        <div className={styles.topAnchor} aria-hidden="true">
+          <Image
+            src="/hamour/anchor-1_1.png"
+            alt=""
+            width={74}
+            height={41}
+          />
+        </div>
 
-        {visibleItems.length > 0 ? (
-          <div className={styles.menuSectionsGroup}>
-            {groups.map((group) => (
-              <section
-                id={`menu-section-${group.id}`}
-                key={group.id}
-                className={styles.menuSection}
-                aria-labelledby={`cat-${group.id}`}
-                data-aos="fade-up"
-              >
-                <header className={styles.sectionHeader}>
-                  <div>
-                    <h2 id={`cat-${group.id}`} className={styles.sectionTitle}>{group.label}</h2>
-                    {group.description ? <p className={styles.sectionSubtitle}>{group.description}</p> : null}
-                  </div>
-                  <span className={styles.sectionCount} aria-label={`${group.items.length} ${locale === "en" ? "items" : "ürün"}`}>
-                    {group.items.length}
-                  </span>
-                </header>
+        <div className={styles.section4Bg} aria-hidden="true">
+          <Image
+            src="/images/balcony-breakfast.webp"
+            alt="Tarihi Van Kahvaltı Evi Atmosferi"
+            fill
+            sizes="100vw"
+            quality={80}
+          />
+        </div>
 
-                <div className={styles.menuList}>
-                  {group.items.map((item, index) => (
-                    <MenuRow
-                      key={item.id}
-                      item={item}
-                      onOpen={openItem}
-                      locale={locale}
-                      featured={index === 0 && activeChapter !== "all"}
-                    />
-                  ))}
-                </div>
-              </section>
-            ))}
+        <div className={styles.section4Container}>
+          <div className={styles.section4Row}>
+            <div className={styles.section4Head}>
+              <h2 className={styles.section4Title}>
+                {isEn
+                  ? "Delightful Moments Await You!"
+                  : "Keyif Dolu Anlar Sizi Bekliyor!"}
+              </h2>
+              <p className={styles.section4Subtitle}>
+                {isEn
+                  ? "The enchanting atmosphere of Tarihi Van Kahvaltı Evi meets authentic flavors!"
+                  : "Tarihi Van Kahvaltı Evi'nin büyüleyici atmosferi lezzetleriyle birleşiyor!"}
+              </p>
+            </div>
+
+            <div className={styles.section4Article}>
+              <p className={styles.section4Text}>
+                {isEn
+                  ? "Tarihi Van Kahvaltı Evi brings together centuries-old breakfast traditions, Beyoğlu's historic Greek townhouse architecture, and heartfelt Eastern hospitality to offer an authentic gourmet journey. We invite you to Tarihi Van Kahvaltı Evi to experience memorable moments in this enchanting atmosphere!"
+                  : "Tarihi Van Kahvaltı Evi, asırlık kahvaltı geleneğini, Beyoğlu'nun tarihi Rum konağı dokusu ve sıcacık misafirperverliğiyle bir araya getirerek özgün bir lezzet deneyimini misafirlerine iftiharla sunuyor. Bu eşsiz atmosferde, keyif dolu anlar yaşamak için sizleri Tarihi Van Kahvaltı Evi'ne bekliyoruz!"}
+              </p>
+
+              <a href="tel:+905415252868" className={styles.section4Btn}>
+                {isEn ? "Call Us" : "Bizi Ara"}
+              </a>
+            </div>
           </div>
-        ) : (
-          <div className={styles.emptyState}>
-            <Image src="/images/brand-emblem-colored.png" alt="" width={58} height={40} style={{ width: "auto", height: "auto" }} />
-            <h3>{messages.emptyTitle}</h3>
-            <p>{messages.emptyText}</p>
-            <button
-              type="button"
-              className={styles.primaryActionBtn}
-              onClick={() => {
-                setSearchTerm("");
-                setActiveChapter("all");
-              }}
+        </div>
+
+
+      </section>
+
+      {/* ====================================================================
+          4. PRODUCT DETAIL MODAL SHEET (Mobile / Click Lightbox)
+          ==================================================================== */}
+      <AnimatePresence>
+        {modalItem && (
+          <div className={styles.sheetOverlay}>
+            <motion.div
+              className={styles.sheetBackdrop}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={handleCloseModal}
+            />
+
+            <motion.div
+              className={styles.sheetDialog}
+              initial={{ opacity: 0, scale: 0.94, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.94, y: 20 }}
+              transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
             >
-              {messages.showAll}
-            </button>
+              <button
+                type="button"
+                className={styles.sheetCloseBtn}
+                onClick={handleCloseModal}
+                aria-label="Kapat"
+              >
+                <X size={20} />
+              </button>
+
+              <div className={styles.sheetMedia}>
+                <Image
+                  src={getItemImage(modalItem, activeChapter.heroImageFallback)}
+                  alt={modalItem.name}
+                  fill
+                  style={{ objectFit: "cover" }}
+                  sizes="(max-width: 600px) 100vw, 540px"
+                />
+              </div>
+
+              <div className={styles.sheetBody}>
+                <div className={styles.sheetTitleRow}>
+                  <h3 className={styles.sheetTitle}>
+                    {isEn && modalItem.translations?.en?.name
+                      ? modalItem.translations.en.name
+                      : modalItem.name}
+                  </h3>
+                  <span className={styles.sheetPrice}>{modalItem.price}</span>
+                </div>
+
+                <p className={styles.sheetDesc}>
+                  {isEn && modalItem.translations?.en?.description
+                    ? modalItem.translations.en.description
+                    : modalItem.description}
+                </p>
+
+                {modalItem.tags && modalItem.tags.length > 0 && (
+                  <div className={styles.sheetTags}>
+                    {modalItem.tags.map((tag, i) => (
+                      <span key={i} className={styles.sheetTag}>
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                )}
+
+                <Link
+                  href={isEn ? "/en/rezervasyon" : "/rezervasyon"}
+                  className={styles.sheetActionBtn}
+                  onClick={handleCloseModal}
+                >
+                  {isEn ? "Reserve Table for This Item" : "Bu Lezzet İçin Masa Ayırt"}
+                </Link>
+              </div>
+            </motion.div>
           </div>
         )}
-
-        <section className={styles.closingSection} aria-labelledby="menu-closing-title">
-          <Image
-            src="/images/interior-chair.webp"
-            alt={locale === "en" ? "Historic dining room at Tarihi Van Kahvaltı Evi" : "Tarihi Van Kahvaltı Evi'nin tarihi salonu"}
-            fill
-            sizes="(max-width: 900px) 100vw, 45vw"
-            className={styles.closingImage}
-          />
-          <div className={styles.closingCopy}>
-            <Image src="/images/brand-emblem-colored.png" alt="" width={48} height={34} style={{ width: "auto", height: "auto" }} />
-            <h2 id="menu-closing-title">
-              {locale === "en" ? "Your table is waiting in Beyoğlu." : "Beyoğlu'nda sofranız hazır."}
-            </h2>
-            <p>
-              {locale === "en"
-                ? "Take your time over breakfast in our historic rooms or at our street-side tables."
-                : "Tarihi salonlarımızda ya da sokak masalarımızda, kahvaltının tadını telaş etmeden çıkarın."}
-            </p>
-            <Link href={locale === "en" ? "/en/rezervasyon" : "/rezervasyon"} className={styles.closingLink}>
-              {locale === "en" ? "Reserve a table" : "Masa rezervasyonu yap"}
-              <ArrowRight size={18} />
-            </Link>
-          </div>
-        </section>
-
-        <footer className={styles.menuDisclaimer}>
-          <span>{messages.updated} · {initialLastUpdated}</span>
-          <p>{messages.availability}</p>
-        </footer>
-      </div>
-
-      {selectedItem ? (
-        <ProductSheet
-          key={selectedItem.id}
-          item={selectedItem}
-          categoryLabel={initialCategories.find((category) => category.id === selectedItem.category)?.label}
-          locale={locale}
-          onClose={closeItem}
-        />
-      ) : null}
+      </AnimatePresence>
     </main>
   );
 }
