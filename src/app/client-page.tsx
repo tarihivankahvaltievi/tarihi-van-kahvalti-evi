@@ -278,15 +278,6 @@ export default function ClientPage({ children, locale = "tr" }: { children: Reac
               </ul>
 
               <div className="nav-actions-mobile">
-                <Link
-                  className="nav-language"
-                  href={alternateHref}
-                  hrefLang={locale === "en" ? "tr" : "en"}
-                  lang={locale === "en" ? "tr" : "en"}
-                  aria-label={messages.alternateLanguageLabel}
-                >
-                  {locale === "en" ? "TR" : "EN"}
-                </Link>
                 <button
                   ref={menuButtonRef}
                   type="button"

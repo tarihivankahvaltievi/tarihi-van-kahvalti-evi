@@ -10044,28 +10044,33 @@ body .mobile-bar .mobile-bar-primary:focus-visible {
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 992px) {
   .header-wrapper {
-    background: rgba(60, 30, 31, 0.96) !important;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+    background: #3e2020 !important;
+    border-bottom: 1px solid rgba(247, 219, 171, 0.12) !important;
   }
   .nav-actions-mobile {
-    display: flex;
+    display: flex !important;
+  }
+  .nav-actions-mobile .nav-language {
+    display: none !important;
   }
   .mobile-toggle {
-    display: flex;
+    display: flex !important;
     background: #f7dbab !important;
-    border-radius: 45px !important;
-    width: 44px !important;
-    height: 44px !important;
-    padding: 8px 9px !important;
+    border-radius: 50% !important;
+    width: 45px !important;
+    height: 45px !important;
+    padding: 10px 9px !important;
+    border: none !important;
   }
   .mobile-toggle .toggle-bar {
     background-color: #ffffff !important;
-    width: 25px !important;
+    width: 27px !important;
+    height: 2px !important;
   }
   .mobile-toggle .mid-bar {
-    width: 20px !important;
+    width: 22px !important;
   }
   .header-wrapper .nav-links {
     display: none !important;

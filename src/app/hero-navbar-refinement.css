@@ -2,16 +2,16 @@
    from the retired parallax experiments still used elsewhere in the cascade. */
 
 .header-wrapper {
-  background: #3a0d10 !important;
-  border-bottom: 1px solid rgba(226, 191, 125, 0.2) !important;
+  background: #3e2020 !important;
+  border-bottom: 1px solid rgba(247, 219, 171, 0.12) !important;
   box-shadow: none !important;
   height: 70px !important;
 }
 
 .header-wrapper.is-scrolled {
-  background: rgba(47, 9, 12, 0.98) !important;
-  border-bottom-color: rgba(226, 191, 125, 0.28) !important;
-  box-shadow: 0 6px 16px rgba(20, 4, 6, 0.18) !important;
+  background: rgba(50, 18, 20, 0.98) !important;
+  border-bottom-color: rgba(247, 219, 171, 0.2) !important;
+  box-shadow: 0 6px 16px rgba(20, 4, 6, 0.25) !important;
 }
 
 .glass-nav {
@@ -42,18 +42,19 @@
 
 .nav-logo-provenance {
   margin-bottom: 2px !important;
-  color: #e2bf7d !important;
+  color: #f7dbab !important;
   font-family: "Causten", sans-serif !important;
   font-size: 0.58rem !important;
   font-weight: 700 !important;
   letter-spacing: 0.22em !important;
   text-transform: uppercase !important;
+  opacity: 0.85 !important;
 }
 
 .nav-logo-main {
-  color: #fffaf1 !important;
+  color: #f7dbab !important;
   font-family: "NOCTADO", Georgia, serif !important;
-  font-size: 1.25rem !important;
+  font-size: 1.35rem !important;
   font-weight: 400 !important;
   letter-spacing: 0.08em !important;
   line-height: 1.1 !important;
@@ -61,51 +62,68 @@
 
 .nav-logo-sub {
   margin-top: 2px !important;
-  color: #e2bf7d !important;
+  color: #f7dbab !important;
   font-family: "Causten", sans-serif !important;
   font-size: 0.62rem !important;
   font-weight: 600 !important;
   letter-spacing: 0.24em !important;
   text-transform: uppercase !important;
+  opacity: 0.85 !important;
 }
 
 .header-wrapper .nav-links {
-  gap: clamp(0.8rem, 1.45vw, 1.45rem) !important;
+  gap: clamp(1rem, 2vw, 2.2rem) !important;
+  display: flex !important;
+  align-items: center !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  list-style: none !important;
 }
 
 .header-wrapper .nav-links .nav-link,
 .header-wrapper .nav-links a {
-  color: rgba(255, 250, 241, 0.85) !important;
-  font-family: "Causten", sans-serif !important;
-  font-size: 0.78rem !important;
-  font-weight: 600 !important;
+  color: #f7dbab !important;
+  font-family: "NOCTADO", Georgia, serif !important;
+  font-size: 1.12rem !important;
+  font-weight: 400 !important;
   letter-spacing: 0.08em !important;
+  text-transform: uppercase !important;
+  transition: color 0.3s ease, opacity 0.3s ease !important;
 }
 
 .header-wrapper .nav-links .nav-link:after,
 .header-wrapper .nav-links a:after {
-  height: 1px;
+  height: 1.5px !important;
+  background: #f7dbab !important;
 }
 
+.header-wrapper .nav-links .nav-link:hover,
+.header-wrapper .nav-links a:hover,
 .header-wrapper .nav-links .nav-link.active,
 .header-wrapper .nav-links a.active {
-  color: #e2bf7d !important;
+  color: #ffffff !important;
 }
 
-.header-wrapper .nav-language {
+.header-wrapper .nav-lang-item .nav-language {
   min-width: auto !important;
   min-height: auto !important;
-  padding: 0 !important;
-  border: none !important;
-  border-radius: 0 !important;
+  padding: 4px 14px !important;
+  border: 1px solid rgba(247, 219, 171, 0.45) !important;
+  border-radius: 20px !important;
   background: transparent !important;
-  color: #e3c07d !important;
-  font-family: "Causten", sans-serif !important;
-  font-size: 0.95rem !important;
-  font-weight: 700 !important;
+  color: #f7dbab !important;
+  font-family: "NOCTADO", Georgia, serif !important;
+  font-size: 1.05rem !important;
+  font-weight: 400 !important;
   letter-spacing: 0.08em !important;
   text-decoration: none !important;
   box-shadow: none !important;
+  transition: all 0.3s ease !important;
+}
+
+.header-wrapper .nav-lang-item .nav-language:hover {
+  background: #f7dbab !important;
+  color: #3e2020 !important;
 }
 
 .hero-section.hero-cinematic {
@@ -320,22 +338,11 @@
   height: clamp(64px, 8vw, 108px);
 }
 
-@media (max-width: 980px) {
-  .header-wrapper .nav-links {
-    gap: 0.75rem !important;
-  }
-
-  .header-wrapper .nav-links .nav-link,
-  .header-wrapper .nav-links a {
-    font-size: 0.68rem !important;
-  }
-}
-
 @media (max-width: 992px) {
   .header-wrapper,
   .header-wrapper.is-scrolled {
-    background: #3a0d10 !important;
-    border-bottom: 1px solid rgba(226, 191, 125, 0.15) !important;
+    background: #3e2020 !important;
+    border-bottom: 1px solid rgba(247, 219, 171, 0.12) !important;
     box-shadow: none !important;
     height: 70px !important;
   }
@@ -346,7 +353,7 @@
 
   .nav-container {
     height: 70px !important;
-    padding-inline: 1rem !important;
+    padding-inline: 1.25rem !important;
     display: flex !important;
     align-items: center !important;
     justify-content: space-between !important;
@@ -367,18 +374,19 @@
 
   .nav-logo-provenance {
     margin-bottom: 2px !important;
-    color: #e2bf7d !important;
+    color: #f7dbab !important;
     font-family: "Causten", sans-serif !important;
     font-size: 0.52rem !important;
     font-weight: 700 !important;
     letter-spacing: 0.2em !important;
     text-transform: uppercase !important;
+    opacity: 0.85 !important;
   }
 
   .nav-logo-main {
-    color: #fffaf1 !important;
+    color: #f7dbab !important;
     font-family: "NOCTADO", Georgia, serif !important;
-    font-size: 1.15rem !important;
+    font-size: 1.25rem !important;
     font-weight: 400 !important;
     letter-spacing: 0.075em !important;
     line-height: 1.08 !important;
@@ -386,72 +394,86 @@
 
   .nav-logo-sub {
     margin-top: 2px !important;
-    color: #e2bf7d !important;
+    color: #f7dbab !important;
     font-family: "Causten", sans-serif !important;
     font-size: 0.54rem !important;
     font-weight: 600 !important;
     letter-spacing: 0.22em !important;
     text-transform: uppercase !important;
+    opacity: 0.85 !important;
+  }
+
+  .header-wrapper .nav-links {
+    display: none !important;
   }
 
   .nav-actions-mobile {
     display: flex !important;
     align-items: center !important;
-    gap: 19px !important;
+    justify-content: flex-end !important;
   }
 
-  .header-wrapper .nav-language,
-  .theme-breakfast .nav-language {
-    min-width: auto !important;
-    min-height: auto !important;
-    flex-basis: auto !important;
-    padding: 0 !important;
-    border: 0 !important;
-    border-radius: 0 !important;
-    background: transparent !important;
-    color: #e3c07d !important;
-    font-family: "Causten", sans-serif !important;
-    font-size: 0.95rem !important;
-    font-weight: 700 !important;
-    letter-spacing: 0.08em !important;
-    text-decoration: none !important;
-    box-shadow: none !important;
+  /* Hamour style: No language text next to button in mobile header */
+  .nav-actions-mobile .nav-language,
+  .header-wrapper .nav-actions-mobile .nav-language,
+  .theme-breakfast .nav-actions-mobile .nav-language {
+    display: none !important;
   }
 
+  /* 1:1 Hamour circular gold hamburger button */
   .mobile-toggle {
     display: flex !important;
+    position: relative !important;
     flex-direction: column !important;
     justify-content: center !important;
-    align-items: center !important;
-    width: 44px !important;
-    height: 40px !important;
-    flex: 0 0 44px !important;
+    align-items: flex-end !important;
+    width: 45px !important;
+    height: 45px !important;
+    flex: 0 0 45px !important;
+    border-radius: 50% !important;
+    background: #f7dbab !important;
+    border: none !important;
+    padding: 10px 9px !important;
     gap: 5px !important;
-    padding: 0 !important;
-    border: 1.5px solid #855c40 !important;
-    border-radius: 8px !important;
-    background: transparent !important;
-    box-shadow: none !important;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.22) !important;
     cursor: pointer !important;
+    transition: transform 0.3s ease, background-color 0.3s ease !important;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .mobile-toggle:active {
+    transform: scale(0.94) !important;
   }
 
   .mobile-toggle .toggle-bar {
-    width: 20px !important;
-    height: 1.5px !important;
+    display: block !important;
+    height: 2px !important;
+    background: #ffffff !important;
+    background-color: #ffffff !important;
     border-radius: 1px !important;
-    background: #f8e7c9 !important;
     margin: 0 !important;
-    transition: transform 0.25s ease, opacity 0.25s ease !important;
+    transition: transform 0.4s ease, opacity 0.4s ease, width 0.4s ease !important;
+  }
+
+  .mobile-toggle .top-bar {
+    width: 27px !important;
   }
 
   .mobile-toggle .mid-bar {
-    width: 15px !important;
+    width: 22px !important;
+    opacity: 1 !important;
     align-self: flex-end !important;
-    margin-right: 12px !important;
+    margin-right: 0 !important;
   }
 
+  .mobile-toggle .bot-bar {
+    width: 27px !important;
+  }
+
+  /* Hamour exact open animation */
   .mobile-toggle.open .top-bar {
-    transform: translateY(6.5px) rotate(45deg) !important;
+    width: 27px !important;
+    transform: rotate(-45deg) translateY(5px) translateX(-5px) !important;
   }
 
   .mobile-toggle.open .mid-bar {
@@ -460,13 +482,31 @@
   }
 
   .mobile-toggle.open .bot-bar {
-    transform: translateY(-6.5px) rotate(-45deg) !important;
+    width: 27px !important;
+    transform: rotate(45deg) translateY(-5px) translateX(-5px) !important;
   }
 
   .mobile-drawer {
     top: 70px !important;
-    background: #350e12 !important;
-    border-bottom: 1px solid rgba(226, 191, 125, 0.2) !important;
+    background: #3e2020 !important;
+    border-bottom: 1px solid rgba(247, 219, 171, 0.2) !important;
+    box-shadow: 0 16px 32px rgba(0, 0, 0, 0.45) !important;
+  }
+
+  .mobile-drawer .mobile-links .mobile-link {
+    font-family: "NOCTADO", Georgia, serif !important;
+    font-size: 1.25rem !important;
+    color: #f7dbab !important;
+    letter-spacing: 0.08em !important;
+    padding: 0.9rem 1.5rem !important;
+    border-bottom: 1px solid rgba(247, 219, 171, 0.08) !important;
+    transition: color 0.3s ease, padding-left 0.3s ease !important;
+  }
+
+  .mobile-drawer .mobile-links .mobile-link:hover,
+  .mobile-drawer .mobile-links .mobile-link.active {
+    color: #ffffff !important;
+    padding-left: 1.85rem !important;
   }
 
   .hero-section.hero-cinematic {
