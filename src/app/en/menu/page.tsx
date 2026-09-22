@@ -3,7 +3,7 @@ import { cookies } from "next/headers";
 import { Suspense } from "react";
 import ClientPage from "../../client-page";
 import { AnimatedFooter } from "../../components/animated-footer";
-import { localizeMenuData, localizeMenuDate } from "../../menu/menu-localization";
+import { localizeMenuData } from "../../menu/menu-localization";
 import { MenuExperience } from "../../menu/menu-experience";
 import { getMenuData } from "../../menu/menu-storage";
 import {
@@ -72,7 +72,7 @@ export default function EnglishMenuPage() {
 
 async function EnglishMenuContent() {
   await cookies();
-  const { categories, items, lastUpdated } = await getMenuData();
+  const { categories, items } = await getMenuData();
   const localized = localizeMenuData("en", categories, items);
 
   const menuSchema = {
@@ -142,9 +142,7 @@ async function EnglishMenuContent() {
       <ClientPage locale="en">
         <MenuExperience
           locale="en"
-          initialCategories={localized.categories}
           initialItems={localized.items}
-          initialLastUpdated={localizeMenuDate("en", lastUpdated)}
         />
         <AnimatedFooter locale="en" />
       </ClientPage>

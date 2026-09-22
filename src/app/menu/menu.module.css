@@ -651,6 +651,7 @@
 /* Individual Item (.item) */
 .menuItem {
   position: relative;
+  scroll-margin-top: 7rem;
   display: block;
   width: 100%;
   padding: 16px 14px 16px 20px;

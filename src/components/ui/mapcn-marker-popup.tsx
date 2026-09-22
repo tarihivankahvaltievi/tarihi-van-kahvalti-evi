@@ -1,6 +1,9 @@
 "use client";
 
-import maplibregl, {
+import {
+  Map as MapLibreGLMap,
+  Marker,
+  Popup,
   type Map as MapLibreMap,
   type MapOptions,
   type PopupOptions,
@@ -67,7 +70,7 @@ export const Map = forwardRef<MapRef, MapProps>(function Map(
   useEffect(() => {
     if (!containerRef.current) return;
 
-    const instance = new maplibregl.Map({
+    const instance = new MapLibreGLMap({
       container: containerRef.current,
       style: styleUrl,
       center,
@@ -140,7 +143,7 @@ export function MapMarker({
 
   useEffect(() => {
     if (!map || !element) return;
-    const instance = new maplibregl.Marker({ element, anchor: "bottom" })
+    const instance = new Marker({ element, anchor: "bottom" })
       .setLngLat([longitude, latitude])
       .addTo(map);
     return () => {
@@ -186,7 +189,7 @@ export function MarkerPopup({
 
   useEffect(() => {
     if (!map || !element || !portalElement) return;
-    const popup = new maplibregl.Popup({
+    const popup = new Popup({
       closeButton: false,
       closeOnClick: true,
       focusAfterOpen: false,

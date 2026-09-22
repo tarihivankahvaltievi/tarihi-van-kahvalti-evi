@@ -153,7 +153,7 @@ const routes = [
     restaurantMenu: `${menuPageUrl}#menu`,
     faqCount: 6,
     sharedHomeDesign: true,
-    visibleSignals: ["traditional turkish breakfast", "taksim", "van breakfast", "live menu"],
+    visibleSignals: ["traditional turkish breakfast", "taksim", "van breakfast", "view menu"],
     hreflang: homeHreflang,
   },
   {
@@ -417,6 +417,12 @@ for (const route of routes) {
   const lowerText = text.toLocaleLowerCase(
     route.language === "tr" ? "tr-TR" : route.language === "ru" ? "ru-RU" : route.language === "ar" ? "ar-SA" : route.language === "ko" ? "ko-KR" : route.language === "ja" ? "ja-JP" : "en-US",
   );
+  // Cache Components streams partially prerendered menu content in the RSC
+  // payload. It becomes visible after hydration, so include that payload when
+  // checking the two live-menu routes.
+  const searchableText = route.sharedMenuDesign
+    ? decodeHtml(html).toLocaleLowerCase(route.language === "tr" ? "tr-TR" : "en-US")
+    : lowerText;
   const routeLabel = route.path;
 
   assert(response.status === 200, `${routeLabel}: HTTP ${response.status}`);
@@ -469,13 +475,14 @@ for (const route of routes) {
       `${routeLabel}: Bing Webmaster doğrulama etiketi eksik`,
     );
   }
-  assert(route.visibleSignals.every((signal) => lowerText.includes(signal)), `${routeLabel}: hedef görünür metin eksik`);
+  assert(route.visibleSignals.every((signal) => searchableText.includes(signal)), `${routeLabel}: hedef görünür metin eksik`);
 
   if (route.sharedHomeDesign) {
     const sharedHomeClasses = [
       "site-shell theme-breakfast",
       "hero-section hero-cinematic",
-      "gallery-section",
+      'id="gallery"',
+      'id="faq"',
       "faq-section",
       "hamour-footer",
     ];
@@ -487,15 +494,22 @@ for (const route of routes) {
 
   if (route.sharedMenuDesign) {
     const sharedMenuClasses = [
-      "__menuHero",
-      "__discoveryBar",
-      "__categoryNav",
-      "__menuGrid",
-      "__menuCard",
+      "__banner",
+      "__navPills",
+      "__menuListArticle",
+      "__menuItem",
+      "__section4",
     ];
     assert(
       sharedMenuClasses.every((className) => html.includes(className)),
       `${routeLabel}: ortak menü tasarım bileşenleri eksik`,
+    );
+    const productAnchors = ["serpme-fix-menu", "van-golu-tabagi", "turk-kahvesi"];
+    assert(
+      productAnchors.every((itemId) =>
+        html.includes(`id="${itemId}"`) || html.includes(`\\"id\\":\\"${itemId}\\"`),
+      ),
+      `${routeLabel}: ürün derin bağlantı hedefleri eksik`,
     );
     const counterpart = route.language === "en" ? "/menu" : "/en/menu";
     assert(

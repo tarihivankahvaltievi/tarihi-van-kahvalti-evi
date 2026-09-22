@@ -4,9 +4,9 @@ import Image from "next/image";
 import Link from "next/link";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { X, Calendar, Phone } from "lucide-react";
+import { X } from "lucide-react";
 import styles from "./menu.module.css";
-import type { MenuCategory, MenuItem } from "./menu-data";
+import type { MenuItem } from "./menu-data";
 import type { MenuLocale } from "./menu-localization";
 
 export type HamourChapter = {
@@ -225,14 +225,11 @@ export function getItemImage(item: MenuItem, fallback: string): string {
 }
 
 interface MenuExperienceProps {
-  initialCategories: MenuCategory[];
   initialItems: MenuItem[];
-  initialLastUpdated: string;
   locale?: MenuLocale;
 }
 
 export function MenuExperience({
-  initialCategories,
   initialItems,
   locale = "tr",
 }: MenuExperienceProps) {
@@ -258,10 +255,34 @@ export function MenuExperience({
   const [activeItemId, setActiveItemId] = useState<string>("");
 
   useEffect(() => {
-    if (chapterItems.length > 0) {
-      setActiveItemId(chapterItems[0].id);
-    }
-  }, [chapterItems]);
+    const revealHashTarget = () => {
+      const targetId = decodeURIComponent(window.location.hash.slice(1));
+      if (!targetId) return;
+
+      const targetItem = initialItems.find((item) => item.id === targetId);
+      if (!targetItem) return;
+
+      const targetChapter = HAMOUR_CHAPTERS.find((chapter) =>
+        chapter.sections.some((section) => section.categories.includes(targetItem.category)),
+      );
+      if (!targetChapter) return;
+
+      setActiveChapterId(targetChapter.id);
+      setActiveItemId(targetItem.id);
+      window.requestAnimationFrame(() => {
+        window.requestAnimationFrame(() => {
+          document.getElementById(targetId)?.scrollIntoView({ block: "start" });
+        });
+      });
+    };
+
+    const frame = window.requestAnimationFrame(revealHashTarget);
+    window.addEventListener("hashchange", revealHashTarget);
+    return () => {
+      window.cancelAnimationFrame(frame);
+      window.removeEventListener("hashchange", revealHashTarget);
+    };
+  }, [initialItems]);
 
   const activeItem = useMemo(() => {
     return chapterItems.find((it) => it.id === activeItemId) || chapterItems[0] || null;
@@ -283,7 +304,7 @@ export function MenuExperience({
     : activeChapter.heroImageFallback;
 
   return (
-    <main className={styles.menuContainer}>
+    <main className={styles.menuContainer} lang={isEn ? "en" : "tr"}>
       {/* ====================================================================
           1. BANNER SECTION (.banner)
           ==================================================================== */}
@@ -458,6 +479,7 @@ export function MenuExperience({
                         return (
                           <div
                             key={item.id}
+                            id={item.id}
                             className={`${styles.menuItem} ${isCurrentActive ? styles.menuItemActive : ""}`}
                             onMouseEnter={() => setActiveItemId(item.id)}
                             onClick={() => {

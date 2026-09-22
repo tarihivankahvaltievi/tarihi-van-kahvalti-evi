@@ -6,7 +6,7 @@ export function VenueAtmosphere({ locale = "tr" }: { locale?: string }) {
   const isEn = locale === "en";
 
   return (
-    <section className={styles.section4} id="keyif-dolu-anlar">
+    <section className={styles.section4} id="gallery">
       {/* Top Anchor Notch */}
       <div className={styles.topAnchor} aria-hidden="true">
         <Image

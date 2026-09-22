@@ -13,17 +13,6 @@ export function HomeContent({ locale = "tr" }: { locale?: SiteLocale }) {
   return (
     <>
       <main id="main-content" lang={messages.documentLanguage}>
-        {/* Accessible SEO keywords */}
-        {locale === "en" ? (
-          <span className="sr-only">
-            Traditional Turkish breakfast in Taksim Beyoğlu. Authentic Van breakfast experience and live menu.
-          </span>
-        ) : (
-          <span className="sr-only">
-            Tarihi Van Kahvaltı Evi Beyoğlu Zambak Sokak Taksim geleneksel serpme kahvaltı
-          </span>
-        )}
-
         {/* Hero Section */}
         <VanHeroParallax locale={locale} />
 
@@ -39,11 +28,7 @@ export function HomeContent({ locale = "tr" }: { locale?: SiteLocale }) {
         {/* Section 4: Historic Venue & Hospitality (Hamour Section 4) */}
         <VenueAtmosphere locale={locale} />
 
-        {/* SEO Required FAQ & Gallery hooks - kept in DOM for schema & crawling without interrupting visual flow */}
-        <div className="gallery-section" style={{ display: "none" }} aria-hidden="true" />
-        <div style={{ display: "none" }} aria-hidden="true">
-          <FaqSection locale={locale} />
-        </div>
+        <FaqSection locale={locale} />
       </main>
 
       {/* Footer (Hamour Footer) */}

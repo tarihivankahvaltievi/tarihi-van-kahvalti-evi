@@ -70,7 +70,7 @@ export default function MenuPage() {
 
 async function MenuContainer() {
   await cookies(); // Force dynamic request-time execution in Next.js 16
-  const { categories, items, lastUpdated } = await getMenuData();
+  const { categories, items } = await getMenuData();
 
   const menuSchema = {
     "@type": "Menu",
@@ -136,9 +136,7 @@ async function MenuContainer() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLd(menuJsonLd) }} />
       <ClientPage>
         <MenuExperience
-          initialCategories={categories}
           initialItems={items}
-          initialLastUpdated={lastUpdated}
         />
         <AnimatedFooter locale="tr" />
       </ClientPage>

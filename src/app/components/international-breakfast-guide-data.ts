@@ -284,7 +284,7 @@ export const guides: Record<GuideLocale, GuideContent> = {
     practical: {
       title: "Plan your breakfast near Taksim",
       text:
-        "Find us at Zambak Sk. No:8 in Şehit Muhtar, Beyoğlu. We are open every day from 08:00 to 18:00. Mornings and weekends can be lively, so groups may wish to call or message ahead.",
+        "Find us at Zambak Sk. No:8 in Şehit Muhtar, Beyoğlu. We are open every day from 07:00 to 22:00. Mornings and weekends can be lively, so groups may wish to call or message ahead.",
       labels: { address: "Address", hours: "Opening hours", route: "Open in Google Maps", menu: "English menu & prices", call: "Call us" },
     },
     faq: {
@@ -295,7 +295,7 @@ export const guides: Record<GuideLocale, GuideContent> = {
         { question: "Do I need a reservation for breakfast?", answer: "Walk-ins are welcome when tables are available. For weekends, holidays and larger groups, calling or sending a WhatsApp message before your visit is recommended." },
         { question: "Can I see the menu and prices in English?", answer: "Yes. Our English menu is available online and is kept aligned with the current dishes and prices served at the restaurant." },
         { question: "Is Turkish breakfast suitable for vegetarians?", answer: "Many traditional breakfast dishes are based on cheese, vegetables, eggs, bread, honey and preserves, but some hot dishes contain meat. Please tell the team your preferences and ask about the current ingredients before ordering." },
-        { question: "What time is best for breakfast in Istanbul?", answer: "We serve from 08:00. Earlier weekday mornings are usually calmer, while late mornings and weekends have a more social atmosphere. Availability can vary, especially for groups." },
+        { question: "What time is best for breakfast in Istanbul?", answer: "We open at 07:00. Earlier weekday mornings are usually calmer, while late mornings and weekends have a more social atmosphere. Availability can vary, especially for groups." },
       ],
     },
     sources: {
@@ -394,7 +394,7 @@ export const guides: Record<GuideLocale, GuideContent> = {
     },
     practical: {
       title: "Спланируйте завтрак рядом с Таксимом",
-      text: "Мы находимся по адресу Zambak Sk. No:8, Şehit Muhtar, Beyoğlu. Открыты ежедневно с 08:00 до 18:00. По утрам и в выходные бывает оживлённо, поэтому большим компаниям лучше позвонить заранее.",
+      text: "Мы находимся по адресу Zambak Sk. No:8, Şehit Muhtar, Beyoğlu. Открыты ежедневно с 07:00 до 22:00. По утрам и в выходные бывает оживлённо, поэтому большим компаниям лучше позвонить заранее.",
       labels: { address: "Адрес", hours: "Часы работы", route: "Открыть Google Maps", menu: "Меню и цены", call: "Позвонить" },
     },
     faq: {
@@ -405,7 +405,7 @@ export const guides: Record<GuideLocale, GuideContent> = {
         { question: "Нужна ли бронь на завтрак?", answer: "Если есть свободные столики, мы принимаем гостей без брони. В выходные, праздники и для большой компании рекомендуем заранее позвонить или написать в WhatsApp." },
         { question: "Можно ли посмотреть меню и цены онлайн?", answer: "Да. Актуальное английское меню опубликовано на сайте и соответствует текущим блюдам и ценам ресторана." },
         { question: "Подойдёт ли турецкий завтрак вегетарианцам?", answer: "Многие блюда состоят из сыра, овощей, яиц, хлеба, мёда и варенья, но некоторые горячие позиции содержат мясо. Сообщите о предпочтениях и уточните состав до заказа." },
-        { question: "В какое время лучше приходить на завтрак?", answer: "Мы открываемся в 08:00. Утром в будни обычно спокойнее, а поздним утром и в выходные атмосфера оживлённее. Для групп доступность столов может меняться." },
+        { question: "В какое время лучше приходить на завтрак?", answer: "Мы открываемся в 07:00. Утром в будни обычно спокойнее, а поздним утром и в выходные атмосфера оживлённее. Для групп доступность столов может меняться." },
       ],
     },
     sources: {
@@ -499,7 +499,7 @@ export const guides: Record<GuideLocale, GuideContent> = {
     },
     practical: {
       title: "خطط لفطورك بالقرب من تقسيم",
-      text: "ستجدنا في Zambak Sk. No:8، Şehit Muhtar، Beyoğlu. نفتح يومياً من 08:00 إلى 18:00. قد تكون ساعات الصباح وعطلات نهاية الأسبوع نشطة، لذلك يُفضّل أن تتواصل المجموعات معنا مسبقاً.",
+      text: "ستجدنا في Zambak Sk. No:8، Şehit Muhtar، Beyoğlu. نفتح يومياً من 07:00 إلى 22:00. قد تكون ساعات الصباح وعطلات نهاية الأسبوع نشطة، لذلك يُفضّل أن تتواصل المجموعات معنا مسبقاً.",
       labels: { address: "العنوان", hours: "ساعات العمل", route: "افتح خرائط Google", menu: "القائمة والأسعار", call: "اتصل بنا" },
     },
     faq: {
@@ -510,7 +510,7 @@ export const guides: Record<GuideLocale, GuideContent> = {
         { question: "هل أحتاج إلى حجز للفطور؟", answer: "نستقبل الزوار من دون حجز عند توفر الطاولات. ننصح بالاتصال أو إرسال رسالة واتساب قبل الزيارة في عطلة نهاية الأسبوع والأعياد وللمجموعات الكبيرة." },
         { question: "هل يمكنني رؤية القائمة والأسعار قبل الزيارة؟", answer: "نعم. القائمة الإنجليزية متاحة على الموقع ويتم تحديثها بما يتوافق مع الأطباق والأسعار الحالية في المطعم." },
         { question: "هل الفطور التركي مناسب للنباتيين؟", answer: "تعتمد أصناف تقليدية كثيرة على الجبن والخضار والبيض والخبز والعسل والمربى، لكن بعض الأطباق الساخنة تحتوي على اللحم. أخبر الفريق بتفضيلاتك واسأل عن المكونات الحالية قبل الطلب." },
-        { question: "ما أفضل وقت للفطور في إسطنبول؟", answer: "نقدم الفطور من الساعة 08:00. تكون صباحات أيام الأسبوع المبكرة أهدأ عادة، بينما تكون الساعات المتأخرة وعطلات نهاية الأسبوع أكثر حيوية. قد يختلف توفر الطاولات للمجموعات." },
+        { question: "ما أفضل وقت للفطور في إسطنبول؟", answer: "نفتح من الساعة 07:00. تكون صباحات أيام الأسبوع المبكرة أهدأ عادة، بينما تكون الساعات المتأخرة وعطلات نهاية الأسبوع أكثر حيوية. قد يختلف توفر الطاولات للمجموعات." },
       ],
     },
     sources: {
@@ -654,7 +654,7 @@ export const guides: Record<GuideLocale, GuideContent> = {
     practical: {
       title: "탁심 근처 발 카이막 방문 정보",
       text:
-        "주소는 Zambak Sk. No:8, Şehit Muhtar, Beyoğlu입니다. 매일 08:00–18:00에 문을 엽니다. 주말 늦은 아침에는 붐빌 수 있으므로 단체 방문이라면 전화나 WhatsApp으로 미리 좌석 상황을 확인하세요.",
+        "주소는 Zambak Sk. No:8, Şehit Muhtar, Beyoğlu입니다. 매일 07:00–22:00에 문을 엽니다. 주말 늦은 아침에는 붐빌 수 있으므로 단체 방문이라면 전화나 WhatsApp으로 미리 좌석 상황을 확인하세요.",
       labels: { address: "주소", hours: "영업시간", route: "Google 지도에서 길찾기", menu: "영문 메뉴와 가격", call: "전화하기" },
     },
     faq: {
@@ -734,7 +734,7 @@ export const guides: Record<GuideLocale, GuideContent> = {
       facts: [
         { label: "현재 메뉴 구성", value: "체에 거른 꿀, 버팔로 카이막, 계절 수제 잼 2종" },
         { label: "위치", value: "Zambak Sk. No:8, Şehit Muhtar, Beyoğlu, İstanbul" },
-        { label: "영업시간", value: "매일 08:00–18:00" },
+        { label: "영업시간", value: "매일 07:00–22:00" },
         { label: "여행 동선", value: "탁심 광장·이스티클랄 거리·지한기르에서 도보 이동 가능" },
       ],
       comparison: {
@@ -847,7 +847,7 @@ export const guides: Record<GuideLocale, GuideContent> = {
     practical: {
       title: "タクシム近くの店舗・アクセス情報",
       text:
-        "住所はZambak Sk. No:8, Şehit Muhtar, Beyoğluです。毎日08:00〜18:00に営業しています。週末の遅い朝は混み合うことがあるため、グループの場合は電話またはWhatsAppで事前に席の状況をご確認ください。",
+        "住所はZambak Sk. No:8, Şehit Muhtar, Beyoğluです。毎日07:00〜22:00に営業しています。週末の遅い朝は混み合うことがあるため、グループの場合は電話またはWhatsAppで事前に席の状況をご確認ください。",
       labels: { address: "住所", hours: "営業時間", route: "Googleマップで経路を見る", menu: "英語メニューと価格", call: "電話する" },
     },
     faq: {
@@ -859,7 +859,7 @@ export const guides: Record<GuideLocale, GuideContent> = {
         { question: "バル・カイマクだけを注文できますか？", answer: "メニュー構成と提供状況は当日の仕込みにより変わります。来店前にオンラインメニューをご確認いただくか、店舗へお問い合わせください。ヴァン式の共有朝食と一緒に味わうと、さまざまな組み合わせを楽しめます。" },
         { question: "予約は必要ですか？", answer: "空席があれば予約なしでもご案内できます。週末、祝日、大人数での来店は、電話またはWhatsAppで事前に席の状況を確認することをおすすめします。" },
         { question: "アレルギーがある場合はどうすればよいですか？", answer: "カイマクは乳製品です。朝食には卵、小麦、ナッツ類などのアレルゲンが含まれる場合があります。注文前にスタッフへ伝え、当日の材料と交差接触の可能性をご確認ください。" },
-        { question: "営業時間と朝食を食べられる時間は？", answer: "毎日08:00〜18:00に営業し、営業時間中は朝食メニューを提供しています。祝日などの特別営業時間は変更される場合があるため、来店前に店舗へご確認ください。" },
+        { question: "営業時間と朝食を食べられる時間は？", answer: "毎日07:00〜22:00に営業し、営業時間中は朝食メニューを提供しています。祝日などの特別営業時間は変更される場合があるため、来店前に店舗へご確認ください。" },
         { question: "来店前にメニューと価格を確認できますか？", answer: "はい。ページ内の英語メニューから、現在の料理と価格を確認できます。季節の商品や当日の提供状況は変わる場合があります。" },
         { question: "ベジタリアンでもヴァン朝食を楽しめますか？", answer: "チーズ、野菜、卵、パン、蜂蜜、カイマク、ジャムなど肉を使わない料理が多くあります。一方、スジュクやカヴルマ入りの料理もあるため、注文時に希望を伝え、当日の材料をご確認ください。" },
       ],
@@ -919,7 +919,7 @@ export const guides: Record<GuideLocale, GuideContent> = {
       facts: [
         { label: "現在のメニュー内容", value: "濾した蜂蜜、水牛のカイマク、季節の自家製ジャム2種" },
         { label: "住所", value: "Zambak Sk. No:8, Şehit Muhtar, Beyoğlu, İstanbul" },
-        { label: "営業時間", value: "毎日 08:00〜18:00" },
+        { label: "営業時間", value: "毎日 07:00〜22:00" },
         { label: "周辺エリア", value: "タクシム広場、イスティクラル通り、ジハンギルから徒歩圏内" },
       ],
       comparison: {

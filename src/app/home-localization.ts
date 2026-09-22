@@ -122,7 +122,7 @@ export const homeMessages = {
       tableAlt: "Kahvaltı sofrasında peynir, reçel ve tahin tabaklarını uzatan eller",
       memoryAlt: "Mekândaki oymalı çerçeveli ayna ve aynaya yansıyan tuğla duvar",
       principles: [
-        ["Beyoğlu Zambak Sokak", "Taksim Meydanı ve İstiklal Caddesi'ne 2 dakika yürüme mesafesinde, tarihi Rum binasındayız."],
+        ["Beyoğlu Zambak Sokak", "Taksim Meydanı ve İstiklal Caddesi'nden yürüyerek ulaşılabilen tarihi Rum binasındayız."],
         ["Günlük Taş Fırın & Pişi", "Her sabah fırından yeni çıkan sıcak pişiler, Van ketesi ve anne usulü ev reçelleri."],
         ["Hakiki Yayla Lezzeti", "Doğu'nun yüksek yaylalarından getirilen otlu peynir, murtuğa, kavut ve Karakovan balı."],
       ],
@@ -527,7 +527,7 @@ export const homeMessages = {
       tableAlt: "Friends passing cheese, preserves and tahini across a shared Van breakfast table",
       memoryAlt: "An ornate historic mirror reflecting the restaurant's brick wall",
       principles: [
-        ["Beyoğlu Zambak Street", "2 minutes walk from Taksim Square and İstiklal Avenue, inside an authentic historic mansion."],
+        ["Beyoğlu Zambak Street", "Within walking distance of Taksim Square and İstiklal Avenue, inside an authentic historic building."],
         ["Stone Oven & Fresh Pişi", "Every morning: hot golden pişi, traditional Van kete pastry, and homemade fruit preserves."],
         ["Authentic Highland Flavors", "Pure Van herb cheese, murtuğa, roasted grain kavut, and organic Karakovan honey."],
       ],
@@ -620,7 +620,7 @@ export const homeMessages = {
       title: "Memorable Moments Await You!",
       subtitle: "Beyoğlu's enchanting historic atmosphere meets generous Van breakfast flavors.",
       description:
-        "Tarihi Van Kahvaltı Evi proudly presents the rich culinary heritage of the East in our historic 19th-century Greek mansion in Beyoğlu. High ceilings, carved antique mirrors, and the authentic vibe of Zambak Street await you for a timeless breakfast experience.",
+        "Tarihi Van Kahvaltı Evi proudly presents the rich culinary heritage of the East in our historic Greek building in Beyoğlu. High ceilings, carved antique mirrors, and the authentic atmosphere of Zambak Street await you for a timeless breakfast experience.",
       callAction: "Call Us",
       menuAction: "Explore Live Menu",
       reservationAction: "Book a Table",

@@ -158,7 +158,7 @@ export const kaymakExplainerGuide: GuideContent = {
   practical: {
     title: "이스탄불에서 발 카이막 맛보기",
     text:
-      "Tarihi Van Kahvaltı Evi는 베요글루 잠박 거리에서 매일 08:00–18:00에 운영합니다. 현재 메뉴에는 체에 거른 꿀, 버팔로 카이막, 계절 수제 잼 2종 구성이 있으며, 가격과 당일 제공 여부는 방문 전에 실시간 영문 메뉴에서 확인할 수 있습니다.",
+      "Tarihi Van Kahvaltı Evi는 베요글루 잠박 거리에서 매일 07:00–22:00에 운영합니다. 현재 메뉴에는 체에 거른 꿀, 버팔로 카이막, 계절 수제 잼 2종 구성이 있으며, 가격과 당일 제공 여부는 방문 전에 실시간 영문 메뉴에서 확인할 수 있습니다.",
     labels: { address: "주소", hours: "영업시간", route: "Google 지도에서 길찾기", menu: "현재 메뉴와 가격", call: "전화하기" },
   },
   faq: {
@@ -289,7 +289,7 @@ export const turkishBreakfastKoreanGuide: GuideContent = {
       { label: "서비스 방식", value: "전통 반 아침 식사는 최소 2인부터 공유식으로 제공" },
       { label: "대표적인 맛", value: "반 허브 치즈, 무르투아, 카부트, 발 카이막, 따뜻한 달걀 팬" },
       { label: "위치", value: "Zambak Sk. No:8, Şehit Muhtar, Beyoğlu, İstanbul" },
-      { label: "영업시간", value: "매일 08:00–18:00" },
+      { label: "영업시간", value: "매일 07:00–22:00" },
     ],
     comparison: {
       title: "일반 호텔 조식·카페 브런치·반 아침 식사",
@@ -363,7 +363,7 @@ export const turkishBreakfastKoreanGuide: GuideContent = {
   practical: {
     title: "탁심·베요글루 방문 정보",
     text:
-      "매장은 Zambak Sk. No:8, Şehit Muhtar, Beyoğlu에 있으며 매일 08:00–18:00에 운영합니다. 주말 늦은 아침과 단체 방문은 좌석 상황이 달라질 수 있으므로 전화나 WhatsApp으로 미리 확인하세요. 현재 가격은 실시간 영문 메뉴에서 확인할 수 있습니다.",
+      "매장은 Zambak Sk. No:8, Şehit Muhtar, Beyoğlu에 있으며 매일 07:00–22:00에 운영합니다. 주말 늦은 아침과 단체 방문은 좌석 상황이 달라질 수 있으므로 전화나 WhatsApp으로 미리 확인하세요. 현재 가격은 실시간 영문 메뉴에서 확인할 수 있습니다.",
     labels: { address: "주소", hours: "영업시간", route: "Google 지도에서 길찾기", menu: "영문 메뉴와 가격", call: "전화하기" },
   },
   faq: {

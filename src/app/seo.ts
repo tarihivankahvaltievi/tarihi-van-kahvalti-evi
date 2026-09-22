@@ -267,6 +267,13 @@ export function buildRestaurantJsonLd(withContext = true) {
     image: [
       {
         "@type": "ImageObject",
+        url: defaultOgImage,
+        width: 1200,
+        height: 630,
+        caption: `${siteName} serpme Van kahvaltısı`,
+      },
+      {
+        "@type": "ImageObject",
         url: `${siteUrl}/images/hero-table.jpg`,
         width: 1202,
         height: 1800,
