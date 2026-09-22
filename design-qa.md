@@ -1,49 +1,65 @@
-# Design QA — Hakkımızda → Footer yenilemesi
+# Design QA — Hamour referanslı menü sayfası
 
-## Comparison target
+## Karşılaştırma hedefi
 
-- Source visual truth: https://www.hamour.com.tr/tr/ (Codex in-app browser source capture).
-- Implementation: http://localhost:3001/ (Codex in-app browser local capture).
-- Matching review states: source menu/atmosphere/footer sequence and the implementation's signature-menu/venue/footer sequence.
-- Desktop viewport: 1440 × 960 CSS px at device scale factor 1; both browser captures were taken at this size, so no density normalization was needed.
-- Mobile viewport: 390 × 844 CSS px at device scale factor 1. The local page was measured section-by-section at 390 px with no horizontal overflow.
+- Kaynak görsel gerçekliği: `https://www.hamour.com.tr/tr/menumuz` canlı sayfası ve kullanıcı tarafından sağlanan dört mobil ekran görüntüsü.
+- Ana kaynak görüntüsü: `/tmp/tarihi-van-menu-source-top.png` (814 × 1706 px, yaklaşık 2× yoğunluk).
+- Ürün listesi kaynak görüntüsü: `/tmp/tarihi-van-menu-source-items.png` (816 × 1722 px, yaklaşık 2× yoğunluk).
+- Uygulama: `http://127.0.0.1:3000/menu`.
+- Ana uygulama görüntüsü: `/tmp/tarihi-van-menu-implementation-top.png` (390 × 844 px, 1× yoğunluk).
+- Ürün listesi uygulama görüntüsü: `/tmp/tarihi-van-menu-implementation-items.png` (390 × 844 px, 1× yoğunluk).
+- CSS görünümü: 390 × 844 px. Kaynak mobil görüntüler 2× yoğunluktan 390 × 844 karşılaştırma alanına ölçeklenip üstten hizalandı; uygulama görüntüleri doğal 1× yoğunlukta yakalandı.
+- Durumlar: mobil ilk görünüm, kategori filtresi, ürün listesi, “murtuğa” araması, ürün detay paneli ve mobil navigasyon.
 
-## Evidence
+## Tam görünüm karşılaştırma kanıtı
 
-- Full-view source and implementation captures were submitted together in the in-app browser comparison at 1440 × 960.
-- Focused comparison: source's full-bleed dark venue CTA against the local `VenueAtmosphere` section. Both use a full-width venue image, left-led display composition, supporting copy at right, and two clearly differentiated actions.
-- Focused comparison: source's menu category area against the local `SignatureShowcase`. The local version preserves the useful six-category tab interaction while replacing source artwork and copy with original site photos, menu content, and branding.
-- Footer capture: local footer was checked at 1440 × 960 after the component rebuild. It retains a single dark, image-led closing field with brand lockup, compact contacts, navigation, legal links, and back-to-top control.
+Kaynak ve uygulama ilk görünümü aynı 390 × 844 alan içinde yan yana incelendi. Her iki tasarım da koyu bordo üst navigasyon, yemek fotoğrafı liderliğinde açılış, krem içerik yüzeyi, serif başlık hiyerarşisi ve kategori geçişini koruyor. Hamour logosu, fotoğrafları ve metinleri bilinçli olarak Tarihi Van Kahvaltı Evi logosu, kendi kahvaltı fotoğrafları ve gerçek menü içeriğiyle değiştirildi.
 
-## Required fidelity surfaces
+## Odaklı bölge karşılaştırma kanıtı
 
-- Fonts and typography: passed. The existing Bodoni Moda / Literata / Commissioner stack creates the display, narrative, and utility hierarchy; headings remain balanced and do not overflow at 390 px.
-- Spacing and layout rhythm: passed. The mobile journey is a succession of single-purpose sections rather than compressed desktop cards; the desktop signature panel has a stable image/copy split.
-- Colors and visual tokens: passed. Dark wine `#402021` / `#35191a`, clay `#ad6248`, and light neutral fields are consistently used for contrast, CTA states, and section transitions.
-- Image quality and asset fidelity: passed. Only project-owned local restaurant images and the existing brand icon are used. No Hamour image, logo, icon, or artwork is hotlinked or copied.
-- Copy and content: passed. Restaurant-specific copy, routes, booking behavior, FAQs, reviews, gallery labels, legal links, and contact details remain intact.
+Ürün listesi ayrıca kullanıcı ekran görüntüsü ile uygulamanın “Kahvaltı” filtresi yan yana karşılaştırıldı. Kaynaktaki küçük ürün görseli + başlık + açıklama ritmi, uygulamada gerçek ürün fotoğrafı bulunan her satıra kompakt görsel eklenerek yaklaştırıldı. Görseli bulunmayan ürünlerde boş yer tutucu kullanılmadı; okunaklı metin satırı korundu.
 
-## Interaction and responsive checks
+## Gerekli doğruluk yüzeyleri
 
-- Category tab changed from “Serpme Van Sofrası” to “Bakır Sahan & Sıcaklar”; `aria-selected` updated correctly.
-- First FAQ item opened successfully.
-- Gallery lightbox opened and closed successfully.
-- “Masa Ayırt” successfully reached `/rezervasyon`.
-- Desktop and mobile browser captures were inspected; no console errors were observed. Existing image-quality configuration was updated to include the app's 78 and 84 quality values.
+- Yazı ve tipografi: geçti. NOCTADO gösterim fontu kaynak sayfanın zarif serif karakterini karşılıyor; Causten gövde metni, fiyat ve kontrol etiketlerinde okunaklı. Başlıklar 390 px genişlikte taşmıyor.
+- Boşluk ve düzen ritmi: geçti. Büyük fotoğraflı açılış, yatay kategori şeridi, krem menü yüzeyi, bölüm ayırımları ve kapanış görseli aynı editoryal ritmi sürdürüyor. 420 px altındaki ürün görseli/başlık çakışması düzeltildi.
+- Renkler ve görsel belirteçler: geçti. Bordo, sıcak krem, altın ve koyu kahverengi palet kaynak yapıya sadık; aktif kategori, fiyat ve ana eylemler yeterli kontrasta sahip.
+- Görsel kalite ve varlık doğruluğu: geçti. Logo ve yemek fotoğrafları proje içindeki Tarihi Van Kahvaltı Evi varlıklarından geliyor; Hamour varlıkları son kullanıcı sayfasında kullanılmıyor ve dış kaynağa hotlink yapılmıyor. 70 ürün yerel görselle gösteriliyor, diğerleri metin tabanlı kalıyor.
+- Metin ve içerik: geçti. 18 gerçek kategori, 142 gerçek ürün, güncel fiyatlar, ürün açıklamaları, alerjen/tedarik notları ve Türkçe/İngilizce rota içeriği korunuyor.
 
-## Findings
+## Etkileşim ve tarayıcı doğrulaması
 
-No actionable P0, P1, or P2 mismatches remain. The deliberate difference from the reference is brand ownership: local imagery, copy, navigation, and conversion paths replace Hamour-specific assets and content.
+- “Kahvaltı” filtresi 27 ürünü doğru gösterdi.
+- “murtuğa” araması iki doğru sonuç döndürdü ve temizleme kontrolü çalıştı.
+- Ürün ayrıntı paneli mobilde açıldı, içerik ve fotoğraf doğru yüklendi, `Escape` ile kapandı.
+- Mobil navigasyon açılıp kapandı; rota ve WhatsApp rezervasyon bağlantıları görünür kaldı.
+- 390 × 844 ve 1440 × 960 görünümleri tarayıcıda incelendi.
+- Son tarayıcı konsolu kontrolünde hata bulunmadı.
+- `npm run lint` ve `npm run build` başarılı.
 
-## Implementation checklist
+## Karşılaştırma geçmişi
 
-- [x] Rebuilt Hakkımızda, atmosphere, signature menu, venue CTA, gallery treatment, guest reviews, FAQ, and footer.
-- [x] Retained keyboard-accessible tabs, details/summary FAQs, gallery dialog, routes, and reservation action.
-- [x] Checked mobile layout and reduced-motion fallbacks.
-- [x] Ran `npm run lint` and `npm run build`.
+1. İlk odaklı karşılaştırmada yalnızca bölümün ilk ürünü görselle gösteriliyordu. Bu, kaynak ritmine ve “kendi fotoğraflarımızı kullan” hedefine göre P2 olarak değerlendirildi.
+2. Gerçek yerel fotoğrafı olan tüm ürünler için 68–72 px kompakt görsel satırı eklendi; bölümün ilk ürünü 102–146 px öne çıkan görsel olarak korundu.
+3. İlk düzeltme sonrası 390 px görünümde normal ürün görseli 102 px'e çıkıp metin sütunuyla çakışıyordu. 420 px medya kuralı ayrıştırıldı; normal görsel 68 px, öne çıkan görsel 102 px yapıldı.
+4. Son görüntü `/tmp/tarihi-van-menu-implementation-items.png` üzerinde başlık, fiyat, açıklama ve görsellerin çakışmadan hizalandığı doğrulandı.
 
-## Follow-up polish
+## Bulgular
 
-- [P3] If desired after launch, replace the legacy header/hero in a separate pass so its visual system receives the same simplification as the Hakkımızda-to-footer journey.
+Eyleme dönük P0, P1 veya P2 bulgusu kalmadı. Kaynaktan kalan farklar marka sahipliği ve içerik gereği bilinçli: Hamour’a ait logo, ürün adları, fotoğraflar ve metinler kullanılmadı.
+
+## Uygulama kontrol listesi
+
+- [x] Kaynak sayfa masaüstü ve mobilde incelendi
+- [x] Tarihi Van logo, fotoğraf ve ürün verileri kullanıldı
+- [x] Kategori filtreleri, arama ve ürün detayı çalışıyor
+- [x] Mobil ve masaüstü düzen doğrulandı
+- [x] Ürün fotoğraflı satırlar ve metin-only geri dönüşü doğrulandı
+- [x] Mobil navigasyon ve klavye kapatma davranışı doğrulandı
+- [x] Lint, TypeScript ve üretim derlemesi geçti
+
+## Takip cilası
+
+Bloklayıcı olmayan P3 bulgusu kalmadı.
 
 final result: passed

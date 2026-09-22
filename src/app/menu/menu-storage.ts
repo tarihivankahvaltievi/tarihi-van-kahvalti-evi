@@ -152,7 +152,7 @@ export async function getMenuData(): Promise<MenuData> {
       return bundledData ? mergeBundledImages(data, bundledData) : data;
     }
     if (data) {
-      console.error("Supabase menu data is incomplete; using bundled menu data instead.");
+      console.info("Supabase menu data is incomplete; using bundled menu data instead.");
     }
   }
 
