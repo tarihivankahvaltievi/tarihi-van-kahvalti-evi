@@ -2,55 +2,71 @@
    from the retired parallax experiments still used elsewhere in the cascade. */
 
 .header-wrapper {
-  background: #3a0d10;
-  border-bottom-color: rgba(226, 191, 125, 0.2);
-  box-shadow: none;
+  background: #3a0d10 !important;
+  border-bottom: 1px solid rgba(226, 191, 125, 0.2) !important;
+  box-shadow: none !important;
+  height: 70px !important;
 }
 
 .header-wrapper.is-scrolled {
-  background: rgba(47, 9, 12, 0.97);
-  border-bottom-color: rgba(226, 191, 125, 0.28);
-  box-shadow: 0 6px 16px rgba(20, 4, 6, 0.18);
+  background: rgba(47, 9, 12, 0.98) !important;
+  border-bottom-color: rgba(226, 191, 125, 0.28) !important;
+  box-shadow: 0 6px 16px rgba(20, 4, 6, 0.18) !important;
 }
 
 .glass-nav {
-  height: 68px;
+  height: 70px !important;
 }
 
 .nav-container {
   max-width: 1280px;
+  height: 70px !important;
   padding-inline: clamp(1.25rem, 3vw, 2.5rem);
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
 }
 
 .nav-logo {
-  gap: 0.68rem;
+  display: flex !important;
+  align-items: center !important;
+  gap: 0.75rem !important;
+  text-decoration: none !important;
 }
 
 .nav-logo-emblem {
-  width: 31px;
-  height: 40px;
+  width: 34px !important;
+  height: 44px !important;
+  flex-shrink: 0 !important;
 }
 
 .nav-logo-provenance {
-  margin-bottom: 1px;
-  color: #d9b56f;
-  font-size: 0.52rem;
-  font-weight: 650;
-  letter-spacing: 0.22em;
+  margin-bottom: 2px !important;
+  color: #e2bf7d !important;
+  font-family: "Causten", sans-serif !important;
+  font-size: 0.58rem !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.22em !important;
+  text-transform: uppercase !important;
 }
 
 .nav-logo-main {
-  color: #fffaf1;
-  font-size: 1.08rem;
-  font-weight: 590;
-  letter-spacing: 0.075em;
+  color: #fffaf1 !important;
+  font-family: "NOCTADO", Georgia, serif !important;
+  font-size: 1.25rem !important;
+  font-weight: 400 !important;
+  letter-spacing: 0.08em !important;
+  line-height: 1.1 !important;
 }
 
 .nav-logo-sub {
-  margin-top: 1px;
-  color: rgba(232, 201, 141, 0.9);
-  font-size: 0.56rem;
-  letter-spacing: 0.235em;
+  margin-top: 2px !important;
+  color: #e2bf7d !important;
+  font-family: "Causten", sans-serif !important;
+  font-size: 0.62rem !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.24em !important;
+  text-transform: uppercase !important;
 }
 
 .header-wrapper .nav-links {
@@ -59,10 +75,11 @@
 
 .header-wrapper .nav-links .nav-link,
 .header-wrapper .nav-links a {
-  color: rgba(255, 250, 241, 0.78) !important;
-  font-size: 0.73rem !important;
-  font-weight: 560 !important;
-  letter-spacing: 0.065em !important;
+  color: rgba(255, 250, 241, 0.85) !important;
+  font-family: "Causten", sans-serif !important;
+  font-size: 0.78rem !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.08em !important;
 }
 
 .header-wrapper .nav-links .nav-link:after,
@@ -76,13 +93,19 @@
 }
 
 .header-wrapper .nav-language {
-  min-width: 36px;
-  min-height: 34px;
-  padding: 0 8px;
-  border-color: rgba(226, 191, 125, 0.38);
-  border-radius: 4px;
-  background: transparent;
-  color: #e2bf7d;
+  min-width: auto !important;
+  min-height: auto !important;
+  padding: 0 !important;
+  border: none !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  color: #e3c07d !important;
+  font-family: "Causten", sans-serif !important;
+  font-size: 0.95rem !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.08em !important;
+  text-decoration: none !important;
+  box-shadow: none !important;
 }
 
 .hero-section.hero-cinematic {
@@ -308,97 +331,142 @@
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 992px) {
   .header-wrapper,
   .header-wrapper.is-scrolled {
     background: #3a0d10 !important;
-    box-shadow: none;
+    border-bottom: 1px solid rgba(226, 191, 125, 0.15) !important;
+    box-shadow: none !important;
+    height: 70px !important;
   }
 
   .glass-nav {
-    height: 64px;
+    height: 70px !important;
   }
 
   .nav-container {
-    padding-inline: 1rem;
+    height: 70px !important;
+    padding-inline: 1rem !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
   }
 
   .nav-logo {
-    gap: 0.55rem;
+    display: flex !important;
+    align-items: center !important;
+    gap: 0.65rem !important;
+    text-decoration: none !important;
   }
 
   .nav-logo-emblem {
-    width: 27px;
-    height: 35px;
+    width: 32px !important;
+    height: 42px !important;
+    flex-shrink: 0 !important;
   }
 
   .nav-logo-provenance {
-    font-size: 0.46rem;
-    letter-spacing: 0.19em;
+    margin-bottom: 2px !important;
+    color: #e2bf7d !important;
+    font-family: "Causten", sans-serif !important;
+    font-size: 0.52rem !important;
+    font-weight: 700 !important;
+    letter-spacing: 0.2em !important;
+    text-transform: uppercase !important;
   }
 
   .nav-logo-main {
-    font-size: 0.96rem;
-    letter-spacing: 0.065em;
+    color: #fffaf1 !important;
+    font-family: "NOCTADO", Georgia, serif !important;
+    font-size: 1.15rem !important;
+    font-weight: 400 !important;
+    letter-spacing: 0.075em !important;
+    line-height: 1.08 !important;
   }
 
   .nav-logo-sub {
-    font-size: 0.49rem;
-    letter-spacing: 0.2em;
+    margin-top: 2px !important;
+    color: #e2bf7d !important;
+    font-family: "Causten", sans-serif !important;
+    font-size: 0.54rem !important;
+    font-weight: 600 !important;
+    letter-spacing: 0.22em !important;
+    text-transform: uppercase !important;
   }
 
   .nav-actions-mobile {
-    gap: 0.38rem;
+    display: flex !important;
+    align-items: center !important;
+    gap: 19px !important;
   }
 
   .header-wrapper .nav-language,
   .theme-breakfast .nav-language {
-    min-width: 38px !important;
-    min-height: 40px !important;
-    flex-basis: 38px !important;
+    min-width: auto !important;
+    min-height: auto !important;
+    flex-basis: auto !important;
     padding: 0 !important;
     border: 0 !important;
     border-radius: 0 !important;
     background: transparent !important;
-    color: #e2bf7d !important;
-    font-size: 0.68rem;
-    font-weight: 650;
+    color: #e3c07d !important;
+    font-family: "Causten", sans-serif !important;
+    font-size: 0.95rem !important;
+    font-weight: 700 !important;
+    letter-spacing: 0.08em !important;
+    text-decoration: none !important;
+    box-shadow: none !important;
   }
 
   .mobile-toggle {
-    display: flex;
-    width: 40px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    align-items: center !important;
+    width: 44px !important;
     height: 40px !important;
-    flex: 0 0 40px;
-    gap: 4px;
-    padding: 8px !important;
-    border: 1px solid rgba(226, 191, 125, 0.44) !important;
-    border-radius: 5px !important;
+    flex: 0 0 44px !important;
+    gap: 5px !important;
+    padding: 0 !important;
+    border: 1.5px solid #855c40 !important;
+    border-radius: 8px !important;
     background: transparent !important;
+    box-shadow: none !important;
+    cursor: pointer !important;
   }
 
   .mobile-toggle .toggle-bar {
     width: 20px !important;
-    height: 1px;
-    border-radius: 0;
-    background: #f8e7c8 !important;
+    height: 1.5px !important;
+    border-radius: 1px !important;
+    background: #f8e7c9 !important;
+    margin: 0 !important;
+    transition: transform 0.25s ease, opacity 0.25s ease !important;
   }
 
   .mobile-toggle .mid-bar {
     width: 15px !important;
-    align-self: flex-end;
+    align-self: flex-end !important;
+    margin-right: 12px !important;
   }
 
   .mobile-toggle.open .top-bar {
-    transform: translateY(5px) rotate(45deg);
+    transform: translateY(6.5px) rotate(45deg) !important;
+  }
+
+  .mobile-toggle.open .mid-bar {
+    opacity: 0 !important;
+    transform: scaleX(0) !important;
   }
 
   .mobile-toggle.open .bot-bar {
-    transform: translateY(-5px) rotate(-45deg);
+    transform: translateY(-6.5px) rotate(-45deg) !important;
   }
 
   .mobile-drawer {
-    top: 64px;
+    top: 70px !important;
+    background: #350e12 !important;
+    border-bottom: 1px solid rgba(226, 191, 125, 0.2) !important;
   }
 
   .hero-section.hero-cinematic {
