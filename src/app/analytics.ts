@@ -15,6 +15,12 @@ declare global {
 const googleAdsConversionId = process.env.NEXT_PUBLIC_GOOGLE_ADS_ID ?? "AW-17869229892";
 const bookingConversionLabel =
   process.env.NEXT_PUBLIC_GOOGLE_ADS_BOOKING_CONVERSION_LABEL ?? "1soqCKS9uu0cEMSe28hC";
+const phoneConversionLabel =
+  process.env.NEXT_PUBLIC_GOOGLE_ADS_PHONE_CONVERSION_LABEL ?? bookingConversionLabel;
+const directionsConversionLabel =
+  process.env.NEXT_PUBLIC_GOOGLE_ADS_DIRECTIONS_CONVERSION_LABEL ?? bookingConversionLabel;
+const whatsappConversionLabel =
+  process.env.NEXT_PUBLIC_GOOGLE_ADS_WHATSAPP_CONVERSION_LABEL ?? bookingConversionLabel;
 
 function getGtag(): (...args: unknown[]) => void {
   if (typeof window === "undefined") return () => {};
@@ -56,7 +62,7 @@ export function trackEvent(name: string, parameters: AnalyticsParameters = {}) {
 
     if (method === "phone" || method === "call") {
       sendEvent("conversion", {
-        send_to: googleAdsConversionId,
+        send_to: `${googleAdsConversionId}/${phoneConversionLabel}`,
         event_category: "phone_call",
         event_label: surface,
         value: 1.0,
@@ -65,7 +71,7 @@ export function trackEvent(name: string, parameters: AnalyticsParameters = {}) {
       });
     } else if (method === "directions" || method === "maps") {
       sendEvent("conversion", {
-        send_to: googleAdsConversionId,
+        send_to: `${googleAdsConversionId}/${directionsConversionLabel}`,
         event_category: "directions",
         event_label: surface,
         value: 1.0,
@@ -74,7 +80,7 @@ export function trackEvent(name: string, parameters: AnalyticsParameters = {}) {
       });
     } else if (method === "whatsapp") {
       sendEvent("conversion", {
-        send_to: googleAdsConversionId,
+        send_to: `${googleAdsConversionId}/${whatsappConversionLabel}`,
         event_category: "whatsapp",
         event_label: surface,
         value: 1.0,
