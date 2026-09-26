@@ -15,12 +15,14 @@ declare global {
 const googleAdsConversionId = process.env.NEXT_PUBLIC_GOOGLE_ADS_ID ?? "AW-17869229892";
 const bookingConversionLabel =
   process.env.NEXT_PUBLIC_GOOGLE_ADS_BOOKING_CONVERSION_LABEL ?? "1soqCKS9uu0cEMSe28hC";
+// Each contact action has its own secondary Google Ads conversion. Never reuse
+// the booking label, even if a deployment environment is misconfigured.
 const phoneConversionLabel =
-  process.env.NEXT_PUBLIC_GOOGLE_ADS_PHONE_CONVERSION_LABEL ?? bookingConversionLabel;
+  process.env.NEXT_PUBLIC_GOOGLE_ADS_PHONE_CONVERSION_LABEL ?? "ijbVCO2b3oYdEMSe28hC";
 const directionsConversionLabel =
-  process.env.NEXT_PUBLIC_GOOGLE_ADS_DIRECTIONS_CONVERSION_LABEL ?? bookingConversionLabel;
+  process.env.NEXT_PUBLIC_GOOGLE_ADS_DIRECTIONS_CONVERSION_LABEL ?? "liadCPOb3oYdEMSe28hC";
 const whatsappConversionLabel =
-  process.env.NEXT_PUBLIC_GOOGLE_ADS_WHATSAPP_CONVERSION_LABEL ?? bookingConversionLabel;
+  process.env.NEXT_PUBLIC_GOOGLE_ADS_WHATSAPP_CONVERSION_LABEL ?? "z-PkCPCb3oYdEMSe28hC";
 
 function getGtag(): (...args: unknown[]) => void {
   if (typeof window === "undefined") return () => {};
@@ -60,7 +62,7 @@ export function trackEvent(name: string, parameters: AnalyticsParameters = {}) {
       transport_type: "beacon",
     });
 
-    if (method === "phone" || method === "call") {
+    if ((method === "phone" || method === "call") && phoneConversionLabel !== bookingConversionLabel) {
       sendEvent("conversion", {
         send_to: `${googleAdsConversionId}/${phoneConversionLabel}`,
         event_category: "phone_call",
@@ -69,7 +71,7 @@ export function trackEvent(name: string, parameters: AnalyticsParameters = {}) {
         currency: "TRY",
         transport_type: "beacon",
       });
-    } else if (method === "directions" || method === "maps") {
+    } else if ((method === "directions" || method === "maps") && directionsConversionLabel !== bookingConversionLabel) {
       sendEvent("conversion", {
         send_to: `${googleAdsConversionId}/${directionsConversionLabel}`,
         event_category: "directions",
@@ -78,7 +80,7 @@ export function trackEvent(name: string, parameters: AnalyticsParameters = {}) {
         currency: "TRY",
         transport_type: "beacon",
       });
-    } else if (method === "whatsapp") {
+    } else if (method === "whatsapp" && whatsappConversionLabel !== bookingConversionLabel) {
       sendEvent("conversion", {
         send_to: `${googleAdsConversionId}/${whatsappConversionLabel}`,
         event_category: "whatsapp",
@@ -110,15 +112,6 @@ export function trackBookingLead(parameters: AnalyticsParameters = {}) {
       transport_type: "beacon",
     });
   }
-
-  // Also send fallback conversion to parent tag ID
-  sendEvent("conversion", {
-    send_to: googleAdsConversionId,
-    event_category: "reservation_lead",
-    value: 1.0,
-    currency: "TRY",
-    transport_type: "beacon",
-  });
 }
 
 /**
@@ -131,12 +124,13 @@ export function AnalyticsAutoTracker() {
       if (!target) return;
 
       const href = target.getAttribute("href") || "";
+      const surface = target.dataset.analyticsSurface;
       if (href.startsWith("tel:")) {
-        trackEvent("contact_click", { contact_method: "phone", surface: "tel_link" });
+        trackEvent("contact_click", { contact_method: "phone", surface: surface || "tel_link" });
       } else if (href.includes("google.com/maps") || href.includes("maps.google.com") || href.includes("goo.gl/maps")) {
-        trackEvent("contact_click", { contact_method: "directions", surface: "map_link" });
+        trackEvent("contact_click", { contact_method: "directions", surface: surface || "map_link" });
       } else if (href.includes("wa.me") || href.includes("whatsapp.com")) {
-        trackEvent("contact_click", { contact_method: "whatsapp", surface: "whatsapp_link" });
+        trackEvent("contact_click", { contact_method: "whatsapp", surface: surface || "whatsapp_link" });
       }
     };
 

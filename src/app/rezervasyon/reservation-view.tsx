@@ -30,6 +30,7 @@ interface ReservationViewProps {
 
 interface SubmittedBooking {
   id: string;
+  saved: boolean;
   customerName: string;
   customerPhone: string;
   date: string;
@@ -198,12 +199,14 @@ export function ReservationView({
       console.error("Booking submission error:", err);
     }
 
-    // Always track primary Google Ads conversion & GA4 lead event
-    trackBookingLead({
-      locale,
-      service_type: serviceType,
-      reservation_id: createdId,
-    });
+    // A WhatsApp handoff alone does not prove that the request was saved.
+    if (createdId) {
+      trackBookingLead({
+        locale,
+        service_type: serviceType,
+        reservation_id: createdId,
+      });
+    }
 
     trackEvent("booking_whatsapp_handoff", {
       locale,
@@ -211,34 +214,25 @@ export function ReservationView({
       reservation_saved: Boolean(createdId),
     });
 
-    // Guaranteed booking code and dynamic calendar URL even if network/db has delays
+    // Keep a reference for WhatsApp even if the request could not be saved.
     const bookingCode =
       createdId ||
       `van-${(date || "").replace(/-/g, "") || Date.now()}-${Math.random().toString(36).substring(2, 8)}`;
 
-    const queryParams = new URLSearchParams({
-      name: customerName,
-      phone: customerPhone,
-      date,
-      time,
-      guests: String(guests),
-      service: serviceType,
-      area: seatingArea,
-      ...(isEnglish ? { lang: "en", locale: "en" } : {}),
-      ...(note ? { note } : {}),
-    });
+    const calendarTargetUrl = createdId
+      ? calendarPageUrl || `${siteUrl}${isEnglish ? "/en" : ""}/rezervasyon/takvim/${createdId}`
+      : "";
 
-    const calendarTargetUrl =
-      calendarPageUrl || `${siteUrl}${isEnglish ? "/en" : ""}/rezervasyon/takvim/${bookingCode}?${queryParams.toString()}`;
-
-    const calendarLine = isEnglish
-      ? `\n\n📅 Add to iPhone / Calendar:\n${calendarTargetUrl}`
-      : `\n\n📅 iPhone / Takvime Ekle:\n${calendarTargetUrl}`;
+    const calendarLine = calendarTargetUrl
+      ? isEnglish
+        ? `\n\n📅 Add to iPhone / Calendar:\n${calendarTargetUrl}`
+        : `\n\n📅 iPhone / Takvime Ekle:\n${calendarTargetUrl}`
+      : "";
 
     const message = isEnglish
       ? `Hello, I'd like to book a table at Tarihi Van Kahvaltı Evi:
 
-📋 Booking Code: #${bookingCode}
+📋 Request Reference: #${bookingCode}
 👤 Name: ${customerName}
 📞 Phone: ${customerPhone}
 📅 Date: ${formattedDate}
@@ -251,7 +245,7 @@ export function ReservationView({
 Could you please confirm table availability? Thank you.`
       : `Merhaba, Tarihi Van Kahvaltı Evi için masa rezervasyonu talebi:
 
-📋 Rezervasyon Kodu: #${bookingCode}
+📋 Talep Referansı: #${bookingCode}
 👤 Ad Soyad: ${customerName}
 📞 Telefon: ${customerPhone}
 📅 Tarih: ${formattedDate}
@@ -274,12 +268,11 @@ Müsaitlik durumunu teyit edebilir misiniz? Teşekkürler.`;
       }, 250);
     }
 
-    const finalIcsUrl =
-      icsDownloadUrl ||
-      `/api/reservations/${bookingCode}/ics?${queryParams.toString()}`;
+    const finalIcsUrl = createdId ? icsDownloadUrl || `/api/reservations/${createdId}/ics` : "";
 
     setSubmittedData({
       id: bookingCode,
+      saved: Boolean(createdId),
       customerName,
       customerPhone,
       date: formattedDate,
@@ -380,18 +373,22 @@ Müsaitlik durumunu teyit edebilir misiniz? Teşekkürler.`;
               </div>
 
               <h2 className={styles.successHeading}>
-                {isEnglish ? "Request Sent on WhatsApp" : "Talebiniz WhatsApp ile İletildi"}
+                {isEnglish ? "Send your request on WhatsApp" : "Talebinizi WhatsApp'ta gönderin"}
               </h2>
 
               <p className={styles.successText}>
-                {isEnglish
-                  ? "Your reservation has been submitted. You can quickly add this table booking to your personal calendar below:"
-                  : "Rezervasyon talebiniz iletildi. Unutmamak için randevuyu telefon takviminize tek tıkla kaydedebilirsiniz:"}
+                {submittedData.saved
+                  ? isEnglish
+                    ? "Your request was saved. Send the WhatsApp message and wait for the restaurant to confirm your table."
+                    : "Talebiniz kaydedildi. WhatsApp mesajını gönderin ve masa için işletmenin teyidini bekleyin."
+                  : isEnglish
+                    ? "The request could not be saved automatically. Send the WhatsApp message to reach the restaurant, then wait for confirmation."
+                    : "Talep otomatik kaydedilemedi. İşletmeye ulaşmak için WhatsApp mesajını gönderin ve teyit bekleyin."}
               </p>
 
               <dl className={styles.summaryBox}>
                 <div className={styles.summaryRow}>
-                  <dt>{isEnglish ? "Code" : "Kod"}</dt>
+                  <dt>{isEnglish ? "Reference" : "Referans"}</dt>
                   <dd>#{submittedData.id}</dd>
                 </div>
                 <div className={styles.summaryRow}>
@@ -732,7 +729,7 @@ Müsaitlik durumunu teyit edebilir misiniz? Teşekkürler.`;
         <a
           href={telUrl}
           className={styles.infoPill}
-          onClick={() => trackEvent("contact_click", { contact_method: "phone", surface: "reservation_page" })}
+          data-analytics-surface="reservation_page"
         >
           <Phone size={13} />
           <span>{displayPhone}</span>
@@ -742,7 +739,7 @@ Müsaitlik durumunu teyit edebilir misiniz? Teşekkürler.`;
           target="_blank"
           rel="noopener noreferrer"
           className={styles.infoPill}
-          onClick={() => trackEvent("contact_click", { contact_method: "directions", surface: "reservation_page" })}
+          data-analytics-surface="reservation_page"
         >
           <MapPin size={13} />
           <span>{displayAddress}</span>

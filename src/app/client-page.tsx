@@ -12,7 +12,6 @@ import {
 import { MessageCircle } from "lucide-react";
 import { whatsappUrl } from "./seo";
 import { messagesFor, type SiteLocale } from "./home-localization";
-import { trackEvent } from "./analytics";
 
 export default function ClientPage({ children, locale = "tr" }: { children: ReactNode; locale?: SiteLocale }) {
   const messages = messagesFor(locale);
@@ -382,9 +381,9 @@ export default function ClientPage({ children, locale = "tr" }: { children: Reac
                   target="_blank"
                   rel="noopener noreferrer"
                   className="mobile-drawer-whatsapp-btn"
+                  data-analytics-surface="mobile_drawer"
                   onClick={() => {
                     setMenuOpen(false);
-                    trackEvent("contact_click", { contact_method: "whatsapp", surface: "mobile_drawer" });
                   }}
                 >
                   <MessageCircle size={16} />
