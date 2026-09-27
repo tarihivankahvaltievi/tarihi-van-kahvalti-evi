@@ -1,6 +1,6 @@
 # SEO ve GEO operasyon planı
 
-Son teknik revizyon: 27 Eylül 2026 · Son dış kaynak/NAP denetimi: 21 Temmuz 2026
+Son teknik revizyon: 27 Eylül 2026 · Son dış kaynak/NAP denetimi: 27 Eylül 2026
 
 Bu belge, `van kahvaltıcısı`, `Beyoğlu kahvaltı`, `Taksim kahvaltı`, `Turkish breakfast near Taksim` ve ilgili yerel niyetli aramalarda organik görünürlüğü artırmak için teknik durum ile işletme hesabı gerektiren işleri birlikte izler. Google'da veya başka bir arama motorunda birinci sıra garanti edilemez. Google'ın açıkladığı yerel sonuç bileşenleri alaka düzeyi, mesafe ve bilinirliktir; teknik iyileştirmeler erişimi ve anlaşılabilirliği güçlendirir, kullanıcının konumunu veya rekabeti ortadan kaldırmaz.
 
@@ -14,6 +14,7 @@ Bu belge, `van kahvaltıcısı`, `Beyoğlu kahvaltı`, `Taksim kahvaltı`, `Turk
 - `/en`, `Content-Language: en` başlığı, İngilizce metadata, tek H1, görünür ziyaretçi rehberi, Van kahvaltısı sözlüğü, SSS ve doğrulanabilir işletme bilgileriyle gerçek bir yerelleştirilmiş sayfadır; yalnızca otomatik çeviri veya anahtar kelime sayfası değildir.
 - Güncel fiyatların tek kaynağı dinamik `/menu` sayfasıdır. Ana sayfadaki sabit ve güncelliğini yitirmiş `450 TL` cevabı kaldırıldı; SSS kullanıcıyı canlı menüye yönlendirir.
 - Ana sayfada `Restaurant`, `WebSite`, `WebPage` ve görünür cevaplarla eşleşen `FAQPage`; menüde `WebPage`, `BreadcrumbList` ve `Menu`; İngilizce sayfada `Restaurant`, `WebPage`, `BreadcrumbList` ve `FAQPage` grafiği bulunur.
+- `FAQPage` şeması görünür SSS ile tutarlıdır; Google, FAQ zengin sonuçlarını bilinen ve yetkili devlet/sağlık siteleriyle sınırlar. Bu restoran için arama sonucunda genişletilmiş SSS beklenmemelidir; şema sıralama garantisi veya özel GEO avantajı değildir.
 - Site genelinde tek ve kararlı işletme kimlikleri (`#restaurant`, `#website`, sayfa kimlikleri), self-canonical, özgün title/description, Open Graph ve Twitter metadata kullanılır. İngilizce FAQ şemasının dili `en` olarak düzeltilmiştir.
 - Türkçe ve İngilizce rezervasyon sayfaları karşılıklı `hreflang`, self-canonical, görünür ve şemayla birebir eşleşen rezervasyon SSS'leri, `ReserveAction`, adres/ulaşım bağlantıları, çalışma saatleri ve doğrulanmış işletme koordinatlarını taşır. Eski `/booking`, `/reservation`, `/masa-ayirt` ve dil eşdeğerleri tek adımla kanonik rezervasyon URL'lerine yönlenir.
 - Site genelindeki coğrafi meta sinyalleri `TR-34`, Beyoğlu/İstanbul ve işletme koordinatlarıyla ortak kaynaktan üretilir. `Restaurant.geo`, `PostalAddress`, Google Maps CID ve görünür adres aynı veri kaynağına bağlıdır.
@@ -57,6 +58,23 @@ Denetlenen kayıtlar:
 - Yandex Maps: https://yandex.com/maps/org/tarihi_van_kahvalt_ve_arap_evi/237523878781/
 - RenkMobil: https://renkmobil.com/kahvalti/istanbul/tarihi-van-kahvalti-evi-1978/
 - MekanRadar: https://mekanradar.com/mekan/istanbul/beyoglu/tarihi-van-kahvalti-evi-1978
+
+## 27 Eylül 2026 Google Search Central denetimi
+
+Google'ın bugün erişilebilen üretken yapay zekâ arama rehberi, GEO/AEO için ayrı teknik mekanizma olmadığını; normal SEO, taranabilir içerik, özgün faydalı bilgi ve doğru işletme profilinin temel olduğunu söylüyor. Google `llms.txt` dosyasını özel bir sinyal olarak kullanmadığını açıkça belirtiyor. Sitedeki dosya diğer sistemler için korunabilir ama Google görünürlüğü beklentisiyle genişletilmemelidir.
+
+Google ayrıca yapay zekâ yanıtlarında kullanılmak üzere sorgu varyasyonlarına göre çok sayıda benzer sayfa üretmemeyi, özgün ziyaretçi faydası sağlamayı öneriyor. Mevcut 20 kanonik sayfaya yeni semt/sorgu kapı sayfaları eklenmemeli; yeni içerik ancak gerçek bir soru veya deneyimle yanıtlandığında yayımlanmalıdır.
+
+Canlı sayfada şu işletme iddiaları görünür durumda ve dosyada birincil kanıt bağlantısı henüz yok: binanın 18. yüzyıla ait ve ikinci derece koruma statüsünde olması, ürünlerin doğrudan Van yaylalarından alınması, manda sütü kaymağı, Karakovan balı, organik yumurta ve üç kuşaktır devam eden aile işletmesi anlatısı. Bunlar doğru olabilir; fakat resmî bina kaydı, tedarik bilgisi veya işletme tarihçesi ile doğrulanıp mümkünse ilgili sayfada kaynağa bağlanmalıdır. Kanıt bulunamazsa yayın metni iddia kapsamını daraltmalıdır. Görünür içerikle yapılandırılmış verinin aynı ve doğru olması gerekir.
+
+Canlı dış dizin gözlemi adres ve saatlerde tek bir kesin sonuç vermedi: resmi site Zambak Sk. No:8, 34435 ve 07:00–22:00 gösteriyor; bazı üçüncü taraf kayıtları 34421 veya 06:30–23:00 bildiriyor; Yandex kaydı No:10A ve saat bilinmiyor gösteriyor. 34435 mahalle düzeyindeki kaynaklarla uyumlu görünse de kesin kapı adresi, posta kodu ve vardiya saatleri işletme belgesi/Google Business Profile üzerinden teyit edilmeden kodda değiştirilmemelidir. Üçüncü taraf dizinlerden birinin kopyalanması NAP tutarlılığını çözmez.
+
+Google yönergelerinden uygulama sonuçları:
+
+- Her indekslenecek sayfada sayfaya özgü, içeriği doğru özetleyen başlık ve açıklama korunmalı. Google başlık bağlantısını ve arama açıklamasını sorguya göre yeniden yazabilir; metadata kesin gösterim garantisi değildir.
+- Yapılandırılmış veri yalnız görünür, güncel ve sayfayla ilgili bilgileri taşımalı. Google geçerli şemada dahi zengin sonuç göstermeyi garanti etmez; zengin sonuç testi ile Search Console URL Denetleme dağıtım öncesi ayrıca kullanılmalıdır.
+- Lighthouse laboratuvar puanı saha Core Web Vitals yerine geçmez. Google'ın iyi eşikleri 75. yüzdelikte LCP ≤ 2,5 sn, INP < 200 ms ve CLS < 0,1'dir; saha takibi Search Console'da 28 günlük dönemlerle yapılmalıdır.
+- Menü fiyatı ve ürün uygunluğu değişebildiği için sayfada görünür canlı menü kaynak tutulmalı; sabit SSS/şema yanıtlarına güncel fiyat yazılmamalıdır.
 
 ## Google Business Profile çalışma listesi
 
@@ -133,6 +151,11 @@ Denetlenen kayıtlar:
 - Google LocalBusiness yapılandırılmış verisi: https://developers.google.com/search/docs/appearance/structured-data/local-business
 - Google AI özellikleri ve site görünürlüğü: https://developers.google.com/search/docs/appearance/ai-features
 - Google generative AI optimizasyon rehberi: https://developers.google.com/search/docs/fundamentals/ai-optimization-guide
+- Google FAQ structured data değişikliği: https://developers.google.com/search/blog/2023/08/howto-faq-changes
+- Google yapılandırılmış veri kalite ilkeleri: https://developers.google.com/search/docs/appearance/structured-data/sd-policies
+- Google title bağlantısı ilkeleri: https://developers.google.com/search/docs/appearance/title-link
+- Google arama açıklaması ilkeleri: https://developers.google.com/search/docs/appearance/snippet
+- Google Core Web Vitals: https://developers.google.com/search/docs/appearance/core-web-vitals
 - Google yararlı içerik: https://developers.google.com/search/docs/fundamentals/creating-helpful-content
 - Google taranabilir bağlantılar: https://developers.google.com/search/docs/crawling-indexing/links-crawlable
 - Google hreflang: https://developers.google.com/search/docs/specialty/international/localized-versions
