@@ -134,34 +134,6 @@
   }
 }
 
-.bannerVector {
-  position: absolute;
-  z-index: 5;
-  left: 50%;
-  bottom: 68px;
-  transform: translateX(-50%);
-}
-
-@media (max-width: 768px) {
-  .bannerVector {
-    bottom: 58px;
-  }
-}
-
-.bannerVectorImg {
-  display: block;
-  max-width: 65px;
-  height: auto;
-  margin: 0 auto;
-  filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.35));
-}
-
-@media (max-width: 768px) {
-  .bannerVectorImg {
-    max-width: 50px;
-  }
-}
-
 /* ==========================================================================
    2. SECTION-3: TABS & MENU ITEMS (.section-3)
    ========================================================================== */

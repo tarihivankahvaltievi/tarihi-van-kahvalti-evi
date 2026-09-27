@@ -7,12 +7,12 @@ export function FaqSection({ locale = "tr" }: { locale?: SiteLocale }) {
   return (
     <section
       className={styles.section}
-      id="faq" 
+      id="faq"
       aria-labelledby="faq-heading"
     >
       <div className={styles.inner}>
         <div className={styles.headingWrap}>
-          <span>{messages.faq.eyebrow}</span>
+          <span className={styles.eyebrow}>{messages.faq.eyebrow}</span>
           <h2 id="faq-heading">{messages.faq.title}</h2>
           <p>{messages.faq.intro}</p>
         </div>
@@ -30,7 +30,11 @@ export function FaqSection({ locale = "tr" }: { locale?: SiteLocale }) {
                   className={styles.question}
                   aria-controls={answerId}
                 >
-                  {faq.question}
+                  <span className={styles.number} aria-hidden="true">
+                    {String(index + 1).padStart(2, "0")}
+                  </span>
+                  <span className={styles.questionText}>{faq.question}</span>
+                  <span className={styles.toggle} aria-hidden="true" />
                 </summary>
                 <div
                   id={answerId}

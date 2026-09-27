@@ -301,15 +301,6 @@ export function MenuExperience({
           </h1>
         </div>
 
-        <div className={styles.bannerVector}>
-          <Image
-            src="/hamour/logo-vector-icon.png"
-            alt="Emblem"
-            width={65}
-            height={55}
-            className={styles.bannerVectorImg}
-          />
-        </div>
       </section>
 
       {/* ====================================================================
