@@ -259,7 +259,7 @@
   align-items: stretch;
   gap: 12px;
   margin-top: 35px;
-  margin-bottom: 50px;
+  margin-bottom: 28px;
   padding: 0;
   list-style: none;
 }
@@ -270,20 +270,14 @@
     grid-template-columns: repeat(3, 1fr);
     gap: 8px;
     margin-top: 25px;
-    margin-bottom: 35px;
+    margin-bottom: 20px;
   }
 }
 
 @media (max-width: 580px) {
   .navPills {
-    grid-template-columns: repeat(3, 1fr);
-    gap: 6px;
-  }
-}
-
-@media (max-width: 380px) {
-  .navPills {
     grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
   }
 }
 
@@ -302,11 +296,13 @@
 
 .navLink {
   width: 100%;
+  min-height: 158px;
   padding: 22px 10px 18px;
-  background: rgba(255, 255, 255, 0.32);
-  border: 1px solid rgba(255, 255, 255, 0.45);
+  background: rgba(255, 250, 243, 0.78);
+  border: 1px solid rgba(64, 32, 33, 0.18);
   border-radius: 40px 0 40px 0;
-  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: background-color 0.25s ease, border-color 0.25s ease,
+    box-shadow 0.25s ease, transform 0.25s ease;
   cursor: pointer;
   text-align: center;
   line-height: 1.25;
@@ -316,27 +312,37 @@
   justify-content: center;
   text-decoration: none;
   position: relative;
-  box-shadow: 0 4px 15px rgba(64, 32, 33, 0.05);
+  box-shadow: 0 4px 15px rgba(64, 32, 33, 0.07);
 }
 
 @media (max-width: 992px) {
   .navLink {
+    min-height: 112px;
     padding: 14px 6px 12px;
     border-radius: 28px 0 28px 0;
   }
 }
 
 .navLink:hover {
-  background: rgba(255, 255, 255, 0.6);
+  background: #fffaf3;
   transform: translateY(-2px);
   box-shadow: 0 8px 22px rgba(64, 32, 33, 0.1);
 }
 
 .navLinkActive {
-  background: #ffffff !important;
-  border-color: #ffffff !important;
-  box-shadow: 0 12px 28px rgba(64, 32, 33, 0.16) !important;
+  background: #402021;
+  border-color: #402021;
+  box-shadow: 0 12px 28px rgba(64, 32, 33, 0.2);
   transform: translateY(-3px);
+}
+
+.navLinkActive:hover {
+  background: #512b2b;
+}
+
+.navLink:focus-visible {
+  outline: 3px solid #a74728;
+  outline-offset: 3px;
 }
 
 .navLinkIcon {
@@ -356,31 +362,10 @@
 }
 
 .navLinkIcon img {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
   display: block;
-  max-width: 100%;
-  max-height: 100%;
+  width: 100%;
+  height: 100%;
   object-fit: contain;
-  transition: opacity 0.3s ease;
-}
-
-.navLinkIconWhite {
-  opacity: 1;
-}
-
-.navLinkIconDark {
-  opacity: 0;
-}
-
-.navLinkActive .navLinkIconWhite {
-  opacity: 0;
-}
-
-.navLinkActive .navLinkIconDark {
-  opacity: 1;
 }
 
 .navLinkText {
@@ -388,7 +373,7 @@
   font-family: "Causten", sans-serif;
   font-size: 15px;
   font-weight: 600;
-  color: #ffffff;
+  color: #402021;
   transition: color 0.3s ease;
   line-height: 1.2;
 }
@@ -403,74 +388,20 @@
   }
 }
 
+@media (max-width: 580px) {
+  .navLinkText {
+    font-size: 13px;
+  }
+}
+
 .navLinkActive .navLinkText {
-  color: #402021 !important;
+  color: #ffffff;
   font-weight: 700;
 }
 
-/* ==========================================================================
-   4. TAB HEAD (.head)
-   ========================================================================== */
-.tabHead {
-  padding: 20px 0 45px;
-  text-align: center;
-  max-width: 860px;
-  margin: 0 auto;
-}
-
-@media (max-width: 992px) {
-  .tabHead {
-    padding: 10px 0 30px;
-  }
-}
-
-.tabHeadTitle {
-  font-family: "NOCTADO", Georgia, serif;
-  font-size: 64px;
-  font-weight: 400;
-  color: #402021;
-  line-height: 1.15;
-  margin: 0 0 16px 0;
-}
-
-@media (max-width: 1200px) {
-  .tabHeadTitle {
-    font-size: 52px;
-  }
-}
-
-@media (max-width: 992px) {
-  .tabHeadTitle {
-    font-size: 38px;
-    margin-bottom: 12px;
-  }
-}
-
-@media (max-width: 640px) {
-  .tabHeadTitle {
-    font-size: 30px;
-  }
-}
-
-.tabHeadDesc {
-  font-family: "NOCTADO", Georgia, serif;
-  font-size: 26px;
-  color: #b45a38;
-  line-height: 1.35;
-  margin: 0;
-  font-weight: 400;
-}
-
-@media (max-width: 992px) {
-  .tabHeadDesc {
-    font-size: 19px;
-    line-height: 1.35;
-  }
-}
-
-@media (max-width: 640px) {
-  .tabHeadDesc {
-    font-size: 16px;
+@media (prefers-reduced-motion: reduce) {
+  .navLink {
+    transition: none;
   }
 }
 

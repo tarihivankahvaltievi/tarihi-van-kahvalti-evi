@@ -14,8 +14,6 @@ export type HamourChapter = {
   label: { tr: string; en: string };
   iconWhite: string;
   iconDark: string;
-  headTitle: { tr: string; en: string };
-  headDescription: { tr: string; en: string };
   sections: {
     title: { tr: string; en: string };
     categories: string[];
@@ -27,16 +25,8 @@ const HAMOUR_CHAPTERS: HamourChapter[] = [
   {
     id: "serpme-kahvalti",
     label: { tr: "Serpme Kahvaltı", en: "Royal Breakfast" },
-    iconWhite: "/hamour/mi_tab-input-4-img-2_1.png",
-    iconDark: "/hamour/mi_tab-input-4-img-1.png",
-    headTitle: {
-      tr: "Güne Van Kahvaltı Evi'nde Başla!",
-      en: "Start the Day at Tarihi Van Kahvaltı Evi!",
-    },
-    headDescription: {
-      tr: "Tarihi Van Kahvaltı Evi'nde yapılan kahvaltı, Van'ın kadim topraklarından özenle seçilmiş malzemelerle hazırlanan zengin sofralarla güne başlamak isteyenlere unutulmaz bir deneyim sunuyor. Doyurucu, doğal ve geleneksel sunumlarıyla her damak zevkine hitap eden bu sofra, gününüze taptaze bir bereket katıyor.",
-      en: "Breakfast at Tarihi Van Kahvaltı Evi offers an unforgettable start to your day with bountiful spreads prepared with ingredients carefully sourced from ancient Van pastures. Wholesome, natural, and timeless, this feast brings vibrant energy to your morning.",
-    },
+    iconWhite: "/hamour/mi_tab-input-4-img-1.png",
+    iconDark: "/hamour/mi_tab-input-4-img-2_1.png",
     sections: [
       {
         title: { tr: "KAHVALTI MENÜLERİ", en: "BREAKFAST MENUS" },
@@ -52,16 +42,8 @@ const HAMOUR_CHAPTERS: HamourChapter[] = [
   {
     id: "sahandan-sicaklar",
     label: { tr: "Sahandan Sıcaklar", en: "Hot Pan Dishes" },
-    iconWhite: "/hamour/mi_tab-input-3-img-2.png",
-    iconDark: "/hamour/mi_tab-input-3-img-1.png",
-    headTitle: {
-      tr: "Bakır Sahanda Geleneksel Van Lezzetleri!",
-      en: "Traditional Hot Delights in Copper Pans!",
-    },
-    headDescription: {
-      tr: "Köz tadında olgunlaşmış taze domatesler, çıtır sivri biberler ve organik köy yumurtalarının bakır sahanda buluştuğu efsanevi menemenlerimiz, tereyağlı omletlerimiz ve cızırdayan kavurmalarımız masanızda tütüyor.",
-      en: "Legendary menemen made with ripe vine tomatoes, crisp green peppers, and farm-fresh organic eggs in copper pans, alongside butter-seared omelettes and sizzling roasted meats.",
-    },
+    iconWhite: "/hamour/mi_tab-input-3-img-1.png",
+    iconDark: "/hamour/mi_tab-input-3-img-2.png",
     sections: [
       {
         title: { tr: "MENEMENLER", en: "MENEMEN SPECIALTIES" },
@@ -85,16 +67,8 @@ const HAMOUR_CHAPTERS: HamourChapter[] = [
   {
     id: "yoresel-tatlar",
     label: { tr: "Yöresel Lezzetler", en: "Heritage Flavors" },
-    iconWhite: "/hamour/mi_tab-input-1-img-2.png",
-    iconDark: "/hamour/mi_tab-input-1-img-1.png",
-    headTitle: {
-      tr: "Van'ın Kadim Sofrası & Miras Tatlar!",
-      en: "Van's Ancient Table & Heritage Delights!",
-    },
-    headDescription: {
-      tr: "Asırlardır süregelen Van mutfağının baş tacı lezzetleri: tereyağında kavrulan cevizli murtuğa, buğdayın öğütülmesiyle hazırlanan şerbetli kavut ve süzme yoğurtla harmanlanan jaji.",
-      en: "The most authentic recipes of centuries-old Van breakfast culture: butter-roasted walnut murtuğa, honey-sweetened ground wheat kavut, and strained herb yogurt jaji.",
-    },
+    iconWhite: "/hamour/mi_tab-input-1-img-1.png",
+    iconDark: "/hamour/mi_tab-input-1-img-2.png",
     sections: [
       {
         title: { tr: "VAN MİRASI LEZZETLER", en: "VAN HERITAGE DELIGHTS" },
@@ -108,14 +82,6 @@ const HAMOUR_CHAPTERS: HamourChapter[] = [
     label: { tr: "Peynir & Soğuklar", en: "Cheeses & Cold" },
     iconWhite: "/hamour/mi_patisseria-beyaz_1.png",
     iconDark: "/hamour/mi_patisseria.png",
-    headTitle: {
-      tr: "Yayla Peynirleri & Taze Bahçe Söğüşü!",
-      en: "Highland Cheeses & Garden Fresh Salad!",
-    },
-    headDescription: {
-      tr: "Van'ın yaylalarından toplanan 25 çeşit şifalı otla hazırlanan hakiki Van otlu peyniri, dinlendirilmiş tulum peynirleri, örgü peyniri ve sofraya tazelik katan taze söğüş tabağı.",
-      en: "Authentic Van herb cheese crafted with 25 varieties of wild mountain herbs, aged tulum, string cheeses, and crisp Mediterranean salad spreads.",
-    },
     sections: [
       {
         title: { tr: "GELENEKSEL VAN PEYNİRLERİ", en: "TRADITIONAL VAN CHEESES" },
@@ -133,14 +99,6 @@ const HAMOUR_CHAPTERS: HamourChapter[] = [
     label: { tr: "Reçeller & Ballar", en: "Jams & Honeys" },
     iconWhite: "/hamour/mi_pasta-beyaz.png",
     iconDark: "/hamour/mi_pasta.png",
-    headTitle: {
-      tr: "Karakovan Balları & Tarihi Anne Reçelleri!",
-      en: "High-Plateau Honey & Mother's Jams!",
-    },
-    headDescription: {
-      tr: "Yüksek rakımlı yaylaların el değmemiş kır çiçeklerinden süzülen saf Karakovan petek balı, manda kaymağı ve anne eliyle geleneksel yöntemlerle pişirilen meşhur ceviz reçelleri.",
-      en: "Pure raw comb honey collected from pristine wildflower plateaus, thick water-buffalo kaymak, and mother's hand-crafted green walnut preserves.",
-    },
     sections: [
       {
         title: { tr: "BALLAR & KAHVALTILIK TATLILAR", en: "HONEYS & BREAKFAST SWEETS" },
@@ -156,16 +114,8 @@ const HAMOUR_CHAPTERS: HamourChapter[] = [
   {
     id: "icecekler",
     label: { tr: "Çay, Kahve & İçecek", en: "Drinks & Coffee" },
-    iconWhite: "/hamour/mi_tab-input-2-img-2.png",
-    iconDark: "/hamour/mi_tab-input-2-img-1.png",
-    headTitle: {
-      tr: "Közde Semaver Çayı & Tarihi Türk Kahvesi!",
-      en: "Samovar Tea & Historic Turkish Coffee!",
-    },
-    headDescription: {
-      tr: "Kahvaltı keyfini taçlandıran ince belli bardakta tavşan kanı demlik çaylarımız, bakır cezvede pişirilen geleneksel Türk kahvelerimiz ve tazeleyici soğuk içeceklerimiz.",
-      en: "Amber-brewed Turkish tea served in traditional tulip glasses, frothy Turkish coffee brewed in copper pots, and refreshing artisan cold beverages.",
-    },
+    iconWhite: "/hamour/mi_tab-input-2-img-1.png",
+    iconDark: "/hamour/mi_tab-input-2-img-2.png",
     sections: [
       {
         title: { tr: "SICAK ÇAYLAR & İÇECEKLER", en: "HOT TEAS & BEVERAGES" },
@@ -378,7 +328,7 @@ export function MenuExperience({
 
         <div className={styles.container}>
           {/* CATEGORY TABS (.nav-pills) */}
-          <ul className={styles.navPills} role="tablist" aria-label="Menu Categories">
+          <ul className={styles.navPills} role="tablist" aria-label={isEn ? "Menu categories" : "Menü kategorileri"}>
             {HAMOUR_CHAPTERS.map((chapter) => {
               const isActive = chapter.id === activeChapterId;
               return (
@@ -392,20 +342,12 @@ export function MenuExperience({
                     className={`${styles.navLink} ${isActive ? styles.navLinkActive : ""}`}
                     onClick={() => setActiveChapterId(chapter.id)}
                   >
-                    <span className={styles.navLinkIcon}>
+                    <span className={styles.navLinkIcon} aria-hidden="true">
                       <Image
-                        src={chapter.iconWhite}
+                        src={isActive ? chapter.iconWhite : chapter.iconDark}
                         alt=""
                         width={64}
                         height={52}
-                        className={styles.navLinkIconWhite}
-                      />
-                      <Image
-                        src={chapter.iconDark}
-                        alt=""
-                        width={64}
-                        height={52}
-                        className={styles.navLinkIconDark}
                       />
                     </span>
                     <span className={styles.navLinkText}>
@@ -416,18 +358,6 @@ export function MenuExperience({
               );
             })}
           </ul>
-
-          {/* TAB HEAD (.head) */}
-          <div className={styles.tabHead}>
-            <h2 className={styles.tabHeadTitle}>
-              {isEn ? activeChapter.headTitle.en : activeChapter.headTitle.tr}
-            </h2>
-            <p className={styles.tabHeadDesc}>
-              {isEn
-                ? activeChapter.headDescription.en
-                : activeChapter.headDescription.tr}
-            </p>
-          </div>
 
           {/* MENU LIST ARTICLE (.menu-list-article) */}
           <div
