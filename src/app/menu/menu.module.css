@@ -650,6 +650,7 @@
 
 /* Individual Item (.item) */
 .menuItem {
+  appearance: none;
   position: relative;
   scroll-margin-top: 7rem;
   display: block;
@@ -661,6 +662,8 @@
   background: transparent;
   cursor: pointer;
   text-align: left;
+  color: inherit;
+  font: inherit;
   transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 

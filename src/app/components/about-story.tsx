@@ -16,7 +16,7 @@ export function AboutStory({ locale = "tr" }: { locale?: string }) {
   const easeLuxury = [0.16, 1, 0.3, 1] as const;
 
   return (
-    <section ref={sectionRef} className={styles.section1} id="hakkimizda">
+    <section ref={sectionRef} className={styles.section1} id={isEn ? "story" : "hakkimizda"}>
       <div className={styles.container}>
         <div className={styles.article}>
           <motion.div
@@ -36,7 +36,6 @@ export function AboutStory({ locale = "tr" }: { locale?: string }) {
                 width={52}
                 height={36}
                 className={styles.crestMiniImg}
-                priority
               />
             </div>
           </motion.div>
@@ -136,7 +135,7 @@ export function AboutStory({ locale = "tr" }: { locale?: string }) {
             }
             transition={{ duration: 0.75, delay: 0.75, ease: easeLuxury }}
           >
-            <Link href="/hikayemiz" className={styles.btn}>
+            <Link href={isEn ? "/en#story" : "/hikayemiz"} className={styles.btn}>
               <span className={styles.btnLabel}>
                 {isEn ? "Discover Our Story" : "Hikâyemizi Keşfedin"}
               </span>

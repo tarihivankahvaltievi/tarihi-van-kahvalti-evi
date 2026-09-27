@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X } from "lucide-react";
 import styles from "./menu.module.css";
@@ -290,14 +290,39 @@ export function MenuExperience({
 
   // Modal Item (for mobile click & desktop detail view)
   const [modalItem, setModalItem] = useState<MenuItem | null>(null);
+  const closeButtonRef = useRef<HTMLButtonElement>(null);
+  const modalTriggerRef = useRef<HTMLElement | null>(null);
 
   const handleOpenModal = useCallback((item: MenuItem) => {
+    modalTriggerRef.current = document.activeElement instanceof HTMLElement
+      ? document.activeElement
+      : null;
     setModalItem(item);
   }, []);
 
   const handleCloseModal = useCallback(() => {
     setModalItem(null);
   }, []);
+
+  useEffect(() => {
+    if (!modalItem) return;
+
+    const previousOverflow = document.body.style.overflow;
+    const focusFrame = window.requestAnimationFrame(() => closeButtonRef.current?.focus());
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") handleCloseModal();
+    };
+
+    document.body.style.overflow = "hidden";
+    window.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      window.cancelAnimationFrame(focusFrame);
+      window.removeEventListener("keydown", handleKeyDown);
+      document.body.style.overflow = previousOverflow;
+      modalTriggerRef.current?.focus();
+    };
+  }, [handleCloseModal, modalItem]);
 
   const activePreviewImage = activeItem
     ? getItemImage(activeItem, activeChapter.heroImageFallback)
@@ -362,6 +387,8 @@ export function MenuExperience({
                     type="button"
                     role="tab"
                     aria-selected={isActive}
+                    aria-controls="menu-chapter-panel"
+                    id={`menu-tab-${chapter.id}`}
                     className={`${styles.navLink} ${isActive ? styles.navLinkActive : ""}`}
                     onClick={() => setActiveChapterId(chapter.id)}
                   >
@@ -403,7 +430,12 @@ export function MenuExperience({
           </div>
 
           {/* MENU LIST ARTICLE (.menu-list-article) */}
-          <div className={styles.menuListArticle}>
+          <div
+            className={styles.menuListArticle}
+            id="menu-chapter-panel"
+            role="tabpanel"
+            aria-labelledby={`menu-tab-${activeChapterId}`}
+          >
             {/* Desktop Left Image Preview (.menu-img-animate) */}
             <div className={styles.menuImgAnimate}>
               <div className={styles.menuImg}>
@@ -477,7 +509,8 @@ export function MenuExperience({
                             : item.description;
 
                         return (
-                          <div
+                          <button
+                            type="button"
                             key={item.id}
                             id={item.id}
                             className={`${styles.menuItem} ${isCurrentActive ? styles.menuItemActive : ""}`}
@@ -524,7 +557,7 @@ export function MenuExperience({
                                 </div>
                               )}
                             </div>
-                          </div>
+                          </button>
                         );
                       })}
                     </div>
@@ -609,16 +642,20 @@ export function MenuExperience({
 
             <motion.div
               className={styles.sheetDialog}
+              role="dialog"
+              aria-modal="true"
+              aria-labelledby="menu-detail-title"
               initial={{ opacity: 0, scale: 0.94, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.94, y: 20 }}
               transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
             >
               <button
+                ref={closeButtonRef}
                 type="button"
                 className={styles.sheetCloseBtn}
                 onClick={handleCloseModal}
-                aria-label="Kapat"
+                aria-label={isEn ? "Close" : "Kapat"}
               >
                 <X size={20} />
               </button>
@@ -635,7 +672,7 @@ export function MenuExperience({
 
               <div className={styles.sheetBody}>
                 <div className={styles.sheetTitleRow}>
-                  <h3 className={styles.sheetTitle}>
+                  <h3 className={styles.sheetTitle} id="menu-detail-title">
                     {isEn && modalItem.translations?.en?.name
                       ? modalItem.translations.en.name
                       : modalItem.name}

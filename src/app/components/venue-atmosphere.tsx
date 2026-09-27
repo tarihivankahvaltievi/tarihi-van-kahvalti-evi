@@ -15,7 +15,6 @@ export function VenueAtmosphere({ locale = "tr" }: { locale?: string }) {
           width={74}
           height={41}
           className={styles.topAnchorImg}
-          priority
         />
       </div>
 
@@ -28,7 +27,6 @@ export function VenueAtmosphere({ locale = "tr" }: { locale?: string }) {
           sizes="100vw"
           quality={85}
           className={styles.bgImg}
-          priority
         />
       </div>
 

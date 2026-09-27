@@ -97,6 +97,8 @@ export function SignatureShowcase({ locale = "tr" }: { locale?: string }) {
                   type="button"
                   role="tab"
                   aria-selected={isActive}
+                  aria-controls="signature-menu-panel"
+                  id={`signature-menu-tab-${tab.id}`}
                   className={`${styles.tabBtn} ${isActive ? styles.tabBtnActive : ""}`}
                   onClick={() => setActiveTab(idx)}
                   whileHover={reduceMotion ? undefined : { y: -2 }}
@@ -122,7 +124,6 @@ export function SignatureShowcase({ locale = "tr" }: { locale?: string }) {
                       width={56}
                       height={56}
                       className={styles.iconImg}
-                      priority
                     />
                   </span>
                   <span className={styles.tabText}>{isEn ? tab.nameEn : tab.name}</span>
@@ -150,6 +151,9 @@ export function SignatureShowcase({ locale = "tr" }: { locale?: string }) {
           <motion.div
             key={current.id}
             className={styles.tabContentPane}
+            id="signature-menu-panel"
+            role="tabpanel"
+            aria-labelledby={`signature-menu-tab-${current.id}`}
             initial={reduceMotion ? false : { opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={
@@ -203,7 +207,7 @@ export function SignatureShowcase({ locale = "tr" }: { locale?: string }) {
                     width={520}
                     height={520}
                     className={styles.plateImg}
-                    priority
+                    sizes="(max-width: 768px) 318px, 520px"
                   />
                 </motion.div>
               </motion.div>
@@ -235,7 +239,7 @@ export function SignatureShowcase({ locale = "tr" }: { locale?: string }) {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.55, delay: 0.26, ease: [0.16, 1, 0.3, 1] }}
               >
-                <Link href={current.btnHref} className={styles.articleBtn}>
+                <Link href={isEn ? "/en/menu" : current.btnHref} className={styles.articleBtn}>
                   <span className={styles.btnLabel}>
                     {isEn ? current.btnTextEn : current.btnText}
                   </span>

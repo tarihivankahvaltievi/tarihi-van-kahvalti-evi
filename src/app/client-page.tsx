@@ -179,7 +179,6 @@ export default function ClientPage({ children, locale = "tr" }: { children: Reac
               <Link
                 className="nav-logo"
                 href={messages.homeHref}
-                aria-label="Tarihi Van Kahvaltı Evi"
                 onClick={(e) => {
                   setMenuOpen(false);
                   if (pathname === "/" || pathname === "/en") {
@@ -308,7 +307,7 @@ export default function ClientPage({ children, locale = "tr" }: { children: Reac
                     className={`mobile-link ${pathname === "/" || pathname === "/en" ? "active" : ""}`}
                     onClick={() => setMenuOpen(false)}
                   >
-                    {locale === "en" ? "ANA SAYFA" : "ANA SAYFA"}
+                    {locale === "en" ? "HOME" : "ANA SAYFA"}
                   </Link>
                 </li>
                 <li>
@@ -317,7 +316,7 @@ export default function ClientPage({ children, locale = "tr" }: { children: Reac
                     className={`mobile-link ${pathname === "/hikayemiz" ? "active" : ""}`}
                     onClick={() => setMenuOpen(false)}
                   >
-                    {locale === "en" ? "HİKAYEMİZ" : "HİKAYEMİZ"}
+                    {locale === "en" ? "OUR STORY" : "HİKAYEMİZ"}
                   </Link>
                 </li>
                 <li>
@@ -326,7 +325,7 @@ export default function ClientPage({ children, locale = "tr" }: { children: Reac
                     className={`mobile-link ${isMenuPage ? "active" : ""}`}
                     onClick={() => setMenuOpen(false)}
                   >
-                    {locale === "en" ? "MENÜ" : "MENÜ"}
+                    {locale === "en" ? "MENU" : "MENÜ"}
                   </Link>
                 </li>
                 <li>
@@ -335,7 +334,7 @@ export default function ClientPage({ children, locale = "tr" }: { children: Reac
                     className={`mobile-link ${isReservationPage ? "active" : ""}`}
                     onClick={() => setMenuOpen(false)}
                   >
-                    {locale === "en" ? "REZERVASYON" : "REZERVASYON"}
+                    {locale === "en" ? "RESERVATION" : "REZERVASYON"}
                   </Link>
                 </li>
                 <li>
@@ -344,7 +343,7 @@ export default function ClientPage({ children, locale = "tr" }: { children: Reac
                     className="mobile-link"
                     onClick={() => setMenuOpen(false)}
                   >
-                    {locale === "en" ? "GALERİ" : "GALERİ"}
+                    {locale === "en" ? "GALLERY" : "GALERİ"}
                   </Link>
                 </li>
                 <li>
@@ -353,7 +352,7 @@ export default function ClientPage({ children, locale = "tr" }: { children: Reac
                     className="mobile-link"
                     onClick={() => setMenuOpen(false)}
                   >
-                    {locale === "en" ? "SSS" : "SSS"}
+                    {locale === "en" ? "FAQ" : "SSS"}
                   </Link>
                 </li>
                 <li>
@@ -362,7 +361,7 @@ export default function ClientPage({ children, locale = "tr" }: { children: Reac
                     className={`mobile-link ${isLocationPage ? "active" : ""}`}
                     onClick={() => setMenuOpen(false)}
                   >
-                    {locale === "en" ? "KONUM" : "KONUM"}
+                    {locale === "en" ? "LOCATION" : "KONUM"}
                   </Link>
                 </li>
               </ul>

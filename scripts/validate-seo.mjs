@@ -300,6 +300,8 @@ const canonicalUrls = new Set([
 const internalPaths = new Set();
 const internalLinkSources = new Map();
 const redirectRules = [
+  ["/breakfast/taksim", "/en"],
+  ["/van-kahvaltisi/taksim", "/van-kahvaltisi"],
   ["/istanbul-van-kahvaltisi", "/van-kahvaltisi"],
   ["/beyoglu-kahvalti", "/"],
   ["/taksim-kahvalti", "/"],

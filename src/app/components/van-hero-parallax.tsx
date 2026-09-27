@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { messagesFor, type SiteLocale } from "../home-localization";
 
 type HeroSlide = {
@@ -43,30 +43,7 @@ export function VanHeroParallax({ locale = "tr" }: { locale?: SiteLocale }) {
   const messages = messagesFor(locale);
   const [currentSlide, setCurrentSlide] = useState(0);
   const [previousSlide, setPreviousSlide] = useState<number | null>(null);
-  const timerRef = useRef<NodeJS.Timeout | null>(null);
   const exitingTimerRef = useRef<NodeJS.Timeout | null>(null);
-
-  const startSlideTimer = () => {
-    if (timerRef.current) clearInterval(timerRef.current);
-    timerRef.current = setInterval(() => {
-      setCurrentSlide((prev) => {
-        setPreviousSlide(prev);
-        if (exitingTimerRef.current) clearTimeout(exitingTimerRef.current);
-        exitingTimerRef.current = setTimeout(() => {
-          setPreviousSlide(null);
-        }, 1500);
-        return (prev + 1) % heroSlides.length;
-      });
-    }, 7000);
-  };
-
-  useEffect(() => {
-    startSlideTimer();
-    return () => {
-      if (timerRef.current) clearInterval(timerRef.current);
-      if (exitingTimerRef.current) clearTimeout(exitingTimerRef.current);
-    };
-  }, []);
 
   const handleSelectSlide = (index: number) => {
     if (index === currentSlide) return;
@@ -76,12 +53,11 @@ export function VanHeroParallax({ locale = "tr" }: { locale?: SiteLocale }) {
     exitingTimerRef.current = setTimeout(() => {
       setPreviousSlide(null);
     }, 1500);
-    startSlideTimer();
   };
 
   return (
     <section className="hero-section hero-cinematic" aria-label={messages.hero.aria}>
-      {/* Keep every frame mounted so the next photograph is decoded before its reveal. */}
+      {/* The first frame is the only eager image; other frames load without competing with LCP. */}
       {heroSlides.map((slide, index) => {
         const isActive = index === currentSlide;
         const isExiting = index === previousSlide;
@@ -89,12 +65,21 @@ export function VanHeroParallax({ locale = "tr" }: { locale?: SiteLocale }) {
         return (
           <div
             key={slide.image}
-            className={`hero-slide hero-slide-${(index % 3) + 1} ${isActive ? "is-active" : ""} ${isExiting ? "is-exiting" : ""}`}
-            style={{ backgroundImage: `url(${slide.image})` }}
-            role="img"
-            aria-label={locale === "en" ? slide.altEn : slide.altTr}
+            className={`hero-slide hero-slide-${(index % 3) + 1} ${index === 0 ? "is-initial" : ""} ${isActive ? "is-active" : ""} ${isExiting ? "is-exiting" : ""}`}
             aria-hidden={!isActive}
-          />
+          >
+            <Image
+              src={slide.image}
+              alt={locale === "en" ? slide.altEn : slide.altTr}
+              fill
+              sizes="100vw"
+              quality={84}
+              priority={index === 0}
+              loading={index === 0 ? "eager" : "lazy"}
+              fetchPriority={index === 0 ? "high" : "low"}
+              className="hero-slide-image"
+            />
+          </div>
         );
       })}
 
@@ -110,6 +95,7 @@ export function VanHeroParallax({ locale = "tr" }: { locale?: SiteLocale }) {
               width={1560}
               height={560}
               priority
+              sizes="(max-width: 768px) 352px, 624px"
               className="hero-title-lockup-image"
             />
           </h1>

@@ -136,6 +136,8 @@ export const faqItems = [
 // Yalnız bilinen eski URL'ler en yakın gerçek içeriğe tek adımda taşınır.
 // Bilinmeyen URL'ler gerçek 404 kalır; site geneli wildcard yönlendirme yapılmaz.
 export const legacyRedirects = [
+  { source: "/breakfast/taksim", destination: "/en" },
+  { source: "/van-kahvaltisi/taksim", destination: "/van-kahvaltisi" },
   { source: "/istanbul-van-kahvaltisi", destination: "/van-kahvaltisi" },
   { source: "/serpme-van-kahvaltisi", destination: "/van-kahvaltisi" },
   { source: "/van-otlu-peynir", destination: "/van-kahvaltisi-nedir" },

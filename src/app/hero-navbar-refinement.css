@@ -143,8 +143,6 @@
   z-index: 0;
   width: 103%;
   height: 103%;
-  background-position: center;
-  background-size: cover;
   opacity: 0;
   pointer-events: none;
   transform: scale(1.015) translate3d(0, 0, 0);
@@ -153,6 +151,11 @@
     opacity 1.45s cubic-bezier(0.16, 1, 0.3, 1),
     transform 1.45s cubic-bezier(0.16, 1, 0.3, 1);
   will-change: opacity, transform;
+}
+
+.hero-cinematic .hero-slide-image {
+  object-fit: cover;
+  object-position: center;
 }
 
 .hero-cinematic .hero-slide-2 {
@@ -167,6 +170,12 @@
   z-index: 2;
   opacity: 1;
   animation: hero-camera-drift 8.2s cubic-bezier(0.32, 0, 0.22, 1) both;
+}
+
+.hero-cinematic .hero-slide.is-initial.is-active {
+  opacity: 1;
+  animation: none;
+  transform: scale(1.015) translate3d(0, 0, 0);
 }
 
 .hero-cinematic .hero-slide.is-exiting {
@@ -291,8 +300,12 @@
 }
 
 .hero-cinematic .btn-primary {
-  background: #b68647 !important;
+  background: #875a2d !important;
   box-shadow: 0 5px 8px rgba(15, 5, 6, 0.26);
+}
+
+.hero-cinematic .btn-primary:hover {
+  background: #70451f !important;
 }
 
 .hero-cinematic .btn-secondary-hero {
@@ -517,7 +530,11 @@
   }
 
   .hero-cinematic .hero-slide {
-    background-position: 58% center;
+    transform-origin: 58% center;
+  }
+
+  .hero-cinematic .hero-slide-image {
+    object-position: 58% center;
   }
 
   .hero-cinematic .hero-overlay {

@@ -1,7 +1,7 @@
 .section { --wine: #402021; --clay: #ad6248; padding: clamp(5rem, 9vw, 8rem) 0; background: #f4f2ee; color: var(--wine); }
 .inner { display: grid; grid-template-columns: minmax(15rem, .72fr) minmax(21rem, 1.28fr); gap: clamp(2.5rem, 8vw, 8rem); width: min(100% - 2.5rem, 1100px); margin: 0 auto; }
 .headingWrap { align-self: start; position: sticky; top: 6.5rem; }
-.headingWrap > span { display: block; margin: 0 0 1rem; color: var(--clay); font-family: var(--font-commissioner-gf), system-ui, sans-serif; font-size: .7rem; font-weight: 750; letter-spacing: .16em; }
+.headingWrap > span { display: block; margin: 0 0 1rem; color: #884a35; font-family: var(--font-commissioner-gf), system-ui, sans-serif; font-size: .7rem; font-weight: 750; letter-spacing: .16em; }
 .headingWrap h2 { max-width: 8ch; margin: 0; font-family: var(--font-bodoni-gf), Georgia, serif; font-size: clamp(2.8rem, 5.6vw, 5rem); font-weight: 500; letter-spacing: -.035em; line-height: .96; text-wrap: balance; }
 .headingWrap p { max-width: 31ch; margin: 1.2rem 0 0; color: #675655; font-family: var(--font-literata-gf), Georgia, serif; font-size: .98rem; line-height: 1.62; }
 .list { border-top: 1px solid rgba(64,32,33,.38); }

@@ -48,11 +48,11 @@ export function AnimatedFooter({ locale = "tr" }: { locale?: string }) {
           data-aos-anchor-placement="top-bottom"
           data-aos-delay="100"
         >
-          <h4 className={styles.textTitle}>
+          <h2 className={styles.textTitle}>
             {isEn
               ? "The Longed-for Flavors Are at Van Kahvaltı Evi!"
               : "Van Kahvaltı Evi’nde Özlenen O Lezzetler Var!"}
-          </h4>
+          </h2>
           <p className={styles.textParagraph}>
             {isEn
               ? "Tarihi Van Kahvaltı Evi was born with the passion of bringing together the scent of oven-fresh golden pişi, the authentic flavors of highland herb cheeses, and the generous spirit of a family table without having to travel far. This family tradition has turned into an enchanting sanctuary in Beyoğlu where guests feel at home and discover centuries-old breakfast traditions."
@@ -117,8 +117,8 @@ export function AnimatedFooter({ locale = "tr" }: { locale?: string }) {
           >
             <Link href={isEn ? "/en#story" : "/hikayemiz"}>{isEn ? "Our Story" : "Hikayemiz"}</Link>
             <Link href={isEn ? "/en/menu" : "/menu"}>{isEn ? "Menu" : "Menü"}</Link>
-            <Link href="/van-kahvaltisi">{isEn ? "Breakfast Guide" : "Van Kahvaltısı"}</Link>
-            <Link href="/van-kahvaltisi-nedir">{isEn ? "Van Breakfast History" : "Van Kahvaltısı Nedir?"}</Link>
+            <Link href={isEn ? "/en/blog/turkish-breakfast-istanbul" : "/van-kahvaltisi"}>{isEn ? "Breakfast Guide" : "Van Kahvaltısı"}</Link>
+            {!isEn && <Link href="/van-kahvaltisi-nedir">Van Kahvaltısı Nedir?</Link>}
             <Link href={isEn ? "/en#location" : "/konum"}>{isEn ? "Contact" : "İletişim"}</Link>
           </nav>
         </div>

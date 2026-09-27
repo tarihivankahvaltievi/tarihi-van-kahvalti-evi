@@ -29,6 +29,7 @@ import {
 // lastmod yalnız görünür ana içerik gerçekten değiştiğinde güncellenir.
 // Her derlemede "şimdi" üretmek arama motorlarına yanıltıcı bir sinyal verir.
 const pageLastModified = "2026-09-22T19:00:00+03:00";
+const homeLastModified = "2026-09-27T15:00:00+03:00";
 const koreanPageLastModified = "2026-09-22T19:00:00+03:00";
 
 const homeLanguageAlternates = {
@@ -151,7 +152,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   return [
     {
       url: siteUrl,
-      lastModified: pageLastModified,
+      lastModified: homeLastModified,
       changeFrequency: "weekly",
       priority: 1,
       images: homeImages,
@@ -238,7 +239,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     },
     {
       url: englishUrl,
-      lastModified: pageLastModified,
+      lastModified: homeLastModified,
       changeFrequency: "weekly",
       priority: 0.9,
       images: homeImages,

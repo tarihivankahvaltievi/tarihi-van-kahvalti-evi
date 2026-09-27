@@ -12,7 +12,6 @@ export function AtmosphereBanner({ locale = "tr" }: { locale?: string }) {
           src="/images/atmosphere-banner-bg.webp"
           alt="Tarihi Van Kahvaltı Evi Nostaljik Atmosfer"
           fill
-          priority
           sizes="100vw"
           quality={85}
           className={styles.bgImg}

@@ -1,6 +1,6 @@
 # SEO ve GEO operasyon planı
 
-Son teknik revizyon: 3 Eylül 2026 · Son dış kaynak/NAP denetimi: 21 Temmuz 2026
+Son teknik revizyon: 27 Eylül 2026 · Son dış kaynak/NAP denetimi: 21 Temmuz 2026
 
 Bu belge, `van kahvaltıcısı`, `Beyoğlu kahvaltı`, `Taksim kahvaltı`, `Turkish breakfast near Taksim` ve ilgili yerel niyetli aramalarda organik görünürlüğü artırmak için teknik durum ile işletme hesabı gerektiren işleri birlikte izler. Google'da veya başka bir arama motorunda birinci sıra garanti edilemez. Google'ın açıkladığı yerel sonuç bileşenleri alaka düzeyi, mesafe ve bilinirliktir; teknik iyileştirmeler erişimi ve anlaşılabilirliği güçlendirir, kullanıcının konumunu veya rekabeti ortadan kaldırmaz.
 
@@ -23,6 +23,7 @@ Bu belge, `van kahvaltıcısı`, `Beyoğlu kahvaltı`, `Taksim kahvaltı`, `Turk
 - `robots.txt` genel botlara ek olarak Googlebot, Bingbot, YandexBot, Applebot, Naver `Yeti`, `OAI-SearchBot` ve `PerplexityBot` için açık arama/grounding grubu yayımlar; yalnız yönetim API'si ve sunucu içi yollar kapalıdır. Kanonik sitemap adresi bildirilir.
 - IndexNow anahtarı alan adında yayımlanır ve `npm run seo:indexnow` Bing, Naver, Seznam gibi katılımcı motorlara değişen URL'leri toplu bildirir. Varsayılan liste İngilizce, Rusça, Arapça, Korece ve Japonca rehberleri de kapsar. Bu bir tarama bildirimi olup indeksleme veya sıralama garantisi değildir.
 - Eski Türkçe sorgu URL'leri en yakın gerçek içeriğe, eski İngilizce sorgu URL'leri `/en` sayfasına tek adımlı kalıcı yönlenir.
+- `/breakfast/taksim` ve `/van-kahvaltisi/taksim` adresleri de artık ayrı `200` kopyaları üretmek yerine ilgili kanonik sayfalara `308` ile yönlenir. Ana sayfa görsel ve yerelleştirme güncellemelerinin tarihi yalnız ilgili sitemap kayıtlarında yenilenir.
 - Derleme sonrası SEO sözleşmesi 20 kanonik sayfada canonical, hreflang, dil başlığı, title, description, H1, görünür metin, JSON-LD, sitemap, en az 50 görsel sitemap kaydı, doğru `lastmod`, yedi arama/AI botu, IndexNow kapsamı, yönlendirme, 404 ve doğrudan `200` dahili bağlantıları otomatik denetler. Rezervasyon sayfalarında görünür SSS–şema eşleşmesi, coğrafi meta etiketleri ve kanonik `ReserveAction`; Korece bal-kaymak sayfalarında gerçek ürün görseli, doğrudan menü bağlantısı, yerelleştirilmiş ziyaretçi bilgileri ve `MenuItem` varlığı ayrıca doğrulanır.
 
 ## Ölçülen performans etkisi
@@ -107,7 +108,7 @@ Denetlenen kayıtlar:
 - Perplexity'nin resmî yayıncı dokümanı `PerplexityBot` erişiminin arama sonuçlarında kaynak gösterimi için açık tutulmasını önerir. Bot artık robots dosyasında açıkça tanımlıdır; Vercel katmanında ek bir WAF engeli bulunmadığı canlı HTTP kontrolüyle doğrulanmıştır.
 - Bing'in Şubat 2026'da açtığı AI Performance raporu; grounding sorgularını, kaynak gösterim sayısını ve sayfa bazlı citation aktivitesini sunar. Bing Webmaster Tools doğrulandıktan sonra klasik tıklama metrikleriyle birlikte bu rapor aylık izlenmelidir.
 - Uluslararası rehberlerdeki Van kahvaltısı, otlu peynir, murtuğa ve kavut tanımları TÜRKPATENT ile T.C. Kültür Portalı kaynaklarına görünür biçimde bağlanır; aynı URL'ler `BlogPosting.citation`, `about.sameAs` ve `mentions.sameAs` alanlarında kullanılır. Bu, görünür metin ile makine-okunur iddiaları aynı kanıta bağlar.
-- Google, AI Overviews/AI Mode için özel bir AI dosyası veya ek şema gerekmediğini açıklar. Ayrı `llms.txt`, “GEO schema” ya da görünmez anahtar kelime bloğu eklenmedi; yararlı görünür metin, taranabilir bağlantı, doğru schema ve güncel işletme gerçekleri güçlendirildi.
+- Google, AI Overviews/AI Mode için özel bir AI dosyası veya ek şema gerekmediğini açıklar. Sitedeki isteğe bağlı `llms.txt`, kanonik sayfalara işaret eden kısa bir yardımcı dizindir ve `noindex` taşır; Google görünürlüğü için bir gereklilik veya sıralama sinyali olarak değerlendirilmez. Yararlı görünür metin, taranabilir bağlantı, doğru schema ve güncel işletme gerçekleri temel alınır.
 - İngilizce ziyaretçi rehberi ve İngilizce canlı menü; turistlerin kullandığı yemek adlarını, güncel fiyatları, konumu, saatleri ve kısa cevapları görünür HTML'de sunar. Böylece bilgi yalnız script veya görsel içinde kalmaz.
 - Şemaya yapay puan, yorum, ödül, hizmet alanı, kurucu hikâyesi veya doğrulanmamış `sameAs` eklenmemelidir.
 
@@ -121,7 +122,7 @@ Denetlenen kayıtlar:
 
 ## 30/60/90 günlük ölçüm rutini
 
-- İlk 30 gün: Search Console/Bing/Yandex/Naver doğrulama, sitemap, profil saat-adres düzeltmeleri, 18 kanonik URL'nin indeks durumu ve ilk sorgu tablosu. Bing'de Search Performance yanında AI Performance / grounding sorgularının başlangıç görüntüsünü kaydedin.
+- İlk 30 gün: Search Console/Bing/Yandex/Naver doğrulama, sitemap, profil saat-adres düzeltmeleri, 20 kanonik URL'nin indeks durumu ve ilk sorgu tablosu. Bing'de Search Performance yanında AI Performance / grounding sorgularının başlangıç görüntüsünü kaydedin.
 - 31–60 gün: gerçek müşteri yorum akışı, fotoğraf güncellemeleri, İngilizce sorguların gösterim/CTR incelemesi, düşük CTR title/description testi. Aynı anda tek anlamlı değişiklik yapın.
 - 61–90 gün: sorgu niyetine göre yeni içeriğe gerçekten ihtiyaç olup olmadığını değerlendirin; NAP düzeltmelerinin yayılımını ve 28 günlük Core Web Vitals saha verisini karşılaştırın.
 - Sıralamayı kişiselleştirilmiş tek bir tarayıcı aramasından değil, Search Console sorgu/sayfa verisi ve profil eylemlerinden değerlendirin.

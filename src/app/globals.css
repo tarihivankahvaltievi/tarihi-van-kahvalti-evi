@@ -9795,13 +9795,16 @@ body .mobile-bar .mobile-bar-primary:focus-visible {
   inset: 0;
   width: 100%;
   height: 100%;
-  background-size: cover;
-  background-position: center;
   opacity: 0;
   z-index: 0;
   will-change: transform, opacity;
   transform: scale(1);
   pointer-events: none;
+}
+
+.hero-slide-image {
+  object-fit: cover;
+  object-position: center;
 }
 
 .hero-slide.is-active {
@@ -9924,7 +9927,7 @@ body .mobile-bar .mobile-bar-primary:focus-visible {
 }
 
 .btn-primary {
-  background: rgba(168, 125, 73, 0.92) !important;
+  background: #875a2d !important;
   color: #ffffff !important;
   border: none !important;
   font-family: "Causten", var(--font-commissioner-gf), sans-serif;
@@ -9945,7 +9948,7 @@ body .mobile-bar .mobile-bar-primary:focus-visible {
 
 .btn-primary:hover {
   transform: translateY(-2px);
-  background: #b8864d !important;
+  background: #70451f !important;
   color: #ffffff !important;
   box-shadow: 0 6px 22px rgba(0, 0, 0, 0.5);
 }
@@ -10128,4 +10131,3 @@ body .mobile-bar .mobile-bar-primary:focus-visible {
   display: none !important;
   content: none !important;
 }
-
