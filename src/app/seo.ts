@@ -40,7 +40,7 @@ export const address = {
   neighborhood: "Şehit Muhtar Mahallesi",
   locality: "Beyoğlu",
   region: "İstanbul",
-  postalCode: "34435",
+  postalCode: "34421",
   country: "TR",
   countryName: "Türkiye",
 };
