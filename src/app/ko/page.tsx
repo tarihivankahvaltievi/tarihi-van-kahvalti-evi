@@ -35,7 +35,6 @@ const faq = [
 export const metadata: Metadata = {
   title: { absolute: `${title} | Tarihi Van` },
   description,
-  keywords: ["이스탄불 카이막", "이스탄불 카이막 맛집", "발 카이막", "탁심 아침 식사", "터키식 아침 식사", "반 아침 식사", "베요글루 맛집"],
   alternates: {
     canonical: koreanUrl,
     languages: { tr: siteUrl, en: englishUrl, ko: koreanUrl, "x-default": siteUrl },

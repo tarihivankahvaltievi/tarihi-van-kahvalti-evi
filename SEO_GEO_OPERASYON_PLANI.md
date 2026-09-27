@@ -72,6 +72,7 @@ Canlı dış dizin gözlemi adres ve saatlerde tek bir kesin sonuç vermedi: res
 Google yönergelerinden uygulama sonuçları:
 
 - Her indekslenecek sayfada sayfaya özgü, içeriği doğru özetleyen başlık ve açıklama korunmalı. Google başlık bağlantısını ve arama açıklamasını sorguya göre yeniden yazabilir; metadata kesin gösterim garantisi değildir.
+- Google'ın kullanmadığı `meta keywords` etiketleri dil sayfalarından kaldırıldı; arama niyeti sayfanın görünen içeriği, başlığı, açıklaması ve gerçek bağlantı yapısıyla karşılanır.
 - Yapılandırılmış veri yalnız görünür, güncel ve sayfayla ilgili bilgileri taşımalı. Google geçerli şemada dahi zengin sonuç göstermeyi garanti etmez; zengin sonuç testi ile Search Console URL Denetleme dağıtım öncesi ayrıca kullanılmalıdır.
 - Lighthouse laboratuvar puanı saha Core Web Vitals yerine geçmez. Google'ın iyi eşikleri 75. yüzdelikte LCP ≤ 2,5 sn, INP < 200 ms ve CLS < 0,1'dir; saha takibi Search Console'da 28 günlük dönemlerle yapılmalıdır.
 - Menü fiyatı ve ürün uygunluğu değişebildiği için sayfada görünür canlı menü kaynak tutulmalı; sabit SSS/şema yanıtlarına güncel fiyat yazılmamalıdır.
@@ -151,6 +152,7 @@ Google yönergelerinden uygulama sonuçları:
 - Google LocalBusiness yapılandırılmış verisi: https://developers.google.com/search/docs/appearance/structured-data/local-business
 - Google AI özellikleri ve site görünürlüğü: https://developers.google.com/search/docs/appearance/ai-features
 - Google generative AI optimizasyon rehberi: https://developers.google.com/search/docs/fundamentals/ai-optimization-guide
+- Google'ın desteklediği meta etiketler: https://developers.google.com/search/docs/crawling-indexing/special-tags
 - Google FAQ structured data değişikliği: https://developers.google.com/search/blog/2023/08/howto-faq-changes
 - Google yapılandırılmış veri kalite ilkeleri: https://developers.google.com/search/docs/appearance/structured-data/sd-policies
 - Google title bağlantısı ilkeleri: https://developers.google.com/search/docs/appearance/title-link

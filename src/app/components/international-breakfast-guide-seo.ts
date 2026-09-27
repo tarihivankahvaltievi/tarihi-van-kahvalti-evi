@@ -45,7 +45,6 @@ export function buildGuideMetadata(guide: GuideContent): Metadata {
   return {
     title: { absolute: guide.title },
     description: guide.description,
-    keywords: [...keywords[guide.locale]],
     authors: [{ name: siteName, url: guide.authorHref ? absoluteUrl(guide.authorHref) : siteUrl }],
     creator: siteName,
     publisher: siteName,
