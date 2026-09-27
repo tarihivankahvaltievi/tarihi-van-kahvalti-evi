@@ -94,12 +94,13 @@ export function trackEvent(name: string, parameters: AnalyticsParameters = {}) {
 }
 
 export function trackBookingLead(parameters: AnalyticsParameters = {}) {
+  const { reservation_id: reservationId, ...eventParameters } = parameters;
   // Fire standard GA4 lead generation event
   sendEvent("generate_lead", {
     currency: "TRY",
     value: 1.0,
     transport_type: "beacon",
-    ...parameters,
+    ...eventParameters,
   });
 
   // Fire primary Google Ads conversion event with exact conversion label
@@ -108,7 +109,7 @@ export function trackBookingLead(parameters: AnalyticsParameters = {}) {
       send_to: `${googleAdsConversionId}/${bookingConversionLabel}`,
       value: 1.0,
       currency: "TRY",
-      transaction_id: String(parameters.reservation_id || ""),
+      transaction_id: String(reservationId || ""),
       transport_type: "beacon",
     });
   }

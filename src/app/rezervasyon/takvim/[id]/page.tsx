@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Suspense } from "react";
 import { connection } from "next/server";
+import { notFound } from "next/navigation";
 import { CheckCircle2 } from "lucide-react";
 import { getReservationById } from "@/app/reservations/reservation-storage";
 import { displayAddress, displayPhone, mapsUrl, siteName, siteUrl } from "@/app/seo";
@@ -26,38 +27,8 @@ async function CalendarContent({ params, searchParams }: CalendarPageProps) {
   await connection();
   const { id } = await params;
   const sp = searchParams ? await searchParams : {};
-  const reservationFromDb = await getReservationById(id);
-
-  const nameParam = typeof sp?.name === "string" ? sp.name : "";
-  const phoneParam = typeof sp?.phone === "string" ? sp.phone : "";
-  const dateParam = typeof sp?.date === "string" ? sp.date : "";
-  const timeParam = typeof sp?.time === "string" ? sp.time : "";
-  const guestsParam = typeof sp?.guests === "string" ? sp.guests : "";
-  const serviceParam = typeof sp?.service === "string" ? sp.service : "";
-  const noteParam = typeof sp?.note === "string" ? sp.note : "";
-
-  let reservation = reservationFromDb;
-  if (!reservation) {
-    let fallbackDate = dateParam;
-    const idDateMatch = id.match(/van-(\d{4})(\d{2})(\d{2})/);
-    if (!fallbackDate && idDateMatch) {
-      fallbackDate = `${idDateMatch[1]}-${idDateMatch[2]}-${idDateMatch[3]}`;
-    }
-
-    reservation = {
-      id,
-      customerName: nameParam || "Değerli Misafirimiz",
-      customerPhone: phoneParam || "",
-      date: fallbackDate || new Date().toISOString().slice(0, 10),
-      time: timeParam || "10:00",
-      guests: Number(guestsParam) || 2,
-      serviceType: serviceParam === "cafe" ? "cafe" : "breakfast",
-      note: noteParam || undefined,
-      status: "confirmed",
-      createdAt: new Date().toISOString(),
-      updatedAt: new Date().toISOString(),
-    };
-  }
+  const reservation = await getReservationById(id);
+  if (!reservation) notFound();
 
   const isEnglish = sp?.lang === "en" || sp?.locale === "en";
   const serviceLabel = reservation.serviceType === "cafe"
@@ -66,17 +37,7 @@ async function CalendarContent({ params, searchParams }: CalendarPageProps) {
     ? "Van Traditional Breakfast"
     : "Van Kahvaltısı";
   const formattedDate = reservation.date ? reservation.date.split("-").reverse().join(".") : "";
-  const icsParams = new URLSearchParams({
-    name: reservation.customerName,
-    phone: reservation.customerPhone || "",
-    date: reservation.date,
-    time: reservation.time,
-    guests: String(reservation.guests),
-    service: reservation.serviceType,
-    locale: isEnglish ? "en" : "tr",
-    ...(reservation.note ? { note: reservation.note } : {}),
-  });
-  const icsDownloadUrl = `/api/reservations/${reservation.id}/ics?${icsParams.toString()}`;
+  const icsDownloadUrl = `/api/reservations/${reservation.id}/ics${isEnglish ? "?locale=en" : ""}`;
 
   // Google Calendar URL
   const [reservationYear, reservationMonth, reservationDay] = reservation.date.split("-");
@@ -94,14 +55,12 @@ async function CalendarContent({ params, searchParams }: CalendarPageProps) {
   const endStr = `${endDate.getFullYear()}${pad(endDate.getMonth() + 1)}${pad(endDate.getDate())}T${pad(endDate.getHours())}${pad(endDate.getMinutes())}00`;
 
   const gCalTitle = encodeURIComponent(
-    isEnglish
-      ? `🍳 Tarihi Van Breakfast | ${reservation.customerName} (${reservation.guests} ${reservation.guests > 1 ? "Guests" : "Guest"})`
-      : `🍳 Tarihi Van Kahvaltı Evi | ${reservation.customerName} (${reservation.guests} Kişi)`
+    isEnglish ? "Tarihi Van Breakfast House - table request" : "Tarihi Van Kahvaltı Evi - masa talebi"
   );
   const gCalDetails = encodeURIComponent(
     isEnglish
-      ? `🍳 Tarihi Van Breakfast House Reservation\n\n👤 Guest: ${reservation.customerName}\n📞 Phone: ${reservation.customerPhone}\n👥 Party Size: ${reservation.guests} Persons\n🍽️ Choice: ${serviceLabel}\n📋 Booking Code: #${reservation.id}\n📝 Note: ${reservation.note || "None"}\n\n📍 Address: ${displayAddress}\n📞 Contact: ${displayPhone}\n🌐 Website: ${siteUrl}/en`
-      : `🍳 Tarihi Van Kahvaltı Evi Rezervasyonu\n\n👤 Misafir: ${reservation.customerName}\n📞 Telefon: ${reservation.customerPhone}\n👥 Kişi: ${reservation.guests} Kişi\n🍽️ Seçim: ${serviceLabel}\n📋 Kod: #${reservation.id}\n📝 Not: ${reservation.note || "Yok"}\n\n📍 Adres: ${displayAddress}\n📞 İletişim: ${displayPhone}\n🌐 Web: ${siteUrl}`
+      ? `Table request for ${reservation.guests} guests. Service: ${serviceLabel}. Await restaurant confirmation.\n${displayAddress}\n${displayPhone}`
+      : `${reservation.guests} kişilik masa talebi. Hizmet: ${serviceLabel}. İşletme teyidini bekleyin.\n${displayAddress}\n${displayPhone}`
   );
   const gCalLocation = encodeURIComponent(`Tarihi Van Kahvaltı Evi, ${displayAddress}`);
   const googleCalendarUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${gCalTitle}&dates=${startStr}/${endStr}&details=${gCalDetails}&location=${gCalLocation}&ctz=Europe/Istanbul`;
@@ -111,16 +70,28 @@ async function CalendarContent({ params, searchParams }: CalendarPageProps) {
       <div className={styles.cardTop}>
         <span className={styles.badgeSuccess}>
           <CheckCircle2 size={16} />
-          {isEnglish ? "Reservation Confirmed" : "Rezervasyon Kaydedildi"}
+          {reservation.status === "confirmed"
+            ? isEnglish ? "Reservation Confirmed" : "Rezervasyon Onaylandı"
+            : reservation.status === "cancelled"
+              ? isEnglish ? "Request Cancelled" : "Talep İptal Edildi"
+              : isEnglish ? "Request Saved" : "Talep Kaydedildi"}
         </span>
         <p className={styles.brandName}>{isEnglish ? "Tarihi Van Breakfast House" : siteName}</p>
         <h1 className={styles.title}>
           {isEnglish ? "Add to Your Calendar" : "Randevuyu Takvime Ekle"}
         </h1>
         <p className={styles.subtitle}>
-          {isEnglish
-            ? "Save this table booking directly to your iPhone or Google Calendar so you don't forget."
-            : "Unutmamak için rezervasyonunuzu telefon takviminize tek tıkla ekleyebilirsiniz."}
+          {reservation.status === "confirmed"
+            ? isEnglish
+              ? "Save your confirmed table booking to your calendar."
+              : "Onaylanan rezervasyonunuzu takviminize ekleyebilirsiniz."
+            : reservation.status === "cancelled"
+              ? isEnglish
+                ? "This request was cancelled. Contact the restaurant to make a new booking."
+                : "Bu talep iptal edildi. Yeni rezervasyon için işletmeyle iletişime geçin."
+            : isEnglish
+              ? "Save this request to your calendar and wait for the restaurant's confirmation."
+              : "Bu talebi takviminize ekleyebilir, işletmenin teyidini bekleyebilirsiniz."}
         </p>
       </div>
 
@@ -165,16 +136,18 @@ async function CalendarContent({ params, searchParams }: CalendarPageProps) {
         </div>
 
         {/* Action Buttons & In-App Browser Guidance */}
-        <CalendarActions
-          icsUrl={icsDownloadUrl}
-          googleCalendarUrl={googleCalendarUrl}
-          mapsUrl={mapsUrl}
-          isEnglish={isEnglish}
-          pageUrl={`${siteUrl}/rezervasyon/takvim/${reservation.id}?${icsParams.toString()}`}
-        />
+        {reservation.status !== "cancelled" ? (
+          <CalendarActions
+            icsUrl={icsDownloadUrl}
+            googleCalendarUrl={googleCalendarUrl}
+            mapsUrl={mapsUrl}
+            isEnglish={isEnglish}
+            pageUrl={`${siteUrl}${isEnglish ? "/en" : ""}/rezervasyon/takvim/${reservation.id}`}
+          />
+        ) : null}
 
         {/* Smart iOS / Safari Guidance */}
-        <div className={styles.tipBox} role="note">
+        {reservation.status !== "cancelled" ? <div className={styles.tipBox} role="note">
           <span className={styles.tipIcon} aria-hidden="true">💡</span>
           <div>
             {isEnglish ? (
@@ -187,7 +160,7 @@ async function CalendarContent({ params, searchParams }: CalendarPageProps) {
               </>
             )}
           </div>
-        </div>
+        </div> : null}
       </div>
 
       <div className={styles.cardFooter}>

@@ -119,18 +119,8 @@ export async function POST(request: Request) {
 
     const baseUrl = siteUrl || "https://www.tarihivankahvaltievi.com";
     const isEn = locale === "en";
-    const queryParams = new URLSearchParams({
-      name: newReservation.customerName,
-      phone: newReservation.customerPhone,
-      date: newReservation.date,
-      time: newReservation.time,
-      guests: String(newReservation.guests),
-      service: newReservation.serviceType,
-      ...(isEn ? { lang: "en", locale: "en" } : {}),
-      ...(newReservation.note ? { note: newReservation.note } : {}),
-    });
-    const icsUrl = `${baseUrl}/api/reservations/${newReservation.id}/ics?${queryParams.toString()}`;
-    const calendarPageUrl = `${baseUrl}${isEn ? "/en" : ""}/rezervasyon/takvim/${newReservation.id}?${queryParams.toString()}`;
+    const icsUrl = `${baseUrl}/api/reservations/${newReservation.id}/ics${isEn ? "?locale=en" : ""}`;
+    const calendarPageUrl = `${baseUrl}${isEn ? "/en" : ""}/rezervasyon/takvim/${newReservation.id}`;
 
     // Google Calendar direct template link
     const [reservationYear, reservationMonth, reservationDay] = newReservation.date.split("-");
@@ -149,9 +139,7 @@ export async function POST(request: Request) {
     const endStr = `${endDate.getFullYear()}${pad(endDate.getMonth() + 1)}${pad(endDate.getDate())}T${pad(endDate.getHours())}${pad(endDate.getMinutes())}00`;
 
     const gCalTitle = encodeURIComponent(
-      isEn
-        ? `🍳 Tarihi Van Breakfast | ${newReservation.customerName} (${newReservation.guests} ${newReservation.guests > 1 ? "Guests" : "Guest"})`
-        : `🍳 Tarihi Van Kahvaltı Evi Rezervasyonu (${newReservation.guests} Kişi)`
+      isEn ? "Tarihi Van Breakfast House - table request" : "Tarihi Van Kahvaltı Evi - masa talebi"
     );
     const serviceLabel =
       newReservation.serviceType === "cafe"
@@ -161,8 +149,8 @@ export async function POST(request: Request) {
         : "Van Kahvaltısı";
     const gCalDetails = encodeURIComponent(
       isEn
-        ? `🍳 Tarihi Van Breakfast House Table Booking\n\n👤 Guest: ${newReservation.customerName}\n📞 Phone: ${newReservation.customerPhone}\n👥 Party: ${newReservation.guests} Persons\n🍽️ Choice: ${serviceLabel}\n📋 Code: #${newReservation.id}\n📝 Note: ${newReservation.note || "None"}\n\n📍 Address: ${displayAddress}\n📞 Contact: ${displayPhone}\n🌐 Website: ${siteUrl}/en`
-        : `🍳 Tarihi Van Kahvaltı Evi Masa Rezervasyonu\n\n👤 Misafir: ${newReservation.customerName}\n📞 Telefon: ${newReservation.customerPhone}\n👥 Kişi: ${newReservation.guests} Kişi\n🍽️ Seçim: ${serviceLabel}\n📋 Kod: #${newReservation.id}\n📝 Not: ${newReservation.note || "Yok"}\n\n📍 Adres: ${displayAddress}\n📞 İletişim: ${displayPhone}\n🌐 Web: ${siteUrl}`
+        ? `Table request for ${newReservation.guests} guests. Service: ${serviceLabel}. Await restaurant confirmation.\n${displayAddress}\n${displayPhone}`
+        : `${newReservation.guests} kişilik masa talebi. Hizmet: ${serviceLabel}. İşletme teyidini bekleyin.\n${displayAddress}\n${displayPhone}`
     );
     const gCalLocation = encodeURIComponent(`Tarihi Van Kahvaltı Evi, ${displayAddress}`);
     const googleCalendarUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${gCalTitle}&dates=${startStr}/${endStr}&details=${gCalDetails}&location=${gCalLocation}&ctz=Europe/Istanbul`;

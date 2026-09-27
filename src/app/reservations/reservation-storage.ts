@@ -136,18 +136,24 @@ export async function getReservationData(): Promise<ReservationData> {
 
 export async function saveReservationData(data: ReservationData): Promise<boolean> {
   data.lastUpdated = new Date().toISOString();
-  memoryReservations = [...data.reservations];
 
   if (isSupabaseConfigured()) {
-    await saveToSupabase(data);
+    if (await saveToSupabase(data)) {
+      memoryReservations = [...data.reservations];
+      return true;
+    }
+    if (process.env.NODE_ENV === "production") return false;
   }
 
   try {
     const filePath = getLocalFilePath();
     await fs.writeFile(filePath, JSON.stringify(data, null, 2), "utf-8");
+    memoryReservations = [...data.reservations];
     return true;
   } catch {
-    // Read-only filesystem on Vercel/serverless is expected; memoryReservations holds the state
+    // An ephemeral serverless instance cannot confirm a durable reservation.
+    if (process.env.NODE_ENV === "production") return false;
+    memoryReservations = [...data.reservations];
     return true;
   }
 }
@@ -160,7 +166,7 @@ export async function addReservation(
   
   // Format unique friendly ID e.g. "van-20261015-842"
   const dateCompact = (reservationInput.date || "").replace(/-/g, "");
-  const randomSuffix = crypto.randomBytes(6).toString("hex");
+  const randomSuffix = crypto.randomBytes(12).toString("hex");
   const id = `van-${dateCompact || Date.now()}-${randomSuffix}`;
 
   const newReservation: Reservation = {
@@ -172,7 +178,9 @@ export async function addReservation(
 
   // Add to top of list
   data.reservations = [newReservation, ...data.reservations];
-  await saveReservationData(data);
+  if (!(await saveReservationData(data))) {
+    throw new Error("Rezervasyon kalıcı depolamaya kaydedilemedi");
+  }
   return newReservation;
 }
 
@@ -191,7 +199,7 @@ export async function updateReservation(
   };
 
   data.reservations[index] = updatedReservation;
-  await saveReservationData(data);
+  if (!(await saveReservationData(data))) return null;
   return updatedReservation;
 }
 
@@ -201,8 +209,7 @@ export async function deleteReservation(id: string): Promise<boolean> {
   data.reservations = data.reservations.filter((r) => r.id !== id);
   if (data.reservations.length === initialLength) return false;
 
-  await saveReservationData(data);
-  return true;
+  return saveReservationData(data);
 }
 
 export async function getReservationById(id: string): Promise<Reservation | null> {

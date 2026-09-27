@@ -72,6 +72,9 @@ async function runTests() {
   if (!singleIcs.includes("METHOD:PUBLISH")) {
     throw new Error("RFC 5545 standartlarına göre METHOD:PUBLISH olmalıdır!");
   }
+  if (!singleIcs.includes("STATUS:TENTATIVE") || !singleIcs.includes("CLASS:PRIVATE")) {
+    throw new Error("Bekleyen talep takvimde onaylanmış veya herkese açık gösteriliyor!");
+  }
   if (!singleIcs.includes("BEGIN:VTIMEZONE") || !singleIcs.includes("TZID:Europe/Istanbul")) {
     throw new Error("Europe/Istanbul VTIMEZONE bloğu eksik!");
   }
@@ -122,6 +125,36 @@ async function runTests() {
   // 6. Test Cleanup
   await deleteReservation(testRes.id);
   console.log("✅ Test rezervasyonu temizlendi.");
+
+  // A failed durable write must not look like a saved booking in production.
+  const previous = {
+    NODE_ENV: process.env.NODE_ENV,
+    SUPABASE_URL: process.env.SUPABASE_URL,
+    SUPABASE_SERVICE_ROLE_KEY: process.env.SUPABASE_SERVICE_ROLE_KEY,
+  };
+  try {
+    process.env.NODE_ENV = "production";
+    process.env.SUPABASE_URL = "http://127.0.0.1:1";
+    process.env.SUPABASE_SERVICE_ROLE_KEY = "test-only";
+    await addReservation({
+      customerName: "Storage Failure Test",
+      customerPhone: "05321234567",
+      date: testDate.iso,
+      time: "11:00",
+      guests: 2,
+      serviceType: "breakfast",
+      status: "pending",
+    }).then(
+      () => { throw new Error("Kalıcı depolama başarısızlığına rağmen kayıt başarılı sayıldı!"); },
+      () => {},
+    );
+    console.log("✅ Kalıcı depolama hatası başarı yanıtına dönüşmüyor.");
+  } finally {
+    for (const [key, value] of Object.entries(previous)) {
+      if (value === undefined) delete process.env[key];
+      else process.env[key] = value;
+    }
+  }
 
   console.log("\n🎉 TÜM TESTLER BAŞARIYLA TAMAMLANDI!");
 }

@@ -59,6 +59,9 @@ export function generateSingleReservationIcs(
     : isEnglish
     ? "Van Traditional Breakfast"
     : "Van Kahvaltısı";
+  const statusLabel = isEnglish
+    ? reservation.status === "confirmed" ? "Confirmed" : reservation.status === "cancelled" ? "Cancelled" : "Awaiting restaurant confirmation"
+    : reservation.status === "confirmed" ? "Onaylandı" : reservation.status === "cancelled" ? "İptal edildi" : "İşletme teyidi bekleniyor";
 
   const descriptionLines = isEnglish
     ? [
@@ -70,7 +73,7 @@ export function generateSingleReservationIcs(
         `🍽️ Service: ${serviceLabel}`,
         `📋 Booking Code: #${reservation.id}`,
         `📝 Note: ${reservation.note || "None"}`,
-        `📌 Status: Confirmed / Pending WhatsApp Confirmation`,
+        `📌 Status: ${statusLabel}`,
         ``,
         `📍 Venue: Tarihi Van Breakfast House (Since 1978)`,
         `🏢 Address: ${displayAddress}`,
@@ -87,7 +90,7 @@ export function generateSingleReservationIcs(
         `🍽️ Hizmet: ${serviceLabel}`,
         `📋 Rezervasyon Kodu: #${reservation.id}`,
         `📝 Not: ${reservation.note || "Yok"}`,
-        `📌 Durum: Onaylandı / WhatsApp Teyitli`,
+        `📌 Durum: ${statusLabel}`,
         ``,
         `📍 Mekan: Tarihi Van Kahvaltı Evi (1978'den Beri)`,
         `🏢 Adres: ${displayAddress}`,
@@ -107,14 +110,14 @@ export function generateSingleReservationIcs(
     : "Tarihi Van Kahvaltı Evi Rezervasyonu";
 
   const alarm1Desc = isEnglish
-    ? `Tomorrow: Tarihi Van Breakfast House table booking (${reservation.guests} Guests)`
-    : `Yarın Tarihi Van Kahvaltı Evi Rezervasyonunuz Var (${reservation.guests} Kişi)`;
+    ? `Tomorrow: Tarihi Van Breakfast House table request (${reservation.guests} Guests)`
+    : `Yarın Tarihi Van Kahvaltı Evi Masa Talebiniz Var (${reservation.guests} Kişi)`;
 
   const alarm2Desc = isEnglish
-    ? `In 2 Hours: Tarihi Van Breakfast House table booking (${reservation.guests} Guests)`
-    : `2 Saat Sonra Tarihi Van Kahvaltı Evi Rezervasyonunuz Var (${reservation.guests} Kişi)`;
+    ? `In 2 Hours: Tarihi Van Breakfast House table request (${reservation.guests} Guests)`
+    : `2 Saat Sonra Tarihi Van Kahvaltı Evi Masa Talebiniz Var (${reservation.guests} Kişi)`;
 
-  const status = reservation.status === "cancelled" ? "CANCELLED" : "CONFIRMED";
+  const status = reservation.status === "cancelled" ? "CANCELLED" : reservation.status === "confirmed" ? "CONFIRMED" : "TENTATIVE";
   const geoCoord = `${coordinates.latitude.toFixed(6)};${coordinates.longitude.toFixed(6)}`;
 
   const icsLines = [
@@ -137,7 +140,7 @@ export function generateSingleReservationIcs(
     `GEO:${geoCoord}`,
     `URL:${siteUrl}${isEnglish ? "/en" : ""}/rezervasyon`,
     `STATUS:${status}`,
-    "CLASS:PUBLIC",
+    "CLASS:PRIVATE",
     "PRIORITY:1",
     "CATEGORIES:DINING,BREAKFAST,RESTAURANT",
     "TRANSP:OPAQUE",
@@ -190,7 +193,8 @@ export function generateCalendarFeedIcs(reservations: Reservation[]): string {
         `SUMMARY:${summary}`,
         `DESCRIPTION:${description}`,
         `LOCATION:${escapeIcalText(LOCATION)}`,
-        "STATUS:CONFIRMED",
+        `STATUS:${reservation.status === "confirmed" ? "CONFIRMED" : "TENTATIVE"}`,
+        "CLASS:PRIVATE",
         "BEGIN:VALARM",
         "ACTION:DISPLAY",
         `DESCRIPTION:Yarın Rezervasyon: ${escapeIcalText(reservation.customerName)} (${reservation.guests} Kişi)`,
