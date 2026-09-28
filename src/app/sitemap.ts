@@ -21,6 +21,7 @@ import {
   koreanKaymakExplainerUrl,
   koreanTurkishBreakfastBlogUrl,
   koreanTaksimBreakfastBlogUrl,
+  koreanTourGuideBreakfastBlogUrl,
   chineseUrl,
   chineseHoneyKaymakBlogUrl,
   chineseTaksimBreakfastBlogUrl,
@@ -382,6 +383,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.7,
       images: internationalGuideImages,
       alternates: taksimGuideAlternates,
+    },
+    {
+      url: koreanTourGuideBreakfastBlogUrl,
+      lastModified: "2026-09-28T12:00:00+03:00",
+      changeFrequency: "monthly",
+      priority: 0.75,
+      images: internationalGuideImages,
     },
     {
       url: koreanKaymakExplainerUrl,

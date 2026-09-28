@@ -17,6 +17,7 @@ export const arabicBreakfastBlogUrl = `${siteUrl}/ar/blog/turkish-breakfast-ista
 export const koreanHoneyKaymakBlogUrl = `${siteUrl}/ko/blog/istanbul-bal-kaymak`;
 export const koreanKaymakExplainerUrl = `${siteUrl}/ko/blog/kaymak-nedir`;
 export const koreanTurkishBreakfastBlogUrl = `${siteUrl}/ko/blog/turkish-breakfast-istanbul`;
+export const koreanTourGuideBreakfastBlogUrl = `${siteUrl}/ko/blog/korean-tour-guide-van-breakfast`;
 export const koreanTaksimBreakfastBlogUrl = `${siteUrl}/ko/blog/taksim-kahvalti-rehberi`;
 export const chineseHoneyKaymakBlogUrl = `${siteUrl}/zh-cn/blog/istanbul-bal-kaymak`;
 export const chineseTaksimBreakfastBlogUrl = `${siteUrl}/zh-cn/blog/taksim-turkish-breakfast`;

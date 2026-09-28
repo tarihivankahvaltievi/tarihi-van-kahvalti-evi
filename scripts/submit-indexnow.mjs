@@ -30,6 +30,7 @@ const defaultUrls = [
   `${siteUrl}/ko/blog/kaymak-nedir`,
   `${siteUrl}/ko/blog/turkish-breakfast-istanbul`,
   `${siteUrl}/ko/blog/taksim-kahvalti-rehberi`,
+  `${siteUrl}/ko/blog/korean-tour-guide-van-breakfast`,
   `${siteUrl}/ja/blog/istanbul-bal-kaymak`,
   `${siteUrl}/zh-cn`,
   `${siteUrl}/zh-cn/blog/istanbul-bal-kaymak`,

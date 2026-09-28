@@ -24,6 +24,7 @@ const japaneseHoneyKaymakBlogUrl = `${canonicalSiteUrl}/ja/blog/istanbul-bal-kay
 const chineseHomeUrl = `${canonicalSiteUrl}/zh-cn`;
 const chineseHoneyKaymakBlogUrl = `${canonicalSiteUrl}/zh-cn/blog/istanbul-bal-kaymak`;
 const chineseTaksimBreakfastBlogUrl = `${canonicalSiteUrl}/zh-cn/blog/taksim-turkish-breakfast`;
+const koreanTourGuideBreakfastBlogUrl = `${canonicalSiteUrl}/ko/blog/korean-tour-guide-van-breakfast`;
 const koreanTaksimBreakfastBlogUrl = `${canonicalSiteUrl}/ko/blog/taksim-kahvalti-rehberi`;
 const spanishHomeUrl = `${canonicalSiteUrl}/es`;
 const englishClassicBreakfastBlogUrl = `${canonicalSiteUrl}/en/blog/classic-turkish-breakfast`;
@@ -77,6 +78,7 @@ const newRoutes = [
   { path: "/zh-cn", canonical: chineseHomeUrl, language: "zh-CN", signals: ["塔克西姆", "蜂蜜奶皮", "Van 早餐"], links: ["/zh-cn/blog/istanbul-bal-kaymak", "/zh-cn/blog/taksim-turkish-breakfast"] },
   { path: "/zh-cn/blog/istanbul-bal-kaymak", canonical: chineseHoneyKaymakBlogUrl, language: "zh-CN", signals: ["Bal Kaymak", "奶皮", "塔克西姆"], hreflang: honeyKaymakHreflang, citations: 2 },
   { path: "/zh-cn/blog/taksim-turkish-breakfast", canonical: chineseTaksimBreakfastBlogUrl, language: "zh-CN", signals: ["serpme kahvaltı", "Van 早餐", "蜂蜜奶皮"], hreflang: taksimHreflang, citations: 4 },
+  { path: "/ko/blog/korean-tour-guide-van-breakfast", canonical: koreanTourGuideBreakfastBlogUrl, language: "ko", signals: ["투어 가이드", "허브 치즈", "메네멘"], links: ["/en/menu", "/ko/blog/turkish-breakfast-istanbul"] },
   { path: "/ko/blog/taksim-kahvalti-rehberi", canonical: koreanTaksimBreakfastBlogUrl, language: "ko", languageTag: "ko-KR", signals: ["탁심", "발 카이막", "반식"], hreflang: taksimHreflang, citations: 3 },
   { path: "/es", canonical: spanishHomeUrl, language: "es", signals: ["desayuno turco", "Taksim", "kaymak"], links: ["/es/blog/desayuno-turco-clasico", "/es/blog/bal-kaymak-estambul"] },
   { path: "/en/blog/classic-turkish-breakfast", canonical: englishClassicBreakfastBlogUrl, language: "en", languageTag: "en-GB", signals: ["full English", "menemen", "simit", "Van breakfast"], hreflang: classicBreakfastHreflang, citations: 3 },
@@ -946,6 +948,7 @@ for (const guidePath of [
   "/ko/blog/kaymak-nedir",
   "/ko/blog/turkish-breakfast-istanbul",
   "/ko/blog/taksim-kahvalti-rehberi",
+  "/ko/blog/korean-tour-guide-van-breakfast",
   "/ja/blog/istanbul-bal-kaymak",
   "/zh-cn",
   "/zh-cn/blog/istanbul-bal-kaymak",

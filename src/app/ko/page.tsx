@@ -14,6 +14,7 @@ import {
   koreanKaymakExplainerUrl,
   koreanTurkishBreakfastBlogUrl,
   koreanTaksimBreakfastBlogUrl,
+  koreanTourGuideBreakfastBlogUrl,
   koreanUrl,
   mapsUrl,
   openingHours,
@@ -57,6 +58,7 @@ const guides = [
   { label: "먹으러 가기", title: "이스탄불 발 카이막 맛집 가이드", description: "실제 메뉴 구성, 꿀과 카이막을 먹는 순서, 탁심 근처 위치와 방문 정보를 확인하세요.", href: "/ko/blog/istanbul-bal-kaymak" },
   { label: "음식 이해하기", title: "카이막은 무엇이고 어떤 맛일까요?", description: "물소·소 카이막, 버터·생크림과의 차이, 발 카이막의 뜻과 터키어 주문 표현을 정리했습니다.", href: "/ko/blog/kaymak-nedir" },
   { label: "한 상 경험하기", title: "이스탄불 터키식 아침 식사", description: "카흐발트와 반 아침 식사의 대표 메뉴, 공유 방식, 주문 순서와 여행 팁을 안내합니다.", href: "/ko/blog/turkish-breakfast-istanbul" },
+  { label: "투어 가이드·단체", title: "한국어 투어 가이드를 위한 반식 아침 식사", description: "가족 이야기, 여러 치즈와 여섯 가지 메네멘, 단체 방문 준비를 한 번에 확인하세요.", href: "/ko/blog/korean-tour-guide-van-breakfast" },
   { label: "탁심 동선", title: "탁심 아침 식사 실전 가이드", description: "탁심 광장에서 길찾기, 발 카이막 단품과 공유 아침상 선택, 영업시간과 방문 전 확인 사항을 정리했습니다.", href: "/ko/blog/taksim-kahvalti-rehberi" },
 ];
 
