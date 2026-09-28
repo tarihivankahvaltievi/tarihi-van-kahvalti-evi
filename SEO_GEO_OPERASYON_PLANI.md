@@ -50,6 +50,7 @@ Kod, işletme sahibinin erişimini gerektiren Google Business Profile, Yandex Bu
 4. **Google kategorisi:** Herkese açık profilin ana kategorisi `Kahvaltı restoranı`; önceki `Cafe` notu artık güncel değil. Profil adı gerçek ticari ad `Tarihi Van Kahvaltı Evi 1978` olarak tutulmalı, ada arama kelimesi eklenmemeli.
 5. **NAP ve bağlantılar:** Google profili işletme telefonunu `0541 525 28 68`, web sitesi, `Menü` ve `Masa bul` rezervasyon bağlantılarını gösteriyor. Site telefonu `+90 541 525 2868`; bu biçimler aynı numaraya karşılık geliyor. Google profili 4,9/1.596 yorum ve yaklaşık 234 bin görüntülenme gösteriyordu. Bu profilde adres, kategori, saat, telefon veya bağlantı değişikliği yapılmadı.
 6. **Arama görünürlüğü sınırı:** Profil yol tarifi ve rezervasyon aksiyonlarına açık. Google Ads konum öğesi de bağlı; Maps reklam uygunluğu olabilir fakat reklam gösterimi veya belirli üst sıra garanti edilmez. Organik Maps sırası reklam bütçesiyle satın alınamaz.
+7. **Saat tutarlılığı düzeltmesi:** 28 Eylül kamuya açık arama önizlemesinde `/van-kahvaltisi-nedir` sayfası eski `08.00–18.00` saatini gösteriyordu. Kaynak sayfa `07.00–22.00` olarak düzeltildi, `cf5c89c` commit'i `main` dalına gönderildi ve canlı URL'de yeni saat doğrulandı.
 
 Denetlenen kayıtlar:
 
@@ -100,7 +101,7 @@ Google yönergelerinden uygulama sonuçları:
 
 ### Bing, Yandex, Safari ve Opera
 
-- IndexNow gönderimi dağıtımdan sonra çalıştırılır. Ayrıca Bing Webmaster Tools'a sitemap eklenip tarama hataları kontrol edilmelidir.
+- IndexNow, iki canlı site dağıtımından sonra 28 Eylül'de çalıştırıldı; 20 URL için bildirim HTTP 200 ile kabul edildi. Bing Webmaster Tools'a sitemap eklenip tarama hataları ayrıca kontrol edilmelidir.
 - Yandex Webmaster'da alan adı doğrulanmalı, sitemap gönderilmeli ve Yandex Business kaydındaki adres/saat çelişkisi düzeltilmelidir.
 - Safari ve Opera ayrı birer arama motoru değildir. Safari/Apple yüzeyleri için Applebot'un erişimi açık tutulur; Opera'da kullanılan arama sağlayıcısının Google/Bing/Yandex tarayıcı ve indeks kuralları geçerlidir. Tarayıcı adına özel sahte schema veya sayfa üretilmez.
 
