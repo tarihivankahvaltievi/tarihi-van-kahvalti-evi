@@ -431,7 +431,7 @@ export default function VanBreakfastCulturePage() {
                 <p>
                   Rehberi okudunuz; şimdi yöresel lezzetleri bakır sahanlar ve demli çay eşliğinde aynı masada
                   keşfedin. Tarihi Van Kahvaltı Evi, Taksim ve İstiklal Caddesi&apos;ne yürüme mesafesindeki Zambak
-                  Sokak&apos;ta her gün 08.00–18.00 arasında açıktır.
+                  Sokak&apos;ta her gün 07.00–22.00 arasında açıktır.
                 </p>
                 <div className={styles.visitActions}>
                   <Link className={styles.lightAction} href="/menu#serpme-fix-menu">
