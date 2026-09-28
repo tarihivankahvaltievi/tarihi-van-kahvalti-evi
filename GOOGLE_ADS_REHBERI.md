@@ -1,18 +1,25 @@
-# Tarihi Van Kahvaltı Evi 1978 — Google Ads Profesyonel Kurulum ve Strateji Rehberi (Güncel)
+# Tarihi Van Kahvaltı Evi 1978 — Google Ads Strateji Rehberi
 
-Bu belge, **günlük 1.000 TL bütçe** ile **kesinlikle YouTube reklamları, mobil oyun içi reklamlar ve uygulama banner'ları olmadan**, yalnızca **Google Arama Ağı** ve **Google Haritalar (Google Maps)** üzerinden dükkana müşteri çekecek profesyonel kampanya mimarisini içerir.
+**Canlı hesap güncellemesi:** 28 Eylül 2026. Aşağıdaki kampanya örneklerinin bazı eski teklif, zaman ve hedefleme alanları güncel hesabı yansıtmayabilir; canlı ayar için önce bu bölüm ve son denetim raporu esas alınmalıdır.
+
+Google Ads'te etkin iki Search kampanyasının ortalama günlük bütçeleri TR için **₺600**, EN için **₺400**; toplam **₺1.000/gün**. Bu kampanya bütçelerinin toplamıdır, harcama hedefi veya mutlak günlük fatura üst sınırı değildir. Google çoğu kampanyada tek bir günde ortalama günlük bütçenin iki katına kadar harcayabilir; ay içi ücretlendirme sınırı kampanya başına ortalama günlük bütçe × **30,4** üzerinden hesaplanır. Yeni bütçeler tam bir ay değişmeden kalırsa iki kampanyanın toplam aylık sınırı yaklaşık **₺30.400** olur; günlük toplam sunulan maliyet bazı günlerde **₺2.000'e** çıkabilir. 28 Eylül'de bütçeler ay ortasında değiştirildiği için bu rakam Eylül ayının kalan kısmının faturası/limiti değildir; Google ay içi sınırı bütçe değişikliklerinin zamanını da hesaba katar. Gerçek harcama daha düşük olabilir. [Google Ads harcama sınırları](https://support.google.com/google-ads/answer/10486637?hl=tr), [bütçe değişikliklerinin etkisi](https://support.google.com/google-ads/answer/10487143?hl=tr). Satış, rezervasyon veya kâr garantisi çıkarılamaz; bunlar işletme kayıtlarıyla ayrıca ölçülmelidir.
+
+**Canlı teklif durumu:** İki Search kampanyası da 27 Eylül'de üst sonuç alanında %70 hedefli **Hedef Gösterim Payı** teklifine alındı; TR azami TBM ₺25, EN azami TBM ₺30. Her ikisi Ads panelinde öğrenme aşamasında. Strateji görünürlük hedefler, rezervasyon ya da kârlılık hedeflemez. Değişiklikleri sık sık üst üste bindirmeyin; en az 14 gün boyunca harcama, nitelikli talep ve teyitli masa kaydını izleyip sonra teklif hedefine karar verin. Aşağıdaki eski "Tıklama Sayısını En Üst Düzeye Çıkarma" ve TBM örneklerini canlı ayar olarak kullanmayın.
+
+**Canlı kampanya durumu:** Search kampanyaları etkin; ana `Genel Trafik Reklam` ve `PMAX | Yerel Ziyaret | Beyoğlu Test` kampanyaları duraklatıldı. TR/EN Search kampanyalarında Google Arama Ağı açık, Görüntülü Reklam Ağı ve Arama Ağı iş ortakları kapalı. Konum öğesi bağlı. Bu durum Haritalar'da reklam gösterimini garanti etmez.
+
+**Google Haritalar gerçeği:** Google Ads'te yalnızca Haritalar'da yayın yapan özel bir kampanya türü veya belirli arama/harita sırasını garanti eden ayar yoktur. Arama kampanyaları, uygun bir İşletme Profili konum öğesiyle Google Arama ve uygun Maps yüzeylerinde gösterilmeye aday olabilir; gösterim açık artırma ve kullanıcı bağlamına bağlıdır. Maksimum Performans farklı Google kanallarında dağıtım yapar; Search dışı kanalları tamamen kapatmak istiyorsanız PMax kullanmayın. Organik Haritalar sıralaması da reklam bütçesiyle satın alınamaz.
 
 ---
 
 ## 🛑 KESİN KURALLAR (SIFIR ÇÖP TRAFİK)
 
-| İstenmeyen Kanallar (KAPALI / YASAK) | İstenen Kanallar (AÇIK / AKTİF) |
+| Kampanya tercihi | Gerçekçi hedef |
 | :--- | :--- |
-| ❌ **YouTube Reklamları** (Video & Banner) | ✅ **Google Arama Sonuçları** (*"taksim van kahvaltısı"*, *"best breakfast taksim"*) |
-| ❌ **Mobil Oyun Reklamları** (Candy Crush, Subway Surfers vb.) | ✅ **Google Haritalar (Maps) Promoted PIN Reklamları** |
-| ❌ **Uygulama İçi Banner'lar** (El feneri, hesap makinesi vb.) | ✅ **Google Haritalar Yerel Arama Sonuçları (Top 1)** |
-| ❌ **Görüntülü Reklam Ağı (Display Network)** | ✅ **Doğrudan Yol Tarifi & Telefon Araması Butonları** |
-| ❌ **Arama Ağı İş Ortakları (Search Partners)** | ✅ **Taksim & Çevresi 3.5 km Yarıçap Odaklı Trafik** |
+| Search ağı tercih ediliyorsa yalnızca Search kampanyası kullanın; Display ve Search iş ortaklarını kapalı tutun. | Yerel niyetli Google aramalarında görünürlük ve nitelikli site/rezervasyon talebi |
+| YouTube, uygulama içi ve Display teslimatını bütçe hedefiyle uyumsuz buluyorsanız PMax'i çalıştırmayın. | Konum öğesiyle Maps yüzeylerinde uygun açık artırmalara aday olma; yerleşim garantisi yoktur. |
+| Telefon, yol tarifi ve web sitesi tıklamasını ayrı raporlayın. | Gerçek rezervasyon, gelen müşteri ve satışları işletme kayıtlarıyla doğrulama |
+| Search Partners kapalı olabilir; bu, Maps görünürlüğünü tek başına kapatmaz. | Organik sıralama için Google Business Profile ve teknik/içerik SEO çalışması |
 
 ---
 
@@ -26,7 +33,7 @@ pie title Günlük 1.000 TL Bütçe Dağılımı
 
 * **Kampanya 1 (Yerli - TR):** **₺600 / gün** (Taksim, Beyoğlu, Cihangir, Şişli, Beşiktaş).
 * **Kampanya 2 (Turist - EN):** **₺400 / gün** (Taksim & Sultanahmet otellerindeki yabancılar).
-* **Aylık Toplam:** ~₺30.000 TL *(Eski sistemde 46.000 TL çöpe gidiyordu; artık 30.000 TL'nin tamamı dükkana müşteri olarak dönüyor).*
+* **Aylık bütçe hesabı:** Google'ın ortalama günlük bütçe uygulamasında çoğu kampanyanın aylık sınırı ortalama günlük bütçe × 30,4'tür. ₺1.000/gün toplamı sabit kalırsa yaklaşık ₺30.400 planlayın. Kampanyaların ayrı günlük limitleri olduğundan bazı günlerde iki kampanya toplamı ₺2.000'e kadar harcayabilir; aylık sınır her kampanya için ayrı hesaplanır. Hesap bütçe raporundaki güncel limitleri izleyin.
 
 ---
 
@@ -34,17 +41,17 @@ pie title Günlük 1.000 TL Bütçe Dağılımı
 
 1. **Google İşletme Profili (Google Business Profile) Entegrasyonu:**
    - Hesabınızda `Tarihi Van Kahvaltı Evi 1978` (Zambak Sk. No:8) profili **Konum Öğesi (Location Asset)** olarak bağlıdır.
-2. **Harita Üzerinde Öne Çıkma (Promoted Pin & Top Listing):**
-   - Kullanıcı Google Haritalar'da *"kahvaltı"*, *"van kahvaltı evi"*, *"breakfast"* yazdığında veya Taksim çevresinde haritayı gezerken dükkanınız **Mor Renkli Öne Çıkan PIN** ve en üst sıradaki sponsorlu mekan olarak listelenir.
-   - Kullanıcı doğrudan **"Yol Tarifi Al"** ve **"Ara"** butonlarıyla dükkana gelir.
+2. **Maps uygunluğu (gösterim garantisi değildir):**
+   - Bağlı ve doğru bir konum öğesi, Arama reklamlarını Maps'in uygun reklam yüzeylerine aday kılabilir. Gerçek gösterim; sorgu, açık artırma, yakınlık, bütçe, teklif ve diğer uygunluk koşullarına bağlıdır.
+   - Reklam etkileşimi yol tarifi veya arama tıklaması yaratabilir; bunlar gelen müşteri, rezervasyon veya satışla aynı şey değildir.
 3. **Sıfır Video / Oyun Riski:**
-   - Arama Ağı + Konum Uzantısı modeli kullanıldığı için reklamlarınız **asla YouTube'da veya oyunlarda çıkmaz**; yalnızca Google Arama ve Google Haritalar arayüzünde görünür.
+   - Search kampanyası Display ve Search Partners kapalı ayarlanabilir. Bu ayar YouTube/oyun yerleşimlerini açmaz; ancak Search reklamlarının yalnızca Maps'te çıkacağı anlamına da gelmez. PMax kullanılırsa birden fazla kanal devreye girebilir.
 
 ---
 
-## 🚫 HESAP DÜZEYİNDE NEGATİF ANAHTAR KELİME LİSTESİ (200+ KELİME)
+## 🚫 PAYLAŞILAN NEGATİF ANAHTAR KELİME LİSTESİ
 
-Aşağıdaki kelimeler bütçenizi korumak için hesap genelinde negatife alınmıştır:
+27 Eylül 2026 Ads değişiklik geçmişinde, 262 terimli paylaşılan listenin üç etkin kampanyaya bağlı olduğu doğrulandı. Bu rehberdeki örnekler canlı listenin tam dökümü değildir; canlı ekleme/silme kararından önce Ads'teki liste ve kampanya bağlantılarını kontrol edin. Kampanyaya özel negatif kelimeler de bulunabilir.
 
 ### A. Şehir / Ulaşım / Coğrafi Karışıklıklar
 ```text
@@ -185,11 +192,13 @@ bayilik şartları
 * **Kampanya Türü:** Sadece Arama Ağı (Search)
 * **Ağlar:** Google Arama Ağı (Görüntülü Ağ: **KAPALI**, Arama Ortakları: **KAPALI**)
 * **Günlük Bütçe:** **₺600,00 / gün**
-* **Hedef Konum:** Zambak Sk. No:8 merkezli **3.5 km yarıçap** (Beyoğlu, Cihangir, Şişli, Beşiktaş, Karaköy)
-* **Zaman Planı:** Pazartesi - Pazar: `07:30 – 16:30`
-* **Teklif Stratejisi:** Tıklama Sayısını En Üst Düzeye Çıkarma (Maks. TBM Sınırı: ₺12,00)
+* **Canlı hedef konum:** Beyoğlu, Beşiktaş, Fatih ve Şişli; Van hariç. Yarıçap hedeflemesi değil.
+* **Canlı teklif:** Hedef Gösterim Payı, üst sonuç alanı %70, azami TBM ₺25; öğrenme aşamasında. Bu görünürlük odaklıdır; rezervasyon verimliliğini garanti etmez.
+* **Zaman planı:** 27 Eylül'de reklam zaman planı değiştirildi. Saat/gün listesini Ads kampanya ayarlarından doğrulamadan bu rehberdeki eski saatleri kullanmayın.
 
-### Anahtar Kelimeler
+### Örnek anahtar kelime temaları
+
+Bu liste öneri havuzudur; canlı etkin kelimelerin tam dökümü değildir. Arama terimleri ve nitelikli rezervasyon kayıtlarıyla doğrulamadan topluca eklemeyin.
 ```text
 [taksim van kahvaltısı]
 [taksim kahvaltı mekanları]
@@ -228,12 +237,14 @@ bayilik şartları
 * **Kampanya Türü:** Sadece Arama Ağı (Search)
 * **Ağlar:** Google Arama Ağı (Görüntülü Ağ: **KAPALI**, Arama Ortakları: **KAPALI**)
 * **Günlük Bütçe:** **₺400,00 / gün**
-* **Hedef Konum:** Beyoğlu, Taksim, Sultanahmet, Sirkeci, Galata (Otel Yoğunluklu Alanlar)
-* **Zaman Planı:** Pazartesi - Pazar: `07:30 – 15:30`
-* **Cihaz Dili:** Türkçe dışındaki tüm diller (İngilizce, Arapça, Korece, Rusça, Fransızca vb.)
-* **Teklif Stratejisi:** Tıklama Sayısını En Üst Düzeye Çıkarma (Maks. TBM Sınırı: ₺15,00)
+* **Canlı hedef konum:** Beyoğlu, Beşiktaş, Fatih ve Şişli. Turist niyeti bu coğrafyayla tek başına garanti edilmez.
+* **Canlı dil:** İngilizce. İstanbul'daki ziyaretçilerin kullandığı arayüz dili farklı olabileceğinden dil kısıtını ayrıca test edin.
+* **Canlı teklif:** Hedef Gösterim Payı, üst sonuç alanı %70, azami TBM ₺30; öğrenme aşamasında. Bu görünürlük odaklıdır; rezervasyon verimliliğini garanti etmez.
+* **Zaman planı:** 27 Eylül'de reklam zaman planı değiştirildi. Saat/gün listesini Ads kampanya ayarlarından doğrulamadan bu rehberdeki eski saatleri kullanmayın.
 
-### Anahtar Kelimeler
+### Örnek anahtar kelime temaları
+
+Bu liste öneri havuzudur; canlı etkin kelimelerin tam dökümü değildir. Arama terimleri ve nitelikli rezervasyon kayıtlarıyla doğrulamadan topluca eklemeyin.
 ```text
 [best turkish breakfast taksim]
 [authentic van breakfast istanbul]
@@ -266,11 +277,7 @@ bayilik şartları
 
 ## 🔗 REKLAM UZANTILARI (ASSETS)
 
-1. **Site Bağlantıları (Sitelinks):**
-   - *Canlı Menü & Fiyatlar:* `https://www.tarihivankahvaltievi.com/menu`
-   - *Hakiki Bal & Kaymak:* `https://www.tarihivankahvaltievi.com/van-kahvaltisi`
-   - *Yol Tarifi & Konum:* `https://www.tarihivankahvaltievi.com/konum`
-   - *1978'den Gelen Hikayemiz:* `https://www.tarihivankahvaltievi.com/hikayemiz`
+1. **Site Bağlantıları (Sitelinks):** Hesap düzeyinde `Canlı Menü & Fiyatlar`, `Serpme Van Kahvaltısı`, `Yol Tarifi & Konum` ve `1978 Lezzet Tarihimiz` bağlantıları var. 28 Eylül'de TR Search'e `Masa Rezervasyon Talebi` (`/rezervasyon`), EN Search'e `Request a Table` (`/en/rezervasyon`) kampanya bağlantıları eklendi. İkisi de Google Ads'te **İnceleniyor** durumunda; onaylanana kadar yayında olduklarını varsaymayın.
 2. **Açıklama Metinleri (Callouts):**
    - *1978'den Beri*
    - *Tarihi Rum Binası*
@@ -280,3 +287,12 @@ bayilik şartları
    - *Taksim Zambak Sokak'ta*
 3. **Telefon ve Konum Butonu:**
    - `+90 541 525 2868` & Google Maps Konum Pin Bağlantısı
+
+---
+
+## Canlı değişiklik kaydı — 28 Eylül 2026
+
+- `SEARCH | TR | Yerel | Taksim` ortalama günlük bütçesi ₺600; `SEARCH | EN | Turistler | Taksim` ₺400 yapıldı. İki PMax kampanyası duraklatıldı. Ads panelinde etkin kampanyaların toplamı ₺1.000/gün.
+- Search teklif stratejileri Hedef Gösterim Payı olarak korundu; TR %70 / azami TBM ₺25, EN %70 / azami TBM ₺30 ve öğrenme aşamasındalar. Bütçe değişikliği sonrası kısa dönem sonuçları kârlılık kanıtı saymayın.
+- TR ve EN kampanyalarına rezervasyon talebi sitelink'i eklendi; ikisi de Google incelemesinde. Bu linkler masa teyidini garanti etmez.
+- Bu hesap değişikliklerinin gerekçesi, ölçüm kısıtları ve Ads paneli bulguları için `../google-ads-denetim-2026-09-28.md` içindeki “Uygulanan düzeltmeler” bölümüne bakın.

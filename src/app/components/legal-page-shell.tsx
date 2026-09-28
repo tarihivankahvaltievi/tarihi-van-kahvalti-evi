@@ -5,10 +5,12 @@ import styles from "./legal-page.module.css";
 export function LegalPageShell({
   eyebrow,
   title,
+  lastUpdated = "19 Temmuz 2026",
   children,
 }: {
   eyebrow: string;
   title: string;
+  lastUpdated?: string;
   children: React.ReactNode;
 }) {
   return (
@@ -24,7 +26,7 @@ export function LegalPageShell({
       <main id="main-content" className={styles.main}>
         <p className={styles.eyebrow}>{eyebrow}</p>
         <h1>{title}</h1>
-        <p className={styles.updated}>Son güncelleme: 19 Temmuz 2026</p>
+        <p className={styles.updated}>Son güncelleme: {lastUpdated}</p>
         <div className={styles.content}>{children}</div>
         <aside className={styles.contact} aria-label="İletişim bilgileri">
           <h2>İletişim</h2>

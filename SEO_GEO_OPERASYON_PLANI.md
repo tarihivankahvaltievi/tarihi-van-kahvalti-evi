@@ -1,6 +1,6 @@
 # SEO ve GEO operasyon planı
 
-Son teknik revizyon: 27 Eylül 2026 · Son dış kaynak/NAP denetimi: 27 Eylül 2026
+Son teknik revizyon: 28 Eylül 2026 · Son Google Maps/NAP denetimi: 28 Eylül 2026 · Üçüncü taraf dizin taraması: 27 Eylül 2026
 
 Bu belge, `van kahvaltıcısı`, `Beyoğlu kahvaltı`, `Taksim kahvaltı`, `Turkish breakfast near Taksim` ve ilgili yerel niyetli aramalarda organik görünürlüğü artırmak için teknik durum ile işletme hesabı gerektiren işleri birlikte izler. Google'da veya başka bir arama motorunda birinci sıra garanti edilemez. Google'ın açıkladığı yerel sonuç bileşenleri alaka düzeyi, mesafe ve bilinirliktir; teknik iyileştirmeler erişimi ve anlaşılabilirliği güçlendirir, kullanıcının konumunu veya rekabeti ortadan kaldırmaz.
 
@@ -40,16 +40,16 @@ Bu belge, `van kahvaltıcısı`, `Beyoğlu kahvaltı`, `Taksim kahvaltı`, `Turk
 
 Konum sayfasındaki en büyük kazanım harita kütüphanesinin kullanıcı isteğine kadar ertelenmesinden gelir. Gerçek kullanıcı verisi için Search Console Core Web Vitals raporu 28 günlük dönemlerle izlenmelidir.
 
-## İşletme sahibi tarafından doğrulanacak gerçekler
+## İşletme sahibi ve üçüncü taraf hesapları gerektiren işler
 
-Kod, işletme sahibinin erişemediğimiz Google Business Profile, Yandex Business ve üçüncü taraf dizin kayıtlarını değiştiremez. 19 Temmuz 2026 taramasında şu çelişkiler görüldü:
+Kod, işletme sahibinin erişimini gerektiren Google Business Profile, Yandex Business ve üçüncü taraf dizin kayıtlarını tek başına değiştiremez. 28 Eylül 2026'da Google Maps'in herkese açık işletme profili yeniden incelendi; eski üçüncü taraf gözlemleri bugünkü profil bilgisi gibi değerlendirilmemelidir.
 
-1. Site ve şema çalışma saatini her gün `07:00–22:00` gösteriyor; 21 Temmuz dış kaynak taramasında Google Maps arama görünümünde `06:30` açılış bilgisi görülmüştü. Gerçek saat birincil kaynaktan yeniden doğrulanmalı; site, Google, Yandex ve dizinler aynı gün eşitlenmelidir.
-2. Site adresi `Zambak Sk. No:8, Şehit Muhtar Mahallesi, Beyoğlu, İstanbul 34435`; Yandex Maps kaydı `Zambak Sokak 10A` gösteriyor ve saatleri bilinmiyor. Gerçek kapı numarası işletme belgesiyle doğrulanıp yanlış kayıt düzeltilmelidir.
-3. RenkMobil işletmeyi `24 saat açık` ve `34421` posta koduyla gösteriyor. MekanRadar da `34421` kullanıyor. Gerçek posta kodu doğrulandıktan sonra her iki kaynakta düzeltme istenmelidir.
-4. Google görünümündeki kategori `Cafe`. Gerçek ana faaliyet kahvaltıysa Google Business Profile'da mevcut en yakın kahvaltı restoranı kategorisi birincil olarak doğrulanmalı; işletme adına anahtar kelime eklenmemelidir.
-5. Sitede kullanılan telefon `+90 541 525 2868` ve işletme adı `Tarihi Van Kahvaltı Evi 1978` tüm önemli yüzeylerde aynı yazımla tutulmalıdır.
-6. Google Maps CID'si `10380797280962926014`; sitedeki yol tarifi ve koordinatlar `41.0367655, 28.9829478` noktasına bağlıdır. Pin gerçek giriş kapısında değilse profil içinden düzeltilmelidir.
+1. **Google saatleri:** Maps profili haftanın her günü `07:00–22:00` gösteriyor; site/şema da aynı. Eski, 21 Temmuz tarihli Google Maps `06:30` kaydı güncel görünümde geçerli değil. Yayınlanan saatlerin gerçek işletme saatleri olduğunu işletme sahibi teyit etmeli; bu denetimde saat değişikliği yapılmadı.
+2. **Google adresi:** Maps ve site `Şehit Muhtar, Zambak Sk. No:8, 34421 Beyoğlu/İstanbul` gösteriyor. Site adresi ile Maps adresi ve `41.0367655, 28.9829478` koordinatları eşleşiyor. Pin'in fiziksel giriş kapısındaki noktaya tam oturduğu dışarıdan doğrulanmadı.
+3. **Üçüncü taraf dizinler:** 27 Eylül tarihli eski dış kaynak taramasında Yandex `Zambak Sokak 10A`/belirsiz saat; RenkMobil `24 saat`/`34421`; MekanRadar `34421` gösteriyordu. Bu çalışmada kayıtların güncel hali yeniden teyit edilmedi. Google/site ile tutarlılık için güncel Yandex Business ve dizin profilleri ayrı ayrı açılıp gerçek adres/saatle karşılaştırılmalı; Yandex No:10A ve RenkMobil 24 saat iddiaları hâlâ varsa, önce işletme sahibinden doğru bilgiyi teyit edip düzenleme talebi gönderin.
+4. **Google kategorisi:** Herkese açık profilin ana kategorisi `Kahvaltı restoranı`; önceki `Cafe` notu artık güncel değil. Profil adı gerçek ticari ad `Tarihi Van Kahvaltı Evi 1978` olarak tutulmalı, ada arama kelimesi eklenmemeli.
+5. **NAP ve bağlantılar:** Google profili işletme telefonunu `0541 525 28 68`, web sitesi, `Menü` ve `Masa bul` rezervasyon bağlantılarını gösteriyor. Site telefonu `+90 541 525 2868`; bu biçimler aynı numaraya karşılık geliyor. Google profili 4,9/1.596 yorum ve yaklaşık 234 bin görüntülenme gösteriyordu. Bu profilde adres, kategori, saat, telefon veya bağlantı değişikliği yapılmadı.
+6. **Arama görünürlüğü sınırı:** Profil yol tarifi ve rezervasyon aksiyonlarına açık. Google Ads konum öğesi de bağlı; Maps reklam uygunluğu olabilir fakat reklam gösterimi veya belirli üst sıra garanti edilmez. Organik Maps sırası reklam bütçesiyle satın alınamaz.
 
 Denetlenen kayıtlar:
 
@@ -67,7 +67,7 @@ Google ayrıca yapay zekâ yanıtlarında kullanılmak üzere sorgu varyasyonlar
 
 Canlı sayfada şu işletme iddiaları görünür durumda ve dosyada birincil kanıt bağlantısı henüz yok: binanın 18. yüzyıla ait ve ikinci derece koruma statüsünde olması, ürünlerin doğrudan Van yaylalarından alınması, manda sütü kaymağı, Karakovan balı, organik yumurta ve üç kuşaktır devam eden aile işletmesi anlatısı. Bunlar doğru olabilir; fakat resmî bina kaydı, tedarik bilgisi veya işletme tarihçesi ile doğrulanıp mümkünse ilgili sayfada kaynağa bağlanmalıdır. Kanıt bulunamazsa yayın metni iddia kapsamını daraltmalıdır. Görünür içerikle yapılandırılmış verinin aynı ve doğru olması gerekir.
 
-Canlı dış dizin gözlemi adres ve saatlerde tek bir kesin sonuç vermedi: resmi site Zambak Sk. No:8, 34435 ve 07:00–22:00 gösteriyor; bazı üçüncü taraf kayıtları 34421 veya 06:30–23:00 bildiriyor; Yandex kaydı No:10A ve saat bilinmiyor gösteriyor. 34435 mahalle düzeyindeki kaynaklarla uyumlu görünse de kesin kapı adresi, posta kodu ve vardiya saatleri işletme belgesi/Google Business Profile üzerinden teyit edilmeden kodda değiştirilmemelidir. Üçüncü taraf dizinlerden birinin kopyalanması NAP tutarlılığını çözmez.
+**28 Eylül güncellemesi:** Google Maps profili ile güncel site ikisi de `Zambak Sk. No:8, 34421 Beyoğlu/İstanbul` ve `07:00–22:00` bilgisini gösteriyor. Önceki dış kaynak taramasındaki `34435`/`06:30` gözlemleri tarihi kayıttır, bugünkü site/profil bilgisi değildir. Yandex ve diğer üçüncü taraf dizinleri 28 Eylül'de ayrıca açılıp doğrulanmadı; 27 Eylül'de kaydedilmiş `No:10A`, `24 saat` veya farklı saatler uyarısı yalnız ilgili güncel kayıtta hâlâ görünüyorsa işletme sahibi teyidinden sonra düzeltme gerektirir. Yalnız eski bir arama sonucu nedeniyle site adresini değiştirmeyin.
 
 Google yönergelerinden uygulama sonuçları:
 
@@ -141,7 +141,7 @@ Google yönergelerinden uygulama sonuçları:
 
 ## 30/60/90 günlük ölçüm rutini
 
-- İlk 30 gün: Search Console/Bing/Yandex/Naver doğrulama, sitemap, profil saat-adres düzeltmeleri, 20 kanonik URL'nin indeks durumu ve ilk sorgu tablosu. Bing'de Search Performance yanında AI Performance / grounding sorgularının başlangıç görüntüsünü kaydedin.
+- İlk 30 gün: Search Console/Bing/Yandex/Naver doğrulama, sitemap, üçüncü taraf profil saat-adres kontrolü, 20 kanonik URL'nin indeks durumu ve ilk sorgu tablosu. Search Console `sc-domain:tarihivankahvaltievi.com` mülkü 28 Eylül'de açık olan Google oturumuna erişim vermedi; doğrulanmış mülk sahibi/erişim yöneticisi ek erişim vermeden indeksleme ve organik sıra panel verisi okunamaz. Bing'de Search Performance yanında AI Performance / grounding sorgularının başlangıç görüntüsünü kaydedin.
 - 31–60 gün: gerçek müşteri yorum akışı, fotoğraf güncellemeleri, İngilizce sorguların gösterim/CTR incelemesi, düşük CTR title/description testi. Aynı anda tek anlamlı değişiklik yapın.
 - 61–90 gün: sorgu niyetine göre yeni içeriğe gerçekten ihtiyaç olup olmadığını değerlendirin; NAP düzeltmelerinin yayılımını ve 28 günlük Core Web Vitals saha verisini karşılaştırın.
 - Sıralamayı kişiselleştirilmiş tek bir tarayıcı aramasından değil, Search Console sorgu/sayfa verisi ve profil eylemlerinden değerlendirin.

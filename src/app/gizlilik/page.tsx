@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 
 export default function PrivacyPage() {
   return (
-    <LegalPageShell eyebrow="Kişisel veriler" title="Gizlilik Politikası">
+    <LegalPageShell eyebrow="Kişisel veriler" title="Gizlilik Politikası" lastUpdated="28 Eylül 2026">
       <section>
         <h2>Bu sayfanın kapsamı</h2>
         <p>
@@ -22,12 +22,18 @@ export default function PrivacyPage() {
       <section>
         <h2>Hangi bilgiler işlenebilir?</h2>
         <ul>
+          <li>Rezervasyon formuna yazdığınız ad, telefon, tarih, saat, kişi sayısı, hizmet tercihi ve isteğe bağlı not.</li>
+          <li>Form gönderildiğinde rezervasyon talebinizi yönetmek ve size yanıt vermek için rezervasyon kaydında işlenen bilgiler.</li>
           <li>WhatsApp üzerinden sizin gönderdiğiniz tarih, saat, kişi sayısı, tercih ve isteğe bağlı not.</li>
           <li>Telefon veya e-posta yoluyla sizin paylaştığınız iletişim ve rezervasyon bilgileri.</li>
           <li>Sunucu güvenliği için hosting sağlayıcısının tutabileceği temel istek ve hata kayıtları.</li>
           <li>Google Analytics tarafından üretilen sayfa görüntüleme ve etkileşim ölçümleri.</li>
         </ul>
-        <p>Site üzerindeki rezervasyon formu bilgileri kendi sunucumuza kaydetmez; gönderim düğmesi WhatsApp&apos;ta sizin onaylayacağınız bir mesaj hazırlar.</p>
+        <p>
+          Formu gönderdiğinizde talebinizin bilgileri rezervasyon kaydına alınır ve WhatsApp&apos;ta size
+          göndermeniz için bir mesaj taslağı açılır. Bu kayıt kesin masa onayı değildir; müsaitliği işletme
+          WhatsApp üzerinden ayrıca teyit eder.
+        </p>
       </section>
       <section>
         <h2>Üçüncü taraf hizmetleri</h2>

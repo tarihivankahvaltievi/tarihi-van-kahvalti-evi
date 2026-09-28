@@ -669,7 +669,7 @@ Müsaitlik durumunu teyit edebilir misiniz? Teşekkürler.`;
                   <span>
                     {isSubmitting
                       ? isEnglish ? "Processing..." : "Hazırlanıyor..."
-                      : isEnglish ? "Reserve via WhatsApp →" : "WhatsApp ile Hemen Ayırt →"}
+                      : isEnglish ? "Request a table on WhatsApp →" : "WhatsApp'ta Masa Talep Et →"}
                   </span>
                 </button>
 
@@ -677,8 +677,8 @@ Müsaitlik durumunu teyit edebilir misiniz? Teşekkürler.`;
                   <ShieldCheck size={13} style={{ color: "#237829", flex: "none" }} />
                   <span>
                     {isEnglish
-                      ? "Free reservation • Instant confirmation on WhatsApp"
-                      : "Ücretsiz rezervasyon • Anında WhatsApp teyidi"}
+                      ? "Free request • Wait for WhatsApp confirmation"
+                      : "Ücretsiz talep • WhatsApp'tan teyit bekleyin"}
                   </span>
                 </p>
               </div>
