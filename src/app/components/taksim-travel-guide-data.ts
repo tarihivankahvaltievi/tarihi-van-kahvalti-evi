@@ -4,6 +4,7 @@ import type { TravelGuide } from "./taksim-travel-guide";
 
 const date = "2026-09-28T12:00:00+03:00";
 const zhHoney = `${siteUrl}/zh-cn/blog/istanbul-bal-kaymak`;
+const esHoney = `${siteUrl}/es/blog/bal-kaymak-estambul`;
 const zhBreakfast = `${siteUrl}/zh-cn/blog/taksim-turkish-breakfast`;
 const koTaksim = `${siteUrl}/ko/blog/taksim-kahvalti-rehberi`;
 
@@ -98,7 +99,7 @@ export const chineseHoneyGuide: TravelGuide = {
   ],
   menuLabel: "查看当前菜单及价格", mapLabel: "Google 地图导航", callLabel: "致电咨询", homeLabel: "中文首页", hoursLabel: "营业时间", addressLabel: "地址",
   menuHref: "/en/menu#bal-kaymak",
-  translations: { "zh-CN": zhHoney, ko: koreanHoneyKaymakBlogUrl, ja: japaneseHoneyKaymakBlogUrl },
+  translations: { "zh-CN": zhHoney, ko: koreanHoneyKaymakBlogUrl, ja: japaneseHoneyKaymakBlogUrl, es: esHoney },
 };
 
 export const chineseBreakfastGuide: TravelGuide = {

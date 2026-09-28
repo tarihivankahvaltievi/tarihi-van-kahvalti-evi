@@ -7,7 +7,7 @@ import styles from "./taksim-travel-guide.module.css";
 
 export type TravelGuide = {
   path: string;
-  language: "ko-KR" | "zh-CN";
+  language: "ko-KR" | "zh-CN" | "en-GB" | "es";
   title: string;
   description: string;
   kicker: string;
@@ -30,6 +30,8 @@ export type TravelGuide = {
   mapLabel: string;
   callLabel: string;
   homeLabel: string;
+  contentsLabel?: string;
+  topMenuLabel?: string;
   hoursLabel: string;
   addressLabel: string;
   translations?: Record<string, string>;
@@ -44,7 +46,7 @@ export function travelGuideMetadata(guide: TravelGuide): Metadata {
     authors: [{ name: siteName, url: siteUrl }],
     openGraph: {
       type: "article", title: guide.title, description: guide.description, url,
-      siteName, locale: guide.language === "ko-KR" ? "ko_KR" : "zh_CN",
+      siteName, locale: ({ "ko-KR": "ko_KR", "zh-CN": "zh_CN", "en-GB": "en_GB", es: "es_ES" } as const)[guide.language],
       publishedTime: guide.date, modifiedTime: guide.date,
       images: [{ url: absoluteUrl(guide.image), alt: guide.imageAlt }],
     },
@@ -54,7 +56,7 @@ export function travelGuideMetadata(guide: TravelGuide): Metadata {
 
 export function TaksimTravelGuide({ guide }: { guide: TravelGuide }) {
   const url = absoluteUrl(guide.path);
-  const home = guide.language === "ko-KR" ? "/ko" : "/zh-cn";
+  const home = ({ "ko-KR": "/ko", "zh-CN": "/zh-cn", "en-GB": "/en", es: "/es" } as const)[guide.language];
   const graph = {
     "@context": "https://schema.org",
     "@graph": [
@@ -90,7 +92,7 @@ export function TaksimTravelGuide({ guide }: { guide: TravelGuide }) {
         <Link href={home} hrefLang={guide.language}>{siteName}</Link>
         <nav aria-label={guide.homeLabel}>
           <Link href={home} hrefLang={guide.language}>{guide.homeLabel}</Link>
-          <Link href="/en/menu" hrefLang="en">Menu</Link>
+          <Link href="/en/menu" hrefLang="en">{guide.topMenuLabel ?? "Menu"}</Link>
           <a href={mapsUrl} target="_blank" rel="noopener noreferrer">{guide.mapLabel}</a>
         </nav>
       </header>
@@ -104,7 +106,7 @@ export function TaksimTravelGuide({ guide }: { guide: TravelGuide }) {
           </div>
           <figure><Image src={guide.image} alt={guide.imageAlt} fill priority sizes="(max-width: 800px) 100vw, 50vw" /><figcaption>{guide.imageAlt}</figcaption></figure>
         </header>
-        <nav className={styles.contents} aria-label="Contents">
+        <nav className={styles.contents} aria-label={guide.contentsLabel ?? "Contents"}>
           {guide.sections.map((section) => <a key={section.id} href={`#${section.id}`}>{section.title}</a>)}
           <a href="#questions">{guide.faqTitle}</a>
         </nav>

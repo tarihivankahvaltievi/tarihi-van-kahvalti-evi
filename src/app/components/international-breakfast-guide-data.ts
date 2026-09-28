@@ -692,6 +692,7 @@ export const guides: Record<GuideLocale, GuideContent> = {
       ko: "https://www.tarihivankahvaltievi.com/ko/blog/istanbul-bal-kaymak",
       ja: "https://www.tarihivankahvaltievi.com/ja/blog/istanbul-bal-kaymak",
       "zh-CN": "https://www.tarihivankahvaltievi.com/zh-cn/blog/istanbul-bal-kaymak",
+      es: "https://www.tarihivankahvaltievi.com/es/blog/bal-kaymak-estambul",
     },
     languageLinks: [
       { label: "한국어 홈", href: "/ko", hrefLang: "ko" },
@@ -699,6 +700,7 @@ export const guides: Record<GuideLocale, GuideContent> = {
       { label: "터키식 아침", href: "/ko/blog/turkish-breakfast-istanbul", hrefLang: "ko" },
       { label: "日本語", href: "/ja/blog/istanbul-bal-kaymak", hrefLang: "ja" },
       { label: "简体中文", href: "/zh-cn/blog/istanbul-bal-kaymak", hrefLang: "zh-CN" },
+      { label: "Español", href: "/es/blog/bal-kaymak-estambul", hrefLang: "es" },
     ],
     relatedGuides: [
       {
@@ -886,11 +888,13 @@ export const guides: Record<GuideLocale, GuideContent> = {
       ja: "https://www.tarihivankahvaltievi.com/ja/blog/istanbul-bal-kaymak",
       ko: "https://www.tarihivankahvaltievi.com/ko/blog/istanbul-bal-kaymak",
       "zh-CN": "https://www.tarihivankahvaltievi.com/zh-cn/blog/istanbul-bal-kaymak",
+      es: "https://www.tarihivankahvaltievi.com/es/blog/bal-kaymak-estambul",
     },
     languageLinks: [
       { label: "日本語", href: "/ja/blog/istanbul-bal-kaymak", hrefLang: "ja" },
       { label: "한국어 발 카이막", href: "/ko/blog/istanbul-bal-kaymak", hrefLang: "ko" },
       { label: "简体中文", href: "/zh-cn/blog/istanbul-bal-kaymak", hrefLang: "zh-CN" },
+      { label: "Español", href: "/es/blog/bal-kaymak-estambul", hrefLang: "es" },
       { label: "English", href: "/en/blog/turkish-breakfast-istanbul", hrefLang: "en" },
     ],
     breadcrumbs: { aria: "パンくずリスト", home: "ホーム", current: "バル・カイマクガイド" },

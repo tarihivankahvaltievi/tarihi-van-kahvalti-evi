@@ -9,6 +9,11 @@ import {
   cookiePolicyUrl,
   defaultOgImagePath,
   englishBreakfastBlogUrl,
+  englishClassicBreakfastBlogUrl,
+  englishSimitBlogUrl,
+  spanishUrl,
+  spanishClassicBreakfastBlogUrl,
+  spanishHoneyKaymakBlogUrl,
   englishMenuUrl,
   englishUrl,
   englishReservationUrl,
@@ -33,9 +38,10 @@ import {
 // lastmod yalnız görünür ana içerik gerçekten değiştiğinde güncellenir.
 // Her derlemede "şimdi" üretmek arama motorlarına yanıltıcı bir sinyal verir.
 const pageLastModified = "2026-09-22T19:00:00+03:00";
-const homeLastModified = "2026-09-27T15:00:00+03:00";
+const homeLastModified = "2026-09-28T19:00:00+03:00";
 const koreanPageLastModified = "2026-09-28T12:00:00+03:00";
 const newGuideLastModified = "2026-09-28T12:00:00+03:00";
+const westernGuideLastModified = "2026-09-28T19:00:00+03:00";
 
 const homeLanguageAlternates = {
   languages: {
@@ -77,7 +83,12 @@ const honeyKaymakGuideAlternates = {
     ko: koreanHoneyKaymakBlogUrl,
     ja: japaneseHoneyKaymakBlogUrl,
     "zh-CN": chineseHoneyKaymakBlogUrl,
+    es: spanishHoneyKaymakBlogUrl,
   },
+};
+
+const classicBreakfastAlternates = {
+  languages: { en: englishClassicBreakfastBlogUrl, es: spanishClassicBreakfastBlogUrl },
 };
 
 const taksimGuideAlternates = {
@@ -279,6 +290,44 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       images: internationalGuideImages,
     },
     {
+      url: spanishUrl,
+      lastModified: westernGuideLastModified,
+      changeFrequency: "monthly",
+      priority: 0.8,
+      images: internationalGuideImages,
+    },
+    {
+      url: englishClassicBreakfastBlogUrl,
+      lastModified: westernGuideLastModified,
+      changeFrequency: "monthly",
+      priority: 0.7,
+      images: internationalGuideImages,
+      alternates: classicBreakfastAlternates,
+    },
+    {
+      url: englishSimitBlogUrl,
+      lastModified: westernGuideLastModified,
+      changeFrequency: "monthly",
+      priority: 0.65,
+      images: uniqueImages(["/images/hero-parallax/overhead-feast.webp", "/images/breakfast-spread.webp"]),
+    },
+    {
+      url: spanishClassicBreakfastBlogUrl,
+      lastModified: westernGuideLastModified,
+      changeFrequency: "monthly",
+      priority: 0.7,
+      images: internationalGuideImages,
+      alternates: classicBreakfastAlternates,
+    },
+    {
+      url: spanishHoneyKaymakBlogUrl,
+      lastModified: westernGuideLastModified,
+      changeFrequency: "monthly",
+      priority: 0.7,
+      images: koreanHoneyKaymakImages,
+      alternates: honeyKaymakGuideAlternates,
+    },
+    {
       url: englishBreakfastBlogUrl,
       lastModified: pageLastModified,
       changeFrequency: "monthly",
@@ -304,7 +353,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     },
     {
       url: koreanHoneyKaymakBlogUrl,
-      lastModified: newGuideLastModified,
+      lastModified: westernGuideLastModified,
       changeFrequency: "monthly",
       priority: 0.7,
       images: koreanHoneyKaymakImages,
@@ -312,7 +361,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     },
     {
       url: chineseHoneyKaymakBlogUrl,
-      lastModified: newGuideLastModified,
+      lastModified: westernGuideLastModified,
       changeFrequency: "monthly",
       priority: 0.7,
       images: koreanHoneyKaymakImages,
@@ -351,7 +400,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     },
     {
       url: japaneseHoneyKaymakBlogUrl,
-      lastModified: newGuideLastModified,
+      lastModified: westernGuideLastModified,
       changeFrequency: "monthly",
       priority: 0.7,
       images: koreanHoneyKaymakImages,

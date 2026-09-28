@@ -182,6 +182,12 @@ const nextConfig: NextConfig = {
         ],
       },
       {
+        source: "/es/:path*",
+        headers: [
+          { key: "Content-Language", value: "es" },
+        ],
+      },
+      {
         source: "/llms.txt",
         headers: [
           {
