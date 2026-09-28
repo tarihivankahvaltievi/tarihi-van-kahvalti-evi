@@ -21,6 +21,10 @@ const koreanHoneyKaymakBlogUrl = `${canonicalSiteUrl}/ko/blog/istanbul-bal-kayma
 const koreanKaymakExplainerUrl = `${canonicalSiteUrl}/ko/blog/kaymak-nedir`;
 const koreanTurkishBreakfastBlogUrl = `${canonicalSiteUrl}/ko/blog/turkish-breakfast-istanbul`;
 const japaneseHoneyKaymakBlogUrl = `${canonicalSiteUrl}/ja/blog/istanbul-bal-kaymak`;
+const chineseHomeUrl = `${canonicalSiteUrl}/zh-cn`;
+const chineseHoneyKaymakBlogUrl = `${canonicalSiteUrl}/zh-cn/blog/istanbul-bal-kaymak`;
+const chineseTaksimBreakfastBlogUrl = `${canonicalSiteUrl}/zh-cn/blog/taksim-turkish-breakfast`;
+const koreanTaksimBreakfastBlogUrl = `${canonicalSiteUrl}/ko/blog/taksim-kahvalti-rehberi`;
 const storyPageUrl = `${canonicalSiteUrl}/hikayemiz`;
 const privacyPageUrl = `${canonicalSiteUrl}/gizlilik`;
 const cookiePolicyPageUrl = `${canonicalSiteUrl}/cerez-politikasi`;
@@ -58,7 +62,16 @@ const internationalGuideHreflang = {
 const honeyKaymakHreflang = {
   ko: koreanHoneyKaymakBlogUrl,
   ja: japaneseHoneyKaymakBlogUrl,
+  "zh-CN": chineseHoneyKaymakBlogUrl,
 };
+
+const taksimHreflang = { ko: koreanTaksimBreakfastBlogUrl, "zh-CN": chineseTaksimBreakfastBlogUrl };
+const newRoutes = [
+  { path: "/zh-cn", canonical: chineseHomeUrl, language: "zh-CN", signals: ["塔克西姆", "蜂蜜奶皮", "Van 早餐"], links: ["/zh-cn/blog/istanbul-bal-kaymak", "/zh-cn/blog/taksim-turkish-breakfast"] },
+  { path: "/zh-cn/blog/istanbul-bal-kaymak", canonical: chineseHoneyKaymakBlogUrl, language: "zh-CN", signals: ["Bal Kaymak", "奶皮", "塔克西姆"], hreflang: honeyKaymakHreflang, citations: 2 },
+  { path: "/zh-cn/blog/taksim-turkish-breakfast", canonical: chineseTaksimBreakfastBlogUrl, language: "zh-CN", signals: ["serpme kahvaltı", "Van 早餐", "蜂蜜奶皮"], hreflang: taksimHreflang, citations: 4 },
+  { path: "/ko/blog/taksim-kahvalti-rehberi", canonical: koreanTaksimBreakfastBlogUrl, language: "ko", languageTag: "ko-KR", signals: ["탁심", "발 카이막", "반식"], hreflang: taksimHreflang, citations: 3 },
+];
 
 const routes = [
   {
@@ -295,6 +308,7 @@ const legalRoutes = [
 ];
 const canonicalUrls = new Set([
   ...routes.map((route) => route.canonical),
+  ...newRoutes.map((route) => route.canonical),
   ...legalRoutes.map((route) => route.canonical),
 ]);
 const internalPaths = new Set();
@@ -621,7 +635,7 @@ for (const route of routes) {
   const faq = graphDocument["@graph"].find((node) => node["@type"] === "FAQPage");
   const questions = faq?.mainEntity?.map((item) => item.name) ?? [];
   const summaries = [...visibleHtml(html).matchAll(/<summary[^>]*>([\s\S]*?)<\/summary>/gi)]
-    .map((match) => decodeHtml(match[1].replace(/<[^>]+>/g, " ")).replace(/\s+/g, " ").trim());
+    .map((match) => decodeHtml(match[1].replace(/<[^>]+>/g, " ")).replace(/\s+/g, " ").trim().replace(/^\d{2}\s+/, ""));
   assert(questions.length === route.faqCount, `${routeLabel}: şema SSS sayısı yanlış`);
   assert(new Set(questions).size === questions.length, `${routeLabel}: şema soruları benzersiz değil`);
   assert(summaries.length === route.faqCount, `${routeLabel}: görünür SSS sayısı yanlış`);
@@ -662,6 +676,40 @@ for (const route of routes) {
     assert(html.includes('href="/en#story"'), `${routeLabel}: görünür editör/işletme geçmişi bağlantısı eksik`);
     const article = graphDocument["@graph"].find((node) => node["@type"] === "BlogPosting");
     assert(article?.about?.filter((item) => item.sameAs).length === 4, `${routeLabel}: resmî kaynaklı entity bağları eksik`);
+  }
+}
+
+for (const route of newRoutes) {
+  const response = await fetchWithRetry(route.path);
+  const html = await response.text();
+  const pageText = visibleText(html);
+  assert(response.status === 200, `${route.path}: HTTP ${response.status}`);
+  assert(response.headers.get("content-language") === route.language, `${route.path}: Content-Language yanlış`);
+  assert(new RegExp(`<main\\b[^>]*\\blang="${route.languageTag ?? route.language}"`, "i").test(html), `${route.path}: ana içerik lang eksik`);
+  assert(html.includes(`<link rel="canonical" href="${route.canonical}"`), `${route.path}: canonical yanlış`);
+  assert((visibleHtml(html).match(/<h1\b/gi) ?? []).length === 1, `${route.path}: tek H1 bulunmalı`);
+  assert(route.signals.every((signal) => pageText.toLocaleLowerCase().includes(signal.toLocaleLowerCase())), `${route.path}: görünür içerik eksik`);
+  assert(!/<meta\s+name="robots"\s+content="[^"]*noindex/i.test(html), `${route.path}: noindex olmamalı`);
+  for (const [language, url] of Object.entries(route.hreflang ?? {})) {
+    assert(html.includes(`hrefLang="${language}" href="${url}"`) || html.includes(`href="${url}" hrefLang="${language}"`), `${route.path}: ${language} hreflang eksik`);
+  }
+  for (const target of route.links ?? []) assert(html.includes(`href="${target}"`), `${route.path}: dahili bağlantı eksik (${target})`);
+  const scripts = [...html.matchAll(/<script\s+type="application\/ld\+json">([\s\S]*?)<\/script>/gi)];
+  assert(scripts.length === 1, `${route.path}: tek JSON-LD script bulunmalı`);
+  const document = JSON.parse(scripts[0][1]);
+  assert(document["@context"] === "https://schema.org", `${route.path}: JSON-LD context yanlış`);
+  if (route.citations) {
+    const article = document["@graph"]?.find((node) => node["@type"] === "BlogPosting");
+    assert(article?.citation?.length === route.citations, `${route.path}: kaynak sayısı yanlış`);
+    assert(article.citation.every((url) => html.includes(`href="${url}"`)), `${route.path}: kaynaklar görünür olmalı`);
+  }
+  for (const match of html.matchAll(/<a\b[^>]*\bhref="([^"]+)"/gi)) {
+    const href = decodeHtml(match[1]);
+    if (!href.startsWith("/")) continue;
+    const internalPath = new URL(href, baseUrl).pathname;
+    internalPaths.add(internalPath);
+    if (!internalLinkSources.has(internalPath)) internalLinkSources.set(internalPath, new Set());
+    if (internalPath !== route.path) internalLinkSources.get(internalPath).add(route.path);
   }
 }
 
@@ -721,6 +769,7 @@ assert(sitemap.includes('hreflang="ru"'), "Sitemap: Rusça hreflang eksik");
 assert(sitemap.includes('hreflang="ar"'), "Sitemap: Arapça hreflang eksik");
 assert(sitemap.includes('hreflang="ko"'), "Sitemap: Korece hreflang eksik");
 assert(sitemap.includes('hreflang="ja"'), "Sitemap: Japonca hreflang eksik");
+assert(sitemap.includes('hreflang="zh-CN"'), "Sitemap: Çince hreflang eksik");
 assert(sitemap.includes('hreflang="x-default"'), "Sitemap: x-default hreflang eksik");
 
 for (const guideUrl of [englishBreakfastBlogUrl, russianBreakfastBlogUrl, arabicBreakfastBlogUrl, koreanTurkishBreakfastBlogUrl]) {
@@ -740,7 +789,7 @@ for (const guideUrl of [englishBreakfastBlogUrl, russianBreakfastBlogUrl, arabic
   );
 }
 
-for (const guideUrl of [koreanHoneyKaymakBlogUrl, japaneseHoneyKaymakBlogUrl]) {
+for (const guideUrl of [koreanHoneyKaymakBlogUrl, japaneseHoneyKaymakBlogUrl, chineseHoneyKaymakBlogUrl]) {
   const guideBlock = sitemap.match(
     new RegExp(`<url>\\s*<loc>${guideUrl}</loc>([\\s\\S]*?)</url>`),
   )?.[1];
@@ -755,6 +804,14 @@ for (const guideUrl of [koreanHoneyKaymakBlogUrl, japaneseHoneyKaymakBlogUrl]) {
     (guideBlock.match(/<image:loc>/g) ?? []).length === 5,
     `Sitemap: ${guideUrl} için beş keşfedilebilir görsel bulunmalı`,
   );
+}
+
+for (const guideUrl of [koreanTaksimBreakfastBlogUrl, chineseTaksimBreakfastBlogUrl]) {
+  const guideBlock = sitemap.match(new RegExp(`<url>\\s*<loc>${guideUrl}</loc>([\\s\\S]*?)</url>`))?.[1];
+  assert(guideBlock, `Sitemap: Taksim rehber URL bloğu eksik (${guideUrl})`);
+  for (const [language, alternateUrl] of Object.entries(taksimHreflang)) {
+    assert(guideBlock.includes(`hreflang="${language}" href="${alternateUrl}"`), `Sitemap: ${guideUrl} için ${language} hreflang eksik`);
+  }
 }
 
 const appDirectory = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../src/app");
@@ -863,7 +920,11 @@ for (const guidePath of [
   "/ko/blog/istanbul-bal-kaymak",
   "/ko/blog/kaymak-nedir",
   "/ko/blog/turkish-breakfast-istanbul",
+  "/ko/blog/taksim-kahvalti-rehberi",
   "/ja/blog/istanbul-bal-kaymak",
+  "/zh-cn",
+  "/zh-cn/blog/istanbul-bal-kaymak",
+  "/zh-cn/blog/taksim-turkish-breakfast",
   "/rezervasyon",
   "/en/rezervasyon",
   "/gizlilik",

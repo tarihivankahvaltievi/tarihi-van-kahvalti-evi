@@ -176,6 +176,12 @@ const nextConfig: NextConfig = {
         ],
       },
       {
+        source: "/zh-cn/:path*",
+        headers: [
+          { key: "Content-Language", value: "zh-CN" },
+        ],
+      },
+      {
         source: "/llms.txt",
         headers: [
           {

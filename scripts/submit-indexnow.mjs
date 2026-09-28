@@ -24,7 +24,11 @@ const defaultUrls = [
   `${siteUrl}/ko/blog/istanbul-bal-kaymak`,
   `${siteUrl}/ko/blog/kaymak-nedir`,
   `${siteUrl}/ko/blog/turkish-breakfast-istanbul`,
+  `${siteUrl}/ko/blog/taksim-kahvalti-rehberi`,
   `${siteUrl}/ja/blog/istanbul-bal-kaymak`,
+  `${siteUrl}/zh-cn`,
+  `${siteUrl}/zh-cn/blog/istanbul-bal-kaymak`,
+  `${siteUrl}/zh-cn/blog/taksim-turkish-breakfast`,
   `${siteUrl}/gizlilik`,
   `${siteUrl}/cerez-politikasi`,
 ];

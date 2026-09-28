@@ -13,6 +13,7 @@ import {
   koreanHoneyKaymakBlogUrl,
   koreanKaymakExplainerUrl,
   koreanTurkishBreakfastBlogUrl,
+  koreanTaksimBreakfastBlogUrl,
   koreanUrl,
   mapsUrl,
   openingHours,
@@ -56,6 +57,7 @@ const guides = [
   { label: "먹으러 가기", title: "이스탄불 발 카이막 맛집 가이드", description: "실제 메뉴 구성, 꿀과 카이막을 먹는 순서, 탁심 근처 위치와 방문 정보를 확인하세요.", href: "/ko/blog/istanbul-bal-kaymak" },
   { label: "음식 이해하기", title: "카이막은 무엇이고 어떤 맛일까요?", description: "물소·소 카이막, 버터·생크림과의 차이, 발 카이막의 뜻과 터키어 주문 표현을 정리했습니다.", href: "/ko/blog/kaymak-nedir" },
   { label: "한 상 경험하기", title: "이스탄불 터키식 아침 식사", description: "카흐발트와 반 아침 식사의 대표 메뉴, 공유 방식, 주문 순서와 여행 팁을 안내합니다.", href: "/ko/blog/turkish-breakfast-istanbul" },
+  { label: "탁심 동선", title: "탁심 아침 식사 실전 가이드", description: "탁심 광장에서 길찾기, 발 카이막 단품과 공유 아침상 선택, 영업시간과 방문 전 확인 사항을 정리했습니다.", href: "/ko/blog/taksim-kahvalti-rehberi" },
 ];
 
 export default function KoreanHomePage() {
@@ -78,6 +80,7 @@ export default function KoreanHomePage() {
             { "@type": "ListItem", position: 1, name: "이스탄불 발 카이막 맛집 가이드", url: koreanHoneyKaymakBlogUrl },
             { "@type": "ListItem", position: 2, name: "카이막이란?", url: koreanKaymakExplainerUrl },
             { "@type": "ListItem", position: 3, name: "이스탄불 터키식 아침 식사", url: koreanTurkishBreakfastBlogUrl },
+            { "@type": "ListItem", position: 4, name: "탁심 아침 식사 실전 가이드", url: koreanTaksimBreakfastBlogUrl },
           ],
         },
         primaryImageOfPage: { "@type": "ImageObject", url: absoluteUrl("/images/og/istanbul-bal-kaymak.jpg"), width: 1200, height: 630 },
@@ -106,6 +109,8 @@ export default function KoreanHomePage() {
           <Link href="/ko/blog/istanbul-bal-kaymak">발 카이막</Link>
           <Link href="/ko/blog/kaymak-nedir">카이막이란</Link>
           <Link href="/ko/blog/turkish-breakfast-istanbul">터키식 아침</Link>
+          <Link href="/ko/blog/taksim-kahvalti-rehberi">탁심 아침</Link>
+          <Link href="/zh-cn" hrefLang="zh-CN">简体中文</Link>
           <Link href="/en/menu" hrefLang="en">메뉴</Link>
         </nav>
       </header>

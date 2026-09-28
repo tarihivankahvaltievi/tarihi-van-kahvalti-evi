@@ -15,6 +15,10 @@ import {
   koreanHoneyKaymakBlogUrl,
   koreanKaymakExplainerUrl,
   koreanTurkishBreakfastBlogUrl,
+  koreanTaksimBreakfastBlogUrl,
+  chineseUrl,
+  chineseHoneyKaymakBlogUrl,
+  chineseTaksimBreakfastBlogUrl,
   koreanUrl,
   japaneseHoneyKaymakBlogUrl,
   locationUrl,
@@ -30,7 +34,8 @@ import {
 // Her derlemede "şimdi" üretmek arama motorlarına yanıltıcı bir sinyal verir.
 const pageLastModified = "2026-09-22T19:00:00+03:00";
 const homeLastModified = "2026-09-27T15:00:00+03:00";
-const koreanPageLastModified = "2026-09-22T19:00:00+03:00";
+const koreanPageLastModified = "2026-09-28T12:00:00+03:00";
+const newGuideLastModified = "2026-09-28T12:00:00+03:00";
 
 const homeLanguageAlternates = {
   languages: {
@@ -71,7 +76,12 @@ const honeyKaymakGuideAlternates = {
   languages: {
     ko: koreanHoneyKaymakBlogUrl,
     ja: japaneseHoneyKaymakBlogUrl,
+    "zh-CN": chineseHoneyKaymakBlogUrl,
   },
+};
+
+const taksimGuideAlternates = {
+  languages: { ko: koreanTaksimBreakfastBlogUrl, "zh-CN": chineseTaksimBreakfastBlogUrl },
 };
 
 const internationalGuideImages = uniqueImages([
@@ -262,6 +272,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       alternates: homeLanguageAlternates,
     },
     {
+      url: chineseUrl,
+      lastModified: newGuideLastModified,
+      changeFrequency: "monthly",
+      priority: 0.8,
+      images: internationalGuideImages,
+    },
+    {
       url: englishBreakfastBlogUrl,
       lastModified: pageLastModified,
       changeFrequency: "monthly",
@@ -287,11 +304,35 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     },
     {
       url: koreanHoneyKaymakBlogUrl,
-      lastModified: koreanPageLastModified,
+      lastModified: newGuideLastModified,
       changeFrequency: "monthly",
       priority: 0.7,
       images: koreanHoneyKaymakImages,
       alternates: honeyKaymakGuideAlternates,
+    },
+    {
+      url: chineseHoneyKaymakBlogUrl,
+      lastModified: newGuideLastModified,
+      changeFrequency: "monthly",
+      priority: 0.7,
+      images: koreanHoneyKaymakImages,
+      alternates: honeyKaymakGuideAlternates,
+    },
+    {
+      url: koreanTaksimBreakfastBlogUrl,
+      lastModified: newGuideLastModified,
+      changeFrequency: "monthly",
+      priority: 0.7,
+      images: internationalGuideImages,
+      alternates: taksimGuideAlternates,
+    },
+    {
+      url: chineseTaksimBreakfastBlogUrl,
+      lastModified: newGuideLastModified,
+      changeFrequency: "monthly",
+      priority: 0.7,
+      images: internationalGuideImages,
+      alternates: taksimGuideAlternates,
     },
     {
       url: koreanKaymakExplainerUrl,
@@ -310,7 +351,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     },
     {
       url: japaneseHoneyKaymakBlogUrl,
-      lastModified: pageLastModified,
+      lastModified: newGuideLastModified,
       changeFrequency: "monthly",
       priority: 0.7,
       images: koreanHoneyKaymakImages,

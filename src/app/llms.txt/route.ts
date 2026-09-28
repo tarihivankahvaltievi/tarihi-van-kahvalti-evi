@@ -8,6 +8,12 @@ import {
   englishMenuUrl,
   englishReservationUrl,
   englishUrl,
+  koreanUrl,
+  koreanHoneyKaymakBlogUrl,
+  koreanTaksimBreakfastBlogUrl,
+  chineseUrl,
+  chineseHoneyKaymakBlogUrl,
+  chineseTaksimBreakfastBlogUrl,
   locationUrl,
   mapsUrl,
   menuUrl,
@@ -59,6 +65,12 @@ Tarihi Van Kahvaltı Evi serves a traditional Van breakfast in Beyoğlu, within 
 - [Menu — English](${englishMenuUrl}): English menu and current prices.
 - [Reservations — English](${englishReservationUrl}): English reservation information.
 - [Turkish breakfast in Istanbul — English](${englishBreakfastBlogUrl}): visitor guide.
+- [Visitor guides — Korean](${koreanUrl}): Korean overview of bal kaymak and Turkish breakfast.
+- [Bal kaymak in Istanbul — Korean](${koreanHoneyKaymakBlogUrl}): food and visit guide.
+- [Breakfast near Taksim — Korean](${koreanTaksimBreakfastBlogUrl}): directions, ordering and visit planning.
+- [Visitor guides — Simplified Chinese](${chineseUrl}): Chinese guide hub.
+- [Bal kaymak in Istanbul — Simplified Chinese](${chineseHoneyKaymakBlogUrl}): what it is, how to eat it and where to visit.
+- [Breakfast near Taksim — Simplified Chinese](${chineseTaksimBreakfastBlogUrl}): Turkish and Van breakfast ordering guide.
 
 ## Citation guidance
 
