@@ -39,7 +39,8 @@ import {
 // lastmod yalnız görünür ana içerik gerçekten değiştiğinde güncellenir.
 // Her derlemede "şimdi" üretmek arama motorlarına yanıltıcı bir sinyal verir.
 const pageLastModified = "2026-09-22T19:00:00+03:00";
-const homeLastModified = "2026-09-28T19:00:00+03:00";
+const homeLastModified = "2026-10-01T01:20:00+03:00";
+const menuPresentationLastModified = "2026-10-01T01:20:00+03:00";
 const koreanPageLastModified = "2026-09-28T12:00:00+03:00";
 const newGuideLastModified = "2026-09-28T12:00:00+03:00";
 const westernGuideLastModified = "2026-09-28T19:00:00+03:00";
@@ -122,10 +123,12 @@ function menuLastModified(value: string) {
   };
   const match = value.trim().match(/^(\d{1,2})\s+([^\s]+)\s+(\d{4})$/);
   const month = match ? monthNumbers[match[2]] : undefined;
-  if (!match || !month) return pageLastModified;
+  if (!match || !month) return menuPresentationLastModified;
 
-  const parsed = `${match[3]}-${month}-${match[1].padStart(2, "0")}T12:00:00+03:00`;
-  return Date.parse(parsed) > Date.parse(pageLastModified) ? parsed : pageLastModified;
+  // The stored value contains a date, not an update time. Midnight avoids
+  // publishing a future lastmod when the menu is saved before noon.
+  const parsed = `${match[3]}-${month}-${match[1].padStart(2, "0")}T00:00:00+03:00`;
+  return Date.parse(parsed) > Date.parse(menuPresentationLastModified) ? parsed : menuPresentationLastModified;
 }
 
 const homeImages = uniqueImages([
@@ -165,6 +168,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   await connection();
   const { categories, items, lastUpdated } = await getMenuData();
   const liveMenuLastModified = menuLastModified(lastUpdated);
+  const liveHomeLastModified = Date.parse(liveMenuLastModified) > Date.parse(homeLastModified)
+    ? liveMenuLastModified
+    : homeLastModified;
   const menuImages = uniqueImages([
     "/images/og/menu.jpg",
     ...categories.map((category) => category.image),
@@ -174,7 +180,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   return [
     {
       url: siteUrl,
-      lastModified: homeLastModified,
+      lastModified: liveHomeLastModified,
       changeFrequency: "weekly",
       priority: 1,
       images: homeImages,
@@ -202,7 +208,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     },
     {
       url: englishReservationUrl,
-      lastModified: pageLastModified,
+      lastModified: homeLastModified,
       changeFrequency: "weekly",
       priority: 0.85,
       images: uniqueImages([
@@ -261,7 +267,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     },
     {
       url: englishUrl,
-      lastModified: homeLastModified,
+      lastModified: liveHomeLastModified,
       changeFrequency: "weekly",
       priority: 0.9,
       images: homeImages,

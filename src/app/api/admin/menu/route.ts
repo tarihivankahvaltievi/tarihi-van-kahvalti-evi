@@ -1,12 +1,15 @@
 import { NextResponse } from "next/server";
-import { revalidatePath } from "next/cache";
+import { revalidatePath, revalidateTag } from "next/cache";
 import { isAdminAuthenticated } from "@/app/admin/auth-helper";
 import { getMenuData, saveMenuData, type MenuData } from "@/app/menu/menu-storage";
+import { publicMenuCacheTag } from "@/app/menu/public-menu-data";
 
 const siteUrl = "https://www.tarihivankahvaltievi.com";
 const indexNowKey = "4f9d1a7c8b6e3f205d72a941ce8b604a";
 
 async function notifyMenuUpdate() {
+  // Isolated integration tests must never submit fixture prices to IndexNow.
+  if (process.env.INDEXNOW_DRY_RUN === "1") return;
   const response = await fetch("https://api.indexnow.org/indexnow", {
     method: "POST",
     headers: { "Content-Type": "application/json; charset=utf-8" },
@@ -14,7 +17,7 @@ async function notifyMenuUpdate() {
       host: new URL(siteUrl).host,
       key: indexNowKey,
       keyLocation: `${siteUrl}/${indexNowKey}.txt`,
-      urlList: [`${siteUrl}/menu`, `${siteUrl}/en/menu`],
+      urlList: [siteUrl, `${siteUrl}/en`, `${siteUrl}/menu`, `${siteUrl}/en/menu`],
     }),
     signal: AbortSignal.timeout(5000),
   });
@@ -59,8 +62,11 @@ export async function POST(request: Request) {
 
     const success = await saveMenuData(data);
     if (success) {
+      revalidateTag(publicMenuCacheTag, { expire: 0 });
       revalidatePath("/menu");
       revalidatePath("/en/menu");
+      revalidatePath("/");
+      revalidatePath("/en");
       revalidatePath("/sitemap.xml");
 
       try {

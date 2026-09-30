@@ -256,7 +256,7 @@ export default function ClientPage({ children, locale = "tr" }: { children: Reac
                 </li>
                 <li>
                   <Link
-                    href="/konum"
+                    href={locale === "en" ? "/en#location" : "/konum"}
                     className={`nav-link ${isLocationPage ? "active" : ""}`}
                   >
                     {locale === "en" ? "LOCATION" : "KONUM"}
@@ -357,7 +357,7 @@ export default function ClientPage({ children, locale = "tr" }: { children: Reac
                 </li>
                 <li>
                   <Link
-                    href="/konum"
+                    href={locale === "en" ? "/en#location" : "/konum"}
                     className={`mobile-link ${isLocationPage ? "active" : ""}`}
                     onClick={() => setMenuOpen(false)}
                   >

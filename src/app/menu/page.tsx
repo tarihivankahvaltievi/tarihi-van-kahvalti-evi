@@ -1,6 +1,4 @@
 import type { Metadata } from "next";
-import { Suspense } from "react";
-import { cookies } from "next/headers";
 import ClientPage from "../client-page";
 import {
   absoluteUrl,
@@ -14,7 +12,8 @@ import {
 } from "../seo";
 import { AnimatedFooter } from "../components/animated-footer";
 import { MenuExperience } from "./menu-experience";
-import { getMenuData } from "./menu-storage";
+import { getPublicMenuData } from "./public-menu-data";
+import { getMenuOrderNote } from "./menu-rules";
 
 const menuDescription =
   "Tarihi Van Kahvaltı Evi güncel menü ve fiyatları: serpme Van kahvaltısı, bakır sahanlar, yöresel lezzetler, çay ve kahve seçenekleri.";
@@ -54,23 +53,8 @@ export const metadata: Metadata = {
   },
 };
 
-export default function MenuPage() {
-  return (
-    <Suspense
-      fallback={
-        <div className="min-h-screen flex items-center justify-center bg-[#f4ecdf]">
-          <div className="inline-block animate-spin rounded-full h-8 w-8 border-4 border-red-800 border-t-transparent" />
-        </div>
-      }
-    >
-      <MenuContainer />
-    </Suspense>
-  );
-}
-
-async function MenuContainer() {
-  await cookies(); // Force dynamic request-time execution in Next.js 16
-  const { categories, items } = await getMenuData();
+export default async function MenuPage() {
+  const { categories, items, lastUpdated } = await getPublicMenuData();
 
   const menuSchema = {
     "@type": "Menu",
@@ -89,6 +73,8 @@ async function MenuContainer() {
           const numericPrice = item.price.match(/^₺?(\d+)/)?.[1];
           return {
             "@type": "MenuItem",
+            "@id": `${menuUrl}#${item.id}`,
+            url: `${menuUrl}#${item.id}`,
             name: item.name,
             description: item.description,
             image: item.image ? absoluteUrl(item.image) : undefined,
@@ -97,6 +83,7 @@ async function MenuContainer() {
                   "@type": "Offer",
                   price: numericPrice,
                   priceCurrency: "TRY",
+                  description: [item.priceNote, getMenuOrderNote(item.id, "tr")].filter(Boolean).join(" ") || undefined,
                   url: `${menuUrl}#${item.id}`,
                 }
               : undefined,
@@ -137,6 +124,8 @@ async function MenuContainer() {
       <ClientPage>
         <MenuExperience
           initialItems={items}
+          initialCategories={categories}
+          lastUpdated={lastUpdated}
         />
         <AnimatedFooter locale="tr" />
       </ClientPage>

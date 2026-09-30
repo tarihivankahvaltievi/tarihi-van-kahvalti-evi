@@ -1,0 +1,30 @@
+.section {
+  padding: clamp(40px, 6vw, 80px) 24px;
+  /* The shared footer overlaps the preceding section by up to 50px. */
+  padding-bottom: calc(clamp(40px, 6vw, 80px) + 50px);
+  background: #f2e3d0;
+  color: #402021;
+  scroll-margin-top: 90px;
+}
+
+.inner {
+  max-width: 1080px;
+  margin: auto;
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: clamp(24px, 5vw, 64px);
+}
+
+.eyebrow { font-size: 14px; font-weight: 600; }
+.inner h2 { font: 400 clamp(28px, 3vw, 42px)/1.15 "NOCTADO", Georgia, serif; margin: 12px 0 20px; }
+.inner address { font-style: normal; font-weight: 600; }
+.inner p, .inner address { line-height: 1.6; }
+.inner p { margin: 12px 0 0; }
+.actions { display: flex; flex-direction: column; align-items: flex-start; gap: 8px; }
+.actions a { min-height: 44px; display: inline-flex; align-items: center; font-weight: 600; text-decoration: underline; text-underline-offset: 4px; }
+.actions a:focus-visible { outline: 2px solid currentColor; outline-offset: 4px; }
+.actions p { font-size: 14px; }
+
+@media (max-width: 700px) {
+  .inner { grid-template-columns: 1fr; }
+}

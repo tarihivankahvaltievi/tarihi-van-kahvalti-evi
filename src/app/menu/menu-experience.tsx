@@ -6,8 +6,9 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X } from "lucide-react";
 import styles from "./menu.module.css";
-import type { MenuItem } from "./menu-data";
-import type { MenuLocale } from "./menu-localization";
+import type { MenuCategory, MenuItem } from "./menu-data";
+import { localizeMenuDate, type MenuLocale } from "./menu-localization";
+import { getMenuOrderNote } from "./menu-rules";
 
 export type HamourChapter = {
   id: string;
@@ -24,7 +25,7 @@ export type HamourChapter = {
 const HAMOUR_CHAPTERS: HamourChapter[] = [
   {
     id: "serpme-kahvalti",
-    label: { tr: "Serpme Kahvaltı", en: "Royal Breakfast" },
+    label: { tr: "Serpme Kahvaltı", en: "Serpme Breakfast" },
     iconWhite: "/hamour/mi_tab-input-4-img-1.png",
     iconDark: "/hamour/mi_tab-input-4-img-2_1.png",
     sections: [
@@ -176,14 +177,30 @@ export function getItemImage(item: MenuItem, fallback: string): string {
 
 interface MenuExperienceProps {
   initialItems: MenuItem[];
+  initialCategories: MenuCategory[];
+  lastUpdated: string;
   locale?: MenuLocale;
 }
 
 export function MenuExperience({
   initialItems,
+  initialCategories,
+  lastUpdated,
   locale = "tr",
 }: MenuExperienceProps) {
   const isEn = locale === "en";
+  // Every category and item is rendered once. Navigation scrolls to existing
+  // HTML rather than mounting products only after a category click.
+  const orderedCategories = useMemo(() => {
+    const chapterOrder = HAMOUR_CHAPTERS.flatMap((chapter) =>
+      chapter.sections.flatMap((section) => section.categories),
+    );
+    const order = (id: string) => {
+      const index = chapterOrder.indexOf(id);
+      return index === -1 ? chapterOrder.length : index;
+    };
+    return [...initialCategories].sort((a, b) => order(a.id) - order(b.id));
+  }, [initialCategories]);
 
   // Active Chapter
   const [activeChapterId, setActiveChapterId] = useState<string>("serpme-kahvalti");
@@ -206,19 +223,23 @@ export function MenuExperience({
 
   useEffect(() => {
     const revealHashTarget = () => {
-      const targetId = decodeURIComponent(window.location.hash.slice(1));
+      let targetId: string;
+      try {
+        targetId = decodeURIComponent(window.location.hash.slice(1));
+      } catch {
+        return; // Ignore malformed fragments without breaking menu interaction.
+      }
       if (!targetId) return;
 
       const targetItem = initialItems.find((item) => item.id === targetId);
-      if (!targetItem) return;
-
+      const targetCategory = initialCategories.find((category) => category.id === targetId);
+      const categoryId = targetItem?.category ?? targetCategory?.id;
+      if (!categoryId) return;
       const targetChapter = HAMOUR_CHAPTERS.find((chapter) =>
-        chapter.sections.some((section) => section.categories.includes(targetItem.category)),
+        chapter.sections.some((section) => section.categories.includes(categoryId)),
       );
-      if (!targetChapter) return;
-
-      setActiveChapterId(targetChapter.id);
-      setActiveItemId(targetItem.id);
+      if (targetChapter) setActiveChapterId(targetChapter.id);
+      setActiveItemId(targetItem?.id ?? initialItems.find((item) => item.category === categoryId)?.id ?? "");
       window.requestAnimationFrame(() => {
         window.requestAnimationFrame(() => {
           document.getElementById(targetId)?.scrollIntoView({ block: "start" });
@@ -232,15 +253,16 @@ export function MenuExperience({
       window.cancelAnimationFrame(frame);
       window.removeEventListener("hashchange", revealHashTarget);
     };
-  }, [initialItems]);
+  }, [initialItems, initialCategories]);
 
   const activeItem = useMemo(() => {
-    return chapterItems.find((it) => it.id === activeItemId) || chapterItems[0] || null;
-  }, [chapterItems, activeItemId]);
+    return initialItems.find((it) => it.id === activeItemId) || chapterItems[0] || null;
+  }, [chapterItems, activeItemId, initialItems]);
 
   // Modal Item (for mobile click & desktop detail view)
   const [modalItem, setModalItem] = useState<MenuItem | null>(null);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
+  const dialogRef = useRef<HTMLDivElement>(null);
   const modalTriggerRef = useRef<HTMLElement | null>(null);
 
   const handleOpenModal = useCallback((item: MenuItem) => {
@@ -261,6 +283,18 @@ export function MenuExperience({
     const focusFrame = window.requestAnimationFrame(() => closeButtonRef.current?.focus());
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Escape") handleCloseModal();
+      if (event.key !== "Tab") return;
+      const focusable = dialogRef.current?.querySelectorAll<HTMLElement>('button:not([disabled]), a[href], input:not([disabled]), [tabindex="0"]');
+      if (!focusable?.length) return;
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
+      }
     };
 
     document.body.style.overflow = "hidden";
@@ -279,7 +313,7 @@ export function MenuExperience({
     : activeChapter.heroImageFallback;
 
   return (
-    <main className={styles.menuContainer} lang={isEn ? "en" : "tr"}>
+    <main id="main-content" tabIndex={-1} className={styles.menuContainer} lang={isEn ? "en" : "tr"}>
       {/* ====================================================================
           1. BANNER SECTION (.banner)
           ==================================================================== */}
@@ -291,13 +325,13 @@ export function MenuExperience({
             fill
             priority
             sizes="100vw"
-            quality={85}
+            quality={84}
           />
         </div>
 
         <div className={styles.bannerText}>
           <h1 className={styles.bannerTitle}>
-            {isEn ? "Menu" : "Menü"}
+            {isEn ? "Menu & Prices" : "Menü ve Fiyatlar"}
           </h1>
         </div>
 
@@ -319,19 +353,26 @@ export function MenuExperience({
 
         <div className={styles.container}>
           {/* CATEGORY TABS (.nav-pills) */}
-          <ul className={styles.navPills} role="tablist" aria-label={isEn ? "Menu categories" : "Menü kategorileri"}>
+          <p className={styles.menuIntro}>
+            {isEn ? "All dishes and prices are listed below in Turkish lira (TRY). Choose a category to jump to it." : "Tüm ürünler ve Türk lirası (TL) fiyatları aşağıda listelenir. İlgili bölüme gitmek için bir kategori seçin."}
+          </p>
+          <nav aria-label={isEn ? "Menu categories" : "Menü kategorileri"}>
+          <ul className={styles.navPills}>
             {HAMOUR_CHAPTERS.map((chapter) => {
               const isActive = chapter.id === activeChapterId;
+              const categoryIds = chapter.sections.flatMap((section) => section.categories);
+              const firstCategory = orderedCategories.find((category) => categoryIds.includes(category.id));
+              if (!firstCategory) return null;
               return (
-                <li key={chapter.id} className={styles.navItem} role="presentation">
-                  <button
-                    type="button"
-                    role="tab"
-                    aria-selected={isActive}
-                    aria-controls="menu-chapter-panel"
-                    id={`menu-tab-${chapter.id}`}
+                <li key={chapter.id} className={styles.navItem}>
+                  <a
+                    href={`#${firstCategory.id}`}
+                    aria-current={isActive ? "location" : undefined}
                     className={`${styles.navLink} ${isActive ? styles.navLinkActive : ""}`}
-                    onClick={() => setActiveChapterId(chapter.id)}
+                    onClick={() => {
+                      setActiveChapterId(chapter.id);
+                      setActiveItemId(initialItems.find((item) => categoryIds.includes(item.category))?.id ?? "");
+                    }}
                   >
                     <span className={styles.navLinkIcon} aria-hidden="true">
                       <Image
@@ -344,18 +385,17 @@ export function MenuExperience({
                     <span className={styles.navLinkText}>
                       {isEn ? chapter.label.en : chapter.label.tr}
                     </span>
-                  </button>
+                  </a>
                 </li>
               );
             })}
           </ul>
+          </nav>
 
           {/* MENU LIST ARTICLE (.menu-list-article) */}
           <div
             className={styles.menuListArticle}
-            id="menu-chapter-panel"
-            role="tabpanel"
-            aria-labelledby={`menu-tab-${activeChapterId}`}
+            aria-label={isEn ? "Complete menu" : "Tam menü"}
           >
             {/* Desktop Left Image Preview (.menu-img-animate) */}
             <div className={styles.menuImgAnimate}>
@@ -374,7 +414,7 @@ export function MenuExperience({
                       alt={activeItem?.name || "Menu item"}
                       fill
                       sizes="50vw"
-                      quality={85}
+                      quality={84}
                       style={{ objectFit: "cover" }}
                     />
                   </motion.div>
@@ -391,6 +431,7 @@ export function MenuExperience({
                     </div>
                     <div className={styles.menuImgBadgePrice}>
                       {activeItem.price}
+                      {activeItem.priceNote && <small className={styles.priceNote}>{activeItem.priceNote}</small>}
                     </div>
                   </div>
                 )}
@@ -400,19 +441,15 @@ export function MenuExperience({
             {/* Right Scrollable Menu Article (.menu-article) */}
             <div className={styles.menuArticle}>
               <div className={styles.menuArticleScroll}>
-                {activeChapter.sections.map((section, secIdx) => {
-                  const sectionCategorySet = new Set(section.categories);
-                  const itemsInSection = initialItems.filter((it) =>
-                    sectionCategorySet.has(it.category),
-                  );
+                {orderedCategories.map((category) => {
+                  const itemsInSection = initialItems.filter((item) => item.category === category.id);
 
                   if (itemsInSection.length === 0) return null;
 
                   return (
-                    <div key={secIdx} className={styles.subSection}>
-                      <h2 className={styles.subCategoryTitle}>
-                        {isEn ? section.title.en : section.title.tr}
-                      </h2>
+                    <section key={category.id} id={category.id} className={styles.subSection} aria-labelledby={`category-title-${category.id}`}>
+                      <h2 id={`category-title-${category.id}`} className={styles.subCategoryTitle}>{category.label}</h2>
+                      <p className={styles.categoryDescription}>{category.description}</p>
 
                       {itemsInSection.map((item) => {
                         const isCurrentActive = activeItem?.id === item.id;
@@ -430,17 +467,13 @@ export function MenuExperience({
                             : item.description;
 
                         return (
-                          <button
-                            type="button"
+                          <article
+                            data-menu-item="true"
                             key={item.id}
                             id={item.id}
                             className={`${styles.menuItem} ${isCurrentActive ? styles.menuItemActive : ""}`}
                             onMouseEnter={() => setActiveItemId(item.id)}
-                            onClick={() => {
-                              setActiveItemId(item.id);
-                              // On mobile or on click, open detail modal
-                              handleOpenModal(item);
-                            }}
+
                           >
                             {/* Mobile Thumbnail */}
                             <div className={styles.menuItemThumb}>
@@ -455,10 +488,16 @@ export function MenuExperience({
                             <div className={styles.menuItemContent}>
                               <div className={styles.menuItemHeader}>
                                 <h3 className={styles.menuItemTitle}>
-                                  {displayName}
+                                  <button type="button" className={styles.itemDetailsButton}
+                                    onFocus={() => setActiveItemId(item.id)}
+                                    onClick={() => { setActiveItemId(item.id); handleOpenModal(item); }}
+                                    aria-label={isEn ? `View details: ${displayName}` : `Ayrıntıları gör: ${displayName}`}>
+                                    {displayName}
+                                  </button>
                                 </h3>
                                 <span className={styles.menuItemPrice}>
                                   {item.price}
+                                  {item.priceNote && <small className={styles.priceNote}>{item.priceNote}</small>}
                                 </span>
                               </div>
 
@@ -468,6 +507,12 @@ export function MenuExperience({
                                 </p>
                               )}
 
+                              {getMenuOrderNote(item.id, locale) && <p className={styles.orderNote}>{getMenuOrderNote(item.id, locale)}</p>}
+                              {item.category === "kahvalti-menuleri" && item.details.length > 0 && (
+                                <ul className={styles.servingDetails}>
+                                  {item.details.map((detail) => <li key={detail}>{detail}</li>)}
+                                </ul>
+                              )}
                               {item.tags && item.tags.length > 0 && (
                                 <div className={styles.menuItemTags}>
                                   {item.tags.map((tag, idx) => (
@@ -478,15 +523,17 @@ export function MenuExperience({
                                 </div>
                               )}
                             </div>
-                          </button>
+                          </article>
                         );
                       })}
-                    </div>
+                    </section>
                   );
                 })}
               </div>
             </div>
           </div>
+          {lastUpdated && <p className={styles.menuUpdated}>{isEn ? "Menu data last updated" : "Menü verisi son güncelleme"}: {localizeMenuDate(locale, lastUpdated)}</p>}
+          <p className={styles.menuIntro}>{isEn ? "For allergies, serving quantities or additional charges, please ask our team before ordering." : "Alerjenler, servis miktarı ve ek ücret koşulları için sipariş öncesinde ekibimize danışabilirsiniz."}</p>
         </div>
       </section>
 
@@ -563,6 +610,7 @@ export function MenuExperience({
 
             <motion.div
               className={styles.sheetDialog}
+              ref={dialogRef}
               role="dialog"
               aria-modal="true"
               aria-labelledby="menu-detail-title"
@@ -598,7 +646,7 @@ export function MenuExperience({
                       ? modalItem.translations.en.name
                       : modalItem.name}
                   </h3>
-                  <span className={styles.sheetPrice}>{modalItem.price}</span>
+                  <span className={styles.sheetPrice}>{modalItem.price}{modalItem.priceNote && <small className={styles.priceNote}>{modalItem.priceNote}</small>}</span>
                 </div>
 
                 <p className={styles.sheetDesc}>
@@ -607,6 +655,8 @@ export function MenuExperience({
                     : modalItem.description}
                 </p>
 
+                {getMenuOrderNote(modalItem.id, locale) && <p className={styles.orderNote}>{getMenuOrderNote(modalItem.id, locale)}</p>}
+                {modalItem.details.length > 0 && <ul className={styles.servingDetails}>{modalItem.details.map((detail) => <li key={detail}>{detail}</li>)}</ul>}
                 {modalItem.tags && modalItem.tags.length > 0 && (
                   <div className={styles.sheetTags}>
                     {modalItem.tags.map((tag, i) => (

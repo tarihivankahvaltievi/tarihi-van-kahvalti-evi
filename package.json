@@ -13,6 +13,7 @@
     "start": "next start",
     "lint": "eslint",
     "test:seo": "node scripts/validate-seo.mjs",
+    "test:menu": "node scripts/test-menu.mjs",
     "test:reservations": "node scripts/test-reservations.mjs",
     "seo:indexnow": "node scripts/submit-indexnow.mjs"
   },

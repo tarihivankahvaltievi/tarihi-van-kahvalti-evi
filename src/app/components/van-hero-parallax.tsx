@@ -4,6 +4,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRef, useState } from "react";
 import { messagesFor, type SiteLocale } from "../home-localization";
+import { address, openingHours, mapsUrl, googleMapsSnapshot } from "../seo";
+import { getMenuOrderNote } from "../menu/menu-rules";
 
 type HeroSlide = {
   image: string;
@@ -39,7 +41,7 @@ const heroSlides: HeroSlide[] = [
   },
 ];
 
-export function VanHeroParallax({ locale = "tr" }: { locale?: SiteLocale }) {
+export function VanHeroParallax({ locale = "tr", serpmePrice }: { locale?: SiteLocale; serpmePrice?: string }) {
   const messages = messagesFor(locale);
   const [currentSlide, setCurrentSlide] = useState(0);
   const [previousSlide, setPreviousSlide] = useState<number | null>(null);
@@ -101,13 +103,21 @@ export function VanHeroParallax({ locale = "tr" }: { locale?: SiteLocale }) {
           </h1>
           <p className="hero-tagline">
             {locale === "en"
-              ? "A family table bringing the breakfast traditions of Van to Beyoğlu."
-              : "Van'ın sofra geleneği, yarım asırdır aynı aile sıcaklığıyla Beyoğlu'nda."}
+              ? "Traditional Van breakfast in Beyoğlu, near Taksim."
+              : "Beyoğlu / Taksim’de geleneksel Van kahvaltısı."}
           </p>
+          <div className="hero-visit-facts">
+            <address>{address.neighborhood}, {address.streetAddress}<br />{address.postalCode} {address.locality} / {address.region}</address>
+            <p>{locale === "en" ? "Every day" : "Her gün"} {openingHours.opens}–{openingHours.closes}</p>
+          </div>
+          {serpmePrice && <p className="hero-breakfast-price"><Link href={`${messages.menuHref}#serpme-fix-menu`}>{locale === "en" ? "Serpme breakfast" : "Serpme kahvaltı"}: {serpmePrice} {locale === "en" ? "per person" : "kişi başı"} · {getMenuOrderNote("serpme-fix-menu", locale)}</Link></p>}
           <div className="hero-actions">
             <Link href={messages.menuHref} className="btn btn-primary">
-              {locale === "en" ? "VIEW MENU" : "MENÜYÜ GÖR"}
+              {locale === "en" ? "MENU & PRICES" : "MENÜ VE FİYATLAR"}
             </Link>
+            <a href={mapsUrl} className="btn btn-secondary-hero" target="_blank" rel="noopener noreferrer" data-analytics-surface="home_hero">
+              {locale === "en" ? "DIRECTIONS" : "YOL TARİFİ"}
+            </a>
             <Link
               href={locale === "en" ? "/en/rezervasyon" : "/rezervasyon"}
               className="btn btn-secondary-hero"
@@ -115,6 +125,12 @@ export function VanHeroParallax({ locale = "tr" }: { locale?: SiteLocale }) {
               {locale === "en" ? "MAKE A RESERVATION" : "REZERVASYON YAP"}
             </Link>
           </div>
+          <p className="hero-review-source">
+            <a href={googleMapsSnapshot.sourceUrl} target="_blank" rel="noopener noreferrer" data-analytics-surface="home_review_source" data-analytics-purpose="review_source">
+              Google Maps · {googleMapsSnapshot.rating.toLocaleString(locale === "en" ? "en-US" : "tr-TR")}/5 · {googleMapsSnapshot.reviewCount.toLocaleString(locale === "en" ? "en-US" : "tr-TR")} {locale === "en" ? "reviews" : "yorum"}
+            </a>
+            <span>{locale === "en" ? "Checked" : "Kontrol"}: <time dateTime={googleMapsSnapshot.checkedAt}>{new Intl.DateTimeFormat(locale === "en" ? "en-GB" : "tr-TR", { day: "numeric", month: "long", year: "numeric", timeZone: "Europe/Istanbul" }).format(new Date(`${googleMapsSnapshot.checkedAt}T12:00:00+03:00`))}</time></span>
+          </p>
         </div>
       </div>
 

@@ -1,11 +1,10 @@
 import type { Metadata } from "next";
-import { cookies } from "next/headers";
-import { Suspense } from "react";
 import ClientPage from "../../client-page";
 import { AnimatedFooter } from "../../components/animated-footer";
 import { localizeMenuData } from "../../menu/menu-localization";
 import { MenuExperience } from "../../menu/menu-experience";
-import { getMenuData } from "../../menu/menu-storage";
+import { getPublicMenuData } from "../../menu/public-menu-data";
+import { getMenuOrderNote } from "../../menu/menu-rules";
 import {
   absoluteUrl,
   buildBreadcrumbJsonLd,
@@ -56,23 +55,8 @@ export const metadata: Metadata = {
   },
 };
 
-export default function EnglishMenuPage() {
-  return (
-    <Suspense
-      fallback={
-        <div className="min-h-screen flex items-center justify-center bg-[#f4ecdf]" lang="en">
-          <p className="font-serif text-lg text-[#5e4940]">Loading the current menu…</p>
-        </div>
-      }
-    >
-      <EnglishMenuContent />
-    </Suspense>
-  );
-}
-
-async function EnglishMenuContent() {
-  await cookies();
-  const { categories, items } = await getMenuData();
+export default async function EnglishMenuPage() {
+  const { categories, items, lastUpdated } = await getPublicMenuData();
   const localized = localizeMenuData("en", categories, items);
 
   const menuSchema = {
@@ -94,6 +78,8 @@ async function EnglishMenuContent() {
           const numericPrice = item.price.match(/^₺?(\d+)/)?.[1];
           return {
             "@type": "MenuItem",
+            "@id": `${englishMenuUrl}#${item.id}`,
+            url: `${englishMenuUrl}#${item.id}`,
             name: item.name,
             alternateName: original?.name,
             description: item.description,
@@ -102,6 +88,7 @@ async function EnglishMenuContent() {
               "@type": "Offer",
               price: numericPrice,
               priceCurrency: "TRY",
+              description: [item.priceNote, getMenuOrderNote(item.id, "en")].filter(Boolean).join(" ") || undefined,
               url: `${englishMenuUrl}#${item.id}`,
             } : undefined,
           };
@@ -143,6 +130,8 @@ async function EnglishMenuContent() {
         <MenuExperience
           locale="en"
           initialItems={localized.items}
+          initialCategories={localized.categories}
+          lastUpdated={lastUpdated}
         />
         <AnimatedFooter locale="en" />
       </ClientPage>

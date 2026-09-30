@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { absoluteUrl, buildRestaurantJsonLd, displayAddress, displayPhone, englishMenuUrl, jsonLd, koreanUrl, mapsUrl, openingHours, siteName, siteUrl, telUrl } from "../../../seo";
+import { absoluteUrl, buildRestaurantJsonLd, displayAddress, displayPhone, jsonLd, koreanUrl, mapsUrl, openingHours, siteName, siteUrl, telUrl } from "../../../seo";
 import styles from "./tour-guide.module.css";
 
 const path = "/ko/blog/korean-tour-guide-van-breakfast";

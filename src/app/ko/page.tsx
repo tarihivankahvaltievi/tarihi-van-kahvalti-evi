@@ -14,7 +14,6 @@ import {
   koreanKaymakExplainerUrl,
   koreanTurkishBreakfastBlogUrl,
   koreanTaksimBreakfastBlogUrl,
-  koreanTourGuideBreakfastBlogUrl,
   koreanUrl,
   mapsUrl,
   openingHours,

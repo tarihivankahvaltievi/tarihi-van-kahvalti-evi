@@ -6,15 +6,19 @@ import { AnimatedFooter } from "./components/animated-footer";
 import { FaqSection } from "./components/faq-section";
 import { VanHeroParallax } from "./components/van-hero-parallax";
 import { messagesFor, type SiteLocale } from "./home-localization";
+import { VisitInformation } from "./components/visit-information";
+import { getPublicMenuData } from "./menu/public-menu-data";
 
-export function HomeContent({ locale = "tr" }: { locale?: SiteLocale }) {
+export async function HomeContent({ locale = "tr" }: { locale?: SiteLocale }) {
   const messages = messagesFor(locale);
+  const { items } = await getPublicMenuData();
+  const serpmePrice = items.find((item) => item.id === "serpme-fix-menu")?.price;
 
   return (
     <>
-      <main id="main-content" lang={messages.documentLanguage}>
+      <main id="main-content" tabIndex={-1} lang={messages.documentLanguage}>
         {/* Hero Section */}
-        <VanHeroParallax locale={locale} />
+        <VanHeroParallax locale={locale} serpmePrice={serpmePrice} />
 
         {/* Section 1: About & Heritage (Hamour Section 1) */}
         <AboutStory locale={locale} />
@@ -29,6 +33,7 @@ export function HomeContent({ locale = "tr" }: { locale?: SiteLocale }) {
         <VenueAtmosphere locale={locale} />
 
         <FaqSection locale={locale} />
+        <VisitInformation locale={locale} />
       </main>
 
       {/* Footer (Hamour Footer) */}

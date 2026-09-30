@@ -447,12 +447,8 @@ for (const route of routes) {
   const lowerText = text.toLocaleLowerCase(
     route.language === "tr" ? "tr-TR" : route.language === "ru" ? "ru-RU" : route.language === "ar" ? "ar-SA" : route.language === "ko" ? "ko-KR" : route.language === "ja" ? "ja-JP" : "en-US",
   );
-  // Cache Components streams partially prerendered menu content in the RSC
-  // payload. It becomes visible after hydration, so include that payload when
-  // checking the two live-menu routes.
-  const searchableText = route.sharedMenuDesign
-    ? decodeHtml(html).toLocaleLowerCase(route.language === "tr" ? "tr-TR" : "en-US")
-    : lowerText;
+  // Serialized JavaScript is not evidence of a readable product or anchor.
+  const searchableText = lowerText;
   const routeLabel = route.path;
 
   assert(response.status === 200, `${routeLabel}: HTTP ${response.status}`);
@@ -537,7 +533,7 @@ for (const route of routes) {
     const productAnchors = ["serpme-fix-menu", "van-golu-tabagi", "turk-kahvesi"];
     assert(
       productAnchors.every((itemId) =>
-        html.includes(`id="${itemId}"`) || html.includes(`\\"id\\":\\"${itemId}\\"`),
+        visibleHtml(html).includes(`id="${itemId}"`),
       ),
       `${routeLabel}: ürün derin bağlantı hedefleri eksik`,
     );
@@ -583,6 +579,20 @@ for (const route of routes) {
       /<a[^>]+class="nav-language"(?=[^>]*hrefLang="tr")(?=[^>]*href="\/")[^>]*>/i.test(html),
       `${routeLabel}: görünür TR dil anahtarı eksik`,
     );
+  }
+
+  if (route.path === "/" || route.path === "/en") {
+    const actualHtml = visibleHtml(html);
+    assert(actualHtml.includes('id="location"'), `${routeLabel}: gerçek konum fragment hedefi eksik`);
+    assert(actualHtml.includes('class="hero-visit-facts"'), `${routeLabel}: ilk ekranda ziyaret bilgisi eksik`);
+    assert(actualHtml.includes('class="hero-breakfast-price"'), `${routeLabel}: ilk ekranda canlı menüye bağlı serpme fiyatı eksik`);
+    assert(actualHtml.includes('class="hero-review-source"'), `${routeLabel}: kaynaklı yorum özeti eksik`);
+    assert(actualHtml.includes('data-analytics-purpose="review_source"'), `${routeLabel}: yorum kaynağı yol tarifi dönüşümü sayılmamalı`);
+    assert(actualHtml.includes('href="https://www.google.com/maps?cid=10380797280962926014"'), `${routeLabel}: doğru Maps kaydı eksik`);
+    assert(actualHtml.includes('id="main-content" tabindex="-1"'), `${routeLabel}: odaklanabilir ana içerik eksik`);
+  }
+  if (route.language === "en" && ["/en", "/en/menu", "/en/rezervasyon"].includes(route.path)) {
+    assert(visibleHtml(html).includes('href="/en#location"'), `${routeLabel}: İngilizce konum bağlantısı eksik`);
   }
 
   if (route.hreflang) {
@@ -642,6 +652,20 @@ for (const route of routes) {
     assert(menu?.["@id"] === `${route.canonical}#menu`, `${routeLabel}: menü kimliği yanlış`);
     assert(menu?.url === route.canonical, `${routeLabel}: menü URL'si yanlış`);
     assert(menu?.hasMenuSection?.length === route.menuSectionCount, `${routeLabel}: menü bölümleri eksik`);
+    const schemaItems = menu.hasMenuSection.flatMap((section) => section.hasMenuItem);
+    const renderedArticles = [...visibleHtml(html).matchAll(/<article\b[^>]*data-menu-item="true"[^>]*>[\s\S]*?<\/article>/gi)].map((match) => match[0]);
+    assert(schemaItems.length === renderedArticles.length, `${routeLabel}: görünür ürün/şema sayıları farklı`);
+    const productIds = renderedArticles.map((article) => article.match(/\bid="([^"]+)"/)?.[1]);
+    assert(new Set(productIds).size === productIds.length, `${routeLabel}: ürün id değerleri benzersiz olmalı`);
+    for (const item of schemaItems) {
+      const id = new URL(item.url).hash.slice(1);
+      const article = renderedArticles.find((entry) => entry.includes(`id="${id}"`));
+      assert(article, `${routeLabel}: ${id} yalnız şemada var`);
+      assert(visibleText(article).includes(item.name), `${routeLabel}: ${id} görünür adı şemayla eşleşmiyor`);
+      if (item.offers) assert(visibleText(article).includes(`₺${item.offers.price}`), `${routeLabel}: ${id} görünür fiyatı şemayla eşleşmiyor`);
+    }
+    assert(visibleHtml(html).includes('id="main-content" tabindex="-1"'), `${routeLabel}: menü skip link hedefi odaklanabilir olmalı`);
+    assert(text.includes(route.language === "en" ? "Minimum 2 people." : "Minimum 2 kişi için servis edilir."), `${routeLabel}: doğrulanmış minimum sipariş koşulu eksik`);
   } else {
     assert(!menu, `${routeLabel}: görünür olmayan menü için şema bulunmamalı`);
   }

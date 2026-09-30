@@ -72,6 +72,14 @@ export const openingHours = {
 // Doğrudan doğrulanmış Google Maps işletme kaydı (CID), genel arama sonucu değil.
 export const mapsUrl =
   "https://www.google.com/maps?cid=10380797280962926014";
+// Dated public-profile observation, not a live feed or a review-rich-result claim.
+// Recheck this exact CID before changing the values or the observation date.
+export const googleMapsSnapshot = {
+  rating: 4.9,
+  reviewCount: 1599,
+  checkedAt: "2026-10-01",
+  sourceUrl: mapsUrl,
+} as const;
 // Yandex Business'ta doğrulanacak mevcut işletme kaydı. Site ile profilin
 // adresi ve çalışma saatleri aynı tutulmalıdır.
 export const yandexMapsUrl =

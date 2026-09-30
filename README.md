@@ -30,7 +30,13 @@ npm start
 - Sitemap ve tarayıcı kuralları: `src/app/sitemap.ts`, `src/app/robots.ts`. XML sitemap yalnız indekslenebilir kanonik sayfaları; canlı menüden okunan keşfedilebilir görselleri ve ana sayfa, menü ve uluslararası rehberler için üç karşılıklı hreflang kümesini içerir.
 - Otomatik SEO/HTTP sözleşmesi: `npm run test:seo`
 
-Adres, telefon, çalışma saatleri veya fiyatlar değiştiğinde önce `seo.ts` güncellenmeli; görünür içerik ile JSON-LD aynı kaynaktan beslenmelidir.
+Adres, telefon ve çalışma saatleri `seo.ts` üzerinden; ürün/fiyat ve çeviriler yönetim panelindeki menü verisi üzerinden güncellenir. Görünür içerik ile JSON-LD aynı kaynaktan beslenmelidir. Menü kaydı TR/EN sayfalarının ortak önbelleğini yeniler.
+
+## 30 Eylül 2026 SEO/GEO raporu
+
+Raporun 24 maddesi, araştırma kaynakları, kabul ölçütleri ve beş bölümlü uygulama planı [ayrıntılı analizde](docs/seo-geo/rapor-analizi-ve-bes-asamali-plan-2026-10-01.md) bulunur. Birinci bölümün [doğrulama kaydı](docs/seo-geo/bolum-1-dogrulama-2026-10-01.md) ve [kod envanteri](docs/seo-geo/kod-envanteri-2026-10-01.csv) aynı dizindedir.
+
+Menü regresyon kontrolü: `npm run test:menu`. Önce `npm run build` gerekir. Test kendi yerel sunucusunu ve geçici menü dosyasını kullanır; Supabase ve IndexNow bildirimleri kapalıdır. Gerçek HTML ürün/fiyat/şema eşleşmesini, yeni kategori görünürlüğünü ve yönetim kaydı sonrası cache yenilemeyi doğrular.
 
 ## Yayına alma
 

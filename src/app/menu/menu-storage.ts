@@ -51,7 +51,11 @@ const getLocalFilePath = () => path.join(process.cwd(), "src/app/menu/menu-data.
 
 async function readLocalMenuData(): Promise<MenuData | null> {
   try {
-    const rawData = await fs.readFile(getLocalFilePath(), "utf-8");
+    // Only the isolated test fixture has a dynamic path. Keep the production
+    // fallback statically traceable so Next deploys the bundled menu JSON.
+    const rawData = process.env.MENU_DATA_FILE
+      ? await fs.readFile(/* turbopackIgnore: true */ process.env.MENU_DATA_FILE, "utf-8")
+      : await fs.readFile(getLocalFilePath(), "utf-8");
     return JSON.parse(rawData) as MenuData;
   } catch (error) {
     console.error("Error reading local menu-data.json:", error);
@@ -165,7 +169,7 @@ export async function saveMenuData(data: MenuData): Promise<boolean> {
     const supabaseSuccess = await saveToSupabase(data);
     // Try to write locally as well for backup/dev, but ignore errors on read-only systems
     try {
-      const filePath = getLocalFilePath();
+      const filePath = process.env.MENU_DATA_FILE || getLocalFilePath();
       const formattedJson = JSON.stringify(data, null, 2);
       await fs.writeFile(filePath, formattedJson, "utf-8");
     } catch {
@@ -176,7 +180,7 @@ export async function saveMenuData(data: MenuData): Promise<boolean> {
 
   // Local only flow
   try {
-    const filePath = getLocalFilePath();
+    const filePath = process.env.MENU_DATA_FILE || getLocalFilePath();
     const formattedJson = JSON.stringify(data, null, 2);
     await fs.writeFile(filePath, formattedJson, "utf-8");
     return true;

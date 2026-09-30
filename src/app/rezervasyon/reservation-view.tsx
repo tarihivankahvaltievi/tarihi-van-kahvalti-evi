@@ -779,7 +779,7 @@ Müsaitlik durumunu teyit edebilir misiniz? Teşekkürler.`;
 
         <div className={styles.guideLinks}>
           <a href={isEnglish ? "/en/menu" : "/menu"}>{isEnglish ? "See the live menu and prices" : "Güncel menü ve fiyatları görün"}</a>
-          <a href="/konum">{isEnglish ? "Open directions and transport details" : "Yol tarifi ve ulaşım bilgilerini açın"}</a>
+          <a href={isEnglish ? "/en#location" : "/konum"}>{isEnglish ? "Open address and directions" : "Yol tarifi ve ulaşım bilgilerini açın"}</a>
         </div>
 
         <div className={styles.reservationFaq} aria-labelledby="reservation-faq-heading">

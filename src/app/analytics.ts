@@ -126,7 +126,10 @@ export function AnalyticsAutoTracker() {
 
       const href = target.getAttribute("href") || "";
       const surface = target.dataset.analyticsSurface;
-      if (href.startsWith("tel:")) {
+      if (target.dataset.analyticsPurpose === "review_source") {
+        // Reading reviews is a trust interaction, not a directions conversion.
+        trackEvent("review_source_click", { surface: surface || "review_link" });
+      } else if (href.startsWith("tel:")) {
         trackEvent("contact_click", { contact_method: "phone", surface: surface || "tel_link" });
       } else if (href.includes("google.com/maps") || href.includes("maps.google.com") || href.includes("goo.gl/maps")) {
         trackEvent("contact_click", { contact_method: "directions", surface: surface || "map_link" });

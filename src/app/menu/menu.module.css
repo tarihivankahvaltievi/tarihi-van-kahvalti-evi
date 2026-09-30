@@ -662,7 +662,7 @@
 .menuItemTitle {
   font-family: "NOCTADO", Georgia, serif;
   font-size: 22px;
-  color: #b45a38;
+  color: #99482c;
   line-height: 1.25;
   margin: 0;
   transition: color 0.3s ease;
@@ -678,7 +678,7 @@
 .menuItemPrice {
   font-family: "NOCTADO", Georgia, serif;
   font-size: 22px;
-  color: #b45a38;
+  color: #99482c;
   font-weight: 500;
   white-space: nowrap;
   letter-spacing: 0.01em;
@@ -699,14 +699,22 @@
   opacity: 0.9;
 }
 
+.subSection { scroll-margin-top: 100px; }
+.menuIntro, .menuUpdated { max-width: 760px; margin: 20px auto; text-align: center; line-height: 1.6; }
+.menuUpdated { font-size: 14px; }
+.categoryDescription { font-size: 14px; line-height: 1.5; margin: -8px 0 16px; }
+.priceNote { display: block; font: 500 12px/1.4 "Causten", sans-serif; letter-spacing: 0; }
+.orderNote { margin: 8px 0; color: #402021; font: 600 14px/1.5 "Causten", sans-serif; }
+.servingDetails { margin: 10px 0; padding-left: 18px; font-size: 14px; line-height: 1.5; }
+.itemDetailsButton { appearance: none; border: 0; padding: 0; background: transparent; color: inherit; font: inherit; text-align: left; cursor: pointer; }
+.itemDetailsButton::after { content: ""; position: absolute; inset: 0; border-radius: inherit; }
+.menuItem:focus-within { outline: 2px solid #402021; outline-offset: 2px; }
+.itemDetailsButton:focus-visible { outline: none; }
+
 @media (max-width: 992px) {
   .menuItemDesc {
-    font-size: 13.5px;
-    line-height: 1.3;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
+    font-size: 14px;
+    line-height: 1.45;
   }
 }
 
@@ -723,7 +731,7 @@
   padding: 2px 8px;
   border-radius: 8px 0 8px 0;
   background: rgba(180, 90, 56, 0.1);
-  color: #b45a38;
+  color: #99482c;
 }
 
 /* ==========================================================================
