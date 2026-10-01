@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { Suspense } from "react";
 import { getPublicMenuData } from "../../menu/public-menu-data";
 import { localizeMenuData } from "../../menu/menu-localization";
 import { getOrderingQuestions } from "../../menu/ordering-questions";
@@ -115,9 +114,7 @@ export default async function ReservationPage() {
       />
       <ClientPage locale="tr">
         <main id="main-content" tabIndex={-1} className={styles.page} lang="tr-TR">
-          <Suspense fallback={<div style={{ minHeight: "420px" }} />}>
-            <ReservationView locale="tr" orderingQuestions={orderingQuestions} />
-          </Suspense>
+          <ReservationView locale="tr" orderingQuestions={orderingQuestions} />
         </main>
         <AnimatedFooter locale="tr" />
       </ClientPage>

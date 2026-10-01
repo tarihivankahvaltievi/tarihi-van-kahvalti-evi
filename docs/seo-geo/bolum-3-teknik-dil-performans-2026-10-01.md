@@ -63,3 +63,13 @@ Yerel üretim derlemesi başarılı. Lint başarılı. SEO sözleşmesi: 30 cano
 Tarayıcı: mobilde TR → EN → EN menü geçişi, 142 ürün ve yatay taşma olmaması; fotoğraf seçimi; masaüstünde AR → EN kök yönünün rtl → ltr dönmesi; skip link'in main'e odak vermesi doğrulandı. Özel veriler ve ortam sırları envantere alınmadı. [Güncel kaynak envanteri](kod-envanteri-bolum-3-2026-10-01.csv) dosya özetlerini içerir.
 
 Yayın sonrası kontrol sonuçları aynı belgede tamamlanacaktır. Performans kabulü ölçüm ve doğrulanmış kaynak iyileştirmesidir; tüm laboratuvar LCP değerlerinin eşik altına indiği henüz iddia edilmez.
+
+## 6. Yayın sonrası bulunan gerileme ve düzeltme
+
+`3979c1a` sürümündeki 06:41 mobil ara ölçüm: ana sayfa **71 / LCP 5,251 s**, menü **90 / LCP 3,301 s**, rezervasyon **73 / LCP 7,268 s**. Olumsuz sonuçlar silinmedi; [ara raporlar manifestte](bolum-3-pagespeed-rapor-baglantilari.json) tutuldu. Ana sayfa/rezervasyon render engelleyen CSS'i **115,1 KiB** oldu. İlgili CSS dosyası okununca 149 font-face ve gereksiz Japonca font tanımları bulundu. Bu, gerçek gözlenen paketleme gerilemesidir; sadece ölçüm dalgalanması diye geçiştirilmedi.
+
+Kurulu Next 16.3.5 belgelerindeki Turbopack `cssChunking: "graph"` stratejisi uygulandı. İlk üretim HTML'inin referans verdiği CSS dosyaları tekrar okundu: TR/EN ana sayfa, menü ve rezervasyonda JP/KR font tanımı kalmadı; KO/JA sayfalarda kendi Noto fontu korundu. Bu koşul artık SEO testinde CSS HTTP yanıtları üzerinden de doğrulanıyor. Global stiller silinmedi; font ve cascade görsel olarak karşılaştırıldı. [Next CSS chunking kaynağı](https://nextjs.org/docs/app/api-reference/config/next-config-js/cssChunking).
+
+Rezervasyonun üretim HTML'inde form ve LCP görselinin boş 420 px fallback sonrasındaki gizli streaming bloğunda olduğu da tespit edildi. İstek verisi okumayan `ReservationView` çevresindeki gereksiz Suspense kaldırıldı. Form ve ana görsel doğrudan ilk main içine alınıyor; tarih seçiminin istemcide başlatılması ve rezervasyon güvenliği korunuyor. Yeni test, form/H1/görselin main içinde olmasını ve gizli B: streaming fallback'i bulunmamasını zorunlu tutuyor. Bu düzeltmenin son canlı ölçümü aşağıda kaydedilecek.
+
+Canlı yönlendirme kontrolü: `/en/?wc-ajax=1` **2 → 1** yönlendirme; UTM korunuyor. HTTP apex **2**, HTTPS apex + eski iletişim adresi **2** yönlendirme yapmaya devam ediyor. İkinci durumda alan adı yönlendirmesi uygulamadan önce çalışıyor; bu katman değerlendirmesi ağ sırasından yapılan çıkarımdır. Vercel proje ayarı okunmaya çalışıldı; mevcut yönetim oturumu projeye erişim vermedi. Hesap değişimi/DNS değişikliği yapılmadı. Kalan hosting alt işi tamamlanmış sayılmıyor. [Canlı zincir kaydı](bolum-3-yonlendirme-sonra.json).

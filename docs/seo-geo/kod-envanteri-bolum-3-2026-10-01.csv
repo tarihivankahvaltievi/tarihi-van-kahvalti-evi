@@ -9,7 +9,7 @@ src/app/(tr)/layout.tsx,6,257,bb49e59d2cf5e793b3159cbf22bfeff7208cdfd1dd7b5dc5a7
 src/app/(tr)/menu/page.tsx,137,4168,91831199dae86cf33bd9d3b618109d497a05b8b1fed8a1f57604075de62a2b9e,8,0,0,0
 src/app/(tr)/not-found.tsx,5,155,7b76e4d61d2c8ca0d34ffb31226872cfb532f50a29ea61b712456ddce1a80215,1,0,0,0
 src/app/(tr)/page.tsx,48,965,6a7b86cb7ba4abd193e64e6c9042e91dfb8e8175d146e83957368208aabfbcb8,4,0,0,0
-src/app/(tr)/rezervasyon/page.tsx,126,4082,d655031f2b888c0ee34d6781bc1298963134f5fc5aaa6cedf235644d887e24a7,11,0,1,0
+src/app/(tr)/rezervasyon/page.tsx,123,3953,ea8176dc3007c88f6ae5f7da43214de359c2527b7c2a1b6fa6f8cf69662ce602,10,0,1,0
 src/app/(tr)/rezervasyon/takvim/[id]/page.tsx,192,8933,76d53cf63caaa7a0d1dd42fa0cb6decc76581af63185310fe48b83174e8dc0ec,10,1,0,0
 src/app/(tr)/van-kahvaltisi/page.tsx,340,16116,b79b7f9ad36eb9b52cf98250ceb60353560b5dd364d0f30a59e921dfa61360f1,8,6,0,0
 src/app/(tr)/van-kahvaltisi-nedir/page.tsx,483,22138,99ef5afe9493c8cee15a66dd56b84688ce80136c82fd08d0d5311d6fccfd9e90,9,10,0,0
@@ -74,7 +74,7 @@ src/app/en/layout.tsx,6,257,51567a449720730a3cfca626510ab0178840a88155a81ad128be
 src/app/en/menu/page.tsx,143,4631,1ac34063d71d0d8e30d876e907fd354d1bb5e626318644fe1f9e4c98c8aa1a6b,9,0,0,0
 src/app/en/not-found.tsx,5,155,d699d6ec16c67523b7974546fcda365f4916446a07f16175f0b334f2a22344b3,1,0,0,0
 src/app/en/page.tsx,98,2829,2ba595043a1c4e0405e35ff32f41a99c21fee78071ea2f99dc22a0e61eee320d,5,0,0,0
-src/app/en/rezervasyon/page.tsx,126,4143,8c2f7c2a8a2bcc18607c82b302d020b44aa83e0e275be68a634c39c7cd9c49a3,11,0,1,0
+src/app/en/rezervasyon/page.tsx,123,4014,75f1db17e12ba3154ed696839327d6f35ec59ef76609ba328ae69b136571a06a,10,0,1,0
 src/app/en/rezervasyon/takvim/[id]/page.tsx,45,1170,7c39b85950efbb407ef9855402c98c21018f9dcafe00934a49b4a2791b36a540,4,0,0,0
 src/app/es/blog/bal-kaymak-estambul/page.tsx,5,340,cf10580af509484623dd0ed8946bdabeaed1ea8a6173f716e53c544f3efb42e8,2,0,0,0
 src/app/es/blog/desayuno-turco-clasico/page.tsx,5,346,b7c0e0e1f4bf42414e9ced6fb0c2da4b1c7f7c7c4869fcf39831d796e34689e6,2,0,0,0
@@ -89,7 +89,7 @@ src/app/hikayemiz/story-page.module.css,925,16839,4a0e8225088333c0cc19ecd0446a86
 src/app/home-content.tsx,43,1746,e3426f9331146dc25d0d3a3c271ed07f76a8121a7161c81c37a5d843848c9cb7,10,0,1,0
 src/app/home-localization.ts,307,13640,3dc481b5d49b77c15ba483fccaf5245a5ed508679b0b08b81b68caee6334f8df,1,0,0,0
 src/app/ja/blog/istanbul-bal-kaymak/page.tsx,15,549,fbb0f656d4198e39efaf60e6d9d78e3a4028a9e15a29f51d2360697256b790a8,2,0,0,0
-src/app/ja/layout.tsx,12,487,6a21d3a29e5bd8b2b43aafa5d45149c2dbc1412a7f2372cebcda8757b73839ef,2,0,0,0
+src/app/ja/layout.tsx,12,487,9ff3d9b9588f2cc8f3032067890a70b1b5a32b50ddb20283f2a6dddd8d604e04,2,0,0,0
 src/app/ja/not-found.tsx,5,155,82801b9b5db23bded4cf5b80bcf2c2d9dbf687437c81f065da189264d76b1841,1,0,0,0
 src/app/ko/blog/istanbul-bal-kaymak/page.tsx,15,547,0e0ed342365470bd2d83ae6d07d31984ae232f7dae8a38bfd1a94891ffc1de4a,2,0,0,0
 src/app/ko/blog/kaymak-nedir/page.tsx,17,633,5c2b013a009c7add9b576f4a4c3e74f60522724b25382d7243a9dd8b9209cee2,3,0,0,0
@@ -99,7 +99,7 @@ src/app/ko/blog/korean-tour-guide-van-breakfast/tour-guide.module.css,1,3568,1f4
 src/app/ko/blog/taksim-kahvalti-rehberi/page.tsx,6,337,986cec7dadb364b7a54285fd63fc2a5272eaa116484b9f282abf99024b1577b4,2,0,0,0
 src/app/ko/blog/turkish-breakfast-istanbul/page.tsx,17,667,bc7b2d1de0d9dc509e069e88319ade93e410201ce7f436312550bdb197583012,3,0,0,0
 src/app/ko/ko-home.module.css,143,10014,8dccdf91ee7f106a1bff39b520a1972091d32c1ce05eaecfe4e9efa24b532971,0,0,0,3
-src/app/ko/layout.tsx,11,465,e839a3c25df8bc25398e65bab4563d88e4ccb80719951a69e8c494e83c178e6d,2,0,0,0
+src/app/ko/layout.tsx,11,465,c769d75faba7f91802320852480eee45547a2433f813ab70a1f38beda5fd7144,2,0,0,0
 src/app/ko/not-found.tsx,5,155,a5e662df212aad1a551945575f03a4a2bc3729c6974d954f8f04ca933d376675,1,0,0,0
 src/app/ko/page.tsx,204,13775,20cb508c0bbc432ac8f2a84b370f291f82ea80333b533822ab04013d3a6dac33,6,7,1,0
 src/app/konum/interactive-location-map.tsx,70,2460,385c26a027b1335442925f0ba1384f29fc0dcf2520866bb141661bd3b9679658,5,0,0,0
@@ -147,4 +147,4 @@ scripts/generate-menu-data.mjs,511,27187,edcc1550222087a0fd0ee4595d6333da817fc2c
 scripts/submit-indexnow.mjs,81,2858,6b751c26d5805cd3a2dd6a6fd8c2558415cce7f71883d1876833a8c3f50d338f,4,0,0,0
 scripts/test-menu.mjs,144,8882,91215de8f72cf6c89e7d47e3d95d49799813f4667e089d96c45a85d1de54e122,7,0,0,0
 scripts/test-reservations.mjs,169,6090,9dca9ebb5833bf2f60de0817321090acbe02ece2353fdf8b6291d6c79689110b,4,0,0,0
-scripts/validate-seo.mjs,1085,54500,f57b3d1795f769f77675513bc0a3b64049b107647b940fcdb7b8943147ac70df,7,3,2,0
+scripts/validate-seo.mjs,1110,56449,d44f9c1aabaf7d2999103ff9d4d716ccd2dcbd13a6822f94870610e36653dc14,7,3,2,0

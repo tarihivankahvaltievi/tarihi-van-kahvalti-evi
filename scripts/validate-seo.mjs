@@ -264,10 +264,10 @@ const routes = [
     languageTag: "ko-KR",
     types: ["Restaurant", "BlogPosting", "WebPage", "BreadcrumbList", "FAQPage"],
     restaurantMenu: `${menuPageUrl}#menu`,
-    hreflang: { ko: koreanKaymakExplainerUrl },
     faqCount: 8,
     sharedGuideDesign: true,
     visibleSignals: ["카이막", "물소유", "발 카이막", "버터", "생크림", "bal kaymak var mı?"],
+    hreflang: { ko: koreanKaymakExplainerUrl },
     sourcedGuide: true,
     citationCount: 4,
     honeyKaymakGuide: true,
@@ -389,6 +389,7 @@ const visibleHtml = (html) =>
     .replace(/<script\b[\s\S]*?<\/script>/gi, " ")
     .replace(/<style\b[\s\S]*?<\/style>/gi, " ");
 
+const checkedStylesheets = new Map();
 const checkedAlternates = new Map();
 const readAlternates = (html) => Object.fromEntries(
   [...html.matchAll(/<link\b[^>]*rel="alternate"[^>]*>/gi)].map(([tag]) => [
@@ -402,6 +403,24 @@ function assertDocumentLanguage(html, response, language, routePath) {
   assert(htmlTags[0].includes(`dir="${language === "ar" ? "rtl" : "ltr"}"`), `${routePath}: ilk HTML yanıtının kök yönü yanlış`);
   assert(response.headers.get("content-language") === language, `${routePath}: Content-Language yanlış`);
 }
+async function assertLanguageStylesheets(html, route) {
+  if (!["/", "/en", "/menu", "/en/menu", "/rezervasyon", "/en/rezervasyon", "/ko", "/ja/blog/istanbul-bal-kaymak"].includes(route.path)) return;
+  const stylesheets = [...html.matchAll(/<link\b[^>]*rel="stylesheet"[^>]*href="([^"]+)"/gi)].map((match) => decodeHtml(match[1]));
+  assert(stylesheets.length > 0, `${route.path}: stylesheet eksik`);
+  for (const href of stylesheets) {
+    assert(href.startsWith("/_next/static/"), `${route.path}: stylesheet kendi alan adından gelmeli`);
+    if (!checkedStylesheets.has(href)) {
+      const response = await fetchWithRetry(href);
+      assert(response.ok, `${route.path}: stylesheet yüklenemiyor (${href})`);
+      checkedStylesheets.set(href, await response.text());
+    }
+  }
+  const css = stylesheets.map((href) => checkedStylesheets.get(href)).join("\n");
+  if (["tr", "en"].includes(route.language)) assert(!/Noto Sans (JP|KR)/.test(css), `${route.path}: başka dilin CJK font CSS'i başlangıç yükünü artırmamalı`);
+  if (route.language === "ko") assert(css.includes("Noto Sans KR") && css.includes("--font-noto-sans-kr"), `${route.path}: Korece font korunmalı`);
+  if (route.language === "ja") assert(css.includes("Noto Sans JP") && css.includes("--font-noto-sans-jp"), `${route.path}: Japonca font korunmalı`);
+}
+
 function assertAlternates(html, route) {
   const actual = readAlternates(html);
   const expected = route.hreflang ?? {};
@@ -461,6 +480,7 @@ for (const route of routes) {
   assert(response.status === 200, `${routeLabel}: HTTP ${response.status}`);
   assertDocumentLanguage(html, response, route.language, route.path);
   assertAlternates(html, route);
+  await assertLanguageStylesheets(html, route);
 
   if (route.language !== "tr") {
     assert(response.headers.get("content-language") === route.language, `${routeLabel}: Content-Language başlığı eksik`);
@@ -700,6 +720,9 @@ for (const route of routes) {
   assert(/<meta\s+name="ICBM"\s+content="41\.0367655, 28\.9829478"/i.test(html), `${routeLabel}: ICBM koordinatı eksik`);
 
   if (route.reservationPage) {
+    const main = visibleHtml(html).match(/<main\b[^>]*>[\s\S]*?<\/main>/i)?.[0] ?? "";
+    assert(main.includes('id="form-heading"') && main.includes('historic-corner.webp') && main.includes('<form'), `${routeLabel}: rezervasyon formu ve LCP görseli ilk HTML main içinde bulunmalı`);
+    assert(!/<template\b[^>]*id="B:/.test(main), `${routeLabel}: rezervasyon içeriği JS ile açılan gizli streaming bloğuna ertelenmemeli`);
     const webPage = graphDocument["@graph"].find((node) => node["@type"] === "WebPage");
     assert(webPage?.potentialAction?.["@type"] === "ReserveAction", `${routeLabel}: sayfa rezervasyon eylemi eksik`);
     assert(
@@ -740,6 +763,7 @@ for (const route of newRoutes) {
   assert(response.status === 200, `${route.path}: HTTP ${response.status}`);
   assertDocumentLanguage(html, response, route.language ?? "tr", route.path);
   assertAlternates(html, route);
+  await assertLanguageStylesheets(html, route);
   assert(response.headers.get("content-language") === route.language, `${route.path}: Content-Language yanlış`);
   assert(new RegExp(`<main\\b[^>]*\\blang="${route.languageTag ?? route.language}"`, "i").test(html), `${route.path}: ana içerik lang eksik`);
   assert(html.includes(`<link rel="canonical" href="${route.canonical}"`), `${route.path}: canonical yanlış`);
@@ -777,6 +801,7 @@ for (const route of legalRoutes) {
   assert(response.status === 200, `${route.path}: HTTP ${response.status}`);
   assertDocumentLanguage(html, response, route.language ?? "tr", route.path);
   assertAlternates(html, route);
+  await assertLanguageStylesheets(html, route);
   assert(canonicalMatches.length === 1, `${route.path}: tek canonical bulunmalı`);
   assert(canonicalMatches[0][1] === route.canonical, `${route.path}: canonical yanlış`);
   assert(!/<meta\s+name="robots"\s+content="[^"]*noindex/i.test(html), `${route.path}: noindex olmamalı`);

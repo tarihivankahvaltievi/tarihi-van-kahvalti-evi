@@ -4,7 +4,7 @@ export { metadata, viewport } from "../root-document";
 
 const localeFont = Noto_Sans_JP({
   subsets: ["latin"],
-  weight: "variable", display: "swap", preload: false, variable: "--font-noto-sans-ja",
+  weight: "variable", display: "swap", preload: false, variable: "--font-noto-sans-jp",
 });
 
 export default function Layout({ children }: Readonly<{ children: React.ReactNode }>) {

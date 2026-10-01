@@ -3,7 +3,7 @@ import { RootDocument } from "../root-document";
 export { metadata, viewport } from "../root-document";
 
 const localeFont = Noto_Sans_KR({
-  weight: "variable", display: "swap", preload: false, variable: "--font-noto-sans-ko",
+  weight: "variable", display: "swap", preload: false, variable: "--font-noto-sans-kr",
 });
 
 export default function Layout({ children }: Readonly<{ children: React.ReactNode }>) {

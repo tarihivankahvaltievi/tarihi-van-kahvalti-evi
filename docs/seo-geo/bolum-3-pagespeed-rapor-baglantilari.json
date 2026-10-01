@@ -18,5 +18,25 @@
       "capturedLabel": "1 Eki 2026 05:04:40 tarihinden başlayan rapor",
       "snapshotFile": "bolum-3-pagespeed-once-rezervasyon.txt"
     }
+  ],
+  "intermediate": [
+    {
+      "page": "anasayfa",
+      "codeCommit": "3979c1a",
+      "report": "https://pagespeed.web.dev/analysis/https-www-tarihivankahvaltievi-com/k4nat8oodb?form_factor=mobile",
+      "snapshotFile": "bolum-3-pagespeed-ara-anasayfa.txt"
+    },
+    {
+      "page": "menu",
+      "codeCommit": "3979c1a",
+      "report": "https://pagespeed.web.dev/analysis/https-www-tarihivankahvaltievi-com-en-menu/udngjfd5ry?form_factor=mobile",
+      "snapshotFile": "bolum-3-pagespeed-ara-menu.txt"
+    },
+    {
+      "page": "rezervasyon",
+      "codeCommit": "3979c1a",
+      "report": "https://pagespeed.web.dev/analysis/https-www-tarihivankahvaltievi-com-en-rezervasyon/01zoqwcdkp?form_factor=mobile",
+      "snapshotFile": "bolum-3-pagespeed-ara-rezervasyon.txt"
+    }
   ]
 }

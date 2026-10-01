@@ -24,7 +24,7 @@ const nextConfig: NextConfig = {
   allowedDevOrigins: ["127.0.0.1"],
   devIndicators: false,
   cacheComponents: true,
-  experimental: { globalNotFound: true },
+  experimental: { globalNotFound: true, cssChunking: "graph" },
   compress: true,
   poweredByHeader: false,
   skipTrailingSlashRedirect: true,
