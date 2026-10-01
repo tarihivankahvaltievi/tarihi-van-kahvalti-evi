@@ -58,7 +58,7 @@ src/app/components/signature-showcase.tsx,257,10050,5e75d5adf690cceedecaeb994169
 src/app/components/taksim-travel-guide-data.ts,151,17052,d634976cd9be906a94fd80869bb299d146c718ca0fe67402abe27cdfd722e8a7,3,0,0,0
 src/app/components/taksim-travel-guide.module.css,5,2824,b2dce6b87fe61495f0712d948c05fb33f41811d3e92bbceaa0e9c08a1a1dfaad,0,0,0,1
 src/app/components/taksim-travel-guide.tsx,142,7044,3d263c4cf1872abbf9412888660e7f71f34c0870a76ae485d0330d21e4e7ea30,6,7,1,0
-src/app/components/van-hero-parallax.tsx,181,7966,49e77b06e2afd8b31abefddbd0be23a87302882802c192255677d0e1fa917eab,6,1,0,0
+src/app/components/van-hero-parallax.tsx,183,8196,c2de0e1330fce87fed4c5422ca6a208d6ab1996484f8990679bfdfbc9e9c356a,6,1,0,0
 src/app/components/venue-atmosphere.module.css,171,2781,28c41390fbd9a61edf72581a6d244c0e4e90439fc431e17d808cd1293d62f49b,0,0,0,4
 src/app/components/venue-atmosphere.tsx,85,3068,053b331447eff31ffb816db374f26836c372f0a1d5cc075e64e4b51cb6deadce,3,1,0,0
 src/app/components/visit-information.module.css,30,1089,64079621a1d7636ecb0abde501b34dd450d7220147b4f4ef024ff8d8b8182024,0,0,0,1

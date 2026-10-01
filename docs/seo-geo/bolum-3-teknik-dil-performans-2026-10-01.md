@@ -48,7 +48,7 @@ CrUX: ana sayfada URL düzeyindeki son 28 gün p75 LCP **2,2 s**, INP **127 ms**
 
 Gözlenen sorunlar ve uygulama:
 
-- Ana sayfada üst üste duran beş hero fotoğrafı başlangıçta DOM'da bulunuyordu. Yalnız aktif fotoğraf, geçiş sırasında da önceki fotoğraf oluşturuluyor. Beş seçim düğmesi ve mevcut geçiş tasarımı korunuyor; diğer fotoğraflar seçildiğinde yükleniyor. İlk fotoğraf eager/high, seçilen diğer fotoğraf eager/auto. İlk yükleme DOM'unda beş yerine bir slayt doğrulandı.
+- Ana sayfada üst üste duran beş hero fotoğrafı başlangıçta DOM'da bulunuyordu. Yalnız aktif fotoğraf, geçiş sırasında da önceki fotoğraf oluşturuluyor. Beş seçim düğmesi ve mevcut geçiş tasarımı korunuyor; diğer fotoğraflar seçildiğinde yükleniyor. Yeni fotoğraf yüklenmeden önceki fotoğraf kaldırılmaz; yavaş bağlantıda boş ekran oluşması önlenir. İlk fotoğraf eager/high, seçilen diğer fotoğraf eager/auto. İlk yükleme DOM'unda beş yerine bir slayt doğrulandı.
 - Menü LCP öğesi `breakfast-spread.webp`. Mevcut deprecated `priority` yerine açık `loading=eager` ve `fetchPriority=high` kullanıldı. Başlangıç ölçümündeki kaynak keşfi teşhisinde yüksek öncelik eksikti; sunucu HTML'i ve tarayıcı DOM'u yeni işareti doğruluyor.
 - Rezervasyon LCP öğesi `historic-corner.webp` zaten eager/high. Bulgularla çelişen ikinci preload veya bütün galeriye yüksek öncelik eklenmedi.
 - Ana sayfada yaklaşık 83 KiB render engelleyen CSS ve 2.660 ms tahmini tasarruf gözlendi. Bu tahmin gerçek kazanım değildir. Küresel cascade birçok sayfa tarafından kullanılıyor. Next `inlineCss` deneysel ve CSS'i HTML/RSC içinde çoğaltıp sayfalar arası önbellekten vazgeçiyor; tüm CSS körlemesine inline edilmedi. Kaynak: [Next inlineCss](https://nextjs.org/docs/app/api-reference/config/next-config-js/inlineCss).

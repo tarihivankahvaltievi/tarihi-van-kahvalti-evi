@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { messagesFor, type SiteLocale } from "../home-localization";
 import { address, openingHours, mapsUrl, googleMapsSnapshot } from "../seo";
 import { getMenuOrderNote } from "../menu/menu-rules";
@@ -45,19 +45,18 @@ export function VanHeroParallax({ locale = "tr", serpmePrice }: { locale?: SiteL
   const messages = messagesFor(locale);
   const [currentSlide, setCurrentSlide] = useState(0);
   const [previousSlide, setPreviousSlide] = useState<number | null>(null);
-  const exitingTimerRef = useRef<NodeJS.Timeout | null>(null);
-  useEffect(() => () => {
-    if (exitingTimerRef.current) clearTimeout(exitingTimerRef.current);
-  }, []);
+  const [readySlide, setReadySlide] = useState(0);
+  useEffect(() => {
+    if (previousSlide === null || readySlide !== currentSlide) return;
+    const timer = setTimeout(() => setPreviousSlide(null), 1500);
+    return () => clearTimeout(timer);
+  }, [currentSlide, readySlide, previousSlide]);
 
   const handleSelectSlide = (index: number) => {
     if (index === currentSlide) return;
-    setPreviousSlide(currentSlide);
+    // Keep the last decoded photograph visible on a slow connection.
+    setPreviousSlide(index === readySlide ? null : readySlide);
     setCurrentSlide(index);
-    if (exitingTimerRef.current) clearTimeout(exitingTimerRef.current);
-    exitingTimerRef.current = setTimeout(() => {
-      setPreviousSlide(null);
-    }, 1500);
   };
 
   return (
@@ -65,9 +64,9 @@ export function VanHeroParallax({ locale = "tr", serpmePrice }: { locale?: SiteL
       {/* Inactive photographs stay out of the DOM until selected. Lazy images
           stacked inside the viewport can still download and compete with LCP. */}
       {heroSlides.map((slide, index) => {
-        const isActive = index === currentSlide;
-        const isExiting = index === previousSlide;
-        if (!isActive && !isExiting) return null;
+        const isActive = index === readySlide;
+        const isExiting = index === previousSlide && readySlide === currentSlide;
+        if (!isActive && index !== previousSlide && index !== currentSlide) return null;
 
         return (
           <div
@@ -83,6 +82,9 @@ export function VanHeroParallax({ locale = "tr", serpmePrice }: { locale?: SiteL
               quality={84}
               loading="eager"
               fetchPriority={index === 0 ? "high" : "auto"}
+              onLoad={() => {
+                if (index === currentSlide) setReadySlide(index);
+              }}
               className="hero-slide-image"
             />
           </div>
