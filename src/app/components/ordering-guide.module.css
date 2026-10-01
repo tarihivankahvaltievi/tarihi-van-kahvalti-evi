@@ -1,0 +1,6 @@
+.section { max-width: 1080px; margin: 40px auto; padding: 28px clamp(16px, 3vw, 32px); background: #faf6f0; border: 1px solid #ded2c4; border-radius: 16px; color: #402021; text-align: left; scroll-margin-top: 100px; }
+.section h2 { font: 400 clamp(26px, 3vw, 36px)/1.2 "NOCTADO", Georgia, serif; margin: 0 0 12px; }
+.section p { line-height: 1.65; margin: 12px 0; overflow-wrap: anywhere; }
+.questions details { border-top: 1px solid #ded2c4; padding: 8px 0; }
+.questions summary { min-height: 44px; padding: 10px 0; font-weight: 600; line-height: 1.5; cursor: pointer; }
+.questions summary:focus-visible { outline: 2px solid #402021; outline-offset: 3px; border-radius: 3px; }

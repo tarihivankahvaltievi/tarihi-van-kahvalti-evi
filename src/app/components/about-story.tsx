@@ -104,8 +104,8 @@ export function AboutStory({ locale = "tr" }: { locale?: string }) {
             >
               <span>
                 {isEn
-                  ? "Since 1978, nestled within the historic architecture of Taksim Beyoğlu, three generations of our family have kept the authentic Van breakfast tradition alive. In our registered 18th-century Greek townhouse, between centuried stone walls, every morning transforms into an unhurried, generous feast of hospitality."
-                  : "1978 yılından bu yana, Taksim’in tarihi dokusunda üç kuşaktır aynı tutku ve aile emeğiyle misafirlerimizi ağırlıyoruz. İkinci derece tarihi eser statüsündeki 18. yüzyıl Rum konağımızın nostaljik atmosferinde, asırlık taş duvarlar arasında her sabahı lezzetin ve paylaşmanın gerçek anlamına ortak olunan telaşsız bir sofraya dönüştürüyoruz."}
+                  ? "Our family story begins in 1978. Today, we bring Van breakfast to Zambak Street in Beyoğlu, near Taksim. The carved mirrors, brickwork and shared tables frame a relaxed morning together."
+                  : "Aile hikâyemizin başlangıcı 1978’e uzanıyor. Bugün Van kahvaltısını Taksim yakınında, Beyoğlu Zambak Sokak’taki soframızda sunuyoruz. Oymalı aynalar, tuğla duvarlar ve birlikte kurulan masalar, telaşsız bir sabahın atmosferini tamamlıyor."}
               </span>
             </motion.p>
             <motion.p
@@ -119,8 +119,8 @@ export function AboutStory({ locale = "tr" }: { locale?: string }) {
             >
               <span>
                 {isEn
-                  ? "Direct from the pristine high plateaus of Van, we bring time-honored herb cheese (Otlu Peynir), wild Karakovan honeycomb, and velvety clotted cream—accompanied by sizzling copper pans of buttery murtuğa, roasted kavut, and slow-brewed samovar tea."
-                  : "Doğrudan Van yaylalarından temin ettiğimiz coğrafi işaretli hakiki otlu peynir, Karakovan petek balı ve manda sütü taze kaymak; bakır sahanda cızırdayan tereyağlı murtuğa, kavut ve semaverden süzülen tavşan kanı demli çayımızla buluşuyor."}
+                  ? "Otlu peynir, honey and kaymak share the table with murtuğa, kavut and Turkish tea. Choose a shared breakfast or an individual plate from the menu, where the current dishes and their included items are listed."
+                  : "Otlu peynir, bal ve kaymak; murtuğa, kavut ve demli çayla aynı sofrada buluşuyor. Paylaşmalı kahvaltı ya da bireysel tabak seçiminizi, güncel ürünlerin ve dahil içeriklerin listelendiği menüden yapabilirsiniz."}
               </span>
             </motion.p>
           </div>

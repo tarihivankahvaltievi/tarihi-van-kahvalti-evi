@@ -1,0 +1,669 @@
+{
+  "tulum-peyniri": {
+    "description": "Kahvaltı sofrasına ayrı porsiyon olarak eklenebilen tulum peyniri.",
+    "story": "Kahvaltı sofrasına ayrı porsiyon olarak eklenebilen tulum peyniri.",
+    "translations": {
+      "en": {
+        "description": "A separate portion of traditional Turkish tulum cheese for the breakfast table.",
+        "story": "A separate portion of traditional Turkish tulum cheese for the breakfast table.",
+        "name": "Tulum Cheese"
+      }
+    }
+  },
+  "otlu-peynir": {
+    "description": "Yöresel otlarla hazırlanan otlu peynir; kahvaltıya eklenebilen ayrı porsiyon.",
+    "story": "Yöresel otlarla hazırlanan otlu peynir; kahvaltıya eklenebilen ayrı porsiyon.",
+    "translations": {
+      "en": {
+        "description": "Herbed cheese (otlu peynir), served as a separate portion alongside breakfast.",
+        "story": "Herbed cheese (otlu peynir), served as a separate portion alongside breakfast.",
+        "name": "Otlu Peynir (Herbed Cheese)"
+      }
+    }
+  },
+  "taze-kasar": {
+    "description": "Taze kaşar peynirinin kahvaltılık porsiyon servisi.",
+    "story": "Taze kaşar peynirinin kahvaltılık porsiyon servisi.",
+    "translations": {
+      "en": {
+        "description": "A breakfast portion of fresh kaşar, a Turkish cheese.",
+        "story": "A breakfast portion of fresh kaşar, a Turkish cheese."
+      }
+    }
+  },
+  "eski-kasar": {
+    "description": "Olgun kaşar peynirinin kahvaltılık porsiyon servisi.",
+    "story": "Olgun kaşar peynirinin kahvaltılık porsiyon servisi.",
+    "translations": {
+      "en": {
+        "description": "A breakfast portion of aged kaşar cheese.",
+        "story": "A breakfast portion of aged kaşar cheese."
+      }
+    }
+  },
+  "cecil-peyniri": {
+    "description": "Tel yapılı çeçil peynirinin kahvaltılık porsiyon servisi.",
+    "story": "Tel yapılı çeçil peynirinin kahvaltılık porsiyon servisi.",
+    "translations": {
+      "en": {
+        "description": "A breakfast portion of çeçil, a Turkish string cheese.",
+        "story": "A breakfast portion of çeçil, a Turkish string cheese.",
+        "name": "Çeçil Cheese"
+      }
+    }
+  },
+  "koy-peyniri": {
+    "description": "Menüde köy peyniri adıyla sunulan kahvaltılık peynir porsiyonu.",
+    "story": "Menüde köy peyniri adıyla sunulan kahvaltılık peynir porsiyonu.",
+    "translations": {
+      "en": {
+        "description": "A breakfast portion of the cheese listed as köy peyniri (village cheese).",
+        "story": "A breakfast portion of the cheese listed as köy peyniri (village cheese)."
+      }
+    }
+  },
+  "beyaz-peynir": {
+    "description": "Beyaz peynirin kahvaltı sofrasına eklenebilen porsiyon servisi.",
+    "story": "Beyaz peynirin kahvaltı sofrasına eklenebilen porsiyon servisi.",
+    "translations": {
+      "en": {
+        "description": "A separate breakfast portion of Turkish white cheese.",
+        "story": "A separate breakfast portion of Turkish white cheese."
+      }
+    }
+  },
+  "peynir-tabagi": {
+    "description": "Bir arada sunulan peynir seçkisi. Günün peynir çeşitleri için ekibimizden bilgi alabilirsiniz.",
+    "story": "Bir arada sunulan peynir seçkisi. Günün peynir çeşitleri için ekibimizden bilgi alabilirsiniz.",
+    "translations": {
+      "en": {
+        "description": "A selection of cheeses served together. Check with the team for the varieties available that day.",
+        "story": "A selection of cheeses served together. Check with the team for the varieties available that day."
+      }
+    }
+  },
+  "sogus": {
+    "description": "Domates, salatalık ve mevsim yeşilliklerinden oluşan söğüş tabağı.",
+    "story": "Domates, salatalık ve mevsim yeşilliklerinden oluşan söğüş tabağı.",
+    "translations": {
+      "en": {
+        "description": "A plate of fresh tomato, cucumber and seasonal greens.",
+        "story": "A plate of fresh tomato, cucumber and seasonal greens.",
+        "name": "Söğüş (Fresh Vegetable Plate)"
+      }
+    }
+  },
+  "karisik-zeytin": {
+    "description": "Yeşil ve siyah zeytinlerin birlikte sunulduğu kahvaltılık porsiyon.",
+    "story": "Yeşil ve siyah zeytinlerin birlikte sunulduğu kahvaltılık porsiyon.",
+    "translations": {
+      "en": {
+        "description": "A breakfast portion combining green and black olives.",
+        "story": "A breakfast portion combining green and black olives."
+      }
+    }
+  },
+  "siyah-zeytin-ezmesi": {
+    "description": "Kahvaltı sofrasına eklenebilen siyah zeytin ezmesi porsiyonu.",
+    "story": "Kahvaltı sofrasına eklenebilen siyah zeytin ezmesi porsiyonu.",
+    "translations": {
+      "en": {
+        "description": "A portion of black olive paste to accompany breakfast.",
+        "story": "A portion of black olive paste to accompany breakfast."
+      }
+    }
+  },
+  "cevizli-cemen": {
+    "description": "Cevizle sunulan çemen; kahvaltıya eşlik eden yöresel porsiyon.",
+    "story": "Cevizle sunulan çemen; kahvaltıya eşlik eden yöresel porsiyon.",
+    "translations": {
+      "en": {
+        "description": "Çemen with walnuts, served as a regional breakfast side.",
+        "story": "Çemen with walnuts, served as a regional breakfast side."
+      }
+    }
+  },
+  "tereyagli-jaji": {
+    "description": "Jaji ve tereyağının birlikte sunulduğu yöresel kahvaltılık porsiyon.",
+    "story": "Jaji ve tereyağının birlikte sunulduğu yöresel kahvaltılık porsiyon.",
+    "translations": {
+      "en": {
+        "description": "Jaji served with butter as a regional breakfast side.",
+        "story": "Jaji served with butter as a regional breakfast side."
+      }
+    }
+  },
+  "balli-cevizli-kavut": {
+    "description": "Kavrulmuş buğdaya dayanan yöresel kavut; bal ve cevizle sunulur.",
+    "story": "Kavrulmuş buğdaya dayanan yöresel kavut; bal ve cevizle sunulur.",
+    "translations": {
+      "en": {
+        "description": "Kavut, a Van speciality based on roasted wheat, served with honey and walnuts.",
+        "story": "Kavut, a Van speciality based on roasted wheat, served with honey and walnuts."
+      }
+    }
+  },
+  "tereyagli-cevizli-murtuga": {
+    "description": "Un, tereyağı ve yumurtayla hazırlanan yöresel murtuğa; cevizle sıcak servis edilir.",
+    "story": "Un, tereyağı ve yumurtayla hazırlanan yöresel murtuğa; cevizle sıcak servis edilir.",
+    "translations": {
+      "en": {
+        "description": "Murtuğa, a warm Van speciality made with flour, butter and egg, served with walnuts.",
+        "story": "Murtuğa, a warm Van speciality made with flour, butter and egg, served with walnuts."
+      }
+    }
+  },
+  "kaymak": {
+    "description": "Kahvaltıya eklenebilen kaymak porsiyonu. Kullanılan süt türü için ekibimizden bilgi alabilirsiniz.",
+    "story": "Kahvaltıya eklenebilen kaymak porsiyonu. Kullanılan süt türü için ekibimizden bilgi alabilirsiniz.",
+    "translations": {
+      "en": {
+        "description": "A portion of kaymak (clotted cream). Ask the team about the milk used.",
+        "story": "A portion of kaymak (clotted cream). Ask the team about the milk used.",
+        "name": "Kaymak (Clotted Cream)"
+      }
+    }
+  },
+  "bal-kaymak": {
+    "description": "Bal ve kaymağın birlikte sunulduğu kahvaltılık porsiyon.",
+    "story": "Bal ve kaymağın birlikte sunulduğu kahvaltılık porsiyon.",
+    "translations": {
+      "en": {
+        "description": "Honey and kaymak (clotted cream), served together as a breakfast side.",
+        "story": "Honey and kaymak (clotted cream), served together as a breakfast side.",
+        "name": "Bal Kaymak (Honey & Clotted Cream)"
+      }
+    }
+  },
+  "bal-tereyagi": {
+    "description": "Bal ve tereyağının birlikte sunulduğu kahvaltılık porsiyon.",
+    "story": "Bal ve tereyağının birlikte sunulduğu kahvaltılık porsiyon.",
+    "translations": {
+      "en": {
+        "description": "Honey and butter served together as a breakfast side.",
+        "story": "Honey and butter served together as a breakfast side."
+      }
+    }
+  },
+  "tahin-pekmez": {
+    "description": "Tahin ve pekmezin birlikte sunulduğu kahvaltılık porsiyon.",
+    "story": "Tahin ve pekmezin birlikte sunulduğu kahvaltılık porsiyon.",
+    "translations": {
+      "en": {
+        "description": "Tahini and molasses served together as a breakfast side.",
+        "story": "Tahini and molasses served together as a breakfast side."
+      }
+    }
+  },
+  "pekmez": {
+    "description": "Kahvaltı sofrasına eklenebilen pekmez porsiyonu.",
+    "story": "Kahvaltı sofrasına eklenebilen pekmez porsiyonu.",
+    "translations": {
+      "en": {
+        "description": "A portion of pekmez (fruit molasses) for the breakfast table.",
+        "story": "A portion of pekmez (fruit molasses) for the breakfast table.",
+        "name": "Pekmez (Molasses)"
+      }
+    }
+  },
+  "pisi-tabagi": {
+    "description": "Tulum peyniri, mevsim reçeli ve Nutella eşliğinde servis edilen sıcak pişi tabağı.",
+    "story": "Tulum peyniri, mevsim reçeli ve Nutella eşliğinde servis edilen sıcak pişi tabağı.",
+    "translations": {
+      "en": {
+        "description": "Warm pişi (fried dough) served with tulum cheese, seasonal jam and Nutella.",
+        "story": "Warm pişi (fried dough) served with tulum cheese, seasonal jam and Nutella.",
+        "name": "Pişi (Fried Dough) Plate",
+        "details": [
+          "Warm fried dough",
+          "Tulum cheese",
+          "Seasonal jam and Nutella"
+        ]
+      }
+    }
+  },
+  "peynirli-gozleme": {
+    "description": "Peynir iç harcıyla hazırlanan, sıcak servis edilen gözleme.",
+    "story": "Peynir iç harcıyla hazırlanan, sıcak servis edilen gözleme.",
+    "translations": {
+      "en": {
+        "description": "Hot Turkish flatbread filled with cheese.",
+        "story": "Hot Turkish flatbread filled with cheese.",
+        "name": "Cheese Gözleme"
+      }
+    }
+  },
+  "kasarli-gozleme": {
+    "description": "Kaşar peyniri iç harcıyla hazırlanan, sıcak servis edilen gözleme.",
+    "story": "Kaşar peyniri iç harcıyla hazırlanan, sıcak servis edilen gözleme.",
+    "translations": {
+      "en": {
+        "description": "Hot Turkish flatbread filled with kaşar cheese.",
+        "story": "Hot Turkish flatbread filled with kaşar cheese.",
+        "name": "Kashar Cheese Gözleme"
+      }
+    }
+  },
+  "patatesli-gozleme": {
+    "description": "Patates iç harcıyla hazırlanan, sıcak servis edilen gözleme.",
+    "story": "Patates iç harcıyla hazırlanan, sıcak servis edilen gözleme.",
+    "translations": {
+      "en": {
+        "description": "Hot Turkish flatbread filled with potato.",
+        "story": "Hot Turkish flatbread filled with potato.",
+        "name": "Potato Gözleme"
+      }
+    }
+  },
+  "ispanakli-gozleme": {
+    "description": "Ispanak iç harcıyla hazırlanan, sıcak servis edilen gözleme.",
+    "story": "Ispanak iç harcıyla hazırlanan, sıcak servis edilen gözleme.",
+    "translations": {
+      "en": {
+        "description": "Hot Turkish flatbread filled with spinach.",
+        "story": "Hot Turkish flatbread filled with spinach.",
+        "name": "Spinach Gözleme"
+      }
+    }
+  },
+  "mantarli-gozleme": {
+    "description": "Mantar iç harcıyla hazırlanan, sıcak servis edilen gözleme.",
+    "story": "Mantar iç harcıyla hazırlanan, sıcak servis edilen gözleme.",
+    "translations": {
+      "en": {
+        "description": "Hot Turkish flatbread filled with mushrooms.",
+        "story": "Hot Turkish flatbread filled with mushrooms.",
+        "name": "Mushroom Gözleme"
+      }
+    }
+  },
+  "sucuklu-gozleme": {
+    "description": "Sucuk iç harcıyla hazırlanan, sıcak servis edilen gözleme.",
+    "story": "Sucuk iç harcıyla hazırlanan, sıcak servis edilen gözleme.",
+    "translations": {
+      "en": {
+        "description": "Hot Turkish flatbread filled with sucuk (Turkish sausage).",
+        "story": "Hot Turkish flatbread filled with sucuk (Turkish sausage).",
+        "name": "Sucuk Gözleme"
+      }
+    }
+  },
+  "kavurmali-gozleme": {
+    "description": "Kavurma iç harcıyla hazırlanan, sıcak servis edilen gözleme.",
+    "story": "Kavurma iç harcıyla hazırlanan, sıcak servis edilen gözleme.",
+    "translations": {
+      "en": {
+        "description": "Hot Turkish flatbread filled with kavurma (Turkish cooked meat).",
+        "story": "Hot Turkish flatbread filled with kavurma (Turkish cooked meat).",
+        "name": "Kavurma Gözleme"
+      }
+    }
+  },
+  "pastirmali-gozleme": {
+    "description": "Pastırma iç harcıyla hazırlanan, sıcak servis edilen gözleme.",
+    "story": "Pastırma iç harcıyla hazırlanan, sıcak servis edilen gözleme.",
+    "translations": {
+      "en": {
+        "description": "Hot Turkish flatbread filled with pastırma (Turkish cured meat).",
+        "story": "Hot Turkish flatbread filled with pastırma (Turkish cured meat).",
+        "name": "Pastırma Gözleme"
+      }
+    }
+  },
+  "special-gozleme": {
+    "description": "Special gözleme seçeneği; günün iç harcını sipariş öncesinde ekibimizden öğrenebilirsiniz.",
+    "story": "Special gözleme seçeneği; günün iç harcını sipariş öncesinde ekibimizden öğrenebilirsiniz.",
+    "translations": {
+      "en": {
+        "description": "The special gözleme option; check the filling with the team before ordering.",
+        "story": "The special gözleme option; check the filling with the team before ordering."
+      }
+    }
+  },
+  "sade-omlet": {
+    "description": "Ek peynir veya et seçeneği içermeyen sade omlet; sıcak servis edilir.",
+    "story": "Ek peynir veya et seçeneği içermeyen sade omlet; sıcak servis edilir.",
+    "translations": {
+      "en": {
+        "description": "A plain omelette without an added cheese or meat option, served hot.",
+        "story": "A plain omelette without an added cheese or meat option, served hot.",
+        "name": "Plain Omelette"
+      }
+    }
+  },
+  "peynirli-omlet": {
+    "description": "Peynir ile hazırlanan sıcak omlet.",
+    "story": "Peynir ile hazırlanan sıcak omlet.",
+    "translations": {
+      "en": {
+        "description": "A hot omelette with cheese.",
+        "story": "A hot omelette with cheese.",
+        "name": "Cheese Omelette"
+      }
+    }
+  },
+  "mantarli-omlet": {
+    "description": "Mantar ile hazırlanan sıcak omlet.",
+    "story": "Mantar ile hazırlanan sıcak omlet.",
+    "translations": {
+      "en": {
+        "description": "A hot omelette with mushrooms.",
+        "story": "A hot omelette with mushrooms.",
+        "name": "Mushroom Omelette"
+      }
+    }
+  },
+  "sosisli-omlet": {
+    "description": "Sosis ile hazırlanan sıcak omlet.",
+    "story": "Sosis ile hazırlanan sıcak omlet.",
+    "translations": {
+      "en": {
+        "description": "A hot omelette with sausage.",
+        "story": "A hot omelette with sausage.",
+        "name": "Sausage Omelette"
+      }
+    }
+  },
+  "sucuklu-omlet": {
+    "description": "Sucuk ile hazırlanan sıcak omlet.",
+    "story": "Sucuk ile hazırlanan sıcak omlet.",
+    "translations": {
+      "en": {
+        "description": "A hot omelette with sucuk (Turkish sausage).",
+        "story": "A hot omelette with sucuk (Turkish sausage).",
+        "name": "Sucuk Omelette"
+      }
+    }
+  },
+  "kavurmali-omlet": {
+    "description": "Kavurma ile hazırlanan sıcak omlet.",
+    "story": "Kavurma ile hazırlanan sıcak omlet.",
+    "translations": {
+      "en": {
+        "description": "A hot omelette with kavurma (Turkish cooked meat).",
+        "story": "A hot omelette with kavurma (Turkish cooked meat).",
+        "name": "Kavurma Omelette"
+      }
+    }
+  },
+  "pastirmali-omlet": {
+    "description": "Pastırma ile hazırlanan sıcak omlet.",
+    "story": "Pastırma ile hazırlanan sıcak omlet.",
+    "translations": {
+      "en": {
+        "description": "A hot omelette with pastırma (Turkish cured meat).",
+        "story": "A hot omelette with pastırma (Turkish cured meat).",
+        "name": "Pastırma Omelette"
+      }
+    }
+  },
+  "et-karisik-omlet": {
+    "description": "Et Karışık Omlet, sıcak servis edilen yumurtalı omlet seçeneği.",
+    "story": "Et Karışık Omlet, sıcak servis edilen yumurtalı omlet seçeneği.",
+    "translations": {
+      "en": {
+        "description": "Mixed Meat Omelette, served hot.",
+        "story": "Mixed Meat Omelette, served hot.",
+        "name": "Mixed Meat Omelette"
+      }
+    }
+  },
+  "sebze-karisik-omlet": {
+    "description": "Sebze Karışık Omlet, sıcak servis edilen yumurtalı omlet seçeneği.",
+    "story": "Sebze Karışık Omlet, sıcak servis edilen yumurtalı omlet seçeneği.",
+    "translations": {
+      "en": {
+        "description": "Mixed Vegetable Omelette, served hot.",
+        "story": "Mixed Vegetable Omelette, served hot.",
+        "name": "Mixed Vegetable Omelette"
+      }
+    }
+  },
+  "sade-menemen": {
+    "description": "Domates, biber ve yumurtayla hazırlanan sıcak menemen.",
+    "story": "Domates, biber ve yumurtayla hazırlanan sıcak menemen.",
+    "translations": {
+      "en": {
+        "description": "Hot menemen: eggs cooked with tomato and pepper.",
+        "story": "Hot menemen: eggs cooked with tomato and pepper.",
+        "name": "Plain Menemen"
+      }
+    }
+  },
+  "mantarli-menemen": {
+    "description": "Domates, biber ve yumurtalı menemenin mantar eklenen seçeneği.",
+    "story": "Domates, biber ve yumurtalı menemenin mantar eklenen seçeneği.",
+    "translations": {
+      "en": {
+        "description": "Menemen with tomato, pepper and eggs, plus mushrooms.",
+        "story": "Menemen with tomato, pepper and eggs, plus mushrooms.",
+        "name": "Mushroom Menemen"
+      }
+    }
+  },
+  "peynirli-menemen": {
+    "description": "Domates, biber ve yumurtalı menemenin peynir eklenen seçeneği.",
+    "story": "Domates, biber ve yumurtalı menemenin peynir eklenen seçeneği.",
+    "translations": {
+      "en": {
+        "description": "Menemen with tomato, pepper and eggs, plus cheese.",
+        "story": "Menemen with tomato, pepper and eggs, plus cheese.",
+        "name": "Cheese Menemen"
+      }
+    }
+  },
+  "sucuklu-menemen": {
+    "description": "Domates, biber ve yumurtalı menemenin sucuk eklenen seçeneği.",
+    "story": "Domates, biber ve yumurtalı menemenin sucuk eklenen seçeneği.",
+    "translations": {
+      "en": {
+        "description": "Menemen with tomato, pepper and eggs, plus sucuk (Turkish sausage).",
+        "story": "Menemen with tomato, pepper and eggs, plus sucuk (Turkish sausage).",
+        "name": "Sucuk Menemen"
+      }
+    }
+  },
+  "kavurmali-menemen": {
+    "description": "Domates, biber ve yumurtalı menemenin kavurma eklenen seçeneği.",
+    "story": "Domates, biber ve yumurtalı menemenin kavurma eklenen seçeneği.",
+    "translations": {
+      "en": {
+        "description": "Menemen with tomato, pepper and eggs, plus kavurma (Turkish cooked meat).",
+        "story": "Menemen with tomato, pepper and eggs, plus kavurma (Turkish cooked meat).",
+        "name": "Kavurma Menemen"
+      }
+    }
+  },
+  "pastirmali-menemen": {
+    "description": "Domates, biber ve yumurtalı menemenin pastırma eklenen seçeneği.",
+    "story": "Domates, biber ve yumurtalı menemenin pastırma eklenen seçeneği.",
+    "translations": {
+      "en": {
+        "description": "Menemen with tomato, pepper and eggs, plus pastırma (Turkish cured meat).",
+        "story": "Menemen with tomato, pepper and eggs, plus pastırma (Turkish cured meat).",
+        "name": "Pastırma Menemen"
+      }
+    }
+  },
+  "sahanda-yumurta": {
+    "description": "Sahanda hazırlanan sade yumurta; sıcak servis edilir.",
+    "story": "Sahanda hazırlanan sade yumurta; sıcak servis edilir.",
+    "translations": {
+      "en": {
+        "description": "Plain pan-cooked eggs, served hot.",
+        "story": "Plain pan-cooked eggs, served hot."
+      }
+    }
+  },
+  "patatesli-yumurta": {
+    "description": "Patates ile sahanda hazırlanan sıcak yumurta.",
+    "story": "Patates ile sahanda hazırlanan sıcak yumurta.",
+    "translations": {
+      "en": {
+        "description": "Hot pan-cooked eggs with potato.",
+        "story": "Hot pan-cooked eggs with potato.",
+        "name": "Eggs with Potato"
+      }
+    }
+  },
+  "ispanakli-yumurta": {
+    "description": "Ispanak ile sahanda hazırlanan sıcak yumurta.",
+    "story": "Ispanak ile sahanda hazırlanan sıcak yumurta.",
+    "translations": {
+      "en": {
+        "description": "Hot pan-cooked eggs with spinach.",
+        "story": "Hot pan-cooked eggs with spinach.",
+        "name": "Eggs with Spinach"
+      }
+    }
+  },
+  "peynirli-yumurta": {
+    "description": "Peynir ile sahanda hazırlanan sıcak yumurta.",
+    "story": "Peynir ile sahanda hazırlanan sıcak yumurta.",
+    "translations": {
+      "en": {
+        "description": "Hot pan-cooked eggs with cheese.",
+        "story": "Hot pan-cooked eggs with cheese.",
+        "name": "Eggs with Cheese"
+      }
+    }
+  },
+  "sucuklu-yumurta": {
+    "description": "Sucuk ile sahanda hazırlanan sıcak yumurta.",
+    "story": "Sucuk ile sahanda hazırlanan sıcak yumurta.",
+    "translations": {
+      "en": {
+        "description": "Hot pan-cooked eggs with sucuk (Turkish sausage).",
+        "story": "Hot pan-cooked eggs with sucuk (Turkish sausage).",
+        "name": "Eggs with Sucuk"
+      }
+    }
+  },
+  "mantarli-yumurta": {
+    "description": "Mantar ile sahanda hazırlanan sıcak yumurta.",
+    "story": "Mantar ile sahanda hazırlanan sıcak yumurta.",
+    "translations": {
+      "en": {
+        "description": "Hot pan-cooked eggs with mushrooms.",
+        "story": "Hot pan-cooked eggs with mushrooms.",
+        "name": "Eggs with Mushroom"
+      }
+    }
+  },
+  "sosisli-yumurta": {
+    "description": "Sosis ile sahanda hazırlanan sıcak yumurta.",
+    "story": "Sosis ile sahanda hazırlanan sıcak yumurta.",
+    "translations": {
+      "en": {
+        "description": "Hot pan-cooked eggs with sausage.",
+        "story": "Hot pan-cooked eggs with sausage.",
+        "name": "Eggs with Sausage"
+      }
+    }
+  },
+  "kavurmali-yumurta": {
+    "description": "Kavurma ile sahanda hazırlanan sıcak yumurta.",
+    "story": "Kavurma ile sahanda hazırlanan sıcak yumurta.",
+    "translations": {
+      "en": {
+        "description": "Hot pan-cooked eggs with kavurma (Turkish cooked meat).",
+        "story": "Hot pan-cooked eggs with kavurma (Turkish cooked meat).",
+        "name": "Eggs with Kavurma"
+      }
+    }
+  },
+  "pastirmali-yumurta": {
+    "description": "Pastırma ile sahanda hazırlanan sıcak yumurta.",
+    "story": "Pastırma ile sahanda hazırlanan sıcak yumurta.",
+    "translations": {
+      "en": {
+        "description": "Hot pan-cooked eggs with pastırma (Turkish cured meat).",
+        "story": "Hot pan-cooked eggs with pastırma (Turkish cured meat).",
+        "name": "Eggs with Pastırma"
+      }
+    }
+  },
+  "salcali-sahanda-sosis": {
+    "description": "Salçayla sahanda hazırlanan, sıcak servis edilen sosis.",
+    "story": "Salçayla sahanda hazırlanan, sıcak servis edilen sosis.",
+    "translations": {
+      "en": {
+        "description": "Sausage cooked in a pan with tomato paste, served hot.",
+        "story": "Sausage cooked in a pan with tomato paste, served hot.",
+        "name": "Sausage with Tomato Paste"
+      }
+    }
+  },
+  "sahanda-kavurma": {
+    "description": "Kavurmanın sahanda sıcak servis edilen porsiyonu.",
+    "story": "Kavurmanın sahanda sıcak servis edilen porsiyonu.",
+    "translations": {
+      "en": {
+        "description": "A hot pan portion of kavurma, a traditional Turkish cooked-meat preparation.",
+        "story": "A hot pan portion of kavurma, a traditional Turkish cooked-meat preparation.",
+        "name": "Kavurma Pan"
+      }
+    }
+  },
+  "sahanda-pastirma": {
+    "description": "Pastırmanın sahanda sıcak servis edilen porsiyonu.",
+    "story": "Pastırmanın sahanda sıcak servis edilen porsiyonu.",
+    "translations": {
+      "en": {
+        "description": "A hot pan portion of pastırma (Turkish cured meat).",
+        "story": "A hot pan portion of pastırma (Turkish cured meat).",
+        "name": "Pastırma Pan"
+      }
+    }
+  },
+  "kuymak": {
+    "description": "Mısır unu ve peynirle hazırlanan sıcak kuymak.",
+    "story": "Mısır unu ve peynirle hazırlanan sıcak kuymak.",
+    "translations": {
+      "en": {
+        "description": "Kuymak, a hot dish made with cornmeal and cheese.",
+        "story": "Kuymak, a hot dish made with cornmeal and cheese."
+      }
+    }
+  },
+  "sahanda-sucuk": {
+    "description": "Sucuğun sahanda sıcak servis edilen porsiyonu.",
+    "story": "Sucuğun sahanda sıcak servis edilen porsiyonu.",
+    "translations": {
+      "en": {
+        "description": "A hot pan portion of sucuk (Turkish sausage).",
+        "story": "A hot pan portion of sucuk (Turkish sausage)."
+      }
+    }
+  },
+  "turk-kahvesi": {
+    "description": "Geleneksel Türk kahvesi; sıcak servis edilir. Şeker tercihinizi sipariş verirken belirtebilirsiniz.",
+    "story": "Geleneksel Türk kahvesi; sıcak servis edilir. Şeker tercihinizi sipariş verirken belirtebilirsiniz.",
+    "translations": {
+      "en": {
+        "description": "Traditional Turkish coffee, served hot. Specify your sugar preference when ordering.",
+        "story": "Traditional Turkish coffee, served hot. Specify your sugar preference when ordering."
+      }
+    }
+  },
+  "ice-chai-tea-latte": {
+    "description": "Buzlu servis edilen chai tea latte seçeneği.",
+    "story": "Buzlu servis edilen chai tea latte seçeneği.",
+    "translations": {
+      "en": {
+        "description": "Chai tea latte served over ice; a tea-based drink rather than coffee.",
+        "story": "Chai tea latte served over ice; a tea-based drink rather than coffee."
+      }
+    }
+  },
+  "chai-tea-latte": {
+    "description": "Sıcak servis edilen chai tea latte seçeneği.",
+    "story": "Sıcak servis edilen chai tea latte seçeneği.",
+    "translations": {
+      "en": {
+        "description": "Chai tea latte served hot; a tea-based drink rather than coffee.",
+        "story": "Chai tea latte served hot; a tea-based drink rather than coffee."
+      }
+    }
+  }
+}

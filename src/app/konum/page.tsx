@@ -162,7 +162,7 @@ export default function LocationPage() {
               <figure className={styles.interiorPhoto}>
                 <Image
                   src="/images/interior-chair.webp"
-                  alt="Tarihi Rum binasının tuğla duvarlı iç mekânı"
+                  alt="Beyoğlu’ndaki mekânın tuğla duvarlı iç mekânı"
                   fill
                   sizes="(max-width: 760px) 38vw, 230px"
                   quality={75}
@@ -177,6 +177,11 @@ export default function LocationPage() {
               <h2 id="arrival-title">Ulaşım seçenekleri</h2>
               <p>
                 M2 Taksim Metro İstasyonu, çevredeki otobüs durakları ve araçla ulaşım için temel bilgileri aşağıda bulabilirsiniz. Güncel güzergâh için haritayı kullanın.
+              </p>
+              <p>
+                Tekerlekli sandalye veya bebek arabasıyla geliyorsanız giriş, basamaklar,
+                oturma alanı ve tuvalete erişim için yola çıkmadan önce <a href={telUrl}>ekibimizi arayın</a>.
+                Masa talebinizde ihtiyaçlarınızı belirterek uygun düzenin teyit edilmesini sağlayabilirsiniz.
               </p>
             </header>
             <ol className={styles.routes}>
@@ -234,7 +239,7 @@ export default function LocationPage() {
               <Utensils size={30} aria-hidden="true" />
               <h2 id="place-title">Zambak Sokak&apos;taki mekân</h2>
               <p>
-                Tarihi Rum binasındaki mekânımız tuğla duvarları, eski aynaları ve sokağa açılan masalarıyla Beyoğlu&apos;nun karakterini taşır. Van kahvaltısını sakin, rahat ve özenli bir ortamda servis ediyoruz.
+                Zambak Sokak’taki mekânımız tuğla duvarları, eski aynaları ve sokağa açılan masalarıyla Beyoğlu&apos;nun karakterini taşır. Van kahvaltısını sakin, rahat ve özenli bir ortamda servis ediyoruz.
               </p>
               <Link href="/menu">Menüyü incele <ArrowUpRight size={17} aria-hidden="true" /></Link>
             </div>

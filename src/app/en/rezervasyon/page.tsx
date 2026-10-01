@@ -1,5 +1,8 @@
 import type { Metadata } from "next";
 import { Suspense } from "react";
+import { getPublicMenuData } from "../../menu/public-menu-data";
+import { localizeMenuData } from "../../menu/menu-localization";
+import { getOrderingQuestions } from "../../menu/ordering-questions";
 import ClientPage from "../../client-page";
 import { AnimatedFooter } from "../../components/animated-footer";
 import {
@@ -18,7 +21,7 @@ import styles from "../../rezervasyon/reservation.module.css";
 
 const pageTitle = "Table Reservation | Tarihi Van Breakfast House, Beyoğlu Taksim";
 const pageDescription =
-  "Reserve your table at Tarihi Van Kahvaltı Evi in Beyoğlu, Taksim. Fresh Van breakfast spread, artisanal cheeses, honey kaymak, hot pans and endless Turkish tea.";
+  "Reserve your table at Tarihi Van Kahvaltı Evi in Beyoğlu, Taksim. See breakfast choices, included drinks and visit details, then request a table.";
 
 export const metadata: Metadata = {
   title: { absolute: pageTitle },
@@ -55,7 +58,9 @@ export const metadata: Metadata = {
   },
 };
 
-export default function EnglishReservationPage() {
+export default async function EnglishReservationPage() {
+  const menu = await getPublicMenuData();
+  const orderingQuestions = getOrderingQuestions("en", localizeMenuData("en", menu.categories, menu.items).items);
   const reservationJsonLd = {
     "@context": "https://schema.org",
     "@graph": [
@@ -98,7 +103,7 @@ export default function EnglishReservationPage() {
           { "@type": "ListItem", position: 2, name: "Reservation", item: englishReservationUrl },
         ],
       },
-      buildFaqJsonLd(englishReservationFaqItems, englishReservationUrl, false, "en-US"),
+      buildFaqJsonLd([...englishReservationFaqItems, ...orderingQuestions], englishReservationUrl, false, "en-US"),
     ],
   };
 
@@ -111,7 +116,7 @@ export default function EnglishReservationPage() {
       <ClientPage locale="en">
         <main id="main-content" className={styles.page} lang="en-US">
           <Suspense fallback={<div style={{ minHeight: "420px" }} />}>
-            <ReservationView locale="en" />
+            <ReservationView locale="en" orderingQuestions={orderingQuestions} />
           </Suspense>
         </main>
         <AnimatedFooter locale="en" />

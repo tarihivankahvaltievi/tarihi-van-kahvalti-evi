@@ -103,9 +103,9 @@ const routes = [
     path: "/menu",
     canonical: menuPageUrl,
     language: "tr",
-    types: ["Restaurant", "WebPage", "BreadcrumbList", "Menu"],
+    types: ["Restaurant", "WebPage", "BreadcrumbList", "FAQPage", "Menu"],
     restaurantMenu: `${menuPageUrl}#menu`,
-    faqCount: 0,
+    faqCount: 7,
     menuSectionCount: 18,
     sharedMenuDesign: true,
     visibleSignals: ["menü", "serpme fix menü", "murtuğa", "türk kahvesi"],
@@ -117,8 +117,8 @@ const routes = [
     language: "tr",
     types: ["Restaurant", "WebPage", "BreadcrumbList", "FAQPage"],
     restaurantMenu: `${menuPageUrl}#menu`,
-    faqCount: 3,
-    visibleSignals: ["masa rezervasyonu", "beyoğlu", "zambak sokak", "taksim meydanı", "5–10 dakika"],
+    faqCount: 10,
+    visibleSignals: ["masa rezervasyonu", "beyoğlu", "zambak sokak", "taksim meydanı"],
     hreflang: reservationHreflang,
     reservationPage: true,
   },
@@ -130,8 +130,8 @@ const routes = [
     htmlLanguage: "tr",
     types: ["Restaurant", "WebPage", "BreadcrumbList", "FAQPage"],
     restaurantMenu: `${menuPageUrl}#menu`,
-    faqCount: 3,
-    visibleSignals: ["table reservation", "beyoğlu", "zambak street", "taksim square", "5–10 minutes"],
+    faqCount: 10,
+    visibleSignals: ["table reservation", "beyoğlu", "zambak street", "taksim square"],
     hreflang: reservationHreflang,
     reservationPage: true,
   },
@@ -188,9 +188,9 @@ const routes = [
     canonical: englishMenuPageUrl,
     language: "en",
     htmlLanguage: "tr",
-    types: ["Restaurant", "WebPage", "BreadcrumbList", "Menu"],
+    types: ["Restaurant", "WebPage", "BreadcrumbList", "FAQPage", "Menu"],
     restaurantMenu: `${menuPageUrl}#menu`,
-    faqCount: 0,
+    faqCount: 7,
     menuSectionCount: 18,
     sharedMenuDesign: true,
     visibleSignals: ["serpme fix menu", "prices", "murtuğa", "taksim"],
@@ -630,6 +630,7 @@ for (const route of routes) {
   const restaurant = graphDocument["@graph"].find((node) => node["@type"] === "Restaurant");
   assert(restaurant?.["@id"] === `${canonicalSiteUrl}/#restaurant`, `${routeLabel}: restoran kimliği yanlış`);
   assert(restaurant?.alternateName === "Tarihi Van Kahvaltı Evi 1978", `${routeLabel}: işletme aliası yanlış`);
+  assert(!restaurant?.paymentAccepted && !restaurant?.currenciesAccepted && !restaurant?.foundingDate, `${routeLabel}: doğrulanmamış ödeme veya hukuki kuruluş bilgisi yayımlanmamalı`);
   assert(restaurant?.logo === `${canonicalSiteUrl}/icons/icon-512.png`, `${routeLabel}: logo yanlış`);
   assert(restaurant?.email === "info@tarihivankahvaltievi.com", `${routeLabel}: e-posta yanlış`);
   assert(restaurant?.hasMap === "https://www.google.com/maps?cid=10380797280962926014", `${routeLabel}: Maps CID yanlış`);
@@ -661,6 +662,7 @@ for (const route of routes) {
       const id = new URL(item.url).hash.slice(1);
       const article = renderedArticles.find((entry) => entry.includes(`id="${id}"`));
       assert(article, `${routeLabel}: ${id} yalnız şemada var`);
+      assert(visibleText(article).includes(item.description), `${routeLabel}: ${id} görünür açıklaması şemayla eşleşmiyor`);
       assert(visibleText(article).includes(item.name), `${routeLabel}: ${id} görünür adı şemayla eşleşmiyor`);
       if (item.offers) assert(visibleText(article).includes(`₺${item.offers.price}`), `${routeLabel}: ${id} görünür fiyatı şemayla eşleşmiyor`);
     }
@@ -678,6 +680,11 @@ for (const route of routes) {
   assert(new Set(questions).size === questions.length, `${routeLabel}: şema soruları benzersiz değil`);
   assert(summaries.length === route.faqCount, `${routeLabel}: görünür SSS sayısı yanlış`);
   assert(questions.every((question) => summaries.includes(question)), `${routeLabel}: görünür SSS ve şema eşleşmiyor`);
+  const faqDetails = [...visibleHtml(html).matchAll(/<details\b[^>]*>[\s\S]*?<\/details>/gi)].map((match) => match[0]);
+  for (const question of faq?.mainEntity ?? []) {
+    const detail = faqDetails.find((entry) => visibleText(entry).includes(question.name));
+    assert(detail && visibleText(detail).includes(question.acceptedAnswer.text.replace(/\s+/g, " ").trim()), `${routeLabel}: ${question.name} görünür cevabı şemayla eşleşmiyor`);
+  }
 
   assert(/<meta\s+name="geo\.region"\s+content="TR-34"/i.test(html), `${routeLabel}: geo.region eksik`);
   assert(/<meta\s+name="geo\.position"\s+content="41\.0367655;28\.9829478"/i.test(html), `${routeLabel}: geo.position eksik`);

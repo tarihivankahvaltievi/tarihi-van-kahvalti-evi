@@ -3,6 +3,7 @@ import ClientPage from "../client-page";
 import {
   absoluteUrl,
   buildBreadcrumbJsonLd,
+  buildFaqJsonLd,
   buildRestaurantJsonLd,
   englishMenuUrl,
   jsonLd,
@@ -14,6 +15,7 @@ import { AnimatedFooter } from "../components/animated-footer";
 import { MenuExperience } from "./menu-experience";
 import { getPublicMenuData } from "./public-menu-data";
 import { getMenuOrderNote } from "./menu-rules";
+import { getOrderingQuestions } from "./ordering-questions";
 
 const menuDescription =
   "Tarihi Van Kahvaltı Evi güncel menü ve fiyatları: serpme Van kahvaltısı, bakır sahanlar, yöresel lezzetler, çay ve kahve seçenekleri.";
@@ -114,6 +116,7 @@ export default async function MenuPage() {
         },
       },
       buildBreadcrumbJsonLd(menuUrl, "Menü ve fiyatlar", false),
+      buildFaqJsonLd(getOrderingQuestions("tr", items), menuUrl, false, "tr"),
       menuSchema,
     ],
   };

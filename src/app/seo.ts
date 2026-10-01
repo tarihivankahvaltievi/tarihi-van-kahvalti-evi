@@ -33,7 +33,7 @@ export const cookiePolicyUrl = `${siteUrl}/cerez-politikasi`;
 
 export const homeTitle = "Beyoğlu Kahvaltı | Tarihi Van Kahvaltı Evi, Taksim";
 export const homeDescription =
-  "Beyoğlu'nda, Taksim Meydanı ve İstiklal Caddesi yakınında 1978'den beri geleneksel Van kahvaltısı: otlu peynir, murtuğa, kavut ve sınırsız çay. Menü ve yol tarifi.";
+  "Beyoğlu’nda Taksim ve İstiklal Caddesi yakınında Van kahvaltısı: otlu peynir, murtuğa, kavut ve sıcak tabaklar. Güncel menü, fiyatlar ve yol tarifi.";
 export const homeOgDescription =
   "Beyoğlu, Taksim ve İstiklal Caddesi yakınında geleneksel Van kahvaltısı; güncel menü, çalışma saatleri, açık adres ve yol tarifi.";
 
@@ -41,7 +41,6 @@ export const displayPhone = "+90 541 525 2868";
 export const phoneE164 = "+905415252868";
 export const telUrl = `tel:${phoneE164}`;
 export const email = "info@tarihivankahvaltievi.com";
-export const foundingDate = "1978";
 export const defaultOgImagePath = "/images/og/home.jpg";
 export const defaultOgImage = `${siteUrl}${defaultOgImagePath}`;
 
@@ -110,7 +109,7 @@ export const faqItems = [
   {
     question: "Van kahvaltısı nedir ve neler içerir?",
     answer:
-      "Van kahvaltısı, otlu peynir, murtuğa, kavut, cacık, kete, süzme bal, kaymak ve sınırsız çay gibi yöresel ürünlerle hazırlanan zengin bir serpme kahvaltıdır.",
+      "Van kahvaltısı, otlu peynir, murtuğa, kavut, cacık, kete, süzme bal, kaymak ve çay gibi yöresel ürünlerle hazırlanan zengin bir serpme kahvaltıdır.",
   },
   {
     question: "Tarihi Van Kahvaltı Evi nerede?",
@@ -219,7 +218,7 @@ export const localSeoFacts = [
   },
   {
     label: "Van kahvaltısı",
-    value: "Otlu peynir, murtuğa, kavut, kete, bal-kaymak, sıcak sahanlar ve sınırsız çayla serpme sofra.",
+    value: "Otlu peynir, murtuğa, kavut, kete, bal-kaymak, sıcak sahanlar ve çayla serpme sofra.",
     href: "/menu",
     linkLabel: "Menüyü gör",
   },
@@ -315,8 +314,7 @@ export function buildRestaurantJsonLd(withContext = true) {
       },
     ],
     description:
-      "1978'den beri Beyoğlu Taksim'de otlu peynir, murtuğa, kavut, sıcak sahanlar ve sınırsız çayla geleneksel serpme Van kahvaltısı sunan restoran.",
-    foundingDate,
+      "Beyoğlu Zambak Sokak No:8’de otlu peynir, murtuğa, kavut ve sıcak tabaklarla Van kahvaltısı sunan restoran; 1978’e uzanan aile anlatısı.",
     telephone: phoneE164,
     email,
     contactPoint: {
@@ -326,8 +324,6 @@ export function buildRestaurantJsonLd(withContext = true) {
       availableLanguage: ["tr", "en"],
     },
     priceRange: "₺₺",
-    paymentAccepted: "Cash, Credit Card",
-    currenciesAccepted: "TRY, EUR, USD",
     acceptsReservations: true,
     // Değerlendirme puanı, işletmenin kendi sayfasında doğrulanabilir yorum
     // kaynağı olmadan işaretlemeye eklenmez. Böylece schema, kaynaklanamayan

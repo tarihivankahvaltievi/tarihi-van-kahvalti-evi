@@ -10,19 +10,19 @@ import styles from "./story-page.module.css";
 
 const timeline = [
   {
-    year: "18. yüzyılın sonu",
-    title: "Bir Rum ailesinin evi",
-    text: "Dönemin usta zanaatkârlarının izlerini taşıyan yapı; özgün motifleri, yüksek tavanları ve tarihi dokusuyla Beyoğlu'nun yaşayan hafızasının bir parçası oldu.",
+    year: "1978",
+    title: "Aile hikâyemizin başlangıcı",
+    text: "Aile anlatımızda Van kahvaltısıyla kurduğumuz bağın başlangıcı 1978’dir. Paylaşmayı, misafirperverliği ve yöresel tatları sofranın merkezine koyan yaklaşımımız bu hikâyenin parçasıdır.",
   },
   {
-    year: "1978",
-    title: "Aile yolculuğumuz başladı",
-    text: "Bu kıymetli yapı aile emeğiyle yeniden hayat buldu. Sofranın merkezine paylaşmayı, misafirperverliği ve Van'dan gelen tatları koyan yaklaşımımız o günden beri değişmedi.",
+    year: "Van geleneği",
+    title: "Paylaşmalı sofranın kültürü",
+    text: "Otlu peynir, murtuğa, kavut ve çay; Van’ın kahvaltı kültüründe ayrı bir yere sahiptir. Bu geleneğin ürünlerini ve kültürel geçmişini resmî kaynaklara dayanan Van kahvaltısı rehberimizde anlatıyoruz.",
   },
   {
     year: "Bugün",
-    title: "Üçüncü kuşak aynı mirası yaşatıyor",
-    text: "İkinci derece tarihi eser statüsündeki mekânımızda sunulan her lezzet; geleneksel kültürün, samimi sofraların ve kuşaktan kuşağa aktarılan emeğin bir yansıması.",
+    title: "Beyoğlu Zambak Sokak’taki soframız",
+    text: "Bugünkü adresimiz Zambak Sokak No:8. Menüdeki yöresel tatları, sıcak tabakları ve kahve seçeneklerini Beyoğlu’nda aynı masada buluşturuyoruz.",
   },
 ];
 
@@ -64,7 +64,7 @@ export function StoryExperience() {
   const lineX = useTransform(scrollYProgress, [0, 1], [0, 80]);
 
   return (
-    <main id="main-content" className={styles.page}>
+    <main id="main-content" tabIndex={-1} className={styles.page}>
       <article>
         <section ref={heroRef} className={styles.hero} aria-labelledby="story-title">
           <div className={styles.heroCopy}>
@@ -125,7 +125,7 @@ export function StoryExperience() {
               />
             </motion.div>
             <div className={styles.heroCaption}>
-              <span>Tarihi Rum binası</span>
+              <span>Beyoğlu’nun dokusu</span>
               <strong>Zambak Sokak No:8</strong>
             </div>
           </div>
@@ -145,19 +145,19 @@ export function StoryExperience() {
           </Reveal>
           <div className={styles.facts} aria-label="Tarihi Van Kahvaltı Evi kısa bilgiler">
             <div><strong>1978</strong><span>Aile yolculuğunun başlangıcı</span></div>
-            <div><strong>3. kuşak</strong><span>Bugün mirası sürdüren aile</span></div>
-            <div><strong>2. derece</strong><span>Tarihi eser statüsündeki yapı</span></div>
+            <div><strong>Van</strong><span>Soframıza yön veren kahvaltı kültürü</span></div>
+            <div><strong>No:8</strong><span>Bugünkü Zambak Sokak adresimiz</span></div>
           </div>
         </section>
 
         <section id="miras" className={styles.heritage} aria-labelledby="heritage-title">
           <div className={styles.heritageIntro}>
             <Reveal>
-              <p className={styles.chapterName}>Binanın hafızası</p>
-              <h2 id="heritage-title">Bir evden, üç kuşaklık bir sofraya</h2>
+              <p className={styles.chapterName}>Aile anlatısı ve sofra kültürü</p>
+              <h2 id="heritage-title">Van’dan Beyoğlu’na bir sofra kültürü</h2>
               <p>
-                Bu bina yalnızca duvarlardan ibaret değil. Beyoğlu&apos;nun farklı dönemlerine, bir ailenin emeğine ve
-                her sabah yeniden kurulan sofralara tanıklık eden canlı bir miras.
+                Aile hikâyemiz, Van kahvaltısının kültürel geçmişi ve bugünkü Beyoğlu adresimiz
+                soframızın farklı parçalarıdır. Her birinin kendi hikâyesi vardır.
               </p>
             </Reveal>
             <Reveal className={styles.heritageImage} delay={0.08}>
@@ -188,6 +188,7 @@ export function StoryExperience() {
               </motion.li>
             ))}
           </ol>
+          <Link className={styles.inlineLink} href="/van-kahvaltisi-nedir">Van kahvaltısının kültürel kaynaklarını okuyun <ArrowUpRight size={17} aria-hidden="true" /></Link>
         </section>
 
         <section className={styles.tableStory} aria-labelledby="table-title">

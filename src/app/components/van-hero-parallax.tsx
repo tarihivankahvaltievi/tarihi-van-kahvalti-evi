@@ -16,7 +16,7 @@ type HeroSlide = {
 const heroSlides: HeroSlide[] = [
   {
     image: "/images/balcony-breakfast.webp",
-    altTr: "Tarihi Rum binası balkonunda zengin serpme kahvaltı sofrası",
+    altTr: "Beyoğlu’nda balkonda zengin serpme kahvaltı sofrası",
     altEn: "Grand Turkish breakfast table on the historic balcony",
   },
   {

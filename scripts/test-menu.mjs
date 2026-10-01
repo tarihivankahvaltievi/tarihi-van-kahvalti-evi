@@ -39,18 +39,23 @@ async function verifyMenu(route, expected, locale) {
   const sections = graph.find((entry) => entry["@type"] === "Menu").hasMenuSection;
   assert.equal(sections.length, expected.categories.length);
   const schemaItems = sections.flatMap((section) => section.hasMenuItem);
+  const escapedText = (value) => value.replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll('"', "&quot;").replaceAll("'", "&#x27;");
   for (const item of expected.items) {
     const article = articles.find((entry) => entry[0].includes(`id="${item.id}"`))?.[0];
     assert.ok(article, `${route}: missing real anchor ${item.id}`);
     assert.ok(article.includes(item.price), `${route}: wrong visible price ${item.id}`);
     const schemaItem = schemaItems.find((entry) => entry.url.endsWith(`#${item.id}`));
     assert.ok(schemaItem, `${route}: schema item ${item.id}`);
+    const description = locale === "en" ? item.translations?.en?.description ?? item.description : item.description;
+    assert.equal(schemaItem.description, description);
+    assert.ok(article.includes(escapedText(description)), `${route}: stale visible description ${item.id}`);
     assert.equal(schemaItem.offers?.price, item.price.match(/^₺?(\d+)/)?.[1]);
     assert.equal(schemaItem.offers?.priceCurrency, "TRY");
   }
   assert.ok(plain.includes('id="main-content"'));
   assert.ok(plain.includes(locale === "en" ? "Minimum 2 people." : "Minimum 2 kişi için servis edilir."));
-  assert.ok(plain.includes(locale === "en" ? "Unlimited Turkish tea" : "Sınırsız çay"));
+  const serpme = expected.items.find((item) => item.id === "serpme-fix-menu");
+  assert.ok(plain.includes(locale === "en" ? serpme.translations.en.details[1] : serpme.details[1]));
 }
 
 async function verifyHomePrices(expected) {
@@ -59,6 +64,15 @@ async function verifyHomePrices(expected) {
     const html = plainHtml(await (await fetch(`${base}${route}`)).text());
     const preview = html.match(/<p class="hero-breakfast-price">[\s\S]*?<\/p>/)?.[0];
     assert.ok(preview?.includes(price), `${route}: homepage price does not match live menu`);
+  }
+}
+
+async function verifyBookingInclusions(expected) {
+  const item = expected.items.find((entry) => entry.id === "serpme-fix-menu");
+  for (const [route, details] of [["/rezervasyon", item.details], ["/en/rezervasyon", item.translations.en.details]]) {
+    const html = plainHtml(await (await fetch(`${base}${route}`)).text());
+    assert.ok(html.includes('id="ordering-guide"'), `${route}: ordering guide missing`);
+    assert.ok(html.includes(details[1]), `${route}: booking guide still shows stale inclusions`);
   }
 }
 
@@ -101,21 +115,28 @@ try {
   await verifyMenu("/menu", baseline, "tr");
   await verifyMenu("/en/menu", baseline, "en");
   await verifyHomePrices(baseline);
+  await verifyBookingInclusions(baseline);
   const changed = structuredClone(baseline);
   changed.lastUpdated = new Intl.DateTimeFormat("tr-TR", { day: "numeric", month: "long", year: "numeric", timeZone: "Europe/Istanbul" }).format(new Date());
   changed.items[0].price = "₺971";
+  changed.items[0].description = "Yalnız izole test ürün açıklaması";
+  changed.items[0].translations.en.description = "Isolated test product description only";
+  changed.items[0].details[1] = "Yalnız izole test çay kapsamı";
+  changed.items[0].translations.en.details[1] = "Isolated test tea inclusion only";
   changed.categories.push({ id: "test-category", label: "Deneme Kategorisi", shortLabel: "Deneme", description: "Only an isolated test fixture.", image: "", imageAlt: "", translations: { en: { label: "Test Category" } } });
   changed.items.push({ ...structuredClone(baseline.items[0]), id: "test-item", category: "test-category", name: "Deneme Ürünü", price: "₺123" });
   await save(changed);
   await verifyMenu("/menu", changed, "tr");
   await verifyMenu("/en/menu", changed, "en");
   await verifyHomePrices(changed);
+  await verifyBookingInclusions(changed);
   await verifySitemapDates();
   await save(baseline);
   await verifyMenu("/menu", baseline, "tr");
   await verifyMenu("/en/menu", baseline, "en");
   await verifyHomePrices(baseline);
-  console.log(`Menü testi geçti: ${baseline.items.length} ürün / ${baseline.categories.length} kategori gerçek prerender HTML'de; TR/EN fiyat-şema eşleşmesi, yetkisiz yazma engeli, anında önbellek yenileme ve yeni kategori görünürlüğü doğrulandı.`);
+  await verifyBookingInclusions(baseline);
+  console.log(`Menü testi geçti: ${baseline.items.length} ürün / ${baseline.categories.length} kategori gerçek prerender HTML'de; TR/EN fiyat-açıklama-şema eşleşmesi, yetkisiz yazma engeli, rezervasyonda güncel dahil ürünler, anında önbellek yenileme ve yeni kategori görünürlüğü doğrulandı.`);
 } finally {
   server.kill("SIGTERM");
   await new Promise((resolve) => { if (server.exitCode !== null) resolve(); else server.once("exit", resolve); });

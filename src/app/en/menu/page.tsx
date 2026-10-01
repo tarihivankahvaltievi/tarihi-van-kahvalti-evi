@@ -5,9 +5,11 @@ import { localizeMenuData } from "../../menu/menu-localization";
 import { MenuExperience } from "../../menu/menu-experience";
 import { getPublicMenuData } from "../../menu/public-menu-data";
 import { getMenuOrderNote } from "../../menu/menu-rules";
+import { getOrderingQuestions } from "../../menu/ordering-questions";
 import {
   absoluteUrl,
   buildBreadcrumbJsonLd,
+  buildFaqJsonLd,
   buildRestaurantJsonLd,
   englishMenuUrl,
   englishUrl,
@@ -119,6 +121,7 @@ export default async function EnglishMenuPage() {
         },
       },
       buildBreadcrumbJsonLd(englishMenuUrl, "English menu and prices", false, "Visitor guide", englishUrl),
+      buildFaqJsonLd(getOrderingQuestions("en", localized.items), englishMenuUrl, false, "en"),
       menuSchema,
     ],
   };

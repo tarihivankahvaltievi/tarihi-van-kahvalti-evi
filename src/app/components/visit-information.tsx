@@ -17,6 +17,9 @@ export function VisitInformation({ locale = "tr" }: { locale?: SiteLocale }) {
           <p>{isEn
             ? "Look for Tarihi Van Kahvaltı Evi on Zambak Street, No:8. Open our Google Maps listing for a route from your starting point."
             : "Tarihi Van Kahvaltı Evi, Zambak Sokak No:8’de. Bulunduğunuz noktadan güncel rota için Google Haritalar kaydımızı açın."}</p>
+          <p>{isEn
+            ? "For a wheelchair or stroller visit, call ahead about the entrance, steps, seating and toilet access. Mention your needs in your table request."
+            : "Tekerlekli sandalye veya bebek arabasıyla ziyaret için giriş, basamaklar, oturma alanı ve tuvalete erişimi gelmeden önce telefonla teyit edin. İhtiyaçlarınızı masa talebine ekleyebilirsiniz."}</p>
         </div>
         <nav className={styles.actions} aria-label={isEn ? "Directions and contact" : "Yol tarifi ve iletişim"}>
           <a href={mapsUrl} target="_blank" rel="noopener noreferrer" data-analytics-surface="home_location">

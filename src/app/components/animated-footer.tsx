@@ -55,8 +55,8 @@ export function AnimatedFooter({ locale = "tr" }: { locale?: string }) {
           </h2>
           <p className={styles.textParagraph}>
             {isEn
-              ? "Tarihi Van Kahvaltı Evi was born with the passion of bringing together the scent of oven-fresh golden pişi, the authentic flavors of highland herb cheeses, and the generous spirit of a family table without having to travel far. This family tradition has turned into an enchanting sanctuary in Beyoğlu where guests feel at home and discover centuries-old breakfast traditions."
-              : "Tarihi Van Kahvaltı Evi, fırından yeni çıkan sıcacık pişi ve kete kokusunu, Doğu'nun bereketli yaylalarından süzülen hakiki otlu peynirin lezzetini ve bu tatların peşine düşmek için uzak diyarlara gitme gerekliliğini ortadan kaldırma hayaliyle doğdu. Büyük bir tutkuyla sahiplendiğimiz bu aile mirası, misafirlerimizin kendilerini Beyoğlu'nun tarihi dokusunda sıcacık bir Van evinde hissedecekleri ve kadim kahvaltı lezzetlerini keşfedecekleri eşsiz bir mekana dönüştü!"}
+              ? "Tarihi Van Kahvaltı Evi was born with the passion of bringing together the scent of freshly fried golden pişi, the authentic flavors of highland herb cheeses, and the generous spirit of a family table without having to travel far. This family tradition has turned into an enchanting sanctuary in Beyoğlu where guests feel at home and discover centuries-old breakfast traditions."
+              : "Tarihi Van Kahvaltı Evi, sıcacık pişi ve kete kokusunu, Doğu'nun bereketli yaylalarından süzülen hakiki otlu peynirin lezzetini ve bu tatların peşine düşmek için uzak diyarlara gitme gerekliliğini ortadan kaldırma hayaliyle doğdu. Büyük bir tutkuyla sahiplendiğimiz bu aile mirası, misafirlerimizin kendilerini Beyoğlu'nun tarihi dokusunda sıcacık bir Van evinde hissedecekleri ve kadim kahvaltı lezzetlerini keşfedecekleri eşsiz bir mekana dönüştü!"}
           </p>
         </div>
 

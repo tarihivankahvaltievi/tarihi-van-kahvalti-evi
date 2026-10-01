@@ -12,7 +12,7 @@ const categories = [
   ["omletler", "Omletler", "Omlet", "Sade ve farklı malzemelerle hazırlanan sıcak omletler.", "Omelettes", "Omelettes", "Hot omelettes prepared plain or with a choice of ingredients."],
   ["menemenler", "Menemenler", "Menemen", "Domates ve yumurta temelli, farklı malzemelerle hazırlanan menemenler.", "Menemen", "Menemen", "Turkish scrambled eggs with tomatoes and a choice of additions."],
   ["yumurtalar", "Yumurtalar", "Yumurta", "Bakır sahanda hazırlanan yumurta ve kuymak çeşitleri.", "Eggs", "Eggs", "Egg dishes and kuymak prepared and served in a pan."],
-  ["sahanlar", "Sahanlar", "Sahan", "Sıcak servis edilen sucuk, sosis, kavurma ve pastırma tabakları.", "Pan Dishes", "Pan dishes", "Hot pan dishes with sausage, roast beef or pastrami."],
+  ["sahanlar", "Sahanlar", "Sahan", "Sıcak servis edilen sucuk, sosis, kavurma ve pastırma tabakları.", "Pan Dishes", "Pan dishes", "Hot pan dishes with sucuk, sausage, kavurma or pastırma."],
   ["sicak-icecekler", "Sıcak İçecekler", "Sıcak", "Çay, sıcak çikolata, salep ve sütlü sıcak içecekler.", "Hot Drinks", "Hot drinks", "Tea, hot chocolate, salep and warm milk drinks."],
   ["bitki-caylari", "Bitki Çayları", "Bitki Çayı", "Farklı bitki, meyve ve baharat aromalarından çaylar.", "Herbal Teas", "Herbal teas", "Teas with a selection of herbs, fruits and spices."],
   ["soft-icecekler", "Soft İçecekler", "Soft", "Su, gazlı içecekler, maden suyu ve meyveli içecekler.", "Soft Drinks", "Soft drinks", "Water, carbonated drinks, mineral water and fruit drinks."],
@@ -480,6 +480,27 @@ const menuData = {
   items: rawItems,
   lastUpdated: "28 Temmuz 2026",
 };
+
+// Keep reviewed wording when rebuilding the source menu. Prices and serving
+// quantities remain the original commercial records, outside this patch.
+const editorial = JSON.parse(fs.readFileSync(path.join(process.cwd(), "src/app/menu/menu-editorial.json"), "utf8"));
+for (const [id, patch] of Object.entries(editorial)) {
+  if (!rawItems.some((item) => item.id === id)) throw new Error(`Unknown editorial product: ${id}`);
+  if (Object.keys(patch).some((key) => !["name", "description", "story", "details", "translations"].includes(key))) {
+    throw new Error(`Editorial patch cannot change commercial fields: ${id}`);
+  }
+}
+for (const item of menuData.items) {
+  const patch = editorial[item.id];
+  if (!patch) continue;
+  const originalEn = item.translations.en;
+  Object.assign(item, patch);
+  item.translations = { en: { ...originalEn, ...patch.translations?.en } };
+  if (item.image) item.translations.en.imageAlt = `${item.translations.en.name} product image`;
+}
+const jams = menuData.categories.find((category) => category.id === "receller");
+jams.label = "Reçeller";
+jams.translations.en.label = "Jams";
 
 if (categories.length !== 18 || rawItems.length !== 142) {
   throw new Error(`Unexpected totals: ${categories.length} categories, ${rawItems.length} items`);

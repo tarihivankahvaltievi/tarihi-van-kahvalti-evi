@@ -1,5 +1,8 @@
 import type { Metadata } from "next";
 import { Suspense } from "react";
+import { getPublicMenuData } from "../menu/public-menu-data";
+import { localizeMenuData } from "../menu/menu-localization";
+import { getOrderingQuestions } from "../menu/ordering-questions";
 import ClientPage from "../client-page";
 import { AnimatedFooter } from "../components/animated-footer";
 import {
@@ -55,7 +58,9 @@ export const metadata: Metadata = {
   },
 };
 
-export default function ReservationPage() {
+export default async function ReservationPage() {
+  const menu = await getPublicMenuData();
+  const orderingQuestions = getOrderingQuestions("tr", localizeMenuData("tr", menu.categories, menu.items).items);
   const reservationJsonLd = {
     "@context": "https://schema.org",
     "@graph": [
@@ -98,7 +103,7 @@ export default function ReservationPage() {
           { "@type": "ListItem", position: 2, name: "Rezervasyon", item: reservationUrl },
         ],
       },
-      buildFaqJsonLd(reservationFaqItems, reservationUrl, false),
+      buildFaqJsonLd([...reservationFaqItems, ...orderingQuestions], reservationUrl, false),
     ],
   };
 
@@ -111,7 +116,7 @@ export default function ReservationPage() {
       <ClientPage locale="tr">
         <main id="main-content" className={styles.page} lang="tr-TR">
           <Suspense fallback={<div style={{ minHeight: "420px" }} />}>
-            <ReservationView locale="tr" />
+            <ReservationView locale="tr" orderingQuestions={orderingQuestions} />
           </Suspense>
         </main>
         <AnimatedFooter locale="tr" />

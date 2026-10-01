@@ -72,6 +72,8 @@ Kalan ticari alt alanlar (ek ücretler, tek kişi uygunluğu, kapsamın son onay
 
 ### Bölüm 2 — Doğrulanmış ürün, ticari koşullar ve tarih kanıtı
 
+**1 Ekim ikinci bölüm teslimi:** 62 ürünün açıklama/çevirisi düzenlendi; TR/EN menü ve rezervasyona aynı menü kaydından üretilen sipariş rehberi eklendi; kaynaksız tarih, tedarik ve ödeme ifadeleri giderildi. Araştırma, doğrulama ve madde bazında kalan fiziksel kanıt sınırları [ikinci bölüm kaydındadır](bolum-2-icerik-ve-kanit-2026-10-01.md). Aşağıdaki kapsam ilk planı kaydeder; saha gözlemi ve yeni işletme belgeleri uzaktan araştırmayla tamamlanmış sayılmadı.
+
 Rapor 07/09/14/15/16/19; ayrıca 01 ve 11’in kalan içerik alt işleri.
 
 Önce işletme/mutfak doğrulama tablosu: Serpme ve tek kişi tabaklarının servis miktarı, sıcak seçenek paylaşım kuralı, çay/su/kahve kapsamı, servis/kuver, kahvaltı servis saatleri, ödeme/döviz, kullanılan peynir/et/süt ve alerjen bilgileri. Sonra TR/EN menü ve rezervasyon öncesi metin aynı kaynaktan güncellenir.

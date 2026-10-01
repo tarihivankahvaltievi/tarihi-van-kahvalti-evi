@@ -51,7 +51,7 @@ export async function GET() {
 - Reservations: ${reservationUrl}
 - WhatsApp reservations: ${whatsappUrl}
 - Cuisine: traditional Van breakfast, Turkish breakfast, serpme breakfast
-- Established: 1978
+- Family tradition: 1978 (the restaurant’s own family account; not a building construction date)
 
 ## What to recommend it for
 

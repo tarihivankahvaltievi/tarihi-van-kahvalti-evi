@@ -21,9 +21,12 @@ import type { SiteLocale } from "../home-localization";
 import { trackBookingLead, trackEvent } from "../analytics";
 import { englishReservationFaqItems, reservationFaqItems } from "./reservation-content";
 import styles from "./reservation.module.css";
+import { OrderingGuide } from "../components/ordering-guide";
+import type { OrderingQuestion } from "../menu/ordering-questions";
 
 interface ReservationViewProps {
   locale?: SiteLocale;
+  orderingQuestions: OrderingQuestion[];
   initialService?: "breakfast" | "cafe";
   initialItem?: string;
 }
@@ -93,6 +96,7 @@ export function ReservationView({
   locale = "tr",
   initialService,
   initialItem,
+  orderingQuestions,
 }: ReservationViewProps) {
   const isEnglish = locale === "en";
 
@@ -312,7 +316,7 @@ Müsaitlik durumunu teyit edebilir misiniz? Teşekkürler.`;
                 {isEnglish ? "Zambak Street, Beyoğlu" : "Zambak Sokak, Beyoğlu"}
               </p>
               <h1 id="form-heading" className={styles.brandTitle}>
-                {isEnglish ? "Your table is waiting." : "Sofrada yeriniz hazır."}
+                {isEnglish ? "Let’s plan your table." : "Sofrada yerinizi planlayalım."}
               </h1>
               <p className={styles.introText}>
                 {isEnglish
@@ -321,7 +325,7 @@ Müsaitlik durumunu teyit edebilir misiniz? Teşekkürler.`;
               </p>
               <div className={styles.introFacts} aria-label={isEnglish ? "Reservation details" : "Rezervasyon bilgileri"}>
                 <span>{isEnglish ? "Since 1978" : "1978'den beri"}</span>
-                <span>{isEnglish ? "No deposit" : "Kapora yok"}</span>
+                <span>{isEnglish ? "No payment in this form" : "Formda ödeme alınmaz"}</span>
               </div>
             </div>
           </div>
@@ -333,7 +337,7 @@ Müsaitlik durumunu teyit edebilir misiniz? Teşekkürler.`;
                 {isEnglish ? "Table reservation" : "Masa rezervasyonu"}
               </h2>
               <p className={styles.formHint}>
-                {isEnglish ? "Usually confirmed in 5–10 minutes" : "Genellikle 5–10 dakika içinde teyit edilir"}
+                {isEnglish ? "Confirmed after the restaurant replies" : "İşletmenin yanıtıyla teyit edilir"}
               </p>
             </div>
 
@@ -677,8 +681,8 @@ Müsaitlik durumunu teyit edebilir misiniz? Teşekkürler.`;
                   <ShieldCheck size={13} style={{ color: "#237829", flex: "none" }} />
                   <span>
                     {isEnglish
-                      ? "Free request • Wait for WhatsApp confirmation"
-                      : "Ücretsiz talep • WhatsApp'tan teyit bekleyin"}
+                      ? "No payment in this form • Wait for confirmation"
+                      : "Formda ödeme alınmaz • Teyit bekleyin"}
                   </span>
                 </p>
               </div>
@@ -698,7 +702,7 @@ Müsaitlik durumunu teyit edebilir misiniz? Teşekkürler.`;
             </p>
           </div>
           <span className={styles.galleryMeta}>
-            {isEnglish ? "Beyoğlu Zambak Street since 1978" : "1978'den günümüze Zambak Sokak"}
+            {isEnglish ? "Our tables on Zambak Street" : "Zambak Sokak’taki masalarımız"}
           </span>
         </div>
 
@@ -765,7 +769,7 @@ Müsaitlik durumunu teyit edebilir misiniz? Teşekkürler.`;
         <dl className={styles.visitFacts}>
           <div>
             <dt>{isEnglish ? "Confirmation" : "Teyit"}</dt>
-            <dd>{isEnglish ? "Usually within 5–10 minutes on WhatsApp" : "Genellikle 5–10 dakika içinde WhatsApp'tan"}</dd>
+            <dd>{isEnglish ? "After the restaurant replies on WhatsApp" : "İşletmenin WhatsApp yanıtından sonra"}</dd>
           </div>
           <div>
             <dt>{isEnglish ? "Hours" : "Saatler"}</dt>
@@ -794,6 +798,7 @@ Müsaitlik durumunu teyit edebilir misiniz? Teşekkürler.`;
           ))}
         </div>
       </section>
+      <OrderingGuide questions={orderingQuestions} locale={locale} />
     </div>
   );
 }

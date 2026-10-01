@@ -36,7 +36,9 @@ Adres, telefon ve çalışma saatleri `seo.ts` üzerinden; ürün/fiyat ve çevi
 
 Raporun 24 maddesi, araştırma kaynakları, kabul ölçütleri ve beş bölümlü uygulama planı [ayrıntılı analizde](docs/seo-geo/rapor-analizi-ve-bes-asamali-plan-2026-10-01.md) bulunur. Birinci bölümün [doğrulama kaydı](docs/seo-geo/bolum-1-dogrulama-2026-10-01.md) ve [kod envanteri](docs/seo-geo/kod-envanteri-2026-10-01.csv) aynı dizindedir.
 
-Menü regresyon kontrolü: `npm run test:menu`. Önce `npm run build` gerekir. Test kendi yerel sunucusunu ve geçici menü dosyasını kullanır; Supabase ve IndexNow bildirimleri kapalıdır. Gerçek HTML ürün/fiyat/şema eşleşmesini, yeni kategori görünürlüğünü ve yönetim kaydı sonrası cache yenilemeyi doğrular.
+İkinci bölümün [ürün, araştırma ve kanıt kaydı](docs/seo-geo/bolum-2-icerik-ve-kanit-2026-10-01.md), [62 ürünün önce/sonra karşılaştırması](docs/seo-geo/bolum-2-urun-degisiklikleri-2026-10-01.csv) ve [güncel kod envanteri](docs/seo-geo/kod-envanteri-bolum-2-2026-10-01.csv) aynı dizindedir. Gözden geçirilmiş kaynak metinler `src/app/menu/menu-editorial.json` içindedir; `node scripts/generate-menu-data.mjs` bu metinleri korur. Yönetim kaydı TR/EN ana sayfa, menü ve rezervasyon rehberini birlikte yeniler.
+
+Menü regresyon kontrolü: `npm run test:menu`. Önce `npm run build` gerekir. Test kendi yerel sunucusunu ve geçici menü dosyasını kullanır; Supabase ve IndexNow bildirimleri kapalıdır. Gerçek HTML ürün/fiyat/açıklama/şema eşleşmesini, rezervasyondaki dahil ürünleri, yeni kategori görünürlüğünü ve yönetim kaydı sonrası cache yenilemeyi doğrular.
 
 ## Yayına alma
 

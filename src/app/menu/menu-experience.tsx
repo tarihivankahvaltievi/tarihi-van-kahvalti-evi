@@ -9,6 +9,8 @@ import styles from "./menu.module.css";
 import type { MenuCategory, MenuItem } from "./menu-data";
 import { localizeMenuDate, type MenuLocale } from "./menu-localization";
 import { getMenuOrderNote } from "./menu-rules";
+import { getOrderingQuestions } from "./ordering-questions";
+import { OrderingGuide } from "../components/ordering-guide";
 
 export type HamourChapter = {
   id: string;
@@ -532,8 +534,8 @@ export function MenuExperience({
               </div>
             </div>
           </div>
-          {lastUpdated && <p className={styles.menuUpdated}>{isEn ? "Menu data last updated" : "Menü verisi son güncelleme"}: {localizeMenuDate(locale, lastUpdated)}</p>}
-          <p className={styles.menuIntro}>{isEn ? "For allergies, serving quantities or additional charges, please ask our team before ordering." : "Alerjenler, servis miktarı ve ek ücret koşulları için sipariş öncesinde ekibimize danışabilirsiniz."}</p>
+          {lastUpdated && <p className={styles.menuUpdated}>{isEn ? "Price record last updated" : "Fiyat kaydı son güncelleme"}: {localizeMenuDate(locale, lastUpdated)}</p>}
+          <OrderingGuide questions={getOrderingQuestions(locale, initialItems)} locale={locale} />
         </div>
       </section>
 
@@ -580,8 +582,8 @@ export function MenuExperience({
             <div className={styles.section4Article}>
               <p className={styles.section4Text}>
                 {isEn
-                  ? "Tarihi Van Kahvaltı Evi brings together centuries-old breakfast traditions, Beyoğlu's historic Greek townhouse architecture, and heartfelt Eastern hospitality to offer an authentic gourmet journey. We invite you to Tarihi Van Kahvaltı Evi to experience memorable moments in this enchanting atmosphere!"
-                  : "Tarihi Van Kahvaltı Evi, asırlık kahvaltı geleneğini, Beyoğlu'nun tarihi Rum konağı dokusu ve sıcacık misafirperverliğiyle bir araya getirerek özgün bir lezzet deneyimini misafirlerine iftiharla sunuyor. Bu eşsiz atmosferde, keyif dolu anlar yaşamak için sizleri Tarihi Van Kahvaltı Evi'ne bekliyoruz!"}
+                  ? "Tarihi Van Kahvaltı Evi brings together centuries-old breakfast traditions, the atmosphere of Beyoğlu, and heartfelt Eastern hospitality to offer an authentic gourmet journey. We invite you to Tarihi Van Kahvaltı Evi to experience memorable moments in this enchanting atmosphere!"
+                  : "Tarihi Van Kahvaltı Evi, asırlık kahvaltı geleneğini, Beyoğlu'nun Beyoğlu atmosferi ve sıcacık misafirperverliğiyle bir araya getirerek özgün bir lezzet deneyimini misafirlerine iftiharla sunuyor. Bu eşsiz atmosferde, keyif dolu anlar yaşamak için sizleri Tarihi Van Kahvaltı Evi'ne bekliyoruz!"}
               </p>
 
               <a href="tel:+905415252868" className={styles.section4Btn}>

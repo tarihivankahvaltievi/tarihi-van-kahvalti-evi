@@ -14,7 +14,7 @@ import {
 
 const storyTitle = "1978'den Beri Van Sofrası | Hikâyemiz";
 const storyDescription =
-  "Tarihi Van Kahvaltı Evi'nin 1978'den bugüne uzanan aile yolculuğu; tarihi Rum binası, Van kahvaltısı geleneği ve Beyoğlu'ndaki sofra kültürü.";
+  "Tarihi Van Kahvaltı Evi'nin 1978'den bugüne uzanan aile yolculuğu; Beyoğlu’ndaki mekân, Van kahvaltısı geleneği ve Beyoğlu'ndaki sofra kültürü.";
 
 export const metadata: Metadata = {
   title: storyTitle,

@@ -22,10 +22,10 @@ export function VenueAtmosphere({ locale = "tr" }: { locale?: string }) {
       <div className={styles.bgOverlay} aria-hidden="true">
         <Image
           src="/images/balcony-breakfast.webp"
-          alt={isEn ? "Historic Greek Townhouse & Balcony Breakfast - Tarihi Van Kahvaltı Evi" : "Tarihi Rum Konağı Balkonunda Kahvaltı - Tarihi Van Kahvaltı Evi"}
+          alt={isEn ? "Beyoğlu Balcony Breakfast - Tarihi Van Kahvaltı Evi" : "Beyoğlu Balkonunda Kahvaltı - Tarihi Van Kahvaltı Evi"}
           fill
           sizes="100vw"
-          quality={85}
+          quality={84}
           className={styles.bgImg}
         />
       </div>
