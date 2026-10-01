@@ -34,10 +34,6 @@ export default function ClientPage({ children, locale = "tr" }: { children: Reac
   const menuPanelRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    document.documentElement.lang = messages.documentLanguage;
-  }, [messages.documentLanguage]);
-
-  useEffect(() => {
     const updateScrollState = () => {
       scrollFrame.current = null;
       const currentScrollY = Math.max(window.scrollY, 0);

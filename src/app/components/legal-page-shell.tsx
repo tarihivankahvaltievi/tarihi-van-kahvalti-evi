@@ -23,7 +23,7 @@ export function LegalPageShell({
           <Link href="/menu">Menü</Link>
         </nav>
       </header>
-      <main id="main-content" className={styles.main}>
+      <main id="main-content" tabIndex={-1} className={styles.main}>
         <p className={styles.eyebrow}>{eyebrow}</p>
         <h1>{title}</h1>
         <p className={styles.updated}>Son güncelleme: {lastUpdated}</p>

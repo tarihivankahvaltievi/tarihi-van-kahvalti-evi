@@ -88,6 +88,8 @@ Kabul: her yeni ticari iddianın sorumlusu, kaynağı ve doğrulama tarihi; ür�
 
 ### Bölüm 3 — Çok dilli teknik tutarlılık ve ölçülmüş performans
 
+**1 Ekim üçüncü bölüm:** statik dil kökleri, yerelleştirilmiş gerçek 404, tam karşılıklı hreflang/sitemap denetimi, birleşik uygulama yönlendirmeleri ve ölçüme dayanan hero/görsel optimizasyonu uygulandı. [Araştırma ve doğrulama kaydı](bolum-3-teknik-dil-performans-2026-10-01.md), laboratuvar/saha ayrımını ve Vercel HTTP katmanının kalan sınırını açıklar.
+
 Rapor 13/18/21/22.
 
 İlk sunucu yanıtında kök `html lang` ve gerekirse `dir` doğru olmalı. Mevcut `main lang` ve Content-Language yardımcıdır, kök dil tutarlılığını bütünüyle çözmez. Next 16.3’ün güncel kök layout/route yöntemine uygun değişiklik yapılmalı; tüm diller ve not-found yeniden test edilmelidir.

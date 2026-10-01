@@ -86,7 +86,7 @@ export function TaksimTravelGuide({ guide }: { guide: TravelGuide }) {
   };
 
   return (
-    <main id="main-content" lang={guide.language} className={styles.page}>
+    <main id="main-content" tabIndex={-1} lang={guide.language} className={styles.page}>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLd(graph) }} />
       <header className={styles.topbar}>
         <Link href={home} hrefLang={guide.language}>{siteName}</Link>

@@ -1,3 +1,4 @@
+import { siteLanguages, type SiteLanguage } from "./site-languages";
 import type { Metadata, Viewport } from "next";
 import Script from "next/script";
 import { Bodoni_Moda, Commissioner, Literata } from "next/font/google";
@@ -154,15 +155,19 @@ import { AnalyticsAutoTracker } from "./analytics";
 
 const googleAdsId = process.env.NEXT_PUBLIC_GOOGLE_ADS_ID ?? "AW-17869229892";
 
-export default function RootLayout({
+export function RootDocument({
   children,
+  locale = "tr",
+  fontClass = "",
 }: Readonly<{
   children: React.ReactNode;
+  locale?: SiteLanguage;
+  fontClass?: string;
 }>) {
   const webVitalsEndpoint = process.env.NEXT_PUBLIC_WEB_VITALS_ENDPOINT;
 
   return (
-    <html lang="tr" className={`h-full antialiased ${bodoni.variable} ${literata.variable} ${commissioner.variable}`}>
+    <html lang={siteLanguages[locale].lang} dir={siteLanguages[locale].dir} className={`h-full antialiased ${bodoni.variable} ${literata.variable} ${commissioner.variable} ${fontClass}`}>
       <head>
         <link rel="preconnect" href="https://www.googletagmanager.com" />
         <link rel="preconnect" href="https://googleads.g.doubleclick.net" />
@@ -192,7 +197,7 @@ export default function RootLayout({
         {webVitalsEndpoint?.startsWith("/") && !webVitalsEndpoint.startsWith("//") ? (
           <WebVitals endpoint={webVitalsEndpoint} />
         ) : null}
-        <a className="skip-link" href="#main-content">Ana içeriğe geç / Skip to content / 본문으로 건너뛰기</a>
+        <a className="skip-link" href="#main-content">{siteLanguages[locale].skip}</a>
         {children}
       </body>
     </html>

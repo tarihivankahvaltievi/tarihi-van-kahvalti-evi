@@ -50,7 +50,6 @@ const homeLanguageAlternates = {
   languages: {
     tr: siteUrl,
     en: englishUrl,
-    ko: koreanUrl,
     "x-default": siteUrl,
   },
 };
@@ -291,7 +290,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: "weekly",
       priority: 0.8,
       images: koreanHoneyKaymakImages,
-      alternates: homeLanguageAlternates,
     },
     {
       url: chineseUrl,
@@ -407,6 +405,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: "monthly",
       priority: 0.6,
       images: koreanHoneyKaymakImages,
+      alternates: { languages: { ko: koreanKaymakExplainerUrl } },
     },
     {
       url: koreanTurkishBreakfastBlogUrl,

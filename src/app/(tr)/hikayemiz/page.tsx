@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
-import ClientPage from "../client-page";
-import { AnimatedFooter } from "../components/animated-footer";
-import { StoryExperience } from "./story-experience";
+import ClientPage from "../../client-page";
+import { AnimatedFooter } from "../../components/animated-footer";
+import { StoryExperience } from "../../hikayemiz/story-experience";
 import {
   absoluteUrl,
   buildBreadcrumbJsonLd,
@@ -10,7 +10,7 @@ import {
   siteName,
   siteUrl,
   storyUrl,
-} from "../seo";
+} from "../../seo";
 
 const storyTitle = "1978'den Beri Van Sofrası | Hikâyemiz";
 const storyDescription =

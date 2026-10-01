@@ -1,5 +1,5 @@
 import { Suspense } from "react";
-import { AdminDashboardContainer } from "./admin-container";
+import { AdminDashboardContainer } from "../../admin/admin-container";
 
 export default function AdminPage() {
   return (

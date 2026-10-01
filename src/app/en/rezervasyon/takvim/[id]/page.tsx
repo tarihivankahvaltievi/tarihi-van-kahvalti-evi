@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Suspense } from "react";
-import ReservationCalendarPage from "@/app/rezervasyon/takvim/[id]/page";
+import ReservationCalendarPage from "@/app/(tr)/rezervasyon/takvim/[id]/page";
 import { siteName } from "@/app/seo";
 
 export const metadata: Metadata = {

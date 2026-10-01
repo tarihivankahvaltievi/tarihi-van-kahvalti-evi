@@ -41,7 +41,6 @@ const expectedBingVerification = process.env.SEO_EXPECT_BING_SITE_VERIFICATION?.
 const homeHreflang = {
   tr: canonicalSiteUrl,
   en: englishPageUrl,
-  ko: koreanPageUrl,
   "x-default": canonicalSiteUrl,
 };
 
@@ -127,7 +126,6 @@ const routes = [
     canonical: englishReservationPageUrl,
     language: "en",
     languageTag: "en-US",
-    htmlLanguage: "tr",
     types: ["Restaurant", "WebPage", "BreadcrumbList", "FAQPage"],
     restaurantMenu: `${menuPageUrl}#menu`,
     faqCount: 10,
@@ -175,7 +173,6 @@ const routes = [
     path: "/en",
     canonical: englishPageUrl,
     language: "en",
-    htmlLanguage: "tr",
     types: ["Restaurant", "WebPage", "BreadcrumbList", "FAQPage"],
     restaurantMenu: `${menuPageUrl}#menu`,
     faqCount: 6,
@@ -187,7 +184,6 @@ const routes = [
     path: "/en/menu",
     canonical: englishMenuPageUrl,
     language: "en",
-    htmlLanguage: "tr",
     types: ["Restaurant", "WebPage", "BreadcrumbList", "FAQPage", "Menu"],
     restaurantMenu: `${menuPageUrl}#menu`,
     faqCount: 7,
@@ -201,18 +197,15 @@ const routes = [
     canonical: koreanPageUrl,
     language: "ko",
     languageTag: "ko-KR",
-    htmlLanguage: "tr",
     types: ["Restaurant", ["WebPage", "CollectionPage"], "BreadcrumbList", "FAQPage"],
     restaurantMenu: `${menuPageUrl}#menu`,
     faqCount: 5,
     visibleSignals: ["발 카이막", "카이막", "터키식 아침 식사", "탁심", "1978"],
-    hreflang: homeHreflang,
   },
   {
     path: "/en/blog/turkish-breakfast-istanbul",
     canonical: englishBreakfastBlogUrl,
     language: "en",
-    htmlLanguage: "tr",
     types: ["Restaurant", "BlogPosting", "WebPage", "BreadcrumbList", "FAQPage"],
     restaurantMenu: `${menuPageUrl}#menu`,
     faqCount: 6,
@@ -226,7 +219,6 @@ const routes = [
     path: "/ru/blog/turetskiy-zavtrak-stambul",
     canonical: russianBreakfastBlogUrl,
     language: "ru",
-    htmlLanguage: "tr",
     types: ["Restaurant", "BlogPosting", "WebPage", "BreadcrumbList", "FAQPage"],
     restaurantMenu: `${menuPageUrl}#menu`,
     faqCount: 6,
@@ -240,7 +232,6 @@ const routes = [
     path: "/ar/blog/turkish-breakfast-istanbul",
     canonical: arabicBreakfastBlogUrl,
     language: "ar",
-    htmlLanguage: "tr",
     direction: "rtl",
     types: ["Restaurant", "BlogPosting", "WebPage", "BreadcrumbList", "FAQPage"],
     restaurantMenu: `${menuPageUrl}#menu`,
@@ -256,7 +247,6 @@ const routes = [
     canonical: koreanHoneyKaymakBlogUrl,
     language: "ko",
     languageTag: "ko-KR",
-    htmlLanguage: "tr",
     types: ["Restaurant", "BlogPosting", "WebPage", "BreadcrumbList", "FAQPage"],
     restaurantMenu: `${menuPageUrl}#menu`,
     faqCount: 6,
@@ -272,13 +262,12 @@ const routes = [
     canonical: koreanKaymakExplainerUrl,
     language: "ko",
     languageTag: "ko-KR",
-    htmlLanguage: "tr",
     types: ["Restaurant", "BlogPosting", "WebPage", "BreadcrumbList", "FAQPage"],
     restaurantMenu: `${menuPageUrl}#menu`,
+    hreflang: { ko: koreanKaymakExplainerUrl },
     faqCount: 8,
     sharedGuideDesign: true,
     visibleSignals: ["카이막", "물소유", "발 카이막", "버터", "생크림", "bal kaymak var mı?"],
-    hreflang: { ko: koreanKaymakExplainerUrl },
     sourcedGuide: true,
     citationCount: 4,
     honeyKaymakGuide: true,
@@ -288,7 +277,6 @@ const routes = [
     canonical: koreanTurkishBreakfastBlogUrl,
     language: "ko",
     languageTag: "ko-KR",
-    htmlLanguage: "tr",
     types: ["Restaurant", "BlogPosting", "WebPage", "BreadcrumbList", "FAQPage"],
     restaurantMenu: `${menuPageUrl}#menu`,
     faqCount: 8,
@@ -303,7 +291,6 @@ const routes = [
     canonical: japaneseHoneyKaymakBlogUrl,
     language: "ja",
     languageTag: "ja-JP",
-    htmlLanguage: "tr",
     types: ["Restaurant", "BlogPosting", "WebPage", "BreadcrumbList", "FAQPage"],
     restaurantMenu: `${menuPageUrl}#menu`,
     faqCount: 9,
@@ -402,6 +389,26 @@ const visibleHtml = (html) =>
     .replace(/<script\b[\s\S]*?<\/script>/gi, " ")
     .replace(/<style\b[\s\S]*?<\/style>/gi, " ");
 
+const checkedAlternates = new Map();
+const readAlternates = (html) => Object.fromEntries(
+  [...html.matchAll(/<link\b[^>]*rel="alternate"[^>]*>/gi)].map(([tag]) => [
+    tag.match(/hrefLang="([^"]+)"/i)?.[1], tag.match(/href="([^"]+)"/i)?.[1],
+  ]).filter(([language]) => language),
+);
+function assertDocumentLanguage(html, response, language, routePath) {
+  const htmlTags = html.match(/<html\b[^>]*>/gi) ?? [];
+  assert(htmlTags.length === 1, `${routePath}: tek html kökü olmalı`);
+  assert(htmlTags[0].includes(`lang="${language}"`), `${routePath}: ilk HTML yanıtının kök dili yanlış`);
+  assert(htmlTags[0].includes(`dir="${language === "ar" ? "rtl" : "ltr"}"`), `${routePath}: ilk HTML yanıtının kök yönü yanlış`);
+  assert(response.headers.get("content-language") === language, `${routePath}: Content-Language yanlış`);
+}
+function assertAlternates(html, route) {
+  const actual = readAlternates(html);
+  const expected = route.hreflang ?? {};
+  assert(JSON.stringify(Object.entries(actual).sort()) === JSON.stringify(Object.entries(expected).sort()), `${route.path}: hreflang kümesi eşdeğer içeriklerle tam eşleşmeli`);
+  checkedAlternates.set(route.canonical, actual);
+}
+
 const visibleText = (html) =>
   decodeHtml(visibleHtml(html).replace(/<[^>]+>/g, " ")).replace(/\s+/g, " ").trim();
 
@@ -452,6 +459,8 @@ for (const route of routes) {
   const routeLabel = route.path;
 
   assert(response.status === 200, `${routeLabel}: HTTP ${response.status}`);
+  assertDocumentLanguage(html, response, route.language, route.path);
+  assertAlternates(html, route);
 
   if (route.language !== "tr") {
     assert(response.headers.get("content-language") === route.language, `${routeLabel}: Content-Language başlığı eksik`);
@@ -729,6 +738,8 @@ for (const route of newRoutes) {
   const html = await response.text();
   const pageText = visibleText(html);
   assert(response.status === 200, `${route.path}: HTTP ${response.status}`);
+  assertDocumentLanguage(html, response, route.language ?? "tr", route.path);
+  assertAlternates(html, route);
   assert(response.headers.get("content-language") === route.language, `${route.path}: Content-Language yanlış`);
   assert(new RegExp(`<main\\b[^>]*\\blang="${route.languageTag ?? route.language}"`, "i").test(html), `${route.path}: ana içerik lang eksik`);
   assert(html.includes(`<link rel="canonical" href="${route.canonical}"`), `${route.path}: canonical yanlış`);
@@ -764,13 +775,27 @@ for (const route of legalRoutes) {
   const canonicalMatches = [...html.matchAll(/<link\s+rel="canonical"\s+href="([^"]+)"/gi)];
 
   assert(response.status === 200, `${route.path}: HTTP ${response.status}`);
+  assertDocumentLanguage(html, response, route.language ?? "tr", route.path);
+  assertAlternates(html, route);
   assert(canonicalMatches.length === 1, `${route.path}: tek canonical bulunmalı`);
   assert(canonicalMatches[0][1] === route.canonical, `${route.path}: canonical yanlış`);
   assert(!/<meta\s+name="robots"\s+content="[^"]*noindex/i.test(html), `${route.path}: noindex olmamalı`);
   assert((visibleHtml(html).match(/<h1\b/gi) ?? []).length === 1, `${route.path}: tam bir H1 bulunmalı`);
 }
 
+for (const [canonical, alternates] of checkedAlternates) {
+  for (const target of Object.values(alternates)) {
+    assert(checkedAlternates.has(target), `hreflang: ${canonical} için hedef kanonik değil (${target})`);
+    assert(Object.values(checkedAlternates.get(target)).includes(canonical), `hreflang: ${canonical} için geri bağlantı yok (${target})`);
+  }
+}
+
 const sitemap = await (await fetchWithRetry("/sitemap.xml")).text();
+for (const block of sitemap.matchAll(/<url>([\s\S]*?)<\/url>/g)) {
+  const canonical = block[1].match(/<loc>([^<]+)<\/loc>/)?.[1];
+  const actual = Object.fromEntries([...block[1].matchAll(/hreflang="([^"]+)" href="([^"]+)"/g)].map((match) => [match[1], decodeHtml(match[2])]));
+  assert(JSON.stringify(Object.entries(actual).sort()) === JSON.stringify(Object.entries(checkedAlternates.get(canonical) ?? {}).sort()), `Sitemap: ${canonical} alternatifleri HTML ile aynı olmalı`);
+}
 const sitemapUrls = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map((match) => match[1]);
 const sitemapLastModified = [...sitemap.matchAll(/<lastmod>([^<]+)<\/lastmod>/g)].map((match) => match[1]);
 const sitemapChangeFrequencies = [...sitemap.matchAll(/<changefreq>([^<]+)<\/changefreq>/g)].map(
@@ -872,8 +897,8 @@ const appFiles = await readdir(appDirectory, { recursive: true });
 const publicPagePaths = appFiles
   .filter((file) => file === "page.tsx" || file.endsWith("/page.tsx"))
   .map((file) => {
-    const routePath = `/${file.replace(/\/page\.tsx$/, "")}`;
-    return routePath === "/page.tsx" ? "/" : routePath;
+    const routePath = `/${file.replace(/(?:^|\/)\([^/]+\)\//g, "/").replace(/^\//, "").replace(/(?:^|\/)page\.tsx$/, "")}`;
+    return routePath || "/";
   })
   .filter((routePath) => routePath !== "/admin" && !routePath.includes("["))
   .sort();
@@ -1004,21 +1029,21 @@ assert(
 for (const [path, destination] of redirectRules) {
   const response = await fetchWithRetry(path, 30, { redirect: "manual" });
   assert(response.status === 308, `Eski URL kalıcı 308 dönmeli: ${path}`);
-  assert(response.headers.get("location") === destination, `Eski URL hedefi yanlış: ${path}`);
+  assert(new URL(response.headers.get("location"), baseUrl).href === new URL(destination, baseUrl).href, `Eski URL hedefi yanlış: ${path}`);
 
   const slashPath = `${path.replace(/\/+$/, "")}/`;
   const slashResponse = await fetchWithRetry(slashPath, 30, { redirect: "manual" });
   assert(slashResponse.status === 308, `Eski URL slash'li hali tek adımda 308 dönmeli: ${slashPath}`);
-  assert(slashResponse.headers.get("location") === destination, `Eski URL slash'li hali tek adımda hedefe gitmeli: ${slashPath}`);
+  assert(new URL(slashResponse.headers.get("location"), baseUrl).href === new URL(destination, baseUrl).href, `Eski URL slash'li hali tek adımda hedefe gitmeli: ${slashPath}`);
 }
 
 const normalSlashResponse = await fetchWithRetry("/menu/", 30, { redirect: "manual" });
 assert(normalSlashResponse.status === 308, "Normal sayfa slash'li hali tek adımda 308 dönmeli: /menu/");
-assert(normalSlashResponse.headers.get("location") === "/menu", "Normal sayfa slash'li hali /menu'ye gitmeli");
+assert(new URL(normalSlashResponse.headers.get("location"), baseUrl).href === new URL("/menu", baseUrl).href, "Normal sayfa slash'li hali /menu'ye gitmeli");
 
 const wcAjaxResponse = await fetchWithRetry("/?wc-ajax=%%endpoint%%", 30, { redirect: "manual" });
 assert(wcAjaxResponse.status === 308, "wc-ajax sorgusu temiz kanonik URL'ye yönlenmeli");
-assert(wcAjaxResponse.headers.get("location") === "/", "wc-ajax sorgusu ana sayfaya yönlenmeli");
+assert(new URL(wcAjaxResponse.headers.get("location"), baseUrl).href === new URL("/", baseUrl).href, "wc-ajax sorgusu ana sayfaya yönlenmeli");
 
 for (const path of internalPaths) {
   const response = await fetchWithRetry(path, 30, { redirect: "manual" });
@@ -1035,7 +1060,25 @@ assert(
 const missing = await fetchWithRetry("/seo-contract-missing-page");
 const missingHtml = await missing.text();
 assert(missing.status === 404, "Bilinmeyen rota gerçek 404 dönmeli");
-assert(/<meta\s+name="robots"\s+content="noindex"/i.test(missingHtml), "404 sayfası noindex olmalı");
+assert(/<meta\s+name="robots"\s+content="[^"]*noindex/i.test(missingHtml), "404 sayfası noindex olmalı");
+
+for (const [prefix, language] of [["", "tr"], ["/en", "en"], ["/ko", "ko"], ["/zh-cn", "zh-CN"], ["/es", "es"], ["/ar", "ar"], ["/ru", "ru"], ["/ja", "ja"]]) {
+  const missingPath = `${prefix}/seo-contract-missing-page`;
+  const response = await fetchWithRetry(missingPath);
+  const html = await response.text();
+  assert(response.status === 404, `${missingPath}: gerçek 404 dönmeli`);
+  assertDocumentLanguage(html, response, language, missingPath);
+  assert(/<meta\s+name="robots"\s+content="[^"]*noindex/i.test(html), `${missingPath}: noindex eksik`);
+}
+for (const [source, destination] of [["/iletisim/?wc-ajax=1&utm_source=seo_audit", "/konum?utm_source=seo_audit"], ["/en/?wc-ajax=1&utm_source=seo_audit", "/en?utm_source=seo_audit"], ["/kafka-cafe/?wc-ajax=1&utm_source=seo_audit", "/menu?utm_source=seo_audit#turk-kahvesi"]]) {
+  const response = await fetchWithRetry(source, 30, { redirect: "manual" });
+  assert(response.status === 308, `${source}: kalıcı yönlendirme eksik`);
+  assert(new URL(response.headers.get("location"), baseUrl).href === new URL(destination, baseUrl).href, `${source}: birleştirilmiş hedef yanlış`);
+}
+if (new URL(baseUrl).hostname === "127.0.0.1") {
+  const combined = await requestWithHost("/iletisim/?wc-ajax=1&utm_source=seo_audit", "tarihivankahvaltievi.com");
+  assert(combined.status === 308 && combined.location === `${canonicalSiteUrl}/konum?utm_source=seo_audit`, "Apex/eski rota/slash/sorgu tek hedefte birleştirilmeli");
+}
 
 console.log(
   `SEO sözleşmesi geçti: ${canonicalUrls.size} kanonik sayfa indekslenebilir; ${redirectRules.length} bilinen eski URL doğru hedefe gider; hreflang, öncelik ve güncellenme sıklığı içeren kapsamlı görsel sitemap, IndexNow, robots, Restaurant/Menu/FAQ şeması ve 404 doğru.`,

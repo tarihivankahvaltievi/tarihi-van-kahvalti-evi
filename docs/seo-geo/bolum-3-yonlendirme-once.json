@@ -1,0 +1,107 @@
+{
+  "checkedAt": "2026-10-01T01:58:59.797294+00:00",
+  "chains": [
+    [
+      {
+        "url": "http://tarihivankahvaltievi.com/",
+        "status": 308,
+        "location": "https://tarihivankahvaltievi.com/",
+        "server": "Vercel"
+      },
+      {
+        "url": "https://tarihivankahvaltievi.com/",
+        "status": 308,
+        "location": "https://www.tarihivankahvaltievi.com/",
+        "server": "Vercel"
+      },
+      {
+        "url": "https://www.tarihivankahvaltievi.com/",
+        "status": 200,
+        "location": null,
+        "server": "Vercel"
+      }
+    ],
+    [
+      {
+        "url": "https://tarihivankahvaltievi.com/",
+        "status": 308,
+        "location": "https://www.tarihivankahvaltievi.com/",
+        "server": "Vercel"
+      },
+      {
+        "url": "https://www.tarihivankahvaltievi.com/",
+        "status": 200,
+        "location": null,
+        "server": "Vercel"
+      }
+    ],
+    [
+      {
+        "url": "http://www.tarihivankahvaltievi.com/",
+        "status": 308,
+        "location": "https://www.tarihivankahvaltievi.com/",
+        "server": "Vercel"
+      },
+      {
+        "url": "https://www.tarihivankahvaltievi.com/",
+        "status": 200,
+        "location": null,
+        "server": "Vercel"
+      }
+    ],
+    [
+      {
+        "url": "https://www.tarihivankahvaltievi.com/en/menu/",
+        "status": 308,
+        "location": "/en/menu",
+        "server": "Vercel"
+      },
+      {
+        "url": "https://www.tarihivankahvaltievi.com/en/menu",
+        "status": 200,
+        "location": null,
+        "server": "Vercel"
+      }
+    ],
+    [
+      {
+        "url": "https://www.tarihivankahvaltievi.com/en/?wc-ajax=1",
+        "status": 308,
+        "location": "/en/",
+        "server": "Vercel"
+      },
+      {
+        "url": "https://www.tarihivankahvaltievi.com/en/",
+        "status": 308,
+        "location": "/en",
+        "server": "Vercel"
+      },
+      {
+        "url": "https://www.tarihivankahvaltievi.com/en",
+        "status": 200,
+        "location": null,
+        "server": "Vercel"
+      }
+    ],
+    [
+      {
+        "url": "https://tarihivankahvaltievi.com/iletisim/?utm_source=seo_audit",
+        "status": 308,
+        "location": "https://www.tarihivankahvaltievi.com/iletisim/?utm_source=seo_audit",
+        "server": "Vercel"
+      },
+      {
+        "url": "https://www.tarihivankahvaltievi.com/iletisim/?utm_source=seo_audit",
+        "status": 308,
+        "location": "/konum?utm_source=seo_audit",
+        "server": "Vercel"
+      },
+      {
+        "url": "https://www.tarihivankahvaltievi.com/konum?utm_source=seo_audit",
+        "status": 200,
+        "location": null,
+        "server": "Vercel"
+      }
+    ]
+  ]
+}

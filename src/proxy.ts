@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
+import { siteLanguages } from "./app/site-languages";
 import { allLegacyRedirects, siteUrl } from "./app/seo";
 
 // Pre-computed map for instant O(1) single-hop lookups.
@@ -12,37 +13,27 @@ for (const rule of allLegacyRedirects) {
 }
 
 export function proxy(request: NextRequest) {
-  const { pathname, search } = request.nextUrl;
+  const { pathname } = request.nextUrl;
   const host = request.headers.get("host") || "";
+  const cleanPath = pathname.replace(/\/+$/, "") || "/";
+  const legacyTarget = redirectMap.get(cleanPath);
+  const canonicalHost = host === "tarihivankahvaltievi.com";
+  const obsoleteQuery = request.nextUrl.searchParams.has("wc-ajax");
 
-  // 1. Apex domain -> www canonical redirect (HTTP 308)
-  if (host === "tarihivankahvaltievi.com") {
-    const destination = new URL(`${pathname}${search}`, siteUrl);
+  // Compute the final path, host and query together. Separate redirect rules
+  // run before Proxy and would reintroduce intermediate legacy/slash URLs.
+  if (canonicalHost || legacyTarget || cleanPath !== pathname || obsoleteQuery) {
+    const destination = new URL(legacyTarget ?? cleanPath, canonicalHost ? siteUrl : request.url);
+    const searchParams = new URLSearchParams(request.nextUrl.searchParams);
+    searchParams.delete("wc-ajax");
+    destination.search = searchParams.toString();
     return NextResponse.redirect(destination, 308);
   }
 
-  // 2. Legacy WooCommerce query cleanup (?wc-ajax=...) -> redirect to clean canonical URL
-  if (request.nextUrl.searchParams.has("wc-ajax")) {
-    const cleanUrl = new URL(pathname, request.url);
-    return NextResponse.redirect(cleanUrl, 308);
-  }
-
-  // 3. Direct single-hop resolution for all legacy/redirected paths (eliminates redirect chains)
-  const legacyTarget = redirectMap.get(pathname);
-  if (legacyTarget) {
-    const destination = new URL(`${legacyTarget}${search}`, request.url);
-    return NextResponse.redirect(destination, 308);
-  }
-
-  // 3. Trailing slash normalization for standard pages:
-  // Redirect /foo/ -> /foo directly in 1 hop (HTTP 308)
-  if (pathname.length > 1 && pathname.endsWith("/")) {
-    const cleanPath = pathname.slice(0, -1);
-    const destination = new URL(`${cleanPath}${search}`, request.url);
-    return NextResponse.redirect(destination, 308);
-  }
-
-  return NextResponse.next();
+  const requestHeaders = new Headers(request.headers);
+  const prefix = pathname.split("/")[1];
+  requestHeaders.set("x-site-language", Object.hasOwn(siteLanguages, prefix) ? prefix : "tr");
+  return NextResponse.next({ request: { headers: requestHeaders } });
 }
 
 export const config = {

@@ -1,12 +1,12 @@
 import { Noto_Sans_JP } from "next/font/google";
+import { RootDocument } from "../root-document";
+export { metadata, viewport } from "../root-document";
 
-const notoSansJp = Noto_Sans_JP({
+const localeFont = Noto_Sans_JP({
   subsets: ["latin"],
-  weight: "variable",
-  display: "swap",
-  variable: "--font-noto-sans-jp",
+  weight: "variable", display: "swap", preload: false, variable: "--font-noto-sans-ja",
 });
 
-export default function JapaneseLayout({ children }: Readonly<{ children: React.ReactNode }>) {
-  return <div className={notoSansJp.variable}>{children}</div>;
+export default function Layout({ children }: Readonly<{ children: React.ReactNode }>) {
+  return <RootDocument locale="ja" fontClass={localeFont.variable}>{children}</RootDocument>;
 }

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import ClientPage from "../client-page";
+import ClientPage from "../../client-page";
 import {
   absoluteUrl,
   buildBreadcrumbJsonLd,
@@ -10,12 +10,12 @@ import {
   menuUrl,
   siteName,
   siteUrl,
-} from "../seo";
-import { AnimatedFooter } from "../components/animated-footer";
-import { MenuExperience } from "./menu-experience";
-import { getPublicMenuData } from "./public-menu-data";
-import { getMenuOrderNote } from "./menu-rules";
-import { getOrderingQuestions } from "./ordering-questions";
+} from "../../seo";
+import { AnimatedFooter } from "../../components/animated-footer";
+import { MenuExperience } from "../../menu/menu-experience";
+import { getPublicMenuData } from "../../menu/public-menu-data";
+import { getMenuOrderNote } from "../../menu/menu-rules";
+import { getOrderingQuestions } from "../../menu/ordering-questions";
 
 const menuDescription =
   "Tarihi Van Kahvaltı Evi güncel menü ve fiyatları: serpme Van kahvaltısı, bakır sahanlar, yöresel lezzetler, çay ve kahve seçenekleri.";

@@ -6,8 +6,8 @@ import { notFound } from "next/navigation";
 import { CheckCircle2 } from "lucide-react";
 import { getReservationById } from "@/app/reservations/reservation-storage";
 import { displayAddress, displayPhone, mapsUrl, siteName, siteUrl } from "@/app/seo";
-import { CalendarActions } from "./calendar-actions";
-import styles from "./calendar-page.module.css";
+import { CalendarActions } from "../../../../rezervasyon/takvim/[id]/calendar-actions";
+import styles from "../../../../rezervasyon/takvim/[id]/calendar-page.module.css";
 
 export const metadata: Metadata = {
   title: `Rezervasyon Takvime Ekle | ${siteName}`,

@@ -1,0 +1,22 @@
+{
+  "before": [
+    {
+      "page": "anasayfa",
+      "report": "https://pagespeed.web.dev/analysis/https-www-tarihivankahvaltievi-com/p1qdhltinz?form_factor=mobile",
+      "capturedLabel": "1 Eki 2026 04:58:22 tarihinden başlayan rapor",
+      "snapshotFile": "bolum-3-pagespeed-once-anasayfa.txt"
+    },
+    {
+      "page": "menu",
+      "report": "https://pagespeed.web.dev/analysis/https-www-tarihivankahvaltievi-com-en-menu/usp89thfxr?form_factor=mobile",
+      "capturedLabel": "1 Eki 2026 05:04:40 tarihinden başlayan rapor",
+      "snapshotFile": "bolum-3-pagespeed-once-menu.txt"
+    },
+    {
+      "page": "rezervasyon",
+      "report": "https://pagespeed.web.dev/analysis/https-www-tarihivankahvaltievi-com-en-rezervasyon/i8dzwoh4nf?form_factor=mobile",
+      "capturedLabel": "1 Eki 2026 05:04:40 tarihinden başlayan rapor",
+      "snapshotFile": "bolum-3-pagespeed-once-rezervasyon.txt"
+    }
+  ]
+}

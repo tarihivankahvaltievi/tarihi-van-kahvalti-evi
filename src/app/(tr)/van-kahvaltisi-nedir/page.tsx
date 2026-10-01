@@ -2,10 +2,10 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowDown, ArrowUpRight, BookOpen, MapPin, UtensilsCrossed } from "lucide-react";
-import ClientPage from "../client-page";
-import { AnimatedFooter } from "../components/animated-footer";
-import styles from "./culture-guide.module.css";
-import { vanBreakfastSources as sources } from "../content-sources";
+import ClientPage from "../../client-page";
+import { AnimatedFooter } from "../../components/animated-footer";
+import styles from "../../van-kahvaltisi-nedir/culture-guide.module.css";
+import { vanBreakfastSources as sources } from "../../content-sources";
 import {
   absoluteUrl,
   breakfastCultureUrl,
@@ -16,7 +16,7 @@ import {
   mapsUrl,
   siteName,
   siteUrl,
-} from "../seo";
+} from "../../seo";
 
 const pageTitle = "Van Kahvaltısı Nedir? İçindekiler ve Sofra Kültürü";
 const pageDescription =
@@ -211,7 +211,7 @@ export default function VanBreakfastCulturePage() {
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLd(pageJsonLd) }} />
       <ClientPage>
-        <main id="main-content" className={styles.page}>
+        <main id="main-content" tabIndex={-1} className={styles.page}>
           <article>
             <header className={styles.hero}>
               <div className={styles.heroCopy}>

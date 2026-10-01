@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight, BusFront, Clock3, MapPin, Navigation, TrainFront, Utensils } from "lucide-react";
-import ClientPage from "../client-page";
-import { AnimatedFooter } from "../components/animated-footer";
+import ClientPage from "../../client-page";
+import { AnimatedFooter } from "../../components/animated-footer";
 import {
   absoluteUrl,
   buildFaqJsonLd,
@@ -17,9 +17,9 @@ import {
   siteUrl,
   telUrl,
   yandexMapsUrl,
-} from "../seo";
-import { LocationMap } from "./location-map";
-import styles from "./location.module.css";
+} from "../../seo";
+import { LocationMap } from "../../konum/location-map";
+import styles from "../../konum/location.module.css";
 
 const locationUrl = `${siteUrl}/konum`;
 const locationTitle = "Beyoğlu Taksim Kahvaltı | Konum ve Yol Tarifi";
@@ -111,7 +111,7 @@ export default function LocationPage() {
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLd(locationJsonLd) }} />
       <ClientPage>
-        <main id="main-content" className={styles.page}>
+        <main id="main-content" tabIndex={-1} className={styles.page}>
           <section className={styles.hero} aria-labelledby="location-title">
             <div className={styles.heroCopy}>
               <p className={styles.routeLabel}>Konum ve yol tarifi</p>

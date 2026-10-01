@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { messagesFor, type SiteLocale } from "../home-localization";
 import { address, openingHours, mapsUrl, googleMapsSnapshot } from "../seo";
 import { getMenuOrderNote } from "../menu/menu-rules";
@@ -46,6 +46,9 @@ export function VanHeroParallax({ locale = "tr", serpmePrice }: { locale?: SiteL
   const [currentSlide, setCurrentSlide] = useState(0);
   const [previousSlide, setPreviousSlide] = useState<number | null>(null);
   const exitingTimerRef = useRef<NodeJS.Timeout | null>(null);
+  useEffect(() => () => {
+    if (exitingTimerRef.current) clearTimeout(exitingTimerRef.current);
+  }, []);
 
   const handleSelectSlide = (index: number) => {
     if (index === currentSlide) return;
@@ -59,10 +62,12 @@ export function VanHeroParallax({ locale = "tr", serpmePrice }: { locale?: SiteL
 
   return (
     <section className="hero-section hero-cinematic" aria-label={messages.hero.aria}>
-      {/* The first frame is the only eager image; other frames load without competing with LCP. */}
+      {/* Inactive photographs stay out of the DOM until selected. Lazy images
+          stacked inside the viewport can still download and compete with LCP. */}
       {heroSlides.map((slide, index) => {
         const isActive = index === currentSlide;
         const isExiting = index === previousSlide;
+        if (!isActive && !isExiting) return null;
 
         return (
           <div
@@ -76,9 +81,8 @@ export function VanHeroParallax({ locale = "tr", serpmePrice }: { locale?: SiteL
               fill
               sizes="100vw"
               quality={84}
-              priority={index === 0}
-              loading={index === 0 ? "eager" : "lazy"}
-              fetchPriority={index === 0 ? "high" : "low"}
+              loading="eager"
+              fetchPriority={index === 0 ? "high" : "auto"}
               className="hero-slide-image"
             />
           </div>

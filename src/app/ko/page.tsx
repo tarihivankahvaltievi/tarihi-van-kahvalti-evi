@@ -8,7 +8,6 @@ import {
   buildFaqJsonLd,
   buildRestaurantJsonLd,
   displayAddress,
-  englishUrl,
   jsonLd,
   koreanHoneyKaymakBlogUrl,
   koreanKaymakExplainerUrl,
@@ -38,7 +37,6 @@ export const metadata: Metadata = {
   description,
   alternates: {
     canonical: koreanUrl,
-    languages: { tr: siteUrl, en: englishUrl, ko: koreanUrl, "x-default": siteUrl },
   },
   openGraph: {
     title,
@@ -46,7 +44,6 @@ export const metadata: Metadata = {
     url: koreanUrl,
     siteName,
     locale: "ko_KR",
-    alternateLocale: ["tr_TR", "en_US"],
     type: "website",
     images: [{ url: absoluteUrl("/images/og/istanbul-bal-kaymak.jpg"), width: 1200, height: 630, alt: "이스탄불의 발 카이막과 터키식 반 아침 식사" }],
   },
@@ -99,7 +96,7 @@ export default function KoreanHomePage() {
   };
 
   return (
-    <main id="main-content" className={styles.page} lang="ko-KR">
+    <main id="main-content" tabIndex={-1} className={styles.page} lang="ko-KR">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLd(pageJsonLd) }} />
       <header className={styles.topbar}>
         <Link className={styles.brand} href="/ko">

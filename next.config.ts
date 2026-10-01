@@ -1,5 +1,4 @@
 import type { NextConfig } from "next";
-import { allLegacyRedirects, siteUrl } from "./src/app/seo";
 
 const isDev = process.env.NODE_ENV !== "production";
 
@@ -25,6 +24,7 @@ const nextConfig: NextConfig = {
   allowedDevOrigins: ["127.0.0.1"],
   devIndicators: false,
   cacheComponents: true,
+  experimental: { globalNotFound: true },
   compress: true,
   poweredByHeader: false,
   skipTrailingSlashRedirect: true,
@@ -33,33 +33,9 @@ const nextConfig: NextConfig = {
     qualities: [65, 70, 74, 75, 78, 80, 82, 84],
     minimumCacheTTL: 60 * 60 * 24 * 30,
   },
-  async redirects() {
-    return [
-      {
-        source: "/:path*",
-        has: [{ type: "host" as const, value: "tarihivankahvaltievi.com" }],
-        destination: `${siteUrl}/:path*`,
-        permanent: true,
-      },
-      ...allLegacyRedirects.flatMap((redirect) => {
-        const clean = redirect.source.replace(/\/+$/, "");
-        return [
-          {
-            source: clean,
-            destination: redirect.destination,
-            permanent: true,
-          },
-          {
-            source: `${clean}/`,
-            destination: redirect.destination,
-            permanent: true,
-          },
-        ];
-      }),
-    ];
-  },
   async headers() {
     return [
+      { source: "/:path*", headers: [{ key: "Content-Language", value: "tr" }] },
       {
         source: "/images/:path*",
         headers: [

@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight, CalendarCheck, Clock3, MapPin, UtensilsCrossed } from "lucide-react";
-import ClientPage from "../client-page";
-import { AnimatedFooter } from "../components/animated-footer";
-import styles from "./van-breakfast.module.css";
+import ClientPage from "../../client-page";
+import { AnimatedFooter } from "../../components/animated-footer";
+import styles from "../../van-kahvaltisi/van-breakfast.module.css";
 import {
   address,
   absoluteUrl,
@@ -18,7 +18,7 @@ import {
   mapsUrl,
   siteName,
   siteUrl,
-} from "../seo";
+} from "../../seo";
 
 const guideTitle = "Taksim'de Van Kahvaltısı | Beyoğlu Rehberi";
 const guideDescription =
@@ -156,7 +156,7 @@ export default function VanBreakfastGuidePage() {
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLd(guideJsonLd) }} />
       <ClientPage>
-        <main id="main-content" className={styles.page}>
+        <main id="main-content" tabIndex={-1} className={styles.page}>
           <article>
             <header className={styles.hero}>
               <div className={styles.heroInner}>

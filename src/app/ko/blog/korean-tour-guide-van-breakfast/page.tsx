@@ -21,7 +21,7 @@ const faqs = [
 export const metadata: Metadata = {
   title: { absolute: title }, description,
   keywords: ["이스탄불 한국어 투어 가이드 아침 식사", "한국인 단체 이스탄불 조식", "탁심 반 아침 식사", "반 허브 치즈", "이스탄불 메네멘", "베요글루 터키식 아침 식사"],
-  alternates: { canonical: url, languages: { ko: url } },
+  alternates: { canonical: url },
   openGraph: { type: "article", locale: "ko_KR", url, siteName, title, description, images: [{ url: image, alt: "Tarihi Van Kahvaltı Evi의 반식 아침 식탁" }] },
   twitter: { card: "summary_large_image", title, description, images: [image] },
 };

@@ -10,6 +10,7 @@ const description = "Guías en español para descubrir el desayuno turco clásic
 export const metadata: Metadata = {
   title: { absolute: title }, description,
   alternates: { canonical: url },
+  twitter: { card: "summary_large_image", title, description, images: [absoluteUrl("/images/hero-parallax/overhead-feast.webp")] },
   openGraph: { type: "website", title, description, url, siteName, locale: "es_ES", images: [{ url: absoluteUrl("/images/hero-parallax/overhead-feast.webp"), alt: "Mesa de desayuno turco en Estambul" }] },
 };
 
@@ -18,7 +19,7 @@ export default function SpanishHomePage() {
     { "@type": "ListItem", position: 1, name: "Desayuno turco clásico", url: `${url}/blog/desayuno-turco-clasico` },
     { "@type": "ListItem", position: 2, name: "Bal kaymak en Estambul", url: `${url}/blog/bal-kaymak-estambul` },
   ] } }] };
-  return <main id="main-content" lang="es" className={styles.page}>
+  return <main id="main-content" tabIndex={-1} lang="es" className={styles.page}>
     <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLd(graph) }} />
     <header className={styles.topbar}><Link href="/es">{siteName}</Link><nav aria-label="Idiomas"><Link href="/en" hrefLang="en">English</Link><Link href="/zh-cn" hrefLang="zh-CN">简体中文</Link><Link href="/en/menu" hrefLang="en">Menú</Link></nav></header>
     <div className={styles.hero}><div><p className={styles.kicker}>Estambul · guías gastronómicas en español</p><h1>Descubre el desayuno turco cerca de Taksim</h1><p className={styles.lead}>Una mesa de quesos, aceitunas, huevos, pan, miel con kaymak y té. Lee cómo funciona un desayuno compartido, qué aporta la tradición de Van y cómo probar bal kaymak en Beyoğlu.</p><p className={styles.byline}>Tarihi Van Kahvaltı Evi · {displayAddress} · Todos los días {openingHours.opens}–{openingHours.closes}</p></div><figure><Image src="/images/hero-parallax/overhead-feast.webp" alt="Desayuno turco compartido con quesos, huevos, miel y té" fill priority sizes="(max-width: 800px) 100vw, 50vw" /></figure></div>

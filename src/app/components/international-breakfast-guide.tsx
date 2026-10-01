@@ -18,7 +18,7 @@ export function InternationalBreakfastGuide({ guide }: { guide: GuideContent }) 
 
   return (
     <main
-      id="main-content"
+      id="main-content" tabIndex={-1}
       className={styles.page}
       lang={guide.languageTag}
       dir={guide.direction}

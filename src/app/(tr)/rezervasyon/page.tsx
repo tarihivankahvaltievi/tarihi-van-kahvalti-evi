@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
 import { Suspense } from "react";
-import { getPublicMenuData } from "../menu/public-menu-data";
-import { localizeMenuData } from "../menu/menu-localization";
-import { getOrderingQuestions } from "../menu/ordering-questions";
-import ClientPage from "../client-page";
-import { AnimatedFooter } from "../components/animated-footer";
+import { getPublicMenuData } from "../../menu/public-menu-data";
+import { localizeMenuData } from "../../menu/menu-localization";
+import { getOrderingQuestions } from "../../menu/ordering-questions";
+import ClientPage from "../../client-page";
+import { AnimatedFooter } from "../../components/animated-footer";
 import {
   absoluteUrl,
   buildFaqJsonLd,
@@ -14,10 +14,10 @@ import {
   reservationUrl,
   siteName,
   siteUrl,
-} from "../seo";
-import { reservationFaqItems } from "./reservation-content";
-import { ReservationView } from "./reservation-view";
-import styles from "./reservation.module.css";
+} from "../../seo";
+import { reservationFaqItems } from "../../rezervasyon/reservation-content";
+import { ReservationView } from "../../rezervasyon/reservation-view";
+import styles from "../../rezervasyon/reservation.module.css";
 
 const pageTitle = "Masa Rezervasyonu | Tarihi Van Kahvaltı Evi, Beyoğlu Taksim";
 const pageDescription =
@@ -114,7 +114,7 @@ export default async function ReservationPage() {
         dangerouslySetInnerHTML={{ __html: jsonLd(reservationJsonLd) }}
       />
       <ClientPage locale="tr">
-        <main id="main-content" className={styles.page} lang="tr-TR">
+        <main id="main-content" tabIndex={-1} className={styles.page} lang="tr-TR">
           <Suspense fallback={<div style={{ minHeight: "420px" }} />}>
             <ReservationView locale="tr" orderingQuestions={orderingQuestions} />
           </Suspense>

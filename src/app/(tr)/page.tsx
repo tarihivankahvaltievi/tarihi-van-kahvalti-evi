@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
-import ClientPage from "./client-page";
-import { HomeContent } from "./home-content";
+import ClientPage from "../client-page";
+import { HomeContent } from "../home-content";
 import {
   buildFaqJsonLd,
   buildHomeWebPageJsonLd,
@@ -9,9 +9,8 @@ import {
   faqItems,
   englishUrl,
   jsonLd,
-  koreanUrl,
   siteUrl,
-} from "./seo";
+} from "../seo";
 
 export const metadata: Metadata = {
   alternates: {
@@ -19,7 +18,6 @@ export const metadata: Metadata = {
     languages: {
       tr: siteUrl,
       en: englishUrl,
-      ko: koreanUrl,
       "x-default": siteUrl,
     },
   },

@@ -325,7 +325,8 @@ export function MenuExperience({
             src="/images/breakfast-spread.webp"
             alt={isEn ? "Tarihi Van Kahvaltı Evi Menu" : "Tarihi Van Kahvaltı Evi Menü"}
             fill
-            priority
+            loading="eager"
+            fetchPriority="high"
             sizes="100vw"
             quality={84}
           />

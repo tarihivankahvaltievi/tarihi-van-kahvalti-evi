@@ -66,3 +66,5 @@ Kurulum adımları ve doğrulama kontrolleri için `GOOGLE_SEARCH_CONSOLE_KURULU
 - Dağıtımdan sonra değişen kanonik URL'leri bildirmek için `npm run seo:indexnow` çalıştırılır.
 
 Hesap doğrulama, sitemap gönderme ve işletme kaydı düzeltme adımları için `BING_YANDEX_KURULUM.md` dosyasını izleyin.
+
+Üçüncü bölümün [teknik dil ve performans kaydı](docs/seo-geo/bolum-3-teknik-dil-performans-2026-10-01.md) ölçüm kaynaklarını içerir. TR sayfaları URL değiştirmeyen `src/app/(tr)` grubundadır; her dil kendi statik kök layout'undan ortak `root-document.tsx` belgesini kullanır. Yalnız bilinmeyen URL'ler için 404 belgesi istek dilini okur. Dil kökleri arasında gezinme tam belge yükler. `npm run test:seo` kök dili/yönü, hreflang/sitemap eşitliği ve sekiz dilde HTTP 404'ü de denetler.

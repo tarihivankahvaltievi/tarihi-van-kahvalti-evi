@@ -114,7 +114,7 @@ export default async function EnglishReservationPage() {
         dangerouslySetInnerHTML={{ __html: jsonLd(reservationJsonLd) }}
       />
       <ClientPage locale="en">
-        <main id="main-content" className={styles.page} lang="en-US">
+        <main id="main-content" tabIndex={-1} className={styles.page} lang="en-US">
           <Suspense fallback={<div style={{ minHeight: "420px" }} />}>
             <ReservationView locale="en" orderingQuestions={orderingQuestions} />
           </Suspense>

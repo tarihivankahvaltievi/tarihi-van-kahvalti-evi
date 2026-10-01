@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { LegalPageShell } from "../components/legal-page-shell";
-import { cookiePolicyUrl } from "../seo";
+import { LegalPageShell } from "../../components/legal-page-shell";
+import { cookiePolicyUrl } from "../../seo";
 
 export const metadata: Metadata = {
   title: "Çerez Politikası",
