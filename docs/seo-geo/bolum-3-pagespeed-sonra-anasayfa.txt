@@ -1,0 +1,410 @@
+https://pagespeed.web.dev/analysis/https-www-tarihivankahvaltievi-com/92a37u3qcb?form_factor=mobile
+- banner:
+  - link "PageSpeed Insights logo PageSpeed Insights":
+    - /url: ./
+    - img "PageSpeed Insights logo"
+    - generic: PageSpeed Insights
+  - button "Bağlantıyı Kopyala":
+    - generic: Bağlantıyı Kopyala
+  - generic: Dokümanlar
+  - link "Dokümanlar":
+    - /url: https://developers.google.com/speed/docs/insights/v5/about
+- generic: Bu site, hizmetlerini sunmak ve trafiği analiz etmek için Google çerezlerinden yararlanıyor.
+- generic: Daha Fazla Bilgi.
+- link "Daha Fazla Bilgi.":
+  - /url: https://policies.google.com/technologies/cookies
+- button "Tamam, Anladım.":
+  - generic: Tamam, Anladım.
+- generic: 1 Eki 2026 06:50:27 tarihinden başlayan rapor
+- textbox:
+  - /placeholder: Web sayfası URL'si girin
+  - text: https://www.tarihivankahvaltievi.com/
+- paragraph: Geçerli bir URL girin
+- button "Analiz et":
+  - generic: Analiz et
+- tablist:
+  - tab "Mobil" [selected]:
+    - generic: smartphone
+    - generic: Mobil
+  - tab "Masaüstü":
+    - generic: computer
+    - generic: Masaüstü
+- tabpanel "Mobil":
+  - generic: Gerçek kullanıcılarınızın nelerle karşılaştığını görün
+  - button "Bu URL"
+  - button "Kaynak"
+  - text: "Önemli Web Verileri Değerlendirmesi:"
+  - generic: Başarılı Oldu
+  - button "button":
+  - checkbox "Toggle the display of histogram breakdowns"
+  - generic: Görünümü genişlet
+  - link "Largest Contentful Paint (LCP)":
+    - /url: https://web.dev/lcp/
+  - generic: 2,2 sn.
+  - link "Interaction to Next Paint (INP)":
+    - /url: https://web.dev/inp/
+  - generic: 127 ms.
+  - link "Cumulative Layout Shift (CLS)":
+    - /url: https://web.dev/cls/
+  - generic: "0"
+  - generic: Dikkate Değer Diğer Metrikler
+  - link "First Contentful Paint (FCP)":
+    - /url: https://web.dev/fcp/
+  - generic: 1,9 sn.
+  - link "Time to First Byte (TTFB)":
+    - /url: https://web.dev/ttfb/
+  - generic: 0,8 sn.
+  - text: Son 28 günlük dönem
+  - button "button":
+  - text: (
+  - link "geçmiş":
+    - /url: https://cruxvis.withgoogle.com/#/?view=cwvsummary&url=https%3A%2F%2Fwww.tarihivankahvaltievi.com%2F&identifier=url&device=PHONE
+  - text: )
+  - text: Farklı mobil cihazlar
+  - text: Birçok örnek (
+  - link "Chrome Kullanıcı Deneyimi Raporu":
+    - /url: https://developer.chrome.com/docs/crux
+  - text: )
+  - text: Tam ziyaret süreleri
+  - text: Farklı ağ bağlantıları
+  - generic: Tüm Chrome sürümleri
+  - generic: Performans sorunlarını teşhis edin
+  - article:
+    - link "79 Performans":
+      - /url: "#performance"
+      - generic: "79"
+      - generic: Performans
+    - link "100 Erişilebilirlik":
+      - /url: "#accessibility"
+      - generic: "100"
+      - generic: Erişilebilirlik
+    - link "92 En İyi Uygulamalar":
+      - /url: "#best-practices"
+      - generic: "92"
+      - generic: En İyi Uygulamalar
+    - link "100 SEO":
+      - /url: "#seo"
+      - generic: "100"
+      - generic: SEO
+    - link "3/3 Ajan Tabanlı Tarama":
+      - /url: "#agentic-browsing"
+      - generic: 3/3
+      - generic: Ajan Tabanlı Tarama
+    - text: Değerler tahminidir ve değişiklik gösterebilir.
+    - link "Performance skorunun hesaplanması":
+      - /url: https://developer.chrome.com/docs/lighthouse/performance/performance-scoring/?utm_source=lighthouse&utm_medium=lr
+    - text: ", doğrudan bu metriklerle yapılır."
+    - link "Hesap makinesini göster.":
+      - /url: https://googlechrome.github.io/lighthouse/scorecalc/#FCP=2701&LCP=4363&TBT=76&CLS=0&SI=3907&TTI=6030&device=mobile&version=13.5.0
+    - generic: 0–49
+    - generic: 50–89
+    - generic: 90–100
+    - img "Final Screenshot"
+    - checkbox "Toggle the display of metric descriptions"
+    - generic: Metrikler
+    - generic: Görünümü genişlet
+    - generic: First Contentful Paint
+    - generic: 2,7 sn.
+    - generic: Largest Contentful Paint
+    - generic: 4,4 sn.
+    - generic: Total Blocking Time
+    - generic: 80 ms.
+    - generic: Cumulative Layout Shift
+    - generic: "0"
+    - generic: Speed Index
+    - generic: 3,9 sn.
+    - list:
+      - listitem: Captured at 1 Eki 2026 06:50 GMT+3
+      - listitem: Emülasyonlu Moto G Power with Lighthouse 13.5.0
+      - listitem: Tek sayfalık oturum
+      - listitem: İlk sayfa yükleme
+      - listitem: Yavaş 4G kısıtlaması
+      - listitem: Using HeadlessChromium 153.0.8010.36 with lr
+    - button "Ağaç grafiği göster"
+    - img "Screenshot"
+    - img "Screenshot"
+    - img "Screenshot"
+    - img "Screenshot"
+    - img "Screenshot"
+    - img "Screenshot"
+    - img "Screenshot"
+    - img "Screenshot"
+    - generic: "Şunlarla alakalı denetimleri göster:"
+    - radio "All" [checked]
+    - generic: All
+    - radio "FCP"
+    - generic "First Contentful Paint": FCP
+    - radio "LCP"
+    - generic "Largest Contentful Paint": LCP
+    - radio "TBT"
+    - generic "Total Blocking Time": TBT
+    - radio "CLS"
+    - generic "Cumulative Layout Shift": CLS
+    - generic: Analizler
+    - 'generic "Oluşturma engelleme istekleri —Tahmini tasarruf: 2.290 ms."':
+      - generic: Oluşturma engelleme istekleri
+      - text: "—Tahmini tasarruf: 2.290 ms."
+    - text: İstekler sayfanın ilk oluşturma işlemini engelliyor. Bu durum, LCP'yi geciktirebilir.
+    - link "Erteleme veya satır içine yerleştirme":
+      - /url: https://developer.chrome.com/docs/performance/insights/render-blocking?utm_source=lighthouse&utm_medium=lr
+    - text: ", bu ağ isteklerini kritik yoldan uzaklaştırabilir."
+    - generic "Relevant to Largest Contentful Paint": LCP
+    - generic "Relevant to First Contentful Paint": FCP
+    - generic "Bu denetim, genel kategori puanını etkilemez.": Puanlanmamış
+    - table:
+      - rowgroup:
+        - row "URL Aktarım Boyutu Süre":
+          - columnheader "URL":
+            - generic: URL
+          - columnheader "Aktarım Boyutu":
+            - generic: Aktarım Boyutu
+          - columnheader "Süre":
+            - generic: Süre
+      - rowgroup:
+        - row "tarihivankahvaltievi.com 1. taraf 72,3 KiB 3.980 msn":
+          - cell "tarihivankahvaltievi.com 1. taraf":
+            - generic: tarihivankahvaltievi.com
+            - generic: 1. taraf
+          - cell "72,3 KiB":
+            - generic "74.014 bayt": 72,3 KiB
+          - cell "3.980 msn":
+            - generic: 3.980 msn
+        - row "…chunks/2c6d78d0ozk_u.css(www.tarihivankahvaltievi.com) 5,8 KiB 540 msn":
+          - cell "…chunks/2c6d78d0ozk_u.css(www.tarihivankahvaltievi.com)":
+            - generic "https://www.tarihivankahvaltievi.com/_next/static/immutable/chunks/2c6d78d0ozk_u.css":
+              - link "…chunks/2c6d78d0ozk_u.css":
+                - /url: https://www.tarihivankahvaltievi.com/_next/static/immutable/chunks/2c6d78d0ozk_u.css
+              - text: (www.tarihivankahvaltievi.com)
+          - cell "5,8 KiB":
+            - generic "5.963 bayt": 5,8 KiB
+          - cell "540 msn":
+            - generic: 540 msn
+        - row "…chunks/3w-nkat_kf5om.css(www.tarihivankahvaltievi.com) 4,5 KiB 540 msn":
+          - cell "…chunks/3w-nkat_kf5om.css(www.tarihivankahvaltievi.com)":
+            - generic "https://www.tarihivankahvaltievi.com/_next/static/immutable/chunks/3w-nkat_kf5om.css":
+              - link "…chunks/3w-nkat_kf5om.css":
+                - /url: https://www.tarihivankahvaltievi.com/_next/static/immutable/chunks/3w-nkat_kf5om.css
+              - text: (www.tarihivankahvaltievi.com)
+          - cell "4,5 KiB":
+            - generic "4.590 bayt": 4,5 KiB
+          - cell "540 msn":
+            - generic: 540 msn
+        - row "…chunks/3g-jttiqedduv.css(www.tarihivankahvaltievi.com) 4,4 KiB 180 msn":
+          - cell "…chunks/3g-jttiqedduv.css(www.tarihivankahvaltievi.com)":
+            - generic "https://www.tarihivankahvaltievi.com/_next/static/immutable/chunks/3g-jttiqedduv.css":
+              - link "…chunks/3g-jttiqedduv.css":
+                - /url: https://www.tarihivankahvaltievi.com/_next/static/immutable/chunks/3g-jttiqedduv.css
+              - text: (www.tarihivankahvaltievi.com)
+          - cell "4,4 KiB":
+            - generic "4.486 bayt": 4,4 KiB
+          - cell "180 msn":
+            - generic: 180 msn
+        - row "…chunks/11m0n2sn32tsj.css(www.tarihivankahvaltievi.com) 47,9 KiB 1.990 msn":
+          - cell "…chunks/11m0n2sn32tsj.css(www.tarihivankahvaltievi.com)":
+            - generic "https://www.tarihivankahvaltievi.com/_next/static/immutable/chunks/11m0n2sn32tsj.css":
+              - link "…chunks/11m0n2sn32tsj.css":
+                - /url: https://www.tarihivankahvaltievi.com/_next/static/immutable/chunks/11m0n2sn32tsj.css
+              - text: (www.tarihivankahvaltievi.com)
+          - cell "47,9 KiB":
+            - generic "49.032 bayt": 47,9 KiB
+          - cell "1.990 msn":
+            - generic: 1.990 msn
+        - row "…chunks/0gqv4782pdjhv.css(www.tarihivankahvaltievi.com) 9,7 KiB 720 msn":
+          - cell "…chunks/0gqv4782pdjhv.css(www.tarihivankahvaltievi.com)":
+            - generic "https://www.tarihivankahvaltievi.com/_next/static/immutable/chunks/0gqv4782pdjhv.css":
+              - link "…chunks/0gqv4782pdjhv.css":
+                - /url: https://www.tarihivankahvaltievi.com/_next/static/immutable/chunks/0gqv4782pdjhv.css
+              - text: (www.tarihivankahvaltievi.com)
+          - cell "9,7 KiB":
+            - generic "9.943 bayt": 9,7 KiB
+          - cell "720 msn":
+            - generic: 720 msn
+    - 'generic "Eski JavaScript —Tahmini tasarruf: 14 KiB"':
+      - generic: Eski JavaScript
+      - text: "—Tahmini tasarruf: 14 KiB"
+    - generic "Zorunlu yeniden düzenleme":
+      - generic: Zorunlu yeniden düzenleme
+    - 'generic "Verimli önbellek sürelerini kullanın —Tahmini tasarruf: 13 KiB"':
+      - generic: Verimli önbellek sürelerini kullanın
+      - text: "—Tahmini tasarruf: 13 KiB"
+    - generic "Düzen kayması sorununun nedenleri":
+      - generic: Düzen kayması sorununun nedenleri
+    - generic "DOM boyutunu optimize edin":
+      - generic: DOM boyutunu optimize edin
+    - generic "LCP dökümü":
+      - generic: LCP dökümü
+    - generic "3. taraflar":
+      - generic: 3. taraflar
+    - text: Bu analizler Chrome Geliştirici Araçları Performans Paneli'nde de mevcuttur. Daha ayrıntılı bilgi görüntülemek için
+    - link "izleme kaydı oluşturun":
+      - /url: https://developer.chrome.com/docs/devtools/performance/reference?utm_source=lighthouse&utm_medium=lr
+    - text: .
+    - generic: Teşhis
+    - 'generic "Kullanılmayan JavaScript''i azaltın —Tahmini tasarruf: 111 KiB"':
+      - generic: Kullanılmayan JavaScript'i azaltın
+      - text: "—Tahmini tasarruf: 111 KiB"
+    - generic "Uzun ana ileti dizisi görevlerinden kaçının —4 uzun görev bulundu":
+      - generic: Uzun ana ileti dizisi görevlerinden kaçının
+      - text: —4 uzun görev bulundu
+    - text: Uygulamanızın performansı hakkında daha fazla bilgi. Bu sayılar Performan skoruna
+    - link "doğrudan etki":
+      - /url: https://developer.chrome.com/docs/lighthouse/performance/performance-scoring/?utm_source=lighthouse&utm_medium=lr
+    - text: etmezler.
+    - generic "Başarılı denetimler (17) Göster":
+      - generic: Başarılı denetimler (17)
+      - generic: Göster
+    - text: — — —
+    - heading "100 Erişilebilirlik" [level=2]:
+      - generic: "100"
+      - generic: Erişilebilirlik
+    - text: Bu kontroller,
+    - link "web uygulamanızın erişilebilirliğini iyileştirme":
+      - /url: https://developer.chrome.com/docs/lighthouse/accessibility/?utm_source=lighthouse&utm_medium=lr
+    - text: fırsatlarını öne çıkarır. Otomatik algılama, sorunların yalnızca bir alt kümesini algılayabilir ve web uygulamanızın erişilebilirliğini garanti etmez. Bu nedenle,
+    - link "manuel test":
+      - /url: https://web.dev/articles/how-to-review?utm_source=lighthouse&utm_medium=lr
+    - text: yapmanız da önerilir.
+    - generic: Adlar ve etiketler
+    - generic "Resim öğelerinde gereksiz metin olan [alt] özellikleri yok.":
+      - text: Resim öğelerinde gereksiz metin olan
+      - code: "[alt]"
+      - text: özellikleri yok.
+    - generic: Bu fırsatlar, uygulamanızdaki kontrollerin anlamının iyileştirilmesine olanak tanır. Bu durum, ekran okuyucu gibi yardımcı teknolojilerin kullanıcılarına daha iyi bir deneyim sunulmasını sağlayabilir.
+    - generic "Manuel olarak kontrol edilecek ek öğeler (10) Göster":
+      - generic: Manuel olarak kontrol edilecek ek öğeler (10)
+      - generic: Göster
+    - text: Bu öğeler, otomatik test aracının kapsamında yer almayan alanları ele alır.
+    - link "Erişilebilirlik incelemesi gerçekleştirme":
+      - /url: https://web.dev/articles/how-to-review?utm_source=lighthouse&utm_medium=lr
+    - text: hakkında daha fazla bilgiyi rehberimizde bulabilirsiniz.
+    - generic "Başarılı denetimler (29) Göster":
+      - generic: Başarılı denetimler (29)
+      - generic: Göster
+    - generic "Geçerli değil (33) Göster":
+      - generic: Geçerli değil (33)
+      - generic: Göster
+    - heading "92 En İyi Uygulamalar" [level=2]:
+      - generic: "92"
+      - generic: En İyi Uygulamalar
+    - generic: Genel
+    - generic "Tarayıcı hataları konsola kaydedildi" [active]:
+      - generic: Tarayıcı hataları konsola kaydedildi
+    - text: Konsola kaydedilen hatalar çözülmemiş problemleri belirtir Bunlar, ağ istek hatalarından ve diğer tarayıcı sorunlarından gelebilir.
+    - link "Konsol teşhis denetlemesindeki hatalar hakkında daha fazla bilgi edinin":
+      - /url: https://developer.chrome.com/docs/lighthouse/best-practices/errors-in-console/?utm_source=lighthouse&utm_medium=lr
+    - text: .
+    - table:
+      - rowgroup:
+        - row "Kaynak Açıklama":
+          - columnheader "Kaynak":
+            - generic: Kaynak
+          - columnheader "Açıklama":
+            - generic: Açıklama
+      - rowgroup:
+        - row "tarihivankahvaltievi.com 1. taraf":
+          - cell "tarihivankahvaltievi.com 1. taraf":
+            - generic: tarihivankahvaltievi.com
+            - generic: 1. taraf
+          - cell
+        - row:
+          - cell "https://www.tarihivankahvaltievi.com:1:0":
+            - generic "https://www.tarihivankahvaltievi.com/":
+              - link "https://www.tarihivankahvaltievi.com:1:0":
+                - /url: https://www.tarihivankahvaltievi.com/
+          - cell:
+            - generic: "Loading the image 'https://www.google.nl/pagead/1p-user-list/17869229892/?random=1790826631858&cv=11&fst=1790823600000&bg=ffffff&guid=ON&async=1&en=gtag.config&gtm=45be69t1v9263033917za200zd9263033917xecxf1&gcd=13l3l3l3l1l1&dma=0&tag_exp=115616985~115938465~115938469~117776796~118897920~118897930~120213116~120385422~120469145~120469153&u_w=412&u_h=823&url=https%3A%2F%2Fwww.tarihivankahvaltievi.com%2F&rcb=7&frm=0&tiba=Beyo%C4%9Flu%20Kahvalt%C4%B1%20%7C%20Tarihi%20Van%20Kahvalt%C4%B1%20Evi%2C%20Taksim&hn=www.googleadservices.com&npa=0&pscdl=noapi&auid=2024725952.1790826632&uaa=&uab=64&uafvl=HeadlessChrome%3B153.0.8010.36%7CNot_A%2520Brand%3B8.0.0.0%7CChromium%3B153.0.8010.36&uamb=1&uam=moto%20g%20power%20(2022)&uap=Android&uapv=11.0&uaw=0&data=event%3Dgtag.config&ept=9&rfmt=3&fmt=3&is_vtc=1&cid=CAQSUABAziHc94krItiQBLzpqLR3oV_x4-i9p3K0DldEz8DTTpKG7GnzaX6USzB97QqeaLBO64r5IMXLN7WY3szZCfQmrMj-DXsLZkB_Pbl1fQtR&random=2876428309&rmt_tld=1&ipr=y' violates the following Content Security Policy directive: \"img-src 'self' data: blob: https://*.supabase.co https://*.google-analytics.com https://*.googletagmanager.com https://www.googleadservices.com https://googleads.g.doubleclick.net https://ad.doubleclick.net https://*.google.com https://*.google.com.tr\". The action has been blocked."
+    - generic "Sorunlar, Chrome Geliştirici Araçları'ndaki Issues paneline kaydedildi":
+      - text: Sorunlar, Chrome Geliştirici Araçları'ndaki
+      - code: Issues
+      - text: paneline kaydedildi
+    - generic: Politika Değerlendirme
+    - generic "XSS saldırıları karşısında CSP'nin etkinliğini sınayın":
+      - generic: XSS saldırıları karşısında CSP'nin etkinliğini sınayın
+    - generic "Güçlü bir HSTS politikası kullanın":
+      - generic: Güçlü bir HSTS politikası kullanın
+    - generic "Trusted Types ile DOM tabanlı XSS'yi azaltın":
+      - generic: Trusted Types ile DOM tabanlı XSS'yi azaltın
+    - generic: Tarayıcı Uyumluluğu
+    - generic "Baseline Özellikleri":
+      - generic: Baseline Özellikleri
+    - generic "Başarılı denetimler (11) Göster":
+      - generic: Başarılı denetimler (11)
+      - generic: Göster
+    - generic "Geçerli değil (4) Göster":
+      - generic: Geçerli değil (4)
+      - generic: Göster
+    - heading "100 SEO" [level=2]:
+      - generic: "100"
+      - generic: SEO
+    - text: Bu kontroller, sayfanızın temel arama motoru optimizasyonu tavsiyesine uymasını sağlar. Burada Lighthouse'un puan vermediği ve
+    - link "Önemli Web Verileri":
+      - /url: https://web.dev/explore/vitals?utm_source=lighthouse&utm_medium=lr
+    - text: "'ndeki performansınız da dahil arama sıralamanızı etkileyebilecek birçok ek faktör vardır."
+    - link "Google Arama'nın Temel Özellikleri hakkında daha fazla bilgi edinin":
+      - /url: https://support.google.com/webmasters/answer/35769
+    - text: .
+    - generic "Manuel olarak kontrol edilecek ek öğeler (1) Gizle":
+      - generic: Manuel olarak kontrol edilecek ek öğeler (1)
+      - generic: Gizle
+    - generic "Yapılandırılmış veriler geçerli":
+      - generic: Yapılandırılmış veriler geçerli
+    - generic: SEO ile ilgili diğer en iyi uygulamaları kontrol etmek için sitenizde bu ek doğrulayıcıları çalıştırın.
+    - generic "Başarılı denetimler (10) Göster":
+      - generic: Başarılı denetimler (10)
+      - generic: Göster
+    - heading "3/3 Ajan Tabanlı Tarama" [level=2]:
+      - generic: 3/3
+      - generic: Ajan Tabanlı Tarama
+    - text: Bu kontroller,
+    - link "yapay zeka ajanları için yüksek kaliteli, göz atılabilir web siteleri":
+      - /url: https://goo.gle/lighthouse-agentic-web
+    - text: sağlar ve WebMCP entegrasyonlarının doğruluğunu onaylar. Bu kategori hâlâ geliştirme aşamasında olduğundan değişebilir.
+    - generic "Başarılı denetimler (3) Göster":
+      - generic: Başarılı denetimler (3)
+      - generic: Göster
+    - text: — —
+    - generic "Geçerli değil (4) Göster":
+      - generic: Geçerli değil (4)
+      - generic: Göster
+- text: — — — — — — — — — —
+- contentinfo:
+  - generic: PageSpeed Insights hakkında daha fazla bilgi
+  - link "Yenilikler":
+    - /url: https://developers.google.com/speed/docs/insights/release_notes
+  - link "Dokümanlar":
+    - /url: https://developers.google.com/speed/docs/insights/v5/about
+  - link "Web Performansı hakkında bilgi edinin":
+    - /url: https://developers.google.com/speed
+  - link "Stack Overflow hakkında soru sorun":
+    - /url: https://stackoverflow.com/questions/tagged/pagespeed-insights
+  - link "Posta listesi":
+    - /url: https://groups.google.com/g/pagespeed-insights-discuss
+  - generic: Alakalı İçerik
+  - link "Güncellemeler":
+    - /url: https://developer.chrome.com/blog
+  - link "Web'in Temelleri":
+    - /url: https://developers.google.com/focus/web-development
+  - link "Örnek Olaylar":
+    - /url: https://web.dev/case-studies
+  - link "Podcast'ler":
+    - /url: https://web.dev/shows
+  - generic: Bağlan
+  - link "Twitter":
+    - /url: https://twitter.com/ChromiumDev
+  - link "YouTube":
+    - /url: https://www.youtube.com/user/ChromeDevelopers
+  - link "Google Developers Logo":
+    - /url: https://developers.google.com/
+    - img "Google Developers Logo"
+  - link "Chrome":
+    - /url: https://developer.chrome.com/
+  - link "Firebase":
+    - /url: https://firebase.google.com/
+  - link "Tüm ürünler":
+    - /url: https://developers.google.com/products/
+  - link "Şartlar ve Gizlilik Politikası":
+    - /url: https://policies.google.com/
+  - text: Ayrıntılı bilgi için
+  - link "Google Developers Sitesi Politikaları":
+    - /url: https://developers.google.com/terms/site-policies
+  - text: "'na bakın."

@@ -1,0 +1,212 @@
+{
+  "checkedAt": "2026-10-01T03:50:51.802200+00:00",
+  "codeCommit": "acd8f34",
+  "gzipNote": "Local gzip estimate; not the observed transfer size.",
+  "routes": [
+    {
+      "path": "/",
+      "htmlLang": "tr",
+      "stylesheets": [
+        {
+          "url": "/_next/static/immutable/chunks/3g-jttiqedduv.css",
+          "decodedBytes": 10788,
+          "gzipEstimateBytes": 2234,
+          "notoJP": false,
+          "notoKR": false
+        },
+        {
+          "url": "/_next/static/immutable/chunks/11m0n2sn32tsj.css",
+          "decodedBytes": 225959,
+          "gzipEstimateBytes": 42693,
+          "notoJP": false,
+          "notoKR": false
+        },
+        {
+          "url": "/_next/static/immutable/chunks/0gqv4782pdjhv.css",
+          "decodedBytes": 39432,
+          "gzipEstimateBytes": 6724,
+          "notoJP": false,
+          "notoKR": false
+        },
+        {
+          "url": "/_next/static/immutable/chunks/2c6d78d0ozk_u.css",
+          "decodedBytes": 17973,
+          "gzipEstimateBytes": 3458,
+          "notoJP": false,
+          "notoKR": false
+        },
+        {
+          "url": "/_next/static/immutable/chunks/3w-nkat_kf5om.css",
+          "decodedBytes": 9817,
+          "gzipEstimateBytes": 2219,
+          "notoJP": false,
+          "notoKR": false
+        }
+      ]
+    },
+    {
+      "path": "/en/menu",
+      "htmlLang": "en",
+      "stylesheets": [
+        {
+          "url": "/_next/static/immutable/chunks/3g-jttiqedduv.css",
+          "decodedBytes": 10788,
+          "gzipEstimateBytes": 2234,
+          "notoJP": false,
+          "notoKR": false
+        },
+        {
+          "url": "/_next/static/immutable/chunks/11m0n2sn32tsj.css",
+          "decodedBytes": 225959,
+          "gzipEstimateBytes": 42693,
+          "notoJP": false,
+          "notoKR": false
+        },
+        {
+          "url": "/_next/static/immutable/chunks/0gqv4782pdjhv.css",
+          "decodedBytes": 39432,
+          "gzipEstimateBytes": 6724,
+          "notoJP": false,
+          "notoKR": false
+        },
+        {
+          "url": "/_next/static/immutable/chunks/3w-nkat_kf5om.css",
+          "decodedBytes": 9817,
+          "gzipEstimateBytes": 2219,
+          "notoJP": false,
+          "notoKR": false
+        },
+        {
+          "url": "/_next/static/immutable/chunks/11ct-aaf899_q.css",
+          "decodedBytes": 37120,
+          "gzipEstimateBytes": 7045,
+          "notoJP": false,
+          "notoKR": false
+        }
+      ]
+    },
+    {
+      "path": "/en/rezervasyon",
+      "htmlLang": "en",
+      "stylesheets": [
+        {
+          "url": "/_next/static/immutable/chunks/3g-jttiqedduv.css",
+          "decodedBytes": 10788,
+          "gzipEstimateBytes": 2234,
+          "notoJP": false,
+          "notoKR": false
+        },
+        {
+          "url": "/_next/static/immutable/chunks/11m0n2sn32tsj.css",
+          "decodedBytes": 225959,
+          "gzipEstimateBytes": 42693,
+          "notoJP": false,
+          "notoKR": false
+        },
+        {
+          "url": "/_next/static/immutable/chunks/0gqv4782pdjhv.css",
+          "decodedBytes": 39432,
+          "gzipEstimateBytes": 6724,
+          "notoJP": false,
+          "notoKR": false
+        },
+        {
+          "url": "/_next/static/immutable/chunks/3w-nkat_kf5om.css",
+          "decodedBytes": 9817,
+          "gzipEstimateBytes": 2219,
+          "notoJP": false,
+          "notoKR": false
+        },
+        {
+          "url": "/_next/static/immutable/chunks/11ct-aaf899_q.css",
+          "decodedBytes": 37120,
+          "gzipEstimateBytes": 7045,
+          "notoJP": false,
+          "notoKR": false
+        }
+      ]
+    },
+    {
+      "path": "/ko",
+      "htmlLang": "ko",
+      "stylesheets": [
+        {
+          "url": "/_next/static/immutable/chunks/0a_kwi9fl5lf7.css",
+          "decodedBytes": 77926,
+          "gzipEstimateBytes": 26153,
+          "notoJP": false,
+          "notoKR": true
+        },
+        {
+          "url": "/_next/static/immutable/chunks/3g-jttiqedduv.css",
+          "decodedBytes": 10788,
+          "gzipEstimateBytes": 2234,
+          "notoJP": false,
+          "notoKR": false
+        },
+        {
+          "url": "/_next/static/immutable/chunks/11m0n2sn32tsj.css",
+          "decodedBytes": 225959,
+          "gzipEstimateBytes": 42693,
+          "notoJP": false,
+          "notoKR": false
+        },
+        {
+          "url": "/_next/static/immutable/chunks/0gqv4782pdjhv.css",
+          "decodedBytes": 39432,
+          "gzipEstimateBytes": 6724,
+          "notoJP": false,
+          "notoKR": false
+        },
+        {
+          "url": "/_next/static/immutable/chunks/2hd4dvw4ou-56.css",
+          "decodedBytes": 11028,
+          "gzipEstimateBytes": 2587,
+          "notoJP": false,
+          "notoKR": false
+        }
+      ]
+    },
+    {
+      "path": "/ja/blog/istanbul-bal-kaymak",
+      "htmlLang": "ja",
+      "stylesheets": [
+        {
+          "url": "/_next/static/immutable/chunks/43a0mn7v7usws.css",
+          "decodedBytes": 95307,
+          "gzipEstimateBytes": 33147,
+          "notoJP": true,
+          "notoKR": false
+        },
+        {
+          "url": "/_next/static/immutable/chunks/3g-jttiqedduv.css",
+          "decodedBytes": 10788,
+          "gzipEstimateBytes": 2234,
+          "notoJP": false,
+          "notoKR": false
+        },
+        {
+          "url": "/_next/static/immutable/chunks/11m0n2sn32tsj.css",
+          "decodedBytes": 225959,
+          "gzipEstimateBytes": 42693,
+          "notoJP": false,
+          "notoKR": false
+        },
+        {
+          "url": "/_next/static/immutable/chunks/0gqv4782pdjhv.css",
+          "decodedBytes": 39432,
+          "gzipEstimateBytes": 6724,
+          "notoJP": false,
+          "notoKR": false
+        },
+        {
+          "url": "/_next/static/immutable/chunks/3tb7nedts9q9m.css",
+          "decodedBytes": 38323,
+          "gzipEstimateBytes": 5080,
+          "notoJP": false,
+          "notoKR": false
+        }
+      ]
+    }
+  ]
+}

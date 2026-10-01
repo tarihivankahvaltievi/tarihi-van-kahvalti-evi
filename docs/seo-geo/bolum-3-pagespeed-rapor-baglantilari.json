@@ -38,5 +38,76 @@
       "report": "https://pagespeed.web.dev/analysis/https-www-tarihivankahvaltievi-com-en-rezervasyon/01zoqwcdkp?form_factor=mobile",
       "snapshotFile": "bolum-3-pagespeed-ara-rezervasyon.txt"
     }
+  ],
+  "after": [
+    {
+      "page": "anasayfa",
+      "codeCommit": "acd8f34",
+      "report": "https://pagespeed.web.dev/analysis/https-www-tarihivankahvaltievi-com/92a37u3qcb?form_factor=mobile",
+      "capturedLabel": "1 Eki 2026 06:50:27 tarihinden başlayan rapor",
+      "snapshotFile": "bolum-3-pagespeed-sonra-anasayfa.txt",
+      "scores": {
+        "performance": 79,
+        "accessibility": 100,
+        "seo": 100,
+        "bestPractices": 92
+      },
+      "scoreCalculatorValues": {
+        "FCP": "2701",
+        "LCP": "4363",
+        "TBT": "76",
+        "CLS": "0",
+        "SI": "3907",
+        "TTI": "6030",
+        "device": "mobile",
+        "version": "13.5.0"
+      }
+    },
+    {
+      "page": "menu",
+      "codeCommit": "acd8f34",
+      "report": "https://pagespeed.web.dev/analysis/https-www-tarihivankahvaltievi-com-en-menu/jgd3ijdowy?form_factor=mobile",
+      "capturedLabel": "1 Eki 2026 06:50:27 tarihinden başlayan rapor",
+      "snapshotFile": "bolum-3-pagespeed-sonra-menu.txt",
+      "scores": {
+        "performance": 78,
+        "accessibility": 100,
+        "seo": 100,
+        "bestPractices": 92
+      },
+      "scoreCalculatorValues": {
+        "FCP": "2701",
+        "LCP": "4593",
+        "TBT": "67",
+        "CLS": "0.01",
+        "SI": "3583",
+        "TTI": "5493",
+        "device": "mobile",
+        "version": "13.5.0"
+      }
+    },
+    {
+      "page": "rezervasyon",
+      "codeCommit": "acd8f34",
+      "report": "https://pagespeed.web.dev/analysis/https-www-tarihivankahvaltievi-com-en-rezervasyon/v1vtlkv1db?form_factor=mobile",
+      "capturedLabel": "1 Eki 2026 06:50:27 tarihinden başlayan rapor",
+      "snapshotFile": "bolum-3-pagespeed-sonra-rezervasyon.txt",
+      "scores": {
+        "performance": 80,
+        "accessibility": 100,
+        "seo": 100,
+        "bestPractices": 92
+      },
+      "scoreCalculatorValues": {
+        "FCP": "2852",
+        "LCP": "4277",
+        "TBT": "80",
+        "CLS": "0",
+        "SI": "3340",
+        "TTI": "5528",
+        "device": "mobile",
+        "version": "13.5.0"
+      }
+    }
   ]
 }

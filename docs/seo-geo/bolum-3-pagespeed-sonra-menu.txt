@@ -1,0 +1,329 @@
+https://pagespeed.web.dev/analysis/https-www-tarihivankahvaltievi-com-en-menu/jgd3ijdowy?form_factor=mobile
+- banner:
+  - link "PageSpeed Insights logo PageSpeed Insights":
+    - /url: ./
+    - img "PageSpeed Insights logo"
+    - generic: PageSpeed Insights
+  - button "Bağlantıyı Kopyala":
+    - generic: Bağlantıyı Kopyala
+  - generic: Dokümanlar
+  - link "Dokümanlar":
+    - /url: https://developers.google.com/speed/docs/insights/v5/about
+- generic: Bu site, hizmetlerini sunmak ve trafiği analiz etmek için Google çerezlerinden yararlanıyor.
+- generic: Daha Fazla Bilgi.
+- link "Daha Fazla Bilgi.":
+  - /url: https://policies.google.com/technologies/cookies
+- button "Tamam, Anladım.":
+  - generic: Tamam, Anladım.
+- generic: 1 Eki 2026 06:50:27 tarihinden başlayan rapor
+- textbox:
+  - /placeholder: Web sayfası URL'si girin
+  - text: https://www.tarihivankahvaltievi.com/en/menu
+- paragraph: Geçerli bir URL girin
+- button "Analiz et":
+  - generic: Analiz et
+- tablist:
+  - tab "Mobil" [selected]:
+    - generic: smartphone
+    - generic: Mobil
+  - tab "Masaüstü":
+    - generic: computer
+    - generic: Masaüstü
+- tabpanel "Mobil":
+  - generic: Gerçek kullanıcılarınızın nelerle karşılaştığını görün
+  - button "button":
+  - button "Bu URL" [disabled]
+  - button "Kaynak"
+  - text: "Önemli Web Verileri Değerlendirmesi:"
+  - generic: Başarısız Oldu
+  - button "button":
+  - checkbox "Toggle the display of histogram breakdowns"
+  - generic: Görünümü genişlet
+  - link "Largest Contentful Paint (LCP)":
+    - /url: https://web.dev/lcp/
+  - generic: 2,5 sn.
+  - link "Interaction to Next Paint (INP)":
+    - /url: https://web.dev/inp/
+  - generic: 131 ms.
+  - link "Cumulative Layout Shift (CLS)":
+    - /url: https://web.dev/cls/
+  - generic: "0"
+  - generic: Dikkate Değer Diğer Metrikler
+  - link "First Contentful Paint (FCP)":
+    - /url: https://web.dev/fcp/
+  - generic: 2,3 sn.
+  - link "Time to First Byte (TTFB)":
+    - /url: https://web.dev/ttfb/
+  - generic: 0,8 sn.
+  - text: Son 28 günlük dönem
+  - button "button":
+  - text: (
+  - link "geçmiş":
+    - /url: https://cruxvis.withgoogle.com/#/?view=cwvsummary&url=https%3A%2F%2Fwww.tarihivankahvaltievi.com%2Fen%2Fmenu&identifier=origin&device=PHONE
+  - text: )
+  - text: Farklı mobil cihazlar
+  - text: Birçok örnek (
+  - link "Chrome Kullanıcı Deneyimi Raporu":
+    - /url: https://developer.chrome.com/docs/crux
+  - text: )
+  - text: Tam ziyaret süreleri
+  - text: Farklı ağ bağlantıları
+  - generic: Tüm Chrome sürümleri
+  - generic: Performans sorunlarını teşhis edin
+  - article:
+    - link "78 Performans":
+      - /url: "#performance"
+      - generic: "78"
+      - generic: Performans
+    - link "100 Erişilebilirlik":
+      - /url: "#accessibility"
+      - generic: "100"
+      - generic: Erişilebilirlik
+    - link "92 En İyi Uygulamalar":
+      - /url: "#best-practices"
+      - generic: "92"
+      - generic: En İyi Uygulamalar
+    - link "100 SEO":
+      - /url: "#seo"
+      - generic: "100"
+      - generic: SEO
+    - link "3/3 Ajan Tabanlı Tarama":
+      - /url: "#agentic-browsing"
+      - generic: 3/3
+      - generic: Ajan Tabanlı Tarama
+    - text: Değerler tahminidir ve değişiklik gösterebilir.
+    - link "Performance skorunun hesaplanması":
+      - /url: https://developer.chrome.com/docs/lighthouse/performance/performance-scoring/?utm_source=lighthouse&utm_medium=lr
+    - text: ", doğrudan bu metriklerle yapılır."
+    - link "Hesap makinesini göster.":
+      - /url: https://googlechrome.github.io/lighthouse/scorecalc/#FCP=2701&LCP=4593&TBT=67&CLS=0.01&SI=3583&TTI=5493&device=mobile&version=13.5.0
+    - generic: 0–49
+    - generic: 50–89
+    - generic: 90–100
+    - img "Final Screenshot"
+    - checkbox "Toggle the display of metric descriptions"
+    - generic: Metrikler
+    - generic: Görünümü genişlet
+    - generic: First Contentful Paint
+    - generic: 2,7 sn.
+    - generic: Largest Contentful Paint
+    - generic: 4,6 sn.
+    - generic: Total Blocking Time
+    - generic: 70 ms.
+    - generic: Cumulative Layout Shift
+    - generic: "0.006"
+    - generic: Speed Index
+    - generic: 3,6 sn.
+    - list:
+      - listitem: Captured at 1 Eki 2026 06:50 GMT+3
+      - listitem: Emülasyonlu Moto G Power with Lighthouse 13.5.0
+      - listitem: Tek sayfalık oturum
+      - listitem: İlk sayfa yükleme
+      - listitem: Yavaş 4G kısıtlaması
+      - listitem: Using HeadlessChromium 153.0.8010.36 with lr
+    - button "Ağaç grafiği göster"
+    - img "Screenshot"
+    - img "Screenshot"
+    - img "Screenshot"
+    - img "Screenshot"
+    - img "Screenshot"
+    - img "Screenshot"
+    - img "Screenshot"
+    - img "Screenshot"
+    - generic: "Şunlarla alakalı denetimleri göster:"
+    - radio "All" [checked]
+    - generic: All
+    - radio "FCP"
+    - generic "First Contentful Paint": FCP
+    - radio "LCP"
+    - generic "Largest Contentful Paint": LCP
+    - radio "TBT"
+    - generic "Total Blocking Time": TBT
+    - radio "CLS"
+    - generic "Cumulative Layout Shift": CLS
+    - generic: Analizler
+    - 'generic "Oluşturma engelleme istekleri —Tahmini tasarruf: 2.310 ms."':
+      - generic: Oluşturma engelleme istekleri
+      - text: "—Tahmini tasarruf: 2.310 ms."
+    - 'generic "Resim yayınlamayı kolaylaştırın —Tahmini tasarruf: 14 KiB"':
+      - generic: Resim yayınlamayı kolaylaştırın
+      - text: "—Tahmini tasarruf: 14 KiB"
+    - 'generic "Eski JavaScript —Tahmini tasarruf: 14 KiB"':
+      - generic: Eski JavaScript
+      - text: "—Tahmini tasarruf: 14 KiB"
+    - generic "Zorunlu yeniden düzenleme":
+      - generic: Zorunlu yeniden düzenleme
+    - 'generic "Verimli önbellek sürelerini kullanın —Tahmini tasarruf: 12 KiB"':
+      - generic: Verimli önbellek sürelerini kullanın
+      - text: "—Tahmini tasarruf: 12 KiB"
+    - generic "Düzen kayması sorununun nedenleri":
+      - generic: Düzen kayması sorununun nedenleri
+    - generic "DOM boyutunu optimize edin":
+      - generic: DOM boyutunu optimize edin
+    - generic "LCP dökümü":
+      - generic: LCP dökümü
+    - generic "3. taraflar":
+      - generic: 3. taraflar
+    - text: Bu analizler Chrome Geliştirici Araçları Performans Paneli'nde de mevcuttur. Daha ayrıntılı bilgi görüntülemek için
+    - link "izleme kaydı oluşturun":
+      - /url: https://developer.chrome.com/docs/devtools/performance/reference?utm_source=lighthouse&utm_medium=lr
+    - text: .
+    - generic: Teşhis
+    - 'generic "Kullanılmayan JavaScript''i azaltın —Tahmini tasarruf: 110 KiB"':
+      - generic: Kullanılmayan JavaScript'i azaltın
+      - text: "—Tahmini tasarruf: 110 KiB"
+    - generic "Uzun ana ileti dizisi görevlerinden kaçının —4 uzun görev bulundu":
+      - generic: Uzun ana ileti dizisi görevlerinden kaçının
+      - text: —4 uzun görev bulundu
+    - text: Uygulamanızın performansı hakkında daha fazla bilgi. Bu sayılar Performan skoruna
+    - link "doğrudan etki":
+      - /url: https://developer.chrome.com/docs/lighthouse/performance/performance-scoring/?utm_source=lighthouse&utm_medium=lr
+    - text: etmezler.
+    - generic "Başarılı denetimler (16) Göster":
+      - generic: Başarılı denetimler (16)
+      - generic: Göster
+    - text: — — —
+    - heading "100 Erişilebilirlik" [level=2]:
+      - generic: "100"
+      - generic: Erişilebilirlik
+    - text: Bu kontroller,
+    - link "web uygulamanızın erişilebilirliğini iyileştirme":
+      - /url: https://developer.chrome.com/docs/lighthouse/accessibility/?utm_source=lighthouse&utm_medium=lr
+    - text: fırsatlarını öne çıkarır. Otomatik algılama, sorunların yalnızca bir alt kümesini algılayabilir ve web uygulamanızın erişilebilirliğini garanti etmez. Bu nedenle,
+    - link "manuel test":
+      - /url: https://web.dev/articles/how-to-review?utm_source=lighthouse&utm_medium=lr
+    - text: yapmanız da önerilir.
+    - generic "Manuel olarak kontrol edilecek ek öğeler (10) Gizle":
+      - generic: Manuel olarak kontrol edilecek ek öğeler (10)
+      - generic: Gizle
+    - generic "Interactive controls are keyboard focusable":
+      - generic: Interactive controls are keyboard focusable
+    - generic "Interactive elements indicate their purpose and state":
+      - generic: Interactive elements indicate their purpose and state
+    - generic "The page has a logical tab order":
+      - generic: The page has a logical tab order
+    - generic "Visual order on the page follows DOM order":
+      - generic: Visual order on the page follows DOM order
+    - generic "User focus is not accidentally trapped in a region":
+      - generic: User focus is not accidentally trapped in a region
+    - generic "The user's focus is directed to new content added to the page":
+      - generic: The user's focus is directed to new content added to the page
+    - generic "HTML5 landmark elements are used to improve navigation":
+      - generic: HTML5 landmark elements are used to improve navigation
+    - generic "Offscreen content is hidden from assistive technology":
+      - generic: Offscreen content is hidden from assistive technology
+    - generic "Custom controls have associated labels":
+      - generic: Custom controls have associated labels
+    - generic "Custom controls have ARIA roles":
+      - generic: Custom controls have ARIA roles
+    - text: Bu öğeler, otomatik test aracının kapsamında yer almayan alanları ele alır.
+    - link "Erişilebilirlik incelemesi gerçekleştirme":
+      - /url: https://web.dev/articles/how-to-review?utm_source=lighthouse&utm_medium=lr
+    - text: hakkında daha fazla bilgiyi rehberimizde bulabilirsiniz.
+    - generic "Başarılı denetimler (26) Göster":
+      - generic: Başarılı denetimler (26)
+      - generic: Göster
+    - generic "Geçerli değil (37) Göster":
+      - generic: Geçerli değil (37)
+      - generic: Göster
+    - heading "92 En İyi Uygulamalar" [level=2]:
+      - generic: "92"
+      - generic: En İyi Uygulamalar
+    - generic: Genel
+    - generic "Tarayıcı hataları konsola kaydedildi":
+      - generic: Tarayıcı hataları konsola kaydedildi
+    - generic "Sorunlar, Chrome Geliştirici Araçları'ndaki Issues paneline kaydedildi":
+      - text: Sorunlar, Chrome Geliştirici Araçları'ndaki
+      - code: Issues
+      - text: paneline kaydedildi
+    - generic: Politika Değerlendirme
+    - generic "XSS saldırıları karşısında CSP'nin etkinliğini sınayın":
+      - generic: XSS saldırıları karşısında CSP'nin etkinliğini sınayın
+    - generic "Güçlü bir HSTS politikası kullanın":
+      - generic: Güçlü bir HSTS politikası kullanın
+    - generic "Trusted Types ile DOM tabanlı XSS'yi azaltın":
+      - generic: Trusted Types ile DOM tabanlı XSS'yi azaltın
+    - generic: Tarayıcı Uyumluluğu
+    - generic "Baseline Özellikleri":
+      - generic: Baseline Özellikleri
+    - generic "Başarılı denetimler (11) Göster":
+      - generic: Başarılı denetimler (11)
+      - generic: Göster
+    - generic "Geçerli değil (4) Göster":
+      - generic: Geçerli değil (4)
+      - generic: Göster
+    - heading "100 SEO" [level=2]:
+      - generic: "100"
+      - generic: SEO
+    - text: Bu kontroller, sayfanızın temel arama motoru optimizasyonu tavsiyesine uymasını sağlar. Burada Lighthouse'un puan vermediği ve
+    - link "Önemli Web Verileri":
+      - /url: https://web.dev/explore/vitals?utm_source=lighthouse&utm_medium=lr
+    - text: "'ndeki performansınız da dahil arama sıralamanızı etkileyebilecek birçok ek faktör vardır."
+    - link "Google Arama'nın Temel Özellikleri hakkında daha fazla bilgi edinin":
+      - /url: https://support.google.com/webmasters/answer/35769
+    - text: .
+    - generic "Manuel olarak kontrol edilecek ek öğeler (1) Gizle":
+      - generic: Manuel olarak kontrol edilecek ek öğeler (1)
+      - generic: Gizle
+    - generic "Yapılandırılmış veriler geçerli":
+      - generic: Yapılandırılmış veriler geçerli
+    - generic: SEO ile ilgili diğer en iyi uygulamaları kontrol etmek için sitenizde bu ek doğrulayıcıları çalıştırın.
+    - generic "Başarılı denetimler (10) Göster":
+      - generic: Başarılı denetimler (10)
+      - generic: Göster
+    - heading "3/3 Ajan Tabanlı Tarama" [level=2]:
+      - generic: 3/3
+      - generic: Ajan Tabanlı Tarama
+    - text: Bu kontroller,
+    - link "yapay zeka ajanları için yüksek kaliteli, göz atılabilir web siteleri":
+      - /url: https://goo.gle/lighthouse-agentic-web
+    - text: sağlar ve WebMCP entegrasyonlarının doğruluğunu onaylar. Bu kategori hâlâ geliştirme aşamasında olduğundan değişebilir.
+    - generic "Başarılı denetimler (3) Göster":
+      - generic: Başarılı denetimler (3)
+      - generic: Göster
+    - text: — —
+    - generic "Geçerli değil (4) Göster":
+      - generic: Geçerli değil (4)
+      - generic: Göster
+- text: — — — — — — — — — — —
+- contentinfo:
+  - generic: PageSpeed Insights hakkında daha fazla bilgi
+  - link "Yenilikler":
+    - /url: https://developers.google.com/speed/docs/insights/release_notes
+  - link "Dokümanlar":
+    - /url: https://developers.google.com/speed/docs/insights/v5/about
+  - link "Web Performansı hakkında bilgi edinin":
+    - /url: https://developers.google.com/speed
+  - link "Stack Overflow hakkında soru sorun":
+    - /url: https://stackoverflow.com/questions/tagged/pagespeed-insights
+  - link "Posta listesi":
+    - /url: https://groups.google.com/g/pagespeed-insights-discuss
+  - generic: Alakalı İçerik
+  - link "Güncellemeler":
+    - /url: https://developer.chrome.com/blog
+  - link "Web'in Temelleri":
+    - /url: https://developers.google.com/focus/web-development
+  - link "Örnek Olaylar":
+    - /url: https://web.dev/case-studies
+  - link "Podcast'ler":
+    - /url: https://web.dev/shows
+  - generic: Bağlan
+  - link "Twitter":
+    - /url: https://twitter.com/ChromiumDev
+  - link "YouTube":
+    - /url: https://www.youtube.com/user/ChromeDevelopers
+  - link "Google Developers Logo":
+    - /url: https://developers.google.com/
+    - img "Google Developers Logo"
+  - link "Chrome":
+    - /url: https://developer.chrome.com/
+  - link "Firebase":
+    - /url: https://firebase.google.com/
+  - link "Tüm ürünler":
+    - /url: https://developers.google.com/products/
+  - link "Şartlar ve Gizlilik Politikası":
+    - /url: https://policies.google.com/
+  - text: Ayrıntılı bilgi için
+  - link "Google Developers Sitesi Politikaları":
+    - /url: https://developers.google.com/terms/site-policies
+  - text: "'na bakın."

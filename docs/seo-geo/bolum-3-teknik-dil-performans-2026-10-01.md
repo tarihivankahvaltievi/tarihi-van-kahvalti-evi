@@ -62,7 +62,7 @@ Yerel üretim derlemesi başarılı. Lint başarılı. SEO sözleşmesi: 30 cano
 
 Tarayıcı: mobilde TR → EN → EN menü geçişi, 142 ürün ve yatay taşma olmaması; fotoğraf seçimi; masaüstünde AR → EN kök yönünün rtl → ltr dönmesi; skip link'in main'e odak vermesi doğrulandı. Özel veriler ve ortam sırları envantere alınmadı. [Güncel kaynak envanteri](kod-envanteri-bolum-3-2026-10-01.csv) dosya özetlerini içerir.
 
-Yayın sonrası kontrol sonuçları aynı belgede tamamlanacaktır. Performans kabulü ölçüm ve doğrulanmış kaynak iyileştirmesidir; tüm laboratuvar LCP değerlerinin eşik altına indiği henüz iddia edilmez.
+Yayın sonrası kontrol sonuçları aşağıdadır. Performans kabulü ölçüm ve doğrulanmış kaynak iyileştirmesidir; bütün laboratuvar LCP değerlerinin eşik altına indiği iddia edilmez.
 
 ## 6. Yayın sonrası bulunan gerileme ve düzeltme
 
@@ -70,6 +70,28 @@ Yayın sonrası kontrol sonuçları aynı belgede tamamlanacaktır. Performans k
 
 Kurulu Next 16.3.5 belgelerindeki Turbopack `cssChunking: "graph"` stratejisi uygulandı. İlk üretim HTML'inin referans verdiği CSS dosyaları tekrar okundu: TR/EN ana sayfa, menü ve rezervasyonda JP/KR font tanımı kalmadı; KO/JA sayfalarda kendi Noto fontu korundu. Bu koşul artık SEO testinde CSS HTTP yanıtları üzerinden de doğrulanıyor. Global stiller silinmedi; font ve cascade görsel olarak karşılaştırıldı. [Next CSS chunking kaynağı](https://nextjs.org/docs/app/api-reference/config/next-config-js/cssChunking).
 
-Rezervasyonun üretim HTML'inde form ve LCP görselinin boş 420 px fallback sonrasındaki gizli streaming bloğunda olduğu da tespit edildi. İstek verisi okumayan `ReservationView` çevresindeki gereksiz Suspense kaldırıldı. Form ve ana görsel doğrudan ilk main içine alınıyor; tarih seçiminin istemcide başlatılması ve rezervasyon güvenliği korunuyor. Yeni test, form/H1/görselin main içinde olmasını ve gizli B: streaming fallback'i bulunmamasını zorunlu tutuyor. Bu düzeltmenin son canlı ölçümü aşağıda kaydedilecek.
+Rezervasyonun üretim HTML'inde form ve LCP görselinin boş 420 px fallback sonrasındaki gizli streaming bloğunda olduğu da tespit edildi. İstek verisi okumayan `ReservationView` çevresindeki gereksiz Suspense kaldırıldı. Form ve ana görsel doğrudan ilk main içine alınıyor; tarih seçiminin istemcide başlatılması ve rezervasyon güvenliği korunuyor. Yeni test, form/H1/görselin main içinde olmasını ve gizli B: streaming fallback'i bulunmamasını zorunlu tutuyor. Bu düzeltmenin son canlı ölçümü aşağıdadır.
 
 Canlı yönlendirme kontrolü: `/en/?wc-ajax=1` **2 → 1** yönlendirme; UTM korunuyor. HTTP apex **2**, HTTPS apex + eski iletişim adresi **2** yönlendirme yapmaya devam ediyor. İkinci durumda alan adı yönlendirmesi uygulamadan önce çalışıyor; bu katman değerlendirmesi ağ sırasından yapılan çıkarımdır. Vercel proje ayarı okunmaya çalışıldı; mevcut yönetim oturumu projeye erişim vermedi. Hesap değişimi/DNS değişikliği yapılmadı. Kalan hosting alt işi tamamlanmış sayılmıyor. [Canlı zincir kaydı](bolum-3-yonlendirme-sonra.json).
+
+## 7. Nihai canlı sonuç — 06:50 mobil ölçümü
+
+Uygulama sürümü `acd8f34` GitHub main'e gönderildi; GitHub üzerindeki Vercel deployment durumu **success**. Bu sürümün canlı SEO sözleşmesi yeni CSS ve ilk rezervasyon HTML koşullarıyla yeniden geçti. 149 metin kaynak dosyası / 43.185 satır güncel envanterde yer alıyor; önceki toplu taramada 119 TS/TSX/JS/MJS dosyasında sözdizimi hatası yoktu. Son ek değişiklikler TypeScript üretim derlemesi ve lint ile yeniden doğrulandı.
+
+| Son mobil laboratuvar | Ana sayfa | EN menü | EN rezervasyon |
+| --- | ---: | ---: | ---: |
+| Performans puanı (önce → sonra) | 82 → 79 | 80 → 78 | 76 → 80 |
+| LCP (önce → sonra) | 3,988 → 4,363 s | 4,733 → 4,593 s | 6,995 → 4,277 s |
+| FCP | 2,701 s | 2,701 s | 2,852 s |
+| TBT (hesaplama bağlantısı) | 76 ms | 67 ms | 80 ms |
+| CLS (ekran değeri) | 0 | 0,006 | 0 |
+| Erişilebilirlik / SEO | 100 / 100 | 100 / 100 | 100 / 100 |
+| En iyi uygulamalar | 92 | 92 | 92 |
+
+Rezervasyon LCP'sindeki gözlenen azalma yaklaşık **%39**. Tek laboratuvar koşusunda elde edilen sonuç, bütün gerçek kullanıcılar için aynı kazanımın kanıtı değildir. Ana sayfa ve menü için genel hızlanma iddia edilmiyor; ara ölçümde menünün 90 puan alması nihai puan yerine kullanılmıyor. Son raporlar, puanlar ve hesaplama bağlantısının ham değerleri [manifestte](bolum-3-pagespeed-rapor-baglantilari.json). Lighthouse'un yuvarlanmış hesaplama bağlantısındaki CLS ile ekrandaki ayrıntılı CLS farklı olabilir; tabloda ekran değeri kullanıldı.
+
+Ana sayfa render engelleyen CSS aktarımı başlangıçta **83,0 KiB**, ara sürümde **115,1 KiB**, son sürümde **72,3 KiB**: başlangıca göre yaklaşık **%13 daha az CSS aktarımı**. Son koşuda ağ süreleri daha uzun olduğu için daha az byte tek başına daha iyi LCP puanı üretmedi. Beş CSS isteğinin toplam süreleri paralel yükleme nedeniyle doğrudan LCP'ye eklenemez. [Canlı CSS denetimi](bolum-3-css-canli-denetim.json) decoded byte ve yerel gzip tahminini ayrıca etiketler; bunlar PSI'nin gözlenen aktarım boyutuyla karıştırılmamalıdır.
+
+Canlı tarayıcı kontrolü: 1440 px masaüstü ve gerçek 440 px mobil viewport'ta taşma yok; rezervasyon formu bekleme ekranı yerine ilk belgede bulunuyor; kişi sayısı 2 → 3 → 2 kontrolü çalışıyor. Form gönderilmedi. Japonca/Korece başlıkların hesaplanmış font-family değerleri kendi Noto fontlarını kullanıyor. Ana sayfada başlangıçta tek fotoğraf; yeni seçim yüklenene kadar önceki fotoğraf korunuyor. [Ana sayfa görünümü](bolum-3-canli-anasayfa.png) ve [mobil rezervasyon görünümü](bolum-3-canli-rezervasyon-mobil.png) kaydedildi.
+
+**Açık kalan işler:** laboratuvar LCP değerleri hâlâ 2,5 s hedefinin üzerinde; küresel CSS'in sayfa/ilk ekran bazında daha kapsamlı ayrıştırılması ayrı ölçüm ve görsel regresyon çalışması gerektirir. Google Ads bölgesel pikselinin mevcut CSP ile çatışması üç son ölçümde de best-practices puanını etkiliyor; koruma gevşetilmedi. HTTP apex ve HTTPS apex + eski adres zincirlerinin hosting katmanındaki fazladan adımı, erişilemeyen Vercel proje ayarı nedeniyle bu kod tesliminde kapatılamadı. Rapor 21'in dış platform alt işi açık kalır. Saha CrUX değerleri yeni kodun anlık sonucu olarak yorumlanmaz.
