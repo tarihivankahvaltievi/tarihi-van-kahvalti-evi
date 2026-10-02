@@ -6,7 +6,6 @@ import { AnimatedFooter } from "./components/animated-footer";
 import { FaqSection } from "./components/faq-section";
 import { VanHeroParallax } from "./components/van-hero-parallax";
 import { messagesFor, type SiteLocale } from "./home-localization";
-import { VisitInformation } from "./components/visit-information";
 import { getPublicMenuData } from "./menu/public-menu-data";
 
 export async function HomeContent({ locale = "tr" }: { locale?: SiteLocale }) {
@@ -33,7 +32,6 @@ export async function HomeContent({ locale = "tr" }: { locale?: SiteLocale }) {
         <VenueAtmosphere locale={locale} />
 
         <FaqSection locale={locale} />
-        <VisitInformation locale={locale} />
       </main>
 
       {/* Footer (Hamour Footer) */}

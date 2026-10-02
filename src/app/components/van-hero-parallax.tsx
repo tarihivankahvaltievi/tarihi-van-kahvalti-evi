@@ -112,7 +112,7 @@ export function VanHeroParallax({ locale = "tr", serpmePrice }: { locale?: SiteL
               ? "Traditional Van breakfast in Beyoğlu, near Taksim."
               : "Beyoğlu / Taksim’de geleneksel Van kahvaltısı."}
           </p>
-          <div className="hero-visit-facts">
+          <div id="location" className="hero-visit-facts">
             <address>{address.neighborhood}, {address.streetAddress}<br />{address.postalCode} {address.locality} / {address.region}</address>
             <p>{locale === "en" ? "Every day" : "Her gün"} {openingHours.opens}–{openingHours.closes}</p>
           </div>

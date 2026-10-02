@@ -3,6 +3,8 @@
   --faq-muted: #68534b;
   --faq-accent: #7c2929;
   padding: clamp(48px, 5vw, 72px) 0;
+  /* Leave room for the footer’s overlapping top edge. */
+  padding-bottom: calc(clamp(48px, 5vw, 72px) + 50px);
   background: #fff;
   color: var(--faq-ink);
   scroll-margin-top: 100px;
@@ -137,7 +139,7 @@
 
 @media (max-width: 760px) {
   .section {
-    padding: 40px 0;
+    padding: 40px 0 90px;
   }
 
   .inner {
