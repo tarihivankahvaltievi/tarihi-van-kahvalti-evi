@@ -247,114 +247,6 @@
     display: none;
   }
 
-  .theme-breakfast .hero.hero-parallax-dining {
-    height: 104svh !important;
-    min-height: 800px !important;
-    max-height: 920px !important;
-    background: var(--site-beige) !important;
-  }
-
-  .theme-breakfast .hero.hero-parallax-dining::before {
-    background: var(--site-beige) !important;
-  }
-
-  .theme-breakfast .hero-parallax-sticky {
-    min-height: 800px !important;
-  }
-
-  .theme-breakfast .hero-parallax-copy {
-    top: 7.25rem !important;
-    left: 16px !important;
-    width: min(86vw, 21rem) !important;
-  }
-
-  .theme-breakfast .hero-provenance {
-    margin-bottom: 0.72rem !important;
-  }
-
-  .theme-breakfast .hero-parallax-copy h1 {
-    max-width: 8.2em !important;
-    font-size: clamp(2.34rem, 10.5vw, 2.85rem) !important;
-    line-height: 0.91 !important;
-    letter-spacing: -0.035em !important;
-    text-wrap: balance;
-  }
-
-  .theme-breakfast .hero-parallax-copy p {
-    max-width: 18.5rem !important;
-    margin-top: 0.86rem !important;
-    color: rgba(36, 23, 24, 0.78) !important;
-    font-size: clamp(0.9rem, 3.7vw, 1rem) !important;
-    font-weight: 560 !important;
-    line-height: 1.42 !important;
-    text-wrap: pretty;
-  }
-
-  .theme-breakfast .hero-copy-ambient-glow {
-    opacity: 0.42 !important;
-  }
-
-  .theme-breakfast .hero-parallax-food-stage {
-    top: 17.25rem !important;
-    right: 0 !important;
-    left: 0 !important;
-    width: 100% !important;
-    height: 310px !important;
-    min-height: 310px !important;
-  }
-
-  .theme-breakfast .hero-parallax-food-stage .hero-float-pan {
-    top: 38% !important;
-    left: 29% !important;
-    width: min(40vw, 154px) !important;
-  }
-
-  .theme-breakfast .hero-parallax-food-stage .hero-float-tea {
-    top: 0 !important;
-    right: 3% !important;
-    width: min(17vw, 66px) !important;
-  }
-
-  .theme-breakfast .hero-parallax-food-stage .hero-float-cheese-platter {
-    top: 16% !important;
-    left: -4% !important;
-    width: min(31vw, 120px) !important;
-  }
-
-  .theme-breakfast .hero-parallax-food-stage .hero-float-greens-platter {
-    top: 63% !important;
-    left: 1% !important;
-    display: block !important;
-    width: min(26vw, 100px) !important;
-  }
-
-  .theme-breakfast .hero-parallax-food-stage .hero-float-simit {
-    top: 62% !important;
-    right: 0 !important;
-    width: min(25vw, 96px) !important;
-  }
-
-  .theme-breakfast .hero-parallax-gallery {
-    top: 63% !important;
-    left: -55vw !important;
-    gap: 0.5rem !important;
-    padding-block: 2rem !important;
-    margin-block: -2rem !important;
-    -webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 14%, #000 96%, transparent 100%) !important;
-    mask-image: linear-gradient(to bottom, transparent 0%, #000 14%, #000 96%, transparent 100%) !important;
-  }
-
-  .theme-breakfast .hero-parallax-row {
-    gap: 0.5rem !important;
-  }
-
-  .theme-breakfast .hero-parallax-card {
-    width: min(34vw, 132px) !important;
-    border: 0 !important;
-    border-radius: 8px !important;
-    box-shadow: 0 6px 8px rgba(42, 27, 18, 0.14) !important;
-  }
-
 }
 
 @media (max-width: 680px) and (max-height: 720px) {
@@ -379,137 +271,24 @@
     margin-top: 4px !important;
     padding-top: 6px !important;
   }
-
-  .theme-breakfast .hero.hero-parallax-dining,
-  .theme-breakfast .hero-parallax-sticky {
-    min-height: 740px !important;
-  }
-
-  .theme-breakfast .hero-parallax-copy {
-    top: 6.7rem !important;
-  }
-
-  .theme-breakfast .hero-parallax-food-stage {
-    top: 16.2rem !important;
-  }
-
-  .theme-breakfast .hero-parallax-gallery {
-    top: 61% !important;
-  }
 }
 
 @media (min-width: 681px) and (max-width: 900px) {
-  .theme-breakfast .hero-parallax-copy {
-    top: 7.75rem !important;
-    left: 2rem !important;
-    width: min(calc(100vw - 4rem), 30rem) !important;
-    max-width: 30rem !important;
-    gap: 0 !important;
-  }
 
-  .theme-breakfast .hero-provenance {
-    display: flex !important;
-    width: min(100%, 28rem) !important;
-    align-items: baseline !important;
-    gap: 0.72rem !important;
-    margin: 0 0 0.84rem !important;
-    padding: 0 0 0.62rem !important;
-    border-bottom: 1px solid rgba(36, 23, 24, 0.2) !important;
-    color: rgba(36, 23, 24, 0.7) !important;
-    white-space: normal !important;
-    animation: none !important;
-  }
-
-  .theme-breakfast .hero-provenance-year {
-    min-height: 0 !important;
-    padding: 0 !important;
-    border: 0 !important;
-    border-radius: 0 !important;
-    background: transparent !important;
-    color: #821b22 !important;
-    font-family: var(--font-literata-gf), "Literata", Georgia, serif !important;
-    font-size: 1rem !important;
-    font-weight: 660 !important;
-    letter-spacing: -0.018em !important;
-  }
-
-  .theme-breakfast .hero-provenance-place {
-    padding: 0 !important;
-    color: rgba(36, 23, 24, 0.67) !important;
-    font-size: 0.78rem !important;
-    font-weight: 570 !important;
-    letter-spacing: -0.005em !important;
-  }
-
-  .theme-breakfast .hero-provenance-place::before,
   .theme-breakfast .hero-title-lockup::after {
     display: none !important;
     content: none !important;
   }
 
-  .theme-breakfast .hero-parallax-copy h1,
-  .theme-breakfast .hero-title-lockup,
-  .theme-breakfast .hero-title-line,
-  .theme-breakfast .hero-title-line-one,
-  .theme-breakfast .hero-title-line-two {
+  .theme-breakfast .hero-title-lockup {
     color: #211817 !important;
     font-family: var(--font-commissioner-gf), "Commissioner", Arial, sans-serif !important;
     font-style: normal !important;
     text-shadow: none !important;
   }
-
-  .theme-breakfast .hero-parallax-copy h1 {
-    display: grid !important;
-    max-width: 8.6em !important;
-    gap: 0.04em !important;
-    font-size: clamp(3.05rem, 7vw, 3.55rem) !important;
-    font-weight: 690 !important;
-    letter-spacing: -0.028em !important;
-    line-height: 0.96 !important;
-    text-wrap: auto !important;
-  }
-
-  .theme-breakfast .hero-title-line {
-    display: block !important;
-    width: 100% !important;
-    max-width: 100% !important;
-    font: inherit !important;
-    letter-spacing: inherit !important;
-    line-height: inherit !important;
-    white-space: normal !important;
-    text-wrap: balance !important;
-  }
-
-  .theme-breakfast .hero-title-line-two {
-    max-width: 8.2em !important;
-  }
-
-  .theme-breakfast .hero-parallax-copy p {
-    max-width: 28rem !important;
-    margin: 0.92rem 0 0 !important;
-    color: rgba(36, 23, 24, 0.76) !important;
-    font-size: 1rem !important;
-    font-weight: 500 !important;
-    line-height: 1.48 !important;
-    animation: none !important;
-  }
-
-  .theme-breakfast .hero-copy-ambient-glow {
-    display: none !important;
-  }
-
-  .theme-breakfast .hero-parallax-food-stage {
-    top: 23.5rem !important;
-  }
-
-  .theme-breakfast .hero-parallax-gallery {
-    top: 62% !important;
-  }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .theme-breakfast .hero-parallax-food-stage .hero-float-item,
-  .theme-breakfast .hero-parallax-food-stage .hero-float-item::after,
   .theme-breakfast .nav-menu-panel,
   .theme-breakfast .nav-menu-panel a {
     animation: none !important;
@@ -519,169 +298,16 @@
 
 /* Mobile hero copy: a quiet origin signature instead of a generic eyebrow. */
 @media (max-width: 680px) {
-  .theme-breakfast .hero-parallax-copy {
-    top: 7.35rem !important;
-    left: clamp(1.125rem, 5.6vw, 1.5rem) !important;
-    width: min(calc(100vw - 2.25rem), 23rem) !important;
-    max-width: 23rem !important;
-    gap: 0 !important;
-  }
 
-  .theme-breakfast .hero-provenance {
-    display: flex !important;
-    width: min(100%, 22rem) !important;
-    align-items: baseline !important;
-    gap: 0.38rem !important;
-    margin: 0 0 1.12rem !important;
-    padding: 0 !important;
-    border: 0 !important;
-    color: rgba(33, 24, 23, 0.7) !important;
-    font-family: var(--font-commissioner-gf), "Commissioner", Arial, sans-serif !important;
-    font-size: clamp(0.82rem, 3.35vw, 0.9rem) !important;
-    font-weight: 430 !important;
-    letter-spacing: -0.004em !important;
-    line-height: 1.35 !important;
-    white-space: normal !important;
-    animation: none !important;
-  }
-
-  .theme-breakfast .hero-provenance-year {
-    display: inline-flex !important;
-    min-height: 0 !important;
-    flex: 0 0 auto !important;
-    align-items: baseline !important;
-    gap: 0.12rem !important;
-    padding: 0 !important;
-    border: 0 !important;
-    border-radius: 0 !important;
-    background: transparent !important;
-    color: #821b22 !important;
-    font-family: var(--font-commissioner-gf), "Commissioner", Arial, sans-serif !important;
-    line-height: inherit !important;
-  }
-
-  .theme-breakfast .hero-provenance-year strong {
-    font-size: inherit !important;
-    font-weight: 620 !important;
-    letter-spacing: inherit !important;
-  }
-
-  .theme-breakfast .hero-provenance-year small {
-    font-size: inherit !important;
-    font-weight: 500 !important;
-    letter-spacing: inherit !important;
-  }
-
-  .theme-breakfast .hero-locale-en .hero-provenance-year small {
-    order: -1;
-    font-size: inherit !important;
-    letter-spacing: inherit !important;
-    text-transform: none;
-  }
-
-  .theme-breakfast .hero-provenance-place {
-    display: block !important;
-    max-width: none !important;
-    padding: 0 !important;
-    color: inherit !important;
-    font: inherit !important;
-    text-wrap: pretty !important;
-  }
-
-  .theme-breakfast .hero-provenance-place::before,
   .theme-breakfast .hero-title-lockup::after {
     display: none !important;
     content: none !important;
   }
 
-  .theme-breakfast .hero-parallax-copy h1,
-  .theme-breakfast .hero-title-lockup,
-  .theme-breakfast .hero-title-line,
-  .theme-breakfast .hero-title-line-one,
-  .theme-breakfast .hero-title-line-two {
+  .theme-breakfast .hero-title-lockup {
     color: #211817 !important;
     font-family: var(--font-commissioner-gf), "Commissioner", Arial, sans-serif !important;
     font-style: normal !important;
     text-shadow: none !important;
-  }
-
-  .theme-breakfast .hero-parallax-copy h1 {
-    display: grid !important;
-    max-width: 9em !important;
-    gap: 0.06em !important;
-    font-size: clamp(2.35rem, 10.4vw, 2.72rem) !important;
-    font-weight: 620 !important;
-    letter-spacing: -0.028em !important;
-    line-height: 0.98 !important;
-    font-optical-sizing: auto !important;
-    font-variation-settings: "FLAR" 32, "VOLM" 8 !important;
-    text-wrap: auto !important;
-  }
-
-  .theme-breakfast .hero-title-line {
-    display: block !important;
-    width: 100% !important;
-    max-width: 100% !important;
-    font: inherit !important;
-    letter-spacing: inherit !important;
-    line-height: inherit !important;
-    white-space: normal !important;
-    text-wrap: balance !important;
-  }
-
-  .theme-breakfast .hero-title-line-two {
-    max-width: 9em !important;
-    font-size: 0.93em !important;
-    font-weight: 560 !important;
-    letter-spacing: -0.022em !important;
-  }
-
-  .theme-breakfast .hero-title-accent {
-    color: #821b22 !important;
-    font: inherit !important;
-    font-weight: 680 !important;
-  }
-
-  .theme-breakfast .hero-parallax-copy p {
-    max-width: 19.5rem !important;
-    margin: 1.08rem 0 0 !important;
-    color: rgba(33, 24, 23, 0.78) !important;
-    font-family: var(--font-commissioner-gf), "Commissioner", Arial, sans-serif !important;
-    font-size: 1rem !important;
-    font-weight: 400 !important;
-    letter-spacing: -0.004em !important;
-    line-height: 1.52 !important;
-    text-wrap: pretty !important;
-    animation: none !important;
-  }
-
-  .theme-breakfast .hero-copy-ambient-glow {
-    display: none !important;
-  }
-
-  .theme-breakfast .hero-parallax-food-stage {
-    top: 20.65rem !important;
-  }
-
-  .theme-breakfast .hero-locale-en .hero-parallax-food-stage .hero-float-tea {
-    top: 18% !important;
-  }
-
-  .theme-breakfast .hero-parallax-gallery {
-    top: 66% !important;
-  }
-}
-
-@media (max-width: 680px) and (max-height: 720px) {
-  .theme-breakfast .hero-parallax-copy {
-    top: 6.7rem !important;
-  }
-
-  .theme-breakfast .hero-parallax-food-stage {
-    top: 19.1rem !important;
-  }
-
-  .theme-breakfast .hero-locale-en .hero-parallax-food-stage .hero-float-tea {
-    top: 34% !important;
   }
 }

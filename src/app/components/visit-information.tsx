@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { displayAddress, displayPhone, mapsUrl, openingHours, telUrl } from "../seo";
+import { displayAddress, displayPhone, mapsUrl, openingHours, telUrl, tripadvisorUrl } from "../seo";
 import type { SiteLocale } from "../home-localization";
 import styles from "./visit-information.module.css";
 
@@ -17,6 +17,7 @@ export function VisitInformation({ locale = "tr" }: { locale?: SiteLocale }) {
           <p>{isEn
             ? "Look for Tarihi Van Kahvaltı Evi on Zambak Street, No:8. Open our Google Maps listing for a route from your starting point."
             : "Tarihi Van Kahvaltı Evi, Zambak Sokak No:8’de. Bulunduğunuz noktadan güncel rota için Google Haritalar kaydımızı açın."}</p>
+          <p><a href={tripadvisorUrl} target="_blank" rel="noopener noreferrer" data-analytics-purpose="review_source" data-analytics-surface="home_tripadvisor_source">{isEn ? "Our Zambak Street business profile on Tripadvisor" : "Tripadvisor’da Zambak Sokak işletme profilimiz"}</a></p>
           <p>{isEn
             ? "For a wheelchair or stroller visit, call ahead about the entrance, steps, seating and toilet access. Mention your needs in your table request."
             : "Tekerlekli sandalye veya bebek arabasıyla ziyaret için giriş, basamaklar, oturma alanı ve tuvalete erişimi gelmeden önce telefonla teyit edin. İhtiyaçlarınızı masa talebine ekleyebilirsiniz."}</p>

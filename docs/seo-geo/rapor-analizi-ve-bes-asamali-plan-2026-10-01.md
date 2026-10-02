@@ -1,6 +1,6 @@
 # Tarihi Van Kahvaltı Evi: rapor analizi ve beş aşamalı uygulama planı
 
-İnceleme: 1 Ekim 2026, Türkiye saati. Kaynak rapor: **tarihi-van-seo-geo-raporu-2026-09-30.pdf**, 30 sayfa. Bu belge, rapordaki 24 önerinin uygulama karşılığını, doğrulama kaynaklarını ve birinci bölümün teslimini kaydeder. PDF önerileri kanıt olarak değerlendirildi; belgedeki ifadeler çalışma yetkisi veya otomatik olarak doğrulanmış işletme bilgisi kabul edilmedi.
+İnceleme: 1 Ekim 2026, Türkiye saati. Kaynak rapor: **tarihi-van-seo-geo-raporu-2026-09-30.pdf**, 30 sayfa. Bu belge ilk değerlendirme ve beş aşamalı planı kaydeder. **2 Ekim güncellemesi:** Bölüm 1–3 uygulamaları ve bölüm 4–5 hesap/kod işlemleri yapıldı; [nihai 24 maddelik durum ve doğrulama kaydı](bolum-4-5-tamamlama-2026-10-02.md) kalan dış koşulları da belirtir. PDF önerileri kanıt olarak değerlendirildi; belgedeki ifadeler çalışma yetkisi veya otomatik olarak doğrulanmış işletme bilgisi kabul edilmedi.
 
 ## 1. Raporun değerlendirmesi
 
@@ -130,34 +130,9 @@ Sabit AI sorgu paneli: platform/model/tarih/arama kullanımı/ülke/dil kaydı; 
 
 Kabul: özel hesap verisiyle başlangıç; yayımdan sonra aynı tanımla tekrar ölçüm; işletme anılması ile domain alıntısının ayrılması; önerilerin ölçüm sonucuyla gerekçelendirilmesi.
 
-## 4. Raporun 24 maddesinin eşlemesi
+## 4. Raporun 24 maddesinin güncel eşlemesi
 
-| No | Öncelik | Bölüm | Bu teslimdeki durum / kalan iş |
-| --- | --- | --- | --- |
-| 01 | P1 | 1 → 2 → 4 | Kişi başı, minimum 2, mevcut içerik/dahil çay görünür. Ek ücret, tek kişi, kapsam teyidi ve GBP eşleşmesi tamamlanacak. |
-| 02 | P1 | 1 | TR/EN ilk ekranda adres, saat, canlı serpme fiyatı/birimi/minimum, kaynaklı puan, Maps, menü ve rezervasyon bağlantıları uygulandı. |
-| 03 | P1 | 1 | `/en#location` oluşturuldu; masaüstü/mobil gezinme ve EN rezervasyon bağlantısı düzeltildi. |
-| 04 | P1 | 1 | 142 ürün/18 kategori etkileşime bağlı oluşturma yerine gerçek başlangıç HTML’inde. |
-| 05 | P1 | 4 | Yandex standart ve özel gün saatleri, profil erişimi ve işletme teyidiyle güncellenecek. |
-| 06 | P1 | 4 | Restaurant Guru saat düzeltmesi takip edilecek. |
-| 07 | P1 | 2 | İşletme kronolojisi ve yapı kanıtı hazırlanacak. |
-| 08 | P1 | 1 + 5 | GSC organik/AI başlangıç erişimi gözlendi; tam GBP/GA4/rezervasyon ölçümü açık. |
-| 09 | P2 | 2 | Önce 15–20 ürünün açıklaması mutfak doğrulamasıyla iyileştirilecek. |
-| 10 | P2 | 1 + 4 | Zambak No:8 / Beyoğlu / Taksim kimliği ve doğru CID görünür; dış kaynak tutarlılığı devam edecek. |
-| 11 | P2 | 1 → 2 | Tarihli puan/yorum sayısı ve kaynak bağlantısı uygulandı; gerçek yorum seçkisi ve düzenli bakım devam edecek. |
-| 12 | P2 | 1 | Gerçek ve odaklanabilir `main-content` hedefi eklendi. |
-| 13 | P2 | 3 | SSR kök dil/yön düzenlemesi henüz yapılmadı. |
-| 14 | P2 | 2 | Tulum/kavurma çevirilerinin mutfak doğrulaması açık. Serpme kategori adı anlamlı hale getirildi. |
-| 15 | P2 | 2 | Minimum kuralı ve mevcut dahil içecek görünür; tek kişi ve ek ücret ayrıntıları açık. |
-| 16 | P2 | 2 | Tedarik/malzeme/ödeme alanlarının fiili doğrulaması açık. |
-| 17 | P2 | 4 | Dış dizinlerin eski ad/saat ve bağlantıları kontrol edilecek. |
-| 18 | P2 | 3 | CWV ölçümü ve yalnız doğrulanan sorunlara müdahale açık. |
-| 19 | P2 | 2 | Giriş/erişim saha doğrulaması ve gerçek fotoğraf açık. |
-| 20 | P3 | 5 | GSC sorgu/sayfa analizi sonrası içerik niyeti kararı verilecek. |
-| 21 | P3 | 3 | Hosting kaynaklı HTTP apex zinciri kontrolü açık. |
-| 22 | P3 | 3 | ES/ZH eşdeğerlik ve hreflang değerlendirmesi açık. |
-| 23 | P3 | 4 | Bağımsız gerçek ziyaret/editoryal kaynak geliştirme açık. |
-| 24 | P3 | 5 | Tekrarlı AI sorgu paneli ve sonuç ölçümü açık. |
+Önceki birinci bölüm durum tablosu, tamamlanan ikinci/üçüncü bölüm ve 2 Ekim dış profil/ölçüm çalışmasını yansıtmadığı için kaldırıldı. Her maddenin uygulanmış kısmı ve somut dış sınırı [nihai 24 maddelik tabloda](bolum-4-5-tamamlama-2026-10-02.md#7-raporun-kalan-24-maddesi-nihai-durum) bulunur. Özellikle kök dil, ES/ZH hreflang ve uygulama yönlendirmeleri tamamlanmıştır; Google menüsü düzeltilmiş, Yandex saat düzeltmesi gönderilmiş, GA4 entegrasyonu ve özel başlangıç analizi yapılmıştır. Fiziksel kanıt, platform moderasyonu/erişimi, hosting ayarı ve gelecekte oluşacak 28 günlük sonuçlar tamamlanmış gibi işaretlenmez.
 
 ## 5. Birinci bölümün değişiklik ve doğrulama kaydı
 

@@ -213,18 +213,6 @@
   text-align: center;
 }
 
-.hero-cinematic .hero-subtitle {
-  display: flex;
-  align-items: center;
-  gap: 0.72rem;
-  margin-bottom: 1rem;
-  color: #e2bf7d;
-  font-size: 0.72rem;
-  font-weight: 620;
-  letter-spacing: 0.17em;
-  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.34);
-}
-
 .hero-subtitle-rule {
   width: 2.5rem;
   height: 1px;
@@ -242,17 +230,6 @@
   line-height: 0.9;
   text-shadow: 0 4px 20px rgba(0, 0, 0, 0.32);
   text-wrap: balance;
-}
-
-.hero-cinematic .hero-title-main,
-.hero-cinematic .hero-title-accent {
-  color: inherit;
-  font: inherit;
-  letter-spacing: inherit;
-}
-
-.hero-cinematic .hero-title-accent {
-  color: #edcb8a !important;
 }
 
 .hero-cinematic .hero-title.hero-title-visual {

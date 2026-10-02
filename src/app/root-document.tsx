@@ -1,6 +1,6 @@
 import { siteLanguages, type SiteLanguage } from "./site-languages";
 import type { Metadata, Viewport } from "next";
-import Script from "next/script";
+import { Suspense } from "react";
 import { Bodoni_Moda, Commissioner, Literata } from "next/font/google";
 import "./globals.css";
 import "./mobile-header-hero.css";
@@ -152,8 +152,7 @@ export const metadata: Metadata = {
 
 import { WebVitals } from "./components/web-vitals";
 import { AnalyticsAutoTracker } from "./analytics";
-
-const googleAdsId = process.env.NEXT_PUBLIC_GOOGLE_ADS_ID ?? "AW-17869229892";
+import { GoogleTags } from "./components/google-tags";
 
 export function RootDocument({
   children,
@@ -174,29 +173,9 @@ export function RootDocument({
         <link rel="me" href={instagramUrl} />
       </head>
       <body className="min-h-full flex flex-col">
-        <Script
-          src={`https://www.googletagmanager.com/gtag/js?id=${googleAdsId}`}
-          strategy="afterInteractive"
-        />
-        <Script
-          id="google-ads-gtag-init"
-          strategy="afterInteractive"
-          dangerouslySetInnerHTML={{
-            __html: `
-              window.dataLayer = window.dataLayer || [];
-              function gtag(){dataLayer.push(arguments);}
-              window.gtag = gtag;
-              gtag('js', new Date());
-              gtag('config', '${googleAdsId}', {
-                allow_enhanced_conversions: true
-              });
-            `,
-          }}
-        />
+        <Suspense fallback={null}><GoogleTags /></Suspense>
         <AnalyticsAutoTracker />
-        {webVitalsEndpoint?.startsWith("/") && !webVitalsEndpoint.startsWith("//") ? (
-          <WebVitals endpoint={webVitalsEndpoint} />
-        ) : null}
+        <WebVitals endpoint={webVitalsEndpoint?.startsWith("/") && !webVitalsEndpoint.startsWith("//") ? webVitalsEndpoint : undefined} />
         <a className="skip-link" href="#main-content">{siteLanguages[locale].skip}</a>
         {children}
       </body>

@@ -1,14 +1,14 @@
 "use client";
 
 import { useEffect } from "react";
-
-type AnalyticsValue = string | number | boolean | undefined;
-type AnalyticsParameters = Record<string, AnalyticsValue>;
+import { analyticsId, safePageLocation, safeInteractionParameters, bookingTransactionId, isBookingId, type AnalyticsParameters } from "./analytics-policy";
 
 declare global {
   interface Window {
     dataLayer?: (unknown[] | IArguments)[];
     gtag?: (...args: unknown[]) => void;
+    vanTagsInitialized?: boolean;
+    [key: `ga-disable-${string}`]: boolean | undefined;
   }
 }
 
@@ -24,7 +24,7 @@ const directionsConversionLabel =
 const whatsappConversionLabel =
   process.env.NEXT_PUBLIC_GOOGLE_ADS_WHATSAPP_CONVERSION_LABEL ?? "z-PkCPCb3oYdEMSe28hC";
 
-function getGtag(): (...args: unknown[]) => void {
+export function getGtag(): (...args: unknown[]) => void {
   if (typeof window === "undefined") return () => {};
   if (typeof window.gtag === "function") return window.gtag;
 
@@ -39,8 +39,17 @@ function getGtag(): (...args: unknown[]) => void {
 
 function sendEvent(name: string, parameters: AnalyticsParameters = {}) {
   if (typeof window === "undefined") return;
+  const page = safePageLocation(window.location.href);
+  if (!page) return;
+  if (name === "conversion") {
+    if (!/^AW-\d+\/[A-Za-z0-9_-]+$/.test(String(parameters.send_to ?? ""))) return;
+  } else if (!/^G-[A-Z0-9]+$/.test(analyticsId)) return;
   const gtag = getGtag();
-  gtag("event", name, parameters);
+  gtag("event", name, {
+    ...parameters,
+    page_location: page,
+    ...(name === "conversion" ? {} : { send_to: analyticsId }),
+  });
 }
 
 /**
@@ -48,6 +57,8 @@ function sendEvent(name: string, parameters: AnalyticsParameters = {}) {
  * phone numbers, dates, notes, and reservation IDs must never be passed here.
  */
 export function trackEvent(name: string, parameters: AnalyticsParameters = {}) {
+  if (!["contact_click", "review_source_click", "booking_whatsapp_handoff"].includes(name)) return;
+  parameters = safeInteractionParameters(parameters);
   sendEvent(name, parameters);
 
   // Send Google Ads conversion and interaction events for high-intent customer actions
@@ -93,12 +104,12 @@ export function trackEvent(name: string, parameters: AnalyticsParameters = {}) {
   }
 }
 
-export function trackBookingLead(parameters: AnalyticsParameters = {}) {
-  const { reservation_id: reservationId, ...eventParameters } = parameters;
+export async function trackBookingLead(parameters: AnalyticsParameters = {}) {
+  const reservationId = String(parameters.reservation_id ?? "");
+  if (!isBookingId(reservationId)) return;
+  const eventParameters = safeInteractionParameters(parameters);
   // Fire standard GA4 lead generation event
   sendEvent("generate_lead", {
-    currency: "TRY",
-    value: 1.0,
     transport_type: "beacon",
     ...eventParameters,
   });
@@ -109,7 +120,7 @@ export function trackBookingLead(parameters: AnalyticsParameters = {}) {
       send_to: `${googleAdsConversionId}/${bookingConversionLabel}`,
       value: 1.0,
       currency: "TRY",
-      transaction_id: String(reservationId || ""),
+      transaction_id: await bookingTransactionId(reservationId),
       transport_type: "beacon",
     });
   }

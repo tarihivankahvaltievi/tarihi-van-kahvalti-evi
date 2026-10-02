@@ -15,6 +15,7 @@
     "test:seo": "node scripts/validate-seo.mjs",
     "test:menu": "node scripts/test-menu.mjs",
     "test:reservations": "node scripts/test-reservations.mjs",
+    "test:analytics": "node scripts/test-analytics.mjs",
     "seo:indexnow": "node scripts/submit-indexnow.mjs"
   },
   "dependencies": {

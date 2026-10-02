@@ -2767,150 +2767,6 @@ h2 span {
 
 /* Floating breakfast hero */
 
-.hero-float-item {
-  position: absolute;
-  z-index: 4;
-  display: block;
-  filter:
-    drop-shadow(0 4px 6px rgba(72, 44, 24, 0.08))
-    drop-shadow(0 16px 24px rgba(72, 44, 24, 0.10))
-    drop-shadow(0 38px 56px rgba(72, 44, 24, 0.13));
-  opacity: 0;
-  transform-origin: 50% 58%;
-  animation:
-    hero-food-enter 1100ms cubic-bezier(0.34, 1.56, 0.64, 1) var(--float-delay) forwards,
-    hero-food-float var(--float-dur, 11s) var(--ease-soft) calc(var(--float-delay) + 1100ms) infinite;
-}
-
-.hero-float-item::after {
-  content: "";
-  position: absolute;
-  inset: 12% 8%;
-  z-index: -1;
-  border-radius: 50%;
-  background: radial-gradient(ellipse at center, rgba(185, 139, 67, 0.08), transparent 70%);
-  filter: blur(18px);
-  pointer-events: none;
-}
-
-.hero-float-item img {
-  object-fit: contain;
-  transform: translateZ(0);
-  transition: filter 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.hero-float-pan {
-  top: 25%;
-  left: 21%;
-  width: clamp(230px, 30vw, 420px);
-  aspect-ratio: 435 / 317;
-  z-index: 7;
-  rotate: -8deg;
-  --float-x: 12px;
-  --float-y: -18px;
-  --float-x-end: -9px;
-  --float-y-end: 11px;
-  animation-duration: 1100ms, 10.2s;
-}
-
-.hero-float-tea {
-  top: 1%;
-  right: 16%;
-  width: clamp(96px, 12vw, 162px);
-  aspect-ratio: 371 / 401;
-  z-index: 8;
-  rotate: 8deg;
-  --float-x: -7px;
-  --float-y: -16px;
-  --float-x-end: 9px;
-  --float-y-end: 8px;
-  animation-duration: 1100ms, 8.8s;
-}
-
-.hero-float-simit {
-  right: 1%;
-  bottom: 7%;
-  width: clamp(180px, 22vw, 310px);
-  aspect-ratio: 453 / 362;
-  z-index: 6;
-  rotate: 7deg;
-  --float-x: -12px;
-  --float-y: -13px;
-  --float-x-end: 8px;
-  --float-y-end: 10px;
-  animation-duration: 1100ms, 11s;
-}
-
-.hero-float-omelette {
-  left: 0;
-  bottom: 4%;
-  width: clamp(210px, 26vw, 370px);
-  aspect-ratio: 500 / 312;
-  z-index: 5;
-  rotate: -10deg;
-  --float-x: 10px;
-  --float-y: -10px;
-  --float-x-end: -12px;
-  --float-y-end: 8px;
-  animation-duration: 1100ms, 11.8s;
-}
-
-.hero-float-cheese-platter {
-  top: 10%;
-  left: 2%;
-  width: clamp(170px, 20vw, 300px);
-  aspect-ratio: 1;
-  z-index: 5;
-  rotate: -7deg;
-  --float-x: 9px;
-  --float-y: -14px;
-  --float-x-end: -8px;
-  --float-y-end: 8px;
-  animation-duration: 1100ms, 10.6s;
-}
-
-.hero-float-greens-platter {
-  right: 15%;
-  bottom: 0;
-  width: clamp(175px, 21vw, 310px);
-  aspect-ratio: 1;
-  z-index: 5;
-  rotate: 5deg;
-  --float-x: -10px;
-  --float-y: -12px;
-  --float-x-end: 8px;
-  --float-y-end: 10px;
-  animation-duration: 1100ms, 11.4s;
-}
-
-.hero-float-black-olives {
-  top: 18%;
-  right: 0;
-  width: clamp(100px, 12vw, 180px);
-  aspect-ratio: 1;
-  z-index: 7;
-  rotate: 10deg;
-  --float-x: -8px;
-  --float-y: -13px;
-  --float-x-end: 7px;
-  --float-y-end: 8px;
-  animation-duration: 1100ms, 9.4s;
-}
-
-.hero-float-apricot-jam {
-  top: 1%;
-  left: 42%;
-  width: clamp(88px, 10vw, 155px);
-  aspect-ratio: 1;
-  z-index: 6;
-  rotate: 6deg;
-  --float-x: -7px;
-  --float-y: -10px;
-  --float-x-end: 7px;
-  --float-y-end: 7px;
-  animation-duration: 1100ms, 9.2s;
-}
-
 @keyframes hero-food-enter {
   0% {
     opacity: 0;
@@ -2964,40 +2820,6 @@ h2 span {
   }
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .hero-float-item {
-    animation: none;
-    opacity: 1;
-  }
-}
-
-@media (max-width: 680px) {
-
-  .hero-float-pan {
-    top: 24%;
-    left: 17%;
-    width: min(58vw, 248px);
-  }
-
-  .hero-float-tea {
-    top: 3%;
-    right: 18%;
-    width: min(22vw, 98px);
-  }
-
-  .hero-float-simit {
-    right: 2%;
-    bottom: 8%;
-    width: min(39vw, 166px);
-  }
-
-  .hero-float-omelette {
-    left: -2%;
-    bottom: 8%;
-    width: min(43vw, 184px);
-  }
-}
-
 /* The menu discovery rail sticks to the viewport; avoid a nested body scroll container. */
 html.menu-scroll-root,
 html:has(.menu-page-shell) {
@@ -3015,340 +2837,9 @@ body.menu-sheet-open {
   overflow: hidden !important;
 }
 
-@media (max-width: 420px) {
-
-  .hero-float-pan {
-    top: 19%;
-    left: 15%;
-    width: min(64vw, 226px);
-  }
-
-  .hero-float-tea {
-    top: 2%;
-    right: 13%;
-    width: min(24vw, 88px);
-  }
-
-  .hero-float-simit {
-    right: 0;
-    bottom: 6%;
-    width: min(42vw, 156px);
-  }
-
-  .hero-float-omelette {
-    left: -2%;
-    bottom: 7%;
-    width: min(49vw, 174px);
-  }
-}
-
 /* 21st / Aceternity-inspired dining parallax hero */
-.hero.hero-parallax-dining {
-  display: block;
-  height: 210svh;
-  min-height: 1340px;
-  overflow: clip;
-  padding: 0;
-  background: linear-gradient(180deg, #fffdfa 0%, #fff9ef 46%, #f7efe3 100%);
-  color: var(--ink);
-  perspective: 1200px;
-  transform-style: preserve-3d;
-}
-
-.hero.hero-parallax-dining::before {
-  inset: 0;
-  z-index: 1;
-  background:
-    linear-gradient(180deg, rgba(255, 253, 247, 0.86) 0%, rgba(255, 253, 247, 0.18) 21%, rgba(255, 253, 247, 0) 58%, rgba(255, 253, 247, 0.82) 100%),
-    radial-gradient(ellipse at 50% 0%, rgba(255, 255, 255, 0.9), transparent 34%);
-  opacity: 1;
-}
-
-.hero.hero-parallax-dining::after {
-  right: clamp(1rem, 5vw, 5.5rem);
-  bottom: clamp(1.4rem, 4vw, 3.4rem);
-  left: clamp(1rem, 5vw, 5.5rem);
-  z-index: 5;
-  background: linear-gradient(90deg, rgba(143, 23, 26, 0), rgba(143, 23, 26, 0.18), rgba(197, 162, 90, 0.34), rgba(143, 23, 26, 0));
-}
-
-.hero-parallax-sticky {
-  position: sticky;
-  top: 0;
-  z-index: 2;
-  height: 100svh;
-  min-height: 760px;
-  overflow: hidden;
-  isolation: isolate;
-}
-
-.hero-parallax-copy {
-  position: absolute;
-  top: clamp(8.85rem, 14.4svh, 11rem);
-  left: clamp(1.2rem, 5vw, 5.5rem);
-  z-index: 9;
-  display: grid;
-  gap: 0.48rem;
-  width: min(24rem, 36vw);
-  color: #211d1b;
-  pointer-events: none;
-}
-
-.hero-copy-ambient-glow {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 160%;
-  height: 160%;
-  background: radial-gradient(circle, rgba(185, 139, 67, 0.12) 0%, rgba(54, 88, 61, 0.05) 50%, transparent 100%);
-  filter: blur(50px);
-  pointer-events: none;
-  z-index: -1;
-}
-
-.hero-parallax-copy::after {
-  width: min(10.5rem, 52%);
-  margin-top: 0.26rem;
-  background: linear-gradient(90deg, rgba(143, 23, 26, 0.62), rgba(198, 158, 84, 0.52), transparent);
-  content: "";
-  animation: hero-copy-line 920ms 360ms cubic-bezier(0.16, 1, 0.3, 1) both;
-}
-
-.hero-parallax-copy > span {
-  width: fit-content;
-  border: 1px solid rgba(143, 23, 26, 0.12);
-  border-radius: 999px;
-  background: rgba(255, 253, 247, 0.72);
-  color: rgba(82, 63, 49, 0.76);
-  padding: 0.48rem 0.76rem;
-  font-size: 0.72rem;
-  font-weight: 850;
-  letter-spacing: 0.08em;
-  line-height: 1;
-  text-transform: uppercase;
-  box-shadow: 0 12px 30px rgba(69, 42, 27, 0.07);
-  backdrop-filter: blur(16px) saturate(132%);
-  -webkit-backdrop-filter: blur(16px) saturate(132%);
-}
-
-.hero-parallax-copy h1 {
-  margin: 0;
-  color: #211d1b;
-  font-family: var(--font-serif), Georgia, serif;
-  font-size: clamp(2.25rem, 3.65vw, 4.25rem);
-  font-weight: 800;
-  letter-spacing: -0.01em;
-  line-height: 0.94;
-  text-wrap: balance;
-  text-shadow: 0 14px 34px rgba(71, 45, 28, 0.08);
-}
-
-.hero-parallax-copy p {
-  max-width: 22rem;
-  margin: 0.08rem 0 0;
-  color: rgba(55, 48, 43, 0.72);
-  font-size: clamp(0.9rem, 1.08vw, 1rem);
-  font-weight: 540;
-  line-height: 1.48;
-}
-
-.hero-parallax-gallery {
-  position: absolute;
-  top: 37%;
-  right: auto;
-  left: -18vw;
-  z-index: 3;
-  display: grid;
-  gap: clamp(1rem, 2.1vw, 1.7rem);
-  transform-origin: 50% 20%;
-  will-change: transform, opacity;
-}
-
-.hero-parallax-food-stage {
-  position: absolute;
-  top: 21%;
-  right: clamp(1rem, 8vw, 8rem);
-  z-index: 7;
-  width: min(46vw, 600px);
-  height: min(52vw, 620px);
-  min-height: 450px;
-  pointer-events: none;
-  transform-style: preserve-3d;
-  will-change: transform;
-}
-
-.hero-parallax-food-stage::before {
-  position: absolute;
-  right: 4%;
-  bottom: 2%;
-  z-index: 0;
-  width: 76%;
-  height: 28%;
-  border-radius: 50%;
-  background: radial-gradient(ellipse at center, rgba(101, 70, 38, 0.13), rgba(101, 70, 38, 0.055) 46%, transparent 70%);
-  filter: blur(5px);
-  content: "";
-}
-
-.hero-parallax-food-stage .hero-float-pan {
-  top: 36%;
-  left: 25%;
-  z-index: 9;
-  width: clamp(185px, 21vw, 315px);
-}
-
-.hero-parallax-food-stage .hero-float-tea {
-  top: 2%;
-  right: 22%;
-  z-index: 10;
-  width: clamp(82px, 9vw, 132px);
-}
-
-.hero-parallax-food-stage .hero-float-simit {
-  right: 4%;
-  bottom: 12%;
-  z-index: 8;
-  width: clamp(145px, 16vw, 236px);
-}
-
-.hero-parallax-food-stage .hero-float-omelette {
-  left: 4%;
-  bottom: 8%;
-  z-index: 7;
-  width: clamp(160px, 18vw, 270px);
-}
-
-.hero-parallax-food-stage .hero-float-cheese-platter {
-  top: 10%;
-  left: 1%;
-  z-index: 6;
-  width: clamp(145px, 16vw, 235px);
-}
-
-.hero-parallax-food-stage .hero-float-greens-platter {
-  right: 19%;
-  bottom: -3%;
-  z-index: 6;
-  width: clamp(150px, 17vw, 250px);
-}
-
-.hero-parallax-food-stage .hero-float-black-olives {
-  top: 20%;
-  right: 2%;
-  z-index: 7;
-  width: clamp(86px, 9.5vw, 142px);
-}
-
-.hero-parallax-food-stage .hero-float-apricot-jam {
-  top: 1%;
-  left: 47%;
-  z-index: 7;
-  width: clamp(78px, 8.4vw, 126px);
-}
-
-.hero-parallax-row {
-  display: flex;
-  gap: clamp(1rem, 2vw, 1.55rem);
-  width: max-content;
-  will-change: transform;
-}
-
-.hero-parallax-row.is-reverse {
-  flex-direction: row-reverse;
-}
-
-.hero-parallax-card {
-  position: relative;
-  width: clamp(19rem, 30vw, 32rem);
-  aspect-ratio: 1.2 / 1;
-  flex: 0 0 auto;
-  overflow: hidden;
-  border: 1px solid rgba(255, 246, 232, 0.32);
-  border-radius: 12px;
-  background: #201714;
-  box-shadow:
-    0 1px 2px rgba(0, 0, 0, 0.06),
-    0 6px 14px rgba(42, 27, 18, 0.08),
-    0 24px 56px rgba(42, 27, 18, 0.14),
-    0 48px 100px rgba(42, 27, 18, 0.10);
-  will-change: transform;
-  transition: box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.hero-parallax-card img {
-  object-fit: cover;
-  filter: saturate(1.06) contrast(1.03) brightness(0.9);
-  transform: scale(1.02);
-}
-
-.hero-parallax-card::after {
-  position: absolute;
-  inset: 0;
-  background:
-    linear-gradient(180deg, rgba(18, 12, 10, 0.02), rgba(18, 12, 10, 0.12)),
-    linear-gradient(115deg, rgba(255, 255, 255, 0.13), transparent 24%, transparent 76%, rgba(255, 255, 255, 0.08));
-  content: "";
-  pointer-events: none;
-}
-
-@media (max-width: 1080px) {
-  .hero.hero-parallax-dining {
-    height: 200svh;
-    min-height: 1220px;
-  }
-
-  .hero-parallax-copy {
-    top: clamp(7.8rem, 13.4svh, 9.65rem);
-    width: min(23rem, 54vw);
-  }
-
-  .hero-parallax-gallery {
-    top: 42.5%;
-    right: auto;
-    left: -42vw;
-  }
-
-  .hero-parallax-food-stage {
-    top: 24%;
-    right: 8%;
-    width: min(82vw, 640px);
-    height: min(62vw, 500px);
-    min-height: 410px;
-  }
-
-  .hero-parallax-card {
-    width: clamp(16rem, 40vw, 26rem);
-  }
-
-}
 
 @media (max-width: 680px) {
-
-  .hero-parallax-copy {
-    top: 8.35rem;
-    left: clamp(1.25rem, 6vw, 1.72rem);
-    right: auto;
-    width: min(70vw, 19rem);
-    max-width: 19rem;
-    gap: 0.42rem;
-  }
-
-  .hero-parallax-copy > span {
-    padding: 0.38rem 0.58rem;
-    font-size: 0.55rem;
-    letter-spacing: 0.07em;
-  }
-
-  .hero-parallax-food-stage {
-    top: 10.6rem;
-    right: 0.25rem;
-    left: 0.55rem;
-    max-width: none;
-    height: 380px;
-    min-height: 380px;
-    margin-left: 0;
-  }
 
   /* ── L-shape RIGHT ARM: natural stagger along the right side of the text ── */
 
@@ -3358,119 +2849,9 @@ body.menu-sheet-open {
 
 @media (max-width: 420px) {
 
-  .hero-parallax-copy {
-    top: 8.04rem;
-    left: 1rem;
-    right: auto;
-    width: min(70vw, 18.2rem);
-    max-width: 18.2rem;
-  }
-
-  .hero-parallax-copy h1 {
-    max-width: 7.1em;
-    font-size: clamp(2.3rem, 10.8vw, 2.86rem);
-    line-height: 0.9;
-    text-wrap: auto;
-  }
-
-  .hero-parallax-copy p {
-    max-width: min(14.9rem, 64vw);
-    font-size: clamp(0.84rem, 3.72vw, 0.98rem);
-    line-height: 1.36;
-  }
-
-  .hero-parallax-gallery {
-    top: 50%;
-    right: auto;
-    left: -82vw;
-    gap: 0.5rem;
-  }
-
-  .hero-parallax-food-stage {
-    top: 10.2rem;
-    right: 0.2rem;
-    left: 0.45rem;
-    width: auto;
-    height: 350px;
-    min-height: 350px;
-    margin-left: 0;
-  }
-
   /* ── L-shape RIGHT ARM ── */
-  .hero-parallax-food-stage .hero-float-tea {
-    top: 0%;
-    right: 5%;
-    left: auto;
-    width: min(15vw, 58px);
-  }
-
-  .hero-parallax-food-stage .hero-float-apricot-jam {
-    top: 8%;
-    left: 50%;
-    right: auto;
-    width: min(13vw, 52px);
-  }
-
-  .hero-parallax-food-stage .hero-float-cheese-platter {
-    top: 17%;
-    right: 0%;
-    left: auto;
-    width: min(26vw, 98px);
-  }
-
-  .hero-parallax-food-stage .hero-float-black-olives {
-    top: 28%;
-    right: 30%;
-    left: auto;
-    width: min(13vw, 52px);
-  }
 
   /* ── L-shape BOTTOM ARM ── */
-  .hero-parallax-food-stage .hero-float-omelette {
-    top: 66%;
-    left: 0%;
-    right: auto;
-    width: min(27vw, 102px);
-  }
-
-  .hero-parallax-food-stage .hero-float-pan {
-    top: 58%;
-    left: 36%;
-    right: auto;
-    width: min(28vw, 106px);
-  }
-
-  .hero-parallax-food-stage .hero-float-greens-platter {
-    top: 64%;
-    right: 0%;
-    left: auto;
-    width: min(19vw, 74px);
-  }
-
-  .hero-parallax-food-stage .hero-float-simit {
-    top: 76%;
-    right: 20%;
-    left: auto;
-    width: min(21vw, 80px);
-  }
-
-  .hero-parallax-row {
-    gap: 0.5rem;
-  }
-
-  .hero-parallax-card {
-    width: min(40vw, 156px);
-    aspect-ratio: 1.15 / 1;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .hero-parallax-gallery,
-  .hero-parallax-food-stage,
-  .hero-parallax-row,
-  .hero-parallax-card {
-    transform: none !important;
-  }
 }
 
 /* Refined logo-inspired palette */
@@ -3556,13 +2937,6 @@ h2 span {
 ::selection {
   background: var(--red);
   color: var(--white);
-}
-
-@media (max-width: 420px) {
-  .hero-parallax-copy {
-    width: min(44vw, 16rem) !important;
-    max-width: 16rem !important;
-  }
 }
 
 /* Premium review + contact polish pass */
@@ -4064,10 +3438,6 @@ h2 span {
 
 /* Hero revision — fewer objects, stronger burgundy identity, earlier gallery reveal. */
 
-.theme-breakfast .hero-parallax-copy::after {
-  background: linear-gradient(90deg, #7a1b22, rgba(122, 27, 34, 0.22) 52%, transparent) !important;
-}
-
 @media (prefers-reduced-motion: reduce) {
   .theme-breakfast .nav-menu-panel,
   .theme-breakfast .nav-menu-panel a,
@@ -4178,50 +3548,6 @@ h2 span {
 }
 
 /* Hero performance and mobile motion polish */
-.hero-parallax-copy {
-  opacity: 1;
-  animation: hero-copy-fast-reveal 360ms cubic-bezier(0.16, 1, 0.3, 1) both;
-}
-
-.hero-copy-ambient-glow {
-  width: 132%;
-  height: 132%;
-  filter: blur(26px);
-  opacity: 0.72;
-}
-
-.hero-parallax-copy::after {
-  animation-duration: 520ms;
-  animation-delay: 110ms;
-}
-
-.hero-parallax-gallery {
-  backface-visibility: hidden;
-  transform: translateZ(0);
-}
-
-.hero-parallax-row {
-  contain: layout paint style;
-}
-
-.hero-parallax-card {
-  backface-visibility: hidden;
-  contain: layout paint style;
-  transform: translateZ(0);
-}
-
-.hero-parallax-food-stage .hero-float-item {
-  backface-visibility: hidden;
-  transform: translateZ(0);
-  animation:
-    hero-food-enter-fast 620ms cubic-bezier(0.16, 1, 0.3, 1) var(--float-delay) forwards,
-    hero-food-float-premium var(--float-dur, 14s) var(--ease-soft) calc(var(--float-delay) + 620ms) infinite;
-}
-
-.hero-parallax-food-stage .hero-float-item::after {
-  filter: blur(10px);
-  opacity: 0.72;
-}
 
 @keyframes hero-copy-fast-reveal {
   from {
@@ -4255,36 +3581,6 @@ h2 span {
   }
   72% {
     transform: translate3d(calc(var(--float-x-end, -8px) * 0.26), calc(var(--float-y-end, 9px) * 0.26), 0) rotate(-0.18deg);
-  }
-}
-
-@media (max-width: 680px) {
-
-  .hero-copy-ambient-glow {
-    display: none;
-  }
-
-  .hero-parallax-food-stage .hero-float-item::after {
-    display: none;
-  }
-}
-
-@media (max-width: 420px) {
-  .hero.hero-parallax-dining {
-    height: 154svh;
-    min-height: 1040px;
-  }
-
-  .hero-parallax-gallery {
-    left: -62vw;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .hero-parallax-copy,
-  .hero-parallax-food-stage .hero-float-item {
-    animation: none !important;
-    opacity: 1;
   }
 }
 
@@ -4939,7 +4235,6 @@ h2 span {
   }
 
   .nav-menu-ambient span,
-.hero-parallax-food-stage .hero-float-item,
 .street-sun-glow,
 .clouds,
 .seagulls,
@@ -4950,22 +4245,8 @@ h2 span {
     animation-iteration-count: 1 !important;
   }
 
-  .hero-parallax-gallery,
-  .hero-parallax-row,
-  .hero-parallax-card,
-  .hero-parallax-food-stage {
-    will-change: auto !important;
-  }
-
-  .hero-parallax-card,
-.nav-menu-panel a {
+  .nav-menu-panel a {
     box-shadow: 0 10px 22px rgba(20, 18, 14, 0.12) !important;
-  }
-
-  .hero-parallax-food-stage .hero-float-item::after,
-  .hero-parallax-food-stage::before,
-  .hero-copy-ambient-glow {
-    display: none !important;
   }
 
   .footer-skyline-wrapper,
@@ -5886,14 +5167,6 @@ h2 span {
   }
 }
 
-@media (max-width: 420px) {
-  .hero-parallax-food-stage .hero-float-simit {
-    top: 12% !important;
-    right: 18% !important;
-    width: min(16vw, 60px) !important;
-  }
-}
-
 .gallery-section .gallery-marquee {
   grid-template-columns: none !important;
 }
@@ -5984,73 +5257,16 @@ h2 span {
    ═══════════════════════════════════════════════════════════════════════════ */
 
 /* ── Shared Design Tokens ── */
-.hero.hero-parallax-dining {
-  --surface-warm:   #fffaf0;
-  --surface-mid:    #f7ebcf;
-  --surface-deep:   #ead6b5;
-  --forest:         rgba(29, 57, 39, 0.97);
-  --forest-mid:     rgba(53, 84, 58, 0.91);
-  --forest-light:   rgba(35, 58, 48, 0.95);
-  --cream:          rgba(255, 250, 240, 1);
-  --cream-88:       rgba(255, 250, 240, 0.88);
-  --cream-80:       rgba(255, 250, 240, 0.80);
-  --cream-18:       rgba(255, 239, 207, 0.18);
-  --cream-28:       rgba(255, 239, 207, 0.28);
-  --ink-warm:       #211d1b;
-  --ink-warm-72:    rgba(47, 42, 38, 0.72);
-  --shadow-forest:  rgba(31, 56, 39, 0.18);
-  --shadow-earth:   rgba(42, 27, 18, 0.13);
-  --radius-sm: 8px;
-  --radius-md: 14px;
-  --radius-card: clamp(14px, 2.2vw, 22px);
-}
 
 /* ── Hero Background ── */
 
 /* ── Shared Typography ── */
-.hero-parallax-copy h1 {
-  font-family: var(--font-playfair), Georgia, serif;
-  font-weight: 900;
-  letter-spacing: -0.005em !important;
-  -webkit-font-smoothing: antialiased;
-}
-
-.hero-parallax-copy p {
-  font-family: var(--font-geist-sans), system-ui, sans-serif;
-  text-wrap: pretty;
-  -webkit-font-smoothing: antialiased;
-}
 
 /* ── Hero Copy ── */
-.hero-parallax-copy h1,
-.hero-parallax-copy h1 span {
-  color: var(--ink-warm) !important;
-  background: transparent !important;
-  text-shadow: 0 8px 28px rgba(71, 45, 28, 0.06) !important;
-}
 
 /* ── Hero Gallery Cards ── */
-.hero-parallax-card {
-  border-radius: var(--radius-md) !important;
-  border-color: rgba(255, 250, 240, 0.72) !important;
-  box-shadow:
-    0 1px 0 rgba(255, 255, 255, 0.28) inset,
-    0 14px 30px var(--shadow-earth) !important;
-  transition: box-shadow 0.4s var(--ease-soft), transform 0.4s var(--ease-soft) !important;
-}
 
 /* ── Hero Food Stage ── */
-.hero-parallax-food-stage::before {
-  inset: 38% 9% 9% 7% !important;
-  border-radius: 999px !important;
-  background:
-    radial-gradient(ellipse at center,
-      rgba(111, 72, 34, 0.16),
-      rgba(111, 72, 34, 0.05) 44%,
-      transparent 72%) !important;
-  opacity: 0.68 !important;
-  filter: blur(14px) !important;
-}
 
 /* ── Story Band: seamless continuation of hero palette ── */
 
@@ -6072,26 +5288,6 @@ h2 span {
   /* ── Hero ── */
 
   /* ── Story (seamless transition from hero) ── */
-}
-
-@media (max-width: 420px) {
-  .hero.hero-parallax-dining {
-    min-height: 740px !important;
-  }
-
-  .hero-parallax-sticky {
-    min-height: 650px !important;
-  }
-
-  .hero-parallax-food-stage {
-    top: 9.18rem !important;
-    height: 268px !important;
-    min-height: 268px !important;
-  }
-
-  .hero-parallax-gallery {
-    top: 45.3% !important;
-  }
 }
 
 /* ── Rebuilt About Section: editorial, compact, heritage-led ── */
@@ -6160,138 +5356,6 @@ h2 span {
     top: calc(58px + env(safe-area-inset-top, 0px)) !important;
   }
 
-  .hero.hero-parallax-dining {
-    height: clamp(835px, 224vw, 990px) !important;
-    min-height: clamp(835px, 224vw, 990px) !important;
-    max-height: 990px !important;
-    padding: 0 !important;
-    background:
-      radial-gradient(ellipse at 76% 29%, rgba(50, 84, 58, 0.075), transparent 34%),
-      radial-gradient(ellipse at 52% 54%, rgba(181, 128, 56, 0.13), transparent 35%),
-      linear-gradient(180deg, #fffaf0 0%, #fbf4e5 44%, #ead6b5 100%) !important;
-  }
-
-  .hero-parallax-sticky {
-    height: clamp(835px, 224vw, 990px) !important;
-    min-height: clamp(835px, 224vw, 990px) !important;
-    max-height: 990px !important;
-  }
-
-  .hero-top-curtain {
-    position: absolute;
-    inset: 0 0 auto;
-    z-index: 12;
-    height: calc(5.2rem + env(safe-area-inset-top, 0px));
-    background:
-      linear-gradient(180deg, rgba(255, 250, 240, 0.98) 0%, rgba(255, 250, 240, 0.88) 52%, rgba(255, 250, 240, 0) 100%);
-    pointer-events: none;
-  }
-
-  .hero-parallax-food-stage {
-    top: 11.75rem !important;
-    right: max(0.25rem, calc((100vw - 430px) / 2 + 0.25rem)) !important;
-    left: max(0.65rem, calc((100vw - 430px) / 2 + 0.65rem)) !important;
-    width: auto !important;
-    height: clamp(338px, 87vw, 376px) !important;
-    min-height: clamp(338px, 87vw, 376px) !important;
-    max-height: 376px !important;
-    margin: 0 !important;
-    transform-origin: 54% 48% !important;
-  }
-
-  .hero-parallax-food-stage .hero-float-item {
-    filter:
-      drop-shadow(0 5px 8px rgba(72, 44, 24, 0.08))
-      drop-shadow(0 16px 22px rgba(72, 44, 24, 0.11)) !important;
-    animation:
-      hero-food-enter-fast 420ms cubic-bezier(0.16, 1, 0.3, 1) var(--float-delay) both,
-      hero-food-float-premium var(--float-dur, 18s) var(--ease-soft) calc(var(--float-delay) + 420ms) 1 !important;
-    animation-delay: var(--float-delay), calc(var(--float-delay) + 420ms) !important;
-    animation-duration: 420ms, var(--float-dur, 18s) !important;
-    animation-fill-mode: both, none !important;
-    animation-iteration-count: 1, 1 !important;
-  }
-
-  .hero-parallax-food-stage .hero-float-tea {
-    top: 1% !important;
-    right: 4% !important;
-    left: auto !important;
-    width: clamp(52px, 14vw, 62px) !important;
-  }
-
-  .hero-parallax-food-stage .hero-float-apricot-jam {
-    top: 9% !important;
-    left: 50% !important;
-    right: auto !important;
-    width: clamp(46px, 12.2vw, 54px) !important;
-  }
-
-  .hero-parallax-food-stage .hero-float-cheese-platter {
-    top: 21% !important;
-    right: 0% !important;
-    left: auto !important;
-    width: clamp(88px, 23.5vw, 102px) !important;
-  }
-
-  .hero-parallax-food-stage .hero-float-black-olives {
-    top: 37% !important;
-    right: 23% !important;
-    left: auto !important;
-    width: clamp(46px, 12.4vw, 54px) !important;
-  }
-
-  .hero-parallax-food-stage .hero-float-omelette {
-    top: 70% !important;
-    left: 0% !important;
-    right: auto !important;
-    width: clamp(96px, 25.5vw, 110px) !important;
-  }
-
-  .hero-parallax-food-stage .hero-float-pan {
-    top: 61% !important;
-    left: 36% !important;
-    right: auto !important;
-    width: clamp(100px, 26.6vw, 114px) !important;
-  }
-
-  .hero-parallax-food-stage .hero-float-greens-platter {
-    top: 70% !important;
-    right: 0% !important;
-    left: auto !important;
-    width: clamp(70px, 18.4vw, 80px) !important;
-  }
-
-  .hero-parallax-food-stage .hero-float-simit {
-    top: 80% !important;
-    right: 20% !important;
-    left: auto !important;
-    width: clamp(76px, 19.8vw, 86px) !important;
-  }
-
-  .hero-parallax-gallery {
-    top: 53.6% !important;
-    right: auto !important;
-    left: calc(50% - min(100vw, 430px) * 1.08) !important;
-    gap: 0.58rem !important;
-    opacity: 0.9 !important;
-  }
-
-  .hero-parallax-row {
-    gap: 0.58rem !important;
-  }
-
-  .hero-parallax-card {
-    width: clamp(146px, 38vw, 168px) !important;
-    aspect-ratio: 1.16 / 1 !important;
-    border-color: rgba(255, 250, 240, 0.78) !important;
-    border-radius: 9px !important;
-  }
-
-  .hero-parallax-card img {
-    filter: saturate(1.03) contrast(1.02) brightness(0.94) !important;
-    transform: scale(1.01) !important;
-  }
-
   .mobile-bar {
     bottom: calc(0.62rem + env(safe-area-inset-bottom)) !important;
     width: min(calc(100% - 1.5rem), 390px) !important;
@@ -6330,14 +5394,6 @@ h2 span {
     font-size: 0.98rem !important;
   }
 
-  .hero-parallax-food-stage {
-    top: 11.45rem !important;
-  }
-
-  .hero-parallax-gallery {
-    top: 54.1% !important;
-  }
-
   .mobile-bar a,
   .mobile-bar button {
     font-size: 0.62rem !important;
@@ -6364,26 +5420,6 @@ body,
     inset 0 -1px 0 rgba(36, 63, 43, 0.08) !important;
 }
 
-.hero.hero-parallax-dining::before {
-  background: none !important;
-  opacity: 0 !important;
-}
-
-.hero-top-curtain {
-  background:
-    linear-gradient(
-      180deg,
-      rgba(255, 249, 237, 0.98) 0%,
-      rgba(255, 249, 237, 0.86) 52%,
-      rgba(255, 249, 237, 0) 100%
-    ) !important;
-}
-
-.hero-parallax-copy h1,
-.hero-parallax-copy h1 span {
-  color: var(--heritage-ink) !important;
-}
-
 .gallery-section,
 .footer-reimagined,
 .seo-page {
@@ -6397,61 +5433,6 @@ body,
 /* Review carousel motion repair: stable cards, no remount pop */
 
 /* Mobile hero finish: soften floating-food exit and keep hero/about beige identical. */
-.hero.hero-parallax-dining {
-  background: var(--heritage-paper) !important;
-  background-color: var(--heritage-paper) !important;
-}
-
-.hero-parallax-sticky::after {
-  position: absolute;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  z-index: 8;
-  height: clamp(7rem, 18vw, 11rem);
-  content: "";
-  background:
-    linear-gradient(
-      180deg,
-      rgba(248, 239, 224, 0) 0%,
-      rgba(248, 239, 224, 0.68) 58%,
-      var(--heritage-paper) 100%
-    );
-  pointer-events: none;
-}
-
-@media (max-width: 680px) {
-  .hero.hero-parallax-dining {
-    background: var(--heritage-paper) !important;
-    background-color: var(--heritage-paper) !important;
-  }
-
-  .hero.hero-parallax-dining::before {
-    background:
-      linear-gradient(
-        180deg,
-        rgba(248, 239, 224, 0.56) 0%,
-        rgba(248, 239, 224, 0.12) 44%,
-        var(--heritage-paper) 100%
-      ) !important;
-  }
-
-  .hero-parallax-food-stage {
-    will-change: transform, opacity !important;
-  }
-
-  .hero-parallax-sticky::after {
-    height: clamp(9rem, 29vw, 13rem);
-    background:
-      linear-gradient(
-        180deg,
-        rgba(248, 239, 224, 0) 0%,
-        rgba(248, 239, 224, 0.38) 34%,
-        rgba(248, 239, 224, 0.86) 72%,
-        var(--heritage-paper) 100%
-      );
-  }
-}
 
 /* Guest notes: compact heritage review room. */
 
@@ -6460,29 +5441,6 @@ body,
 /* Guest review heading: refined motion and heritage shine. */
 
 /* Hero gallery cards: subtle black contour for clearer photo edges. */
-.hero-parallax-card {
-  border-color: rgba(18, 15, 12, 0.36) !important;
-  box-shadow:
-    0 0 0 1px rgba(18, 15, 12, 0.2),
-    0 1px 0 rgba(255, 255, 255, 0.3) inset,
-    0 0 0 1px rgba(18, 15, 12, 0.18) inset,
-    0 14px 30px rgba(42, 27, 18, 0.13) !important;
-}
-
-.hero-parallax-card img {
-  box-shadow: inset 0 0 0 1px rgba(18, 15, 12, 0.16) !important;
-}
-
-@media (max-width: 680px) {
-  .hero-parallax-card {
-    border-color: rgba(18, 15, 12, 0.42) !important;
-    box-shadow:
-      0 0 0 1px rgba(18, 15, 12, 0.24),
-      0 1px 0 rgba(255, 255, 255, 0.24) inset,
-      0 0 0 1px rgba(18, 15, 12, 0.22) inset,
-      0 10px 24px rgba(42, 27, 18, 0.12) !important;
-  }
-}
 
 /* Guest reviews final polish: quieter heritage stage, sharper editorial headline. */
 
@@ -6762,16 +5720,6 @@ body,
   text-transform: uppercase;
 }
 
-.hero-parallax-copy {
-  animation: hero-copy-refined-in 780ms cubic-bezier(0.16, 1, 0.3, 1) 120ms both !important;
-}
-
-.hero-parallax-copy h1 {
-  font-family: var(--font-cormorant), Georgia, serif !important;
-  font-weight: 700 !important;
-  letter-spacing: 0 !important;
-}
-
 @keyframes hero-copy-refined-in {
   from {
     opacity: 0;
@@ -6796,83 +5744,14 @@ body,
     font-size: clamp(0.48rem, 1.9vw, 0.58rem) !important;
     letter-spacing: 0.15em !important;
   }
-
-  .hero-parallax-copy h1 {
-    max-width: 5.15em !important;
-    font-size: clamp(2.2rem, 10.35vw, 3.03rem) !important;
-    line-height: 0.9 !important;
-    text-wrap: balance;
-  }
-
-  .hero-parallax-copy::after {
-    width: 12.2rem !important;
-    max-width: 76% !important;
-    margin-top: 0.08rem !important;
-  }
 }
 
 /* Hero identity rewrite: clear business name first, rich but disciplined motion. */
-.hero-parallax-copy {
-  perspective: 900px;
-}
 
 .hero-title-lockup {
   display: grid;
   gap: clamp(0.02rem, 0.2vw, 0.16rem);
   transform-style: preserve-3d;
-}
-
-.hero-title-line {
-  display: block;
-  color: var(--heritage-ink);
-  font-family: var(--font-cormorant), Georgia, serif;
-  font-weight: 700;
-  letter-spacing: 0 !important;
-  line-height: 0.88;
-  text-wrap: balance;
-  white-space: nowrap;
-  transform-origin: left center;
-  text-shadow:
-    0 1px 0 rgba(255, 249, 237, 0.8),
-    0 8px 18px rgba(64, 48, 28, 0.14),
-    0 24px 48px rgba(64, 48, 28, 0.12);
-  animation: hero-title-plate-in 880ms cubic-bezier(0.16, 1, 0.3, 1) both;
-  will-change: transform, opacity, filter;
-}
-
-.hero-title-line-one {
-  color: #201b19;
-  animation-delay: 190ms;
-}
-
-.hero-title-line-two {
-  color: #27472f;
-  animation-delay: 290ms;
-  text-shadow:
-    0 1px 0 rgba(255, 249, 237, 0.82),
-    0 8px 18px rgba(36, 63, 43, 0.15),
-    0 24px 48px rgba(64, 48, 28, 0.12);
-}
-
-.hero-parallax-copy p {
-  max-width: 31rem !important;
-  margin-top: clamp(0.82rem, 1.8vw, 1.18rem) !important;
-  color: rgba(33, 29, 27, 0.76) !important;
-  font-size: clamp(1rem, 1.45vw, 1.28rem) !important;
-  font-weight: 680 !important;
-  line-height: 1.38 !important;
-  text-wrap: balance;
-  animation: hero-copy-body-in 760ms cubic-bezier(0.16, 1, 0.3, 1) 410ms both;
-}
-
-.hero-parallax-copy::after {
-  width: clamp(13rem, 25vw, 23.5rem) !important;
-  height: 1px !important;
-  margin-top: clamp(1rem, 1.9vw, 1.35rem) !important;
-  background:
-    linear-gradient(90deg, rgba(36, 63, 43, 0.55), rgba(154, 116, 56, 0.28) 46%, transparent) !important;
-  transform-origin: left center;
-  animation: hero-rule-draw 900ms cubic-bezier(0.16, 1, 0.3, 1) 520ms both;
 }
 
 @keyframes hero-title-plate-in {
@@ -6914,85 +5793,6 @@ body,
   to {
     opacity: 1;
     transform: scaleX(1);
-  }
-}
-
-@media (min-width: 681px) {
-  .hero-parallax-copy {
-    width: min(44vw, 40rem) !important;
-  }
-
-  .hero-parallax-copy h1 {
-    max-width: 9.1em !important;
-    font-size: clamp(4rem, 7.1vw, 7.6rem) !important;
-    line-height: 0.88 !important;
-  }
-}
-
-@media (max-width: 680px) {
-  .hero-parallax-copy {
-    top: clamp(9rem, 23.4vw, 9.9rem) !important;
-    left: max(1rem, calc((100vw - 430px) / 2 + 1rem)) !important;
-    width: min(66vw, 17.7rem) !important;
-    max-width: calc(100vw - 1.9rem) !important;
-    gap: 0 !important;
-  }
-
-  .hero-parallax-copy h1 {
-    max-width: 6.9em !important;
-    font-size: clamp(2.18rem, 9.25vw, 2.82rem) !important;
-    line-height: 0.87 !important;
-  }
-
-  .hero-title-line {
-    text-shadow:
-      0 1px 0 rgba(255, 249, 237, 0.78),
-      0 7px 15px rgba(64, 48, 28, 0.13),
-      0 18px 34px rgba(64, 48, 28, 0.09);
-  }
-
-  .hero-parallax-copy p {
-    max-width: min(16.7rem, 62vw) !important;
-    margin-top: 0.72rem !important;
-    font-size: clamp(0.82rem, 3.2vw, 0.94rem) !important;
-    line-height: 1.34 !important;
-    font-weight: 680 !important;
-    text-wrap: pretty;
-  }
-
-  .hero-parallax-food-stage .hero-float-apricot-jam {
-    top: 14% !important;
-    left: auto !important;
-    right: 2% !important;
-  }
-
-  .hero-parallax-copy::after {
-    width: min(13.6rem, 54vw) !important;
-    margin-top: 0.72rem !important;
-  }
-}
-
-@media (max-width: 390px) {
-  .hero-parallax-copy {
-    top: 8.9rem !important;
-    width: 16.2rem !important;
-  }
-
-  .hero-parallax-copy h1 {
-    font-size: clamp(2rem, 8.9vw, 2.34rem) !important;
-  }
-
-  .hero-parallax-copy p {
-    max-width: 14.9rem !important;
-    font-size: 0.79rem !important;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .hero-title-line,
-.hero-parallax-copy p,
-.hero-parallax-copy::after {
-    animation: none !important;
   }
 }
 
@@ -7209,43 +6009,6 @@ body .mobile-bar button {
 }
 
 /* Hero final authority — must remain the last hero layer. */
-.theme-breakfast .hero.hero-parallax-dining {
-  background: radial-gradient(ellipse at 82% 24%, rgba(122, 27, 34, 0.075), transparent 30%), radial-gradient(ellipse at 46% 58%, rgba(181, 128, 56, 0.1), transparent 34%), #f1ebe2 !important;
-}
-
-.theme-breakfast .hero-parallax-card {
-  border: 1px solid rgba(22, 9, 11, 0.72) !important;
-  border-radius: 6px !important;
-  box-shadow: 4px 5px 0 rgba(22, 9, 11, 0.1), 0 14px 26px rgba(55, 35, 25, 0.1) !important;
-}
-
-@media (max-width: 680px) {
-  .theme-breakfast .hero.hero-parallax-dining,
-  .theme-breakfast .hero-parallax-sticky {
-    height: clamp(790px, 206vw, 870px) !important;
-    min-height: clamp(790px, 206vw, 870px) !important;
-    max-height: 870px !important;
-  }
-
-  .theme-breakfast .hero-parallax-copy::after {
-    display: none !important;
-  }
-
-  .theme-breakfast .hero-parallax-food-stage {
-    top: 10.4rem !important;
-    height: clamp(322px, 82vw, 354px) !important;
-    min-height: clamp(322px, 82vw, 354px) !important;
-    max-height: 354px !important;
-  }
-
-  .theme-breakfast .hero-parallax-food-stage .hero-float-apricot-jam {
-    display: none !important;
-  }
-  .theme-breakfast .hero-parallax-food-stage .hero-float-cheese-platter { top: 24% !important; right: -1% !important; width: clamp(98px, 25vw, 112px) !important; }
-  .theme-breakfast .hero-parallax-food-stage .hero-float-black-olives { top: 43% !important; right: 23% !important; }
-  .theme-breakfast .hero-parallax-food-stage .hero-float-omelette { top: 70% !important; left: -2% !important; width: clamp(104px, 27vw, 118px) !important; }
-  .theme-breakfast .hero-parallax-food-stage .hero-float-greens-platter { top: 72% !important; right: -1% !important; width: clamp(76px, 19.5vw, 86px) !important; }
-}
 
 /* Van tile blue — the third brand color, used for information and wayfinding. */
 :root,
@@ -7806,44 +6569,9 @@ body .mobile-bar a svg {
   background: #17120d !important;
 }
 
-.theme-breakfast .hero-title-lockup,
-.theme-breakfast .hero-parallax-copy h1 {
+.theme-breakfast .hero-title-lockup {
   font-family: var(--font-bodoni-gf), "Bodoni Moda", Georgia, serif !important;
   font-optical-sizing: auto;
-}
-
-.theme-breakfast .hero-title-line {
-  font-family: inherit !important;
-  font-weight: 650 !important;
-  letter-spacing: -0.035em !important;
-  text-shadow: 0 1px 0 rgba(255, 249, 238, 0.72), 0 12px 28px rgba(59, 38, 29, 0.1) !important;
-}
-
-.theme-breakfast .hero-title-line-one {
-  color: #211817 !important;
-}
-
-.theme-breakfast .hero-title-line-one em {
-  color: #211817 !important;
-  font-style: italic;
-  font-weight: 620;
-}
-
-.theme-breakfast .hero-title-line-two {
-  font-style: italic;
-  font-weight: 650 !important;
-  text-shadow: 0 1px 0 rgba(255, 249, 238, 0.74), 0 12px 28px rgba(47, 86, 102, 0.13) !important;
-}
-
-.theme-breakfast .hero-parallax-copy p {
-  max-width: 34rem !important;
-  margin-top: clamp(0.9rem, 1.8vw, 1.2rem) !important;
-  color: rgba(36, 23, 24, 0.78) !important;
-  font-weight: 650 !important;
-}
-
-.theme-breakfast .hero-parallax-copy::after {
-  display: none !important;
 }
 
 @keyframes nav-brand-arrive {
@@ -7856,12 +6584,6 @@ body .mobile-bar a svg {
     opacity: 1;
     transform: translate3d(0, 0, 0);
     filter: blur(0);
-  }
-}
-
-@media (min-width: 681px) {
-  .theme-breakfast .hero-parallax-copy {
-    width: min(48vw, 43rem) !important;
   }
 }
 
@@ -7886,27 +6608,6 @@ body .mobile-bar a svg {
   }
 }
 
-@media (max-width: 680px) {
-  .theme-breakfast .hero-parallax-copy {
-    top: clamp(7.8rem, 20.4vw, 8.45rem) !important;
-    left: max(1rem, calc((100vw - 430px) / 2 + 1rem)) !important;
-    width: min(77vw, 20.6rem) !important;
-    max-width: calc(100vw - 1.8rem) !important;
-  }
-}
-
-@media (max-width: 390px) {
-  .theme-breakfast .hero-parallax-copy {
-    top: 7.65rem !important;
-    width: min(79vw, 18.6rem) !important;
-  }
-
-  .theme-breakfast .hero-parallax-copy p {
-    max-width: 16.2rem !important;
-    font-size: 0.78rem !important;
-  }
-}
-
 @media (prefers-reduced-motion: reduce) {
   .theme-breakfast .logo,
   .theme-breakfast .logo-word > span,
@@ -7920,9 +6621,7 @@ body .mobile-bar a svg {
 
 /* Upright premium wordmark + GPU-composited title choreography. */
 .theme-breakfast .logo,
-.theme-breakfast .hero-title-lockup,
-.theme-breakfast .hero-parallax-copy h1,
-.theme-breakfast .hero-title-line {
+.theme-breakfast .hero-title-lockup {
   font-family: var(--font-literata-gf), "Literata", Georgia, serif !important;
   font-optical-sizing: auto;
   font-style: normal !important;
@@ -7956,45 +6655,6 @@ body .mobile-bar a svg {
   isolation: isolate;
   perspective: 1100px;
   transform-style: preserve-3d;
-}
-
-.theme-breakfast .hero-title-line {
-  animation: none !important;
-  font-style: normal !important;
-  font-weight: 760 !important;
-  letter-spacing: -0.03em !important;
-  line-height: 0.94 !important;
-  transform-style: preserve-3d;
-}
-
-.theme-breakfast .hero-title-line-one,
-.theme-breakfast .hero-title-line-one em {
-  color: #211817 !important;
-  font-style: normal !important;
-}
-
-.theme-breakfast .hero-title-line-one .hero-title-word {
-  color: #211817 !important;
-}
-
-.theme-breakfast .hero-title-line-two {
-  color: var(--van-blue) !important;
-  font-style: normal !important;
-  font-weight: 760 !important;
-}
-
-.theme-breakfast .hero-title-line-two .hero-title-word {
-  color: var(--van-blue) !important;
-}
-
-.theme-breakfast .hero-title-word {
-  display: inline-block;
-  font: inherit;
-  font-style: normal !important;
-  transform-origin: 50% 78%;
-  backface-visibility: hidden;
-  animation: hero-wordmark-land 880ms cubic-bezier(0.16, 1, 0.3, 1) calc(90ms + (var(--word-index) * 82ms)) both;
-  will-change: transform, opacity;
 }
 
 .theme-breakfast .hero-title-lockup::after {
@@ -8053,9 +6713,6 @@ body .mobile-bar a svg {
 }
 
 @media (max-width: 680px) {
-  .theme-breakfast .hero-title-line {
-    letter-spacing: -0.025em !important;
-  }
 
   .theme-breakfast .hero-title-lockup::after {
     bottom: -0.22em;
@@ -8065,7 +6722,6 @@ body .mobile-bar a svg {
 
 @media (prefers-reduced-motion: reduce) {
   .theme-breakfast .logo-word > span,
-  .theme-breakfast .hero-title-word,
   .theme-breakfast .hero-title-lockup::after {
     animation: none !important;
     opacity: 1 !important;
@@ -8446,10 +7102,7 @@ body .mobile-bar a svg {
 .theme-breakfast .logo-word,
 .theme-breakfast .logo-word > span,
 .theme-breakfast .logo-word > .logo-van,
-.theme-breakfast .hero-title-lockup,
-.theme-breakfast .hero-parallax-copy h1,
-.theme-breakfast .hero-title-line,
-.theme-breakfast .hero-title-word {
+.theme-breakfast .hero-title-lockup {
   font-family: var(--font-bricolage-grotesque-gf), "Bricolage Grotesque", Arial, sans-serif !important;
   font-optical-sizing: auto;
   font-style: normal !important;
@@ -8499,94 +7152,9 @@ body .mobile-bar a svg {
   transform: translateY(1px) !important;
 }
 
-.theme-breakfast .hero.hero-parallax-dining,
-.theme-breakfast .hero-parallax-sticky {
-  --hero-surface: #f1ebe2;
-  background-color: var(--hero-surface) !important;
-}
-
 .theme-breakfast .hero-title-lockup {
   gap: 0.015em !important;
   perspective: 1000px;
-}
-
-.theme-breakfast .hero-provenance {
-  display: flex;
-  align-items: center;
-  gap: 0.68rem;
-  width: fit-content;
-  margin-bottom: clamp(0.72rem, 1.4vw, 0.95rem);
-  color: rgba(36, 23, 24, 0.76);
-  font-size: clamp(0.68rem, 0.82vw, 0.76rem);
-  font-weight: 720;
-  line-height: 1;
-  white-space: nowrap;
-  animation: hero-provenance-in 700ms cubic-bezier(0.16, 1, 0.3, 1) 70ms both;
-}
-
-.theme-breakfast .hero-provenance-year {
-  display: inline-flex;
-  min-height: 1.7rem;
-  align-items: center;
-  padding: 0.1rem 0.48rem 0;
-  border-radius: 2px;
-  background: #821b22;
-  color: #f1ebe2;
-  font-family: var(--font-bricolage-grotesque-gf), "Bricolage Grotesque", Arial, sans-serif;
-  font-size: 0.72rem;
-  font-weight: 790;
-  letter-spacing: 0.04em;
-}
-
-.theme-breakfast .hero-provenance-place {
-  position: relative;
-  padding-left: 1.8rem;
-  letter-spacing: 0.01em;
-}
-
-.theme-breakfast .hero-provenance-place::before {
-  position: absolute;
-  top: 50%;
-  left: 0;
-  width: 1.25rem;
-  height: 1px;
-  background: #cda85f;
-  content: "";
-}
-
-.theme-breakfast .hero-title-line {
-  display: flex !important;
-  gap: 0.2em;
-  align-items: baseline;
-  width: max-content;
-  max-width: 100%;
-  overflow: visible;
-  font-weight: 790 !important;
-  letter-spacing: -0.038em !important;
-  line-height: 0.9 !important;
-  text-shadow: 0 1px 0 rgba(255, 250, 241, 0.7), 0 8px 14px rgba(48, 31, 27, 0.08) !important;
-}
-
-.theme-breakfast .hero-title-line-one,
-.theme-breakfast .hero-title-line-one .hero-title-word {
-  color: #211817 !important;
-}
-
-.theme-breakfast .hero-title-line-two,
-.theme-breakfast .hero-title-line-two .hero-title-word {
-  color: #821b22 !important;
-  text-shadow: 0 1px 0 rgba(255, 250, 241, 0.78), 0 12px 24px rgba(130, 27, 34, 0.12) !important;
-}
-
-.theme-breakfast .hero-title-word {
-  opacity: 0;
-  transform-origin: 20% 85%;
-  animation: hero-grotesk-reveal 880ms cubic-bezier(0.16, 1, 0.3, 1) calc(100ms + (var(--word-index) * 85ms)) both !important;
-  will-change: clip-path, transform, opacity, filter;
-}
-
-.theme-breakfast .hero-title-line-two .hero-title-word {
-  animation-name: hero-grotesk-reveal-accent !important;
 }
 
 .theme-breakfast .hero-title-lockup::after {
@@ -8596,17 +7164,6 @@ body .mobile-bar a svg {
   height: 2px !important;
   background: linear-gradient(90deg, #821b22 0 72%, rgba(130, 27, 34, 0)) !important;
   animation: hero-grotesk-rule 820ms cubic-bezier(0.16, 1, 0.3, 1) 520ms both !important;
-}
-
-.theme-breakfast .hero-parallax-copy p {
-  color: rgba(36, 23, 24, 0.8) !important;
-  font-weight: 540 !important;
-  animation: hero-grotesk-copy 760ms cubic-bezier(0.16, 1, 0.3, 1) 440ms both !important;
-}
-
-.theme-breakfast .hero-copy-ambient-glow {
-  background: radial-gradient(circle, rgba(205, 168, 95, 0.16), rgba(130, 27, 34, 0.045) 48%, transparent 70%) !important;
-  animation: hero-ambient-breathe 7s ease-in-out 1.1s infinite alternate;
 }
 
 @keyframes hero-grotesk-reveal {
@@ -8676,17 +7233,6 @@ body .mobile-bar a svg {
   to { opacity: 1; filter: blur(0); transform: translate3d(0, 0, 0); }
 }
 
-@media (min-width: 681px) {
-  .theme-breakfast .hero-parallax-copy {
-    top: clamp(7.6rem, 12.5svh, 9rem) !important;
-  }
-
-  .theme-breakfast .hero-parallax-copy h1 {
-    max-width: 9.4em !important;
-    font-size: clamp(3.8rem, 6.15vw, 5.6rem) !important;
-  }
-}
-
 @media (max-width: 768px) {
 
   .theme-breakfast .logo-subtitle {
@@ -8695,45 +7241,8 @@ body .mobile-bar a svg {
   }
 }
 
-@media (max-width: 680px) {
-
-  .theme-breakfast .hero-provenance {
-    gap: 0.5rem;
-    margin-bottom: 0.66rem;
-    font-size: clamp(0.62rem, 2.55vw, 0.7rem);
-  }
-
-  .theme-breakfast .hero-provenance-year {
-    min-height: 1.5rem;
-    font-size: 0.64rem;
-  }
-
-  .theme-breakfast .hero-provenance-place {
-    padding-left: 1.4rem;
-  }
-
-  .theme-breakfast .hero-provenance-place::before {
-    width: 0.95rem;
-  }
-
-  .theme-breakfast .hero-parallax-food-stage .hero-float-black-olives,
-.theme-breakfast .hero-parallax-food-stage .hero-float-greens-platter {
-    display: none !important;
-  }
-}
-
-@media (max-width: 390px) {
-  .theme-breakfast .hero-parallax-copy h1 {
-    font-size: clamp(2.22rem, 10.15vw, 2.62rem) !important;
-  }
-}
-
 @media (prefers-reduced-motion: reduce) {
-  .theme-breakfast .hero-title-word,
   .theme-breakfast .hero-title-lockup::after,
-  .theme-breakfast .hero-parallax-copy p,
-  .theme-breakfast .hero-copy-ambient-glow,
-  .theme-breakfast .hero-provenance,
   .theme-breakfast .nav::after {
     animation: none !important;
     clip-path: none !important;
@@ -8890,48 +7399,8 @@ body .mobile-bar a svg {
 }
 
 /* The photo field arrives through a soft editorial veil instead of a hard seam. */
-.theme-breakfast .hero-parallax-gallery {
-  padding-block: 3.5rem;
-  margin-block: -3.5rem;
-  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 8%, #000 94%, transparent 100%);
-  mask-image: linear-gradient(to bottom, transparent 0%, #000 8%, #000 94%, transparent 100%);
-}
-
-.theme-breakfast .hero-parallax-card {
-  border-color: rgba(36, 23, 24, 0.5) !important;
-  background: #2a1c19 !important;
-  box-shadow: 3px 4px 0 rgba(36, 23, 24, 0.1) !important;
-}
-
-.theme-breakfast .hero-parallax-card img {
-  filter: saturate(1.025) contrast(1.025) brightness(0.955) !important;
-}
 
 /* Every cutout shares the same upper-left light and lower-right table shadow. */
-.theme-breakfast .hero-parallax-food-stage .hero-float-item {
-  filter:
-    drop-shadow(1px 1px 0 rgba(255, 250, 241, 0.16))
-    drop-shadow(7px 12px 8px rgba(56, 31, 23, 0.14))
-    drop-shadow(12px 22px 18px rgba(56, 31, 23, 0.09)) !important;
-  opacity: 0;
-  animation:
-    hero-table-set 760ms cubic-bezier(0.16, 1, 0.3, 1) var(--float-delay) both,
-    hero-food-studio-float var(--float-dur, 16s) ease-in-out calc(var(--float-delay) + 760ms) infinite !important;
-}
-
-.theme-breakfast .hero-parallax-food-stage .hero-float-item::after {
-  top: auto !important;
-  right: 4% !important;
-  bottom: 1% !important;
-  left: 18% !important;
-  width: auto !important;
-  height: 15% !important;
-  border-radius: 50% !important;
-  background: radial-gradient(ellipse, rgba(54, 28, 20, 0.22), transparent 70%) !important;
-  filter: blur(6px) !important;
-  opacity: 0.58 !important;
-  animation: hero-table-shadow 700ms cubic-bezier(0.16, 1, 0.3, 1) var(--float-delay) both;
-}
 
 @keyframes hero-table-set {
   0% {
@@ -9068,25 +7537,10 @@ body .mobile-bar a svg {
     background: #cda85f !important;
     color: #241718 !important;
   }
-
-  .theme-breakfast .hero-parallax-gallery {
-    padding-block: 2.2rem;
-    margin-block: -2.2rem;
-    -webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 10%, #000 96%, transparent 100%);
-    mask-image: linear-gradient(to bottom, transparent 0%, #000 10%, #000 96%, transparent 100%);
-  }
-
-  .theme-breakfast .hero-parallax-food-stage .hero-float-item {
-    filter:
-      drop-shadow(1px 1px 0 rgba(255, 250, 241, 0.12))
-      drop-shadow(5px 9px 7px rgba(56, 31, 23, 0.16)) !important;
-  }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .theme-breakfast .logo-van::after,
-  .theme-breakfast .hero-parallax-food-stage .hero-float-item,
-  .theme-breakfast .hero-parallax-food-stage .hero-float-item::after {
+  .theme-breakfast .logo-van::after {
     animation: none !important;
     filter: none !important;
     opacity: 1 !important;
@@ -9111,8 +7565,6 @@ body,
 .site-shell,
 .theme-breakfast .nav,
 .theme-breakfast .nav.scrolled,
-.theme-breakfast .hero.hero-parallax-dining,
-.theme-breakfast .hero-parallax-sticky,
 .theme-breakfast .gallery-section,
 .faq-section,
 .footer-reimagined:not(#hamour-footer),
@@ -9178,19 +7630,6 @@ body .mobile-bar .mobile-bar-primary:focus-visible {
   background: none !important;
 }
 
-.theme-breakfast .hero.hero-parallax-dining::before {
-  background: none !important;
-  opacity: 0 !important;
-}
-
-.theme-breakfast .hero-top-curtain {
-  background: linear-gradient(180deg, #f4ecdf 0%, rgba(244, 236, 223, 0.9) 52%, rgba(244, 236, 223, 0) 100%) !important;
-}
-
-.theme-breakfast .hero-parallax-sticky::after {
-  background: linear-gradient(180deg, rgba(244, 236, 223, 0) 0%, rgba(244, 236, 223, 0.7) 58%, #f4ecdf 100%) !important;
-}
-
 .footer-skyline-wrapper,
 .footer-grid,
 .info-badge,
@@ -9202,16 +7641,6 @@ body .mobile-bar .mobile-bar-primary:focus-visible {
 .footer-reimagined:not(#hamour-footer)::before,
 .footer-reimagined:not(#hamour-footer)::after {
   background: none !important;
-}
-
-@media (max-width: 680px) {
-  .theme-breakfast .hero.hero-parallax-dining::before {
-    background: none !important;
-  }
-
-  .theme-breakfast .hero-parallax-sticky::after {
-    background: linear-gradient(180deg, rgba(244, 236, 223, 0) 0%, rgba(244, 236, 223, 0.42) 34%, rgba(244, 236, 223, 0.9) 72%, #f4ecdf 100%) !important;
-  }
 }
 
 /* Gallery mobile alignment: keep the CTA clear of the title and make the
@@ -9289,8 +7718,6 @@ body .mobile-bar .mobile-bar-primary:focus-visible {
   background: #3a0d10 !important;
 }
 
-.hero.hero-parallax-dining:not(.hero-is-visible) .hero-float-item,
-.hero.hero-parallax-dining:not(.hero-is-visible) .hero-float-item::after,
 .footer-reimagined:not(.footer-is-visible) .tram-group {
   animation-play-state: paused !important;
 }
@@ -9864,26 +8291,6 @@ body .mobile-bar .mobile-bar-primary:focus-visible {
   text-align: center;
 }
 
-.hero-subtitle {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.65rem;
-  font-family: var(--font-commissioner-gf), -apple-system, BlinkMacSystemFont, sans-serif;
-  font-size: 0.86rem;
-  letter-spacing: 0.24em;
-  text-transform: uppercase;
-  color: #d6af66;
-  margin-bottom: 1.25rem;
-  font-weight: 600;
-  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.55);
-}
-
-.hero-subtitle-dot {
-  font-size: 0.52rem;
-  color: #c89f53;
-  opacity: 0.85;
-}
-
 .hero-title {
   font-family: "NOCTADO", Georgia, serif;
   font-size: 3.9rem;
@@ -9893,19 +8300,6 @@ body .mobile-bar .mobile-bar-primary:focus-visible {
   letter-spacing: 0.04em;
   text-transform: uppercase;
   text-shadow: 0 3px 14px rgba(0, 0, 0, 0.65);
-}
-
-.hero-title-main {
-  display: block;
-  color: #fff9f0;
-}
-
-.hero-title-accent {
-  display: block;
-  color: #f7dbab;
-  font-style: italic;
-  font-weight: 400;
-  letter-spacing: 0.05em;
 }
 
 .hero-tagline {
@@ -10101,10 +8495,6 @@ body .mobile-bar .mobile-bar-primary:focus-visible {
   .hero-section {
     height: 86vh;
     min-height: 500px;
-  }
-  .hero-subtitle {
-    font-size: 0.78rem;
-    letter-spacing: 0.18em;
   }
   .hero-title {
     font-size: 2.1rem !important;

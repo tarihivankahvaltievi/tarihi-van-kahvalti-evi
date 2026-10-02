@@ -1,0 +1,70 @@
+{
+  "date": "2026-10-02",
+  "sourceFilesChecked": 119,
+  "classes": [
+    "hero-parallax-food-stage",
+    "hero-parallax-copy",
+    "hero-float-item",
+    "hero-parallax-dining",
+    "hero-parallax-card",
+    "hero-title-line",
+    "hero-title-word",
+    "hero-parallax-sticky",
+    "hero-parallax-gallery",
+    "hero-copy-ambient-glow",
+    "hero-title-line-two",
+    "hero-float-greens-platter",
+    "hero-float-omelette",
+    "hero-float-simit",
+    "hero-float-black-olives",
+    "hero-float-apricot-jam",
+    "hero-provenance",
+    "hero-title-line-one",
+    "hero-float-cheese-platter",
+    "hero-float-pan",
+    "hero-float-tea",
+    "hero-top-curtain",
+    "hero-parallax-row",
+    "hero-is-visible",
+    "hero-provenance-year",
+    "hero-subtitle",
+    "hero-provenance-place",
+    "hero-title-accent",
+    "hero-subtitle-dot",
+    "hero-title-main"
+  ],
+  "measurements": [
+    {
+      "file": "src/app/globals.css",
+      "beforeBytes": 249826,
+      "afterBytes": 209548,
+      "beforeGzip": 45604,
+      "afterGzip": 38386,
+      "removedSelectors": 253
+    },
+    {
+      "file": "src/app/mobile-header-hero.css",
+      "beforeBytes": 19397,
+      "afterBytes": 8587,
+      "beforeGzip": 3191,
+      "afterGzip": 1813,
+      "removedSelectors": 64
+    },
+    {
+      "file": "src/app/desktop-refinement.css",
+      "beforeBytes": 13878,
+      "afterBytes": 2796,
+      "beforeGzip": 2706,
+      "afterGzip": 980,
+      "removedSelectors": 60
+    },
+    {
+      "file": "src/app/hero-navbar-refinement.css",
+      "beforeBytes": 17325,
+      "afterBytes": 16873,
+      "beforeGzip": 3721,
+      "afterGzip": 3645,
+      "removedSelectors": 4
+    }
+  ]
+}

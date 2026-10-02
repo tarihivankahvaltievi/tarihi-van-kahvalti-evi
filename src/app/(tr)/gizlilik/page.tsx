@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 
 export default function PrivacyPage() {
   return (
-    <LegalPageShell eyebrow="Kişisel veriler" title="Gizlilik Politikası" lastUpdated="28 Eylül 2026">
+    <LegalPageShell eyebrow="Kişisel veriler" title="Gizlilik Politikası" lastUpdated="2 Ekim 2026">
       <section>
         <h2>Bu sayfanın kapsamı</h2>
         <p>
@@ -38,8 +38,7 @@ export default function PrivacyPage() {
       <section>
         <h2>Üçüncü taraf hizmetleri</h2>
         <p>
-          Site kullanım istatistikleri için Google Analytics 4 kullanılır. Google sinyalleri ve reklam
-          kişiselleştirmesi kapalıdır. Google Haritalar,
+          Site kullanım istatistikleri için Google Analytics 4 ve dönüşüm ölçümü için Google Ads kullanılır. Telefon, yol tarifi ve WhatsApp tıklaması kaydedilen masa talebinden ayrı ölçülür; bunlar kesinleşmiş rezervasyon anlamına gelmez. Formdaki müşteri adı, telefon, tarih ve not analitik olaylarına gönderilmez. Dönüşüm tekrarlarını ayırmak için rezervasyon erişim kodunun kendisi yerine tek yönlü bir özet kullanılır. Google sinyalleri ve reklam kişiselleştirme sinyalleri kodda kapalıdır. Google Haritalar,
           Instagram ve WhatsApp bağlantılarını açtığınızda ilgili hizmetin kendi gizlilik koşulları geçerlidir.
           Harita, siz “Haritayı yükle” seçeneğini kullanmadan üçüncü taraf harita dosyalarını indirmez.
         </p>

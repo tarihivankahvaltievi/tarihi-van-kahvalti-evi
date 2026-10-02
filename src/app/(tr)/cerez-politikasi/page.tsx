@@ -11,12 +11,12 @@ export const metadata: Metadata = {
 
 export default function CookiePolicyPage() {
   return (
-    <LegalPageShell eyebrow="Tarayıcı depolaması" title="Çerez Politikası">
+    <LegalPageShell eyebrow="Tarayıcı depolaması" title="Çerez Politikası" lastUpdated="2 Ekim 2026">
       <section>
         <h2>Herkese açık site sayfaları</h2>
         <p>
           Ana sayfa, menü, konum ve İngilizce ziyaretçi rehberi site kullanımını ölçmek için analitik çerezler
-          kullanır. Site reklam veya kişiselleştirilmiş pazarlama çerezi kullanmaz.
+          kullanır. Google Ads etiketi telefon, yol tarifi, WhatsApp tıklamaları ve kaydedilen masa taleplerini ayrı dönüşüm eylemleri olarak ölçer. Reklam kişiselleştirme sinyallerinin gönderilmesi kodda kapalıdır.
         </p>
       </section>
       <section>
@@ -24,8 +24,8 @@ export default function CookiePolicyPage() {
         <p>
           Hangi sayfaların ziyaret edildiği ve siteyle nasıl etkileşim kurulduğu hakkında toplu istatistikler
           üretmek için Google Analytics 4 kullanılır. Google Analytics, ziyaret ve oturumları ayırt etmek için
-          tarayıcınıza <code>_ga</code> ile başlayan analitik çerezler yerleştirebilir. Google sinyalleri ve reklam
-          kişiselleştirmesi kapalıdır.
+          tarayıcınıza <code>_ga</code> ile başlayan analitik çerezler yerleştirebilir. Google Ads dönüşüm ölçümü de çerez kullanabilir. Google sinyalleri ve reklam
+          kişiselleştirme sinyalleri kodda kapalıdır. Müşteri adı, telefon, rezervasyon tarihi ve notu analitik olay parametrelerine eklenmez. Özel yönetim ve rezervasyon takvimi sayfalarında site etiketleri başlatılmaz.
         </p>
       </section>
       <section>

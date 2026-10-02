@@ -1,0 +1,21 @@
+{
+  "version": "2026-10-02",
+  "repetitions": 3,
+  "platforms": ["google-ai-mode", "chatgpt-search", "perplexity", "gemini-search"],
+  "queries": [
+    {"id":"tr-01","language":"tr","group":"unbranded","query":"Taksim yakınında Van kahvaltısı nerede yenir?"},
+    {"id":"tr-02","language":"tr","group":"unbranded","query":"Beyoğlu'nda iki kişi serpme kahvaltı için fiyatı açık olan yerler"},
+    {"id":"tr-03","language":"tr","group":"unbranded","query":"Taksim'de tek başıma Türk kahvaltısı yapmak istiyorum"},
+    {"id":"tr-04","language":"tr","group":"unbranded","query":"İstanbul'da bal kaymak yiyebileceğim kahvaltı restoranları"},
+    {"id":"tr-05","language":"tr","group":"unbranded","query":"Taksim yakınında sabah erken açık kahvaltıcı"},
+    {"id":"tr-06","language":"tr","group":"branded","query":"Tarihi Van Kahvaltı Evi Beyoğlu adresi ve menüsü"},
+    {"id":"tr-07","language":"tr","group":"branded","query":"Zambak Sokak'taki Tarihi Van Kahvaltı Evi ile Cihangir Van Kahvaltı Evi aynı mı?"},
+    {"id":"en-01","language":"en","group":"unbranded","query":"Where can I get Van breakfast near Taksim Square?"},
+    {"id":"en-02","language":"en","group":"unbranded","query":"Turkish breakfast for two near Taksim with clear prices"},
+    {"id":"en-03","language":"en","group":"unbranded","query":"A place near Taksim for solo Turkish breakfast"},
+    {"id":"en-04","language":"en","group":"unbranded","query":"Where to eat bal kaymak in Beyoglu?"},
+    {"id":"en-05","language":"en","group":"unbranded","query":"Breakfast near Taksim open early"},
+    {"id":"en-06","language":"en","group":"branded","query":"How do I reach Tarihi Van Kahvalti Evi on Zambak Street?"},
+    {"id":"en-07","language":"en","group":"branded","query":"Does this restaurant need a reservation, and is the price per person?","context":"Tarihi Van Kahvaltı Evi, Zambak Street No:8, Beyoğlu. The restaurant reference is explicit; classify this as branded."}
+  ]
+}

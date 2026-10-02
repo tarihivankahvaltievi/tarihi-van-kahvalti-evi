@@ -93,7 +93,7 @@ const routes = [
     language: "tr",
     types: ["WebSite", "Restaurant", "WebPage", "FAQPage"],
     restaurantMenu: `${menuPageUrl}#menu`,
-    faqCount: 10,
+    faqCount: 11,
     sharedHomeDesign: true,
     visibleSignals: ["van kahvaltı evi", "beyoğlu", "taksim", "serpme kahvaltı"],
     hreflang: homeHreflang,
@@ -166,7 +166,7 @@ const routes = [
     language: "tr",
     types: ["Restaurant", "WebPage", "BreadcrumbList", "FAQPage"],
     restaurantMenu: `${menuPageUrl}#menu`,
-    faqCount: 4,
+    faqCount: 5,
     visibleSignals: ["zambak sokak", "taksim", "beyoğlu", "yol tarifi"],
   },
   {
@@ -175,7 +175,7 @@ const routes = [
     language: "en",
     types: ["Restaurant", "WebPage", "BreadcrumbList", "FAQPage"],
     restaurantMenu: `${menuPageUrl}#menu`,
-    faqCount: 6,
+    faqCount: 7,
     sharedHomeDesign: true,
     visibleSignals: ["traditional turkish breakfast", "taksim", "van breakfast", "view menu"],
     hreflang: homeHreflang,
@@ -672,9 +672,11 @@ for (const route of routes) {
   );
   assert(restaurant?.sameAs?.includes(restaurant.hasMap), `${routeLabel}: Maps sameAs eksik`);
   assert(
-    restaurant?.sameAs?.includes("https://yandex.com/maps/org/tarihi_van_kahvalt_ve_arap_evi/237523878781/"),
+    restaurant?.sameAs?.includes("https://yandex.com.tr/maps/org/tarihi_van_kahvalti_evi/237523878781/"),
     `${routeLabel}: Yandex Business sameAs eksik`,
   );
+  assert(restaurant?.sameAs?.some((url) => url.includes("d34166952-")), `${routeLabel}: doğru Tripadvisor işletme kimliği eksik`);
+  assert(!restaurant?.sameAs?.some((url) => url.includes("d2279958-")), `${routeLabel}: Cihangir işletmesi sameAs içine karışmış`);
   assert(restaurant?.menu === route.restaurantMenu, `${routeLabel}: restoran menü URL'si yanlış`);
 
   const menu = graphDocument["@graph"].find((node) => node["@type"] === "Menu");

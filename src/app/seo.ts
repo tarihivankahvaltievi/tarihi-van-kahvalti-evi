@@ -74,15 +74,18 @@ export const mapsUrl =
 // Dated public-profile observation, not a live feed or a review-rich-result claim.
 // Recheck this exact CID before changing the values or the observation date.
 export const googleMapsSnapshot = {
-  rating: 4.9,
-  reviewCount: 1599,
-  checkedAt: "2026-10-01",
+  rating: 4.8,
+  reviewCount: 1602,
+  checkedAt: "2026-10-02",
   sourceUrl: mapsUrl,
 } as const;
 // Yandex Business'ta doğrulanacak mevcut işletme kaydı. Site ile profilin
 // adresi ve çalışma saatleri aynı tutulmalıdır.
 export const yandexMapsUrl =
-  "https://yandex.com/maps/org/tarihi_van_kahvalt_ve_arap_evi/237523878781/";
+  "https://yandex.com.tr/maps/org/tarihi_van_kahvalti_evi/237523878781/";
+// Address and phone match Zambak No:8; d2279958 belongs to another restaurant.
+export const tripadvisorUrl =
+  "https://www.tripadvisor.com.tr/Restaurant_Review-g293974-d34166952-Reviews-Tarihi_Van_KahvaltI_ve_Sarap_Evi-Istanbul.html";
 export const whatsappUrl =
   "https://wa.me/905415252868?text=Merhaba%2C%20Tarihi%20Van%20Kahvalt%C4%B1%20Evi%20i%C3%A7in%20rezervasyon%20bilgisi%20almak%20istiyorum.";
 export const instagramUrl = "https://www.instagram.com/tarihivankahvaltievi/";
@@ -91,6 +94,7 @@ export const sameAsUrls = [
   mapsUrl,
   yandexMapsUrl,
   instagramUrl,
+  tripadvisorUrl,
 ];
 
 export const cuisine = [
@@ -114,6 +118,10 @@ export const faqItems = [
   {
     question: "Tarihi Van Kahvaltı Evi nerede?",
     answer: `${siteName}, ${displayAddress} adresindedir; Taksim Meydanı ve İstiklal Caddesi'ne yürüme mesafesindedir.`,
+  },
+  {
+    question: "Cihangir'deki Van Kahvaltı Evi kaydı bu adresi mi gösteriyor?",
+    answer: "Bu web sitesinin menüsü ve masa talepleri Zambak Sokak No:8, Beyoğlu adresindeki Tarihi Van Kahvaltı Evi içindir. Cihangir'de Defterdar Yokuşu No:52/A adresini gösteren Van Kahvaltı Evi kaydı bu sitenin ziyaret adresi değildir. Yol tarifi alırken Zambak Sokak No:8 ve 0541 525 28 68 bilgilerini kontrol edin.",
   },
   {
     question: "Çalışma saatleri nedir?",

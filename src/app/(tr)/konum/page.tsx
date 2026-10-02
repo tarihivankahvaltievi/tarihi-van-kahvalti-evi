@@ -32,6 +32,10 @@ const locationFaqItems = [
     answer: `${siteName}, ${displayAddress} adresindedir. Taksim Meydanı ve İstiklal Caddesi çevresinden yürüyerek ulaşılabilir.`,
   },
   {
+    question: "Cihangir'deki Van Kahvaltı Evi kaydı doğru ziyaret adresi mi?",
+    answer: "Bu sitedeki menü ve masa talepleri Zambak Sokak No:8 adresindeki Tarihi Van Kahvaltı Evi içindir. Defterdar Yokuşu No:52/A adresini gösteren Cihangir kaydı bu sitenin ziyaret adresi değildir. Haritada Zambak Sokak No:8 ve 0541 525 28 68 bilgilerini kontrol edin.",
+  },
+  {
     question: "Taksim Metro'dan Tarihi Van Kahvaltı Evi'ne nasıl gidilir?",
     answer:
       "M2 Taksim istasyonundan Sıraselviler yönüne çıkın. Sıraselviler Caddesi üzerinden Zambak Sokak'a ilerleyerek mekâna ulaşabilirsiniz. Güncel yaya rotası için sayfadaki Google Haritalar bağlantısını kullanın.",

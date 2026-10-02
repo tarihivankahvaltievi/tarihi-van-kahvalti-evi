@@ -205,7 +205,7 @@ export function ReservationView({
 
     // A WhatsApp handoff alone does not prove that the request was saved.
     if (createdId) {
-      trackBookingLead({
+      void trackBookingLead({
         locale,
         service_type: serviceType,
         reservation_id: createdId,

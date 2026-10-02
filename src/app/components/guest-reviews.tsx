@@ -1,4 +1,4 @@
-import { googleMapsSnapshot } from "../seo";
+import { googleMapsSnapshot, tripadvisorUrl } from "../seo";
 import type { SiteLocale } from "../home-localization";
 import styles from "./guest-reviews.module.css";
 
@@ -18,6 +18,9 @@ export function GuestReviews({ locale = "tr" }: { locale?: SiteLocale }) {
           </p>
           <a className={styles.viewAll} href={googleMapsSnapshot.sourceUrl} target="_blank" rel="noopener noreferrer" data-analytics-purpose="review_source" data-analytics-surface="guest_reviews">
             {isEn ? "Read the reviews and their dates at the source" : "Yorumları ve tarihlerini kaynağında okuyun"}
+          </a>
+          <a className={styles.viewAll} href={tripadvisorUrl} target="_blank" rel="noopener noreferrer" data-analytics-purpose="review_source" data-analytics-surface="guest_reviews_tripadvisor">
+            {isEn ? "View our Zambak Street business profile on Tripadvisor" : "Tripadvisor’da Zambak Sokak işletme profilimiz"}
           </a>
         </header>
       </div>

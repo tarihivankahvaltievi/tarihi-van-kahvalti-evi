@@ -4,6 +4,10 @@ export type SiteLocale = "tr" | "en";
 
 export const englishFaqItems = [
   {
+    question: "Is the Van Kahvaltı Evi listing in Cihangir the address for this website?",
+    answer: "The menu and table requests on this website are for Tarihi Van Kahvaltı Evi at Zambak Street No:8 in Beyoğlu. The Cihangir listing at Defterdar Yokuşu No:52/A is not the visiting address for this website. Check Zambak Street No:8 and +90 541 525 2868 when choosing directions.",
+  },
+  {
     question: "Where can I have a traditional Turkish breakfast near Taksim?",
     answer:
       "Tarihi Van Kahvaltı Evi serves a traditional Van-style Turkish breakfast on Zambak Street in Beyoğlu, within walking distance of Taksim Square and İstiklal Avenue.",
