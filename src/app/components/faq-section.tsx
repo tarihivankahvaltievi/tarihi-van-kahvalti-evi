@@ -30,9 +30,6 @@ export function FaqSection({ locale = "tr" }: { locale?: SiteLocale }) {
                   className={styles.question}
                   aria-controls={answerId}
                 >
-                  <span className={styles.number} aria-hidden="true">
-                    {String(index + 1).padStart(2, "0")}
-                  </span>
                   <span className={styles.questionText}>{faq.question}</span>
                   <span className={styles.toggle} aria-hidden="true" />
                 </summary>
