@@ -1773,7 +1773,7 @@ export function AdminDashboard({
                   <textarea
                     value={itemForm.description || ""}
                     onChange={(e) => setItemForm((prev) => ({ ...prev, description: e.target.value }))}
-                    placeholder="Otlu peynir, murtuğa, kavut, cacık, kete, bal-kaymak ve sınırsız çay."
+                    placeholder="Otlu peynir, murtuğa, kavut, pişi, bal-kaymak ve çay."
                     className="w-full px-3 py-2 border rounded-lg text-sm bg-white focus:outline-none focus:border-red-800 h-16 resize-none"
                   />
                 </div>
@@ -2253,4 +2253,3 @@ export function AdminDashboard({
     </div>
   );
 }
-

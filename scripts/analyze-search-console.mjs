@@ -46,6 +46,7 @@ const [organic, ai, pages, queries, devices, countries, aiPages, organicFilters,
   csv(args.ai, 'Sayfa sayısı.csv'), csv(args.organic, 'Filtreler.csv'), csv(args.ai, 'Filtreler.csv'),
 ]);
 const total = (rows, key) => {
+  if (!rows.length) return null;
   const values = rows.map(row => number(row[key]));
   return values.some(value => value === null) ? null : values.reduce((sum, value) => sum + value, 0);
 };

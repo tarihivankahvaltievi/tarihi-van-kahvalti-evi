@@ -72,10 +72,28 @@ function renderRoute(path) {
 window.dataLayer = []; delete window.vanTagsInitialized;
 renderRoute('/'); renderRoute('/'); renderRoute('/menu'); renderRoute('/admin');
 assert.equal(events().filter(e => e[1] === 'page_view').length, 2);
-assert.equal(events().find(e => e[0] === 'config' && e[1] === policy.analyticsId)[2].send_page_view, false);
+const gaConfig = events().find(e => e[0] === 'config' && e[1] === policy.analyticsId)[2];
+assert.equal(gaConfig.send_page_view, false);
+assert.equal(gaConfig.allow_google_signals, false);
+assert.equal(gaConfig.allow_ad_personalization_signals, false);
 assert.equal(window[`ga-disable-${policy.analyticsId}`], true);
 assert.ok(!JSON.stringify(events()).includes('PRIVATE'));
 renderRoute('/en/menu');
 assert.equal(window[`ga-disable-${policy.analyticsId}`], false);
 assert.equal(events().filter(e => e[1] === 'page_view').length, 3);
+
+// Deployment settings can intentionally disable either destination. A queued
+// event must never fall back to another property or a malformed Ads label.
+for (const settings of [
+  { NEXT_PUBLIC_GA4_MEASUREMENT_ID: '', NEXT_PUBLIC_GOOGLE_ADS_ID: '' },
+  { NEXT_PUBLIC_GA4_MEASUREMENT_ID: 'invalid', NEXT_PUBLIC_GOOGLE_ADS_ID: 'invalid' },
+]) {
+  const disabledWindow = { location: { href: `${policy.analyticsOrigin}/rezervasyon` } };
+  const disabledContext = { ...context, window: disabledWindow, process: { env: settings } };
+  const disabledPolicy = loadModule('src/app/analytics-policy.ts', disabledContext);
+  const disabledAnalytics = loadModule('src/app/analytics.ts', disabledContext, { react: { useEffect() {} }, './analytics-policy': disabledPolicy });
+  disabledAnalytics.trackEvent('contact_click', { contact_method: 'phone' });
+  await disabledAnalytics.trackBookingLead({ reservation_id: reservationId });
+  assert.equal(disabledWindow.dataLayer, undefined);
+}
 console.log('Analytics checks passed: public routes, SPA deduplication, private routes, query/referrer scrubbing, hashed booking tokens and separate contact conversions.');

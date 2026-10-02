@@ -137,6 +137,7 @@ const sourceItems = {
 export const guides: Record<GuideLocale, GuideContent> = {
   en: {
     locale: "en",
+    dates: { published: "2026-07-21T09:00:00+03:00", modified: "2026-10-02", visible: "2 October 2026" },
     languageTag: "en",
     direction: "ltr",
     path: guidePaths.en,
@@ -170,7 +171,7 @@ export const guides: Record<GuideLocale, GuideContent> = {
       title: "What is a traditional Turkish breakfast?",
       paragraphs: [
         "Turkish breakfast—kahvaltı—is a shared meal of savoury and sweet dishes served together. Cheese, olives, tomatoes, cucumber, eggs, bread, honey, clotted cream and preserves form the familiar foundation. Tea is not a side note: it sets the pace of the meal and is refreshed throughout the table.",
-        "A Van breakfast is a distinctive regional expression of that tradition. It adds flavours associated with Van in eastern Türkiye, including aromatic Van herb cheese, murtuğa, kavut, thick herb-filled cacık, kete and hot egg dishes. The result is generous, but its real character comes from variety, contrast and the habit of lingering together.",
+        "A Van breakfast is a distinctive regional expression of that tradition. It adds flavours associated with Van in eastern Türkiye, including aromatic Van herb cheese, murtuğa, kavut, thick herb-filled cacık and hot egg dishes. The result is generous, but its real character comes from variety, contrast and the habit of lingering together.",
         "At Tarihi Van Kahvaltı Evi, our family has carried this breakfast culture since 1978. Today we serve it in a historic building on Zambak Street in Beyoğlu, close to Taksim Square, İstiklal Avenue and Cihangir.",
       ],
     },
@@ -216,7 +217,7 @@ export const guides: Record<GuideLocale, GuideContent> = {
             "Fried eggs, menemen, or eggs with sucuk or kavurma arrive hot and give the shared spread its hearty centre.",
         },
         {
-          name: "Bread, kete and pastries",
+          name: "Bread and pişi",
           role: "Made for dipping and sharing",
           description:
             "Different textures carry the savoury cheeses, pan juices, butter, honey and preserves from one bite to the next.",
@@ -311,11 +312,12 @@ export const guides: Record<GuideLocale, GuideContent> = {
     },
     footer: { note: "Traditional Van breakfast in Beyoğlu since 1978.", home: "English home", menu: "Menu", directions: "Directions" },
     updatedLabel: "Last reviewed",
-    dateLabel: "21 July 2026",
+    dateLabel: "2 October 2026",
     authorLabel: "Tarihi Van Kahvaltı Evi editorial team",
   },
   ru: {
     locale: "ru",
+    dates: { published: "2026-07-21T09:00:00+03:00", modified: "2026-10-02", visible: "2 октября 2026" },
     languageTag: "ru",
     direction: "ltr",
     path: guidePaths.ru,
@@ -341,7 +343,7 @@ export const guides: Record<GuideLocale, GuideContent> = {
       title: "Что такое традиционный турецкий завтрак?",
       paragraphs: [
         "Турецкий завтрак — kahvaltı — это совместная трапеза, где солёные и сладкие блюда появляются на столе одновременно. Сыры, оливки, помидоры, огурцы, яйца, свежий хлеб, мёд, каймак и варенье составляют привычную основу. Чай задаёт ритм завтрака: его подливают в небольшие стаканы на протяжении всей встречи.",
-        "Ванский завтрак — особая региональная версия этой традиции. В ней важны продукты восточной провинции Ван: ароматный сыр с травами, муртуга, кавут, густой зелёный джаджик, выпечка кете и горячие блюда с яйцом. Главное здесь не количество, а разнообразие вкусов и неторопливое общение.",
+        "Ванский завтрак — особая региональная версия этой традиции. В ней важны продукты восточной провинции Ван: ароматный сыр с травами, муртуга, кавут, густой зелёный джаджик и горячие блюда с яйцом. Главное здесь не количество, а разнообразие вкусов и неторопливое общение.",
         "Семейная история Tarihi Van Kahvaltı Evi связана с ванским завтраком с 1978 года. Сегодня мы продолжаем её в историческом здании на улице Zambak в Бейоглу — недалеко от площади Таксим, улицы Истикляль и района Джихангир.",
       ],
     },
@@ -355,7 +357,7 @@ export const guides: Record<GuideLocale, GuideContent> = {
         { name: "Ванский джаджик", role: "Свежий акцент", description: "Гуще привычного джаджика: процеженный йогурт или творожная основа, свежая зелень и перец уравновешивают горячие блюда." },
         { name: "Мёд и каймак", role: "Классическая сладкая пара", description: "Ароматный мёд и нежные густые сливки на свежем хлебе — один из самых простых и запоминающихся вкусов стола." },
         { name: "Яйца на горячей сковороде", role: "Готовятся перед подачей", description: "Яичница, менемен, яйца с суджуком или кавурмой подаются горячими и становятся сытным центром общей трапезы." },
-        { name: "Хлеб, кете и выпечка", role: "Для каждого соуса и намазки", description: "Разные виды выпечки соединяют сыр, сок горячих блюд, масло, мёд и варенье в постоянно меняющиеся сочетания." },
+        { name: "Хлеб и пиши", role: "Для каждого соуса и намазки", description: "Хлеб и пиши соединяют сыр, сок горячих блюд, масло, мёд и варенье в постоянно меняющиеся сочетания." },
         { name: "Свежий турецкий чай", role: "Ритм завтрака", description: "Чай в стаканах-тюльпанах регулярно подливают, поэтому завтрак превращается в спокойный ритуал общения." },
       ],
     },
@@ -416,7 +418,7 @@ export const guides: Record<GuideLocale, GuideContent> = {
     closing: { title: "Приходите за завтраком. Оставайтесь ради общения.", text: "Попробуйте вкусы настоящего ванского завтрака в историческом Бейоглу — там, где семейная история продолжается с 1978 года.", menu: "Посмотреть актуальное меню", directions: "Построить маршрут" },
     footer: { note: "Традиционный ванский завтрак в Бейоглу с 1978 года.", home: "Главная на английском", menu: "Меню", directions: "Как добраться" },
     updatedLabel: "Проверено",
-    dateLabel: "21 июля 2026",
+    dateLabel: "2 октября 2026",
     authorLabel: "Редакция Tarihi Van Kahvaltı Evi",
   },
   ar: {

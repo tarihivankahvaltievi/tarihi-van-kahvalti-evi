@@ -26,7 +26,7 @@ const timeline = [
   },
 ];
 
-const tastes = ["Otlu peynir", "Bal & kaymak", "Van ketesi", "Murtuğa", "Kavut", "Demli çay"];
+const tastes = ["Otlu peynir", "Bal & kaymak", "Pişi", "Murtuğa", "Kavut", "Demli çay"];
 
 function Reveal({
   children,
@@ -215,7 +215,7 @@ export function StoryExperience() {
             <p className={styles.chapterName}>Van&apos;a özgü lezzetler</p>
             <h2 id="table-title">Geleneksel Van kahvaltısının en özel hâli</h2>
             <p>
-              Otlu peynirden bal ve kaymağa, Van ketesinden sıcacık çaya uzanan soframız; doğal lezzetleri,
+              Otlu peynirden bal ve kaymağa, pişiden sıcacık çaya uzanan soframız; yöresel lezzetleri,
               özenle seçilen yöresel ürünleri ve samimi sunumuyla hazırlanır.
             </p>
             <p>

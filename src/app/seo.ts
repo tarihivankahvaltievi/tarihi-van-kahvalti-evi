@@ -226,7 +226,7 @@ export const localSeoFacts = [
   },
   {
     label: "Van kahvaltısı",
-    value: "Otlu peynir, murtuğa, kavut, kete, bal-kaymak, sıcak sahanlar ve çayla serpme sofra.",
+    value: "Otlu peynir, murtuğa, kavut, pişi, bal-kaymak, sıcak sahanlar ve çayla serpme sofra.",
     href: "/menu",
     linkLabel: "Menüyü gör",
   },

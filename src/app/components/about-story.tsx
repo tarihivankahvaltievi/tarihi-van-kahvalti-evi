@@ -80,12 +80,12 @@ export function AboutStory({ locale = "tr" }: { locale?: string }) {
             <p>
               {isEn ? (
                 <>
-                  A generous breakfast, warm bread from the oven and unhurried conversation—this is
+                  A generous breakfast, warm pişi and unhurried conversation—this is
                   our invitation to gather around the table.
                 </>
               ) : (
                 <>
-                  Taze ürünler, fırından çıkan sıcak kete ve uzun sohbetler için kurulan cömert bir
+                  Taze ürünler, sıcacık pişi ve uzun sohbetler için kurulan cömert bir
                   sofra. Bizim kahvaltı anlayışımız bu kadar yalın.
                 </>
               )}

@@ -43,7 +43,7 @@ const guideFaqItems = [
   {
     question: "Van kahvaltısında vejetaryen seçenekler var mı?",
     answer:
-      "Menüde otlu peynir, bal-kaymak, reçel, kete, pişi, murtuğa, kavut ve bazı yumurtalı seçenekler gibi vejetaryen ürünler bulunur. İçerik, alerjen ve günlük uygunluk için sipariş öncesinde ekibe danışılmalıdır.",
+      "Menüde otlu peynir, bal-kaymak, reçel, pişi, murtuğa, kavut ve bazı yumurtalı seçenekler bulunur. Vejetaryen beslenmeye uygunluk, peynir mayası, içerik, alerjen ve günlük hazırlık için sipariş öncesinde ekibe danışılmalıdır.",
   },
   {
     question: "Taksim'de Van kahvaltısı için ne zaman gelmeli?",
@@ -107,7 +107,7 @@ export default function VanBreakfastGuidePage() {
         description: guideDescription,
         inLanguage: "tr-TR",
         isPartOf: { "@id": `${siteUrl}/#website` },
-        dateModified: "2026-07-20",
+        dateModified: "2026-10-02",
         publisher: { "@id": `${siteUrl}/#restaurant` },
         about: [
           { "@type": "Thing", name: "Van kahvaltısı" },
@@ -227,6 +227,8 @@ export default function VanBreakfastGuidePage() {
                 <p>
                   Her ürünün sofrada ayrı bir rolü vardır. Tuzlu, sıcak, tatlı ve hamur işi tabakları aynı anda
                   paylaşılır; ürünlerin günlük veya mevsimlik bulunabilirliği değişebilir.
+                  {" "}Bu bölüm yöresel kültürü anlatır; kete güncel işletme menüsünde yer almaz.
+                  Sipariş verilebilen ürünler için <Link href="/menu">canlı menüyü</Link> inceleyin.
                 </p>
               </header>
               <dl className={styles.flavourList}>
@@ -258,7 +260,7 @@ export default function VanBreakfastGuidePage() {
                 <ol className={styles.numberedList}>
                   <li>Önce peynir, zeytin, cacık, bal-kaymak ve reçeller gibi paylaşımlık tabakları tanıyın.</li>
                   <li>Murtuğa, kavut ve yumurtalı sahanları sıcaklığını korurken ortaklaşa tadın.</li>
-                  <li>Kete, pişi ve ekmekleri tatlı ve tuzlu eşlikçilerle farklı biçimlerde deneyin.</li>
+                  <li>Pişi ve ekmekleri tatlı ve tuzlu eşlikçilerle farklı biçimlerde deneyin.</li>
                   <li>Çayı acele etmeden yenileyin; Van sofrasının özü uzun sohbet ve paylaşımda saklıdır.</li>
                 </ol>
                 <p className={styles.serviceNote}>

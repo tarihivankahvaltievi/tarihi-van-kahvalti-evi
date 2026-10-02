@@ -222,7 +222,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     },
     {
       url: breakfastGuideUrl,
-      lastModified: pageLastModified,
+      lastModified: homeLastModified,
       changeFrequency: "monthly",
       priority: 0.8,
       images: uniqueImages([
@@ -247,7 +247,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     },
     {
       url: storyUrl,
-      lastModified: visitorContentLastModified,
+      lastModified: homeLastModified,
       changeFrequency: "yearly",
       priority: 0.6,
       images: uniqueImages([
@@ -338,7 +338,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     },
     {
       url: englishBreakfastBlogUrl,
-      lastModified: pageLastModified,
+      lastModified: homeLastModified,
       changeFrequency: "monthly",
       priority: 0.7,
       images: internationalGuideImages,
@@ -346,7 +346,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     },
     {
       url: russianBreakfastBlogUrl,
-      lastModified: pageLastModified,
+      lastModified: homeLastModified,
       changeFrequency: "monthly",
       priority: 0.7,
       images: internationalGuideImages,
