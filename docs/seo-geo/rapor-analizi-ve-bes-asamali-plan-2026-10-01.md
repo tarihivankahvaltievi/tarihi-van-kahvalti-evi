@@ -26,7 +26,7 @@ Raporun ana teşhisi yerinde: site temel teknik SEO altyapısına sahip, fakat z
 
 Google’ın seçtiği canonical, gerçek bot erişimi, CWV saha verisi, sorgu niyeti çakışması, GBP eylemleri ve rezervasyon sonuçları HTML yanıtından çıkarılamaz. HTTP 200 indekslenme kanıtı değildir. Bir bot User-Agent’ıyla yapılan istek, doğrulanmış bot IP’si veya gerçek crawl log’u değildir.
 
-Rapor özel hesap verisi görmemişti. Bu çalışmada yayımdan önce açık Search Console oturumundan organik ve üretken AI performans raporlarına salt okunur erişim doğrulandı. Başlangıç gözlemi Git deposu dışında yerel olarak tutulur. Özellikle AI raporunda gösterim bulunması, “AI görünürlüğü hiç yok” şeklinde bir teşhisi desteklemez. Bu veri bütün AI platformlarına veya gerçekleşmiş restoran ziyaretlerine genellenemez. GBP/GA4 ve onaylanan rezervasyon karşılaştırması henüz tamamlanmadı.
+Rapor özel hesap verisi görmemişti. Bu çalışmada yayımdan önce açık Search Console oturumundan organik ve üretken AI performans raporlarına salt okunur erişim doğrulandı; ayrıca Google işletme profilindeki mevcut menü kayıtları gözden geçirilip düzenlendi, GA4 web akışı doğrulandı ve privacy-safe olay entegrasyonu kuruldu. Başlangıç gözlemi Git deposu dışında yerel olarak tutulur. Özellikle AI raporunda gösterim bulunması, “AI görünürlüğü hiç yok” şeklinde bir teşhisi desteklemez. Bu veri bütün AI platformlarına veya gerçekleşmiş restoran ziyaretlerine genellenemez. GA4'te gerçek rezervasyon talebi alımının Realtime doğrulaması, dış profil moderasyonları ve onaylı rezervasyonlarla dönemsel karşılaştırma açık iş olarak kalır. Ayrıntılar ve son sınırlar [bölüm 4–5 kapanış kaydındadır](bolum-4-5-tamamlama-2026-10-02.md).
 
 ### Raporun önerilerindeki sınırlar
 

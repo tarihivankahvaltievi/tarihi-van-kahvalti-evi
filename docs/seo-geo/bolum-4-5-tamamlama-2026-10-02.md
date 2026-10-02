@@ -70,7 +70,7 @@ GA4 lead olayından yapay 1 TL gelir değeri kaldırıldı. Mevcut Ads dönüş�
 
 Ham hesap verisi deposunun dışında tutulur. Kamu raporunda özel trafik hacimleri ve kullanıcı/hesap kimlikleri yayımlanmadı. Gerçek onaylı rezervasyonlar, `generate_lead` veya WhatsApp tıklamasıyla eşitlenmedi. Yeni üretim talebi açılarak sahte dönüşüm testi yapılmadı.
 
-Bing mevcut oturumla otomatik erişilebilir değildi; Google bağlantısı yeni veri erişimi/onay gerektiren ekrana geldi. Yeni grant verilmedi. Bu nedenle Bing AI görünürlüğü ölçülmedi, sıfır kabul edilmedi. Vercel panelinde açık hesap bu projeye erişemedi; alan adı yönlendirmesinin hosting ayarı değiştirilemedi.
+Bing mevcut oturumla otomatik erişilebilir değildi; Google bağlantısı yeni veri erişimi/onay gerektiren ekrana geldi. Yeni grant verilmedi. Bu nedenle Bing AI görünürlüğü ölçülmedi, sıfır kabul edilmedi. Vercel'de doğru proje ve alan adı ayarları doğrulandı; GitHub bağlantısı mevcut ve yeni `main` commit'i otomatik olarak production'a dağıtıldı. Alan adında apex→www yönü kalıcı olarak doğrulandı. HTTP isteklerinin önce HTTPS'e, ardından www'ye 308 ile yönlenmesi uygulama kaynaklı değil; Vercel'in HTTPS zorlamasının alan adı yönlendirmesinden önce çalışması nedeniyle gözlenen platform zinciridir. Vercel'in zorunlu HTTPS yönlendirmesi kapatılamaz; bu nedenle iki adım uygulama kodundan teke indirilemez.
 
 ## 4. İngilizce içerik niyeti kararı
 
@@ -127,7 +127,7 @@ Canlı yayım, yeni PageSpeed ölçümleri ve hesap akışına gerçek tag eriş
 | 18 | CWV | Ölçüme dayanan görsel yükleme ve sınırlı CSS temizliği; güvenli vitals toplama hazır. | Yeni saha p75’i yeterli örnek oluşmadan başarı sayılmaz. |
 | 19 | Fiziksel erişim | Belirsiz erişilebilirlik iddiaları yerine ziyaret öncesi gerçek ihtiyaç teyidi. | Kapı/basamak/tuvalet saha ölçümü ve onaylı fotoğraf uzaktan üretilemez. |
 | 20 | EN niyet ayrımı | Farklı rehber niyetleri korunur; başlangıç/veri yaşı incelendi. | Tam 28 gün ve sayfa×sorgu matrisiyle tekrar değerlendirme gerekir. |
-| 21 | HTTP apex zinciri | Uygulama canonical/legacy yönlendirmeleri tek hedefte test edildi. | Hosting’in HTTP→HTTPS→www ek adımı panel erişimi olmadığı için kaldı. |
+| 21 | HTTP apex zinciri | Apex→www alan adı yönlendirmesi ve production hedefi doğrulandı. | HTTP→HTTPS→www iki adım Vercel'in zorunlu HTTPS yönlendirme sırasından kaynaklanır; uygulama kodu bu platform kuralını değiştiremez. |
 | 22 | ES/ZH hreflang | Gerçek hub ve eşdeğer yazı kümeleri; karşılıklı hreflang/sitemap testleri tamam. | — |
 | 23 | Bağımsız kaynak | Doğru olgusal işletme paketi ve profil kaynakları hazır. | Bağımsız ziyaret/editoryal deneyim satın alınmadı veya uydurulmadı; dış iletişim yapılmadı. |
 | 24 | Tekrarlı AI paneli | 14 sorgu/4 platform/3 tekrar protokolü ve doğrulayıcı; gerçek tanısal denemeler mevcut. | Tam 168 hücre ve sonraki karşılaştırma tamamlanmış sayılmaz; erişilemeyen ölçümler null. |
@@ -155,4 +155,9 @@ Kurulu Next 16.3.5 Script, usePathname, useReportWebVitals ve CSS belgeleri yere
 
 ## 9. Son canlı kontrol
 
-Yayım ve son performans kanıtları tamamlandığında bu bölüm somut commit ve ölçüm tarihleriyle doldurulur.
+- Uygulama commit'i: [`2adebd9`](https://github.com/tarihivankahvaltievi/tarihi-van-kahvalti-evi/commit/2adebd9eedb79b4a4ec49c11f79a7f07f21c8979), `main`. Commit GitHub `origin/main` ile karşılaştırıldı; gönderilmemiş yerel değişiklik yoktu.
+- Production: Vercel'in GitHub entegrasyonu bu commit'i production'a otomatik dağıttı; deployment Ready/Current olarak doğrulandı. Production alias `https://www.tarihivankahvaltievi.com/`.
+- Canlı temel SEO kontrolü: 30 canonical sayfa ve 48 eski URL için denetim geçti. Ana sayfa, TR/EN rehberleri ve `llms.txt` canlı yanıtlarda güncel menüyle çelişen “kete sunuluyor” ifadesi vermiyor; kültürel rehberde kete ile güncel işletme menüsü ayrıca ayrılıyor.
+- Yayımdan sonra alınan bir PageSpeed mobil laboratuvar örneğinde ana sayfa LCP 4.893 ms, FCP 3.301 ms, TBT 456 ms, CLS 0 ölçüldü. Bu tek sentetik laboratuvar çalışmasıdır; saha p75'i veya deploy öncesi/sonrası nedensel karşılaştırma değildir. Kullanılabilir URL düzeyi CrUX örneği ana sayfa için 28 günlük LCP 2,2 sn, INP 127 ms ve CLS 0 gösteriyordu. URL düzeyi olmayan diğer sayfalara ana sayfa sonucu genellenmez.
+- Build, lint, analytics, menü ve yerel/canlı SEO doğrulamaları bu uygulama commit'i için geçti. GA4 arayüzünde `generate_lead` önemli olay yapıldı ve sekiz düşük kardinaliteli özel boyut ile bir metrik kaydedildi. Gerçek üretim `generate_lead` alımı Realtime'da görülmeden veri alımı doğrulandı sayılmaz; sahte talep oluşturulmadı.
+- Bu kapanış belgesi ile ilk beş aşamalı analiz notu hesap oturumundan sonra güncellendi. Dizin düzeltmeleri, AI panelinin tüm ölçümleri ve yeterli süreye yayılan SEO/CWV sonuçları aşağıdaki açık koşullardır.
