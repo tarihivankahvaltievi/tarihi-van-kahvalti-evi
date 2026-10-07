@@ -153,7 +153,6 @@ export const metadata: Metadata = {
 import { WebVitals } from "./components/web-vitals";
 import { AnalyticsAutoTracker } from "./analytics";
 import { GoogleTags } from "./components/google-tags";
-import { CoffeeOffer } from "./components/coffee-offer";
 
 export function RootDocument({
   children,
@@ -179,7 +178,6 @@ export function RootDocument({
         <WebVitals endpoint={webVitalsEndpoint?.startsWith("/") && !webVitalsEndpoint.startsWith("//") ? webVitalsEndpoint : undefined} />
         <a className="skip-link" href="#main-content">{siteLanguages[locale].skip}</a>
         {children}
-        <Suspense fallback={null}><CoffeeOffer locale={locale} /></Suspense>
       </body>
     </html>
   );
