@@ -19,7 +19,7 @@ await new Promise((resolve) => portProbe.close(resolve));
 const base = `http://127.0.0.1:${port}`;
 const password = randomBytes(24).toString("hex");
 const server = spawn(process.execPath, ["node_modules/next/dist/bin/next", "start", "--hostname", "127.0.0.1", "--port", String(port)], {
-  env: { ...process.env, SUPABASE_URL: "", SUPABASE_SERVICE_ROLE_KEY: "", MENU_DATA_FILE: menuFile, INDEXNOW_DRY_RUN: "1", ADMIN_PASSWORD: password, ADMIN_SESSION_SECRET: randomBytes(24).toString("hex") },
+  env: { ...process.env, SUPABASE_URL: "", SUPABASE_SERVICE_ROLE_KEY: "", MENU_DATA_FILE: menuFile, RESERVATION_DATA_FILE: path.join(testDirectory, "reservations.json"), INDEXNOW_DRY_RUN: "1", ADMIN_PASSWORD: password, ADMIN_SESSION_SECRET: randomBytes(24).toString("hex") },
   stdio: ["ignore", "pipe", "pipe"],
 });
 let serverLog = "";
@@ -88,7 +88,23 @@ try {
   for (const route of ["menu", "en/menu"]) {
     const prerender = plainHtml(await readFile(`.next/server/app/${route}.html`, "utf8"));
     assert.equal((prerender.match(/data-menu-item="true"/g) ?? []).length, baseline.items.length, `${route}: prerender requires JavaScript`);
-    assert.ok(!prerender.includes('id="S:0"'), `${route}: product content hidden in streamed chunk`);
+    // React may stream an unrelated widget after the menu. Check each product's
+    // actual ancestors rather than rejecting every streamed boundary on the page.
+    const stack = [];
+    let visibleProducts = 0;
+    const voidTags = new Set(["area", "base", "br", "col", "embed", "hr", "img", "input", "link", "meta", "param", "source", "track", "wbr"]);
+    for (const [tag] of prerender.matchAll(/<\/?[a-z][^>]*>/gi)) {
+      const name = tag.match(/^<\/?([a-z][a-z0-9-]*)/i)[1].toLowerCase();
+      if (tag.startsWith("</")) {
+        const index = stack.findLastIndex((entry) => entry.name === name);
+        if (index >= 0) stack.length = index;
+        continue;
+      }
+      const hidden = stack.some((entry) => entry.hidden) || /\shidden(?:[\s=>])/i.test(tag) || /style="[^"]*display\s*:\s*none/i.test(tag);
+      if (name === "article" && tag.includes('data-menu-item="true"') && !hidden) visibleProducts++;
+      if (!voidTags.has(name) && !tag.endsWith("/>")) stack.push({ name, hidden });
+    }
+    assert.equal(visibleProducts, baseline.items.length, `${route}: product content hidden in streamed chunk`);
   }
   let ready = false;
   for (let attempt = 0; attempt < 60; attempt++) {
@@ -100,6 +116,15 @@ try {
     await new Promise((resolve) => setTimeout(resolve, 150));
   }
   assert.ok(ready, `Local test server did not start: ${serverLog}`);
+  // Exercise the real POST handler with an expired same-day time. Storage is
+  // isolated too, so even a regression cannot create a real customer request.
+  const dateParts = new Intl.DateTimeFormat("en-CA", { timeZone: "Europe/Istanbul", year: "numeric", month: "2-digit", day: "2-digit", hour: "2-digit", hourCycle: "h23" }).formatToParts(new Date());
+  const part = (type) => dateParts.find((entry) => entry.type === type).value;
+  const today = `${part("year")}-${part("month")}-${part("day")}`;
+  const expiredTime = `${part("hour")}:00`;
+  const invalidBooking = await fetch(`${base}/api/reservations`, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ customerName: "Isolated expired request", customerPhone: "05321234567", date: today, time: expiredTime, guests: 2 }) });
+  assert.equal(invalidBooking.status, 400, "Server accepted an expired same-day request");
+  assert.ok((await invalidBooking.json()).error);
   const unauthorized = await fetch(`${base}/api/admin/menu`, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(baseline) });
   assert.equal(unauthorized.status, 401);
   const auth = await fetch(`${base}/api/admin/auth`, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ password }) });

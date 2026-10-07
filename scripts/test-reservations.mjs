@@ -1,3 +1,20 @@
+import assert from "node:assert/strict";
+import { getDefaultReservation, getIstanbulDate, isFutureReservation } from "../src/app/rezervasyon/reservation-time.ts";
+
+// Fixed clocks exercise same-day expiry, UTC midnight and visitors abroad.
+const afternoon = new Date("2026-10-07T14:17:00Z");
+assert.equal(getIstanbulDate(afternoon), "2026-10-07");
+assert.equal(isFutureReservation("2026-10-07", "10:00", afternoon), false);
+assert.equal(isFutureReservation("2026-10-07", "17:00", afternoon), false);
+assert.equal(isFutureReservation("2026-10-07", "18:00", afternoon), true);
+assert.deepEqual(getDefaultReservation(afternoon), { date: "2026-10-07", time: "18:00", minDate: "2026-10-07" });
+assert.deepEqual(getDefaultReservation(new Date("2026-10-07T18:00:00Z")), { date: "2026-10-08", time: "10:00", minDate: "2026-10-07" });
+assert.equal(getIstanbulDate(new Date("2026-10-07T22:00:00Z")), "2026-10-08");
+assert.equal(isFutureReservation("2027-02-30", "10:00", afternoon), false);
+assert.equal(isFutureReservation("2026-10-08", "22:01", afternoon), false);
+assert.equal(isFutureReservation("2026-10-08", "22:00", afternoon), true);
+console.log("✅ İstanbul saat dilimi, geçmiş saatler, kapanış sonrası varsayılan ve geçersiz takvim tarihi doğrulandı.");
+
 import { rm } from "node:fs/promises";
 import path from "node:path";
 

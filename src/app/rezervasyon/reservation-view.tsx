@@ -20,6 +20,7 @@ import { displayAddress, displayPhone, mapsUrl, openingHours, phoneE164, siteUrl
 import type { SiteLocale } from "../home-localization";
 import { trackBookingLead, trackEvent } from "../analytics";
 import { englishReservationFaqItems, reservationFaqItems } from "./reservation-content";
+import { getDefaultReservation, getIstanbulDate, isFutureReservation, reservationTimes } from "./reservation-time";
 import styles from "./reservation.module.css";
 import { OrderingGuide } from "../components/ordering-guide";
 import type { OrderingQuestion } from "../menu/ordering-questions";
@@ -84,14 +85,6 @@ const venuePhotos = [
   },
 ];
 
-function getTodayString() {
-  const today = new Date();
-  const yyyy = today.getFullYear();
-  const mm = String(today.getMonth() + 1).padStart(2, "0");
-  const dd = String(today.getDate()).padStart(2, "0");
-  return `${yyyy}-${mm}-${dd}`;
-}
-
 export function ReservationView({
   locale = "tr",
   initialService,
@@ -115,16 +108,26 @@ export function ReservationView({
     initialItem ? `${isEnglish ? "Item" : "Seçim"}: ${initialItem}` : "",
   );
   const [honeypot, setHoneypot] = useState("");
+  const [formError, setFormError] = useState("");
+  const [clockNow, setClockNow] = useState<Date | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submittedData, setSubmittedData] = useState<SubmittedBooking | null>(null);
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      const today = getTodayString();
-      setDate(today);
-      setMinDate(today);
+      const now = new Date();
+      const initial = getDefaultReservation(now);
+      setDate(initial.date);
+      setTime(initial.time);
+      setMinDate(initial.minDate);
+      setClockNow(now);
     }, 0);
-    return () => clearTimeout(timer);
+    const interval = setInterval(() => {
+      const now = new Date();
+      setClockNow(now);
+      setMinDate(getIstanbulDate(now));
+    }, 30_000);
+    return () => { clearTimeout(timer); clearInterval(interval); };
   }, []);
 
   const seatingLabels: Record<"indoor" | "street" | "balcony", { tr: string; en: string }> = {
@@ -149,6 +152,13 @@ export function ReservationView({
       return;
     }
 
+    setFormError("");
+    if (!isFutureReservation(date, time)) {
+      setFormError(isEnglish
+        ? "Choose a future date and time in Istanbul local time."
+        : "İstanbul saatine göre gelecekteki bir tarih ve saat seçin.");
+      return;
+    }
     setIsSubmitting(true);
 
     // Open synchronously while the submit click still carries user activation.
@@ -190,6 +200,14 @@ export function ReservationView({
         }),
       });
 
+      if (res.status === 400) {
+        whatsappWindow?.close();
+        setFormError(isEnglish
+          ? "Check your name, phone, date and time. Please choose a future time in Istanbul."
+          : "Ad, telefon, tarih ve saati kontrol edin. İstanbul saatine göre gelecekteki bir saat seçin.");
+        setIsSubmitting(false);
+        return;
+      }
       if (res.ok) {
         const json = await res.json();
         if (json.reservation) {
@@ -471,6 +489,7 @@ Müsaitlik durumunu teyit edebilir misiniz? Teşekkürler.`;
             </div>
           ) : (
             <form onSubmit={handleSubmit} className={styles.cardForm}>
+              {formError && <p role="alert" className={styles.formHint}>{formError}</p>}
               {/* Honeypot */}
               <div className={styles.honeypot} aria-hidden="true">
                 <label htmlFor="hp_check">Leave empty</label>
@@ -543,7 +562,14 @@ Müsaitlik durumunu teyit edebilir misiniz? Teşekkürler.`;
                     required
                     value={date}
                     min={minDate}
-                    onChange={(e) => setDate(e.target.value)}
+                    onChange={(e) => {
+                      const nextDate = e.target.value;
+                      setDate(nextDate);
+                      const now = new Date();
+                      if (!isFutureReservation(nextDate, time, now)) {
+                        setTime(reservationTimes.find((slot) => isFutureReservation(nextDate, slot, now)) ?? "");
+                      }
+                    }}
                     className={styles.input}
                   />
                 </div>
@@ -551,36 +577,20 @@ Müsaitlik durumunu teyit edebilir misiniz? Teşekkürler.`;
                 <div className={styles.field}>
                   <label htmlFor="form-guest-time" className={styles.label}>
                     <Clock size={13} />
-                    <span>{isEnglish ? "Time" : "Saat"}</span>
+                    <span>{isEnglish ? "Time (Istanbul)" : "Saat (İstanbul)"}</span>
                   </label>
                   <select
                     id="form-guest-time"
                     name="reservation-time"
+                    required
                     value={time}
                     onChange={(e) => setTime(e.target.value)}
                     className={styles.select}
                   >
-                    <option value="08:00">08:00</option>
-                    <option value="08:30">08:30</option>
-                    <option value="09:00">09:00</option>
-                    <option value="09:30">09:30</option>
-                    <option value="10:00">10:00</option>
-                    <option value="10:30">10:30</option>
-                    <option value="11:00">11:00</option>
-                    <option value="11:30">11:30</option>
-                    <option value="12:00">12:00</option>
-                    <option value="12:30">12:30</option>
-                    <option value="13:00">13:00</option>
-                    <option value="13:30">13:30</option>
-                    <option value="14:00">14:00</option>
-                    <option value="14:30">14:30</option>
-                    <option value="15:00">15:00</option>
-                    <option value="15:30">15:30</option>
-                    <option value="16:00">16:00</option>
-                    <option value="17:00">17:00</option>
-                    <option value="18:00">18:00</option>
-                    <option value="19:00">19:00</option>
-                    <option value="20:00">20:00</option>
+                    <option value="" disabled>{isEnglish ? "Choose a time" : "Saat seçin"}</option>
+                    {reservationTimes.map((slot) => (
+                      <option key={slot} value={slot} disabled={Boolean(clockNow && !isFutureReservation(date, slot, clockNow))}>{slot}</option>
+                    ))}
                   </select>
                 </div>
               </div>

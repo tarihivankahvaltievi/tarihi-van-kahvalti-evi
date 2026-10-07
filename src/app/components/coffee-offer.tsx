@@ -14,10 +14,11 @@ export function CoffeeOffer({ locale }: { locale: SiteLanguage }) {
   const dialogRef = useRef<HTMLDialogElement>(null);
   const dismissedRef = useRef(false);
   const copy = coffeeOfferContent[locale];
-  const isAdmin = pathname === "/admin" || pathname.startsWith("/admin/");
+  const isBooking = /(?:^|\/)rezervasyon(?:\/|$)/.test(pathname);
+  const suppressOffer = isBooking || pathname === "/admin" || pathname.startsWith("/admin/");
 
   useEffect(() => {
-    if (isAdmin) return;
+    if (suppressOffer) return;
     const dialog = dialogRef.current;
     let dismissed = dismissedRef.current;
     try {
@@ -33,7 +34,7 @@ export function CoffeeOffer({ locale }: { locale: SiteLanguage }) {
       }
     }, 1200);
     return () => window.clearTimeout(timer);
-  }, [isAdmin, pathname]);
+  }, [suppressOffer, pathname]);
 
   useEffect(() => {
     const dialog = dialogRef.current;
@@ -56,7 +57,7 @@ export function CoffeeOffer({ locale }: { locale: SiteLanguage }) {
       observer.disconnect();
       if (scrollLocked) document.body.style.overflow = previousOverflow;
     };
-  }, [isAdmin]);
+  }, [suppressOffer]);
 
   const rememberDismissal = () => {
     dismissedRef.current = true;
@@ -69,7 +70,7 @@ export function CoffeeOffer({ locale }: { locale: SiteLanguage }) {
 
   const close = () => dialogRef.current?.close();
 
-  if (isAdmin) return null;
+  if (suppressOffer) return null;
 
   return (
     <>

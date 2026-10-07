@@ -5,6 +5,7 @@ import {
   addReservation,
   type ServiceType,
 } from "@/app/reservations/reservation-storage";
+import { isFutureReservation } from "@/app/rezervasyon/reservation-time";
 import { displayAddress, displayPhone, siteUrl } from "@/app/seo";
 
 export async function GET() {
@@ -51,16 +52,6 @@ export async function POST(request: Request) {
     const normalizedDate = String(date ?? "").trim();
     const normalizedTime = String(time ?? "").trim();
     const phoneDigits = normalizedPhone.replace(/\D/g, "");
-    const todayParts = new Intl.DateTimeFormat("en-CA", {
-      timeZone: "Europe/Istanbul",
-      year: "numeric",
-      month: "2-digit",
-      day: "2-digit",
-    }).formatToParts(new Date());
-    const todayPart = (type: "year" | "month" | "day") =>
-      todayParts.find((part) => part.type === type)?.value ?? "";
-    const todayInIstanbul = `${todayPart("year")}-${todayPart("month")}-${todayPart("day")}`;
-
     // Validate server-side as well as in the browser. This protects the admin
     // calendar from malformed or past entries sent directly to the endpoint.
     if (
@@ -77,26 +68,9 @@ export async function POST(request: Request) {
       );
     }
 
-    const parsedDate = new Date(`${normalizedDate}T${normalizedTime}:00+03:00`);
-    const [year, month, day] = normalizedDate.split("-").map(Number);
-    const [hours, minutes] = normalizedTime.split(":").map(Number);
-    const calendarDate = new Date(Date.UTC(year, month - 1, day));
-    const isRealCalendarDate =
-      calendarDate.getUTCFullYear() === year &&
-      calendarDate.getUTCMonth() === month - 1 &&
-      calendarDate.getUTCDate() === day;
-    if (
-      !Number.isFinite(parsedDate.getTime()) ||
-      !isRealCalendarDate ||
-      normalizedDate < todayInIstanbul ||
-      hours < 7 ||
-      hours > 22 ||
-      (hours === 22 && minutes > 0) ||
-      minutes < 0 ||
-      minutes > 59
-    ) {
+    if (!isFutureReservation(normalizedDate, normalizedTime)) {
       return NextResponse.json(
-        { error: "Lütfen bugünden sonraki geçerli bir tarih ve çalışma saatleri içinde bir saat seçin." },
+        { error: "Lütfen İstanbul saatine göre gelecekteki bir tarih ve çalışma saatleri içinde bir saat seçin." },
         { status: 400 },
       );
     }
