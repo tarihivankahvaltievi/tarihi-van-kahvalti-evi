@@ -35,6 +35,19 @@ export function safeReferrer(value: string): string {
   } catch { return ""; }
 }
 
+/** Retain only Google's ad-click identifiers, never arbitrary form/query data. */
+export function measurementPageLocation(value: string): string | null {
+  const page = safePageLocation(value);
+  if (!page) return null;
+  const source = new URL(value);
+  const destination = new URL(page);
+  for (const key of ["gclid", "gbraid", "wbraid", "dclid"]) {
+    const id = source.searchParams.get(key);
+    if (id && /^[A-Za-z0-9_-]{1,512}$/.test(id)) destination.searchParams.set(key, id);
+  }
+  return destination.toString();
+}
+
 export type AnalyticsValue = string | number | boolean | undefined;
 export type AnalyticsParameters = Record<string, AnalyticsValue>;
 

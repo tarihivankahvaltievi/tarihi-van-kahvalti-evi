@@ -3,7 +3,7 @@
 import Script from "next/script";
 import { useEffect, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
-import { analyticsId, adsId, safePageLocation, safeReferrer } from "../analytics-policy";
+import { analyticsId, adsId, measurementPageLocation, safeReferrer } from "../analytics-policy";
 import { getGtag } from "../analytics";
 
 export function GoogleTags() {
@@ -11,7 +11,7 @@ export function GoogleTags() {
   const [ready, setReady] = useState(false);
   const previous = useRef<string | null>(null);
   useEffect(() => {
-    const page = safePageLocation(window.location.href);
+    const page = measurementPageLocation(window.location.href);
     window[`ga-disable-${analyticsId}`] = !page;
     if (!page) return;
     const gtag = getGtag();

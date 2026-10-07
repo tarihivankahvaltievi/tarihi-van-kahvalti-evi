@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
-import { analyticsId, safePageLocation, safeInteractionParameters, bookingTransactionId, isBookingId, type AnalyticsParameters } from "./analytics-policy";
+import { analyticsId, measurementPageLocation, safeInteractionParameters, bookingTransactionId, isBookingId, type AnalyticsParameters } from "./analytics-policy";
 
 declare global {
   interface Window {
@@ -37,19 +37,21 @@ export function getGtag(): (...args: unknown[]) => void {
   return fn;
 }
 
-function sendEvent(name: string, parameters: AnalyticsParameters = {}) {
-  if (typeof window === "undefined") return;
-  const page = safePageLocation(window.location.href);
-  if (!page) return;
+function sendEvent(name: string, parameters: AnalyticsParameters = {}, callback?: () => void): boolean {
+  if (typeof window === "undefined") return false;
+  const page = measurementPageLocation(window.location.href);
+  if (!page) return false;
   if (name === "conversion") {
-    if (!/^AW-\d+\/[A-Za-z0-9_-]+$/.test(String(parameters.send_to ?? ""))) return;
-  } else if (!/^G-[A-Z0-9]+$/.test(analyticsId)) return;
+    if (!/^AW-\d+\/[A-Za-z0-9_-]+$/.test(String(parameters.send_to ?? ""))) return false;
+  } else if (!/^G-[A-Z0-9]+$/.test(analyticsId)) return false;
   const gtag = getGtag();
   gtag("event", name, {
     ...parameters,
     page_location: page,
     ...(name === "conversion" ? {} : { send_to: analyticsId }),
+    ...(callback ? { event_callback: callback, event_timeout: 2000 } : {}),
   });
+  return true;
 }
 
 /**
@@ -116,12 +118,20 @@ export async function trackBookingLead(parameters: AnalyticsParameters = {}) {
 
   // Fire primary Google Ads conversion event with exact conversion label
   if (bookingConversionLabel) {
-    sendEvent("conversion", {
-      send_to: `${googleAdsConversionId}/${bookingConversionLabel}`,
-      value: 1.0,
-      currency: "TRY",
-      transaction_id: await bookingTransactionId(reservationId),
-      transport_type: "beacon",
+    const transactionId = await bookingTransactionId(reservationId);
+    // Allow the tag to process the event before a same-tab WhatsApp handoff.
+    // This callback is not a receipt from Google. Blocked tags must not trap users.
+    await new Promise<void>((resolve) => {
+      const timer = setTimeout(resolve, 2000);
+      const finish = () => { clearTimeout(timer); resolve(); };
+      const queued = sendEvent("conversion", {
+        send_to: `${googleAdsConversionId}/${bookingConversionLabel}`,
+        value: 1.0,
+        currency: "TRY",
+        transaction_id: transactionId,
+        transport_type: "beacon",
+      }, finish);
+      if (!queued) finish();
     });
   }
 }

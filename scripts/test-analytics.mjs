@@ -18,7 +18,7 @@ function loadModule(file, context, imports = {}) {
 }
 const window = { location: { href: 'https://www.tarihivankahvaltievi.com/rezervasyon?name=PRIVATE&phone=PRIVATE#PRIVATE' } };
 const context = { window, document: { title: 'Reservation', referrer: 'https://example.com/private?secret=PRIVATE' },
-  URL, TextEncoder, crypto: webcrypto, process: { env: {} } };
+  URL, TextEncoder, crypto: webcrypto, setTimeout, clearTimeout, process: { env: {} } };
 const policy = loadModule('src/app/analytics-policy.ts', context);
 assert.equal(policy.safePageLocation(window.location.href), 'https://www.tarihivankahvaltievi.com/rezervasyon');
 for (const suffix of ['/admin', '/admin?name=PRIVATE', '/rezervasyon/takvim/SECRET', '/en/rezervasyon/takvim/SECRET', '/api/reservations', '/unknown']) {
@@ -27,6 +27,9 @@ for (const suffix of ['/admin', '/admin?name=PRIVATE', '/rezervasyon/takvim/SECR
 assert.equal(policy.safePageLocation('http://www.tarihivankahvaltievi.com/'), null);
 assert.equal(policy.safePageLocation('https://preview.example.com/'), null);
 assert.equal(policy.safePageLocation('http://127.0.0.1:3100/'), null);
+assert.equal(policy.measurementPageLocation(`${policy.analyticsOrigin}/en?gclid=Test_click-123&gbraid=Test_braid&wbraid=Test_web&name=PRIVATE#PRIVATE`), `${policy.analyticsOrigin}/en?gclid=Test_click-123&gbraid=Test_braid&wbraid=Test_web`);
+assert.equal(policy.measurementPageLocation(`${policy.analyticsOrigin}/?gclid=invalid%20value&email=PRIVATE`), `${policy.analyticsOrigin}/`);
+assert.equal(policy.measurementPageLocation(`${policy.analyticsOrigin}/admin?gclid=Test_click`), null);
 assert.equal(policy.safeReferrer(context.document.referrer), 'https://example.com');
 assert.equal(policy.safeReferrer('https://www.tarihivankahvaltievi.com/rezervasyon/takvim/SECRET'), policy.analyticsOrigin);
 const analytics = loadModule('src/app/analytics.ts', context, { react: { useEffect() {} }, './analytics-policy': policy });
@@ -40,13 +43,31 @@ assert.match(primary.transaction_id, /^[a-f0-9]{64}$/);
 assert.equal(primary.transaction_id, await policy.bookingTransactionId(reservationId));
 assert.ok(!JSON.stringify(events()).includes(reservationId));
 assert.ok(!JSON.stringify(events()).includes('PRIVATE'));
+
+// A successful callback releases handoff immediately; without a callback the
+// bounded timeout still releases it. Neither a queue nor callback proves receipt.
+window.location.href = `${policy.analyticsOrigin}/rezervasyon?gclid=Test_click-123&phone=PRIVATE`;
+const originalGtag = window.gtag;
+let callbackRan = false;
+window.gtag = (...args) => {
+  originalGtag(...args);
+  if (args[1] === 'conversion') { callbackRan = true; args[2].event_callback(); }
+};
+await analytics.trackBookingLead({ reservation_id: reservationId });
+assert.equal(callbackRan, true);
+assert.equal(events().filter(e => e[1] === 'conversion').at(-1)[2].page_location, `${policy.analyticsOrigin}/rezervasyon?gclid=Test_click-123`);
+window.gtag = originalGtag;
+const blockedStarted = Date.now();
+await analytics.trackBookingLead({ reservation_id: reservationId });
+assert.ok(Date.now() - blockedStarted >= 1900);
+window.location.href = `${policy.analyticsOrigin}/rezervasyon`;
 assert.equal(events()[0][2].send_to, 'G-5F3FS1NCZR');
 const beforeInvalid = events().length;
 await analytics.trackBookingLead({ reservation_id: 'invalid' });
 analytics.trackEvent('unrecognized', { name: 'PRIVATE' });
 assert.equal(events().length, beforeInvalid);
 analytics.trackEvent('booking_whatsapp_handoff', { locale: 'en', reservation_saved: false, link_url: 'https://wa.me/?text=PRIVATE' });
-assert.equal(events().filter(e => e[1] === 'generate_lead').length, 1);
+assert.equal(events().filter(e => e[1] === 'generate_lead').length, 3);
 assert.ok(!JSON.stringify(events()).includes('PRIVATE'));
 analytics.trackEvent('contact_click', { contact_method: 'phone', surface: 'home_hero' });
 assert.ok(events().filter(e => e[1] === 'conversion').at(-1)[2].send_to !== primary.send_to);

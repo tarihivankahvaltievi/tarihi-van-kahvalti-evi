@@ -25,7 +25,7 @@ export default function CookiePolicyPage() {
           Hangi sayfaların ziyaret edildiği ve siteyle nasıl etkileşim kurulduğu hakkında toplu istatistikler
           üretmek için Google Analytics 4 kullanılır. Google Analytics, ziyaret ve oturumları ayırt etmek için
           tarayıcınıza <code>_ga</code> ile başlayan analitik çerezler yerleştirebilir. Google Ads dönüşüm ölçümü de çerez kullanabilir. Google sinyalleri ve reklam
-          kişiselleştirme sinyalleri kodda kapalıdır. Müşteri adı, telefon, rezervasyon tarihi ve notu analitik olay parametrelerine eklenmez. Özel yönetim ve rezervasyon takvimi sayfalarında site etiketleri başlatılmaz.
+          kişiselleştirme sinyalleri kodda kapalıdır. Reklamdan gelen ziyareti dönüşümle ilişkilendirmek için Google reklam tıklama kimlikleri (gclid, gbraid, wbraid, dclid) ölçüm adresinde korunur; diğer sorgu parametreleri ve adres parçaları temizlenir. Müşteri adı, telefon, rezervasyon tarihi ve notu analitik olay parametrelerine eklenmez. Özel yönetim ve rezervasyon takvimi sayfalarında site etiketleri başlatılmaz.
         </p>
       </section>
       <section>
