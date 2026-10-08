@@ -10,6 +10,9 @@ import { createServer } from "node:net";
 // It cannot target a live website, database, or IndexNow endpoint.
 const testDirectory = await mkdtemp(path.join(tmpdir(), "van-menu-test-"));
 const menuFile = path.join(testDirectory, "menu.json");
+const reservationFile = path.join(testDirectory, "reservations.json");
+const pastReservation = { id: "isolated-past-reservation", customerName: "Isolated visit fixture", customerPhone: "05321234567", date: "2020-01-01", time: "10:00", guests: 2, serviceType: "breakfast", status: "confirmed", source: "website", createdAt: "2020-01-01T07:00:00Z", updatedAt: "2020-01-01T07:00:00Z" };
+await writeFile(reservationFile, JSON.stringify({ reservations: [pastReservation], lastUpdated: pastReservation.updatedAt }));
 const baseline = JSON.parse(await readFile("src/app/menu/menu-data.json", "utf8"));
 await writeFile(menuFile, JSON.stringify(baseline));
 const portProbe = createServer();
@@ -19,7 +22,7 @@ await new Promise((resolve) => portProbe.close(resolve));
 const base = `http://127.0.0.1:${port}`;
 const password = randomBytes(24).toString("hex");
 const server = spawn(process.execPath, ["node_modules/next/dist/bin/next", "start", "--hostname", "127.0.0.1", "--port", String(port)], {
-  env: { ...process.env, SUPABASE_URL: "", SUPABASE_SERVICE_ROLE_KEY: "", MENU_DATA_FILE: menuFile, RESERVATION_DATA_FILE: path.join(testDirectory, "reservations.json"), INDEXNOW_DRY_RUN: "1", ADMIN_PASSWORD: password, ADMIN_SESSION_SECRET: randomBytes(24).toString("hex") },
+  env: { ...process.env, SUPABASE_URL: "", SUPABASE_SERVICE_ROLE_KEY: "", MENU_DATA_FILE: menuFile, RESERVATION_DATA_FILE: reservationFile, INDEXNOW_DRY_RUN: "1", ADMIN_PASSWORD: password, ADMIN_SESSION_SECRET: randomBytes(24).toString("hex") },
   stdio: ["ignore", "pipe", "pipe"],
 });
 let serverLog = "";
@@ -56,6 +59,10 @@ async function verifyMenu(route, expected, locale) {
   assert.ok(plain.includes(locale === "en" ? "Minimum 2 people." : "Minimum 2 kişi için servis edilir."));
   const serpme = expected.items.find((item) => item.id === "serpme-fix-menu");
   assert.ok(plain.includes(locale === "en" ? serpme.translations.en.details[1] : serpme.details[1]));
+  const comparison = plain.match(/<section id="breakfast-options"[\s\S]*?<\/section>/)?.[0];
+  assert.ok(comparison?.includes(serpme.price), `${route}: comparison does not use the editable price`);
+  assert.ok(comparison?.includes(locale === "en" ? serpme.translations.en.details[1] : serpme.details[1]), `${route}: comparison has stale inclusions`);
+  assert.ok(comparison?.includes(locale === "en" ? '/en/rezervasyon' : '/rezervasyon'), `${route}: table-request link missing`);
 }
 
 async function verifyHomePrices(expected) {
@@ -65,6 +72,10 @@ async function verifyHomePrices(expected) {
     const preview = html.match(/<p class="hero-breakfast-price">[\s\S]*?<\/p>/)?.[0];
     assert.ok(preview?.includes(price), `${route}: homepage price does not match live menu`);
   }
+  const guide = plainHtml(await (await fetch(`${base}/van-kahvaltisi`)).text());
+  const comparison = guide.match(/<section id="breakfast-options"[\s\S]*?<\/section>/)?.[0];
+  assert.ok(comparison?.includes(price), 'Visit guide comparison does not follow live price changes');
+  assert.ok(comparison?.includes(expected.items.find(item => item.id === 'serpme-fix-menu').details[1]), 'Visit guide comparison has stale tea inclusion');
 }
 
 async function verifyBookingInclusions(expected) {
@@ -131,6 +142,38 @@ try {
   assert.equal(auth.status, 200);
   const cookie = auth.headers.get("set-cookie")?.split(";")[0];
   assert.ok(cookie);
+  async function patchVisit(id, body, authenticated = true) {
+    return fetch(`${base}/api/reservations/${id}`, { method: "PATCH", headers: { "Content-Type": "application/json", ...(authenticated ? { Cookie: cookie } : {}) }, body: JSON.stringify(body) });
+  }
+  assert.equal((await fetch(`${base}/api/reservations/${pastReservation.id}`)).status, 401);
+  assert.equal((await patchVisit(pastReservation.id, { attendance: "arrived" }, false)).status, 401);
+  for (const body of [{}, { attendance: "invalid" }, { status: "invalid" }, { source: "staff" }, { attendance: "arrived", customerName: "forged" }]) {
+    assert.equal((await patchVisit(pastReservation.id, body)).status, 400, "Visit API accepted invalid fields");
+  }
+  assert.equal((await patchVisit("isolated-missing", { attendance: null })).status, 404);
+  for (const attendance of ["arrived", "no_show", null]) {
+    const response = await patchVisit(pastReservation.id, { attendance });
+    assert.equal(response.status, 200);
+    assert.equal((await response.json()).reservation.attendance, attendance);
+  }
+  await patchVisit(pastReservation.id, { attendance: "arrived" });
+  const cancelled = await patchVisit(pastReservation.id, { status: "cancelled" });
+  assert.equal((await cancelled.json()).reservation.attendance, null, "Cancelled visit still counted as arrived");
+  assert.equal((await patchVisit(pastReservation.id, { attendance: "arrived" })).status, 400);
+  const future = new Date();
+  future.setUTCDate(future.getUTCDate() + 2);
+  const bookingBody = { customerName: "Isolated source fixture", customerPhone: "05321234567", date: future.toISOString().slice(0, 10), time: "10:00", guests: 2, source: "staff", status: "confirmed", attendance: "arrived" };
+  for (const staff of [false, true]) {
+    const response = await fetch(`${base}/api/reservations`, { method: "POST", headers: { "Content-Type": "application/json", ...(staff ? { Cookie: cookie } : {}) }, body: JSON.stringify(bookingBody) });
+    assert.equal(response.status, 200);
+    const { reservation } = await response.json();
+    assert.equal(reservation.source, staff ? "staff" : "website");
+    assert.equal(reservation.status, staff ? "confirmed" : "pending");
+    assert.ok(!reservation.attendance, "Caller forged a visit outcome");
+    assert.equal((await patchVisit(reservation.id, { attendance: "arrived" })).status, 400, "Future visit accepted");
+  }
+  assert.equal(JSON.parse(await readFile(reservationFile, "utf8")).reservations.length, 3, "Reservation writes escaped the isolated fixture");
+  console.log("Rezervasyon API: yönetici yetkisi, kaynak sahteciliği, gerçek ziyaret sonucu, gelecek tarih engeli ve iptal sonrası temizleme doğrulandı.");
   async function save(data) {
     const response = await fetch(`${base}/api/admin/menu`, { method: "POST", headers: { "Content-Type": "application/json", Cookie: cookie }, body: JSON.stringify(data) });
     assert.equal(response.status, 200, "Admin fixture save failed");

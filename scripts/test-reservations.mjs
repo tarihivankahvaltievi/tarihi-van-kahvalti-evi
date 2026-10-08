@@ -138,6 +138,10 @@ async function runTests() {
     throw new Error("Durum güncelleme başarısız!");
   }
   console.log("✅ Durum güncelleme (Onaylama) testi başarılı.");
+  assert.equal(updated.source, undefined, "Eski kayıtların kaynağı varsayılmamalı");
+  await updateReservation(testRes.id, { attendance: "arrived" });
+  const cancelled = await updateReservation(testRes.id, { status: "cancelled" });
+  assert.equal(cancelled.attendance, null, "İptal edilen kayıt gerçek ziyaret olarak sayılmamalı");
 
   // 6. Test Cleanup
   await deleteReservation(testRes.id);

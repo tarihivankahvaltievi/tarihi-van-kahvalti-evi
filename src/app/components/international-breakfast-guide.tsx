@@ -6,6 +6,13 @@ import { guidePaths, guides, type GuideContent } from "./international-breakfast
 import styles from "./international-breakfast-guide.module.css";
 
 const languageLabels = { en: "English", ru: "Русский", ar: "العربية", ko: "한국어", ja: "日本語" } as const;
+const visitActions = {
+  en: { label: "Request a table", note: "The menu and table request form are in English. A request is confirmed after the restaurant replies." },
+  ru: { label: "Запросить столик (на английском)", note: "Меню и форма запроса столика доступны на английском. Столик подтверждён только после ответа ресторана." },
+  ar: { label: "طلب طاولة (بالإنجليزية)", note: "القائمة ونموذج طلب الطاولة باللغة الإنجليزية. يتأكد الحجز بعد رد المطعم." },
+  ko: { label: "테이블 요청하기 (영어)", note: "메뉴와 테이블 요청 양식은 영어로 제공됩니다. 매장의 답변을 받은 후에 예약이 확정됩니다." },
+  ja: { label: "テーブルをリクエスト（英語）", note: "メニューとテーブルリクエストのフォームは英語です。お店からの返信後に予約が確定します。" },
+} as const;
 
 export function InternationalBreakfastGuide({ guide }: { guide: GuideContent }) {
   const menuHref = guide.seo?.menuItem?.url ?? "/en/menu";
@@ -56,7 +63,7 @@ export function InternationalBreakfastGuide({ guide }: { guide: GuideContent }) 
                 <a className={styles.primaryAction} href="#what-is-turkish-breakfast">
                   {guide.hero.readLabel} <ArrowDown size={17} aria-hidden="true" />
                 </a>
-                <Link className={styles.secondaryAction} href={menuHref} hrefLang="en">
+                <Link className={styles.secondaryAction} href={menuHref} hrefLang="en" data-analytics-surface="international_guide_hero">
                   {guide.hero.menuLabel} <Utensils size={17} aria-hidden="true" />
                 </Link>
               </div>
@@ -236,10 +243,12 @@ export function InternationalBreakfastGuide({ guide }: { guide: GuideContent }) 
               {guide.practical.labels.route} <ArrowUpRight size={16} aria-hidden="true" />
             </a>
             <Link href={menuHref} hrefLang="en">{guide.practical.labels.menu}</Link>
+            <Link href="/en/rezervasyon" hrefLang="en" data-analytics-surface="international_guide_visit">{visitActions[guide.locale].label}</Link>
             <a href={telUrl}>
               <Phone size={15} aria-hidden="true" /> {guide.practical.labels.call}: <bdi>{displayPhone}</bdi>
             </a>
           </div>
+          <p>{visitActions[guide.locale].note}</p>
         </section>
 
         <section id="questions" className={styles.faq} aria-labelledby="faq-title">

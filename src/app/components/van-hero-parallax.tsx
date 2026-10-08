@@ -79,7 +79,7 @@ export function VanHeroParallax({ locale = "tr", serpmePrice }: { locale?: SiteL
               alt={locale === "en" ? slide.altEn : slide.altTr}
               fill
               sizes="100vw"
-              quality={84}
+              quality={75}
               loading="eager"
               fetchPriority={index === 0 ? "high" : "auto"}
               onLoad={() => {
@@ -118,7 +118,7 @@ export function VanHeroParallax({ locale = "tr", serpmePrice }: { locale?: SiteL
           </div>
           {serpmePrice && <p className="hero-breakfast-price"><Link href={`${messages.menuHref}#serpme-fix-menu`}>{locale === "en" ? "Serpme breakfast" : "Serpme kahvaltı"}: {serpmePrice} {locale === "en" ? "per person" : "kişi başı"} · {getMenuOrderNote("serpme-fix-menu", locale)}</Link></p>}
           <div className="hero-actions">
-            <Link href={messages.menuHref} className="btn btn-primary">
+            <Link href={messages.menuHref} className="btn btn-primary" data-analytics-surface="home_hero">
               {locale === "en" ? "MENU & PRICES" : "MENÜ VE FİYATLAR"}
             </Link>
             <a href={mapsUrl} className="btn btn-secondary-hero" target="_blank" rel="noopener noreferrer" data-analytics-surface="home_hero">
@@ -127,6 +127,7 @@ export function VanHeroParallax({ locale = "tr", serpmePrice }: { locale?: SiteL
             <Link
               href={locale === "en" ? "/en/rezervasyon" : "/rezervasyon"}
               className="btn btn-secondary-hero"
+              data-analytics-surface="home_hero"
             >
               {locale === "en" ? "MAKE A RESERVATION" : "REZERVASYON YAP"}
             </Link>

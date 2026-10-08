@@ -10,12 +10,12 @@ const koreanLanguageLinks = [
 
 const sharedDates = {
   published: "2026-07-22T00:30:00+03:00",
-  modified: "2026-07-22T00:30:00+03:00",
-  visible: "2026-07-22",
+  modified: "2026-10-08",
+  visible: "2026-10-08",
 };
 
 const sharedFooter = {
-  note: "1978년부터 베요글루에서 이어온 전통 반 아침 식사.",
+  note: "1978년부터 이어온 가족의 전통, 오늘의 베요글루 반 아침 식사.",
   home: "한국어 홈",
   menu: "영문 메뉴",
   directions: "길찾기",
@@ -54,7 +54,7 @@ export const kaymakExplainerGuide: GuideContent = {
       "카이막(kaymak)은 우유를 천천히 가열한 뒤 표면에 생긴 진한 크림층을 모아 만드는 유제품입니다. 버터처럼 짜지 않고 휘핑크림처럼 가볍지도 않습니다. 터키의 아침 식탁에서는 꿀을 뜻하는 발(bal)과 따뜻한 빵을 곁들인 ‘발 카이막’으로 자주 만납니다.",
     readLabel: "1분 요약부터 읽기",
     menuLabel: "현재 발 카이막 메뉴 보기",
-    imageAlt: "꿀과 버팔로 카이막이 빵, 차와 함께 놓인 터키식 아침 식탁",
+    imageAlt: "꿀과 카이막이 빵, 차와 함께 놓인 터키식 아침 식탁",
     imageCaption: "카이막의 담백한 고소함에 꿀의 향을 더하는 것이 발 카이막의 핵심입니다.",
   },
   nav: {
@@ -158,7 +158,7 @@ export const kaymakExplainerGuide: GuideContent = {
   practical: {
     title: "이스탄불에서 발 카이막 맛보기",
     text:
-      "Tarihi Van Kahvaltı Evi는 베요글루 잠박 거리에서 매일 07:00–22:00에 운영합니다. 현재 메뉴에는 체에 거른 꿀, 버팔로 카이막, 계절 수제 잼 2종 구성이 있으며, 가격과 당일 제공 여부는 방문 전에 실시간 영문 메뉴에서 확인할 수 있습니다.",
+      "Tarihi Van Kahvaltı Evi는 베요글루 잠박 거리에서 매일 07:00–22:00에 운영합니다. 현재 메뉴에는 꿀과 카이막 메뉴가 있으며, 가격과 당일 제공 여부는 방문 전에 실시간 영문 메뉴에서 확인할 수 있습니다.",
     labels: { address: "주소", hours: "영업시간", route: "Google 지도에서 길찾기", menu: "현재 메뉴와 가격", call: "전화하기" },
   },
   faq: {
@@ -193,7 +193,7 @@ export const kaymakExplainerGuide: GuideContent = {
   },
   footer: sharedFooter,
   updatedLabel: "마지막 검토",
-  dateLabel: "2026년 7월 22일",
+  dateLabel: "2026년 10월 8일",
   authorLabel: "Tarihi Van Kahvaltı Evi 편집팀",
   dates: sharedDates,
   breadcrumbs: { aria: "경로", home: "한국어 홈", current: "카이막이란" },
@@ -212,8 +212,8 @@ export const kaymakExplainerGuide: GuideContent = {
     ],
     mentions: ["발 카이막", "물소 카이막", "꿀", "피시", "터키 차"],
     menuItem: {
-      name: "꿀, 버팔로 카이막과 수제 잼",
-      description: "체에 거른 꿀, 버팔로 카이막, 계절에 따라 준비하는 수제 잼 2종",
+      name: "꿀과 카이막",
+      description: "꿀과 카이막을 함께 내는 아침 식사 메뉴",
       url: "/en/menu#bal-kaymak",
     },
   },
@@ -399,7 +399,7 @@ export const turkishBreakfastKoreanGuide: GuideContent = {
   },
   footer: sharedFooter,
   updatedLabel: "마지막 검토",
-  dateLabel: "2026년 7월 22일",
+  dateLabel: "2026년 10월 8일",
   authorLabel: "Tarihi Van Kahvaltı Evi 편집팀",
   dates: sharedDates,
   breadcrumbs: { aria: "경로", home: "한국어 홈", current: "이스탄불 터키식 아침 식사" },

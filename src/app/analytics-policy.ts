@@ -35,7 +35,16 @@ export function safeReferrer(value: string): string {
   } catch { return ""; }
 }
 
-/** Retain only Google's ad-click identifiers, never arbitrary form/query data. */
+// Controlled public campaign vocabulary. Do not accept customer names, free
+// text, email addresses or arbitrary utm_term/content values into measurement.
+export const campaignVocabulary = {
+  utm_source: ["google", "google_maps", "gbp", "instagram", "facebook", "tripadvisor", "wanderlog", "restaurantguru", "yandex", "bing", "chatgpt", "perplexity", "hotel", "partner"],
+  utm_medium: ["organic", "referral", "social", "cpc", "email"],
+  utm_campaign: ["gbp", "google_business_profile", "local_profiles", "instagram_bio", "seo_geo_2026", "breakfast", "taksim_breakfast", "hotel_referral"],
+  utm_content: ["website", "menu", "reservation", "bio", "post"],
+} as const;
+
+/** Retain approved campaign values and ad-click IDs; strip all other data. */
 export function measurementPageLocation(value: string): string | null {
   const page = safePageLocation(value);
   if (!page) return null;
@@ -45,13 +54,26 @@ export function measurementPageLocation(value: string): string | null {
     const id = source.searchParams.get(key);
     if (id && /^[A-Za-z0-9_-]{1,512}$/.test(id)) destination.searchParams.set(key, id);
   }
+  const sourceValue = source.searchParams.get("utm_source")?.toLowerCase();
+  const mediumValue = source.searchParams.get("utm_medium")?.toLowerCase();
+  // A partial or unknown source/medium pair is not a registered campaign.
+  if (sourceValue && mediumValue &&
+      campaignVocabulary.utm_source.some((value) => value === sourceValue) &&
+      campaignVocabulary.utm_medium.some((value) => value === mediumValue)) {
+    destination.searchParams.set("utm_source", sourceValue);
+    destination.searchParams.set("utm_medium", mediumValue);
+    for (const key of ["utm_campaign", "utm_content"] as const) {
+      const value = source.searchParams.get(key)?.toLowerCase();
+      if (value && campaignVocabulary[key].some((allowed) => allowed === value)) destination.searchParams.set(key, value);
+    }
+  }
   return destination.toString();
 }
 
 export type AnalyticsValue = string | number | boolean | undefined;
 export type AnalyticsParameters = Record<string, AnalyticsValue>;
 
-const safeKeys = new Set(["locale", "service_type", "contact_method", "method", "surface", "reservation_saved"]);
+const safeKeys = new Set(["locale", "service_type", "contact_method", "method", "surface", "reservation_saved", "item_id", "category_id"]);
 export function safeInteractionParameters(parameters: AnalyticsParameters): AnalyticsParameters {
   return Object.fromEntries(Object.entries(parameters).filter(([key, value]) => {
     if (!safeKeys.has(key)) return false;

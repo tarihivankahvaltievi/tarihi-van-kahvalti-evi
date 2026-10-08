@@ -40,7 +40,7 @@ import {
 // Her derlemede "şimdi" üretmek arama motorlarına yanıltıcı bir sinyal verir.
 const pageLastModified = "2026-09-22T19:00:00+03:00";
 const homeLastModified = "2026-10-02";
-const menuPresentationLastModified = "2026-10-01T02:00:00+03:00";
+const menuPresentationLastModified = "2026-10-08";
 const visitorContentLastModified = "2026-10-01T02:00:00+03:00";
 const koreanPageLastModified = "2026-09-28T12:00:00+03:00";
 const newGuideLastModified = "2026-09-28T12:00:00+03:00";
@@ -171,6 +171,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const liveHomeLastModified = Date.parse(liveMenuLastModified) > Date.parse(homeLastModified)
     ? liveMenuLastModified
     : homeLastModified;
+  const liveGuideLastModified = Date.parse(liveMenuLastModified) > Date.parse("2026-10-08") ? liveMenuLastModified : "2026-10-08";
   const liveReservationLastModified = Date.parse(liveMenuLastModified) > Date.parse(visitorContentLastModified)
     ? liveMenuLastModified
     : visitorContentLastModified;
@@ -222,7 +223,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     },
     {
       url: breakfastGuideUrl,
-      lastModified: homeLastModified,
+      lastModified: liveGuideLastModified,
       changeFrequency: "monthly",
       priority: 0.8,
       images: uniqueImages([
@@ -338,7 +339,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     },
     {
       url: englishBreakfastBlogUrl,
-      lastModified: homeLastModified,
+      lastModified: "2026-10-08",
       changeFrequency: "monthly",
       priority: 0.7,
       images: internationalGuideImages,
@@ -346,7 +347,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     },
     {
       url: russianBreakfastBlogUrl,
-      lastModified: homeLastModified,
+      lastModified: "2026-10-08",
       changeFrequency: "monthly",
       priority: 0.7,
       images: internationalGuideImages,
@@ -354,7 +355,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     },
     {
       url: arabicBreakfastBlogUrl,
-      lastModified: pageLastModified,
+      lastModified: "2026-10-08",
       changeFrequency: "monthly",
       priority: 0.7,
       images: internationalGuideImages,
@@ -362,7 +363,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     },
     {
       url: koreanHoneyKaymakBlogUrl,
-      lastModified: westernGuideLastModified,
+      lastModified: "2026-10-08",
       changeFrequency: "monthly",
       priority: 0.7,
       images: koreanHoneyKaymakImages,
@@ -401,7 +402,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     },
     {
       url: koreanKaymakExplainerUrl,
-      lastModified: koreanPageLastModified,
+      lastModified: "2026-10-08",
       changeFrequency: "monthly",
       priority: 0.6,
       images: koreanHoneyKaymakImages,
@@ -409,7 +410,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     },
     {
       url: koreanTurkishBreakfastBlogUrl,
-      lastModified: koreanPageLastModified,
+      lastModified: "2026-10-08",
       changeFrequency: "monthly",
       priority: 0.7,
       images: internationalGuideImages,
@@ -417,7 +418,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     },
     {
       url: japaneseHoneyKaymakBlogUrl,
-      lastModified: westernGuideLastModified,
+      lastModified: "2026-10-08",
       changeFrequency: "monthly",
       priority: 0.7,
       images: koreanHoneyKaymakImages,
@@ -431,7 +432,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     },
     {
       url: cookiePolicyUrl,
-      lastModified: "2026-10-02",
+      lastModified: "2026-10-08",
       changeFrequency: "monthly",
       priority: 0.5,
     },

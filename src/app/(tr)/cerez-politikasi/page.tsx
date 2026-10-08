@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 
 export default function CookiePolicyPage() {
   return (
-    <LegalPageShell eyebrow="Tarayıcı depolaması" title="Çerez Politikası" lastUpdated="2 Ekim 2026">
+    <LegalPageShell eyebrow="Tarayıcı depolaması" title="Çerez Politikası" lastUpdated="8 Ekim 2026">
       <section>
         <h2>Herkese açık site sayfaları</h2>
         <p>
@@ -25,7 +25,7 @@ export default function CookiePolicyPage() {
           Hangi sayfaların ziyaret edildiği ve siteyle nasıl etkileşim kurulduğu hakkında toplu istatistikler
           üretmek için Google Analytics 4 kullanılır. Google Analytics, ziyaret ve oturumları ayırt etmek için
           tarayıcınıza <code>_ga</code> ile başlayan analitik çerezler yerleştirebilir. Google Ads dönüşüm ölçümü de çerez kullanabilir. Google sinyalleri ve reklam
-          kişiselleştirme sinyalleri kodda kapalıdır. Reklamdan gelen ziyareti dönüşümle ilişkilendirmek için Google reklam tıklama kimlikleri (gclid, gbraid, wbraid, dclid) ölçüm adresinde korunur; diğer sorgu parametreleri ve adres parçaları temizlenir. Müşteri adı, telefon, rezervasyon tarihi ve notu analitik olay parametrelerine eklenmez. Özel yönetim ve rezervasyon takvimi sayfalarında site etiketleri başlatılmaz.
+          kişiselleştirme sinyalleri kodda kapalıdır. Reklamdan gelen ziyareti dönüşümle ilişkilendirmek için Google reklam tıklama kimlikleri (gclid, gbraid, wbraid, dclid) ölçüm adresinde korunur. Tanımlı kampanyalara ait kaynak, kanal, kampanya ve bağlantı türü etiketleri de korunabilir; serbest metin, diğer sorgu parametreleri ve adres parçaları temizlenir. Menüye geçiş, kategori seçimi, ürün inceleme ve masa talebine başlama ayrı etkileşimler olarak ölçülür. Müşteri adı, telefon, rezervasyon tarihi ve notu analitik olay parametrelerine eklenmez. Özel yönetim ve rezervasyon takvimi sayfalarında site etiketleri başlatılmaz.
         </p>
       </section>
       <section>

@@ -30,6 +30,12 @@ assert.equal(policy.safePageLocation('http://127.0.0.1:3100/'), null);
 assert.equal(policy.measurementPageLocation(`${policy.analyticsOrigin}/en?gclid=Test_click-123&gbraid=Test_braid&wbraid=Test_web&name=PRIVATE#PRIVATE`), `${policy.analyticsOrigin}/en?gclid=Test_click-123&gbraid=Test_braid&wbraid=Test_web`);
 assert.equal(policy.measurementPageLocation(`${policy.analyticsOrigin}/?gclid=invalid%20value&email=PRIVATE`), `${policy.analyticsOrigin}/`);
 assert.equal(policy.measurementPageLocation(`${policy.analyticsOrigin}/admin?gclid=Test_click`), null);
+const campaignUrl = `${policy.analyticsOrigin}/menu?utm_source=google&utm_medium=organic&utm_campaign=gbp&utm_content=menu&utm_term=PRIVATE&phone=PRIVATE#PRIVATE`;
+assert.equal(policy.measurementPageLocation(campaignUrl), `${policy.analyticsOrigin}/menu?utm_source=google&utm_medium=organic&utm_campaign=gbp&utm_content=menu`);
+assert.equal(policy.measurementPageLocation(`${policy.analyticsOrigin}/?utm_source=PRIVATE&utm_medium=organic&utm_campaign=PRIVATE`), `${policy.analyticsOrigin}/`);
+assert.equal(policy.measurementPageLocation(`${policy.analyticsOrigin}/?utm_source=google&utm_medium=organic&utm_campaign=PRIVATE&utm_content=PRIVATE`), `${policy.analyticsOrigin}/?utm_source=google&utm_medium=organic`);
+assert.equal(policy.measurementPageLocation(`${policy.analyticsOrigin}/?utm_source=google`), `${policy.analyticsOrigin}/`);
+assert.equal(policy.measurementPageLocation(`${policy.analyticsOrigin}/admin?utm_source=google&utm_medium=organic&utm_campaign=gbp`), null);
 assert.equal(policy.safeReferrer(context.document.referrer), 'https://example.com');
 assert.equal(policy.safeReferrer('https://www.tarihivankahvaltievi.com/rezervasyon/takvim/SECRET'), policy.analyticsOrigin);
 const analytics = loadModule('src/app/analytics.ts', context, { react: { useEffect() {} }, './analytics-policy': policy });
@@ -103,6 +109,43 @@ renderRoute('/en/menu');
 assert.equal(window[`ga-disable-${policy.analyticsId}`], false);
 assert.equal(events().filter(e => e[1] === 'page_view').length, 3);
 
+// Start a fresh public session with approved UTM tags. Both initial config
+// and the one page_view use the same sanitized attribution URL.
+window.dataLayer = []; delete window.vanTagsInitialized;
+refs.length = 0; refIndex = 0; effects = [];
+window.location.href = campaignUrl; pathname = '/menu';
+tags.GoogleTags(); for (const effect of effects) effect();
+assert.equal(events().find(e => e[0] === 'config' && e[1] === policy.analyticsId)[2].page_location, policy.measurementPageLocation(campaignUrl));
+assert.equal(events().filter(e => e[1] === 'page_view').length, 1);
+assert.equal(events().find(e => e[1] === 'page_view')[2].page_location, policy.measurementPageLocation(campaignUrl));
+assert.ok(!JSON.stringify(events()).includes('PRIVATE'));
+
+// Exercise the real delegated link handler without loading external tags.
+let clickHandler;
+const clickDocument = { documentElement: { lang: 'tr' },
+  addEventListener(name, fn) { if (name === 'click') clickHandler = fn; }, removeEventListener() {} };
+const navigationAnalytics = loadModule('src/app/analytics.ts', { ...context, document: clickDocument }, {
+  react: { useEffect(fn) { fn(); } }, './analytics-policy': policy,
+});
+navigationAnalytics.AnalyticsAutoTracker();
+function clickLink(href, dataset = {}) {
+  const link = { dataset, getAttribute() { return href; }, closest() { return { getAttribute() { return 'ja'; } }; } };
+  clickHandler({ target: { closest() { return link; } } });
+}
+// Provide the browser origin used by the actual click handler.
+window.location = new URL(`${policy.analyticsOrigin}/ja/blog/istanbul-bal-kaymak`);
+window.dataLayer = [];
+clickLink('/en/menu', { analyticsSurface: 'international_guide_hero' });
+clickLink('/en/menu#serpme-fix-menu', { analyticsPurpose: 'menu_compare', analyticsItem: 'serpme-fix-menu', analyticsSurface: 'breakfast_guide' });
+clickLink('/en/rezervasyon', { analyticsSurface: 'international_guide_visit' });
+clickLink('https://example.com/menu');
+assert.deepEqual(events().map(e => e[1]), ['menu_click', 'menu_compare_click', 'booking_start']);
+assert.equal(events()[0][2].locale, 'ja');
+assert.equal(events()[1][2].item_id, 'serpme-fix-menu');
+assert.equal(events().filter(e => ['generate_lead', 'conversion'].includes(e[1])).length, 0);
+navigationAnalytics.trackEvent('menu_item_view', { item_id: 'bal-kaymak', surface: 'menu_details', name: 'PRIVATE', phone: 'PRIVATE' });
+assert.ok(!JSON.stringify(events()).includes('PRIVATE'));
+
 // Deployment settings can intentionally disable either destination. A queued
 // event must never fall back to another property or a malformed Ads label.
 for (const settings of [
@@ -117,4 +160,4 @@ for (const settings of [
   await disabledAnalytics.trackBookingLead({ reservation_id: reservationId });
   assert.equal(disabledWindow.dataLayer, undefined);
 }
-console.log('Analytics checks passed: public routes, SPA deduplication, private routes, query/referrer scrubbing, hashed booking tokens and separate contact conversions.');
+console.log('Analytics checks passed: approved UTM attribution, fresh-session config, public/private routes, SPA deduplication, menu-to-booking funnel, PII scrubbing and separate booking/contact conversions.');

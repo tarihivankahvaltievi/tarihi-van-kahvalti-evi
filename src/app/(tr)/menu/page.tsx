@@ -16,12 +16,14 @@ import { MenuExperience } from "../../menu/menu-experience";
 import { getPublicMenuData } from "../../menu/public-menu-data";
 import { getMenuOrderNote } from "../../menu/menu-rules";
 import { getOrderingQuestions } from "../../menu/ordering-questions";
+import { BreakfastComparison } from "../../components/breakfast-comparison";
 
+const menuTitle = "Van Kahvaltısı Menü ve Fiyatları | Taksim, Beyoğlu";
 const menuDescription =
-  "Tarihi Van Kahvaltı Evi güncel menü ve fiyatları: serpme Van kahvaltısı, bakır sahanlar, yöresel lezzetler, çay ve kahve seçenekleri.";
+  "Taksim, Beyoğlu’nda Van kahvaltısı: serpme, tek kişilik tabaklar ve sıcak seçenekler. Güncel kişi başı fiyatları, dahil içerikler ve masa talebi bilgileri.";
 
 export const metadata: Metadata = {
-  title: { absolute: "Van Kahvaltı Menüsü ve Fiyatları | Beyoğlu Taksim" },
+  title: { absolute: menuTitle },
   description: menuDescription,
   alternates: {
     canonical: menuUrl,
@@ -32,7 +34,7 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: "Van Kahvaltı Menüsü ve Fiyatları | Beyoğlu Taksim",
+    title: menuTitle,
     description: menuDescription,
     url: menuUrl,
     siteName,
@@ -49,7 +51,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Van Kahvaltı Menüsü ve Fiyatları | Beyoğlu Taksim",
+    title: menuTitle,
     description: menuDescription,
     images: [absoluteUrl("/images/og/menu.jpg")],
   },
@@ -129,6 +131,7 @@ export default async function MenuPage() {
           initialItems={items}
           initialCategories={categories}
           lastUpdated={lastUpdated}
+          comparison={<BreakfastComparison items={items} lastUpdated={lastUpdated} surface="menu_comparison" />}
         />
         <AnimatedFooter locale="tr" />
       </ClientPage>

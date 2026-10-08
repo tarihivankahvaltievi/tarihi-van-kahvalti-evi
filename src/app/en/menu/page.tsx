@@ -6,6 +6,7 @@ import { MenuExperience } from "../../menu/menu-experience";
 import { getPublicMenuData } from "../../menu/public-menu-data";
 import { getMenuOrderNote } from "../../menu/menu-rules";
 import { getOrderingQuestions } from "../../menu/ordering-questions";
+import { BreakfastComparison } from "../../components/breakfast-comparison";
 import {
   absoluteUrl,
   buildBreadcrumbJsonLd,
@@ -19,7 +20,7 @@ import {
   siteUrl,
 } from "../../seo";
 
-const pageTitle = "English Breakfast Menu & Prices | Taksim Istanbul";
+const pageTitle = "Turkish Breakfast Menu & Prices | Taksim, Istanbul";
 const pageDescription =
   "See the current English menu and prices for traditional Van breakfast near Taksim: shared breakfast, herb cheese, murtuğa, kavut, hot dishes, tea and coffee.";
 
@@ -135,6 +136,7 @@ export default async function EnglishMenuPage() {
           initialItems={localized.items}
           initialCategories={localized.categories}
           lastUpdated={lastUpdated}
+          comparison={<BreakfastComparison items={localized.items} locale="en" lastUpdated={lastUpdated} surface="menu_comparison" />}
         />
         <AnimatedFooter locale="en" />
       </ClientPage>

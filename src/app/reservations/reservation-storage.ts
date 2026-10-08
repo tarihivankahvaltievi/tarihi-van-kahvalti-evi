@@ -16,6 +16,10 @@ export interface Reservation {
   serviceType: ServiceType;
   note?: string;
   status: ReservationStatus;
+  // Legacy records stay unknown until staff verifies them; confirmation alone
+  // is never evidence that a guest visited the restaurant.
+  source?: "website" | "staff";
+  attendance?: "arrived" | "no_show" | null;
   createdAt: string; // ISO string
   updatedAt: string; // ISO string
 }
@@ -26,11 +30,9 @@ export interface ReservationData {
 }
 
 const getLocalFilePath = () =>
-  path.join(
-    process.cwd(),
-    "src/app/reservations",
-    path.basename(process.env.RESERVATION_DATA_FILE || "reservations-data.json"),
-  );
+  process.env.RESERVATION_DATA_FILE
+    ? path.resolve(process.env.RESERVATION_DATA_FILE)
+    : path.join(process.cwd(), "src/app/reservations/reservations-data.json");
 
 // Helper to check if Supabase is configured
 export function isSupabaseConfigured() {
@@ -196,6 +198,7 @@ export async function updateReservation(
     ...data.reservations[index],
     ...updates,
     updatedAt: new Date().toISOString(),
+    ...(updates.status && updates.status !== "confirmed" ? { attendance: null } : {}),
   };
 
   data.reservations[index] = updatedReservation;

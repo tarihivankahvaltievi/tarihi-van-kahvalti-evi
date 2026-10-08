@@ -251,7 +251,7 @@ const routes = [
     restaurantMenu: `${menuPageUrl}#menu`,
     faqCount: 6,
     sharedGuideDesign: true,
-    visibleSignals: ["이스탄불 발 카이막", "터키식 아침 식사", "탁심", "1978", "버팔로 카이막", "bal kaymak var mı?"],
+    visibleSignals: ["이스탄불 발 카이막", "터키식 아침 식사", "탁심", "1978", "꿀과 카이막", "bal kaymak var mı?"],
     hreflang: honeyKaymakHreflang,
     sourcedGuide: true,
     citationCount: 4,
@@ -295,7 +295,7 @@ const routes = [
     restaurantMenu: `${menuPageUrl}#menu`,
     faqCount: 9,
     sharedGuideDesign: true,
-    visibleSignals: ["イスタンブールで味わう", "バル・カイマク", "タクシム", "1978", "水牛のカイマク", "bal kaymak var mı?"],
+    visibleSignals: ["イスタンブールで味わう", "バル・カイマク", "タクシム", "1978", "蜂蜜とカイマク", "bal kaymak var mı?"],
     hreflang: honeyKaymakHreflang,
     sourcedGuide: true,
     citationCount: 4,
@@ -531,6 +531,9 @@ for (const route of routes) {
     );
   }
   assert(route.visibleSignals.every((signal) => searchableText.includes(signal)), `${routeLabel}: hedef görünür metin eksik`);
+  if (["/ko/blog/istanbul-bal-kaymak", "/ko/blog/kaymak-nedir", "/ja/blog/istanbul-bal-kaymak"].includes(route.path)) {
+    assert(!["체에 거른 꿀, 버팔로 카이막", "濾した蜂蜜、水牛のカイマク"].some((claim) => html.includes(claim)), `${routeLabel}: teyitsiz ürün iddiası görünür metin veya şemada kaldı`);
+  }
 
   if (route.sharedHomeDesign) {
     const sharedHomeClasses = [

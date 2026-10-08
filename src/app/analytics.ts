@@ -59,7 +59,7 @@ function sendEvent(name: string, parameters: AnalyticsParameters = {}, callback?
  * phone numbers, dates, notes, and reservation IDs must never be passed here.
  */
 export function trackEvent(name: string, parameters: AnalyticsParameters = {}) {
-  if (!["contact_click", "review_source_click", "booking_whatsapp_handoff"].includes(name)) return;
+  if (!["contact_click", "review_source_click", "booking_whatsapp_handoff", "menu_click", "menu_compare_click", "menu_category_select", "menu_item_view", "booking_start"].includes(name)) return;
   parameters = safeInteractionParameters(parameters);
   sendEvent(name, parameters);
 
@@ -147,6 +147,19 @@ export function AnalyticsAutoTracker() {
 
       const href = target.getAttribute("href") || "";
       const surface = target.dataset.analyticsSurface;
+      const locale = target.closest("[lang]")?.getAttribute("lang") || document.documentElement.lang || "tr";
+      // Internal navigation is a funnel step, never a saved reservation lead.
+      let destination: URL | undefined;
+      try { destination = new URL(href, window.location.href); } catch { /* Invalid links are not measurable navigation. */ }
+      if (destination?.origin === window.location.origin) {
+        if (target.dataset.analyticsPurpose === "menu_compare") {
+          trackEvent("menu_compare_click", { locale, surface: surface || "menu_comparison", item_id: target.dataset.analyticsItem });
+        } else if (["/menu", "/en/menu"].includes(destination.pathname)) {
+          trackEvent("menu_click", { locale, surface: surface || "site_navigation" });
+        } else if (["/rezervasyon", "/en/rezervasyon"].includes(destination.pathname)) {
+          trackEvent("booking_start", { locale, surface: surface || "site_navigation" });
+        }
+      }
       if (target.dataset.analyticsPurpose === "review_source") {
         // Reading reviews is a trust interaction, not a directions conversion.
         trackEvent("review_source_click", { surface: surface || "review_link" });

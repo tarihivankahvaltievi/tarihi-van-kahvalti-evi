@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState, type ReactNode } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X } from "lucide-react";
 import styles from "./menu.module.css";
@@ -11,6 +11,7 @@ import { localizeMenuDate, type MenuLocale } from "./menu-localization";
 import { getMenuOrderNote } from "./menu-rules";
 import { getOrderingQuestions } from "./ordering-questions";
 import { OrderingGuide } from "../components/ordering-guide";
+import { trackEvent } from "../analytics";
 
 export type HamourChapter = {
   id: string;
@@ -182,6 +183,7 @@ interface MenuExperienceProps {
   initialCategories: MenuCategory[];
   lastUpdated: string;
   locale?: MenuLocale;
+  comparison?: ReactNode;
 }
 
 export function MenuExperience({
@@ -189,6 +191,7 @@ export function MenuExperience({
   initialCategories,
   lastUpdated,
   locale = "tr",
+  comparison,
 }: MenuExperienceProps) {
   const isEn = locale === "en";
   // Every category and item is rendered once. Navigation scrolls to existing
@@ -272,7 +275,8 @@ export function MenuExperience({
       ? document.activeElement
       : null;
     setModalItem(item);
-  }, []);
+    trackEvent("menu_item_view", { locale, item_id: item.id, surface: "menu_details" });
+  }, [locale]);
 
   const handleCloseModal = useCallback(() => {
     setModalItem(null);
@@ -328,7 +332,7 @@ export function MenuExperience({
             loading="eager"
             fetchPriority="high"
             sizes="100vw"
-            quality={84}
+            quality={75}
           />
         </div>
 
@@ -355,6 +359,7 @@ export function MenuExperience({
         </div>
 
         <div className={styles.container}>
+          {comparison}
           {/* CATEGORY TABS (.nav-pills) */}
           <p className={styles.menuIntro}>
             {isEn ? "All dishes and prices are listed below in Turkish lira (TRY). Choose a category to jump to it." : "Tüm ürünler ve Türk lirası (TL) fiyatları aşağıda listelenir. İlgili bölüme gitmek için bir kategori seçin."}
@@ -375,6 +380,7 @@ export function MenuExperience({
                     onClick={() => {
                       setActiveChapterId(chapter.id);
                       setActiveItemId(initialItems.find((item) => categoryIds.includes(item.category))?.id ?? "");
+                      trackEvent("menu_category_select", { locale, category_id: chapter.id, surface: "menu_categories" });
                     }}
                   >
                     <span className={styles.navLinkIcon} aria-hidden="true">
@@ -673,9 +679,10 @@ export function MenuExperience({
                 <Link
                   href={isEn ? "/en/rezervasyon" : "/rezervasyon"}
                   className={styles.sheetActionBtn}
+                  data-analytics-surface="menu_details"
                   onClick={handleCloseModal}
                 >
-                  {isEn ? "Reserve Table for This Item" : "Bu Lezzet İçin Masa Ayırt"}
+                  {isEn ? "Request a Table" : "Masa Talebi Gönder"}
                 </Link>
               </div>
             </motion.div>

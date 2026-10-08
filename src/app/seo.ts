@@ -31,9 +31,9 @@ export const storyUrl = `${siteUrl}/hikayemiz`;
 export const privacyUrl = `${siteUrl}/gizlilik`;
 export const cookiePolicyUrl = `${siteUrl}/cerez-politikasi`;
 
-export const homeTitle = "Beyoğlu Kahvaltı | Tarihi Van Kahvaltı Evi, Taksim";
+export const homeTitle = "Tarihi Van Kahvaltı Evi | Taksim Menü ve Yol Tarifi";
 export const homeDescription =
-  "Beyoğlu’nda Taksim ve İstiklal Caddesi yakınında Van kahvaltısı: otlu peynir, murtuğa, kavut ve sıcak tabaklar. Güncel menü, fiyatlar ve yol tarifi.";
+  "Zambak Sokak No:8’de Tarihi Van Kahvaltı Evi. Güncel menü ve fiyatları inceleyin; çalışma saatlerini kontrol edin, yol tarifi alın veya masa talebi gönderin.";
 export const homeOgDescription =
   "Beyoğlu, Taksim ve İstiklal Caddesi yakınında geleneksel Van kahvaltısı; güncel menü, çalışma saatleri, açık adres ve yol tarifi.";
 

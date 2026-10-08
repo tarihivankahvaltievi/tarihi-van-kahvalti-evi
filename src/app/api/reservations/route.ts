@@ -78,6 +78,7 @@ export async function POST(request: Request) {
     const guestCount = Math.max(1, Math.min(40, Math.trunc(Number(guests) || 2)));
     const validServiceType: ServiceType =
       serviceType === "cafe" ? "cafe" : "breakfast";
+    const createdByStaff = await isAdminAuthenticated();
 
     const newReservation = await addReservation({
       customerName: normalizedName,
@@ -88,7 +89,8 @@ export async function POST(request: Request) {
       guests: guestCount,
       serviceType: validServiceType,
       note: note ? String(note).trim().slice(0, 300) : undefined,
-      status: "pending",
+      status: createdByStaff && body.status === "confirmed" ? "confirmed" : "pending",
+      source: createdByStaff ? "staff" : "website",
     });
 
     const baseUrl = siteUrl || "https://www.tarihivankahvaltievi.com";

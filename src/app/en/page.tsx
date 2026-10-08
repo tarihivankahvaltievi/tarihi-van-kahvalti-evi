@@ -12,9 +12,9 @@ import {
   siteUrl,
 } from "../seo";
 
-const englishTitle = "Turkish Breakfast Near Taksim, Istanbul | Tarihi Van";
+const englishTitle = "Turkish Breakfast Near Taksim | Menu & Prices, Tarihi Van";
 const englishDescription =
-  "Traditional Van breakfast in Beyoğlu, a short walk from Taksim Square: herb cheese, murtuğa, kavut, hot dishes and Turkish tea. See prices, hours and directions.";
+  "Plan a Turkish breakfast at Zambak Street No:8 near Taksim. Compare current menu prices, shared and individual options, directions and table requests.";
 
 export const metadata: Metadata = {
   title: { absolute: englishTitle },

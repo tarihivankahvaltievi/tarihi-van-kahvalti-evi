@@ -41,6 +41,7 @@ import type {
   ReservationStatus,
   ServiceType,
 } from "../reservations/reservation-storage";
+import { getIstanbulDate } from "../rezervasyon/reservation-time";
 
 
 // Helper function to compress images on the client side
@@ -264,8 +265,9 @@ export function AdminDashboard({
         body: JSON.stringify({ status: newStatus }),
       });
       if (res.ok) {
+        const json = await res.json();
         setReservations((prev) =>
-          prev.map((r) => (r.id === id ? { ...r, status: newStatus } : r))
+          prev.map((r) => (r.id === id ? json.reservation : r))
         );
         const statusLabel =
           newStatus === "confirmed"
@@ -281,6 +283,18 @@ export function AdminDashboard({
       console.error(err);
       showMessage("error", "Sunucu hatası");
     }
+  };
+
+  const handleUpdateAttendance = async (id: string, attendance: Reservation["attendance"]) => {
+    try {
+      const response = await fetch(`/api/reservations/${id}`, {
+        method: "PATCH", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ attendance }),
+      });
+      const result = await response.json();
+      if (!response.ok) { showMessage("error", result.error || "Ziyaret sonucu kaydedilemedi"); return; }
+      setReservations((previous) => previous.map((item) => item.id === id ? result.reservation : item));
+      showMessage("success", "Ziyaret sonucu kaydedildi");
+    } catch { showMessage("error", "Ziyaret sonucu kaydedilemedi"); }
   };
 
   // Delete reservation
@@ -344,7 +358,7 @@ export function AdminDashboard({
   };
 
   // Counts & Stats
-  const todayStr = new Date().toISOString().split("T")[0];
+  const todayStr = getIstanbulDate(new Date());
   const pendingCount = useMemo(
     () => reservations.filter((r) => r.status === "pending").length,
     [reservations]
@@ -1003,6 +1017,13 @@ export function AdminDashboard({
             </div>
 
             {/* Filters, Search & Action Bar */}
+            <p className="text-sm text-gray-700 leading-relaxed">
+              Web sitesi talepleri: <strong>{reservations.filter((r) => r.source === "website").length}</strong>
+              {" · "}Onaylanan kayıtlar: <strong>{reservations.filter((r) => r.status === "confirmed").length}</strong>
+              {" · "}Geldi olarak işaretlenen: <strong>{reservations.filter((r) => r.status === "confirmed" && r.attendance === "arrived").length}</strong>
+              {" · "}Gelmedi olarak işaretlenen: <strong>{reservations.filter((r) => r.status === "confirmed" && r.attendance === "no_show").length}</strong>.
+              {" "}Bu sayılar masa kaydıdır. Eski kayıtların kaynağı ve işaretlenmemiş ziyaret sonuçları bilinmiyor kabul edilir.
+            </p>
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
               <div className="flex flex-wrap items-center gap-2">
                 {[
@@ -1193,6 +1214,21 @@ export function AdminDashboard({
                             <div className="bg-amber-50/70 border border-amber-100 rounded-lg p-2.5 text-xs text-amber-950 italic mt-2">
                               &ldquo;{res.note}&rdquo;
                             </div>
+                          )}
+                          <p className="text-xs text-gray-700 mt-3">
+                            Kayıt kaynağı: {res.source === "website" ? "Web sitesi" : res.source === "staff" ? "İşletme girişi" : "Bilinmiyor (eski kayıt)"}
+                          </p>
+                          {res.status === "confirmed" && res.date <= todayStr && (
+                            <label className="flex flex-wrap items-center gap-2 text-sm text-gray-800 mt-3">
+                              Ziyaret sonucu
+                              <select aria-label={`${res.customerName} için ziyaret sonucu`} value={res.attendance || ""}
+                                className="min-h-11 border border-gray-300 rounded-md px-3 bg-white"
+                                onChange={(event) => handleUpdateAttendance(res.id, (event.target.value || null) as Reservation["attendance"])}>
+                                <option value="">Henüz işaretlenmedi</option>
+                                <option value="arrived">Geldi</option>
+                                <option value="no_show">Gelmedi</option>
+                              </select>
+                            </label>
                           )}
                         </div>
                       </div>

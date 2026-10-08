@@ -22,7 +22,7 @@ import { LocationMap } from "../../konum/location-map";
 import styles from "../../konum/location.module.css";
 
 const locationUrl = `${siteUrl}/konum`;
-const locationTitle = "Beyoğlu Taksim Kahvaltı | Konum ve Yol Tarifi";
+const locationTitle = "Tarihi Van Kahvaltı Evi Konum | Zambak Sokak No:8";
 const locationDescription =
   "Beyoğlu'nda Taksim Meydanı ve İstiklal Caddesi yakınındaki Tarihi Van Kahvaltı Evi'nin adresini, çalışma saatlerini, metro ve yürüyüş yol tarifini görün.";
 

@@ -176,6 +176,7 @@
   opacity: 1;
   animation: none;
   transform: scale(1.015) translate3d(0, 0, 0);
+  will-change: auto;
 }
 
 .hero-cinematic .hero-slide.is-exiting {

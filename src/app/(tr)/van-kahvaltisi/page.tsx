@@ -4,6 +4,8 @@ import Link from "next/link";
 import { ArrowUpRight, CalendarCheck, Clock3, MapPin, UtensilsCrossed } from "lucide-react";
 import ClientPage from "../../client-page";
 import { AnimatedFooter } from "../../components/animated-footer";
+import { BreakfastComparison } from "../../components/breakfast-comparison";
+import { getPublicMenuData } from "../../menu/public-menu-data";
 import styles from "../../van-kahvaltisi/van-breakfast.module.css";
 import {
   address,
@@ -16,11 +18,12 @@ import {
   displayAddress,
   jsonLd,
   mapsUrl,
+  openingHours,
   siteName,
   siteUrl,
 } from "../../seo";
 
-const guideTitle = "Taksim'de Van Kahvaltısı | Beyoğlu Rehberi";
+const guideTitle = "Taksim’de Van Kahvaltısı | Serpme Menü ve Ziyaret Rehberi";
 const guideDescription =
   "Taksim ve Beyoğlu'nda geleneksel Van kahvaltısı için rehber: Zambak Sokak adresi, M2 erişimi, çalışma saatleri, güncel menü ve yöresel tatlar.";
 
@@ -94,7 +97,8 @@ export const metadata: Metadata = {
   },
 };
 
-export default function VanBreakfastGuidePage() {
+export default async function VanBreakfastGuidePage() {
+  const { items, lastUpdated } = await getPublicMenuData();
   const guideJsonLd = {
     "@context": "https://schema.org",
     "@graph": [
@@ -107,7 +111,7 @@ export default function VanBreakfastGuidePage() {
         description: guideDescription,
         inLanguage: "tr-TR",
         isPartOf: { "@id": `${siteUrl}/#website` },
-        dateModified: "2026-10-02",
+        dateModified: "2026-10-08",
         publisher: { "@id": `${siteUrl}/#restaurant` },
         about: [
           { "@type": "Thing", name: "Van kahvaltısı" },
@@ -167,9 +171,9 @@ export default function VanBreakfastGuidePage() {
                     <span>Van kahvaltısı</span>
                   </h1>
                   <p className={styles.lead}>
-                    Tarihi Van Kahvaltı Evi, Taksim ve İstiklal Caddesi&apos;ne yürüme mesafesindeki Zambak Sokak&apos;ta;
-                    otlu peynir, sıcak yöresel lezzetler, hamur işleri, bal-kaymak ve demli çayla kurulan paylaşım
-                    sofrasını 1978&apos;den beri yaşatıyor.
+                    Taksim ve İstiklal Caddesi yakınında, Zambak Sokak No:8&apos;deki Tarihi Van Kahvaltı Evi&apos;nde
+                    serpme sofra veya tek kişilik bir tabak seçebilirsiniz. Aile anlatımızın başlangıcı 1978;
+                    bugünkü ziyaretinizi ise güncel menü, servis koşulları ve doğru adresle planlayın.
                   </p>
                   <div className={styles.actions}>
                     <Link className={styles.primaryAction} href="/rezervasyon">
@@ -193,7 +197,7 @@ export default function VanBreakfastGuidePage() {
                     </div>
                     <div>
                       <dt>Çalışma saatleri</dt>
-                      <dd>Her gün 07:00–22:00</dd>
+                      <dd>{openingHours.short}</dd>
                     </div>
                   </dl>
                 </div>
@@ -215,11 +219,16 @@ export default function VanBreakfastGuidePage() {
               <div className={styles.guideNavInner}>
                 <strong>Yerel rehber</strong>
                 <a href="#sofrada-neler-var">Sofrada neler var?</a>
+                <a href="#breakfast-options">Serpme ve tek kişi</a>
                 <a href="#nasil-servis-edilir">Nasıl servis edilir?</a>
                 <a href="#ziyaret-plani">Adres ve ulaşım</a>
                 <a href="#sorular">Kısa cevaplar</a>
               </div>
             </nav>
+
+            <div className={styles.choiceSection}>
+              <BreakfastComparison items={items} lastUpdated={lastUpdated} surface="breakfast_guide" />
+            </div>
 
             <section id="sofrada-neler-var" className={styles.flavours} aria-labelledby="glossary-title">
               <header className={styles.sectionIntro}>
@@ -299,11 +308,12 @@ export default function VanBreakfastGuidePage() {
               </header>
               <div className={styles.visitDetails}>
                 <div className={styles.visitFacts}>
-                  <p><Clock3 size={18} aria-hidden="true" /><span><strong>Her gün 07:00–22:00</strong>Hafta sonu ve kalabalık gruplar için ziyaret öncesinde masa uygunluğunu sormanız önerilir.</span></p>
+                  <p><Clock3 size={18} aria-hidden="true" /><span><strong>{openingHours.short}</strong>Bu aralık mekânın çalışma saatidir. Erken veya geç kahvaltıda istediğiniz ürünlerin uygunluğunu ekibe sorun; hafta sonu ve gruplarda masa talebinizi önceden iletin.</span></p>
                   <p><MapPin size={18} aria-hidden="true" /><span><strong>Taksim&apos;den yürüyerek ulaşım</strong>M2 Taksim durağından Sıraselviler yönüne çıkıp Zambak Sokak&apos;a ilerleyin.</span></p>
                 </div>
                 <div className={styles.visitActions}>
                   <Link className={styles.lightAction} href="/menu">Menü ve fiyatlar <ArrowUpRight size={16} aria-hidden="true" /></Link>
+                  <Link className={styles.lightAction} href="/rezervasyon" data-analytics-surface="breakfast_guide_visit">Masa talebi gönder <ArrowUpRight size={16} aria-hidden="true" /></Link>
                   <a className={styles.outlineLightAction} href={mapsUrl} target="_blank" rel="noreferrer">Google Haritalar&apos;da aç <ArrowUpRight size={16} aria-hidden="true" /></a>
                 </div>
               </div>

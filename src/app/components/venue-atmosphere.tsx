@@ -25,7 +25,7 @@ export function VenueAtmosphere({ locale = "tr" }: { locale?: string }) {
           alt={isEn ? "Beyoğlu Balcony Breakfast - Tarihi Van Kahvaltı Evi" : "Beyoğlu Balkonunda Kahvaltı - Tarihi Van Kahvaltı Evi"}
           fill
           sizes="100vw"
-          quality={84}
+          quality={75}
           className={styles.bgImg}
         />
       </div>
