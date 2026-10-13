@@ -541,7 +541,7 @@ for (const route of routes) {
       "hero-section hero-cinematic",
       'id="gallery"',
       'id="faq"',
-      "faq-section",
+      'id="faq-heading"',
       "hamour-footer",
     ];
     assert(
@@ -552,11 +552,11 @@ for (const route of routes) {
 
   if (route.sharedMenuDesign) {
     const sharedMenuClasses = [
-      "__banner",
-      "__navPills",
-      "__menuListArticle",
-      "__menuItem",
-      "__section4",
+      "_banner",
+      "_navPills",
+      "_menuListArticle",
+      "_menuItem",
+      "_section4",
     ];
     assert(
       sharedMenuClasses.every((className) => html.includes(className)),
@@ -577,7 +577,7 @@ for (const route of routes) {
   }
 
   if (route.sharedGuideDesign) {
-    const sharedGuideClasses = ["__hero", "__articleNav", "__menuList", "__reasons", "__practical", "__faq"];
+    const sharedGuideClasses = ["_hero", "_articleNav", "_menuList", "_reasons", "_practical", "_faq"];
     assert(
       sharedGuideClasses.every((className) => html.includes(className)),
       `${routeLabel}: ortak uluslararası rehber tasarımı eksik`,
@@ -962,6 +962,10 @@ assert(llms.includes("# Tarihi Van Kahvaltı Evi"), "llms.txt: işletme adı eks
 assert(llms.includes(menuPageUrl), "llms.txt: canlı menü kaynağı eksik");
 assert(llms.includes(reservationPageUrl), "llms.txt: rezervasyon kaynağı eksik");
 assert(llms.includes("Citation guidance"), "llms.txt: alıntı yönlendirmesi eksik");
+for (const url of [russianBreakfastBlogUrl, arabicBreakfastBlogUrl, japaneseHoneyKaymakBlogUrl, koreanKaymakExplainerUrl, koreanTurkishBreakfastBlogUrl, koreanTourGuideBreakfastBlogUrl]) {
+  assert(llms.includes(url), `llms.txt: dil rehberi eksik (${url})`);
+}
+assert(llms.includes("not a confirmed booking"), "llms.txt: talep ile onaylanmış rezervasyon ayrımı eksik");
 
 const adminResponse = await fetchWithRetry("/admin");
 const adminHtml = await adminResponse.text();

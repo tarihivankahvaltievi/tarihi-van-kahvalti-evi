@@ -13,7 +13,7 @@ export function AtmosphereBanner({ locale = "tr" }: { locale?: string }) {
           alt="Tarihi Van Kahvaltı Evi Nostaljik Atmosfer"
           fill
           sizes="100vw"
-          quality={85}
+          quality={75}
           className={styles.bgImg}
         />
       </div>

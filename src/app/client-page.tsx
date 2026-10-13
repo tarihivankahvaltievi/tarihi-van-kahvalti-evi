@@ -69,21 +69,28 @@ export default function ClientPage({ children, locale = "tr" }: { children: Reac
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             entry.target.classList.add("aos-animate");
+            observer.unobserve(entry.target);
           }
         });
       },
       { threshold: 0.05, rootMargin: "0px 0px -20px 0px" }
     );
 
-    const observeNewElements = () => {
-      const elements = document.querySelectorAll("[data-aos]:not(.aos-animate)");
-      elements.forEach((el) => observer.observe(el));
+    const observeNewElements = (root: ParentNode) => {
+      if (root instanceof Element && root.matches("[data-aos]:not(.aos-animate)")) {
+        observer.observe(root);
+      }
+      root.querySelectorAll("[data-aos]:not(.aos-animate)").forEach((el) => observer.observe(el));
     };
 
-    observeNewElements();
+    observeNewElements(document);
 
-    const mutationObserver = new MutationObserver(() => {
-      observeNewElements();
+    const mutationObserver = new MutationObserver((records) => {
+      for (const record of records) {
+        for (const node of record.addedNodes) {
+          if (node instanceof Element) observeNewElements(node);
+        }
+      }
     });
     mutationObserver.observe(document.body, { childList: true, subtree: true });
 
@@ -179,7 +186,7 @@ export default function ClientPage({ children, locale = "tr" }: { children: Reac
                   setMenuOpen(false);
                   if (pathname === "/" || pathname === "/en") {
                     e.preventDefault();
-                    window.scrollTo({ top: 0, behavior: "smooth" });
+                    window.scrollTo({ top: 0, behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "instant" : "smooth" });
                   }
                 }}
               >

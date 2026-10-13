@@ -72,6 +72,7 @@ export function SignatureShowcase({ locale = "tr" }: { locale?: string }) {
   const [activeTab, setActiveTab] = useState(0);
   const sectionRef = useRef<HTMLElement>(null);
   const isInView = useInView(sectionRef, { once: true, amount: 0.18 });
+  const isVisible = useInView(sectionRef, { amount: 0.01 });
   const reduceMotion = useReducedMotion();
 
   const safeTabIdx = Math.max(0, Math.min(activeTab, TABS.length - 1));
@@ -83,12 +84,12 @@ export function SignatureShowcase({ locale = "tr" }: { locale?: string }) {
         {/* Category Tabs: 3 Luxury Buttons */}
         <motion.div
           className={styles.tabNavWrapper}
-          initial={reduceMotion ? false : { opacity: 0, y: 24 }}
+          initial={false}
           whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.2 }}
           transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
         >
-          <div className={styles.tabNav} role="tablist" aria-label="Menü Kategorileri">
+          <div className={styles.tabNav} role="tablist" aria-label={isEn ? "Menu categories" : "Menü Kategorileri"}>
             {TABS.map((tab, idx) => {
               const isActive = idx === safeTabIdx;
               return (
@@ -97,17 +98,29 @@ export function SignatureShowcase({ locale = "tr" }: { locale?: string }) {
                   type="button"
                   role="tab"
                   aria-selected={isActive}
+                  tabIndex={isActive ? 0 : -1}
                   aria-controls="signature-menu-panel"
                   id={`signature-menu-tab-${tab.id}`}
                   className={`${styles.tabBtn} ${isActive ? styles.tabBtnActive : ""}`}
                   onClick={() => setActiveTab(idx)}
+                  onKeyDown={(event) => {
+                    let next: number;
+                    if (event.key === "ArrowRight") next = (idx + 1) % TABS.length;
+                    else if (event.key === "ArrowLeft") next = (idx - 1 + TABS.length) % TABS.length;
+                    else if (event.key === "Home") next = 0;
+                    else if (event.key === "End") next = TABS.length - 1;
+                    else return;
+                    event.preventDefault();
+                    setActiveTab(next);
+                    document.getElementById(`signature-menu-tab-${TABS[next].id}`)?.focus();
+                  }}
                   whileHover={reduceMotion ? undefined : { y: -2 }}
                   whileTap={reduceMotion ? undefined : { scale: 0.97 }}
                 >
                   {/* Sliding active pill indicator */}
                   {isActive && (
                     <motion.div
-                      layoutId="activeTabPill"
+                      layoutId={reduceMotion ? undefined : "activeTabPill"}
                       className={styles.activePill}
                       transition={{
                         type: "spring",
@@ -130,7 +143,7 @@ export function SignatureShowcase({ locale = "tr" }: { locale?: string }) {
 
                   {isActive && (
                     <motion.span
-                      layoutId="activeTabAccent"
+                      layoutId={reduceMotion ? undefined : "activeTabAccent"}
                       className={styles.activeIndicator}
                       transition={{
                         type: "spring",
@@ -153,8 +166,9 @@ export function SignatureShowcase({ locale = "tr" }: { locale?: string }) {
             className={styles.tabContentPane}
             id="signature-menu-panel"
             role="tabpanel"
+            tabIndex={0}
             aria-labelledby={`signature-menu-tab-${current.id}`}
-            initial={reduceMotion ? false : { opacity: 0 }}
+            initial={false}
             animate={{ opacity: 1 }}
             exit={
               reduceMotion
@@ -167,20 +181,14 @@ export function SignatureShowcase({ locale = "tr" }: { locale?: string }) {
             <div className={styles.plateArea}>
               <motion.div
                 className={styles.plateWrapper}
-                initial={
-                  reduceMotion
-                    ? false
-                    : isInView
-                    ? { opacity: 0, x: -75, rotate: -3, scale: 0.95 }
-                    : { opacity: 0, x: -95, rotate: -4, scale: 0.93 }
-                }
+                initial={false}
                 animate={
-                  isInView
+                  (isInView || reduceMotion)
                     ? { opacity: 1, x: 0, rotate: 0, scale: 1 }
-                    : { opacity: 0, x: -95, rotate: -4, scale: 0.93 }
+                    : { opacity: 1, x: -95, rotate: -4, scale: 0.93 }
                 }
                 transition={{
-                  duration: 0.88,
+                  duration: reduceMotion ? 0.15 : 0.88,
                   ease: [0.16, 1, 0.3, 1],
                 }}
               >
@@ -188,8 +196,8 @@ export function SignatureShowcase({ locale = "tr" }: { locale?: string }) {
                 <motion.div
                   className={styles.plateFloating}
                   animate={
-                    reduceMotion
-                      ? undefined
+                    reduceMotion || !isVisible
+                      ? { y: 0 }
                       : {
                           y: [0, -6, 0],
                         }
@@ -217,7 +225,7 @@ export function SignatureShowcase({ locale = "tr" }: { locale?: string }) {
             <div className={styles.article}>
               <motion.h3
                 className={styles.articleTitle}
-                initial={reduceMotion ? false : { opacity: 0, y: 16 }}
+                initial={false}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.55, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
               >
@@ -226,7 +234,7 @@ export function SignatureShowcase({ locale = "tr" }: { locale?: string }) {
 
               <motion.p
                 className={styles.articleDesc}
-                initial={reduceMotion ? false : { opacity: 0, y: 14 }}
+                initial={false}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.55, delay: 0.18, ease: [0.16, 1, 0.3, 1] }}
               >
@@ -235,7 +243,7 @@ export function SignatureShowcase({ locale = "tr" }: { locale?: string }) {
 
               <motion.div
                 className={styles.btnWrapper}
-                initial={reduceMotion ? false : { opacity: 0, y: 12 }}
+                initial={false}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.55, delay: 0.26, ease: [0.16, 1, 0.3, 1] }}
               >

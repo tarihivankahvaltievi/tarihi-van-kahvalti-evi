@@ -13,6 +13,7 @@ export function AboutStory({ locale = "tr" }: { locale?: string }) {
   const isInView = useInView(sectionRef, { once: true, amount: 0.15 });
   const reduceMotion = useReducedMotion();
 
+  // Keep server-rendered text visible before hydration or scroll observation.
   const easeLuxury = [0.16, 1, 0.3, 1] as const;
 
   return (
@@ -21,11 +22,11 @@ export function AboutStory({ locale = "tr" }: { locale?: string }) {
         <div className={styles.article}>
           <motion.div
             className={styles.crestMini}
-            initial={reduceMotion ? false : { opacity: 0, y: -16 }}
+            initial={false}
             animate={
-              isInView
+              (isInView || reduceMotion)
                 ? { opacity: 1, y: 0 }
-                : { opacity: 0, y: -16 }
+                : { opacity: 1, y: -16 }
             }
             transition={{ duration: 0.75, ease: easeLuxury }}
           >
@@ -43,11 +44,11 @@ export function AboutStory({ locale = "tr" }: { locale?: string }) {
           <h2 className={styles.title}>
             <motion.span
               className={styles.titleLine}
-              initial={reduceMotion ? false : { opacity: 0, y: 26, filter: "blur(5px)" }}
+              initial={false}
               animate={
-                isInView
+                (isInView || reduceMotion)
                   ? { opacity: 1, y: 0, filter: "blur(0px)" }
-                  : { opacity: 0, y: 26, filter: "blur(5px)" }
+                  : { opacity: 1, y: 26, filter: "blur(0px)" }
               }
               transition={{ duration: 0.8, delay: 0.1, ease: easeLuxury }}
             >
@@ -55,11 +56,11 @@ export function AboutStory({ locale = "tr" }: { locale?: string }) {
             </motion.span>
             <motion.span
               className={styles.titleLineAccent}
-              initial={reduceMotion ? false : { opacity: 0, y: 26, filter: "blur(5px)" }}
+              initial={false}
               animate={
-                isInView
+                (isInView || reduceMotion)
                   ? { opacity: 1, y: 0, filter: "blur(0px)" }
-                  : { opacity: 0, y: 26, filter: "blur(5px)" }
+                  : { opacity: 1, y: 26, filter: "blur(0px)" }
               }
               transition={{ duration: 0.8, delay: 0.22, ease: easeLuxury }}
             >
@@ -69,11 +70,11 @@ export function AboutStory({ locale = "tr" }: { locale?: string }) {
 
           <motion.div
             className={styles.intro}
-            initial={reduceMotion ? false : { opacity: 0, y: 24, scale: 0.98 }}
+            initial={false}
             animate={
-              isInView
+              (isInView || reduceMotion)
                 ? { opacity: 1, y: 0, scale: 1 }
-                : { opacity: 0, y: 24, scale: 0.98 }
+                : { opacity: 1, y: 24, scale: 0.98 }
             }
             transition={{ duration: 0.85, delay: 0.38, ease: easeLuxury }}
           >
@@ -94,11 +95,11 @@ export function AboutStory({ locale = "tr" }: { locale?: string }) {
 
           <div className={styles.richtext}>
             <motion.p
-              initial={reduceMotion ? false : { opacity: 0, y: 20 }}
+              initial={false}
               animate={
-                isInView
+                (isInView || reduceMotion)
                   ? { opacity: 1, y: 0 }
-                  : { opacity: 0, y: 20 }
+                  : { opacity: 1, y: 20 }
               }
               transition={{ duration: 0.75, delay: 0.48, ease: easeLuxury }}
             >
@@ -109,11 +110,11 @@ export function AboutStory({ locale = "tr" }: { locale?: string }) {
               </span>
             </motion.p>
             <motion.p
-              initial={reduceMotion ? false : { opacity: 0, y: 20 }}
+              initial={false}
               animate={
-                isInView
+                (isInView || reduceMotion)
                   ? { opacity: 1, y: 0 }
-                  : { opacity: 0, y: 20 }
+                  : { opacity: 1, y: 20 }
               }
               transition={{ duration: 0.75, delay: 0.58, ease: easeLuxury }}
             >
@@ -127,11 +128,11 @@ export function AboutStory({ locale = "tr" }: { locale?: string }) {
 
           <motion.div
             className={styles.btnWrapper}
-            initial={reduceMotion ? false : { opacity: 0, y: 18 }}
+            initial={false}
             animate={
-              isInView
+              (isInView || reduceMotion)
                 ? { opacity: 1, y: 0 }
-                : { opacity: 0, y: 18 }
+                : { opacity: 1, y: 18 }
             }
             transition={{ duration: 0.75, delay: 0.75, ease: easeLuxury }}
           >
