@@ -6,18 +6,15 @@ import { AnimatedFooter } from "./components/animated-footer";
 import { FaqSection } from "./components/faq-section";
 import { VanHeroParallax } from "./components/van-hero-parallax";
 import { messagesFor, type SiteLocale } from "./home-localization";
-import { getPublicMenuData } from "./menu/public-menu-data";
 
-export async function HomeContent({ locale = "tr" }: { locale?: SiteLocale }) {
+export function HomeContent({ locale = "tr" }: { locale?: SiteLocale }) {
   const messages = messagesFor(locale);
-  const { items } = await getPublicMenuData();
-  const serpmePrice = items.find((item) => item.id === "serpme-fix-menu")?.price;
 
   return (
     <>
       <main id="main-content" tabIndex={-1} lang={messages.documentLanguage}>
         {/* Hero Section */}
-        <VanHeroParallax locale={locale} serpmePrice={serpmePrice} />
+        <VanHeroParallax locale={locale} />
 
         {/* Section 1: About & Heritage (Hamour Section 1) */}
         <AboutStory locale={locale} />

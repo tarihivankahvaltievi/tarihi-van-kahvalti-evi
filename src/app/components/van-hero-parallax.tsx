@@ -4,8 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { messagesFor, type SiteLocale } from "../home-localization";
-import { address, openingHours, mapsUrl, googleMapsSnapshot } from "../seo";
-import { getMenuOrderNote } from "../menu/menu-rules";
+import { mapsUrl, googleMapsSnapshot } from "../seo";
 
 type HeroSlide = {
   image: string;
@@ -41,7 +40,7 @@ const heroSlides: HeroSlide[] = [
   },
 ];
 
-export function VanHeroParallax({ locale = "tr", serpmePrice }: { locale?: SiteLocale; serpmePrice?: string }) {
+export function VanHeroParallax({ locale = "tr" }: { locale?: SiteLocale }) {
   const messages = messagesFor(locale);
   const [currentSlide, setCurrentSlide] = useState(0);
   const [previousSlide, setPreviousSlide] = useState<number | null>(null);
@@ -107,16 +106,6 @@ export function VanHeroParallax({ locale = "tr", serpmePrice }: { locale?: SiteL
               className="hero-title-lockup-image"
             />
           </h1>
-          <p className="hero-tagline">
-            {locale === "en"
-              ? "Traditional Van breakfast in Beyoğlu, near Taksim."
-              : "Beyoğlu / Taksim’de geleneksel Van kahvaltısı."}
-          </p>
-          <div id="location" className="hero-visit-facts">
-            <address>{address.neighborhood}, {address.streetAddress}<br />{address.postalCode} {address.locality} / {address.region}</address>
-            <p>{locale === "en" ? "Every day" : "Her gün"} {openingHours.opens}–{openingHours.closes}</p>
-          </div>
-          {serpmePrice && <p className="hero-breakfast-price"><Link href={`${messages.menuHref}#serpme-fix-menu`}>{locale === "en" ? "Serpme breakfast" : "Serpme kahvaltı"}: {serpmePrice} {locale === "en" ? "per person" : "kişi başı"} · {getMenuOrderNote("serpme-fix-menu", locale)}</Link></p>}
           <div className="hero-actions">
             <Link href={messages.menuHref} className="btn btn-primary" data-analytics-surface="home_hero">
               {locale === "en" ? "MENU & PRICES" : "MENÜ VE FİYATLAR"}

@@ -8301,17 +8301,6 @@ body .mobile-bar .mobile-bar-primary:focus-visible {
   text-shadow: 0 3px 14px rgba(0, 0, 0, 0.65);
 }
 
-.hero-tagline {
-  font-family: "Causten", var(--font-commissioner-gf), system-ui, sans-serif;
-  font-size: 1.12rem;
-  color: rgba(255, 249, 240, 0.92);
-  margin: 0 auto 2.2rem;
-  max-width: 600px;
-  line-height: 1.6;
-  font-weight: 400;
-  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.65);
-}
-
 .hero-actions {
   display: flex;
   gap: 1.25rem;
@@ -8477,9 +8466,6 @@ body .mobile-bar .mobile-bar-primary:focus-visible {
   .hero-title {
     font-size: 2.6rem;
   }
-  .hero-tagline {
-    font-size: 1.05rem;
-  }
   .hero-actions {
     flex-direction: column;
     align-items: stretch;
@@ -8498,11 +8484,6 @@ body .mobile-bar .mobile-bar-primary:focus-visible {
   .hero-title {
     font-size: 2.1rem !important;
     line-height: 1.15 !important;
-  }
-  .hero-tagline {
-    font-size: 0.95rem !important;
-    line-height: 1.55 !important;
-    margin-bottom: 2rem;
   }
 }
 
