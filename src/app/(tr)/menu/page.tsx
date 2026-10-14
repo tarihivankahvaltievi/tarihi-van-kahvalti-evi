@@ -16,7 +16,6 @@ import { MenuExperience } from "../../menu/menu-experience";
 import { getPublicMenuData } from "../../menu/public-menu-data";
 import { getMenuOrderNote } from "../../menu/menu-rules";
 import { getOrderingQuestions } from "../../menu/ordering-questions";
-import { BreakfastComparison } from "../../components/breakfast-comparison";
 
 const menuTitle = "Van Kahvaltısı Menü ve Fiyatları | Taksim, Beyoğlu";
 const menuDescription =
@@ -131,7 +130,6 @@ export default async function MenuPage() {
           initialItems={items}
           initialCategories={categories}
           lastUpdated={lastUpdated}
-          comparison={<BreakfastComparison items={items} lastUpdated={lastUpdated} surface="menu_comparison" />}
         />
         <AnimatedFooter locale="tr" />
       </ClientPage>

@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useCallback, useEffect, useMemo, useRef, useState, type ReactNode } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X } from "lucide-react";
 import styles from "./menu.module.css";
@@ -183,7 +183,6 @@ interface MenuExperienceProps {
   initialCategories: MenuCategory[];
   lastUpdated: string;
   locale?: MenuLocale;
-  comparison?: ReactNode;
 }
 
 export function MenuExperience({
@@ -191,7 +190,6 @@ export function MenuExperience({
   initialCategories,
   lastUpdated,
   locale = "tr",
-  comparison,
 }: MenuExperienceProps) {
   const isEn = locale === "en";
   // Every category and item is rendered once. Navigation scrolls to existing
@@ -359,7 +357,6 @@ export function MenuExperience({
         </div>
 
         <div className={styles.container}>
-          {comparison}
           {/* CATEGORY TABS (.nav-pills) */}
           <p className={styles.menuIntro}>
             {isEn ? "All dishes and prices are listed below in Turkish lira (TRY). Choose a category to jump to it." : "Tüm ürünler ve Türk lirası (TL) fiyatları aşağıda listelenir. İlgili bölüme gitmek için bir kategori seçin."}
