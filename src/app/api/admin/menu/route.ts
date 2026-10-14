@@ -1,3 +1,4 @@
+import { readJsonObject, RequestError } from "@/app/api/request-security";
 import { NextResponse } from "next/server";
 import { revalidatePath, revalidateTag } from "next/cache";
 import { isAdminAuthenticated } from "@/app/admin/auth-helper";
@@ -50,10 +51,20 @@ export async function POST(request: Request) {
       );
     }
 
-    const data = (await request.json()) as MenuData;
+    const data = (await readJsonObject(request, 1024 * 1024)) as unknown as MenuData;
 
-    // Basic validation
-    if (!data.categories || !data.items || !data.lastUpdated) {
+    // Reject corrupt records before they can break the menu, schema or GEO feed.
+    const text = (value: unknown) => typeof value === "string" && value.length <= 10_000;
+    if (!Array.isArray(data.categories) || !Array.isArray(data.items) ||
+        !data.categories.length || data.categories.length > 100 || data.items.length > 1000 ||
+        !text(data.lastUpdated) || !data.lastUpdated.trim() ||
+        !data.categories.every((entry) => entry && [entry.id, entry.label, entry.shortLabel, entry.description, entry.image, entry.imageAlt].every(text)) ||
+        !data.items.every((entry) => entry && [entry.id, entry.category, entry.name, entry.price, entry.description, entry.story, entry.image, entry.imageAlt].every(text) &&
+          (entry.priceNote === undefined || text(entry.priceNote)) &&
+          Array.isArray(entry.tags) && entry.tags.every(text) && Array.isArray(entry.details) && entry.details.every(text)) ||
+        new Set(data.categories.map((entry) => entry.id)).size !== data.categories.length ||
+        new Set(data.items.map((entry) => entry.id)).size !== data.items.length ||
+        data.items.some((entry) => !data.categories.some((category) => category.id === entry.category))) {
       return NextResponse.json(
         { error: "Geçersiz menü verisi" },
         { status: 400 }
@@ -70,6 +81,7 @@ export async function POST(request: Request) {
       revalidatePath("/rezervasyon");
       revalidatePath("/en/rezervasyon");
       revalidatePath("/sitemap.xml");
+      revalidatePath("/llms.txt");
 
       try {
         await notifyMenuUpdate();
@@ -87,6 +99,7 @@ export async function POST(request: Request) {
       { status: 500 }
     );
   } catch (error) {
+    if (error instanceof RequestError) return NextResponse.json({ error: error.message }, { status: error.status });
     console.error("Menu POST API error:", error);
     return NextResponse.json(
       { error: "Sunucu hatası" },

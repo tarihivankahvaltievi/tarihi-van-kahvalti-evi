@@ -1,6 +1,5 @@
 import type { MetadataRoute } from "next";
-import { connection } from "next/server";
-import { getMenuData } from "./menu/menu-storage";
+import { getPublicMenuData } from "./menu/public-menu-data";
 import {
   absoluteUrl,
   arabicBreakfastBlogUrl,
@@ -165,8 +164,7 @@ const homeImages = uniqueImages([
 ]);
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  await connection();
-  const { categories, items, lastUpdated } = await getMenuData();
+  const { categories, items, lastUpdated } = await getPublicMenuData();
   const liveMenuLastModified = menuLastModified(lastUpdated);
   const liveHomeLastModified = Date.parse(liveMenuLastModified) > Date.parse(homeLastModified)
     ? liveMenuLastModified

@@ -1,9 +1,12 @@
+import { readJsonObject, RequestError } from "@/app/api/request-security";
 import { NextResponse } from "next/server";
 import { isAdminAuthenticated } from "@/app/admin/auth-helper";
 import {
   updateReservation,
   deleteReservation,
   getReservationById,
+  type ReservationStatus,
+  type Reservation,
 } from "@/app/reservations/reservation-storage";
 import { getIstanbulDate } from "@/app/rezervasyon/reservation-time";
 
@@ -40,27 +43,28 @@ export async function PATCH(
     }
 
     const { id } = await props.params;
-    const body = await request.json();
+    const body = await readJsonObject(request, 4096);
     if (!body || typeof body !== "object" || Array.isArray(body) ||
         !Object.keys(body).length || Object.keys(body).some((key) => !["status", "attendance"].includes(key)) ||
-        ("status" in body && !["pending", "confirmed", "cancelled"].includes(body.status)) ||
-        ("attendance" in body && body.attendance !== null && !["arrived", "no_show"].includes(body.attendance))) {
+        ("status" in body && (typeof body.status !== "string" || !["pending", "confirmed", "cancelled"].includes(body.status))) ||
+        ("attendance" in body && body.attendance !== null && (typeof body.attendance !== "string" || !["arrived", "no_show"].includes(body.attendance)))) {
       return NextResponse.json({ error: "Geçersiz durum veya ziyaret sonucu." }, { status: 400 });
     }
     const existing = await getReservationById(id);
     if (!existing) return NextResponse.json({ error: "Rezervasyon bulunamadı" }, { status: 404 });
-    const status = body.status ?? existing.status;
+    const status = (body.status ?? existing.status) as ReservationStatus;
     if (body.attendance && (status !== "confirmed" || existing.date > getIstanbulDate(new Date()) ||
         (body.attendance === "no_show" && Date.parse(`${existing.date}T${existing.time}:00+03:00`) > Date.now()))) {
       return NextResponse.json({ error: "Ziyaret sonucu yalnız tarihi gelmiş, onaylı bir kayıt için işlenebilir." }, { status: 400 });
     }
-    const updated = await updateReservation(id, { status, ...("attendance" in body ? { attendance: body.attendance } : {}) });
+    const updated = await updateReservation(id, { status, ...("attendance" in body ? { attendance: body.attendance as Reservation["attendance"] } : {}) });
     if (!updated) {
       return NextResponse.json({ error: "Rezervasyon bulunamadı" }, { status: 404 });
     }
 
     return NextResponse.json({ success: true, reservation: updated });
   } catch (error) {
+    if (error instanceof RequestError) return NextResponse.json({ error: error.message }, { status: error.status });
     console.error("Update reservation error:", error);
     return NextResponse.json({ error: "Sunucu hatası" }, { status: 500 });
   }

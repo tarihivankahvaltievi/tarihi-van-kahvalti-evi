@@ -55,6 +55,40 @@
   border-top: 1px solid rgba(64, 32, 33, 0.25);
 }
 
+.visit {
+  margin-top: 28px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(64, 32, 33, 0.25);
+  font-family: "Causten", system-ui, sans-serif;
+  font-size: 15px;
+  line-height: 1.6;
+  scroll-margin-top: 110px;
+}
+
+.visit h3 {
+  margin: 0 0 10px;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.visit address {
+  max-width: 32ch;
+  font-style: normal;
+}
+
+.visit p {
+  margin: 8px 0;
+}
+
+.visit a {
+  display: block;
+  width: fit-content;
+  padding: 10px 0;
+  color: var(--faq-accent);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
 .item {
   border-bottom: 1px solid rgba(64, 32, 33, 0.16);
 }

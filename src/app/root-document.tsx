@@ -168,8 +168,6 @@ export function RootDocument({
   return (
     <html lang={siteLanguages[locale].lang} dir={siteLanguages[locale].dir} className={`h-full antialiased ${bodoni.variable} ${literata.variable} ${commissioner.variable} ${fontClass}`}>
       <head>
-        <link rel="preconnect" href="https://www.googletagmanager.com" />
-        <link rel="preconnect" href="https://googleads.g.doubleclick.net" />
         <link rel="me" href={instagramUrl} />
       </head>
       <body className="min-h-full flex flex-col">

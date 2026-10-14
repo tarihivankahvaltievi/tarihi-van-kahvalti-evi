@@ -16,6 +16,19 @@ export function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
   const host = request.headers.get("host") || "";
   const cleanPath = pathname.replace(/\/+$/, "") || "/";
+  if (pathname.startsWith("/api/") && !["GET", "HEAD", "OPTIONS"].includes(request.method)) {
+    const origin = request.headers.get("origin");
+    // Browser mutations must come from this deployment. Requests without
+    // Origin remain usable by authenticated server clients and local scripts.
+    if (request.headers.get("sec-fetch-site") === "cross-site" ||
+        (origin && origin !== request.nextUrl.origin && origin !== siteUrl)) {
+      return NextResponse.json({ error: "İstek kaynağına izin verilmiyor." }, { status: 403 });
+    }
+    const limit = pathname === "/api/admin/upload" ? 6 * 1024 * 1024 : 1024 * 1024;
+    if (Number(request.headers.get("content-length")) > limit) {
+      return NextResponse.json({ error: "İstek boyutu çok büyük." }, { status: 413 });
+    }
+  }
   const legacyTarget = redirectMap.get(cleanPath);
   const canonicalHost = host === "tarihivankahvaltievi.com";
   const obsoleteQuery = request.nextUrl.searchParams.has("wc-ajax");
@@ -38,6 +51,7 @@ export function proxy(request: NextRequest) {
 
 export const config = {
   matcher: [
+    "/api/:path*",
     /*
      * Match all request paths except:
      * - _next/static (static files)

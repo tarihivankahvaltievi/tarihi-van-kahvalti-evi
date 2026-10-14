@@ -1,3 +1,4 @@
+import { readJsonObject, RequestError } from "@/app/api/request-security";
 import { NextResponse } from "next/server";
 import { isAdminAuthenticated } from "@/app/admin/auth-helper";
 import {
@@ -28,7 +29,7 @@ export async function GET() {
 
 export async function POST(request: Request) {
   try {
-    const body = await request.json();
+    const body = await readJsonObject(request, 16 * 1024);
     const {
       customerName,
       customerPhone,
@@ -55,6 +56,10 @@ export async function POST(request: Request) {
     // Validate server-side as well as in the browser. This protects the admin
     // calendar from malformed or past entries sent directly to the endpoint.
     if (
+      typeof customerName !== "string" || typeof customerPhone !== "string" ||
+      typeof date !== "string" || typeof time !== "string" ||
+      (customerEmail !== undefined && customerEmail !== "" && (typeof customerEmail !== "string" || customerEmail.length > 100 || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(customerEmail))) ||
+      (note !== undefined && (typeof note !== "string" || note.length > 300)) ||
       normalizedName.length < 2 ||
       normalizedName.length > 70 ||
       phoneDigits.length < 10 ||
@@ -139,6 +144,7 @@ export async function POST(request: Request) {
       googleCalendarUrl,
     });
   } catch (error) {
+    if (error instanceof RequestError) return NextResponse.json({ error: error.message }, { status: error.status });
     console.error("Reservation POST API error:", error);
     return NextResponse.json(
       { error: "Rezervasyon oluşturulurken bir hata oluştu" },

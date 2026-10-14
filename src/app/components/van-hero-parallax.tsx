@@ -101,7 +101,7 @@ export function VanHeroParallax({ locale = "tr" }: { locale?: SiteLocale }) {
               alt=""
               width={1560}
               height={560}
-              priority
+              loading="eager"
               sizes="(max-width: 768px) 352px, 624px"
               className="hero-title-lockup-image"
             />

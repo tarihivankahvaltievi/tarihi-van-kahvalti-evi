@@ -22,7 +22,7 @@ await new Promise((resolve) => portProbe.close(resolve));
 const base = `http://127.0.0.1:${port}`;
 const password = randomBytes(24).toString("hex");
 const server = spawn(process.execPath, ["node_modules/next/dist/bin/next", "start", "--hostname", "127.0.0.1", "--port", String(port)], {
-  env: { ...process.env, SUPABASE_URL: "", SUPABASE_SERVICE_ROLE_KEY: "", MENU_DATA_FILE: menuFile, RESERVATION_DATA_FILE: reservationFile, INDEXNOW_DRY_RUN: "1", ADMIN_PASSWORD: password, ADMIN_SESSION_SECRET: randomBytes(24).toString("hex") },
+  env: { ...process.env, SUPABASE_URL: "", SUPABASE_SERVICE_ROLE_KEY: "", MENU_DATA_FILE: menuFile, RESERVATION_DATA_FILE: reservationFile, INDEXNOW_DRY_RUN: "1", UPLOAD_DIRECTORY: path.join(testDirectory, "uploads"), ADMIN_PASSWORD: password, ADMIN_SESSION_SECRET: randomBytes(24).toString("hex") },
   stdio: ["ignore", "pipe", "pipe"],
 });
 let serverLog = "";
@@ -59,19 +59,13 @@ async function verifyMenu(route, expected, locale) {
   assert.ok(plain.includes(locale === "en" ? "Minimum 2 people." : "Minimum 2 kişi için servis edilir."));
   const serpme = expected.items.find((item) => item.id === "serpme-fix-menu");
   assert.ok(plain.includes(locale === "en" ? serpme.translations.en.details[1] : serpme.details[1]));
-  const comparison = plain.match(/<section id="breakfast-options"[\s\S]*?<\/section>/)?.[0];
-  assert.ok(comparison?.includes(serpme.price), `${route}: comparison does not use the editable price`);
-  assert.ok(comparison?.includes(locale === "en" ? serpme.translations.en.details[1] : serpme.details[1]), `${route}: comparison has stale inclusions`);
-  assert.ok(comparison?.includes(locale === "en" ? '/en/rezervasyon' : '/rezervasyon'), `${route}: table-request link missing`);
+  const orderingGuide = plain.match(/<section[^>]*id="ordering-guide"[\s\S]*?<\/section>/)?.[0];
+  assert.ok(orderingGuide?.includes(locale === "en" ? serpme.translations.en.details[1] : serpme.details[1]), `${route}: ordering guide has stale inclusions`);
+  assert.ok(plain.includes(locale === "en" ? '/en/rezervasyon' : '/rezervasyon'), `${route}: table-request link missing`);
 }
 
-async function verifyHomePrices(expected) {
+async function verifyGuidePrices(expected) {
   const price = expected.items.find((item) => item.id === "serpme-fix-menu").price;
-  for (const route of ["/", "/en"]) {
-    const html = plainHtml(await (await fetch(`${base}${route}`)).text());
-    const preview = html.match(/<p class="hero-breakfast-price">[\s\S]*?<\/p>/)?.[0];
-    assert.ok(preview?.includes(price), `${route}: homepage price does not match live menu`);
-  }
   const guide = plainHtml(await (await fetch(`${base}/van-kahvaltisi`)).text());
   const comparison = guide.match(/<section id="breakfast-options"[\s\S]*?<\/section>/)?.[0];
   assert.ok(comparison?.includes(price), 'Visit guide comparison does not follow live price changes');
@@ -138,10 +132,37 @@ try {
   assert.ok((await invalidBooking.json()).error);
   const unauthorized = await fetch(`${base}/api/admin/menu`, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(baseline) });
   assert.equal(unauthorized.status, 401);
+  for (const [body, type, expected] of [["{", "application/json", 400], ["null", "application/json", 400], ["[]", "application/json", 400], ["{}", "text/plain", 415], [JSON.stringify({ password: "x".repeat(5000) }), "application/json", 413]]) {
+    const response = await fetch(`${base}/api/admin/auth`, { method: "POST", headers: { "Content-Type": type }, body });
+    assert.equal(response.status, expected, "Auth must reject malformed/oversized bodies");
+  }
+  for (const route of ["/api/admin/auth", "/api/admin/logout", "/api/reservations", `/api/reservations/${pastReservation.id}.txt`]) {
+    const response = await fetch(`${base}${route}`, { method: "POST", headers: { "Content-Type": "application/json", Origin: "https://attacker.example" }, body: "{}" });
+    assert.equal(response.status, 403, "Cross-origin mutation must be blocked, including paths with extensions");
+  }
+  assert.equal((await fetch(`${base}/api/reservations`, { method: "POST", headers: { "Content-Type": "application/json", "Sec-Fetch-Site": "cross-site" }, body: "{}" })).status, 403);
   const auth = await fetch(`${base}/api/admin/auth`, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ password }) });
   assert.equal(auth.status, 200);
   const cookie = auth.headers.get("set-cookie")?.split(";")[0];
   assert.ok(cookie);
+  async function upload(bytes, type, expected) {
+    const form = new FormData();
+    form.append("file", new Blob([bytes], { type }), "../../untrusted.html");
+    const response = await fetch(`${base}/api/admin/upload`, { method: "POST", headers: { Cookie: cookie }, body: form });
+    assert.equal(response.status, expected, "Upload validation");
+    return response;
+  }
+  await upload("<svg xmlns='http://www.w3.org/2000/svg'/>", "image/svg+xml", 415);
+  await upload("<html>disguised image</html>", "image/png", 400);
+  await upload(new Uint8Array(5 * 1024 * 1024 + 1), "image/png", 413);
+  const sharp = (await import("sharp")).default;
+  const png = await sharp({ create: { width: 8, height: 8, channels: 3, background: "red" } }).png().toBuffer();
+  const uploaded = await (await upload(png, "image/png", 200)).json();
+  assert.match(uploaded.url, /^\/uploads\/[a-f0-9-]+\.webp$/);
+  const metadata = await sharp(await readFile(path.join(testDirectory, "uploads", path.basename(uploaded.url)))).metadata();
+  assert.equal(metadata.format, "webp");
+  assert.equal(metadata.width, 8);
+  console.log("API güvenliği: yabancı kaynak, geçersiz JSON, gövde limiti, SVG/sahte görsel engeli ve gerçek WebP dönüşümü doğrulandı.");
   async function patchVisit(id, body, authenticated = true) {
     return fetch(`${base}/api/reservations/${id}`, { method: "PATCH", headers: { "Content-Type": "application/json", ...(authenticated ? { Cookie: cookie } : {}) }, body: JSON.stringify(body) });
   }
@@ -174,15 +195,28 @@ try {
   }
   assert.equal(JSON.parse(await readFile(reservationFile, "utf8")).reservations.length, 3, "Reservation writes escaped the isolated fixture");
   console.log("Rezervasyon API: yönetici yetkisi, kaynak sahteciliği, gerçek ziyaret sonucu, gelecek tarih engeli ve iptal sonrası temizleme doğrulandı.");
+  async function verifyAnswerEngineMenu(expected) {
+    const response = await fetch(`${base}/llms.txt`);
+    assert.equal(response.status, 200);
+    const text = await response.text();
+    assert.ok(text.includes(expected.lastUpdated));
+    for (const item of expected.items) assert.ok(text.includes(`${item.name}${item.translations?.en?.name ? ` / ${item.translations.en.name}` : ""}: ${item.price}`), `llms.txt: stale/missing ${item.id}`);
+    assert.ok(!text.includes("kete is not listed"), "Availability must come from live data");
+  }
   async function save(data) {
     const response = await fetch(`${base}/api/admin/menu`, { method: "POST", headers: { "Content-Type": "application/json", Cookie: cookie }, body: JSON.stringify(data) });
     assert.equal(response.status, 200, "Admin fixture save failed");
+  }
+  for (const data of [{ categories: {}, items: [], lastUpdated: "14 Ekim 2026" }, { categories: [], items: [], lastUpdated: "14 Ekim 2026" }, { ...baseline, items: [{ id: "broken" }] }]) {
+    const response = await fetch(`${base}/api/admin/menu`, { method: "POST", headers: { "Content-Type": "application/json", Cookie: cookie }, body: JSON.stringify(data) });
+    assert.equal(response.status, 400, "Corrupt menu must be rejected before storage");
   }
   // Force a fresh tag so another build/test's cached fixture cannot affect us.
   await save(baseline);
   await verifyMenu("/menu", baseline, "tr");
   await verifyMenu("/en/menu", baseline, "en");
-  await verifyHomePrices(baseline);
+  await verifyGuidePrices(baseline);
+  await verifyAnswerEngineMenu(baseline);
   await verifyBookingInclusions(baseline);
   const changed = structuredClone(baseline);
   changed.lastUpdated = new Intl.DateTimeFormat("tr-TR", { day: "numeric", month: "long", year: "numeric", timeZone: "Europe/Istanbul" }).format(new Date());
@@ -196,13 +230,15 @@ try {
   await save(changed);
   await verifyMenu("/menu", changed, "tr");
   await verifyMenu("/en/menu", changed, "en");
-  await verifyHomePrices(changed);
+  await verifyGuidePrices(changed);
+  await verifyAnswerEngineMenu(changed);
   await verifyBookingInclusions(changed);
   await verifySitemapDates();
   await save(baseline);
   await verifyMenu("/menu", baseline, "tr");
   await verifyMenu("/en/menu", baseline, "en");
-  await verifyHomePrices(baseline);
+  await verifyGuidePrices(baseline);
+  await verifyAnswerEngineMenu(baseline);
   await verifyBookingInclusions(baseline);
   console.log(`Menü testi geçti: ${baseline.items.length} ürün / ${baseline.categories.length} kategori gerçek prerender HTML'de; TR/EN fiyat-açıklama-şema eşleşmesi, yetkisiz yazma engeli, rezervasyonda güncel dahil ürünler, anında önbellek yenileme ve yeni kategori görünürlüğü doğrulandı.`);
 } finally {

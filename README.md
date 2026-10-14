@@ -20,7 +20,7 @@ npm start
 ## İçerik ve SEO kaynağı
 
 - İşletme bilgileri, sayfa içeriği, yapılandırılmış veri ve eski URL yönlendirmeleri: `src/app/seo.ts`
-- Site geneli metadata: `src/app/layout.tsx`
+- Site geneli metadata: `src/app/root-document.tsx`
 - İndekslenebilir kanonik sayfalar: ana sayfa `/`, menü `/menu`, yerel Van kahvaltısı rehberi `/van-kahvaltisi`, kaynaklı kültür rehberi `/van-kahvaltisi-nedir`, hikâye `/hikayemiz`, konum `/konum`, İngilizce ziyaretçi rehberi `/en` ve İngilizce canlı menü `/en/menu`
 - SSS ana sayfada, güncel QR menü `/menu`, adres ve yol tarifi ise `/konum` sayfasında yer alır.
 - Güncel ve indekslenebilir QR menü `/menu` sayfasındadır; kaldırılan `/iletisim`, `/sss` ve `/kafka-cafe` URL'leri en yakın gerçek içeriğe yönlenir.
@@ -31,6 +31,14 @@ npm start
 - Otomatik SEO/HTTP sözleşmesi: `npm run test:seo`
 
 Adres, telefon ve çalışma saatleri `seo.ts` üzerinden; ürün/fiyat ve çeviriler yönetim panelindeki menü verisi üzerinden güncellenir. Görünür içerik ile JSON-LD aynı kaynaktan beslenmelidir. Menü kaydı TR/EN sayfalarının ortak önbelleğini yeniler.
+
+## 14 Ekim 2026 genel bakım
+
+- Sitemap ve `llms.txt`, herkese açık menünün ortak etiketli önbelleğini kullanır. Menü kaydı her ikisini de yeniler; GEO ürün/fiyat metni yönetim menüsünden üretilir.
+- API yazma isteklerinde Origin/Fetch Metadata kontrolü, JSON tür/şekil kontrolü ve akış sırasında boyut sınırı uygulanır. Yönetici menü kayıtları hatalı ürün/kategori verisini reddeder.
+- Yönetici görsel yüklemesi JPEG/PNG/WebP/AVIF kabul eder; 5 MB dosya, 6 MB form, 16 milyon piksel sınırları vardır. Gerçek pikseller çözümlenir, metadata temizlenir, en fazla 2400 piksel WebP üretilir. Sunucu testleri `UPLOAD_DIRECTORY` ile geçici dizine yazar.
+- Üretim kontrolleri: `npm run lint`, `npm run build`, `npm run test:security`, `npm run test:menu`, `npm run test:reservations`, `npm run test:analytics`, çalışan yerel üretim sunucusunda `npm run test:seo` ve `npm audit --omit=dev`.
+- Ayrıntılar ve kalan geliştirme bağımlılığı bulgusu: [bakım kaydı](docs/maintenance-2026-10-14.md).
 
 ## 30 Eylül 2026 SEO/GEO raporu
 

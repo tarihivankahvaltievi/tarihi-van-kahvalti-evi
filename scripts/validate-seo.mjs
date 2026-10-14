@@ -616,8 +616,9 @@ for (const route of routes) {
   if (route.path === "/" || route.path === "/en") {
     const actualHtml = visibleHtml(html);
     assert(actualHtml.includes('id="location"'), `${routeLabel}: gerçek konum fragment hedefi eksik`);
-    assert(actualHtml.includes('class="hero-visit-facts"'), `${routeLabel}: ilk ekranda ziyaret bilgisi eksik`);
-    assert(actualHtml.includes('class="hero-breakfast-price"'), `${routeLabel}: ilk ekranda canlı menüye bağlı serpme fiyatı eksik`);
+    const hero = actualHtml.match(/<section[^>]*class="hero-section[^>]*>[\s\S]*?<\/section>/)?.[0];
+    assert(hero?.includes(`href="${route.path === "/en" ? "/en/menu" : "/menu"}"`), `${routeLabel}: hero güncel menü ve fiyatlara bağlanmalı`);
+    assert(hero?.includes(`href="${route.path === "/en" ? "/en/rezervasyon" : "/rezervasyon"}"`), `${routeLabel}: hero masa talebine bağlanmalı`);
     assert(actualHtml.includes('class="hero-review-source"'), `${routeLabel}: kaynaklı yorum özeti eksik`);
     assert(actualHtml.includes('data-analytics-purpose="review_source"'), `${routeLabel}: yorum kaynağı yol tarifi dönüşümü sayılmamalı`);
     assert(actualHtml.includes('href="https://www.google.com/maps?cid=10380797280962926014"'), `${routeLabel}: doğru Maps kaydı eksik`);

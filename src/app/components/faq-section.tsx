@@ -1,5 +1,6 @@
 import { messagesFor, type SiteLocale } from "../home-localization";
 import styles from "./faq-section.module.css";
+import { displayAddress, displayPhone, mapsUrl, openingHours, telUrl } from "../seo";
 
 export function FaqSection({ locale = "tr" }: { locale?: SiteLocale }) {
   const messages = messagesFor(locale);
@@ -15,6 +16,15 @@ export function FaqSection({ locale = "tr" }: { locale?: SiteLocale }) {
           <span className={styles.eyebrow}>{messages.faq.eyebrow}</span>
           <h2 id="faq-heading">{messages.faq.title}</h2>
           <p>{messages.faq.intro}</p>
+          <div id="location" className={styles.visit} aria-labelledby="home-location-heading">
+            <h3 id="home-location-heading">{locale === "en" ? "Address & directions" : "Adres ve yol tarifi"}</h3>
+            <address>{displayAddress}</address>
+            <p>{locale === "en" ? `Every day ${openingHours.opens}–${openingHours.closes}` : openingHours.short}</p>
+            <a href={telUrl}>{displayPhone}</a>
+            <a href={mapsUrl} target="_blank" rel="noopener noreferrer">
+              {locale === "en" ? "Get directions on Google Maps →" : "Google Haritalar’da yol tarifi al →"}
+            </a>
+          </div>
         </div>
 
         <div className={styles.list}>

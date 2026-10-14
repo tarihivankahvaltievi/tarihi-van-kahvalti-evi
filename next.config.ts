@@ -173,7 +173,7 @@ const nextConfig: NextConfig = {
           },
           {
             key: "Cache-Control",
-            value: "public, max-age=3600, s-maxage=86400, stale-while-revalidate=604800",
+            value: "public, max-age=60, s-maxage=60, stale-while-revalidate=60",
           },
         ],
       },
@@ -234,6 +234,14 @@ const nextConfig: NextConfig = {
             key: "Content-Security-Policy",
             value: contentSecurityPolicy,
           },
+        ],
+      },
+      {
+        source: "/uploads/:path*",
+        headers: [
+          { key: "X-Robots-Tag", value: "noindex" },
+          { key: "Content-Security-Policy", value: "default-src 'none'; sandbox" },
+          { key: "Cache-Control", value: "public, max-age=31536000, immutable" },
         ],
       },
     ];

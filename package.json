@@ -16,15 +16,17 @@
     "test:menu": "node scripts/test-menu.mjs",
     "test:reservations": "node scripts/test-reservations.mjs",
     "test:analytics": "node scripts/test-analytics.mjs",
+    "test:security": "node scripts/test-request-security.mjs",
     "seo:indexnow": "node scripts/submit-indexnow.mjs"
   },
   "dependencies": {
     "framer-motion": "^12.42.2",
     "lucide-react": "^1.23.0",
     "maplibre-gl": "^6.10.0",
-    "next": "^16.4.0",
+    "next": "^16.4.1",
     "react": "19.2.7",
-    "react-dom": "19.2.7"
+    "react-dom": "19.2.7",
+    "sharp": "^0.35.5"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4.3.2",
@@ -32,7 +34,7 @@
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "eslint": "^9",
-    "eslint-config-next": "^16.4.0",
+    "eslint-config-next": "^16.4.1",
     "tailwindcss": "^4.3.2",
     "typescript": "^5"
   },
