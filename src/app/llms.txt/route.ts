@@ -46,7 +46,7 @@ export async function GET() {
   const menu = await getPublicMenuData();
   const plainText = (value: string) => value.replace(/[\r\n\t]+/g, " ").replace(/[\[\]<>`]/g, "").trim();
   const menuSnapshot = menu.items.map((item) =>
-    `- ${plainText(item.name)}${item.translations?.en?.name ? ` / ${plainText(item.translations.en.name)}` : ""}: ${plainText(item.price)}${item.priceNote ? ` (${plainText(item.priceNote)})` : ""}`,
+    `- ${plainText(item.name)}${item.translations?.en?.name ? ` / ${plainText(item.translations.en.name)}` : ""}: ${plainText(item.price)}${item.priceNote ? ` (${plainText(item.priceNote)})` : ""}. ${plainText(item.description)}${item.details?.length ? ` Details: ${item.details.map(plainText).join("; ")}` : ""}`,
   ).join("\n");
   const body = `# ${siteName}
 

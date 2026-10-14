@@ -52,12 +52,16 @@ export function proxy(request: NextRequest) {
 export const config = {
   matcher: [
     "/api/:path*",
+    "/robots.txt",
+    "/sitemap.xml",
+    "/llms.txt",
     /*
      * Match all request paths except:
      * - _next/static (static files)
      * - _next/image (image optimization files)
+     * - local font files (served directly without running Proxy)
      * - static assets with extensions (.svg, .png, .jpg, .jpeg, .gif, .webp, .avif, .ico, .txt, .xml, .json, .webmanifest)
      */
-    "/((?!_next/static|_next/image|images/|icons/|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp|avif|ico|txt|xml|json|webmanifest)).*)",
+    "/((?!_next/static|_next/image|images/|icons/|fonts/|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp|avif|ico|txt|xml|json|webmanifest)).*)",
   ],
 };

@@ -828,6 +828,23 @@ for (const block of sitemap.matchAll(/<url>([\s\S]*?)<\/url>/g)) {
   assert(JSON.stringify(Object.entries(actual).sort()) === JSON.stringify(Object.entries(checkedAlternates.get(canonical) ?? {}).sort()), `Sitemap: ${canonical} alternatifleri HTML ile aynı olmalı`);
 }
 const sitemapUrls = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map((match) => match[1]);
+// Fetch the same public HTML a Google crawler receives, without executing JS.
+// A regular-browser success alone cannot detect bot-specific blocks or shells.
+for (const url of sitemapUrls) {
+  const route = new URL(url).pathname;
+  const response = await fetchWithRetry(route, 3, {
+    redirect: "manual",
+    headers: { "User-Agent": "Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)" },
+  });
+  const html = await response.text();
+  assert(response.status === 200, `Googlebot: ${route} doğrudan 200 dönmeli`);
+  assert(!response.headers.get("x-robots-tag")?.includes("noindex"), `Googlebot: ${route} HTTP noindex olmamalı`);
+  assert(!/<meta\s+name="(?:robots|googlebot)"\s+content="[^"]*noindex/i.test(html), `Googlebot: ${route} meta noindex olmamalı`);
+  assert(/<h1(?:\s|>)/i.test(visibleHtml(html)), `Googlebot: ${route} ilk HTML'de h1 içermeli`);
+  assert(visibleText(html).length > 200, `Googlebot: ${route} JS olmadan okunabilir içerik içermeli`);
+  assert(html.includes(`rel="canonical" href="${url}"`), `Googlebot: ${route} kanonik URL yanlış`);
+}
+
 const sitemapLastModified = [...sitemap.matchAll(/<lastmod>([^<]+)<\/lastmod>/g)].map((match) => match[1]);
 const sitemapChangeFrequencies = [...sitemap.matchAll(/<changefreq>([^<]+)<\/changefreq>/g)].map(
   (match) => match[1],
@@ -865,6 +882,23 @@ assert(
   sitemapImages.every((url) => url.startsWith(`${canonicalSiteUrl}/images/`)),
   "Sitemap: görsel URL'si kanonik alan adında olmalı",
 );
+// Broken image sitemap entries waste crawler requests and hide image results.
+const imagePaths = [...new Set(sitemapImages.map((url) => new URL(url).pathname))];
+for (let start = 0; start < imagePaths.length; start += 6) {
+  await Promise.all(imagePaths.slice(start, start + 6).map(async (imagePath) => {
+    const response = await fetchWithRetry(imagePath, 3, { method: "HEAD", redirect: "manual" });
+    assert(response.status === 200, `Sitemap görseli: ${imagePath} HTTP ${response.status}`);
+    assert(response.headers.get("content-type")?.startsWith("image/"), `Sitemap görseli: ${imagePath} gerçek görsel dönmeli`);
+    assert(!response.headers.get("x-robots-tag")?.includes("noindex"), `Sitemap görseli: ${imagePath} indekslenebilir olmalı`);
+  }));
+}
+for (const fontPath of ["/fonts/causten/Causten-Regular.woff2", "/fonts/noctado/NOCTADO.woff2"]) {
+  const response = await fetchWithRetry(fontPath, 3, { method: "HEAD" });
+  assert(response.status === 200, `Font: ${fontPath} erişilebilir olmalı`);
+  assert(response.headers.get("cache-control")?.includes("max-age=604800"), `Font: ${fontPath} haftalık önbellek eksik`);
+}
+console.log(`Googlebot: ${sitemapUrls.length} sayfada JS gerektirmeyen HTML; ${imagePaths.length} benzersiz sitemap görselinde HTTP 200 doğrulandı.`);
+
 assert(sitemap.includes('hreflang="en"'), "Sitemap: İngilizce hreflang eksik");
 assert(sitemap.includes('hreflang="ru"'), "Sitemap: Rusça hreflang eksik");
 assert(sitemap.includes('hreflang="ar"'), "Sitemap: Arapça hreflang eksik");
@@ -1091,6 +1125,11 @@ assert(
   apexResponse.location === `${canonicalSiteUrl}/host-normalization-test`,
   "Apex alan adı www kanoniğine yönlenmeli",
 );
+
+for (const metadataPath of ["/robots.txt", "/sitemap.xml", "/llms.txt"]) {
+  const response = await requestWithHost(metadataPath, "tarihivankahvaltievi.com");
+  assert(response.status === 308 && response.location === `${canonicalSiteUrl}${metadataPath}`, `${metadataPath}: apex metadata kanonik www adresine gitmeli`);
+}
 
 const missing = await fetchWithRetry("/seo-contract-missing-page");
 const missingHtml = await missing.text();

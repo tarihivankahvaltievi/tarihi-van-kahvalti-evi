@@ -21,8 +21,9 @@ const port = portProbe.address().port;
 await new Promise((resolve) => portProbe.close(resolve));
 const base = `http://127.0.0.1:${port}`;
 const password = randomBytes(24).toString("hex");
+const sessionSecret = randomBytes(24).toString("hex");
 const server = spawn(process.execPath, ["node_modules/next/dist/bin/next", "start", "--hostname", "127.0.0.1", "--port", String(port)], {
-  env: { ...process.env, SUPABASE_URL: "", SUPABASE_SERVICE_ROLE_KEY: "", MENU_DATA_FILE: menuFile, RESERVATION_DATA_FILE: reservationFile, INDEXNOW_DRY_RUN: "1", UPLOAD_DIRECTORY: path.join(testDirectory, "uploads"), ADMIN_PASSWORD: password, ADMIN_SESSION_SECRET: randomBytes(24).toString("hex") },
+  env: { ...process.env, SUPABASE_URL: "", SUPABASE_SERVICE_ROLE_KEY: "", MENU_DATA_FILE: menuFile, RESERVATION_DATA_FILE: reservationFile, INDEXNOW_DRY_RUN: "1", UPLOAD_DIRECTORY: path.join(testDirectory, "uploads"), ADMIN_PASSWORD: password, ADMIN_SESSION_SECRET: sessionSecret },
   stdio: ["ignore", "pipe", "pipe"],
 });
 let serverLog = "";
@@ -145,6 +146,16 @@ try {
   assert.equal(auth.status, 200);
   const cookie = auth.headers.get("set-cookie")?.split(";")[0];
   assert.ok(cookie);
+  assert.match(auth.headers.get("set-cookie"), /HttpOnly/i);
+  assert.match(auth.headers.get("set-cookie"), /Secure/i);
+  assert.match(auth.headers.get("set-cookie"), /SameSite=lax/i);
+  const { createSession, sessionLifetimeSeconds } = await import("../src/app/admin/session.ts");
+  const expired = createSession(password, sessionSecret, Date.now() - (sessionLifetimeSeconds + 60) * 1000);
+  for (const invalidCookie of [`${cookie}tampered`, `admin_session=${expired}`]) {
+    const response = await fetch(`${base}/api/reservations`, { headers: { Cookie: invalidCookie } });
+    assert.equal(response.status, 401, "Expired or tampered session gained admin access");
+  }
+
   async function upload(bytes, type, expected) {
     const form = new FormData();
     form.append("file", new Blob([bytes], { type }), "../../untrusted.html");
@@ -201,6 +212,10 @@ try {
     const text = await response.text();
     assert.ok(text.includes(expected.lastUpdated));
     for (const item of expected.items) assert.ok(text.includes(`${item.name}${item.translations?.en?.name ? ` / ${item.translations.en.name}` : ""}: ${item.price}`), `llms.txt: stale/missing ${item.id}`);
+    for (const item of expected.items) {
+      assert.ok(text.includes(item.description), `llms.txt: missing product description ${item.id}`);
+      for (const detail of item.details ?? []) assert.ok(text.includes(detail), `llms.txt: missing serving detail ${item.id}`);
+    }
     assert.ok(!text.includes("kete is not listed"), "Availability must come from live data");
   }
   async function save(data) {

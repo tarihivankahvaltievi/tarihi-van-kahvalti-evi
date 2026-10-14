@@ -32,6 +32,10 @@ npm start
 
 Adres, telefon ve çalışma saatleri `seo.ts` üzerinden; ürün/fiyat ve çeviriler yönetim panelindeki menü verisi üzerinden güncellenir. Görünür içerik ile JSON-LD aynı kaynaktan beslenmelidir. Menü kaydı TR/EN sayfalarının ortak önbelleğini yeniler.
 
+## 15 Ekim 2026 SEO/GEO ve güvenlik bakımı
+
+Sunucuda süresi doğrulanan yönetici oturumu, yerel font önbelleği, keşif dosyaları için kanonik yönlendirme ve canlı menüden GEO servis ayrıntıları eklendi. Dağıtım sonrası yöneticiler yeniden giriş yapmalıdır. `test:seo` artık Googlebot HTML erişimini ve tüm sitemap görsellerini de kontrol eder. Kontroller ve sınırlamalar [bakım kaydında](docs/maintenance-2026-10-15.md).
+
 ## 14 Ekim 2026 genel bakım
 
 - Sitemap ve `llms.txt`, herkese açık menünün ortak etiketli önbelleğini kullanır. Menü kaydı her ikisini de yeniler; GEO ürün/fiyat metni yönetim menüsünden üretilir.

@@ -1,7 +1,7 @@
 import { readJsonObject, RequestError } from "@/app/api/request-security";
 import { NextResponse } from "next/server";
 import { cookies } from "next/headers";
-import { getAdminPassword, getSessionHash, safeEqual } from "@/app/admin/auth-helper";
+import { getAdminPassword, getSessionSecret, createSession, safeEqual, sessionLifetimeSeconds } from "@/app/admin/auth-helper";
 
 export async function POST(request: Request) {
   try {
@@ -9,17 +9,17 @@ export async function POST(request: Request) {
 
     const expectedPassword = getAdminPassword();
     if (typeof password === "string" && safeEqual(password, expectedPassword)) {
-      const hash = getSessionHash(expectedPassword);
+      const session = createSession(expectedPassword, getSessionSecret());
       const cookieStore = await cookies();
 
       cookieStore.set({
         name: "admin_session",
-        value: hash,
+        value: session,
         httpOnly: true,
         secure: process.env.NODE_ENV === "production",
         sameSite: "lax",
         path: "/",
-        maxAge: 60 * 60 * 24 * 7, // 7 days
+        maxAge: sessionLifetimeSeconds,
       });
 
       return NextResponse.json({ success: true });
