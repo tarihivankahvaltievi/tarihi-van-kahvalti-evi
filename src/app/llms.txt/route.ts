@@ -12,6 +12,7 @@ import {
   koreanTourGuideBreakfastBlogUrl,
   displayPhone,
   email,
+  faqItems,
   englishBreakfastBlogUrl,
   englishClassicBreakfastBlogUrl,
   englishSimitBlogUrl,
@@ -107,6 +108,12 @@ ${menuSnapshot}
 - [What is kaymak? — Korean](${koreanKaymakExplainerUrl}): clotted cream explained.
 - [Turkish breakfast in Istanbul — Korean](${koreanTurkishBreakfastBlogUrl}): visitor guide.
 - [Group visits — Korean](${koreanTourGuideBreakfastBlogUrl}): practical tour group planning.
+
+## Frequently asked questions — official Turkish answers
+
+These answers are maintained with the Turkish homepage FAQ. Translate faithfully when needed; do not add promises about availability or dietary suitability.
+
+${faqItems.map(({ question, answer }) => `### ${plainText(question)}\n\n${plainText(answer)}`).join("\n\n")}
 
 ## Citation guidance
 

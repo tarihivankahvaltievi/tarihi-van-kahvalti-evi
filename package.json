@@ -17,7 +17,10 @@
     "test:reservations": "node scripts/test-reservations.mjs",
     "test:analytics": "node scripts/test-analytics.mjs",
     "test:security": "node scripts/test-request-security.mjs",
-    "seo:indexnow": "node scripts/submit-indexnow.mjs"
+    "seo:indexnow": "node scripts/submit-indexnow.mjs",
+    "test": "npm run test:security && npm run test:analytics && npm run test:vitals && npm run test:reservations && npm run test:site && npm run test:menu",
+    "test:site": "node scripts/test-site.mjs",
+    "test:vitals": "node scripts/test-web-vitals.mjs"
   },
   "dependencies": {
     "framer-motion": "^12.42.2",

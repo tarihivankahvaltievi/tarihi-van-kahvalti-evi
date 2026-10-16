@@ -28,7 +28,7 @@ const literata = Literata({
 const commissioner = Commissioner({
   subsets: ["latin", "latin-ext"],
   weight: "variable",
-  axes: ["FLAR", "VOLM"],
+  // Only weight varies in our styles; unused FLAR/VOLM axes enlarge every subset.
   display: "swap",
   preload: false,
   variable: "--font-commissioner-gf",

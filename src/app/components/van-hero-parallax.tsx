@@ -84,6 +84,11 @@ export function VanHeroParallax({ locale = "tr" }: { locale?: SiteLocale }) {
               onLoad={() => {
                 if (index === currentSlide) setReadySlide(index);
               }}
+              onError={() => {
+                if (index !== currentSlide || index === readySlide) return;
+                setCurrentSlide(readySlide);
+                setPreviousSlide(null);
+              }}
               className="hero-slide-image"
             />
           </div>

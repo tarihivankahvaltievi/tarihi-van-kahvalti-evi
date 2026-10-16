@@ -37,10 +37,7 @@ export function WebVitals({ endpoint }: { endpoint?: string }) {
     if (!endpoint) return;
     const payload = JSON.stringify(observation);
 
-    if (navigator.sendBeacon) {
-      navigator.sendBeacon(endpoint, payload);
-      return;
-    }
+    if (navigator.sendBeacon?.(endpoint, payload)) return;
 
     void fetch(endpoint, {
       body: payload,
@@ -49,6 +46,8 @@ export function WebVitals({ endpoint }: { endpoint?: string }) {
       headers: {
         "Content-Type": "application/json",
       },
+    }).catch(() => {
+      // Telemetry must never surface an unhandled rejection to the visitor.
     });
   }, [endpoint]);
   useReportWebVitals(report);
