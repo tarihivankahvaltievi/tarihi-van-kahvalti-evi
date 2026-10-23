@@ -103,6 +103,19 @@ export function trackEvent(name: string, parameters: AnalyticsParameters = {}) {
         transport_type: "beacon",
       });
     }
+  } else if (name === "booking_whatsapp_handoff" && whatsappConversionLabel !== bookingConversionLabel) {
+    // The reservation flow opens WhatsApp programmatically after its button
+    // click, so the anchor-based contact tracker cannot see this handoff.
+    // Count it under the separate secondary WhatsApp action, never as another
+    // reservation lead; the booking conversion is sent only for a saved request.
+    sendEvent("conversion", {
+      send_to: `${googleAdsConversionId}/${whatsappConversionLabel}`,
+      event_category: "whatsapp",
+      event_label: "reservation_handoff",
+      value: 1.0,
+      currency: "TRY",
+      transport_type: "beacon",
+    });
   }
 }
 
