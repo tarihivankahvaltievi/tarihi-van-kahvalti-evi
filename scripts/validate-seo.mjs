@@ -828,6 +828,7 @@ for (const block of sitemap.matchAll(/<url>([\s\S]*?)<\/url>/g)) {
   assert(JSON.stringify(Object.entries(actual).sort()) === JSON.stringify(Object.entries(checkedAlternates.get(canonical) ?? {}).sort()), `Sitemap: ${canonical} alternatifleri HTML ile aynı olmalı`);
 }
 const sitemapUrls = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map((match) => match[1]);
+const crawledPages = new Map();
 // Fetch the same public HTML a Google crawler receives, without executing JS.
 // A regular-browser success alone cannot detect bot-specific blocks or shells.
 for (const url of sitemapUrls) {
@@ -842,8 +843,25 @@ for (const url of sitemapUrls) {
   assert(!/<meta\s+name="(?:robots|googlebot)"\s+content="[^"]*noindex/i.test(html), `Googlebot: ${route} meta noindex olmamalı`);
   assert(/<h1(?:\s|>)/i.test(visibleHtml(html)), `Googlebot: ${route} ilk HTML'de h1 içermeli`);
   assert(visibleText(html).length > 200, `Googlebot: ${route} JS olmadan okunabilir içerik içermeli`);
+  const rendered = visibleHtml(html);
+  assert(/<main\b[^>]*\bid="main-content"/.test(rendered), `Erişilebilirlik: ${route} ana içeriğe geç hedefi eksik`);
+  crawledPages.set(route, rendered);
   assert(html.includes(`rel="canonical" href="${url}"`), `Googlebot: ${route} kanonik URL yanlış`);
 }
+
+// Validate fragments too: HTTP 200 alone hides broken section and skip links.
+let fragmentCount = 0;
+for (const [source, html] of crawledPages) {
+  for (const match of html.matchAll(/<a\b[^>]*\bhref="([^"]+)"/gi)) {
+    const target = new URL(decodeHtml(match[1]), `${canonicalSiteUrl}${source}`);
+    if (target.origin !== canonicalSiteUrl || !target.hash || !crawledPages.has(target.pathname)) continue;
+    const id = decodeURIComponent(target.hash.slice(1));
+    const ids = [...crawledPages.get(target.pathname).matchAll(/\bid="([^"]+)"/g)].map((entry) => decodeHtml(entry[1]));
+    assert(ids.includes(id), `Dahili bölüm bağlantısı: ${source} → ${target.pathname}${target.hash} hedefi eksik`);
+    fragmentCount++;
+  }
+}
+console.log(`Dahili bağlantılar: ${fragmentCount} bölüm bağlantısı ve tüm ana içeriğe geç hedefleri doğrulandı.`);
 
 const sitemapLastModified = [...sitemap.matchAll(/<lastmod>([^<]+)<\/lastmod>/g)].map((match) => match[1]);
 const sitemapChangeFrequencies = [...sitemap.matchAll(/<changefreq>([^<]+)<\/changefreq>/g)].map(

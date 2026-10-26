@@ -32,6 +32,10 @@ npm start
 
 Adres, telefon ve çalışma saatleri `seo.ts` üzerinden; ürün/fiyat ve çeviriler yönetim panelindeki menü verisi üzerinden güncellenir. Görünür içerik ile JSON-LD aynı kaynaktan beslenmelidir. Menü kaydı TR/EN sayfalarının ortak önbelleğini yeniler.
 
+## 26 Ekim 2026 genel bakım ve SEO/GEO araştırması
+
+TR/EN menü şeması birleştirildi; Türkçe binlik/ondalık fiyat ayracı hatası giderildi ve servis ayrıntıları yapılandırılmış veriye eklendi. Korece rehberin başlık kontrastı ve ana içeriğe geçişi düzeltildi. Next.js 16.4.3 ve bağımlılık güncellemeleri sonrası tam audit sıfır açık gösteriyor. 30 sayfa, 252 bölüm bağlantısı ve 142 ürün test edildi. Araştırma kaynakları, işletme sahibinin saat teyidi, kontroller ve sınırlar [bakım raporunda](docs/maintenance-2026-10-26.md).
+
 ## 15 Ekim 2026 SEO/GEO ve güvenlik bakımı
 
 Sunucuda süresi doğrulanan yönetici oturumu, yerel font önbelleği, keşif dosyaları için kanonik yönlendirme ve canlı menüden GEO servis ayrıntıları eklendi. Dağıtım sonrası yöneticiler yeniden giriş yapmalıdır. `test:seo` artık Googlebot HTML erişimini ve tüm sitemap görsellerini de kontrol eder. Kontroller ve sınırlamalar [bakım kaydında](docs/maintenance-2026-10-15.md).

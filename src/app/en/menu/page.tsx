@@ -4,7 +4,7 @@ import { AnimatedFooter } from "../../components/animated-footer";
 import { localizeMenuData } from "../../menu/menu-localization";
 import { MenuExperience } from "../../menu/menu-experience";
 import { getPublicMenuData } from "../../menu/public-menu-data";
-import { getMenuOrderNote } from "../../menu/menu-rules";
+import { buildMenuSchema } from "../../menu/menu-schema";
 import { getOrderingQuestions } from "../../menu/ordering-questions";
 import {
   absoluteUrl,
@@ -61,42 +61,10 @@ export default async function EnglishMenuPage() {
   const { categories, items, lastUpdated } = await getPublicMenuData();
   const localized = localizeMenuData("en", categories, items);
 
-  const menuSchema = {
-    "@type": "Menu",
-    "@id": `${englishMenuUrl}#menu`,
-    name: `${siteName} English Menu`,
-    description: pageDescription,
-    url: englishMenuUrl,
-    inLanguage: "en",
-    isBasedOn: { "@id": `${menuUrl}#menu` },
-    hasMenuSection: localized.categories.map((category) => ({
-      "@type": "MenuSection",
-      name: category.label,
-      description: category.description,
-      hasMenuItem: localized.items
-        .filter((item) => item.category === category.id)
-        .map((item) => {
-          const original = items.find((candidate) => candidate.id === item.id);
-          const numericPrice = item.price.match(/^₺?(\d+)/)?.[1];
-          return {
-            "@type": "MenuItem",
-            "@id": `${englishMenuUrl}#${item.id}`,
-            url: `${englishMenuUrl}#${item.id}`,
-            name: item.name,
-            alternateName: original?.name,
-            description: item.description,
-            image: item.image ? absoluteUrl(item.image) : undefined,
-            offers: numericPrice ? {
-              "@type": "Offer",
-              price: numericPrice,
-              priceCurrency: "TRY",
-              description: [item.priceNote, getMenuOrderNote(item.id, "en")].filter(Boolean).join(" ") || undefined,
-              url: `${englishMenuUrl}#${item.id}`,
-            } : undefined,
-          };
-        }),
-    })),
-  };
+  const menuSchema = buildMenuSchema({
+    categories: localized.categories, items: localized.items, originalItems: items,
+    locale: "en", url: englishMenuUrl, description: pageDescription,
+  });
 
   const menuJsonLd = {
     "@context": "https://schema.org",

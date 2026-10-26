@@ -14,7 +14,7 @@ import {
 import { AnimatedFooter } from "../../components/animated-footer";
 import { MenuExperience } from "../../menu/menu-experience";
 import { getPublicMenuData } from "../../menu/public-menu-data";
-import { getMenuOrderNote } from "../../menu/menu-rules";
+import { buildMenuSchema } from "../../menu/menu-schema";
 import { getOrderingQuestions } from "../../menu/ordering-questions";
 
 const menuTitle = "Van Kahvaltısı Menü ve Fiyatları | Taksim, Beyoğlu";
@@ -59,41 +59,9 @@ export const metadata: Metadata = {
 export default async function MenuPage() {
   const { categories, items, lastUpdated } = await getPublicMenuData();
 
-  const menuSchema = {
-    "@type": "Menu",
-    "@id": `${menuUrl}#menu`,
-    name: `${siteName} Menüsü`,
-    description: menuDescription,
-    url: menuUrl,
-    inLanguage: "tr-TR",
-    hasMenuSection: categories.map((category) => ({
-      "@type": "MenuSection",
-      name: category.label,
-      description: category.description,
-      hasMenuItem: items
-        .filter((item) => item.category === category.id)
-        .map((item) => {
-          const numericPrice = item.price.match(/^₺?(\d+)/)?.[1];
-          return {
-            "@type": "MenuItem",
-            "@id": `${menuUrl}#${item.id}`,
-            url: `${menuUrl}#${item.id}`,
-            name: item.name,
-            description: item.description,
-            image: item.image ? absoluteUrl(item.image) : undefined,
-            offers: numericPrice
-              ? {
-                  "@type": "Offer",
-                  price: numericPrice,
-                  priceCurrency: "TRY",
-                  description: [item.priceNote, getMenuOrderNote(item.id, "tr")].filter(Boolean).join(" ") || undefined,
-                  url: `${menuUrl}#${item.id}`,
-                }
-              : undefined,
-          };
-        }),
-    })),
-  };
+  const menuSchema = buildMenuSchema({
+    categories, items, locale: "tr", url: menuUrl, description: menuDescription,
+  });
 
   const menuJsonLd = {
     "@context": "https://schema.org",

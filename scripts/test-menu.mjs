@@ -31,7 +31,7 @@ server.stdout.on("data", (chunk) => { serverLog += chunk; });
 server.stderr.on("data", (chunk) => { serverLog += chunk; });
 const plainHtml = (html) => html.replace(/<script\b[\s\S]*?<\/script>/gi, "").replace(/<style\b[\s\S]*?<\/style>/gi, "");
 
-async function verifyMenu(route, expected, locale) {
+async function verifyMenu(route, expected, locale, schemaPrices = {}) {
   const response = await fetch(`${base}${route}`);
   assert.equal(response.status, 200);
   const html = await response.text();
@@ -53,8 +53,14 @@ async function verifyMenu(route, expected, locale) {
     const description = locale === "en" ? item.translations?.en?.description ?? item.description : item.description;
     assert.equal(schemaItem.description, description);
     assert.ok(article.includes(escapedText(description)), `${route}: stale visible description ${item.id}`);
-    assert.equal(schemaItem.offers?.price, item.price.match(/^₺?(\d+)/)?.[1]);
-    assert.equal(schemaItem.offers?.priceCurrency, "TRY");
+    const expectedPrice = Object.hasOwn(schemaPrices, item.id) ? schemaPrices[item.id] : item.price.replace("₺", "");
+    assert.equal(schemaItem.offers?.price, expectedPrice, `${route}: ${item.id} machine-readable price`);
+    if (expectedPrice === undefined) assert.equal(schemaItem.offers, undefined, `${route}: ambiguous prices must not create an offer`);
+    else {
+      assert.equal(schemaItem.offers.priceCurrency, "TRY");
+      const details = locale === "en" ? item.translations?.en?.details ?? item.details : item.details;
+      for (const detail of details) assert.ok(schemaItem.offers.description.includes(detail), `${route}: missing serving detail for ${item.id}`);
+    }
   }
   assert.ok(plain.includes('id="main-content"'));
   assert.ok(plain.includes(locale === "en" ? "Minimum 2 people." : "Minimum 2 kişi için servis edilir."));
@@ -235,7 +241,9 @@ try {
   await verifyBookingInclusions(baseline);
   const changed = structuredClone(baseline);
   changed.lastUpdated = new Intl.DateTimeFormat("tr-TR", { day: "numeric", month: "long", year: "numeric", timeZone: "Europe/Istanbul" }).format(new Date());
-  changed.items[0].price = "₺971";
+  changed.items[0].price = "₺1.250,50";
+  changed.items[1].price = "1.750 TL";
+  changed.items[2].price = "₺350–450";
   changed.items[0].description = "Yalnız izole test ürün açıklaması";
   changed.items[0].translations.en.description = "Isolated test product description only";
   changed.items[0].details[1] = "Yalnız izole test çay kapsamı";
@@ -243,8 +251,9 @@ try {
   changed.categories.push({ id: "test-category", label: "Deneme Kategorisi", shortLabel: "Deneme", description: "Only an isolated test fixture.", image: "", imageAlt: "", translations: { en: { label: "Test Category" } } });
   changed.items.push({ ...structuredClone(baseline.items[0]), id: "test-item", category: "test-category", name: "Deneme Ürünü", price: "₺123" });
   await save(changed);
-  await verifyMenu("/menu", changed, "tr");
-  await verifyMenu("/en/menu", changed, "en");
+  const schemaPrices = { "serpme-fix-menu": "1250.5", "van-golu-tabagi": "1750", "pisi-tabagi": undefined };
+  await verifyMenu("/menu", changed, "tr", schemaPrices);
+  await verifyMenu("/en/menu", changed, "en", schemaPrices);
   await verifyGuidePrices(changed);
   await verifyAnswerEngineMenu(changed);
   await verifyBookingInclusions(changed);

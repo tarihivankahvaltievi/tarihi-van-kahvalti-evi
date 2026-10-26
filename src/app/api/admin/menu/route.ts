@@ -18,7 +18,7 @@ async function notifyMenuUpdate() {
       host: new URL(siteUrl).host,
       key: indexNowKey,
       keyLocation: `${siteUrl}/${indexNowKey}.txt`,
-      urlList: [siteUrl, `${siteUrl}/en`, `${siteUrl}/menu`, `${siteUrl}/en/menu`, `${siteUrl}/rezervasyon`, `${siteUrl}/en/rezervasyon`],
+      urlList: [siteUrl, `${siteUrl}/en`, `${siteUrl}/menu`, `${siteUrl}/en/menu`, `${siteUrl}/van-kahvaltisi`, `${siteUrl}/rezervasyon`, `${siteUrl}/en/rezervasyon`],
     }),
     signal: AbortSignal.timeout(5000),
   });
@@ -76,6 +76,7 @@ export async function POST(request: Request) {
       revalidateTag(publicMenuCacheTag, { expire: 0 });
       revalidatePath("/menu");
       revalidatePath("/en/menu");
+      revalidatePath("/van-kahvaltisi");
       revalidatePath("/");
       revalidatePath("/en");
       revalidatePath("/rezervasyon");

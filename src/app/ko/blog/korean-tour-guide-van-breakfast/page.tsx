@@ -38,7 +38,7 @@ const schema = {
 };
 
 export default function KoreanTourGuideBreakfastPage() {
-  return <main className={styles.page} lang="ko">
+  return <main id="main-content" tabIndex={-1} className={styles.page} lang="ko">
     <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLd(schema) }} />
     <nav className={styles.top} aria-label="한국어 탐색"><Link href="/ko">Tarihi Van Kahvaltı Evi</Link><Link href="/ko">한국어 홈</Link><Link href="/en/menu" hrefLang="en">현재 메뉴</Link></nav>
     <article>
