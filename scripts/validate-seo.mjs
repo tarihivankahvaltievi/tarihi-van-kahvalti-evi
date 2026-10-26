@@ -88,6 +88,15 @@ const newRoutes = [
 
 const routes = [
   {
+    path: "/taksim-kafe",
+    canonical: `${canonicalSiteUrl}/taksim-kafe`,
+    language: "tr",
+    faqCount: 0,
+    types: ["Restaurant", "WebPage", "BreadcrumbList"],
+    restaurantMenu: `${menuPageUrl}#menu`,
+    visibleSignals: ["kahve", "beyoğlu", "taksim", "zambak sokak"],
+  },
+  {
     path: "/",
     canonical: canonicalSiteUrl,
     language: "tr",

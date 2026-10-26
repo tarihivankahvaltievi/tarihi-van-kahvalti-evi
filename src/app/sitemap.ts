@@ -181,6 +181,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   return [
     {
+      url: absoluteUrl("/taksim-kafe"),
+      lastModified: "2026-10-26",
+      changeFrequency: "monthly",
+      priority: 0.8,
+      images: uniqueImages(["/images/coffee/coffee-og.jpg", "/images/coffee/floating-cup.webp", "/images/coffee-moment.webp"]),
+    },
+    {
       url: siteUrl,
       lastModified: liveHomeLastModified,
       changeFrequency: "weekly",

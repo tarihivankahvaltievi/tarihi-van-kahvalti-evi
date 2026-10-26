@@ -233,6 +233,13 @@ export default function ClientPage({ children, locale = "tr" }: { children: Reac
                     {locale === "en" ? "MENU" : "MENÜ"}
                   </Link>
                 </li>
+                {locale === "tr" && (
+                  <li>
+                    <Link href="/taksim-kafe" className={`nav-link ${pathname === "/taksim-kafe" ? "active" : ""}`}>
+                      KAHVE
+                    </Link>
+                  </li>
+                )}
                 <li>
                   <Link
                     href={locale === "en" ? "/en/rezervasyon" : "/rezervasyon"}
@@ -331,6 +338,17 @@ export default function ClientPage({ children, locale = "tr" }: { children: Reac
                     {locale === "en" ? "MENU" : "MENÜ"}
                   </Link>
                 </li>
+                {locale === "tr" && (
+                  <li>
+                    <Link
+                      href="/taksim-kafe"
+                      className={`mobile-link ${pathname === "/taksim-kafe" ? "active" : ""}`}
+                      onClick={() => setMenuOpen(false)}
+                    >
+                      KAHVE
+                    </Link>
+                  </li>
+                )}
                 <li>
                   <Link
                     href={locale === "en" ? "/en/rezervasyon" : "/rezervasyon"}

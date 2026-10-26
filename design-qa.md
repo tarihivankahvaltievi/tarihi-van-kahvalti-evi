@@ -63,3 +63,50 @@ Eyleme dönük P0, P1 veya P2 bulgusu kalmadı. Kaynaktan kalan farklar marka sa
 Bloklayıcı olmayan P3 bulgusu kalmadı.
 
 final result: passed
+
+---
+
+# Coffee page QA — 26 October 2026
+
+## Visual source and evidence
+
+- Layout source: `/Users/baran/Downloads/IMG_6349 2.jpg` (1179 × 1656), the user's photographed and annotated mobile web sketch.
+- Background/art-direction source: `/Users/baran/Downloads/IMG_6345.jpg` (1160 × 1777), supplied Kroffee example. Used for pale architectural background and photographic floating objects, not its logo, typography or products.
+- Implementation: `/taksim-kafe`, verified with the production build at `http://localhost:3001/taksim-kafe`.
+- Full-page mobile evidence: `tmp/coffee-qa/mobile-final.png`, 393 CSS px wide, browser viewport 393 × 852, screenshot density 1×.
+- Full-page desktop evidence: `tmp/coffee-qa/desktop-final.png`, 1280 CSS px wide, browser viewport 1280 × 900, density 1×.
+- Focused evidence: `tmp/coffee-qa/mobile-story.png` (frames and background), `tmp/coffee-qa/desktop-hero.png` (cup, beans, title and navigation).
+- Tablet evidence: `tmp/coffee-qa/tablet-final.png`, viewport 768 × 1024, density 1×.
+
+The photographed sketch contains perspective, annotations and no exact CSS viewport, so pixel-exact overlay would be misleading. It is a structural source: header → centered cup/beans → title → curved transition → crest/text → two framed photographs → large venue photograph → existing footer. Source images and the rendered mobile full-page image were opened together in one visual comparison input; the frame and hero regions were then inspected separately. Existing NOCTADO/Causten fonts, crest, burgundy header, cream surface and footer are intentional identity preservation.
+
+## Comparison history
+
+1. The previous side-by-side hero, tabs and menu-list composition was rejected by the user. Removed it entirely and rebuilt the page to the supplied sketch.
+2. [P2, image/content] First new version used a breakfast-table image and large promotional heading in the venue section. Replaced with the actual interior photo (`atmosphere-banner-bg.webp`), preserving the view of the room and keeping address/directions discreet at the bottom. Post-fix mobile and desktop full-page captures confirm the change.
+3. [P2, desktop spacing] The lowest floating bean approached the first headline line. Moved its desktop baseline from -4% to 7% inside the visual scene. Recaptured `desktop-hero.png`; bean and headline no longer overlap.
+4. [P1, HTML] Streaming fallback briefly duplicated the complete page's H1/main in raw HTML. Removed the duplicate fallback and used the documented route-level instant-navigation opt-out for the shared URL-dependent navigation. Production build remains static; browser confirms exactly one H1 and one main. The SEO inventory now includes the new route with zero FAQ items, plus valid sitemap lastmod/changefreq/priority.
+
+## Required fidelity surfaces
+
+- Typography: passed. Existing NOCTADO display and Causten body preserve the homepage identity. Mobile H1 wraps into the requested two lines without clipping; body copy and captions remain readable. No replacement font system introduced.
+- Spacing/layout: passed. Centered coffee scene, copy below cup, crest-led middle section, side-by-side frames even on mobile, full-width room image and shared footer match the sketch's order. No horizontal document overflow at 393, 768 or 1280 CSS px.
+- Colors/tokens: passed. Existing warm cream, burgundy and gold are retained. Pale taupe architecture follows the supplied reference. Text uses dark burgundy/brown; room caption has a restrained bottom scrim for contrast.
+- Images/assets: passed. New cup, bean, engraved background and frame are optimized local WebP raster assets. Transparent cutouts were inspected; no visible opaque rectangles or broken images. Real venue and coffee photos are reused from the project. No substitute CSS drawings or handmade SVG illustrations.
+- Copy/content: passed. Main heading is the user's requested “Tarihi atmosferde kahve keyfi.” Address, links and shared footer use existing business information. No invented ratings, seating conditions, coffee sourcing claims or prices.
+
+## Interactions and technical checks
+
+- Mobile menu opens, includes KAHVE, and closes when the link is selected.
+- Discovery arrow scrolls to the story; final story top is approximately 90px below the viewport top.
+- Coffee-menu link opens `/menu#sicak-kahveler`; target and Sıcak Kahveler heading verified.
+- Directions points to the existing verified Google Maps business URL.
+- Cup/beans respond to scroll through Motion values; short entrance animation completes in under 5 seconds. No perpetual animation. CSS and Motion both gate spatial animation for reduced-motion preferences. OS preference emulation was not available in this browser, so the reduced-motion branch was reviewed in source rather than claimed as an emulated visual test.
+- Production browser error log: no errors.
+- Production build, targeted ESLint and existing production site regression suite pass. The suite verifies Googlebot-readable HTML on 31 canonical pages, sitemap images, canonical/schema consistency and internal anchors.
+
+## Open questions / follow-up polish
+
+None blocking. Sketch-based comparison is structural, not a pixel-for-pixel reproduction of the photographed paper. The existing shared footer is intentionally preserved.
+
+final result: passed
