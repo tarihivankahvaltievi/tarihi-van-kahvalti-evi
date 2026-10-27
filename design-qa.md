@@ -192,3 +192,13 @@ No performance score, live indexing, rich-result appearance or conversion lift i
 final result: local implementation passed
 
 Owner confirmation follow-up · 2026-10-27: The owner confirms Wi-Fi, outlets and laptop work areas, and permits coffee visits without breakfast. Added the facts to all six native visit sections and matching Restaurant amenities; removed the previous uncertainty from llms.txt and updated research notes. No free-use or unlimited-duration policy is inferred. Production build and 36-page site checks pass, including visible native work text and three true amenity features on each coffee page. Turkish 393px mobile evidence: `tmp/coffee-qa/prices-2026-10-27/workspace-confirmed.png`; no overflow.
+
+---
+
+# Coffee hero type and background refinement · 2026-10-27
+
+User requested a more coherent font for “Tarihi atmosferde / kahve keyfi.” and the existing framed-photo section's engraved background behind the opening. Both Latin hero lines now use the already bundled Literata family, with restrained 420/520 weights, closer size proportions and less extreme tracking. The existing native-script overrides remain. The exact `beyoglu-engraving.webp` asset is reused in a decorative hero pseudo-element at .68 opacity; image, text and controls remain above it. Story artwork is unchanged.
+
+Production build and diff checks pass; Impeccable detector returned no findings. Visually checked Turkish at 320px, 393px and 1280px, plus English and RTL Arabic at 393px. No horizontal overflow. Computed Turkish styles confirm Literata on both lines and the requested engraving URL. Evidence: `tmp/coffee-qa/hero-type-2026-10-27/tr-mobile.png` and `tr-desktop.png`. No new font dependency, image generation, content or navigation changes.
+
+final result: passed

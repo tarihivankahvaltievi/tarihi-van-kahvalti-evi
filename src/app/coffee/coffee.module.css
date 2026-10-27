@@ -36,6 +36,17 @@
   overflow: hidden;
   padding-top: 34px;
   padding-bottom: 76px;
+  isolation: isolate;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background: url('/images/coffee/beyoglu-engraving.webp') center 58% / cover no-repeat;
+  opacity: .68;
 }
 
 .scene {
@@ -136,9 +147,12 @@
 
 .heroCopy h1 {
   max-width: none;
-  letter-spacing: -.015em;
-  font-size: clamp(39px, 4.2vw, 57px);
-  line-height: 1.3;
+  font-family: var(--font-literata-gf), Georgia, serif;
+  font-weight: 420;
+  font-optical-sizing: auto;
+  letter-spacing: -.025em;
+  font-size: clamp(36px, 4vw, 52px);
+  line-height: 1.35;
 }
 
 .heroCopy p {
@@ -346,12 +360,12 @@
 
 .heroCopy h1 span {
   display: inline-block;
-  font-family: var(--font-bodoni-gf), Georgia, serif;
-  font-weight: 600;
-  font-size: clamp(62px, 6.9vw, 92px);
-  letter-spacing: -.035em;
-  line-height: 1.1;
-  margin-top: 1px;
+  font-family: inherit;
+  font-weight: 520;
+  font-size: clamp(54px, 5.8vw, 76px);
+  letter-spacing: -.025em;
+  line-height: 1.2;
+  margin-top: 5px;
 }
 
 .heroActions {
@@ -551,8 +565,8 @@
   display: none;
 }
   .heroCopy h1 {
-  font-size: clamp(31px, 8.8vw, 40px);
-  line-height: 1.3;
+  font-size: clamp(25px, 7.2vw, 32px);
+  line-height: 1.4;
 }
   .heroCopy p {
   font-size: 16px;
@@ -625,9 +639,9 @@
   padding: 11px 18px;
 }
   .heroCopy h1 span {
-  font-size: clamp(49px, 13.9vw, 68px);
-  line-height: 1.2;
-  letter-spacing: -.035em;
+  font-size: clamp(39px, 11.5vw, 50px);
+  line-height: 1.25;
+  letter-spacing: -.025em;
 }
   .heroActions {
   margin-top: 24px;
@@ -708,7 +722,7 @@
   height: 310px;
 }
   .heroCopy h1 span {
-  font-size: 48px;
+  font-size: 38px;
 }
   .heroActions {
   gap: 13px;
@@ -793,7 +807,7 @@
 .storyIntro .menuNote { font-size: 14px; line-height: 1.7; max-width: 480px; margin-top: 13px; }
 .venueContent .hours { font-size: 14px; margin-top: 11px; }
 .page:not([data-locale='tr']) .heroCopy p { max-width: 560px; margin-inline: auto; line-height: 1.65; }
-.page:not([data-locale='tr']) .heroCopy h1 span { font-size: clamp(51px, 6.2vw, 82px); }
+.page:not([data-locale='tr']) .heroCopy h1 span { font-size: clamp(50px, 5.8vw, 74px); }
 .page[data-locale='ru'] { font-family: system-ui, sans-serif; }
 .page[data-locale='ru'] h1, .page[data-locale='ru'] h1 span, .page[data-locale='ru'] h2, .page[data-locale='ru'] h2 span, .page[data-locale='ru'] .choiceName { font-family: Georgia, serif; letter-spacing: -.025em; }
 .page[data-locale='ru'] .heroCopy h1 { font-size: clamp(31px, 3.6vw, 49px); }
@@ -827,7 +841,7 @@
 :global(.coffee-page-shell):lang(ar) :global(footer nav) { font-family: var(--font-coffee-arabic), Tahoma, sans-serif; }
 @media (max-width: 600px) {
   .languageLinks { gap: 0 17px; padding: 7px 15px 0; font-size: 12px; }
-  .page:not([data-locale='tr']) .heroCopy h1 span { font-size: clamp(39px, 10.8vw, 52px); }
+  .page:not([data-locale='tr']) .heroCopy h1 span { font-size: clamp(36px, 10.8vw, 48px); }
   .page[data-locale='ru'] .heroCopy h1 { font-size: 29px; }
   .page[data-locale='ru'] .heroCopy h1 span { font-size: clamp(31px, 8.5vw, 39px); }
   .page[data-locale='ar'] .heroCopy h1 { font-size: 39px; }
