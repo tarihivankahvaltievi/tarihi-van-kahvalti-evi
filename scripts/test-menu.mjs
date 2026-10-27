@@ -88,6 +88,34 @@ async function verifyBookingInclusions(expected) {
   }
 }
 
+const coffeeRoutes = ['/taksim-kafe', '/en/coffee-taksim', '/ru/coffee-taksim', '/ar/coffee-taksim', '/ko/coffee-taksim', '/zh-cn/coffee-taksim'];
+const coffeeIds = ['turk-kahvesi', 'espresso', 'americano', 'latte', 'flat-white', 'cold-brew'];
+async function verifyCoffeePages(expected, specialPrices = {}) {
+  const source = expected.items.filter(item => coffeeIds.includes(item.id));
+  for (const route of coffeeRoutes) {
+    const response = await fetch(`${base}${route}`);
+    assert.equal(response.status, 200, `${route}: coffee page unavailable`);
+    const html = await response.text();
+    const plain = plainHtml(html);
+    const graph = JSON.parse(html.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/)[1])['@graph'];
+    const list = graph.find(node => node['@type'] === 'ItemList');
+    assert.equal(list.numberOfItems, source.length, `${route}: removed coffee persisted`);
+    assert.equal((plain.match(/data-coffee-item=/g) ?? []).length, source.length);
+    for (const item of source) {
+      const row = plain.match(new RegExp(`<li[^>]+data-coffee-item="${item.id}"[^>]*>([\\s\\S]*?)</li>`))?.[1] ?? '';
+      assert.ok(row.includes(item.price), `${route}: stale coffee price for ${item.id}`);
+      if (item.priceNote) assert.ok(row.includes(item.priceNote), `${route}: serving note omitted`);
+      const schemaItem = list.itemListElement.find(entry => entry.item.url.endsWith(`#${item.id}`))?.item;
+      assert.ok(schemaItem && row.includes(schemaItem.name), `${route}: visible/schema name mismatch`);
+      const price = Object.hasOwn(specialPrices, item.id) ? specialPrices[item.id] : item.price.replace('₺', '');
+      assert.equal(schemaItem.offers?.price, price, `${route}: schema price for ${item.id}`);
+      if (price === undefined) assert.equal(schemaItem.offers, undefined, `${route}: range became exact offer`);
+      else assert.equal(schemaItem.offers.priceCurrency, 'TRY');
+    }
+    if (!expected.items.some(item => item.id === 'cold-brew')) assert.ok(!plain.includes('data-coffee-item="cold-brew"'), `${route}: deleted item still displayed`);
+  }
+}
+
 async function verifySitemapDates() {
   const xml = await (await fetch(`${base}/sitemap.xml`)).text();
   for (const match of xml.matchAll(/<lastmod>([^<]+)<\/lastmod>/g)) {
@@ -117,6 +145,10 @@ try {
       if (!voidTags.has(name) && !tag.endsWith("/>")) stack.push({ name, hidden });
     }
     assert.equal(visibleProducts, baseline.items.length, `${route}: product content hidden in streamed chunk`);
+  }
+  for (const route of coffeeRoutes) {
+    const prerender = plainHtml(await readFile(`.next/server/app${route}.html`, 'utf8'));
+    assert.equal((prerender.match(/data-coffee-item=/g) ?? []).length, 6, `${route}: coffee prices require JavaScript`);
   }
   let ready = false;
   for (let attempt = 0; attempt < 60; attempt++) {
@@ -239,8 +271,13 @@ try {
   await verifyGuidePrices(baseline);
   await verifyAnswerEngineMenu(baseline);
   await verifyBookingInclusions(baseline);
+  await verifyCoffeePages(baseline);
   const changed = structuredClone(baseline);
   changed.lastUpdated = new Intl.DateTimeFormat("tr-TR", { day: "numeric", month: "long", year: "numeric", timeZone: "Europe/Istanbul" }).format(new Date());
+  changed.items.find(item => item.id === 'turk-kahvesi').price = '₺175,50';
+  changed.items.find(item => item.id === 'espresso').price = '₺250–300';
+  changed.items.find(item => item.id === 'latte').priceNote = 'ekstra';
+  changed.items = changed.items.filter(item => item.id !== 'cold-brew');
   changed.items[0].price = "₺1.250,50";
   changed.items[1].price = "1.750 TL";
   changed.items[2].price = "₺350–450";
@@ -251,12 +288,13 @@ try {
   changed.categories.push({ id: "test-category", label: "Deneme Kategorisi", shortLabel: "Deneme", description: "Only an isolated test fixture.", image: "", imageAlt: "", translations: { en: { label: "Test Category" } } });
   changed.items.push({ ...structuredClone(baseline.items[0]), id: "test-item", category: "test-category", name: "Deneme Ürünü", price: "₺123" });
   await save(changed);
-  const schemaPrices = { "serpme-fix-menu": "1250.5", "van-golu-tabagi": "1750", "pisi-tabagi": undefined };
+  const schemaPrices = { "serpme-fix-menu": "1250.5", "van-golu-tabagi": "1750", "turk-kahvesi": "175.5", espresso: undefined, "pisi-tabagi": undefined };
   await verifyMenu("/menu", changed, "tr", schemaPrices);
   await verifyMenu("/en/menu", changed, "en", schemaPrices);
   await verifyGuidePrices(changed);
   await verifyAnswerEngineMenu(changed);
   await verifyBookingInclusions(changed);
+  await verifyCoffeePages(changed, { 'turk-kahvesi': '175.5', espresso: undefined });
   await verifySitemapDates();
   await save(baseline);
   await verifyMenu("/menu", baseline, "tr");
@@ -264,6 +302,7 @@ try {
   await verifyGuidePrices(baseline);
   await verifyAnswerEngineMenu(baseline);
   await verifyBookingInclusions(baseline);
+  await verifyCoffeePages(baseline);
   console.log(`Menü testi geçti: ${baseline.items.length} ürün / ${baseline.categories.length} kategori gerçek prerender HTML'de; TR/EN fiyat-açıklama-şema eşleşmesi, yetkisiz yazma engeli, rezervasyonda güncel dahil ürünler, anında önbellek yenileme ve yeni kategori görünürlüğü doğrulandı.`);
 } finally {
   server.kill("SIGTERM");

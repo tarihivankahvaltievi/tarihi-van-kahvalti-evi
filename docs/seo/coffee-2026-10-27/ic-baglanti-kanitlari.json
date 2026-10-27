@@ -1,0 +1,57 @@
+[
+  {
+    "source": "/ko",
+    "target": "/ko/coffee-taksim",
+    "text": "커피 한 잔도 계획하고 계신가요? 탁심 근처 커피 종류와 가격을 확인해 보세요."
+  },
+  {
+    "source": "/zh-cn",
+    "target": "/zh-cn/coffee-taksim",
+    "text": "也想安排一段咖啡时光？ 看看塔克西姆附近的咖啡选择与价格。"
+  },
+  {
+    "source": "/ru/blog/turetskiy-zavtrak-stambul",
+    "target": "/ru/coffee-taksim",
+    "text": "Планируете кофейную паузу? Посмотрите наш кофе и цены рядом с Таксимом."
+  },
+  {
+    "source": "/zh-cn/blog/istanbul-bal-kaymak",
+    "target": "/zh-cn/coffee-taksim",
+    "text": "也想安排一段咖啡时光？ 看看塔克西姆附近的咖啡选择与价格。"
+  },
+  {
+    "source": "/zh-cn/blog/taksim-turkish-breakfast",
+    "target": "/zh-cn/coffee-taksim",
+    "text": "也想安排一段咖啡时光？ 看看塔克西姆附近的咖啡选择与价格。"
+  },
+  {
+    "source": "/ar/blog/turkish-breakfast-istanbul",
+    "target": "/ar/coffee-taksim",
+    "text": "هل تخططون لاستراحة قهوة أيضاً؟ اكتشفوا القهوة والأسعار بالقرب من تقسيم."
+  },
+  {
+    "source": "/ko/blog/istanbul-bal-kaymak",
+    "target": "/ko/coffee-taksim",
+    "text": "커피 한 잔도 계획하고 계신가요? 탁심 근처 커피 종류와 가격을 확인해 보세요."
+  },
+  {
+    "source": "/ko/blog/taksim-kahvalti-rehberi",
+    "target": "/ko/coffee-taksim",
+    "text": "커피 한 잔도 계획하고 계신가요? 탁심 근처 커피 종류와 가격을 확인해 보세요."
+  },
+  {
+    "source": "/ko/blog/turkish-breakfast-istanbul",
+    "target": "/ko/coffee-taksim",
+    "text": "커피 한 잔도 계획하고 계신가요? 탁심 근처 커피 종류와 가격을 확인해 보세요."
+  },
+  {
+    "source": "/ko/blog/kaymak-nedir",
+    "target": "/ko/coffee-taksim",
+    "text": "커피 한 잔도 계획하고 계신가요? 탁심 근처 커피 종류와 가격을 확인해 보세요."
+  },
+  {
+    "source": "/en/blog/turkish-breakfast-istanbul",
+    "target": "/en/coffee-taksim",
+    "text": "Planning a coffee break too? Explore our coffees and prices near Taksim."
+  }
+]

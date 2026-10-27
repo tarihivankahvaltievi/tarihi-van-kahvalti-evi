@@ -1,3 +1,4 @@
+import { CoffeeDiscovery } from "../coffee/coffee-discovery";
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
@@ -24,6 +25,6 @@ export default function ChineseHomePage() {
     <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLd(graph) }} />
     <header className={styles.topbar}><Link href="/zh-cn">{siteName}</Link><nav aria-label="语言"><Link href="/ko" hrefLang="ko">한국어</Link><Link href="/en" hrefLang="en">English</Link><Link href="/en/menu" hrefLang="en">Menu</Link></nav></header>
     <div className={styles.hero}><div><p className={styles.kicker}>中文旅行美食指南</p><h1>塔克西姆的早晨，从蜂蜜奶皮到 Van 早餐</h1><p className={styles.lead}>在伊斯坦布尔 Beyoğlu，认识土耳其早餐的甜味与咸味。先选一篇指南：蜂蜜奶皮的味道和吃法，或塔克西姆附近共享式早餐的点单方法。</p><p className={styles.byline}>Tarihi Van Kahvaltı Evi · {displayAddress} · 每天 {openingHours.opens}–{openingHours.closes}</p></div><figure><Image src="/images/hero-parallax/overhead-feast.webp" alt="蜂蜜奶皮、奶酪、面包和红茶组成的土耳其早餐" fill priority sizes="(max-width: 800px) 100vw, 50vw" /></figure></div>
-    <div className={styles.body}><section className={styles.section}><h2>选择您需要的指南</h2><div className={styles.points}><div><h3><Link href="/zh-cn/blog/istanbul-bal-kaymak">蜂蜜奶皮 Bal Kaymak</Link></h3><p>它是什么、怎么吃、奶源如何确认，以及塔克西姆附近的实际到店信息。</p></div><div><h3><Link href="/zh-cn/blog/taksim-turkish-breakfast">塔克西姆土耳其早餐</Link></h3><p>共享式 kahvaltı、Van 地区菜品、两人点单与步行路线。</p></div></div></section><aside className={styles.visit}><h2>计划到店</h2><p>{displayAddress}</p><div className={styles.actions}><Link href="/en/menu" hrefLang="en">查看当前菜单及价格</Link><a href={mapsUrl} target="_blank" rel="noopener noreferrer">Google 地图导航</a></div></aside></div>
+    <div className={styles.body}><section className={styles.section}><h2>选择您需要的指南</h2><div className={styles.points}><div><h3><Link href="/zh-cn/blog/istanbul-bal-kaymak">蜂蜜奶皮 Bal Kaymak</Link></h3><p>它是什么、怎么吃、奶源如何确认，以及塔克西姆附近的实际到店信息。</p></div><div><h3><Link href="/zh-cn/blog/taksim-turkish-breakfast">塔克西姆土耳其早餐</Link></h3><p>共享式 kahvaltı、Van 地区菜品、两人点单与步行路线。</p></div></div></section><aside className={styles.visit}><h2>计划到店</h2><CoffeeDiscovery locale="zh-cn" /><p>{displayAddress}</p><div className={styles.actions}><Link href="/en/menu" hrefLang="en">查看当前菜单及价格</Link><a href={mapsUrl} target="_blank" rel="noopener noreferrer">Google 地图导航</a></div></aside></div>
   </main>;
 }

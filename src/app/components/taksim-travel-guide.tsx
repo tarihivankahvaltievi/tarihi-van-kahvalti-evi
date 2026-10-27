@@ -1,3 +1,4 @@
+import { CoffeeDiscovery } from "../coffee/coffee-discovery";
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
@@ -122,6 +123,7 @@ export function TaksimTravelGuide({ guide }: { guide: TravelGuide }) {
             <h2>Tarihi Van Kahvaltı Evi</h2>
             <dl><div><dt>{guide.addressLabel}</dt><dd>{displayAddress}</dd></div><div><dt>{guide.hoursLabel}</dt><dd>{openingHours.opens}–{openingHours.closes}</dd></div></dl>
             <div className={styles.actions}><Link href={guide.menuHref ?? "/en/menu"} hrefLang="en">{guide.menuLabel}</Link><a href={mapsUrl} target="_blank" rel="noopener noreferrer">{guide.mapLabel}</a><a href={telUrl}>{guide.callLabel}</a></div>
+            {(guide.language === "ko-KR" || guide.language === "zh-CN") && <CoffeeDiscovery locale={guide.language === "ko-KR" ? "ko" : "zh-cn"} />}
           </aside>
           <section id="questions" className={styles.section}>
             <h2>{guide.faqTitle}</h2>

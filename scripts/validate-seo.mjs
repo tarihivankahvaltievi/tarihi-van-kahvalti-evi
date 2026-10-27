@@ -103,7 +103,7 @@ const coffeeRoutes = [
   { path: "/ko/coffee-taksim", language: "ko", visibleSignals: ["커피", "탁심", "영문 메뉴", "zambak"] },
   { path: "/zh-cn/coffee-taksim", language: "zh-CN", visibleSignals: ["咖啡", "塔克西姆", "英文菜单", "zambak"] },
 ].map((route) => ({ ...route, canonical: `${canonicalSiteUrl}${route.path}`, faqCount: 0,
-  types: ["Restaurant", "WebPage", "BreadcrumbList"], restaurantMenu: `${menuPageUrl}#menu`, hreflang: coffeeLanguages,
+  types: ["Restaurant", "WebPage", "BreadcrumbList", "ItemList"], restaurantMenu: `${menuPageUrl}#menu`, hreflang: coffeeLanguages,
 }));
 
 const routes = [
@@ -606,6 +606,15 @@ for (const route of routes) {
   }
 
   if (coffeeRoutes.some((coffee) => coffee.path === route.path)) {
+    const menuList = JSON.parse(html.match(/<script\s+type="application\/ld\+json">([\s\S]*?)<\/script>/i)[1])["@graph"].find((node) => node["@type"] === "ItemList");
+    assert(menuList?.itemListElement?.length === 6, `${routeLabel}: görünür kahve fiyat envanteri eksik`);
+    for (const entry of menuList.itemListElement) {
+      const item = entry.item;
+      const id = new URL(item.url).hash.slice(1);
+      const row = visibleHtml(html).match(new RegExp(`<li[^>]+data-coffee-item="${id}"[^>]*>([\\s\\S]*?)</li>`))?.[1] ?? "";
+      assert(visibleText(row).includes(item.name), `${routeLabel}: kahve adı görünür HTML ile eşleşmeli (${id})`);
+      assert(item.offers?.priceCurrency === "TRY" && visibleText(row).includes(`₺${item.offers.price}`), `${routeLabel}: kahve fiyatı şemayla eşleşmeli (${id})`);
+    }
     assert(visibleHtml(html).includes('id="coffee-visit-title"'), `${routeLabel}: taranabilir ziyaret bilgisi eksik`);
     assert((visibleHtml(html).match(/<dt>/g) ?? []).length === 4, `${routeLabel}: dört ziyaret sorusu HTML'de bulunmalı`);
     assert(text.includes("07:00") && text.includes("22:00") && text.includes("34421"), `${routeLabel}: saat ve tam adres eksik`);
@@ -885,6 +894,21 @@ for (const url of sitemapUrls) {
 
 // Validate fragments too: HTTP 200 alone hides broken section and skip links.
 let fragmentCount = 0;
+// Coffee discovery must have a native content entry point, not only cross-language links.
+for (const [language, source] of [['tr', '/'], ['en', '/en/blog/turkish-breakfast-istanbul'], ['ru', '/ru/blog/turetskiy-zavtrak-stambul'], ['ar', '/ar/blog/turkish-breakfast-istanbul'], ['ko', '/ko'], ['zh-CN', '/zh-cn']]) {
+  const target = new URL(coffeeLanguages[language]).pathname;
+  assert(internalLinkSources.get(target)?.has(source), `Kahve iç bağlantısı: ${source} → ${target} eksik`);
+}
+// These requests test user-agent response parity, not verified crawler access through a production CDN.
+for (const agent of ['Bingbot', 'OAI-SearchBot', 'PerplexityBot', 'AdsBot-Google']) {
+  for (const route of coffeeRoutes) {
+    const response = await fetchWithRetry(route.path, 3, { headers: { 'User-Agent': agent }, redirect: 'manual' });
+    const html = visibleHtml(await response.text());
+    assert(response.status === 200, `${agent}: ${route.path} erişilemiyor`);
+    assert((html.match(/data-coffee-item=/g) ?? []).length === 6, `${agent}: ${route.path} fiyatlar JS gerektiriyor`);
+    assert(html.includes(`href="${route.canonical}"`), `${agent}: ${route.path} canonical yanlış`);
+  }
+}
 for (const [source, html] of crawledPages) {
   for (const match of html.matchAll(/<a\b[^>]*\bhref="([^"]+)"/gi)) {
     const target = new URL(decodeHtml(match[1]), `${canonicalSiteUrl}${source}`);

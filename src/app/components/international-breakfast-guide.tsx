@@ -1,3 +1,4 @@
+import { CoffeeDiscovery } from "../coffee/coffee-discovery";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowDown, ArrowUpRight, Clock3, MapPin, Phone, Utensils } from "lucide-react";
@@ -249,6 +250,7 @@ export function InternationalBreakfastGuide({ guide }: { guide: GuideContent }) 
             </a>
           </div>
           <p>{visitActions[guide.locale].note}</p>
+          {guide.locale !== "ja" && <CoffeeDiscovery locale={guide.locale} />}
         </section>
 
         <section id="questions" className={styles.faq} aria-labelledby="faq-title">

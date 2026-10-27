@@ -3,6 +3,9 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowDown, ArrowUpRight } from "lucide-react";
 import ClientPage, { type PageNavigation } from "../client-page";
+import { getPublicMenuData } from "../menu/public-menu-data";
+import { CoffeeMenuPreview } from "./coffee-menu-preview";
+import { getFeaturedCoffees, buildCoffeeMenuList, type FeaturedCoffee } from "./coffee-menu-data";
 import { CoffeeVisit } from "./coffee-visit";
 import { CoffeeFooter } from "./coffee-footer";
 import { CoffeeScene } from "./coffee-interactions";
@@ -33,7 +36,7 @@ function LanguageLinks({ locale }: { locale: CoffeeLocale }) {
   </nav>;
 }
 
-function CoffeeContent({ locale }: { locale: CoffeeLocale }) {
+function CoffeeContent({ locale, items }: { locale: CoffeeLocale; items: FeaturedCoffee[] }) {
   const c = coffeeCopy[locale];
   const menu = locale === "tr" ? "/menu" : "/en/menu";
   const choiceTargets = ["turk-kahvesi", "sicak-kahveler", "soguk-kahveler"];
@@ -89,6 +92,8 @@ function CoffeeContent({ locale }: { locale: CoffeeLocale }) {
       </nav>
     </section>
 
+    <CoffeeMenuPreview items={items} locale={locale} />
+
     <section className={styles.venue} aria-labelledby="coffee-venue-title">
       <Image src="/hamour/anchor-2.png" alt="" width={74} height={41} className={styles.sectionAnchor} />
       <Image src="/images/atmosphere-banner-bg.webp" alt={c.images.venue} fill sizes="100vw" quality={84} className={styles.venueBackground} />
@@ -101,7 +106,9 @@ function CoffeeContent({ locale }: { locale: CoffeeLocale }) {
   </main>;
 }
 
-export function LocalizedCoffeePage({ locale }: { locale: CoffeeLocale }) {
+export async function LocalizedCoffeePage({ locale }: { locale: CoffeeLocale }) {
+  const menu = await getPublicMenuData();
+  const items = getFeaturedCoffees(menu.items, locale);
   const c = coffeeCopy[locale];
   const url = absoluteUrl(coffeePaths[locale]);
   const navigation: PageNavigation = {
@@ -116,11 +123,15 @@ export function LocalizedCoffeePage({ locale }: { locale: CoffeeLocale }) {
     languages: coffeeLocales.map((other) => ({ href: coffeePaths[other], label: coffeeLanguageNames[other], language: coffeeLanguageTags[other] })),
   };
   const schema = { "@context": "https://schema.org", "@graph": [buildRestaurantJsonLd(false),
-    { "@type": "WebPage", "@id": `${url}#webpage`, url, name: c.title, description: c.description, inLanguage: coffeeLanguageTags[locale], isPartOf: { "@id": `${siteUrl}/#website` }, about: { "@id": `${siteUrl}/#restaurant` }, mainEntity: { "@id": `${siteUrl}/#restaurant` } },
+    { "@type": "WebPage", "@id": `${url}#webpage`, url, name: c.title, description: c.description, inLanguage: coffeeLanguageTags[locale], isPartOf: { "@id": `${siteUrl}/#website` }, about: { "@id": `${siteUrl}/#restaurant` }, mainEntity: { "@id": `${siteUrl}/#restaurant` },
+      primaryImageOfPage: { "@type": "ImageObject", url: absoluteUrl("/images/coffee/coffee-og.jpg"), width: 1200, height: 630, caption: c.images.guests },
+      ...(items.length ? { mentions: { "@id": `${url}#coffee-menu` } } : {}),
+    },
     buildBreadcrumbJsonLd(url, c.nav.coffee, false, locale === "tr" ? "Ana sayfa" : c.nav.guide, locale === "tr" ? siteUrl : absoluteUrl(coffeeGuidePaths[locale])),
+    ...(items.length ? [buildCoffeeMenuList(items, locale)] : []),
   ] };
   return <>
     <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLd(schema) }} />
-    <ClientPage locale={locale === "tr" ? "tr" : "en"} navigation={navigation}><CoffeeContent locale={locale} /><CoffeeFooter locale={locale} /></ClientPage>
+    <ClientPage locale={locale === "tr" ? "tr" : "en"} navigation={navigation}><CoffeeContent locale={locale} items={items} /><CoffeeFooter locale={locale} /></ClientPage>
   </>;
 }

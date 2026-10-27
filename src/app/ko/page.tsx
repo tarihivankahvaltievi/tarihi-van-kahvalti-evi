@@ -1,3 +1,4 @@
+import { CoffeeDiscovery } from "../coffee/coffee-discovery";
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
@@ -138,6 +139,7 @@ export default function KoreanHomePage() {
           <h2 id="ko-intro-title">발 카이막은 터키 아침 식사의 달콤한 한 부분입니다.</h2>
           <p>발(bal)은 터키어로 꿀, 카이막(kaymak)은 우유에서 얻는 진하고 부드러운 유제품입니다. 따뜻한 빵이나 피시에 카이막을 올리고 꿀을 곁들여 먹습니다. 카이막 자체는 대체로 담백하고 고소하며, 선명한 단맛은 꿀에서 옵니다.</p>
           <p>하지만 현지의 아침은 발 카이막 한 접시에서 끝나지 않습니다. 카흐발트(kahvaltı)는 치즈, 올리브, 채소, 달걀, 잼, 따뜻한 빵과 차를 함께 나누는 식사입니다. 반(Van)식 아침에는 허브 치즈, 무르투아, 카부트와 걸쭉한 자즉처럼 지역의 맛이 더해집니다.</p>
+          <CoffeeDiscovery locale="ko" />
           <div className={styles.answerBox}>Tarihi Van Kahvaltı Evi는 베요글루 잠박 거리에서 1978년부터 이어온 가족의 반 아침 문화를 선보입니다. 매일 07:00–22:00 운영하며 탁심 광장과 이스티클랄 거리에서 걸어서 방문할 수 있습니다.</div>
         </div>
       </section>

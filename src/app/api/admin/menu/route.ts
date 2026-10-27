@@ -1,3 +1,4 @@
+import { coffeeLocales, coffeePaths } from "@/app/coffee/coffee-localization";
 import { readJsonObject, RequestError } from "@/app/api/request-security";
 import { NextResponse } from "next/server";
 import { revalidatePath, revalidateTag } from "next/cache";
@@ -18,7 +19,7 @@ async function notifyMenuUpdate() {
       host: new URL(siteUrl).host,
       key: indexNowKey,
       keyLocation: `${siteUrl}/${indexNowKey}.txt`,
-      urlList: [siteUrl, `${siteUrl}/en`, `${siteUrl}/menu`, `${siteUrl}/en/menu`, `${siteUrl}/van-kahvaltisi`, `${siteUrl}/rezervasyon`, `${siteUrl}/en/rezervasyon`],
+      urlList: [...coffeeLocales.map((locale) => `${siteUrl}${coffeePaths[locale]}`), siteUrl, `${siteUrl}/en`, `${siteUrl}/menu`, `${siteUrl}/en/menu`, `${siteUrl}/van-kahvaltisi`, `${siteUrl}/rezervasyon`, `${siteUrl}/en/rezervasyon`],
     }),
     signal: AbortSignal.timeout(5000),
   });
@@ -74,6 +75,7 @@ export async function POST(request: Request) {
     const success = await saveMenuData(data);
     if (success) {
       revalidateTag(publicMenuCacheTag, { expire: 0 });
+      for (const locale of coffeeLocales) revalidatePath(coffeePaths[locale]);
       revalidatePath("/menu");
       revalidatePath("/en/menu");
       revalidatePath("/van-kahvaltisi");

@@ -172,3 +172,21 @@ Validation: production build, targeted ESLint, analytics suite and production si
 Live HTTP audit at `docs/seo/coffee-2026-10-27/canli-denetim.json` confirms all six production coffee URLs still return 404; production sitemap lacks them. Local tests do not establish live deployment or Google indexing. Research and implementation plan is in the same folder. GBP, Ads and Search Console accounts were not modified, and no advertising spend occurred.
 
 final result: local implementation passed; deployment remains blocked by repository write access
+
+---
+
+# Coffee menu discovery and data QA · 2026-10-27
+
+Added a cream menu-price section within the established coffee composition. Six actual menu products are selected from the shared server menu cache, with native product names in all six languages, explicit TRY context and an English-menu disclosure on international CTAs. No new bitmap assets, client-side data request, animation, or third-party UI library was added. Price notes remain visible. Arabic uses isolated LTR prices.
+
+A matching ItemList references MenuItem identities already used by the real menu pages. Prices and displayed rows derive from the same selected objects. Ambiguous amounts omit Offers, deleted items are filtered out, and an empty selection omits the section/list. WebPage references the existing real coffee image with dimensions and a localized caption. Menu administration invalidates all coffee pages and includes them in menu-change notifications. Coffee sitemap lastmod now follows meaningful menu updates.
+
+Evidence: `tmp/coffee-qa/prices-2026-10-27/` contains all six 393px mobile captures and a 1280px Turkish desktop capture. All were visually inspected. Arabic was additionally checked at 320px. No horizontal overflow. Native script typography, prices, links and the burgundy/cream section transitions remain readable. The Chinese guide's new link was clicked to the Chinese coffee page, then its Turkish coffee row to `/en/menu#turk-kahvesi`; the target exists.
+
+Eleven existing guide pages now contain contextual coffee discovery links in their own language. Static build evidence is saved to `docs/seo/coffee-2026-10-27/ic-baglanti-kanitlari.json`. SEO regression assertions require a real native entry point for every coffee locale.
+
+Validation: production build and targeted ESLint pass. All coffee pages remain static with the shared menu cache policy. Production site suite passes for 36 canonical pages, 342 internal section links and 100 sitemap images. Googlebot sees real HTML; four additional user-agent header checks see six prices on every coffee page. These are local parity tests, not verified production bot/CDN access. Isolated admin integration tests pass for decimal coffee prices, ambiguous price ranges, serving notes, deletion and restoration across all six pages; fixtures never reach live storage or IndexNow. Impeccable detector returned no findings.
+
+No performance score, live indexing, rich-result appearance or conversion lift is claimed. Research sources, decisions and limits are recorded in `docs/seo/coffee-2026-10-27/ikinci-teknik-arastirma.md`.
+
+final result: local implementation passed
