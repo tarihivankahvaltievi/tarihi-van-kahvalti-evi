@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import { Bree_Serif } from "next/font/google";
 import Link from "next/link";
 import { ArrowDown, ArrowUpRight } from "lucide-react";
 import ClientPage, { type PageNavigation } from "../client-page";
@@ -13,6 +14,14 @@ import { absoluteUrl, buildBreadcrumbJsonLd, buildRestaurantJsonLd, jsonLd, maps
 import styles from "./coffee.module.css";
 
 import { coffeeCopy, coffeePaths, coffeeLocales, coffeeLanguageNames, coffeeLanguageTags, coffeeGuidePaths, coffeeOgLocales, type CoffeeLocale } from "./coffee-localization";
+
+const coffeeDisplay = Bree_Serif({
+  subsets: ["latin", "latin-ext"],
+  weight: "400",
+  display: "swap",
+  preload: false,
+  variable: "--font-coffee-display",
+});
 
 export const coffeeAlternates = Object.fromEntries([
   ...coffeeLocales.map((locale) => [coffeeLanguageTags[locale], absoluteUrl(coffeePaths[locale])]),
@@ -40,7 +49,7 @@ function CoffeeContent({ locale, items }: { locale: CoffeeLocale; items: Feature
   const c = coffeeCopy[locale];
   const menu = locale === "tr" ? "/menu" : "/en/menu";
   const choiceTargets = ["turk-kahvesi", "sicak-kahveler", "soguk-kahveler"];
-  return <main data-analytics-surface="coffee_page" id="main-content" className={styles.page} lang={coffeeLanguageTags[locale]} dir={locale === "ar" ? "rtl" : "ltr"} data-locale={locale} tabIndex={-1}>
+  return <main data-analytics-surface="coffee_page" id="main-content" className={`${styles.page} ${coffeeDisplay.variable}`} lang={coffeeLanguageTags[locale]} dir={locale === "ar" ? "rtl" : "ltr"} data-locale={locale} tabIndex={-1}>
     <LanguageLinks locale={locale} />
     <section className={styles.hero} aria-labelledby="coffee-heading">
       <CoffeeScene alt={c.images.cup} />
