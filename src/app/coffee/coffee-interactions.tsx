@@ -6,7 +6,7 @@ import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion
 import styles from "./coffee.module.css";
 
 /** Scroll moves the cup and beans without a perpetual animation or render loop. */
-export function CoffeeScene() {
+export function CoffeeScene({ alt = "Kalp desenli süt köpüğüyle porselen fincanda kahve" }: { alt?: string }) {
   const ref = useRef<HTMLDivElement>(null);
   const reduced = useReducedMotion();
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
@@ -18,7 +18,7 @@ export function CoffeeScene() {
 
   return <div className={styles.scene} ref={ref}>
     <motion.div className={styles.cup} style={reduced ? undefined : { x: cupX, y: cupY, rotate: cupRotate }}>
-      <Image src="/images/coffee/floating-cup.webp" alt="Kalp desenli süt köpüğüyle porselen fincanda kahve" width={1100} height={1100} sizes="(max-width: 600px) 84vw, 530px" quality={84} preload />
+      <Image src="/images/coffee/floating-cup.webp" alt={alt} width={1100} height={1100} sizes="(max-width: 600px) 84vw, 530px" quality={84} preload />
     </motion.div>
     <motion.div aria-hidden="true" className={styles.beansNear} style={reduced ? undefined : { y: nearY }}>
       <Image className={styles.beanOne} src="/images/coffee/coffee-bean.webp" alt="" width={90} height={88} />

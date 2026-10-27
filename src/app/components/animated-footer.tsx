@@ -121,7 +121,7 @@ export function AnimatedFooter({ locale = "tr" }: { locale?: string }) {
             {isEn && <Link href="/en/blog/classic-turkish-breakfast">Classic Turkish Breakfast</Link>}
             {isEn && <Link href="/en/blog/simit-turkish-bagel">Simit Guide</Link>}
             <Link href="/es" hrefLang="es">Español</Link>
-            {!isEn && <Link href="/taksim-kafe">Kahve Molası</Link>}
+            <Link href={isEn ? "/en/coffee-taksim" : "/taksim-kafe"}>{isEn ? "Coffee near Taksim" : "Kahve Molası"}</Link>
             {!isEn && <Link href="/van-kahvaltisi-nedir">Van Kahvaltısı Nedir?</Link>}
             <Link href={isEn ? "/en#location" : "/konum"}>{isEn ? "Contact" : "İletişim"}</Link>
           </nav>

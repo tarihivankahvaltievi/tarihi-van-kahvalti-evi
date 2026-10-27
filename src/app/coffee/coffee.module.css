@@ -777,3 +777,68 @@
   translate: 0 0;
 }
 }
+
+.languageLinks {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 6px 23px;
+  padding: 12px 20px 0;
+  font-family: system-ui, sans-serif;
+  font-size: 13px;
+}
+.languageLinks a { display: inline-flex; align-items: center; min-height: 44px; border-bottom: 1px solid transparent; }
+.languageLinks a[aria-current='page'] { color: var(--coffee-burgundy); border-bottom-color: currentColor; font-weight: 700; }
+.languageLinks a:hover { color: var(--coffee-burgundy); }
+.storyIntro .menuNote { font-size: 14px; line-height: 1.7; max-width: 480px; margin-top: 13px; }
+.venueContent .hours { font-size: 14px; margin-top: 11px; }
+.page:not([data-locale='tr']) .heroCopy p { max-width: 560px; margin-inline: auto; line-height: 1.65; }
+.page:not([data-locale='tr']) .heroCopy h1 span { font-size: clamp(51px, 6.2vw, 82px); }
+.page[data-locale='ru'] { font-family: system-ui, sans-serif; }
+.page[data-locale='ru'] h1, .page[data-locale='ru'] h1 span, .page[data-locale='ru'] h2, .page[data-locale='ru'] h2 span, .page[data-locale='ru'] .choiceName { font-family: Georgia, serif; letter-spacing: -.025em; }
+.page[data-locale='ru'] .heroCopy h1 { font-size: clamp(31px, 3.6vw, 49px); }
+.page[data-locale='ru'] .heroCopy h1 span { font-size: clamp(42px, 5.1vw, 68px); }
+.page[data-locale='ar'] { font-family: var(--font-coffee-arabic), Tahoma, Arial, sans-serif; }
+.page[data-locale='ar'] h1, .page[data-locale='ar'] h1 span, .page[data-locale='ar'] h2, .page[data-locale='ar'] h2 span, .page[data-locale='ar'] .choiceName { font-family: var(--font-coffee-arabic), Tahoma, Arial, sans-serif; letter-spacing: 0; }
+.page[data-locale='ar'] .heroCopy h1 { font-size: clamp(40px, 4.2vw, 60px); line-height: 1.5; }
+.page[data-locale='ar'] .heroCopy h1 span { line-height: 1.5; font-weight: 600; }
+.page[data-locale='ar'] p, .page[data-locale='ar'] .choiceDescription { font-size: 20px; }
+.page[data-locale='ko'] { font-family: var(--font-noto-sans-kr), 'Apple SD Gothic Neo', sans-serif; word-break: keep-all; }
+.page[data-locale='zh-cn'] { font-family: 'PingFang SC', 'Microsoft YaHei', system-ui, sans-serif; }
+.page:is([data-locale='ko'],[data-locale='zh-cn']) h1,
+.page:is([data-locale='ko'],[data-locale='zh-cn']) h1 span,
+.page:is([data-locale='ko'],[data-locale='zh-cn']) h2,
+.page:is([data-locale='ko'],[data-locale='zh-cn']) h2 span,
+.page:is([data-locale='ko'],[data-locale='zh-cn']) .choiceName { font-family: inherit; font-weight: 600; letter-spacing: -.025em; line-height: 1.5; }
+.page:is([data-locale='ko'],[data-locale='zh-cn']) .heroCopy h1 { font-size: clamp(30px, 3.5vw, 46px); }
+.page:is([data-locale='ko'],[data-locale='zh-cn']) .heroCopy h1 span { font-size: clamp(40px, 4.5vw, 62px); }
+.page:is([data-locale='ko'],[data-locale='zh-cn']) .storyIntro h2,
+.page:is([data-locale='ko'],[data-locale='zh-cn']) .coffeeBar h2 { font-size: clamp(28px, 3.4vw, 43px); }
+.page:not([data-locale='tr']) .frames figcaption { font-family: inherit; font-size: 16px; font-style: normal; line-height: 1.7; }
+:global(.coffee-page-shell):is(:lang(ru),:lang(zh-CN),:lang(ko)) :global(.nav-links .nav-link),
+:global(.coffee-page-shell):is(:lang(ru),:lang(zh-CN),:lang(ko)) :global(.mobile-links .mobile-link) { font-family: system-ui, sans-serif !important; font-size: 15px !important; letter-spacing: 0 !important; text-transform: none !important; }
+:global(.coffee-page-shell):lang(ar) :global(.nav-links .nav-link),
+:global(.coffee-page-shell):lang(ar) :global(.mobile-links .mobile-link) { font-family: var(--font-coffee-arabic), Tahoma, sans-serif !important; font-size: 20px !important; letter-spacing: 0 !important; }
+:global(.coffee-page-shell):is(:lang(ru),:lang(zh-CN),:lang(ko)) :global(footer h2),
+:global(.coffee-page-shell):is(:lang(ru),:lang(zh-CN),:lang(ko)) :global(footer p),
+:global(.coffee-page-shell):is(:lang(ru),:lang(zh-CN),:lang(ko)) :global(footer nav) { font-family: system-ui, sans-serif; }
+:global(.coffee-page-shell):lang(ar) :global(footer h2),
+:global(.coffee-page-shell):lang(ar) :global(footer p),
+:global(.coffee-page-shell):lang(ar) :global(footer nav) { font-family: var(--font-coffee-arabic), Tahoma, sans-serif; }
+@media (max-width: 600px) {
+  .languageLinks { gap: 0 17px; padding: 7px 15px 0; font-size: 12px; }
+  .page:not([data-locale='tr']) .heroCopy h1 span { font-size: clamp(39px, 10.8vw, 52px); }
+  .page[data-locale='ru'] .heroCopy h1 { font-size: 29px; }
+  .page[data-locale='ru'] .heroCopy h1 span { font-size: clamp(31px, 8.5vw, 39px); }
+  .page[data-locale='ar'] .heroCopy h1 { font-size: 39px; }
+  .page[data-locale='ar'] .heroCopy h1 span { font-size: 42px; }
+  .page:is([data-locale='ko'],[data-locale='zh-cn']) .heroCopy h1 { font-size: 27px; }
+  .page:is([data-locale='ko'],[data-locale='zh-cn']) .heroCopy h1 span { font-size: clamp(29px, 8.2vw, 36px); }
+  .page:is([data-locale='ko'],[data-locale='zh-cn']) .storyIntro h2 { font-size: 25px; }
+  .page:not([data-locale='tr']) .frames figcaption { font-size: 13px; }
+  .page:not([data-locale='tr']) .heroActions { gap: 14px; }
+  .page[data-locale='ru'] .heroActions { gap: 13px; flex-wrap: wrap; }
+  .page[data-locale='ar'] .heroMenu { font-size: 18px; }
+  .page:not([data-locale='tr']) .choiceName { font-size: 24px; }
+  .page:not([data-locale='tr']) .venueContent h2 { font-size: 29px; }
+}

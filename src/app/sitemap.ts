@@ -1,4 +1,5 @@
 import type { MetadataRoute } from "next";
+import { coffeeLocales, coffeePaths, coffeeLanguageTags } from "./coffee/coffee-localization";
 import { getPublicMenuData } from "./menu/public-menu-data";
 import {
   absoluteUrl,
@@ -180,13 +181,17 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   ]);
 
   return [
-    {
-      url: absoluteUrl("/taksim-kafe"),
-      lastModified: "2026-10-26",
-      changeFrequency: "monthly",
+    ...coffeeLocales.map((locale) => ({
+      url: absoluteUrl(coffeePaths[locale]),
+      lastModified: "2026-10-27",
+      changeFrequency: "monthly" as const,
       priority: 0.8,
       images: uniqueImages(["/images/coffee/coffee-og.jpg", "/images/coffee/floating-cup.webp", "/images/coffee-moment.webp"]),
-    },
+      alternates: { languages: Object.fromEntries([
+        ...coffeeLocales.map((language) => [coffeeLanguageTags[language], absoluteUrl(coffeePaths[language])]),
+        ["x-default", absoluteUrl(coffeePaths.tr)],
+      ]) },
+    })),
     {
       url: siteUrl,
       lastModified: liveHomeLastModified,

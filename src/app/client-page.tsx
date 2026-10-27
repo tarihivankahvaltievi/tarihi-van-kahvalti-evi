@@ -13,8 +13,22 @@ import { MessageCircle } from "lucide-react";
 import { whatsappUrl } from "./seo";
 import { messagesFor, type SiteLocale } from "./home-localization";
 
-export default function ClientPage({ children, locale = "tr" }: { children: ReactNode; locale?: SiteLocale }) {
+export type PageNavigation = {
+  language: string;
+  homeHref: string;
+  open: string;
+  close: string;
+  languageLabel: string;
+  items: { href: string; label: string }[];
+  languages: { href: string; label: string; language: string }[];
+};
+
+export default function ClientPage({ children, locale = "tr", navigation }: {
+  children: ReactNode; locale?: SiteLocale; navigation?: PageNavigation;
+}) {
   const messages = messagesFor(locale);
+  const openLabel = navigation?.open ?? messages.nav.open;
+  const closeLabel = navigation?.close ?? messages.nav.close;
   const router = useRouter();
   const pathname = usePathname();
   const isMenuPage = pathname === "/menu" || pathname === "/en/menu";
@@ -175,13 +189,14 @@ export default function ClientPage({ children, locale = "tr" }: { children: Reac
 
   return (
     <>
-      <div id="top" lang={messages.documentLanguage} className={`site-shell theme-breakfast ${isMenuPage ? "menu-page-shell" : ""}`}>
+      <div id="top" lang={navigation?.language ?? messages.documentLanguage} className={`site-shell theme-breakfast ${isMenuPage ? "menu-page-shell" : ""} ${navigation ? "coffee-page-shell" : ""}`}>
         <header className={`header-wrapper ${scrolled ? "is-scrolled" : ""}`}>
           <nav className="glass-nav">
             <div className="nav-container">
               <Link
                 className="nav-logo"
-                href={messages.homeHref}
+                href={navigation?.homeHref ?? messages.homeHref}
+                dir="ltr"
                 onClick={(e) => {
                   setMenuOpen(false);
                   if (pathname === "/" || pathname === "/en") {
@@ -209,6 +224,9 @@ export default function ClientPage({ children, locale = "tr" }: { children: Reac
               </Link>
 
               <ul className="nav-links">
+                {navigation ? navigation.items.map((item) => (
+                  <li key={item.href}><Link href={item.href} className={`nav-link ${pathname === item.href ? "active" : ""}`} aria-current={pathname === item.href ? "page" : undefined}>{item.label}</Link></li>
+                )) : <>
                 <li>
                   <Link
                     href={messages.homeHref}
@@ -233,10 +251,10 @@ export default function ClientPage({ children, locale = "tr" }: { children: Reac
                     {locale === "en" ? "MENU" : "MENÜ"}
                   </Link>
                 </li>
-                {locale === "tr" && (
+                {(locale === "tr" || locale === "en") && (
                   <li>
-                    <Link href="/taksim-kafe" className={`nav-link ${pathname === "/taksim-kafe" ? "active" : ""}`}>
-                      KAHVE
+                    <Link href={locale === "en" ? "/en/coffee-taksim" : "/taksim-kafe"} className={`nav-link ${pathname.endsWith("coffee-taksim") || pathname === "/taksim-kafe" ? "active" : ""}`}>
+                      {locale === "en" ? "COFFEE" : "KAHVE"}
                     </Link>
                   </li>
                 )}
@@ -283,6 +301,7 @@ export default function ClientPage({ children, locale = "tr" }: { children: Reac
                     {locale === "en" ? "TR" : "EN"}
                   </Link>
                 </li>
+                </>}
               </ul>
 
               <div className="nav-actions-mobile">
@@ -290,7 +309,7 @@ export default function ClientPage({ children, locale = "tr" }: { children: Reac
                   ref={menuButtonRef}
                   type="button"
                   className={`mobile-toggle ${menuOpen ? "open" : ""}`}
-                  aria-label={menuOpen ? messages.nav.close : messages.nav.open}
+                  aria-label={menuOpen ? closeLabel : openLabel}
                   aria-expanded={menuOpen}
                   aria-controls="mobile-drawer-menu"
                   onClick={() => setMenuOpen((open) => !open)}
@@ -311,6 +330,9 @@ export default function ClientPage({ children, locale = "tr" }: { children: Reac
               aria-hidden={!menuOpen}
             >
               <ul className="mobile-links">
+                {navigation ? navigation.items.map((item) => (
+                  <li key={item.href}><Link href={item.href} className={`mobile-link ${pathname === item.href ? "active" : ""}`} aria-current={pathname === item.href ? "page" : undefined} onClick={() => setMenuOpen(false)}>{item.label}</Link></li>
+                )) : <>
                 <li>
                   <Link
                     href={messages.homeHref}
@@ -338,14 +360,14 @@ export default function ClientPage({ children, locale = "tr" }: { children: Reac
                     {locale === "en" ? "MENU" : "MENÜ"}
                   </Link>
                 </li>
-                {locale === "tr" && (
+                {(locale === "tr" || locale === "en") && (
                   <li>
                     <Link
-                      href="/taksim-kafe"
+                      href={locale === "en" ? "/en/coffee-taksim" : "/taksim-kafe"}
                       className={`mobile-link ${pathname === "/taksim-kafe" ? "active" : ""}`}
                       onClick={() => setMenuOpen(false)}
                     >
-                      KAHVE
+                      {locale === "en" ? "COFFEE" : "KAHVE"}
                     </Link>
                   </li>
                 )}
@@ -385,8 +407,12 @@ export default function ClientPage({ children, locale = "tr" }: { children: Reac
                     {locale === "en" ? "LOCATION" : "KONUM"}
                   </Link>
                 </li>
+                </>}
               </ul>
               <div className="mobile-drawer-actions">
+                {navigation ? <nav aria-label={navigation.languageLabel} className="mobile-drawer-intl-list">
+                  {navigation.languages.map((item) => <Link key={item.href} href={item.href} hrefLang={item.language} lang={item.language} aria-current={pathname === item.href ? "page" : undefined} onClick={() => setMenuOpen(false)}>{item.label}</Link>)}
+                </nav> : <>
                 <Link
                   className="mobile-drawer-lang-btn"
                   href={alternateHref}
@@ -415,7 +441,8 @@ export default function ClientPage({ children, locale = "tr" }: { children: Reac
                   <Link href="/ar/blog/turkish-breakfast-istanbul" hrefLang="ar" onClick={() => setMenuOpen(false)}>دليل تركي</Link>
                   <Link href="/ko" hrefLang="ko" onClick={() => setMenuOpen(false)}>한국어 안내</Link>
                   <Link href="/ja/blog/istanbul-bal-kaymak" hrefLang="ja" onClick={() => setMenuOpen(false)}>日本語ガイド</Link>
-                </div>
+                </div>                </>}
+
               </div>
             </div>
           </nav>
@@ -424,7 +451,7 @@ export default function ClientPage({ children, locale = "tr" }: { children: Reac
         <button
           type="button"
           className={`mobile-drawer-backdrop ${menuOpen ? "open" : ""}`}
-          aria-label={messages.nav.close}
+          aria-label={closeLabel}
           tabIndex={-1}
           onClick={() => setMenuOpen(false)}
         />

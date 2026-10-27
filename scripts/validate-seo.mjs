@@ -86,16 +86,28 @@ const newRoutes = [
   { path: "/es/blog/bal-kaymak-estambul", canonical: spanishHoneyKaymakBlogUrl, language: "es", signals: ["bal kaymak", "Taksim", "leche de vaca"], hreflang: honeyKaymakHreflang, citations: 2 },
 ];
 
+const coffeeLanguages = {
+  tr: `${canonicalSiteUrl}/taksim-kafe`,
+  en: `${canonicalSiteUrl}/en/coffee-taksim`,
+  ru: `${canonicalSiteUrl}/ru/coffee-taksim`,
+  ar: `${canonicalSiteUrl}/ar/coffee-taksim`,
+  ko: `${canonicalSiteUrl}/ko/coffee-taksim`,
+  "zh-CN": `${canonicalSiteUrl}/zh-cn/coffee-taksim`,
+  "x-default": `${canonicalSiteUrl}/taksim-kafe`,
+};
+const coffeeRoutes = [
+  { path: "/taksim-kafe", language: "tr", visibleSignals: ["kahve", "beyoğlu", "taksim", "zambak"] },
+  { path: "/en/coffee-taksim", language: "en", visibleSignals: ["coffee", "taksim", "english menu", "zambak"] },
+  { path: "/ru/coffee-taksim", language: "ru", visibleSignals: ["кофе", "таксим", "английском", "zambak"] },
+  { path: "/ar/coffee-taksim", language: "ar", direction: "rtl", visibleSignals: ["قهوة", "تقسيم", "الإنجليزية", "zambak"] },
+  { path: "/ko/coffee-taksim", language: "ko", visibleSignals: ["커피", "탁심", "영문 메뉴", "zambak"] },
+  { path: "/zh-cn/coffee-taksim", language: "zh-CN", visibleSignals: ["咖啡", "塔克西姆", "英文菜单", "zambak"] },
+].map((route) => ({ ...route, canonical: `${canonicalSiteUrl}${route.path}`, faqCount: 0,
+  types: ["Restaurant", "WebPage", "BreadcrumbList"], restaurantMenu: `${menuPageUrl}#menu`, hreflang: coffeeLanguages,
+}));
+
 const routes = [
-  {
-    path: "/taksim-kafe",
-    canonical: `${canonicalSiteUrl}/taksim-kafe`,
-    language: "tr",
-    faqCount: 0,
-    types: ["Restaurant", "WebPage", "BreadcrumbList"],
-    restaurantMenu: `${menuPageUrl}#menu`,
-    visibleSignals: ["kahve", "beyoğlu", "taksim", "zambak sokak"],
-  },
+  ...coffeeRoutes,
   {
     path: "/",
     canonical: canonicalSiteUrl,
@@ -593,7 +605,16 @@ for (const route of routes) {
     );
   }
 
-  if (!route.sharedGuideDesign && route.language !== "ko") {
+  if (coffeeRoutes.some((coffee) => coffee.path === route.path)) {
+    for (const [language, href] of Object.entries(coffeeLanguages).filter(([language]) => language !== "x-default")) {
+      const localPath = new URL(href).pathname;
+      assert(new RegExp(`<a(?=[^>]*href="${localPath}")(?=[^>]*hrefLang="${language}")[^>]*>`, "i").test(html), `${routeLabel}: eşdeğer ${language} kahve sayfası bağlantısı eksik`);
+    }
+    if (!["tr", "en"].includes(route.language)) {
+      assert(html.includes('href="/en/menu#sicak-kahveler"'), `${routeLabel}: yabancı menü İngilizce karşılığa gitmeli`);
+      assert(!text.includes("Bir kahve, biraz sohbet."), `${routeLabel}: çevrilmemiş Türkçe pazarlama metni kaldı`);
+    }
+  } else if (!route.sharedGuideDesign && route.language !== "ko") {
     for (const [language, href] of Object.entries({
       en: "/en/blog/turkish-breakfast-istanbul",
       ru: "/ru/blog/turetskiy-zavtrak-stambul",

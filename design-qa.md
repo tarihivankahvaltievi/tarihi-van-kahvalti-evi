@@ -140,3 +140,19 @@ The Turkish coffee choice was clicked and reached `/menu#turk-kahvesi` with a re
 No actionable P0/P1/P2 findings remain. Earlier sketch-based QA stays above as historical evidence; this pass intentionally adds the requested weight and coffee navigation.
 
 final result: passed
+
+---
+
+# Coffee localization QA · 2026-10-27
+
+English, Russian, Arabic, Korean and Simplified Chinese now share the Turkish coffee composition with independently adapted visitor copy. Tourist pages explain the Taksim/İstiklal setting and Turkish coffee ordering rather than translating Turkish cultural wordplay literally. All navigation, image descriptions, captions, menu choices and footer copy are localized. Menu links explicitly disclose the existing English menu where appropriate.
+
+Evidence: `tmp/coffee-qa/localized/{en,ru,ar,ko,zh-cn}-mobile.png` at 393 × 852 viewport; `ar-desktop.png`, `ru-desktop.png` and `en-desktop-hero.png` at 1280 × 900 viewport. Full mobile captures were visually inspected for all five languages. Arabic uses an RTL layout and Noto Naskh Arabic; Russian uses Cyrillic-capable typography; Korean and Chinese use appropriate script fonts and wrapping. Desktop Arabic and Russian openings retain the cup/heading hierarchy without collisions. The English homepage navigation remains on one line at 1280px after adding its coffee link. No horizontal overflow was found on the five mobile pages or the Arabic desktop page.
+
+The mobile drawer was opened in English and its Arabic link selected; the target loaded in Arabic and the drawer closed. All five visible language links were followed and their document language/direction checked. Arabic opening hours now isolate the time range in an explicit LTR bdi element so 07:00–22:00 retains chronological order. Address remains LTR for map/address consistency.
+
+Each of the six coffee URLs has a self-canonical, reciprocal language alternates, localized metadata and WebPage language, crawlable static HTML and a sitemap entry. Production build and targeted ESLint pass. Production site suite passes: 36 Googlebot-readable canonical pages, 294 internal section links, 100 sitemap images, 48 legacy redirects, hreflang/schema validation, security headers and cross-origin protection.
+
+Existing imagery, burgundy/cream palette, frames and reduced-motion handling are preserved. Native-language human editorial review was not part of this implementation. No new business claims or prices were introduced.
+
+final result: passed
