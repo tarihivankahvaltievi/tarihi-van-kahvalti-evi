@@ -4,6 +4,8 @@ export const adsId = process.env.NEXT_PUBLIC_GOOGLE_ADS_ID ?? "AW-17869229892";
 export const analyticsOrigin = "https://www.tarihivankahvaltievi.com";
 
 const publicPaths = new Set([
+  "/taksim-kafe", "/en/coffee-taksim", "/ru/coffee-taksim",
+  "/ar/coffee-taksim", "/ko/coffee-taksim", "/zh-cn/coffee-taksim",
   "/", "/en", "/ko", "/zh-cn", "/es", "/menu", "/en/menu",
   "/rezervasyon", "/en/rezervasyon", "/konum", "/hikayemiz",
   "/van-kahvaltisi", "/van-kahvaltisi-nedir", "/gizlilik", "/cerez-politikasi",
@@ -40,7 +42,7 @@ export function safeReferrer(value: string): string {
 export const campaignVocabulary = {
   utm_source: ["google", "google_maps", "gbp", "instagram", "facebook", "tripadvisor", "wanderlog", "restaurantguru", "yandex", "bing", "chatgpt", "perplexity", "hotel", "partner"],
   utm_medium: ["organic", "referral", "social", "cpc", "email"],
-  utm_campaign: ["gbp", "google_business_profile", "local_profiles", "instagram_bio", "seo_geo_2026", "breakfast", "taksim_breakfast", "hotel_referral"],
+  utm_campaign: ["gbp", "google_business_profile", "local_profiles", "instagram_bio", "seo_geo_2026", "breakfast", "taksim_breakfast", "hotel_referral", "taksim_coffee", "turkish_coffee"],
   utm_content: ["website", "menu", "reservation", "bio", "post"],
 } as const;
 

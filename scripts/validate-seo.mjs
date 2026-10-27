@@ -606,6 +606,10 @@ for (const route of routes) {
   }
 
   if (coffeeRoutes.some((coffee) => coffee.path === route.path)) {
+    assert(visibleHtml(html).includes('id="coffee-visit-title"'), `${routeLabel}: taranabilir ziyaret bilgisi eksik`);
+    assert((visibleHtml(html).match(/<dt>/g) ?? []).length === 4, `${routeLabel}: dört ziyaret sorusu HTML'de bulunmalı`);
+    assert(text.includes("07:00") && text.includes("22:00") && text.includes("34421"), `${routeLabel}: saat ve tam adres eksik`);
+
     for (const [language, href] of Object.entries(coffeeLanguages).filter(([language]) => language !== "x-default")) {
       const localPath = new URL(href).pathname;
       assert(new RegExp(`<a(?=[^>]*href="${localPath}")(?=[^>]*hrefLang="${language}")[^>]*>`, "i").test(html), `${routeLabel}: eşdeğer ${language} kahve sayfası bağlantısı eksik`);
@@ -1044,6 +1048,7 @@ assert(llmsResponse.headers.get("x-robots-tag")?.includes("noindex"), "llms.txt:
 assert(llms.includes("# Tarihi Van Kahvaltı Evi"), "llms.txt: işletme adı eksik");
 assert(llms.includes(menuPageUrl), "llms.txt: canlı menü kaynağı eksik");
 assert(llms.includes(reservationPageUrl), "llms.txt: rezervasyon kaynağı eksik");
+for (const url of Object.values(coffeeLanguages)) assert(llms.includes(url), `llms.txt: kahve kaynağı eksik (${url})`);
 assert(llms.includes("Citation guidance"), "llms.txt: alıntı yönlendirmesi eksik");
 for (const url of [russianBreakfastBlogUrl, arabicBreakfastBlogUrl, japaneseHoneyKaymakBlogUrl, koreanKaymakExplainerUrl, koreanTurkishBreakfastBlogUrl, koreanTourGuideBreakfastBlogUrl]) {
   assert(llms.includes(url), `llms.txt: dil rehberi eksik (${url})`);

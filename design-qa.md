@@ -156,3 +156,19 @@ Each of the six coffee URLs has a self-canonical, reciprocal language alternates
 Existing imagery, burgundy/cream palette, frames and reduced-motion handling are preserved. Native-language human editorial review was not part of this implementation. No new business claims or prices were introduced.
 
 final result: passed
+
+---
+
+# Coffee SEO / GEO implementation QA · 2026-10-27
+
+This pass adds an in-world visitor-information section rather than changing the coffee composition. Four server-rendered questions per language cover location, actual menu choices, opening hours and the live price source. A definition list remains visible without JavaScript; no hidden SEO copy or cafe FAQ rich-result claim was introduced. Hours come from the same source as the Restaurant schema. The existing English-menu disclosure is retained for international visitors.
+
+Evidence: `tmp/coffee-qa/seo-2026-10-27/` includes English/Arabic/Russian/Korean/Chinese focused mobile captures (393 × 852) and `tr-desktop.png` (1280 × 900). The new text was visually inspected in all six languages. Arabic retains RTL layout and isolated LTR hours/address. Long Russian questions wrap; Korean and Chinese body copy remains readable. No horizontal document overflow at 393px on all six pages, 320px on Turkish, or 1280px on Turkish. The new Turkish visit-section menu link was clicked and reached `/menu#sicak-kahveler` with the real target present.
+
+Measurement regression found and fixed: all six coffee routes were missing from the public analytics allowlist. Added exact public paths, controlled coffee campaign names and section labels. Directions/contact interactions now preserve the page locale. Existing PII filtering, private-route exclusions and distinction between contact clicks and saved bookings are preserved. Analytics regression tests exercise menu/directions actions on each coffee route and verify no purchase or saved-lead event is fabricated.
+
+Validation: production build, targeted ESLint, analytics suite and production site suite pass. Site checks verify 36 readable canonical pages, 300 internal section links, 100 sitemap images, reciprocal hreflang and schemas. Four visitor questions and complete address/hours are explicitly checked in each coffee page's HTML. The Impeccable detector returned no findings. IndexNow inventory dry-run contains all six coffee URLs; no live submission was made.
+
+Live HTTP audit at `docs/seo/coffee-2026-10-27/canli-denetim.json` confirms all six production coffee URLs still return 404; production sitemap lacks them. Local tests do not establish live deployment or Google indexing. Research and implementation plan is in the same folder. GBP, Ads and Search Console accounts were not modified, and no advertising spend occurred.
+
+final result: local implementation passed; deployment remains blocked by repository write access

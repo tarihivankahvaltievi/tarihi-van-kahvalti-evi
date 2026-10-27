@@ -6,7 +6,7 @@ import { coffeeCopy, coffeeGuidePaths, coffeePaths, type CoffeeLocale } from "./
 export function CoffeeFooter({ locale }: { locale: CoffeeLocale }) {
   const c = coffeeCopy[locale];
   const menu = locale === "tr" ? "/menu" : "/en/menu";
-  return <footer id="hamour-footer" className={styles.footer}>
+  return <footer data-analytics-surface="coffee_footer" id="hamour-footer" className={styles.footer}>
     <div className={styles.container}>
       <div className={styles.footerVector}><Link href={coffeePaths[locale]} aria-label="Tarihi Van Kahvaltı Evi"><Image src="/images/brand-emblem-colored.png" alt="" width={75} height={51} className={styles.vectorImg} /></Link></div>
       <div className={styles.footerLogo}><Link href={coffeePaths[locale]} className={styles.brandTitleLink}><bdi className={styles.brandName}>TARİHİ VAN KAHVALTI EVİ</bdi></Link></div>

@@ -24,6 +24,11 @@ assert.equal(policy.safePageLocation(window.location.href), 'https://www.tarihiv
 for (const suffix of ['/admin', '/admin?name=PRIVATE', '/rezervasyon/takvim/SECRET', '/en/rezervasyon/takvim/SECRET', '/api/reservations', '/unknown']) {
   assert.equal(policy.safePageLocation(`https://www.tarihivankahvaltievi.com${suffix}`), null);
 }
+const coffeePaths = ['/taksim-kafe', '/en/coffee-taksim', '/ru/coffee-taksim', '/ar/coffee-taksim', '/ko/coffee-taksim', '/zh-cn/coffee-taksim'];
+for (const path of coffeePaths) {
+  assert.equal(policy.safePageLocation(`${policy.analyticsOrigin}${path}?email=PRIVATE#PRIVATE`), `${policy.analyticsOrigin}${path}`);
+  assert.equal(policy.measurementPageLocation(`${policy.analyticsOrigin}${path}?utm_source=google&utm_medium=cpc&utm_campaign=taksim_coffee&gclid=Coffee_click&email=PRIVATE`), `${policy.analyticsOrigin}${path}?gclid=Coffee_click&utm_source=google&utm_medium=cpc&utm_campaign=taksim_coffee`);
+}
 assert.equal(policy.safePageLocation('http://www.tarihivankahvaltievi.com/'), null);
 assert.equal(policy.safePageLocation('https://preview.example.com/'), null);
 assert.equal(policy.safePageLocation('http://127.0.0.1:3100/'), null);
@@ -129,7 +134,7 @@ const navigationAnalytics = loadModule('src/app/analytics.ts', { ...context, doc
 });
 navigationAnalytics.AnalyticsAutoTracker();
 function clickLink(href, dataset = {}) {
-  const link = { dataset, getAttribute() { return href; }, closest() { return { getAttribute() { return 'ja'; } }; } };
+  const link = { dataset, getAttribute() { return href; }, closest(selector) { return selector === '[lang]' ? { getAttribute() { return 'ja'; } } : { dataset }; } };
   clickHandler({ target: { closest() { return link; } } });
 }
 // Provide the browser origin used by the actual click handler.
@@ -145,6 +150,21 @@ assert.equal(events()[1][2].item_id, 'serpme-fix-menu');
 assert.equal(events().filter(e => ['generate_lead', 'conversion'].includes(e[1])).length, 0);
 navigationAnalytics.trackEvent('menu_item_view', { item_id: 'bal-kaymak', surface: 'menu_details', name: 'PRIVATE', phone: 'PRIVATE' });
 assert.ok(!JSON.stringify(events()).includes('PRIVATE'));
+
+// Coffee pages must measure meaningful actions, without claiming a purchase.
+for (const path of coffeePaths) {
+  window.location = new URL(`${policy.analyticsOrigin}${path}?email=PRIVATE`);
+  window.dataLayer = [];
+  clickLink('/en/menu#sicak-kahveler', { analyticsSurface: 'coffee_hero' });
+  clickLink('https://www.google.com/maps?cid=10380797280962926014', { analyticsSurface: 'coffee_venue' });
+  const coffeeEvents = events();
+  assert.equal(coffeeEvents.filter(e => e[1] === 'menu_click').length, 1);
+  assert.equal(coffeeEvents.find(e => e[1] === 'contact_click')[2].surface, 'coffee_venue');
+  assert.equal(coffeeEvents.find(e => e[1] === 'contact_click')[2].locale, 'ja');
+  assert.equal(coffeeEvents.filter(e => e[1] === 'conversion').length, 1);
+  assert.equal(coffeeEvents.filter(e => ['purchase', 'generate_lead'].includes(e[1])).length, 0);
+  assert.ok(!JSON.stringify(coffeeEvents).includes('PRIVATE'));
+}
 
 // Deployment settings can intentionally disable either destination. A queued
 // event must never fall back to another property or a malformed Ads label.

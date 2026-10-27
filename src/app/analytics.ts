@@ -159,7 +159,7 @@ export function AnalyticsAutoTracker() {
       if (!target) return;
 
       const href = target.getAttribute("href") || "";
-      const surface = target.dataset.analyticsSurface;
+      const surface = target.closest<HTMLElement>("[data-analytics-surface]")?.dataset.analyticsSurface;
       const locale = target.closest("[lang]")?.getAttribute("lang") || document.documentElement.lang || "tr";
       // Internal navigation is a funnel step, never a saved reservation lead.
       let destination: URL | undefined;
@@ -177,11 +177,11 @@ export function AnalyticsAutoTracker() {
         // Reading reviews is a trust interaction, not a directions conversion.
         trackEvent("review_source_click", { surface: surface || "review_link" });
       } else if (href.startsWith("tel:")) {
-        trackEvent("contact_click", { contact_method: "phone", surface: surface || "tel_link" });
+        trackEvent("contact_click", { locale, contact_method: "phone", surface: surface || "tel_link" });
       } else if (href.includes("google.com/maps") || href.includes("maps.google.com") || href.includes("goo.gl/maps")) {
-        trackEvent("contact_click", { contact_method: "directions", surface: surface || "map_link" });
+        trackEvent("contact_click", { locale, contact_method: "directions", surface: surface || "map_link" });
       } else if (href.includes("wa.me") || href.includes("whatsapp.com")) {
-        trackEvent("contact_click", { contact_method: "whatsapp", surface: surface || "whatsapp_link" });
+        trackEvent("contact_click", { locale, contact_method: "whatsapp", surface: surface || "whatsapp_link" });
       }
     };
 

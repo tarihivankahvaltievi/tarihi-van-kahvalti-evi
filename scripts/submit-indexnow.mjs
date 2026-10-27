@@ -8,6 +8,7 @@ const key = "4f9d1a7c8b6e3f205d72a941ce8b604a";
 const keyLocation = `${siteUrl}/${key}.txt`;
 const defaultUrls = [
   siteUrl,
+  ...["/taksim-kafe", "/en/coffee-taksim", "/ru/coffee-taksim", "/ar/coffee-taksim", "/ko/coffee-taksim", "/zh-cn/coffee-taksim"].map((path) => `${siteUrl}${path}`),
   `${siteUrl}/menu`,
   `${siteUrl}/rezervasyon`,
   `${siteUrl}/van-kahvaltisi`,
