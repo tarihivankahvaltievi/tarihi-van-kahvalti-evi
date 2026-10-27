@@ -606,6 +606,10 @@ for (const route of routes) {
   }
 
   if (coffeeRoutes.some((coffee) => coffee.path === route.path)) {
+    const coffeeRestaurant = JSON.parse(html.match(/<script\s+type="application\/ld\+json">([\s\S]*?)<\/script>/i)[1])["@graph"].find((node) => node["@type"] === "Restaurant");
+    const workSignal = ({ tr: "Wi‑Fi", en: "Wi-Fi", ru: "Wi-Fi", ar: "واي فاي", ko: "와이파이", "zh-CN": "Wi-Fi" })[route.language];
+    assert(text.includes(workSignal), `${routeLabel}: teyit edilmiş çalışma bilgisi görünür olmalı`);
+    assert(coffeeRestaurant.amenityFeature?.length === 3 && coffeeRestaurant.amenityFeature.every((feature) => feature.value === true), `${routeLabel}: teyit edilmiş çalışma olanakları eksik`);
     const menuList = JSON.parse(html.match(/<script\s+type="application\/ld\+json">([\s\S]*?)<\/script>/i)[1])["@graph"].find((node) => node["@type"] === "ItemList");
     assert(menuList?.itemListElement?.length === 6, `${routeLabel}: görünür kahve fiyat envanteri eksik`);
     for (const entry of menuList.itemListElement) {
@@ -616,7 +620,7 @@ for (const route of routes) {
       assert(item.offers?.priceCurrency === "TRY" && visibleText(row).includes(`₺${item.offers.price}`), `${routeLabel}: kahve fiyatı şemayla eşleşmeli (${id})`);
     }
     assert(visibleHtml(html).includes('id="coffee-visit-title"'), `${routeLabel}: taranabilir ziyaret bilgisi eksik`);
-    assert((visibleHtml(html).match(/<dt>/g) ?? []).length === 4, `${routeLabel}: dört ziyaret sorusu HTML'de bulunmalı`);
+    assert((visibleHtml(html).match(/<dt>/g) ?? []).length === 5, `${routeLabel}: beş ziyaret sorusu HTML'de bulunmalı`);
     assert(text.includes("07:00") && text.includes("22:00") && text.includes("34421"), `${routeLabel}: saat ve tam adres eksik`);
 
     for (const [language, href] of Object.entries(coffeeLanguages).filter(([language]) => language !== "x-default")) {

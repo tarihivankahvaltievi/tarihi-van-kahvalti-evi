@@ -122,7 +122,7 @@ export async function LocalizedCoffeePage({ locale }: { locale: CoffeeLocale }) 
     ],
     languages: coffeeLocales.map((other) => ({ href: coffeePaths[other], label: coffeeLanguageNames[other], language: coffeeLanguageTags[other] })),
   };
-  const schema = { "@context": "https://schema.org", "@graph": [buildRestaurantJsonLd(false),
+  const schema = { "@context": "https://schema.org", "@graph": [{ ...buildRestaurantJsonLd(false), amenityFeature: ["Wi-Fi", "Power outlets", "Laptop work areas"].map((name) => ({ "@type": "LocationFeatureSpecification", name, value: true })) },
     { "@type": "WebPage", "@id": `${url}#webpage`, url, name: c.title, description: c.description, inLanguage: coffeeLanguageTags[locale], isPartOf: { "@id": `${siteUrl}/#website` }, about: { "@id": `${siteUrl}/#restaurant` }, mainEntity: { "@id": `${siteUrl}/#restaurant` },
       primaryImageOfPage: { "@type": "ImageObject", url: absoluteUrl("/images/coffee/coffee-og.jpg"), width: 1200, height: 630, caption: c.images.guests },
       ...(items.length ? { mentions: { "@id": `${url}#coffee-menu` } } : {}),

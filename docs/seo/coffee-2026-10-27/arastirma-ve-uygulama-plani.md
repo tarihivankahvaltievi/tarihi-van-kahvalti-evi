@@ -146,7 +146,7 @@ GEO kontrolü için haftalık aynı 12 soruluk küçük set kullanılabilir: alt
 
 ## 10. İşletmeden netleşmesi gereken bilgiler
 
-Kahvaltı siparişi olmadan yalnız kahve için oturulabiliyor mu? Minimum sipariş veya servis koşulu var mı? Wi‑Fi, priz ve laptop uygulaması nedir? Gerçek çekirdek/tedarikçi/demleme bilgisi nedir? Servis saatleri tüm kahveler için aynı mı? Bunlar teyit edilince ilgili niyetler hedeflenebilir; şimdilik sitede vaat edilmedi.
+27 Ekim işletme sahibi teyidi: Kahvaltı siparişi olmadan kahve için de gelinebilir; Wi‑Fi, priz ve çalışma alanları vardır. Bu bilgiler altı dilde kahve ziyaret bölümüne ve ilgili işletme verisine eklendi. Ücretsiz veya sınırsız kullanım koşulu belirtilmedi; böyle bir vaat eklenmedi. Çekirdek/tedarikçi/demleme bilgisi, tüm kahvelerin servis saatleri ve varsa masa kullanım koşulları hâlâ ayrıca netleştirilebilir.
 
 ## Bu turda yapılanlar
 

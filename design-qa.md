@@ -190,3 +190,5 @@ Validation: production build and targeted ESLint pass. All coffee pages remain s
 No performance score, live indexing, rich-result appearance or conversion lift is claimed. Research sources, decisions and limits are recorded in `docs/seo/coffee-2026-10-27/ikinci-teknik-arastirma.md`.
 
 final result: local implementation passed
+
+Owner confirmation follow-up · 2026-10-27: The owner confirms Wi-Fi, outlets and laptop work areas, and permits coffee visits without breakfast. Added the facts to all six native visit sections and matching Restaurant amenities; removed the previous uncertainty from llms.txt and updated research notes. No free-use or unlimited-duration policy is inferred. Production build and 36-page site checks pass, including visible native work text and three true amenity features on each coffee page. Turkish 393px mobile evidence: `tmp/coffee-qa/prices-2026-10-27/workspace-confirmed.png`; no overflow.

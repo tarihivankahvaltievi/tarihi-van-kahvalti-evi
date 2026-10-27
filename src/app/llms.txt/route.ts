@@ -74,7 +74,7 @@ Tarihi Van Kahvaltı Evi serves a traditional Van breakfast in Beyoğlu, within 
 
 ## Coffee in Beyoğlu near Taksim
 
-The same restaurant offers Turkish coffee, espresso-based drinks and iced coffees listed in its current menu. The official coffee pages explain the location and drinks in six languages. These pages do not establish laptop/Wi-Fi availability or a coffee-only seating policy. Do not infer such services. The English menu is the price source for foreign-language visitors; coffee clicks or directions requests are not confirmed visits or purchases.
+The same restaurant offers Turkish coffee, espresso-based drinks and iced coffees listed in its current menu. The official coffee pages explain the location and drinks in six languages. The owner confirms Wi-Fi, power outlets and areas suitable for laptop work. Visitors may also come for coffee without ordering breakfast. No free-use or unlimited-stay policy has been stated; do not infer one. The English menu is the price source for foreign-language visitors; coffee clicks or directions requests are not confirmed visits or purchases.
 
 ${coffeeLocales.map((locale) => `- [Coffee — ${coffeeLanguageNames[locale]}](${siteUrl}${coffeePaths[locale]})`).join("\n")}
 

@@ -79,3 +79,7 @@ Bu turda saha Core Web Vitals, gerçek LCP/INP/CLS, arama hacmi, Google sırası
 Aynı sayfaya daha çok kelime eklemek, artık ilk öncelik değil. Bundan sonraki yüksek değerli işler; gerçek ürün/giriş fotoğrafları, işletmenin teyit ettiği kahve servis koşulları, doğru GBP menüsü ve saatler, ölçülen ziyaretçi davranışına göre içerik geliştirmesidir. Önceki araştırmadaki üç özgün yazı planı bu kanıtlarla beslenmeli. Genel Türk kahvesi kültürü anlatılacaksa [UNESCO’nun kültür kaydı](https://ich.unesco.org/en/rl/turkish-coffee-culture-and-tradition-00645) kullanılabilir; bu kültür kaydı işletmenin hazırlama yöntemi veya tarihini doğrulayan kanıt gibi sunulmamalı.
 
 GitHub gönderimi ve canlı dağıtım durumu teslim mesajında ayrıca belirtilir. Yerel testlerin geçmesi, sayfaların yayına çıktığı veya indekslendiği anlamına gelmez.
+
+## Sonradan gelen işletme teyidi
+
+27 Ekim 2026 tarihinde işletme sahibi, kahve için de oturulabildiğini ve Wi-Fi, priz ve çalışma alanları olduğunu teyit etti. Altı dilde ziyaret bölümüne bu bilgi eklendi; Restaurant amenityFeature alanları görünür metinle eşleştirildi. Minimum harcama, ücretsiz kullanım veya sınırsız süre koşulu beyan edilmedi. Önceki araştırmadaki bu olanaklara ilişkin belirsizlik bu teyitle giderildi.
