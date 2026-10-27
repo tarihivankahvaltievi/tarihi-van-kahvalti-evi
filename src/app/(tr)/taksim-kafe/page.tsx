@@ -29,6 +29,10 @@ function CoffeeContent() {
       <div className={styles.heroCopy}>
         <h1 id="coffee-heading">Tarihi atmosferde<br /><span>kahve keyfi.</span></h1>
         <p>Taksim’in kalbinde, Tarihi Van’da.</p>
+        <div className={styles.heroActions}>
+          <Link href="/menu#sicak-kahveler" className={styles.heroMenu}>Kahve menüsü <ArrowUpRight size={18} /></Link>
+          <a href={mapsUrl} target="_blank" rel="noopener noreferrer" className={styles.heroDirections}>Bize uğrayın <ArrowUpRight size={17} /></a>
+        </div>
         <a href="#kahve-hikayesi" className={styles.discover} aria-label="Kahve sayfasını keşfedin"><ArrowDown size={21} strokeWidth={1.3} /></a>
       </div>
     </section>
@@ -57,6 +61,18 @@ function CoffeeContent() {
           <figcaption>Fincanlarda biriken sohbet.</figcaption>
         </figure>
       </div>
+    </section>
+
+    <section className={styles.coffeeBar} aria-labelledby="coffee-bar-title">
+      <div className={styles.coffeeBarHead}>
+        <h2 id="coffee-bar-title">Kahvenizi<br /><span>nasıl alırsınız?</span></h2>
+        <p>Kimi zaman alıştığınız tat.<br />Kimi zaman yeni bir fincan.</p>
+      </div>
+      <nav aria-label="Kahve çeşitlerini keşfedin" className={styles.coffeeChoices}>
+        <Link href="/menu#turk-kahvesi"><span className={styles.choiceName}>Türk kahvesi</span><span className={styles.choiceDescription}>Sade, orta ya da şekerli.<br />Kendine has bir ritüel.</span><span className={styles.choiceAction}>Menüde keşfet <ArrowUpRight size={18} /></span></Link>
+        <Link href="/menu#sicak-kahveler"><span className={styles.choiceName}>Espresso & süt</span><span className={styles.choiceDescription}>Latte, cappuccino, flat white.<br />Fincanınızı seçin.</span><span className={styles.choiceAction}>Sıcak kahveler <ArrowUpRight size={18} /></span></Link>
+        <Link href="/menu#soguk-kahveler"><span className={styles.choiceName}>Buz gibi</span><span className={styles.choiceDescription}>Ice latte, americano, cold brew.<br />Günün serin molası.</span><span className={styles.choiceAction}>Soğuk kahveler <ArrowUpRight size={18} /></span></Link>
+      </nav>
     </section>
 
     <section className={styles.venue} aria-labelledby="coffee-venue-title">

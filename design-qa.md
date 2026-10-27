@@ -110,3 +110,33 @@ The photographed sketch contains perspective, annotations and no exact CSS viewp
 None blocking. Sketch-based comparison is structural, not a pixel-for-pixel reproduction of the photographed paper. The existing shared footer is intentionally preserved.
 
 final result: passed
+
+---
+
+# Coffee refinement QA
+
+## Target and evidence
+
+The user requested a stronger, fuller refinement of the existing approved structure. The structural reference is the preceding implementation capture `tmp/coffee-qa/mobile-final.png` (393 × 2513, 1×), compared together with `tmp/coffee-qa/mobile-refined.png` (393 × 3468, 1×) in the same visual input. The original Downloads sketch is no longer available at its former path; this pass uses the existing implementation as the layout baseline rather than claiming a new pixel match to that photographed sketch.
+
+Latest evidence: `tmp/coffee-qa/hero-refined.png` (1280 × 900 focused opening), `tmp/coffee-qa/desktop-refined.png` (1280px full page) and `tmp/coffee-qa/mobile-refined.png` (393px full page). Additional 320px viewport checks show document width exactly 320px, no overflowing page and no broken images. Full-page images have different heights because the user asked for more content; no height-normalized typography comparison was assumed.
+
+## Intentional improvements
+
+- Enlarged cup from 405px to 510px on desktop and 290px to 335px on mobile; redistributed beans to support the larger object. Static, restrained drop shadow adds product depth.
+- Hero heading uses existing brand NOCTADO for the first line and the already loaded Bodoni Moda at weight 600 for the coffee emphasis. No new font download or palette introduced.
+- Added useful menu and directions actions to the opening.
+- Larger framed photographs now retain their deliberate angles on the inner image containers; the outer AOS scroll transform no longer overwrites the rotation. Their shadow is applied to the transparent frame asset, not to a rectangular card.
+- Reduced architecture opacity so the real photographs lead.
+- Added a burgundy coffee selection section linking directly to Turkish coffee, hot coffees and cold coffees in the existing menu. This is the deliberate new content requested in this iteration; the centered hero, crest, paired photographs, real venue photo and shared footer remain.
+- Consolidated the CSS cascade and media-query overrides, and increased responsive image sizing for the larger cup.
+
+## Fidelity and functional checks
+
+Typography, spacing, palette, image quality and content were checked in the full mobile/desktop captures and the focused hero view. No headline/image collisions, clipped text or placeholder artwork remain. Existing brand assets and restaurant photography are reused. New coffee copy describes items already in the menu and makes no new sourcing or seating claims.
+
+The Turkish coffee choice was clicked and reached `/menu#turk-kahvesi` with a real matching target. The existing production regression suite verifies all new menu section links, 31 canonical pages and 100 sitemap images. Targeted ESLint and production build pass. Production browser error log is empty. Reduced-motion gates remain in CSS and Motion; this pass does not claim OS-preference emulation.
+
+No actionable P0/P1/P2 findings remain. Earlier sketch-based QA stays above as historical evidence; this pass intentionally adds the requested weight and coffee navigation.
+
+final result: passed
