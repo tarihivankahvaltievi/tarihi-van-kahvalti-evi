@@ -435,17 +435,13 @@
   align-items: start;
   gap: clamp(42px, 7.8vw, 110px);
   padding: clamp(72px, 8vw, 108px) max(32px, calc((100% - 1120px)/2));
-  background: #eee2d0;
+  background: #f8eedf;
   color: #492724;
   overflow: hidden;
 }
 
 .coffeeBar::before {
-  content: '';
-  position: absolute;
-  inset: 0 0 auto;
-  height: 1px;
-  background: #49272426;
+  content: none;
 }
 
 .coffeeBarHead {
@@ -453,8 +449,6 @@
   flex-direction: column;
   align-items: start;
   gap: 22px;
-  border-inline-start: 1px solid #7c292959;
-  padding-inline-start: 24px;
   max-width: 380px;
 }
 
@@ -485,7 +479,7 @@
 .coffeeChoices {
   display: grid;
   min-width: 0;
-  border-bottom: 1px solid #49272430;
+  border-bottom: 1px solid #49272424;
 }
 
 .coffeeChoices > a {
@@ -495,7 +489,7 @@
   gap: 18px;
   min-height: 128px;
   padding: 15px 4px;
-  border-top: 1px solid #49272430;
+  border-top: 1px solid #49272424;
   transition: background-color 220ms ease;
 }
 
@@ -774,14 +768,16 @@
 }
   .coffeeBar {
   display: block;
-  padding: 54px 24px 54px;
+  padding: 37px 24px 54px;
 }
   .coffeeBarHead {
   display: flex;
-  max-width: 340px;
-  gap: 13px;
+  align-items: center;
+  max-width: 100%;
+  gap: 12px;
   margin-bottom: 29px;
-  padding-inline-start: 17px;
+  padding: 0;
+  text-align: center;
 }
   .coffeeBarHead h2 {
   font-size: 37px;
