@@ -37,6 +37,16 @@ export const englishFaqItems = [
     answer:
       "Call +90 541 525 2868 or send a WhatsApp message. Your table is confirmed only after the restaurant replies.",
   },
+  {
+    question: "Can I visit just for coffee without ordering breakfast?",
+    answer:
+      "Yes. You can visit Tarihi Van Kahvaltı Evi just for a coffee break. Our English menu lists current Turkish coffee, espresso-based drinks and iced coffees with prices in Turkish lira (TRY).",
+  },
+  {
+    question: "Is there Wi-Fi, power and space to work with a laptop?",
+    answer:
+      "Yes. Our restaurant at Zambak Street No:8 in Beyoğlu has Wi-Fi, power outlets and areas suitable for laptop work. Ask our team about available tables and conditions for your visit.",
+  },
 ] as const;
 
 export const homeMessages = {

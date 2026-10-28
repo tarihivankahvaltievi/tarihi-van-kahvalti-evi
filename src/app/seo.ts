@@ -1,3 +1,5 @@
+import { siteLanguages } from "./site-languages.ts";
+
 export const siteUrl = "https://www.tarihivankahvaltievi.com";
 export const siteName = "Tarihi Van Kahvaltı Evi";
 export const alternateName = "Tarihi Van Kahvaltı Evi 1978";
@@ -55,6 +57,11 @@ export const address = {
 };
 
 export const displayAddress = `${address.streetAddress}, ${address.neighborhood}, ${address.locality}, ${address.region} ${address.postalCode}`;
+
+// Avoid prescribing an unverified station exit or street sequence. The Maps
+// business record supplies a walking route from the visitor's actual location.
+export const taksimWalkingDirections =
+  "M2 Taksim istasyonundan veya Taksim Meydanı'ndan Zambak Sokak No:8 adresine yürüyerek ulaşabilirsiniz. Çıkışınıza ve başlangıç noktanıza uygun güncel yaya rotasını Google Haritalar bağlantısından kontrol edin.";
 
 export const coordinates = {
   latitude: 41.0367655,
@@ -138,8 +145,7 @@ export const faqItems = [
   },
   {
     question: "Taksim metrodan nasıl gidilir?",
-    answer:
-      "M2 Taksim durağından Sıraselviler yönüne çıkıp Zambak Sokak'a yürüyerek kısa sürede ulaşabilirsiniz. İlk kez gelecek misafirler Google Haritalar bağlantısından rota alabilir.",
+    answer: taksimWalkingDirections,
   },
   {
     question: "Serpme Van kahvaltısı en az kaç kişilik servis edilir?",
@@ -155,6 +161,16 @@ export const faqItems = [
     question: "Kafka Cafe nedir?",
     answer:
       "Kafka Cafe, Tarihi Van Kahvaltı Evi içinde yer alan kahve köşesidir; Türk kahvesi ve nitelikli kahve seçenekleri sunar.",
+  },
+  {
+    question: "Kahvaltı yapmadan sadece kahve içmeye gelebilir miyim?",
+    answer:
+      "Evet. Tarihi Van Kahvaltı Evi'ne kahvaltı sipariş etmeden kahve molası için de gelebilirsiniz. Türk kahvesi, espresso bazlı ve soğuk kahvelerin güncel çeşitleri ve Türk lirası cinsinden fiyatları menümüzde yer alır.",
+  },
+  {
+    question: "Wi-Fi, priz ve laptopla çalışma alanı var mı?",
+    answer:
+      "Evet. Beyoğlu Zambak Sokak No:8'deki mekânımızda Wi-Fi, priz ve laptopla çalışmaya uygun alanlar bulunur. Ziyaretinizde masa uygunluğunu ve kullanım koşullarını ekibimizden öğrenebilirsiniz.",
   },
 ] as const;
 
@@ -255,7 +271,7 @@ export function buildWebsiteJsonLd(withContext = true) {
     name: siteName,
     alternateName,
     url: siteUrl,
-    inLanguage: "tr-TR",
+    inLanguage: Object.values(siteLanguages).map(({ lang }) => lang),
     publisher: { "@id": `${siteUrl}/#restaurant` },
   };
   return withContext ? { "@context": "https://schema.org", ...data } : data;

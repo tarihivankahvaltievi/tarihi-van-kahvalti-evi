@@ -1,6 +1,21 @@
 import Link from "next/link";
-import { displayAddress, displayPhone, email, siteName, telUrl } from "../seo";
+import type { Metadata } from "next";
+import { defaultOgImage, displayAddress, displayPhone, email, siteName, telUrl } from "../seo";
 import styles from "./legal-page.module.css";
+
+export function legalPageMetadata(title: string, description: string, url: string): Metadata {
+  const fullTitle = `${title} | ${siteName}`;
+  return {
+    title: { absolute: fullTitle },
+    description,
+    alternates: { canonical: url },
+    openGraph: {
+      title: fullTitle, description, url, siteName, locale: "tr_TR", type: "website",
+      images: [{ url: defaultOgImage, width: 1200, height: 630, alt: siteName }],
+    },
+    twitter: { card: "summary_large_image", title: fullTitle, description, images: [defaultOgImage] },
+  };
+}
 
 export function LegalPageShell({
   eyebrow,

@@ -41,6 +41,8 @@ async function verifyMenu(route, expected, locale, schemaPrices = {}) {
   const scripts = [...html.matchAll(/<script\s+type="application\/ld\+json">([\s\S]*?)<\/script>/gi)];
   const graph = JSON.parse(scripts[0][1])["@graph"];
   const sections = graph.find((entry) => entry["@type"] === "Menu").hasMenuSection;
+  const restaurantId = "https://www.tarihivankahvaltievi.com/#restaurant";
+  assert.equal(graph.find((entry) => entry["@type"] === "Menu").provider["@id"], restaurantId);
   assert.equal(sections.length, expected.categories.length);
   const schemaItems = sections.flatMap((section) => section.hasMenuItem);
   const escapedText = (value) => value.replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll('"', "&quot;").replaceAll("'", "&#x27;");
@@ -58,6 +60,7 @@ async function verifyMenu(route, expected, locale, schemaPrices = {}) {
     if (expectedPrice === undefined) assert.equal(schemaItem.offers, undefined, `${route}: ambiguous prices must not create an offer`);
     else {
       assert.equal(schemaItem.offers.priceCurrency, "TRY");
+      assert.equal(schemaItem.offers.seller["@id"], restaurantId);
       const details = locale === "en" ? item.translations?.en?.details ?? item.details : item.details;
       for (const detail of details) assert.ok(schemaItem.offers.description.includes(detail), `${route}: missing serving detail for ${item.id}`);
     }
@@ -253,7 +256,15 @@ try {
     for (const item of expected.items) {
       assert.ok(text.includes(item.description), `llms.txt: missing product description ${item.id}`);
       for (const detail of item.details ?? []) assert.ok(text.includes(detail), `llms.txt: missing serving detail ${item.id}`);
+      for (const menu of ["/menu", "/en/menu"]) {
+        assert.ok(text.includes(`https://www.tarihivankahvaltievi.com${menu}#${item.id}`), `llms.txt: missing citation source ${menu}#${item.id}`);
+      }
+      const line = text.split("\n").find((entry) => entry.startsWith(`- ${item.name}`));
+      if (item.priceNote) assert.ok(line.includes(`(${item.priceNote})`), `llms.txt: missing serving unit ${item.id}`);
+      if (item.id === "serpme-fix-menu") assert.ok(line.includes("Order conditions: Minimum 2 people."), "llms.txt: shared breakfast minimum order must stay with its price");
     }
+    if (!expected.items.some((item) => item.id === "cold-brew")) assert.ok(!text.includes("/menu#cold-brew"), "llms.txt: removed item still offered as a citation");
+    assert.ok(text.includes('"kişi başı"'), "llms.txt: per-person pricing explanation missing");
     assert.ok(!text.includes("kete is not listed"), "Availability must come from live data");
   }
   async function save(data) {

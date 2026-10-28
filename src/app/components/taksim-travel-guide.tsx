@@ -17,6 +17,7 @@ export type TravelGuide = {
   image: string;
   imageAlt: string;
   date: string;
+  modifiedDate?: string;
   author: string;
   sections: { id: string; title: string; paragraphs: string[]; points?: { title: string; text: string }[] }[];
   faqTitle: string;
@@ -48,7 +49,7 @@ export function travelGuideMetadata(guide: TravelGuide): Metadata {
     openGraph: {
       type: "article", title: guide.title, description: guide.description, url,
       siteName, locale: ({ "ko-KR": "ko_KR", "zh-CN": "zh_CN", "en-GB": "en_GB", es: "es_ES" } as const)[guide.language],
-      publishedTime: guide.date, modifiedTime: guide.date,
+      publishedTime: guide.date, modifiedTime: guide.modifiedDate ?? guide.date,
       images: [{ url: absoluteUrl(guide.image), alt: guide.imageAlt }],
     },
     twitter: { card: "summary_large_image", title: guide.title, description: guide.description, images: [absoluteUrl(guide.image)] },
@@ -66,7 +67,7 @@ export function TaksimTravelGuide({ guide }: { guide: TravelGuide }) {
         "@type": "BlogPosting", "@id": `${url}#article`, headline: guide.title,
         description: guide.description, inLanguage: guide.language, url,
         mainEntityOfPage: { "@id": `${url}#webpage` },
-        datePublished: guide.date, dateModified: guide.date,
+        datePublished: guide.date, dateModified: guide.modifiedDate ?? guide.date,
         author: { "@type": "Organization", name: siteName, url: siteUrl },
         publisher: { "@type": "Organization", name: siteName, url: siteUrl },
         image: absoluteUrl(guide.image),
@@ -103,7 +104,7 @@ export function TaksimTravelGuide({ guide }: { guide: TravelGuide }) {
             <p className={styles.kicker}>{guide.kicker}</p>
             <h1>{guide.heading}</h1>
             <p className={styles.lead}>{guide.lead}</p>
-            <p className={styles.byline}>{guide.author} · <time dateTime={guide.date}>{guide.date.slice(0, 10)}</time></p>
+            <p className={styles.byline}>{guide.author} · <time dateTime={guide.modifiedDate ?? guide.date}>{(guide.modifiedDate ?? guide.date).slice(0, 10)}</time></p>
           </div>
           <figure><Image src={guide.image} alt={guide.imageAlt} fill priority sizes="(max-width: 800px) 100vw, 50vw" /><figcaption>{guide.imageAlt}</figcaption></figure>
         </header>

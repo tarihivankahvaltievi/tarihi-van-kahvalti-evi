@@ -1,13 +1,12 @@
-import type { Metadata } from "next";
 import Link from "next/link";
-import { LegalPageShell } from "../../components/legal-page-shell";
+import { LegalPageShell, legalPageMetadata } from "../../components/legal-page-shell";
 import { cookiePolicyUrl } from "../../seo";
 
-export const metadata: Metadata = {
-  title: "Çerez Politikası",
-  description: "Tarihi Van Kahvaltı Evi web sitesinin çerez ve yerel depolama açıklaması.",
-  alternates: { canonical: cookiePolicyUrl },
-};
+export const metadata = legalPageMetadata(
+  "Çerez Politikası",
+  "Tarihi Van Kahvaltı Evi web sitesinin çerez ve yerel depolama açıklaması.",
+  cookiePolicyUrl,
+);
 
 export default function CookiePolicyPage() {
   return (

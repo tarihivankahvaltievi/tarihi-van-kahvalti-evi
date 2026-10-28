@@ -1,4 +1,4 @@
-import { absoluteUrl, menuUrl, siteName } from "../seo";
+import { absoluteUrl, menuUrl, siteName, siteUrl } from "../seo";
 import type { MenuCategory, MenuItem } from "./menu-data";
 import type { MenuLocale } from "./menu-localization";
 import { menuSchemaPrice } from "./menu-price";
@@ -22,6 +22,7 @@ export function buildMenuSchema({ categories, items, originalItems, locale, url,
     description,
     url,
     inLanguage: locale === "en" ? "en" : "tr-TR",
+    provider: { "@id": `${siteUrl}/#restaurant` },
     ...(locale === "en" ? { isBasedOn: { "@id": `${menuUrl}#menu` } } : {}),
     hasMenuSection: categories.map((category) => ({
       "@type": "MenuSection",
@@ -41,6 +42,7 @@ export function buildMenuSchema({ categories, items, originalItems, locale, url,
             "@type": "Offer",
             price,
             priceCurrency: "TRY",
+            seller: { "@id": `${siteUrl}/#restaurant` },
             description: [item.priceNote, getMenuOrderNote(item.id, locale), ...item.details].filter(Boolean).join(" ") || undefined,
             url: `${url}#${item.id}`,
           } : undefined,

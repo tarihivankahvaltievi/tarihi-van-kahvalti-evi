@@ -1,5 +1,6 @@
 import { coffeeLocales, coffeePaths, coffeeLanguageNames } from "../coffee/coffee-localization";
 import { getPublicMenuData } from "../menu/public-menu-data";
+import { getMenuOrderNote } from "../menu/menu-rules";
 import {
   breakfastCultureUrl,
   breakfastGuideUrl,
@@ -48,7 +49,7 @@ export async function GET() {
   const menu = await getPublicMenuData();
   const plainText = (value: string) => value.replace(/[\r\n\t]+/g, " ").replace(/[\[\]<>`]/g, "").trim();
   const menuSnapshot = menu.items.map((item) =>
-    `- ${plainText(item.name)}${item.translations?.en?.name ? ` / ${plainText(item.translations.en.name)}` : ""}: ${plainText(item.price)}${item.priceNote ? ` (${plainText(item.priceNote)})` : ""}. ${plainText(item.description)}${item.details?.length ? ` Details: ${item.details.map(plainText).join("; ")}` : ""}`,
+    `- ${plainText(item.name)}${item.translations?.en?.name ? ` / ${plainText(item.translations.en.name)}` : ""}: ${plainText(item.price)}${item.priceNote ? ` (${plainText(item.priceNote)})` : ""}. ${plainText(item.description)}${item.details?.length ? ` Details: ${item.details.map(plainText).join("; ")}` : ""}${getMenuOrderNote(item.id, "en") ? ` Order conditions: ${getMenuOrderNote(item.id, "en")}` : ""} Sources: ${menuUrl}#${encodeURIComponent(item.id)} | ${englishMenuUrl}#${encodeURIComponent(item.id)}`,
   ).join("\n");
   const body = `# ${siteName}
 
@@ -81,6 +82,8 @@ ${coffeeLocales.map((locale) => `- [Coffee — ${coffeeLanguageNames[locale]}]($
 ## Current menu snapshot
 
 Menu update label: ${plainText(menu.lastUpdated)}. Prices are in Turkish lira (TRY); retain any per-person or serving notes. This snapshot is generated from the same menu data as the public Turkish and English menu pages. Listed dishes are not a guarantee of stock or dietary suitability. Always cite ${menuUrl} or ${englishMenuUrl} and recheck before a visit.
+
+If an item is marked "kişi başı", its listed price is per person, not the total for a two-person table. Keep each item's serving notes and order conditions with its price; use the item's source links for citations.
 
 ${menuSnapshot}
 

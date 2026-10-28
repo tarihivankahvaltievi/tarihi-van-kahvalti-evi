@@ -15,6 +15,7 @@ import {
   openingHours,
   siteName,
   siteUrl,
+  taksimWalkingDirections,
   telUrl,
   yandexMapsUrl,
 } from "../../seo";
@@ -37,8 +38,7 @@ const locationFaqItems = [
   },
   {
     question: "Taksim Metro'dan Tarihi Van Kahvaltı Evi'ne nasıl gidilir?",
-    answer:
-      "M2 Taksim istasyonundan Sıraselviler yönüne çıkın. Sıraselviler Caddesi üzerinden Zambak Sokak'a ilerleyerek mekâna ulaşabilirsiniz. Güncel yaya rotası için sayfadaki Google Haritalar bağlantısını kullanın.",
+    answer: taksimWalkingDirections,
   },
   {
     question: "Toplu taşımayla ulaşım mümkün mü?",
@@ -193,7 +193,7 @@ export default function LocationPage() {
                 <span className={styles.routeIcon}><TrainFront size={24} aria-hidden="true" /></span>
                 <div>
                   <h3>M2 Taksim Metro&apos;dan</h3>
-                  <p>Sıraselviler yönündeki çıkışı kullanın; Sıraselviler Caddesi üzerinden Zambak Sokak&apos;a ilerleyin.</p>
+                  <p>{taksimWalkingDirections}</p>
                 </div>
                 <span className={styles.routeMode}>Metro + yürüyüş</span>
               </li>
@@ -201,7 +201,7 @@ export default function LocationPage() {
                 <span className={styles.routeIcon}><BusFront size={24} aria-hidden="true" /></span>
                 <div>
                   <h3>Toplu taşımayla</h3>
-                  <p>Taksim çevresindeki otobüs duraklarından Sıraselviler yönüne yürüyerek mekâna ulaşabilirsiniz.</p>
+                  <p>Taksim çevresindeki otobüs duraklarından Zambak Sokak No:8 adresine güncel yaya rotasını harita üzerinden kontrol edin.</p>
                 </div>
                 <span className={styles.routeMode}>Otobüs + yürüyüş</span>
               </li>

@@ -15,14 +15,14 @@ export const koreanTaksimGuide: TravelGuide = {
   kicker: "한국인 여행자의 탁심 아침 동선", heading: "탁심에서 아침 식사: 발 카이막부터 반식 카흐발트까지",
   lead: "탁심에 머문다면 아침 식사를 위해 멀리 이동할 필요가 없습니다. 베요글루 잠박 거리에서 발 카이막을 맛보거나, 허브 치즈와 따뜻한 요리가 함께 나오는 반(Van)식 아침상을 나눠 보세요. 이 가이드는 장소를 찾는 단계부터 주문까지 필요한 정보를 모았습니다.",
   image: "/images/hero-parallax/overhead-feast.webp", imageAlt: "발 카이막, 치즈, 빵과 터키 차가 놓인 반식 아침 식탁",
-  date, author: "Tarihi Van Kahvaltı Evi 편집팀",
+  date, modifiedDate: "2026-10-28", author: "Tarihi Van Kahvaltı Evi 편집팀",
   sections: [
     { id: "where", title: "탁심 근처에서 어디로 가나요?", paragraphs: [
       "Tarihi Van Kahvaltı Evi는 이스탄불 베요글루의 Şehit Muhtar Mahallesi, Zambak Sk. No:8에 있습니다. 탁심 광장과 이스티클랄 거리에서 도보로 접근할 수 있으며, 아래 Google 지도 링크에서 출발 위치에 맞는 실제 경로를 확인할 수 있습니다. 거리와 소요 시간은 출구와 교통 상황에 따라 달라집니다.",
       "아침 일정을 촘촘히 잡았다면 메뉴를 먼저 보고 방문하는 것이 편합니다. 영업시간은 매일 07:00–22:00로 안내하지만 공휴일, 특별 운영 또는 당일 혼잡도는 방문 전에 확인해 주세요."
     ], points: [
-      { title: "탁심 광장에서", text: "M2 탁심역 또는 광장을 기준으로 Sıraselviler 방면을 확인하고 Zambak Sokak 주소로 지도를 따라 걸어오세요." },
-      { title: "이스티클랄 거리에서", text: "거리 남쪽 출입 방향에서 베요글루 골목으로 이동합니다. 길은 출발 지점에 따라 달라지므로 실시간 도보 경로가 가장 정확합니다." },
+      { title: "탁심 광장에서", text: "M2 탁심역이나 탁심 광장에서 Zambak Sokak No:8을 목적지로 설정하고, 출발 지점에 맞는 Google 지도의 도보 경로를 따라오세요." },
+      { title: "이스티클랄 거리에서", text: "이스티클랄 거리에서 Zambak Sokak No:8까지 도보로 이동할 수 있습니다. 출발 지점에 따라 경로가 다르므로 지도에서 현재 위치에 맞는 길을 확인하세요." },
     ] },
     { id: "order", title: "발 카이막 한 접시와 아침상 중 무엇을 주문할까요?", paragraphs: [
       "발(bal)은 꿀, 카이막(kaymak)은 우유에서 얻는 진한 유제품입니다. 달콤한 간식처럼 간단히 맛보고 싶다면 발 카이막 단품을 살펴보세요. 카이막 자체는 대체로 담백하고, 단맛은 곁들인 꿀에서 옵니다. 따뜻한 빵에 카이막을 먼저 올리고 꿀을 조금씩 더하면 맛의 차이를 느끼기 좋습니다.",

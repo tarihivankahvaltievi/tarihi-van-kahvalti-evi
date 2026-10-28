@@ -21,6 +21,7 @@ import {
   openingHours,
   siteName,
   siteUrl,
+  taksimWalkingDirections,
 } from "../../seo";
 
 const guideTitle = "Taksim’de Van Kahvaltısı | Serpme Menü ve Ziyaret Rehberi";
@@ -55,8 +56,7 @@ const guideFaqItems = [
   },
   {
     question: "Taksim Metro'dan Tarihi Van Kahvaltı Evi'ne nasıl gidilir?",
-    answer:
-      "M2 Taksim durağından Sıraselviler yönüne çıkıp Zambak Sokak'a yürüyerek ulaşabilirsiniz. İlk kez gelecek misafirler güncel rota için Google Haritalar bağlantısını kullanabilir.",
+    answer: taksimWalkingDirections,
   },
 ] as const;
 
@@ -309,7 +309,7 @@ export default async function VanBreakfastGuidePage() {
               <div className={styles.visitDetails}>
                 <div className={styles.visitFacts}>
                   <p><Clock3 size={18} aria-hidden="true" /><span><strong>{openingHours.short}</strong>Bu aralık mekânın çalışma saatidir. Erken veya geç kahvaltıda istediğiniz ürünlerin uygunluğunu ekibe sorun; hafta sonu ve gruplarda masa talebinizi önceden iletin.</span></p>
-                  <p><MapPin size={18} aria-hidden="true" /><span><strong>Taksim&apos;den yürüyerek ulaşım</strong>M2 Taksim durağından Sıraselviler yönüne çıkıp Zambak Sokak&apos;a ilerleyin.</span></p>
+                  <p><MapPin size={18} aria-hidden="true" /><span><strong>Taksim&apos;den yürüyerek ulaşım</strong>{taksimWalkingDirections}</span></p>
                 </div>
                 <div className={styles.visitActions}>
                   <Link className={styles.lightAction} href="/menu">Menü ve fiyatlar <ArrowUpRight size={16} aria-hidden="true" /></Link>

@@ -114,7 +114,7 @@ const routes = [
     language: "tr",
     types: ["WebSite", "Restaurant", "WebPage", "FAQPage"],
     restaurantMenu: `${menuPageUrl}#menu`,
-    faqCount: 11,
+    faqCount: 13,
     sharedHomeDesign: true,
     visibleSignals: ["van kahvaltı evi", "beyoğlu", "taksim", "serpme kahvaltı"],
     hreflang: homeHreflang,
@@ -196,7 +196,7 @@ const routes = [
     language: "en",
     types: ["Restaurant", "WebPage", "BreadcrumbList", "FAQPage"],
     restaurantMenu: `${menuPageUrl}#menu`,
-    faqCount: 7,
+    faqCount: 9,
     sharedHomeDesign: true,
     visibleSignals: ["traditional turkish breakfast", "taksim", "van breakfast", "view menu"],
     hreflang: homeHreflang,
@@ -447,6 +447,22 @@ function assertAlternates(html, route) {
   const expected = route.hreflang ?? {};
   assert(JSON.stringify(Object.entries(actual).sort()) === JSON.stringify(Object.entries(expected).sort()), `${route.path}: hreflang kümesi eşdeğer içeriklerle tam eşleşmeli`);
   checkedAlternates.set(route.canonical, actual);
+}
+
+function assertShareMetadata(html, route) {
+  const meta = Object.fromEntries([...html.matchAll(/<meta\b[^>]*>/gi)].map(([tag]) => [
+    tag.match(/(?:name|property)="([^"]+)"/i)?.[1],
+    decodeHtml(tag.match(/content="([^"]*)"/i)?.[1] ?? ""),
+  ]));
+  assert(meta["og:url"] === route.canonical, `${route.path}: Open Graph URL'si sayfanın canonical adresiyle aynı olmalı`);
+  for (const field of ["og:title", "og:description", "og:image", "twitter:title", "twitter:description", "twitter:image"]) {
+    assert(meta[field]?.length > 0, `${route.path}: ${field} eksik`);
+  }
+  if (legalRoutes.some(({ path }) => path === route.path)) {
+    const title = decodeHtml(html.match(/<title>([^<]*)<\/title>/i)?.[1] ?? "");
+    assert(meta["og:title"] === title && meta["twitter:title"] === title, `${route.path}: paylaşım başlığı ana sayfadan miras kalmamalı`);
+    assert(meta["og:description"] === meta.description && meta["twitter:description"] === meta.description, `${route.path}: paylaşım açıklaması bu sayfaya ait olmalı`);
+  }
 }
 
 const visibleText = (html) =>
@@ -708,6 +724,10 @@ for (const route of routes) {
   );
 
   const restaurant = graphDocument["@graph"].find((node) => node["@type"] === "Restaurant");
+  if (route.path === "/") {
+    const website = graphDocument["@graph"].find((node) => node["@type"] === "WebSite");
+    assert(JSON.stringify(website.inLanguage) === JSON.stringify(["tr", "en", "ko", "zh-CN", "es", "ar", "ru", "ja"]), "WebSite: mevcut tüm içerik dilleri tanımlanmalı");
+  }
   assert(restaurant?.["@id"] === `${canonicalSiteUrl}/#restaurant`, `${routeLabel}: restoran kimliği yanlış`);
   assert(restaurant?.alternateName === "Tarihi Van Kahvaltı Evi 1978", `${routeLabel}: işletme aliası yanlış`);
   assert(!restaurant?.paymentAccepted && !restaurant?.currenciesAccepted && !restaurant?.foundingDate, `${routeLabel}: doğrulanmamış ödeme veya hukuki kuruluş bilgisi yayımlanmamalı`);
@@ -734,6 +754,7 @@ for (const route of routes) {
   if (route.types.includes("Menu")) {
     assert(menu?.["@id"] === `${route.canonical}#menu`, `${routeLabel}: menü kimliği yanlış`);
     assert(menu?.url === route.canonical, `${routeLabel}: menü URL'si yanlış`);
+    assert(menu?.provider?.["@id"] === restaurant["@id"], `${routeLabel}: menü işletmeye bağlanmalı`);
     assert(menu?.hasMenuSection?.length === route.menuSectionCount, `${routeLabel}: menü bölümleri eksik`);
     const schemaItems = menu.hasMenuSection.flatMap((section) => section.hasMenuItem);
     const renderedArticles = [...visibleHtml(html).matchAll(/<article\b[^>]*data-menu-item="true"[^>]*>[\s\S]*?<\/article>/gi)].map((match) => match[0]);
@@ -746,7 +767,10 @@ for (const route of routes) {
       assert(article, `${routeLabel}: ${id} yalnız şemada var`);
       assert(visibleText(article).includes(item.description), `${routeLabel}: ${id} görünür açıklaması şemayla eşleşmiyor`);
       assert(visibleText(article).includes(item.name), `${routeLabel}: ${id} görünür adı şemayla eşleşmiyor`);
-      if (item.offers) assert(visibleText(article).includes(`₺${item.offers.price}`), `${routeLabel}: ${id} görünür fiyatı şemayla eşleşmiyor`);
+      if (item.offers) {
+        assert(visibleText(article).includes(`₺${item.offers.price}`), `${routeLabel}: ${id} görünür fiyatı şemayla eşleşmiyor`);
+        assert(item.offers.seller?.["@id"] === restaurant["@id"], `${routeLabel}: ${id} fiyatı aynı işletmeye bağlanmalı`);
+      }
     }
     assert(visibleHtml(html).includes('id="main-content" tabindex="-1"'), `${routeLabel}: menü skip link hedefi odaklanabilir olmalı`);
     assert(text.includes(route.language === "en" ? "Minimum 2 people." : "Minimum 2 kişi için servis edilir."), `${routeLabel}: doğrulanmış minimum sipariş koşulu eksik`);
@@ -886,6 +910,7 @@ for (const url of sitemapUrls) {
   });
   const html = await response.text();
   assert(response.status === 200, `Googlebot: ${route} doğrudan 200 dönmeli`);
+  assertShareMetadata(html, { path: route, canonical: url });
   assert(!response.headers.get("x-robots-tag")?.includes("noindex"), `Googlebot: ${route} HTTP noindex olmamalı`);
   assert(!/<meta\s+name="(?:robots|googlebot)"\s+content="[^"]*noindex/i.test(html), `Googlebot: ${route} meta noindex olmamalı`);
   assert(/<h1(?:\s|>)/i.test(visibleHtml(html)), `Googlebot: ${route} ilk HTML'de h1 içermeli`);
@@ -894,6 +919,15 @@ for (const url of sitemapUrls) {
   assert(/<main\b[^>]*\bid="main-content"/.test(rendered), `Erişilebilirlik: ${route} ana içeriğe geç hedefi eksik`);
   crawledPages.set(route, rendered);
   assert(html.includes(`rel="canonical" href="${url}"`), `Googlebot: ${route} kanonik URL yanlış`);
+  if (["/", "/konum", "/van-kahvaltisi", "/ko/blog/taksim-kahvalti-rehberi"].includes(route)) {
+    assert(!html.includes("Sıraselviler"), `${route}: teyitsiz sokak veya metro çıkışı tarifi yayımlanmamalı`);
+  }
+  if (route === "/ko/blog/taksim-kahvalti-rehberi") {
+    const graph = JSON.parse(html.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/)[1])["@graph"];
+    const article = graph.find((node) => node["@type"] === "BlogPosting");
+    assert(article.datePublished === "2026-09-28T12:00:00+03:00", "Korece rehber: ilk yayın tarihi korunmalı");
+    assert(article.dateModified === "2026-10-28" && /<time\b[^>]*datetime="2026-10-28"/i.test(html), "Korece rehber: görünür ve yapısal güncelleme tarihleri eşleşmeli");
+  }
 }
 
 // Validate fragments too: HTTP 200 alone hides broken section and skip links.

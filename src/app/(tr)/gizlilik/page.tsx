@@ -1,13 +1,12 @@
-import type { Metadata } from "next";
 import Link from "next/link";
-import { LegalPageShell } from "../../components/legal-page-shell";
+import { LegalPageShell, legalPageMetadata } from "../../components/legal-page-shell";
 import { privacyUrl } from "../../seo";
 
-export const metadata: Metadata = {
-  title: "Gizlilik Politikası",
-  description: "Tarihi Van Kahvaltı Evi web sitesi ve iletişim kanalları için gizlilik açıklaması.",
-  alternates: { canonical: privacyUrl },
-};
+export const metadata = legalPageMetadata(
+  "Gizlilik Politikası",
+  "Tarihi Van Kahvaltı Evi web sitesi ve iletişim kanalları için gizlilik açıklaması.",
+  privacyUrl,
+);
 
 export default function PrivacyPage() {
   return (
