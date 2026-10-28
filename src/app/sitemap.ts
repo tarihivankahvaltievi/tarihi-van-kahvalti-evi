@@ -183,7 +183,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   return [
     ...coffeeLocales.map((locale) => ({
       url: absoluteUrl(coffeePaths[locale]),
-      lastModified: Date.parse(liveMenuLastModified) > Date.parse("2026-10-27") ? liveMenuLastModified : "2026-10-27",
+      lastModified: Date.parse(liveMenuLastModified) > Date.parse("2026-10-28") ? liveMenuLastModified : "2026-10-28",
       changeFrequency: "monthly" as const,
       priority: 0.8,
       images: uniqueImages(["/images/coffee/coffee-og.jpg", "/images/coffee/floating-cup.webp", "/images/coffee-moment.webp"]),

@@ -115,6 +115,14 @@ async function verifyCoffeePages(expected, specialPrices = {}) {
       if (price === undefined) assert.equal(schemaItem.offers, undefined, `${route}: range became exact offer`);
       else assert.equal(schemaItem.offers.priceCurrency, 'TRY');
     }
+    const drinksAnswer = plain.match(/<dt>(?:Hangi kahveler var\?|Which coffees are on the menu\?|Какой кофе есть в меню\?|ما أنواع القهوة المتوفرة في القائمة؟|어떤 커피를 주문할 수 있나요\?|菜单上有哪些咖啡？)<\/dt>\s*<dd><p>([\s\S]*?)<\/p>/)?.[1];
+    assert.ok(drinksAnswer, `${route}: current coffee answer missing`);
+    for (const { item } of list.itemListElement) assert.ok(drinksAnswer.includes(item.name), `${route}: coffee answer and menu disagree`);
+    if (!expected.items.some(item => item.id === 'cold-brew')) {
+      for (const removedName of ['cold brew', 'cold-brew', 'колд брю', 'كولد برو', '콜드 브루', '冷萃']) {
+        assert.ok(!drinksAnswer.toLowerCase().includes(removedName), `${route}: removed coffee still recommended`);
+      }
+    }
     if (!expected.items.some(item => item.id === 'cold-brew')) assert.ok(!plain.includes('data-coffee-item="cold-brew"'), `${route}: deleted item still displayed`);
   }
 }

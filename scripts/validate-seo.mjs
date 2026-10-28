@@ -537,8 +537,9 @@ for (const route of routes) {
     html.match(/<meta\s+name="description"\s+content="([^"]*)"/i)?.[1] ?? "",
   );
   assert(title.length >= (["ko", "ja"].includes(route.language) ? 25 : 35) && title.length <= 70, `${routeLabel}: title uzunluğu ${title.length}`);
+  // Editorial guardrails, not Google limits. CJK needs fewer characters to convey the same facts.
   assert(
-    description.length >= (["ko", "ja"].includes(route.language) ? 60 : 100) && description.length <= 170,
+    description.length >= (["ko", "ja", "zh-CN"].includes(route.language) ? 60 : 100) && description.length <= 170,
     `${routeLabel}: description uzunluğu ${description.length}`,
   );
   assert((visibleHtml(html).match(/<h1\b/gi) ?? []).length === 1, `${routeLabel}: tam bir H1 bulunmalı`);
@@ -625,6 +626,8 @@ for (const route of routes) {
     const coffeeRestaurant = JSON.parse(html.match(/<script\s+type="application\/ld\+json">([\s\S]*?)<\/script>/i)[1])["@graph"].find((node) => node["@type"] === "Restaurant");
     const workSignal = ({ tr: "Wi‑Fi", en: "Wi-Fi", ru: "Wi-Fi", ar: "واي فاي", ko: "와이파이", "zh-CN": "Wi-Fi" })[route.language];
     assert(text.includes(workSignal), `${routeLabel}: teyit edilmiş çalışma bilgisi görünür olmalı`);
+    const description = html.match(/<meta\b[^>]*name="description"[^>]*content="([^"]*)"/i)?.[1] ?? "";
+    assert(description.includes(workSignal.replace("‑", "-")), `${routeLabel}: yerel kahve/çalışma niyeti açıklaması eksik`);
     assert(coffeeRestaurant.amenityFeature?.length === 3 && coffeeRestaurant.amenityFeature.every((feature) => feature.value === true), `${routeLabel}: teyit edilmiş çalışma olanakları eksik`);
     const menuList = JSON.parse(html.match(/<script\s+type="application\/ld\+json">([\s\S]*?)<\/script>/i)[1])["@graph"].find((node) => node["@type"] === "ItemList");
     assert(menuList?.itemListElement?.length === 6, `${routeLabel}: görünür kahve fiyat envanteri eksik`);

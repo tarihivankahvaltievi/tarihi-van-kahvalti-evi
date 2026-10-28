@@ -111,7 +111,7 @@ function CoffeeContent({ locale, items }: { locale: CoffeeLocale; items: Feature
         <a href={mapsUrl} target="_blank" rel="noopener noreferrer" data-analytics-surface="coffee_venue" className={styles.directions}>{c.directions} <ArrowUpRight size={18} /></a>
       </div>
     </section>
-    <CoffeeVisit locale={locale} />
+    <CoffeeVisit locale={locale} items={items} />
   </main>;
 }
 
