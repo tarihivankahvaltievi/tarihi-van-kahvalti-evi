@@ -72,7 +72,7 @@ function CoffeeContent({ locale, items }: { locale: CoffeeLocale; items: Feature
     <section id="kahve-hikayesi" className={styles.story} aria-labelledby="coffee-story-title">
       <div className={styles.engraving} aria-hidden="true" />
       <div className={styles.storyIntro}>
-        <Image src="/images/brand-emblem-colored.png" alt="" width={85} height={58} className={styles.emblem} data-aos="fade-up" />
+        <div className={styles.storySeam} aria-hidden="true"><Image src="/images/brand-emblem-colored.png" alt="" width={85} height={58} className={styles.emblem} /></div>
         <h2 id="coffee-story-title" data-aos="fade-left">{c.story[0]}<br /><span>{c.story[1]}</span></h2>
         <p data-aos="fade-up">{c.storyText}</p>
         <Link href={`${menu}#sicak-kahveler`} hrefLang={locale === "tr" ? "tr" : "en"} data-analytics-surface="coffee_story" data-aos="fade-up" className={styles.menuLink}>{c.menu} <ArrowUpRight size={17} /></Link>
@@ -98,16 +98,13 @@ function CoffeeContent({ locale, items }: { locale: CoffeeLocale; items: Feature
 
     <section className={styles.coffeeBar} aria-labelledby="coffee-bar-title">
       <header className={styles.coffeeBarHead} data-aos="fade-up">
-        <span className={styles.coffeeBarIndex} aria-hidden="true">1978&nbsp; · &nbsp;BEYOĞLU</span>
         <h2 id="coffee-bar-title">{c.bar[0]}<br /><span>{c.bar[1]}</span></h2>
         <p>{c.barText[0]}<br />{c.barText[1]}</p>
       </header>
       <nav aria-label={c.nav.coffee} className={styles.coffeeChoices}>
         {c.choices.map(([name, first, second, action], index) => <Link key={choiceTargets[index]} href={`${menu}#${choiceTargets[index]}`} hrefLang={locale === "tr" ? "tr" : "en"} data-analytics-surface="coffee_selection" data-aos="fade-up">
-          <span className={styles.choiceIndex} aria-hidden="true">0{index + 1}</span>
-          <span className={styles.choiceImage} aria-hidden="true"><Image src={choiceImages[index]} alt="" fill sizes="(max-width: 600px) 74px, 112px" /></span>
-          <span className={styles.choiceCopy}><span className={styles.choiceName}>{name}</span><span className={styles.choiceDescription}>{first}<br />{second}</span></span>
-          <span className={styles.choiceAction}><span>{action}</span><ArrowUpRight size={18} aria-hidden="true" /></span>
+          <span className={styles.choiceImage} aria-hidden="true"><Image src={choiceImages[index]} alt="" fill sizes="(max-width: 600px) 52vw, 350px" /></span>
+          <span className={styles.choiceCopy}><span className={styles.choiceName}>{name}</span><span className={styles.choiceDescription}>{first}<br />{second}</span><span className={styles.choiceAction}><span>{action}</span><ArrowUpRight size={18} aria-hidden="true" /></span></span>
         </Link>)}
       </nav>
     </section>
