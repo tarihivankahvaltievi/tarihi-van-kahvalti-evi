@@ -49,6 +49,11 @@ function CoffeeContent({ locale, items }: { locale: CoffeeLocale; items: Feature
   const c = coffeeCopy[locale];
   const menu = locale === "tr" ? "/menu" : "/en/menu";
   const choiceTargets = ["turk-kahvesi", "sicak-kahveler", "soguk-kahveler"];
+  const choiceImages = [
+    "/images/menu-products/turk-kahvesi.webp",
+    "/images/menu-products/latte.webp",
+    "/images/menu-products/ice-latte.webp",
+  ];
   return <main data-analytics-surface="coffee_page" id="main-content" className={`${styles.page} ${coffeeDisplay.variable}`} lang={coffeeLanguageTags[locale]} dir={locale === "ar" ? "rtl" : "ltr"} data-locale={locale} tabIndex={-1}>
     <LanguageLinks locale={locale} />
     <section className={styles.hero} aria-labelledby="coffee-heading">
@@ -67,11 +72,11 @@ function CoffeeContent({ locale, items }: { locale: CoffeeLocale; items: Feature
     <section id="kahve-hikayesi" className={styles.story} aria-labelledby="coffee-story-title">
       <div className={styles.engraving} aria-hidden="true" />
       <div className={styles.storyIntro}>
-        <Image src="/images/brand-emblem-colored.png" alt="" width={85} height={58} className={styles.emblem} />
-        <h2 id="coffee-story-title">{c.story[0]}<br /><span>{c.story[1]}</span></h2>
-        <p>{c.storyText}</p>
-        <Link href={`${menu}#sicak-kahveler`} hrefLang={locale === "tr" ? "tr" : "en"} data-analytics-surface="coffee_story" className={styles.menuLink}>{c.menu} <ArrowUpRight size={17} /></Link>
-        <p className={styles.menuNote}>{c.menuNote}</p>
+        <Image src="/images/brand-emblem-colored.png" alt="" width={85} height={58} className={styles.emblem} data-aos="fade-up" />
+        <h2 id="coffee-story-title" data-aos="fade-left">{c.story[0]}<br /><span>{c.story[1]}</span></h2>
+        <p data-aos="fade-up">{c.storyText}</p>
+        <Link href={`${menu}#sicak-kahveler`} hrefLang={locale === "tr" ? "tr" : "en"} data-analytics-surface="coffee_story" data-aos="fade-up" className={styles.menuLink}>{c.menu} <ArrowUpRight size={17} /></Link>
+        <p className={styles.menuNote} data-aos="fade-up">{c.menuNote}</p>
       </div>
       <div className={styles.frames}>
         <figure className={styles.frameLeft} data-aos="fade-right">
@@ -92,12 +97,18 @@ function CoffeeContent({ locale, items }: { locale: CoffeeLocale; items: Feature
     </section>
 
     <section className={styles.coffeeBar} aria-labelledby="coffee-bar-title">
-      <div className={styles.coffeeBarHead}>
+      <header className={styles.coffeeBarHead} data-aos="fade-up">
+        <span className={styles.coffeeBarIndex} aria-hidden="true">1978&nbsp; · &nbsp;BEYOĞLU</span>
         <h2 id="coffee-bar-title">{c.bar[0]}<br /><span>{c.bar[1]}</span></h2>
         <p>{c.barText[0]}<br />{c.barText[1]}</p>
-      </div>
+      </header>
       <nav aria-label={c.nav.coffee} className={styles.coffeeChoices}>
-        {c.choices.map(([name, first, second, action], index) => <Link key={choiceTargets[index]} href={`${menu}#${choiceTargets[index]}`} hrefLang={locale === "tr" ? "tr" : "en"} data-analytics-surface="coffee_selection"><span className={styles.choiceName}>{name}</span><span className={styles.choiceDescription}>{first}<br />{second}</span><span className={styles.choiceAction}>{action} <ArrowUpRight size={18} /></span></Link>)}
+        {c.choices.map(([name, first, second, action], index) => <Link key={choiceTargets[index]} href={`${menu}#${choiceTargets[index]}`} hrefLang={locale === "tr" ? "tr" : "en"} data-analytics-surface="coffee_selection" data-aos="fade-up">
+          <span className={styles.choiceIndex} aria-hidden="true">0{index + 1}</span>
+          <span className={styles.choiceImage} aria-hidden="true"><Image src={choiceImages[index]} alt="" fill sizes="(max-width: 600px) 74px, 112px" /></span>
+          <span className={styles.choiceCopy}><span className={styles.choiceName}>{name}</span><span className={styles.choiceDescription}>{first}<br />{second}</span></span>
+          <span className={styles.choiceAction}><span>{action}</span><ArrowUpRight size={18} aria-hidden="true" /></span>
+        </Link>)}
       </nav>
     </section>
 
