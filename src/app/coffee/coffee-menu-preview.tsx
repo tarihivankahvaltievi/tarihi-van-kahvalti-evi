@@ -15,7 +15,7 @@ export function CoffeeMenuPreview({ items, locale }: { items: FeaturedCoffee[]; 
     <div className={styles.menuPreviewHeading}><h2 id="coffee-price-title">{c.title}</h2><p>{c.note}</p></div>
     <ul className={styles.menuPreviewItems}>
       {items.map((item) => <li key={item.id} data-coffee-item={item.id}><Link href={item.href} hrefLang={locale === "tr" ? "tr" : "en"}>
-        <span>{item.name}{item.priceNote && <small lang="tr">{item.priceNote}</small>}</span><i className={styles.menuLeader} aria-hidden="true" /><bdi dir="ltr">{item.price}</bdi>
+        <span>{item.name}{item.priceNote && <small lang="tr">{item.priceNote}</small>}</span><bdi dir="ltr">{item.price}</bdi>
       </Link></li>)}
     </ul>
     <Link className={styles.menuPreviewLink} href={`${menu}#sicak-kahveler`} hrefLang={locale === "tr" ? "tr" : "en"}>{c.all} <ArrowUpRight size={17} aria-hidden="true" /></Link>
