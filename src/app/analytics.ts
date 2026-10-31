@@ -178,9 +178,14 @@ export function AnalyticsAutoTracker() {
         trackEvent("review_source_click", { surface: surface || "review_link" });
       } else if (href.startsWith("tel:")) {
         trackEvent("contact_click", { locale, contact_method: "phone", surface: surface || "tel_link" });
-      } else if (href.includes("google.com/maps") || href.includes("maps.google.com") || href.includes("goo.gl/maps")) {
+      } else if (destination && /^https?:$/.test(destination.protocol) && (
+        (["www.google.com", "google.com", "goo.gl"].includes(destination.hostname) && /^\/maps(?:\/|$)/.test(destination.pathname)) ||
+        ["maps.google.com", "maps.app.goo.gl"].includes(destination.hostname) ||
+        (["yandex.com.tr", "yandex.com", "yandex.ru"].includes(destination.hostname) && /^\/maps(?:\/|$)/.test(destination.pathname))
+      )) {
         trackEvent("contact_click", { locale, contact_method: "directions", surface: surface || "map_link" });
-      } else if (href.includes("wa.me") || href.includes("whatsapp.com")) {
+      } else if (destination && /^https?:$/.test(destination.protocol) &&
+        ["wa.me", "api.whatsapp.com", "web.whatsapp.com", "www.whatsapp.com", "whatsapp.com"].includes(destination.hostname)) {
         trackEvent("contact_click", { locale, contact_method: "whatsapp", surface: surface || "whatsapp_link" });
       }
     };

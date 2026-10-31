@@ -166,6 +166,29 @@ for (const path of coffeePaths) {
   assert.ok(!JSON.stringify(coffeeEvents).includes('PRIVATE'));
 }
 
+// Measure the actual Yandex directions links and supported Google short links.
+// A provider name in an unrelated URL must not create a contact conversion.
+window.location = new URL(`${policy.analyticsOrigin}/konum`);
+window.dataLayer = [];
+for (const href of [
+  'https://yandex.com.tr/maps/org/tarihi_van_kahvalti_evi/237523878781/',
+  'https://maps.app.goo.gl/example',
+  'https://goo.gl/maps/example',
+  'https://maps.google.com/?q=Taksim',
+  'https://api.whatsapp.com/send?phone=905415252868',
+]) clickLink(href);
+assert.equal(events().filter(e => e[1] === 'conversion').length, 5);
+assert.equal(events().filter(e => e[1] === 'contact_click' && e[2].contact_method === 'directions').length, 4);
+const beforeUnrelatedLinks = events().length;
+for (const href of [
+  'https://example.com/?next=https://www.google.com/maps',
+  'https://google.com/maps-preview',
+  'https://maps.google.com.example.org/',
+  'https://example.com/wa.me',
+  'https://whatsapp.com.example.org/',
+]) clickLink(href);
+assert.equal(events().length, beforeUnrelatedLinks);
+
 // Deployment settings can intentionally disable either destination. A queued
 // event must never fall back to another property or a malformed Ads label.
 for (const settings of [
