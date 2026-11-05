@@ -1,4 +1,5 @@
 import type { MenuItem } from "./menu-data";
+import { menuSchemaPrice } from "./menu-price";
 import type { MenuLocale } from "./menu-localization";
 
 export type OrderingQuestion = { question: string; answer: string };
@@ -10,12 +11,27 @@ export function getOrderingQuestions(locale: MenuLocale, items: MenuItem[]): Ord
   const serving = [serpme, plate].filter((item): item is MenuItem => Boolean(item))
     .map((item) => `${item.name}: ${item.details.join("; ")}.`).join(" ");
 
+  const price = serpme ? menuSchemaPrice(serpme.price) : undefined;
+  const twoPersonTotal = price === undefined ? undefined : new Intl.NumberFormat(isEn ? "en-GB" : "tr-TR", {
+    style: "currency", currency: "TRY", maximumFractionDigits: 2,
+  }).format(Math.round(Number(price) * 100) * 2 / 100);
+  const plates = items.filter((item) => ["van-golu-tabagi", "pisi-tabagi", "yumurtali-ekmek-tabagi"].includes(item.id));
+
   return [
+    {
+      question: isEn ? "How much is a shared breakfast for two in Taksim?" : "Taksim’de iki kişilik serpme kahvaltı ne kadar?",
+      answer: serpme && twoPersonTotal !== undefined
+        ? (isEn
+          ? `${serpme.name} is ${serpme.price} per person. For two people, the breakfast subtotal is ${twoPersonTotal}. The minimum order is two people. Additional dishes and drinks are separate; confirm any service or cover charge before ordering.`
+          : `${serpme.name} kişi başı ${serpme.price}. İki kişi için kahvaltı ara toplamı ${twoPersonTotal}. En az iki kişilik sipariş verilir. Ek ürün ve içecekler ayrıdır; varsa servis veya kuver ücretini sipariş öncesinde teyit edin.`)
+        : (isEn ? "Check the current menu or contact the restaurant for the shared breakfast price and availability. A two-person total cannot be calculated from the current price record."
+          : "Serpme kahvaltının fiyatı ve uygunluğu için güncel menüyü kontrol edin veya işletmeye ulaşın. Mevcut fiyat kaydından iki kişilik tutar hesaplanamıyor."),
+    },
     {
       question: isEn ? "Can I choose breakfast for one person?" : "Tek kişi için kahvaltı seçebilir miyim?",
       answer: isEn
-        ? "The minimum of two people applies to Serpme Fix Menu. For an individual serving, compare the per-person Van Gölü Plate, Pişi Plate, Egg Bread Plate and à la carte dishes. Party size in a table request is separate from the minimum order for a dish."
-        : "Minimum iki kişi kuralı Serpme Fix Menü içindir. Bireysel seçim için kişi başı sunulan Van Gölü Tabağı, Pişi Tabağı, Yumurtalı Ekmek Tabağı ve ayrı sipariş edilen ürünleri karşılaştırabilirsiniz. Masa talebindeki kişi sayısı, bir ürünün minimum sipariş koşulundan ayrıdır.",
+        ? `The minimum of two people applies to Serpme Fix Menu. ${plates.length ? `Individual choices currently listed: ${plates.map((item) => `${item.name} (${item.price})`).join(", ")}.` : "Check the menu or ask the team for available individual dishes."} Party size in a table request is separate from the minimum order for a dish.`
+        : `Minimum iki kişi kuralı Serpme Fix Menü içindir. ${plates.length ? `Menüdeki bireysel seçenekler: ${plates.map((item) => `${item.name} (${item.price})`).join(", ")}.` : "Mevcut bireysel seçenekler için menüyü inceleyin veya ekibe danışın."} Masa talebindeki kişi sayısı, bir ürünün minimum sipariş koşulundan ayrıdır.`,
     },
     {
       question: isEn ? "Which drinks and hot options are included?" : "Hangi içecekler ve sıcak seçenekler dahil?",

@@ -7,7 +7,7 @@ const publicPaths = new Set([
   "/taksim-kafe", "/en/coffee-taksim", "/ru/coffee-taksim",
   "/ar/coffee-taksim", "/ko/coffee-taksim", "/zh-cn/coffee-taksim",
   "/", "/en", "/ko", "/zh-cn", "/es", "/menu", "/en/menu",
-  "/rezervasyon", "/en/rezervasyon", "/konum", "/hikayemiz",
+  "/rezervasyon", "/en/rezervasyon", "/konum", "/en/location", "/hikayemiz",
   "/van-kahvaltisi", "/van-kahvaltisi-nedir", "/gizlilik", "/cerez-politikasi",
   "/en/blog/turkish-breakfast-istanbul", "/en/blog/classic-turkish-breakfast",
   "/en/blog/simit-turkish-bagel", "/ru/blog/turetskiy-zavtrak-stambul",

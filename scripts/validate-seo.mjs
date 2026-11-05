@@ -125,7 +125,7 @@ const routes = [
     language: "tr",
     types: ["Restaurant", "WebPage", "BreadcrumbList", "FAQPage", "Menu"],
     restaurantMenu: `${menuPageUrl}#menu`,
-    faqCount: 7,
+    faqCount: 8,
     menuSectionCount: 18,
     sharedMenuDesign: true,
     visibleSignals: ["menü", "serpme fix menü", "murtuğa", "türk kahvesi"],
@@ -137,7 +137,7 @@ const routes = [
     language: "tr",
     types: ["Restaurant", "WebPage", "BreadcrumbList", "FAQPage"],
     restaurantMenu: `${menuPageUrl}#menu`,
-    faqCount: 10,
+    faqCount: 11,
     visibleSignals: ["masa rezervasyonu", "beyoğlu", "zambak sokak", "taksim meydanı"],
     hreflang: reservationHreflang,
     reservationPage: true,
@@ -149,7 +149,7 @@ const routes = [
     languageTag: "en-US",
     types: ["Restaurant", "WebPage", "BreadcrumbList", "FAQPage"],
     restaurantMenu: `${menuPageUrl}#menu`,
-    faqCount: 10,
+    faqCount: 11,
     visibleSignals: ["table reservation", "beyoğlu", "zambak street", "taksim square"],
     hreflang: reservationHreflang,
     reservationPage: true,
@@ -160,7 +160,7 @@ const routes = [
     language: "tr",
     types: ["Restaurant", "WebPage", "BreadcrumbList", "FAQPage"],
     restaurantMenu: `${menuPageUrl}#menu`,
-    faqCount: 6,
+    faqCount: 8,
     visibleSignals: ["van kahvaltısı", "otlu peynir", "murtuğa", "kavut", "taksim"],
   },
   {
@@ -182,6 +182,16 @@ const routes = [
     visibleSignals: ["1978", "aile sofrası", "zambak sokak", "beyoğlu"],
   },
   {
+    path: "/en/location",
+    canonical: `${canonicalSiteUrl}/en/location`,
+    language: "en",
+    types: ["Restaurant", "WebPage", "BreadcrumbList", "FAQPage"],
+    restaurantMenu: `${menuPageUrl}#menu`,
+    faqCount: 7,
+    visibleSignals: ["how to find us", "zambak", "taksim", "opening hours"],
+    hreflang: { tr: `${canonicalSiteUrl}/konum`, en: `${canonicalSiteUrl}/en/location`, "x-default": `${canonicalSiteUrl}/konum` },
+  },
+  {
     path: "/konum",
     canonical: `${canonicalSiteUrl}/konum`,
     language: "tr",
@@ -189,6 +199,7 @@ const routes = [
     restaurantMenu: `${menuPageUrl}#menu`,
     faqCount: 5,
     visibleSignals: ["zambak sokak", "taksim", "beyoğlu", "yol tarifi"],
+    hreflang: { tr: `${canonicalSiteUrl}/konum`, en: `${canonicalSiteUrl}/en/location`, "x-default": `${canonicalSiteUrl}/konum` },
   },
   {
     path: "/en",
@@ -207,7 +218,7 @@ const routes = [
     language: "en",
     types: ["Restaurant", "WebPage", "BreadcrumbList", "FAQPage", "Menu"],
     restaurantMenu: `${menuPageUrl}#menu`,
-    faqCount: 7,
+    faqCount: 8,
     menuSectionCount: 18,
     sharedMenuDesign: true,
     visibleSignals: ["serpme fix menu", "prices", "murtuğa", "taksim"],
@@ -689,9 +700,13 @@ for (const route of routes) {
     assert(actualHtml.includes('data-analytics-purpose="review_source"'), `${routeLabel}: yorum kaynağı yol tarifi dönüşümü sayılmamalı`);
     assert(actualHtml.includes('href="https://www.google.com/maps?cid=10380797280962926014"'), `${routeLabel}: doğru Maps kaydı eksik`);
     assert(actualHtml.includes('id="main-content" tabindex="-1"'), `${routeLabel}: odaklanabilir ana içerik eksik`);
+    const plan = actualHtml.match(/<section id="plan-breakfast"[\s\S]*?<\/section>/)?.[0];
+    assert(plan?.includes('data-breakfast-choice="serpme-fix-menu"'), `${routeLabel}: ana sayfada gerçek serpme seçeneği eksik`);
+    assert(plan?.includes('data-breakfast-choice="van-golu-tabagi"'), `${routeLabel}: tek kişilik seçenek eksik`);
+    assert(plan?.includes(route.path === "/en" ? "Breakfast subtotal for two" : "İki kişi için kahvaltı ara toplamı"), `${routeLabel}: iki kişi fiyat bağlamı eksik`);
   }
   if (route.language === "en" && ["/en", "/en/menu", "/en/rezervasyon"].includes(route.path)) {
-    assert(visibleHtml(html).includes('href="/en#location"'), `${routeLabel}: İngilizce konum bağlantısı eksik`);
+    assert(visibleHtml(html).includes('href="/en/location"'), `${routeLabel}: İngilizce konum bağlantısı eksik`);
   }
 
   if (route.hreflang) {

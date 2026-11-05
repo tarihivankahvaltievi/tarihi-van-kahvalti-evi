@@ -5,6 +5,7 @@ import { ArrowUpRight, CalendarCheck, Clock3, MapPin, UtensilsCrossed } from "lu
 import ClientPage from "../../client-page";
 import { AnimatedFooter } from "../../components/animated-footer";
 import { BreakfastComparison } from "../../components/breakfast-comparison";
+import { getOrderingQuestions } from "../../menu/ordering-questions";
 import { getPublicMenuData } from "../../menu/public-menu-data";
 import styles from "../../van-kahvaltisi/van-breakfast.module.css";
 import {
@@ -99,6 +100,7 @@ export const metadata: Metadata = {
 
 export default async function VanBreakfastGuidePage() {
   const { items, lastUpdated } = await getPublicMenuData();
+  const questions = [...getOrderingQuestions("tr", items).slice(0, 2), ...guideFaqItems];
   const guideJsonLd = {
     "@context": "https://schema.org",
     "@graph": [
@@ -111,7 +113,7 @@ export default async function VanBreakfastGuidePage() {
         description: guideDescription,
         inLanguage: "tr-TR",
         isPartOf: { "@id": `${siteUrl}/#website` },
-        dateModified: "2026-10-08",
+        dateModified: "2026-10-29",
         publisher: { "@id": `${siteUrl}/#restaurant` },
         about: [
           { "@type": "Thing", name: "Van kahvaltısı" },
@@ -152,7 +154,7 @@ export default async function VanBreakfastGuidePage() {
         },
       },
       buildBreadcrumbJsonLd(breakfastGuideUrl, "Van kahvaltısı rehberi", false),
-      buildFaqJsonLd(guideFaqItems, breakfastGuideUrl, false),
+      buildFaqJsonLd(questions, breakfastGuideUrl, false),
     ],
   };
 
@@ -325,7 +327,7 @@ export default async function VanBreakfastGuidePage() {
                 <p>İçerik, servis biçimi, vejetaryen seçenekler ve ziyaret zamanı hakkında doğrudan yanıtlar.</p>
               </header>
               <div className={styles.faq}>
-                {guideFaqItems.map((item) => (
+                {questions.map((item) => (
                   <details key={item.question}>
                     <summary>{item.question}</summary>
                     <p>{item.answer}</p>

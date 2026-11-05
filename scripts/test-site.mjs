@@ -46,6 +46,29 @@ try {
     });
     assert.equal(response.status, 403, `${route}: cross-origin writes must fail`);
   }
+  const canonical = "https://www.tarihivankahvaltievi.com";
+  for (const route of ["/konum", "/en/location"]) {
+    const response = await fetch(`${base}${route}`);
+    assert.equal(response.status, 200);
+    const html = await response.text();
+    const visible = html.replace(/<script\b[^>]*>[\s\S]*?<\/script>/gi, "");
+    assert.ok(html.includes(`rel="canonical" href="${canonical}${route}"`));
+    for (const [lang, target] of [["tr", "/konum"], ["en", "/en/location"], ["x-default", "/konum"]]) {
+      assert.ok(html.includes(`hrefLang="${lang}" href="${canonical}${target}"`), `${route}: missing reciprocal alternate ${lang}`);
+    }
+    assert.ok(visible.includes("Zambak"));
+    assert.ok(!/name="robots" content="[^"]*noindex/.test(html));
+    if (route === "/en/location") {
+      assert.ok(html.includes('lang="en"'));
+      for (const text of ["How to find us", "Opening hours", "/en/menu", "/en/rezervasyon", "M2 Taksim"]) assert.ok(visible.includes(text), `English location missing ${text}`);
+      const graphs = [...html.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)].flatMap((match) => JSON.parse(match[1])["@graph"] ?? []);
+      const faq = graphs.find((node) => node["@type"] === "FAQPage");
+      assert.equal(faq.inLanguage, "en");
+      assert.ok(graphs.some((node) => node["@id"] === `${canonical}/#restaurant`));
+    }
+  }
+  const sitemap = await (await fetch(`${base}/sitemap.xml`)).text();
+  assert.ok(sitemap.includes(`<loc>${canonical}/en/location</loc>`));
   const llms = await (await fetch(`${base}/llms.txt`)).text();
   assert.ok(llms.includes("Frequently asked questions"));
   assert.ok(llms.includes("Van kahvaltısı"));

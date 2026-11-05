@@ -6,6 +6,7 @@ import { AnimatedFooter } from "./components/animated-footer";
 import { FaqSection } from "./components/faq-section";
 import { VanHeroParallax } from "./components/van-hero-parallax";
 import { messagesFor, type SiteLocale } from "./home-localization";
+import { BreakfastVisit } from "./components/breakfast-visit";
 
 export function HomeContent({ locale = "tr" }: { locale?: SiteLocale }) {
   const messages = messagesFor(locale);
@@ -15,6 +16,8 @@ export function HomeContent({ locale = "tr" }: { locale?: SiteLocale }) {
       <main id="main-content" tabIndex={-1} lang={messages.documentLanguage}>
         {/* Hero Section */}
         <VanHeroParallax locale={locale} />
+
+        <BreakfastVisit locale={locale} />
 
         {/* Section 1: About & Heritage (Hamour Section 1) */}
         <AboutStory locale={locale} />

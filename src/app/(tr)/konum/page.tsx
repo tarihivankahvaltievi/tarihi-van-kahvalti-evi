@@ -10,6 +10,7 @@ import {
   buildRestaurantJsonLd,
   displayAddress,
   displayPhone,
+  englishLocationUrl,
   jsonLd,
   mapsUrl,
   openingHours,
@@ -54,7 +55,7 @@ const locationFaqItems = [
 export const metadata: Metadata = {
   title: { absolute: locationTitle },
   description: locationDescription,
-  alternates: { canonical: locationUrl },
+  alternates: { canonical: locationUrl, languages: { tr: locationUrl, en: englishLocationUrl, "x-default": locationUrl } },
   openGraph: {
     title: locationTitle,
     description: locationDescription,

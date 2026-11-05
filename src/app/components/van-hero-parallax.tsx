@@ -100,7 +100,7 @@ export function VanHeroParallax({ locale = "tr" }: { locale?: SiteLocale }) {
       <div className="container hero-content">
         <div className="hero-content-inner animate-fade-in">
           <h1 className="hero-title hero-title-visual">
-            <span className="sr-only">Tarihi Van Kahvaltı Evi</span>
+            <span className="sr-only">{locale === "en" ? "Turkish breakfast near Taksim · Tarihi Van Kahvaltı Evi" : "Taksim’de serpme kahvaltı · Tarihi Van Kahvaltı Evi"}</span>
             <Image
               src="/images/hero-title-lockup-heritage.png"
               alt=""
@@ -123,7 +123,7 @@ export function VanHeroParallax({ locale = "tr" }: { locale?: SiteLocale }) {
               className="btn btn-secondary-hero"
               data-analytics-surface="home_hero"
             >
-              {locale === "en" ? "MAKE A RESERVATION" : "REZERVASYON YAP"}
+              {locale === "en" ? "REQUEST A TABLE" : "MASA TALEBİ GÖNDER"}
             </Link>
           </div>
           <p className="hero-review-source">

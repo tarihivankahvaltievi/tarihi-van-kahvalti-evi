@@ -24,6 +24,7 @@ export const koreanTaksimBreakfastBlogUrl = `${siteUrl}/ko/blog/taksim-kahvalti-
 export const chineseHoneyKaymakBlogUrl = `${siteUrl}/zh-cn/blog/istanbul-bal-kaymak`;
 export const chineseTaksimBreakfastBlogUrl = `${siteUrl}/zh-cn/blog/taksim-turkish-breakfast`;
 export const japaneseHoneyKaymakBlogUrl = `${siteUrl}/ja/blog/istanbul-bal-kaymak`;
+export const englishLocationUrl = `${siteUrl}/en/location`;
 export const locationUrl = `${siteUrl}/konum`;
 export const reservationUrl = `${siteUrl}/rezervasyon`;
 export const englishReservationUrl = `${englishUrl}/rezervasyon`;
@@ -33,9 +34,9 @@ export const storyUrl = `${siteUrl}/hikayemiz`;
 export const privacyUrl = `${siteUrl}/gizlilik`;
 export const cookiePolicyUrl = `${siteUrl}/cerez-politikasi`;
 
-export const homeTitle = "Tarihi Van Kahvaltı Evi | Taksim Menü ve Yol Tarifi";
+export const homeTitle = "Taksim Serpme Kahvaltı | Tarihi Van Kahvaltı Evi";
 export const homeDescription =
-  "Zambak Sokak No:8’de Tarihi Van Kahvaltı Evi. Güncel menü ve fiyatları inceleyin; çalışma saatlerini kontrol edin, yol tarifi alın veya masa talebi gönderin.";
+  "Taksim’de serpme Van kahvaltısı ve tek kişilik tabaklar. Zambak Sokak No:8, Beyoğlu. Güncel fiyatları görün, yol tarifi alın ve WhatsApp ile masa talebi gönderin.";
 export const homeOgDescription =
   "Beyoğlu, Taksim ve İstiklal Caddesi yakınında geleneksel Van kahvaltısı; güncel menü, çalışma saatleri, açık adres ve yol tarifi.";
 

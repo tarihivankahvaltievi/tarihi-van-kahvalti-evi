@@ -45,6 +45,7 @@ interface SubmittedBooking {
   icsUrl?: string;
   calendarPageUrl?: string;
   googleCalendarUrl?: string;
+  whatsappUrl: string;
 }
 
 const venuePhotos = [
@@ -148,7 +149,7 @@ export function ReservationView({
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
 
-    if (honeypot) {
+    if (honeypot || isSubmitting) {
       return;
     }
 
@@ -186,6 +187,7 @@ export function ReservationView({
 
       const res = await fetch("/api/reservations", {
         method: "POST",
+        signal: AbortSignal.timeout(12_000),
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           customerName,
@@ -307,6 +309,7 @@ Müsaitlik durumunu teyit edebilir misiniz? Teşekkürler.`;
       icsUrl: finalIcsUrl,
       calendarPageUrl: calendarTargetUrl,
       googleCalendarUrl: gCalUrl || undefined,
+      whatsappUrl,
     });
 
     setIsSubmitting(false);
@@ -406,8 +409,17 @@ Müsaitlik durumunu teyit edebilir misiniz? Teşekkürler.`;
                     ? "Your request was saved. Send the WhatsApp message and wait for the restaurant to confirm your table."
                     : "Talebiniz kaydedildi. WhatsApp mesajını gönderin ve masa için işletmenin teyidini bekleyin."
                   : isEnglish
-                    ? "The request could not be saved automatically. Send the WhatsApp message to reach the restaurant, then wait for confirmation."
-                    : "Talep otomatik kaydedilemedi. İşletmeye ulaşmak için WhatsApp mesajını gönderin ve teyit bekleyin."}
+                    ? "Automatic saving could not be confirmed. Send the WhatsApp message to reach the restaurant, then wait for confirmation."
+                    : "Talebin otomatik kaydı teyit edilemedi. İşletmeye ulaşmak için WhatsApp mesajını gönderin ve teyit bekleyin."}
+              </p>
+
+              <a href={submittedData.whatsappUrl} target="_blank" rel="noopener noreferrer"
+                className={styles.appleBtn} data-analytics-surface="reservation_recovery">
+                <MessageCircle size={18} aria-hidden="true" />
+                {isEnglish ? "Open my WhatsApp request" : "WhatsApp talebimi aç"}
+              </a>
+              <p className={styles.formHint}>
+                {isEnglish ? "WhatsApp did not open? Use the button above, or call us below." : "WhatsApp açılmadıysa yukarıdaki düğmeyi kullanın veya aşağıdan bizi arayın."}
               </p>
 
               <dl className={styles.summaryBox}>

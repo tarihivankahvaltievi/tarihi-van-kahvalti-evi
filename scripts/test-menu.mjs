@@ -80,6 +80,13 @@ async function verifyGuidePrices(expected) {
   const comparison = guide.match(/<section id="breakfast-options"[\s\S]*?<\/section>/)?.[0];
   assert.ok(comparison?.includes(price), 'Visit guide comparison does not follow live price changes');
   assert.ok(comparison?.includes(expected.items.find(item => item.id === 'serpme-fix-menu').details[1]), 'Visit guide comparison has stale tea inclusion');
+  for (const route of ["/", "/en"]) {
+    const html = plainHtml(await (await fetch(`${base}${route}`)).text());
+    const plan = html.match(/<section id="plan-breakfast"[\s\S]*?<\/section>/)?.[0];
+    assert.ok(plan?.includes(price), `${route}: homepage breakfast price is stale`);
+    const plate = expected.items.find((item) => item.id === "van-golu-tabagi");
+    assert.ok(plan?.includes(plate.price), `${route}: individual plate price is stale`);
+  }
 }
 
 async function verifyBookingInclusions(expected) {
@@ -311,6 +318,11 @@ try {
   await verifyMenu("/menu", changed, "tr", schemaPrices);
   await verifyMenu("/en/menu", changed, "en", schemaPrices);
   await verifyGuidePrices(changed);
+  for (const [route, total] of [["/", "2.501,00"], ["/en", "2,501.00"], ["/menu", "2.501,00"], ["/en/menu", "2,501.00"], ["/van-kahvaltisi", "2.501,00"]]) {
+    const html = await (await fetch(`${base}${route}`)).text();
+    const visible = html.replace(/<script\b[^>]*>[\s\S]*?<\/script>/gi, "");
+    assert.ok(visible.includes(total), `${route}: two-person answer did not update with the live price`);
+  }
   await verifyAnswerEngineMenu(changed);
   await verifyBookingInclusions(changed);
   await verifyCoffeePages(changed, { 'turk-kahvesi': '175.5', espresso: undefined });

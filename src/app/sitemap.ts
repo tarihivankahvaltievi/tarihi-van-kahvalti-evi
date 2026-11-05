@@ -28,6 +28,7 @@ import {
   koreanUrl,
   japaneseHoneyKaymakBlogUrl,
   locationUrl,
+  englishLocationUrl,
   menuUrl,
   privacyUrl,
   reservationUrl,
@@ -39,9 +40,9 @@ import {
 // lastmod yalnız görünür ana içerik gerçekten değiştiğinde güncellenir.
 // Her derlemede "şimdi" üretmek arama motorlarına yanıltıcı bir sinyal verir.
 const pageLastModified = "2026-09-22T19:00:00+03:00";
-const homeLastModified = "2026-10-28";
-const menuPresentationLastModified = "2026-10-08";
-const visitorContentLastModified = "2026-10-01T02:00:00+03:00";
+const homeLastModified = "2026-11-05";
+const reservationPresentationLastModified = "2026-11-05";
+const menuPresentationLastModified = "2026-10-29";
 const koreanPageLastModified = "2026-09-28T12:00:00+03:00";
 const newGuideLastModified = "2026-09-28T12:00:00+03:00";
 const westernGuideLastModified = "2026-09-28T19:00:00+03:00";
@@ -170,10 +171,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const liveHomeLastModified = Date.parse(liveMenuLastModified) > Date.parse(homeLastModified)
     ? liveMenuLastModified
     : homeLastModified;
-  const liveGuideLastModified = Date.parse(liveMenuLastModified) > Date.parse("2026-10-28") ? liveMenuLastModified : "2026-10-28";
-  const liveReservationLastModified = Date.parse(liveMenuLastModified) > Date.parse(visitorContentLastModified)
+  const liveGuideLastModified = Date.parse(liveMenuLastModified) > Date.parse("2026-10-29") ? liveMenuLastModified : "2026-10-29";
+  const liveReservationLastModified = Date.parse(liveMenuLastModified) > Date.parse(reservationPresentationLastModified)
     ? liveMenuLastModified
-    : visitorContentLastModified;
+    : reservationPresentationLastModified;
   const menuImages = uniqueImages([
     "/images/og/menu.jpg",
     ...categories.map((category) => category.image),
@@ -270,7 +271,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     },
     {
       url: locationUrl,
-      lastModified: "2026-10-28",
+      lastModified: "2026-10-29",
+      alternates: { languages: { tr: locationUrl, en: englishLocationUrl, "x-default": locationUrl } },
       changeFrequency: "monthly",
       priority: 0.8,
       images: uniqueImages([
@@ -278,6 +280,14 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         "/images/interior-chair.webp",
         "/images/historic-mirror.webp",
       ]),
+    },
+    {
+      url: englishLocationUrl,
+      lastModified: "2026-10-29",
+      changeFrequency: "monthly",
+      priority: 0.8,
+      alternates: { languages: { tr: locationUrl, en: englishLocationUrl, "x-default": locationUrl } },
+      images: uniqueImages(["/images/street-table.webp"]),
     },
     {
       url: englishUrl,

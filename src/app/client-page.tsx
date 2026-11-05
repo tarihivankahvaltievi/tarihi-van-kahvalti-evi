@@ -32,12 +32,14 @@ export default function ClientPage({ children, locale = "tr", navigation }: {
   const router = useRouter();
   const pathname = usePathname();
   const isMenuPage = pathname === "/menu" || pathname === "/en/menu";
-  const isLocationPage = pathname === "/konum";
+  const isLocationPage = pathname === "/konum" || pathname === "/en/location";
   const isReservationPage = pathname === "/rezervasyon" || pathname === "/en/rezervasyon";
   const alternateHref = isMenuPage
     ? locale === "en" ? "/menu" : "/en/menu"
     : isReservationPage
     ? locale === "en" ? "/rezervasyon" : "/en/rezervasyon"
+    : isLocationPage
+    ? locale === "en" ? "/konum" : "/en/location"
     : messages.alternateHref;
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
@@ -284,7 +286,7 @@ export default function ClientPage({ children, locale = "tr", navigation }: {
                 </li>
                 <li>
                   <Link
-                    href={locale === "en" ? "/en#location" : "/konum"}
+                    href={locale === "en" ? "/en/location" : "/konum"}
                     className={`nav-link ${isLocationPage ? "active" : ""}`}
                   >
                     {locale === "en" ? "LOCATION" : "KONUM"}
@@ -400,7 +402,7 @@ export default function ClientPage({ children, locale = "tr", navigation }: {
                 </li>
                 <li>
                   <Link
-                    href={locale === "en" ? "/en#location" : "/konum"}
+                    href={locale === "en" ? "/en/location" : "/konum"}
                     className={`mobile-link ${isLocationPage ? "active" : ""}`}
                     onClick={() => setMenuOpen(false)}
                   >

@@ -123,7 +123,7 @@ export function AnimatedFooter({ locale = "tr" }: { locale?: string }) {
             <Link href="/es" hrefLang="es">Español</Link>
             <Link href={isEn ? "/en/coffee-taksim" : "/taksim-kafe"}>{isEn ? "Coffee near Taksim" : "Kahve Molası"}</Link>
             {!isEn && <Link href="/van-kahvaltisi-nedir">Van Kahvaltısı Nedir?</Link>}
-            <Link href={isEn ? "/en#location" : "/konum"}>{isEn ? "Contact" : "İletişim"}</Link>
+            <Link href={isEn ? "/en/location" : "/konum"}>{isEn ? "Contact" : "İletişim"}</Link>
           </nav>
         </div>
 

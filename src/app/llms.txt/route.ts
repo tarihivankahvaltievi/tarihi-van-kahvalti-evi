@@ -31,6 +31,7 @@ import {
   chineseHoneyKaymakBlogUrl,
   chineseTaksimBreakfastBlogUrl,
   locationUrl,
+  englishLocationUrl,
   mapsUrl,
   menuUrl,
   openingHours,
@@ -91,6 +92,7 @@ ${menuSnapshot}
 
 - [Homepage — Turkish](${siteUrl}): restaurant overview, address, hours, FAQs and reservation options.
 - [Menu and current prices — Turkish](${menuUrl}): the source of truth for current menu items and prices.
+- [Location and directions — English](${englishLocationUrl}): Taksim access, address, hours and table requests.
 - [Location and directions — Turkish](${locationUrl}): walking and transit guidance from Taksim.
 - [Reservations — Turkish](${reservationUrl}): reservation request details.
 - [Van breakfast guide — Turkish](${breakfastGuideUrl}): regional breakfast overview.
