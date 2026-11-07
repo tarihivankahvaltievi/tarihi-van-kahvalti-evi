@@ -40,8 +40,8 @@ import {
 // lastmod yalnız görünür ana içerik gerçekten değiştiğinde güncellenir.
 // Her derlemede "şimdi" üretmek arama motorlarına yanıltıcı bir sinyal verir.
 const pageLastModified = "2026-09-22T19:00:00+03:00";
-const homeLastModified = "2026-11-05";
-const reservationPresentationLastModified = "2026-11-05";
+const homeLastModified = "2026-11-07";
+const reservationPresentationLastModified = "2026-11-07";
 const menuPresentationLastModified = "2026-10-29";
 const koreanPageLastModified = "2026-09-28T12:00:00+03:00";
 const newGuideLastModified = "2026-09-28T12:00:00+03:00";

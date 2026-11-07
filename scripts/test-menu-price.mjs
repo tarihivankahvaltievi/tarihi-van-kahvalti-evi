@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import { menuSchemaPrice } from "../src/app/menu/menu-price.ts";
+import { menuSchemaPrice, breakfastSubtotal } from "../src/app/menu/menu-price.ts";
 
 for (const [input, expected] of [
   ["₺970", "970"], [" ₺ 970 ", "970"], ["970 TL", "970"],
@@ -24,9 +24,9 @@ const compiled = ts.transpileModule(readFileSync("src/app/menu/ordering-question
 const exports = {};
 vm.runInNewContext(compiled, { exports, Intl, require: (name) => {
   assert.equal(name, "./menu-price");
-  return { menuSchemaPrice };
+  return { breakfastSubtotal };
 } });
-const item = { id: "serpme-fix-menu", name: "Serpme", price: "₺1.250,50", details: [] };
+const item = { id: "serpme-fix-menu", name: "Serpme", price: "₺1.250,50", priceNote: "kişi başı", details: [] };
 for (const locale of ["tr", "en"]) {
   const answer = exports.getOrderingQuestions(locale, [item])[0].answer;
   assert.ok(answer.includes(locale === "tr" ? "2.501,00" : "2,501.00"), answer);
@@ -40,3 +40,12 @@ for (const locale of ["tr", "en"]) {
   assert.ok(!removed[1].answer.includes("Van Gölü"), "Removed plates must not be recommended");
 }
 console.log("Ordering answers: decimal two-person totals, ambiguous prices and removed products passed.");
+
+for (const priceNote of [undefined, "per plate", "ekstra", "tabak fiyatı"]) {
+  assert.equal(breakfastSubtotal({ ...item, priceNote }, 2), undefined);
+  for (const locale of ["tr", "en"]) assert.ok(exports.getOrderingQuestions(locale, [{ ...item, priceNote }])[0].answer.includes(locale === "tr" ? "hesaplanamıyor" : "cannot be calculated"));
+}
+assert.equal(breakfastSubtotal({ ...item, priceNote: "per person" }, 3), "3751.5");
+for (const guests of [1, 0, -1, 2.5, 41, Infinity]) assert.equal(breakfastSubtotal(item, guests), undefined);
+assert.equal(breakfastSubtotal({ ...item, price: "₺900–1200" }, 2), undefined);
+console.log("Serving units and party sizes: unknown/per-plate prices cannot become per-person totals.");

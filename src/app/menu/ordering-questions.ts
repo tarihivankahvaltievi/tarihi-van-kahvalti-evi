@@ -1,5 +1,5 @@
 import type { MenuItem } from "./menu-data";
-import { menuSchemaPrice } from "./menu-price";
+import { breakfastSubtotal } from "./menu-price";
 import type { MenuLocale } from "./menu-localization";
 
 export type OrderingQuestion = { question: string; answer: string };
@@ -11,10 +11,10 @@ export function getOrderingQuestions(locale: MenuLocale, items: MenuItem[]): Ord
   const serving = [serpme, plate].filter((item): item is MenuItem => Boolean(item))
     .map((item) => `${item.name}: ${item.details.join("; ")}.`).join(" ");
 
-  const price = serpme ? menuSchemaPrice(serpme.price) : undefined;
+  const price = breakfastSubtotal(serpme, 2);
   const twoPersonTotal = price === undefined ? undefined : new Intl.NumberFormat(isEn ? "en-GB" : "tr-TR", {
     style: "currency", currency: "TRY", maximumFractionDigits: 2,
-  }).format(Math.round(Number(price) * 100) * 2 / 100);
+  }).format(Number(price));
   const plates = items.filter((item) => ["van-golu-tabagi", "pisi-tabagi", "yumurtali-ekmek-tabagi"].includes(item.id));
 
   return [

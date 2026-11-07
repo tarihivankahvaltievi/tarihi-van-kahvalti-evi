@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { getPublicMenuData } from "../menu/public-menu-data";
 import { localizeMenuData, localizeMenuDate } from "../menu/menu-localization";
-import { menuSchemaPrice } from "../menu/menu-price";
+import { breakfastSubtotal } from "../menu/menu-price";
 import { openingHours } from "../seo";
 import type { SiteLocale } from "../home-localization";
 import styles from "./breakfast-visit.module.css";
@@ -16,10 +16,10 @@ export async function BreakfastVisit({ locale }: { locale: SiteLocale }) {
     .filter((item) => item !== undefined);
   if (!choices.length) return null;
   const serpme = data.items.find((item) => item.id === "serpme-fix-menu");
-  const price = serpme?.priceNote === "kişi başı" ? menuSchemaPrice(serpme.price) : undefined;
+  const price = breakfastSubtotal(serpme, 2);
   const total = price === undefined ? null : new Intl.NumberFormat(isEn ? "en-GB" : "tr-TR", {
     style: "currency", currency: "TRY", maximumFractionDigits: 2,
-  }).format(Math.round(Number(price) * 100) * 2 / 100);
+  }).format(Number(price));
 
   return (
     <section id="plan-breakfast" className={styles.section} aria-labelledby="plan-breakfast-title" data-analytics-surface="home_breakfast">
@@ -46,6 +46,8 @@ export async function BreakfastVisit({ locale }: { locale: SiteLocale }) {
               <p>{item.id === "serpme-fix-menu"
                 ? (isEn ? "Shared breakfast · Minimum 2 people." : "Paylaşmalı kahvaltı · En az 2 kişilik sipariş.")
                 : (isEn ? "An individual breakfast plate." : "Tek kişilik kahvaltı tabağı.")}</p>
+              <p>{item.description}</p>
+              <ul className={styles.inclusions}>{item.details.map((detail) => <li key={detail}>{detail}</li>)}</ul>
               {item.id === "serpme-fix-menu" && total && <p className={styles.subtotal}>{isEn ? "Breakfast subtotal for two" : "İki kişi için kahvaltı ara toplamı"}: {total}</p>}
               <Link href={`${menuPath}#${item.id}`} className={styles.link} data-analytics-purpose="menu_compare" data-analytics-item={item.id}>
                 {isEn ? "See contents & included drinks" : "İçerikleri ve dahil içecekleri gör"} →

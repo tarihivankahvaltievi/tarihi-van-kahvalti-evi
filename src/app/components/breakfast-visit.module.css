@@ -17,3 +17,6 @@
 .section a:focus-visible { outline: 3px solid #8f171a; outline-offset: 4px; }
 @media (max-width: 700px) { .inner { grid-template-columns: minmax(0, 1fr); gap: 28px; } .section { padding-inline: 20px; } }
 @media (max-width: 360px) { .row { flex-wrap: wrap; gap: 8px; } }
+
+.inclusions { margin: 12px 0; padding-inline-start: 20px; font: 400 15px/1.6 "Causten", system-ui, sans-serif; }
+.inclusions li + li { margin-top: 4px; }

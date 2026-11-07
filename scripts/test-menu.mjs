@@ -86,6 +86,10 @@ async function verifyGuidePrices(expected) {
     assert.ok(plan?.includes(price), `${route}: homepage breakfast price is stale`);
     const plate = expected.items.find((item) => item.id === "van-golu-tabagi");
     assert.ok(plan?.includes(plate.price), `${route}: individual plate price is stale`);
+    const shared = expected.items.find((item) => item.id === "serpme-fix-menu");
+    const content = route === "/en" ? shared.translations.en : shared;
+    assert.ok(plan?.includes(content.description), `${route}: breakfast contents are stale`);
+    for (const detail of content.details) assert.ok(plan?.includes(detail), `${route}: breakfast inclusions are stale`);
   }
 }
 
@@ -95,6 +99,10 @@ async function verifyBookingInclusions(expected) {
     const html = plainHtml(await (await fetch(`${base}${route}`)).text());
     assert.ok(html.includes('id="ordering-guide"'), `${route}: ordering guide missing`);
     assert.ok(html.includes(details[1]), `${route}: booking guide still shows stale inclusions`);
+    const summary = html.match(/<aside[^>]*data-analytics-surface="reservation_prices"[^>]*>[\s\S]*?<\/aside>/)?.[0];
+    assert.ok(summary?.includes(item.price), `${route}: missing current price before the form`);
+    assert.ok(html.indexOf(summary) < html.indexOf('id="form-guest-name"'), `${route}: prices must precede personal-data fields`);
+    assert.ok(summary?.includes(route.startsWith("/en") ? "/en/menu#serpme-fix-menu" : "/menu#serpme-fix-menu"));
   }
 }
 

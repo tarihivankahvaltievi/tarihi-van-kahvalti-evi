@@ -59,7 +59,10 @@ export const metadata: Metadata = {
 
 export default async function ReservationPage() {
   const menu = await getPublicMenuData();
-  const orderingQuestions = getOrderingQuestions("tr", localizeMenuData("tr", menu.categories, menu.items).items);
+  const localizedItems = localizeMenuData("tr", menu.categories, menu.items).items;
+  const breakfastChoices = localizedItems.filter((item) => ["serpme-fix-menu", "van-golu-tabagi"].includes(item.id))
+    .map(({ id, name, price, priceNote }) => ({ id, name, price, priceNote }));
+  const orderingQuestions = getOrderingQuestions("tr", localizedItems);
   const reservationJsonLd = {
     "@context": "https://schema.org",
     "@graph": [
@@ -114,7 +117,7 @@ export default async function ReservationPage() {
       />
       <ClientPage locale="tr">
         <main id="main-content" tabIndex={-1} className={styles.page} lang="tr-TR">
-          <ReservationView locale="tr" orderingQuestions={orderingQuestions} />
+          <ReservationView locale="tr" orderingQuestions={orderingQuestions} breakfastChoices={breakfastChoices} />
         </main>
         <AnimatedFooter locale="tr" />
       </ClientPage>

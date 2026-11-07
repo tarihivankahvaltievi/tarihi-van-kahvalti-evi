@@ -2,6 +2,9 @@
 
 import { useEffect, useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
+import { breakfastSubtotal } from "../menu/menu-price";
+import type { MenuItem } from "../menu/menu-data";
 import {
   Calendar,
   CheckCircle2,
@@ -28,6 +31,7 @@ import type { OrderingQuestion } from "../menu/ordering-questions";
 interface ReservationViewProps {
   locale?: SiteLocale;
   orderingQuestions: OrderingQuestion[];
+  breakfastChoices?: Pick<MenuItem, "id" | "name" | "price" | "priceNote">[];
   initialService?: "breakfast" | "cafe";
   initialItem?: string;
 }
@@ -91,6 +95,7 @@ export function ReservationView({
   initialService,
   initialItem,
   orderingQuestions,
+  breakfastChoices = [],
 }: ReservationViewProps) {
   const isEnglish = locale === "en";
 
@@ -503,6 +508,19 @@ Müsaitlik durumunu teyit edebilir misiniz? Teşekkürler.`;
             </div>
           ) : (
             <form onSubmit={handleSubmit} className={styles.cardForm}>
+              {serviceType === "breakfast" && breakfastChoices.length > 0 && (
+                <aside className={styles.breakfastPrices} aria-label={isEnglish ? "Breakfast prices" : "Kahvaltı fiyatları"} data-analytics-surface="reservation_prices">
+                  {breakfastChoices.map((item) => {
+                    const amount = item.id === "serpme-fix-menu" ? breakfastSubtotal(item, guests) : undefined;
+                    return <div key={item.id}>
+                      <p><strong>{item.name}</strong> · {item.price} {item.priceNote}</p>
+                      {item.id === "serpme-fix-menu" && <p>{isEnglish ? "Minimum order: 2 people." : "En az 2 kişilik sipariş."}{amount !== undefined && <> {isEnglish ? `Serpme subtotal for ${guests}: ` : `${guests} kişilik serpme ara toplamı: `}{new Intl.NumberFormat(isEnglish ? "en-GB" : "tr-TR", { style: "currency", currency: "TRY" }).format(Number(amount))}</>}</p>}
+                    </div>;
+                  })}
+                  <Link href={isEnglish ? "/en/menu#serpme-fix-menu" : "/menu#serpme-fix-menu"}>{isEnglish ? "Compare contents & included drinks" : "İçerikleri ve dahil içecekleri karşılaştır"} →</Link>
+                  <p>{isEnglish ? "Extras are separate. Confirm any service or cover charge before ordering." : "Ekstralar ayrıdır. Varsa servis/kuver ücretini sipariş öncesinde teyit edin."}</p>
+                </aside>
+              )}
               {formError && <p role="alert" className={styles.formHint}>{formError}</p>}
               {/* Honeypot */}
               <div className={styles.honeypot} aria-hidden="true">

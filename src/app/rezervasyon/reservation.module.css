@@ -863,3 +863,9 @@ a.infoPill:hover {
   .photoCard:hover .photoImg,
   .submitBtn:hover:not(:disabled) { transform: none; }
 }
+
+.breakfastPrices { padding: 14px 0; border-block: 1px solid #c7b6a5; color: #402021; font: 400 14px/1.55 "Causten", system-ui, sans-serif; }
+.breakfastPrices p { margin: 4px 0; }
+.breakfastPrices > div + div { margin-top: 10px; }
+.breakfastPrices a { display: inline-flex; align-items: center; min-height: 44px; color: inherit; text-decoration: underline; text-underline-offset: 3px; }
+.breakfastPrices a:focus-visible { outline: 2px solid #8f171a; outline-offset: 3px; }
