@@ -57,6 +57,7 @@ function CoffeeContent({ locale, items }: { locale: CoffeeLocale; items: Feature
   return <main data-analytics-surface="coffee_page" id="main-content" className={`${styles.page} ${coffeeDisplay.variable}`} lang={coffeeLanguageTags[locale]} dir={locale === "ar" ? "rtl" : "ltr"} data-locale={locale} tabIndex={-1}>
     <LanguageLinks locale={locale} />
     <section className={styles.hero} aria-labelledby="coffee-heading">
+      <Image src="/images/tarihi-van-official-logo.png" alt="Tarihi Van Kahvaltı Evi" width={1254} height={1254} className={styles.officialLogo} loading="eager" />
       <CoffeeScene alt={c.images.cup} />
       <div className={styles.heroCopy}>
         <h1 id="coffee-heading">{c.hero[0]}<br /><span>{c.hero[1]}</span></h1>
